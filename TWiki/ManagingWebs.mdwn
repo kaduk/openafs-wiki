@@ -81,10 +81,6 @@ In either case you will want to be sure to verify that your new web has all the 
 
 Renaming or deleting a web requires direct access to the installation files on the host server. There are currently no browser-based equivalents of the Rename/move/delete topic tools for working with webs.
 
-### <a name="Renaming the MAINWEB"></a> Renaming the MAINWEB
-
-If you plan to rename the Main web, remember that TWiki stores user and group topics in `%MAINWEB%`, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
-
 1. Prepare your site: Search each web for links to the target web, searching topic text for `Oldwebname.`, including the dot so you'll find references like `Oldwebname.SomeTopic`
   - Make changes as required, to `Newwebname.SomeTopic` or better yet, to `%MAINWEB%.SomeTopic`
 2. Edit the [[TWikiPreferences]] topic: Rename or delete the web from the `WIKIWEBLIST` variable
@@ -93,5 +89,9 @@ If you plan to rename the Main web, remember that TWiki stores user and group to
 5. Go to `twiki/templates` and rename or remove the web directory if present
   - **_Note:_** See TWiki:Codev.RenameWebs for some complications
 6. Go to `twiki/pub` and rename or remove the web directory if present
+
+### <a name="Renaming the MAINWEB"></a> Renaming the MAINWEB
+
+If you plan to rename the Main web, remember that TWiki stores user and group topics in `%MAINWEB%`, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
 
 -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.PeterThoeny - 07 Apr 2002 %BR% -- TWiki:Main.GrantBow - 16 Jan 2003

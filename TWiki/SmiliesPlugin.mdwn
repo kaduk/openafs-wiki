@@ -73,7 +73,12 @@ Here is the list of smilies supported by this plugin. To add others, attach new 
   <tr>
     <td> :p </td>
     <td><img alt="tongue.gif" src="http://www.dementia.org/twiki//view/tongue.gif" /></td>
-    <td> "razz (stick out tongue)" </td>
+    <td> "stick out tongue" </td>
+  </tr>
+  <tr>
+    <td> :-p </td>
+    <td><img alt="tongue.gif" src="http://www.dementia.org/twiki//view/tongue.gif" /></td>
+    <td> "stick out tongue" </td>
   </tr>
   <tr>
     <td> :rolleyes: </td>
@@ -115,6 +120,36 @@ Here is the list of smilies supported by this plugin. To add others, attach new 
     <td><img alt="devilwink.gif" src="http://www.dementia.org/twiki//view/devilwink.gif" /></td>
     <td> "hehe! (friendly)" </td>
   </tr>
+  <tr>
+    <td> :-X </td>
+    <td><img alt="sealed.gif" src="http://www.dementia.org/twiki//view/sealed.gif" /></td>
+    <td> "sealed lips" </td>
+  </tr>
+  <tr>
+    <td> :ok: </td>
+    <td><img alt="thumbs.gif" src="http://www.dementia.org/twiki//view/thumbs.gif" /></td>
+    <td> "thumbs up" </td>
+  </tr>
+  <tr>
+    <td> :yes: </td>
+    <td><img alt="yes.gif" src="http://www.dementia.org/twiki//view/yes.gif" /></td>
+    <td> "yes" </td>
+  </tr>
+  <tr>
+    <td> :no: </td>
+    <td><img alt="no.gif" src="http://www.dementia.org/twiki//view/no.gif" /></td>
+    <td> "no" </td>
+  </tr>
+  <tr>
+    <td> :love: </td>
+    <td><img alt="love.gif" src="http://www.dementia.org/twiki//view/love.gif" /></td>
+    <td> "in love" </td>
+  </tr>
+  <tr>
+    <td> :scull: </td>
+    <td><img alt="scull.gif" src="http://www.dementia.org/twiki//view/scull.gif" /></td>
+    <td> "scull" </td>
+  </tr>
 </table>
 
 ## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
@@ -130,9 +165,9 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - The name of the topic containig your Smilies. Default: <code>**%WEB%.SmiliesPlugin**</code>
   - #Set TOPIC = [[SmiliesPlugin]]
 
-- The way the _emoticon_ is displayed. You can use <code>**$emoticon**</code> (e.g. `:D`), <code>**$url**</code> (e.g. `%ATTACHURL%/biggrin.gif`) and <code>**$tooltip**</code> (e.g. `"big grin"`). Default: <code>**&lt;img src="$url" alt="$tooltip" /&gt;**</code>
+- The way the _emoticon_ is displayed. You can use <code>**$emoticon**</code> (e.g. `:D`), <code>**$url**</code> (e.g. `%ATTACHURL%/biggrin.gif`) and <code>**$tooltip**</code> (e.g. `"big grin"`). Default: <code>**&lt;img src="$url" alt="$tooltip" title="$tooltip" border="0" /&gt;**</code>
 
-          * #Set FORMAT = <img src="$url" alt="$emoticon" />
+          * #Set FORMAT = <img src="$url" alt="$emoticon" title="$emoticon" border="0" />
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -160,22 +195,26 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
 </table>
 - Test if the plugin is correctly installed:
-  - You will see a series of icons on next line: <br /> :-) :) :cool: :( :o :D ;) :p :rolleyes: :mad: :eek: :confused: &gt;:-) &gt;;-)
+  - You will see a series of icons on next line: <br /> :-) :) :cool: :( :o :D ;) :p :rolleyes: :mad: :eek: :confused: &gt;:-) &gt;;-) :-X :ok: :yes: :no: :love: :scull:
 
 ## <a name="Plugin Info"></a> Plugin Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td> TWiki:Main.AndreaSterbini </td>
+    <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 16 Feb 2004 (v1.002) </td>
+    <td> 21 Aug 2004 (v1.003) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 21 Aug 2004: </td>
+    <td> Fixed tooltip for Netscape; added "sealed lips", "thumbs up", "yes" "no", "in love", "scull" </td>
   </tr>
   <tr>
     <td align="right"> 16 Feb 2004: </td>
@@ -229,4 +268,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main.AndreaSterbini - 28 Dec 2000 <br /> -- TWiki:Main.PeterThoeny - 16 Feb 2004
+-- TWiki:Main.AndreaSterbini - 28 Dec 2000 <br /> -- TWiki:Main.PeterThoeny - 21 Aug 2004
