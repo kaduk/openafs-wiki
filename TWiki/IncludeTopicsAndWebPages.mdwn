@@ -21,7 +21,7 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
 
 - <code>**"page"**</code>: <br /> The nameless parameter specifies the page to include. It is
   - The name of a topic located in the current web, i.e. <code>**%INCLUDE\{"WebNotify"\}%**</code>
-  - A `Web.Topic` name specifying a topic in another web, i.e. <code>**%INCLUDE\{"TWiki.TWikiWebsTable"\}%**</code>
+  - A `Web.Topic` name specifying a topic in another web, i.e. <code>**%INCLUDE\{"TWiki.SiteMap"\}%**</code>
   - A full qualified URL with <code>**http**</code> protocol, domain name and optional port number, i.e. <code>**%INCLUDE\{"http://twiki.org:80/index.html"\}%**</code>. Supported content types are <code>**text/html**</code> and <code>**text/plain**</code>. The full page is included by default, but the HTML header and scripts are stripped in case it is a web page.
 
 - <code>**pattern="reg-exp"**</code>: <br /> The **pattern** parameter is optional and allows you to extract some parts of a web page. Specify a [[RegularExpression]] that scans from start (`'^'`) to end and contains the text you want to keep in parenthesis, i.e. <code>**pattern="^.\*?(from here.\*?to here).\*"**</code>. You need to make sure that the integrity of a web page is not compromised, i.e. if you include a table make sure to include everything including the table end tag.

@@ -11,33 +11,72 @@
 
 # <a name="Managing Webs"></a> Managing Webs
 
-_Adding, renaming and deleting webs are manual operations done directly on the server_
+_Adding webs is a web based operation; renaming and deleting webs are manual operations done directly on the server_
 
 ## <a name="Overview"></a> Overview
 
-Managing TWiki webs requires direct access to the installation files on the host server. There are currently no browser-based equivalents of the Rename/move/delete topic tools for working with webs.
+A [[TWikiSite]] is divided into webs; each one represents one subject, one area of collaboration. Administrators can add/rename/delete webs.
+
+<a name="CreateNewWeb"></a>
 
 ## <a name="Adding a New Web"></a> Adding a New Web
 
-Adding new webs is quick and easy - you can have a basic web up and running in a couple of minutes:
-
-1. **Create** a new directory under `twiki/data/`, ex: `twiki/data/Newweb`<br />
-  - the name has to start with a capital and _cannot_ be a [[WikiWord]]
-2. **Copy** in the contents of `twiki/data/_default`.
+<form action="http://www.dementia.org/twiki//manage/%WEB%/%TOPIC%" method="post" name="admin"> Create a new web by filling out this form. <strong><em>Note:</em></strong> It is not recommended to create a new web for each little project. Cross-linking topics and search is easier if there are only a few larger webs. <p>
+  </p>
+  <table border="1" cellpadding="0" cellspacing="0">
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Name of new web: </strong></th>
+      <td><input name="newweb" size="16" type="text" value="" /></td>
+      <td> Enter a short name of up to 10 characters. The name must start with one or more upper case letters, followed by optional lower case letters or numbers; it cannot be a [[TWiki/WikiWord]]</td>
+    </tr>
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Based on web: </strong></th>
+      <td><select name="webtemplate"> </select></td>
+      <td> Select a template web (starting with an underscore) or an existing web as a template for the new web. All topics are copied over from a template web; only topics that start with <strong>Web...</strong> (like "WebHome", "WebNotify") are copied from an existing web </td>
+    </tr>
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Web color: </strong></th>
+      <td><input name="webbgcolor" size="16" type="text" value="#D0D0D0" /></td>
+      <td> Enter a [[Main/StandardColors]] code for the web </td>
+    </tr>
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Exclude web from "search all": </strong></th>
+      <td><input checked name="nosearchall" type="radio" value="" /> No   <input name="nosearchall" type="radio" value="on" /> Yes </td>
+      <td> Specify if you want to exclude the web from a "search all webs" search </td>
+    </tr>
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Update WIKIWEBLIST: </strong></th>
+      <td><input name="updatewikiweblist" type="radio" value="" /> No   <input checked name="updatewikiweblist" type="radio" value="on" /> Yes </td>
+      <td> Specify if you want to list the new web in the WIKIWEBLIST displayed by some skins in the upper right hand corner </td>
+    </tr>
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Description:<br />   </strong></th>
+      <td colspan="2"><input name="description" size="60" type="text" value="" /><br /> Enter a short description of the web. This is for listing the web in the [[TWiki/SiteMap]] (leave field empty if you prefer not to update the directory) </td>
+    </tr>
+    <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Used to...<br />   </strong></th>
+      <td colspan="2"><input name="usedto" size="60" type="text" value="..." /><br /> Continue the sentence describing the intended use. This is also for the [[TWiki/SiteMap]]</td>
+    </tr>
+    <tr>
+      <td>   </td>
+      <td colspan="2"><input type="submit" value="Create new web" /></td>
+    </tr>
+  </table><input name="newtopic" type="hidden" value="" /> <input name="action" type="hidden" value="createnewweb" /></form>
 
 For detailed instructions, see [[TWiki Installation Guide: Adding a New Web|Main/TWikiInstallationGuide#CreateWeb]].
 
 ## <a name="Renaming or Deleting a Web"></a> Renaming or Deleting a Web
+
+Renaming or deleting a web requires direct access to the installation files on the host server. There are currently no browser-based equivalents of the Rename/move/delete topic tools for working with webs.
 
 **NOTE:** If you plan to rename the %WIKITOOLNAME%.Main web, remember that TWiki stores user and group topics in <code>%MAINWEB%</code>, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
 
 1. Prepare your site: Search each web for links to the target web, searching topic text for `Oldwebname.`, including the dot so you'll find references like `Oldwebname.SomeTopic`.
   - Make changes as required, to `Newwebname.SomeTopic` or better yet, to `%MAINWEB%.SomeTopic`.
 2. Edit the [[TWikiPreferences]] topic: Rename or delete the web from the `WIKIWEBLIST` variable.
-3. Edit the [[TWikiWebsTable]] topic: Rename or delete the web from the table.
-4. Login to the %WIKITOOLNAME% server, via Telnet or FTP.
-5. Go to `twiki/data` and rename or remove the web directory.
-6. Go to `twiki/templates` and rename or remove the web directory if present.
-7. Go to `twiki/pub` and rename or remove the web directory if present.
+3. Login to the %WIKITOOLNAME% server, via Telnet or FTP.
+4. Go to `twiki/data` and rename or remove the web directory.
+5. Go to `twiki/templates` and rename or remove the web directory if present.
+6. Go to `twiki/pub` and rename or remove the web directory if present.
 
--- [[MikeMannix]] - 14 Sep 2001 <br />
+-- [[MikeMannix]] - 14 Sep 2001 <br /> -- [[PeterThoeny]] - 07 Apr 2002 <br />

@@ -217,7 +217,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:34</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:35</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -267,15 +267,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:34:42</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:35:09</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:34</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:35</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:34</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:35</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -302,7 +302,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>"Web.Topic"</code></td>
-          <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.TWikiWebsTable"}%</code></td>
+          <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.SiteMap"}%</code></td>
         </tr>
         <tr>
           <td><code>"http://..."</code></td>
