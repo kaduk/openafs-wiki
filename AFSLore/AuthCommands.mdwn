@@ -67,5 +67,11 @@ The kas wrapper mentioned above maybe useful for Heimdal environments too.
 - asetkey -- converts a V5 keytab file containing the AFS service ticket key and stores it into a [[KeyFile]] which AFS servers understand.
 - fakeka
 - r\* commands -- where to get safe kerberized versions?
+- pts -- suite of commands for accessing the [[PtServer]] to manage AFS groups in all authentication environments.
+- uss -- user creation tool. It is [documented](http://www.openafs.org/pages/doc/AdminReference/auarf242.htm#HDRUSS_INTRO) in the admin guide. It has some support for alternate authentication systems, but probably works best in [[KaServer]] environments.
 
--- [[TedAnderson]] - 23 Jan 2002
+----
+
+See [[SettingUpAuthentication]]
+
+-- [[TedAnderson]] - 23 Jan 2002 -- [[TedAnderson]] - 06 Feb 2002
