@@ -1,30 +1,30 @@
 <div>
   <ul>
     <li><a href="#Links"> Links</a><ul>
-        <li><a href="#%WIKITOOLNAME% Internal Links"> %WIKITOOLNAME% Internal Links</a></li>
-        <li><a href="#Remote Site Links"> Remote Site Links</a></li>
+        <li><a href="#Internal Links"> Internal Links</a></li>
+        <li><a href="#External Links"> External Links</a></li>
       </ul>
     </li>
     <li><a href="#Editing"> Editing</a></li>
     <li><a href="#Using HTML"> Using HTML</a></li>
     <li><a href="#TWiki Variables"> TWiki Variables</a></li>
     <li><a href="#"Gotchas" when Editing Text"> "Gotchas" when Editing Text</a></li>
-    <li><a href="#%WIKITOOLNAME% Plugins"> %WIKITOOLNAME% Plugins</a></li>
+    <li><a href="#TWiki Plugins"> TWiki Plugins</a></li>
   </ul>
 </div>
 
-It is easy to collaborate; just type your text. You don't need to know HTML at all, though you can use it if you prefer. Links to topics will be created automatically, as long as you follow these simple Text Formatting Rules. [[TextFormattingFAQ]] has answers to frequently asked questions about text formatting. This page is available in a pop-up window when in Edit mode.
+It is easy to collaborate: just type in your text. You don't need to know HTML at all, though you can use it if you prefer. Links to topics will be created automatically, as long as you follow these simple Text Formatting Rules. [[TextFormattingFAQ]] has answers to frequently asked questions about text formatting. This page is also available as quick reference pop-up window from a link in the Edit screen.
 
 ## <a name="Links"></a> Links
 
-Being able to create links without any formating required is a core TWiki feature, made possible using [[WikiNames]]. With the latest version of TWiki linking rules, by adding a few extra symbols, you can have even more powerful linking control.
+Being able to create links without any formatting required is a core TWiki feature, made possible using [[WikiNames]]. With the latest version of TWiki linking rules, a simple extension of the syntax provides an new set of flexible linking options.
 
-### <a name="%WIKITOOLNAME% Internal Links"></a> %WIKITOOLNAME% Internal Links
+### <a name="Internal Links"></a> Internal Links
 
 - [[GoodStyle]] is a [[WikiWord]] that links to the GoodStyle topic located in the current %WIKITOOLNAME% web.
 - [[NotExistingYet]] is a topic waiting to be written. You could create that topic by clicking on the question mark. (Do not create that topic; you would wreck this example!)
 
-### <a name="Remote Site Links"></a> Remote Site Links
+### <a name="External Links"></a> External Links
 
 - `http://...`, `https://...`, `ftp://...` and `mailto:...@...` are linked automatically.
 - Email addresses like `name@domain.com` are linked automatically.
@@ -306,9 +306,9 @@ The formatting rules are fairly simple to use and fast to type. However, there a
 
 - See more [[TextFormattingFAQs]]
 
-## <a name="%WIKITOOLNAME% Plugins"></a> %WIKITOOLNAME% Plugins
+## <a name="TWiki Plugins"></a> TWiki Plugins
 
-Plugins offer additional text formatting rules and extend the functionality of %WIKITOOLNAME%. Currently enabled plugins are:
+Plugins provide additional text formatting rules and can extend the functionality of %WIKITOOLNAME% into many other areas. Available Plugins are located in the [[Plugins|Main/TWiki:Plugins]] web. Currently enabled plugins on this site are:
 
 - [[SpreadSheetPlugin]] <span>(any TWiki, 10197)</span>:
 - [[CommentPlugin]] <span>(Dakar, 11359)</span>: Allows users to quickly post comments to a page without an edit/preview/save cycle
@@ -320,4 +320,6 @@ Plugins offer additional text formatting rules and extend the functionality of %
 - [[TablePlugin]] <span>(1.020, 12339)</span>:
 - [[TwistyPlugin]] <span>(1.2.0, $Rev: 12154$)</span>:
 
-Learn more about plugins in [[TWikiPlugins]] and [[TWikiPreferences]].
+Check on current Plugin status and settings for this site in [[TWikiPreferences]].
+
+-- [[MikeMannix]] - 30 Aug 2001
