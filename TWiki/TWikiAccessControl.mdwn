@@ -1,7 +1,6 @@
 <div>
   <ul>
     <li><a href="#TWiki Access Control"> TWiki Access Control</a><ul>
-        <li><a href="#Overview"> Overview</a></li>
         <li><a href="#An Important Control Considerati"> An Important Control Consideration</a></li>
         <li><a href="#Users and Groups"> Users and Groups</a><ul>
             <li><a href="#Managing Users"> Managing Users</a></li>
@@ -18,11 +17,9 @@
             <li><a href="#Deny Renaming by Web"> Deny Renaming by Web</a></li>
           </ul>
         </li>
-        <li><a href="#Restricting Read Access"> Restricting Read Access</a><ul>
-            <li><a href="#Known Issues"> Known Issues</a><ul>
-                <li><a href="#Selective Unrestricted Web Acces"> Selective Unrestricted Web Access</a></li>
-              </ul>
-            </li>
+        <li><a href="#Restricting Web Access"> Restricting Web Access</a><ul>
+            <li><a href="#Create Hidden Webs"> Create Hidden Webs</a></li>
+            <li><a href="#Create Authenticated Access By W"> Create Authenticated Access By Web</a></li>
           </ul>
         </li>
         <li><a href="#Hiding Control Settings"> Hiding Control Settings</a></li>
@@ -35,8 +32,6 @@
 # <a name="TWiki Access Control"></a> TWiki Access Control
 
 _Restricting read and write access to topics and webs, by users and groups_
-
-## <a name="Overview"></a> Overview
 
 [[TWikiAccessControl]] allows you restrict access to single topics and entire webs, by individual user and by user groups, in three main areas: view; edit &amp; attach; and rename/move/delete. These controls, combined with [[TWikiUserAuthentication]], let you easily create and manage an extremely flexible, fine-grained privilege system.
 
@@ -59,7 +54,7 @@ As a collaboration guideline:
 
 ## <a name="Users and Groups"></a> Users and Groups
 
-Access control is based on users and groups. Users are defined by their [[WikiNames]], an then organized into unlimited combinations under different user groups.
+Access control is based on users and groups. Users are defined by their [[WikiNames]], an then organized in unlimited combinations under different user groups.
 
 ### <a name="Managing Users"></a> Managing Users
 
@@ -144,30 +139,70 @@ The same rules apply as for topics, with these additions:
 - DENYTOPICRENAME (in topic) overrides DENYWEBRENAME (in WebPreferences)
 - ALLOWTOPICRENAME (in topic) overrides ALLOWWEBRENAME (in WebPreferences)
 
-## <a name="Restricting Read Access"></a> Restricting Read Access
+## <a name="Restricting Web Access"></a> Restricting Web Access
 
-You can define restrictions of who is allowed to view a %WIKITOOLNAME% web.
+You can prevent selected users and groups from accessing certain webs, by hiding them using restricting read access, or by requiring login. There are two basic methods, one simple, using standard preferences variables to hide a web, but offering low security, and a secure log-in approach that is currently a workaround, involving some minor script and filesystem modification.
 
-- Define one or both of these variable in the [[WebPreferences]] topic:
-  - Set DENYWEBVIEW = &lt; list of users and groups &gt;
+### <a name="Create Hidden Webs"></a> Create Hidden Webs
+
+You can prevent selected users and groups from viewing certain %WIKITOOLNAME% webs by setting one or both of these variables in each web's [[WebPreferences]] topic:
+
+- - Set DENYWEBVIEW = &lt; list of users and groups &gt;
   - Set ALLOWWEBVIEW = &lt; list of users and groups &gt;
+- If keeping a hidden web out of general use is a consideration, you should also prevent the "all webs" search option from accessing each hidden web, by enabling the <code>**NOSEARCHALL**</code> variable in [[WebPreferences]]:
+  - Set NOSEARCHALL = on
+  - It is not recommended to restrict view access to individual topics since all content is searchable _within_ a web.
+- %H%This method only works if the <code>**view**</code> script is authenticated, which means that all users have to login, even for read-only access. (An open guest account, like [[TWikiGuest]], can get around this, allowing anyone to login with, for example, view-only access for public webs.) [[TWikiInstallationGuide]] has more on Basic Authentication, using the <code>**.htaccess**</code> file.
+- %X% **Hiding webs is not very secure**, as there is a way to circumvent the read access restriction. It can be useful in certain situations - for example, to simplify site organization and clutter, by hiding low traffic webs - but is not recommended for securing sensitive content.
 
-### <a name="Known Issues"></a> Known Issues
+### <a name="Create Authenticated Access By W"></a> Create Authenticated Access By Web
 
-- The view restriction is not suitable for very sensitive content since there is a way to circumvent the read access restriction.
-- Read access restriction only works if the view script is authenticated, that means that users need to log on also just to read topics. [[TWikiInstallationGuide]] has more on Basic Authentication based on the <code>**.htaccess**</code> file.
+To selectively restrict web access with the security of Basic Authentication, there is a reliable workaround that involves some straightforward code modification:
 
-#### <a name="Selective Unrestricted Web Acces"></a> Selective Unrestricted Web Access
+1. Set aside the <code>**view**</code> script (rename) and create a <code>**view**</code> subdirectory in its place.
+2. In the <code>**view**</code> subdirectory, create a separate copy of a modified viewing script for each web, and create <code>**.htaccess**</code> settings for the restricted webs.
+  - %T% You can use symbolic links to a single copy of the viewing script to make any script updates that much easier.
 
-- There is a workaround if you prefer to have unrestricted access to view topics located in normal webs, and to authenticate users only for webs where view restriction is enabled:
-  1. **Omit** the <code>**view**</code> script from the `.htaccess` file.
-  2. **Enable** the <code>**$doRememberRemoteUser**</code> flag in <code>**lib/TWiki.cfg**</code> as described in [[TWikiUserAuthentication]]. %WIKITOOLNAME% will now remember the IP address of an authenticated user.
-  3. **Copy** the <code>**view**</code> script to <code>**viewauth**</code> (or better, create a symbolic link)
-  4. **Add** <code>**viewauth**</code> to the list of authenticated scripts in the .htaccess file.
-    - When a user accesses a web where you enabled view restriction, %WIKITOOLNAME% will redirect from the `view` script to the `viewauth` script once (this happens only if the user has never edited a topic). Doing so will ask for authentication. The `viewauth` script shows the requested topic if the user could log on and if the user is authorized to see that web.
-    - If you enable view restriction for a web, it is recommended to restrict search "all webs" from searching this web. Enable this restriction with the <code>**NOSEARCHALL**</code> variable in its [[WebPreferences]], like:
-      - Set NOSEARCHALL = on
-    - It is not recommended to restrict view access to individual topics since all content is searchable _within_ a web.
+> **Example of viewing script**
+>
+> <code>**redirect**</code>
+>
+>     #!/usr/bin/perl -w
+>     #
+>
+>     chdir '..';
+>
+>     # Adjust SCRIPT and PATH_INFO variables to account for the changed directory
+>     my $web = $ENV{SCRIPT_NAME};
+>     $web    =~ s#^.*/view(/[^/]*).*$#$1#; # isolate the path element after "view"
+>     $ENV{PATH_TRANSLATED} =~ s#(/[^/]*)$#$web$1#;
+>     $ENV{PATH_INFO}       =~ s#(/[^/]*)$#$web$1#;
+>     $ENV{SCRIPT_NAME}     =~ s#/view$web#/view#;
+>     $ENV{SCRIPT_FILENAME} =~ s#/view$web#/view#;
+>
+>     # open (LOG, '>>/tmp/redirect.log');
+>     # print LOG join ("\n", scalar localtime (time ()), %ENV);
+>     # close LOG;
+>     exec ('/usr/bin/perl', '-wT', 'view.orig') or
+>
+>     print <<EOF;
+>     Content-type: text/plain
+>
+>     Error executing /cgi-bin/view.orig: $?
+>     Click the BACK button in your browser and contact webmaster\@bcs-oops.org.
+>
+>     EOF
+
+- **_(Mod by [[ImmoHuneke]] - 16 Mar 2002)_**
+
+**A SECOND OPTION:** A less reliable workaround that also requires code changes is available to provide the same unrestricted viewing access, with authentication required only on selected webs:
+
+1. **Omit** the <code>**view**</code> script from the `.htaccess` file.
+2. **Enable** the <code>**$doRememberRemoteUser**</code> flag in <code>**lib/TWiki.cfg**</code> as described in [[TWikiUserAuthentication]]. %WIKITOOLNAME% will now remember the IP address of an authenticated user. 1. **Copy** the <code>**view**</code> script to <code>**viewauth**</code> (or better, create a symbolic link) 1. **Add** <code>**viewauth**</code> to the list of authenticated scripts in the .htaccess file.
+  - When a user accesses a web where you enabled view restriction, %WIKITOOLNAME% will redirect from the `view` script to the `viewauth` script once (this happens only if the user has never edited a topic). Doing so will ask for authentication. The `viewauth` script shows the requested topic if the user could log on and if the user is authorized to see that web.
+  - If you enable view restriction for a web, it is recommended to restrict search "all webs" from searching this web. Enable this restriction with the <code>**NOSEARCHALL**</code> variable in its [[WebPreferences]], like:
+    - Set NOSEARCHALL = on
+  - It is not recommended to restrict view access to individual topics since all content is searchable _within_ a web.
 
 ## <a name="Hiding Control Settings"></a> Hiding Control Settings
 
@@ -195,4 +230,4 @@ By mistyping a user or group name in the ALLOWTOPICCHANGE setting, it's possible
 
 - The default setting is not to have superusers.
 
--- [[MikeMannix]] - 02 Dec 2001
+-- [[MikeMannix]] - 20 Mar 2002
