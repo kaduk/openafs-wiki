@@ -211,7 +211,38 @@ The above form asks for a topic name. A hidden input tag named <code>**templatet
     	  (date format is <nop>YYYYxMMxDD)
     </form>
 
-The <code>**onlywikiname**</code> parameter enforces [[WikiWords]] for topic names. The <code>**topicparent**</code> parameter sets the topic parent to the topic where the form is located.
+The `edit` scipt understands the following parameters, typically supplied by HTML input fields:
+
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+>     <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+>   </tr>
+>   <tr>
+>     <td><code>topic</code></td>
+>     <td> Name of topic to create. Can be set in a text field, or is set programmatically (e.g. with a sequential number) </td>
+>   </tr>
+>   <tr>
+>     <td><code>onlywikiname</code></td>
+>     <td> If set, TWiki will complain if the topic name is not a [[Main/WikiWord]]</td>
+>   </tr>
+>   <tr>
+>     <td><code>templatetopic</code></td>
+>     <td> The name of the template topic, e.g. topic used to copy the initial content </td>
+>   </tr>
+>   <tr>
+>     <td><code>topicparent</code></td>
+>     <td> Sets the parent topic </td>
+>   </tr>
+>   <tr>
+>     <td><code>TopicClassification</code></td>
+>     <td> Assuming the template topic has a form with a field called "TopicClassification", it will set the value of the field </td>
+>   </tr>
+>   <tr>
+>     <td><code>anyname</code></td>
+>     <td> Any parameter can passed to the new topic; if the template topic contains <code>%URLPARAM{"anyname"}%</code>, it will be replaced by its value </td>
+>   </tr>
+> </table>
 
 %T% **TIP:** You can use the `%WIKIUSERNAME%` and `%DATE%` variables in your topic templates to include the signature of the person creating a new topic. The variables are expanded into fixed text when a new topic is created. The standard signature is: <br /><code>**-- %WIKIUSERNAME% - %DATE%**</code>
 
@@ -313,4 +344,4 @@ With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=W
 
 - A drawback of referring to a master template is that you can only test a template from within TWiki, where the include variables are resolved. In the previous system, each template was a structurally complete HTML document with a `.tmpl` filename extension - it contained unresolved `%VARIABLES%`, but could still be previewed directly in a browser.
 
--- [[PeterThoeny]] - 01 Feb 2003 <br /> -- [[MikeMannix]] - 14 Sep 2001 <br /> -- TWiki:Main/DavidLeBlanc - 11 Mar 2002
+-- TWiki:Main.PeterThoeny - 16 Dec 2003 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002

@@ -21,42 +21,36 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <th bgcolor="#99CCCC" colspan="3"><strong> Required Server Environment </strong></th>
-  </tr>
-  <tr>
     <th bgcolor="#99CCCC"><strong> Resource </strong></th>
-    <th bgcolor="#99CCCC"><strong> Unix </strong></th>
-    <th bgcolor="#99CCCC"><strong> Windows* </strong></th>
+    <th bgcolor="#99CCCC"><strong> Required Server Environment * </strong></th>
   </tr>
   <tr>
     <td> Perl </td>
-    <td align="center" colspan="2"> 5.005_03 or higher (5.6.1 recommended, <br /> 5.8.0 <strong>not</strong> recommended yet, see TWiki:Codev.UsingPerl58OnRedHat8) </td>
+    <td> 5.005_03 or higher (5.6.1 recommended, 5.8.0 <strong>not</strong> recommended yet, see TWiki:Codev.IssuesWithPerl5dot8) </td>
   </tr>
   <tr>
     <td> Non-standard Perl modules </td>
-    <td align="center"><code>Net::SMTP</code> (or <code>sendmail</code>) </td>
-    <td align="center"><code>Net::SMTP</code>, <code>MIME::Base64</code>, <code>Digest::SHA1</code></td>
+    <td> %BULLET% Unix: <code>Net::SMTP</code> (or <code>sendmail</code>) %BB% Windows: <code>Net::SMTP</code>, <code>MIME::Base64</code>, <code>Digest::SHA1</code></td>
   </tr>
   <tr>
     <td> RCS </td>
-    <td align="center" colspan="2"> 5.7 or higher (including GNU <code>diff</code>) %BR% Optional, but the all-Perl RCS replacement is not currently recommended for live sites - see TWiki:Codev.RcsLite. </td>
+    <td> 5.7 or higher (including GNU <code>diff</code>) %BR% Optional, but the all-Perl RCS replacement is not currently recommended for live sites - see TWiki:Codev.RcsLite </td>
   </tr>
   <tr>
     <td> GNU <code>diff</code></td>
-    <td align="center" colspan="2"> GNU <code>diff</code> 2.7 or higher is required when not using the all-Perl RcsLite. %BR% Install on PATH if not included with RCS (check version with <code>diff -v</code>) </td>
+    <td> GNU <code>diff</code> 2.7 or higher is required when not using the all-Perl RcsLite. %BR% Install on PATH if not included with RCS (check version with <code>diff -v</code>) %BR% Must be the version used by RCS, to avoid problems with binary attachments - RCS may have hard-coded path to <code>diff</code></td>
   </tr>
   <tr>
     <td> Other external programs </td>
-    <td align="center" colspan="2"><code>ls, fgrep, egrep</code></td>
+    <td><code>fgrep, egrep</code></td>
   </tr>
   <tr>
     <td> Cron/scheduler </td>
-    <td align="center"><code>cron</code></td>
-    <td><code>cron</code> equivalents </td>
+    <td> %BULLET% Unix: <code>cron</code> %BB% Windows: <code>cron</code> equivalents </td>
   </tr>
   <tr>
     <td> Web server </td>
-    <td align="center" colspan="2"> Apache 1.3 is well supported; Apache 2.0 is <strong>not</strong> recommended yet (see TWiki:Support.FailedAuthenticationWithApache2OnWinNT). %BR% For other servers, CGI support, authentication, extended path required </td>
+    <td> Apache 1.3 is well supported; Apache 2.0 is <strong>not</strong> recommended yet (see TWiki:Codev.IssuesWithApache2dot0). %BR% For other servers, CGI support, authentication, extended path info required; also, the <code>register</code> script is likely to need significant changes </td>
   </tr>
 </table>
 
@@ -81,4 +75,4 @@ You can easily add functionality, by customizing [[TWikiTemplates]], for one, wh
 - The [[TWikiPlugins]] feature currently does not have compatibility guidelines for developers. Plugins can require just about anything - browser-specific functions, stylesheets (CSS), Java applets, cookies, specific Perl modules,... - check the individual Plugin specs.
   - %H% Plugins included in the TWiki distribution do not add requirements.
 
--- [[MikeMannix]] - 12 Jan 2002
+-- TWiki:Main.MikeMannix - 12 Jan 2002 %BR% -- TWiki:Main.PeterThoeny - 16 Dec 2003
