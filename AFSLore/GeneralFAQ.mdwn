@@ -155,7 +155,7 @@ Firstly, AFS makes use of Kerberos to authenticate users. This improves security
 
 - encrypted passwords no longer need to be visible
   - You don't have to use NIS, aka yellow pages, to distribute /etc/passwd - thus "ypcat passwd" can be eliminated.
-  - If you do choose to use NIS, you can replace the password field with "X" so the encrypted password is not visible. (These issues are discussed in detail in [25]).
+  - If you do choose to use NIS, you can replace the password field with "X" so the encrypted password is not visible. (These issues are discussed in detail in [[[AdminGuide|Main/FurtherReading#AdminGuide]]]).
 
 - AFS uses mutual authentication - both the service provider and service requester prove their identities
 
@@ -224,7 +224,7 @@ Once you have wide-area AFS in place, you don't have to keep local copies of fil
 
 #### <a name="1.05.i  Communications protocol"></a> 1.05.i Communications protocol
 
-AFS communications protocol is optimized for Wide Area Networks. Retransmitting only the single bad packet in a batch of packets and allowing the number of unacknowledged packets to be higher (than in other protocols, see [4]).
+AFS communications protocol is optimized for Wide Area Networks. Retransmitting only the single bad packet in a batch of packets and allowing the number of unacknowledged packets to be higher (than in other protocols, see [[[Johnson90|Main/FurtherReading#Johnson90]]]).
 
 #### <a name="1.05.j  Improved system manageme"></a> 1.05.j Improved system management capability
 
@@ -484,7 +484,7 @@ AFS uses Kerberos to do complex mutual authentication which means that both the 
 
 Transarc's implementation of Kerberos is slightly different from MIT Kerberos V4 but AFS can work with either version. Joe Jackson wrote about this in: <http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html>
 
-For more detail on this and other Kerberos issues see the faq for Kerberos (posted to news.answers and comp.protocols.kerberos) [28]. (Also, see [15], [16], [26], [27])
+For more detail on this and other Kerberos issues see the faq for Kerberos (posted to news.answers and comp.protocols.kerberos) [[[Jaspan|Main/FurtherReading#Jaspan]]]. (Also, see [[[Miller87|Main/FurtherReading#Miller87]]], [[[Bryant88|Main/FurtherReading#Bryant88]]], [[[Bellovin90|Main/FurtherReading#Bellovin90]]], [[[Steiner88|Main/FurtherReading#Steiner88]]])
 
 ### <a name="1.09  Does AFS work over protoco"></a> 1.09 Does AFS work over protocols other than TCP/IP?
 

@@ -373,9 +373,9 @@ In theory, you could have RO copies of a user's RW volume on a second server but
 
 ### <a name="3.17  Which TCP/IP ports and pro"></a> 3.17 Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?
 
-Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [35] [36]:
+Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [[[Mills89|Main/FurtherReading#Mills89]]] [[[Mills92|Main/FurtherReading#Mills92]]]:
 
-ntp 123/tcp
+ntp 123/udp
 
 A list of NTP servers is available via anonymous FTP from:
 
@@ -467,7 +467,7 @@ The space needed for the BK volume is directly related to the size of all files 
 
 No.
 
-The AFS Cache Manager makes use of NTP [35] [36] to synchronise time with your cell's NTP servers.
+The AFS Cache Manager makes use of NTP [[[Mills89|Main/FurtherReading#Mills89]]] [[[Mills92|Main/FurtherReading#Mills92]]] to synchronise time with your cell's NTP servers.
 
 Typically, one of your AFS cell's servers synchronises with an external NTP server and provides accurate time to your cell.
 
