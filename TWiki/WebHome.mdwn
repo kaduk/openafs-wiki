@@ -41,14 +41,14 @@
         <li><strong>TWiki Help FAQs</strong><ul>
             <li>[[Main/TWikiFAQ]]: The first things people ask about TWiki </li>
             <li>[[Main/TextFormattingFAQ]]: Common how-to questions about posting in TWiki </li>
+            <li> Frequent users should also browse the full [[Main/WebHome#ReferenceManual]]! </li>
           </ul>
         </li>
-        <li> Frequent users should also browse the full [[Main/WebHome#ReferenceManual]]! </li>
       </ul>
       <p>
       </p>
       <ul>
-        <li> %T% In less than an hour, you can read through and customize the [[Main/WebHome#UsersGuide]] to reflect the exact feature set enabled on your own TWiki site. </li>
+        <li> %T% <strong>ADMINS:</strong> In less than an hour, you can read through and customize the [[Main/WebHome#UsersGuide]] to reflect the exact feature set enabled on your own TWiki site. </li>
       </ul>
     </td>
     <td width="25"> </td>
@@ -60,44 +60,39 @@
 
 <a name="ReferenceManual"></a>
 
-## <a name="TWiki Reference Manual"></a> TWiki Reference Manual
+## <a name="TWiki Configuration Manual"></a> TWiki Configuration Manual
 
-Documentation for webmasters, system administrators, project managers, team leaders, <br /> and all other users of the TWiki advanced online collaboration tool.
+Documentation for webmasters, system administrators, project managers, team <br /> leaders, and all other users of the TWiki advanced online collaboration tool.
 
-- **[[TWikiDocumentation]]**: Complete current reference...
-  - [[System Requirements|Main/TWikiImplementationNotes]]
-  - [[Installation Guide|Main/TWikiInstallationGuide]]
-  - [[Upgrade Guide|Main/TWikiUpgradeGuide]]
-  - [[User Authentication|Main/TWikiUserAuthentication]]
-  - [[Access Control|Main/TWikiAccessControl]]
-  - [[TWiki Text Formatting|Main/TextFormattingRules]]
-  - [[TWikiVariables]]
-  - [[TWikiAttachments|Main/FileAttachment]]
-  - [[TWikiForms]]
-  - [[TWikiTemplates]]
-  - [[TWikiSkins]]
-  - [[TWiki Search Formatting|Main/FormattedSearch]]
-  - [[TWikiMetaData]]
-  - [[TWikiPlugins]]
-  - [[TWikiSiteTools]]
-  - [[Managing Topics|Main/ManagingTopics]]
-  - [[Managing Webs|Main/ManagingWebs]]<br />**Appendices**<br />[[A. TWiki File System|Main/AppendixFileSystem]]<br />[[B. TWiki Development Timeline|Main/TWikiHistory]]
+- **[[TWikiDocumentation]]**: All manual sections in one file...
+  1. [[System Requirements|Main/TWikiImplementationNotes]]
+  2. [[Installation Guide|Main/TWikiInstallationGuide]]
+  3. [[Upgrade Guide|Main/TWikiUpgradeGuide]]
+  4. [[User Authentication|Main/TWikiUserAuthentication]]
+  5. [[Access Control|Main/TWikiAccessControl]]
+  6. [[TWiki Text Formatting|Main/TextFormattingRules]]
+  7. [[TWikiVariables]]
+  8. [[TWikiAttachments|Main/FileAttachment]]
+  9. [[TWikiForms]]
+  10. [[TWikiTemplates]]
+  11. [[TWikiSkins]]
+  12. [[TWiki Search Formatting|Main/FormattedSearch]]
+  13. [[TWikiMetaData]]
+  14. [[TWikiPlugins]]
+  15. [[TWikiSiteTools]]
+  16. [[Managing Topics|Main/ManagingTopics]]
+  17. [[Managing Webs|Main/ManagingWebs]]<br />**Appendices**<br />[[A. TWiki File System|Main/AppendixFileSystem]]<br />[[B. TWiki Development Timeline|Main/TWikiHistory]]
+
+## <a name="TWiki Reference"></a> TWiki Reference
+
+- [[Demonstrating TWiki|Main/TWikiCourseOutlineExample]]
 
 ## <a name="TWikiSiteTools"></a><a name="_TWikiSiteTools"></a> TWikiSiteTools
 
-[[TWikiSiteTools]] include utilities for navigation and for monitoring web and site-wide activity.
+[[TWikiSiteTools]] include utilities for navigation and for monitoring TWiki web and site-wide activity.
 
 - [[TWikiPreferences]]: %WIKITOOLNAME% site-wide preferences
-- **Installed Plugins** extending the functionality of TWiki
-  - [[SpreadSheetPlugin]] <span>(any TWiki, 10197)</span>:
-  - [[CommentPlugin]] <span>(Dakar, 11359)</span>: Allows users to quickly post comments to a page without an edit/preview/save cycle
-  - [[EditTablePlugin]] <span>(any TWiki, 11646)</span>:
-  - [[InterwikiPlugin]] <span>(Dakar, $Rev: 11935$)</span>:
-  - [[PreferencesPlugin]] <span>(Dakar, 9839)</span>:
-  - [[SlideShowPlugin]] <span>(Any TWiki, $Rev: 12847$)</span>:
-  - [[SmiliesPlugin]] <span>(Dakar, 8154)</span>:
-  - [[TablePlugin]] <span>(1.020, 12339)</span>:
-  - [[TwistyPlugin]] <span>(1.2.0, $Rev: 12154$)</span>:
+- [[InstalledPlugins]]: currently available TWiki add-on features
 
 - The [[SiteMap]]: A color-coded directory of available webs that can be easily included on any page _(below)_
 

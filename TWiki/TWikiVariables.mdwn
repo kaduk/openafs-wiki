@@ -267,7 +267,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:35:09</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:35:52</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -302,7 +302,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>"Web.Topic"</code></td>
-          <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.SiteMap"}%</code></td>
+          <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.TWikiSiteMap"}%</code></td>
         </tr>
         <tr>
           <td><code>"http://..."</code></td>
@@ -358,7 +358,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>"text"</code></td>
-          <td> Search term. (Is a regular expression or literal, depending on the <code>regex</code> parameter) </td>
+          <td> Search term. (Is a regular expression or literal, depending on the <code>regex</code> parameter) [TWikiAlphaRelease - for regular expressions ";" can be used to mean <em>and</em> e.g. "search;agrep" will find all topic containing search <em>and</em> agrep ] </td>
           <td> required </td>
         </tr>
         <tr>
@@ -458,7 +458,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>title="Title"</code></td>
-          <td> Text the is prepended to any search results </td>
+          <td> Text that is prepended to any search results </td>
           <td> required </td>
         </tr>
       </table> Example: <code><b>%METASEARCH{type="topicmoved" web="%WEB%" topic="%TOPIC%" title="This topic used to exist and was moved to: "}%</b></code>, you may want to use this in [[Main/WebTopicViewTemplate]] and [[Main/WebTopicNonWikiTemplate]]<br /><code><b>%METASEARCH{type="parent" web="%WEB%" topic="%TOPIC%" title="Children: "}%</b></code></td>
@@ -618,21 +618,23 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
   </tr>
 </table>
 
+<a name="SettingPrefs"></a>
+
 ## <a name="Setting Preferences"></a> Setting Preferences
 
-- The syntax for Preferences variables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />[3 spaces] \* [space] Set [space] VARIABLENAME [space] = [value]<br />**_Examples:_**
+- The syntax for Preferences Bariables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />[3 spaces] \* [space] Set [space] VARIABLENAME [space] = [value]<br />**_Examples:_**
 - <code>**Set VARIABLENAME = =value=**</code>
   - <code>**Set VARIABLENAME = =value=**</code>
 
 ## <a name="Creating Custom Variables"></a> Creating Custom Variables
 
-- You can add your own preference variables for an entire site, a single web, or a single topic, using the standard syntax. Whatever you include in your variable will be expanded on display, and treated exactly as if it had been written out. So you can place formatted text, page links, image paths.
+- You can add your own Preference Variables for us across an entire site or a single web, using the standard [[Preferences syntax|Main/WebHome#SettingPrefs]]. Whatever you include in your Variable will be expanded on display, exactly as if it had been entered directly. You can place formatted text, page links, image paths.
 
-> **Example: Create a custom logo variable**
+> **Example: Create a custom logo variable the %WEB% web**
 >
 > <br />
 >
-> - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, simply define the variable on the web's [[WebPreferences]] page. You also have to upload `logo.gif` - this can be done by [[attaching a file|Main/FileAttachment]] to `LogoTopic` (any topic name you choose):
->   - <code>**Set MYLOGO = %PUBURL%/%MAINWEB%/LogoTopic/logo.gif**</code>
+> - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, define the Variable on the web's [[WebPreferences]] page, and upload a logo file, ex: `mylogo.gif`. You can upload by [[attaching the file|Main/FileAttachment]] to [[WebPreferences]], or, to avoid clutter, to any other topic in the same web, ex: `LogoTopic`:
+>   - <code>**Set MYLOGO = %PUBURL%/TWiki/LogoTopic/mylogo.gif**</code>
 
--- [[PeterThoeny]] - 13 Sep 2001 <br /> -- [[MikeMannix]] - 07 Mar 2002
+-- [[PeterThoeny]] - 13 Sep 2001 <br /> -- [[MikeMannix]] - 12 May 2002
