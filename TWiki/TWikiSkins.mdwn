@@ -67,19 +67,11 @@ You can use [[template variables|Main/TWikiTemplates#TemplateVariables]], [[TWik
   </tr>
   <tr>
     <td><code>%WEB%</code></td>
-    <td> The name of the current web </td>
-  </tr>
-  <tr>
-    <td><code>%WEBURLENCODED%</code></td>
-    <td> The name of the current web, URL encoded (for form action) </td>
+    <td> The name of the current web. <strong><em>Note:</em></strong> It is recommended to URL-encode the variable in form actions with <code>%URLENCODE{"%WEB%"}%</code> for proper handling in an internationalized environment </td>
   </tr>
   <tr>
     <td><code>%TOPIC%</code></td>
-    <td> The name of the current topic </td>
-  </tr>
-  <tr>
-    <td><code>%TOPICURLENCODED%</code></td>
-    <td> The name of the current topic, URL encoded (for form action) </td>
+    <td> The name of the current topic. <strong><em>Note:</em></strong> It is recommended to URL-encode the variable in form actions with <code>%URLENCODE{"%TOPIC%"}%</code> for proper handling in an internationalized environment </td>
   </tr>
   <tr>
     <td><code>%WEBTOPICLIST%</code></td>
@@ -127,7 +119,7 @@ The `%WEBTOPICLIST%` includes a "Go" box to jump to a topic. The box also unders
 
 Here is an example form that has a select box and the "Go" box for illustration purposes. You need to have JavaScript enabled for this to work:
 
-<form action="http://www.dementia.org/twiki//view/%WEBURLENCODED%/%TOPICURLENCODED%" name="sample">
+<form action="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%" name="sample">
   <table border="3">
     <tr>
       <td><select name="sel" onchange="this.form.topic.value=this.options[this.selectedIndex].value; this.form.submit()"><option selected value="">Navigate...</option>
@@ -161,4 +153,4 @@ A skin can be activated in two ways:
 
 The <code>**?skin=name**</code> URL parameter overrides the SKIN Preference value.
 
--- [[PeterThoeny]] - 03 Jan 2003
+-- [[PeterThoeny]] - 05 Jan 2003
