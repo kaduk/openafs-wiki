@@ -260,6 +260,8 @@ When viewing a topic the <code>**Raw Text**</code> link can be clicked to show t
 
 Meta Data is rendered with the %META% variable. This is mostly used in the `view`, `preview` and `edit` scripts.
 
+**_Note:_** Rendering meta data is currently not supported in topic text. As a workaround, use [[FormattedSearch]] on the current topic only to render form fields.
+
 Current support covers:
 
 <table border="1" cellpadding="0" cellspacing="0">
@@ -270,6 +272,10 @@ Current support covers:
   <tr>
     <td><code>%META{"form"}%</code></td>
     <td> Show form data, see [[Main/TWikiForms]]. </td>
+  </tr>
+  <tr>
+    <td><code>%META{"formfield"}%</code></td>
+    <td> Show form field value. Parameter: <code><b>name="field_name"</b></code>. Example:%BR% <code>%META{ "formfield" name="TopicClassification" }%</code></td>
   </tr>
   <tr>
     <td><code>%META{"attachments"}%</code></td>
