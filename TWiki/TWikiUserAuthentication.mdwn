@@ -13,7 +13,7 @@
 
 ## <a name="TWiki User Authentication"></a> TWiki User Authentication
 
-Controlling TWiki site access and logging authorized user activity
+_TWiki site access control and user activity tracking_
 
 ### <a name="Overview"></a> Overview
 
@@ -68,6 +68,18 @@ This section applies only if your %WIKITOOLNAME% is installed on a server that i
 >
 > everywhere but in the Main web.
 
+<a name="ChangingPasswords"></a>
+
 ### <a name="Changing Passwords"></a> Changing Passwords
+
+Change and reset passwords using forms on regular pages. Use topic-level [[TWikiAccessControl]] to restrict use as required.
+
+- The [[ChangePassword]] form, <code>**TWiki/ChangePassword**</code>:
+
+>
+
+- The [[ResetPassword]] form <code>**TWiki/ResetPassword**</code>:
+
+>
 
 -- [[PeterThoeny]] - 16 Mar 2001 <br /> -- [[MikeMannix]] - 29 Aug 2001
