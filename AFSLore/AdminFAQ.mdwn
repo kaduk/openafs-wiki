@@ -373,7 +373,7 @@ In theory, you could have RO copies of a user's RW volume on a second server but
 
 ### <a name="3.17  Which TCP/IP ports and pro"></a> 3.17 Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?
 
-Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [[[Mills89|Main/FurtherReading#Mills89]]] [[[Mills92|Main/FurtherReading#Mills92]]]:
+Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [[[NTP|Main/FurtherReading#NTP]]] and question [[3.22|Main/WebHome#NTP]]:
 
 ntp 123/udp
 
@@ -467,9 +467,15 @@ The space needed for the BK volume is directly related to the size of all files 
 
 No.
 
-The AFS Cache Manager makes use of NTP [[[Mills89|Main/FurtherReading#Mills89]]] [[[Mills92|Main/FurtherReading#Mills92]]] to synchronise time with your cell's NTP servers.
+<a name="NTP"></a> The AFS Servers make use of NTP [[[NTP|Main/FurtherReading#NTP]]] to synchronise time each other and typically with one or more external NTP servers. By default, clients synchronize their time with one of the servers in the local cell. Thus all the machines participating in the AFS cell have an accurate view of the time.
 
-Typically, one of your AFS cell's servers synchronises with an external NTP server and provides accurate time to your cell.
+For further details on NTP see: <http://www.eecis.udel.edu/~ntp/>. The latest version is 4.1, dated August 2001, which is **much** more recent that the version packaged with Transarc AFS.
+
+A list of NTP servers is available via anonymous FTP from:
+
+- <http://www.eecis.udel.edu/~mills/ntp/servers.html>
+
+The default time setting behavior of the AFS client can be disabled by specifying the `-nosettime` argument to [afsd](http://www.transarc.ibm.com/Library/documentation/afs/3.5/unix/cmd/cmd53.htm). This is recommended for AFS servers which are also configured as clients (because servers normally run NTP daemons) and for clients that run NTP.
 
 ### <a name="3.23  Why should I keep /usr/vic"></a> 3.23 Why should I keep /usr/vice/etc/CellServDB current?
 

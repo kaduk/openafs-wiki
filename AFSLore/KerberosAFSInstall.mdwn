@@ -53,7 +53,7 @@ First, activate the new AFS [[KeyFile]] by executing:
 
 After this restart, try using kinit to get Kerberos tickets for admin then (if necessary) use aklog to get an AFS token. Basically ensure that the AFS [[KeyFile]] is valid... (get a specific command to test this).
 
-Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ60) section of the [[OpenAFS]] documentation. The rest of the documentation can be completed without any changes. (What about replacing ntp with something recent, though...?)
+Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ60) section of the [[OpenAFS]] documentation. The rest of the documentation can be completed without any changes. (What about replacing NTP with something recent, though...? See FAQ [[3.22|Main/AdminFAQ#NTP]] and [[[NTP|Main/FurtherReading#NTP]]])
 
 ## <a name="Setting up Transparent Login"></a> Setting up Transparent Login
 
