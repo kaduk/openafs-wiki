@@ -171,6 +171,10 @@ The second is "lat":
 
 <file:///afs/transarc.com/public/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs> <ftp://ftp.transarc.com/pub/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs>
 
+Another collection of tools was [mentioned](https://lists.openafs.org/pipermail/openafs-info/2002-October/006353.html) by [[DanielClark]]:
+
+Another option is [OpenPBS](http://www.openpbs.org/) and [Password Storage and Retrieval](http://www.lam-mpi.org/software/psr/) (PSR), where you encrypt your AFS password with a public key and put it in your home directory, and trusted machine(s) which have the private key on local disk then decrypt your password and run your job. MIT uses a variant of this (e.g. [a](http://web.mit.edu/longjobs/www/) &amp; [b](http://mit.edu/longjobs-dev/notebook/)) that uses their own code (see [longjobs documentation](http://web.mit.edu/longjobs-dev/doc/netsec.txt) sections III and IV) instead of PSR.
+
 ### <a name="3.09  Can I check my user&#39;s pass"></a> 3.09 Can I check my user's passwords for security purposes?
 
 Yes. Alec Muffett's Crack tool (at version 4.1f) has been converted to work on the Transarc kaserver database. This modified Crack (AFS Crack) is available via anonymous ftp from:
