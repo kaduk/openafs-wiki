@@ -6,15 +6,16 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 <div>
   <ul>
-    <li><a href="#Web Preferences"> Web Preferences</a></li>
-    <li><a href="#User Settings"> User Settings</a></li>
-    <li><a href="#TWiki Platform Settings"> TWiki Platform Settings</a></li>
-    <li><a href="#Email and Proxy Server Settings"> Email and Proxy Server Settings</a><ul>
+    <li><a href="#Default Web Preferences"> Default Web Preferences</a></li>
+    <li><a href="#Default User Settings"> Default User Settings</a></li>
+    <li><a href="#TWiki Platform Settings"> TWiki Platform Settings</a><ul>
+        <li><a href="#Search Settings"> Search Settings</a></li>
+        <li><a href="#Email and Proxy Server Settings"> Email and Proxy Server Settings</a></li>
         <li><a href="#Email Link Settings"> Email Link Settings</a></li>
+        <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
       </ul>
     </li>
     <li><a href="#Plugins Settings"> Plugins Settings</a></li>
-    <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
     <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
     <li><a href="#Access Control Settings"> Access Control Settings</a></li>
     <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
@@ -22,7 +23,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   </ul>
 </div>
 
-## <a name="Web Preferences"></a> Web Preferences
+## <a name="Default Web Preferences"></a> Default Web Preferences
 
 %X% **NOTE:** They are typically redefined in individual WebPreferences topics
 
@@ -45,7 +46,7 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Warn if `%INCLUDE{}%` of topic fails: Fail silently (if empty or `off`); output "Warning: Can't INCLUDE Topic, topic not found" (if set to `on`); else, output specific text (use `$topic` for topic). You can override this setting by web preferences and by a `warn="..."` parameter in `%INCLUDE{}%` :
   - Set INCLUDEWARNING = %RED% **_Note:_** %ENDCOLOR% Included topic [[$topic|Main/Topic]] does not exist yet
 
-## <a name="User Settings"></a> User Settings
+## <a name="Default User Settings"></a> Default User Settings
 
 %X% **NOTE:** They are typically redefined in topics of individual [[TWikiUsers]]
 
@@ -105,7 +106,16 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Maximum size of [[FileAttachments]] in KB, 0 for no limit:
   - Set ATTACHFILESIZELIMIT = 10000
 
-## <a name="Email and Proxy Server Settings"></a> Email and Proxy Server Settings
+### <a name="Search Settings"></a> Search Settings
+
+- Default type for search, one of: keyword (for search engine like syntax), regex (for [[RegularExpression]] search), or literal (for verbatim search)
+  - Set SEARCHDEFAULTTTYPE = keyword
+- Default for `%SEARCH{}%` variable, one of: keyword, regex, or literal
+  - Set SEARCHVARDEFAULTTYPE = literal
+- Stop words, e.g., common words and characters to exclude from a keyword search:
+  - Set SEARCHSTOPWORDS = a, all, am, an, and, any, as, at, b, be, by, c, d, e, for, from, g, h, how, i, i'm, i.e., in, is, isn't, it, it's, its, j, k, l, m, n, o, of, on, or, p, q, r, s, t, that, that's, the, this, to, u, v, w, was, wasn't, what, what's, when, where, who, who's, will, with, x, y, z
+
+### <a name="Email and Proxy Server Settings"></a> Email and Proxy Server Settings
 
 - TWiki webmaster email address:
   - Set WIKIWEBMASTER = <webmaster@your.company>
@@ -134,15 +144,7 @@ The following are **_site-level_** settings that affect all users in all webs on
 - URL for current topic
   - Set TOPICURL = <http://www.dementia.org/twiki//view/%WEB%/WebHome>
 
-## <a name="Plugins Settings"></a> Plugins Settings
-
-- [[TWikiPlugins]] configuration: All plugin modules that exist in the `lib/TWiki/Plugins` directory are activated automatically unless disabled by DISABLEDPLUGINS. You can optionally list the installed plugins in INSTALLEDPLUGINS. This is useful to define the sequence of plugin execution, or to specify other webs then the TWiki web for the plugin topics. Specify plugins as a comma separated list of topics.
-  - Set INSTALLEDPLUGINS = [[DefaultPlugin]], [[SpreadSheetPlugin]]
-  - Set DISABLEDPLUGINS = [[EmptyPlugin]]
-  - Currently activated plugins: [[SpreadSheetPlugin]], [[CommentPlugin]], [[EditTablePlugin]], [[InterwikiPlugin]], [[PreferencesPlugin]], [[SlideShowPlugin]], [[SmiliesPlugin]], [[TablePlugin]], [[TwistyPlugin]]
-  - %T% **NOTE:** You can enable/disable all plugins with the <code>**$disableAllPlugins**</code> flag in the <code>**lib/TWiki.cfg**</code> file.
-
-## <a name="HTTP-EQUIV Settings"></a> HTTP-EQUIV Settings
+### <a name="HTTP-EQUIV Settings"></a> HTTP-EQUIV Settings
 
 - %T% **NOTE:** Changing cache behaviour with these settings should not be necessary and may cause cache-related problems (e.g. TWiki:Codev/BackFromPreviewLosesText or TWiki:Codev/RefreshEditPage). These settings do not affect proxy caches.
 
@@ -157,6 +159,14 @@ The following are **_site-level_** settings that affect all users in all webs on
 - <code>**http-equiv**</code> meta tags for <code>**preview**</code> script:
 
           * Set HTTP_EQUIV_ON_PREVIEW =
+
+## <a name="Plugins Settings"></a> Plugins Settings
+
+- [[TWikiPlugins]] configuration: All plugin modules that exist in the `lib/TWiki/Plugins` directory are activated automatically unless disabled by DISABLEDPLUGINS. You can optionally list the installed plugins in INSTALLEDPLUGINS. This is useful to define the sequence of plugin execution, or to specify other webs then the TWiki web for the plugin topics. Specify plugins as a comma separated list of topics.
+  - Set INSTALLEDPLUGINS = [[DefaultPlugin]], [[SpreadSheetPlugin]]
+  - Set DISABLEDPLUGINS = [[EmptyPlugin]]
+  - Currently activated plugins: [[SpreadSheetPlugin]], [[CommentPlugin]], [[EditTablePlugin]], [[InterwikiPlugin]], [[PreferencesPlugin]], [[SlideShowPlugin]], [[SmiliesPlugin]], [[TablePlugin]], [[TwistyPlugin]]
+  - %T% **NOTE:** You can enable/disable all plugins with the <code>**$disableAllPlugins**</code> flag in the <code>**lib/TWiki.cfg**</code> file.
 
 ## <a name="Miscellaneous Settings"></a> Miscellaneous Settings
 
@@ -255,7 +265,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set ALLOWWEBMANAGE = [[TWikiAdminGroup]]
 
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBMANAGE
+  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
