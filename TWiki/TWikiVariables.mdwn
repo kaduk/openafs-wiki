@@ -66,8 +66,8 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
     <td> Small 16x16 pixel icon of common attachment types, like <img align="top" alt="bmp" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/bmp.gif" width="16" /> <code>bmp</code>, <img align="top" alt="doc" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/doc.gif" width="16" /> <code>doc</code>, <img align="top" alt="gif" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/gif.gif" width="16" /> <code>gif</code>, <img align="top" alt="hlp" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/hlp.gif" width="16" /> <code>hlp</code>, <img align="top" alt="html" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/html.gif" width="16" /> <code>html</code>, <img align="top" alt="mp3" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/mp3.gif" width="16" /> <code>mp3</code>, <img align="top" alt="pdf" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" /> <code>pdf</code>, <img align="top" alt="ppt" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/ppt.gif" width="16" /> <code>ppt</code>, <img align="top" alt="txt" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/txt.gif" width="16" /> <code>txt</code>, <img align="top" alt="xls" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/xls.gif" width="16" /> <code>xls</code>, <img align="top" alt="xml" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/xml.gif" width="16" /> <code>xml</code>, <img align="top" alt="zip" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/zip.gif" width="16" /> <code>zip</code>, etc. Specify file type only, file name, or full path name. Example: <code>%ICON{"pdf"}%</code> returns <img align="top" alt="pdf" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" /></td>
   </tr>
   <tr>
-    <td><code>%URLPARAM{"name"}%</code></td>
-    <td> Returns the value of a URL parameter. Note that there is a risk that this variable could be misused for cross-scripting. Parameters are name, default and newline: <table border="1" cellpadding="0" cellspacing="0">
+    <td><code>%PARAM{"name"}%</code></td>
+    <td> Returns the value of a URL parameter. Note that there is a risk that this variable could be misused for cross-scripting. Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
@@ -88,11 +88,42 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> Convert newlines to other delimiters </td>
           <td> no conversion </td>
         </tr>
-      </table> Example: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
+        <tr>
+          <td><code>encode="entity"</code></td>
+          <td> Encode special characters into HTML entities, like a double quote into <code>&amp;#034;</code>. This is needed if text is put into an HTML form field </td>
+          <td> no encoding </td>
+        </tr>
+        <tr>
+          <td><code>encode="url"</code></td>
+          <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
+          <td> no encoding </td>
+        </tr>
+      </table> Example: <code>%PARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b>%PARAM{"skin"}%</b></td>
   </tr>
   <tr>
-    <td><code>%URLENCODE{"string"}%</code></td>
-    <td> Encodes a string for use as a URL parameter. Ex: <code>%URLENCODE{"spaced name"}%</code> returns <b>spaced%20name</b></td>
+    <td><code>%ENCODE{"string"}%</code></td>
+    <td> Encodes a string. Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+        </tr>
+        <tr>
+          <td><code>"string"</code></td>
+          <td> String to encode </td>
+          <td> required (can be empty) </td>
+        </tr>
+        <tr>
+          <td><code>type="entity"</code></td>
+          <td> Encode special characters into HTML entities, like a double quote into <code>&amp;#034;</code></td>
+          <td> URL encoding </td>
+        </tr>
+        <tr>
+          <td><code>type="url"</code></td>
+          <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
+          <td> (this is the default) </td>
+        </tr>
+      </table> Example: <code>%ENCODE{"spaced name"}%</code> returns <b>spaced%20name</b></td>
   </tr>
   <tr>
     <td><code>%WIKITOOLNAME%</code></td>
@@ -296,7 +327,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:43:44</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:43:51</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -377,7 +408,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%TOC{"SomeTopic" ...}%</code></td>
-    <td> Table of Contents. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;/h2&gt;"</code>) are taken into account. Any heading text after <code>"!!"</code> is excluded from the TOC; for example, write <code>"---+!! text"</code> if you do not want to list a header in the TOC. Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
+    <td> Table of Contents. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;/h2&gt;"</code>) are taken into account. Any heading text after <code>"!!"</code> is excluded from the TOC; for example, write <code>"---+!! text"</code> if you do not want to list a header in the TOC. Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
@@ -398,7 +429,12 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> Limit depth of headings shown in TOC </td>
           <td> 6 </td>
         </tr>
-      </table> Examples: <code><b>%TOC{depth="2"}%</b></code>, <code><b>%TOC{"TWikiDocumentation" web="TWiki"}%</b></code></td>
+        <tr>
+          <td><code>title="Some text"</code></td>
+          <td> Title to appear at top of TOC </td>
+          <td> none </td>
+        </tr>
+      </table> Examples: <code><b>%TOC{depth="2"}%</b></code>, <code><b>%TOC{"TWikiDocumentation" web="TWiki" title="Contents:"}%</b></code></td>
   </tr>
   <tr>
     <td><code>%SEARCH{"text" ...}%</code></td>
@@ -736,4 +772,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 > - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, define the Variable on the web's [[WebPreferences]] page, and upload a logo file, ex: `mylogo.gif`. You can upload by [[attaching the file|Main/FileAttachment]] to [[WebPreferences]], or, to avoid clutter, to any other topic in the same web, ex: `LogoTopic`:
 >   - <code>**Set MYLOGO = %PUBURL%/TWiki/LogoTopic/mylogo.gif**</code>
 
--- [[PeterThoeny]] - 19 Jan 2003 <br /> -- [[MikeMannix]] - 12 May 2002
+-- TWiki:Main.PeterThoeny - 14 Jan 2004 <br /> -- TWiki:Main.MikeMannix - 12 May 2002
