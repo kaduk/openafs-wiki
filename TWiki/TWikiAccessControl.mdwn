@@ -31,53 +31,51 @@
 
 # <a name="TWiki Access Control"></a> TWiki Access Control
 
-_Restricting read and write access to topics and webs, by users and groups_
+_Restricting read and write access to topics and webs, by Users and groups_
 
-[[TWikiAccessControl]] allows you restrict access to single topics and entire webs, by individual user and by user groups, in three main areas: view; edit &amp; attach; and rename/move/delete. These controls, combined with [[TWikiUserAuthentication]], let you easily create and manage an extremely flexible, fine-grained privilege system.
+[[TWikiAccessControl]] allows you restrict access to single topics and entire webs, by individual user and by user Groups, in three areas: view; edit &amp; attach; and rename/move/delete. Access control, combined with [[TWikiUserAuthentication]], lets you easily create and manage an extremely flexible, fine-grained privilege system.
 
 ## <a name="An Important Control Considerati"></a> An Important Control Consideration
 
-Open, freeform editing is the essence of the [[WikiCulture]] - it's what makes TWiki different and often more effective than other collaboration tools. So, it is strongly recommended that decisions to restrict read or write access to a web or a topic are made with care. Experience shows that _unrestricted write access_ works very well because:
+Open, freeform editing is the essence of [[WikiCulture]] - what makes TWiki different and often more effective than other collaboration tools. For that reason, it is strongly recommended that decisions to restrict read or write access to a web or a topic are made with care - the more restrictions, the less Wiki in the mix. Experience shows that _unrestricted write access_ works very well because:
 
-- Peer influence is enough to ensure that only relevant content is posted.
+- **Peer influence** is enough to ensure that only relevant content is posted.
 
-- Peer editing - the ability to rearrange anything on a page - keeps topics focussed.
+- **Peer editing** - the ability for anyone to rearrange all content on a page - keeps topics focussed.
 
-- All content is preserved under revision control.
+- In TWiki, content is transparently preserved under **revision control**:
   - Edits can be undone by the [[TWikiAdminGroup]] (the default administrators group; see [[#ManagingGroups|Main/WebHome#ManagingGroups]]).
   - Users are encouraged to edit and refactor (condense a long topic), since there's a safety net.
 
-As a collaboration guideline:
+As a **collaboration guideline**:
 
-- Create broad groups (more and varied input), and...
-- Avoid creating view-only users (if you can read it, you can contribute to it).
+- Create broad-based Groups (for more and varied input), and...
+- Avoid creating view-only Users (if you can read it, you should be able to contribute to it).
 
 ## <a name="Users and Groups"></a> Users and Groups
 
-Access control is based on users and groups. Users are defined by their [[WikiNames]], an then organized in unlimited combinations under different user groups.
+Access control is based on the familiar concept of Users and Groups. Users are defined by their [[WikiNames]]. They can then be organized in unlimited combinations by inclusion in one or more user Groups. For convenience, Groups can also be included in other Groups.
 
 ### <a name="Managing Users"></a> Managing Users
 
-A user is created by with the [[TWikiRegistration]] form. The process generates a topic in the Main web in the new user's [[WikiName]]. The default visitor name is [[TWikiGuest]].
+A user is created with the [[TWikiRegistration]] form. The process generates a topic in the Main web in the new user's [[WikiName]]. The default visitor name is [[TWikiGuest]].
 
-- Users can be authenticated using Basic Authentication or SSL. [[TWikiUserAuthentication]] is required in order to track user identities.
+- Users can be authenticated using Basic Authentication (htaccess) or SSL (secure server). In either case, [[TWikiUserAuthentication]] is required in order to track user identities, and use User and Group access control.
 
 <a name="ManagingGroups"></a>
 
 ### <a name="Managing Groups"></a> Managing Groups
 
-Groups are defined by group topics in the <code>**Main**</code> web, like the [[TWikiAdminGroup]]. To create a new group:
+Groups are defined by group topics created in the <code>**Main**</code> web, like the [[TWikiAdminGroup]]. To create a new group:
 
-1. Start in [[TWikiGroups]] and **create** a new topic with a name that ends in **Group**. Example:
+1. <code>**Edit**</code> [[TWikiGroups]] by entering a new topic with a name that ends in <code>**Group**</code>. Example:
   - <code>**SomeGroup**</code>
-2. **Define** two variables in the group topic:
-  - <code>**Set GROUP = &lt; list of users and/or groups &gt;**</code>
-  - <code>**Set ALLOWTOPICCHANGE = &lt; list of users and/or groups &gt;**</code>
-
-- A variables is defined as a bullet of format `Set NAME = value`. A bullet line starts with a multiple of three spaces, an asterisk, and a space.
-- The GROUP variable is a comma-separated list of users and/or other groups. Example:
-  - <code>**Set GROUP = Main.SomeUser, Main.OtherUser, Main.SomeOtherGroup**</code>
-- ALLOWTOPICCHANGE defines who is allowed to change the group topic; it is a comma delimited list of users and groups. You typically want to restrict that to the members of the group itself, so it should contain the name of the topic. (This prevents users not in the group from editing the topic and from gaining unauthorized membership to the group.) For example, for the TWikiAdminGroup topic write:
+2. **Set Preferences** for two Variables in the new group topic:
+  - <code>**Set GROUP = &lt; list of Users and/or Groups &gt;**</code>
+  - <code>**Set ALLOWTOPICCHANGE = &lt; list of Users and/or Groups &gt;**</code>
+  - The GROUP variable is a comma-separated list of Users and/or other Groups. Example:
+    - <code>**Set GROUP = Main.SomeUser, Main.OtherUser, Main.SomeGroup**</code>
+  - ALLOWTOPICCHANGE defines who is allowed to change the group topic; it is a comma delimited list of Users and Groups. You typically want to restrict that to the members of the group itself, so it should contain the name of the topic. (This prevents Users not in the Group from editing the topic to give themselves or others access. For example, for the TWikiAdminGroup topic write:
   - <code>**Set ALLOWTOPICCHANGE = Main.TWikiAdminGroup**</code>
 
 ## <a name="Restricting Write Access"></a> Restricting Write Access
@@ -89,13 +87,13 @@ You can define who is allowed to make changes to a web or a topic.
 Denying editing of a topic also restricts file attachment; both privileges are assigned together.
 
 - Define one or both of these variables in a topic, preferably at the end of the page:
-  - <code>**Set DENYTOPICCHANGE = &lt; list of users and groups &gt;**</code>
-  - <code>**Set ALLOWTOPICCHANGE = &lt; list of users and groups &gt;**</code>
+  - <code>**Set DENYTOPICCHANGE = &lt; list of Users and Groups &gt;**</code>
+  - <code>**Set ALLOWTOPICCHANGE = &lt; list of Users and Groups &gt;**</code>
 
-- DENYTOPICCHANGE defines users or groups that **are not** allowed to make changes to the topic. It is a comma delimited list of users and groups. Example:
+- DENYTOPICCHANGE defines Users or Groups that **are not** allowed to make changes to the topic, with a comma-delimited list. Example:
   - <code>**Set DENYTOPICCHANGE = Main.SomeBadBoy, Main.SomeBadGirl, Main.SomeHackerGroup**</code>
 
-- ALLOWTOPICCHANGE defines users or groups that **are** allowed to make changes to the topic. It is a comma delimited list of users and groups. Example:
+- ALLOWTOPICCHANGE defines Users or Groups that **are** allowed to make changes to the topic. It is a comma delimited list of Users and Groups. Example:
   - <code>**Set ALLOWTOPICCHANGE = Main.SomeGoodGuy, Main.SomeGoodGirl, Main.TWikiAdminGroup**</code>
 
 - DENYTOPICCHANGE is evaluated before ALLOWTOPICCHANGE. Access is denied if the authenticated person is in the DENYTOPICCHANGE list, or not in the ALLOWTOPICCHANGE list. Access is granted in case DENYTOPICCHANGE and ALLOWTOPICCHANGE is not defined.
@@ -105,8 +103,8 @@ Denying editing of a topic also restricts file attachment; both privileges are a
 Restricting web-level editing blocks creating new topics, changing topics or attaching files.
 
 - Define one or both of these variable in the [[WebPreferences]] topic:
-  - <code>**Set DENYWEBCHANGE = &lt; list of users and groups &gt;**</code>
-  - <code>**Set ALLOWWEBCHANGE = &lt; list of users and groups &gt;**</code>
+  - <code>**Set DENYWEBCHANGE = &lt; list of Users and Groups &gt;**</code>
+  - <code>**Set ALLOWWEBCHANGE = &lt; list of Users and Groups &gt;**</code>
 
 The same rules apply as for restricting topics, with these additions:
 
@@ -122,13 +120,13 @@ You can define who is allowed to rename, move or delete a topic, or rename a web
 To allow a user to rename, move or delete a topic, they also need write (editing) permission. They also need write access to change references in referring topics.
 
 - Define one or both of these variables in a topic, preferably at the end of the topic:
-  - <code>**Set DENYTOPICRENAME = &lt; list of users and groups &gt;**</code>
-  - <code>**Set ALLOWTOPICRENAME = &lt; list of users and groups &gt;**</code>
+  - <code>**Set DENYTOPICRENAME = &lt; list of Users and Groups &gt;**</code>
+  - <code>**Set ALLOWTOPICRENAME = &lt; list of Users and Groups &gt;**</code>
 
-- DENYTOPICCRENAME defines users or groups that **are not** allowed to rename the topic. It is a comma delimited list of users and groups. Example:
+- DENYTOPICCRENAME defines Users or Groups that **are not** allowed to rename the topic. It is a comma delimited list of Users and Groups. Example:
   - <code>**Set DENYTOPICRENAME = Main.SomeBadBoy, Main.SomeBadGirl, Main.SomeHackerGroup**</code>
 
-- ALLOWTOPICRENAME defines users or groups that **are** allowed to rename the topic. It is a comma delimited list of users and groups. Example:
+- ALLOWTOPICRENAME defines Users or Groups that **are** allowed to rename the topic. It is a comma delimited list of Users and Groups. Example:
   - <code>**Set ALLOWTOPICRENAME = Main.SomeGoodGuy, Main.SomeGoodGirl, Main.TWikiAdminGroup**</code>
 
 - DENYTOPICRENAME is evaluated before ALLOWTOPICRENAME. Access is denied if the authenticated person is in the DENYTOPICRENAME list, or not in the ALLOWTOPICRENAME list. Access is granted in case DENYTOPICRENAME and ALLOWTOPICRENAME is not defined.
@@ -138,8 +136,8 @@ To allow a user to rename, move or delete a topic, they also need write (editing
 You can define restrictions of who is allowed to rename a %WIKITOOLNAME% web.
 
 - Define one or both of these variable in the [[WebPreferences]] topic:
-  - <code>**Set DENYWEBRENAME = &lt; list of users and groups &gt;**</code>
-  - <code>**Set ALLOWWEBRENAME = &lt; list of users and groups &gt;**</code>
+  - <code>**Set DENYWEBRENAME = &lt; list of Users and Groups &gt;**</code>
+  - <code>**Set ALLOWWEBRENAME = &lt; list of Users and Groups &gt;**</code>
 
 The same rules apply as for topics, with these additions:
 
@@ -148,20 +146,20 @@ The same rules apply as for topics, with these additions:
 
 ## <a name="Restricting Web Access"></a> Restricting Web Access
 
-You can prevent selected users and groups from accessing certain webs, by hiding them using restricting read access, or by requiring login. There are two basic methods, one simple, using standard preferences variables to hide a web, but offering low security, and a secure log-in approach that is currently a workaround, involving some minor script and filesystem modification.
+You can prevent selected Users and Groups from accessing certain webs, by hiding them using restricting read access, or by requiring login. There are two basic methods, one simple, using standard preferences variables to hide a web, but offering low security, and a secure log-in approach that is currently a workaround, involving some minor script and filesystem modification.
 
 ### <a name="Create Hidden Webs"></a> Create Hidden Webs
 
-You can prevent selected users and groups from viewing certain %WIKITOOLNAME% webs by setting one or both of these variables in each web's [[WebPreferences]] topic:
+You can prevent selected Users and Groups from viewing certain %WIKITOOLNAME% webs by setting one or both of these variables in each web's [[WebPreferences]] topic:
 
-- <code>**Set DENYWEBVIEW = &lt; list of users and groups &gt;**</code>
-- <code>**Set ALLOWWEBVIEW = &lt; list of users and groups &gt;**</code>
+- <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
+- <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
 
 %T% If keeping a hidden web out of general use is a consideration, you can prevent the <code>**all webs**</code> search option from accessing hidden webs, by enabling the <code>**NOSEARCHALL**</code> variable in [[WebPreferences]]:
 
 - <code>**Set NOSEARCHALL = on**</code>
   - It is not recommended to restrict view access to individual topics since all content is searchable _within_ a web.
-  - %H%This method only works if the <code>**view**</code> script is authenticated, which means that all users have to login, even for read-only access. (An open guest account, like [[TWikiGuest]], can get around this, allowing anyone to login to a common account with, for example, view-only access for public webs.) [[TWikiInstallationGuide]] has more on Basic Authentication, using the <code>**.htaccess**</code> file.
+  - %H%This method only works if the <code>**view**</code> script is authenticated, which means that all Users have to login, even for read-only access. (An open guest account, like [[TWikiGuest]], can get around this, allowing anyone to login to a common account with, for example, view-only access for public webs.) [[TWikiInstallationGuide]] has more on Basic Authentication, using the <code>**.htaccess**</code> file.
 
 %X% **Hiding webs is not very secure**, as there is a way to circumvent the read access restriction. It can be useful in certain situations - for example, to simplify site organization and clutter, by hiding low traffic webs - but is not recommended for securing sensitive content. _(See the next section for a more secure approach.)_
 
@@ -177,7 +175,7 @@ Use the following setup to provide unrestricted viewing access to open webs, wit
 - When a user accesses a web where you enabled view restriction, %WIKITOOLNAME% will redirect from the `view` script to the `viewauth` script once (this happens only if the user has never edited a topic). Doing so will ask for authentication. The `viewauth` script shows the requested topic if the user could log on and if the user is authorized to see that web.
 - If you enable view restriction for a web, it is recommended to restrict search "all webs" from searching this web. Enable this restriction with the <code>**NOSEARCHALL**</code> variable in its [[WebPreferences]], like:
   - <code>**Set NOSEARCHALL = on**</code>
-- It is not recommended to restrict view access to individual topics since all content is searchable _within_ a web.
+- It is not recommended to restrict view access to individual topics since all content is searchable within a web - a search will turn up the "hidden" topic.
 
 ## <a name="Hiding Control Settings"></a> Hiding Control Settings
 
@@ -187,11 +185,7 @@ Use the following setup to provide unrestricted viewing access to open webs, wit
 >
 > <br />
 >
-> Set DENYTOPICCHANGE = Main.SomeGroup
->
-> <br />
->
-> --&gt;
+> - Set DENYTOPICCHANGE = Main.SomeGroup<br /> --&gt;
 
 <a name="SuperAdminGroup"></a>
 
@@ -199,10 +193,10 @@ Use the following setup to provide unrestricted viewing access to open webs, wit
 
 By mistyping a user or group name in the ALLOWTOPICCHANGE setting, it's possible to lock a topic so that no-one can edit it from a browser. To avoid this, you can create Web-based **superusers**:
 
-- Set the `$superAdminGroup` variable in `lib/TWiki.cfg` to the name of a group of users who are always allowed to edit/view topics.
+- Set the <code>**$superAdminGroup**</code> variable in <code>**lib/TWiki.cfg**</code> to the name of a group of Users who are always allowed to edit/view topics.
 
 > $superAdminGroup = "TWikiAdminGroup";
 
 - The default setting is not to have superusers.
 
--- [[MikeMannix]] - 01 Apr 2002 <br /> -- [[PeterThoeny]] - 04 May 2002
+-- [[PeterThoeny]] - 04 May 2002<br /> -- [[MikeMannix]] - 12 May 2002
