@@ -289,7 +289,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>WikiWord Links:</strong> %BR% CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically. %BR% <strong><em>Note:</em></strong> In case you want to link to a topic in a different %WIKITOOLNAME% web write <code>Webname.TopicName</code>. </td>
+    <td valign="top"><strong>WikiWord Links:</strong> %BR% CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically. %BR% <strong><em>Note:</em></strong> In case you want to link to a topic in a different %WIKITOOLNAME% web write <code>Otherweb.TopicName</code>. (The link label is the the name of the web in case the is WebHome, else it is the topic name) </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 WebNotify
 
@@ -392,7 +392,7 @@ You can use just about any HTML tag without a problem - however, there are a few
 
 You can use JavaScript for your TWiki applications. Since TWiki rendering might interfere with JavaScript code you need to escape it with HTML comments and `<pre>` tags:
 
-    <script language="JavaScript">
+    <script type="text/javascript">
     <!-- Hide JavaScript and <pre> escape TWiki rendering
     ... put your JavaScript code here...
     // Stop hiding and stop </pre> escaping TWiki rendering -->
@@ -470,4 +470,4 @@ TWiki formatting rules are fairly simple to use and quick to type. However, ther
 - **Q:** Why is the `'&'` character sometimes not displayed?
   - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 25 Apr 2004
+-- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 01 Aug 2004
