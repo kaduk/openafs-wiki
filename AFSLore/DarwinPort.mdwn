@@ -7,3 +7,17 @@ The mailing list for this port is <https://lists.openafs.org/mailman/listinfo/po
 There are issues with the Finder in this port due to its desire to enumerate and traverse all directories to look for metadata and the poor interaction of this with a fully populated directory of mountpoints mounted as /afs.
 
 -- [[DerrickBrashear]] - 24 Jan 2002
+
+Some nice GUI stuff for OS X Jaguar:
+
+\* AFS Tokens: Get/destroy tokens, see group membership, create, delete, and edit owned groups
+
+\* AFS Install: A GUI app which configs the client. Set a cell name, cell alias, edit CellServDB, and set afsd startup options. Included with the OpenAFS 1.2.9.2 and up packages on our website when a fresh install is performed (not an upgrade).
+
+\* Mount AFS: The -nomount option keeps afsd from attempting to mount (and thereby keeps Finder from hanging). Double click the icon, put in admin username and password, and AFS mounts. Based on the commandline mount\_afs code from Stanford. Requires OpenAFS 1.2.10 or higher.
+
+The above is available from:
+
+<http://cf.ccmr.cornell.edu/publicdownloads/afs>
+
+-- [[DaveBotsch]] - 14 Nov 2003

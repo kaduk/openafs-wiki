@@ -1,0 +1,21 @@
+With regard to linking libraries:
+
+You can either link agaist lwp or pthreads. You do NOT want to do both.
+
+Pthreads looks to be easier in terms of keeping track of libs:
+
+For pthreads:
+
+-lafsauthent -lafsrpc -lpthread
+
+for lwp:
+
+-llwp -lauth -lkauth -lprot and more
+
+So, to summarize:
+
+afsauthent, afsrpc -&gt; pthread
+
+kauth, auth, et al -&gt; lwp
+
+-- [[DaveBotsch]] - 15 Nov 2003
