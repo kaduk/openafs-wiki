@@ -1,0 +1,91 @@
+<div>
+  <ul>
+    <li><a href="#Installing the First AFS Machine"> Installing the First AFS Machine</a></li>
+    <li><a href="#Overview: Installing Server Func"> Overview: Installing Server Functionality</a></li>
+    <li><a href="#Choosing the First AFS Machine"> Choosing the First AFS Machine</a></li>
+  </ul>
+</div>
+
+# <a name="Installing the First AFS Machine"></a> Installing the First AFS Machine
+
+This chapter describes how to install the first AFS machine in your cell, configuring it as both a file server machine and a client machine. After completing all procedures in this chapter, you can remove the client functionality if you wish, as described in Removing Client Functionality.
+
+To install additional file server machines after completing this chapter, see Installing Additional Server Machines.
+
+To install additional client machines after completing this chapter, see Installing Additional Client Machines. Requirements and Configuration Decisions
+
+The instructions in this chapter assume that you meet the following requirements.
+
+- You are logged onto the machine's console as the local superuser root
+
+- A standard version of one of the operating systems supported by the current version of AFS is running on the machine
+
+- You can access the data on the AFS CD-ROMs, either through a local CD drive or via an NFS mount of a CD drive attached to a machine that is accessible by network
+
+You must make the following configuration decisions while installing the first AFS machine. To speed the installation itself, it is best to make the decisions before beginning. See the chapter in the IBM AFS Administration Guide about issues in cell administration and configuration for detailed guidelines.
+
+- Select the first AFS machine
+
+- Select the cell name
+
+- Decide which partitions or logical volumes to configure as AFS server partitions, and choose the directory names on which to mount them
+
+- Decide whether to use the standard AFS authentication and authorization software or Kerberos as obtained from another source. On several system types, the decision determines how you incorporate AFS into the machine's authentication system. If you wish to use Kerberos, contact the AFS Product Support group now to learn about how you must modify the installation procedure.
+
+- Decide how big to make the client cache
+
+- Decide how to configure the top levels of your cell's AFS filespace
+
+This chapter is divided into three large sections corresponding to the three parts of installing the first AFS machine. Perform all of the steps in the order they appear. Each functional section begins with a summary of the procedures to perform. The sections are as follows:
+
+- Installing server functionality (begins in Overview: Installing Server Functionality)
+
+- Installing client functionality (begins in Overview: Installing Client Functionality)
+
+- Configuring your cell's filespace, establishing further security mechanisms, and enabling access to foreign cells (begins in Overview: Completing the Installation of the First AFS Machine)
+
+# <a name="Overview: Installing Server Func"></a> Overview: Installing Server Functionality
+
+In the first phase of installing your cell's first AFS machine, you install file server and database server functionality by performing the following procedures:
+
+1. Choose which machine to install as the first AFS machine
+
+1. Create AFS-related directories on the local disk
+
+1. Incorporate AFS modifications into the machine's kernel
+
+1. Configure partitions or logical volumes for storing AFS volumes
+
+1. On some system types, install and configure an AFS-modified version of the fsck program
+
+1. If the machine is to remain a client machine, incorporate AFS into its authentication system
+
+1. Start the Basic [[OverSeer]] (BOS) Server
+
+1. Define the cell name and the machine's cell membership
+
+1. Start the database server processes: Authentication Server, Backup Server, Protection Server, and Volume Location (VL) Server
+
+10. Configure initial security mechanisms
+
+11. Start the fs process, which incorporates three component processes: the File Server, Volume Server, and Salvager
+
+12. Start the server portion of the Update Server
+
+13. Start the controller process (called runntp) for the Network Time Protocol Daemon, which synchronizes machine clocks
+
+# <a name="Choosing the First AFS Machine"></a> Choosing the First AFS Machine
+
+The first AFS machine you install must have sufficient disk space to store AFS volumes. To take best advantage of AFS's capabilities, store client-side binaries as well as user files in volumes. When you later install additional file server machines in your cell, you can distribute these volumes among the different machines as you see fit.
+
+These instructions configure the first AFS machine as a database server machine, the binary distribution machine for its system type, and the cell's system control machine. For a description of these roles, see the IBM AFS Administration Guide.
+
+Installation of additional machines is simplest if the first machine has the lowest IP address of any database server machine you currently plan to install. If you later install database server functionality on a machine with a lower IP address, you must first update the /usr/vice/etc/CellServDB file on all of your cell's client machines. For more details, see Installing Database Server Functionality. Creating AFS Directories
+
+Create the /usr/afs and /usr/vice/etc directories on the local disk, to house server and client files respectively. Subsequent instructions copy files from the AFS CD-ROM into them. Create the /cdrom directory as a mount point for CD-ROMs, if it does not already exist.
+
+       # mkdir /usr/afs
+
+       # mkdir -p /usr/vice/etc
+
+       # mkdir /cdrom
