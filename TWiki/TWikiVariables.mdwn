@@ -63,7 +63,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%URLPARAM{"name"}%</code></td>
-    <td> Returns the value of a URL parameter. Ex: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
+    <td> Returns the value of a URL parameter. Note that there is a low risk that this variable could be misused for cross-scripting. Ex: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
   </tr>
   <tr>
     <td><code>%URLENCODE{"string"}%</code></td>
@@ -221,7 +221,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:36</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:37</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -271,15 +271,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:57</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:37:08</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:36</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:37</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:36</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:37</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -622,13 +622,33 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
   </tr>
 </table>
 
+> **_Note:_**
+>
+> There are some more useful variables defined in the
+>
+> [[TWikiPreferences]]
+>
+> like
+>
+> `%BR%`
+>
+> for line break, colors like
+>
+> `%RED%`
+>
+> for colored text and small icons like
+>
+> `%H%`
+>
+> for a %H% Help icon.
+
 <a name="SettingPrefs"></a>
 
 ## <a name="Setting Preferences"></a> Setting Preferences
 
-- The syntax for Preferences Variables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />[3 spaces] \* [space] Set [space] VARIABLENAME [space] = [value]<br />**_Examples:_**
-- <code>**Set VARIABLENAME = =value=**</code>
-  - <code>**Set VARIABLENAME = =value=**</code>
+- The syntax for Preferences Variables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />[multiple of 3 spaces] \* [space] Set [space] VARIABLENAME [space] = [value]<br />**_Examples:_**
+- <code>**Set VARIABLENAME = value**</code>
+  - <code>**Set VARIABLENAME = value**</code>
 
 ## <a name="Creating Custom Variables"></a> Creating Custom Variables
 
