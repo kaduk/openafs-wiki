@@ -1,6 +1,6 @@
 Freelance AFS Client (a similar feature exists in the Unix clients, known as [[DynamicRoot]])
 
-1 Introduction
+## <a name="1	Introduction"></a> 1 Introduction
 
 The current implementation of AFS requires that all AFS clients belong to a home cell. The home cell provides the client with a starting point to mount the entire AFS file system. The client's top most level view of AFS is determined by the home cell server's root.afs volume. Through root.afs, the home cell also controls which cells clients can access.
 
@@ -8,7 +8,7 @@ To provide a more flexible and relevant view of the AFS file system to the user,
 
 The new Freelance AFS Client also increases the scalability of the AFS file system since administrator intervention is no longer required for clients to access newly established cells. It also removes the client dependency on the availability of the home cell. Previously, if the home cell were not available, clients would not be able to access the AFS file system. This critical dependency is not present in the Freelance AFS Client.
 
-2 Usage
+## <a name="2	 Usage"></a> 2 Usage
 
 The Freelance feature is available only for the Windows NT/2000 and 9x clients. In 9x, it can be enabled by running afsd.exe manually with the "-freelance" flag. It can be enabled in NT/2000 by setting the following registry key:
 
