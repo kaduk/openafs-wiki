@@ -25,9 +25,9 @@ The %WIKITOOLNAME% web has the following types of **_internal links:_**
   <tr>
     <td valign="top"><strong>Paragraphs:</strong><br /> Blank lines will create new paragraphs. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- 1st paragraph
+1st paragraph
 
- 2nd paragraph
+2nd paragraph
 </pre> </font></span></td>
     <td valign="top"> 1st paragraph <p> 2nd paragraph </p>
     </td>
@@ -35,43 +35,43 @@ The %WIKITOOLNAME% web has the following types of **_internal links:_**
   <tr>
     <td valign="top"><strong>Bold Text:</strong><br /> Words get <strong>bold</strong> by enclosing them in <code>*</code> asterisks. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- *Bold*
+*Bold*
 </pre> </font></span></td>
     <td valign="top"><strong>Bold</strong></td>
   </tr>
   <tr>
     <td valign="top"><strong>Italic Text:</strong><br /> Words get <em>italic</em> by enclosing them in <code>_</code> underscores. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- _Italic_
+_Italic_
 </pre> </font></span></td>
     <td valign="top"><em>Italic</em></td>
   </tr>
   <tr>
     <td valign="top"><strong>Bold Italic:</strong><br /> Words get <em>_bold italic</em> by enclosing them in <code>_</code> double-underscores. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- __Bold italic__
+__Bold italic__
 </pre> </font></span></td>
     <td valign="top"><strong><em>Bold italic</em></strong></td>
   </tr>
   <tr>
     <td valign="top"><strong>Fixed Font:</strong><br /> Words get shown in <code>fixed font</code> by enclosing them in <code>=</code> equal signs. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- =Fixed font=
+=Fixed font=
 </pre> </font></span></td>
     <td valign="top"><code>Fixed font</code></td>
   </tr>
   <tr>
     <td valign="top"><strong>Bold Fixed Font:</strong><br /> Words get shown in <code><b>bold fixed font</b></code> by enclosing them in <code><b></b></code> double equal signs. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- ==Bold fixed==
+==Bold fixed==
 </pre> </font></span></td>
     <td valign="top"><code><b>Bold fixed</b></code></td>
   </tr>
   <tr>
     <td valign="top"><strong><em>Note:</em></strong> Make sure to "stick" the <code>* _ = ==</code> signs to the words, e.g. take away spaces. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- _This works_,
- _this not _
+_This works_,
+_this not _
 </pre> </font></span></td>
     <td valign="top"><em>This works</em>, _this not _ </td>
   </tr>
@@ -187,23 +187,50 @@ class CatAnimal {
   <tr>
     <td valign="top"><strong>WikiWord Links:</strong><br /> CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically. <br /><strong><em>Note:</em></strong> In case you want to link to a topic in a different %WIKITOOLNAME% web write <code>Webname.TopicName</code>. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- WebNotify,
- Know.ReadmeFirst
+WebNotify
+
+Know.ReadmeFirst
 </pre> </font></span></td>
-    <td valign="top">[[Main/WebNotify]], [[Know/ReadmeFirst]]</td>
+    <td valign="top">[[Main/WebNotify]]<p>[[Know/ReadmeFirst]]</p>
+    </td>
   </tr>
   <tr>
-    <td valign="top"><strong>Forced Links:</strong><br /> You can create a forced internal link by enclosing words in double square brackets. <br /><strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; i.e. <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web. </td>
+    <td valign="top"><strong>Forced Links:</strong><br /> You can create a forced internal link by enclosing words in double square brackets. <br /><strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; i.e. <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- [[wiki syntax]],
- [[Main.TWiki users]]
+[[wiki syntax]]
+
+[[Main.TWiki users]]
 </pre> </font></span></td>
-    <td valign="top">[[Main/WikiSyntax]], [[Main/TWikiUsers]]</td>
+    <td valign="top">[[Main/WikiSyntax]]<p>[[Main/TWikiUsers]]</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><strong>Specific Links:</strong><br /> Create a link where you can specify the link text and the link reference separately, using nested square brackets like <code>[[text][reference]]</code>. Internal link references (i.e. [[Main/WikiSyntax]]) and external link references (i.e. <a href="http://TWiki.org/" target="_top">http://TWiki.org/</a>) are supported. The same <strong><em>Forced Links</em></strong> rules apply for internal link references. Anchor names can be added as well, like <code>[[go home][WebHome@MyAnchor]]</code> and <code>[[Yahoo!][http://www.yahoo.com/#somewhere]]</code>. </td>
+    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
+[[syntax][WikiSyntax]]
+
+[[GNU][http://gnu.org]]
+</pre> </font></span></td>
+    <td valign="top">[[Main/Syntax]]<p>[[Main/GNU]]</p>
+    </td>
+  </tr>
+  <tr>
+    <td valign="top"><strong>Anchors:</strong><br /> You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>@AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic@MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
+    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
+[[WebHome@NotThere]]
+
+[[Jump][@MyAnchor]]
+
+@MyAnchor To here
+</pre> </font></span></td>
+    <td valign="top">[[Main/WebHomeNotThere]]<p>[[Main/Jump]]</p>
+      <p> @MyAnchor To here </p>
+    </td>
   </tr>
   <tr>
     <td valign="top"><strong>Prevent a Link:</strong><br /> Prevent a [[Main/WikiWord]] from being linked by prepending it with the <code>&lt;nop&gt;</code> tag. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- &lt;nop&gt;SunOS
+&lt;nop&gt;SunOS
 </pre> </font></span></td>
     <td valign="top"> SunOS </td>
   </tr>
