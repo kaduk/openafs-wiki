@@ -66,6 +66,14 @@
     <td> Your %WIKINAME% including the Main web name. Usefull for signatures. Is <b>Main.admin</b></td>
   </tr>
   <tr>
+    <td><code>%MAINWEB%</code></td>
+    <td> The Main web containing [[Main/TWikiUsers]], [[Main/OfficeLocations]] and [[Main/TWikiGroups]]. Is <b>Main</b></td>
+  </tr>
+  <tr>
+    <td><code>%TWIKIWEB%</code></td>
+    <td> The web containing all documentation and configuration of %WIKITOOLNAME%. Is <b>TWiki</b></td>
+  </tr>
+  <tr>
     <td><code>%WEB%</code></td>
     <td> The current web, is <b>%WEB%</b></td>
   </tr>
@@ -76,6 +84,26 @@
   <tr>
     <td><code>%INCLUDINGWEB%</code></td>
     <td> The web name of the topic that includes the current topic. Same as <code>%WEB%</code> in case there is no include. </td>
+  </tr>
+  <tr>
+    <td><code>%HOMETOPIC%</code></td>
+    <td> The home topic in each web. Is <b>[[Main/WebHome]]</b></td>
+  </tr>
+  <tr>
+    <td><code>%NOTIFYTOPIC%</code></td>
+    <td> The notify topic in each web. Is <b>[[Main/WebNotify]]</b></td>
+  </tr>
+  <tr>
+    <td><code>%WIKIUSERSTOPIC%</code></td>
+    <td> The index topic of all registered users. Is <b>TWikiUsers</b></td>
+  </tr>
+  <tr>
+    <td><code>%WEBPREFSTOPIC%</code></td>
+    <td> The web preferences topic. Is <b>WebPreferences</b></td>
+  </tr>
+  <tr>
+    <td><code>%STATISTICSTOPIC%</code></td>
+    <td> The web statistics topic. Is <b>WebStatistics</b></td>
   </tr>
   <tr>
     <td><code>%TOPIC%</code></td>
@@ -200,7 +228,7 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:48</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:53</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -499,4 +527,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 - Additional preferences variables can be defined on all three level as needed. Example:
   - `Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif`
 
--- [[PeterThoeny]] - 14 Jul 2001 <br />
+-- [[PeterThoeny]] - 23 Jul 2001 <br />

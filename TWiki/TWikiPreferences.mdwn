@@ -5,11 +5,11 @@ The following settings are **_site-level preferences_** , e.g. affecting all use
 **_Preferences:_**
 
 - List of %WIKITOOLNAME% webs: (the first line of a topic; to add a web see [[TWikiDocumentation]] and [[TWikiWebsTable]])
-  - Set WIKIWEBLIST = [%WIKITOOLNAME%](%WIKIHOMEURL%) . \{ [Main](http://www.dementia.org/twiki//view/Main/WebHome) | [TWiki](http://www.dementia.org/twiki//view/TWiki/WebHome) | [Know](http://www.dementia.org/twiki//view/Know/WebHome) | [Test](http://www.dementia.org/twiki//view/Test/WebHome) \}
+  - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Test|Test/WebHome]]
+  - **_Note:_** To automatically list all non-hidden webs in alphabetical order you can use this variable instead: Set WIKIWEBLIST =
 
 - List of topics of a web: (the second line of a topic, is overwritten by web preferences)
-  - Set WEBTOPICLIST = %WEB% . \{ [Home](WebHome) | [Changes](WebChanges) | [Index](http://www.dementia.org/twiki//search/%WEB%/?scope=topic&regex=on&search=.*) | [Search](WebSearch) | Go <input name="topic" size="16" type="text" />
- \}
+  - Set WEBTOPICLIST = [[Home|Main/WebHome]] | [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
 
 - Copyright notice:
   - Set WEBCOPYRIGHT = <font>Copyright © 2000 by the contributing authors. \\nAll material on this collaboration tool is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send](mailto:?subject=%WIKITOOLNAME% Feedback) feedback. </font>
