@@ -1,0 +1,190 @@
+# <a name="Instant TWiki Site Enhancements"></a><a name=" Instant TWiki Site Enhancements"></a> Instant TWiki Site Enhancements
+
+These quick enhancements are aimed at improving TWiki's ease-of-use. New TWiki site administrators are especially encouraged to review this document for ideas before deploying a new [[TWikiSite]]. The metaphor of building a house is useful. The listed enhancedments are some of the details possible when moving into a new office or home. These small changes can make a **big** differences for user satisfaction at your site. All modifications can be done through your Web browser, and they don't take more then in a couple of minutes. No system administration expertise is required. Some of these enhancements are also mentioned in the reference manual and other topics.
+
+Many of these tips are based on setting some special [[TWikiVariables]].
+
+%S% We recommend implementing at least **_some_** of these enhancements **_right after installation_**, to get a taste for what is possible. Some of these tips and enhancements _should_ be implemented before or during initial roll-out.
+
+This may spark your imagination to **really** customize your site so that it's optimal for **your** users. Slightly more advanced customization tips are listed in [[TWikiAdminCookBook]].
+
+<div>
+  <ul>
+    <li><a href="#Tips using _TWikiVariables"> Tips using TWikiVariables</a><ul>
+        <li><a href="#Change Colors of Page Header/Foo"> Change Colors of Page Header/Footer</a></li>
+        <li><a href="#Set Page Background Color"> Set Page Background Color </a></li>
+        <li><a href="#Titles-Only Topic List - _WebTop"> Titles-Only Topic List - WebTopicList</a></li>
+        <li><a href="#Simple way to create %RED% color"> Simple way to create %RED% colored text %ENDCOLOR% and graphics</a></li>
+        <li><a href="#EZ Graphic Icons to Highlight Te"> EZ Graphic Icons to Highlight Text</a></li>
+        <li><a href="#Use TOC variable to create table"> Use TOC variable to create table of contens</a></li>
+      </ul>
+    </li>
+    <li><a href="#Personal Productivity - Tools an"> Personal Productivity - Tools and Tips for Working Faster</a><ul>
+        <li><a href="#Use your favorite text editor fo"> Use your favorite text editor for major edits</a></li>
+        <li><a href="#Use SEARCH to Create a personal"> Use SEARCH to Create a personal directory of topics you're involved in</a></li>
+      </ul>
+    </li>
+    <li><a href="#Hidden Edit Lock for Individual"> Hidden Edit Lock for Individual Topics</a></li>
+    <li><a href="#Change the Default Site Logo"> Change the Default Site Logo</a></li>
+    <li><a href="#Customize Topic Classification F"> Customize Topic Classification Forms</a></li>
+    <li><a href="#Add Your Favorite _JavaScript Fe"> Add Your Favorite JavaScript Features</a></li>
+  </ul>
+</div>
+
+----
+
+## <a name="Tips using _TWikiVariables"></a> Tips using [[TWikiVariables]]
+
+You need to know what is the variable name, and in what page is/should be defined.
+
+### <a name="Change Colors of Page Header/Foo"></a> Change Colors of Page Header/Footer
+
+Incredibly obvious, maybe, but some TWiki site admins don't get around to changing the default web colors right off, whether they like them or not. Simply changing the defaults will make a huge difference in the overall look.
+
+**What we are doing**
+
+We want to set variable WEBBGCOLOR in topic [[WebPreferences]] to one of the [[StandardColors]]. WebPreferences is, as you can guess, a topic which holds all kind of preference setting for each TWiki Web[[{*}|Main/ManagingWebs]]. Each web has its own WebPreferences, and you can set them differently for each web.
+
+**How to do it**
+
+1. Pick color code from company or product references, the [[StandardColors]] table (recommended for 8-bit client compatibility), or some other color reference.
+2. Go to [[WebPreferences]] in each web, and edit the topic.
+3. Set your preferred WEBBGCOLOR preferences variable, and save the topic.
+4. %X% Add a new line immediately after the color code. If there is (invisible) space after the color code, the page header might get strange colors (e.g. black).
+
+It's just as easy to refine later on, so you're not locked in, just looking better.
+
+### <a name="Set Page Background Color"></a> Set Page Background Color
+
+Without getting into the [[TWikiTemplates]] system yet, you can easily edit the <code>**view.tmpl**</code> (in the `templates` directory). In the HTML at the top, the body tag has the page background hardcoded to white <code>**bgcolor="#ffffff"**</code>. You can change that color value to new variable. First, define a new preferences variable in the site-level [[TWikiPreferences]], e.g. `* Set =PAGEBGCOLOR = #d0d0d0`, then edit the <code>**view.tmpl**</code> template file and change <code>**bgcolor="#ffffff"**</code> to <code>**bgcolor="%PAGEBGCOLOR%"**</code>. If you want you can set the page background color individualy per web, simple add a `* Set =PAGEBGCOLOR = #d0d0d0` bullet to the [[WebPreferences]] to overload the site-level preferences. (Without font color control, you'll have to stick to light colors.
+
+### <a name="Titles-Only Topic List - _WebTop"></a> Titles-Only Topic List - [[WebTopicList]]
+
+**_A good first navigation tool for new users,_** a fast-loading linked list (page titles only) of a web's topics is a quick and easy way see what's available. By default, slower, but more powerfull [[WebIndex]] is used.
+
+Without explaining what WEBTOPICLIST is, just try it:
+
+1. Go to [[WebPreferences]] in each web, and edit the topic.
+2. In WEBTOPICLIST variable, replace `WebIndex` with `WebTopicList`, and save.
+
+### <a name="Simple way to create %RED% color"></a> Simple way to create %RED% colored text %ENDCOLOR% and graphics
+
+This should be enabled, see the "Miscellaneous Settings" in the [[TWikiPreferences]], . If not, look at TWiki:TWiki/TWikiPreferences. Look for variables RED, BLUE etc (which define HTML tag FONT). To copy/paste the variables defining the colors you need to see the source text, but `Edit` is disabled. Instead, go to `More` and view the topic in <code>**raw**</code> format.
+
+### <a name="EZ Graphic Icons to Highlight Te"></a> EZ Graphic Icons to Highlight Text
+
+Graphics in text (like this: %X%) is done also by defining special variables. See [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]]. Some may prefer longer names, like `HELP`, `WARN` etc. You can also add your own images, e.g. a `NEW`, or a `ASK` to ask question.
+
+%T% Using graphic icons to highlight important text right from the start can seriously improve how well new users take to a TWiki site. A minimum set of two or three icons can make content much easier to follow, eye-catching, EXCITING. Research says, people tent not to read pages through, but scan them first - and graphics (used sparringly ;-) of course) can help them. On **HELP** pages, most people tend to jump around looking for answers rather than reading through - icons help point out the most important bits.
+
+**How to create your own set of icons:**
+
+1. Go to the <code>**Preferences**</code> topic: [[TWikiPreferences]] for site-wide use, or [[WebPreferences]] for use in one web only.
+2. <code>**Attach**</code> a graphic (the ones on this page are 16x16 pixels), then define a Preference Variable with a short but recognizable name.
+
+- **_Example:_** Enter `%TEST%` to get %TEST% - see how it's [[done|Main/WebPreferences#DefineIcon]].
+- %T% Ideas for quick icons: NEW; UPDATE; a STAR or other bullet; key symbols relating to your site content.
+- For documentation and help, this [[TWiki|TWiki/WebHome]] web uses three main icons: %H% for **HELP**, %T% for **TIP**, %X% for **IMPORTANT**.
+- **_Related:_** There are other approaches for creating more extensive TWiki icon libraries. This is a simply and quick way to get started. See [[TWikiDocGraphics]] for more info.
+
+### <a name="Use TOC variable to create table"></a> Use TOC variable to create table of contens
+
+TOC is Table-Of-Contens, generated automagically from headers (defined like that: <code>**---++**</code> , see [[TWikiShorthand]]).
+
+For example, you may want to put all your custom variables in [[TWikiPreferences]] right on top of the page, and generate table of contens, like:
+
+- Preferences for easy creating nice pages
+  - Graphics icons in text
+  - Colored text
+- System Preferences
+  - Contents of page header and footer
+  - User interface defaults
+  - Email
+  - Plugins
+  - Notes
+
+Non-admin users wil be interested only in first part, non-system preferences.
+
+----
+
+## <a name="Personal Productivity - Tools an"></a> Personal Productivity - Tools and Tips for Working Faster
+
+Although this area applies to all TWiki set-ups, the initial focus is on TWiki site managers working on a Linux/Apache TWiki site, from a Windows local PC. The assumption being: if you're working with Linux as your desktop, you're probably a programmer or system admin and have these basics handled!
+
+### <a name="Use your favorite text editor fo"></a> Use your favorite text editor for major edits
+
+When you have a fair bit of TWiki formatting work - for example, compiling new info pages from various cut'n'paste sources, editing multiple TWiki topics or contributed material - it's often easier to use a real **[[TextEditor]]** instead of the browser's text edit box. There are several methods for doing this. For Windows, there are several well-recommended text editors.
+
+**_Windows Example:_** [TextPad](http://textpad.com) is a low-cost, top flight Windows program, with an extended trial period. You can download from a well-stocked library of user-contributed macros, dictionaries, and syntax and clip files. You can also easily create a TWiki clip collection that allows you to format text with TWiki code: select a text string and click for bold, italic, links, bullet lists - just like a regular HTML editor - and also insert blocks of TWiki code, use simple or regex search and replace, more.
+
+**_Copy &amp; Paste:_** Using the web window this can work very well. System differences may present difficulties with this method but it is simple and reliable in most cases.
+
+**_Browser Integration:_** Some web browsers can be configured to automatically use an external editor. See your browser documentation for details. Such a configuration and a small tool for Linux is described in an example on TWiki.org. TWiki:Codev/EditDaemonWithGVimIntegration
+
+**_Alternate Browser:_** While your main browser might not have the features for TWikic topic editing, another one might.
+
+- An example on the Linux platform is the `w3m` pager/browser for Linux. This is a text based version similar to `lynx` but it includes text editor features and a configurable command set to act like `lynx` if you are more accustomed to it.
+
+### <a name="Use SEARCH to Create a personal"></a><a name="Use SEARCH to Create a personal "></a> Use SEARCH to Create a personal directory of topics you're involved in
+
+Here's how you can create your own personal directory of topics you've contributed to recently. Copy the text below (between **Start Copy** and **End Copy**) and paste it into your personal page (Main.admin). You can add other webs to search by duplicating one of the web subsections and editing the string \{web ="webname"\} in the search parameters to refer to the specific web you want to search. This script would also work for a group.
+
+**Start Copy**
+
+    __Here's a list of topics I've been involved in recently:__
+
+    ---++++ Codev
+
+    %SEARCH{ "%TOPIC%" web="Codev" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" regex="off" order="modified" reverse="on" limit="20"}%
+
+    ---++++ Support
+
+    %SEARCH{ "%TOPIC%" web="Support" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" regex="off" order="modified" reverse="on" limit="20"}%
+
+    ---++++ TWiki
+
+    %SEARCH{ "%TOPIC%" web="TWiki" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" regex="off" order="modified" reverse="on" limit="10"}%
+
+**End Copy**
+
+The SEARCH variable has many more formatting options, see [[TWikiVariables]].
+
+----
+
+## <a name="Hidden Edit Lock for Individual"></a><a name="Hidden Edit Lock for Individual "></a> Hidden Edit Lock for Individual Topics
+
+When you're creating main gateway pages, you may want to temporarily (or permanently) restrict editing to yourself or a limited group of people. You can do this with a Preference setting that includes one or more users and groups. Only auhorized users will be able to use <code>**Edit**</code>.
+
+- **_Example:_** <code>**Set ALLOWTOPICCHANGE = Main.UserName, Main.GroupName**</code>
+- %T% **To hide the setting:** Use HTML comment tags - put <code>**&lt;!--**</code> on the line \_above the setting, and <code>**--&gt;**</code> on the line below.
+- _This is in the regular help files but worth highlighting._
+
+----
+
+## <a name="Change the Default Site Logo"></a> Change the Default Site Logo using TWiki:Codev/HighResolutionLogos.
+
+Approved and already deployed on several TWiki sites, this logo set provides a professional alternative to the Robot.
+
+The size of Robot icon is 46x50 pixels - there are countless 48x48 standard-sized, free-use grapics if you're stuck. Here are some decent places to look. Attach the new graphic to [[TWikiPreferences]], and change the WIKILOGOIMG variable.
+
+----
+
+## <a name="Customize Topic Classification F"></a> Customize Topic Classification Forms
+
+With a simple one or two-line default topic form available for every topic - in **Edit** mode, click the <code>**[Add]**</code> button, and select the form if it isn't alredy enabled. Then, click the title to get to the actual form, <code>**[Edit]**</code>, and carefully change values, probably basic page classifications. You'll get some increased value, and hands-on experience with [[TWikiForms]], without having to read up about them first. %X% **_(add the corresponding search per category - copy a default and change)_**
+
+----
+
+## <a name="Add Your Favorite _JavaScript Fe"></a> Add Your Favorite JavaScript Features
+
+You're no doubt familiar or better with HTML, JS, and "webmastering". Without getting into the [[TWikiTemplates]] system yet, you can easily edit the <code>**view.tmpl**</code> (in the `templates` directory) for some dramatic effects. The top of the template is mostly regular HTML with some variables. Open up some space in the <code>**&lt;head&gt;**</code> area, and you can drop in reliable JavaScripts - a pop-up window script, for example - or tag it as an external script.
+
+- %T% Obviously, you can do the same - place a link to an external stylesheet as well. If you set values for standard HTML tags, you can control a good deal of the type size, style and color with out adding CSS tags. **_example_**
+
+%X% Depending on what you load up, you may change the overall cross-browser compatibility - however be careful that your site does not look beat up in various other browsers. The scripts you choose will determine compatibility.
+
+----
+
+%T% **_NOTE:_** Feel free to add your own tips to TWiki:%WEB%.%TOPIC% as quick notes at the end of the list, following the existing format!
+
+**Contributors:** TWiki:Main.GrantBow, TWiki:Main.LynnwoodBrown, TWiki:Main.MikeMannix, TWiki:Main.PeterMasiar, TWiki:Main.PeterThoeny
