@@ -638,6 +638,27 @@ The kernel parts on Solaris have to be compiled with Sun cc, same for other plat
 
 ### <a name="3.31 Upgrading _OpenAFS"></a> 3.31 Upgrading [[OpenAFS]]
 
+Upgrade of AFS on Linux
+
+    /etc/rc.d/init.d/afs stop
+    cd root.client/usr/vice/etc
+    tar cvf - . | (cd /usr/vice/etc; tar xfp -)
+    cp -p afs.rc /etc/rc.d/init.d/afs
+    cp ../../../../lib/pam_afs.krb.so.1  /lib/security
+    cd ../../../../root.server/usr/afs
+    tar cvf - . | (cd /usr/afs; tar xfp -)
+    # echo "auth sufficient /lib/security/pam_afs.so try_first_pass \
+    ignore_root" >> /etc/pam.d/login
+    cd /lib/security
+    vim /etc/sysconfig/afs
+    ln -s pam_afs.krb.so.1 pam_afs.so
+    cd /etc/rc3.d
+    ln -s ../init.d/afs S99afs
+    cd ../rc0.d
+    ln -s ../init.d/afs K01afs
+    cp /usr/vice/etc/afs.conf /etc/sysconfig/afs
+    /etc/rc.d/init.d/afs start
+
 Upgrade of AFS on Solaris 2.6
 
     cd /etc/rc3.d/
@@ -729,11 +750,12 @@ Other ports are:
 
 ### <a name="3.33 Tuning client cache for hug"></a> 3.33 Tuning client cache for huge data
 
-Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache sizes afsd crashes on startup (Linux, [[Tru64Unix]] at least).
+Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache sizes afsd crashes on startup (Linux, [[Tru64Unix]] at least). It is possibly when dcache is too small. Go for:
 
-    > So I ran the full suite of iozone tests (13), but at a single file size
-    > (128M) and one record size (64K).  I set the AFS cache size to 80000K
-    > for both memcache and diskcache.
+    /usr/vice/etc/afsd -nosettime -stat 12384 -chunk 19
+
+    > So I ran the full suite of iozone tests (13), but at a single file
+    > size (128M) and one record size (64K).  I set the AFS cache size to > 80000K for both memcache and diskcache.
 
     Note that memcache size and diskcache size are different things.
     In the case of memcache, a fixed number of chunks are allocated
