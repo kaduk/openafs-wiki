@@ -905,11 +905,16 @@ In the meantime, the following two defines are useful in building stuff on AFS 3
 
 ### <a name="3.37 afs_krb_get_lrealm() using"></a><a name="3.37 afs_krb_get_lrealm() using "></a> 3.37 afs\_krb\_get\_lrealm() using /usr/afs/etc/krb.conf
 
-In this file you can set also another REALM to be used by you afs server processes, if the REALM should differ from the system-wide REALM (/etc/krb.conf).
+In this file you can set also another REALM to be used by you afs server processes, if the REALM should differ from the system-wide REALM (
+
+    /etc/krb.conf
+
+).
 
 Don't forget it's related to these entries in Kerberos KDC:
 
-afs.cell.name@REALM krbtgt CELL.NAME@REALM
+    afs.cell.name@REALM
+    krbtgt CELL.NAME@REALM
 
 ### <a name="3.38 Moving from kaserver to Hei"></a> 3.38 Moving from kaserver to Heimdal KDC
 
@@ -919,9 +924,13 @@ afs.cell.name@REALM krbtgt CELL.NAME@REALM
 
 First of all, some Heimdal's configure flags:
 
---enable-kaserver requires krb4 libs, so for that you'll need a working krb4 are you still using a kaserver/kaserver emulation ?
+    --enable-kaserver
 
---enable-kaserver-db is just for dumping a kaserver krb4 database. If you are no longer running a kaserver, you don't need it.
+requires krb4 libs, so for that you'll need a working krb4 are you still using a kaserver/kaserver emulation ?
+
+    --enable-kaserver-db
+
+is just for dumping a kaserver krb4 database. If you are no longer running a kaserver, you don't need it.
 
 Migration itself:
 
@@ -929,18 +938,27 @@ Migration itself:
 
 This works while migrating from kaserver:
 
-/usr/heimdal/libexec/hprop --source=kaserver --cell=xxx --kaspecials --stdout | /usr/heimdal/libexec/hpropd --no-inetd --stdin
+    /usr/heimdal/libexec/hprop --source=kaserver --cell=xxx
+    --kaspecials --stdout | /usr/heimdal/libexec/hpropd --no-inetd --stdin
 
 This somewhat doesn't:
 
-/usr/heimdal/libexec/hprop --source=kaserver --cell=xxx --encrypt --master-key= --kaspecials --stdout | /usr/heimdal/libexec/hpropd --stdin
+    /usr/heimdal/libexec/hprop --source=kaserver --cell=xxx
+    --encrypt --master-key=<path to key> --kaspecials --stdout |
+    /usr/heimdal/libexec/hpropd --stdin
 
 ### <a name="3.39 Moving from KTH-KRB4 to Hei"></a> 3.39 Moving from KTH-KRB4 to Heimdal KDC
 
-/usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /var/kerberos/dump.txt --master-key=/.k -D | /usr/heimdal/libexec/hpropd -n
+    /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /var/kerberos/dump.txt --master-key=/.k -D | /usr/heimdal/libexec/hpropd -n
 
-or
+    or
 
-1. dump of the krb4 database with kdb\_util 2. dump of the "default" heimdal database with kadmin -l 3. /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d where /etc/krb5.keytab contains hprop/\`hostname\` keys 4. merge of the converted database with file from (2) via kadmin
+    1. dump of the krb4 database with kdb_util
+    2. dump of the "default" heimdal database with kadmin -l
+    3. /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d
+       where /etc/krb5.keytab contains hprop/`hostname` keys
+    4. merge of the converted database with file from (2) via kadmin
 
-The special thing for me is the use of "-D" in the (3) which seems to cause conversion des-cbc-sha1 keys of old krb4 database entries to des-cbc-md5.
+    The special thing for me is the use of "-D" in the (3) which seems to
+    cause conversion des-cbc-sha1 keys of old krb4 database entries to
+    des-cbc-md5.
