@@ -32,12 +32,13 @@ WikiWords are styled like this because:
 **Hints**
 
 - Insert WikiWords wherever you can. Rich linking helps to make a Wiki successful.
+- Be specific. All topics in a web share one name space. For example, instead of `FunctionalSpec` write `BreadSlicerFunctionalSpec` because other projects might also have a functional spec topic.
 - To stop a WikiWord from being turned into a hyperlink, insert the text `<nop>` immediately before the WikiWord.
 - A topic is usually presented in the singular. Plural WikiWords are automatically linked to the singular topic, i.e. the link [[WikiWords]] links to the topic [[WikiWord]].
 - Sometimes you have to be creative to find a good WikiName. Examples:
   - To create a topic about the the **Bread Slicer 1.2** product, use `BreadSlicer1dot2` or `BreadSlicer1pt2`, but not `BreadSlicer1.2`.
   - To create a topic about **year 2000**, you could go for `YearTwoK` or `YearTwoThousand`, but not `Year2K` or `Y2K` or `Y2000`.
 - Turn acronyms into WikiWords, i.e. take `FaqIndex` for a "FAQ index" topic.
-- You can create nicer looking links by using double square brackets, i.e. write `[[TWiki access control]]` to get a link to [[TWikiAccessControl]] that looks like [[TWiki access control|Main/TWikiAccessControl]].
+- You can specify any link label by using double square brackets, e.g. write `[[TWikiAccessControl][access control]]` to get a link to [[TWikiAccessControl]] that looks like [[access control|Main/TWikiAccessControl]].
 
 **_Related Topics:_** [[WikiSyntax]], [[TextFormattingRules]]
