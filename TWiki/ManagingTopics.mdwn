@@ -1,20 +1,20 @@
 <div>
   <ul>
-    <li><a href="#Modifying Topics"> Modifying Topics</a><ul>
-        <li><a href="#Referring topics"> Referring topics</a></li>
-        <li><a href="#Deleting a topic"> Deleting a topic</a></li>
-        <li><a href="#Redirection from old topic"> Redirection from old topic</a></li>
+    <li><a href="#Managing Topics"> Managing Topics</a><ul>
+        <li><a href="#Referring Topics"> Referring Topics</a></li>
+        <li><a href="#Deleting a Topic"> Deleting a Topic</a></li>
+        <li><a href="#Redirecting from an Old Topic"> Redirecting from an Old Topic</a></li>
         <li><a href="#Permissions"> Permissions</a></li>
-        <li><a href="#Approach"> Approach</a></li>
-        <li><a href="#Limitations"> Limitations</a></li>
+        <li><a href="#Procedure"> Procedure</a></li>
+        <li><a href="#Known Limitations"> Known Limitations</a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="Modifying Topics"></a> Modifying Topics
+## <a name="Managing Topics"></a> Managing Topics
 
-Select rename/move when viewing a topic to change its name, delete it or move it
+Select [Rename/move] when viewing a topic to change its name, delete it or move it
 
 1. Select target Web if other than existing Web
 2. Fill in new name - defaults to current name
@@ -24,19 +24,19 @@ Select rename/move when viewing a topic to change its name, delete it or move it
   - If any of the referring pages are locked then they will be listed
   - You can correct these later by again pressing Rename/Move
 
-### <a name="Referring topics"></a> Referring topics
+### <a name="Referring Topics"></a> Referring Topics
 
 Referring topics are found using the the %SEARCH% variable, see the template <code>**searchrenameview.tmpl**</code>. First, matching topics in the current Web are listed - matches are to _topic_. Next, all Webs (including the current one) are listed that match _web.topic_. Because %SEARCH% is used, Webs marked in [[WebPreferences]] as NOSEARCHALL will not show up in the search for refernces to the _topic_ being changed.
 
 Changed references are kept are as short as possible, i.e. _topic_ is used in preference to _web.topic_.
 
-### <a name="Deleting a topic"></a> Deleting a topic
+### <a name="Deleting a Topic"></a> Deleting a Topic
 
 Topics can be _deleted_ by moving them to the <code>**Trash Web**</code>. Note that topics from all Webs go into this, so there could be name clashes, the user is warned of this and asked to choose a new name. When TWiki support sub-webs, these could be created on demand in the Trash Web, which would avoid this name clash problem.
 
 It is up to the administrator of a TWiki installation to clean the Trash Web periodically e.g. by archiving to tape of CDROM entries older than 6 months.
 
-### <a name="Redirection from old topic"></a> Redirection from old topic
+### <a name="Redirecting from an Old Topic"></a> Redirecting from an Old Topic
 
 Something like the following can be put in [[WebTopicViewTemplate]] and [[WebTopicNonWikiTemplate]] to show if a topic has moved. It does this by searching for the tag %META:TOPICMOVED\{...\}%.
 
@@ -46,7 +46,7 @@ Something like the following can be put in [[WebTopicViewTemplate]] and [[WebTop
 
 Permissions affect rename in various ways. To rename a topic you need both change and rename permissions. To alter refering topics, you need change permission. See [[TWikiDocumentation#TWiki_Access_Control]] for information on setting up permissions.
 
-### <a name="Approach"></a> Approach
+### <a name="Procedure"></a> Procedure
 
 - %SEARCH% is used with a special template to show text in topics that requires alteration to point to the new topic name. This includes relavent [[meta data|Main/TWikiDocumentation#Meta_Data_Definition]]
   - User chooses which topics will be altered
@@ -55,13 +55,13 @@ Permissions affect rename in various ways. To rename a topic you need both chang
 - References are changed (locks and permissions allowing)
 - Any refering topics that can't be changed due to locks are listed - user can try getting these references changed at any time.
 
-### <a name="Limitations"></a> Limitations
+### <a name="Known Limitations"></a> Known Limitations
 
 Rename in TWiki is fairly complicated due to the dynamic generation of links. Ideally it would be possible to run the required part of rendering in a way that would allow identification of the text to be changed. Unfortunately, these hooks don't exist in TWiki at present. Instead, %SEARCH% is used with a special template to show the text to be changed. And the selected topics and then altered. Search can show matches that will not be updated e.g. because of case differences. Other mis-matches to actual rendered output are also possible as the approaches are so different.
 
 The following shows some limitations of square bracket processing.
 
-    [[Old Topic]]  => [[NewTopic][Old Topic]]
-    [[old topic]]  => [[NewTopic][old topic]]
-    [[old t opic]] => not changed
-    [[OldTopic]]   => [[NewTopic]]
+> [[Old Topic]]  => [[NewTopic][Old Topic]]
+>     [[old topic]]  => [[NewTopic][old topic]]
+>     [[old t opic]] => not changed
+>     [[OldTopic]]   => [[NewTopic]]

@@ -1,4 +1,4 @@
-## <a name="Monitoring Site Changes"></a> Monitoring Site Changes
+## <a name="Web Notification on Changes"></a> Web Notification on Changes
 
 Each %WIKITOOLNAME% web does an automatic email notification of recent changes. Users can subscribe / unsubscribe themselves in [[WebNotify]] of each TWiki web. The Perl script <code>**mailnotify**</code> is called by a deamon in regular intervals. The script is sending an automated email to subscribed users in case some topics changed in a web within this interval.
 
