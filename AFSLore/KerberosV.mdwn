@@ -46,6 +46,17 @@ Some other issues to explain:
 - encryption types -- this is a per key property and V5 supports several (while V4 only supported one, namely what V5 calls des-cbc-crc). However, this is not the V5 default (which I think is des3) so you need to ensure that the AFS principal uses des-cbc-crc.
 - [[StringToKey]] differences
 
+### <a name="Links"></a> Links
+
+#### <a name="KerberosV version 1.3.1"></a> [[KerberosV]] version 1.3.1
+
+[Main Site](http://web.mit.edu/kerberos/)
+
+- [install guide](http://web.mit.edu/kerberos/www/krb5-1.3/krb5-1.3.1/doc/krb5-install.html)
+- [user guide](http://web.mit.edu/kerberos/www/krb5-1.3/krb5-1.3.1/doc/krb5-user.html)
+- [admin guide](http://web.mit.edu/kerberos/www/krb5-1.3/krb5-1.3.1/doc/krb5-admin.html)
+- [krb425 guide](http://web.mit.edu/kerberos/www/krb5-1.3/krb5-1.3.1/doc/krb425.html)
+
 -- [[TedAnderson]] - 22 Jan 2002 -- [[DerrickBrashear]] - 23 Jan 2002 -- [[TedAnderson]] - 23 Jan 2002 -- [[JasonGarman]] - 30 Jan 2002 -- [[TedAnderson]] - 31 Jan 2002
 
 ----
