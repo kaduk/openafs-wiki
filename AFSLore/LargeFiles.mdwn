@@ -1,0 +1,23 @@
+Modify AFS clients and servers to support files bigger than 2^31-1 bytes.
+
+Here is the way [[JeffreyHutzelman]] [described](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002304.html) the project:
+
+- Add a whole new set of fileserver RPC's that use 64-bit file sizes, offsets, and lengths. This would affect at least [[FetchData]], [[StoreData]], [[FetchStatus]], [[StoreStatus]], [[BulkStatus]], [[InlineBulkStatus]], and possibly some others.
+
+- Define semantics for large files, particularly in cases where clients try to manipulate them using the old RPC's.
+
+- Modify the fileserver backend to support large files. This may mean changing the vnode index format, among other things.
+
+- Modify the cache manager to implement the new RPC's, falling back on the old ones as appropriate.
+
+- Extend the volume dump format to support dumping files with &gt;2GB of content.
+
+Backward compatibility is very important. Old clients must be able to talk to new fileservers and vice versa. It should be possible to move a volume containing no large files between new and old fileservers. It should be possible to perform a dump of a new volume, even if it contains large files, using an existing volume dump client.
+
+Remember also that AFS is a wire protocol with multiple implementors. Things like new RPC numbers and probably new volume dump tags should be coordinated. If you're really interested in working on this, I suggest coming up with a design proposal and asking for comments both here and on <arla-drinkers@stacken.kth.se>.
+
+----
+
+[[HartmutReuter]] responded in the same thread indicating that much of the client work has been done to support [[MultiResidentAFS]]. Doing the server part of the work is probably not as difficult.
+
+-- [[TedAnderson]] - 17 Jan 2002

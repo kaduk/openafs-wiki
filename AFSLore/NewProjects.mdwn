@@ -5,6 +5,7 @@
     <li><a href="#Pending and Desired _OpenAFS Pro"> Pending and Desired OpenAFS Projects</a><ul>
         <li><a href="#Pending Projects"> Pending Projects</a></li>
         <li><a href="#Proposed Projects"> Proposed Projects</a></li>
+        <li><a href="#Discussion"> Discussion</a></li>
       </ul>
     </li>
   </ul>
@@ -58,6 +59,12 @@ The following are items which have been proposed, but which are not yet in progr
 
 - [[PartitionUUID]] -- Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact [[DerrickBrashear]].
 
+- [[ByteRangeLocks]] would improve support for applications that use them especially those on Windows platforms.
+
 ----
 
 Copied by [[TedAnderson]] with some minor edits from <http://www.openafs.org/projects.html> (dated 17-Oct-2001).
+
+----
+
+## <a name="Discussion"></a> Discussion
