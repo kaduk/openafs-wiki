@@ -28,7 +28,7 @@ _Inline search feature allows flexible formatting of search result_
 
 ## <a name="Overview"></a> Overview
 
-By default, the format for displaying a search result is fixed, e.g. a table with rows of topic name and topic summary. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (i.e. `%SEARCH{ "food" format="| $topic | $summary |" }%`).
+The `%SEARCH{...}%` variable documented in [[TWikiVariables]] has a fixed format for the search result, that is, a table consisting of topic names and topic summaries. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (such as `%SEARCH{ "food" format="| $topic | $summary |" }%`).
 
 ## <a name="Syntax"></a> Syntax
 
@@ -67,11 +67,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, i.e. <code>29 Jun 2010 - 15:31</code></td>
+    <td> Time stamp of last topic update, i.e. <code>29 Jun 2010 - 15:32</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, i.e. <code>2010-06-29T15:31Z</code></td>
+    <td> Time stamp of last topic update, i.e. <code>2010-06-29T15:32Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
