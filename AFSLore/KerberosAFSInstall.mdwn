@@ -47,6 +47,12 @@ where greekmythology.com is the name of your local cell. After your complete thi
 
 ### <a name="Finishing _OpenAFS installation"></a> Finishing [[OpenAFS]] installation
 
+First, activate the new AFS [[KeyFile]] by executing:
+
+       bos restart <machine name> -all -cell <cell name> -noauth
+
+After this restart, try using kinit to get Kerberos tickets for admin then (if necessary) use aklog to get an AFS token. Basically ensure that the AFS [[KeyFile]] is valid... (get a specific command to test this).
+
 Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ60) section of the [[OpenAFS]] documentation. The rest of the documentation can be completed without any changes. (What about replacing ntp with something recent, though...?)
 
 ## <a name="Setting up Transparent Login"></a> Setting up Transparent Login
