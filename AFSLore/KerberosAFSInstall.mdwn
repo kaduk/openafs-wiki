@@ -8,7 +8,7 @@ Note that this document is under development. Also, I don't try to explain the [
 
 To continue, you need a working Kerberos realm. See [[SettingUpAuthentication]] for the implementation options, and refer to the documentation that comes with your particular version of Kerberos to establish your realm. It is easiest if your realm name is the caps version of your cell name, which in turn is the same as your site's domain name. For example if your site's domain is 'greekmythology.com', your Kerberos realm name should be 'GREEKMYTHOLOGY.COM' and your AFS cell name should be 'greekmythology.com'. See [[KerberosTerms]] if you are confused on what a "realm" is.
 
-Once you have a working Kerberos realm, ie. you can "kinit" as yourself and receive valid Kerberos tickets, you are ready to continue on installing [[OpenAFS]].
+Once you have a working Kerberos realm, ie. you can "kinit" as yourself and receive valid Kerberos tickets, you are ready to continue on installing [[OpenAFS]]. (NOTE: If you are working on the Red Hat Linux platform, there is an RPM available that may ease your pain considerably. See [[LinuxAFSInstall]].)
 
 ## <a name="OpenAFS"></a> [[OpenAFS]]
 
