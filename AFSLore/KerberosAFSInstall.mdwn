@@ -38,30 +38,82 @@ Your [[KerberosV]] realm must support krb524 for aklog to work, typically. [[Ker
 
 - kdc will service krb524 requests
 
-Next we will create an AFS [[KeyFile]] and an administrator principal in the Kerberos database. The procedure for creating an AFS [[KeyFile]] depends on which [[KerberosV]] implementation you have chosen to use.
+Next we will create an AFS [[KeyFile]] and an administrator principal in the Kerberos database. The procedure for creating an AFS [[KeyFile]] depends on which Kerberos implementation you have chosen to use.
 
-Things to remember about AFS [[KeyFile]]: they must contain a key using the des-cbc-crc encryption type and has the latest kvno in the Kerberos database.
+Things to remember about AFS [[KeyFile]]: they must contain a key using the des-cbc-crc encryption type and the key must have exactly same kvno as the afs/cell@REALM in the Kerberos database. If cell is same as lowercased REALM name, you can create afs@REALM instead of afs/cell@REALM.
+
+Someone wrote a nice pages at: <http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html> <http://www.contrib.andrew.cmu.edu/~shadow/afs/afs-with-kerberos.html>
+
+[[KerberosIV]], like KTH Kerberos4 from <code>**http://www.pdc.kth.se/kth-krb**</code> :
+
+Create afs principal entry in kerberos database:
+
+If you have afs key already created using "kadmin add", you had to specify password on interactively. That's quite weak password. Much better is to do <code>**kadmin get**</code>. <code>**kadmin**</code> will try to download the key from KDC, and if it's not present, it will create one, using random key. That's what we want.
+
+ksrvutil(1) does similar and doesn't require from you to have kadmind(1) running on your machine. The "get" command does same: downloads or (in our case) creates new afs principal using random password. The next example expects that joe.admin is you and you know the proper password to get full access to you kerberos database:
+
+       mv /etc/srvtab /etc/srvtab.orig
+       /usr/athena/sbin/ksrvutil -p joe.admin get
+       Name [rcmd]: afs
+       Instance [hostname]: greekmythology.com
+       Realm [GREEKMYTHOLOGY.COM]: GREEKMYTHOLOGY.COM
+       Is this correct? (y,n) [y]
+       Add more keys? (y,n) [n]
+       Password for joe.admin@GREEKMYTHOLOGY.COM
+       # list keys in /etc/srvtab, look for the AFS key and it's kvno
+       ksrvutil list
+       mv /etc/srvtab /etc/srvtab.afskey
+       mv /etc/srvtab.orig /etc/srvtab
+
+If you want to make the above more complicated, you will need <code>**/usr/athena/sbin/ext\_srvtab**</code> utility to extract already existing key from Kerberos KDC and save it into /etc/srvtab. It will ask you for your master kerberos password (but if you installed kerberos in the "proper" way, you've used random password which you don't know at all), so better use <code>**ksrvutil**</code> as described above and forget <code>**ext\_srvtab**</code>.
+
+Now you should have the afs key in /etc/srvtab.afskey.
+
+Import this AFS key from Kerberos keyfile (/etc/srvtab format) into AFS /usr/afs/etc/KeyFile using <code>**asetkey**</code> utility, which is I think from /afs/transarc.com/public/afs-contrib
+
+        asetkey add 0 /etc/srvtab.afskey afs.greekmythology\.com@GREEKMYTHOLOGY.COM
+
+This [[KeyFile]] with the AFS-key you can just always re-copy to new AFS machines. Be sure that the key version number KVNO is always same in this [[KeyFile]] and in Kerberos database. On all these machines you of course need afs.hostname.REALM key loaded into their <code>**/etc/srvtab**</code> (create them with <code>**'/ust/athena/bin/ksrvutil get'**</code>).
+
+You can test if you have same keys in kerberos and AFS like this:
+
+      kauth username
+      tokens
+
+If you have some tokens now, then it works and you can now shutdown kaserver. Users, which you have created under kaserver are stored in /usr/afs/db/kaserver.\*, but you can just forget them. Create these users again in Kerberos. With [[KerberosIV]] from KTH they get stored under /var/kerberos, when using Heimdal under /var/heimdal/.
 
 [[KerberosVMIT]]:
 
-- The AFS-Kerberos5 migration kit includes a program "asetkey"
+- The AFS-Kerberos5 migration kit includes a program <code>**asetkey**</code>
+
+Save the AFS key from kerberos KDC to a file, possibly using kadmin(see KTH [[KerberosIV]] section above), and the use either <code>**asetkey**</code> or use ==ktutil==(see [[HeimdalKTH]] section below) to convert the format and save into [[KeyFile]].
+
+           asetkey add 0 /etc/srvtab.afskey afs.cell@REALM
+
+The \`0' above means kvno (key version number 0). Use ktutils list or similar like <code>**kadmin get**</code> command to see, what kvno has the afs key in Kerberos database. Use exactly same number when running <code>**asetkey**</code>. There's
 
 [[HeimdalKTH]]:
 
-- The [[HeimdalKTH]] distribution's ktutil can copy directly into an AFS [[KeyFile]]
+- The [[HeimdalKTH]] distribution's <code>**ktutil**</code> can copy directly into an AFS [[KeyFile]]
 
+           kadmin --admin-server=my_kdc_server
+           kadmin> add --random-key afs/cell
+           kadmin> del_enctype afs/cell@REALM des3-cbc-sha1
+           kadmin> get afs/cell@REALM
+           kadmin> list *
+           kadmin> ext -k /etc/afskeytabfile.krb5
+           kadmin> quit
+           ktutil -k /etc/afskeytabfile.krb5 list
            ktutil copy FILE:/etc/afskeytabfile.krb5 AFSKEYFILE:/usr/afs/etc/KeyFile
-
-(look for links in the mailing lists and explain this step; in the mean time, magic google words are [[KeyFile]], asetkey, and ktutil.)
 
 After you have a working [[KeyFile]] installed in the appropriate directory (/usr/afs/etc/KeyFile for transarc-paths, ???? otherwise) and with the appropriate permissions (0600, owner root), we can create administrative users for AFS. This is a two step process as we first create an authentication principal in the Kerberos database then add the admin user in the authorization ("protection") database in the AFS server.
 
-Create a user ("admin" in this example) using the appropriate kadmin utility with your [[KerberosV]] distribution. Set a secure password, and note that setting Kerberos admin rights for this user does **not** affect his AFS rights.
+Create a user ("joe/admin" in this example) using the appropriate kadmin utility with your [[KerberosV]] distribution. Set a secure password, and note that setting Kerberos admin rights for this user does **not** affect his AFS rights. Please note, that "joe/admin@REALM" is [[KerberosV]] notation and that [[KerberosIV]] is using "joe.admin@REALM". As AFS is based on [[KerberosIV]], you should specify "joe.admin@REALM" or just "joe.admin". (I did this mistake recently and for days was hunting for an explanation, why while having valid tickets, valid AFS tokens with proper kvno (key version number as the one in Kerberos KDC) fileserver, ptserver and bosserver complain about my AFS token being invalid. Yes, I had in the /usr/(afs|vice)/etc/UserList file "joe/admin@REALM"). In [[OpenAFS]]-1.2.8, you can possibly enable Kerbero5 syntax for usernames (please have a look using google for words "Neulinger Nathan RE: [OpenAFS-devel] pts examine src/auth/userok.c") posted on Tue, 3 Dec 2002 11:44:28 to openafs-devel list.
 
-Now we will use the <code>**pts**</code> command in [[OpenAFS]] to add this admin user to the AFS administrators group:
+Now we will use the <code>**pts**</code> command in [[OpenAFS]] to add this joe.admin user to the AFS administrators group named system:administrators. The username could be just "joe" or "admin", but it's a good habit to have .admin appended to it (it is called instance):
 
-       pts createuser -name admin -cell greekmythology.com -noauth
-       pts adduser admin system:administrators -cell greekmythology.com -noauth
+       pts createuser -name joe.admin -cell greekmythology.com -noauth
+       pts adduser joe.admin system:administrators -cell  -noauth
 
 where greekmythology.com is the name of your local cell. After your complete this step, you can continue on to...
 
@@ -71,7 +123,14 @@ First, activate the new AFS [[KeyFile]] by executing:
 
        bos restart <machine name> -all -cell <cell name> -noauth
 
-After this restart, try using kinit to get Kerberos tickets for admin then (if necessary) use aklog to get an AFS token. Basically ensure that the AFS [[KeyFile]] is valid... (get a specific command to test this).
+After this restart, try using kinit to get Kerberos tickets for admin then (if necessary) use aklog to get an AFS token or use afslog if afsd client cache is already running. Basically ensure that the AFS [[KeyFile]] is valid:
+
+       /usr/heimdal/sbin/ktutil copy AFSKEYFILE:/usr/afs/etc/KeyFile FILE:/etc/afskeytabfile.krb5
+       /usr/heimdal/bin/kinit -k -t /etc/afskeytabfile.krb5 afs/greekmythology.com
+       # you should be able to autenticate against KDC using the /etc/afskeytabfile.krb5
+       #    where is saved your afs key in keytab form recognizable by Kerberos5
+       /usr/heimdal/klist
+       # you should see you have afs/greekmythology.com ticket having some expiration time etc.
 
 Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ60) section of the [[OpenAFS]] documentation. The rest of the documentation can be completed without any changes. (What about replacing NTP with something recent, though...? See FAQ [[3.22|Main/AdminFAQ#NTP]] and [[[NTP|Main/FurtherReading#NTP]]])
 
