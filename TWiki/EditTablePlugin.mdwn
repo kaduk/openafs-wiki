@@ -176,7 +176,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Date format of [Mishoo DHTML calendar](http://dynarch.com/mishoo/calendar.epl):
   - Set JSCALENDARDATEFORMAT = %Y/%m/%d
 
-- Language of DHTML calendar, pointing to attached `calendar-<code>.js` language file: `en`, `de`, `es`, `fr`, `jp`
+- Language of DHTML calendar, pointing to attached `calendar-<code>.js` language file: `en`, `af`, `br`, `ca`, `cs-win`, `da`, `de`, `du`, `el`, `es`, `fr`, `hr`, `hr-utf8`, `hu`, `it`, `jp`, `nl`, `no`, `pl`, `pt`, `ro`, `ru`, `sk`, `sp`, `sv`, `tr`, `zh`
   - Set JSCALENDARLANGUAGE = en
 
 - Additional options of DHTML calendar:
@@ -218,8 +218,8 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
 </table>
 - The plugin depends on the `viewauth` script to authenticate the user. As described in [[TWikiAccessControl]], copy the `view` script to `viewauth` (or better, create a symbolic link) and add `viewauth` to the list of authenticated scripts in the `.htaccess` file.
-- The Mishoo DHTML calendar 0.9.5 is preinstalled and should work without any configuration. If you wish to use another language, attach the language files to the Plugin topic and change the Plugin settings
-- Test if the plugin is correctly installed:
+- The Mishoo DHTML calendar 0.9.5 is preinstalled and should work without any configuration. If you wish to use another language, specify the in the Plugin settings, or create a new language files, attach it to the Plugin topic, and change the Plugin settings
+- Test if the Plugin is correctly installed:
   - Check above example if there is an **[ Edit table ]** button below the table in above example
   - Click on **[ Edit table ]**, make changes and save the table
 
@@ -237,11 +237,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 13 Dec 2003 </td>
+    <td> 20 Dec 2003 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 20 Dec 2003: </td>
+    <td> Fixed bug where calendar did not work after adding a row (TWiki:Main/PaulineCheung); added all language files of Mishoo DHTML calendar 0.9.5 </td>
   </tr>
   <tr>
     <td align="right"> 13 Dec 2003: </td>
@@ -323,4 +327,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 13 Dec 2003
+-- TWiki:Main/PeterThoeny - 20 Dec 2003
