@@ -2,40 +2,61 @@
 
 This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this Plugin provides general formula evaluation capability, not just classic spreadsheet functions.
 
-Example:
-
-<table border="1" cellpadding="0" cellspacing="0">
+<table>
   <tr>
-    <th bgcolor="#99CCCC"><strong> Region: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Sales: </strong></th>
+    <td valign="top"><strong><em>Example:</em></strong><p>
+      </p>
+      <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> Region: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Sales: </strong></th>
+        </tr>
+        <tr>
+          <td> Northeast </td>
+          <td align="right"> 320 </td>
+        </tr>
+        <tr>
+          <td> Northwest </td>
+          <td align="right"> 580 </td>
+        </tr>
+        <tr>
+          <td> South </td>
+          <td align="right"> 240 </td>
+        </tr>
+        <tr>
+          <td> Europe </td>
+          <td align="right"> 610 </td>
+        </tr>
+        <tr>
+          <td> Asia </td>
+          <td align="right"> 220 </td>
+        </tr>
+        <tr>
+          <td> Total: </td>
+          <td align="right"> 1970 </td>
+        </tr>
+      </table>
+      <p>
+      </p>
+    </td>
+    <td>     </td>
+    <td valign="top"><strong><em>Interactive example:</em></strong><p>
+      </p>
+      <form action="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%" method="get" name="interactive"> Formula: <code>%CALC{"</code><input name="formula" size="30" type="text" value="$PROPERSPACE(admin)" /><code>"}%</code>   <input type="submit" value="Go" /><br /> Result:     admin <p>
+        </p>
+        <p>
+        </p>
+      </form>
+    </td>
   </tr>
   <tr>
-    <td> Northeast </td>
-    <td align="right"> 320 </td>
-  </tr>
-  <tr>
-    <td> Northwest </td>
-    <td align="right"> 580 </td>
-  </tr>
-  <tr>
-    <td> South </td>
-    <td align="right"> 240 </td>
-  </tr>
-  <tr>
-    <td> Europe </td>
-    <td align="right"> 610 </td>
-  </tr>
-  <tr>
-    <td> Asia </td>
-    <td align="right"> 220 </td>
-  </tr>
-  <tr>
-    <td> Total: </td>
-    <td align="right"> 1970 </td>
+    <td colspan="3">
+      <p> The formula next to "Total" is <code><b>%CALC{"$SUM( $ABOVE() )"}%</b></code>. <br /> (you see the formula instead of the sum in case the Plugin is not installed or not enabled.) </p>
+      <p>
+      </p>
+    </td>
   </tr>
 </table>
-
-The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <br /> (you see the formula instead of the sum in case the Plugin is not installed or not enabled.)
 
 ## <a name="Syntax Rules"></a> Syntax Rules
 
@@ -162,7 +183,7 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
   </tr>
   <tr>
     <td><code><b>"$LISTIF(condition, list)"</b></code></td>
-    <td> Remove elements from a list that do not meet a condition. In addition to the condition described in <code>$IF()</code>, you can use <code><b>$item</b></code> to indicate the current element. Examples: %BR% <code><b>%CALC{"$LISTIF($item &gt; 12, 14, 7, 25)"}%</b></code> returns <code><b>14, 25</b></code> %BR% <code><b>%CALC{"$LISTIF($NOT($EXACT($item,)), A, B, , C)"}%</b></code> returns <code><b>A, B, C</b></code></td>
+    <td> Remove elements from a list that do not meet a condition. In addition to the condition described in <code>$IF()</code>, you can use <code><b>$item</b></code> to indicate the current element, and <code><b>$index</b></code> for the list index, starting at 1. Examples: %BR% <code><b>%CALC{"$LISTIF($item &gt; 12, 14, 7, 25)"}%</b></code> returns <code><b>14, 25</b></code> %BR% <code><b>%CALC{"$LISTIF($NOT($EXACT($item,)), A, B, , E)"}%</b></code> returns non-empty elements <code><b>A, B, E</b></code> %BR% <code><b>%CALC{"$LISTIF($index &gt; 2, A, B, C, D)"}%</b></code> returns <code><b>C, D</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$LISTITEM(index, list)"</b></code></td>
