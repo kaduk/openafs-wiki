@@ -8,11 +8,34 @@ There are basically three options with several variants
 
 The consensus these days is to use [[KerberosV]], even though lacking native support for V5, AFS still needs various conversion and migration tools.
 
+For [[KerberosV]], there are two main open-source solutions for Unix: [[KerberosVMIT]] and [[HeimdalKTH]]. A quick comparison of the two:
+
+[[KerberosVMIT]] Advantages:
+
+- Excellent documentation
+- The "reference" implementation everyone else uses as a baseline
+- Great library support. Third-party software compiles easily with the libraries MIT provides.
+
+[[KerberosVMIT]] Disadvantages:
+
+- Poor integration with AFS. Requires the AFS-Kerberos5 migration kit to work with AFS.
+- Export issues
+
+[[HeimdalKTH]] Advantages:
+
+- Excellent integration with AFS.
+
+[[HeimdalKTH]] Disadvantages:
+
+- Client API is just different enough from MIT to keep most applications from compiling out of the box.
+
+Note that you can mix-and-match. Currently I'm using a [[HeimdalKTH]] KDC with [[KerberosVMIT]] clients. If you take this route the one big thing to watch out for is administrative tools - kadmin, kpasswd, and such.
+
 -- [[TedAnderson]] - 22 Jan 2002
 
 Some other topics that should be explained.
 
-- SSH -- There are two issues. First is mutually authenticating you and the SSH server to each other using Kerberos. Second is passing local AFS authentication to the remote shell (in this case an AFS Client) in the form of AFS service tickets (tokens).
+- SSH -- There are two issues. First is mutually authenticating you and the SSH server to each other using Kerberos. See [[KerberosV]] for a link to patches to kerberize [[OpenSSH]]. Second is passing local AFS authentication to the remote shell (in this case an AFS Client) in the form of AFS service tickets (tokens).
   - these instructions from [[CharlesClancy]] for building openssh might be useful <http://lists.openafs.org/pipermail/openafs-info/2002-January/002846.html>
   - another perspective from [[OwenLeBlanc]] <http://lists.openafs.org/pipermail/openafs-info/2002-January/002856.html>
 - How to choose between [[KaServer]], [[KerberosVMIT]], [[HeimdalKTH]] and [[ActiveDirectory]].
@@ -24,7 +47,7 @@ Some other topics that should be explained.
 - IP ACLs
 - How to configure various authentication servers to issue tickets (tokens) with lifetimes longer than 25 hours.
 
--- [[TedAnderson]] - 23-24, 29 Jan 2002
+-- [[TedAnderson]] - 23-24, 29 Jan 2002 -- [[JasonGarman]] - 30 Jan 2002
 
 ----
 
