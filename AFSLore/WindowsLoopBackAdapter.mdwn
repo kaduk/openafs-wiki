@@ -36,6 +36,18 @@ There are two options: run [confloop.msi](http://www.eos.ncsu.edu/wolfcall/loopb
     - If you're on a private network that actually uses 10.\* addresses, change the IP to point to another RFC1918 address space.
 5. Before you leave the properties for the Loopback Adapter, be sure that "File and Print Sharing for Microsoft Networks" and "Client for Microsoft Networks" are installed and checked. If not, use the Install button to install these services, and check them in the list.
 
+### <a name="Turn on Automatic Lana Scan"></a> Turn on Automatic Lana Scan
+
+1. The automatic Lana scan should find and select the new loopback adapter, and is on by default. However, if you've turned it off, you can turn it back on by going to Start/Settings/Control Panel/AFS Client Configuration, clicking on the "Advanced" tab, going to "Miscellaneous", and checking the box for "Automatic Lana scan." Again, this step is not necessary step unless you have changed the settings.
+
 Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) included in [[OpenAFS]] 1.2.8+, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
 
 -- [[BenCreech]] - 11 Jul 2003
+
+-- Modified by [[BenCreech]] - 15 Jul 2003
+
+`Contributors:`
+
+- `Scott Williams - the loopback patch`
+- `Ben Creech - this document`
+- `Kim Kimball - the last step`
