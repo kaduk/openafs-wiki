@@ -12,7 +12,7 @@ The following are **_site-level_** settings that affect all users in all webs on
         <li><a href="#Plugins Settings"> Plugins Settings</a></li>
         <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
         <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
-        <li><a href="#Preferences Access Control"> Preferences Access Control</a></li>
+        <li><a href="#Access Control Settings"> Access Control Settings</a></li>
         <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
         <li><a href="#Related Topics"> Related Topics</a></li>
       </ul>
@@ -185,17 +185,17 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Set ENDCOLOR =
   - To finish colored text
 
-## <a name="Preferences Access Control"></a> Preferences Access Control
+## <a name="Access Control Settings"></a> Access Control Settings
 
 - Users or groups allowed to change or rename this %TOPIC% topic: (ex: [[TWikiAdminGroup]])
   - Set ALLOWTOPICCHANGE =
   - Set ALLOWTOPICRENAME =
 
 - Users or groups allowed to [[create new webs|TWiki/ManagingWebs]]: (ex: [[TWikiAdminGroup]])
-  - Set ALLOWWEBCREATEWEB = [[TWikiAdminGroup]]
+  - Set ALLOWWEBMANAGE = [[TWikiAdminGroup]]
 
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBCREATEWEB
+  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBMANAGE
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
