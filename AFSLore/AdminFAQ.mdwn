@@ -54,6 +54,7 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.43 Although I get krb tickets,"> 3.43 Although I get krb tickets, afslog doesn't give me tokens, I see UDP packets to port 4444</a></li>
         <li><a href="#3.44 I get error message trhough"> 3.44 I get error message trhough syslogd: "afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)"</a></li>
         <li><a href="#3.45 I get tickets and tokens, b"> 3.45 I get tickets and tokens, but still get Permission denied.</a></li>
+        <li><a href="#3.46 Recovering broken afs cache"> 3.46 Recovering broken afs cache on clients</a></li>
       </ul>
     </li>
   </ul>
@@ -1086,3 +1087,28 @@ Answer:
 ### <a name="3.45 I get tickets and tokens, b"></a> 3.45 I get tickets and tokens, but still get Permission denied.
 
 Answer: /usr/afs/etc/UserList accepts only krb4 syntax. Use `joe.admin` instead of `joe/admin`. See `https://lists.openafs.org/pipermail/openafs-devel/2002-December/008673.html` and the rest of the thread.
+
+### <a name="3.46 Recovering broken afs cache"></a> 3.46 Recovering broken afs cache on clients
+
+    >> Does anyone have a trick to force AFS to refresh its cache (for a
+    >> particular directory or even for all files?) The only way I know
+    >> how to accomplish this is to reboot, stop in single user mode,
+    >> rm -rf the cache files and let AFS rebuild everything.
+    >
+    > fs flush and fs flushv have cured corruption problems in the past
+    > on some of our clients.
+
+    Thanks for the tip - I was not aware of the flush* subcommands.
+    Here's a little of what I saw today:
+
+    ls -la
+    /bin/ls: asso.S14Q00246.all.log: Bad address
+    /bin/ls: asso.S14Q00246.all.lst: Bad address
+    /bin/ls: chr14markers.txt: Bad address
+    /bin/ls: geno.summary.txt: Bad address
+    /bin/ls: global.ind.S14Q00246.all.txt: No such device
+    /bin/ls: global.S14Q00246.all.txt: No such device
+    total 103
+    [ other ls results as usual ]
+
+    Flushing a particular file had no effect (the same error as shown above appears). Flushvolume took a long time, but when it eventually completed, the ls -la behaved exactly as one would expect.
