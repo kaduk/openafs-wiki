@@ -83,7 +83,7 @@
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:25</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:26</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -133,15 +133,15 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:25:46</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:06</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:25</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:26</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:25</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:26</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -170,6 +170,30 @@
   <tr>
     <td><code>%STOPINCLUDE%</code></td>
     <td> If present in included topic, stop to include text at this location and ignore the remaining text. A normal view of the topic shows everyting exept the <code>%STOPINCLUDE%</code> variable itself. </td>
+  </tr>
+  <tr>
+    <td><code>%TOC%</code></td>
+    <td> Table of Content of current topic. </td>
+  </tr>
+  <tr>
+    <td><code>%TOC{"SomeTopic" ...}%</code></td>
+    <td> Table of Content. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;h2&gt;"</code>) are taken into account. Parameter is composed of the topic name, followed by optional <code>name="value"</code> pairs: <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> Pair: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+        </tr>
+        <tr>
+          <td><code>web="Name"</code></td>
+          <td> Name of web </td>
+          <td> Current web </td>
+        </tr>
+        <tr>
+          <td><code>depth="2"</code></td>
+          <td> Limit depth of headings shown in TOC </td>
+          <td> 6 </td>
+        </tr>
+      </table> Examples: <code><b>%TOC{depth="2"}%</b></code>, <code><b>%TOC{"TWikiDocumentation" web="TWiki"}%</b></code></td>
   </tr>
   <tr>
     <td><code>%SEARCH{"str" ...}%</code></td>
@@ -365,4 +389,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 - Additional preferences variables can be defined on all three level as needed. Example:
   - `Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif`
 
--- [[PeterThoeny]] - 19 Jan 2001 <br />
+-- [[PeterThoeny]] - 01 Mar 2001 <br />

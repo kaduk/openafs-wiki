@@ -33,6 +33,20 @@ The %WIKITOOLNAME% web has the following types of **_internal links:_**
     </td>
   </tr>
   <tr>
+    <td valign="top"><strong>Headings:</strong><br /> At least three dashes at the beginning of a line, followed by plus signs and the heading text. One plus creates a level 1 heading (most important), two pluses a level 2 heading; the maximum is level 6. <strong><em>Note:</em></strong> A Table of Content can be created automatically with the <code>%TOC%</code> variable, see [[Main/TWikiVariables]]. </td>
+    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
+---++ Sushi
+
+---+++ Maguro
+</pre> </font></span></td>
+    <td valign="top">
+      <h2><a name="Sushi"></a> Sushi </h2>
+      <p>
+      </p>
+      <h3><a name="Maguro"></a> Maguro </h3>
+    </td>
+  </tr>
+  <tr>
     <td valign="top"><strong>Bold Text:</strong><br /> Words get <strong>bold</strong> by enclosing them in <code>*</code> asterisks. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 *Bold*
@@ -95,7 +109,7 @@ class CatAnimal {
 </pre></td>
   </tr>
   <tr>
-    <td valign="top"><strong>Separator:</strong><br /> At least four dashes at the beginning of a line. </td>
+    <td valign="top"><strong>Separator:</strong><br /> At least three dashes at the beginning of a line. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 -------
 </pre> </font></span></td>
@@ -205,26 +219,26 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr>
-    <td valign="top"><strong>Specific Links:</strong><br /> Create a link where you can specify the link text and the link reference separately, using nested square brackets like <code>[[text][reference]]</code>. Internal link references (i.e. [[Main/WikiSyntax]]) and external link references (i.e. <a href="http://TWiki.org/" target="_top">http://TWiki.org/</a>) are supported. The same <strong><em>Forced Links</em></strong> rules apply for internal link references. Anchor names can be added as well, like <code>[[go home][WebHome@MyAnchor]]</code> and <code>[[Yahoo!][http://www.yahoo.com/#somewhere]]</code>. </td>
+    <td valign="top"><strong>Specific Links:</strong><br /> Create a link where you can specify the link text and the link reference separately, using nested square brackets like <code>[[reference][text]]</code>. Internal link references (i.e. [[Main/WikiSyntax]]) and external link references (i.e. <a href="http://TWiki.org/" target="_top">http://TWiki.org/</a>) are supported. The same <strong><em>Forced Links</em></strong> rules apply for internal link references. Anchor names can be added as well, like <code>[[WebHome#MyAnchor][go home]]</code> and <code>[[http://www.yahoo.com/#somewhere][Yahoo!]]</code>. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-[[syntax][WikiSyntax]]
+[[WikiSyntax][syntax]]
 
-[[GNU][http://gnu.org]]
+[[http://gnu.org][GNU]]
 </pre> </font></span></td>
-    <td valign="top">[[Main/Syntax]]<p>[[Main/GNU]]</p>
+    <td valign="top">[[Main/WikiSyntax]]<p><a href="http://gnu.org" target="_top">GNU</a></p>
     </td>
   </tr>
   <tr>
-    <td valign="top"><strong>Anchors:</strong><br /> You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>@AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic@MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
+    <td valign="top"><strong>Anchors:</strong><br /> You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-[[WebHome@NotThere]]
+[[WebHome#NotThere]]
 
-[[Jump][@MyAnchor]]
+[[#MyAnchor][Jump]]
 
-@MyAnchor To here
+#MyAnchor To here
 </pre> </font></span></td>
-    <td valign="top">[[Main/WebHomeNotThere]]<p>[[Main/Jump]]</p>
-      <p> @MyAnchor To here </p>
+    <td valign="top">[[Main/WebHome#NotThere]]<p>[[Main/WebHome#MyAnchor]]</p>
+      <p><a name="MyAnchor"></a> To here </p>
     </td>
   </tr>
   <tr>
