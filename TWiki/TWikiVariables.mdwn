@@ -58,12 +58,20 @@ TWiki expands the following variables enclosed in % percent signs:
     <td> The current topic name, is <b>%TOPIC%</b></td>
   </tr>
   <tr>
-    <td><code>%DATE%</code></td>
-    <td> Todays date (local server time), is <b>29 Jun 2010</b></td>
+    <td><code>%GMTIME%</code></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:24</b></td>
   </tr>
   <tr>
-    <td><code>%GMTIME%</code></td>
-    <td> Todays date (GM time), is <b>29 Jun 2010 - 15:24</b></td>
+    <td><code>%GMTIME{"format"}%</code></td>
+    <td> Formatted GM time based on keywords (first three characters needed.) <br /> Example: <code>%GMTIME{"day month, year - hour:min:sec"}%</code> is <b>day month, year - hour:min:sec</b></td>
+  </tr>
+  <tr>
+    <td><code>%SERVERTIME%</code></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:24</b></td>
+  </tr>
+  <tr>
+    <td><code>%SERVERTIME{"format"}%</code></td>
+    <td> Formatted server time. Example: <code>%SERVERTIME{"hou:min"}%</code> is <b>hou:min</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
