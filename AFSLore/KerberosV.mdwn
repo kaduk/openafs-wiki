@@ -1,6 +1,8 @@
 I am not the right person to write this page but here is a start:
 
-[[KenHornstein]]'s migration toolkit is here: <ftp://ftp.cmf.nrl.navy.mil/pub/kerberos5/>.
+The MIT web site for Kerberos is <http://web.mit.edu/kerberos/www>. The FAQ is at <http://www.nrl.navy.mil/CCS/people/kenh/kerberos-faq.html>.
+
+[[KenHornstein]]'s AFS-Kerberos5 migration toolkit is here: <ftp://ftp.cmf.nrl.navy.mil/pub/kerberos5/>.
 
 -- [[TedAnderson]] - 22 Jan 2002
 
@@ -8,5 +10,12 @@ Some other issues to explain:
 
 - PAM modules available for K5
 - Admin differences between various K5 implementations
+- krb524d -- which uses a K5 TGT to produce a V4 AFS service ticket which the [[CacheManager]] needs. It does not need to run on the same machine as the [[KerberosV]] server but just needs access to the AFS principal's key. This is not needed for [[HeimdalKTH]] which implements V4 and V5 services, but is for MIT and [[ActiveDirectory]].
+- encryption types -- this is a per key property and V5 supports several (while V4 only supported one, namely what V5 calls des-cbc-crc). However, this is not the V5 default (which I think is des3) so you need to ensure that the AFS principal uses des-cbc-crc.
+- [[StringToKey]] differences
 
 -- [[TedAnderson]] - 23 Jan 2002
+
+----
+
+See [[HeimdalKTH]], [[ActiveDirectory]], [[KerberosDCE]], [[AuthCommands]], [[SettingUpAuthentication]].
