@@ -385,6 +385,7 @@ For further details on NTP see: <http://www.eecis.udel.edu/~ntp/>
 
 For a "minimal" AFS service which does not allow inbound or outbound klog:
 
+       cachemanager    4711/udp (only if you use the arla-client instead of OpenAFS)
        fileserver      7000/udp
        cachemanager    7001/udp
        ptserver        7002/udp
