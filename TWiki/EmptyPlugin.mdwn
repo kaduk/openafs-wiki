@@ -10,16 +10,16 @@ To create your own plugin:
 
 ## <a name="Syntax Rules"></a> Syntax Rules
 
-(describe the syntax)
+(none)
 
-## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
+## <a name="Plugin Settings"></a> Plugin Settings
 
-Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%EMPTYPLUGIN\_SHORTDESCRIPTION%**</code>
+Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%EMPTYPLUGIN\_SHORTDESCRIPTION%**</code>
 
-- One line description, shown in the [[TextFormattingRules]] topic:
+- One line description, is shown in the [[TextFormattingRules]] topic:
   - Set SHORTDESCRIPTION = This plugin does nothing, but can be used as a template for your own plugins.
 
-- Your own settings, for example:
+- Your own setting, i.e.:
   - Set EXAMPLE = got it!
 
 - Debug plugin: (See output in `data/debug.txt`)
@@ -27,46 +27,26 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
-(This plugin is preinstalled, you do not need to install it.)
-
-**_Note:_** You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the server where TWiki is running.
-
-- Download the ZIP file from the Plugin web (see below)
-- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> File: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-  </tr>
-  <tr>
-    <td><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
-    <td> Plugin topic </td>
-  </tr>
-  <tr>
-    <td><code><b>data/TWiki/%TOPIC%.txt,v</b></code></td>
-    <td> Plugin topic repository </td>
-  </tr>
-  <tr>
-    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
-    <td> Plugin Perl module </td>
-  </tr>
-</table>
-- Test if the plugin is correctly installed:
-  - (describe tests here)
+- This plugin is preinstalled, you do not need to install it.
 
 ## <a name="Plugin Info"></a> Plugin Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td>[[TWiki/AndreaSterbini]], [[TWiki/PeterThoeny]]</td>
+    <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 14 Jul 2001 (V1.000) </td>
+    <td> 21 Mar 2003 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 21 Mar 2004: </td>
+    <td> Added afterSaveHandler </td>
   </tr>
   <tr>
     <td align="right"> 14 Jul 2001: </td>
@@ -86,7 +66,11 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Perl Version: </td>
-    <td> 5.005 </td>
+    <td> 5.0 </td>
+  </tr>
+  <tr>
+    <td align="right"> TWiki:Plugins/Benchmark: </td>
+    <td>[[TWiki/GoodStyle]] 99%, [[TWiki/FormattedSearch]] 99%, %TOPIC% 99% </td>
   </tr>
   <tr>
     <td align="right"> Plugin Home: </td>
@@ -100,4 +84,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], [[DefaultPlugin]]
 
--- [[AndreaSterbini]] - 27 Feb 2001 <br /> -- [[PeterThoeny]] - 14 Jul 2001
+-- TWiki:Main.AndreaSterbini - 27 Feb 2001 %BR% -- TWiki:Main.PeterThoeny - 21 Mar 2004
