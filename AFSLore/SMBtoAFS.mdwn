@@ -2,14 +2,18 @@
   <ul>
     <li><a href="#Using Samba as an AFS gateway"> Using Samba as an AFS gateway</a><ul>
         <li><a href="#Plain text passwords sent over n"> Plain text passwords sent over network</a><ul>
-            <li><a href="#Compile Samba --with-pam"> Compile Samba --with-pam</a></li>
-            <li><a href="#Compile Samba --with-afs"> Compile Samba --with-afs</a></li>
+            <li><a href="#Compile Samba 2 --with-pam"> Compile Samba 2 --with-pam</a></li>
+            <li><a href="#Compile Samba 2 --with-afs"> Compile Samba 2 --with-afs</a></li>
           </ul>
         </li>
         <li><a href="#No plain text passwords sent ove"> No plain text passwords sent over network</a><ul>
             <li><a href="#kSAMBA"> kSAMBA</a></li>
             <li><a href="#SMBKlog"> SMBKlog</a></li>
             <li><a href="#FOKSTRAUT"> FOKSTRAUT</a></li>
+          </ul>
+        </li>
+        <li><a href="#New: More secure options"> New: More secure options</a><ul>
+            <li><a href="#Samba 3 built-in AFS support"> Samba 3 built-in AFS support</a></li>
             <li><a href="#kimpersonate"> kimpersonate </a></li>
           </ul>
         </li>
@@ -40,7 +44,7 @@ Disadvantages:
 - Client gets no warning before AFS tokens expire
 - To get new tokens, client must unmap and then remap the drive letter corresponding to the AFS gateway
 
-### <a name="Compile Samba --with-pam"></a> Compile Samba --with-pam
+### <a name="Compile Samba 2 --with-pam"></a> Compile Samba 2 --with-pam
 
 This causes Samba to use pluggable authentication modules (PAM) for authentication. PAM is available on many Unix variants, notably Linux and Solaris. There are PAM modules for the various Kerberos implementations that work with AFS; the module for the default kaserver comes with [[OpenAFS]]. For some more info on PAM see the [Samba doc](http://de.samba.org/samba/ftp/docs/htmldocs/Samba-HOWTO-Collection.html#PAM). Many precompiled versions of Samba are built with this option (i.e. Redhat's Samba RPMs)
 
@@ -52,7 +56,7 @@ Disadvantages:
 
 - Doesn't work with operating systems that do not support PAM.
 
-### <a name="Compile Samba --with-afs"></a> Compile Samba --with-afs
+### <a name="Compile Samba 2 --with-afs"></a> Compile Samba 2 --with-afs
 
 This links Samba against AFS authentication code directly.
 
@@ -196,6 +200,55 @@ Disadvantages:
   - Authors mention using a simple script on a login server in which a user can make an SMB connect and authenticate themselves. Unsure of the security of this solution.
   - Another possibility would be a web application behind an SSL server running on the same host as the Samba server.
 - Passwords must be stored in cleartext on the Samba server.
+
+## <a name="New: More secure options"></a> New: More secure options
+
+### <a name="Samba 3 built-in AFS support"></a> Samba 3 built-in AFS support
+
+It looks like Samba 3.0.4 has built-in AFS support (perhaps only for the Kerberos 4 kaserver on GNU/Linux with [[OpenAFS]] however). The relevant configure option looks like:
+
+      --with-fake-kaserver    Include AFS fake-kaserver support (default=no)
+
+References:
+
+- <http://www.samba.org/samba/docs/man/smb.conf.5.html#AFSSHARE>
+- <news://news.gmane.org:119/E19sNzf-0002uv-00@intern.SerNet.DE>
+- <http://www.dragoninc.on.ca/mail-archives/samba-technical/2003-10/0339.html>
+- [http://marc.theaimsgroup.com/?l=samba&amp;m=108238783519493&amp;w=2](http://marc.theaimsgroup.com/?l=samba&m=108238783519493&w=2)
+- [http://marc.theaimsgroup.com/?l=samba&amp;m=108119099330691&amp;w=2](http://marc.theaimsgroup.com/?l=samba&m=108119099330691&w=2)
+- <http://lists.samba.org/archive/samba/2004-April/084693.html>
+
+Also based on <http://us4.samba.org/samba/ftp/pre/WHATSNEW-3-0-5pre1.txt> it looks like Samba 3.0.5 will have support to display and set AFS acls via the NT security editor.
+
+Here are some relevant comments from the Samba 3.0.4 code (author's homepage is at <http://www.sernet.de/vl/> ):
+
+    ./source/lib/afs.c:
+    /*
+      This routine takes a radical approach completely bypassing the
+      Kerberos idea of security and using AFS simply as an intelligent
+      file backend. Samba has persuaded itself somehow that the user is
+      actually correctly identified and then we create a ticket that the
+      AFS server hopefully accepts using its KeyFile that the admin has
+      kindly stored to our secrets.tdb.
+
+      Thanks to the book "Network Security -- PRIVATE Communication in a
+      PUBLIC World" by Charlie Kaufman, Radia Perlman and Mike Speciner
+      Kerberos 4 tickets are not really hard to construct.
+
+      For the comments "Alice" is the User to be auth'ed, and "Bob" is the
+      AFS server.
+    */
+
+    ./source/lib/afs_settoken.c:
+    /*
+      Put an AFS token into the Kernel so that it can authenticate against
+      the AFS server. This assumes correct local uid settings.
+
+      This is currently highly Linux and OpenAFS-specific. The correct API
+      call for this would be ktc_SetToken. But to do that we would have to
+      import a REALLY big bunch of libraries which I would currently like
+      to avoid.
+    */
 
 ### <a name="kimpersonate"></a> kimpersonate
 
