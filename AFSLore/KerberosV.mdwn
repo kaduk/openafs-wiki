@@ -13,7 +13,7 @@ If you already have a working AFS cell using [[KaServer]], check out [[DerrickBr
 For now a few links... explanations to follow later:
 
 - Setting up [[OpenSSH]] to use [[KerberosV]] authentication: you can either use PAM to authenticate people (boring) or you can add the patches at <http://www.sxw.org.uk/computing/patches/openssh.html> to use existing [[KerberosV]] tickets for single-sign-on and automatic ticket forwarding (interesting). Note that by default this patch won't grab tickets when logging in via password - post small patch to enable this later.
-- If you're having trouble with the AFS-Kerberos5 migration kit, see <http://www.mathematik.uni-karlsruhe.de/~iwrmm/Persons/Schulz/Unix/afs/afs-krb5.html> for tips. In particular check out the Makefile patches.
+- If you're having trouble with [[KenHornstein]]'s AFS-Kerberos5 migration kit available at <ftp://ftp.cmf.nrl.navy.mil/pub/kerberos5/>, see <http://www.mathematik.uni-karlsruhe.de/~iwrmm/Persons/Schulz/Unix/afs/afs-krb5.html> for tips. In particular check out the Makefile patches.
 - An older AFS link page: <http://www-2.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs.html>
 
 Some other issues to explain:
@@ -24,7 +24,7 @@ Some other issues to explain:
 - encryption types -- this is a per key property and V5 supports several (while V4 only supported one, namely what V5 calls des-cbc-crc). However, this is not the V5 default (which I think is des3) so you need to ensure that the AFS principal uses des-cbc-crc.
 - [[StringToKey]] differences
 
--- [[TedAnderson]] - 22 Jan 2002 -- [[DerrickBrashear]] - 23 Jan 2002 -- [[TedAnderson]] - 23 Jan 2002 -- [[JasonGarman]] - 30 Jan 2002
+-- [[TedAnderson]] - 22 Jan 2002 -- [[DerrickBrashear]] - 23 Jan 2002 -- [[TedAnderson]] - 23 Jan 2002 -- [[JasonGarman]] - 30 Jan 2002 -- [[TedAnderson]] - 31 Jan 2002
 
 ----
 
