@@ -61,15 +61,13 @@ File Attachments can be used to create powerful customized groupware solutions, 
 
 An attachment can be moved between topics.
 
-- Click <code>**Action**</code> on the Attachment to be moved.
+- Click <code>**Manage**</code> on the Attachment to be moved.
 - On the control screen, select the new web and/or topic.
 - Click <code>**Move**</code>. The attachment and its version history are moved. The original location is stored as [[topic Meta Data|Main/TWikiDocumentation#Meta_Data_Definition]].
 
 ## <a name="Deleting Attachments"></a> Deleting Attachments
 
-It is not possible to delete attached files directly. You can delete a topic, and its attachments with it.
-
-- %T% One easy workaround is to create a <code>**Trash.TrashAttachments**</code> - then, simply move unwanted Attachments to that topic.
+Move unwanted Attachments to web `Trash`, topic `TrashAttachment`.
 
 ## <a name="Linking to Attached Files"></a> Linking to Attached Files
 
@@ -104,25 +102,25 @@ Files attached to a topic are displayed in a directory table, displayed at the b
 >     <td>
 >       <table border="1" cellpadding="1" cellspacing="0">
 >         <tr>
->           <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttachment">Attachment</a>:</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Action:</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Size:</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Date:</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Who:</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Comment:</strong></th>
+>           <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttachment">Attachment</a></strong></th>
+>           <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
+>           <th align="center" bgcolor="#99CCCC"><strong>Size</strong></th>
+>           <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
+>           <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
+>           <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
 >         </tr>
 >         <tr>
 >           <td><img align="top" height="16" src="http://www.dementia.org/twiki//view/icn/txt.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=&filename=Sample.txt">Sample.txt</a></td>
->           <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">action</a></td>
->           <td> 30 </td>
+>           <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">manage</a></td>
+>           <td align="right"> 0.1 K </td>
 >           <td> 22 Jul 2000 - 19:37 </td>
 >           <td><a href="PeterThoeny">PeterThoeny</a></td>
 >           <td> Just a sample </td>
 >         </tr>
 >         <tr>
 >           <td><img align="top" hight="16" src="http://www.dementia.org/twiki//view/icn/bmp.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=&filename=Smile.gif">Smile.gif</a></td>
->           <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">action</a></td>
->           <td> 94 </td>
+>           <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">manage</a></td>
+>           <td align="right"> 0.1 K </td>
 >           <td> 22 Jul 2000 - 19:38 </td>
 >           <td><a href="PeterThoeny">PeterThoeny</a></td>
 >           <td> Smiley face </td>
@@ -134,7 +132,7 @@ Files attached to a topic are displayed in a directory table, displayed at the b
 
 ## <a name="File Attachment Controls"></a> File Attachment Controls
 
-Clicking on an <code>**Action**</code> link takes you to a new page that looks like this:
+Clicking on a <code>**Manage**</code> link takes you to a new page that looks like this:
 
 > <form>
 >   <table border="1" cellpadding="20" cellspacing="0">
@@ -142,18 +140,18 @@ Clicking on an <code>**Action**</code> link takes you to a new page that looks l
 >       <td>
 >         <table border="1" cellpadding="1" cellspacing="0">
 >           <tr>
->             <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttachment">Attachment</a>:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Action:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Size:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Date:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Who:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Comment:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttribute">Attribute</a>:</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttachment">Attachment</a></strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Size</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttribute">Attribute</a></strong></th>
 >           </tr>
 >           <tr>
 >             <td><img align="top" height="16" src="http://www.dementia.org/twiki//view/icn/txt.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/TWiki/%WEB%/%TOPIC%?rev=&filename=Sample.txt">Sample.txt</a></td>
->             <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">action</a></td>
->             <td> 30 </td>
+>             <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">manage</a></td>
+>             <td align="right"> 0.1 K </td>
 >             <td> 22 Jul 2000 - 19:37 </td>
 >             <td><a href="PeterThoeny">PeterThoeny</a></td>
 >             <td> Just a sample </td>
@@ -161,8 +159,8 @@ Clicking on an <code>**Action**</code> link takes you to a new page that looks l
 >           </tr>
 >           <tr>
 >             <td><img align="top" height="16" src="http://www.dementia.org/twiki//view/icn/bmp.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=&filename=Smile.gif">Smile.gif</a></td>
->             <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">action</a></td>
->             <td> 94 </td>
+>             <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">manage</a></td>
+>             <td align="right"> 0.1 K </td>
 >             <td> 22 Jul 2000 - 19:38 </td>
 >             <td><a href="PeterThoeny">PeterThoeny</a></td>
 >             <td> Smiley face </td>
@@ -176,11 +174,11 @@ Clicking on an <code>**Action**</code> link takes you to a new page that looks l
 >         </p>
 >         <table border="1" cellpadding="1" cellspacing="0">
 >           <tr>
->             <th align="center" bgcolor="#99CCCC"><strong>Version:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Action:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Date:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Who:</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Comment:</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Version</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
+>             <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
 >           </tr>
 >           <tr>
 >             <td> 1.1 </td>
