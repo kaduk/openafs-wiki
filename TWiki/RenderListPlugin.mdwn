@@ -232,6 +232,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   - Set HOME\_THEME = icon, 1, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![home.gif](http://www.dementia.org/twiki//view/home.gif)
   - Set ORG\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![home.gif](http://www.dementia.org/twiki//view/home.gif)
   - Set GROUP\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![group.gif](http://www.dementia.org/twiki//view/group.gif)
+  - Set EMAIL\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![email.gif](http://www.dementia.org/twiki//view/email.gif)
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -272,14 +273,18 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 02 Dec 2003 (V1.000) </td>
+    <td> 05 Dec 2003 (V1.010) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
-    <td align="right"> 02 Nov 2003: </td>
+    <td align="right"> 05 Dec 2003: </td>
+    <td> Fixed rendering issue with IE, added EMAIL_THEME </td>
+  </tr>
+  <tr>
+    <td align="right"> 02 Dec 2003: </td>
     <td> Initial version </td>
   </tr>
   <tr>
@@ -306,4 +311,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], TWiki:Plugins/TreePlugin
 
--- TWiki:Main/PeterThoeny - 02 Dec 2003
+-- TWiki:Main/PeterThoeny - 05 Dec 2003
