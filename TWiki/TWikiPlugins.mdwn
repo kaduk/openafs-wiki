@@ -5,6 +5,7 @@
         <li><a href="#Preinstalled Plugins"> Preinstalled Plugins</a></li>
         <li><a href="#Installing Plugins"> Installing Plugins</a><ul>
             <li><a href="#On-Site Pretesting"> On-Site Pretesting</a></li>
+            <li><a href="#Checking that Plugins are Workin"> Checking that Plugins are Working on a Live Server</a></li>
             <li><a href="#A Note on Plugin Performance"> A Note on Plugin Performance</a></li>
           </ul>
         </li>
@@ -100,6 +101,10 @@ To test new Plugins on your installation before making them public, you may want
   - **Copy** the modified files to the Production installation. You can update a TWiki installation live and users won't even notice.
 
 - **Method 2:** List the Plugin being tested in the `DISABLEDPLUGINS` variable in [[TWikiPreferences]]. Redefine the `DISABLEDPLUGINS` variable in the `Sandbox` web and do the testing there.
+
+### <a name="Checking that Plugins are Workin"></a> Checking that Plugins are Working on a Live Server
+
+[[InstalledPlugins]] shows which Plugins are: 1) installed, 2) loading properly and 3) what TWiki:Codev.PluginHandlers they invoke. Any failures are shown in the Errors section.
 
 ### <a name="A Note on Plugin Performance"></a> A Note on Plugin Performance
 
@@ -355,4 +360,4 @@ Example code to build the file name:
         return "$dir/_FooBarPlugin_$name";
     }
 
--- TWiki:Main/PeterThoeny - 11 Dec 2003 <br /> -- TWiki:Main/AndreaSterbini - 29 May 2001 <br /> -- TWiki:Main/MikeMannix - 03 Dec 2001
+-- TWiki:Main/PeterThoeny - 18 May 2004 %BR% -- TWiki:Main/AndreaSterbini - 29 May 2001 %BR% -- TWiki:Main/MikeMannix - 03 Dec 2001

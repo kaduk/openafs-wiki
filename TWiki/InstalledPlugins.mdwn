@@ -1,8 +1,8 @@
-## <a name="Installed Plugins"></a> Installed Plugins
+# <a name="Installed Plugins"></a> Installed Plugins
 
 Plugins are mainly user-contributed add-ons that enhance and extend TWiki features and capabilities. A limited number of plugins are included in the core TWiki distribution - and most those can be removed - while the rest are optional, available from TWiki:Plugins/WebHome.
 
-Here is a list of the plugins currently installed on this TWiki site:
+Here is a list of the plugins currently installed and enabled on this TWiki site:
 
 - [[SpreadSheetPlugin]] <span>(any TWiki, 10197)</span>:
 - [[CommentPlugin]] <span>(Dakar, 11359)</span>: Allows users to quickly post comments to a page without an edit/preview/save cycle
@@ -14,4 +14,103 @@ Here is a list of the plugins currently installed on this TWiki site:
 - [[TablePlugin]] <span>(1.020, 12339)</span>:
 - [[TwistyPlugin]] <span>(1.2.0, $Rev: 12154$)</span>:
 
--- [[MikeMannix]] - 12 May 2002
+# <a name="Plugin Diagnostics"></a> Plugin Diagnostics
+
+<table border="1">
+  <tr>
+    <th>Plugin</th>
+    <th>Errors</th>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/SpreadSheetPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register SpreadSheetPlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/CommentPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register CommentPlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/EditTablePlugin]]</td>
+    <td><pre>
+Plugins: could not fully register EditTablePlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/InterwikiPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register InterwikiPlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/PreferencesPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register PreferencesPlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/SlideShowPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register SlideShowPlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/SmiliesPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register SmiliesPlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/TablePlugin]]</td>
+    <td><pre>
+Plugins: could not fully register TablePlugin, no plugin topic
+</pre></td>
+  </tr>
+  <tr valign="top">
+    <td>[[TWiki/TwistyPlugin]]</td>
+    <td><pre>
+Plugins: could not fully register TwistyPlugin, no plugin topic
+</pre></td>
+  </tr>
+</table>
+<table border="1">
+  <tr>
+    <th>Handler</th>
+    <th>Plugins</th>
+  </tr>
+  <tr valign="top">
+    <td>beforeCommonTagsHandler</td>
+    <td>PreferencesPlugin<br />TwistyPlugin</td>
+  </tr>
+  <tr valign="top">
+    <td>beforeSaveHandler</td>
+    <td>CommentPlugin</td>
+  </tr>
+  <tr valign="top">
+    <td>commonTagsHandler</td>
+    <td>SpreadSheetPlugin<br />CommentPlugin<br />EditTablePlugin<br />SlideShowPlugin<br />SmiliesPlugin</td>
+  </tr>
+  <tr valign="top">
+    <td>initPlugin</td>
+    <td>SpreadSheetPlugin<br />CommentPlugin<br />EditTablePlugin<br />InterwikiPlugin<br />PreferencesPlugin<br />SlideShowPlugin<br />SmiliesPlugin<br />TablePlugin<br />TwistyPlugin</td>
+  </tr>
+  <tr valign="top">
+    <td>postRenderingHandler</td>
+    <td>EditTablePlugin<br />PreferencesPlugin<br />TwistyPlugin</td>
+  </tr>
+  <tr valign="top">
+    <td>preRenderingHandler</td>
+    <td>InterwikiPlugin<br />SmiliesPlugin<br />TablePlugin</td>
+  </tr>
+</table>
+
+**9 plugins**
+
+**_Note:_** The diagnostics are provided by the `%FAILEDPLUGINS%` variable
+
+**_Related Topics:_** [[TWikiPlugins]], [[TWikiPreferences]]
+
+-- TWiki:Main.MikeMannix - 12 May 2002 %BR% -- TWiki:Main.PeterThoeny - 18 May 2004
