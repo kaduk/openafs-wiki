@@ -1,7 +1,6 @@
 <div>
   <ul>
     <li><a href="#TWiki User Authentication"> TWiki User Authentication</a><ul>
-        <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Authentication Options"> Authentication Options</a><ul>
             <li><a href="#Partial Authentication"> Partial Authentication</a></li>
           </ul>
@@ -15,9 +14,7 @@
 
 # <a name="TWiki User Authentication"></a> TWiki User Authentication
 
-_TWiki site access control and user activity tracking_
-
-## <a name="Overview"></a> Overview
+_TWiki site access control and user activity tracking options_
 
 TWiki does not authenticate users internally, it depends on the `REMOTE_USER` environment variable. This variable is set when you enable Basic Authentication (.htaccess) or SSL "secure server" authentication (https protocol).
 
@@ -28,8 +25,8 @@ TWiki uses visitor identification to keep track of who made changes to topics at
 No special installation steps are required if the server is already authenticated. If it isn't, you have three standard options for controlling user access:
 
 1. **Forget about authentication** to make your site completely public - anyone can browse and edit freely, in classic Wiki mode. All visitors are assigned the [[TWikiGuest]] default identity, so you can't track individual user activity. <br />
-2. **Use SSL** (Secure Sockets Layer; HTTPS) to authenticate and secure the whole server. <br />
-3. **Use Basic Authentication (.htaccess)** to control access by protecting key scripts: `attach`, `edit=`, `installpasswd`, `preview`, `rename`, `save`, `upload` using the .htaccess file. The [[TWikiInstallationGuide]] has step-by-step instructions.
+2. **Use SSL (Secure Sockets Layer; HTTPS)** to authenticate and secure the whole server. <br />
+3. **Use Basic Authentication (.htaccess)** to control access by protecting key scripts: `attach`, `edit=`, `installpasswd`, `preview`, `rename`, `save`, `upload` using the <code>**.htaccess file**</code>. The [[TWikiInstallationGuide]] has step-by-step instructions.
 
 ### <a name="Partial Authentication"></a> Partial Authentication
 
@@ -41,7 +38,7 @@ No special installation steps are required if the server is already authenticate
 
 - Enable this feature by setting the <code>**$doRememberRemoteUser**</code> flag in `TWiki.cfg`. TWiki then persistently stores the IP address/username pairs in the file, `$remoteUserFilename`, which is `"$dataDir/remoteusers.txt"` by default.
 
-- **_NOTE:_** This approach can fail if the IP address changes due to dynamically assigned IP addresses or proxy servers.
+- %X% This approach can fail if the IP address changes due to dynamically assigned IP addresses or proxy servers.
 
 **Quick Authentication Test** - Use the %WIKIUSERNAME% variable to return your current identity:
 
@@ -49,15 +46,17 @@ No special installation steps are required if the server is already authenticate
 
 ## <a name="TWiki Username vs. Login Usernam"></a> TWiki Username vs. Login Username
 
-This section applies only if your %WIKITOOLNAME% is installed on a server that is both **authenticated** and on an **intranet**.
+This section applies only if your TWiki site is installed on a server that is both **authenticated** and on an **intranet**.
 
-%WIKITOOLNAME% internally manages two usernames: Login username and TWiki username.
+%WIKITOOLNAME% internally manages two usernames: Login Username and TWiki Username.
 
-- **Login username:** When you login to the intranet, you use your existing login username, ex: <code>**pthoeny**</code>. This name is normally passed to %WIKITOOLNAME% by the <code>**REMOTE\_USER**</code> environment variable, and used by internally by %WIKITOOLNAME%. Login usernames are maintained by your system administrator.
+- **Login Username:** When you login to the intranet, you use your existing login username, ex: <code>**pthoeny**</code>. This name is normally passed to TWiki by the <code>**REMOTE\_USER**</code> environment variable, and used internally. Login Usernames are maintained by your system administrator.
 
-- **TWiki username:** Your name in [[WikiNotation]], ex: <code>**PeterThoeny**</code>, is recorded when you register using [[TWikiRegistration]]; doing so also generates a personal home page in the Main web.
+- **TWiki Username:** Your name in [[WikiNotation]], ex: <code>**PeterThoeny**</code>, is recorded when you register using [[TWikiRegistration]]; doing so also generates a personal home page in the Main web.
 
-%WIKITOOLNAME% can automatically map an intranet username to a TWiki username, provided that the username pair exists in the [[TWikiUsers]] topic. This is also handled automatically when you register.
+TWiki can automatically map an Intranet (Login) Username to a TWiki Username, provided that the username pair exists in the [[TWikiUsers]] topic. This is also handled automatically when you register.
+
+- %X% In the original TWiki distribution, in <code>**twiki/data**</code>, there are two registration form topics, [[TWikiRegistration]] and [[TWikiRegistrationPub]]. The original form includes an intranet Login Username field. For Basic Authentication, the original form is replaced by the Pub version. If you started using TWiki on Basic Authentication and want to change, you have to switch back forms for future use, and manually correct the existing entries, by editing [[TWikiUsers]], adding the Login Username for each member - `PeterThoeny - pthoeny - 01 Jan 1999` - and also in the <code>**.htpasswd**</code> file, where you can either replace the [[WikiNames]] or duplicate the entries and have both, so both usernames will work. **_verification and clearer rewrite to follow in a bit. also link to original installation mention._**
 
 > **_NOTE:_**
 >
@@ -93,4 +92,4 @@ Change and reset passwords using forms on regular pages. Use [[TWikiAccessContro
 
 >
 
--- [[MikeMannix]] - 29 Aug 2001
+-- [[MikeMannix]] - 19 May 2002
