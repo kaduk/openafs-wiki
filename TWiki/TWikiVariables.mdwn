@@ -271,7 +271,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:37:08</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:37:42</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -362,7 +362,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>"text"</code></td>
-          <td> Search term. (Is a regular expression or literal, depending on the <code>regex</code> parameter) [TWikiAlphaRelease - for regular expressions ";" can be used to mean <em>and</em> e.g. "search;agrep" will find all topic containing search <em>and</em> agrep ] </td>
+          <td> Search term. Is a regular expression or literal, depending on the <code>regex</code> parameter. For regular expressions ";" is used to mean <em>and</em> e.g. "search;agrep" will find all topic containing search <em>and</em> agrep. </td>
           <td> required </td>
         </tr>
         <tr>
@@ -392,7 +392,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>regex="on"</code></td>
-          <td>[[Main/RegularExpression]] search </td>
+          <td>[[Main/RegularExpression]] search; also enables ";" as <em>and</em></td>
           <td> Literal search </td>
         </tr>
         <tr>
