@@ -13,8 +13,8 @@
         </li>
         <li><a href="#Error Messages"> Error Messages</a><ul>
             <li><a href="#I receive a "Delayed Write failu"> I receive a "Delayed Write failure" error when saving documents from Microsoft Office to AFS volumes. What can I do?</a></li>
-            <li><a href="#I receive errors stating that th"> I receive errors stating that the AFS Client Service may not have been started, what should I do?</a></li>
-            <li><a href="#When I have obtained tokens usin"> When I have obtained tokens using Kerberos for Windows, I receive errors similar to "Ticket contained unknown key version number", what is wrong?</a></li>
+            <li><a href="#I receive errors stating that th"> I receive errors stating that the AFS Client Service may not have been started; what should I do?</a></li>
+            <li><a href="#When I have obtained tokens usin"> When I have obtained tokens using Kerberos for Windows, I receive errors similar to "Ticket contained unknown key version number". What is wrong?</a></li>
             <li><a href="#Why can't I use _OpenAFS with an"> Why can't I use OpenAFS with an Active Directory KDC?</a></li>
             <li><a href="#Why can't I install _OpenAFS on"> Why can't I install OpenAFS on Windows NT, ME or 9x?</a></li>
             <li><a href="#Why do I receive "AFS is still s"> Why do I receive "AFS is still starting. Retry?" messages when I have turned off "Obtain tokens at logon"?</a></li>
@@ -56,7 +56,7 @@ If, on the other hand, you are using roaming profiles, there is unfortunately no
 
 ### <a name="How come my non-ASCII filename c"></a> How come my non-ASCII filename characters are wrong; code page problems?
 
-Yes, it is. Currently, the [[OpenAFS]] implementation uses a SMB server with which Windows communicates. This server is not yet able to handle all code pages. So, if you are accessing files from other systems as well, you will experience the old code page missmatch problem.
+Yes, it is. Currently, the [[OpenAFS]] implementation uses a SMB server with which Windows communicates. This server is not yet able to handle all code pages. So, if you are accessing files from other systems as well, you will experience the old code page mismatch problem.
 
 The CIFS protocol itself has support for Unicode. Hopefully, it will be implemented in [[OpenAFS]] in the future. (from J. Altman)
 
@@ -68,7 +68,7 @@ First of all, note that the default cache size is 20 MB, which means a 2 GB file
 
 If the [[OpenAFS]] Client Service cannot connect to your home cell when it starts, it will crash.
 
-To solve this problem, look up the Freelance Mode in the [[WindowsConfigurationReferenceGuide]].
+To solve this problem, look up Freelance Mode in the [[WindowsConfigurationReferenceGuide]].
 
 ### <a name="Why does _OpenAFS for Windows cr"></a> Why does [[OpenAFS]] for Windows crash on my Hyperthreaded Pentium 4?
 
@@ -80,9 +80,9 @@ This is due to a known bug. Set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\S
 
 Windows has support for a concept known as Overlapped I/O. It is frequently used in Microsoft Office programs. The idea is that the program sends several file read, or write, requests at once and handles them in the order they are completed. This way, writes to different locations do not have to wait for previous writes to complete. It is mostly a performance enhancement.
 
-Unfortunately, [[OpenAFS]] for Windows currently does not handle theses overlapping requests very well. You are probably best off saving to local disk and then copying them into AFS.
+Unfortunately, [[OpenAFS]] for Windows currently does not handle these overlapping requests very well. You are probably better off saving to local disk and then copying into AFS.
 
-### <a name="I receive errors stating that th"></a> I receive errors stating that the AFS Client Service may not have been started, what should I do?
+### <a name="I receive errors stating that th"></a> I receive errors stating that the AFS Client Service may not have been started; what should I do?
 
 First, you should check if the service is running or not. You can do this in Control Panel\\Administration Tools\\Services. If it is not, try to start it. Won't work? File a bugreport!
 
@@ -90,28 +90,28 @@ You could try to login on a local account (like Administrator) and browse `\\AFS
 
 If all fails, file a bugreport!
 
-### <a name="When I have obtained tokens usin"></a> When I have obtained tokens using Kerberos for Windows, I receive errors similar to "Ticket contained unknown key version number", what is wrong?
+### <a name="When I have obtained tokens usin"></a> When I have obtained tokens using Kerberos for Windows, I receive errors similar to "Ticket contained unknown key version number". What is wrong?
 
 As with most things on the computer, this error message is not entirely correct. It is not neccessarily the version number of the key that is wrong. Two of the most common reasons are
 
-- Wrong cell. You may have obtained tokens for one cell and is now trying to reach another cell. Try doing `afslog` for the new cell if you know you should have access to it.
+- Wrong cell. You may have obtained tokens for one cell and are now trying to reach another cell. Try doing `afslog` for the new cell if you know you should have access to it.
 - Old server. Support for [[KerberosV]] tickets is a relatively new feature of [[OpenAFS]]. You will need an [[OpenAFS]] 1.2.8 or later server to use the feature. Either update the server, or disable [[KerberosV]]. Read about the latter in the [[Configuration Reference Guide|Main/WindowsConfigurationReferenceGuide#Disable_Automatic_Use_of_KerberosV]].
 
 ### <a name="Why can&#39;t I use _OpenAFS with an"></a> Why can't I use [[OpenAFS]] with an Active Directory KDC?
 
-You can, however Microsoft uses the Kerberos tickets in a way no one had anticipated during protocol design. While remaining syntactically valid, the tickets the AD KDC issues are very large. They can be 10 kB while other KDC implementations usually issue tickets around 500 bytes in size.
+You can; however, Microsoft uses Kerberos tickets in a way no one anticipated during protocol design. While remaining syntactically valid, the tickets the AD KDC issues are very large: they can be 10 kB while other KDC implementations usually issue tickets around 500 bytes in size.
 
 You will have to setup you AFS server to support the larger ticket sizes, or update your server.
 
 ### <a name="Why can&#39;t I install _OpenAFS on"></a><a name="Why can&#39;t I install _OpenAFS on "></a> Why can't I install [[OpenAFS]] on Windows NT, ME or 9x?
 
-As of version 1.3.65, the old Windows branch will no longer be maintained. The interface for the Windows NT series and the Windows 9x series are completely different. Most of the users now use Windows 2000 or newer. Less has changed between Windows NT 4 and Windows 2000, but the developer community has decided to discontinue support for Windows NT 4 too.
+As of version 1.3.65, the old Windows branch will no longer be maintained. The interface for the Windows NT series and the Windows 9x series are completely different. Most users now use Windows 2000 or newer. Less has changed between Windows NT 4 and Windows 2000, but the developer community has decided to discontinue support for Windows NT 4 too.
 
-The main reason for this decision is the lack of developers and fundings. [[OpenAFS]] for Windows is a free project and requires donations ,or developers with time left, to move forward. Old versions of [[OpenAFS]] for Windows 9x and NT 4 are still available.
+The main reason for this decision is a lack of developers and funding. [[OpenAFS]] for Windows is a free project and requires donations, or developers with time left, to move forward. Old versions of [[OpenAFS]] for Windows 9x and NT 4 are still available.
 
 ### <a name="Why do I receive &quot;AFS is still s"></a> Why do I receive "AFS is still starting. Retry?" messages when I have turned off "Obtain tokens at logon"?
 
-The AFS Client Service is trying to start, but is waiting for something. This may be a slow or non-existent DNS server, a faulty AFS server, or simply an unplugged cable. The important thing to know is that AFS has not got enough information to begin its normal operation. Check your DNS, AFS servers and [[CellServDB]].
+The AFS Client Service is trying to start, but is waiting for something. This may be a slow or non-existent DNS server, a faulty AFS server, or simply an unplugged cable. The important thing to know is that AFS does not have enough information to begin normal operation. Check your DNS, AFS servers and [[CellServDB]].
 
 ### <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
 
@@ -125,7 +125,7 @@ The Light Gateway works by simply publishing what [[OpenAFS]] has already built 
 
 ### <a name="There is only one cell listed in"></a> There is only one cell listed in `\\AFS\all` or when browsing `\\AFS`. Where are all my cells?
 
-This is related to two reasons:
+There are two possible reasons:
 
 #### <a name="Broken Root Volume"></a> Broken Root Volume
 
@@ -133,7 +133,7 @@ You may have chosen the wrong default cell. Maybe that cell only has one cell mo
 
 #### <a name="Freelance Mode"></a> Freelance Mode
 
-Your computer is currently using the Freelance Mode. Read about it in the below.
+Your computer is currently using Freelance Mode. Read about that below.
 
 ### <a name="What happened to the files in th"></a> What happened to the files in the Windows directory, like `afsdcell.ini`, `afs_freelance.ini` and `afsdsbmt.ini`?
 
@@ -147,7 +147,7 @@ Starting with version 1.3.65 several settings now require Administrator privileg
 
 ### <a name="Why should I abandon Kerberos 4?"></a> Why should I abandon Kerberos 4?
 
-A gigant security hole was found in the Kerberos 4 protocol. This led the world to move over to the (already deployed) more secure Kerberos 5 protocol. The problem occurs when using trusted domains.
+A giant security hole was found in the Kerberos 4 protocol. This led the world to move over to the (already deployed) more secure Kerberos 5 protocol. The problem occurs when using trusted domains.
 
 Recent updates to [[OpenAFS]] include support for Kerberos 5. If your cell still uses **_kaserver_** or a plain Kerberos 4 server, you should update them to use Kerberos 5. The **_kaserver_** can be seen as deprecated. The most common Kerberos 5 servers (KDCs) are [Heimdal](http://www.pdc.kth.se/heimdal/), [MIT Kerberos](http://web.mit.edu/kerberos/www/) and [Microsoft's Active Directory services](http://www.microsoft.com/).
 
@@ -155,17 +155,17 @@ Recent updates to [[OpenAFS]] include support for Kerberos 5. If your cell still
 
 ### <a name="What is &quot;Freelance Mode&quot;?"></a> What is "Freelance Mode"?
 
-AFS was originally intended to be run on stationary office computers. It required the AFS servers to be reachable at any time. Now, the laptop has made that an impossibility. Users disconnect and connect their computers to different networks several times a day. This led the AFS community to the invention of "Freelance mode". Since the user's default cell determines which cells will be visible to the user, a workaround was neccessary when laptops began moving around.
+AFS was originally intended to be run on stationary office computers. It required the AFS servers to be reachable at any time. Laptop computers operate differently: users disconnect and connect their computers to different networks several times a day. This led the AFS community to invent "Freelance Mode." Since the user's default cell determines which cells will be visible to the user, a workaround was neccessary when laptops began moving around.
 
-If you have a laptop, or will otherwise be without a connection to the servers of your default cell, you should have this enabled. If your computer can always communicate with the servers of the default cell, this mode is superflous.
+If you have a laptop, or will otherwise be without a connection to the servers of your default cell, you should have this enabled. If your computer can always communicate with the servers of the default cell, this mode is superfluous.
 
-To switch it on and off, please read in the [[Configuration Reference|Main/WindowsConfigurationReferenceGuide#Freelance_Client_Support]].
+To switch Freelance Mode on and off, please read the [[Configuration Reference|Main/WindowsConfigurationReferenceGuide#Freelance_Client_Support]].
 
 ### <a name="What is &quot;High Security Mode&quot;?"></a> What is "High Security Mode"?
 
-It is a deprecated way of achieving some sort of security. Before the [[OpenAFS]] for Windows client was able to use authenticated SMB connections, you had a potential security risk when more than one user was logging on to the same computer at once.
+It is a deprecated way of achieving a modicum of security. Before the [[OpenAFS]] for Windows client was able to use authenticated SMB connections, you had a potential security risk when more than one user was logging on to the same computer at once.
 
-The High Security Mode created a SMB share with a random name, instead of the default <tt>\\\\machine-AFS</tt>. Thus making it harder for anyone else to connect to it. There is no reason to go for the High Security Mode now that [[OpenAFS]] for Windows supports SMB authentication.
+The High Security Mode created a SMB share with a random name (instead of the default <tt>\\\\machine-AFS</tt>), thus making it harder for anyone else to connect to it. There is no reason to use High Security Mode now that [[OpenAFS]] for Windows supports SMB authentication.
 
 ### <a name="What is the Microsoft Loop Back"></a><a name="What is the Microsoft Loop Back "></a> What is the Microsoft Loop Back Adapter?
 
