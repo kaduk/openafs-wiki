@@ -3,7 +3,7 @@
     <li><a href="#TWiki Installation Guide"> TWiki Installation Guide</a><ul>
         <li><a href="#Standard Installation"> Standard Installation</a><ul>
             <li><a href="#Step 1: Create  Configure the Di"> Step 1: Create &amp; Configure the Directories</a><ul>
-                <li><a href="#Step 1 for Non-Root Accounts"> Step 1 for Non-Root Accounts</a></li>
+                <li><a href="#Aletrnative Step 1: Create  Conf"> Aletrnative Step 1: Create &amp; Configure the Directories for Non-Root Accounts</a></li>
               </ul>
             </li>
             <li><a href="#Step 2: Set File Permissions"> Step 2: Set File Permissions</a></li>
@@ -89,7 +89,7 @@ Download the TWiki 01-Sep-2004 distribution in Unix ZIP format from <http://TWik
 
 <a name="StepOneB"></a>
 
-#### <a name="Step 1 for Non-Root Accounts"></a> Step 1 for Non-Root Accounts
+#### <a name="Aletrnative Step 1: Create  Conf"></a> Aletrnative Step 1: Create &amp; Configure the Directories for Non-Root Accounts
 
 To install TWiki on a system where you don't have Unix/Linux root (administrator) privileges, for example, on a hosted Web account or an intranet server administered by someone else:
 
@@ -163,8 +163,8 @@ To install TWiki on a system where you don't have Unix/Linux root (administrator
   - Set the permission of the `twiki/data` **directory** and its **subdirectories** so that files in there are writable by user `nobody`. A simple way is to chmod them to `drwxrwxr-x` (775) and to `chown` them to `nobody`.
   - Set the permission of the `twiki/pub` directory and all its subdirectories so that files in there are writable by user `nobody`. A simple way is to `chmod` them to `drwxrwxr-x` (775) and to `chown` them to `nobody`.
   - %H% The `twiki/data/*/*.txt,v` RCS repository files in the installation package are locked by user `nobody`. If your CGI scripts are **_not_** running as user `nobody`, it's not possible to check in files (you'll see that the revision number won't increase after saving a topic). In this case, you need to unlock all repository files (check the RCS man pages) and lock them with a different user, such as `www-data`, or delete them all - new files will be automatically created the first time each topic is edited. You have two options to change ownership of the RCS lock user:
-    - Run the `testenv` script from your browser; in the %BROWN% **Fix** %ENDCOLOR% line you can <u>relock</u> all the rcs files
-    - Alternatively, run this in your shell: %BR% `cd twiki/data` %BR% `find . -name *.v~ -exec perl -pi~ -e '$. <= 10 && s/nobody:/www-data:/ ' {} ;`
+    - Run the `testenv` script from your browser; in the %BROWN% **Fix** %ENDCOLOR% line you can <u>relock</u> all the rcs files **(recommended)**
+    - Alternatively, run this in your shell: %BR% `cd twiki/data` %BR% <code>find . -name **,v -exec perl -pi~ -e '$. &lt;= 10 &amp;&amp; s/nobody:/www-data:/ ' \{\} \\;**</code> %BR% This will create `,v~` backup files which you should remove after verification: %BR% `find . -name *,v~ -exec rm -f {} \;`
 
 ### <a name="Step 3: Edit the Configuration F"></a> Step 3: Edit the Configuration Files
 
@@ -238,7 +238,7 @@ With your new TWiki installation up and running, you can manage most aspects of 
 ### <a name="Enabling Authentication of Users"></a> Enabling Authentication of Users
 
 - If TWiki is installed on a non-authenticated server - not using SSL - and you'd like to authenticate users:
-  1. **Rename** file `.htaccess.txt` in the `twiki/bin` directory to `.htaccess` and change it to your needs. For details, consult the HTTP server documentation (for Apache server: [[1]](http://www.apache.org/docs/mod/directives.html), [[2]](http://systems.mcs.kent.edu/info/web_help/htaccess/)). In particular, the following <font>red</font> part needs to be configured correctly: <br /><code>Redirect <font>/urlpathto/twiki/index.html</font> http://<font>yourdomain.com/urlpathto/twiki/bin/</font>view</code><br /><code>AuthUserFile <font>/filepathto/twiki/data/</font>.htpasswd</code><br /><code>ErrorDocument 401 <font>/urlpathto/twiki/bin/</font>oops/TWiki/TWikiRegistration?template=oopsauth</code>
+  1. **Rename** file `.htaccess.txt` in the `twiki/bin` directory to `.htaccess` and change it to your needs. The comment at the top of the file explains what need to be done, basically replace `!FILE_path_to_TWiki!` and `!URL_path_to_TWiki!` with paths specific to your installation. _For the details of how this file works, consult the HTTP server documentation (for Apache server: [[1]](http://www.apache.org/docs/mod/directives.html), [[2]](http://systems.mcs.kent.edu/info/web_help/htaccess/))_.
     - %X% **NOTE:** If you had to add a `.cgi` or `.pl` file extension to the `bin` scripts, make sure to do the same for `edit`, `view`, `preview`, and all the other script names in `.htaccess`.
     - %H% The browser should ask for login name and password when you click on the <u>Edit</u> link. In case `.htaccess` does not have the desired effect, you need to enable it: Add "AllowOverride All" to the Directory [[3]](http://httpd.apache.org/docs/mod/core.html#directory) section of `access.conf` for your `twiki/bin` directory.
       - **This applies only if you have root access:** on hosted accounts, you shouldn't have this problem - otherwise, email tech support.
@@ -265,4 +265,4 @@ At this time, TWiki does not ship with an "what you see is what you get" editor.
 
 See [[Appendix A: TWiki File System|Main/AppendixFileSystem]] for an installed system snapshot and descriptions of all files in the TWiki 01-Sep-2004 distribution.
 
--- TWiki:Main/PeterThoeny - 15 Aug 2004 %BR% -- TWiki:Main/MikeMannix - 16 May 2002
+-- TWiki:Main/PeterThoeny - 29 Aug 2004 %BR% -- TWiki:Main/MikeMannix - 16 May 2002
