@@ -1,7 +1,6 @@
 <div>
   <ul>
     <li><a href="#TWiki System Requirements"> TWiki System Requirements</a><ul>
-        <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Server Requirements"> Server Requirements</a></li>
         <li><a href="#Client Requirements"> Client Requirements</a></li>
         <li><a href="#Known Issues"> Known Issues</a></li>
@@ -12,15 +11,13 @@
 
 # <a name="TWiki System Requirements"></a> TWiki System Requirements
 
-_Server and client system requirements for TWiki 01-Dec-2001_
+_Server and client requirements for TWiki 01-Dec-2001_
 
-## <a name="Overview"></a> Overview
-
-Maintaining minimum client and server requirements is necessary to keep TWiki deployment as broad as possible.
+Low client and server requirements are core features that keep TWiki widely deployable, particularly across a range of browser platforms and versions.
 
 ## <a name="Server Requirements"></a> Server Requirements
 
-TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (Revision Control System)](http://www.gnu.org/software/rcs/rcs.html), a GNU Free Software package. TWiki is developed in a basic Linux/Apache environment. It also works with Microsoft Windows, and should have no problem on any other platform that meets the requirements:
+TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (Revision Control System)](http://www.gnu.org/software/rcs/rcs.html), a GNU Free Software package. TWiki is developed in a basic Linux/Apache environment. It also works with Microsoft Windows, and should have no problem on any other platform that meets the requirements.
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -29,14 +26,14 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   <tr>
     <th bgcolor="#99CCCC"><strong> Resource </strong></th>
     <th bgcolor="#99CCCC"><strong> Unix </strong></th>
-    <th bgcolor="#99CCCC"><strong> Windows </strong></th>
+    <th bgcolor="#99CCCC"><strong> Windows* </strong></th>
   </tr>
   <tr>
     <td> Perl </td>
     <td align="center" colspan="2"> 5.005_03 or higher </td>
   </tr>
   <tr>
-    <td> Non standard Perl modules </td>
+    <td> Non-standard Perl modules </td>
     <td align="center"><code>Net::SMTP</code> (or <code>sendmail</code>) </td>
     <td align="center"><code>Net::SMTP</code>, <code>MIME::Base64</code>, <code>Digest::SHA1</code></td>
   </tr>
@@ -50,11 +47,13 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   </tr>
   <tr>
     <td> Web server </td>
-    <td align="center" colspan="2"> Apache; others (with support for CGI, authentication, extended path) <strong>*</strong></td>
+    <td align="right" colspan="2"> Apache; others (with CGI support, authentication, extended path) </td>
   </tr>
 </table>
 
-Current documentation covers Linux only. A [TWikiOnWindows](http://twiki.org/cgi-bin/view/Codev/TWikiOnWindows) installation guide is next.
+%X% **\*** _Current documentation covers Linux/Apache only. See TWiki:Codev/TWikiOnWindows for work-to-date on a Windows installation guide._
+
+<a name="ClientRequirements"></a>
 
 ## <a name="Client Requirements"></a> Client Requirements
 
@@ -66,10 +65,11 @@ The TWiki [[standard installation|Main/TWikiInstallationGuide]] has extremely lo
 - no cookies
 - no CSS
 
-You can easily add capabilities, through customizing the templates, for one, while tailoring the browser requirements to your situation.
+You can easily add functionality, by customizing [[TWikiTemplates]], for one, while tailoring the browser requirements to your situation.
 
 ## <a name="Known Issues"></a> Known Issues
 
-- The new [[TWikiPlugins]] feature currently does not have compatibility guidelines for developers. Plugins can require just about anything: browser-specific functions, stylesheets (CSS), DHTML, Java applets, cookies.
+- The new [[TWikiPlugins]] feature currently does not have compatibility guidelines for developers. Plugins can require just about anything - browser-specific functions, stylesheets (CSS), Java applets, cookies, specific Perl modules,... - check the individual Plugin specs.
+  - %H% Plugins included in the TWiki distribution do not add requirements.
 
--- [[MikeMannix]] - 08 Jan 2002
+-- [[MikeMannix]] - 12 Jan 2002
