@@ -84,23 +84,27 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, like <code>29 Jun 2010 - 15:36</code></td>
+    <td> Time stamp of last topic update, like <code>29 Jun 2010 - 15:42</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, like <code>2010-06-29T15:36Z</code></td>
+    <td> Time stamp of last topic update, like <code>2010-06-29T15:42Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
     <td> Number of last topic revision, like <code>1.4</code></td>
   </tr>
   <tr>
-    <td><code>$wikiusername</code></td>
-    <td> Wiki user name of last topic update, like <code>Main.JohnSmith</code></td>
+    <td><code>$username</code></td>
+    <td> Login name of last topic update, like <code>jsmith</code></td>
   </tr>
   <tr>
-    <td><code>$username</code></td>
-    <td> User name of last topic update, like <code>JohnSmith</code></td>
+    <td><code>$wikiname</code></td>
+    <td> Wiki user name of last topic update, like <code>JohnSmith</code></td>
+  </tr>
+  <tr>
+    <td><code>$wikiusername</code></td>
+    <td> Wiki user name of last topic update, like <code>Main.JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$summary</code></td>
