@@ -1,8 +1,8 @@
 <div>
   <ul>
     <li><a href="#TWiki Formatted Search Results"> TWiki Formatted Search Results</a><ul>
-        <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Syntax"> Syntax</a></li>
+        <li><a href="#Nested Search"> Nested Search</a></li>
         <li><a href="#Examples"> Examples</a><ul>
             <li><a href="#Bullet list showing topic name a"> Bullet list showing topic name and summary</a></li>
           </ul>
@@ -26,21 +26,19 @@
 
 _Inline search feature allows flexible formatting of search result_
 
-## <a name="Overview"></a> Overview
-
 The `%SEARCH{...}%` variable documented in [[TWikiVariables]] has a fixed format for the search result, that is, a table consisting of topic names and topic summaries. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (such as `%SEARCH{ "food" format="| $topic | $summary |" }%`).
 
 ## <a name="Syntax"></a> Syntax
 
-Two paramters can be used to specify a customized search result:
+Two parameters can be used to specify a customized search result:
 
 1. `header="..."` parameter
 
-Use the header paramter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. I.e. <br />`header="| *Topic:* | *Summary:* |"`
+Use the header paramter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. <br /> Example: `header="| *Topic:* | *Summary:* |"`
 
 2. `format="..."` parameter
 
-Use the format paramter to specify the format of one search hit. I.e. <br />`format="| $topic | $summary |"`
+Use the format parameter to specify the format of one search hit. <br /> Example: `format="| $topic | $summary |"`
 
 Variables that can be used in the format string:
 
@@ -50,16 +48,24 @@ Variables that can be used in the format string:
     <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
   </tr>
   <tr>
-    <td><code>$n</code></td>
-    <td> New line </td>
-  </tr>
-  <tr>
     <td><code>$web</code></td>
     <td> Name of the web </td>
   </tr>
   <tr>
     <td><code>$topic</code></td>
     <td> Topic name </td>
+  </tr>
+  <tr>
+    <td><code>$topic(20)</code></td>
+    <td> Topic name, "<tt>- </tt>" hyphenated each 20 characters </td>
+  </tr>
+  <tr>
+    <td><code>$topic(30, -&lt;br /&gt;)</code></td>
+    <td> Topic name, hyphenated each 30 characters with separator "<tt>-&lt;br /&gt;</tt>" </td>
+  </tr>
+  <tr>
+    <td><code>$topic(40, ...)</code></td>
+    <td> Topic name, shortended to 40 characters with "<tt>...</tt>" indication </td>
   </tr>
   <tr>
     <td><code>$text</code></td>
@@ -71,23 +77,23 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, i.e. <code>29 Jun 2010 - 15:34</code></td>
+    <td> Time stamp of last topic update, like <code>29 Jun 2010 - 15:35</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, i.e. <code>2010-06-29T15:34Z</code></td>
+    <td> Time stamp of last topic update, like <code>2010-06-29T15:35Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
-    <td> Number of last topic revision, i.e. <code>1.4</code></td>
+    <td> Number of last topic revision, like <code>1.4</code></td>
   </tr>
   <tr>
     <td><code>$wikiusername</code></td>
-    <td> Wiki user name of last topic update, i.e. <code>Main.JohnSmith</code></td>
+    <td> Wiki user name of last topic update, like <code>Main.JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$username</code></td>
-    <td> User name of last topic update, i.e. <code>JohnSmith</code></td>
+    <td> User name of last topic update, like <code>JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$summary</code></td>
@@ -95,17 +101,71 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$formfield(name)</code></td>
-    <td> The field value of a form field, i.e. <code>$formfield(TopicClassification)</code> would get expanded to <code>PublicFAQ</code>. This applies only to topics that have a [[Main/TWikiForms]]</td>
+    <td> The field value of a form field; for example, <code>$formfield(TopicClassification)</code> would get expanded to <code>PublicFAQ</code>. This applies only to topics that have a [[Main/TWikiForms]]</td>
+  </tr>
+  <tr>
+    <td><code>$formfield(name, 10)</code></td>
+    <td> Form field value, "<tt>- </tt>" hyphenated each 10 characters </td>
+  </tr>
+  <tr>
+    <td><code>$formfield(name, 20, -&lt;br /&gt;)</code></td>
+    <td> Form field value, hyphenated each 20 characters with separator "<tt>-&lt;br /&gt;</tt>" </td>
+  </tr>
+  <tr>
+    <td><code>$formfield(name, 30, ...)</code></td>
+    <td> Form field value, shortended to 30 characters with "<tt>...</tt>" indication </td>
   </tr>
   <tr>
     <td><code>$pattern(reg-exp)</code></td>
-    <td> A regular expression pattern to extract some text from a topic, i.e. <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. </td>
+    <td> A regular expression pattern to extract some text from a topic. For example, <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. </td>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line </td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". This variable gets removed; useful for nested search </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>). Alternatively write <code>\"</code> to escape it </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
   </tr>
 </table>
 
-**_Note:_** For `$pattern(reg-exp)`, specify a [[RegularExpression]] that scans from start to end and contains the text you want to keep in parenthesis, i.e. `$pattern(.*?(from here.*?to here).*)`. You need to make sure that the integrity of a web page is not compromised, i.e. if you include a table make sure to include everything including the table end tag.
+**_Note:_** For `$pattern(reg-exp)`, specify a [[RegularExpression]] that scans from start to end and contains the text you want to keep in parenthesis, like `$pattern(.*?(from here.*?to here).*)`. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table make sure to include everything including the table end tag.
+
+## <a name="Nested Search"></a> Nested Search
+
+Search can be nested. For example, search for some topics, then form a new search for each topic found in the first search. The idea is to build the nested search string using a formatted search in the first search.
+
+Here is an example. We want to search for topics, do a nested search with each hit, and show the result as nested bullets. Parameters like `scope="text" regex="on" nosearch="on" nototal="on"` are omitted for simplicity.
+
+- First search:
+  - `%SEARCH{ "freedom" format="   * $topic" }%`
+- Second search. For each hit we want this search:
+  - `%SEARCH{ "(topic of first search)" format="      * $topic" }%`
+- Now we nest the searches. We need to escape the second search, e.g. the first search will build a valid second search string:
+  - `%SEARCH{ "freedom" format="   * $topic: $n$percntSEARCH{ \"$topic\" format=\"      * $dollartopic" }$nop%\" }%`
+
+Note that we escape the second search so that it does not get evaluated by the first search:
+
+- `$percnt` to escape the leading percent of the second search
+- `\"` to escape the qouble quotes
+- `$dollar` to escape the `$` of `$topic`
+- `$nop` to escape the `}%` sequence
 
 ## <a name="Examples"></a> Examples
+
+<a name="SearchBulletList"></a>
 
 ### <a name="Bullet list showing topic name a"></a> Bullet list showing topic name and summary
 
@@ -157,4 +217,4 @@ To get this:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
--- [[PeterThoeny]] - 28 Nov 2001 <br />
+-- [[PeterThoeny]] - 16 May 2002
