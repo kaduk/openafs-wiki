@@ -2,7 +2,7 @@ _This topic describes the "why" and "how" of making the Windows [[OpenAFS]] clie
 
 ## <a name="Why use the Loopback adapter?"></a> Why use the Loopback adapter?
 
-The AFS Client (both IBM and [[OpenAFS]]) relies on a network protocol called Server Message Block (SMB) to mount AFS drives (J:, K:, etc). This protocol runs on [[NetBIOS]] and is a part of the so-called Common Internet File System (CIFS). Normally, it is used to access Windows shares on remote machines. It is part of what Microsoft calls "File and Print Sharing".
+The AFS Client (both IBM and [[OpenAFS]]) relies on a network protocol called Server Message Block (SMB) to mount AFS drives. This protocol runs on [[NetBIOS]] and is a part of the so-called Common Internet File System (CIFS). Normally, it is used to access Windows shares on remote machines. It is part of what Microsoft calls "File and Print Sharing".
 
 The AFS Client subverts this protocol for its own uses. Since Windows already knows how to access files on a remote [[NetBIOS]] share, the AFS Client simply pretends it is such a share. Therefore, one might view the Windows AFS Client as a gateway between the AFS world and the [[NetBIOS]] (or "CIFS" or "SMB") world.
 
