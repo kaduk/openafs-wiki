@@ -4,13 +4,21 @@
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Major changes from the previous"> Major changes from the previous template system</a></li>
         <li><a href="#Functional Specifications"> Functional Specifications</a></li>
-        <li><a href="#New Template System by Example"> New Template System by Example</a><ul>
+        <li><a href="#TWiki Master Template"> TWiki Master Template</a></li>
+        <li><a href="#Types of Template"> Types of Template</a><ul>
+            <li><a href="#HTML Page Templates"> HTML Page Templates</a></li>
+            <li><a href="#Template Topics"> Template Topics</a><ul>
+                <li><a href="#Template Topics in Action"> Template Topics in Action</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#Templates by Example"> Templates by Example</a><ul>
             <li><a href="#Base template oopsbase.tmpl"> Base template oopsbase.tmpl</a></li>
             <li><a href="#Test template oopstest.tmpl"> Test template oopstest.tmpl</a></li>
             <li><a href="#Sample screen shot of oopstest.t"> Sample screen shot of oopstest.tmpl</a></li>
           </ul>
         </li>
-        <li><a href="#TWiki master template"> TWiki master template</a></li>
         <li><a href="#Known Issues"> Known Issues</a></li>
       </ul>
     </li>
@@ -51,7 +59,117 @@ The main difference is that templates are now defined using variables to include
 - Templates and [[TWikiSkins]] work transparently and interchangeably. For example, you can create a skin that overloads just the `twiki.tmpl`, like `twiki.print.tmpl`, that redefines the header and footer.
 - **_Note:_** The template directives work only for templates, they do not get processed in topic text.
 
-## <a name="New Template System by Example"></a> New Template System by Example
+## <a name="TWiki Master Template"></a> TWiki Master Template
+
+All common parts are defined in a master template, <code>**twiki.tmpl**</code>, that all other templates use.
+
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th bgcolor="#99CCCC"><strong> Template variable: </strong></th>
+>     <th bgcolor="#99CCCC"><strong> Defines: </strong></th>
+>   </tr>
+>   <tr>
+>     <td> %TMPL:DEF{"sep"}% </td>
+>     <td> "|" separator </td>
+>   </tr>
+>   <tr>
+>     <td> %TMPL:DEF{"htmldoctype"}% </td>
+>     <td> Start of all HTML pages </td>
+>   </tr>
+>   <tr>
+>     <td> %TMPL:DEF{"standardheader"}% </td>
+>     <td> Standard header (ex: view, index, seach) </td>
+>   </tr>
+>   <tr>
+>     <td> %TMPL:DEF{"simpleheader"}% </td>
+>     <td> Simple header with reduced links (ex: edit, attach, oops) </td>
+>   </tr>
+>   <tr>
+>     <td> %TMPL:DEF{"standardfooter"}% </td>
+>     <td> Footer, excluding revision and copyright parts </td>
+>   </tr>
+>   <tr>
+>     <td> %TMPL:DEF{"oops"}% </td>
+>     <td> Skeleton of oops dialog </td>
+>   </tr>
+> </table>
+
+## <a name="Types of Template"></a> Types of Template
+
+There are two types of templates:
+
+- **HTML Page Templates**: Defines layout of %WIKITOOLNAME% pages
+- **Template Topics**: Defines default text when you create a new topic
+
+### <a name="HTML Page Templates"></a> HTML Page Templates
+
+%WIKITOOLNAME% uses HTML template files for all actions like topic view, edit, preview and so on. This allows you to change the look and feel of all pages by editing just some template files.
+
+The template files are in the <code>**twiki/templates**</code> directory. As an example, <code>**twiki/templates/view.tmpl**</code> is the template file for the <code>**twiki/bin/view**</code> script. Templates can be overloaded per web. The following search order applies:
+
+1. <code>**twiki/templates/$webName/$scriptName.tmpl**</code>
+2. <code>**twiki/templates/$scriptName.tmpl**</code>
+
+**_Note:_** <code>**$webName**</code> is the name of the web ( i.e. <code>**Main**</code> ), and <code>**$scriptName**</code> is the script ( i.e. <code>**view**</code> ).
+
+**_Note:_** [[TWikiSkins]] can be defined to overload the standard templates.
+
+Some special variables are used in templates ( especially <code>**view**</code> ) to show meta data - see [[Meta Data Rendering|Main/TWikiDocumentation#Meta_Data_Rendering]]
+
+### <a name="Template Topics"></a> Template Topics
+
+Template topics define the default text for new topics. There are three types of template topics:
+
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th bgcolor="#99CCCC"><strong> Topic Name: </strong></th>
+>     <th bgcolor="#99CCCC"><strong> What it is: </strong></th>
+>   </tr>
+>   <tr>
+>     <td>[[Main/WebTopicViewTemplate]]</td>
+>     <td> Help text shown when you view a non existing topic. </td>
+>   </tr>
+>   <tr>
+>     <td>[[Main/WebTopicNonWikiTemplate]]</td>
+>     <td> Help text shown when you view a non existing topic that has not a [[Main/WikiName]]. </td>
+>   </tr>
+>   <tr>
+>     <td>[[Main/WebTopicEditTemplate]]</td>
+>     <td> Default text shown when you create a new topic. </td>
+>   </tr>
+> </table>
+
+All template topics are located in the TWiki web. The [[WebTopicEditTemplate]] can be overloaded. The following search order applies when you create a new topic:
+
+1. The topic name specified by the `templatetopic` parameter.
+2. WebTopicEditTemplate in the current web.
+3. WebTopicEditTemplate in the TWiki web.
+
+#### <a name="Template Topics in Action"></a> Template Topics in Action
+
+Here is an example for creating new topics based on a specific template topic:
+
+<form action="http://www.dementia.org/twiki//edit/%WEB%/" name="new">
+  <ul>
+    <li> New example topic: <input name="topic" size="22" type="text" value="ExampleTopic20100629" /> <input name="templatetopic" type="hidden" value="ExampleTopicTemplate" /> <input type="submit" value="Create" /> (date format is YYYYMMDD) </li>
+  </ul>
+</form>
+
+Above form asks for a topic name. A hidden input tag of name "templatetopic" specifies the [[ExampleTopicTemplate]] as the template topic. Here is the HTML source of the form:
+
+    <form name="new" action="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%WEB%/">
+    	* New example topic:
+    	  <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$year$mo$day}%" size="22">
+    	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate">
+    	  <input type="hidden" name="onlywikiname" value="on">
+    	  <input type="submit" value="Create"> (date format is YYYYMMDD)
+    </form>
+
+The "onlywikiname" parameter enforces [[WikiWords]] for topic names.
+
+**_Note:_** Use can use the `%WIKIUSERNAME%` and `%DATE%` variables in your topic templates as the signature; those variables are expanded when a new topic is created. The standard topic signature is: <br />`-- %WIKIUSERNAME% - %DATE%`
+
+## <a name="Templates by Example"></a> Templates by Example
 
 Attached is an example of an oops base template `oopsbase.tmpl` and a example oops dialog `oopstest.tmpl` which is based on the base template. **_NOTE:_** This isn't the release version, just a quick, simple demo.
 
@@ -59,7 +177,7 @@ Attached is an example of an oops base template `oopsbase.tmpl` and a example oo
 
 The first line declares the delimiter variable called "sep", used to separate multiple link items. The variable can be called anywhere by writing `%TMPL:P{"sep"}%`
 
-> <table border="1" cellpadding="1" cellspacing="0">
+> <table bgcolor="#f5f5f5" border="1" cellpadding="1" cellspacing="0">
 >   <tr>
 >     <td><pre>
 > %TMPL:DEF{"sep"}% | %TMPL:END%
@@ -107,7 +225,7 @@ The first line declares the delimiter variable called "sep", used to separate mu
 
 Each oops template basically just defines some variables and includes the base template that does the layout work.
 
-> <table border="1" cellpadding="1" cellspacing="0">
+> <table bgcolor="#f5f5f5" border="1" cellpadding="1" cellspacing="0">
 >   <tr>
 >     <td><pre>
 > %TMPL:DEF{"titleaction"}% (test =titleaction=) %TMPL:END%
@@ -145,54 +263,8 @@ With URL: <code>**.../bin/oops/Test/TestTopic2?template=oopstest&amp;param1=WebH
 >   </tr>
 > </table>
 
-## <a name="TWiki master template"></a> TWiki master template
-
-All common template parts are defined in one master template, `twiki.tmpl`, that all other templates include.
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Template variable: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Defines: </strong></th>
-  </tr>
-  <tr>
-    <td> %TMPL:DEF{"sep"}% </td>
-    <td> "|" separator </td>
-  </tr>
-  <tr>
-    <td> %TMPL:DEF{"htmldoctype"}% </td>
-    <td> Start of all HTML pages </td>
-  </tr>
-  <tr>
-    <td> %TMPL:DEF{"standardheader"}% </td>
-    <td> Standard header (ex: view, index, seach) </td>
-  </tr>
-  <tr>
-    <td> %TMPL:DEF{"simpleheader"}% </td>
-    <td> Simple header with reduced links (ex: edit, attach, oops) </td>
-  </tr>
-  <tr>
-    <td> %TMPL:DEF{"standardfooter"}% </td>
-    <td> Footer, excluding revision and copyright parts </td>
-  </tr>
-  <tr>
-    <td> %TMPL:DEF{"oops"}% </td>
-    <td> Skeleton of oops dialog </td>
-  </tr>
-</table>
-
-> **Example: `oopspreview.tmpl` template**
->
->     %TMPL:INCLUDE{"twiki"}%
->     %TMPL:DEF{"titleaction"}% (oops) %TMPL:END%
->     %TMPL:DEF{"webaction"}% *Attention* %TMPL:END%
->     %TMPL:DEF{"heading"}% Topic is not saved yet %TMPL:END%
->     %TMPL:DEF{"message"}% Please go back in your browser and save the topic. %TMPL:END%
->     %TMPL:DEF{"topicaction"}%
->     %TMPL:END%
->     %TMPL:P{"oops"}%
-
 ## <a name="Known Issues"></a> Known Issues
 
 - A drawback of referring to a master template is that you can only test a template from within TWiki, where the include variables are resolved. In the previous system, each template is a structurally complete HTML document with a `.tmpl` filename extension - it contains unresolved `%VARIABLES%`, but can still be previewed directly in a browser.
 
--- [[PeterThoeny]] - 23 Jul 2001 <br /> -- [[MikeMannix]] - 30 Aug 2001
+-- [[PeterThoeny]] - 23 Jul 2001 <br /> -- [[MikeMannix]] - 14 Sep 2001 <br />

@@ -11,7 +11,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
     <li><a href="#How can I write fixed font text?"> How can I write fixed font text?</a></li>
     <li><a href="#Text I enter gets wrapped around"> Text I enter gets wrapped around. How can I keep the formatting as it is?</a></li>
     <li><a href="#How do I create tables?"> How do I create tables?</a></li>
-    <li><a href="#Can I include images and picture"> Can I include images and pictures?</a></li>
+    <li><a href="#Can I include images on a page?"> Can I include images on a page?</a></li>
     <li><a href="#Can I write colored text?"> Can I write colored text?</a></li>
   </ul>
 </div>
@@ -20,7 +20,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > ### <a name="How do I make a separator?"></a> How do I make a separator?
 >
-> You can make a horizontal separator by entering three dashes at the beginning of a line: `---`.
+> Create a separator - a horizontal rule - by entering three dashes at the beginning of a blank line: `---`. You can enter more than three if you like, for a more visible separator in edit mode: <br />`--------------`
 >
 > ----
 >
@@ -36,7 +36,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > ### <a name="Text enclosed in angle brackets"></a><a name="Text enclosed in angle brackets "></a> Text enclosed in angle brackets like &lt;filename&gt; is not displayed. How can I show it as it is?
 >
-> TWiki interprets text as HTML. The '&lt;' and '&gt;' characters are used to define HTML commands. Text contained in angle brackets is interpreted by the browser if it's a valid HTML instruction, or ignored if it isn't - either way, the brackets and its contents are not displayed.
+> TWiki interprets text as HTML, and the '&lt;' and '&gt;' characters define where HTML commands start and end. Text _inside_ angle brackets is treated as HTML, and ignored if it doesn't actually do anything - either way, the brackets and its contents are not displayed.
 >
 > If you want to display angle brackets, enter them as HTML codes instead of typing them in directly:
 >
@@ -68,7 +68,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > ### <a name="Text I enter gets wrapped around"></a> Text I enter gets wrapped around. How can I keep the formatting as it is?
 >
-> TWiki interprets text as HTML, so you can use the `preformatted` HTML text option to keep the new line of text as is. Enclose the text in &lt;pre&gt; &lt;/pre&gt;, or in TWiki's own &lt;verbatim&gt; &lt;/verbatim&gt; tags:
+> TWiki interprets text as HTML, so you can use the `preformatted` HTML option to keep the new line of text as is. Enclose the text in &lt;pre&gt; &lt;/pre&gt;, or in TWiki's own &lt;verbatim&gt; &lt;/verbatim&gt; tag:
 >
 >     This text will keep its format as it is:
 >     <verbatim>
@@ -77,7 +77,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >       aaa		 12.00	 3	36.00
 >     </verbatim>
 >
-> The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that also forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
+> The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
 >
 > ----
 >
@@ -144,31 +144,35 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > ----
 >
-> ### <a name="Can I include images and picture"></a> Can I include images and pictures?
+> ### <a name="Can I include images on a page?"></a> Can I include images on a page?
 >
-> Yes, this is possible. The easiest way of including images is to attach a GIF, JPG or PNG file to a topic and then to include it with text `%ATTACHURL%/myImage.gif` . [[FileAttachment]] has more.
+> Yes. The easiest way is to [[attach|Main/FileAttachment]] a GIF, JPG or PNG file to a topic and then to place it with: `%ATTACHURL%/myImage.gif`. This works only for the page that the image is attached to.
 >
-> There are actually two ways of including inline images.
+> To place an image on any page, ther are two ways of including inline images.
 >
 > **1\. Using URL ending in .gif, .jpg, .jpeg, .png**
 >
-> This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **Note:** The images must be accessible as a URL.
+> This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **_NOTE:_** The images must be [[accessible|Main/WebHome#ImgUpload]] as a URL.
 >
 > - **_You enter:_** ` TWiki http://www.dementia.org/twiki//view/wikiHome.gif logo.`<br />**_Result:_** TWiki ![wikiHome.gif](http://www.dementia.org/twiki//view/wikiHome.gif) logo.
 >
+> <a name="ImgUpload"></a> You can upload images directly to your server with FTP access. You can also [[attach|Main/FileAttachment]] image files to a topic - you could even create a dedicated image topic, like `ImageLibrary` - and then link to the images directly:
+>
+> - Attach `pic.gif` to `Someweb.SomeTopic`<br /> Display with <code>http://www.dementia.org/twiki//view/Someweb/SomeTopic/pic.gif</code>
+>
 > **2\. Using &lt;img&gt; tag**
 >
-> This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The display of the topic is faster if you include the WIDTH and HEIGHT parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
+> This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The display of the topic is faster if you include the `WIDTH` and `HEIGHT` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
 >
-> - **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/wikiHome.gif" width="46" height="50" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/wikiHome.gif" width="46" height="50" /> logo.
+> - **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/wikiHome.gif" width="46" height="50" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/wikiHome.gif" width="46" height="50" alt="logo" /> logo.
 >
 > ----
 >
 > ### <a name="Can I write colored text?"></a> Can I write colored text?
 >
-> Sure. The quickest way is to use the &lt;font color="colorCode"&gt; and &lt;/font&gt; tags - they're HTML tags that work in any browser, (although they've been phased in the latest version).
+> Sure. The quickest way is to go &lt;font color="colorCode"&gt;colorize&lt;/font&gt; - `font` is an HTML tag that works in any browser, although it's been phased out in the latest HTML specs.
 >
-> You can also use a `style` attribute: `style="color:#ff0000"`, placed in most HTML tags - `span` is an all-purpose choice: "&lt;span style="color:#ff0000"&gt;.
+> You can also use the up-to-date `style` attribute - ex: `style="color:#ff0000"` - placed in most HTML tags. `span` is an all-purpose choice: "&lt;span style="color:#ff0000"&gt;CoLoR&lt;/span&gt;. Only old (like 3.x IE &amp; NS) browsers have a problem with `style`.
 >
 > "colorCode" is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or <code>"#ff000=" for Web page purposes. For a basic color selection (you can [[StandardColor|Main/StandardColors]] names instead of hex code in the =font</code> tag only):
 >
