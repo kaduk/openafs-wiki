@@ -1,60 +1,7 @@
 <div>
   <ul>
     <li><a href="#TWiki Variables"> TWiki Variables</a><ul>
-        <li><a href="#Predefined Variables"> Predefined Variables</a><ul>
-            <li><a href="#ATTACHURL -- attachment URL of t"> ATTACHURL -- attachment URL of the current topic</a></li>
-            <li><a href="#ATTACHURLPATH -- path of the att"> ATTACHURLPATH -- path of the attachment URL of the current topic</a></li>
-            <li><a href="#BASETOPIC -- base topic where an"> BASETOPIC -- base topic where an INCLUDE started</a></li>
-            <li><a href="#BASEWEB -- base web where an INC"> BASEWEB -- base web where an INCLUDE started</a></li>
-            <li><a href="#DISPLAYTIME -- display time"> DISPLAYTIME -- display time</a></li>
-            <li><a href="#DISPLAYTIME{"format"} -- formatt"> DISPLAYTIME{"format"} -- formatted display time</a></li>
-            <li><a href="#ENCODE{"string"} -- encodes a st"> ENCODE{"string"} -- encodes a string</a></li>
-            <li><a href="#GMTIME -- GM time"> GMTIME -- GM time</a></li>
-            <li><a href="#GMTIME{"format"} -- formatted GM"> GMTIME{"format"} -- formatted GM time</a></li>
-            <li><a href="#HOMETOPIC -- home topic in each"> HOMETOPIC -- home topic in each web</a></li>
-            <li><a href="#HTTP_HOST -- environment variabl"> HTTP_HOST -- environment variable</a></li>
-            <li><a href="#ICON{"type"} -- small icon of co"> ICON{"type"} -- small icon of common attachment types</a></li>
-            <li><a href="#INCLUDE{"page"} -- include other"> INCLUDE{"page"} -- include other topics or web pages</a></li>
-            <li><a href="#INCLUDINGTOPIC -- name of topic"> INCLUDINGTOPIC -- name of topic that includes current topic</a></li>
-            <li><a href="#INCLUDINGWEB -- web that include"> INCLUDINGWEB -- web that includes current topic</a></li>
-            <li><a href="#MAINWEB -- name of Main web"> MAINWEB -- name of Main web</a></li>
-            <li><a href="#METASEARCH -- special search of"> METASEARCH -- special search of meta data</a></li>
-            <li><a href="#NOTIFYTOPIC -- name of the notif"> NOTIFYTOPIC -- name of the notify topic</a></li>
-            <li><a href="#PUBURL -- the base URL of attach"> PUBURL -- the base URL of attachments</a></li>
-            <li><a href="#PUBURLPATH -- the base URL path"> PUBURLPATH -- the base URL path of attachments</a></li>
-            <li><a href="#REMOTE_ADDR -- environment varia"> REMOTE_ADDR -- environment variable</a></li>
-            <li><a href="#REMOTE_PORT -- environment varia"> REMOTE_PORT -- environment variable</a></li>
-            <li><a href="#REMOTE_USER -- environment varia"> REMOTE_USER -- environment variable</a></li>
-            <li><a href="#SCRIPTURL -- script URL of %WIKI"> SCRIPTURL -- script URL of %WIKITOOLNAME%</a></li>
-            <li><a href="#SCRIPTURLPATH -- script URL path"> SCRIPTURLPATH -- script URL path of %WIKITOOLNAME%</a></li>
-            <li><a href="#SCRIPTSUFFIX -- script suffix"> SCRIPTSUFFIX -- script suffix</a></li>
-            <li><a href="#SEARCH{"text"} -- search content"> SEARCH{"text"} -- search content</a></li>
-            <li><a href="#SERVERTIME -- server time"> SERVERTIME -- server time</a></li>
-            <li><a href="#SERVERTIME{"format"} -- formatte"> SERVERTIME{"format"} -- formatted server time</a></li>
-            <li><a href="#SPACEDTOPIC -- topic name, space"> SPACEDTOPIC -- topic name, spaced and encoded</a></li>
-            <li><a href="#STARTINCLUDE -- start position o"> STARTINCLUDE -- start position of topic text if included</a></li>
-            <li><a href="#STATISTICSTOPIC -- name of stati"> STATISTICSTOPIC -- name of statistics topic</a></li>
-            <li><a href="#STOPINCLUDE -- end position of t"> STOPINCLUDE -- end position of topic text if included</a></li>
-            <li><a href="#TOC -- table of contents of curr"> TOC -- table of contents of current topic</a></li>
-            <li><a href="#TOC{"Topic"} -- table of content"> TOC{"Topic"} -- table of contents</a></li>
-            <li><a href="#TOPIC -- name of current topic"> TOPIC -- name of current topic</a></li>
-            <li><a href="#TOPICLIST{"format"} -- topic ind"> TOPICLIST{"format"} -- topic index of a web</a></li>
-            <li><a href="#TWIKIWEB -- name of TWiki docume"> TWIKIWEB -- name of TWiki documentation web</a></li>
-            <li><a href="#URLPARAM{"name"} -- get value of"> URLPARAM{"name"} -- get value of a URL parameter</a></li>
-            <li><a href="#USERNAME -- your login username"> USERNAME -- your login username</a></li>
-            <li><a href="#VAR{"NAME" web="Web"} -- get a p"> VAR{"NAME" web="Web"} -- get a preference value from another web </a></li>
-            <li><a href="#WEB -- name of current web"> WEB -- name of current web</a></li>
-            <li><a href="#WEBLIST{"format"} -- index of al"> WEBLIST{"format"} -- index of all webs</a></li>
-            <li><a href="#WEBPREFSTOPIC -- name of web pre"> WEBPREFSTOPIC -- name of web preferences topic</a></li>
-            <li><a href="#WIKIHOMEURL -- site home URL"> WIKIHOMEURL -- site home URL</a></li>
-            <li><a href="#WIKINAME -- your Wiki username"> WIKINAME -- your Wiki username</a></li>
-            <li><a href="#WIKIPREFSTOPIC -- name of site-w"> WIKIPREFSTOPIC -- name of site-wide preferences topic</a></li>
-            <li><a href="#WIKITOOLNAME -- name of your TWi"> WIKITOOLNAME -- name of your TWiki site</a></li>
-            <li><a href="#WIKIUSERNAME -- your Wiki userna"> WIKIUSERNAME -- your Wiki username with web prefix</a></li>
-            <li><a href="#WIKIUSERSTOPIC -- name of topic"> WIKIUSERSTOPIC -- name of topic listing all registers users</a></li>
-            <li><a href="#WIKIVERSION -- the version of th"> WIKIVERSION -- the version of the installed TWiki engine</a></li>
-          </ul>
-        </li>
+        <li><a href="#Predefined Variables"> Predefined Variables</a></li>
         <li><a href="#Preferences Variables"> Preferences Variables</a></li>
         <li><a href="#Setting Preferences"> Setting Preferences</a></li>
         <li><a href="#Creating Custom Variables"> Creating Custom Variables</a></li>
@@ -67,9 +14,12 @@
 
 _Special text strings expand on the fly to display user data or system info_
 
-TWikiVariables are text strings - `%VARIABLE%` - that expand into content whenever a page is opened. When a topic is rendered for viewing, `VARIABLES` are replaced by data, either user-entered, or info automatically generated by TWiki (like the date, or the current username). There are predefined variables, and Preference variables that you configure. You can also define custom variables, with new names and values.
+TWikiVariables are text strings - `%VARIABLE%` - that expand into content whenever a page is rendered for viewing. `VARIABLES` are replaced by data, either user-entered or automatically generated by TWiki (like the date, or the current username). There are predefined variables, and Preference variables that you can configure. You can also define custom variables, with new names and values.
 
-**_Note:_** To leave a variable unexpanded, preceed it with an exclamation point, e.g. type `!%TOPIC%` to get %TOPIC%.
+**_Notes:_**
+
+- To leave a variable unexpanded, precede it with an exclamation point, e.g. type `!%TOPIC%` to get %TOPIC%.
+- Variables are expanded relative to the topic they are _used_ in, not the topic they are _defined_ in.
 
 ## <a name="Predefined Variables"></a> Predefined Variables
 
@@ -79,982 +29,180 @@ Most predefined variables return values that were either set in the <code>**lib/
 
 This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the following variables (enclosed in <code>**%**</code> percent signs):
 
-<a name="VarATTACHURL"></a>
-
-### <a name="ATTACHURL -- attachment URL of t"></a> ATTACHURL -- attachment URL of the current topic
-
-- Syntax: `%ATTACHURL%`
-- Expands to: `http://www.dementia.org/twiki//view`
-- Example: If you attach a file you can refer to it as `%ATTACHURL%/image.gif`
-- Related: [[ATTACHURLPATH|Main/WebHome#VarATTACHURLPATH]], [[PUBURLPATH|Main/WebHome#VarPUBURLPATH]], [[SCRIPTURL|Main/WebHome#VarSCRIPTURL]], [[FileAttachments]]
-
-<a name="VarATTACHURLPATH"></a>
-
-### <a name="ATTACHURLPATH -- path of the att"></a> ATTACHURLPATH -- path of the attachment URL of the current topic
-
-- Syntax: `%ATTACHURLPATH%`
-- Expands to: `http://www.dementia.org/twiki//view`
-- Related: [[ATTACHURL|Main/WebHome#VarATTACHURL]], [[PUBURL|Main/WebHome#VarPUBURL]], [[FileAttachments]]
-
-<a name="VarBASETOPIC"></a>
-
-### <a name="BASETOPIC -- base topic where an"></a> BASETOPIC -- base topic where an INCLUDE started
-
-- The name of the topic where a single or nested INCLUDE started - same as `%TOPIC%` if there is no INCLUDE
-- Syntax: `%BASETOPIC%`
-- Related: [[BASEWEB|Main/WebHome#VarBASEWEB]], [[INCLUDINGTOPIC|Main/WebHome#VarINCLUDINGTOPIC]], [[INCLUDE|Main/WebHome#VarINCLUDE]], [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarBASEWEB"></a>
-
-### <a name="BASEWEB -- base web where an INC"></a> BASEWEB -- base web where an INCLUDE started
-
-- The web name where the includes started, e.g. the web of the first topic of nested includes. Same as `%WEB%` in case there is no include.
-- Syntax: `%BASEWEB%`
-- Related: [[BASETOPIC|Main/WebHome#VarBASETOPIC]], [[INCLUDINGWEB|Main/WebHome#VarINCLUDINGWEB]], [[INCLUDE|Main/WebHome#VarINCLUDE]], [[WEB|Main/WebHome#VarWEB]]
-
-<a name="VarDISPLAYTIME"></a>
-
-### <a name="DISPLAYTIME -- display time"></a> DISPLAYTIME -- display time
-
-- Syntax: `%DISPLAYTIME%`
-- Expands to: `29 Jun 2010 - 15:45`
-- Related: [[DISPLAYTIME{"format"}|Main/WebHome#VarDISPLAYTIME2]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
-
-<a name="VarDISPLAYTIME2"></a>
-
-### <a name="DISPLAYTIME{&quot;format&quot;} -- formatt"></a> DISPLAYTIME\{"format"\} -- formatted display time
-
-- Formatted time - either GMT or Local server time, depending on setting in TWiki.cfg. Same format qualifiers as `%GMTIME%`
-- Syntax: `%DISPLAYTIME{"format"}%`
-- Example: `%DISPLAYTIME{"$hou:$min"}%` expands to `15:45`
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
-
-<a name="VarENCODE"></a>
-
-### <a name="ENCODE{&quot;string&quot;} -- encodes a st"></a> ENCODE\{"string"\} -- encodes a string
-
-- Syntax: `%ENCODE{"string"}%`
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"string"</code></td>
-    <td> String to encode </td>
-    <td> required (can be empty) </td>
-  </tr>
-  <tr>
-    <td><code>type="entity"</code></td>
-    <td> Encode special characters into HTML entities, like a double quote into <code>&amp;#034;</code></td>
-    <td> URL encoding </td>
-  </tr>
-  <tr>
-    <td><code>type="url"</code></td>
-    <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
-    <td> (this is the default) </td>
-  </tr>
-</table>
-- Example: `%ENCODE{"spaced name"}%` expands to `spaced%20name`
-- Related: [[URLPARAM|Main/WebHome#VarURLPARAM]]
-
-<a name="VarGMTIME"></a>
-
-### <a name="GMTIME -- GM time"></a> GMTIME -- GM time
-
-- Syntax: `%GMTIME%`
-- Expands to: `29 Jun 2010 - 15:45`
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME{"format"}|Main/WebHome#VarGMTIME2]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
-
-<a name="VarGMTIME2"></a>
-
-### <a name="GMTIME{&quot;format&quot;} -- formatted GM"></a> GMTIME\{"format"\} -- formatted GM time
-
-- Syntax: `%GMTIME{"format"}%`
-- Supported variables: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Variable: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Unit: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Example </strong></th>
-  </tr>
-  <tr>
-    <td><code>$seconds</code></td>
-    <td> seconds </td>
-    <td> 59 </td>
-  </tr>
-  <tr>
-    <td><code>$minutes</code></td>
-    <td> minutes </td>
-    <td> 59 </td>
-  </tr>
-  <tr>
-    <td><code>$hours</code></td>
-    <td> hours </td>
-    <td> 23 </td>
-  </tr>
-  <tr>
-    <td><code>$day</code></td>
-    <td> day of month </td>
-    <td> 31 </td>
-  </tr>
-  <tr>
-    <td><code>$wday</code></td>
-    <td> day of the Week (Sun, Mon, Tue, Wed, Thu, Fri, Sat) </td>
-    <td> Thu </td>
-  </tr>
-  <tr>
-    <td><code>$month</code></td>
-    <td> month in ISO format </td>
-    <td> Dec </td>
-  </tr>
-  <tr>
-    <td><code>$mo</code></td>
-    <td> 2 digit month </td>
-    <td> 12 </td>
-  </tr>
-  <tr>
-    <td><code>$year</code></td>
-    <td> 4 digit year </td>
-    <td> 1999 </td>
-  </tr>
-  <tr>
-    <td><code>$ye</code></td>
-    <td> 2 digit year </td>
-    <td> 99 </td>
-  </tr>
-  <tr>
-    <td><code>$tz</code></td>
-    <td> either "GMT" (if set to gmtime), or "Local" (if set to servertime) </td>
-    <td> GMT </td>
-  </tr>
-  <tr>
-    <td><code>$iso</code></td>
-    <td> ISO format timestamp </td>
-    <td> 2010-06-29T15:45:36Z </td>
-  </tr>
-  <tr>
-    <td><code>$rcs</code></td>
-    <td> RCS format timestamp </td>
-    <td> 2010/06/29 15:45:36 </td>
-  </tr>
-  <tr>
-    <td><code>$http</code></td>
-    <td> E-mail &amp; http format timestamp </td>
-    <td> Tue, 29 Jun 2010 15:45:36 GMT </td>
-  </tr>
-</table>
-- Variables can be shortened to 3 characters
-- Example: `%GMTIME{"$day $month, $year - $hour:$min:$sec"}%` expands to `29 Jun, 2010 - 15:45:36`
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
-
-<a name="VarHOMETOPIC"></a>
-
-### <a name="HOMETOPIC -- home topic in each"></a><a name="HOMETOPIC -- home topic in each "></a> HOMETOPIC -- home topic in each web
-
-- Syntax: `%HOMETOPIC%`
-- Expands to: `WebHome`, renders as [[WebHome]]
-- Related: [[NOTIFYTOPIC|Main/WebHome#VarNOTIFYTOPIC]], [[STATISTICSTOPIC|Main/WebHome#VarSTATISTICSTOPIC]], [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarHTTPHOST"></a>
-
-### <a name="HTTP_HOST -- environment variabl"></a> HTTP\_HOST -- environment variable
-
-- Syntax: `%HTTP_HOST%`
-- Expands to: ==
-- Related: [[REMOTE_ADDR|Main/WebHome#VarREMOTEADDR]], [[REMOTE_PORT|Main/WebHome#VarREMOTEPORT]], [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]]
-
-<a name="VarICON"></a>
-
-### <a name="ICON{&quot;type&quot;} -- small icon of co"></a> ICON\{"type"\} -- small icon of common attachment types
-
-- Small 16x16 pixel icon of common attachment types. Specify file type only, file name, or full path name
-- Syntax: `%ICON{"type"}%`
-- Samples: <img src="http://www.dementia.org/twiki//view/Main/WebHome/bmp.gif" width="16" height="16" alt="bmp" /> `bmp`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/doc.gif" width="16" height="16" alt="doc" /> `doc`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/gif.gif" width="16" height="16" alt="gif" /> `gif`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/hlp.gif" width="16" height="16" alt="hlp" /> `hlp`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/html.gif" width="16" height="16" alt="html" /> `html`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/mp3.gif" width="16" height="16" alt="mp3" /> `mp3`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" height="16" alt="pdf" /> `pdf`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/ppt.gif" width="16" height="16" alt="ppt" /> `ppt`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/txt.gif" width="16" height="16" alt="txt" /> `txt`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/xls.gif" width="16" height="16" alt="xls" /> `xls`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/xml.gif" width="16" height="16" alt="xml" /> `xml`, <img src="http://www.dementia.org/twiki//view/Main/WebHome/zip.gif" width="16" height="16" alt="zip" /> `zip`
-- Example: `%ICON{"pdf"}%` expands to <img src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" height="16" alt="pdf" />
-- Related: [[TWikiPreferences]], [[FileAttachments]], [[TWikiDocGraphics]]
-
-<a name="VarINCLUDE"></a>
-
-### <a name="INCLUDE{&quot;page&quot;} -- include other"></a> INCLUDE\{"page"\} -- include other topics or web pages
-
-- Syntax: `%INCLUDE{"page" ...}%`
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"SomeTopic"</code></td>
-    <td> The name of a topic located in the current web, i.e. <code>%INCLUDE{"WebNotify"}%</code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>"Web.Topic"</code></td>
-    <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.SiteMap"}%</code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>"http://..."</code></td>
-    <td> A full qualified URL, i.e. <code>%INCLUDE{"http://twiki.org/"}%</code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>pattern="..."</code></td>
-    <td> A [[Main/RegularExpression]] pattern to include a subset of a topic or page </td>
-    <td> none </td>
-  </tr>
-  <tr>
-    <td><code>rev="1.2"</code></td>
-    <td> Include a previous topic revision; N/A for URLs </td>
-    <td> top revision </td>
-  </tr>
-  <tr>
-    <td><code>warn="off"</code></td>
-    <td> Warn if topic include fails: Fail silently (if <code>off</code>); output default warning (if set to <code>on</code>); else, output specific text (use <code>$topic</code> for topic name) </td>
-    <td><code>%INCLUDE- WARNING%</code> [[Main/TWikiPreferences]] setting </td>
-  </tr>
-</table>
-- Related: [[BASETOPIC|Main/WebHome#VarBASETOPIC]], [[BASEWEB|Main/WebHome#VarBASEWEB]], [[INCLUDINGTOPIC|Main/WebHome#VarINCLUDINGTOPIC]], [[INCLUDINGWEB|Main/WebHome#VarINCLUDINGWEB]], [[IncludeTopicsAndWebPages]]
-
-<a name="VarINCLUDINGTOPIC"></a>
-
-### <a name="INCLUDINGTOPIC -- name of topic"></a><a name="INCLUDINGTOPIC -- name of topic "></a> INCLUDINGTOPIC -- name of topic that includes current topic
-
-- The name of the topic that includes the current topic - same as `%TOPIC%` in case there is no include
-- Syntax: `%INCLUDINGTOPIC%`
-- Related: [[BASETOPIC|Main/WebHome#VarBASETOPIC]], [[INCLUDINGWEB|Main/WebHome#VarINCLUDINGWEB]], [[INCLUDE|Main/WebHome#VarINCLUDE]], [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarINCLUDINGWEB"></a>
-
-### <a name="INCLUDINGWEB -- web that include"></a> INCLUDINGWEB -- web that includes current topic
-
-- The web name of the topic that includes the current topic - same as `%WEB%` if there is no INCLUDE.
-- Syntax: `%INCLUDINGWEB%`
-- Related: [[BASEWEB|Main/WebHome#VarBASEWEB]], [[INCLUDINGTOPIC|Main/WebHome#VarINCLUDINGTOPIC]], [[INCLUDE|Main/WebHome#VarINCLUDE]], [[WEB|Main/WebHome#VarWEB]]
-
-<a name="VarMAINWEB"></a>
-
-### <a name="MAINWEB -- name of Main web"></a> MAINWEB -- name of Main web
-
-- The web containing [[TWikiUsers]], [[OfficeLocations]] and [[TWikiGroups]]
-- Syntax: `%MAINWEB%`
-- Expands to: `Main`
-- Related: [[TWIKIWEB|Main/WebHome#VarTWIKIWEB]]
-
-<a name="VarMETASEARCH"></a>
-
-### <a name="METASEARCH -- special search of"></a><a name="METASEARCH -- special search of "></a> METASEARCH -- special search of meta data
-
-- Syntax: `%METASEARCH{...}%`
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>type="topicmoved"</code></td>
-    <td> What sort of search is required? <br /><code>"topicmoved"</code> if search for a topic that may have been moved <br /><code>"parent"</code> if searching for topics that have a specific parent i.e. its children </td>
-    <td> required </td>
-  </tr>
-  <tr>
-    <td><code>web="%WEB%"</code></td>
-    <td> Wiki web to search: A web, a list of webs separated by whitespace, or <code>all</code> webs. </td>
-    <td> required </td>
-  </tr>
-  <tr>
-    <td><code>topic="%TOPIC%"</code></td>
-    <td> The topic the search relates to </td>
-    <td> required </td>
-  </tr>
-  <tr>
-    <td><code>title="Title"</code></td>
-    <td> Text that is prepended to any search results </td>
-    <td> required </td>
-  </tr>
-</table>
-- Example: `%METASEARCH{type="topicmoved" web="%WEB%" topic="%TOPIC%" title="This topic used to exist and was moved to: "}%`
-- Example: You may want to use this in [[WebTopicViewTemplate]] and [[WebTopicNonWikiTemplate]]:<br />`%METASEARCH{type="parent" web="%WEB%" topic="%TOPIC%" title="Children: "}%`
-- Related: [[SEARCH|Main/WebHome#VarSEARCH]]
-
-<a name="VarNOTIFYTOPIC"></a>
-
-### <a name="NOTIFYTOPIC -- name of the notif"></a> NOTIFYTOPIC -- name of the notify topic
-
-- Syntax: `%NOTIFYTOPIC%`
-- Expands to: `WebNotify`, renders as [[WebNotify]]
-- Related: [[HOMETOPIC|Main/WebHome#VarHOMETOPIC]], [[STATISTICSTOPIC|Main/WebHome#VarSTATISTICSTOPIC]], [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarPUBURL"></a>
-
-### <a name="PUBURL -- the base URL of attach"></a> PUBURL -- the base URL of attachments
-
-- Syntax: `%PUBURL%`
-- Expands to: `http://www.dementia.org/twiki//view`
-- Example: You can refer to a file attached to another topic with `%PUBURL%/%WEB%/OtherTopic/image.gif`
-- Related: [[ATTACHURL|Main/WebHome#VarATTACHURL]], [[PUBURLPATH|Main/WebHome#VarPUBURLPATH]], [[SCRIPTURL|Main/WebHome#VarSCRIPTURL]], [[FileAttachments]]
-
-<a name="VarPUBURLPATH"></a>
-
-### <a name="PUBURLPATH -- the base URL path"></a><a name="PUBURLPATH -- the base URL path "></a> PUBURLPATH -- the base URL path of attachments
-
-- Syntax: `%PUBURLPATH%`
-- Expands to: `http://www.dementia.org/twiki//view`
-- Related: [[ATTACHURL|Main/WebHome#VarATTACHURL]], [[PUBURL|Main/WebHome#VarPUBURL]], [[FileAttachments]]
-
-<a name="VarREMOTEADDR"></a>
-
-### <a name="REMOTE_ADDR -- environment varia"></a> REMOTE\_ADDR -- environment variable
-
-- Syntax: `%REMOTE_ADDR%`
-- Expands to: ==
-- Related: [[HTTP_HOST|Main/WebHome#VarHTTPHOST]], [[REMOTE_PORT|Main/WebHome#VarREMOTEPORT]], [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]]
-
-<a name="VarREMOTEPORT"></a>
-
-### <a name="REMOTE_PORT -- environment varia"></a> REMOTE\_PORT -- environment variable
-
-- Syntax: `%REMOTE_PORT%`
-- Expands to: ``
-- Related: [[HTTP_HOST|Main/WebHome#VarHTTPHOST]], [[REMOTE_ADDR|Main/WebHome#VarREMOTEADDR]], [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]]
-
-<a name="VarREMOTEUSER"></a>
-
-### <a name="REMOTE_USER -- environment varia"></a> REMOTE\_USER -- environment variable
-
-- Syntax: `%REMOTE_USER%`
-- Expands to: ``
-- Related: [[HTTP_HOST|Main/WebHome#VarHTTPHOST]], [[REMOTE_ADDR|Main/WebHome#VarREMOTEADDR]], [[REMOTE_PORT|Main/WebHome#VarREMOTEPORT]], [[USERNAME|Main/WebHome#VarUSERNAME]], [[WIKINAME|Main/WebHome#VarWIKINAME]], [[WIKIUSERNAME|Main/WebHome#VarWIKIUSERNAME]]
-
-<a name="VarSCRIPTURL"></a>
-
-### <a name="SCRIPTURL -- script URL of %WIKI"></a> SCRIPTURL -- script URL of %WIKITOOLNAME%
-
-- Syntax: `%SCRIPTURL%`
-- Expands to: `http://www.dementia.org/twiki/`
-- Example: To get the authenticated version of current topic write `%SCRIPTURL%/viewauth%SCRIPTSUFFIX%/%WEB%/%TOPIC%` which expands to `http://www.dementia.org/twiki//viewauth/%WEB%/%TOPIC%`
-- Related: [[PUBURL|Main/WebHome#VarPUBURL]], [[SCRIPTSUFFIX|Main/WebHome#VarSCRIPTSUFFIX]], [[SCRIPTURLPATH|Main/WebHome#VarSCRIPTURLPATH]]
-
-<a name="VarSCRIPTURLPATH"></a>
-
-### <a name="SCRIPTURLPATH -- script URL path"></a> SCRIPTURLPATH -- script URL path of %WIKITOOLNAME%
-
-- Syntax: `%SCRIPTURLPATH%`
-- Expands to: `http://www.dementia.org/twiki/`
-- Related: [[PUBURLPATH|Main/WebHome#VarPUBURLPATH]], [[SCRIPTURL|Main/WebHome#VarSCRIPTURL]]
-
-<a name="VarSCRIPTSUFFIX"></a>
-
-### <a name="SCRIPTSUFFIX -- script suffix"></a> SCRIPTSUFFIX -- script suffix
-
-- Some %WIKITOOLNAME% installations require a file extension for CGI scripts like `.pl` or `.cgi`
-- Syntax: `%SCRIPTSUFFIX%`
-- Expands to: ``
-- Related: [[SCRIPTURL|Main/WebHome#VarSCRIPTURL]]
-
-<a name="VarSEARCH"></a>
-
-### <a name="SEARCH{&quot;text&quot;} -- search content"></a> SEARCH\{"text"\} -- search content
-
-- Inline search, shows a search result embedded in a topic
-- Syntax: `%SEARCH{"text" ...}%`
-- Supported parameters: [1] <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"text"</code></td>
-    <td> Search term. Is a keyword search, literal search or regular expression search, depending on the <code>type</code> parameter. [[Main/SearchHelp]] has more </td>
-    <td> required </td>
-  </tr>
-  <tr>
-    <td><code>search="text"</code></td>
-    <td> (Alternative to above) </td>
-    <td> N/A </td>
-  </tr>
-  <tr>
-    <td><code>web="Name"</code><br /><code>web="Main, Know"</code><br /><code>web="all"</code></td>
-    <td> Wiki web to search: A web, a list of webs separated by comma, or <code>all</code> webs. [2] </td>
-    <td> Current web </td>
-  </tr>
-  <tr>
-    <td><code>topic="WebPreferences"</code><br /><code>topic="*Bug"</code></td>
-    <td> Limit search to topics: A topic, a topic with asterisk wildcards, or a list of topics separated by comma. </td>
-    <td> All topics in a web </td>
-  </tr>
-  <tr>
-    <td><code>excludetopic="Web*"</code><br /><code>excludetopic="WebHome, WebChanges"</code></td>
-    <td> Exclude topics from search: A topic, a topic with asterisk wildcards, or a list of topics separated by comma. </td>
-    <td> None </td>
-  </tr>
-  <tr>
-    <td><code>type="keyword"</code><br /><code>type="literal"</code><br /><code>type="regex"</code></td>
-    <td> Do a keyword search like <code>soap "web service" -shampoo</code>; a literal search like <code>web service</code>; or [[Main/RegularExpression]] search like <code>soap;web service;!shampoo</code></td>
-    <td><code>%SEARCHVAR- DEFAULTTYPE%</code> [[Main/TWikiPreferences]] setting (%SEARCHVARDEFAULTTYPE%) </td>
-  </tr>
-  <tr>
-    <td><code>scope="topic"</code><br /><code>scope="text"</code><br /><code>scope="all"</code></td>
-    <td> Search topic name (title); the text (body) of topic; or all (both) </td>
-    <td><code>"text"</code></td>
-  </tr>
-  <tr>
-    <td><code>order="topic"</code><br /><code>order="created"</code><br /><code>order="modified"</code><br /><code>order="editby"</code><br /><code>order=<br /> "formfield(name)"</code></td>
-    <td> Sort the results of search by the topic names, topic creation time, last modified time, last editor, or named field of [[Main/TWikiForms]]. The sorting is done web by web; in case you want to sort across webs, create a [[Main/FormattedSearch]] table and sort it with [[Main/TablePlugin]]'s initsort </td>
-    <td> Sort by topic name </td>
-  </tr>
-  <tr>
-    <td><code>limit="all"</code><br /><code>limit="16"</code></td>
-    <td> Limit the number of results returned. This is done after sorting in case <code>order</code> is specified </td>
-    <td> All results </td>
-  </tr>
-  <tr>
-    <td><code>reverse="on"</code></td>
-    <td> Reverse the direction of the search </td>
-    <td> Ascending search </td>
-  </tr>
-  <tr>
-    <td><code>casesensitive="on"</code></td>
-    <td> Case sensitive search </td>
-    <td> Ignore case </td>
-  </tr>
-  <tr>
-    <td><code>nosummary="on"</code></td>
-    <td> Show topic title only </td>
-    <td> Show topic summary </td>
-  </tr>
-  <tr>
-    <td><code>bookview="on"</code></td>
-    <td>[[Main/BookView]] search, e.g. show complete topic text </td>
-    <td> Show topic summary </td>
-  </tr>
-  <tr>
-    <td><code>nosearch="on"</code></td>
-    <td> Suppress search string </td>
-    <td> Show search string </td>
-  </tr>
-  <tr>
-    <td><code>noheader="on"</code></td>
-    <td> Suppress search header <br /><span style="background: #FFB0B0"> <strong>Topics: Changed: By:</strong> </span></td>
-    <td> Show search header </td>
-  </tr>
-  <tr>
-    <td><code>nototal="on"</code></td>
-    <td> Do not show number of topics found </td>
-    <td> Show number </td>
-  </tr>
-  <tr>
-    <td><code>header="..."</code><br /><code>format="..."</code></td>
-    <td> Custom format results: see <strong>[[Main/FormattedSearch]]</strong> for usage, variables &amp; examples </td>
-    <td> Results in table </td>
-  </tr>
-  <tr>
-    <td><code>expandvariables="on"</code></td>
-    <td> Expand variables before applying a [[Main/FormattedSearch]] on a search hit. Useful to show the expanded text, e.g. to show the result of a [[Main/SpreadSheetPlugin]] <code>%CALC{}%</code> instead of the formula </td>
-    <td> Raw text </td>
-  </tr>
-  <tr>
-    <td><code>multiple="on"</code></td>
-    <td> Multiple hits per topic. Each hit can be [[Main/FormattedSearch]]. The last token is used in case of a regular expression ";" <em>and</em> search </td>
-    <td> Only one hit per topic </td>
-  </tr>
-  <tr>
-    <td><code>separator=", "</code></td>
-    <td> Line separator between hits </td>
-    <td> Newline <code>"$n"</code></td>
-  </tr>
-</table>
-- Example: `%SEARCH{"wiki" web="Main" scope="topic"}%`
-- Example with format: `%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%` _(displays results in a table with header - [[details|Main/FormattedSearch]])_
-- %H% If the TWiki:Plugins.TablePlugin is installed, you may set a `%TABLE{}%` variable just before the `%SEARCH{}%` to alter the output of a search. Example: `%TABLE{ tablewidth="90%" }%`
-- Related: [[METASEARCH|Main/WebHome#VarMETASEARCH]], [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[WEBLIST|Main/WebHome#VarWEBLIST]], [[FormattedSearch]]
-
-- [1] **_Note_**: The search form uses identical names for input fields.
-- [2] **_Note_**: A web can be excluded from a `web="all"` search if you define a `NOSEARCHALL=on` variable in its [[WebPreferences]]
-
-<a name="VarSERVERTIME"></a>
-
-### <a name="SERVERTIME -- server time"></a> SERVERTIME -- server time
-
-- Syntax: `%SERVERTIME%`
-- Expands to: `29 Jun 2010 - 11:45`
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME{"format"}|Main/WebHome#VarSERVERTIME2]]
-
-<a name="VarSERVERTIME2"></a>
-
-### <a name="SERVERTIME{&quot;format&quot;} -- formatte"></a> SERVERTIME\{"format"\} -- formatted server time
-
-- Same format qualifiers as `%GMTIME%`
-- Syntax: `%SERVERTIME{"format"}%`
-- Example: `%SERVERTIME{"$hou:$min"}%` expands to `11:45`
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
-
-<a name="VarSPACEDTOPIC"></a>
-
-### <a name="SPACEDTOPIC -- topic name, space"></a> SPACEDTOPIC -- topic name, spaced and encoded
-
-- The current topic name with added spaces, for regular expression search of Ref-By
-- Syntax: `%SPACEDTOPIC%`
-- Expands to: ==
-- Related: [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarSTARTINCLUDE"></a>
-
-### <a name="STARTINCLUDE -- start position o"></a> STARTINCLUDE -- start position of topic text if included
-
-- If present in included topic, start to include text from this location up to the end, or up to the location of the `%STOPINCLUDE%` variable. A normal view of the topic shows everyting exept the `%STARTINCLUDE%` variable itself.
-- Syntax: `%STARTINCLUDE%`
-- Related: [[INCLUDE|Main/WebHome#VarINCLUDE]], [[STOPINCLUDE|Main/WebHome#VarSTOPINCLUDE]]
-
-<a name="VarSTATISTICSTOPIC"></a>
-
-### <a name="STATISTICSTOPIC -- name of stati"></a> STATISTICSTOPIC -- name of statistics topic
-
-- Syntax: `%STATISTICSTOPIC%`
-- Expands to: `WebStatistics`, renders as [[WebStatistics]]
-- Related: [[HOMETOPIC|Main/WebHome#VarHOMETOPIC]], [[NOTIFYTOPIC|Main/WebHome#VarNOTIFYTOPIC]], [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarSTOPINCLUDE"></a>
-
-### <a name="STOPINCLUDE -- end position of t"></a> STOPINCLUDE -- end position of topic text if included
-
-- If present in included topic, stop to include text at this location and ignore the remaining text. A normal view of the topic shows everyting exept the `%STOPINCLUDE%` variable itself.
-- Syntax: `%STOPINCLUDE%`
-- Related: [[INCLUDE|Main/WebHome#VarINCLUDE]], [[STARTINCLUDE|Main/WebHome#VarSTARTINCLUDE]]
-
-<a name="VarTOC"></a>
-
-### <a name="TOC -- table of contents of curr"></a> TOC -- table of contents of current topic
-
-- Syntax: `%TOC%`
-- Related: [[TOC{"SomeTopic"}|Main/WebHome#VarTOC2]]
-
-<a name="VarTOC2"></a>
-
-### <a name="TOC{&quot;Topic&quot;} -- table of content"></a> TOC\{"Topic"\} -- table of contents
-
-- Syntax: `%TOC{"SomeTopic" ...}%`
-- Table of Contents. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[WikiSyntax]] (`"---++ text"`) and HTML (`"<h2>text</h2>"`) are taken into account. Any heading text after `"!!"` is excluded from the TOC; for example, write `"---+!! text"` if you do not want to list a header in the TOC
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"TopicName"</code></td>
-    <td> topic name </td>
-    <td> Current topic </td>
-  </tr>
-  <tr>
-    <td><code>web="Name"</code></td>
-    <td> Name of web </td>
-    <td> Current web </td>
-  </tr>
-  <tr>
-    <td><code>depth="2"</code></td>
-    <td> Limit depth of headings shown in TOC </td>
-    <td> 6 </td>
-  </tr>
-  <tr>
-    <td><code>title="Some text"</code></td>
-    <td> Title to appear at top of TOC </td>
-    <td> none </td>
-  </tr>
-</table>
-- Example: `%TOC{depth="2"}%`
-- Example: `%TOC{"TWikiDocumentation" web="TWiki" title="Contents:"}%`
-- Related: [[TOC|Main/WebHome#VarTOC]]
-
-<a name="VarTOPIC"></a>
-
-### <a name="TOPIC -- name of current topic"></a> TOPIC -- name of current topic
-
-- Syntax: `%TOPIC%`
-- Expands to: `%TOPIC%`, renders as [[%TOPIC%|Main/TOPIC]]
-- Related: [[BASETOPIC|Main/WebHome#VarBASETOPIC]], [[INCLUDINGTOPIC|Main/WebHome#VarINCLUDINGTOPIC]], [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[WEB|Main/WebHome#VarWEB]]
-
-<a name="VarTOPICLIST"></a>
-
-### <a name="TOPICLIST{&quot;format&quot;} -- topic ind"></a> TOPICLIST\{"format"\} -- topic index of a web
-
-- The "format" defines the format of one topic item. It may include variables: The `$name` variable gets expanded to the topic name; the `$web` variable gets expanded to the name of the web.
-- Syntax: `%TOPICLIST{"format" ...}%`
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"format"</code></td>
-    <td> Format of one line, may include <code>$name</code> and <code>$web</code> variables </td>
-    <td><code>"$name"</code></td>
-  </tr>
-  <tr>
-    <td><code>format="format"</code></td>
-    <td> (Alternative to above) </td>
-    <td><code>"$name"</code></td>
-  </tr>
-  <tr>
-    <td><code>separator=", "</code></td>
-    <td> line separator </td>
-    <td><code>"\n"</code> (new line) </td>
-  </tr>
-  <tr>
-    <td><code>web="Name"</code></td>
-    <td> Name of web </td>
-    <td> Current web </td>
-  </tr>
-</table>
-- Example: `%TOPICLIST{"   * $web.$name"}%` creates a bullet list of all topics
-- Example: `%TOPICLIST{separator=", "}%` creates a comma separated list of all topics
-- Example: `%TOPICLIST{" <option>$name</option>"}%` creates an option list (for drop down menus)
-- Related: [[SEARCH|Main/WebHome#VarSEARCH]], [[WEBLIST|Main/WebHome#VarWEBLIST]]
-
-<a name="VarTWIKIWEB"></a>
-
-### <a name="TWIKIWEB -- name of TWiki docume"></a> TWIKIWEB -- name of TWiki documentation web
-
-- The web containing all documentation and site-wide preference settings for %WIKITOOLNAME%
-- Syntax: `%TWIKIWEB%`
-- Expands to: `TWiki`
-- Related: [[MAINWEB|Main/WebHome#VarMAINWEB]]
-
-<a name="VarURLPARAM"></a>
-
-### <a name="URLPARAM{&quot;name&quot;} -- get value of"></a> URLPARAM\{"name"\} -- get value of a URL parameter
-
-- Returns the value of a URL parameter. Note that there is a risk that this variable could be misused for cross-scripting
-- Syntax: `%URLPARAM{"name"}%`
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"name"</code></td>
-    <td> The name of a URL parameter </td>
-    <td> required </td>
-  </tr>
-  <tr>
-    <td><code>default="..."</code></td>
-    <td> Default value in case parameter is empty or missing </td>
-    <td> empty string </td>
-  </tr>
-  <tr>
-    <td><code>newline="&lt;br /&gt;"</code></td>
-    <td> Convert newlines in textarea to other delimiters </td>
-    <td> no conversion </td>
-  </tr>
-  <tr>
-    <td><code>encode="entity"</code></td>
-    <td> Encode special characters into HTML entities, like a double quote into <code>&amp;#034;</code>. This is needed if text is put into an HTML form field </td>
-    <td> no encoding </td>
-  </tr>
-  <tr>
-    <td><code>encode="url"</code></td>
-    <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
-    <td> no encoding </td>
-  </tr>
-  <tr>
-    <td><code>multiple="on"</code> %BR% <code>multiple="[[$item]]"</code></td>
-    <td> If set, gets all selected elements of a <code>&lt;select multiple="multiple"&gt;</code> tag. A format can be specified, with <code>$item</code> indicating the element, e.g. <code>multiple="Option: $item"</code></td>
-    <td> first element </td>
-  </tr>
-  <tr>
-    <td><code>separator=", "</code></td>
-    <td> Separator between multiple selections. Only relevant if multiple is specified </td>
-    <td><code>"\n"</code> (new line) </td>
-  </tr>
-</table>
-- Example: `%URLPARAM{"skin"}%` returns `print` for a `.../view/%WEB%/%TOPIC%?skin=print` URL. [Test this](http://www.dementia.org/twiki//viewauth/%WEB%/%TOPIC%?skin=print#VarURLPARAM):
-- Related: [[SEARCH|Main/WebHome#VarSEARCH]], [[FormattedSearch]]
-
-<a name="VarUSERNAME"></a>
-
-### <a name="USERNAME -- your login username"></a> USERNAME -- your login username
-
-- TWiki makes names available in three formats: USERNAME like `jsmith`, WIKINAME like `JohnSmith` and WIKIUSERNAME like `Main.JohnSmith`. A user is a [[TWikiGuest]] in case the topic is not authenticated
-- Syntax: `%USERNAME%`
-- Expands to: `admin`
-- Related: [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]], [[WIKINAME|Main/WebHome#VarWIKINAME]], [[WIKIUSERNAME|Main/WebHome#VarWIKIUSERNAME]], [[TWikiUserAuthentication]]
-
-<a name="VarVAR"></a>
-
-### <a name="VAR{&quot;NAME&quot; web=&quot;Web&quot;} -- get a p"></a> VAR\{"NAME" web="Web"\} -- get a preference value from another web
-
-- Syntax: `%VAR{"NAME" web="Web"}%`
-- Example: To get `%WEBBGCOLOR%` of the Main web write `%VAR{"WEBBGCOLOR" web="Main"}%`, which expands to ==
-- Related: [[WEBPREFSTOPIC|Main/WebHome#VarWEBPREFSTOPIC]]
-
-<a name="VarWEB"></a>
-
-### <a name="WEB -- name of current web"></a> WEB -- name of current web
-
-- Syntax: `%WEB%`
-- Expands to: `%WEB%`
-- Related: [[BASEWEB|Main/WebHome#VarBASEWEB]], [[INCLUDINGWEB|Main/WebHome#VarINCLUDINGWEB]], [[TOPIC|Main/WebHome#VarTOPIC]]
-
-<a name="VarWEBLIST"></a>
-
-### <a name="WEBLIST{&quot;format&quot;} -- index of al"></a> WEBLIST\{"format"\} -- index of all webs
-
-- List of all webs. Hidden webs are excluded, e.g. webs with a `NOSEARCHALL=on` preference variable. The `"format"` defines the format of one web item. The `$name` variable gets expanded to the name of the web, `$qname` gets expanded to double quoted name, `$marker` to `marker` where web matches `selection`.
-- Syntax: `%WEBLIST{"format" ...}%`
-- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
-  </tr>
-  <tr>
-    <td><code>"format"</code></td>
-    <td> Format of one line, may include <code>$name</code> variable </td>
-    <td><code>"$name"</code></td>
-  </tr>
-  <tr>
-    <td><code>format="format"</code></td>
-    <td> (Alternative to above) </td>
-    <td><code>"$name"</code></td>
-  </tr>
-  <tr>
-    <td><code>separator=", "</code></td>
-    <td> line separator </td>
-    <td><code>"\n"</code> (new line) </td>
-  </tr>
-  <tr>
-    <td><code>webs="public"</code></td>
-    <td> comma sep list of Web, public expands to all non-hidden </td>
-    <td><code>"public"</code></td>
-  </tr>
-  <tr>
-    <td><code>marker="selected"</code></td>
-    <td> Text for <code>$marker</code> where item matches <code>selection</code>, otherwise equals <code>""</code></td>
-    <td><code>"selected"</code></td>
-  </tr>
-  <tr>
-    <td><code>selection="%WEB%"</code></td>
-    <td> Current value to be selected in list </td>
-    <td><code>section="%WEB%"</code></td>
-  </tr>
-</table>
-- Example: `%WEBLIST{"   * [[$name.WebHome]]"}%` creates a bullet list of all webs.
-- Example: `%WEBLIST{"<option $marker value=$qname>$name</option>" webs="Trash,public" selection="%WEB%" separator=" "}%` Dropdown of all public Webs + Trash Web, current Web highlighted.
-- Related: [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[SEARCH|Main/WebHome#VarSEARCH]]
-
-<a name="VarWEBPREFSTOPIC"></a>
-
-### <a name="WEBPREFSTOPIC -- name of web pre"></a> WEBPREFSTOPIC -- name of web preferences topic
-
-- Syntax: `%WEBPREFSTOPIC%`
-- Expands to: `WebPreferences`, renders as [[WebPreferences]]
-- Related: [[HOMETOPIC|Main/WebHome#VarHOMETOPIC]], [[WIKIPREFSTOPIC|Main/WebHome#VarWIKIPREFSTOPIC]], [[VAR|Main/WebHome#VarVAR]]
-
-<a name="VarWIKIHOMEURL"></a>
-
-### <a name="WIKIHOMEURL -- site home URL"></a> WIKIHOMEURL -- site home URL
-
-- The base URL of %WIKITOOLNAME%, is the link of the Home icon in the upper left corner, defined in TWiki.cfg
-- Syntax: `%WIKIHOMEURL%`
-- Expands to: `%WIKIHOMEURL%`
-- Related: [[WIKITOOLNAME|Main/WebHome#VarWIKITOOLNAME]]
-
-<a name="VarWIKINAME"></a>
-
-### <a name="WIKINAME -- your Wiki username"></a> WIKINAME -- your Wiki username
-
-- The [[WikiName]] is the same as %USERNAME% if not defined in the [[TWikiUsers]] topic
-- Syntax: `%WIKINAME%`
-- Expands to: `admin`
-- Related: [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]], [[USERNAME|Main/WebHome#VarUSERNAME]], [[WIKIUSERNAME|Main/WebHome#VarWIKIUSERNAME]], [[WIKIUSERSTOPIC|Main/WebHome#VarWIKIUSERSTOPIC]]
-
-<a name="VarWIKIPREFSTOPIC"></a>
-
-### <a name="WIKIPREFSTOPIC -- name of site-w"></a> WIKIPREFSTOPIC -- name of site-wide preferences topic
-
-- Syntax: `%WIKIPREFSTOPIC%`
-- Expands to: `TWikiPreferences`, renders as [[TWikiPreferences]]
-- Related: [[HOMETOPIC|Main/WebHome#VarHOMETOPIC]], [[WEBPREFSTOPIC|Main/WebHome#VarWEBPREFSTOPIC]]
-
-<a name="VarWIKITOOLNAME"></a>
-
-### <a name="WIKITOOLNAME -- name of your TWi"></a> WIKITOOLNAME -- name of your TWiki site
-
-- Syntax: `%WIKITOOLNAME%`
-- Expands to: `%WIKITOOLNAME%`
-- Related: [[WIKIHOMEURL|Main/WebHome#VarWIKIHOMEURL]], [[WIKIVERSION|Main/WebHome#VarWIKIVERSION]]
-
-<a name="VarWIKIUSERNAME"></a>
-
-### <a name="WIKIUSERNAME -- your Wiki userna"></a> WIKIUSERNAME -- your Wiki username with web prefix
-
-- Your %WIKINAME% with Main web prefix, useful to point to your %WIKITOOLNAME% home page
-- Syntax: `%WIKIUSERNAME%`
-- Expands to: `Main.admin`, renders as Main.admin
-- Related: [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]], [[USERNAME|Main/WebHome#VarUSERNAME]], [[WIKINAME|Main/WebHome#VarWIKINAME]]
-
-<a name="VarWIKIUSERSTOPIC"></a>
-
-### <a name="WIKIUSERSTOPIC -- name of topic"></a><a name="WIKIUSERSTOPIC -- name of topic "></a> WIKIUSERSTOPIC -- name of topic listing all registers users
-
-- Syntax: `%WIKIUSERSTOPIC%`
-- Expands to: `TWikiUsers`, with Main prefix renders as [[TWikiUsers]]
-- Related: [[WIKIUSERNAME|Main/WebHome#VarWIKIUSERNAME]]
-
-<a name="VarWIKIVERSION"></a>
-
-### <a name="WIKIVERSION -- the version of th"></a> WIKIVERSION -- the version of the installed TWiki engine
-
-- Syntax: `%WIKIVERSION%`
-- Expands to: `TWiki-4.1.2, Sat, 03 Mar 2007, build 13046`
-- Related: [[WIKITOOLNAME|Main/WebHome#VarWIKITOOLNAME]]
+**_Note:_** Above text is included from [[TWikiVariablesAtoM]] and [[TWikiVariablesNtoZ]]
 
 <a name="PreferencesVariables"></a>
 
 ## <a name="Preferences Variables"></a> Preferences Variables
 
-Additional variables are defined in the preferences ( site-level ( **_SL_** ) in [[TWikiPreferences]], web-level ( **_WL_** ) in [[WebPreferences]] of each web, and user level ( **_UL_** ) preferences in individual user topics):
+Additional variables are defined in the preferences topics:
+
+- site-level ( **_SL_** ) in [[TWikiPreferences]]
+- web-level ( **_WL_** ) in [[WebPreferences]] of each web
+- user level ( **_UL_** ) in individual user topics
 
 <table align="center" border="1" cellpadding="2" cellspacing="0" style="background-color: #f5f5f5">
   <tr>
     <th width="160"> Variable: </th>
     <th> Level: </th>
     <th> What: </th>
+    <th>Expands to:</th>
   </tr>
   <tr>
     <td><code>%ALLOWTOPICCHANGE%</code></td>
     <td><strong><em>(any topic)</em></strong></td>
     <td> List of users and groups who are <strong>allowed</strong> to change the current topic. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %ALLOWTOPICCHANGE%  </td>
   </tr>
   <tr>
     <td><code>%ALLOWTOPICRENAME%</code></td>
     <td><strong><em>(any topic)</em></strong></td>
     <td> List of users and groups who are <strong>allowed</strong> to rename the current topic. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %ALLOWTOPICRENAME%  </td>
   </tr>
   <tr>
     <td><code>%ALLOWWEBCHANGE%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> List of users and groups who are <strong>allowed</strong> to change topics in the %WIKITOOLNAME% web. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %ALLOWWEBCHANGE%  </td>
   </tr>
   <tr>
     <td><code>%ALLOWWEBRENAME%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> List of users and groups who are <strong>allowed</strong> to rename topics in the %WIKITOOLNAME% web. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %ALLOWWEBRENAME%  </td>
   </tr>
   <tr>
     <td><code>%ATTACHLINKBOX%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> Default state of the link check box in the attach file page. Check box is initially checked if value is set to <code>CHECKED</code> , unchecked if empty. If checked, a link is created to the attached file at the end of the topic. Value is: <b><code>%ATTACHLINKBOX%</code></b></td>
+    <td> %ATTACHLINKBOX%  </td>
   </tr>
   <tr>
     <td><code>%DENYTOPICCHANGE%</code></td>
     <td><strong><em>(any topic)</em></strong></td>
     <td> List of users and groups who are <strong>not allowed</strong> to change the current topic. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %DENYTOPICCHANGE%  </td>
   </tr>
   <tr>
     <td><code>%DENYTOPICRENAME%</code></td>
     <td><strong><em>(any topic)</em></strong></td>
     <td> List of users and groups who are <strong>not allowed</strong> to rename the current topic. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %DENYTOPICRENAME%  </td>
   </tr>
   <tr>
     <td><code>%DENYWEBCHANGE%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> List of users and groups who are <strong>not allowed</strong> to change topics in the %WIKITOOLNAME% web. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %DENYWEBCHANGE%  </td>
   </tr>
   <tr>
     <td><code>%DENYWEBRENAME%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> List of users and groups who are <strong>not allowed</strong> to rename topics in the %WIKITOOLNAME% web. (More in [[Main/TWikiAccessControl]]) </td>
+    <td> %DENYWEBRENAME%  </td>
   </tr>
   <tr>
     <td><code>%DONTNOTIFYCHECKBOX%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> Default state of the "Minor Changes, Don't Notify" ([[Main/DontNotify]]) check box in preview. Check box is initially checked if <code>Set DONTNOTIFYCHECKBOX = checked="checked"</code>, or unchecked if empty. Value is: <b><code>%DONTNOTIFYCHECKBOX%</code></b></td>
+    <td> %DONTNOTIFYCHECKBOX%  </td>
   </tr>
   <tr>
     <td><code>%EDITBOXHEIGHT%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> Vertical size of edit box, is <b> <code>%EDITBOXHEIGHT%</code> </b></td>
+    <td> %EDITBOXHEIGHT%  </td>
   </tr>
   <tr>
     <td><code>%EDITBOXWIDTH%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> Horizontal size of edit box, is <b> <code>%EDITBOXWIDTH%</code> </b></td>
+    <td> %EDITBOXWIDTH%  </td>
   </tr>
   <tr>
     <td><code>%EDITBOXSTYLE%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> Style of text edit box. Set to <code>width: 99%</code> for full window width (default; overwrites the EDITBOXWIDTH setting), or <code>width: auto</code> to disable. Value is: <b><code>%EDITBOXSTYLE%</code></b></td>
+    <td> %EDITBOXSTYLE%  </td>
   </tr>
   <tr>
     <td><code>%FINALPREFERENCES%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>WL</em></strong></td>
     <td> List of preferences that are not allowed to be overridden by next level preferences</td>
+    <td> %FINALPREFERENCES%  </td>
   </tr>
   <tr>
     <td><code>%HTTP_EQUIV_ON_EDIT%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> http-equiv meta tags for edit script. </td>
+    <td> %HTTP_EQUIV_ON_EDIT%  </td>
   </tr>
   <tr>
     <td><code>%HTTP_EQUIV_ON_PREVIEW%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> http-equiv meta tags for preview script. </td>
+    <td> %HTTP_EQUIV_ON_PREVIEW%  </td>
   </tr>
   <tr>
     <td><code>%HTTP_EQUIV_ON_VIEW%</code></td>
     <td><strong><em>SL</em></strong></td>
     <td> http-equiv meta tags for view, rdiff, attach, search* scripts. </td>
+    <td> %HTTP_EQUIV_ON_VIEW%  </td>
   </tr>
   <tr>
     <td><code>%NEWTOPICBGCOLOR%</code></td>
     <td><strong><em>SL</em></strong> , <em>UL</em></td>
     <td> Background color of non existing topic. ( <strong><em>UL</em></strong> needs authentication for topic views ) </td>
+    <td> %NEWTOPICBGCOLOR%  </td>
   </tr>
   <tr>
     <td><code>%NEWTOPICFONTCOLOR%</code></td>
     <td><strong><em>SL</em></strong> , <em>UL</em></td>
     <td> Font color of non existing topic. ( <strong><em>UL</em></strong> needs authentication for topic views ) </td>
+    <td> %NEWTOPICFONTCOLOR%  </td>
   </tr>
   <tr>
     <td><code>%NOSEARCHALL%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> Exclude web from a <code>web="all"</code> search (set variable to <code>on</code> for hidden webs) </td>
+    <td> %NOSEARCHALL%  </td>
   </tr>
   <tr>
     <td><code>%RELEASEEDITLOCKCHECKBOX%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> Default state of the "Release edit lock" ([[Main/UnlockTopic]]) check box in preview. Checkbox is initially checked if <code>Set RELEASEEDITLOCKCHECKBOX = checked="checked"</code>, or unchecked if empty. If checked, make sure to click on <u>Edit</u> to do more changes; do <strong>not</strong> go back in your browser to the edit page, or you risk that someone else will edit the topic at the same time! Value is: <b><code>%RELEASEEDITLOCKCHECKBOX%</code></b></td>
+    <td> %RELEASEEDITLOCKCHECKBOX%  </td>
   </tr>
   <tr>
     <td><code>%WEBBGCOLOR%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> Background color of web </td>
+    <td> %WEBBGCOLOR%  </td>
   </tr>
   <tr>
     <td><code>%WEBCOPYRIGHT%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>WL</em></strong></td>
     <td> Copyright notice (bottom right corner of topics) </td>
+    <td> %WEBCOPYRIGHT%  </td>
   </tr>
   <tr>
     <td><code>%WEBTOPICLIST%</code></td>
     <td><strong><em>WL</em></strong></td>
     <td> Common links of web (second line of topics) </td>
+    <td> %WEBTOPICLIST%  </td>
   </tr>
   <tr>
     <td><code>%WIKIWEBLIST%</code></td>
     <td><strong><em>SL</em></strong></td>
     <td> List of %WIKITOOLNAME% webs (in upper right corner of topics) </td>
+    <td> %WIKIWEBLIST%  </td>
   </tr>
   <tr>
     <td><code>%WIKIWEBMASTER%</code></td>
     <td><strong><em>SL</em></strong></td>
     <td> Webmaster email address (sender of email notifications) , is <b></b></td>
+    <td>  </td>
   </tr>
 </table>
 
@@ -1079,4 +227,8 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 > - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, define the Variable on the web's [[WebPreferences]] page, and upload a logo file, ex: `mylogo.gif`. You can upload by [[attaching the file|Main/FileAttachment]] to [[WebPreferences]], or, to avoid clutter, to any other topic in the same web, ex: `LogoTopic`:
 >   - <code>**Set MYLOGO = %PUBURL%/TWiki/LogoTopic/mylogo.gif**</code>
 
--- TWiki:Main.PeterThoeny - 09 May 2004 %BR% -- TWiki:Main.MikeMannix - 12 May 2002
+-- TWiki:Main.PeterThoeny - 14 Aug 2004 <br /> -- TWiki:Main.MikeMannix - 12 May 2002
+
+Crawford split up this topic into included [[TWikiVariablesAtoM]] and [[TWikiVariablesNtoZ]].
+
+-- [[PeterThoeny]] - 26 Jul 2004
