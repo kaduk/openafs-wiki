@@ -1,79 +1,119 @@
 <table>
   <tr>
-    <td> Welcome to TWiki, a flexible, powerful, and simple Web-based collaboration platform. Use TWiki to run a project development space, a document management system, a knowledge base, or any other groupware tool, on an intranet or on the Web. <p>This is the place to learn about it, download it, and try it out for yourself... </p>
+    <td> Welcome to TWiki, a flexible, powerful, and simple, secure, Web-based collaboration platform. Use TWiki to run a project development space, a document management system, a knowledge base, or any other groupware tool, on an intranet or on the Web. <p>This is the place to learn about it, download it, and try it out for yourself... </p>
     </td>
     <td width="25"> </td>
     <td width="200"><a href="http://TWiki.org/"><img alt="Powered by TWiki" border="0" height="64" src="http://www.dementia.org/twiki//view/twikilogo3.gif" width="131" /></a><br /> The official TWiki<sup>TM</sup><br />site is <a href="http://twiki.org/" target="_top">http://twiki.org/</a></td>
   </tr>
 </table>
-
-### <a name="TWiki User&#39;s Guide"></a> TWiki User's Guide
-
-- **TWiki Quick Start** - the fast track approach
-  - [[WelcomeGuest]]: A fast track intro covering all the basics
-  - [[TWikiRegistration]]: Sign up so you can edit pages and select options
-
-- **One-Page Primers** cover TWiki basics
-  - [[TWikiTutorial]]: A compact, 20-minute TWiki primer
-  - [[TWikiSite]]: Instant overview - first, there was Wiki
-  - [[TWikiPages]]: Customize, rename, move, or delete TWiki topics
-  - [[WikiSyntax]]: TWiki shorthand basics
-  - [[GoodStyle]]: Working tips for an open collaboration environment
-  - [[TWikiShorthand]]: The complete TWiki text formatting syntax on one page
-  - [[TWikiVariables]]: How to easily embed text, graphics, dynamic content
-  - [[FileAttachments]]: Use your browser to upload files for distribution or display
-  - [[WebChangesAlert]]: Subscribe to email alerts linking to the latest page changes
-
-- **TWiki Help FAQs**
-  - [[TWikiFAQ]]: The first things people ask about TWiki
-  - [[TextFormattingFAQ]]: Common how-to questions about posting in TWiki
-
-- Frequent users should also browse the [[TWiki Reference Manual|Main/WebHome#ReferenceManual]]!
-- It's easy to customize the User's Guide to reflect the features and settings enabled on your own TWiki site.
-
-<a name="ReferenceManual"></a>
-
-### <a name="TWiki Reference Manual"></a> TWiki Reference Manual
-
-Documentation for webmasters, system administrators, project managers, team leaders, <br /> and all other users of the TWiki advanced online collaboration tool.
-
-- **[[TWikiDocumentation]]**: Complete current reference...
-  - [[System Requirements|Main/TWikiImplementationNotes]]
-  - [[Installation Guide|Main/TWikiInstallationGuide]]
-  - [[Upgrade Guide|Main/TWikiUpgradeGuide]]
-  - [[User Authentication|Main/TWikiUserAuthentication]]
-  - [[Access Control|Main/TWikiAccessControl]]
-  - [[TWiki Text Formatting|Main/TextFormattingRules]]
-  - [[TWikiVariables]]
-  - [[TWikiAttachments|Main/FileAttachment]]
-  - [[TWikiForms]]
-  - [[TWikiTemplates]]
-  - [[TWikiSkins]]
-  - [[TWiki Search Formatting|Main/FormattedSearch]]
-  - [[TWikiMetaData]]
-  - [[TWikiPlugins]]
-  - [[TWikiSiteTools]]
-  - [[Managing Topics|Main/ManagingTopics]]
-  - [[Managing Webs|Main/ManagingWebs]]<br />**Appendices**<br />[[A. TWiki File System|Main/AppendixFileSystem]]<br />[[B. TWiki Dev Timeline|Main/TWikiHistory]]
-
-### <a name="TWikiSiteTools"></a><a name="_TWikiSiteTools"></a> TWikiSiteTools
-
-[[TWikiSiteTools]] include utilities for navigating and keeping up with site activity on individual TWiki webs. Preferences can also be configured, by web or site-wide. You are currently in the **TWiki** web.
-
 <form action="http://www.dementia.org/twiki//search/%WEB%/">
-  <ul>
-    <li>[[Main/WebSearch]]: Full text search of this web<br /><input name="search" size="32" type="text" /> <input type="submit" value="Search" />    (extended options in [[Main/WebSearch]]) </li>
-    <li>[[Main/WebChanges]]: Display recent input on the this web </li>
-    <li>[[Main/WebIndex]]: List all web topics in alphabetical order. See also the faster [[Main/WebTopicList]]</li>
-    <li>[[Main/WebNotify]]: Subscribe to an email alert with the latest this web changes </li>
-    <li>[[Main/WebStatistics]]: View access statistics for the this web </li>
-  </ul>
+  <table>
+    <tr valign="top">
+      <td><a name="UsersGuide"></a><h2><a name="TWiki User's Guide"></a> TWiki User's Guide </h2>
+        <p>
+        </p>
+        <ul>
+          <li><strong>TWiki Quick Start</strong> - the fast track approach <ul>
+              <li>[[Main/WelcomeGuest]]: A fast track intro covering all the basics </li>
+              <li>[[Main/TWikiRegistration]]: Sign up so you can edit pages and select options </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+        </p>
+        <ul>
+          <li><strong>One-Page Primers</strong> cover TWiki basics <ul>
+              <li>[[Main/TWikiTutorial]]: A compact, 20-minute TWiki primer </li>
+              <li>[[Main/TWikiSite]]: Instant overview - first, there was Wiki </li>
+              <li>[[Main/TWikiPages]]: Customize, rename, move, or delete TWiki topics </li>
+              <li>[[Main/WikiSyntax]]: All of the TWiki shorthand basics </li>
+              <li>[[Main/GoodStyle]]: Working tips for an open collaboration environment </li>
+              <li>[[Main/TWikiShorthand]]: Scan all TWiki text formatting rules on one page </li>
+              <li>[[Main/TWikiVariables]]: How to easily embed text, graphics, dynamic content </li>
+              <li>[[Main/FileAttachments]]: Browser-upload files for distribution or display </li>
+              <li>[[Main/WebChangesAlert]]: Get email alerts linking to the latest page changes </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+        </p>
+        <ul>
+          <li><strong>TWiki Help FAQs</strong><ul>
+              <li>[[Main/TWikiFAQ]]: The first things people ask about TWiki </li>
+              <li>[[Main/TextFormattingFAQ]]: Common how-to questions about posting in TWiki </li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+        </p>
+        <ul>
+          <li> %T% It should take an hour or less to read through and customize the [[Main/WebHome#UsersGuide]] to reflect the features and settings enabled on your own TWiki site. </li>
+          <li> Frequent users should also browse the full [[Main/WebHome#ReferenceManual]]! </li>
+        </ul>
+      </td>
+      <td width="25"> </td>
+      <td valign="top" width="200"><input name="search" size="20" type="text" /> <input type="submit" value="Search Docs" /><br /><font size="-2">More options in [[Main/WebSearch]]</font></td>
+    </tr>
+  </table>
+  <table>
+    <tr valign="top">
+      <td><a name="ReferenceManual"></a><h2><a name="TWiki Reference Manual"></a> TWiki Reference Manual </h2>
+        <p> Documentation for webmasters, system administrators, project managers, team leaders, <br /> and all other users of the TWiki advanced online collaboration tool. </p>
+        <p>
+        </p>
+        <ul>
+          <li><strong>[[Main/TWikiDocumentation]]</strong>: Complete current reference... <ul>
+              <li>[[Main/TWikiImplementationNotes]]</li>
+              <li>[[Main/TWikiInstallationGuide]]</li>
+              <li>[[Main/TWikiUpgradeGuide]]</li>
+              <li>[[Main/TWikiUserAuthentication]]</li>
+              <li>[[Main/TWikiAccessControl]]</li>
+              <li>[[Main/TextFormattingRules]]</li>
+              <li>[[Main/TWikiVariables]]</li>
+              <li>[[Main/FileAttachment]]</li>
+              <li>[[Main/TWikiForms]]</li>
+              <li>[[Main/TWikiTemplates]]</li>
+              <li>[[Main/TWikiSkins]]</li>
+              <li>[[Main/FormattedSearch]]</li>
+              <li>[[Main/TWikiMetaData]]</li>
+              <li>[[Main/TWikiPlugins]]</li>
+              <li>[[Main/TWikiSiteTools]]</li>
+              <li>[[Main/ManagingTopics]]</li>
+              <li>[[Main/ManagingWebs]]<br /><strong>Appendices</strong><br />[[Main/AppendixFileSystem]]<br />[[Main/TWikiHistory]]</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+        </p>
+        <h2><a name="TWikiSiteTools"></a><a name="_TWikiSiteTools"></a> TWikiSiteTools </h2>
+        <p>[[Main/TWikiSiteTools]] include utilities for navigation and for monitoriing web and site-wide activity. [[Main/WebPreferences]] can be individually configured. </p>
+        <ul>
+          <li> You are currently in the <strong>[[WEB/WebHome]]</strong> web. </li>
+        </ul>
+        <p>
+        </p>
+        <form action="http://www.dementia.org/twiki//search/%WEB%/">
+          <ul>
+            <li>[[Main/WebSearch]]: Full text search of this web<br /><input name="search" size="32" type="text" /> <input type="submit" value="Search" />    (extended options in [[Main/WebSearch]]) </li>
+            <li>[[Main/WebChanges]]: Display recent input on the this web </li>
+            <li>[[Main/WebIndex]]: List all web topics in alphabetical order. See also the faster [[Main/WebTopicList]]</li>
+            <li>[[Main/WebNotify]]: Subscribe to an email alert linking to the most recently changed topics in this web </li>
+            <li>[[Main/WebStatistics]]: View access statistics for this web </li>
+          </ul>
+        </form>
+        <ul>
+          <li>[[Main/WebPreferences]]: Preference settings for the this web </li>
+          <li>[[Main/TWikiPreferences]]: %WIKITOOLNAME% site-wide preferences </li>
+          <li> The [[TWiki/TWikiWebsTable]]: A color-coded directory of available webs that can be easily included on any page <em>(below)</em><ul>
+              <li> The [[TWiki/WebHome]] web is coded light orange for quick identification. </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+      <td valign="top" width="150">  </td>
+    </tr>
+  </table>
 </form>
-
-- [[WebPreferences]]: Preference settings for the this web
-- [[TWikiPreferences]]: TWiki site-wide preferences
-- The [[TWikiWebsTable]] _(below)_ is a color-coded directory of available webs that can be easily included on any page.
-  - The [[%WEB%|TWiki/WebHome]] web is coded light orange for quick identification.
 
 - TWiki<sup>TM</sup> is a trademark of [[PeterThoeny]]
 - TWiki is developed as Free Software under the [[GNU/GPL|Main/GnuGeneralPublicLicense]]
