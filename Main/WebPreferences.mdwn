@@ -10,6 +10,12 @@ The following settings are **_web preferences_** of the %WIKITOOLNAME%.%WEB% web
 - Web specific background color: (Pick a lighter one of the [[StandardColors]])
   - Set WEBBGCOLOR = #FFFFC0
 
+- List this web in the [[SiteMap]]:
+  - If yes, Set SITEMAPLIST = `on`, and add the "what" and "use to..." description for the site map. Make sure to list only links that include the name of the web, e.g. %WEB%.Topic links.
+  - Set SITEMAPLIST = on
+  - Set SITEMAPWHAT = Welcome to %WIKITOOLNAME%... [[Users|WEB/TWikiUsers]], [[Groups|WEB/TWikiGroups]], [[Offices|WEB/OfficeLocations]] - tour this expandable virtual workspace.
+  - Set SITEMAPUSETO = ...get a first-hand feel for TWiki possibilities.
+
 - Exclude web from a `web="all"` search: (Set to `on` for hidden webs)
   - Set NOSEARCHALL =
 
