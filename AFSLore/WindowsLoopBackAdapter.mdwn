@@ -16,47 +16,4 @@ Fortunately, it is possible to isolate the AFS Client's virtual SMB server from 
 
 ## <a name="How do I use the Loopback adapte"></a> How do I use the Loopback adapter?
 
-There are three options:
-
-(1) the Loopback adapter will be automatically installed and configured for you when you install [[OpenAFS]] version 1.3.65 or higher.
-
-(2) run [confloop.msi](http://www.eos.ncsu.edu/wolfcall/loopback).
-
-(3) follow these instructions.
-
-Use the first option if possible. The msi option is appropriate for system administrators who must install the loopback adapter on lots of machines. Finally, these instructions can be used by single users. The instructions were written for Windows XP, but translate fairly directly to Windows 2000.
-
-### <a name="Add the Loopback Adapter"></a> Add the Loopback Adapter
-
-1. Go to Control Panel, and click on "Add Hardware".
-2. Tell the wizard you've already connected the hardware, and scroll to the bottom of the list to "Add a new hardware device".
-3. Choose to install the device from a list.
-4. Choose to install a "Network Adapter", and install the Microsoft Loopback Adapter.
-
-### <a name="Configure the Loopback Adapter"></a> Configure the Loopback Adapter
-
-1. Go to "Network Adapters" in Control Panel, and you should find the connection corresponding to the Microsoft Loopback Adapter.
-2. Right click on the new connection, and go to properties.
-3. Double-click on the TCP/IP settings.
-4. The adapter will be configured by default for DHCP; we want to change this. To configure the Loopback Adapter to use a reserved private network address, type in the following information:
-  - IP Address: 10.254.254.253
-  - Subnet Mask: 255.254.254.252
-  - Default Gateway: **Leave blank**.
-  - DNS servers: **Leave blank**.
-    - If you're on a private network that actually uses 10.\* addresses, change the IP to point to another RFC1918 address space.
-5. Before you leave the properties for the Loopback Adapter, be sure that "File and Print Sharing for Microsoft Networks" and "Client for Microsoft Networks" are installed and checked. If not, use the Install button to install these services, and check them in the list.
-6. After installing the adapter, you may optionally rename the adapter to "AFS" from the Network Connections folder.
-
-Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) included in [[OpenAFS]] 1.2.8+, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
-
--- [[BenCreech]] - 11 Jul 2003
-
--- Modified by [[BenCreech]] - 15 Jul 2003
-
--- Modified by Jeffrey Altman - 25 June 2004
-
-`Contributors:`
-
-- `Scott Williams - the loopback patch`
-- `Ben Creech - this document`
-- `Kim Kimball - the last step`
+It happens by default.
