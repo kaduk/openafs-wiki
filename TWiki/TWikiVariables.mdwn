@@ -1,3 +1,13 @@
+<div>
+  <ul>
+    <li><a href="#TWiki Variables"> TWiki Variables</a><ul>
+        <li><a href="#Predefined Variables"> Predefined Variables</a></li>
+        <li><a href="#Preferences Variables"> Preferences Variables</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
 ## <a name="TWiki Variables"></a> TWiki Variables
 
 ### <a name="Predefined Variables"></a> Predefined Variables
@@ -242,7 +252,7 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:27:16</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:27:26</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -296,11 +306,11 @@
   </tr>
   <tr>
     <td><code>%TOC%</code></td>
-    <td> Table of Content of current topic. </td>
+    <td> Table of Contents of current topic. </td>
   </tr>
   <tr>
     <td><code>%TOC{"SomeTopic" ...}%</code></td>
-    <td> Table of Content. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;h2&gt;"</code>) are taken into account. (But not <code>"&lt;H2&gt;text&lt;H2&gt;"</code>, which can be used to exclude a heading from the TOC.) Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
+    <td> Table of Contents. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;h2&gt;"</code>) are taken into account. (But not <code>"&lt;H2&gt;text&lt;/H2&gt;"</code>, which can be used to exclude a heading from the TOC.) Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
@@ -565,4 +575,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 - Additional preferences variables can be defined on all three level as needed. Example:
   - `Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif`
 
--- [[PeterThoeny]] - 23 Jul 2001 <br />
+-- [[PeterThoeny]] - 23 Jul 2001 <br /> -- [[MikeMannix]] - 26 Aug 2001 <br />
