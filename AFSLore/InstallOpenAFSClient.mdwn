@@ -1,0 +1,53 @@
+## <a name="How to Install the _OpenAFS Clie"></a> How to Install the [[OpenAFS]] Client
+
+This documentation provides instructions for installing the [[OpenAFS]] client only. Documentation for installing a server belongs elsewhere.
+
+This document is intended for users who are familiar enough with administrating their operating system of choice to not need hand holding, but unfamiliar enough with [[OpenAFS]] to need basic setup instructions.
+
+### <a name="Operation System specific instru"></a> Operation System specific instructions
+
+#### <a name="Linux, Redhat 8"></a> Linux, Redhat 8
+
+These are the steps I used to get [[OpenAFS]] working on a fairly standard Redhat 8 machine.
+
+##### <a name="Download RPMS"></a> Download RPMS
+
+Download the most current versions of these RPMS from www.openafs.org:
+
+- openafs (Utilities, Init scripts, and documentation)
+- openafs-client (AFS daemon, PAM modules, client configuration files)
+- openafs-kernel (AFS kernel module, for Redhat's kernel 2.4.18-14
+- openafs-krb5 (Utilities for using Kerberos 5 tickets to get AFS tokens)
+
+You may also want:
+
+- openafs-compat (Populate /usr/afsws with symlinks for legacy applications/users)
+- openafs-devel (AFS libraries and include files, for building AFS aware applications)
+- openafs-kpasswd (Compatibility package for use with a KA server)
+- openafs-kernel-source (AFS kernel module source, necessary if you aren't using Redhat's kernel)
+
+You almost certainly don't want:
+
+- openafs-server (AFS Server binaries)
+
+If you don't already have Redhat's kerberos 5 RPMS installed, you may wish to download those as well. But they aren't strictly necessary, and only the openafs-krb5 package depends on them.
+
+##### <a name="Install RPMS"></a> Install RPMS
+
+Install those RPMS. If you don't know how to do this, then this document isn't intended for you.
+
+##### <a name="Configure AFS"></a> Configure AFS
+
+Follow the instructions that were output during the RPM install. In particular, edit /usr/vice/etc/ThisCell.
+
+If you haven't already configured Kerberos on your system, do so now. Instructions for doing that are outside of the scope of this document.
+
+##### <a name="Start AFS"></a> Start AFS
+
+Start the AFS client, either by rebooting, or by running '/etc/rc.d/init.d/afs start'
+
+Verify that /afs/&lt;your-cell-here&gt; is readable.
+
+Get AFS tokens with klog, or translate existing kerberos tickets with aklog, and verify that you can modify files in AFS.
+
+-- [[DavidNolan]] - 29 Jul 2003
