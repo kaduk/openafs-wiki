@@ -30,8 +30,10 @@
         <li><a href="#Settings Without a User Interfac"> Settings Without a User Interface</a><ul>
             <li><a href="#Netbios Name"> Netbios Name</a></li>
             <li><a href="#Encryption of Network Traffic"> Encryption of Network Traffic</a></li>
-            <li><a href="#Freelance Client Support"> Freelance Client Support</a></li>
-            <li><a href="#Freelance Root Setup"> Freelance Root Setup</a></li>
+            <li><a href="#Freelance Client Support"> Freelance Client Support</a><ul>
+                <li><a href="#Freelance Root Setup"> Freelance Root Setup</a></li>
+              </ul>
+            </li>
             <li><a href="#Hiding Dot-Files"> Hiding Dot-Files</a></li>
             <li><a href="#Hiding the \\AFS\all Share"> Hiding the <tt>\\AFS\all</tt> Share</a></li>
             <li><a href="#Tweaking the SMB Connections"> Tweaking the SMB Connections</a></li>
@@ -47,6 +49,7 @@
             <li><a href="#Integrated Logon Silence"> Integrated Logon Silence</a></li>
             <li><a href="#Disable Automatic Use of _Kerber"> Disable Automatic Use of KerberosV</a></li>
             <li><a href="#Changing the Default Authenticat"> Changing the Default Authentication Cell</a></li>
+            <li><a href="#Changing the Parameters of AFS C"> Changing the Parameters of AFS Credentials Manager</a></li>
           </ul>
         </li>
         <li><a href="#Per Domain Options"> Per Domain Options</a><ul>
@@ -215,9 +218,9 @@ Historically, AFS did not support encrypted network traffic. This has changed in
 
 ### <a name="Freelance Client Support"></a> Freelance Client Support
 
-This option can be set during installation. After installation, a registry entry must be edited. It can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` and is called `FreelanceClient` (type DWORD). Set it to 1 to enable Freelance Mode. See the [[WindowsQuickStartGuide]] for more information on Freelance Mode. Default is off.
+This option can be set during installation. After installation, a registry entry must be edited. It can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` and is called `FreelanceClient` (type DWORD). Set it to 1 to enable Freelance Mode. See the [[Troubleshooting Guide|Main/WindowsTroubleshootingGuide#What_is_Freelance_Mode_]] for more information on Freelance Mode. Default is zero (disabled).
 
-### <a name="Freelance Root Setup"></a> Freelance Root Setup
+#### <a name="Freelance Root Setup"></a> Freelance Root Setup
 
 To be able to use Freelance Mode, the AFS Client Service needs to know which cells should be visible. This is equivalent to mounting `root.cell` volumes in `root.afs`. If there are no volumes described when the AFS Client Service first starts, the default cell is inserted into the list (including a forced R/W volume).
 
@@ -254,6 +257,19 @@ Four values in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFS
   - Extended (GSS SPNEGO) authentication required (2, default)
 
 Heavily loaded clients may need to increase the first two values.
+
+Running the default authentication type, GSS SPNEGO, requires you to have the `cifs/HOST$@REALM` principal in your [[KerberosV]] KDC. If you Windows client computer is called `adam.openafs.org`, the principal should (probably) be `cifs/ADAM$@OPENAFS.ORG`. This works like the `host` principal, and must share the secret key with the `host` principal. Note: The name of the virtual SMB share is **_AFS_** if you use the [[WindowsLoopBackAdapter]]. But you must **_not_** have the principal `cifs/afs` principal in any realm you login to.
+
+If the CIFS principal is missing, the client will revert to using NTLM authentication.
+
+Also, you can explicitly set the Client Side Caching Policy of a SMB share by populating `HKEY_LOCAL_MACHINE\SOFTWARE\OpenAFS\Client\CSCPolicy\` with values. The values (type string) are keyed by the submount (Windows share) name. Valid policy values are:
+
+- **disable** Which totally disables Windows Client Side Caching.
+- **programs** Disables the cache for files that are opened for reading.
+- **documents** All files will be cached.
+- **manual** Selected files will be cached.
+
+Note that CSC is something Windows can do with all CIFS shares. The setting is used for responding to Windows requests about the policy. AFS itself has its own caching which is not involved in CSC. Read more in [Windows Clustering](http://www.microsoft.com/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/cluad_pr_100.asp).
 
 ### <a name="Connection Timeouts"></a> Connection Timeouts
 
@@ -316,6 +332,10 @@ If you have MIT Kerberos for Windows installed, and you do not want to let AFS C
 In some rare cases, you may want to authenticate to one cell, but keep using another cell as your home. You can do this by entering the authentication cell each time you obtain new tokens. If you intend to do it regularly, you can change it in the registry.
 
 The value `Authentication Cell` (type string) in `HKEY_CURRENT_USER\SOFTWARE\OpenAFS\Client` can be set to another cell name than the default cell.
+
+### <a name="Changing the Parameters of AFS C"></a> Changing the Parameters of AFS Credentials Manager
+
+When the AFS Credentials Manager starts, it recreates the Start Menu and Startup shortcuts to enforce the parameters given during installation. These parameters are stored as `AfscredsShortcutParams` in `SOFTWARE\OpenAFS\Client`. It can be set for both `HKEY_LOCAL_MACHINE` and for `HKEY_CURRENT_USER`. Default is `-A -M -N -Q`. See above for an explanation on these parameters.
 
 ## <a name="Per Domain Options"></a> Per Domain Options
 
