@@ -37,7 +37,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set WEBTOPICLIST = [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
 
 - Web specific background color: (is overwritten by web preferences)
-  - Set WEBBGCOLOR = #C0C0C0
+  - Set WEBBGCOLOR = #FFD8AA
 
 - Copyright notice:
   - Set WEBCOPYRIGHT = Copyright © 1999-2010 by the contributing authors. \\nAll material on this collaboration platform is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send feedback](mailto:?subject=%WIKITOOLNAME% Feedback on %WEB%.%TOPIC%)
@@ -310,7 +310,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set TOPICOVERRIDESUSER = off
 
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE, READTOPICPREFS, TOPICOVERRIDESUSER, BASICSTYLETOPIC
+  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE, READTOPICPREFS, TOPICOVERRIDESUSER
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
