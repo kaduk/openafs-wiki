@@ -296,7 +296,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:23</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:38</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -419,9 +419,19 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> N/A </td>
         </tr>
         <tr>
-          <td><code>web="Name"</code><br /><code>web="Main Know"</code><br /><code>web="all"</code></td>
-          <td> Wiki web to search: A web, a list of webs separated by whitespace, or <code>all</code> webs. [2] </td>
+          <td><code>web="Name"</code><br /><code>web="Main, Know"</code><br /><code>web="all"</code></td>
+          <td> Wiki web to search: A web, a list of webs separated by comma, or <code>all</code> webs. [2] </td>
           <td> Current web </td>
+        </tr>
+        <tr>
+          <td><code>topic="WebPreferences"</code><br /><code>topic="*Bug"</code></td>
+          <td> Limit search to topics: A topic, a topic with asterisk wildcards, or a list of topics separated by comma. </td>
+          <td> All topics in a web </td>
+        </tr>
+        <tr>
+          <td><code>excludetopic="Web*"</code><br /><code>excludetopic="WebHome, WebChanges"</code></td>
+          <td> Exclude topics from search: A topic, a topic with asterisk wildcards, or a list of topics separated by comma. </td>
+          <td> None </td>
         </tr>
         <tr>
           <td><code>scope="topic"</code><br /><code>scope="text"</code></td>
