@@ -1,16 +1,15 @@
 <div>
   <ul>
     <li><a href="#Managing Topics"> Managing Topics</a><ul>
-        <li><a href="#Overview"> Overview</a><ul>
+        <li><a href="#Overview"> Overview</a></li>
+        <li><a href="#How to Rename/Move/Delete a Topi"> How to Rename/Move/Delete a Topic</a><ul>
             <li><a href="#Referring Topics"> Referring Topics</a></li>
-            <li><a href="#Deleting a Topic"> Deleting a Topic</a><ul>
-                <li><a href="#Clearing the Trash"> Clearing the Trash</a></li>
-              </ul>
-            </li>
+            <li><a href="#About Deleting a Topic"> About Deleting a Topic</a></li>
           </ul>
         </li>
+        <li><a href="#Clearing the Trash"> Clearing the Trash</a></li>
         <li><a href="#Redirecting from an Old Topic"> Redirecting from an Old Topic</a></li>
-        <li><a href="#Impact of Topic Access Settings"> Impact of Topic Access Settings</a></li>
+        <li><a href="#Effect of Access Settings"> Effect of Access Settings</a></li>
         <li><a href="#How Rename/move Works"> How Rename/move Works</a></li>
         <li><a href="#Known Limitations"> Known Limitations</a></li>
       </ul>
@@ -24,30 +23,33 @@ _Browser-based rename, move, and delete for individual topics_
 
 ## <a name="Overview"></a> Overview
 
-Using browser controls while viewing a topic, you change its name, move it to another TWiki web, or delete it:
+Use browser controls while viewing a topic, to change its name, move it to another TWiki web, or delete it to a hidden `Trash` web.
 
-1. **Select** target web if other than the current web - chose <code>**Trash**</code> to [[delete a topic|Main/WebHome#DeleteTopic]]
-2. **Enter** the new topic name - default is current name <br />**_NOTE:_** You will be warned if there are locks or if there is a name conflict
-3. **Select** from the list of links to the topic that will be changed those to OMIT from changes (by default, all referring links will be updated)
-4. **Click** on **Rename/Move** to rename/remove topic will be renamed and links to the topic updated as requested.
-  - If any of the referring pages are locked then they will be listed
-  - You can correct these later by again pressing Rename/Move
+## <a name="How to Rename/Move/Delete a Topi"></a> How to Rename/Move/Delete a Topic
+
+1. **Click** on <code>**[More]**</code> (bottom right of page) on the topic to be changed, then, in the new screen, on <code>**[Rename/move]**</code>.
+2. **Select** target web if other than the current web - chose `Trash` to [[delete a topic|Main/WebHome#DeleteTopic]]
+3. **Enter** the new topic name - default is current name <br />**_NOTE:_** You will be warned if there are locks or if there is a name conflict.
+4. **Select** from the list of referring links any topics NOT to be updated with the new name (by default, all referring links will be updated).
+5. **Click** on <code>**[Rename/Move]**</code>: the topic will be renamed and links to the topic updated as requested.
+  - If any of the referring pages are locked then they will be listed.
+  - You can correct these later by again pressing <code>**[Rename/Move]**</code>.
 
 ### <a name="Referring Topics"></a> Referring Topics
 
 Referring topics are found using the the %SEARCH% variable, see the template `searchrenameview.tmpl`. First, matching topics in the current Web are listed - matches are to _topic_. Next, all Webs (including the current one) are listed that match _web.topic_. Because %SEARCH% is used, Webs marked in [[WebPreferences]] as NOSEARCHALL will not show up in the search for refernces to the _topic_ being changed.
 
-Changed references are kept are as short as possible, i.e. _topic_ is used in preference to _web.topic_.
+Changed references are kept are as short as possible, ex: _topic_ is used in preference to _web.topic_.
 
 <a name="DeleteTopic"></a>
 
-### <a name="Deleting a Topic"></a> Deleting a Topic
+### <a name="About Deleting a Topic"></a> About Deleting a Topic
 
 Deleted topics are moved to the `Trash` web - NOT physically erased from the server. All webs share `Trash` - in case of a name conflict with a topic already `Trash`, the user is alerted and asked to choose a new name.
 
-#### <a name="Clearing the Trash"></a> Clearing the Trash
+## <a name="Clearing the Trash"></a> Clearing the Trash
 
-**_NOTE:_** The `Trash` web should be be cleared periodically, by archiving the contents if required (recommended), then deleting the files from the `Trash` directory.
+The `Trash` web should be be cleared periodically, by archiving the contents if required (recommended), then deleting the files from the `Trash` directory.
 
 ## <a name="Redirecting from an Old Topic"></a> Redirecting from an Old Topic
 
@@ -56,18 +58,18 @@ You can use [[TWikiMetaData]] to place a command in [[WebTopicViewTemplate]] and
 > %<nop>METASEARCH{type="topicmoved" web="%WEB%" topic="%TOPIC%"
 >     title="This topic used to exist and was moved to: "}%
 
-## <a name="Impact of Topic Access Settings"></a> Impact of Topic Access Settings
+## <a name="Effect of Access Settings"></a> Effect of Access Settings
 
 Permissions affect the rename function in various ways. To rename a topic, you need both change and rename permissions. To alter refer4ing topics, you need change permission. See [[TWikiAccessControl]] for information on setting up access permissions.
 
 ## <a name="How Rename/move Works"></a> How Rename/move Works
 
-- %SEARCH% is used with a special template to show text in topics that requires updating to point to the new topic and/or web name. This includes relevent [[TWikiMetaData]] definition.
-  - User chooses which topics will be altered
-- `<pre>` and `<verbatim>` are honoured - no changes are made to text within these areas
-- Topic is moved (if locks allow)
-- References are changed (locks and permissions permitting)
-- Any referring topics that can't be changed due to locks are listed - user can change them at another time.
+1. %SEARCH%, with a special template, finds and displays all occurrences of the topic name in other topics, site-wide. These referring links are by default automatically changed to the new topic and/or web name. This includes relevant [[TWikiMetaData]] definitions.
+  - User can omit one or more topics from the update list.
+  - `<pre>` and `<verbatim>` are honoured - no changes are made to text within these areas.
+2. The topic is moved (if locks allow).
+3. References are changed (locks and permissions permitting).
+4. Any referring topics that can't be changed due to locks are listed - user can change them at another time.
 
 ## <a name="Known Limitations"></a> Known Limitations
 
