@@ -11,7 +11,11 @@ The Bibliography of the [[AFSFrequentlyAskedQuestions]].
 
 <div>
   <ul>
-    <li><a href="#6  Bibliography"> 6 Bibliography</a></li>
+    <li><a href="#6  Bibliography"> 6 Bibliography</a><ul>
+        <li><a href="#Reference used in the FAQ"> Reference used in the FAQ</a></li>
+        <li><a href="#Other miscellaneous reference to"> Other miscellaneous reference to AFS</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 
@@ -25,7 +29,7 @@ Where `athena-dist.mit.edu` is the anonymous FTP site and `pub/kerberos/doc/usen
 
 These references can be used throughout the AFSLore Wiki using FurtherReading#Reference, for example, [[FurtherReading#Mills92]].
 
-----
+### <a name="Reference used in the FAQ"></a> Reference used in the FAQ
 
 <a name="1"> <a name="Howard88"> [Howard88] John H Howard, Michael L Kazar, Sherri G Menees, David A Nichols, M Satyanarayanan, Robert N Sidebotham, Michael J West "Scale and Performance in a Distributed File System", ACM Transactions on Computer Systems, Vol. 6, No. 1, Feb 1988 pp 51-81. <http://www-2.cs.cmu.edu/afs/cs/project/coda/Web/docdir/s11.pdf> </a></a>
 
@@ -108,3 +112,17 @@ These references can be used throughout the AFSLore Wiki using FurtherReading#Re
 <a name="Katz94"> [Katz94] Eric Katz, Michelle Butler and Robert [[McGrath]], "A Scalable HTTP Server: The NCSA Prototype", National Center for Supercomputing Applications, University of Illinois, Urbana-Champaign, Il 61820, <http://archive.ncsa.uiuc.edu/InformationServers/Conferences/CERNwww94/www94.ncsa.html> </a>
 
 > Describes the use of AFS to create a scalable web server.
+
+### <a name="Other miscellaneous reference to"></a> Other miscellaneous reference to AFS
+
+Mic Bowman, Bill Camargo, "Digital Libraries: The Next Generation in File System Technology", D-Lib Magazine, February 1998, <http://www.dlib.org/dlib/february98/bowman/02bowman.html>.
+
+> Uses AFS as an example of the value of wide-area file systems. It outlines several modes of usage exemplified by AFS. It goes on to suggest enhancements that would make a file system more valuable as a collaborative tool: extensible user-level metadata, explicit object typing with inheritance, and meta-object to store and manage references to other objects.
+>
+> <br />
+>
+> --
+>
+> [[TedAnderson]]
+>
+> - 01 Aug 2002
