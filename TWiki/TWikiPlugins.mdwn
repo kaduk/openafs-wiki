@@ -88,7 +88,7 @@ To test new Plugins on your installation before making them public, you may want
     - %X% If you modify topics using the new features, live users will likely see unfamiliar new META tags showing up on their pages - to avoid this, create and edit test-only topics to try out new features.
   - **Copy** the modified files to the Production installation. You can update a TWiki installation live and users won't even notice.
 
-- **Method 2:** List the Plugin under `Test` in the `DISABLEDPLUGINS` variable in [[TWikiPreferences]]. Redefine the `DISABLEDPLUGINS` variable in the Test web and do the testing there.
+- **Method 2:** List the Plugin being tested in the `DISABLEDPLUGINS` variable in [[TWikiPreferences]]. Redefine the `DISABLEDPLUGINS` variable in the `Sandbox` web and do the testing there.
 
 ## <a name="Managing Plugins"></a> Managing Plugins
 
