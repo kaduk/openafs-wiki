@@ -22,6 +22,7 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#4.10  Donde puedo encontrar info"> 4.10 Donde puedo encontrar informacion en Espanol sobre AFS?</a></li>
         <li><a href="#4.11 Is there a book on AFS ??"> 4.11 Is there a book on AFS ??</a></li>
         <li><a href="#4.12 Where can I find tools to u"> 4.12 Where can I find tools to use with AFS?</a></li>
+        <li><a href="#4.13 Where can I find stuff from"> 4.13 Where can I find stuff from the old transarc.com web site?</a></li>
       </ul>
     </li>
   </ul>
@@ -136,7 +137,7 @@ Here are some I have found (please let me know if you find more):
        http://www.ncsa.uiuc.edu/Pubs/UserGuides/AFSGuide/AFSv2.1Book.html
 
     d) Transarc AFS Product Information:
-       http://www.transarc.com/dfs/public/www/htdocs/.hosts/external/Product/EFS/AFS/afsoverview.html
+       http://web.archive.org/web/20010604011953/www.transarc.ibm.com/Library/documentation/afs_doc.html
 
     e) CERN AFS User's Guide:
        http://wsspinfo.cern.ch/file/doc/afsug.html
@@ -203,3 +204,9 @@ Yes, though now it is out of print. "Managing AFS: The Andrew File System" by Ri
 ### <a name="4.12 Where can I find tools to u"></a> 4.12 Where can I find tools to use with AFS?
 
 A collection of AFS management tools used at Stanford University can be found at <http://www.eyrie.org/~eagle/software/> in the AFS section. Included in this collection are tools for handling volume creation, volume deletion, and migrating volumes, a tool for comparing read/write and read-only volumes, tools for monitoring AFS with Nagios, tools for tracking mount point locations for volumes, and some user utilities like a recursive wrapper around fs and a utility to find mount points in a file tree.
+
+### <a name="4.13 Where can I find stuff from"></a> 4.13 Where can I find stuff from the old transarc.com web site?
+
+Many of the links to transarc.com in the FAQ, and around the web are broken. The best bet seems to be to use the [Wayback Machine](http://web.archive.org) to search the Internet Archive for old versions of the pages from transarc.com and transarc.ibm.com. Here is one place to start, but things are sometimes missing so you may have to search for older copies and alternate paths.
+
+Here is the [AFS 3.6 Documentation](http://web.archive.org/web/20010604011953/http://www.transarc.ibm.com/Library/documentation/afs/3.6/unix/en_US/HTML/index.htm) and [AFS for Windows](http://web.archive.org/web/20010529113949/www.transarc.ibm.com/Library/documentation/afs/3.6/windows/en_US/html/index.htm).
