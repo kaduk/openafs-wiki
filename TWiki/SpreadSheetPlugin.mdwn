@@ -1,6 +1,6 @@
 # <a name="TWiki Spreadsheet Plugin"></a> TWiki Spreadsheet Plugin
 
-This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulas like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables.
+This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this Plugin provides general formula evaluation capability, not just classic spreadsheet functions.
 
 Example:
 
@@ -39,8 +39,9 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
 
 ## <a name="Syntax Rules"></a> Syntax Rules
 
-- The formula in the <code>**%CALC\{"formula"\}%**</code> variable can contain built-in functions
-- Built-in function are of format <code>**$FUNCNAME(parameter)%**</code>
+The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> variable, which gets rendered according to the built-in function(s) found between the quotes.
+
+- Built-in function are of format <code>**$FUNCNAME(parameter)**</code>
 - Functions may be nested, e.g. <code>**%CALC\{"$SUM( R2:C$COLUMN(0)..R$ROW(-1):C$COLUMN(0) )"\}%**</code>
 - Functions are evaluated from left to right, and from inside to outside if nested
 - The function parameter can be text; a mathematical formula; a cell address; or a range of cell addresses
@@ -124,24 +125,24 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
     <td> Formats a number to a certain type and precision. Types with examples:<br />  - <code><b>%CALC{"$FORMAT( COMMA, 2, 12345.6789 )"}%</b></code> returns <code><b>12,345.68</b></code><br />  - <code><b>%CALC{"$FORMAT( DOLLAR, 2, 12345.67 )"}%</b></code> returns <code><b>$12,345.68</b></code><br />  - <code><b>%CALC{"$FORMAT( NUMBER, 1, 12345.67 )"}%</b></code> returns <code><b>12345.7</b></code><br />  - <code><b>%CALC{"$FORMAT( PERCENT, 1, 0.1234567 )"}%</b></code> returns <code><b>12.3%</b></code></td>
   </tr>
   <tr>
-    <td><code><b>"$FORMATTIME( serial, text )"</b></code></td>
-    <td> Convert a serialized date into a date string; the following variables in text are expanded: <code>$second</code> (seconds, 00..59); <code>$minute</code> (minutes, 00..59); <code>$hour</code> (hours, 00..23); <code>$day</code> (day of month, 01..31); <code>$month</code> (month, 01..12); <code>$mon</code> (month in text format, Jan..Dec); <code>$year</code> (4 digit year, 1999); <code>$ye</code> (2 digit year, 99), <code>$wd</code> (day number of the week, 1 for Sunday, 2 for Monday, etc), <code>$wday</code> (day of the week, Sun..Sat), <code>$weekday</code> (day of the week, Sunday..Saturday), <code>$yearday</code> (day of the year, 1..365, or 1..366 in leap years). Date is assumed to be server time; add <code>GMT</code> to indicate Greenwich time zone. See also <code>$TIME()</code>, <code>$TODAY()</code>, <code>$FORMATGMTIME()</code>, <code>$TIMEDIFF()</code>. Example: <code><b>%CALC{"$FORMATTIME( 0, $year/$month/$day GMT )"}%</b></code> returns <code><b>1970/01/01 GMT</b></code></td>
+    <td><code><b>"$FORMATTIME(serial, text)"</b></code></td>
+    <td> Convert a serialized date into a date string; the following variables in text are expanded: <code>$second</code> (seconds, 00..59); <code>$minute</code> (minutes, 00..59); <code>$hour</code> (hours, 00..23); <code>$day</code> (day of month, 01..31); <code>$month</code> (month, 01..12); <code>$mon</code> (month in text format, Jan..Dec); <code>$year</code> (4 digit year, 1999); <code>$ye</code> (2 digit year, 99), <code>$wd</code> (day number of the week, 1 for Sunday, 2 for Monday, etc), <code>$wday</code> (day of the week, Sun..Sat), <code>$weekday</code> (day of the week, Sunday..Saturday), <code>$yearday</code> (day of the year, 1..365, or 1..366 in leap years). Date is assumed to be server time; add <code>GMT</code> to indicate Greenwich time zone. See also <code>$TIME()</code>, <code>$TODAY()</code>, <code>$FORMATGMTIME()</code>, <code>$TIMEDIFF()</code>. Example: <code><b>%CALC{"$FORMATTIME(0, $year/$month/$day GMT)"}%</b></code> returns <code><b>1970/01/01 GMT</b></code></td>
   </tr>
   <tr>
-    <td><code><b>"$FORMATGMTIME( serial, text )"</b></code></td>
-    <td> Convert a serialized date into a date string in Greenwich time zone. Same variables expansion as in <code>$FORMATTIME()</code>. Example: <code><b>%CALC{"$FORMATGMTIME( 1041379200, $day $mon $year )"}%</b></code> returns <code><b>01 Jan 2003</b></code></td>
+    <td><code><b>"$FORMATGMTIME(serial, text)"</b></code></td>
+    <td> Convert a serialized date into a date string in Greenwich time zone. Same variables expansion as in <code>$FORMATTIME()</code>. Example: <code><b>%CALC{"$FORMATGMTIME(1041379200, $day $mon $year)"}%</b></code> returns <code><b>01 Jan 2003</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$GET(name)"</b></code></td>
-    <td> Get the value of a previously set variable. Specify the variable name (alphanumeric characters and underscores). An empty string is returned if the variable does not exist. Use <code>$SET()</code> to set a variable first. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables. See also <code>$SET()</code>. Example: <code><b>%CALC{"$GET( my_total )"}%</b></code> returns the value of the <code>my_total</code> variable </td>
+    <td> Get the value of a previously set variable. Specify the variable name (alphanumeric characters and underscores). An empty string is returned if the variable does not exist. Use <code>$SET()</code> to set a variable first. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables. See also <code>$SET()</code>. Example: <code><b>%CALC{"$GET(my_total)"}%</b></code> returns the value of the <code>my_total</code> variable </td>
   </tr>
   <tr>
     <td><code><b>"$IF(condition, value if true, value if 0)"</b></code></td>
-    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Examples:%BR% <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not%BR% <code><b>%CALC{"$IF( $EXACT($T(R1:C2),), empty, $T(R1:C2) )"}%</b></code> returns the content of R1:C2 or <code><b>empty</b></code> if empty%BR% <code><b>%CALC{"$SET(val, $IF( $T(R1:C2) == 0, zero, $T(R1:C2) ))"}%</b></code> sets a variable conditionally </td>
+    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Examples:%BR% <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK)"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not%BR% <code><b>%CALC{"$IF( $EXACT($T(R1:C2),), empty, $T(R1:C2))"}%</b></code> returns the content of R1:C2 or <code><b>empty</b></code> if empty%BR% <code><b>%CALC{"$SET(val, $IF( $T(R1:C2) == 0, zero, $T(R1:C2)))"}%</b></code> sets a variable conditionally </td>
   </tr>
   <tr>
     <td><code><b>"$INT(formula)"</b></code></td>
-    <td> Evaluates a simple formula and rounds the result down to the nearest integer. Example: <code><b>%CALC{"$INT( 10 / 4 )"}%</b></code> returns <code><b>2</b></code></td>
+    <td> Evaluates a simple formula and rounds the result down to the nearest integer. Example: <code><b>%CALC{"$INT(10 / 4)"}%</b></code> returns <code><b>2</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$LEFT()"</b></code></td>
@@ -154,6 +155,10 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   <tr>
     <td><code><b>"$LIST(range)"</b></code></td>
     <td> Converts the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list. Example: <code><b>%CALC{"$LIST( $LEFT() )"}%</b></code> returns <code><b>Apples, Lemons, Oranges, Kiwis</b></code> assuming the cells to the left contain <code><b>| Apples | Lemons, Oranges | Kiwis |</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$LISTITEM(index, list)"</b></code></td>
+    <td> Get one item of a list. Index is 1 to size of list; use a negative number to count from the end of the list. Examples:%BR% <code><b>%CALC{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Orange</b></code> %BR% <code><b>%CALC{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Kiwi</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$LISTMAP(formula, list)"</b></code></td>
@@ -217,7 +222,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$PROPERSPACE(text)"</b></code></td>
-    <td> Properly spaces out [[TWiki/WikiWords]] preceeded by white space, parenthesis, or <code><b>][</b></code>. Words listed in the DONTSPACE [[TWiki/TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded. Example, assuming DONTSPACE contains McIntosh: <code><b>%CALC{"PROPERSPACE(McIntosh likes WikiWord links like WebHome and [[WebHome][WebHome]])"}%</b></code> returns <code><b>McIntosh likes Wiki Word links like Web Home and [[Main/WebHome]]</b></code></td>
+    <td> Properly spaces out [[TWiki/WikiWords]] preceeded by white space, parenthesis, or <code><b>][</b></code>. Words listed in the DONTSPACE [[TWiki/TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded. Example, assuming DONTSPACE contains McIntosh: <code><b>%CALC{"PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh"}%</b></code> returns <code><b>Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$RAND(max)"</b></code></td>
@@ -383,7 +388,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   - Set SKIPINCLUDE = 1
 
 - [[WikiWords|TWiki/WikiWord]] to exclude from being spaced out by the <code>**$PROPERSPACE(text)**</code> function. This comma delimited list can be overloaded by a DONTSPACE preferences variable:
-  - Set DONTSPACE = CodeWarrior, McIntosh, RedHat, SuSE
+  - Set DONTSPACE = CodeWarrior, MacDonald, McIntosh, RedHat, SuSE
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -419,15 +424,19 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 16 Mar 2004 </td>
+    <td> 21 Mar 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 21 Mar 2004: </td>
+    <td> Added $LISTINDEX(); fixed call to inofficial function </td>
+  </tr>
+  <tr>
     <td align="right"> 16 Mar 2004: </td>
-    <td> Added $LISTMAP(), $LISTREVERSE(), $LISTSIZE(), $LISTSORT(), $LISTUNIQUE(), $SETM(); retired $COUNTUNIQUE() in favor of $COUNTITEMS($LISTUNIQUE(); fixed evaluation order issue of $IF(); fixed missing eval error messages suppressed since version 06 Mar 2004; redirect stderr messages to warning </td>
+    <td> Added $LISTMAP(), $LISTREVERSE(), $LISTSIZE(), $LISTSORT(), $LISTUNIQUE(), $SETM(); retired $COUNTUNIQUE() in favor of $COUNTITEMS($LISTUNIQUE()); fixed evaluation order issue of $IF(); fixed missing eval error messages suppressed since version 06 Mar 2004; redirect stderr messages to warning </td>
   </tr>
   <tr>
     <td align="right"> 08 Mar 2004: </td>
@@ -537,4 +546,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 16 Mar 2004
+-- TWiki:Main/PeterThoeny - 21 Mar 2004
