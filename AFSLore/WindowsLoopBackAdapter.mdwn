@@ -36,6 +36,6 @@ These instructions were written for Windows XP, but translate fairly directly to
     - If you're on a private network that actually uses 10.\* addresses, change the IP to point to another RFC1918 address space.
 5. Before you leave the properties for the Loopback Adapter, be sure that "File and Print Sharing for Microsoft Networks" and "Client for Microsoft Networks" are installed and checked. If not, use the Install button to install these services, and check them in the list.
 
-Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) by Scott Williams, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
+Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) included in [[OpenAFS]] 1.2.8+, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
 
 -- [[BenCreech]] - 11 Jul 2003
