@@ -19,7 +19,12 @@ Managing TWiki webs requires direct access to the installation files on the host
 
 ## <a name="How to Add a New Web"></a> How to Add a New Web
 
-- See [[TWikiInstallationGuide|Main/TWikiDocumentation#TWikiInstallationGuide]]
+Adding new webs is quick and easy - you can have a basic web up and running in a couple of minutes:
+
+1. **Create** a new directory under <code>**twiki/data/**</code>, ex: `twiki/data/newweb`
+2. **Copy** in the contents of `twiki/data/_default`.
+
+For detailed instructions: [[TWiki Installation Guide: Creating a New Web|Main/TWikiDocumentation#CreateWeb]].
 
 ## <a name="How to Rename or Delete a Web"></a> How to Rename or Delete a Web
 
