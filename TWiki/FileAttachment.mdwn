@@ -46,7 +46,8 @@ File Attachments can be used to create powerful customized groupware solutions, 
 - Click on the <code>**Attach**</code> link at the bottom of the page. The `Attach` screen lets you browse for a file, add a comment, and upload it. The uploaded file will show up in the [[File Attachment table|Main/WebHome#FileAttachmentTable]].
   - Any type of file can be uploaded. Some files that might pose a security risk are renamed, ex: `*.php` files are renamed to `*.php.txt` so that no one can place code that would be read in a .php file.
   - The previous upload path is retained for convenience. In case you make some changes to the local file and want to upload it, again you can copy the previous upload path into the Local file field.
-  - Currently there is no file size limit other than the disk space on the server. \* %X% It's not recommended to upload files greater than a few hundred K through a browser. Large files can be extremely slow-loading, and often time out. Use FTP for large file uploads.
+  - TWiki can limit the file size. This is defined by the `%ATTACHFILESIZELIMIT%` variable of the [[TWikiPreferences]], currently set at %ATTACHFILESIZELIMIT% KB.
+    - %X% It's not recommended to upload files greater than a few hundred K through a browser. Large files can be extremely slow-loading, and often time out. Use an FTP site for large file uploads.
 
 ## <a name="Downloading Files"></a> Downloading Files
 
