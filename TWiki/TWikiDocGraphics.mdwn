@@ -4,7 +4,7 @@ This is one way to create a library of common icons, accessible through user-def
 
 There are other approaches as well: the TWiki:Plugins/TopicVarsPlugin lets you set variables in any topic, not just in [[WebPreferences]], for use in the same. The TWiki:Plugins/SmiliesPlugin, using a different short hand than `%VARIABLES%`, may be worth checking out for extended use.
 
-In this example, %TOPIC% - this topic - acts as the icon library. Graphics are uploaded and displayed. Then, the paths are set in [[TWikiPreferences]] for site-wide access. You can also create individual library pages in each web. And you don't have to restrict yourself to graphics: Preferences Variables can include text and links to any type of file.
+In this example, %TOPIC% - this topic - acts as the icon library. Graphics are uploaded and displayed. Then, the paths are set in [[TWiki.TWikiPreferences#DocGraphics|TWiki/TWikiPreferences#DocGraphics]] for site-wide access. You can also create individual library pages in each web. And you don't have to restrict yourself to graphics: Preferences Variables can include text and links to any type of file.
 
 - <img src="http://www.dementia.org/twiki//view/help.gif" width="16" height="16" alt="help.gif" /> Help
 - <img src="http://www.dementia.org/twiki//view/tip.gif" width="16" height="16" alt="tip.gif" /> Tip / Idea
