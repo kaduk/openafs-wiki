@@ -44,10 +44,10 @@ Some other topics that should be explained.
 - [[AccessControlLists]] (aka ACLs).
 - IP ACLs
 - How to configure various authentication servers to issue tickets (tokens) with lifetimes longer than 25 hours.
-- Integration with NIS. See the [[GeneralFAQ#1_05_d_Improved_security]], but basically you use NIS vis NSS for names of users and Kerberos via PAM for authentication. There is still the question of integrating group management.
+- [[IntegrationWithNIS]]. See the [[GeneralFAQ#1_05_d_Improved_security]], but basically you use NIS vis NSS for names of users and Kerberos via PAM for authentication. There is still the question of integrating group management.
 - [[OtherGroupServers]] are not well integrated as far as I know. The big ones are [[ActiveDirectory]] and [[NIS]] and maybe some LDAP systems. While one could imagine wrapping a [[PtServer]] interface around such a thing, there are probably some features that would make seamless integration difficult. Has anyone seriously looked into this?
 
--- [[TedAnderson]] - 22-24, 29 Jan 2002<br /> -- [[JasonGarman]] - 30 Jan 2002<br /> -- [[TedAnderson]] - 06 Feb 2002<br />
+-- [[TedAnderson]] - 22-24, 29 Jan 2002<br /> -- [[JasonGarman]] - 30 Jan 2002<br /> -- [[TedAnderson]] - 06-07 Feb 2002<br />
 
 ----
 
