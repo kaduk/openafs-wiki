@@ -7,7 +7,7 @@ TWiki expands the following variables enclosed in % percent signs:
   </tr>
   <tr>
     <td><code>%WIKIHOMEURL%</code></td>
-    <td> The base script URL of TWiki, link of Home icon in upper left corner is <b>%WIKIHOMEURL%</b></td>
+    <td> The base script URL of TWiki, link of Home icon in upper left corner, is <b>%WIKIHOMEURL%</b></td>
   </tr>
   <tr>
     <td><code>%SCRIPTURL%</code></td>
@@ -60,6 +60,22 @@ TWiki expands the following variables enclosed in % percent signs:
   <tr>
     <td><code>%DATE%</code></td>
     <td> Todays date, is <b>29 Jun 2010</b></td>
+  </tr>
+  <tr>
+    <td><code>%HTTP_HOST%</code></td>
+    <td> HTTP_HOST environment variable, is <b></b></td>
+  </tr>
+  <tr>
+    <td><code>%REMOTE_ADDR%</code></td>
+    <td> REMOTE_ADDR environment variable, is <b></b></td>
+  </tr>
+  <tr>
+    <td><code>%REMOTE_PORT%</code></td>
+    <td> REMOTE_PORT environment variable, is <b></b></td>
+  </tr>
+  <tr>
+    <td><code>%REMOTE_USER%</code></td>
+    <td> REMOTE_USER environment variable, is <b></b></td>
   </tr>
   <tr>
     <td><code>%INCLUDE{"file.ext"}%</code></td>
@@ -161,3 +177,5 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
     <td> Default state of the link check box in the attach file page. Check box is initially checked if value is set to <code>CHECKED</code> , unchecked if empty. If checked, a link is created to the attached file at the end of the topic. Value is: <b><code>%ATTACHLINKBOX%</code></b></td>
   </tr>
 </table>
+
+-- [[PeterThoeny]] - 21 Apr 2000 <br />
