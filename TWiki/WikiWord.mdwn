@@ -20,25 +20,27 @@ WikiWords are styled like this because:
 
 - [[WikiWord]]
 - [[GoodStyle]]
-- [[AVeryLongWikiTopicNameIsAlsoPossible]]
+- [[AVeryLongWikiTopicNameIsAlsoPossible]]: wherever an uppercase or lowercase letter is allowed, a group of letters of the same case is allowed
 - [[YearTwoThousand]]
 
 **Bad examples for WikiWords:**
 
-- Web: Name with no uppercase letter in between
-- [[T5Wiki]]: Name with number before the first lowercase letter
+- Web: Name without the uppercase letter(s), lowercase letter(s), uppercase letter(s) sequence
+- [[T5Wiki]]: Name with number before the uppercase, lowercase, uppercase sequence
+- [[Md5sumsAfterBurning]]: Name with number before the uppercase, lowercase, uppercase sequence
 - Know-How: Name with dashes in between
 
 **Hints**
 
 - Insert WikiWords wherever you can. Rich linking helps to make a Wiki successful.
 - Be specific. All topics in a web share one name space. For example, instead of `FunctionalSpec` write `BreadSlicerFunctionalSpec` because other projects might also have a functional spec topic.
-- To stop a WikiWord from being turned into a hyperlink, insert the text `<nop>` immediately before the WikiWord.
-- A topic is usually presented in the singular. Plural WikiWords are automatically linked to the singular topic, i.e. the link [[WikiWords]] links to the topic [[WikiWord]].
+- %H% To stop a WikiWord from being turned into a hyperlink, insert the text `<nop>` immediately before the WikiWord.
+- It is recommended to create topics with singular names. Plural WikiWords are automatically linked to the singular topic, i.e. the link [[WikiWords]] links to the topic [[WikiWord]].
 - Sometimes you have to be creative to find a good WikiName. Examples:
   - To create a topic about the the **Bread Slicer 1.2** product, use `BreadSlicer1dot2` or `BreadSlicer1pt2`, but not `BreadSlicer1.2`.
   - To create a topic about **year 2000**, you could go for `YearTwoK` or `YearTwoThousand`, but not `Year2K` or `Y2K` or `Y2000`.
 - Turn acronyms into WikiWords, i.e. take `FaqIndex` for a "FAQ index" topic.
 - You can specify any link label by using double square brackets, e.g. write `[[TWikiAccessControl][access control]]` to get a link to [[TWikiAccessControl]] that looks like [[access control|Main/TWikiAccessControl]].
+- %X% The topic is assumed to be in the current TWiki web. Prepending the name of a TWiki web and a period links to a topic in another web.
 
 **_Related Topics:_** [[WikiSyntax]], [[TextFormattingRules]]
