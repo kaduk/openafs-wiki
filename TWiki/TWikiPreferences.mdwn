@@ -60,7 +60,7 @@ The following are **_site-level_** settings that affect all users in all webs on
 %X% **NOTE:** They are typically redefined in topics of individual [[TWikiUsers]]
 
 - Show tool-tip topic info on mouse-over of [[WikiWord]] links. Setting can be on, off, or customized. An empty setting or off setting disables the tool-tips (for better performance). The setting can contain $summary to show the topic summary, $date for the last change date, $rev for the revision, $username for the login name of the last editor, $wikiname for the WikiName, $wikiusername for Main.WikiName, $topic for the topic name, and $web for the web name
-  - Set LINKTOOLTIPINFO = on
+  - Set LINKTOOLTIPINFO = off
   - #Set LINKTOOLTIPINFO = $username - $date - $rev: $summary
 
 - Horizontal size of text edit box: (can be overwritten by user preferences)

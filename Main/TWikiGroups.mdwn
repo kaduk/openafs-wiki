@@ -1,18 +1,24 @@
 These groups can be used to define fine grained [[TWikiAccessControl]] in %WIKITOOLNAME%:
 
-- [[TWikiAdminGroup]]
-- [[EngineeringGroup]]
-- [[SupportGroup]]
--
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
 
-Add your groups to this list and define new group topics similar to existing ones. Group topics **_must_** end in `...Group.`
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
+
+<form action="http://www.dementia.org/twiki//edit/%WEB%/" method="get">
+  <ul>
+    <li> New Group: <input name="topic" size="30" type="text" value="NameGroup" /> <input name="templatetopic" type="hidden" value="TWikiGroupTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="onlynewtopic" type="hidden" value="on" /> <input type="submit" value="Add" /><ul>
+        <li><strong><em>Note:</em></strong> A group topic name must be a [[TWiki/WikiWord]] and <strong><em>must</em></strong> end in <code>...Group</code>. New topics are based on [[Main/TWikiGroupTemplate]]</li>
+      </ul>
+    </li>
+  </ul>
+</form>
 
 **IMPORTANT NOTE:** Think twice before restricting write access to a web or a topic, because an open system where everybody can contribute is the essence of the [[WikiCulture]]. Experience shows that unrestricted write access works very well because:
 
 - There is enough peer pressure to post only appropriate content.
 - Content does not get lost because topics are under revision control.
-- A topic revision can be undone by a member of the [[TWikiAdminGroup]] in case needed.
+- A topic revision can be undone by a member of the [[TWikiAdminGroup]] in case it needs to be.
 
-**_Related topics:_** [[TWikiAccessControl]], [[WebPreferences]], [[TWikiUsers]], [[WikiCulture]].
+**_Related topics:_** [[TWikiAccessControl]], [[WebPreferences]], [[TWikiUsers]], [[WikiCulture]]
 
--- [[PeterThoeny]] - 07 Nov 2000 <br />
+-- TWiki:Main.PeterThoeny - 04 Aug 2004 %BR% -- TWiki:Main.AurelioAHeckert - 03 Aug 2004
