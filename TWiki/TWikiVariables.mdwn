@@ -263,7 +263,7 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> 2 digit year </td>
               <td> 99 </td>
             </tr>
-          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:30:15</b></td>
+          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:30:25</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME%</code></td>
@@ -620,6 +620,6 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 > <br />
 >
 > - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, simply define the variable on the web's [[WebPreferences]] page. You also have to upload `logo.gif` - this can be done by [[attaching a file|Main/FileAttachment]] to `LogoTopic` (any topic name you choose):
->   - <code>**Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif**</code>
+>   - <code>**Set MYLOGO = %PUBURL%/%MAINWEB%/LogoTopic/logo.gif**</code>
 
--- [[MikeMannix]] - 30 Aug 2001 <br />
+-- [[MikeMannix]] - 30 Aug 2001 <br /> -- [[PeterThoeny]] - 13 Sep 2001 <br />
