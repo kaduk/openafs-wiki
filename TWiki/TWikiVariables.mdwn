@@ -24,7 +24,7 @@ Most predefined variables return values that were either set in the <code>**lib/
 
 This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the following variables (enclosed in <code>**%**</code> percent signs):
 
-<table align="center" border="1" cellpadding="2" cellspacing="0" style="background-color: #f5f5f5" width="90%">
+<table align="center" border="1" cellpadding="2" cellspacing="0" style="background-color: #f5f5f5">
   <tr>
     <th width="160"> Variable: </th>
     <th> Expanded to: </th>
@@ -327,7 +327,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:43:51</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:43:53</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -389,7 +389,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         <tr>
           <td><code>warn="off"</code></td>
           <td> Warn if topic include fails: Fail silently (if <code>off</code>); output default warning (if set to <code>on</code>); else, output specific text (use <code>$topic</code> for topic name) </td>
-          <td><code>%INCLUDE- WARNING%</code> preferences setting </td>
+          <td><code>%INCLUDE- WARNING%</code> [[Main/TWikiPreferences]] setting </td>
         </tr>
       </table>
     </td>
@@ -446,7 +446,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>"text"</code></td>
-          <td> Search term. Is a regular expression or literal, depending on the <code>regex</code> parameter. For regular expressions ";" is used to mean <em>and</em> e.g. "search;agrep" will find all topic containing search <em>and</em> agrep. </td>
+          <td> Search term. Is a keyword search, literal search or regular expression search, depending on the <code>type</code> parameter. [[Main/SearchHelp]] has more </td>
           <td> required </td>
         </tr>
         <tr>
@@ -470,9 +470,14 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> None </td>
         </tr>
         <tr>
-          <td><code>scope="topic"</code><br /><code>scope="text"</code></td>
-          <td> Search topic name (title) or in the text (body) of the topic </td>
-          <td> Topic text (body) </td>
+          <td><code>type="keyword"</code><br /><code>type="literal"</code><br /><code>type="regex"</code></td>
+          <td> Do a keyword search like <code>soap "web service" -shampoo</code>; a literal search like <code>web service</code>; or [[Main/RegularExpression]] search like <code>soap;web service;!shampoo</code></td>
+          <td><code>%SEARCHVAR- DEFAULTTYPE%</code> [[Main/TWikiPreferences]] setting </td>
+        </tr>
+        <tr>
+          <td><code>scope="topic"</code><br /><code>scope="text"</code><br /><code>scope="all"</code></td>
+          <td> Search topic name (title); the text (body) of topic; or all (both) </td>
+          <td><code>"text"</code></td>
         </tr>
         <tr>
           <td><code>order="topic"</code><br /><code>order="modified"</code><br /><code>order="editby"</code><br /><code>order=<br /> "formfield(name)"</code></td>
@@ -483,11 +488,6 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td><code>limit="all"</code><br /><code>limit="16"</code></td>
           <td> Limit the number of results returned </td>
           <td> All results </td>
-        </tr>
-        <tr>
-          <td><code>regex="on"</code></td>
-          <td>[[Main/RegularExpression]] search; also enables ";" as <em>and</em></td>
-          <td> Literal search </td>
         </tr>
         <tr>
           <td><code>reverse="on"</code></td>
@@ -539,7 +539,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> Line separator between hits </td>
           <td> Newline <code>"$n"</code></td>
         </tr>
-      </table> Regular example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code><br /> Formatted example: <code><b>%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%</b></code> <em>(displays results in a table with header - [[Main/FormattedSearch]])</em><br /> %H% If the TWiki:Plugins.TablePlugin is installed, you may set a <code>%TABLE{}%</code> variable just before the <code>%SEARCH{}%</code> to alter the output of a search. Example: <code><b>%TABLE{ tablewidth="90%" }%</b></code></td>
+      </table> Example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code><br /> Formatted example: <code><b>%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%</b></code> <em>(displays results in a table with header - [[Main/FormattedSearch]])</em><br /> %H% If the TWiki:Plugins.TablePlugin is installed, you may set a <code>%TABLE{}%</code> variable just before the <code>%SEARCH{}%</code> to alter the output of a search. Example: <code><b>%TABLE{ tablewidth="90%" }%</b></code></td>
   </tr>
   <tr>
     <td><code>%METASEARCH{...}%</code></td>
@@ -591,7 +591,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
 
 Additional variables are defined in the preferences ( site-level ( **_SL_** ) in [[TWikiPreferences]], web-level ( **_WL_** ) in [[WebPreferences]] of each web, and user level ( **_UL_** ) preferences in individual user topics):
 
-<table align="center" border="1" cellpadding="2" cellspacing="0" style="background-color: #f5f5f5" width="90%">
+<table align="center" border="1" cellpadding="2" cellspacing="0" style="background-color: #f5f5f5">
   <tr>
     <th width="160"> Variable: </th>
     <th> Level: </th>
@@ -723,35 +723,13 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
     <td> List of users and groups who are <strong>allowed</strong> to rename the current topic. (More in [[Main/TWikiAccessControl]]) </td>
   </tr>
   <tr>
-    <td>
-      <p>
-      </p>
-    </td>
     <td><code>%FINALPREFERENCES%</code></td>
     <td><strong><em>SL</em></strong> , <strong><em>WL</em></strong></td>
     <td> List of preferences that are not allowed to be overridden by next level preferences</td>
   </tr>
 </table>
 
-> **_Note:_**
->
-> There are some more useful variables defined in the
->
-> [[TWikiPreferences]]
->
-> like
->
-> `%BR%`
->
-> for line break, colors like
->
-> `%RED%`
->
-> for colored text and small icons like
->
-> `%H%`
->
-> for a %H% Help icon.
+**_Note:_** There are some more useful variables defined in the [[TWikiPreferences]] like `%BR%` for line break, colors like `%RED%` for colored text and small icons like `%H%` for a %H% Help icon.
 
 <a name="SettingPrefs"></a>
 
