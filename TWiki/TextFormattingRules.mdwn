@@ -45,3 +45,11 @@ External links:
   - HTML 3.2 Reference Specification at <http://www.w3.org/TR/REC-html32.html>
 
 **WIKI VARIABLES**
+
+Variables are names enclosed in percent signs that gets expanded on the fly.
+
+- `%WEB%` : The current web, is **%WEB%** .
+- `%TOPIC%` : The current topic name, is **%TOPIC%** .
+- `%ATTACHURL%` : The attachment URL of the current topic. Example usage: If you attach a file to a topic you can refer to it as <code>**%ATTACHURL%/image.gif**</code> to show the URL of the file or the image in your text.
+- `%INCLUDE{"file.ext"}%` : Server side include, includes the text of a file. The default directory is the current Wiki web. Example: <code>**%INCLUDE\{"Know/TopicName.txt"\}%**</code>
+- There are many more variables, see [[TWikiVariables]].
