@@ -4,57 +4,13 @@ Gives extra control of table display:
 
 - Allows sorting
 - Changing table properties like border width, cell spacing and cell padding
-- Changing background color for header cells
-- Changing background color for data cells - colors can _alternate_
-- Behaviour can be specified for a specific table using %TABLE\{...\}% or with global preferences
-
-## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
-
-Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
-
-- One line description, shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Control attributes of tables and sorting of table columns
-
-- Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
-  - Set DEBUG = 0
-
-- Table border width. Default: 1
-  - Set TABLEBORDER = 1
-
-- Table cell padding. Default: 0
-  - Set CELLPADDING = 0
-
-- Table cell spacing. Default: 1
-  - Set CELLSPACING = 1
-
-- Table width, e.g. `100%` for relative, `640` for absolute width. Default: (not set)
-  - Set TABLEWIDTH =
-
-- Vertical alignment of cells. Set to: `top`, `middle`, `bottom` or `baseline`; default: (empty)
-  - Set VALIGN =
-
-- Table header cell alignment. Set to: `left`, `center`, `right` or `justify`; default: (empty)
-  - Set HEADERALIGN =
-
-- Table data cell alignment. Set to: `left`, `center`, `right` or `justify`; default: (empty)
-  - Set DATAALIGN =
-
-- Background color of header cells ('\*'s around text). Choose one of the [[StandardColors]]. Default: <span>\#99CCCC</span>
-  - Set HEADER\_BG =
-
-- Text color of header cells ('\*'s around text). Default: not specified, e.g. determined by the browser
-  - Set HEADER\_COLOR =
-
-- Background color of table rows, two alternate colors. Default: <span>\#FFFFCC</span>, <span>\#FFFFFF</span>
-  - Set DATA\_BG = #FFFFCC, #FFFFFF
-
-- Text color of table rows, alternate colors. Default: not specified, e.g. determined by the browser
-  - Set DATA\_COLOR =
-
-- Make sortable:
-  - #Set SORT = attachments
-  - Set SORT = all
-  - #Set SORT = none
+- Changing background color and text color for header cells
+- Changing background color and text color for data cells - colors can _alternate_
+- Table attributes can be set and overridden in this order:
+  - Default `TABLEATTRIBUTES` Plugin setting in this topic.
+  - A `TABLEATTRIBUTES` preferences setting on site-level ([[TWikiPreferences]]) or web-level (any [[WebPreferences]]), e.g.
+    - `Set TABLEATTRIBUTES = tableborder="0" cellpadding="1" ...`
+  - Before a table using `%TABLE{...}%`
 
 ## <a name="Sorting"></a> Sorting
 
@@ -67,9 +23,27 @@ Click on column heading text to sort by a column. Initial column will be sorted 
 - number is digits, with optional decimal point
 - otherwise treated as text
 
-## <a name="Per Table Settings"></a> Per Table Settings
+## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
 
-On line before the table use `%TABLE{...}%`:
+Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
+
+- One line description, shown in the [[TextFormattingRules]] topic:
+  - Set SHORTDESCRIPTION = Control attributes of tables and sorting of table columns
+
+- Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
+  - Set DEBUG = 0
+
+- Make sortable:
+  - #Set SORT = attachments
+  - Set SORT = all
+  - #Set SORT = none
+
+- Default table attributes:
+  - Set TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99CCCC" databg="#FFFFCC, #FFFFFF"
+
+## <a name="Table Attributes"></a> Table Attributes
+
+Attributes are defined as a `TABLEATTRIBUTES` Plugin setting in this topic, a `TABLEATTRIBUTES` preferences setting, or on line before the table using `%TABLE{...}%`:
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
@@ -164,7 +138,7 @@ On line before the table use `%TABLE{...}%`:
   </tr>
 </table>
 
-All default to the global setting
+The `%TABLE{...}%` settings override `TABLEATTRIBUTES` preferences settings, which override the `TABLEATTRIBUTES` Plugin settings.
 
 ## <a name="Example"></a> Example
 
@@ -280,74 +254,78 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 15 Dec 2002 </td>
+    <td bgcolor="#ffffff" style=""> 17 Dec 2002 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
     <td bgcolor="#ecf2f8" style="">  </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 15 Dec 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added headerrows and footerrows params (TWiki:Main/WoutMertens); added tablewidth and columnwidths params (TWiki:Main/ThorstenSommermann) </td>
+    <td align="right" bgcolor="#ffffff" style=""> 17 Dec 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Removed individual table Plugin settings; added TABLEATTRIBUTES Plugins setting and TABLEATTRIBUTES preferences setting </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 09 Dec 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added headercolor and datacolor parameters </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 15 Dec 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added headerrows and footerrows params (TWiki:Main/WoutMertens); added tablewidth and columnwidths params (TWiki:Main/ThorstenSommermann) </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 05 Jun 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
+    <td align="right" bgcolor="#ffffff" style=""> 09 Dec 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added headercolor and datacolor parameters </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 13 Mar 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jun 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 12 Mar 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
+    <td align="right" bgcolor="#ffffff" style=""> 13 Mar 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jan 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 12 Mar 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 06 Dec 2001: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
+    <td align="right" bgcolor="#ffffff" style=""> 05 Jan 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 29 Nov 2001: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Fixed Perl warnings </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 06 Dec 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 16 Nov 2001: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
+    <td align="right" bgcolor="#ffffff" style=""> 29 Nov 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Fixed Perl warnings </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 07 Oct 2001: </td>
-    <td bgcolor="#ecf2f8" style=""> JT: Initial version </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 16 Nov 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
-    <td bgcolor="#ffffff" style=""> none </td>
+    <td align="right" bgcolor="#ffffff" style=""> 07 Oct 2001: </td>
+    <td bgcolor="#ffffff" style=""> JT: Initial version </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> Other Dependencies: </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> CPAN Dependencies: </td>
     <td bgcolor="#ecf2f8" style=""> none </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> Perl Version: </td>
-    <td bgcolor="#ffffff" style=""> 5.0 </td>
+    <td align="right" bgcolor="#ffffff" style=""> Other Dependencies: </td>
+    <td bgcolor="#ffffff" style=""> none </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> Plugin Home: </td>
-    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+    <td align="right" bgcolor="#ecf2f8" style=""> Perl Version: </td>
+    <td bgcolor="#ecf2f8" style=""> 5.0 </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> Feedback: </td>
-    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+    <td align="right" bgcolor="#ffffff" style=""> Plugin Home: </td>
+    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> Feedback: </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], [[StandardColors]]
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 15 Dec 2002 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 17 Dec 2002 <br />
