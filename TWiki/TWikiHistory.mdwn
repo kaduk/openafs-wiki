@@ -28,7 +28,7 @@
 - **29 Dec 2002** - [[AndreaSterbini]], [[PeterThoeny]], [[RichardDonkin]], [[SvenDowideit]]
   - New Plugin hooks `registrationHandler`, `beforeEditHandler`, `afterEditHandler`, `beforeSaveHandler`, `writeHeaderHandler`, `redirectCgiQueryHandler`, `getSessionValueHandler`, `setSessionValueHandler`
 - **30 Nov 2002** - [[RichardDonkin]]
-  - Internationalization ('I18N') support 8-bit character sets in [[WikiWords]], such as ISO-8859-15, KOI8-R
+  - Internationalization ('I18N') support for international characters in [[WikiWords]], such as ISO-8859-15, KOI8-R - also supports Chinese, Japanese, etc.
 - **25 Nov 2002** - [[PeterThoeny]]
   - Include previous topic revision with `%INCLUDE{ "OtherTopic" rev="1.2" }%`
 - **15 Nov 2002** - [[PeterThoeny]]
@@ -65,7 +65,7 @@
   - Form and script to create new webs, see [[ManagingWebs]]
 - **01 Apr 2002** - [[JohnTalintyre]]
   - New data storage framework that lets you use external RCS commands for revision control, or a new native Perl implementation that does not depend on the external RCS commands
-- **28 Mar 2002** - [[PeterThoeny]]
+- **28 Mar 2002** - [[RichardDonkin]]
   - Fixed IE5/IE6-specific problem whereby going back from preview sometimes removes all edit changes
 - **23 Mar 2002** - [[JohnTalintyre]]
   - New AND search; with regular expression enabled, use the semicolon ";" as the AND operator in `%SEARCH{}%` variable, [[FormattedSearch]] and [[WebSearch]]
