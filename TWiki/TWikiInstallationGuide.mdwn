@@ -53,6 +53,7 @@ Request and download the TWiki 01-Sep-2001 distribution in Unix ZIP format from 
 >      <Directory "/home/httpd/twiki/bin">
 >     	 Options +ExecCGI
 >     	 SetHandler cgi-script
+>     	 AllowOverride all
 >     	 Allow from all
 >      </Directory>
 >      <Directory "/home/httpd/twiki/pub">
