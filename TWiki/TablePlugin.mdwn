@@ -3,30 +3,40 @@
 Gives extra control off table display:
 
 - Allows sorting
+- Changing table properties like border width, cell spacing and cell padding
 - Changing background color for header cells
 - Changing background color for data cells - colors can _alternate_
 - Behaviour can be specified for a specific table using %TABLE\{...\}% or with global preferences
 
-## <a name="Global Preferences"></a> Global Preferences
+## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
 
-- Set DEBUG to on to get debug messages in `data/debug.txt`. Default: `off`
-  - Set DEBUG = off
+Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
+
+- One line description, is shown in the [[TextFormattingRules]] topic:
+  - Set SHORTDESCRIPTION = Control attributes of tables and sorting of table columns
+
+- Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
+  - Set DEBUG = 0
+
 - Table border width. Default: 1
-  - Set TABLEBORDER = 3
+  - Set TABLEBORDER = 1
+
 - Table cell padding. Default: 0
-  - Set CELLPADDING = 5
+  - Set CELLPADDING = 0
+
 - Table cell spacing. Default: 1
-  - Set CELLSPACING = 2
+  - Set CELLSPACING = 1
+
 - Color for header cells ('\*'s around text). Default: <span>\#99CCCC</span>
   - #Set HEADER\_BG = red
+
 - Background color for table rows, two alternate colors. Default: <span>\#FFFFCC</span>,<span>\#FFFFFF</span>
   - Set DATA\_BG = #FFFFCC,#FFFFFF
+
 - Make sortable:
   - #Set SORT = attachments
   - Set SORT = all
   - #Set SORT = none
-- Short description:
-  - Set SHORTDESCRIPTION = Control attributes of tables and sorting of table columns
 
 ## <a name="Sorting"></a> Sorting
 
@@ -39,7 +49,7 @@ Click on column heading text to sort by a column. Initial column will be sorted 
 - number is digits, with optional decimal point
 - otherwise treated as text
 
-## <a name="Per table settings"></a> Per table settings
+## <a name="Per Table Settings"></a> Per Table Settings
 
 On line before the table use `%TABLE{...}%`:
 
@@ -85,9 +95,9 @@ All default to the global setting
 
 ## <a name="Examples"></a> Examples
 
-Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="2" cellspacing="1" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"}%`
+Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="3" cellspacing="1" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"}%`
 
-<table border="0" cellpadding="3" cellspacing="0" style="border-width: 0px">
+<table border="0" cellpadding="3" cellspacing="1" style="border-width: 0px">
   <tr>
     <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Num</font></a></th>
     <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Status</font></a></th>
@@ -138,4 +148,80 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="2" cellspacing
   </tr>
 </table>
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 15 Nov 2001 <br />
+### <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
+
+- Download the ZIP file from the Plugin web (see below)
+- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File:</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description:</font></a></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
+    <td bgcolor="#ecf2f8" style=""> Plugin topic </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code><b>data/TWiki/%TOPIC%.txt,v</b></code></td>
+    <td bgcolor="#ffffff" style=""> Plugin topic repository </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td bgcolor="#ecf2f8" style=""> Plugin Perl module </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code><b>pub/TWiki/%TOPIC%/diamond.gif</b></code></td>
+    <td bgcolor="#ffffff" style=""> Diamond symbol </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code><b>pub/TWiki/%TOPIC%/down.gif</b></code></td>
+    <td bgcolor="#ecf2f8" style=""> Down arrow </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code><b>pub/TWiki/%TOPIC%/up.gif</b></code></td>
+    <td bgcolor="#ffffff" style=""> Up arrow </td>
+  </tr>
+</table>
+- Test if the plugin is correctly installed:
+  - Check above example if the table renders as expected
+  - Try click on heading to sort. Other tables should also be sortable
+
+### <a name="Plugin Info"></a> Plugin Info
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> Plugin Author: </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki/JohnTalintyre]]</td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
+    <td bgcolor="#ffffff" style=""> 07 Oct 2001 </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
+    <td bgcolor="#ecf2f8" style=""> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
+    <td bgcolor="#ffffff" style="">   </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> Other Dependencies: </td>
+    <td bgcolor="#ecf2f8" style="">   </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Perl Version: </td>
+    <td bgcolor="#ffffff" style=""> 5.0 </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> Plugin Home: </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Feedback: </td>
+    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+</table>
+
+**_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
+
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 16 Nov 2001 <br />
