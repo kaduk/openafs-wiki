@@ -626,11 +626,9 @@ The following file systems have been reported to work for the AFS client cache:
 
 The kernel parts on Solaris have to be compiled with Sun cc, same for other platforms, i.e. you need same compiler used to compile kernel to compile your afs modules. [[Tru64Unix]] doesn't support modules, so you have to edit kernel config files and link statically into kernel. Kernel module insertion works fine on Linux, Solaris, Irix ...
 
-$ ./configure --enable-transarc-paths=/usr/etc --with-afs-sysname=i386\_linux24
-
-$ make dest
-
-$ cd dest/i386\_linux24
+    ./configure --enable-transarc-paths=/usr/etc --with-afs-sysname=i386_linux24
+    make dest
+    cd dest/i386_linux24
 
 ... and continue the install process described in IBM AFS documentation. If you do "make install", you will end up with some stuff installed into /usr/local but something not, regardless the --enable-transarc-paths option ... "make install" it's messy.
 
@@ -704,13 +702,13 @@ In case of troubles when you need only fileserver process to run (to be able to 
 
 cp src/viced/fileserver /usr/afs/bin (or wherever)
 
-bos restart calomys fs -local
+    bos restart calomys fs -local
 
 ... then attach with gdb
 
 To debug if client running afsd kernel process talks to the servers from [[CellServDB]], do:
 
-tcpdump -vv -s 1500 port 7001
+    tcpdump -vv -s 1500 port 7001
 
 Other ports are:
 
