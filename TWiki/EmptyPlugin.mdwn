@@ -1,9 +1,68 @@
-**Empty TWiki Plugin**
+## <a name="Empty TWiki Plugin"></a> Empty TWiki Plugin
 
 This is an empty plugin you can use as a template to build your own [[TWikiPlugins]]. This plugin does nothing, but is ready to be used.
 
-Copy file <code>**TWiki/Plugins/EmptyPlugin.pm**</code> to <code>**&lt;name&gt;Plugin.pm**</code> and customize the plugin.
+To create your own plugin:
+
+- Copy file <code>**TWiki/Plugins/EmptyPlugin.pm**</code> to <code>**&lt;name&gt;Plugin.pm**</code> and customize the plugin.
+- Copy this topic to <code>**&lt;name&gt;Plugin**</code> and customize it.
+- See details in [[TWikiPlugins]].
+
+### <a name="Syntax Rules"></a> Syntax Rules
+
+(none)
+
+### <a name="%TOPIC% Preferences"></a> %TOPIC% Preferences
+
+Plugin preferences are stored as preferences variables. To reference a plugin preference write <code>**%&lt;plugin name&gt;\_&lt;preference name&gt;%**</code>, i.e. <code>**%EMPTYPLUGIN\_SHORTDESCRIPTION%**</code>
+
+- One line description, is included in the [[TextFormattingRules]] topic:
+  - Set SHORTDESCRIPTION = This plugin does nothing, but can be used as a template for your own plugins.
+
+- Your own preferences, i.e.:
+  - Set COLOR = red
+
+### <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
+
+- This plugin is preinstalled, you do not need to install it.
+
+### <a name="Plugin Info"></a> Plugin Info
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"> Plugin Author: </td>
+    <td>[[TWiki/AndreaSterbini]], [[TWiki/PeterThoeny]]</td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Version: </td>
+    <td> 08 Jul 2001 </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td> 08 Jul 2001: Changed to plug&amp;play <br /> 27 Feb 2001: Initial version </td>
+  </tr>
+  <tr>
+    <td align="right"> CPAN Dependencies: </td>
+    <td> none </td>
+  </tr>
+  <tr>
+    <td align="right"> Other Dependencies: </td>
+    <td> none </td>
+  </tr>
+  <tr>
+    <td align="right"> Perl Version: </td>
+    <td> 5.0 </td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Home: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+</table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], [[DefaultPlugin]]
 
--- [[PeterThoeny]] - 13 Mar 2001 <br />
+-- [[AndreaSterbini]] - 27 Feb 2001 <br /> -- [[PeterThoeny]] - 08 Jul 2001 <br />
