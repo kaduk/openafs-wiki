@@ -11,7 +11,7 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
 - The URL and Tooltip Text may contain optional <code>**$page**</code> variables; the variable gets expanded to the page name.
 - **_Note:_** The Tooltip Text must not contain any HTML tags (including <code>**&lt;nop&gt;**</code> escape code), no internal [[WikiWord]] links, and no external links. Hint: Escape <code>**'WikiWords'**</code> and <code>**'$page'**</code>.
 
-### <a name="Inter-Site Links"></a> Inter-Site Links
+### <a name="General Inter-Site Links"></a> General Inter-Site Links
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -23,6 +23,11 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
     <td> Acronym </td>
     <td><a href="http://www.acronymfinder.com/af-query.asp?Acronym=$page&String=exact" target="_top">http://www.acronymfinder.com/af-query.asp?Acronym=$page&amp;String=exact</a></td>
     <td> Look up '$page' on Acronym Finder site </td>
+  </tr>
+  <tr>
+    <td> Dictionary </td>
+    <td><a href="http://www.dictionary.com/cgi-bin/dict.pl?term=" target="_top">http://www.dictionary.com/cgi-bin/dict.pl?term=</a></td>
+    <td> Look up '$page' at Dictionary.com </td>
   </tr>
   <tr>
     <td> Google </td>
@@ -66,23 +71,8 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
   </tr>
   <tr>
     <td> DolphinWiki </td>
-    <td><a href="http://www.object-arts.com/wiki/html/Dolphin/" target="_top">http://www.object-arts.com/wiki/html/Dolphin/</a></td>
+    <td><a href="http://www.object-arts.co.uk/wiki/html/Dolphin/$page.htm" target="_top">http://www.object-arts.co.uk/wiki/html/Dolphin/$page.htm</a></td>
     <td> '$page' on Dolphin Wiki site </td>
-  </tr>
-  <tr>
-    <td> EfnetCppWiki </td>
-    <td><a href="http://www.encrypted.net/~jh/cpp-wiki/moin.cgi/" target="_top">http://www.encrypted.net/~jh/cpp-wiki/moin.cgi/</a></td>
-    <td> '$page' on Efnet Cpp Wiki site </td>
-  </tr>
-  <tr>
-    <td> EfnetPythonWiki </td>
-    <td><a href="http://www.encrypted.net/~jh/python-wiki/moin.cgi/" target="_top">http://www.encrypted.net/~jh/python-wiki/moin.cgi/</a></td>
-    <td> '$page' on 'EfnetPythonWiki' site </td>
-  </tr>
-  <tr>
-    <td> EfnetXmlWiki </td>
-    <td><a href="http://www.encrypted.net/~jh/xml-wiki/moin.cgi/" target="_top">http://www.encrypted.net/~jh/xml-wiki/moin.cgi/</a></td>
-    <td> '$page' on Efnet XML Wiki site </td>
   </tr>
   <tr>
     <td> FoxWiki </td>
@@ -121,7 +111,7 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
   </tr>
   <tr>
     <td> OrgPatterns </td>
-    <td><a href="http://i44pc48.info.uni-karlsruhe.de/cgi-bin/OrgPatterns" target="_top">http://i44pc48.info.uni-karlsruhe.de/cgi-bin/OrgPatterns</a>? </td>
+    <td><a href="http://www.easycomp.org/cgi-bin/OrgPatterns" target="_top">http://www.easycomp.org/cgi-bin/OrgPatterns</a>? </td>
     <td> '$page' on Organizational Patterns site </td>
   </tr>
   <tr>
@@ -145,14 +135,14 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
     <td> '$page' on Wiki site written in Python </td>
   </tr>
   <tr>
-    <td> TWiki </td>
-    <td><a href="http://twiki.org/cgi-bin/view/" target="_top">http://twiki.org/cgi-bin/view/</a></td>
-    <td> '$page' on TWiki site, we know it! </td>
-  </tr>
-  <tr>
     <td> Squeak </td>
     <td><a href="http://minnow.cc.gatech.edu/squeak/" target="_top">http://minnow.cc.gatech.edu/squeak/</a></td>
     <td> '$page' on Squeak Smalltalk Wiki </td>
+  </tr>
+  <tr>
+    <td> TWiki </td>
+    <td><a href="http://twiki.org/cgi-bin/view/" target="_top">http://twiki.org/cgi-bin/view/</a></td>
+    <td> '$page' on TWiki.org </td>
   </tr>
   <tr>
     <td> UseMod </td>
@@ -171,7 +161,7 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
   </tr>
   <tr>
     <td> Wikipedia </td>
-    <td><a href="http://www.wikipedia.com/wiki/" target="_top">http://www.wikipedia.com/wiki/</a></td>
+    <td><a href="http://en.wikipedia.org/wiki/" target="_top">http://en.wikipedia.org/wiki/</a></td>
     <td> '$page' on 'Wikipedia' </td>
   </tr>
   <tr>
