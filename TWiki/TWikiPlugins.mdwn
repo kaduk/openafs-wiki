@@ -144,16 +144,15 @@ The Application Programming Interface (API) for TWikiPlugins provides the specif
 
 ### <a name="Available Core Functions"></a> Available Core Functions
 
-The `lib/TWiki/Func.pm` implements ALL official Plugin functions. Plugins should ONLY use functions published in this module.
+The [[TWikiFuncModule]] (`lib/TWiki/Func.pm`) implements ALL official Plugin functions. Plugins should ONLY use functions published in this module.
 
 %X% If you use functions not in `Func.pm`, you run the risk of creating security holes. Also, your Plugin will likely break and require updating when you upgrade to a new version of TWiki.
-
-- For best performance, enable only the functions you really need. NOTE: `outsidePREHandler` and `insidePREHandler` are particularly expensive.
 
 ### <a name="Predefined Hooks"></a> Predefined Hooks
 
 In addition to TWiki core functions, Plugins can use **predefined hooks**, or **call backs**, listed in the `lib/TWiki/Plugins/EmptyPlugin.pm` module.
 
+- For best performance, enable only the functions you really need. NOTE: `outsidePREHandler` and `insidePREHandler` are particularly expensive.
 - All but the initPlugin are disabled. To enable a call back, remove `DISABLE_` from the function name.
 
 ### <a name="Plugin Version Detection"></a> Plugin Version Detection
