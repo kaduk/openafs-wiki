@@ -45,7 +45,7 @@ Working in TWiki is as easy as typing in text - exactly like email. You don't ne
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Headings:</strong><br /> At least three dashes at the beginning of a line, followed by plus signs and the heading text. One plus creates a level 1 heading (most important), two pluses a level 2 heading; the maximum is level 6. <strong><em>Note:</em></strong> A Table of Content can be created automatically with the <code>%TOC%</code> variable, see [[Main/TWikiVariables]]. </td>
+    <td valign="top"><strong>Headings:</strong><br /> At least three dashes at the beginning of a line, followed by plus signs and the heading text. One plus creates a level 1 heading (most important), two pluses a level 2 heading; the maximum is level 6. <strong><em>Note:</em></strong> A Table of Content can be created automatically with the <code>%TOC%</code> variable, see [[Main/TWikiVariables]]. Any heading text after <code>!!</code> is excluded from the TOC; for example, write <code>---+!! text</code> if you do not want to list a header in the TOC. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 ---++ Sushi
 
@@ -232,7 +232,7 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top">#SquareBrackets <strong>Forced Links:</strong><br /> You can create a forced internal link by enclosing words in double square brackets. <br /><strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; i.e. <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. </td>
+    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong><br /> You can create a forced internal link by enclosing words in double square brackets. <br /><strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; i.e. <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[wiki syntax]]
 

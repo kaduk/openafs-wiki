@@ -271,7 +271,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:08</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:17</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -329,7 +329,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%TOC{"SomeTopic" ...}%</code></td>
-    <td> Table of Contents. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;/h2&gt;"</code>) are taken into account. (But not <code>"&lt;H2&gt;text&lt;/H2&gt;"</code>, which can be used to exclude a heading from the TOC.) Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
+    <td> Table of Contents. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;/h2&gt;"</code>) are taken into account. Any heading text after <code>"!!"</code> is excluded from the TOC; for example, write <code>"---+!! text"</code> if you do not want to list a header in the TOC. Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
