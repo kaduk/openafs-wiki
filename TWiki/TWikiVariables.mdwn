@@ -1,3 +1,7 @@
+## <a name="TWiki Variables"></a> TWiki Variables
+
+### <a name="Predefined Variables"></a> Predefined Variables
+
 %WIKITOOLNAME% expands the following variables enclosed in % percent signs:
 
 <table border="1">
@@ -133,7 +137,7 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:06</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:18</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -267,7 +271,7 @@
   </tr>
   <tr>
     <td><code>%VAR{"NAME" web="Web"}%</code></td>
-    <td> Get a preference value from another web then the current one. Example: To get <code>%WEBBGCOLOR%</code> of the Main web write <code>%VAR{"WEBBGCOLOR" web="Main"}%</code>, is <code><b></b></code></td>
+    <td> Get a preference value from a web other then the current one. Example: To get <code>%WEBBGCOLOR%</code> of the Main web write <code>%VAR{"WEBBGCOLOR" web="Main"}%</code>, is <code><b></b></code></td>
     <td>
       <p>
       </p>
@@ -276,6 +280,8 @@
 </table>
 
 [1] **_Note_**: A web can be excluded from a `web="all"` search if you define a `NOSEARCHALL=on` variable in its [[WebPreferences]].
+
+### <a name="Preferences Variables"></a> Preferences Variables
 
 Additional variables are defined in the preferences ( site-level ( **_SL_** ) in [[TWikiPreferences]], web-level ( **_WL_** ) in [[WebPreferences]] of each web, and user level ( **_UL_** ) preferences in individual user topics):
 
@@ -389,4 +395,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 - Additional preferences variables can be defined on all three level as needed. Example:
   - `Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif`
 
--- [[PeterThoeny]] - 01 Mar 2001 <br />
+-- [[PeterThoeny]] - 15 Mar 2001 <br />
