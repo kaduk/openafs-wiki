@@ -1,0 +1,63 @@
+# <a name="Pending and Desired _OpenAFS Pro"></a> Pending and Desired [[OpenAFS]] Projects
+
+<div>
+  <ul>
+    <li><a href="#Pending and Desired _OpenAFS Pro"> Pending and Desired OpenAFS Projects</a><ul>
+        <li><a href="#Pending Projects"> Pending Projects</a></li>
+        <li><a href="#Proposed Projects"> Proposed Projects</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Pending Projects"></a> Pending Projects
+
+The following are items known to be in progress, and, where available, a point of contact.
+
+- [[DisconnectedOperation]] provides the ability to use AFS while not connected to a network.
+
+- [[NestedGroups]] allows PTS groups to have other groups as members. Waiting for [[OpenAFS]] port.
+
+- [[FreeBSDPort]] -- Server ported. No cache manager support yet available.
+
+- [[HPUX11Port|Main/HP-UP11Port]] -- Missing RX code reconstructed. Waiting on kernel header from HP. Contact [[DerrickBrashear]].
+
+- [[NetBSDPort]] -- No timeline available.
+
+- [[OpenBSDPort]] -- In progress. No cache manager support yet available.
+
+- [[AutoConf]] with automake too. In progress. Contact [[DerrickBrashear]].
+
+- [[DynamicRoot]] (/afs) support utilizing AFSDB DNS resource records is available for all UNIX ports. Windows includes similar [[FreelanceClient]] support.
+
+- [[AtSysConfig]] allows @sys expansion from a list. Substantially complete. Contact [[TedMcCabe]].
+
+## <a name="Proposed Projects"></a> Proposed Projects
+
+The following are items which have been proposed, but which are not yet in progress. A point of contact is included where appropriate.
+
+- [[BetterDocumentation]] -- Contact [[EstherFilderman]].
+
+- IPv6
+
+- [[KerberosV]] -- Support Kerberos version 5 and additional encryption type support. Contact [[JeffreyHutzelman]]
+
+- [[LargeFiles]] -- Support for files over 2GB. The concensus seems to be that beyond supporting big files, large volumes already work fine.
+
+- [[MultipleClones]] provides support for more than one backup and read-only volume for a single read/write.
+
+- [[SelectableUbikTieBreaker]] -- proposes to change lowest IP metric to something administrator-selectable.
+
+- [[VolumeDumpEditor]] -- Need tool to allow editing volume dumps.
+
+- [[WindowsIFS]] -- Implement AFS as a Windows installable file system instead of as a virtual SMB server.
+
+- [[BetterServerPreferences]] allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact [[DerrickBrashear]]. _Do this for vldb servers too, or is that a separate project? [[TedAnderson]]_
+
+- NFSTranslator -- Create an AFS/NFS translator for [[OpenAFS]] because there were licensing issues with the code in the IBM/Transarc product. A shell of one for Solaris only is in the source tree but needs more work before it will be useful. Contact [[DerrickBrashear]]. Another approach is a user-mode implementation. Contact [[JeffreyHutzelman]].
+
+- [[PartitionUUID]] -- Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact [[DerrickBrashear]].
+
+----
+
+Copied by [[TedAnderson]] with some minor edits from <http://www.openafs.org/projects.html> (dated 17-Oct-2001).
