@@ -4,7 +4,10 @@
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Choose Web Template"> Choose Web Template</a></li>
         <li><a href="#Adding a New Web"> Adding a New Web</a></li>
-        <li><a href="#Renaming or Deleting a Web"> Renaming or Deleting a Web</a></li>
+        <li><a href="#Renaming or Deleting a Web"> Renaming or Deleting a Web</a><ul>
+            <li><a href="#Renaming the MAINWEB"> Renaming the MAINWEB</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -36,7 +39,7 @@ In either case you will want to be sure to verify that your new web has all the 
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Name of new web: </strong></th>
       <td><input name="newweb" size="16" type="text" value="" /></td>
-      <td> Enter a short name of up to 10 characters. The name must start with one or more upper case letters, followed by optional lower case letters or numbers; it cannot be a [[TWiki/WikiWord]]</td>
+      <td> Enter a short name of up to 10 characters. The name must start with an upper case letters, followed by optional upper or lower case letters or numbers </td>
     </tr>
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Based on web: </strong></th>
@@ -67,24 +70,28 @@ In either case you will want to be sure to verify that your new web has all the 
     </tr>
   </table><input name="newtopic" type="hidden" value="" /> <input name="action" type="hidden" value="createweb" /></form>
 
-**Note:** Attachments will NOT get copied over along with their topics. This will be a feature added for the TWiki:Codev/CairoRelease.
+**_Notes:_**
 
-**Note:** This script does not yet edit the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] file to update the `WIKIWEBLIST`. This must be done by hand.
-
-The manage script while creating the new web will update the following variables in the [[WebPreferences]]: `WEBBGCOLOR`, `SITEMAPLIST`, `SITEMAPWHAT`, `SITEMAPUSETO` and `NOSEARCHALL`. These variables are now used to dynamically generate the [[SiteMap]].
+- Attachments will NOT get copied over along with their topics
+- The manage script while creating the new web will update the following variables in the [[WebPreferences]]: `WEBBGCOLOR`, `SITEMAPLIST`, `SITEMAPWHAT`, `SITEMAPUSETO` and `NOSEARCHALL`. These variables are used to dynamically generate the [[SiteMap]]
+- This script does not edit the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] file to update the `WIKIWEBLIST`. This must be done by hand
+- As of TWiki Release 01 Sep 2004, a web name can be a [[WikiWord]]. Prior to that it could be only `UPPER` or `UPPERlower`. A side effect of this is that if you do use a wiki name, `%WEB%` must be written as `<nop>%WEB%` or else it will try to link to a non-existing topic of that name
 
 ## <a name="Renaming or Deleting a Web"></a> Renaming or Deleting a Web
 
 Renaming or deleting a web requires direct access to the installation files on the host server. There are currently no browser-based equivalents of the Rename/move/delete topic tools for working with webs.
 
-**NOTE:** If you plan to rename the %WIKITOOLNAME%.Main web, remember that TWiki stores user and group topics in `%MAINWEB%`, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
+### <a name="Renaming the MAINWEB"></a> Renaming the MAINWEB
 
-1. Prepare your site: Search each web for links to the target web, searching topic text for `Oldwebname.`, including the dot so you'll find references like `Oldwebname.SomeTopic`.
-  - Make changes as required, to `Newwebname.SomeTopic` or better yet, to `%MAINWEB%.SomeTopic`.
-2. Edit the [[TWikiPreferences]] topic: Rename or delete the web from the `WIKIWEBLIST` variable.
-3. Login to the %WIKITOOLNAME% server, via Telnet or FTP.
-4. Go to `twiki/data` and rename or remove the web directory.
-5. Go to `twiki/templates` and rename or remove the web directory if present.
-6. Go to `twiki/pub` and rename or remove the web directory if present.
+If you plan to rename the Main web, remember that TWiki stores user and group topics in `%MAINWEB%`, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
 
--- [[MikeMannix]] - 14 Sep 2001 <br /> -- [[PeterThoeny]] - 07 Apr 2002 <br /> -- [[GrantBow]] - 16 Jan 2003
+1. Prepare your site: Search each web for links to the target web, searching topic text for `Oldwebname.`, including the dot so you'll find references like `Oldwebname.SomeTopic`
+  - Make changes as required, to `Newwebname.SomeTopic` or better yet, to `%MAINWEB%.SomeTopic`
+2. Edit the [[TWikiPreferences]] topic: Rename or delete the web from the `WIKIWEBLIST` variable
+3. Login to the %WIKITOOLNAME% server, via Telnet or FTP
+4. Go to `twiki/data` and rename or remove the web directory
+5. Go to `twiki/templates` and rename or remove the web directory if present
+  - **_Note:_** See TWiki:Codev.RenameWebs for some complications
+6. Go to `twiki/pub` and rename or remove the web directory if present
+
+-- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.PeterThoeny - 07 Apr 2002 %BR% -- TWiki:Main.GrantBow - 16 Jan 2003

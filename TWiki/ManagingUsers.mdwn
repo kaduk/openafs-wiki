@@ -1,0 +1,44 @@
+<div>
+  <ul>
+    <li><a href="#Manage Users"> Manage Users</a><ul>
+        <li><a href="#Authentication and Access Contro"> Authentication and Access Control</a></li>
+        <li><a href="#Register User"> Register User</a></li>
+        <li><a href="#Change, Reset and Install Passwo"> Change, Reset and Install Passwords</a></li>
+        <li><a href="#Removing User Accounts"> Removing User Accounts</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+# <a name="Manage Users"></a> Manage Users
+
+_Register users on your TWiki site; change/reset/install passwords; remove user accounts_
+
+## <a name="Authentication and Access Contro"></a> Authentication and Access Control
+
+- [[TWikiUserAuthentication]] describes options of user authentication
+- [[TWikiAccessControl]] describes how to define groups and how to restrict access to content
+
+## <a name="Register User"></a> Register User
+
+- [[TWikiRegistration]] is for users to fill out a form
+- [[NewUserTemplate]] can be changed to customize user home pages
+
+## <a name="Change, Reset and Install Passwo"></a> Change, Reset and Install Passwords
+
+- [[ChangePassword]] is for users who remember their password
+- [[ResetPassword]] is for users who do _not_ remember their password; they are asked to send a request to the site administrator to install a new password
+- [[InstallPassword]] is for the site administrator to install a password
+
+## <a name="Removing User Accounts"></a> Removing User Accounts
+
+To remove a user account:
+
+1. Edit the `data/.htpasswd` file to delete their entry (only applies if you are using a .htpasswd file)
+2. Remove the `FredQuimby` line from the Main.TWikiUsers topic
+3. Remove user from all groups and from all the `ALLOWWEB/ALLOWTOPIC...` declarations, if any.%BR% **_Note:_** Otherwise this is a security hole as the first one to re-register with this name will be granted the permissions of the previous user.
+4. _[optional]_ Remove their topic files: `data/Main/FredQuimby.txt` and `data/Main/FredQuimby.txt,v`
+
+**_Note:_** Consider leaving the user topic file in place so their past signatures and revision author entries don't end up looking like [[AnUncreatedTopic]]. If you want to make it clear the user is inactive on your site (e.g. [[PeterThoeny]]) or has been banished add a note to that effect and write protect the page ([[TWikiAccessControl]]). The existance of the UserName topic prevent that user name from being re-used.
+
+-- TWiki:Main.MattWilkie - 21 Jul 2003 %BR% -- TWiki:Main.PeterThoeny - 15 Aug 2004
