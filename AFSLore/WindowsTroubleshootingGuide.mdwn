@@ -9,6 +9,7 @@
         </li>
         <li><a href="#Error Messages"> Error Messages</a><ul>
             <li><a href="#What is this _MrxSmb event 3019"> What is this MrxSmb event 3019 that pops up in my System Log?</a></li>
+            <li><a href="#Why isn't the AFS Light Gateway"> Why isn't the AFS Light Gateway working anymore?</a></li>
           </ul>
         </li>
         <li><a href="#Nomenclature"> Nomenclature</a><ul>
@@ -33,6 +34,10 @@ The CIFS protocol itself has support for Unicode. Hopefully, it will be implemen
 ### <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
 
 The [[MrxSmb]] event 3019 is due to the use of the Loop Back device. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
+
+### <a name="Why isn&#39;t the AFS Light Gateway"></a><a name="Why isn&#39;t the AFS Light Gateway "></a> Why isn't the AFS Light Gateway working anymore?
+
+The Light Gateway works by simply publishing what [[OpenAFS]] has already built for internal use. If you install the Microsoft Loop Back Adapter, the submounts will only be published on the local computer. Either remove the Loop Back Adapter, or stop using the gateway functionality.
 
 ## <a name="Nomenclature"></a> Nomenclature
 
