@@ -4,9 +4,9 @@ There are two different flavours of the AFS file server (the fs process): One us
 
 The inode-based server needs a file system which supports access by inode and usually a special fsck is required so that the AFS data is not corrupted (since the server does some behind-the-scenes stuff with the file system). The NAMEI file server does not pose any unusual constraints on the underlying filesystem - it's an ordinary userspace program working with (silly-named) files.
 
-You can easily see that you are using an NAMEI file server if there are files like `V0536871833.vol` in your `/vicep*`. (this is incorrect... transarc sun4x\_58 shows these files and is not NAMEI -- guest)
+You can easily see that you are using an NAMEI file server if there is a directory named `AFSIDat` and with subdirectories like `+` and `+1` in your `/vicep*`.
 
--- [[TinoSchwarze]] - 18 Nov 2002
+-- [[TinoSchwarze]] - 25 Jul 2003
 
 ## <a name="Recommended Partition Types for"></a><a name="Recommended Partition Types for "></a> Recommended Partition Types for use with [[OpenAFS]]
 
