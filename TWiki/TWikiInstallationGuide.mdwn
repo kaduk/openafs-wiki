@@ -38,7 +38,7 @@ Request and download the TWiki 01-Dec-2001 distribution in Unix ZIP format from 
 
 %X% **NOTE:** _If you don't have access to your Web server configuration files - for example, if you're installing on an ISP-hosted account - use the [[alternative Step 1|Main/WebHome#StepOneB]] instead._
 
-- Create directory `/home/httpd/twiki` and unzip the TWiki distribution into this directory.
+- Create directory `/home/httpd/twiki` and [unzip](http://www.info-zip.org/pub/infozip/UnZip.html) the TWiki distribution into this directory.
 - The `twiki/bin` directory of TWiki must be set as a cgi-bin directory. Add `/home/httpd/twiki/bin` to file `/etc/httpd/httpd.conf` with only `ExecCGI` option.
 - The `twiki/pub` directory of TWiki must be set so that it is visible as a URL. Add `/home/httpd/twiki` to file `httpd.conf` with normal access options (copy from `/home/httpd/html` ).
 - Now add `ScriptAlias` for `/twiki/bin` and `Alias` for `/twiki` to file `httpd.conf` . <br /> %X% **NOTE:** The `ScriptAlias` **_must_** come before the `Alias`, otherwise, Apache will fail to correctly set up `/twiki/bin/`, by treating it as just another subdirectory of the `/twiki/` alias.
