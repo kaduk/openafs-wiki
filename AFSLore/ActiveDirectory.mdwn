@@ -6,7 +6,15 @@ The resulting TGT tickets use a proprietary authorization data format. There was
 
 [[DouglasEngert]] posted some [details](http://lists.openafs.org/pipermail/openafs-info/2002-March/003836.html) on doing this including a pointer to gsiklog which uses GSSAPI to get an K4/AFS token.
 
--- [[TedAnderson]] - 23 Jan 2002<br /> -- [[DerrickBrashear]] - 24 Jan 2002 added the information about the paper.<br /> -- [[TedAnderson]] - 18 Mar 2002 added Engert pointer.<br />
+More from Douglas in the same [thread](http://lists.openafs.org/pipermail/openafs-info/2002-March/003904.html).
+
+> > _I suppose this means krb524d must share knowledge of the key used to encrypt the K5 token. How, in practice, does one share such a key with active directory?_
+>
+> You get a key from the [[W2K]] much like you get a key for a host. Its just for afs/cell@REALM. The MS documents talk about how to do thisfor a host. The process of adding the afs/cell@realm can output a keytab file, or it can print the key on the screen.
+>
+> You can then use the MIT ktutil addent -key to add this to a keytab file.
+
+-- [[TedAnderson]] - 23 Jan 2002<br /> -- [[DerrickBrashear]] - 24 Jan 2002 added the information about the paper.<br /> -- [[TedAnderson]] - 18,22 Mar 2002 added Engert pointer.<br />
 
 ----
 
