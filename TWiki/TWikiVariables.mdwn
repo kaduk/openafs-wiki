@@ -71,14 +71,22 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Default: </strong></th>
         </tr>
         <tr>
           <td><code>"name"</code></td>
           <td> The name of a URL parameter </td>
+          <td> required </td>
+        </tr>
+        <tr>
+          <td><code>default="..."</code></td>
+          <td> Default value in case parameter is empty or missing </td>
+          <td> empty string </td>
         </tr>
         <tr>
           <td><code>newline="&lt;br /&gt;"</code></td>
           <td> Convert newlines to other delimiters </td>
+          <td> no conversion </td>
         </tr>
       </table> Example: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
   </tr>
@@ -288,7 +296,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:13</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:15</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
