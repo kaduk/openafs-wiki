@@ -1,16 +1,36 @@
+<div>
+  <ul>
+    <li><a href="#TWiki Implementation Notes"> TWiki Implementation Notes</a><ul>
+        <li><a href="#Platforms and System Requirement"> Platforms and System Requirements </a></li>
+        <li><a href="#Directory Structure"> Directory Structure</a><ul>
+            <li><a href="#Files in twiki"> Files in <code>twiki</code></a></li>
+            <li><a href="#Files in twiki/bin"> Files in <code>twiki/bin</code></a></li>
+            <li><a href="#Files in twiki/lib"> Files in <code>twiki/lib</code></a></li>
+            <li><a href="#Files in twiki/lib/TWiki"> Files in <code>twiki/lib/TWiki</code></a></li>
+            <li><a href="#Files in twiki/lib/TWiki/Plugins"> Files in <code>twiki/lib/TWiki/Plugins</code></a></li>
+            <li><a href="#Files in twiki/pub"> Files in <code>twiki/pub</code></a></li>
+            <li><a href="#Files in twiki/data"> Files in <code>twiki/data</code></a></li>
+            <li><a href="#Files in twiki/templates"> Files in <code>twiki/templates</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
 ## <a name="TWiki Implementation Notes"></a> TWiki Implementation Notes
 
-### <a name="Platform"></a> Platform
+### <a name="Platforms and System Requirement"></a> Platforms and System Requirements
 
-TWiki is written in Perl 5 and also uses some shell commands. The current implementation runs best on a Unix machine, but it is also possible on Microsoft Windows. RCS (for revision control) must be installed on the system.
+TWiki is written in **Perl 5** and also uses some **shell commands**. The current implementation runs best on a Unix machine, but it is also possible on Microsoft Windows. **RCS** (for revision control) must be installed on the system. [ **_MM: Locate elsewhere and/or include one-liner and link for RCS..._** ]
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC" colspan="3"><strong> Required Environment by Platform </strong></th>
   </tr>
   <tr>
-    <th bgcolor="#99CCCC"><strong> Package(s): </strong></th>
-    <th bgcolor="#99CCCC"><strong> Unix: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Packages: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Linux/Unix: </strong></th>
     <th bgcolor="#99CCCC"><strong> Windows: </strong></th>
   </tr>
   <tr>
@@ -26,7 +46,7 @@ TWiki is written in Perl 5 and also uses some shell commands. The current implem
   <tr>
     <td> Optional Perl modules </td>
     <td><code>Net::SMTP</code> (or sendmail) </td>
-    <td><code>Net::SMTP</code></td>
+    <td align="center"><code>Net::SMTP</code></td>
   </tr>
   <tr>
     <td> RCS </td>
@@ -43,42 +63,76 @@ TWiki is written in Perl 5 and also uses some shell commands. The current implem
     <td align="center"> Apache </td>
     <td align="center"> Apache, IIS </td>
   </tr>
+  <tr>
+    <td><em>OS versions</em></td>
+    <td align="center"><strong><em>Linux, Unix...</em></strong></td>
+    <td align="center"><strong><em>every last Win?!</em></strong></td>
+  </tr>
 </table>
 
 ### <a name="Directory Structure"></a> Directory Structure
 
+You can easily rename the root TWiki directory - <code>**twiki**</code> - to whatever you like by changing a configuration file value. For the simplest installation and future upgrades, you should leave the subdirectory structure exactly as is:
+
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> Directory: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Files: </strong></th>
     <th bgcolor="#99CCCC"><strong> Used for: </strong></th>
   </tr>
   <tr>
+    <td><code><b>twiki</b></code></td>
+    <td align="center">[[Main/WebHome#TWikiFiles]]</td>
+    <td> Start-up info </td>
+  </tr>
+  <tr>
     <td><code><b>twiki/bin</b></code></td>
-    <td> TWiki Perl scripts </td>
+    <td align="center">[[Main/WebHome#BinFiles]]</td>
+    <td> Perl scripts </td>
+  </tr>
+  <tr>
+    <td><code><b>twiki/lib</b></code></td>
+    <td align="center">[[Main/WebHome#LibFiles]]</td>
+    <td> Configuration file &amp; main library </td>
   </tr>
   <tr>
     <td><code><b>twiki/lib/TWiki</b></code></td>
-    <td> TWiki Perl modules </td>
+    <td align="center">[[Main/WebHome#LibTWiki]]</td>
+    <td> Perl modules </td>
   </tr>
   <tr>
     <td><code><b>twiki/lib/TWiki/Plugins</b></code></td>
-    <td> Plugins modules </td>
+    <td align="center">[[Main/WebHome#libtwikiplugins]]</td>
+    <td>[[Main/TWikiPlugins]] Perl modules </td>
   </tr>
   <tr>
     <td><code><b>twiki/pub</b></code></td>
-    <td> Public files ([[Main/FileAttachments]], images), plus RCS histories </td>
+    <td align="center">[[Main/WebHome#PubFiles]]</td>
+    <td> Public support files (ex: [[Main/FileAttachments]], images) and RCS histories) </td>
   </tr>
   <tr>
     <td><code><b>twiki/data</b></code></td>
-    <td> source (topic) text, including RCS histories </td>
+    <td align="center">[[Main/WebHome#DataFiles]]</td>
+    <td> Topic text (page content) and RCS histories; </td>
   </tr>
   <tr>
     <td><code><b>twiki/templates</b></code></td>
+    <td align="center">[[Main/WebHome#TemplatesFiles]]</td>
     <td> HTML templates, used by TWiki scripts </td>
   </tr>
 </table>
 
-#### <a name="Files in twiki/bin"></a> Files in twiki/bin
+**_Note: about the additional directories in data, elsewhere_**
+
+<a name="TWikiFiles"></a>
+
+#### <a name="Files in twiki"></a> Files in `twiki`
+
+**_to follow_**
+
+<a name="BinFiles"></a>
+
+#### <a name="Files in twiki/bin"></a> Files in `twiki/bin`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -159,7 +213,9 @@ TWiki is written in Perl 5 and also uses some shell commands. The current implem
   </tr>
 </table>
 
-#### <a name="Files in twiki/lib"></a> Files in twiki/lib
+<a name="LibFiles"></a>
+
+#### <a name="Files in twiki/lib"></a> Files in `twiki/lib`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -172,11 +228,13 @@ TWiki is written in Perl 5 and also uses some shell commands. The current implem
   </tr>
   <tr>
     <td><code><b>TWiki.cfg</b></code></td>
-    <td> For initialization and configuration, used by <code><b>TWiki.pm</b></code></td>
+    <td> For configuration, used by <code><b>TWiki.pm</b></code></td>
   </tr>
 </table>
 
-#### <a name="Files in twiki/lib/TWiki"></a> Files in twiki/lib/TWiki
+<a name="LibTWiki"></a>
+
+#### <a name="Files in twiki/lib/TWiki"></a> Files in `twiki/lib/TWiki`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -217,7 +275,9 @@ TWiki is written in Perl 5 and also uses some shell commands. The current implem
   </tr>
 </table>
 
-#### <a name="Files in twiki/lib/TWiki/Plugins"></a> Files in twiki/lib/TWiki/Plugins
+<a name="LibTWikiPlugins"></a>
+
+#### <a name="Files in twiki/lib/TWiki/Plugins"></a> Files in `twiki/lib/TWiki/Plugins`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -238,4 +298,22 @@ TWiki is written in Perl 5 and also uses some shell commands. The current implem
   </tr>
 </table>
 
--- [[MikeMannix]] - 26 Aug 2001
+<a name="PubFiles"></a>
+
+#### <a name="Files in twiki/pub"></a> Files in `twiki/pub`
+
+**_to follow_**
+
+<a name="DataFiles"></a>
+
+#### <a name="Files in twiki/data"></a> Files in `twiki/data`
+
+**_to follow_**
+
+<a name="TemplatesFiles"></a>
+
+#### <a name="Files in twiki/templates"></a> Files in `twiki/templates`
+
+**_to follow_**
+
+-- [[MikeMannix]] - 28 Aug 2001
