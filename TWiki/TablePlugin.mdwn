@@ -172,7 +172,7 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
   </tr>
 </table>
 
-### <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
+## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
 - Download the ZIP file from the Plugin web (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
@@ -209,20 +209,20 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
   - Check above example if the table renders as expected
   - Try click on heading to sort. Other tables should also be sortable
 
-### <a name="Plugin Info"></a> Plugin Info
+## <a name="Plugin Info"></a> Plugin Info
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Plugin Author: </td>
-    <td bgcolor="#ecf2f8" style="">[[TWiki/JohnTalintyre]]</td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki/JohnTalintyre]], [[TWiki/PeterThoeny]]</td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 07 Mar 2002 </td>
+    <td bgcolor="#ffffff" style=""> 12 Mar 2002 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
-    <td bgcolor="#ecf2f8" style=""> 07 Mar 2002 PTh: Added valign, headeralign and dataalign; fixed swapped cellpadding/cellspacing bug <br /> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
+    <td bgcolor="#ecf2f8" style=""> 12 Mar 2002 PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value <br /> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
@@ -248,4 +248,4 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 07 Mar 2002 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 12 Mar 2002 <br />
