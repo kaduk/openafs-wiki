@@ -158,10 +158,11 @@ class CatAnimal {
     </td>
   </tr>
   <tr>
-    <td valign="top"><strong>Table:</strong><br /> Optional spaces followed by the cells enclosed in vertical bars. </td>
+    <td valign="top"><strong>Table:</strong><br /> Optional spaces followed by the cells enclosed in vertical bars. <br /><strong><em>Note:</em></strong> In case you have a long row and you want it to be more readable when you edit the table you can split the row into lines that end with a <code>'\'</code> backslash character. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 | A1 | B1 | C1 |
 | A2 | B2 | C2 |
+| A3 \  | next \  | next |
 </pre> </font></span></td>
     <td valign="top">
       <table border="1" cellpadding="0" cellspacing="0">
@@ -174,6 +175,11 @@ class CatAnimal {
           <td> A2 </td>
           <td> B2 </td>
           <td> C2 </td>
+        </tr>
+        <tr>
+          <td> A3 </td>
+          <td> next </td>
+          <td> next </td>
         </tr>
       </table>
     </td>
@@ -200,16 +206,6 @@ class CatAnimal {
  &lt;nop&gt;SunOS
 </pre> </font></span></td>
     <td valign="top"> SunOS </td>
-  </tr>
-  <tr>
-    <td valign="top"><strong>Disable Links:</strong><br /> You can disable automatic linking of [[Main/WikiWords]] by surround text with <code>&lt;noautolink&gt;</code> and <code>&lt;/noautolink&gt;</code> tags. <br /><strong><em>Note:</em></strong> Each tag must be on a line by itself. </td>
-    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
- &lt;noautolink&gt;
- RedHat &amp;
- SuSE
- &lt;/noautolink&gt;
-</pre> </font></span></td>
-    <td valign="top"> RedHat &amp; SuSE </td>
   </tr>
 </table>
 
