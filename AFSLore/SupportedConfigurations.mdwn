@@ -59,7 +59,7 @@ You can easily see that you are using an NAMEI file server if there are files li
   </tr>
   <tr>
     <td> sun4x_5[789] </td>
-    <td><code>ufs</code> w/o logging (client logging works OK for me) </td>
+    <td><code>ufs</code> without logging or dedicated ufs cache partition with logging, <code>vxfs</code></td>
   </tr>
   <tr>
     <td> aix_4[345] , aix_51 </td>
