@@ -1,16 +1,13 @@
-# <a name="%TOPIC%"></a> %TOPIC%
+# Interwiki Plugin
 
 The %TOPIC% links <code>**ExternalSite:Page**</code> text to external sites based on aliases defined in the [[InterWikis]] topic. This plugin is inspired by UseMod Wiki's inter-wiki links, <http://www.usemod.com/cgi-bin/wiki.pl?InterWiki>.
 
 <div>
   <ul>
-    <li><a href="#%TOPIC%">%TOPIC%</a><ul>
-        <li><a href="#Syntax Rules"> Syntax Rules</a></li>
-        <li><a href="#%TOPIC% Settings"> %TOPIC% Settings</a></li>
-        <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
-        <li><a href="#Plugin Info"> Plugin Info</a></li>
-      </ul>
-    </li>
+    <li><a href="#Syntax Rules"> Syntax Rules</a></li>
+    <li><a href="#%TOPIC% Settings"> %TOPIC% Settings</a></li>
+    <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
+    <li><a href="#Plugin Info"> Plugin Info</a></li>
   </ul>
 </div>
 
@@ -72,11 +69,43 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 1.0.2 </td>
+    <td> 31 Aug 2002, 1.0.2 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
-    <td> 27 Jul 2001 Allow numbers in site name <br /> 26 Jul 2001 Fixed alternating missed link bug due to greedy $postfixPattern (fix by Richard Donkin) <br /> 14 Jul 2001 Changed to plug &amp; play <br /> 16 Jun 2001: Made tooltips optional; prevent <code><b>Module::Sub</b></code> type of link <br /> 12 Jun 2001: Added optional tool tips (IE only); added the link rules topic name variable; added flexible link patterns; optional <code><b>$page</b></code> in URL <br /> 10 Jun 2001: Changed rules topic to table-based syntax <br /> 20 Feb 2001: Initial version </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 31 Aug 2002: </td>
+    <td> Allow percent sign in site name </td>
+  </tr>
+  <tr>
+    <td align="right"> 27 Jul 2001: </td>
+    <td> Allow numbers in site name </td>
+  </tr>
+  <tr>
+    <td align="right"> 26 Jul 2001: </td>
+    <td> Fixed alternating missed link bug due to greedy $postfixPattern (fix by Richard Donkin) </td>
+  </tr>
+  <tr>
+    <td align="right"> 14 Jul 2001: </td>
+    <td> Changed to plug &amp; play </td>
+  </tr>
+  <tr>
+    <td align="right"> 16 Jun 2001: </td>
+    <td> Made tooltips optional; prevent <code><b>Module::Sub</b></code> type of link </td>
+  </tr>
+  <tr>
+    <td align="right"> 12 Jun 2001: </td>
+    <td> Added optional tool tips (IE only); added the link rules topic name variable; added flexible link patterns; optional <code><b>$page</b></code> in URL </td>
+  </tr>
+  <tr>
+    <td align="right"> 10 Jun 2001: </td>
+    <td> Changed rules topic to table-based syntax </td>
+  </tr>
+  <tr>
+    <td align="right"> 20 Feb 2001: </td>
+    <td> Initial version </td>
   </tr>
   <tr>
     <td align="right"> CPAN Dependencies: </td>
@@ -102,4 +131,4 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[InterWikis]], [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[AndreaSterbini]] - 20 Oct 2000 <br /> -- [[PeterThoeny]] - 27 Jul 2001 <br /> -- [[MikeMannix]] - 01 Oct 2001 <br />
+-- [[AndreaSterbini]] - 20 Oct 2000 <br /> -- [[PeterThoeny]] - 31 Aug 2002 <br /> -- [[MikeMannix]] - 01 Oct 2001 <br />
