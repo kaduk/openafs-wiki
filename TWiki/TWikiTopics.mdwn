@@ -12,67 +12,82 @@
   </ul>
 </div>
 
-Each page in a TWiki web is called a **_topic_**, defined by its meaningful, descriptive [[WikiWord]] title.
+Each page in a TWiki web is called a **_topic_**, identified by a unique, hopefully descriptive, [[WikiWord]] title. A topic is the basic building block of a [[TWikiSite]].
 
 ## <a name="Page Features"></a> Page Features
 
-A TWiki topic is a self-contained information unit rich in features:
+A TWiki topic is a self-contained information unit rich in features. Each topic has:
 
 - a [[WikiWord]] title that lets you:
   - instantly identify what the page is about
-  - automatically link to it from other pages
-- an edit-anywhere collaboration area where you can:
-  - enter plain or fully-HTML formatted text
-  - work with simple TWiki editing shorthand (that includes HTML mark-up and special TWiki functions)
+  - link to it from other pages just by typing it in
+- an [[edit link|Main/WebHome#PageBottom]] to a collaboration area where you can:
+  - enter plain or HTML-formatted text (plain text is all you need)
+  - use simple TWiki shorthand to enter HTML and special TWiki functions
   - include Web links, images, anything else you can put on a Web page
-- an extra [[forms input|TWiki/TWikiForms]] option:
-  - store structured info alongside the free-form page content
+- an extra [[Web forms|TWiki/TWikiForms]] option:
+  - store database-style info alongside the free-form page content
   - use text fields and boxes, radio buttons, pulldown selector menus, checkboxes
-  - select from one or many different input forms, with all data preserved
+  - create your own forms to gather searchable, sortable input
+  - select one form per topic from as many choices as you like
 - a [[FileAttachment]] feature that lets you:
   - upload files through your browser to the TWiki server
   - attach any type of file (documents, images, applications) for viewing or downloading
-  - make changes and update existing files
+  - upload revisions of existing files with automatic backup of all previous versions
 - [[TWiki Skins|TWiki/TWikiSkins]] to customize the look of headers and footers:
-  - apply skins across an entire TWiki web level, or to a single page
+  - apply skins across an entire TWiki web, or to a single page
+  - use included skins and easily create new ones
+  - try the <code>**[Printable]**</code> skin below: stripped down headers and footers suitable for printing
 - browser-based controls for [[renaming, moving, and deleting|Main/WebHome#RenamingTopics]] pages:
-  - rename a page and automatically update all the references to it, site-wide
+  - rename a page and automatically update all of the links to it, site-wide
   - move a page from one TWiki web to another
-  - safely delete a topic to a special Trash web (invisible, but accessible to the TWiki administrators if needed)
+  - safely delete a topic to a special Trash web (invisible, but recoverable from the Web server if necessary)
 - flexible [[access control|TWiki/TWikiAccessControl]]:
   - independently determine who can see, edit, rename, move or delete topics
   - set permissions by individual users and user groups
-- revision control automatically saves topic changes:
+- RCS revision control to automatically save all topic changes:
   - uses the established standard RCS (Revision Control System)
   - efficiently stores every change made to the original version
-  - allows comparison of changes between any two versions, and review of any version, as formatted or raw text
-- referred-by searches that list all topics in a web or site wide that link to a particular page
+  - lets you compare changes between any two versions or review all chnages
+  - displays any previous version as a regular Web page or as raw text
+- referred-by searches that list all topics that link to a particular page
 - hierarchical parent-child topic navigation:
   - automatically links a new page as the "child" of the page it was created from
   - allows manual assignment of parent page from a list of all topics in the local web
   - offers navigation displays, by topic parent, or by related topic
+- many more features - see [[TWikiMetaData]], for a start - as well as special TWiki effects that you can store on a top (start with [[TWikiVariables]])...
 
-The configuration of your TWiki site and your own user account determine which of these features you can use.
+The configuration of your TWiki site and your personal user account determine which of these features are installed and available to you.
 
 <a name="EditingPages"></a>
 
 ## <a name="How to create and edit a page"></a> How to create and edit a page
 
-Adding and editing information on existing pages, and creating new pages, is TWiki's main function.
+Making it incredibly easy for you to add and edit information on existing pages, create new pages, and link all TWiki pages, is TWiki's main function.
 
-- To modify a topic, click the <code>**[Edit]**</code> link at the bottom left of every page. An editing window appears. Type away. Use the [[GoodStyle]] and [[TextFormattingRules]] links to get pop-up window help.
+- **To modify a page**, click the <code>**[Edit]**</code> link at the left of the toolbar at the bottom of every page. An editing window appears. Type away. Use the [[GoodStyle]] and [[TextFormattingRules]] links to get pop-up window help.
   - Click <code>**[Preview Changes]**</code> to see how your edit looks.
   - Click <code>**[Save Changes]**</code> to save.
 
-- To add a new page, the simplest way is to type a new [[WikiName]] on an existing page. When the page is saved, the new name will appear highlighted, with a **?** at the end: click the **?** and a new edit window appears. Enter, preview and save as usual. The new page now exists.
+- **To add a new page**, the simplest way is to type a new [[WikiName]] on an existing page, while you're in edit mode. When the page is saved, the new name will appear highlighted, with a **?** at the end: click the **?** and a new edit window appears. Enter, preview and save as usual. The new page now exists.
+  - Go back to the page where you started, and you'll see the **?** has disappeared, and your [[WikiWord]] name is now a regular link. Type it anywhere on any page in that web, and it will be turned into a link.
+  - %H% **One little links rule: each topic, and its [[WikiWord]] link, belongs to one unique web only.** To link _between_ webs, you must first enter the topic's web name. <br /> For example: This is [[TWikiPages]], in the <code>**TWiki**</code> web, so that's all you need to type on any page in this web. But to link to [[TWikiPages]] from a page in the <code>**Main**</code> web, you have to type <code>**TWiki.TWikiPages**</code> - <code>**Web.TopicName**</code>. It's simple.
 
 <a name="OtherFeatures"></a>
 
 ## <a name="How to attach files and use othe"></a> How to attach files and use other features
 
-The color-coded control strip at the bottom of every page displays a series of links, including <code>**[Attach]**</code> (for attachments), <code>**[Ref-by]**</code> (to display referring pages), and <code>**[More]**</code>, which opens a new screen of additional controls).
+The color-coded toolbar at the bottom of every page displays a series of links, including:
 
-- Most controls are self-explanatory, and also include explanatory text and help links.
+- <code>**[Attach]**</code> - pops a new screen for file attachments
+- <code>**[Ref-By]**</code> - displays all the TWiki pages with links to the page you're on
+- <code>**[Diffs]**</code> - generates a page showing every change made to the page you're on, with names, dates, and changes
+- <code>**r1.3 | &gt; | r1.2**</code> _(ex)_ - some specific previous version stuff that you can check out on your own
+- <code>**[More]**</code> - opens up a whole new screen of additional controls
+
+It looks like a lot - it is a lot, and there's more. BUT, it's all simple, flexible, and optional - the only way to confuse yourself or your site set-up and users is by using features you really don't need. Unlike the usual expensive, complex collaboration and project management packages, TWiki is fully functional and effective just by typing in text and making [[WikiWord]] links. All the rest is there only if you need it!
+
+- Most controls are self-explanatory, and also include instructions and help links.
 - Experiment. You can always cancel or go Back whenever you like.
 - Get in-depth info from the [[complete documentation|TWiki/WebHome]], including the User's Guide and Reference Manual.
 
@@ -80,20 +95,18 @@ The color-coded control strip at the bottom of every page displays a series of l
 
 ## <a name="How to rename, move or delete a"></a><a name="How to rename, move or delete a "></a> How to rename, move or delete a page
 
-You can now rename, move and delete individual topics from your browser. All three options are available by clicking **More** on the control strip at the bottom of every page. The access settings for a topic, web or entire site may be disabled for one or more of the three options. In any case, all three are similar and extremely self-explanatory.
+You can now rename, move and delete individual topics from your browser. All three options are available by clicking <code>**[More]**</code> on the control strip at the bottom of every page. The access settings for a topic, web or entire site may be disabled for one or more of the three options, depending on your site set-up and personal permissions. In any case, all three are similar and extremely easy to use.
 
-1. On the topic you want to change, click **More** &gt; **Rename/move**
-2. To move or delete: select the target web (`Trash` for delete)from the pull-down menu; otherwise, leave on the current web
-3. To rename: fill in a new [[WikiName]] (otherwise, leave the current topic name)
-4. To update occurrences of the topic name on other pages: From the list of pages that link to the topic, check or uncheck each entry as you desire - only checked links will be updated;
-5. Click **Rename/move**: the topic will be renamed and links to the topic updated.
-  - Any problems are listed ; you can change them later.
-  - If a referring page can't be update because it's locked (ex: someone's editing), it appears on an alert. You can missed pages later by again pressing **Rename/move**.
+1. Go to the page you want to change, click <code>**[More] &gt; [Rename/move]**</code>
+2. **To move or delete:** select the target web (<code>**Trash**</code> to delete)from the pull-down menu (otherwise, leave on the current web)
+3. **To rename:** fill in a new [[WikiName]] (otherwise, leave the current topic name)
+4. **To update links:** From the list of pages that show links to the topic you're changing, uncheck each entry you DON'T want to update - only checked links will be updated;
+5. Click <code>**[Rename/move]**</code>: the topic are renamed and/or moved, and the checked links to the topic are updated.
+  - Any problems are listed - take note, and you can fix them later.
+  - If a linked page can't be updated (it may be locked because someone's editing it), an alert will appear. You can update missed pages later by again pressing <code>**[Rename/move]**</code>.
 
 %H% Deleting means moving the topic to the Trash web. Since all webs share the one Trash, name conflicts may come up.
 
-%X% **NOTE:** Keep in mind that moving a topic from a view-restricted web to a public web or the Trash web will compromise security.
-
 See: [[ManagingTopics|Main/TWikiDocumentation#Managing_Topics]] for more details.
 
-_Last updated: [[MikeMannix]] - 30 Oct 2001_<br />
+_Last updated: [[MikeMannix]] - 29 Dec 2001_
