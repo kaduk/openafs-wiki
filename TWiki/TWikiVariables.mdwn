@@ -67,7 +67,20 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%URLPARAM{"name"}%</code></td>
-    <td> Returns the value of a URL parameter. Note that there is a low risk that this variable could be misused for cross-scripting. Ex: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
+    <td> Returns the value of a URL parameter. Note that there is a risk that this variable could be misused for cross-scripting. Parameters are name and newline: <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+        </tr>
+        <tr>
+          <td><code>"name"</code></td>
+          <td> The name of a URL parameter </td>
+        </tr>
+        <tr>
+          <td><code>newline="&lt;br /&gt;"</code></td>
+          <td> Convert newlines to other delimiters </td>
+        </tr>
+      </table> Example: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
   </tr>
   <tr>
     <td><code>%URLENCODE{"string"}%</code></td>
@@ -225,7 +238,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:41</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:42</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -275,15 +288,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:41:33</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:11</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:41</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:42</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:41</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:42</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
