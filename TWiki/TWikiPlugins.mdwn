@@ -194,14 +194,15 @@ TWiki:Codev/StepByStepRenderingOrder helps you decide which rendering handler to
 
 ### <a name="Plugin Version Detection"></a> Plugin Version Detection
 
-To eliminate the incompatibility problems bound to arise from active open Plugin development, a Plugin versioning system and an API `GetVersion` detection routine are provided for automatic compatibility checking.
+To eliminate the incompatibility problems bound to arise from active open Plugin development, a Plugin versioning system is provided for automatic compatibility checking.
 
 - All modules require a `$VERSION='0.000'` variable, beginning at `1.000`.
 
 - The `initPlugin` handler should check all dependencies and return TRUE if the initialization is OK or FALSE if something went wrong.
   - The Plugin initialization code does not register a Plugin that returns FALSE (or that has no `initPlugin` handler).
 
-- `$VERSION='1.000'` is the current setting in `TWiki::Plugins.pm` and in the preinstalled system Plugins ([[DefaultPlugin]], [[EmptyPlugin]], [[InterwikiPlugin]]).
+- `$TWiki::Plugins::VERSION` in the `TWiki::Plugins` module contains the TWiki Plugin API version, currently **1\.11**.
+  - You can also use the [[%PLUGINVERSION{}%|Main/TWikiVariables#VarPLUGINVERSION]] variable to query the Plugin API version or the version of installed Plugins.
 
 <a name="CreatePlugins"></a>
 
@@ -361,4 +362,4 @@ Example code to build the file name:
         return "$dir/_FooBarPlugin_$name";
     }
 
--- TWiki:Main/PeterThoeny - 18 May 2004 %BR% -- TWiki:Main/AndreaSterbini - 29 May 2001 %BR% -- TWiki:Main/MikeMannix - 03 Dec 2001
+-- TWiki:Main/PeterThoeny - 14 Aug 2004 %BR% -- TWiki:Main/AndreaSterbini - 29 May 2001 %BR% -- TWiki:Main/MikeMannix - 03 Dec 2001
