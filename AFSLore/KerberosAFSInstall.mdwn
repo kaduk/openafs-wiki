@@ -1,0 +1,56 @@
+# <a name="Installing Kerberos  AFS"></a> Installing Kerberos &amp; AFS
+
+AFS includes its own implementation of Kerberos, the KAServer. However, new installs of KAServer are not recommended as it is based on a draft version of the obsolete Kerberos 4 protocol. Even though AFS doesn't support [[KerberosV]] directly, it is highly recommended that you set up a [[KerberosV]] realm for your AFS cell and **not** install the KAServer. See [[KerberosV]] for the many advantages of using the latest Kerberos for your network authentication.
+
+Note that this document is under development. Also, I don't try to explain the [[OpenAFS]] specific parts of the install -- This document describes only the changes that have to be made to create a new [[OpenAFS]] cell with [[KerberosV]] authentication. If you have followed these instructions and are still having problems please email the openafs-info mailing list.
+
+## <a name="Basics"></a> Basics
+
+To continue, you need a working Kerberos realm. See [[SettingUpAuthentication]] for the implementation options, and refer to the documentation that comes with your particular version of Kerberos to establish your realm. It is easiest if your realm name is the caps version of your cell name, which in turn is the same as your site's domain name. For example if your site's domain is 'greekmythology.com', your Kerberos realm name should be 'GREEKMYTHOLOGY.COM' and your AFS cell name should be 'greekmythology.com'. See [[KerberosTerms]] if you are confused on what a "realm" is.
+
+Once you have a working Kerberos realm, ie. you can "kinit" as yourself and receive valid Kerberos tickets, you are ready to continue on installing [[OpenAFS]].
+
+## <a name="OpenAFS"></a> [[OpenAFS]]
+
+### <a name="Starting the Install"></a> Starting the Install
+
+Now we will begin the [[OpenAFS]] installation. The relevant part of the [[OpenAFS]] documentation can be found at [OpenAFS installation documentation](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ17). Follow the instructions in [Creating AFS Directories](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#Header_32) and begin the [Platform Specific Procedures](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ20) as appropriate for your operating system. **SKIP** the "Enabling AFS Login" section of your operating system's instructions. Also note that you may need to reboot during this procedure (particularly on Solaris).
+
+Now you are ready to continue on to [Starting the BOS Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ50) (... someone want to chime in here and explain how one can use pt\_util etc to do this part without running in -noauth??). Proceed to [Defining Cell Name](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ51). During the [Starting Database Servers](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ52) section, **do not** issue the <code>**bos create**</code> command to add the kaserver.
+
+### <a name="Create AFS Keys and Administrato"></a> Create AFS Keys and Administrators
+
+Next we will create an AFS [[KeyFile]] and an administrator principal in the Kerberos database. The procedure for creating an AFS [[KeyFile]] depends on which [[KerberosV]] implementation you have chosen to use.
+
+Things to remember about AFS [[KeyFile]]: they must contain a key using the des-cbc-crc encryption type and has the latest kvno in the Kerberos database.
+
+[[KerberosVMIT]]:
+
+- The AFS-Kerberos5 migration kit includes a program "asetkey"
+
+[[HeimdalKTH]]:
+
+- The [[HeimdalKTH]] distribution's ktutil can copy directly into an AFS [[KeyFile]]
+
+(look for links in the mailing lists and explain this step; in the mean time, magic google words are [[KeyFile]], asetkey, and ktutil.)
+
+After you have a working [[KeyFile]] installed in the appropriate directory (/usr/afs/etc/KeyFile for transarc-paths, ???? otherwise) and with the appropriate permissions (0600, owner root), we can create administrative users for AFS. This is a two step process as we first create an authentication principal in the Kerberos database then add the admin user in the authorization ("protection") database in the AFS server.
+
+Create a user ("admin" in this example) using the appropriate kadmin utility with your [[KerberosV]] distribution. Set a secure password, and note that setting Kerberos admin rights for this user does **not** affect his AFS rights.
+
+Now we will use the <code>**pts**</code> command in [[OpenAFS]] to add this admin user to the AFS administrators group:
+
+       pts createuser -name admin -cell greekmythology.com -noauth
+       pts adduser admin system:administrators -cell greekmythology.com -noauth
+
+where greekmythology.com is the name of your local cell. After your complete this step, you can continue on to...
+
+### <a name="Finishing _OpenAFS installation"></a> Finishing [[OpenAFS]] installation
+
+Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ60) section of the [[OpenAFS]] documentation. The rest of the documentation can be completed without any changes. (What about replacing ntp with something recent, though...?)
+
+## <a name="Setting up Transparent Login"></a> Setting up Transparent Login
+
+In its current state, you have to manually log into your AFS cell through kinit and possibly aklog (explain aklog..., debugging using "tokens" etc). There are several methods to enable transparent login to both local resources (the machine itself) and AFS through a single password. See [[KerberosV]] and [[SettingUpAuthentication]] for some information.
+
+-- [[JasonGarman]] - 05 Feb 2002
