@@ -158,9 +158,9 @@ The SEARCH variable has many more formatting options, see [[TWikiVariables]].
 
 Here, last 15 is formatted into neat table.
 
-    &lt;font size="-1">&lt;table>
-     %SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="&lt;tr>&lt;td>  [[$topic]] &lt;/td>&lt;td>  $wikiusername  &lt;/td>&lt;td> $date  &lt;/td>&lt;/tr>" limit="15" }%
-     &lt;/table>&lt;/font>
+    <table>
+    %SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="<tr><td>  [[$topic][$topic]] </td><td>  $wikiusername  </td><td> $date  </td></tr>" limit="15" }%
+    </table>
 
 ----
 
