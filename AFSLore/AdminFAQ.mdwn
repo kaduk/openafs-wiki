@@ -162,7 +162,9 @@ A better approach is to re-authenticate just before the token expires.
 
 There are two examples of this that have been contributed to afs-contrib. The first is "reauth":
 
-<file:///afs/transarc.com/public/afs-contrib/tools/reauth/> <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth/MANIFEST>
+- <file:///afs/transarc.com/public/afs-contrib/tools/reauth/>
+- <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth/MANIFEST>
+- <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/reauth-0.0.5.tar.gz>
 
 The second is "lat":
 
@@ -173,6 +175,7 @@ The second is "lat":
 Yes. Alec Muffett's Crack tool (at version 4.1f) has been converted to work on the Transarc kaserver database. This modified Crack (AFS Crack) is available via anonymous ftp from:
 
 - <ftp://export.acs.cmu.edu/pub/crack.tar.Z>
+- <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/crack.tar.Z>
 
 and is known to work on: pmax\_\* sun4\*\_\* hp700\_\* rs\_aix\* next\_\*
 
@@ -193,7 +196,7 @@ Author: Dan Lovinger Contact: Derrick J. Brashear &lt;shadow+@andrew.cmu.edu&gt;
 
 Yes. There is a tool, balance, which does exactly this. It can be retrieved via anonymous ftp from:
 
-- <ftp://ftp.andrew.cmu.edu/pub/balance-1.1a.tar.Z>
+- <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/balance-1.1b.tar.gz>
 
 Actually, it is possible to write arbitrary balancing algorithms for this tool. The default set of "agents" provided for the current version of balance balance by usage, # of volumes, and activity per week, the latter currently requiring a source patch to the AFS volserver. Balance is highly configurable.
 
