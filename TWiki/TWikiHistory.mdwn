@@ -20,7 +20,661 @@
 
 ## <a name="01-Sep-2004 Release (Cairo)"></a> 01-Sep-2004 Release (Cairo)
 
-(doc pending)
+**_Major New Features_**
+
+- Automatic upgrade script, and easier first-time installation
+- Attractive new skins, using a standard set of CSS classes, and a skin browser to help you choose
+- New easier-to-use save options
+- Many improvements to SEARCH
+- Improved support for internationalisation
+- Better topic management screens
+- More pre-installed Plugins: CommentPlugin, EditTablePlugin, RenderListPlugin, SlideShowPlugin, SmiliesPlugin, SpreadSheetPlugin, TablePlugin
+- More callbacks for Plugins
+- Better support for different authentication methods
+- Many user interface and usability improvements
+- And many, many more enhancements
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 90%" width="90%"><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Details of New Features and Enhancements of 01-Sep-2004 Release</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 10%" width="10%"><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Developer, Sponsor</font></a></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Install: Ship with an automatic upgrade script to facilitate TWiki upgrades. <a href="http://TWiki.org/cgi-bin/view/Codev/CairoReleaseUpgradeGuide" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MartinGregory TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Install: New testenv function to change the locks in the TWiki database to the web server user id (automates installation step). <a href="http://TWiki.org/cgi-bin/view/Codev/RelockingRCSFiles" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.MattWilkie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Install: The shipped .htaccess.txt now needs to be edited before it is valid, to help reduce chances of error. <a href="http://TWiki.org/cgi-bin/view/Codev/InconsistentExtractDirectory" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Install: Configurable password file handling for different types of encryption. <a href="http://TWiki.org/cgi-bin/view/Codev/ConfigurablePasswordFileHandling" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PavelGoran TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Install: Remove office locations from registration. <a href="http://TWiki.org/cgi-bin/view/Codev/RemoveOfficeFromRegistration" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Install: Changes to support shorter URLs with Apache Rewrite rules. <a href="http://TWiki.org/cgi-bin/view/Codev/ShorterURLs" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.AntonioBellezza TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Install: Remove the Know web from the distribution. <a href="http://TWiki.org/cgi-bin/view/Codev/StopDistributingKnowWeb" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Internationalization: Support use of UTF-8 URLs for [[Main/I18N]] characters in TWiki page and attachment names. <a href="http://TWiki.org/cgi-bin/view/Codev/EncodeURLsWithUTF8" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.RichardDonkin </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Authentication: Authenticate users when creating new topic in view restricted web. <a href="http://TWiki.org/cgi-bin/view/Codev/VariousAuthBugsFixed" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.JonathanGraehl TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Preferences: TWiki Preferences need to be secured properly. <a href="http://TWiki.org/cgi-bin/view/Codev/SecureTWikiPreferences" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Preferences: Use TWiki Forms to set user preferences. <a href="http://TWiki.org/cgi-bin/view/Codev/UsingFormsForSettings" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Skins: New pre-installed skins PatternSkin and DragonSkin. <a href="http://TWiki.org/cgi-bin/view/Codev/SkinsForCairoRelease" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Skins: New skin browser to choose from installed skins. <a href="http://TWiki.org/cgi-bin/view/Codev/TWikiSkinBrowser" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Skins: Documented set of CSS classes that are used in standard skins. <a href="http://TWiki.org/cgi-bin/view/Codev/CssClassNames" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Skins: Added CSS class names to Diff output. <a href="http://TWiki.org/cgi-bin/view/Codev/HardwiredRDiffColours" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Skins: Templates can now be read from user topics, as well as from files in the templates diretcory. <a href="http://TWiki.org/cgi-bin/view/Codev/ReadTemplatesFromUserTopics" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Skins: Ensure that the default template gets overridden by a template passed in. <a href="http://TWiki.org/cgi-bin/view/Codev/PassedInTopicTemplateOverridesDefault" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MartinCleaver TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Skin: Convey an important broadcast message to all users, e.g. scheduled server downtime. <a href="http://TWiki.org/cgi-bin/view/Codev/BroadcastMessageHandling" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Skin: Balanced pastel colors for TWiki webs. <a href="http://TWiki.org/cgi-bin/view/Codev/TWikiWebColors" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Rendering: Use exclamation point prefix to escape TWiki markup rendering. <a href="http://TWiki.org/cgi-bin/view/Codev/EasierNop" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Rendering: Ordered lists with uppercase &amp; lowercase letters, uppercase &amp; lowercase Roman numerals. <a href="http://TWiki.org/cgi-bin/view/Codev/ImprovedOutlines" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.DanBoitnott TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Rendering: Allow custom styles for the "?" of uncreated topics. <a href="http://TWiki.org/cgi-bin/view/Codev/NewTopicLinkStylePatch" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Rendering: Render IRC and NNTP as a URL. <a href="http://TWiki.org/cgi-bin/view/Codev/RenderIrcAsURL" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Rendering: Make acronym linking more strict by requiring a trailing boundary, e.g. excluding TLAfoobar. <a href="http://TWiki.org/cgi-bin/view/Codev/TLAbehaviourIsOdd" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Rendering: TWiki Form with Label type. <a href="http://TWiki.org/cgi-bin/view/Codev/TWikiFormWithLabelType" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Rendering: Web names can now be WikiWords. <a href="http://TWiki.org/cgi-bin/view/Codev/WebNameAsWikiName" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Rendering: New syntax for definition list with dollar sign and colon. <a href="http://TWiki.org/cgi-bin/view/Codev/WikiSyntaxForDefinitionLists" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.AdamTheo TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Rendering: Table with multi-span rows, functionality provided by Table Plugin. <a href="http://TWiki.org/cgi-bin/view/Codev/WikiTablesNeedRowspanning" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: New title parameter for TOC variable. <a href="http://TWiki.org/cgi-bin/view/Codev/AddHeadingToToc" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: New REVINFO variable in templates supports flexible display of revision information. <a href="http://TWiki.org/cgi-bin/view/Codev/AddRevisionVariablesToTemplate" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: Set times to be displayed as gmtime or servertime. <a href="http://TWiki.org/cgi-bin/view/Codev/AlwaysServerTimeZone" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SueBlake TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: Properly encode parameters for form fields with ENCODE variable. <a href="http://TWiki.org/cgi-bin/view/Codev/EncodeParamsForFormFields" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: Expand USERNAME and WIKINAME in Template Topics. <a href="http://TWiki.org/cgi-bin/view/Codev/ExpandUsernameAndWikinameInTemplateTopics" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: Expand same variables in new user template as in template topics. <a href="http://TWiki.org/cgi-bin/view/Codev/ExpandVariablesInNewUserTemplate" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: Optionally warn when included topic does not exist; with the option to create the included topic. <a href="http://TWiki.org/cgi-bin/view/Codev/FailedIncludeWarning" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: In topic text show file-types of attached files as icons. <a href="http://TWiki.org/cgi-bin/view/Codev/FileAttachmentIconVariable" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: New variable FORMFIELD returns the value of a field in the form attached to a topic.. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedTWikiFormDataInTopicText" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.DavidSachitano TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: Meta data rendering for form fields with META{"formfield"}. <a href="http://TWiki.org/cgi-bin/view/Codev/MetaDataRendering" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: New PLUGINVERSION variable. <a href="http://TWiki.org/cgi-bin/view/Codev/PluginVersionVariable" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: URLPARAM now has a <code>default="..."</code> argument, for when no value has been given. <a href="http://TWiki.org/cgi-bin/view/Codev/UrlParamWithDefaultValue" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Variables: URLPARAM variable with newline parameter. <a href="http://TWiki.org/cgi-bin/view/Codev/UrlParamWithNewlineArg" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Variables: URLPARAM variable with new multiple=on parameter. <a href="http://TWiki.org/cgi-bin/view/Codev/UrlParamWithSelectMultiple" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PaulineCheung TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: New switch for search to perform an AND NOT search. <a href="http://TWiki.org/cgi-bin/view/Codev/InvertedSearchFeature" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: Keyword search to search with implicit AND. <a href="http://TWiki.org/cgi-bin/view/Codev/KeywordSearchWithImplicitAnd" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Multiple searches in same topic with new multiple="on" paramter. <a href="http://TWiki.org/cgi-bin/view/Codev/MultipleSearchesInSameTopic" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: Remove limitation on number of topics to search in a web. <a href="http://TWiki.org/cgi-bin/view/Codev/ArgumentListIsTooLongForSearch" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Exclude topics from search with an excludetopic parameter. <a href="http://TWiki.org/cgi-bin/view/Codev/ExcludeWebTopicsFromSearch" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: Expand Variables on Formatted Search with expandvariables Flag. <a href="http://TWiki.org/cgi-bin/view/Codev/ExpandVariablesOnFormattedSearch" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Formatted Search with [[Main/WebForm]] variable to retrieve the name of the form attached to a topic. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchFormnameVariable" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.FrankSmith TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: Formatted Search with Conditional Output. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchWithConditionalOutput" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Formatted Search with $parent token to get the parent topic. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchWithParentTopic" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: New separator parameter to SEARCH supports better SEARCH embedding. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchWithSeparatorParameter" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Improved search performance when sorting result by topic name. <a href="http://TWiki.org/cgi-bin/view/Codev/SchwartzianTransformMisused" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: New <code>scope=all</code> search parameter to search in topic name and topic text at the same time. <a href="http://TWiki.org/cgi-bin/view/Codev/SearchScopeForTopicAndText" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: New <code>topic</code> parameter for AND search on topic text and topic name. <a href="http://TWiki.org/cgi-bin/view/Codev/SearchTopicNameAndTopicText" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search modules uses Perl-style keyword parameters (code cleanup). <a href="http://TWiki.org/cgi-bin/view/Codev/SearchWebHasTooManyParameters" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: New $wikiname variable in format parameter of formatted search. <a href="http://TWiki.org/cgi-bin/view/Codev/ShortUserNameInFormattedSearch" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: Sort search by topic creation date. <a href="http://TWiki.org/cgi-bin/view/Codev/SortSearchByTopicCreateDate" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Topic creation date and user in Formatted Search. <a href="http://TWiki.org/cgi-bin/view/Codev/TopicCreateDateInFormattedSearch" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CoreyFruitman TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Search: Increase levels of nested search from 2 to 16. <a href="http://TWiki.org/cgi-bin/view/Codev/MoreNestedSearchLevels" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: New pre-installed Plugins CommentPlugin, EditTablePlugin, RenderListPlugin, SlideShowPlugin, SmiliesPlugin, SpreadSheetPlugin, TablePlugin. <a href="http://TWiki.org/cgi-bin/view/Codev/PreinstalledTWikiPlugins" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Plugins: New callback <code>afterSaveHandler</code>, called after a topic is saved. <a href="http://TWiki.org/cgi-bin/view/Codev/AfterSavePluginHandler" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: New callbacks <code>beforeAttachmentSaveHandler</code> and <code>afterAttachmentSaveHandler</code>, used to intervene on attachment save event. <a href="http://TWiki.org/cgi-bin/view/Codev/BeforeAttachmentSaveHandler" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MartinCleaver TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Plugins: New callbacks <code>beforeCommonTagsHandler</code> and <code>afterCommonTagsHandler</code>. <a href="http://TWiki.org/cgi-bin/view/Codev/BeforeCommonTagsHandler" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: New callback <code>renderFormFieldForEditHandler</code> to render form field for edit. <a href="http://TWiki.org/cgi-bin/view/Codev/RenderFormFieldForEditHandler" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Plugins: New callback <code>renderWikiWordHandler</code> to custom render links. <a href="http://TWiki.org/cgi-bin/view/Codev/RenderedWikiWordHandler" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.MartinCleaver TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: Adds new dependency checking function TWiki::Func::checkDependencies for Plugins. <a href="http://TWiki.org/cgi-bin/view/Codev/PluginDependencies" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Plugins: A recommendation for where a Plugin can store its data. <a href="http://TWiki.org/cgi-bin/view/Codev/RecommendedStorageOfPluginData" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Show tool-tip topic info on [[Main/WikiWord]] links. <a href="http://TWiki.org/cgi-bin/view/Codev/ToolTipTopicInfoOnWikiWordLinks" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Save topic and continue edit feature. <a href="http://TWiki.org/cgi-bin/view/Codev/CheckpointSave" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ColasNahaboo </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Change topic with direct save (without edit/preview/save cycle) and checkpoint save. <a href="http://TWiki.org/cgi-bin/view/Codev/SavemultiCgiScript" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MattWilkie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: In attachment table, change 'action' to 'manage'. <a href="http://TWiki.org/cgi-bin/view/Codev/AttachmentActionLinkBadName" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Smaller usability enhancements on the file attachment table. <a href="http://TWiki.org/cgi-bin/view/Codev/BetterAttachmentTableForCairoRelease" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Removes anchor links from header content and places them before the text to fix 'header becomes link'. <a href="http://TWiki.org/cgi-bin/view/Codev/BetterLinksToHeadings" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Improved functionality of the More screen. <a href="http://TWiki.org/cgi-bin/view/Codev/BetterMoreRealizedFeatures" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Quick reference chart of most used markup is now listed on the edit screen. <a href="http://TWiki.org/cgi-bin/view/Codev/HelpTextInEditPage" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Flag for edit script to avoid overwrite of existing topic text and form data. <a href="http://TWiki.org/cgi-bin/view/Codev/FlagForEditScriptToAvoidFormDataOverwrite" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.NielsKoldso TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Disable Escape key in IE textarea to prevent it cancelling work. <a href="http://TWiki.org/cgi-bin/view/Codev/EscKeyInEditorDeletesText" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Improved warning message on unsaved topic. <a href="http://TWiki.org/cgi-bin/view/Codev/ReassurePeopleTheyDidntLoseTheirData" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MartinGregory TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Reverse order of words in page title for better multi-window/tab navigation. <a href="http://TWiki.org/cgi-bin/view/Codev/ReversePageTitle" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Provides a framework to create and modify a topic without going through edit-&gt;preview-&gt;save sequence. <a href="http://TWiki.org/cgi-bin/view/Codev/SaveContentWithoutEdit" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.AndreUlrich TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Set the topic parent to none in More screen, e.g. remove the current topic parent. <a href="http://TWiki.org/cgi-bin/view/Codev/SettingParentTopicToNone" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Use templates to define how file attachments are displayed. Was previously hard-coded. <a href="http://TWiki.org/cgi-bin/view/Codev/TemplatesForMetaDataPresentation" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> UI: Topic diff shows unified diff with unchanged context. <a href="http://TWiki.org/cgi-bin/view/Codev/UnifiedDiffOutput" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> UI: Diff feature shows TWiki form changes in nice tables. <a href="http://TWiki.org/cgi-bin/view/Codev/TWikiFormsDiffRendering" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Code refactoring: The log entry for a save now has a dontNotify flag in the extra field if the user checked the minor changes flag. <a href="http://TWiki.org/cgi-bin/view/Codev/DontNotifyFlagInLogFile" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Code refactoring: Server-side include of attachments accelerates INCLUDE. <a href="http://TWiki.org/cgi-bin/view/Codev/IncludeAttachment" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Code refactoring: Move functionality out of bin scripts and into included modules. <a href="http://TWiki.org/cgi-bin/view/Codev/MoreChangesToUpload" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Code refactoring: Move bin script functionality into TWiki::UI modules. <a href="http://TWiki.org/cgi-bin/view/Codev/MoveScriptFunctionalityIntoTWikiUiLibs" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Code refactoring: Optimize preferences handling for better performance. <a href="http://TWiki.org/cgi-bin/view/Codev/OptimizePreferencesHandling" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PavelGoran TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Code refactoring: Refactor variable expansion for edit and register. <a href="http://TWiki.org/cgi-bin/view/Codev/RefactorVariableExpansion" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Code refactoring: Move savemulti script into TWiki::UI::Save. <a href="http://TWiki.org/cgi-bin/view/Codev/SavemultiIntoSaveDotPm" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.MattWilkie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Code refactoring: Topic search is done natively in Perl, it does not depend anymore on system calls with pipes. <a href="http://TWiki.org/cgi-bin/view/Codev/SearchWithNoPipe" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Code refactoring: Fix logical error in upload script which prevented MIME filename from being used. <a href="http://TWiki.org/cgi-bin/view/Codev/UploadFilenameFixToEnableBatchUploadWithCurl" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.WalterMundt </td>
+  </tr>
+</table>
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 90%" width="90%"><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Bug Fixes of 01-Sep-2004 Release</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 10%" width="10%"><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Developer, Sponsor</font></a></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Consistently create headings with empty anchor tags. <a href="http://TWiki.org/cgi-bin/view/Codev/AllcapsHeadingsProduceBrokenAnchors" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: TOC does not work for headings containing &amp; without spaces surrounding it. <a href="http://TWiki.org/cgi-bin/view/Codev/AmpersandHeadingBadTOCLink" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Backslash line break breaks TWiki form definitions. <a href="http://TWiki.org/cgi-bin/view/Codev/BackslashBreaksForm" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Rename fixes unrelated topic references. <a href="http://TWiki.org/cgi-bin/view/Codev/BugInTopicRenaming" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.RichardDonkin </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Bug with infinite recursion in search. <a href="http://TWiki.org/cgi-bin/view/Codev/BugInfiniteRecursionInSearch" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Can't send mail with full 'From' address. <a href="http://TWiki.org/cgi-bin/view/Codev/CantSendMailWithFullAddress" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: All scripts change to $bin before execute (for mod_perl2). <a href="http://TWiki.org/cgi-bin/view/Codev/ChangeToScriptDirForModPerl" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Several RSS readers do not show all entries seen in the WebChanges list; repeated updates to the same topics get lost. <a href="http://TWiki.org/cgi-bin/view/Codev/ChangesDontShowUpInRSS" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: TWiki::Access::checkAccessPermission function improperly handles Main and TWiki webs. <a href="http://TWiki.org/cgi-bin/view/Codev/CheckAccessPermissionBrokenForMainAndTWikiWebs" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Topic save returns error CI Date precedes date in revision. <a href="http://TWiki.org/cgi-bin/view/Codev/CiDatePrecedesDateInRevision" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Double quotes got replaced by " in TWiki forms. <a href="http://TWiki.org/cgi-bin/view/Codev/DoubleQuoteHandlingInTwikiForms" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki: MS TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Duplicated Wiki name in .htpasswd entry for sha1 encoding. <a href="http://TWiki.org/cgi-bin/view/Codev/DuplicatedWikiNameInHtpasswdEntry" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: When viewing a previous version of a topic, the view script substitutes only one occurrence of the variable EDITTOPIC. <a href="http://TWiki.org/cgi-bin/view/Codev/EditTopicNotGloballySubstituted" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Form default values are not working for text fields. <a href="http://TWiki.org/cgi-bin/view/Codev/FormDefaultNotWorkingForTextField" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ThomasWeigert TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Formatted searches using a $pattern which unbalanced parenthesis crash TWiki. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchPatternExtractionUnmatchedParenthesesError" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Formatted Search uses title but should use name for formfield parameter. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchUsesTitleInsteadOfName" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: GMTIME variable returns unwanted GMT text. <a href="http://TWiki.org/cgi-bin/view/Codev/GmTimeVariableReturnsUnwantedGMT" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Include from other Web links ACRONYMS. <a href="http://TWiki.org/cgi-bin/view/Codev/IncludeFromOtherWebLinksACRONYMS" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Including an HTML file is very slow. <a href="http://TWiki.org/cgi-bin/view/Codev/IncludeHTMLTakesLongTime" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: includeUrl() mess up absolute URLs. <a href="http://TWiki.org/cgi-bin/view/Codev/IncludeUrlScrewsUpAbsoluteUrls" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Filter out fixed font rendering in TOC to avoid unrendered = equal signs in TOC. <a href="http://TWiki.org/cgi-bin/view/Codev/IncorrectWhitespaceParsingInTOC" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: The initializeUserHandler is broken for session Plugins. <a href="http://TWiki.org/cgi-bin/view/Codev/InitializeUserHandlerBroken" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: SEARCH fails with very large webs. <a href="http://TWiki.org/cgi-bin/view/Codev/InlineSearchArgListTooLong" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Security alert: User could gain view access rights of another user. <a href="http://TWiki.org/cgi-bin/view/Codev/InsecureViewWithFailedAuthentication" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.KimCovil TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: 'print to closed file handle' error of log files are not writable. <a href="http://TWiki.org/cgi-bin/view/Codev/LogAndWarningFilePermissionsGiveBadErrorMessage" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MartinGregory TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Meta data handler can't process CR-LF line endings. <a href="http://TWiki.org/cgi-bin/view/Codev/MetaDataHandlerCantProcessCrLfLineEndings" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: METAFIELD meta data is not shown in view raw=on mode. <a href="http://TWiki.org/cgi-bin/view/Codev/MetaFieldNotShownInViewRawMode" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Minor XHTML non-compliance in templates and code. <a href="http://TWiki.org/cgi-bin/view/Codev/MinorXHTMLNonComplianceInTemplates" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Getting pages from virtual hosts fails. <a href="http://TWiki.org/cgi-bin/view/Codev/NetCantGetURLFromVhosts" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Create new web fails if RCS files do not exist. <a href="http://TWiki.org/cgi-bin/view/Codev/NewWebFailsIfTemplateRCSIsDeleted" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ClausBrunzema TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Metacharacters can be passed through to the shell in File Attach. <a href="http://TWiki.org/cgi-bin/view/Codev/NoShellCharacterEscapingInFileAttachComment" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Ability to delete non-WikiWord topics without confirmation. <a href="http://TWiki.org/cgi-bin/view/Codev/NonWikiWordInConfirm" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: + symbol in password reset fails. <a href="http://TWiki.org/cgi-bin/view/Codev/OopsResetPasswdFormat" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Pathinfo cleanup for hosted sites. <a href="http://TWiki.org/cgi-bin/view/Codev/PathInfoCleanupBug" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.MikeSalisbury TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Software error in SEARCH if regular expression pattern has unmached parenthesis. <a href="http://TWiki.org/cgi-bin/view/Codev/PatternExtractBug" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Pipe chars in the comment field of the attachment table are not escaped. <a href="http://TWiki.org/cgi-bin/view/Codev/PipeInCommentInAttachmentTableNotEscaped" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Link escaping in preview fails for not quoted hrefs. <a href="http://TWiki.org/cgi-bin/view/Codev/PreviewDoesNoQuoteHrefs" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.TedPavlic TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Preview expands variables twice. <a href="http://TWiki.org/cgi-bin/view/Codev/PreviewExpandsVariablesTwice" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Using a proxy with TWiki fails; no proxy-HTTP request, minimal request not HTTP 1.0, requests marked 1.1 are at best 1.0. <a href="http://TWiki.org/cgi-bin/view/Codev/ProxiedIncludesBrokenImplementationBug" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MichaelSparks TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Runaway view processes with TWiki::Sore::RcsLite. <a href="http://TWiki.org/cgi-bin/view/Codev/RcsLiteRunawayViewProcesses" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Regex Error in WebTopicList with topics that have meta characters in the name. <a href="http://TWiki.org/cgi-bin/view/Codev/RegexErrorWithTopicNamesWithMetaChars" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Rename script misses some ref-by topics. <a href="http://TWiki.org/cgi-bin/view/Codev/RenameScriptMissesSomeReferrers" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.JohnTalintyre </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Links to self within the page being renamed are not changed. <a href="http://TWiki.org/cgi-bin/view/Codev/RenameSkipsSelf" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Rename topic does 'Main.Main.UserName' for attachments. <a href="http://TWiki.org/cgi-bin/view/Codev/RenameTopicDoesMainMainUser" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Revision date is set to Jan 1970 when using RCS Lite. <a href="http://TWiki.org/cgi-bin/view/Codev/RevisionDateJan1970" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: The new dynamically-created SiteMap is very nice, but somewhat slow. <a href="http://TWiki.org/cgi-bin/view/Codev/SiteMapIsSlow" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: The makeAnchorName function did not produce the same results if called iteratively, resulting in problems trying to link to headers.. <a href="http://TWiki.org/cgi-bin/view/Codev/SpecificLinkIncorrectlyRemovesAnchorUnderscores" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Statistics page does not provide links to non-wikiword topics. <a href="http://TWiki.org/cgi-bin/view/Codev/StatisticsDoesNotLinkNonWikiWordTopics" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Make TOC link URI references relative. <a href="http://TWiki.org/cgi-bin/view/Codev/TOCLinkURIRefsNotRelative" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MartinGregory TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: TWiki hangs when used on Apache 2.0. <a href="http://TWiki.org/cgi-bin/view/Codev/TWikiOnApache2dot0Hangs" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: TOC incorrectly strips out links in headers. <a href="http://TWiki.org/cgi-bin/view/Codev/TocMishandlesStrippingLinks" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: The HTML tags that are generated by TOC do not close properly. <a href="http://TWiki.org/cgi-bin/view/Codev/TocNotClosedProperly" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: TOC on INCLUDEd topic ignores STOPINCLUDE. <a href="http://TWiki.org/cgi-bin/view/Codev/TocWithParameterIgnoresStopinclude" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.WillNorris TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Quotes in tooltip message can break a TWiki form. <a href="http://TWiki.org/cgi-bin/view/Codev/TooltipCanBreakForm" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Better error message if the file attachment directory is not writable. <a href="http://TWiki.org/cgi-bin/view/Codev/UninitializedValueInRcsFile" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Image size of PNG files. <a href="http://TWiki.org/cgi-bin/view/Codev/UploadDoesNotGenerateImageSizeOfPngs" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.ArthurClemens </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: The testenv script distinguishes between real user ID and effective user ID. <a href="http://TWiki.org/cgi-bin/view/Codev/UseEffectiveUIDInTestenv" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.RichardDonkin </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Variables in square bracket links dont work in form fields. <a href="http://TWiki.org/cgi-bin/view/Codev/VariableInSquareBracketLinkDoestWorkInFormField" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Variable with Parameters in Form Fields Disappear. <a href="http://TWiki.org/cgi-bin/view/Codev/VariableWithParamsInFormFieldsDisappear" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Verbatim tag should escape HTML entities. <a href="http://TWiki.org/cgi-bin/view/Codev/VerbatimShouldEscapeHtmlEntities" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Field names of TWiki Forms can be WikiWords, this is used to link to a help topic. <a href="http://TWiki.org/cgi-bin/view/Codev/WebDotTopicFormFieldNamesDontWork" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Clean up the WebRssBase INCLUDES to use VARIABLES set in TWikiPreferences. <a href="http://TWiki.org/cgi-bin/view/Codev/WebRssBaseDcFieldsWrong" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Resolving variables in included topics. <a href="http://TWiki.org/cgi-bin/view/Codev/WrongInternalTagOrder" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.OliverKrueger TWiki:Main.SvenDowideit </td>
+  </tr>
+</table>
 
 ## <a name="01-Feb-2003 Release (Beijing)"></a> 01-Feb-2003 Release (Beijing)
 
