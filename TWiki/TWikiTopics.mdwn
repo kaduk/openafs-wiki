@@ -52,9 +52,12 @@ A TWiki topic is a rich information unit. **Each** topic has:
 
 Features that can be used by topics and sites include:
 
-- skins
-  - fully configurable look and feel for all topics
+- [[TWiki Skins|TWiki/TWikiSkins]] to customize the look of headers and footers when topics are converted to Web pages for display:
   - default and user selectable per session
+  - fully configurable look and feel
+  - apply skins across an entire TWiki web, or to a single displayed page
+  - use included skins and easily create new ones
+  - try the <code>**[Printable]**</code> skin below: stripped down headers and footers suitable for clean hard copy
 - plug-ins
   - new feature packages
   - developer community evolving existing and new capabilities
@@ -75,10 +78,6 @@ Features that can be used by topics and sites include:
   - accesses meta-data
   - use text fields and boxes, radio buttons, pulldown selector menus, checkboxes
   - create your own forms to tag topics to later search, sort and display
-- [[TWiki Skins|TWiki/TWikiSkins]] to customize the look of headers and footers when topics are converted to Web pages for display:
-  - apply skins across an entire TWiki web, or to a single displayed page
-  - use included skins and easily create new ones
-  - try the <code>**[Printable]**</code> skin below: stripped down headers and footers suitable for clean hard copy
 - [[renaming, moving, and deleting|Main/WebHome#RenamingTopics]]
   - rename a topic and automatically update all of the links to it, site-wide
   - move a topic from one TWiki web to another

@@ -163,7 +163,7 @@ You can also edit `$localPerlLibPath` in the `setlib.cfg` file if you are not ro
 - %H% The `twiki/data/*/*.txt,v` RCS repository files in the installation package are locked by user `nobody`. If your CGI scripts are **_not_** running as user `nobody`, it's not possible to check in files (you'll see that the revision number won't increase after saving a topic). In this case, you need to unlock all repository files (check the RCS man pages) and lock them with a different user, ex `www-data`, or delete them all - new files will be automatically created the first time each topic is edited. A simple way to change ownership is with a search-and-replace in all files; for example, using perl:
 
 > cd twiki/data
->     perl -pi~ -e 's/nobody:/www-data:/' */*,v
+>     perl -pi~ -e 's/nobody(\:[0-9\.]+[\;\s]+strict\;)/www-data$1/' */*,v
 
 ### <a name="Step 3: Set the Main Configurati"></a> Step 3: Set the Main Configuration File
 

@@ -28,7 +28,11 @@ REs are similar to (but more poweful than) the "wildcards" used in the command-l
   </tr>
   <tr>
     <td><code>bug*</code></td>
-    <td> Search for <strong>bug</strong>, <strong>bugs</strong>, <strong>bugfix</strong></td>
+    <td> Search for <strong>bug</strong>, <strong>bugg</strong>, <strong>buggg</strong> or simply <strong>bu</strong> (a star matches <strong>zero</strong> or more instances of the previous character) </td>
+  </tr>
+  <tr>
+    <td><code>bug.*</code></td>
+    <td> Search for <strong>bug</strong>, <strong>bugs</strong>, <strong>bugfix</strong> (a dot-star matches zero or more instances of <strong>any</strong> character) </td>
   </tr>
   <tr>
     <td><code>[Bb]ag</code></td>
