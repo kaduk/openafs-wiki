@@ -21,3 +21,23 @@ The above is available from:
 <http://cf.ccmr.cornell.edu/publicdownloads/afs>
 
 -- [[DaveBotsch]] - 14 Nov 2003
+
+To get AFS tokens automatically (equivalent of aklog) on kinit or console login, you can use one of three loginLogout Kerberos plugins, which install in /Library/Kerberos Plug-Ins and require a reference in /Library/Preferences/edu.mit.Kerberos:
+
+Alexei Kosut's original, uses Kerberos 4 aklog:
+
+[http://www-personal.umich.edu/%7earosenbl/aklog\_loginLogout.hqx](http://www-personal.umich.edu/%7earosenbl/aklog_loginLogout.hqx)
+
+Some changes needed for Panther compatibility are discussed here:
+
+<http://mailman.mit.edu/pipermail/krbdev/2004-January/002159.html>
+
+Nicholas Riley's, uses Kerberos 5 aklog:
+
+\* Source code: <https://lists.openafs.org/pipermail/port-darwin/2003-July/000308.html>
+
+\* Installer package (text in installer is site-specific): <http://www.acm.uiuc.edu/admin/afs/aklog-1.0.dmg>
+
+Ragnar Sundblad's, uses afslog (works with Arla as well as [[OpenAFS]]):
+
+<https://lists.openafs.org/pipermail/port-darwin/2003-July/000309.html>
