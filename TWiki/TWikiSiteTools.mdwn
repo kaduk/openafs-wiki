@@ -3,7 +3,6 @@
     <li><a href="#TWikiSiteTools"> TWikiSiteTools</a><ul>
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#WebNotify Recent Changes Alert"> WebNotify Recent Changes Alert</a><ul>
-            <li><a href="#How It Works"> How It Works</a></li>
             <li><a href="#Configuring Outgoing Mail"> Configuring Outgoing Mail</a></li>
             <li><a href="#Setting the Automatic Email Sche"> Setting the Automatic Email Schedule</a></li>
           </ul>
@@ -30,11 +29,7 @@ _Utilities for searching, navigation, and monitoring site activity_
 
 ## <a name="WebNotify Recent Changes Alert"></a><a name="_WebNotify Recent Changes Alert"></a> WebNotify Recent Changes Alert
 
-Each TWiki web has an automatic email alert service that sends a list of recent changes on a preset schedule, like once a day. Users can subscribe and unsubscribe using [[WebNotify]] in each web.
-
-### <a name="How It Works"></a> How It Works
-
-The Perl script `mailnotify` is called by a deamon in regular intervals. The script sends an automated email to subscribed users if topics were changed in a web within last interval.
+Each TWiki web has an automatic email alert service that sends a list of recent changes on a preset schedule, like once a day. Users can subscribe and unsubscribe using [[WebNotify]] in each web. The Perl script `mailnotify` is called by a deamon in regular intervals. The script sends an automated email to subscribed users if topics were changed in a web within last interval.
 
 ### <a name="Configuring Outgoing Mail"></a> Configuring Outgoing Mail
 
