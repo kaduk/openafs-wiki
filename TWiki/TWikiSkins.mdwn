@@ -3,6 +3,11 @@
     <li><a href="#TWiki Skins"> TWiki Skins</a><ul>
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Defining Skins"> Defining Skins</a></li>
+        <li><a href="#Variables in Skins"> Variables in Skins</a><ul>
+            <li><a href="#The "Go" Box and Navigation Box"> The "Go" Box and Navigation Box</a></li>
+          </ul>
+        </li>
+        <li><a href="#Packaging and Publishing Skins"> Packaging and Publishing Skins</a></li>
         <li><a href="#Activating Skins"> Activating Skins</a></li>
       </ul>
     </li>
@@ -21,6 +26,128 @@ Skins are customized [[TWikiTemplates]] files. You can use skins to change the l
 
 Skin files are located in the `twiki/templates` directory and are named with the syntax: <code>**&lt;scriptname&gt;.&lt;skin&gt;.tmpl**</code>. For example, the **Printable** skin for the `view` template is `view.print.tmpl`.
 
+Use the existing [[TWikiTemplates]] (like `view.tmpl`) or skin files as a base for your own skin, name it for example `view.myskin.tmpl`.
+
+## <a name="Variables in Skins"></a> Variables in Skins
+
+You can use [[template variables|Main/TWikiTemplates#TemplateVariables]], [[TWikiVariables]], and other predefined variables to compose your skins. Some commonly used variables in skins:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Variable: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expanded to: </strong></th>
+  </tr>
+  <tr>
+    <td><code>%WIKILOGOURL%</code></td>
+    <td> Link of page logo </td>
+  </tr>
+  <tr>
+    <td><code>%WIKILOGOIMG%</code></td>
+    <td> Image URL of page logo </td>
+  </tr>
+  <tr>
+    <td><code>%WIKILOGOALT%</code></td>
+    <td> Alt text of page logo </td>
+  </tr>
+  <tr>
+    <td><code>%WEBBGCOLOR%</code></td>
+    <td> Web specific background color, defined in the [[Main/WebPreferences]]</td>
+  </tr>
+  <tr>
+    <td><code>%WIKITOOLNAME%</code></td>
+    <td> The name of your TWiki site </td>
+  </tr>
+  <tr>
+    <td><code>%SCRIPTURL%</code></td>
+    <td> The script URL of TWiki </td>
+  </tr>
+  <tr>
+    <td><code>%SCRIPTSUFFIX%</code></td>
+    <td> The script suffix, ex: <code>.pl</code>, <code>.cgi</code></td>
+  </tr>
+  <tr>
+    <td><code>%WEB%</code></td>
+    <td> The name of the current web </td>
+  </tr>
+  <tr>
+    <td><code>%WEBURLENCODED%</code></td>
+    <td> The name of the current web, URL encoded (for form action) </td>
+  </tr>
+  <tr>
+    <td><code>%TOPIC%</code></td>
+    <td> The name of the current topic </td>
+  </tr>
+  <tr>
+    <td><code>%TOPICURLENCODED%</code></td>
+    <td> The name of the current topic, URL encoded (for form action) </td>
+  </tr>
+  <tr>
+    <td><code>%WEBTOPICLIST%</code></td>
+    <td> Common links of current web, defined in the [[Main/WebPreferences]]. It includes a [[Main/WebHome#GoBox]]</td>
+  </tr>
+  <tr>
+    <td><code>%TEXT%</code></td>
+    <td> The topic text, e.g. the content that can be edited </td>
+  </tr>
+  <tr>
+    <td><code>%META{"form"}%</code></td>
+    <td>[[Main/TWikiForms]], if any </td>
+  </tr>
+  <tr>
+    <td><code>%META{"attachments"}%</code></td>
+    <td>[[Main/FileAttachment]] table </td>
+  </tr>
+  <tr>
+    <td><code>%META{"parent"}%</code></td>
+    <td> The topic parent </td>
+  </tr>
+  <tr>
+    <td><code>%EDITTOPIC%</code></td>
+    <td> Edit link </td>
+  </tr>
+  <tr>
+    <td><code>%REVTITLE%</code></td>
+    <td> The revision title, if any, ex: <code>(r1.6)</code></td>
+  </tr>
+  <tr>
+    <td><code>%REVINFO%</code></td>
+    <td> Revision info, ex: <code>r1.6 - 24 Dec 2002 - 08:12 GMT - Main.admin</code></td>
+  </tr>
+  <tr>
+    <td><code>%WEBCOPYRIGHT%</code></td>
+    <td> Copyright notice, defined in the [[Main/WebPreferences]]</td>
+  </tr>
+</table>
+
+<a name="GoBox"></a>
+
+### <a name="The &quot;Go&quot; Box and Navigation Box"></a> The "Go" Box and Navigation Box
+
+The `%WEBTOPICLIST%` includes a "Go" box to jump to a topic. The box also understand URLs, e.g. you can type <http://www.google.com/> to jump to an external web site. The feature is handy if you build a skin that has a select box of frequently used links, like Intranet home, employee database, sales database and such. A little JavaScript gets into action on the onSelect method of the select tag to fill the selected URL into the "Go" box field, then submits the form.
+
+Here is an example form that has a select box and the "Go" box for illustration purposes. You need to have JavaScript enabled for this to work:
+
+<form action="http://www.dementia.org/twiki//view/%WEBURLENCODED%/%TOPICURLENCODED%" name="sample">
+  <table border="3">
+    <tr>
+      <td><select name="sel" onchange="this.form.topic.value=this.options[this.selectedIndex].value; this.form.submit()"><option selected value="">Navigate...</option>
+          <option value="http://www.twiki.org/">Intranet home</option>
+          <option value="Main.TWikiUsers">Employee index</option>
+          <option value="Main.WebHome">Main web</option>
+          <option value="TWiki.WebHome">TWiki web</option>
+          <option value="http://www.google.com/">Google</option>
+          <option value="http://www.yahoo.com/">Yahoo!</option></select> Bare bones header for demo only </td>
+    </tr>
+    <tr>
+      <td> %WEBTOPICLIST% </td>
+    </tr>
+  </table>
+</form>
+
+## <a name="Packaging and Publishing Skins"></a> Packaging and Publishing Skins
+
+See TWiki:Plugins/SkinPackagingHowTo
+
 ## <a name="Activating Skins"></a> Activating Skins
 
 A skin can be activated in two ways:
@@ -34,4 +161,4 @@ A skin can be activated in two ways:
 
 The <code>**?skin=name**</code> URL parameter overrides the SKIN Preference value.
 
--- [[PeterThoeny]] - 14 Jul 2001 <br />
+-- [[PeterThoeny]] - 03 Jan 2003
