@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li><a href="#TWikiSiteTools"> TWikiSiteTools</a><ul>
+    <li><a href="#TWiki Site Tools"> TWiki Site Tools</a><ul>
         <li><a href="#WebNotify Recent Changes Alert"> WebNotify Recent Changes Alert</a><ul>
             <li><a href="#Configuring Outgoing Mail"> Configuring Outgoing Mail</a></li>
             <li><a href="#Setting the Automatic Email Sche"> Setting the Automatic Email Schedule</a></li>
@@ -21,7 +21,7 @@
   </ul>
 </div>
 
-# <a name="TWikiSiteTools"></a><a name="_TWikiSiteTools"></a> TWikiSiteTools
+# <a name="TWiki Site Tools"></a> TWiki Site Tools
 
 _Utilities for searching, navigation, and monitoring site activity_
 
@@ -29,13 +29,27 @@ _Utilities for searching, navigation, and monitoring site activity_
 
 ## <a name="WebNotify Recent Changes Alert"></a><a name="_WebNotify Recent Changes Alert"></a> WebNotify Recent Changes Alert
 
-Each TWiki web has an automatic email alert service that sends a list of recent changes on a preset schedule, like once a day. Users can subscribe and unsubscribe using [[WebNotify]] in each web. The Perl script `mailnotify` is called by a deamon in regular intervals. The script sends an automated email to subscribed users if topics were changed in a web within last interval.
+Each TWiki web has an automatic email alert service that sends a list of recent changes on a preset schedule, like once a day. Users can subscribe and unsubscribe using [[WebNotify]] in each web. The Perl script `mailnotify` is called by a background process at regular intervals. The script sends an automated email to subscribed users if topics were changed in a web since the script was last run.
 
-- You can create a [[WebNotify]] using [[TWikiVariables]] with <code>**%NOTIFYTOPIC%**</code>
+- You can create a [[WebNotify]] link using [[TWikiVariables]] with <code>**%NOTIFYTOPIC%**</code>
+
+TWiki handles WebNotify entries that include the [[WikiName]] of a user or a [[TWikiGroup|Main/TWikiGroups]] and an optional e-mail address. Example entries in WebNotify:
+
+    	 * Main.FredBloggs
+    	 * Main.FredBloggs - secondary@home.com
+    	 * Main.EngineeringGroup
+
+The first entry is the default form, the notification gets sent to the e-mail address specified in the user's home page. The second entry lists an alternative e-mail address. The third entry specifies a group, the notification gets sent to each member of the group.
+
+You can also use `%MAINWEB%` instead of `Main`, but this is not necessary even if you have renamed the main web by configuring `$mainWebname` in `TWiki.cfg`.
 
 ### <a name="Configuring Outgoing Mail"></a> Configuring Outgoing Mail
 
 %WIKITOOLNAME% will use the <code>**Net::SMTP**</code> module if it is installed on your system. Set this with the <code>**SMTPMAILHOST**</code> variable in [[TWikiPreferences]].
+
+The notify e-mail uses the default `changes.tmpl` template, or a skin if activated in the [[TWikiPreferences]].
+
+mailnotify also relies on two hidden files in each `TWiki/data/[web]` directory: `.changes` and `.mailnotify.` Make sure both are writable by your web server process. `.changes` contains a list of changes; go ahead and make this empty. `.mailnotify` contains a timestamp of the last time notification was done.
 
 You can use an external mail program, like <code>**sendmail**</code>, if the `Net::SMTP` module is not installed. Set the program path in <code>**$mailProgram**</code> in <code>**TWiki.cfg**</code>.
 
@@ -106,4 +120,4 @@ This is simply a preset `SEARCH`. The number of topics listed by the `limit` par
 
 > %SEARCH{"\.*" scope="topic" regex="on" nosearch="on"}%
 
--- [[MikeMannix]] - 01 Dec 2001
+-- [[MikeMannix]] - 01 Dec 2001 %BR% -- [[PeterThoeny]] - 30 Jan 2003
