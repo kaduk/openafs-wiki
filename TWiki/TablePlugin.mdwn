@@ -1,0 +1,115 @@
+# <a name="Table Plugin"></a> Table Plugin
+
+Gives extra control off table display:
+
+- Allows sorting
+- Changing background colour for header cells
+- Changing background colour for data cells - colours can _alternate_
+- Behaviour can be specified for a specific table using %TABLE\{...\}% or with global preferences
+
+## <a name="Global Preferences"></a> Global Preferences
+
+- Set DEBUG to on to get debug messages in `data/debug.txt`. Default: `off`
+  - Set DEBUG = on
+- Colour for header cells ('\*'s around text). Default: <font>\#99CCCC</font>
+  - #Set HEADER\_BG = red
+- #Set DATA\_BG = #C8CB8F,#DBDDB5
+- Set DATA\_BG = #FFFFCC,#FFFFFF
+- #Set SORT = attachments
+- Set SORT = all
+- #Set SORT = none
+
+- Set SHORTDESCRIPTION = Control sorting and colours for table display
+
+## <a name="Sorting"></a> Sorting
+
+Click on column heading text to sort by a column. Initial column will be sorted in descending order, click again to get ascending order. The type of data in the cell is determined automatically:
+
+- date if format is:
+  - dd MMM YYY - hh:mm
+  - dd-MMM-YY or dd-MM-YYYY (can be / or space in place of -)
+  - MMM is Jan, Feb, etc
+- number is digits, with optional decimal point
+- otherwise treated as text
+
+## <a name="Per table settings"></a> Per table settings
+
+On line before the table use %TABLE\{...\}%:
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Argument</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Comment</font></a></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>sort</code></td>
+    <td bgcolor="#ecf2f8" style=""><code>on</code> or <code>off</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>headerbg</code></td>
+    <td bgcolor="#ffffff" style=""> header cell background colour </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>databg</code></td>
+    <td bgcolor="#ecf2f8" style=""> data cell background colour, a comma seperated list </td>
+  </tr>
+</table>
+
+All default to the global setting
+
+## <a name="Examples"></a> Examples
+
+Line before table: %TABLE\{sort="on" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"\}%
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Num</font></a></th>
+    <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Status</font></a></th>
+    <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Action</font></a></th>
+    <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Who</font></a></th>
+    <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=4;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">When</font></a></th>
+    <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=5;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Progress</font></a></th>
+  </tr>
+  <tr>
+    <td bgcolor="#C8CB8F" style=""> 1 </td>
+    <td bgcolor="#C8CB8F" style=""> C </td>
+    <td bgcolor="#C8CB8F" style=""> Chose new colours </td>
+    <td bgcolor="#C8CB8F" style=""> John </td>
+    <td bgcolor="#C8CB8F" style=""> 1-Dec-02 </td>
+    <td bgcolor="#C8CB8F" style="">   </td>
+  </tr>
+  <tr>
+    <td bgcolor="#DBDDB5" style=""> 2 </td>
+    <td bgcolor="#DBDDB5" style=""> X </td>
+    <td bgcolor="#DBDDB5" style=""> Release </td>
+    <td bgcolor="#DBDDB5" style=""> John </td>
+    <td bgcolor="#DBDDB5" style=""> 1-Apr-02 </td>
+    <td bgcolor="#DBDDB5" style="">   </td>
+  </tr>
+  <tr>
+    <td bgcolor="#C8CB8F" style=""> 3 </td>
+    <td bgcolor="#C8CB8F" style="">   </td>
+    <td bgcolor="#C8CB8F" style=""> Get feedback </td>
+    <td bgcolor="#C8CB8F" style=""> Anne </td>
+    <td bgcolor="#C8CB8F" style=""> 1-Feb-02 </td>
+    <td bgcolor="#C8CB8F" style="">   </td>
+  </tr>
+  <tr>
+    <td bgcolor="#DBDDB5" style=""> 12 </td>
+    <td bgcolor="#DBDDB5" style=""> C </td>
+    <td bgcolor="#DBDDB5" style=""> Spec error handling </td>
+    <td bgcolor="#DBDDB5" style=""> Jack </td>
+    <td bgcolor="#DBDDB5" style=""> 1-Dec-02 </td>
+    <td bgcolor="#DBDDB5" style="">   </td>
+  </tr>
+  <tr>
+    <td bgcolor="#C8CB8F" style=""> 5 </td>
+    <td bgcolor="#C8CB8F" style="">   </td>
+    <td bgcolor="#C8CB8F" style=""> Abc </td>
+    <td bgcolor="#C8CB8F" style=""> John </td>
+    <td bgcolor="#C8CB8F" style="">   </td>
+    <td bgcolor="#C8CB8F" style="">   </td>
+  </tr>
+</table>
+
+-- [[JohnTalintyre]] - 07 Oct 2001 <br />
