@@ -217,7 +217,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> Current value to be selected in list </td>
           <td><code>section="%WEB%"</code></td>
         </tr>
-      </table> Examples: <br /><code>%WEBLIST{"   * [[$name.WebHome]]"}%</code> creates a bullet list of all webs. <br /><code>%WEBLIST{"<select><option $marker="$marker" value="$qname">$name</option>" webs="Trash,public" selection="%WEB%" separator=" "}%</select></code> Dropdown of all public Webs + Trash Web, current Web highlighted. </td>
+      </table> Examples: <br /><code>%WEBLIST{"   * [[$name.WebHome]]"}%</code> creates a bullet list of all webs. <br /><code>%WEBLIST{"&lt;option $marker value=$qname&gt;$name&lt;/option&gt;" webs="Trash,public" selection="%WEB%" separator=" "}%</code> Dropdown of all public Webs + Trash Web, current Web highlighted. </td>
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
@@ -271,7 +271,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:17</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:57</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
