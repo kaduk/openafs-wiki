@@ -42,6 +42,9 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set NOAUTOLINK =
   - **_Note:_** Use the `[[...][...]]` syntax to link topics in case you disabled WikiWord linking. The `<noautolink> ... </noautolink>` syntax can be used to prevents links within a block of text.
 
+- Warn if `%INCLUDE{}%` of other topic fails (if set to `on`); silently fail (if empty); can be overwritten by web preferences:
+  - Set INCLUDEWARNING =
+
 ## <a name="User Settings"></a> User Settings
 
 %X% **NOTE:** They are typically redefined in topics of individual [[TWikiUsers]]
