@@ -44,10 +44,12 @@ If you haven't already configured Kerberos on your system, do so now. Instructio
 
 ##### <a name="Start AFS"></a> Start AFS
 
-Start the AFS client, either by rebooting, or by running '/etc/rc.d/init.d/afs start'
+Start the AFS client, by running '/etc/rc.d/init.d/afs start'
 
 Verify that /afs/&lt;your-cell-here&gt; is readable.
 
 Get AFS tokens with klog, or translate existing kerberos tickets with aklog, and verify that you can modify files in AFS.
+
+Once you've verified that AFS works correctly, you may want to configure AFS to start automatically, via whatever mechanism you prefer.
 
 -- [[DavidNolan]] - 29 Jul 2003
