@@ -44,7 +44,7 @@ There are more types of [[StringToKey]] functions in V5.
 
 ## <a name="HeimdalKTH -- the international"></a><a name="HeimdalKTH -- the international "></a> [[HeimdalKTH]] -- the international version of Kerberos version 5
 
-Here's some [mail](http://lists-openafs.central.org/pipermail/openafs-info/2001-April/000591.html) from [[DerrickBrashear]] for using [[HeimdalKTH]] for AFS authentication. An updated version of this document can be found here: <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
+Here's some [mail](http://lists-openafs.central.org/pipermail/openafs-info/2001-April/000591.html) from [[DerrickBrashear]] for using [[HeimdalKTH]] for AFS authentication. An updated version of this document can be found [here](http://lost-contact.mit.edu/afs/net/project/afs32/andrew.cmu.edu/usr/shadow/ka2heim.txt): <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
 
 - afslog
 - ktutil -- for example to create a [[KeyFile]] for AFS servers you can use this sequence<br />`ktutil -k keytab.afs get afs@MY.REALM`<br />`ktutil copy FILE:keytab.afs AFSKEYFILE:/usr/vice/etc/KeyFile`<br /> It can also convert from `srvtab` format.
