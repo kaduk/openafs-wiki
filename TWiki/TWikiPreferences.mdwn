@@ -9,7 +9,7 @@ The following are **_site-level_** settings that affect all users in all webs on
     <li><a href="#Web Preferences"> Web Preferences</a></li>
     <li><a href="#User Settings"> User Settings</a></li>
     <li><a href="#TWiki Platform Settings"> TWiki Platform Settings</a></li>
-    <li><a href="#Email Settings"> Email Settings</a><ul>
+    <li><a href="#Email and Proxy Server Settings"> Email and Proxy Server Settings</a><ul>
         <li><a href="#Email Link Settings"> Email Link Settings</a></li>
       </ul>
     </li>
@@ -84,7 +84,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Sandbox|Sandbox/WebHome]]
   - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use the `%WEBLIST{}%` variable instead: <br />
 
-## <a name="Email Settings"></a> Email Settings
+## <a name="Email and Proxy Server Settings"></a> Email and Proxy Server Settings
 
 - TWiki webmaster email address:
   - Set WIKIWEBMASTER = <webmaster@your.company>
@@ -94,6 +94,10 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 - Mail domain sending mail. SMTP requires that you identify the TWiki server sending mail. If not set, <code>**Net::SMTP**</code> will guess it for you. Ex: <code>**twiki.your.company**</code>
   - Set SMTPSENDERHOST =
+
+- Proxy Server. Some environments require outbound HTTP traffic to go through a proxy server. Set the host in PROXYHOST (example: <code>**proxy.your.company**</code>), and the port number in PROXYPORT (example: <code>**8080**</code>). No proxy is used if PROXYHOST or PROXYPORT is empty.
+  - Set PROXYHOST =
+  - Set PROXYPORT =
 
 ### <a name="Email Link Settings"></a> Email Link Settings
 

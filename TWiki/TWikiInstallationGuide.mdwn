@@ -143,12 +143,10 @@ To install TWiki on a system where you don't have server administrator privilege
 - Set the permission of all files below `twiki/data` so that they are writable by user `nobody`. A simple way is to `chmod` them to `-rw-rw-r--` (664) and to `chown` them to `nobody`.
 - Set the permission of the `twiki/data` directory and its subdirectories so that files in there are writable by user `nobody`. A simple way is to chmod them to `drwxrwxr-x` (775) and to `chown` them to `nobody`.
 - Set the permission of the `twiki/pub` directory and all its subdirectories so that files in there are writable by user `nobody`. A simple way is to `chmod` them to `drwxrwxr-x` (775) and to `chown` them to `nobody`.
-- %H% The `twiki/data/*/*.txt,v` RCS repository files in the installation package are locked by user `nobody`. If your CGI scripts are **_not_** running as user `nobody`, it's not possible to check in files (you'll see that the revision number won't increase after saving a topic). In this case, you need to unlock all repository files (check the RCS man pages) and lock them with a different user, ex `www-data`, or delete them all - new files will be automatically created the first time each topic is edited. A simple way to change ownership is with a search-and-replace in all files; for example, using sed:
+- %H% The `twiki/data/*/*.txt,v` RCS repository files in the installation package are locked by user `nobody`. If your CGI scripts are **_not_** running as user `nobody`, it's not possible to check in files (you'll see that the revision number won't increase after saving a topic). In this case, you need to unlock all repository files (check the RCS man pages) and lock them with a different user, ex `www-data`, or delete them all - new files will be automatically created the first time each topic is edited. A simple way to change ownership is with a search-and-replace in all files; for example, using perl:
 
 > cd twiki/data
->     for f in */*,v; do sed 's/nobody\:/www-data\:/' $f > x; mv -f x $f; done
-
-Note that this is not required if you use the Perl based RCS implementation - see _Dataframework_.
+>     perl -pi -e 's/nobody:/www-data:/' */*,v
 
 ### <a name="Step 3: Set the Main Configurati"></a> Step 3: Set the Main Configuration File
 
