@@ -1,0 +1,47 @@
+It is easy to collaborate, just type your text. You don't need to know HTML at all, though you can use it if you prefer. Links to topics will be created automatically as long as you follow these simple Text Formatting Rules. [[TextFormattingFAQ]] has answers to frequently asked questions about text formatting.
+
+**LINKS**
+
+The Collaborative Work Area is a bunch of related links that are editable through your web browser.
+
+The TWiki web has the following types of internal links:
+
+- [[GoodStyle]] is a topic that is part of the current TWiki web.
+- [[NotExistingYet]] is a topic waiting to be written. You could create that topic by clicking on the question mark. (Do not create that topic, you would wreck this example!)
+- [[ReadmeFirst]] is a topic in a different TWiki web. (You write it as _Web.TopicName_ , but it will show up as _TopicName_ )
+
+External links:
+
+- `http://...`, `https://...`, `ftp://...` and `mailto:...@...` are linked automatically.
+- Email addresses like <code> <name@domain.com> </code> are linked automatically.
+
+**EDITING**
+
+- [[CapitalizedWordsStickedTogether]] will produce a link automatically.
+- Blank lines will create new paragraphs.
+- Words get **bold** by enclosing them in **\*** asterisks
+- Words get _italic_ by enclosing them in **\_** underscores
+- Words get **_bold italic_** by enclosing them in **\_\_** double-underscores
+- Words get shown in `fixed font` by enclosing them in = equal signs
+- Note for **bold** , _italic_ , **_bold italic_** and `fixed font` text:
+  - Make sure to "stick" the `* _ =` signs to the characters, e.g.
+    - _This works_
+    - \_This does not get italic because there is a space between the last word and the underline character \_
+  - Example text to enter:
+    - Writing \*bold text\* , \_italic text\_ and =fixed== monospaced text
+  - Example text gets rendered as:
+    - Writing **bold text** , _italic text_ and `fixed=` monospaced text
+- Separator: -------- (at the beginning of a line)
+- List Item: &lt;3spaces&gt;\*
+- Nested Item: &lt;6spaces&gt;\*
+- Ordered List: &lt;3spaces&gt;&lt;number&gt;.
+- Definition: &lt;3spaces&gt;&lt;term&gt;:&lt;definition&gt;.
+- Table: &lt;optional spaces&gt;| cell 1 | cell 2 | cell 3 | ... |
+
+**EXTRAS**
+
+- Most HTML tags will work.
+  - Overview of all HTML elements at <http://www.htmlhelp.com/reference/wilbur/overview.html>
+  - HTML 3.2 Reference Specification at <http://www.w3.org/TR/REC-html32.html>
+
+**WIKI VARIABLES**
