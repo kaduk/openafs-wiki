@@ -65,7 +65,7 @@
 
 ## <a name="Introduction"></a> Introduction
 
-Once you have installed [[OpenAFS]] for Windows onto your computer, there are two programs you will be concerned with: The first one is the AFS Client (Credentials Manager), the second is the AFS Client Configuration program. Many of the options in [[OpenAFS]] can be set from both programs. This is a source of confusion, which this guide will try to sort out.
+Once you have installed [[OpenAFS]] for Windows onto your computer, there are two programs you will be concerned with: the AFS Client (Credentials Manager), and the AFS Client Configuration program. Many of the options in [[OpenAFS]] can be set from both programs. This is a source of confusion, which this guide will try to sort out.
 
 Because this is a reference, the programs will be described in order, screen by screen. At the end, files and Windows Registry keys will be described.
 
@@ -75,7 +75,7 @@ This program is located in `C:\Program Files\OpenAFS\Client\Program\afscreds.exe
 
 ### <a name="Command Line Options"></a> Command Line Options
 
-If you intend to run `afscreds.exe` from a command line, the following options may be of interrest to you. NB: The flags are case-insensitive, and can begin with either **_-_** (� la Unix) or **_/_** (old Windows style).
+If you intend to run `afscreds.exe` from a command line, the following options may be of interest to you. NB: The flags are case-insensitive, and can begin with either **_-_** (� la Unix) or **_/_** (old Windows style).
 
 <dl>
   <dt> -A</dt>
@@ -110,7 +110,7 @@ The Credentials Manager can make use of MIT Kerberos for Windows, if installed. 
 
 ### <a name="Drive Letters"></a> Drive Letters
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/drive-letters.png" width="467" height="238" /> A fundamental entity in the Microsoft Windows operating systems is the **_drive_**. A drive is identified by one letter and a colon. To mask a network file system as a drive is called to "map a drive".
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/drive-letters.png" width="467" height="238" /> A fundamental entity in the Microsoft Windows operating systems is the **_drive_**. A drive is identified by one letter and a colon. Masking a network file system as a drive is called "mapping a drive."
 
 Mapping a drive in [[OpenAFS]] requires you to know three things. You will have to know what drive you want to map, what AFS path to map from, and what to call the mapping. The first two should be obivous. If you are used to Unix, however, note that the AFS Path is written using backslash, not slash. You also have the option to automatically reconnect the drive on login.
 
@@ -134,7 +134,7 @@ Clicking it brings the Credentials Manager up. Right-clicking opens a three-item
 
 This program is located in `C:\Program Files\OpenAFS\Common\afs_config.exe` (default location). The configuration utility can perform most operations of the Credentials Manager, and more. In fact, the Client Configuration is not able to obtain tokens, but everything else can be updated with it.
 
-When installed, [[OpenAFS]] also installs this program as a Control Panel applet, called "AFS Client Configuration". No matter how you call it, the functionality is the same.
+When installed, [[OpenAFS]] also installs this program as a Control Panel applet, called "AFS Client Configuration". No matter what you call it, the functionality is the same.
 
 ### <a name="General"></a> General
 
@@ -152,9 +152,9 @@ Mapping drives and creating submounts work the same way as for the Credentials M
 
 ### <a name="Preferences"></a> Preferences
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/preferences.png" width="356" height="495" /> Since AFS can mirror both files and volume information on several servers, there must be a way to determine which server to contact. In [[OpenAFS]] for Windows, this is specified using the Server Preferences screen. Normally, you will never need to manually change the preferences of the servers. However, if you are doing load balance testing or if you are stress testing a server, you may set the preferences here.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/preferences.png" width="356" height="495" /> Since AFS can mirror both files and volume information on several servers, there must be a way to determine which server to contact. In [[OpenAFS]] for Windows, this is specified using the Server Preferences screen. Normally, you will never need to manually change the preferences of the servers. However, if you are doing load balance testing or if you are stress-testing a server, you may want to set preferences here.
 
-You can also import the rankings from a file. The file is a text file with one line per server. Whitespaces separate the server name from the rankning number. Note that the servers are imported to the active list (File Server or Volume Location Server).
+You can also import the rankings from a file. The file is a text file with one line per server. Whitespaces separate the server name from the ranking number. Note that the servers are imported to the active list (File Server or Volume Location Server).
 
 ### <a name="AFS Cells"></a> AFS Cells
 
@@ -168,14 +168,14 @@ In the Cache Configuration section, there are four options:
 
 - **Cache Size** determines the maximum disk cache size. The disk cache is a file, and it will always have the chosen size. I.e. it will not shrink if possible. The defualt is 20 MB. If you are editing large files, you may want to increase the cache size. Note that [[OpenAFS]] for Windows does not have a **_persistent cache_**. This means the cache will be flushed each time the [[OpenAFS]] service stops. The Unix versions of [[OpenAFS]] does have a persistent cache.
 - **Cache Path** holds the path to the file acting as disk cache. The default is `C:\AFSCache`.
-- **Chunk Size** is the smallest transfer unit. The cache works by caching chunks of files, contrary to entire files. It should be set to a size which is fast to transfer over the network, yet large enough to avoid lots and lots of transfers. The default is 32 kB. It must be an even power of two.
+- **Chunk Size** is the smallest transfer unit. The cache works by caching chunks of files, not necessarily entire files. It should be set to a size which is fast to transfer over the network, yet large enough to avoid lots and lots of transfers. The default is 32 kB. It must be an even power of two.
 - **Status Cache** describes file meta information caching. 1000 entries is the default.
 
 #### <a name="Logon Settings"></a> Logon Settings
 
-Change the behaviour of the Integrated Logon feature. The login retry interval sets how long (in seconds) [[OpenAFS]] will try to obtain initial tokens. Fail Logins Silently controls whether you will get a message box telling the reason for the failure, or not.
+Change the behavior of the Integrated Logon feature. The login retry interval sets how long (in seconds) [[OpenAFS]] will try to obtain initial tokens. Fail Logins Silently controls whether you will get a message box telling the reason for the failure.
 
-Setting "Fail Logins Silently" to "No" also affects the function of the retry interval. When the interval has passed, you will be given a question to start the timer over or not. If you choose to start over, another retry interval will be used to try and obtain the tokens.
+Setting "Fail Logins Silently" to "No" also affects the function of the retry interval. When the interval has passed, you will be asked whether to start the timer over or not. If you choose to start over, another retry interval will be used to try and obtain the tokens.
 
 #### <a name="Diagnostic"></a> Diagnostic
 
@@ -191,17 +191,17 @@ In a highly networked environment, it is not uncommon to read login scripts from
 
 #### <a name="Binding"></a> Binding
 
-Before [[OpenAFS]] for Windows began to use the [[WindowsLoopBackAdapter]], it used physical network interfaces to bind to. In certain situations, the default choice may be a bad choice. For instance, when the network interface connects directly to the Internet, this would be a bad idea. With the Loop Back Adapter, this is no longer an issue.
+Before [[OpenAFS]] for Windows began to use the [[WindowsLoopBackAdapter]], it used physical network interfaces to bind to. In certain situations, the default choice may be a bad one. For instance, when the network interface connects directly to the Internet, this would be a bad idea. With the Loop Back Adapter, this is no longer an issue.
 
 #### <a name="Miscellaneous"></a> Miscellaneous
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/adv_misc.png" width="336" height="301" /> These settings are hardly ever changed. They control system specific settings.
 
-- **Probe Interval** determines how often to check file servers. AFS is designed through the principle of callbacks. The file servers are obligued to notify each client if a subscribed file changes. This setup is not guaranteed to work if the servers loose the subscription list. Therefore, the client must probe the servers as often as possible. **_Note: Currently this setting is not permanently stored in the Windows Registry. It is only induced in a running AFS Client Service._**
+- **Probe Interval** determines how often to check file servers. AFS is designed through the principle of callbacks. The file servers are obliged to notify each client if a subscribed file changes. This setup is not guaranteed to work if the servers lose the subscription list. Therefore, the client probes the servers regularly. **_Note: currently this setting is not permanently stored in the Windows Registry. It is only induced in a running AFS Client Service._**
 - **Background Threads** controls how many AFS network threads will be running. One thread is able to handle one request from an AFS server at any time. Default is four threads.
 - **Service Threads** controls how many SMB/CIFS threads will be running. If your computer is a single user machine, not doing any video or audio editing, a low number should suffice. It is possible that a higher number will get better performance for many parallel file accesses. Default is two threads.
 - **System Name** is the value of "@sys". It should never be changed. Default is currently "i386\_nt40" for Windows NT/2000/XP/2003.
-- **Mount Directory** is really "Mount Root". It is used when resolving symlinks. Microsoft Windows does not know of symbolic links, why the AFS Client Service must convert them. If a symlink target begins with the **_Mount Directory_** string, it will be transformed into an absolute path of the form `\\AFS\ALL\...`. Default is `/afs`. There is generally no need to modify this value.
+- **Mount Directory** is really "Mount Root". It is used when resolving symlinks. Microsoft Windows does not know about symbolic links, so the AFS Client Service must convert them. If a symlink target begins with the **_Mount Directory_** string, it will be transformed into an absolute path of the form `\\AFS\ALL\...`. Default is `/afs`. There is generally no need to modify this value.
 - **Root Volume** is the name of the root volume of the default cell. Default is `root.afs`, and is the recommended AFS root volume name.
 
 ## <a name="Settings Without a User Interfac"></a> Settings Without a User Interface
@@ -210,11 +210,11 @@ Currently, some options have not yet been given a proper user interface. These c
 
 ### <a name="Netbios Name"></a> Netbios Name
 
-As the AFS service publishes its services as SMB/CIFS shares, there must be a name of this service. The `NetbiosName` (type expanding string) value of `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` can change this. The default is "AFS". Change this to "%COMPUTERNAME%-AFS" to revert to the old behaviour.
+As the AFS service publishes its services as SMB/CIFS shares, there must be a name of this service. The `NetbiosName` (type expanding string) value of `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` can change this. The default is "AFS". Change this to "%COMPUTERNAME%-AFS" to revert to the old behavior.
 
 ### <a name="Encryption of Network Traffic"></a> Encryption of Network Traffic
 
-Historically, AFS did not support encrypted network traffic. This has changed in recent years. The support is off by default in order to be compatible with old servers. You enable and disable encryption through the value `SecurityLevel` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` set to 1 to enable and 0 to disable.
+Historically, AFS did not support encrypted network traffic. This has changed in recent years. The support is off by default in order to be compatible with old servers. You enable and disable encryption through the value `SecurityLevel` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`. Set to 1 to enable and 0 to disable.
 
 ### <a name="Freelance Client Support"></a> Freelance Client Support
 
@@ -287,11 +287,11 @@ In `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Param
 
 ### <a name="Enabling Debug Trace Events"></a> Enabling Debug Trace Events
 
-Normally, the `TraceOption` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` is 0, meaning no traces will be output to the Application Event Log. Setting it to 1 enables trace output.
+Normally, the `TraceOption` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` is 0, meaning no traces will be sent to the Application Event Log. Setting it to 1 enables trace output.
 
 ### <a name="Restricting the Number of Utiliz"></a> Restricting the Number of Utilized CPUs
 
-For most part, the [[OpenAFS]] client can use as many processors as available. It has, however, showed that Hyperthreaded Pentium 4 systems can cause the [[OpenAFS]] service to crash. If you have such a system, you should set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`) to 1. The default is undefined, and means all processors may be used.
+For most part, the [[OpenAFS]] client can use as many processors as available. However, using multiple processors on a Hyperthreaded Pentium 4 system can cause the [[OpenAFS]] service to crash. If you have such a system, you should set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`) to 1. The default is undefined, and means all processors may be used.
 
 ### <a name="Moving the _CellServDB File"></a> Moving the [[CellServDB]] File
 
@@ -305,17 +305,17 @@ To change this location you must update the registry value `AuthentProviderPath`
 
 ### <a name="Allowing More Time For the Servi"></a> Allowing More Time For the Service To Start
 
-When the AFS Client Service starts, it has to read files, the registry, DNS and connect to servers. All of this may take quite some time. On slow computers, the default retry policy can be too short.
+When the AFS Client Service starts, it has to read files, the registry, DNS information, and connect to servers. All of this may take quite some time. On slow computers, the default retry policy can be too short.
 
-In this case, the `LoginRetryInterval` (type DWORD) and `LoginSleepInterval` (type DWORD) values in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` can be increased. If the [[OpenAFS]] client service has not started yet, the network provider will wait for a maximum of `LoginRetryInterval` seconds while retrying every `LoginSleepInterval` seconds to check if the service is up. This setting is domain-specific, see below.
+In this case, the `LoginRetryInterval` (type DWORD) and `LoginSleepInterval` (type DWORD) values in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` can be increased. If the [[OpenAFS]] client service has not started yet, the network provider will wait for a maximum of `LoginRetryInterval` seconds while retrying every `LoginSleepInterval` seconds to check if the service is up. This setting is domain-specific; see below.
 
 ### <a name="Running a Logon Script"></a> Running a Logon Script
 
-You may set `LogonScript` (type string or expandable string) of `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` to any runnable script or program. Default is to not run any program. This setting is also domain-specific, see below.
+You may set `LogonScript` (type string or expandable string) of `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` to any runnable script or program. Default is to not run any program. This setting is also domain-specific; see below.
 
 ### <a name="Integrated Logon Usage"></a> Integrated Logon Usage
 
-Utilization of the Integrated Logon feature can be set on a per-domain basis. The value is called `LogonOption` (type DWORD) and can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Setting this to zero disables Integrated Logon, a one enables it. Default is enabled. If you set this to 2, you enable the [[OpenAFS]] High Security mode, and setting it to 3 enables both High Security Mode and Integrated Logon.
+Utilization of the Integrated Logon feature can be set on a per-domain basis. The value is called `LogonOption` (type DWORD) and can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Setting this to zero disables Integrated Logon, and a one enables it. Default is enabled. If you set this to 2, you enable the [[OpenAFS]] High Security mode, and setting it to 3 enables both High Security Mode and Integrated Logon.
 
 High Security mode is a deprecated techinque to let several users logon to the same computer at once. Since [[OpenAFS]] now supports authenticated SMB connections, there is really no need for this mode. If you still want to use this mode, you should disable SMB Authentication. See "Tweaking the SMB Connections" on this matter.
 
@@ -325,7 +325,7 @@ In the Client Configuration, you may choose whether the Intergrated Logon should
 
 ### <a name="Disable Automatic Use of _Kerber"></a> Disable Automatic Use of [[KerberosV]]
 
-If you have MIT Kerberos for Windows installed, and you do not want to let AFS Credentials Manager use it, you can disable it setting `EnableKFW` (type DWORD) in `SOFTWARE\OpenAFS\Client`. This can be done in either of `HKEY_LOCAL_MACHINE` or `HKEY_CURRENT_USER`.
+If you have MIT Kerberos for Windows installed, and you do not want to let AFS Credentials Manager use it, you can disable it by setting `EnableKFW` (type DWORD) in `SOFTWARE\OpenAFS\Client`. This can be done in either of `HKEY_LOCAL_MACHINE` or `HKEY_CURRENT_USER`.
 
 ### <a name="Changing the Default Authenticat"></a> Changing the Default Authentication Cell
 
@@ -335,7 +335,7 @@ The value `Authentication Cell` (type string) in `HKEY_CURRENT_USER\SOFTWARE\Ope
 
 ### <a name="Changing the Parameters of AFS C"></a> Changing the Parameters of AFS Credentials Manager
 
-When the AFS Credentials Manager starts, it recreates the Start Menu and Startup shortcuts to enforce the parameters given during installation. These parameters are stored as `AfscredsShortcutParams` in `SOFTWARE\OpenAFS\Client`. It can be set for both `HKEY_LOCAL_MACHINE` and for `HKEY_CURRENT_USER`. Default is `-A -M -N -Q`. See above for an explanation on these parameters.
+When the AFS Credentials Manager starts, it recreates the Start Menu and Startup shortcuts to enforce the parameters given during installation. These parameters are stored as `AfscredsShortcutParams` in `SOFTWARE\OpenAFS\Client`. It can be set for both `HKEY_LOCAL_MACHINE` and for `HKEY_CURRENT_USER`. Default is `-A -M -N -Q`. See above for an explanation of these parameters.
 
 ## <a name="Per Domain Options"></a> Per Domain Options
 
@@ -348,7 +348,7 @@ When the AFS Credentials Manager starts, it recreates the Start Menu and Startup
 
 This is a new feature of [[OpenAFS]] 1.3.6, and is not yet supported by the configuration user interface. While being a usable feature, we choose to document, so that you can still use it. A new configuration interface is hopefully on its way.
 
-All values that can be domain-specific are located under `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Domains which want to have specific settings can create the subkey <tt>Domain\\_domain_\\</tt> and store the values there. The domain name is the logon domain, as specified in the Windows Login screen. A special domain, called `LOCALHOST`, is a placeholder for the local computer. Any other Active Directory or Kerberos realm should use it's realm name for the key.
+All values that can be domain-specific are located under `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Domains which want to have specific settings can create the subkey <tt>Domain\\_domain_\\</tt> and store the values there. The domain name is the logon domain, as specified in the Windows Login screen. A special domain, called `LOCALHOST`, is a placeholder for the local computer. Any other Active Directory or Kerberos realm should use its realm name for the key.
 
 ### <a name="Resolution of Domain Specific Va"></a> Resolution of Domain Specific Values
 
@@ -362,16 +362,16 @@ As a consequence of this scheme, there must also be set rules for resolving whic
 
 If the specific domain key does not exist, then the `Domain` key will be ignored. All the configuration information in this case will come from the standard `NetworkProvider` key.
 
-If the specific domain key exists, then the value will be looked up in the specific domain key, domains key and the NP key successively until the value is found. The first instance of the value found this way will be the effective for the login session. If no such instance can be found, the default will be used. To re-iterate, a value in a more specific key supercedes a value in a less specific key.
+If the specific domain key exists, then the value will be looked up in the specific domain key, domains key and the NP key successively until the value is found. The first instance of the value found this way will be the effective for the login session. If no such instance can be found, the default will be used. in other words, a value in a more specific key supercedes a value in a less specific key.
 
 Back to our example. Logging in to domain `OPENAFS.ORG` clearly enables the Integrated Logon. Logging on the local computer disables it. Logging in to `MIT.EDU` will also disable Integrated Logon, because the domain key exists, but misses a value. This resolves to using the value of `Domain\LogonOption`. However, logging in to `KTH.SE` would enable Integrated Logon. It is not listed as a domain, and thus the `NetworkProvider\LogonOption` is used. In order to retain backward-compatibility, there are two exceptions to this resolution order.
 
 ### <a name="Exceptions To the Resolution Rul"></a> Exceptions To the Resolution Rule
 
-Historically, the 'FailLoginsSilently' value was in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` key and not in the `NetworkProvider` key. Therefore, for backwards compatibility, the value in the `Parameters` key will supercede all instances of this value in other keys. In the absence of this value in the `Parameters` key, normal scope rules apply.
+Historically, the 'FailLoginsSilently' value was in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` key and not in the `NetworkProvider` key. Therefore, for backward compatibility, the value in the `Parameters` key will supercede all instances of this value in other keys. In the absence of this value in the `Parameters` key, normal scope rules apply.
 
 The second exception is for the `LogonScript` value. If a `LogonScript` is not specified in the specific domain key nor in the `Domain` key, the value in the `NetworkProvider` key will only be checked if the effective `LogonOptions` specify a high security integrated login. If a logon script is specified in the specific domain key or the domains key, it will be used regardless of the high security setting. Please be aware of this when setting this value.
 
 ## <a name="Windows Registry Keys of _OpenAF"></a> Windows Registry Keys of [[OpenAFS]]
 
-During the preparation of this release of [[OpenAFS]], a lot of changes have been made to the way configuration is stored. The work is still not finished, why the list of registry keys currently used can be found [here](http://web.mit.edu/~jaltman/Public/OpenAFS/registry.txt).
+During the preparation of this release of [[OpenAFS]], a lot of changes have been made to the way configuration is stored. The work is still not finished; the list of registry keys currently used can be found [here](http://web.mit.edu/~jaltman/Public/OpenAFS/registry.txt).
