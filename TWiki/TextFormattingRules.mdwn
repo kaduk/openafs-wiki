@@ -250,6 +250,13 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
+    <td valign="top"><strong>Easier External Links:</strong><br /> An easier syntax for external links is now available: <code>[[externalURL text]]</code> - just hit the spacebar to separate the link URL from the descriptive text, e.g. <code>[[http://gnu.org/ GNU]]</code>. This also supports anchors, e.g. <code>[[http://www.yahoo.com/#somewhere Yahoo!]]</code>. </td>
+    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
+[[http://gnu.org GNU]]
+</pre> </font></span></td>
+    <td valign="top"><a href="http://gnu.org" target="_top">GNU</a></td>
+  </tr>
+  <tr bgcolor="#ffffff">
     <td valign="top"><strong>Anchors:</strong><br /> You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[WebHome#NotThere]]
@@ -305,6 +312,7 @@ Being able to create links without any formatting required is a core TWiki featu
 - Email addresses like `name@domain.com` are linked automatically.
 
 - `[[Square bracket rules]]` let you easily create [[non-WikiWord links|Main/WebHome#SquareBrackets]].
+  - You can also write `[[http://yahoo.com Yahoo home page]]` as an easier way of doing external links with descriptive text for the link, such as [Yahoo home page](http://yahoo.com).
 
 ## <a name="TWikiPlugin Formatting Extension"></a><a name="_TWikiPlugin Formatting Extensio"></a> TWikiPlugin Formatting Extensions
 
@@ -325,3 +333,7 @@ Available Plugins are located in the [Plugins](http://twiki.org/cgi-bin/view/Plu
 Check on current Plugin status and settings for this site in [[TWikiPreferences]].
 
 -- [[MikeMannix]] - 02 Dec 2001
+
+Updated to cover TWiki:Codev/EasierExternalLinking (in the alpha release).
+
+-- [[RichardDonkin]] - 26 Mar 2002
