@@ -8,7 +8,10 @@
             </li>
             <li><a href="#Step 2: Set File Permissions"> Step 2: Set File Permissions</a></li>
             <li><a href="#Step 3: Edit the Configuration F"> Step 3: Edit the Configuration Files</a></li>
-            <li><a href="#Step 4: Internationalisation Set"> Step 4: Internationalisation Setup (Optional)</a></li>
+            <li><a href="#Step 4: Internationalisation Set"> Step 4: Internationalisation Setup (Optional)</a><ul>
+                <li><a href="#Trouble with _I18N?"> Trouble with I18N? </a></li>
+              </ul>
+            </li>
             <li><a href="#Step 5: Configure Site-Wide Emai"> Step 5: Configure Site-Wide Email Preferences</a></li>
             <li><a href="#Step 6: Finish Up from Your Brow"> Step 6: Finish Up from Your Browser</a></li>
           </ul>
@@ -183,7 +186,7 @@ To install TWiki on a system where you don't have Unix/Linux root (administrator
 
 By default, TWiki is configured to support US ASCII letters (no accents) in [[WikiWords]], and ISO-8859-1 (Western European) characters in page contents. If that's OK for you, skip this step.
 
-If your Wiki will be used by non-English speakers, TWiki can be configured for Internationalisation ('I' followed by 18 letters, then 'N', or _I18N_). Specifically, TWiki will support suitable accented characters in [[WikiWords]] (as well as languages such as Japanese or Chinese in which [[WikiWords]] do not apply), and to support virtually any character set in the contents of pages. **_NOTE:_** _TWiki does not currently support UTF-8, so you are advised **not** to use this - however, improved UTF-8 support is [under development](http://twiki.org/cgi-bin/view/Codev/ProposedUTF8SupportForI18N)._
+If your Wiki will be used by non-English speakers, TWiki can be configured for Internationalisation ('I' followed by 18 letters, then 'N', or _I18N_). Specifically, TWiki will support suitable accented characters in [[WikiWords]] (as well as languages such as Japanese or Chinese in which [[WikiWords]] do not apply), and will support virtually any character set in the contents of pages. **_NOTE:_** TWiki does not currently support UTF-8, so you are advised **not** to use this - however, improved UTF-8 support is under development, see TWiki:Codev/ProposedUTF8SupportForI18N.
 
 To configure internationalisation suppport:
 
@@ -191,15 +194,17 @@ To configure internationalisation suppport:
 2. Type the Unix/Linux command `locale -a` to find a suitable 'locale' for your use of TWiki. A locale that includes a dot followed by a character set is recommended, e.g. `pl_PL.ISO-8859-2` for Poland. Consult your system administrator if you are not sure which locale to use.
 3. In `TWiki.cfg`, set the `$siteLocale` parameter to your chosen locale, e.g. `pl_PL.ISO-8859-2` for Poland.
 4. Check your setup using `testenv` (download the latest `testenv` from TWiki:Support/SupportGuidelines if possible) - this provides some diagnostics for [[I18N]] setup, and in particular checks that your locale can be used successfully.
-5. If you are using Internet Explorer or Opera, configure your browser to not send URLs encoded with UTF-8
-  - Internet Explorer 5.0 or higher: in _Tools | Options | Advanced_, uncheck 'always send URLs as UTF-8', then close all IE windows and restart IE.
-  - Opera 6.x or higher: in _Preferences | Network | International Web Addresses_, uncheck 'encode all addresses with UTF-8'.
-  - **_NOTE:_** _If this configuration change is not acceptable, consider installing a TWiki beta release (19 Jan 2004 or later), which fully supports UTF-8 URLs._
+5. _(For upgrade of TWiki [[I18N]] sites only:)_ If you were using TWiki:Codev.TWikiRelease01Feb2003 support for [[I18N]], and are using Internet Explorer or Opera, you should re-configure your browser so that it sends URLs encoded with UTF-8 (supported since TWiki:Codev.TWikiRelease01Sep2004). If you are doing a new installation of TWiki, you can ignore this step - no browser reconfiguration is needed for TWiki Release 01-Sep-2004).
+  - Internet Explorer 5.0 or higher: in _Tools | Options | Advanced_, check 'always send URLs as UTF-8', then close all IE windows and restart IE.
+  - Opera 6.x or higher: in _Preferences | Network | International Web Addresses_, check 'encode all addresses with UTF-8'.
+  - **_NOTE:_** This does not mean that TWiki supports UTF-8 as a site character set.
 6. Try out your TWiki by creating pages in the Sandbox web that use international characters in [[WikiWords]] and checking that searching, [[WebIndex]], Ref-By and other features are working OK.
+
+#### <a name="Trouble with _I18N?"></a> Trouble with [[I18N]]?
 
 If international characters in [[WikiWords]] do not seem to work, and you are on Perl 5.6 or higher, you may need to set the `TWiki.cfg` parameter `$localeRegexes` to 0 - this disables some features but enables TWiki to work even if your system has locales that do not work. Then, set the `$upperNational` and `$lowerNational` parameters to the valid upper and lower case accented letters for your locale.
 
-- **_NOTE:_** _You will need to do the above workaround for Windows based servers (whether using Cygwin or ActiveState Perl), since Perl locales are not working on Windows as of Feb 2004._
+- **_NOTE:_** You will need to do the above workaround for Windows based servers (whether using Cygwin or ActiveState Perl), since Perl locales are not working on Windows as of Feb 2004.
 
 If international characters in [[WikiWords]] aren't working, and you are on Perl 5.005 with working locales, keep `$useLocale` set to 1 and set `$localeRegexes` to 0, then set `$upperNational` and `$lowerNational` - if `testenv` generates the lists of characters for you, your locales are working so there is no need to set `$localeRegexes` to 0 in this case. See the comments in `TWiki.cfg` for more information.
 
