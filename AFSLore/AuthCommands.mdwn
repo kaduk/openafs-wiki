@@ -18,7 +18,7 @@ The klog command (and kpasswd too) try several [[StringToKey]] functions.
 
 - klog -- authentication with [[KaServer]] by getting AFS service tickets and sending them to the (kernel) [[CacheManager]]. Can save the TGT in a file compatible with kinit (V4) as a non-default option.
 - tokens -- displays AFS service tickets (tokens) held by the [[CacheManager]].
-- kpasswd -- change password in [[KaServer]]
+- kpasswd -- change password in [[KaServer]].
 - kas -- administrative interface to [[KaServer]]
 - inetd -- passes authentication information to network servers. See [inetd ](http://www.cs.rose-hulman.edu/docs/afs-doc/html/AdminRef/auarf179.htm#HDRINETD). [Avoid](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002351.html).
 - r\* commands -- passes authentication information between trusting hosts (over a secure network). See [Remote Services](http://www.cs.rose-hulman.edu/docs/afs-doc/html/AdminGd/auagd007.htm#HDRWQ78). [Avoid](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002351.html) and [thread](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002372.html). These are not built by default in [[OpenAFS]] unless --enable-insecure is specified.
@@ -34,7 +34,29 @@ There are more types of [[StringToKey]] functions in V5.
 
 [[CharlesClancy]] posted a Perl [script](http://lists.openafs.org/pipermail/openafs-info/2002-January/003060.html) that provides a kas interface to kadmin, so that existing scripts (and users) that use kas can easily work in a K5 environment.
 
+[[DerekAtkins]] provides this handy mapping from [[KerberosVMIT]] to [[KaServer]]:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> [[Main/KerberosVMIT]] </strong></th>
+    <th bgcolor="#99CCCC"><strong> [[Main/KaServer]] </strong></th>
+  </tr>
+  <tr>
+    <td> kinit + aklog/afslog </td>
+    <td> klog </td>
+  </tr>
+  <tr>
+    <td> kadmin </td>
+    <td> kas </td>
+  </tr>
+  <tr>
+    <td> kpasswd </td>
+    <td> kpasswd </td>
+  </tr>
+</table>
+
 - kinit -- authenticates using standard UDP port 88. Works with DCE, [[HeimdalKTH]] and [[ActiveDirectory]] (maybe?).
+- kpasswd -- change KDC password.
 - klist -- displays contents of ticket cache.
 - ktadmin
 - ktadd -- add a principal<br /><code>ktadd -k /etc/krb5/keytab -e des-cbc-crc:v4 <afs@CS.UMD>.EDU</code>
@@ -74,4 +96,4 @@ The kas wrapper mentioned above maybe useful for Heimdal environments too.
 
 See [[SettingUpAuthentication]]
 
--- [[TedAnderson]] - 23 Jan 2002 -- [[TedAnderson]] - 06 Feb 2002
+-- [[TedAnderson]] - 23 Jan 2002 -- [[TedAnderson]] - 06 Feb 2002 -- [[TedAnderson]] - 07 Mar 2002
