@@ -6,46 +6,44 @@ see also for ref: orig [[TWikiTemplatingSystem]]
 
 <div>
   <ul>
-    <li><a href="#new topic for the final doc"> new topic for the final doc</a><ul>
-        <li><a href="#TWiki Template System"> TWiki Template System</a><ul>
-            <li><a href="#Overview"> Overview</a></li>
-            <li><a href="#Needs of the TWiki templating sy"> Needs of the TWiki templating system</a></li>
-            <li><a href="#Functional Spec"> Functional Spec</a></li>
-            <li><a href="#Examples"> Examples</a><ul>
-                <li>
-                  <ul>
-                    <li><a href="#Base template oopsbase.tmpl"> Base template oopsbase.tmpl</a></li>
-                    <li><a href="#Test template oopstest.tmpl"> Test template oopstest.tmpl</a></li>
-                    <li><a href="#Sample screen shot of oopstest.t"> Sample screen shot of oopstest.tmpl</a></li>
-                  </ul>
-                </li>
+    <li><a href="#new topic for the final doc"> new topic for the final doc</a></li>
+    <li><a href="#TWiki Template System"> TWiki Template System</a></li>
+    <li><a href="#Overview"> Overview</a><ul>
+        <li><a href="#Needs of the TWiki templating sy"> Needs of the TWiki templating system</a></li>
+        <li><a href="#Functional Spec"> Functional Spec</a></li>
+        <li><a href="#Examples"> Examples</a><ul>
+            <li>
+              <ul>
+                <li><a href="#Base template oopsbase.tmpl"> Base template oopsbase.tmpl</a></li>
+                <li><a href="#Test template oopstest.tmpl"> Test template oopstest.tmpl</a></li>
+                <li><a href="#Sample screen shot of oopstest.t"> Sample screen shot of oopstest.tmpl</a></li>
               </ul>
             </li>
-            <li><a href="#Comments and feedback"> Comments and feedback</a></li>
           </ul>
         </li>
+        <li><a href="#Comments and feedback"> Comments and feedback</a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="TWiki Template System"></a> TWiki Template System
+# <a name="TWiki Template System"></a> TWiki Template System
 
 _Define the templates used to render all HTML pages displayed in TWiki_
 
-### <a name="Overview"></a> Overview
+# <a name="Overview"></a> Overview
 
 We have a need for more advanced template handling. As [[JohnTalintyre]] pointed out in [[CommonHeaderFooterTemplate]] it makes sense to separate the header and footer into one file so that it can be easily altered (or even overloaded by a skin). Also the oops dialog messages are all identical except for a few variables like heading, and so on.
 
 Using external modules like the [[TemplateToolkit]] would be one way to go, but this will add a lot of baggage to TWiki.
 
-### <a name="Needs of the TWiki templating sy"></a> Needs of the TWiki templating system
+## <a name="Needs of the TWiki templating sy"></a> Needs of the TWiki templating system
 
 - Separate common parts into one (or more) base template file(s) and include that from other template files like `view.tmpl`.
 - Define common variables like a "|" separator in the base template and use them in other template files
 - Define variable text in templates (i.e. `view.tmpl`) and pass them to the base template
 
-### <a name="Functional Spec"></a> Functional Spec
+## <a name="Functional Spec"></a> Functional Spec
 
 I tried to define a simple but powerful solution that can be extended over time. Here we go:
 
@@ -64,11 +62,11 @@ I tried to define a simple but powerful solution that can be extended over time.
 - Templates and skins work transparently and interchangeably. You could for example define a new skin just for the header &amp; footer and keep the other template files unchanged.
 - **_Note:_** The template directive work only for templates, they do not get processed in topic text.
 
-### <a name="Examples"></a> Examples
+## <a name="Examples"></a> Examples
 
 Attached is an example of an oops base template `oopsbase.tmpl` and a example oops dialog `oopstest.tmpl` which is based on the base template. This is not the version that will go into the release, it is just a quick hack.
 
-##### <a name="Base template oopsbase.tmpl"></a> Base template oopsbase.tmpl
+#### <a name="Base template oopsbase.tmpl"></a> Base template oopsbase.tmpl
 
 The first line declares the delimiter variable called "sep", used to separate multiple link items. The variable can be called anywhere by writing `%TMPL:P{"sep"}%`
 
@@ -118,7 +116,7 @@ The first line declares the delimiter variable called "sep", used to separate mu
     </td></tr>
     </table >
 
-##### <a name="Test template oopstest.tmpl"></a> Test template oopstest.tmpl
+#### <a name="Test template oopstest.tmpl"></a> Test template oopstest.tmpl
 
 Each oops template basically just defines some variables and includes the base template that does the layout work.
 
@@ -148,7 +146,7 @@ Test =topicaction=:
   <tr>
     <td> &lt;/table &gt; <p>
       </p>
-      <h5><a name="Sample screen shot of oopstest.t"></a> Sample screen shot of oopstest.tmpl </h5>
+      <h4><a name="Sample screen shot of oopstest.t"></a> Sample screen shot of oopstest.tmpl </h4>
       <p> With URL: <code><b>.../bin/oops/Test/TestTopic2?template=oopstest&amp;param1=WebHome&amp;param2=WebNotify</b></code></p>
       <p>
       </p>
@@ -159,7 +157,7 @@ Test =topicaction=:
       </table>
       <p>
       </p>
-      <h3><a name="Comments and feedback"></a> Comments and feedback </h3>
+      <h2><a name="Comments and feedback"></a> Comments and feedback </h2>
       <p>
       </p>
       <ul>

@@ -24,15 +24,15 @@
   </ul>
 </div>
 
-## <a name="TWiki Operating Environment"></a> TWiki Operating Environment
+# <a name="TWiki Operating Environment"></a> TWiki Operating Environment
 
 _Server and client system requirements, file system structure_
 
-### <a name="Overview"></a> Overview
+## <a name="Overview"></a> Overview
 
 Maintaining minimum client and server requirements is necessary to keep TWiki deployment as broad as possible.
 
-### <a name="Server-Side Requirements"></a> Server-Side Requirements
+## <a name="Server-Side Requirements"></a> Server-Side Requirements
 
 TWiki is written in Perl 5 and uses a number of shell commands. It requires GNU RCS (Revision Control System) to be installed on the same system. TWiki is developed in a standard Linux/Apache environment. It can also work with Microsoft Windows and other platforms.
 
@@ -70,7 +70,7 @@ TWiki is written in Perl 5 and uses a number of shell commands. It requires GNU 
 
 Current documentation covers Linux only. Compiling a basic [TWikiOnWindows](http://twiki.org/cgi-bin/view/Codev/TWikiOnWindows) installation guide is an ongoing effort.
 
-### <a name="Client-Side Requirements"></a> Client-Side Requirements
+## <a name="Client-Side Requirements"></a> Client-Side Requirements
 
 The TWiki standard installation has extremely low browser requirements:
 
@@ -81,11 +81,11 @@ The TWiki standard installation has extremely low browser requirements:
 
 TWiki generates XHTML 1.0 code as long as it is compatible with HTML 3.2.
 
-#### <a name="Known Issues"></a> Known Issues
+### <a name="Known Issues"></a> Known Issues
 
 - The new [[TWikiPlugins]] feature currently does not have any compatibility guidelines for developers. Plugins can require just about anything: browser-specific functions, stylesheets (CSS), Java, cookies, etc.
 
-### <a name="TWiki File System"></a> TWiki File System
+## <a name="TWiki File System"></a> TWiki File System
 
 You can rename the root TWiki directory - `twiki` - to whatever you like by changing it in the `twiki.cfg` configuration file. However, to keep the current installation and future upgrades simple, you should leave the subdirectory structure intact:
 
@@ -127,13 +127,13 @@ You can rename the root TWiki directory - `twiki` - to whatever you like by chan
   </tr>
 </table>
 
-#### <a name="File Descriptions"></a> File Descriptions
+### <a name="File Descriptions"></a> File Descriptions
 
 A rundown of the individual files in the current %VERSION% distribution, organized by TWiki root directories. All listings are complete unless otherwise noted.
 
 <a name="TWikiFiles"></a>
 
-##### <a name="Files in twiki"></a> Files in `twiki`
+#### <a name="Files in twiki"></a> Files in `twiki`
 
 Introductory and installation files.
 
@@ -166,7 +166,7 @@ Introductory and installation files.
 
 <a name="BinFiles"></a>
 
-##### <a name="Files in twiki/bin"></a> Files in `twiki/bin`
+#### <a name="Files in twiki/bin"></a> Files in `twiki/bin`
 
 All Perl CGI scripts.
 
@@ -251,7 +251,7 @@ All Perl CGI scripts.
 
 <a name="LibFiles"></a>
 
-##### <a name="Files under twiki/lib"></a> Files under `twiki/lib`
+#### <a name="Files under twiki/lib"></a> Files under `twiki/lib`
 
 The new `lib/TWiki/Plugins` directories contain core configuration, libraries and function modules, and Plugins.
 
@@ -316,7 +316,7 @@ The new `lib/TWiki/Plugins` directories contain core configuration, libraries an
 
 <a name="PubFiles"></a>
 
-##### <a name="Files under twiki/pub"></a> Files under `twiki/pub`
+#### <a name="Files under twiki/pub"></a> Files under `twiki/pub`
 
 **_attachments like images..._**
 
@@ -501,7 +501,7 @@ The new `lib/TWiki/Plugins` directories contain core configuration, libraries an
 
 <a name="DataFiles"></a>
 
-##### <a name="Files under twiki/data"></a> Files under `twiki/data`
+#### <a name="Files under twiki/data"></a> Files under `twiki/data`
 
 The `data` directory stores TWiki page data as individual text files. Each active web has its own subdirectory. The TWiki distribution package includes four start-up webs, with a number of pages of documentation and demo content. _This is a representative partial file listing..._
 
@@ -738,7 +738,7 @@ The `data` directory stores TWiki page data as individual text files. Each activ
 
 <a name="TemplatesFiles"></a>
 
-##### <a name="Files in twiki/templates"></a> Files in `twiki/templates`
+#### <a name="Files in twiki/templates"></a> Files in `twiki/templates`
 
 _Used to flexibly control appearance of rendered pages..._
 
