@@ -182,6 +182,7 @@ Use the following setup to authenticate users for topic viewing in all webs and 
 1. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
   - <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
+  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted in case `DENYWEBVIEW` and `ALLOWWEBVIEW` is not defined.
 2. **Hide** the web from an "all webs" search. Enable this restriction with the <code>**NOSEARCHALL**</code> variable in its [[WebPreferences]] topic:
   - <code>**Set NOSEARCHALL = on**</code>
 3. **Add** <code>**view**</code> to the list of authenticated scripts in the `.htaccess` file.
@@ -195,6 +196,7 @@ Use the following setup to provide unrestricted viewing access to open webs, wit
 1. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
   - <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
+  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted in case `DENYWEBVIEW` and `ALLOWWEBVIEW` is not defined.
 2. **Hide** the web from an "all webs" search. Enable this restriction with the <code>**NOSEARCHALL**</code> variable in its [[WebPreferences]] topic:
   - <code>**Set NOSEARCHALL = on**</code>
 3. **Enable** the <code>**$doRememberRemoteUser**</code> flag in <code>**lib/TWiki.cfg**</code> as described in [[TWikiUserAuthentication]]. %WIKITOOLNAME% will now remember the IP address of an authenticated user.
@@ -207,13 +209,9 @@ When a user accesses a web where you enabled view restriction, %WIKITOOLNAME% wi
 
 ## <a name="Hiding Control Settings"></a> Hiding Control Settings
 
-- %T% To hide access control settings from normal browser viewing, place them in comment markers.
+%T% To hide access control settings from normal browser viewing, place them in comment markers.
 
-> &lt;!--
->
-> <br />
->
-> - Set DENYTOPICCHANGE = Main.SomeGroup<br /> --&gt;
+&lt;style="background-color:#f5f5f5"&gt; `<!--`<br />`   * Set DENYTOPICCHANGE = Main.SomeGroup`<br />`-->`
 
 <a name="SuperAdminGroup"></a>
 
