@@ -1,15 +1,18 @@
 **%WIKITOOLNAME%.%WEB% Web Preferences**
 
-The following settings are **_web preferences_** of the %WIKITOOLNAME%.%WEB% web. These preferences overwrite the **_site-level preferences_** in [[TWikiPreferences]], and can be overwritten by **_user preferences_** (your personal topic, i.e. [[PeterThoeny]] in the %WIKITOOLNAME%.Main web)
+The following settings are **_web preferences_** of the %WIKITOOLNAME%.%WEB% web. These preferences overwrite the **_site-level preferences_** in [[TWikiPreferences]], and can be overwritten by **_user preferences_** (your personal topic, i.e. [[TWikiGuest]] in the %WIKITOOLNAME%.Main web)
 
 **_Preferences:_**
 
 - List of topics of the %WIKITOOLNAME%.%WEB% web:
-  - Set WEBTOPICLIST = %WEB% . \{ [Home](WebHome) | [Welcome](WelcomeGuest) | [Users](TWikiUsers) | [Changes](http://www.dementia.org/twiki//changes/%WEB%) | [Index](http://www.dementia.org/twiki//search/%WEB%/?scope=topic&regex=on&search=.*) | [Search](WebSearch) | Go <input name="topic" size="16" type="text" />
+  - Set WEBTOPICLIST = %WEB% . \{ [Home](WebHome) | [Users](TWikiUsers) | [Offices](OfficeLocations) | [Changes](WebChanges) | [Index](WebIndex) | [Search](WebSearch) | Go <input name="topic" size="16" type="text" />
  \}
 
 - Web specific background color:
   - Set WEBBGCOLOR = #FFFFC0
+
+- Exclude web from a `web="all"` search: (Set to `on` for hidden webs)
+  - Set NOSEARCHALL =
 
 **_Notes:_**
 

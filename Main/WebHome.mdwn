@@ -1,6 +1,6 @@
 <table>
   <tr>
-    <td> Welcome to %WIKITOOLNAME%, a web based collaboration tool, document management tool and knowledge base tool. </td>
+    <td> Welcome to %WIKITOOLNAME%, a web-based collaboration tool, document management tool and knowledge base tool. </td>
     <td><a href="http://TWiki.SourceForge.net/"><img alt="Powered by TWiki" border="0" height="64" src="http://www.dementia.org/twiki//view/twikilogo3.gif" width="131" /></a></td>
     <td><b>The TWiki home is at <br /><a href="http://TWiki.SourceForge.net/" target="_top">http://TWiki.SourceForge.net/</a> </b></td>
   </tr>
@@ -13,22 +13,24 @@
 
 <form action="http://www.dementia.org/twiki//search/%WEB%/">
   <ul>
-    <li><a href="http://www.dementia.org/twiki//search/%WEB%/?scope=topic&regex=on&search=.*">Topic index</a>: List up all %WIKITOOLNAME%.%WEB% topics in alphabetical order. </li>
-    <li><a href="http://www.dementia.org/twiki//view/%WEB%/WebSearch">Search</a>: Full text search of the %WIKITOOLNAME%.%WEB% web. </li>
+    <li>[[Main/WebSearch]]: Full text search of the %WIKITOOLNAME%.%WEB% web. </li>
     <li><input name="search" size="32" type="text" /> <input type="submit" value="Search" />    (More options in [[Main/WebSearch]]) </li>
-    <li><a href="http://www.dementia.org/twiki//changes/%WEB%">Changes</a>: Find out recent changes of the %WIKITOOLNAME%.%WEB% web. </li>
+    <li>[[Main/WebChanges]]: Find out recent changes of the %WIKITOOLNAME%.%WEB% web. </li>
+    <li>[[Main/WebIndex]]: Display all %WIKITOOLNAME%.%WEB% topics in alphabetical order. </li>
     <li>[[Main/WebNotify]]: Subscribe to be automatically notified when something changes in the %WIKITOOLNAME%.%WEB% web. </li>
     <li>[[Main/WebStatistics]]: View access statistics of the %WIKITOOLNAME%.%WEB% web. </li>
     <li>[[Main/WebPreferences]]: Preferences of the %WIKITOOLNAME%.%WEB% web. </li>
-  </ul> . <p><strong>%WIKITOOLNAME%.TWiki Web:</strong></p>
-  <ul>
-    <li>[[TWiki/WelcomeGuest]]: Look here first to get you rolling on %WIKITOOLNAME%. </li>
-    <li>[[TWiki/TWikiWeb]]: Explains what a %WIKITOOLNAME% web is. </li>
-    <li>[[TWiki/TWikiRegistration]]: Create your account in order to edit topics. </li>
-    <li>[[TWiki/TWikiPreferences]]: %WIKITOOLNAME% site-level preferences </li>
   </ul>
 </form>
+
+**%WIKITOOLNAME%.TWiki Web:**
+
+- [[WelcomeGuest]]: Look here first to get yourself rolling on %WIKITOOLNAME%.
+- [[TWikiWeb]]: Explains what a %WIKITOOLNAME% web is.
+- [[TWikiRegistration]]: Create your account in order to edit topics.
+- [[TWikiPreferences]]: %WIKITOOLNAME% site-level preferences
 
 **Notes:**
 
 - You are currently in the %WIKITOOLNAME%.%WEB% web. The color code for this web is a light yellow background, so you know where you are.
+- If you are not familiar with the %WIKITOOLNAME% collaboration tool, please visit [[WelcomeGuest]] in %WIKITOOLNAME%.TWiki first.

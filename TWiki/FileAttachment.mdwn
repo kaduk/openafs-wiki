@@ -1,0 +1,95 @@
+**FileAttachment**
+
+Each topic can have files attached to it. This is similar to an e-mail attachment. Just use your browser to upload or download a file.
+
+- To upload: Click on the Attach link at the bottom of each page. A form is shown where you can browse for a file and upload it. The uploaded file will show up in the FileAttachment table.
+- To download: Click on the file in the FileAttachment table.
+
+**FileAttachment table**
+
+Is a table that looks like this:
+
+<table border="0" cellpadding="0" cellspacing="4">
+  <tr bgcolor="#99CCCC">
+    <th>FileAttachment: </th>
+    <th> Action: </th>
+    <th> Size: </th>
+    <th> Date: </th>
+    <th> Who: </th>
+    <th> Comment: </th>
+  </tr>
+  <tr>
+    <td> (attached file) </td>
+    <td> (view, update, add) </td>
+    <td> (file size) </td>
+    <td> (upload date) </td>
+    <td> (uploded by) </td>
+    <td> (file comment) </td>
+  </tr>
+</table>
+
+**Action** is:
+
+- **view:** View file. This is the same as clicking on the filename.
+- **update:** Update file that is already attached.
+- **add:** Add a new attachment.
+
+**Remarks**
+
+- Once a file is attached it can be referenced in the topic by `%ATTACHURL%/{filename}` . Example:
+  - Attach file: `Sample.txt`
+  - Text is shown as: <http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Sample.txt> , i.e. it is a link.
+- GIF and JPG images can be attached and shown in the text like this:
+  - Attach file: `Smile.gif`
+  - Edit topic and write text: `%ATTACHURL%/Smile.gif`
+  - Text is shown as: ![Smile.gif](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Smile.gif) , i.e. it shows up as an image.
+- It is not possible to delete attached files with the current TWiki implementation. Contact if you need to delete files.
+
+<table border="0" cellpadding="0" cellspacing="4">
+  <tr bgcolor="#99CCCC">
+    <th>[[TWiki/FileAttachment]]: </th>
+    <th> Action: </th>
+    <th> Size: </th>
+    <th> Date: </th>
+    <th> Who: </th>
+    <th> Comment: </th>
+  </tr>
+  <tr>
+    <td><twknextitem> </twknextitem></td>
+  </tr>
+  <tr>
+    <td valign="top"><twkfileicon><img align="top" hight="16" src="http://www.dementia.org/twiki//view/icn/txt.gif" width="16" /></twkfileicon> <a href="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Sample.txt"><twkfilename>Sample.txt</twkfilename></a> <twkfilepath> <twkdata value="C:\DATA\Sample.txt"> </twkdata></twkfilepath></td>
+    <td valign="top"><twkaction><a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?filename=Sample.txt">view</a> <a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt">update</a></twkaction></td>
+    <td align="right" valign="top"><twkfilesize>30</twkfilesize></td>
+    <td valign="top"><twkfiledate>22 Jul 2000 - 19:37</twkfiledate></td>
+    <td valign="top"><twkfileuser> [[Main/PeterThoeny]]</twkfileuser></td>
+    <td valign="top"><twkfilecomment>Just a sample</twkfilecomment></td>
+  </tr>
+  <tr>
+    <td><twknextitem> </twknextitem></td>
+  </tr>
+  <tr>
+    <td valign="top"><twkfileicon><img align="top" hight="16" src="http://www.dementia.org/twiki//view/icn/bmp.gif" width="16" /></twkfileicon> <a href="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Smile.gif"><twkfilename>Smile.gif</twkfilename></a> <twkfilepath> <twkdata value="C:\DATA\Smile.gif"> </twkdata></twkfilepath></td>
+    <td valign="top"><twkaction><a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?filename=Smile.gif">view</a> <a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif">update</a></twkaction></td>
+    <td align="right" valign="top"><twkfilesize>94</twkfilesize></td>
+    <td valign="top"><twkfiledate>22 Jul 2000 - 19:38</twkfiledate></td>
+    <td valign="top"><twkfileuser> [[Main/PeterThoeny]]</twkfileuser></td>
+    <td valign="top"><twkfilecomment>Smiley face</twkfilecomment></td>
+  </tr>
+  <tr>
+    <td><twknextitem> </twknextitem></td>
+  </tr>
+  <tr>
+    <td valign="top">
+    </td>
+    <td valign="top"><twkaction><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%">add</a><twkaction> </twkaction></twkaction></td>
+    <td align="right" valign="top">
+    </td>
+    <td valign="top">
+    </td>
+    <td valign="top">
+    </td>
+    <td valign="top">
+    </td>
+  </tr>
+</table>
