@@ -42,6 +42,10 @@
     <td> The path of the attachment URL of the current topic, is <b>http://www.dementia.org/twiki//view</b></td>
   </tr>
   <tr>
+    <td><code>%URLPARAM{"name"}%</code></td>
+    <td> Returns the value of a URL parameter. I.e. <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
+  </tr>
+  <tr>
     <td><code>%WIKITOOLNAME%</code></td>
     <td> Name of wiki tool, is <b>%WIKITOOLNAME%</b></td>
   </tr>
@@ -137,7 +141,7 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:26</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:30</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
