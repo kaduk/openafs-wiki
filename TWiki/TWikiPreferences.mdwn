@@ -6,8 +6,13 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 <div>
   <ul>
-    <li><a href="#General Preferences"> General Preferences</a></li>
-    <li><a href="#Email Settings"> Email Settings</a></li>
+    <li><a href="#Web Preferences"> Web Preferences</a></li>
+    <li><a href="#User Settings"> User Settings</a></li>
+    <li><a href="#TWiki Platform Settings"> TWiki Platform Settings</a></li>
+    <li><a href="#Email Settings"> Email Settings</a><ul>
+        <li><a href="#Email Link Settings"> Email Link Settings</a></li>
+      </ul>
+    </li>
     <li><a href="#Plugins Settings"> Plugins Settings</a></li>
     <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
     <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
@@ -17,16 +22,12 @@ The following are **_site-level_** settings that affect all users in all webs on
   </ul>
 </div>
 
-----
+## <a name="Web Preferences"></a> Web Preferences
 
-## <a name="General Preferences"></a> General Preferences
-
-- List of %WIKITOOLNAME% webs - on the first line of the upper toolbar (to add a new web, see [[ManagingWebs]] and [[SiteMap]]):
-  - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Sandbox|Sandbox/WebHome]]
-  - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use the `%WEBLIST{}%` variable instead: <br />
+%X% **NOTE:** They are typically redefined in individual WebPreferences topics
 
 - List of selected topics in a web - the second line of the upper toolbar (usually overwritten in individual [[WebPreferences]]):
-  - Set WEBTOPICLIST = [[Home|Main/WebHome]] | [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
+  - Set WEBTOPICLIST = [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
 
 - Copyright notice:
   - Set WEBCOPYRIGHT = <font>Copyright © 1999-2002 by the contributing authors. \\nAll material on this collaboration tool is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send](mailto:?subject=%WIKITOOLNAME% Feedback) feedback. </font>
@@ -37,14 +38,9 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Web specific background color: (is overwritten by web preferences)
   - Set WEBBGCOLOR = #C0C0C0
 
-- [[PreviewBackground]] image:
-  - Set PREVIEWBGIMAGE = ![previewbg.gif](http://www.dementia.org/twiki//view/TWiki/PreviewBackground/previewbg.gif)
+## <a name="User Settings"></a> User Settings
 
-- Background color of non existing topic: ( default `cornsilk` or `#FFFFCE` )
-  - Set NEWTOPICBGCOLOR = #FFFFCE
-
-- Font color of non existing topic: ( default `#0000FF` )
-  - Set NEWTOPICFONTCOLOR = #0000FF
+%X% **NOTE:** They are typically redefined in topics of individual [[TWikiUsers]]
 
 - Horizontal size of text edit box: (can be overwritten by user preferences)
   - Set EDITBOXWIDTH = 70
@@ -74,6 +70,20 @@ The following are **_site-level_** settings that affect all users in all webs on
           * Set ATTACHEDIMAGEFORMAT = \t* $comment: <br />
             <img src="%ATTACHURLPATH%/$name" alt="$name" $size />
 
+## <a name="TWiki Platform Settings"></a> TWiki Platform Settings
+
+- TWiki platform name:
+  - Set WIKITOOLNAME = TWikibeta
+
+- Image, URL and alternate tooltip text of TWiki logo: (can be overwritten by web preferences)
+  - Set WIKILOGOIMG = ![twikiRobot46x50.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikiRobot46x50.gif)
+  - Set WIKILOGOURL = <http://TWiki.org/>
+  - Set WIKILOGOALT = TWiki home
+
+- List of %WIKITOOLNAME% webs - on the first line of the upper toolbar (to add a new web, see [[ManagingWebs]] and [[SiteMap]]):
+  - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Sandbox|Sandbox/WebHome]]
+  - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use the `%WEBLIST{}%` variable instead: <br />
+
 ## <a name="Email Settings"></a> Email Settings
 
 - TWiki webmaster email address:
@@ -84,6 +94,17 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 - Mail domain sending mail. SMTP requires that you identify the TWiki server sending mail. If not set, <code>**Net::SMTP**</code> will guess it for you. Ex: <code>**twiki.your.company**</code>
   - Set SMTPSENDERHOST =
+
+### <a name="Email Link Settings"></a> Email Link Settings
+
+- 'Mail this topic' mailto: link - can be included in topics, templates or skins
+  - Set MAILTHISTOPIC = [%MAILTHISTOPICTEXT%](mailto:?subject=WebHome&amp;body=%TOPICURL%)
+
+- 'Mail this topic' link text
+  - Set MAILTHISTOPICTEXT = Send a link to this page
+
+- URL for current topic
+  - Set TOPICURL = <http://www.dementia.org/twiki//view/%WEB%/WebHome>
 
 ## <a name="Plugins Settings"></a> Plugins Settings
 
@@ -124,7 +145,6 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set U = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/updated.gif" width="56" height="8" alt="UPDATED" />
   - Set X = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/warning.gif" width="16" height="16" alt="ALERT!" />
   - Set Y = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/choice-yes.gif" width="16" height="16" alt="DONE" />
-  - Set TLS = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/8831.gif" width="88" height="31" alt="TWiki ID button" />
 
 - Colored text: (see more [[StandardColors]]) <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -188,6 +208,15 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Set ENDCOLOR =
   - To finish colored text
 
+- Background color of non existing topic: ( default `cornsilk` or `#FFFFCE` )
+  - Set NEWTOPICBGCOLOR = #FFFFCE
+
+- Font color of non existing topic: ( default `#0000FF` )
+  - Set NEWTOPICFONTCOLOR = #0000FF
+
+- [[PreviewBackground]] image:
+  - Set PREVIEWBGIMAGE = ![previewbg.gif](http://www.dementia.org/twiki//view/TWiki/PreviewBackground/previewbg.gif)
+
 ## <a name="Access Control Settings"></a> Access Control Settings
 
 - Users or groups allowed to change or rename this %TOPIC% topic: (ex: [[TWikiAdminGroup]])
@@ -198,7 +227,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set ALLOWWEBMANAGE = [[TWikiAdminGroup]]
 
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBMANAGE
+  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBMANAGE
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
@@ -215,5 +244,5 @@ You can introduce new VARIABLES and use them in your topics and templates. There
 
 - [[WebPreferences]] has preferences of the %WIKITOOLNAME%.%WEB% web.
 - [[TWikiUsers]] has a list of user topics. User topics can have optional user preferences.
-- [[TWikiVariables]] has a list of common `%VARIABLES%` .
+- [[TWikiVariables]] has a list of common `%VARIABLES%`.
 - [[TWikiAccessControl]] explains how to restrict access by users or groups.
