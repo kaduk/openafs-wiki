@@ -27,6 +27,7 @@ The Usage Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#2.17  What's the difference betw"> 2.17 What's the difference between /afs/cellname and /afs/.cellname?</a></li>
         <li><a href="#2.18  Can I klog as two users on"> 2.18 Can I klog as two users on a machine in the same cell?</a></li>
         <li><a href="#2.19  What are the ~/._afsXXXX f"> 2.19 What are the ~/.__afsXXXX files?</a></li>
+        <li><a href="#2.20  How do you set up IP-based"> 2.20 How do you set up IP-based ACLs?</a></li>
       </ul>
     </li>
   </ul>
@@ -455,3 +456,7 @@ In UNIX filesystems, when you a remove a file that is kept open by a process, th
 Some applications rely on that feature, e.g. they create a temporary file and remove it immediatley while keeping the file descriptor open. The file then disappears from the filesystem automagically when the process terminates or the file descriptor gets closed otherwise. Such applications could get into trouble with older versions of AFS, where the file could really disappear while it was held open.
 
 Newer versions of AFS rename such files to .\_\_afsXXXX, thus making sure that the data stays around as expected by the application. As soon as the file gets closed, the associated .\_\_afsXXXX should disappear.
+
+### <a name="2.20  How do you set up IP-based"></a> 2.20 How do you set up IP-based ACLs?
+
+See <http://www.duke.edu/~jhv/answers/afs-ip-acls.html>
