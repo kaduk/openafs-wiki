@@ -17,11 +17,11 @@ The following are items known to be in progress, and, where available, a point o
 
 - [[DisconnectedOperation]] provides the ability to use AFS while not connected to a network.
 
-- [[NestedGroups]] allows PTS groups to have other groups as members. Code available, waiting for [[OpenAFS]] port.
+- [[NestedGroups]] allows PTS groups to have other groups as members. Code available, waiting for [[OpenAFS]] port. In CVS head, not in 1.2 branch.
 
 - [[FreeBSDPort]] -- Server ported. Cache manager available, not stable yet.
 
-- [[HPUX11Port|Main/HP-UX11Port]] -- Missing RX code reconstructed. Header needed, available from HP.
+- [[HPUX11Port|Main/HP-UX11Port]] -- Missing RX code reconstructed. Header needed, available from HP. Available in 1.2.10.
 
 - [[NetBSDPort]] -- No timeline available.
 
@@ -45,7 +45,7 @@ The following are items which have been proposed, but which are not yet in progr
 
 - [[KerberosV]] -- Support Kerberos version 5 and additional encryption type support. Contact [[JeffreyHutzelman]]
 
-- [[LargeFiles]] -- Support for files over 2GB. The concensus seems to be that beyond supporting big files, large volumes already work fine.
+- [[LargeFiles]] -- Support for files over 2GB. The concensus seems to be that beyond supporting big files, large volumes already work fine. Actively in progress. R Lindsay Todd, Hartmut Reuter, and Nathan Neulinger working on this.
 
 - [[MultipleClones]] provides support for more than one backup and read-only volume for a single read/write.
 

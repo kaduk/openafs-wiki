@@ -593,6 +593,8 @@ On the client side, you always have to use a file system supporting the inode ab
 - vxfs (HP-UX)
 - advfs (Tru64), it works but gives cachecurruption
 
+- Patch committed to cvs around 6/2003 will now enforce this in some cases and generate a warning to the user if the filesystem type is wrong.
+
 The following file systems have been reported to work for the AFS client cache:
 
 - ext2
