@@ -19,13 +19,13 @@
 
 # <a name="Managing Topics"></a> Managing Topics
 
-## <a name="Overview"></a> Overview
-
 _Browser-based rename, move, and delete for individual topics_
 
-## <a name="How to Rename/Move/Delete a Topi"></a> How to Rename/Move/Delete a Topic
+## <a name="Overview"></a> Overview
 
 While view a special topic, you can use browser-based controls to change its name, move it to another TWiki web, or delete it to a hidden `Trash` web.
+
+## <a name="How to Rename/Move/Delete a Topi"></a> How to Rename/Move/Delete a Topic
 
 1. **Click** on <code>**[More]**</code> (bottom right of page) on the topic to be changed, then, in the new screen, on <code>**[Rename/move]**</code>. You can now rename and/or move/delete in one operation:
 2. **Move/Delete:** Select the target web if other than the current web - choose `Trash` to [[delete a topic|Main/WebHome#DeleteTopic]].
@@ -44,7 +44,7 @@ Deleted topics are moved to a special <code>**Trash**</code> web - they are NOT 
 The `Trash` web should be be cleared periodically, by archiving (saving) the text and RCS files if required (recommended), then deleting them from the `Trash` directory.
 
 - %X% This can only be done from on the server, not through the browser.
-  - %T% Since simple FTP access to the `Trash` directory is all that's required to maintain `Trash`, it's possible grant users `Trash` admin privileges while limiting server access.
+  - %T% Since simple FTP access to the <code>**Trash**</code> directory is all that's required for maintenance, it's possible to grant `Trash` admin privileges to multiple users, while strictly limiting server access.
 
 ## <a name="Redirecting from an Old Topic"></a> Redirecting from an Old Topic
 
@@ -79,13 +79,13 @@ Consider carefully whether to make browser-based **Rename/Move/Delete** widely a
 - When referring links are updated, the modified topics appear in [[WebChanges]], creating the impression that editorial changes were made. This can undermine the usefulness of [[WebChanges]].
 - Due to [[current limitations|Main/WebHome#RenameLimitations]], fairly heavy use of rename/move/delete functions can lead to an accumulation of minor technical problems (ex: broken links) and usability issues (ex: user confusion). If Rename is used heavily, these types of negatives will obviously increase.
 
-Ultimately, the size, objectives, and policies of your TWiki site, and the real-world behavior of your user group, will determine the most effective implementation of this feature.
+Ultimately, the size, objectives, and policies of your TWiki site, the real-world behavior of your user group, and most importantly, the initial TWiki site management leadership, will determine the most effective implementation of this feature, and the success of the site overall.
 
 <a name="RenameLimitations"></a>
 
 ## <a name="Known Issues"></a> Known Issues
 
-**Rename/Move** is fairly complicated due to the dynamic generation of links. Ideally, it would be possible to run the required part of rendering in a way that would allow identification of the text to be changed. Unfortunately, these hooks don't exist in TWiki at present. Instead, %SEARCH% is used with a special template to show the text to be changed, and the selected topics are then altered. One drawback is that `search` can show matches that will not be updated because of case differences. Other mismatches to actual rendered output are also possible as the approaches are so different.
+**Rename/Move** is fairly complicated due to the dynamic generation of links. Ideally, it would be possible to run the required part of rendering in a way that would allow identification of the text to be changed. Unfortunately, these hooks don't exist in TWiki at present. Instead, %SEARCH% is used with a special template to show the text to be changed, and the selected topics are then altered. One drawback is that `search` can show matches that will not be updated due to case differences. Other mismatches with actual rendered output are also possible as the approaches are so different.
 
 The following shows some limitations of square bracket processing.
 
