@@ -63,9 +63,16 @@ Access control is based on the familiar concept of Users and Groups. Users are d
 
 ### <a name="Managing Users"></a> Managing Users
 
-A user is created with the [[TWikiRegistration]] form. The process generates a topic in the Main web in the new user's [[WikiName]]. The default visitor name is [[TWikiGuest]].
+A user can create an account in [[TWikiRegistration]]. The following actions are performed:
 
-- Users can be authenticated using Basic Authentication (htaccess) or SSL (secure server). In either case, [[TWikiUserAuthentication]] is required in order to track user identities, and use User and Group access control.
+- [[WikiName]] and encrypted password are recorded in `.htpasswd` if authentication is enabled.
+- A confirmation e-mail is sent to the user.
+- A user home page with the [[WikiName]] of the user is created in the Main web.
+- The user is added to the [[TWikiUsers]] topic.
+
+Users can be authenticated using Basic Authentication (htaccess) or SSL (secure server). In either case, [[TWikiUserAuthentication]] is required in order to track user identities, and use User and Group access control.
+
+The default visitor name is [[TWikiGuest]]. This is the non-authenticated user.
 
 <a name="ManagingGroups"></a>
 
