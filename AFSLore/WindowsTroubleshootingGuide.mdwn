@@ -4,17 +4,30 @@
   <ul>
     <li><a href="#Troubleshooting Guide for _OpenA"> Troubleshooting Guide for OpenAFS for Windows</a><ul>
         <li><a href="#Bugs"> Bugs</a><ul>
+            <li><a href="#Are my tokens destroyed when I l"> Are my tokens destroyed when I logout?</a></li>
             <li><a href="#How come my non-ASCII filename c"> How come my non-ASCII filename characters are wrong; code page problems?</a></li>
+            <li><a href="#Why do my 2 GB+ files break?"> Why do my 2 GB+ files break?</a></li>
+            <li><a href="#Why does the Client Service cras"> Why does the Client Service crash when I start my laptop?</a></li>
             <li><a href="#Why does _OpenAFS for Windows cr"> Why does OpenAFS for Windows crash on my Hyperthreaded Pentium 4?</a></li>
           </ul>
         </li>
         <li><a href="#Error Messages"> Error Messages</a><ul>
+            <li><a href="#Why can't I use _OpenAFS with an"> Why can't I use OpenAFS with an Active Directory KDC?</a></li>
+            <li><a href="#Why can't I install _OpenAFS on"> Why can't I install OpenAFS on Windows NT, ME or 9x?</a></li>
             <li><a href="#What is this _MrxSmb event 3019"> What is this MrxSmb event 3019 that pops up in my System Log?</a></li>
             <li><a href="#Why isn't the AFS Light Gateway"> Why isn't the AFS Light Gateway working anymore?</a></li>
           </ul>
         </li>
+        <li><a href="#Features"> Features</a><ul>
+            <li><a href="#Why can I not use fs to set the"> Why can I not use <tt>fs</tt> to set the X option anymore?</a></li>
+            <li><a href="#Why should I abandon Kerberos 4?"> Why should I abandon Kerberos 4?</a></li>
+          </ul>
+        </li>
         <li><a href="#Nomenclature"> Nomenclature</a><ul>
+            <li><a href="#What is "High Security Mode"?"> What is "High Security Mode"?</a></li>
+            <li><a href="#What is the Microsoft Loop Back"> What is the Microsoft Loop Back Adapter?</a></li>
             <li><a href="#What is a "submount"?"> What is a "submount"?</a></li>
+            <li><a href="#What is "Symbol Information"?"> What is "Symbol Information"?</a></li>
           </ul>
         </li>
       </ul>
@@ -24,11 +37,27 @@
 
 ## <a name="Bugs"></a> Bugs
 
+### <a name="Are my tokens destroyed when I l"></a> Are my tokens destroyed when I logout?
+
+Hard to tell. If your profile is local (not on the network, roaming) there is no need for the tokens, and they are destroyed when you logout.
+
+If, on the other hand, you are using roaming profiles, there is unfortunately no way for the AFS Client Service to know when the profile has been put back into AFS. Thus, the "roaming" could fail if the service tried to forget the tokens. When using roaming profiles, the tokens are not destroyed on logout.
+
 ### <a name="How come my non-ASCII filename c"></a> How come my non-ASCII filename characters are wrong; code page problems?
 
 Yes, it is. Currently, the [[OpenAFS]] implementation uses a SMB server with which Windows communicates. This server is not yet able to handle all code pages. So, if you are accessing files from other systems as well, you will experience the old code page missmatch problem.
 
 The CIFS protocol itself has support for Unicode. Hopefully, it will be implemented in [[OpenAFS]] in the future. (from J. Altman)
+
+### <a name="Why do my 2 GB+ files break?"></a> Why do my 2 GB+ files break?
+
+First of all, note that the default cache size is 20 MB, which means a 2 GB file will flush the cache directly. Second, [[OpenAFS]] does not yet support files larger than 2<sup>31</sup> bytes, which is 2 GB.
+
+### <a name="Why does the Client Service cras"></a> Why does the Client Service crash when I start my laptop?
+
+If the [[OpenAFS]] Client Service cannot connect to your home cell when it starts, it will crash.
+
+To solve this problem, look up the Freelance Mode in the [[WindowsConfigurationReferenceGuide]].
 
 ### <a name="Why does _OpenAFS for Windows cr"></a> Why does [[OpenAFS]] for Windows crash on my Hyperthreaded Pentium 4?
 
@@ -36,18 +65,56 @@ This is due to a known bug. Set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\S
 
 ## <a name="Error Messages"></a> Error Messages
 
+### <a name="Why can&#39;t I use _OpenAFS with an"></a> Why can't I use [[OpenAFS]] with an Active Directory KDC?
+
+You can, however Microsoft uses the Kerberos tickets in a way no one had anticipated during protocol design. While remaining syntactically valid, the tickets the AD KDC issues are very large. They can be 10 kB while other KDC implementations usually issue tickets around 500 bytes in size.
+
+You will have to setup you AFS server to support the larger ticket sizes, or update your server.
+
+### <a name="Why can&#39;t I install _OpenAFS on"></a><a name="Why can&#39;t I install _OpenAFS on "></a> Why can't I install [[OpenAFS]] on Windows NT, ME or 9x?
+
+As of version 1.3.65, the old Windows branch will no longer be maintained. The interface for the Windows NT series and the Windows 9x series are completely different. Most of the users now use Windows 2000 or newer. Less has changed between Windows NT 4 and Windows 2000, but the developer community has decided to discontinue support for Windows NT 4 too.
+
+The main reason for this decision is the lack of developers and fundings. [[OpenAFS]] for Windows is a free project and requires donations ,or developers with time left, to move forward. Old versions of [[OpenAFS]] for Windows 9x and NT 4 are still available.
+
 ### <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
 
-The [[MrxSmb]] event 3019 is due to the use of the Loop Back device. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
+The [[MrxSmb]] event 3019 is due to the use of the [[WindowsLoopBackAdapter]]. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
 
 ### <a name="Why isn&#39;t the AFS Light Gateway"></a><a name="Why isn&#39;t the AFS Light Gateway "></a> Why isn't the AFS Light Gateway working anymore?
 
-The Light Gateway works by simply publishing what [[OpenAFS]] has already built for internal use. If you install the Microsoft Loop Back Adapter, the submounts will only be published on the local computer. Either remove the Loop Back Adapter, or stop using the gateway functionality.
+The Light Gateway works by simply publishing what [[OpenAFS]] has already built for internal use. If you install the [[WindowsLoopBackAdapter]], the submounts will only be published on the local computer. Either remove the Loop Back Adapter, or stop using the gateway functionality.
+
+## <a name="Features"></a> Features
+
+### <a name="Why can I not use fs to set the"></a><a name="Why can I not use fs to set the "></a> Why can I not use `fs` to set the X option anymore?
+
+Starting with version 1.3.65 several settings now require Administrator privileges to change them.
+
+### <a name="Why should I abandon Kerberos 4?"></a> Why should I abandon Kerberos 4?
+
+A gigant security hole was found in the Kerberos 4 protocol. This led the world to move over to the (already deployed) more secure Kerberos 5 protocol. The problem occurs when using trusted domains.
+
+Recent updates to [[OpenAFS]] include support for Kerberos 5. If your cell still uses **_kaserver_** or a plain Kerberos 4 server, you should update them to use Kerberos 5. The **_kaserver_** can be seen as deprecated. The most common Kerberos 5 servers (KDCs) are [Heimdal](http://www.pdc.kth.se/heimdal/), [MIT Kerberos](http://web.mit.edu/kerberos/www/) and [Microsoft's Active Directory services](http://www.microsoft.com/).
 
 ## <a name="Nomenclature"></a> Nomenclature
+
+### <a name="What is &quot;High Security Mode&quot;?"></a> What is "High Security Mode"?
+
+It is a deprecated way of achieving some sort of security. Before the [[OpenAFS]] for Windows client was able to use authenticated SMB connections, you had a potential security risk when more than one user was logging on to the same computer at once.
+
+The High Security Mode created a SMB share with a random name, instead of the default <tt>\\\\machine-AFS</tt>. Thus making it harder for anyone else to connect to it. There is no reason to go for the High Security Mode now that [[OpenAFS]] for Windows supports SMB authentication.
+
+### <a name="What is the Microsoft Loop Back"></a><a name="What is the Microsoft Loop Back "></a> What is the Microsoft Loop Back Adapter?
+
+See the [[WindowsLoopBackAdapter]] page.
 
 ### <a name="What is a &quot;submount&quot;?"></a> What is a "submount"?
 
 A submount is used in [[OpenAFS]] for Windows to map drives. Instead of mapping drives directly to the AFS server, the [[OpenAFS]] Client uses another approach. It uses the CIFS file system as an intermediary. So, the Windows computer really thinks it maps a normal Windows share. These shares are the same thing as a submount. When you want to map a drive, the [[OpenAFS]] service creates a submount, exports it for Windows to see it, and maps the share. The submount "all" is always available and is the root of the AFS file system (`/afs` in Unix). This means you can always access any cell by writing `\\AFS\all\cell\...`.
 
 This is a quick-and-dirty approach, but it has an upside. In Unix, the way to shorten a path is to install a symbolic link. In Windows, this is not possible. Using submounts, however, you can create shortcuts to any AFS path. Say you often use the path `/afs/openafs.org/usr/someone/development/code/openafs/src/WINNT`. Then you could create a submount (say, "openafs-nt") of it, thus reducing the path to `\\AFS\openafs-nt`.
+
+### <a name="What is &quot;Symbol Information&quot;?"></a> What is "Symbol Information"?
+
+When installing [[OpenAFS]], you have the option of installing symbol information. This helps the developers track down crashes. It is only informational, and if you don't intend to send bug reports (you really should), there is no need for this feature.

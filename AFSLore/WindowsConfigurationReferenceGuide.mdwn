@@ -38,6 +38,17 @@
             <li><a href="#Tweaking RPC Traffic"> Tweaking RPC Traffic</a></li>
             <li><a href="#Enabling Debug Trace Events"> Enabling Debug Trace Events</a></li>
             <li><a href="#Restricting the Number of Utiliz"> Restricting the Number of Utilized CPUs</a></li>
+            <li><a href="#Moving the _CellServDB File"> Moving the CellServDB File</a></li>
+            <li><a href="#Moving the Integrated Logon Supp"> Moving the Integrated Logon Support File</a></li>
+            <li><a href="#Allowing More Time For the Servi"> Allowing More Time For the Service To Start</a></li>
+            <li><a href="#Running a Logon Script"> Running a Logon Script</a></li>
+            <li><a href="#Integrated Logon Usage"> Integrated Logon Usage</a></li>
+            <li><a href="#Integrated Logon Silence"> Integrated Logon Silence</a></li>
+          </ul>
+        </li>
+        <li><a href="#Per Domain Options"> Per Domain Options</a><ul>
+            <li><a href="#Resolution of Domain Specific Va"> Resolution of Domain Specific Values</a></li>
+            <li><a href="#Exceptions To the Resolution Rul"> Exceptions To the Resolution Rule</a></li>
           </ul>
         </li>
         <li><a href="#Windows Registry Keys of _OpenAF"> Windows Registry Keys of OpenAFS</a></li>
@@ -242,6 +253,71 @@ Normally, the `TraceOption` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentCo
 ### <a name="Restricting the Number of Utiliz"></a> Restricting the Number of Utilized CPUs
 
 For most part, the [[OpenAFS]] client can use as many processors as available. It has, however, showed that Hyperthreaded Pentium 4 systems can cause the [[OpenAFS]] service to crash. If you have such a system, you should set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`) to 1. The default is undefined, and means all processors may be used.
+
+### <a name="Moving the _CellServDB File"></a> Moving the [[CellServDB]] File
+
+The registry setting `CellServDBDir` (type string) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` specifies the base directory of the [[CellServDB]] file. Note that the filename `CellServDB` is appended to this path. The default is `C:\Program Files\OpenAFS\Client`.
+
+### <a name="Moving the Integrated Logon Supp"></a> Moving the Integrated Logon Support File
+
+[[OpenAFS]] installs very few files outside its directory in `Program Files`. The Integrated Logon DLL, `afslogon.dll`, is an exception. It is installed in `%WINDIR%\SYSTEM32` by default.
+
+To change this location you must update the registry value `AuthentProviderPath` (type string) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` to point to the new location.
+
+### <a name="Allowing More Time For the Servi"></a> Allowing More Time For the Service To Start
+
+When the AFS Client Service starts, it has to read files, the registry, DNS and connect to servers. All of this may take quite some time. On slow computers, the default retry policy can be too short.
+
+In this case, the `LoginRetryInterval` (type DWORD) and `LoginSleepInterval` (type DWORD) values in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` can be increased. If the [[OpenAFS]] client service has not started yet, the network provider will wait for a maximum of `LoginRetryInterval` seconds while retrying every `LoginSleepInterval` seconds to check if the service is up. This setting is domain-specific, see below.
+
+### <a name="Running a Logon Script"></a> Running a Logon Script
+
+You may set `LogonScript` (type string or expandable string) of `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` to any runnable script or program. Default is to not run any program. This setting is also domain-specific, see below.
+
+### <a name="Integrated Logon Usage"></a> Integrated Logon Usage
+
+Utilization of the Integrated Logon feature can be set on a per-domain basis. The value is called `LogonOption` (type DWORD) and can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Setting this to zero disables Integrated Logon, a one enables it. Default is enabled. If you set this to 2, you enable the [[OpenAFS]] High Security mode, and setting it to 3 enables both High Security Mode and Integrated Logon.
+
+High Security mode is a deprecated techinque to let several users logon to the same computer at once. Since [[OpenAFS]] now supports authenticated SMB connections, there is really no need for this mode. If you still want to use this mode, you should disable SMB Authentication. See "Tweaking the SMB Connections" on this matter.
+
+### <a name="Integrated Logon Silence"></a> Integrated Logon Silence
+
+In the Client Configuration, you may choose whether the Intergrated Logon should warn when you cannot logon, or if it should not. Since this setting is domain-specific, here is the background. The `FailLoginsSilently` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` can be set to 1 to ignore any failures. Default is to warn (i.e. a value of zero).
+
+## <a name="Per Domain Options"></a> Per Domain Options
+
+[[OpenAFS]] for Windows is now able to support domain-specific settings. Four of the settings in the previous section can be adjusted on a domain basis:
+
+- Allowing More Time For the Service To Start
+- Running a Logon Script
+- Integrated Logon Usage
+- Integrated Logon Silence
+
+This is a new feature of [[OpenAFS]] 1.3.6, and is not yet supported by the configuration user interface. While being a usable feature, we choose to document, so that you can still use it. A new configuration interface is hopefully on its way.
+
+All values that can be domain-specific are located under `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Domains which want to have specific settings can create the subkey <tt>Domain\\_domain_\\</tt> and store the values there. The domain name is the logon domain, as specified in the Windows Login screen. A special domain, called `LOCALHOST`, is a placeholder for the local computer. Any other Active Directory or Kerberos realm should use it's realm name for the key.
+
+### <a name="Resolution of Domain Specific Va"></a> Resolution of Domain Specific Values
+
+As a consequence of this scheme, there must also be set rules for resolving which value to use. Let us use the following example in the discussion:
+
+    ...\NetworkProvider\  LogonOption = 1
+    	Domain\				LogonOption = 0
+    		OPENAFS.ORG\	 LogonOption = 1
+    		MIT.EDU\
+    		LOCALHOST\		LogonOption = 0
+
+If the specific domain key does not exist, then the `Domain` key will be ignored. All the configuration information in this case will come from the standard `NetworkProvider` key.
+
+If the specific domain key exists, then the value will be looked up in the specific domain key, domains key and the NP key successively until the value is found. The first instance of the value found this way will be the effective for the login session. If no such instance can be found, the default will be used. To re-iterate, a value in a more specific key supercedes a value in a less specific key.
+
+Back to our example. Logging in to domain `OPENAFS.ORG` clearly enables the Integrated Logon. Logging on the local computer disables it. Logging in to `MIT.EDU` will also disable Integrated Logon, because the domain key exists, but misses a value. This resolves to using the value of `Domain\LogonOption`. However, logging in to `KTH.SE` would enable Integrated Logon. It is not listed as a domain, and thus the `NetworkProvider\LogonOption` is used. In order to retain backward-compatibility, there are two exceptions to this resolution order.
+
+### <a name="Exceptions To the Resolution Rul"></a> Exceptions To the Resolution Rule
+
+Historically, the 'FailLoginsSilently' value was in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` key and not in the `NetworkProvider` key. Therefore, for backwards compatibility, the value in the `Parameters` key will supercede all instances of this value in other keys. In the absence of this value in the `Parameters` key, normal scope rules apply.
+
+The second exception is for the `LogonScript` value. If a `LogonScript` is not specified in the specific domain key nor in the `Domain` key, the value in the `NetworkProvider` key will only be checked if the effective `LogonOptions` specify a high security integrated login. If a logon script is specified in the specific domain key or the domains key, it will be used regardless of the high security setting. Please be aware of this when setting this value.
 
 ## <a name="Windows Registry Keys of _OpenAF"></a> Windows Registry Keys of [[OpenAFS]]
 
