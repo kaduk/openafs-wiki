@@ -32,7 +32,7 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
   </tr>
   <tr>
     <td><code>header</code></td>
-    <td> Enable static header if <code>"on"</code>, e.g. disable editing of the first row;<br /> Else specify the header format of a new table like <code>"|*Food*|*Drink*|"</code>. </td>
+    <td> Specify the header format of a new table like <code>"|*Food*|*Drink*|"</code>. Useful to start a table with only a button </td>
     <td> (no header) </td>
   </tr>
   <tr>
@@ -62,7 +62,7 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
   </tr>
   <tr>
     <td><code>editbutton</code></td>
-    <td> Set edit button text, e.g. <code>"Edit this table"</code>; set button image with alt text, e.g. <code>"Edit table, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/edittopic.gif"</code>; hide button, e.g. <code>"hide"</code> (Note: Automatically hidden if edit button is present in a cell) </td>
+    <td> Set edit button text, e.g. <code>"Edit this table"</code>; set button image with alt text, e.g. <code>"Edit table, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/edittopic.gif"</code>; hide edit button at the end of the table with <code>"hide"</code> (Note: Button is automatically hidden if an edit button is present in a cell) </td>
     <td><code>EDITBUTTON</code> %BR% Plugin setting </td>
   </tr>
 </table>
@@ -100,11 +100,11 @@ By default, variables in `<initial value>` (of text input field) and `<label tex
 
 ## <a name="Per Cell Settings"></a> Per Cell Settings
 
-The edit field type can be defined for each table cell by placing an `%EDITCELL{ "type, ..." }%` variable after the cell content. This is useful to override the per column `%EDITTABLE{ format="..." }%` settings, or to create tables with key/value rows. All edit field types of the `format="..."` parameter are supported, e.g. to define a text field, type: `| cell content %EDITCELL{ "text, 20" }% |`
+An individual edit field type can be defined for each table cell. Place an `%EDITCELL{ "type, ..." }%` variable at the end of the cell content. This is useful to override the per column `%EDITTABLE{ format="..." }%` settings, or to create tables with key/value rows. All edit field types of the `format="..."` parameter are supported. For example, to define a text field, type: `| cell content %EDITCELL{ "text, 20" }% |`
 
-It is also possible to place the edit button into a cell instead of default location below the table. Type `| %EDITCELL{ "editbutton, 1, Edit this table" }% |` to show a button, or `| %EDITCELL{ "editbutton, 1, Edit table, Image-URL" }% |` to show a button image with alternate text.
+It is also possible to place the edit button inside a cell instead of default location below the table. Type `| %EDITCELL{ "editbutton, 1, Edit this table" }% |` to show a button, or `| %EDITCELL{ "editbutton, 1, Edit table, Image-URL" }% |` to show a button image with alternate text.
 
-**_Note:_** The EDITCELL variable cannot be used by itself; place an EDITTABLE variable at the beginning of a table where you want to use EDITCELL variables.
+**_Note:_** The `%EDITCELL{ }%=variable cannot be used by itself; place an =%EDITTABLE{ }%=variable at the beginning of a table where you want to use =%EDITCELL{ }%` variables.
 
 ## <a name="Table Buttons"></a> Table Buttons
 
@@ -194,31 +194,8 @@ The following example shows a simple table with key/value rows. The default edit
 | DOB: | 1999/12/31 %EDITCELL{date, 10}% |
 | City: | New York |
 </pre></td>
-    <td valign="top"> You get: <a name="edittable2"></a><div>
-        <form action="http://www.dementia.org/twiki/viewauth#edittable2" method="post" name="edittable2"><input name="ettablenr" type="hidden" value="2" /> <input name="etedit" type="hidden" value="on" /><table border="1" cellpadding="0" cellspacing="0">
-            <tr>
-              <th bgcolor="#99CCCC"><strong> Key </strong></th>
-              <th bgcolor="#99CCCC"><strong> Value </strong></th>
-            </tr>
-            <tr>
-              <td> Name: </td>
-              <td> John Smith </td>
-            </tr>
-            <tr>
-              <td> Gender: </td>
-              <td> M </td>
-            </tr>
-            <tr>
-              <td> DOB: </td>
-              <td> 1999/12/31 </td>
-            </tr>
-            <tr>
-              <td> City: </td>
-              <td> New York </td>
-            </tr>
-          </table><input name="etrows" type="hidden" value="5" /> <input type="submit" value="Edit table" /></form>
-      </div>
-    </td>
+    <td valign="top"> Screenshot: <img alt="EDITCELL Example in view mode" height="141" src="http://www.dementia.org/twiki//view/ScreenshotEditCell1.gif" width="149" /></td>
+    <td valign="top"> Screenshot in edit mode: <img alt="EDITCELL Example in edit mode" height="164" src="http://www.dementia.org/twiki//view/ScreenshotEditCell2.gif" width="276" /></td>
   </tr>
 </table>
 
@@ -269,6 +246,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <th bgcolor="#99CCCC"><strong> Description: </strong></th>
   </tr>
   <tr>
+    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td> Plugin Perl module </td>
+  </tr>
+  <tr>
     <td><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
     <td> Plugin topic </td>
   </tr>
@@ -277,8 +258,24 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin topic repository </td>
   </tr>
   <tr>
-    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
-    <td> Plugin Perl module </td>
+    <td><code><b>pub/TWiki/%TOPIC%/*.gif</b></code></td>
+    <td> Screenshots </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/%TOPIC%/README</b></code></td>
+    <td> Mishoo DHTML calendar README </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/%TOPIC%/release-notes.html</b></code></td>
+    <td> Mishoo DHTML calendar release notes </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/%TOPIC%/*.js</b></code></td>
+    <td> Mishoo DHTML calendar JavaScript files </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/%TOPIC%/calendar-system.css</b></code></td>
+    <td> Mishoo DHTML calendar stylesheet </td>
   </tr>
 </table>
 - The Plugin depends on the `viewauth` script to authenticate the user. As described in [[TWikiAccessControl]], copy the `view` script to `viewauth` (or better, create a symbolic link) and add `viewauth` to the list of authenticated scripts in the `.htaccess` file.
@@ -301,11 +298,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 17 Feb 2004 </td>
+    <td> 18 Feb 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 18 Feb 2004: </td>
+    <td> Doc fixes; allow edit button anywhere in a cell not just at the end of a cell </td>
   </tr>
   <tr>
     <td align="right"> 17 Feb 2004: </td>
@@ -384,6 +385,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> 5.0 </td>
   </tr>
   <tr>
+    <td align="right"> TWiki:Plugins/Benchmark: </td>
+    <td>[[TWiki/GoodStyle]] 98%, [[TWiki/FormattedSearch]] 98%, %TOPIC% 95% </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Home: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
   </tr>
@@ -395,4 +400,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 17 Feb 2004
+-- TWiki:Main/PeterThoeny - 18 Feb 2004
