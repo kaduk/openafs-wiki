@@ -10,10 +10,30 @@ Note: below is only the documentation for the API. The actual API source is incl
 
 The Java AFS API (JAFS) has been updated, employing several fixes and improvements, with patches for [[OpenAFS]] 1.2.9 source and the current source (CVS/daily snapshots). The most recent API documents (v2) are posted below along with the recent source patches. -- [[ManuelPereira]] - 09 Jun 2003
 
-- [openafs-jafs-API-v2.tar.gz](http://www.dementia.org/twiki//view/openafs-jafs-API-v2.tar.gz): API docs for Java AFS v2 (userspace and admin)
+The Java AFS API (JAFS) has been updated, including additional testing programs, with patches for [[OpenAFS]] 1.2.10a source. The most recent API documents (v2) are posted below along with the recent source patches.
+
+**Quick Steps**
+
+1. Download <http://www.openafs.org/dl/openafs/1.2.10a/openafs-1.2.10a-src.tar.gz>
+2. Download <https://grand.central.org/twiki/pub/AFSLore/JavaAPI/jafs-1.2.10a-diff.tar.gz>
+3. `tar �xzf openafs-1.2.10a.tar.gz`
+4. `tar �xzf jafs-1.2.10a-diff.tar.gz`
+5. `cd openafs-1.2.10a`
+6. `patch �p1 < ../jafs-1.2.10a.diff`
+7. `./configure --with-afs-sysname=i386_linux24 --enable-transarc-paths �-java-home=/usr/java/jdk`
+8. `make`
+9. `make jafs`
+
+-- [[ManuelPereira]] - 11 Nov 2003
+
+----
+
+- [README](http://www.dementia.org/twiki//view/README): JAFS v2 README file (read for patch instructions)
+
+- [openafs-jafs-API-v2.2.tar.gz](http://www.dementia.org/twiki//view/openafs-jafs-API-v2.2.tar.gz): API docs for Java AFS v2.2 (userspace and admin)
 
 - [jafs-1.2.9-diff.tar.gz](http://www.dementia.org/twiki//view/jafs-1.2.9-diff.tar.gz): Patch for [[OpenAFS]] 1.2.9 release source (updated 2003-11-11)
 
-- [jafs-diff.tar.gz](http://www.dementia.org/twiki//view/jafs-diff.tar.gz): Patch for current source (CVS/daily snapshots)
+- [jafs-1.2.10a-diff.tar.gz](http://www.dementia.org/twiki//view/jafs-1.2.10a-diff.tar.gz): Patch for [[OpenAFS]] 1.2.10a release source
 
-- [README](http://www.dementia.org/twiki//view/README): JAFS v2 README file (read for patch instructions)
+- [jafs-diff.tar.gz](http://www.dementia.org/twiki//view/jafs-diff.tar.gz): Patch for current source (CVS/daily snapshots)
