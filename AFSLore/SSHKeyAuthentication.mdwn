@@ -1,0 +1,59 @@
+# <a name="SSH Key Authentication and AFS T"></a> SSH Key Authentication and AFS Token Passing
+
+The first part of this document describes a way to set up your <code>**~/.ssh/**</code> directory so that you only need a token on the client side for key-based authentication. This configuration will enable a remote sshd to read your public keys without a token, while keeping your private keys safe. The second part describes patching OpenSSH to restore the older-style AFS token-passing functionality, where key-based authentication worked out-of-the-box.
+
+## <a name="Background"></a> Background
+
+SSH Key Authentication no longer works in recent versions of [OpenSSH](http://www.openssh.org/) if your home directory lives in AFS. In older (pre-2.9) versions of OpenSSH, your token would be passed across during the authentication phase, so the remote sshd could read your <code>**~/.ssh/authorized\_keys**</code> file. (It needed this since the whole directory is hopefully ACL'd to keep people out, as your private keys live there, too.) Since the remote sshd could then read files in your <code>**~/.ssh**</code> dir, key authentication could happen normally, and all was good.
+
+Currently, however, OpenSSH doesn't accept passed AFS tokens until after authentication has already taken place. Since the remote sshd doesn't have a token to read your authorized\_key file, it falls back to other authentication methods. Once you're authed and it hits the session phase, then and only then does the AFS token get passed. The general consensus is that this was changed because passing an AFS token before actual authentication happened was seen as a security risk.
+
+## <a name="Method 1: Directory Voodoo"></a> Method 1: Directory Voodoo
+
+Remember, the remote **_sshd_** only needs to be able to read your <code>**authorized\_keys**</code> file in your <code>**~/.ssh**</code> dir, and needs to be able to do so without having an AFS token. Since this file only contains public keys, it doesn't matter who can read them.
+
+Create a subdirectory of your <code>**~/.ssh**</code> dir (we'll call it " <code>**private/**</code> ") and ACL it so only you can do anything within it. Move your private keys into that directory. Symlink to them from the <code>**~/.ssh**</code> directory and give <code>**system:anyuser**</code> read/lookup access to your <code>**~/.ssh**</code> dir.
+
+You now have a <code>**~/.ssh**</code> dir with " <code>**system:anyuser rl**</code> " access that contains only public keys and symlinks to your private keys, and a subdirectory to which only you have rights that contains the actual private keys.
+
+So here's what happens now: (Assuming SSH1/RSA auth)
+
+You attempt an SSH1 connection to _host2_ from _host1_, using RSA key authentication. The **_sshd_** on _host2_ needs to look in your <code>**authorized\_keys**</code> file, and can now do so without the AFS token. Your **_ssh_** client process on _host1_ already has access to your AFS token, so it can read <code>**~/.ssh/private/identity**</code> (your SSH1 private RSA key). Authentication proceeds as normal. After you're authed, then your AFS token gets passed across, and life proceeds as normal.
+
+The directory layout (and permissions for the PTS group <code>**system:anyuser**</code>) looks something like this:
+
+     ${HOME}   ( system:anyuser l )
+         |
+         +--- .ssh/   ( system:anyuser rl )
+                |
+                +--- private/   ( system:anyuser none )
+                |         |
+                |         +--- identity
+                |         +--- id_rsa
+                |         +--- id_dsa
+                |
+                +--- authorized_keys
+                +--- authorized_keys
+                +--- indentiy.pub
+                +--- id_rsa.pub
+                +--- id_dsa.pub
+                +--- identity --symlink--> ./private/identity
+                +--- id_rsa   --symlink--> ./private/id_rsa
+                +--- id_dsa   --symlink--> ./private/id_dsa
+                +--- known_hosts, known_hosts2, etc...
+
+The remote sshd only needs to read your public keys stored in the <code>**authorized\_keys**</code> file, which it can read without a token. As long as you have a token on the ssh-client side, you can read your private keys (symlinked into the place ssh expects to find them) for the client half of the key-based auth.
+
+The glaring drawback to this cheap hack is that your users have to set this up for themselves. However, writing a simple shell script wrapper for **_ssh_** that checks for the existance of this subdirectory and performs the above voodoo if it doesn't would not be too terribly difficult.
+
+## <a name="Method 2: Patching _OpenSSH"></a> Method 2: Patching OpenSSH
+
+An alternative is to patch OpenSSH to pass AFS tokens before attempting key authentication. This will allow the remote sshd to once again be able to read the contents of your <code>**~/.ssh/**</code> directory, and more specifically, the <code>**authorized\_keys**</code> file that resides within.
+
+Patches can be found at: <http://www.pitt.edu/~rlink/patches/>
+
+For the sake of compatibility with both older and newer versions of OpenSSH, these patches attempt AFS token and Kerberos TGT passing both before and after the authentication phase.
+
+There's not really much else to say here, because all these patches do is revert OpenSSH to its previous well-documented behaviour.
+
+-- [[RayLink]] - 26 Feb 2003
