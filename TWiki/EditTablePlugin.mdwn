@@ -46,6 +46,11 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
     <td><code>CHANGEROWS</code> %BR% Plugin setting </td>
   </tr>
   <tr>
+    <td><code>quietsave</code></td>
+    <td> Quiet Save button is shown if <code>"on"</code>, hidden if <code>"off"</code></td>
+    <td><code>QUIETSAVE</code> %BR% Plugin setting </td>
+  </tr>
+  <tr>
     <td><code>include</code></td>
     <td> Other topic defining the EDITTABLE parameters. The first %EDITTABLE% in the topic is used. This is useful if you have many topics with the same table format and you want to update the format in one place. </td>
     <td> (none) </td>
@@ -212,8 +217,12 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Default for change rows flag: `on`, `off`, `add`
   - Set CHANGEROWS = on
 
-- Default text for edit button:
-  - Set EDITBUTTON = Edit table
+- Default flag for quiet save option: `on` to show the Quiet Save button, `off` to hide
+  - Set QUIETSAVE = on
+
+- Default edit button: Specify `button text`, or specify `alternate text, image URL`
+  - #Set EDITBUTTON = Edit table
+  - Set EDITBUTTON = Edit this table, ![edittable.gif](http://www.dementia.org/twiki//view/edittable.gif)
 
 - Date format of [Mishoo DHTML calendar](http://dynarch.com/mishoo/calendar.epl):
   - Set JSCALENDARDATEFORMAT = %Y/%m/%d
@@ -246,10 +255,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <th bgcolor="#99CCCC"><strong> Description: </strong></th>
   </tr>
   <tr>
-    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
-    <td> Plugin Perl module </td>
-  </tr>
-  <tr>
     <td><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
     <td> Plugin topic </td>
   </tr>
@@ -258,8 +263,16 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin topic repository </td>
   </tr>
   <tr>
+    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td> Plugin Perl module </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/%TOPIC%/edittable.gif</b></code></td>
+    <td> Edit table button image </td>
+  </tr>
+  <tr>
     <td><code><b>pub/TWiki/%TOPIC%/*.gif</b></code></td>
-    <td> Screenshots </td>
+    <td> Screenshots and Mishoo DHTML calendar images </td>
   </tr>
   <tr>
     <td><code><b>pub/TWiki/%TOPIC%/README</b></code></td>
@@ -298,11 +311,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 18 Feb 2004 </td>
+    <td> 27 Feb 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 27 Feb 2004: </td>
+    <td> Added QUIETSAVE setting and <code>quietsave</code> parameter; image for Edit button </td>
   </tr>
   <tr>
     <td align="right"> 18 Feb 2004: </td>
@@ -400,4 +417,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 18 Feb 2004
+-- TWiki:Main/PeterThoeny - 27 Feb 2004

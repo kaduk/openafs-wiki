@@ -41,7 +41,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
 
 - The formula in the <code>**%CALC\{"formula"\}%**</code> variable can contain built-in functions
 - Built-in function are of format <code>**$FUNCNAME(parameter)%**</code>
-- Built-in functions may be nested, e.g. <code>**%CALC\{"$SUM( R2:C$COL(0)..R$ROW(-1):C$COL(0) )"\}%**</code>
+- Built-in functions may be nested, e.g. <code>**%CALC\{"$SUM( R2:C$COLUMN(0)..R$ROW(-1):C$COLUMN(0) )"\}%**</code>
 - The function parameter can be text; a mathematical formula; a cell address; or a range of cell addresses
 - Multiple parameters form a list; they are separated by a comma, followed by optional space, e.g. <code>**%CALC\{"$SUM( 3, 5, 7 )"\}%**</code>
 - A table cell can be addressed as <code>**R1:C1**</code>. Table address matrix: <table border="1" cellpadding="0" cellspacing="0">
@@ -92,11 +92,15 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$COUNTITEMS(list)"</b></code></td>
-    <td> The count of individual items in a list. Example: To count the items of all cells above the current cell, write <code><b>%CALC{"$COUNTITEMS( $ABOVE() )"}%</b></code></td>
+    <td> Counts individual items in a list. Example: <code><b>%CALC{"$COUNTITEMS( $ABOVE() )"}%</b></code> returns <code><b>Closed: 1, Open: 2</b></code> assuming one cell above the current cell contains <code><b>Closed</b></code> and two cells contain <code><b>Open</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$COUNTSTR(list, str)"</b></code></td>
     <td> Counts the number of cells in a list equal to a given string (if str is specified), or counts the number of non empty cells in a list. Example: To count the number of non empty cells above the current cell, write <code><b>%CALC{"$COUNTSTR( $ABOVE() )"}%</b></code>; to count the number of cells equal to <code><b>DONE</b></code>, write <code><b>%CALC{"$COUNTSTR( $ABOVE(), DONE )"}%</b></code>; </td>
+  </tr>
+  <tr>
+    <td><code><b>"$COUNTUNIQUE(list)"</b></code></td>
+    <td> Counts unique items in a list, separated by comma and/or space. Example: <code><b>%CALC{"$COUNTUNIQUE( $ABOVE() )"}%</b></code> returns <code><b>Alice: 2, Mike: 1, Tom: 2</b></code> assuming the cells above the current cell contain <code><b>Alice</b></code> and <code><b>Tom, Mike</b></code> and <code><b>Alice, Tom</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$DEF(list)"</b></code></td>
@@ -132,7 +136,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$IF(condition, value if true, value if 0)"</b></code></td>
-    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less then), <code><b>&lt;=</b></code> (less then or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater then or equal), <code><b>&gt;=</b></code> (greater then). Example: <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not </td>
+    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Example: <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not </td>
   </tr>
   <tr>
     <td><code><b>"$INT(formula)"</b></code></td>
@@ -347,11 +351,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 24 Oct 2003 </td>
+    <td> 27 Feb 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 27 Feb 2004: </td>
+    <td> Added $COUNTUNIQUE() </td>
   </tr>
   <tr>
     <td align="right"> 24 Oct 2003: </td>
@@ -426,6 +434,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> none </td>
   </tr>
   <tr>
+    <td align="right"> TWiki:Plugins/Benchmark: </td>
+    <td>[[TWiki/GoodStyle]] 99%, [[TWiki/FormattedSearch]] 99%, %TOPIC% 95% </td>
+  </tr>
+  <tr>
     <td align="right"> Other Dependencies: </td>
     <td> none </td>
   </tr>
@@ -445,4 +457,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 24 Oct 2003
+-- TWiki:Main/PeterThoeny - 27 Feb 2004
