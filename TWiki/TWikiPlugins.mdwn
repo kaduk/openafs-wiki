@@ -32,11 +32,11 @@
   </ul>
 </div>
 
-## <a name="TWiki Plugins"></a> TWiki Plugins
+# <a name="TWiki Plugins"></a> TWiki Plugins
 
 Plugin use and development; about the Plugin API.
 
-### <a name="Overview"></a> Overview
+## <a name="Overview"></a> Overview
 
 You can add Plugins to greatly extend TWiki's functionality, without alering the program core. With a plug-in approach, you can:
 
@@ -46,7 +46,7 @@ You can add Plugins to greatly extend TWiki's functionality, without alering the
 
 Everything to do with TWiki Plugins - demos, new releases, downloads, development, general discussion - is available at TWiki.org, in the **[[TWiki.org Plugins web|Main/TWiki:Plugins]]**.
 
-### <a name="Preinstalled Plugins"></a> Preinstalled Plugins
+## <a name="Preinstalled Plugins"></a> Preinstalled Plugins
 
 TWiki comes with three Plugins as part of the standard installation.
 
@@ -58,7 +58,7 @@ TWiki comes with three Plugins as part of the standard installation.
 
 <a name="InstallPlugin"></a>
 
-### <a name="Installing Plugins"></a> Installing Plugins
+## <a name="Installing Plugins"></a> Installing Plugins
 
 Each TWikiPlugin comes with full documentation: step-by-step installation instructions, a detailed description of any special requirements, version details, and a working example for testing.
 
@@ -76,7 +76,7 @@ Each Plugin has a standard release page, located in the TWiki:Plugins web at TWi
 - **Dev page:** Post feature requests, bug reports and general dev comments; topic title ends in <code>**Dev**</code> (<code>**SomePluginDev**</code>).
 - **User support:** Post installation, how to use type questions (and answers, if you have them) in the TWiki:Support web.
 
-#### <a name="On-Site Pretesting"></a> On-Site Pretesting
+### <a name="On-Site Pretesting"></a> On-Site Pretesting
 
 To test new Plugins on your installation before making them public, you may want to use one of these two approaches:
 
@@ -87,11 +87,11 @@ To test new Plugins on your installation before making them public, you may want
 
 - **Method 2:** List the Plugin under <code>**Test**</code> in the DISABLEDPLUGINS variable in [[TWikiPreferences]]. Redefine the DISABLEDPLUGINS variable in the Test web and do the testing there.
 
-### <a name="Managing Plugins"></a> Managing Plugins
+## <a name="Managing Plugins"></a> Managing Plugins
 
 Ideally, after you've [[installed a Plugin|Main/WebHome#InstallPlugin]], just read the instructions and you're set. In fact, some Plugins require additional settings or offer extra options that you can modify on Preferences pages. You may want to make a Plugin available only in certain webs, or temporarily disable it. And having to list all available Plugins will probably come up. You can handle all of these with simple procedures.
 
-#### <a name="Setting Preferences"></a> Setting Preferences
+### <a name="Setting Preferences"></a> Setting Preferences
 
 Installed Plugins can be **toggled on or off**, site-wide or by web, through TWikiPreferences and individual WebPreferences:
 
@@ -110,7 +110,7 @@ Installed Plugins can be **toggled on or off**, site-wide or by web, through TWi
 
 - The settings can be retrieved as Preferences variables like <code>**%&lt;pluginname&gt;\_&lt;var&gt;%**</code>, ex: <code>**%DEFAULTPLUGIN\_SHORTDESCRIPTION%**</code> shows the description of the DefaultPlugin.
 
-#### <a name="Listing Active Plugins"></a> Listing Active Plugins
+### <a name="Listing Active Plugins"></a> Listing Active Plugins
 
 Plugin status variables let you list all active Plugins wherever needed. There are two list formats:
 
@@ -135,11 +135,11 @@ Plugin status variables let you list all active Plugins wherever needed. There a
 
 <a name="PluginAPI"></a>
 
-### <a name="The TWiki Plugin API"></a> The TWiki Plugin API
+## <a name="The TWiki Plugin API"></a> The TWiki Plugin API
 
 The Application Programming Interface (API) for TWikiPlugins provides the specifications for hooking into the core TWiki code from your external Perl Plugin module. The Plugin API is new to the Production version of TWiki with the TWikiReleaseSpring2001.
 
-#### <a name="Available Core Functions"></a> Available Core Functions
+### <a name="Available Core Functions"></a> Available Core Functions
 
 The <code>**lib/TWiki/Func.pm**</code> implements ALL official Plugin functions. Plugins should ONLY use functions published in this module.
 
@@ -147,13 +147,13 @@ The <code>**lib/TWiki/Func.pm**</code> implements ALL official Plugin functions.
 
 - For best performance, enable only the functions you really need. NOTE: <code>**outsidePREHandler**</code> and <code>**insidePREHandler**</code> are particularly expensive.
 
-#### <a name="Predefined Hooks"></a> Predefined Hooks
+### <a name="Predefined Hooks"></a> Predefined Hooks
 
 In addition to TWiki core functions, Plugins can use **predefined hooks**, or **call backs**, listed in the <code>**lib/TWiki/Plugins/EmptyPlugin.pm**</code> module.
 
 - All but the initPlugin are disabled. To enable a call back, remove <code>**DISABLE\_**</code> from the function name.
 
-#### <a name="Plugin Version Detection"></a> Plugin Version Detection
+### <a name="Plugin Version Detection"></a> Plugin Version Detection
 
 To eliminate the incompatibility problems bound to arise from active open Plugin development, a Plugin versioning system and an API <code>**GetVersion**</code> detection routine are provided for automatic compatibility checking.
 
@@ -166,15 +166,15 @@ To eliminate the incompatibility problems bound to arise from active open Plugin
 
 <a name="CreatePlugins"></a>
 
-### <a name="Creating Plugins"></a> Creating Plugins
+## <a name="Creating Plugins"></a> Creating Plugins
 
 With a reasonable knowledge of the Perl scripting language, you can create new Plugins or modify and extend existing ones. Basic plug-in architecture uses an Application Programming Interface (API), a set of software instructions that allow external code to interact with the main program. The [[TWiki Plugin API|Main/WebHome#PluginAPI]] Plugins by providing a programming interface for TWiki.
 
-#### <a name="The _DefaultPlugin Alternative"></a> The DefaultPlugin Alternative
+### <a name="The _DefaultPlugin Alternative"></a> The DefaultPlugin Alternative
 
 - **DefaultPlugin** can handle some outdated TWiki variables, found, for example, in sites recently updated from an old version. Settings are in [[TWikiPreferences]]. You can also add your own simple custom processing rules here, though in all but very simple cases, writing a new Plugin is preferable.
 
-#### <a name="Anatomy of a Plugin"></a> Anatomy of a Plugin
+### <a name="Anatomy of a Plugin"></a> Anatomy of a Plugin
 
 A basic TWiki Plugin consists of two elements:
 
@@ -185,13 +185,13 @@ The Perl module can be a block of code that connects with TWiki alone, or it can
 
 The Plugin API handles the details of connecting your Perl module with main TWiki code. When you're familiar with the [[Plugin API|Main/WebHome#PluginAPI]], you're ready to develop Plugins.
 
-#### <a name="Creating the Perl Module"></a> Creating the Perl Module
+### <a name="Creating the Perl Module"></a> Creating the Perl Module
 
 Copy file ([`EmptyPlugin.pm`](http://twiki.org/lib/TWiki/Plugins/EmptyPlugin.pm) to <code>**&lt;name&gt;Plugin.pm**</code> <code>**EmptyPlugin.pm**</code> contains no executable code, so it does nothing, but it's ready to be used. Customize it. Refer to the [[Plugin API|Main/WebHome#PluginAPI]] specs for more information.
 
 <a name="CreatePluginTopic"></a>
 
-#### <a name="Writing the Documentation Topic"></a> Writing the Documentation Topic
+### <a name="Writing the Documentation Topic"></a> Writing the Documentation Topic
 
 The Plugin documentation topic contains usage instructions and version details. It serves the Plugin files as [[FileAttachments]] for downloading. (The doc topic is also included _in_ the [[distribution package|Main/WebHome#CreatePluginPackage]].) To create a documentation topic:
 
@@ -229,7 +229,7 @@ The Plugin documentation topic contains usage instructions and version details. 
 
 <a name="CreatePluginPackage"></a>
 
-#### <a name="Packaging for Distribution"></a> Packaging for Distribution
+### <a name="Packaging for Distribution"></a> Packaging for Distribution
 
 A minimum Plugin release consists of a Perl module with a [[WikiName]] that ends in <code>**Plugin**</code>, ex: <code>**YourPlugin.pm**</code>, and a documentation page with the same name(<code>**YourPlugin.txt**</code>).
 
@@ -244,7 +244,7 @@ A minimum Plugin release consists of a Perl module with a [[WikiName]] that ends
 
 <a name="PublishPlugin"></a>
 
-#### <a name="Publishing for Public Use"></a> Publishing for Public Use
+### <a name="Publishing for Public Use"></a> Publishing for Public Use
 
 You can release your tested, packaged Plugin to the TWiki community through the TWiki:Plugins web, where all Plugins submitted to TWiki.org are available for download and further development discussion. Publish your Plugin in three steps:
 

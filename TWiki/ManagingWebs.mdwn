@@ -9,19 +9,19 @@
   </ul>
 </div>
 
-## <a name="Managing Webs"></a> Managing Webs
+# <a name="Managing Webs"></a> Managing Webs
 
 _Adding, renaming and deleting webs is done directly on the server_
 
-### <a name="Overview"></a> Overview
+## <a name="Overview"></a> Overview
 
 Managing TWiki webs requires direct access to the installation files on the host server. There are no browser-based web tools.
 
-### <a name="How to Add a New Web"></a> How to Add a New Web
+## <a name="How to Add a New Web"></a> How to Add a New Web
 
 - See [[TWikiInstallationGuide|Main/TWikiDocumentation#TWikiInstallationGuide]]
 
-### <a name="How to Rename or Delete a Web"></a> How to Rename or Delete a Web
+## <a name="How to Rename or Delete a Web"></a> How to Rename or Delete a Web
 
 **NOTE:** Think twice if you intend to rename the %WIKITOOLNAME%.Main web, since many files point to it. If you rename it, you also have to change all occurrences of `Main` to the new web name (like the web prefixes for all user signatures, `Main.SomeName`). (On the other hand, if the `%MAINWEB%` variable is used throughout, you won't have that problem.)
 
