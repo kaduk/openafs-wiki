@@ -67,7 +67,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%URLPARAM{"name"}%</code></td>
-    <td> Returns the value of a URL parameter. Note that there is a risk that this variable could be misused for cross-scripting. Parameters are name and newline: <table border="1" cellpadding="0" cellspacing="0">
+    <td> Returns the value of a URL parameter. Note that there is a risk that this variable could be misused for cross-scripting. Parameters are name, default and newline: <table border="1" cellpadding="0" cellspacing="0">
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
@@ -296,7 +296,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:15</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:23</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -482,6 +482,16 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td><code>header="..."</code><br /><code>format="..."</code></td>
           <td> Custom format results: see <strong>[[Main/FormattedSearch]]</strong> for usage, variables &amp; examples </td>
           <td> Results in table </td>
+        </tr>
+        <tr>
+          <td><code>multiple="on"</code></td>
+          <td> Multiple hits per topic. Each hit can be [[Main/FormattedSearch]]. The last token is used in case of a regular expression ";" <em>and</em> search </td>
+          <td> Only one hit per topic </td>
+        </tr>
+        <tr>
+          <td><code>separator=", "</code></td>
+          <td> Line separator between hits </td>
+          <td> Newline <code>"$n"</code></td>
         </tr>
       </table> Regular example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code><br /> Formatted example: <code><b>%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%</b></code> <em>(displays results in a table with header - [[Main/FormattedSearch]])</em><br /> %H% If the TWiki:Plugins.TablePlugin is installed, you may set a <code>%TABLE{}%</code> variable just before the <code>%SEARCH{}%</code> to alter the output of a search. Example: <code><b>%TABLE{ tablewidth="90%" }%</b></code></td>
   </tr>

@@ -76,7 +76,7 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$text</code></td>
-    <td> Formatted topic text </td>
+    <td> Formatted topic text. In case of a <code>multiple="on"</code> search, it is the line found for each search hit. </td>
   </tr>
   <tr>
     <td><code>$locked</code></td>
@@ -128,7 +128,7 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$pattern(reg-exp)</code></td>
-    <td> A regular expression pattern to extract some text from a topic. For example, <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. </td>
+    <td> A regular expression pattern to extract some text from a topic. In case of a <code>multiple="on"</code> search, the pattern is applied to the line found in each search hit. For example, <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. </td>
   </tr>
   <tr>
     <td><code>$n</code> or <code>$n()</code></td>
