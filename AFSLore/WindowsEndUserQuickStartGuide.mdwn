@@ -1,0 +1,59 @@
+# <a name="End User Quick Start Guide"></a> End User Quick Start Guide
+
+## <a name="Introduction"></a> Introduction
+
+This guide is a (hopefully) straight forward manual for setting up [[OpenAFS]] for Windows 1.3.66. It was written with the not-so-experienced user in mind and is a step-by-step description of a sample configuration. Changing the settings to your specific needs should pose no problems.
+
+### <a name="Before the Installation"></a> Before the Installation
+
+Before we start, let us take a moment and just skim through the installation. For the impatient, this section may not be what you are looking for. This is an introduction to the concepts of AFS'ing in Windows. The "basic" knowledge you should have before attempting to connect to the world.
+
+#### <a name="System Requirements"></a> System Requirements
+
+First of all, check that your system and network is capable of using [[OpenAFS]] for Windows. You will need Windows 2000 or later. Support for Windows NT and the Windows 9x (including ME) series has been discontinued. If you succeed with the installation, it is sheer luck!
+
+The disc usage of [[OpenAFS]] is pretty limited, around 50 MB in the standard installation. You may later increase the cache size, thus using up more.
+
+To be able to access files, you will need the network up and running. AFS is not very demanding on bandwidth, but realize that every byte of a file is transmitted over the wire (or air) uncompressed. The use of the client cache helps reducing the bandwidth requirements.
+
+#### <a name="Kerberos, an analogy"></a> Kerberos, an analogy
+
+AFS uses an access-restriction system called Kerberos, originally developed at MIT. Kerberos is a three-part authenticator. You could say the Kerberos server (a.k.a. KDC, Kerberos Domain Controller) is somewhat like an ID-card archive. When Adam wants to loan a car from Eve, Eve may trust Adam. Adam is trusted to leave the car back as agreed. In this case, Adam needs simply state "I am Adam". Eve lends him the car, and everything is fine.
+
+However, if Eve has never met this Adam fellow, she might not want to just give him the car and hope he is returning with it. This is where the three-part authentication comes in. Authorities are trusted by most people. So, imagine this scenario instead: Adam tells Eve he wants to borrow her car.
+
+- Fine, but how do I know you are who you say you are? She says.
+
+- Do you trust the ID Authority and that they will only give out ID cards to the right person? He continues.
+
+- Yes, sure I do, they have information on everyone. Including me.
+
+- So, you would accept if I were to show you an ID card of me that has been signed by the ID Authority? Adam persists.
+
+- Absolutely, and apparently, you trust them too, so I could do the same to you, she says.
+
+Both Adam and Eve go about sending in their secret password (known only to the respective person and the computer at ID Authority). They flash their fresh ID cards, and accept each others identity. Instead of the two trusting each other, they only have to trust one common party.
+
+#### <a name="Kerberos in practice"></a> Kerberos in practice
+
+In AFS, you (the Windows Client, actually) are Adam, and the AFS server is Eve. They both communicate with a KDC.
+
+However, in the digital reality, things are not quite as easy as borrowing a car: Originally, the version four of Kerberos was used in AFS. It turned out this was an insecure concept, why the rest of the world moved to [[KerberosV]] (version 5). [[OpenAFS]] followed as soon as possible, without breaking backward compatibility. Unfortunatly, the Windows client was not updated with [[KerberosV]] when the Unix client was, which led the Windows people to create external tools for [[KerberosV]].
+
+Nowadays, [[OpenAFS]] for Windows does support [[KerberosV]] tickets ("ID cards") directly, but the variety of utilities still exist and create the problem of choosing which one to use.
+
+In order to use [[KerberosV]] (recommended), you will have to use Kerberos for Windows, an MIT product. Of course, this requires that you use [[KerberosV]] servers, which still is not always the case. Small sites may still use [[OpenAFS]]' own Kerberos server implementation, called the **_kaserver_**.
+
+### <a name="The Software Installation"></a> The Software Installation
+
+Now that you know about the existence and uses of Kerberos, we can continue with the installation. This guide will first discuss the installation screens, then continuing with a simple sample configuration and end with some references. Happy installing!
+
+## <a name="Obtaining _OpenAFS for Windows"></a> Obtaining [[OpenAFS]] for Windows
+
+The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of both all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/release/latest.html) you will always find the latest releases. The ready-to-install Windows package is usually located at the bottom of the page.
+
+The file you download is either an executable file, or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later.
+
+## <a name="Start the Installation"></a> Start the Installation
+
+To begin installing, run the file you downloaded. The screens are pretty standard. Let us go through them one by one.
