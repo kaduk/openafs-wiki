@@ -75,8 +75,10 @@ You can easily see that you are using an NAMEI file server if there is a directo
   </tr>
   <tr>
     <td> These Don't Work </td>
-    <td><code>reiserfs</code>, <code>vxfs</code> (HP-UX) </td>
+    <td><code>reiserfs</code>, <code>vxfs</code> (HP-UX, Solaris) </td>
   </tr>
 </table>
+
+- **Question:** Does this table imply that clients can't use the NAMEI backend and still need a specific filesystem? Will this ever change?
 
 -- [[ToddLewis]] - 06 Nov 2002

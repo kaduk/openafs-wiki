@@ -581,6 +581,8 @@ I have not tested either of these procedures. -- [[TedAnderson]] - 05 Jun 2003
 
 ### <a name="3.29 What underlying filesystems"></a> 3.29 What underlying filesystems can I use for AFS ?
 
+See also [[SupportedConfigurations]].
+
 You need to distinguish between the filesystem used by the file server to store the actual AFS data (by convention in /vicep?) and the filesystem used by the client cache manager to cache files.
 
 With the new namei file server you can basically use any filesystem you want. Tne namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though).
