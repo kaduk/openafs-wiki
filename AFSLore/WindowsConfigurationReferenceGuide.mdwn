@@ -14,6 +14,31 @@
         </li>
         <li><a href="#Client Configuration"> Client Configuration</a><ul>
             <li><a href="#General"> General</a></li>
+            <li><a href="#Drive Letters"> Drive Letters</a></li>
+            <li><a href="#Preferences"> Preferences</a></li>
+            <li><a href="#AFS Cells"> AFS Cells</a></li>
+            <li><a href="#Advanced"> Advanced</a><ul>
+                <li><a href="#Logon Settings"> Logon Settings</a></li>
+                <li><a href="#Diagnostic"> Diagnostic</a></li>
+                <li><a href="#Global Drives"> Global Drives</a></li>
+                <li><a href="#Binding"> Binding</a></li>
+                <li><a href="#Miscellaneous"> Miscellaneous</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#Settings Without a User Interfac"> Settings Without a User Interface</a><ul>
+            <li><a href="#Tokens For Roaming Profiles"> Tokens For Roaming Profiles</a></li>
+            <li><a href="#Netbios Name"> Netbios Name</a></li>
+            <li><a href="#Encryption of Network Traffic"> Encryption of Network Traffic</a></li>
+            <li><a href="#Freelance Client Support"> Freelance Client Support</a></li>
+            <li><a href="#Hiding Dot-Files"> Hiding Dot-Files</a></li>
+            <li><a href="#Hiding the \\AFS\all Share"> Hiding the <tt>\\AFS\all</tt> Share</a></li>
+            <li><a href="#Tweaking the SMB Connections"> Tweaking the SMB Connections</a></li>
+            <li><a href="#Connection Timeouts"> Connection Timeouts</a></li>
+            <li><a href="#Tweaking RPC Traffic"> Tweaking RPC Traffic</a></li>
+            <li><a href="#Enabling Debug Trace Events"> Enabling Debug Trace Events</a></li>
+            <li><a href="#Restricting the Number of Utiliz"> Restricting the Number of Utilized CPUs</a></li>
           </ul>
         </li>
         <li><a href="#Windows Registry Keys of _OpenAF"> Windows Registry Keys of OpenAFS</a></li>
@@ -92,6 +117,138 @@ This program is located in `C:\Program Files\OpenAFS\Common\afs_config.exe` (def
 When installed, [[OpenAFS]] also installs this program as a Control Panel applet, called "AFS Client Configuration". No matter how you call it, the functionality is the same.
 
 ### <a name="General"></a> General
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/general.png" width="356" height="495" /> The General Tab of the AFS Client Configuration provide roughly the same functionality as the Advanced Tab of the Credentials Manager. The Cell Name identifies the default authentication cell. The `root.afs` volume of this cell is used to identify which cells to present at the root. Your default cell must have AFSDB-records in DNS, or/and be listed in [[CellServDB]] (see AFS Cells below). At the bottom, you will find the same Start / Stop Service as in the Credentials Manager.
+
+The three other options are:
+
+- **Obtain AFS tokens when logging into Windows** enables the Integrated Logon feature.
+- **Provide an AFS Light Gateway** gives you access to the [[OpenAFS]] submounts from other computers.
+- **Show the AFS Client icon in the taskbar** will start the Credentials Manager if it is not already running.
+
+### <a name="Drive Letters"></a> Drive Letters
+
+Mapping drives and creating submounts work the same way as for the Credentials Manager. Please refer to the section above.
+
+### <a name="Preferences"></a> Preferences
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/preferences.png" width="356" height="495" /> Since AFS can mirror both files and volume information on several servers, there must be a way to determine which server to contact. In [[OpenAFS]] for Windows, this is specified using the Server Preferences screen. Normally, you will never need to manually change the preferences of the servers. However, if you are doing load balance testing or if you are stress testing a server, you may set the preferences here.
+
+You can also import the rankings from a file. The file is a text file with one line per server. Whitespaces separate the server name from the rankning number. Note that the servers are imported to the active list (File Server or Volume Location Server).
+
+### <a name="AFS Cells"></a> AFS Cells
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/afscells.png" width="356" height="495" /> Before [[OpenAFS]] was able to handle AFSDB-records in DNS, the [[CellServDB]] file contained the explicit mappings between cells and servers. The AFS Cells Tab shows the cells currently in the [[CellServDB]]. You add a cell and list its associated servers. Most large sites copy the [[CellServDB]] directly from the network, to keep it in sync.
+
+### <a name="Advanced"></a> Advanced
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/advanced.png" width="356" height="495" /> Finally, the Advanced Tab. This is where you configure the heart of [[OpenAFS]] for Windows. Most of these settings already have a best-practice value. Be warned that changing these settings can cause [[OpenAFS]] to be slow, or to stop working at all.
+
+In the Cache Configuration section, there are four options:
+
+- **Cache Size** determines the maximum disk cache size. The disk cache is a file, and it will always have the chosen size. I.e. it will not shrink if possible. The defualt is 20 MB. If you are editing large files, you may want to increase the cache size. Note that [[OpenAFS]] for Windows does not have a **_persistent cache_**. This means the cache will be flushed each time the [[OpenAFS]] service stops. The Unix versions of [[OpenAFS]] does have a persistent cache.
+- **Cache Path** holds the path to the file acting as disk cache. The default is `C:\AFSCache`.
+- **Chunk Size** is the smallest transfer unit. The cache works by caching chunks of files, contrary to entire files. It should be set to a size which is fast to transfer over the network, yet large enough to avoid lots and lots of transfers. The default is 32 kB. It must be an even power of two.
+- **Status Cache** describes file meta information caching. 1000 entries is the default.
+
+#### <a name="Logon Settings"></a> Logon Settings
+
+Change the behaviour of the Integrated Logon feature. The login retry interval sets how long (in seconds) [[OpenAFS]] will try to obtain initial tokens. Fail Logins Silently controls whether you will get a message box telling the reason for the failure, or not.
+
+Setting "Fail Logins Silently" to "No" also affects the function of the retry interval. When the interval has passed, you will be given a question to start the timer over or not. If you choose to start over, another retry interval will be used to try and obtain the tokens.
+
+#### <a name="Diagnostic"></a> Diagnostic
+
+Due to the complexity of [[OpenAFS]], the error and trace logging facilites have evolved into a detailed tracer of execution. The buffer is a ring, and the default size is 5000 kB. You can read this buffer using the `osidebug` program.
+
+"Trap On Panic" is used during development. It is only useful if the AFS service crashes. If set to "Yes" (default), a crashed service will start the system debugger. (Actually, it sends an IRQ 3.) Note that the option is ignored if the system does not have a debugger installed.
+
+"Report Session Startups" will let the AFS service send an event to the Windows Event Log each time a new SMB/CIFS session is started. Default is "No".
+
+#### <a name="Global Drives"></a> Global Drives
+
+In a highly networked environment, it is not uncommon to read login scripts from the network. This, of course, requires the scripts to be accessible by login time. Since the per-user drive mappings are executed **_after_** the scripts are executed, the global drive mappings can be used. These affect all users, and can only be modified by an Administrator.
+
+#### <a name="Binding"></a> Binding
+
+Before [[OpenAFS]] for Windows began to use the Microsoft Loop Back Adapter, it used physical network interfaces to bind to. In certain situations, the default choice may be a bad choice. For instance, when the network interface connects directly to the Internet, this would be a bad idea. With the Loop Back Adapter, this is no longer an issue.
+
+#### <a name="Miscellaneous"></a> Miscellaneous
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/adv_misc.png" width="336" height="301" /> These settings are hardly ever changed. They control system specific settings.
+
+- **Probe Interval** determines how often to check file servers. AFS is designed through the principle of callbacks. The file servers are obligued to notify each client if a subscribed file changes. This setup is not guaranteed to work if the servers loose the subscription list. Therefore, the client must probe the servers as often as possible. **_Note: Currently this setting is not permanently stored in the Windows Registry. It is only induced in a running AFS Client Service._**
+- **Background Threads** controls how many AFS network threads will be running. One thread is able to handle one request from an AFS server at any time. Default is four threads.
+- **Service Threads** controls how many SMB/CIFS threads will be running. If your computer is a single user machine, not doing any video or audio editing, a low number should suffice. It is possible that a higher number will get better performance for many parallel file accesses. Default is two threads.
+- **System Name** is the value of "@sys". It should never be changed. Default is currently "i386\_nt40" for Windows NT/2000/XP/2003.
+- **Mount Directory** is really "Mount Root". It is used when resolving symlinks. Microsoft Windows does not know of symbolic links, why the AFS Client Service must convert them. If a symlink target begins with the **_Mount Directory_** string, it will be transformed into an absolute path of the form `\\AFS\ALL\...`. Default is `/afs`. There is generally no need to modify this value.
+- **Root Volume** is the name of the root volume of the default cell. Default is `root.afs`, and is the recommended AFS root volume name.
+
+## <a name="Settings Without a User Interfac"></a> Settings Without a User Interface
+
+Currently, some options have not yet been given a proper user interface. These can be changed directly in the Windows Registry using `regedit`.
+
+### <a name="Tokens For Roaming Profiles"></a> Tokens For Roaming Profiles
+
+The AFS service is capable of retaining the user's tokens some time after logging out. This enables a slow transfer of the user's roaming profile to be successfully completed. The registry keys can be found under `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`. The values in question are called `LogoffTokenTransfer` (type DWORD) and `LogoffTokenTransferTimeout` (type QWORD).
+
+Setting `LogoffTokenTransfer` to 1 makes the AFS service keep the tokens for `LogoffTokenTransferTimeout` seconds.
+
+### <a name="Netbios Name"></a> Netbios Name
+
+As the AFS service publishes its services as SMB/CIFS shares, there must be a name of this service. The `NetbiosName` (type expanding string) value of `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` can change this. The default is "AFS". Change this to "%COMPUTERNAME%-AFS" to revert to the old behaviour.
+
+### <a name="Encryption of Network Traffic"></a> Encryption of Network Traffic
+
+Historically, AFS did not support encrypted network traffic. This has changed in recent years. The support is off by default in order to be compatible with old servers. You enable and disable encryption through the value `SecurityLevel` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` set to 1 to enable and 0 to disable.
+
+### <a name="Freelance Client Support"></a> Freelance Client Support
+
+This option can be set during installation. After installation, a registry entry must be edited. It can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` and is called `FreelanceClient` (type DWORD). Set it to 1 to enable Freelance Mode. See the [[WindowsQuickStartGuide]] for more information on Freelance Mode. Default is off.
+
+### <a name="Hiding Dot-Files"></a> Hiding Dot-Files
+
+On Unix, a dot-file is a file which begins with the dot character. It is semantically similar to the Hidden attribute used in Windows. This feature is enabled by default and marks all dot-files with the Hidden attribute. The value `HideDotFiles` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` can disable it (by giving it the value 0).
+
+### <a name="Hiding the \\AFS\all Share"></a> Hiding the `\\AFS\all` Share
+
+The share `all` is exported by default, and is defined as the root volume of the default cell. If you do not want this share to be defined, you can set `AllSubmount` (type DWORD) to 0, in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`.
+
+### <a name="Tweaking the SMB Connections"></a> Tweaking the SMB Connections
+
+Four values in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` affect the SMB connections:
+
+- `MaxMpxRequests` (type DWORD) is the maximum number of multiplexed SMB requests that can be made. Default is 50.
+- `MaxVCPerServer` (type DWORD) is the maximum number of SMB virtual circuits. Default is 100.
+- `NoFindLanaByName` (type DWORD) disables the attempt to identity the network adapter to use by looking for an adapter with a display name of "AFS", if set to 1. Default is 0.
+- `SMBAuthType` (type DWORD) defines the type of SMB authentication which must be present in order for the Windows SMB client to connect to the AFS Client Service's SMB server. The values are
+  - No authentication required (0)
+  - NTLM authentication required (1)
+  - Extended (GSS SPNEGO) authentication required (2, default)
+
+Heavily loaded clients may need to increase the first two values.
+
+### <a name="Connection Timeouts"></a> Connection Timeouts
+
+In `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`, two values control when connections are considered dead.
+
+- `ConnDeadTimeout` (type DWORD) Default is 60 seconds.
+- `HardDeadTimeout` (type DWORD) Default is 120 seconds, and it must be at least twice the `ConnDeadTimeout` value.
+
+### <a name="Tweaking RPC Traffic"></a> Tweaking RPC Traffic
+
+In `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`, two values control how RX transfers data.
+
+- `RxNoJumbo` (type DWORD) If enabled, does not send or indicate that we are able to send or receive RX jumbograms. Default is 0, which means jumbograms are used.
+- `RxMaxMTU` (type DWORD) If set to anything other than -1, uses that value as the maximum MTU supported by the RX interface. In order to enable [[OpenAFS]] to operate across the Cisco IPSec VPN client, this value must be set to 1264 or smaller. Default is -1, the maximum.
+
+### <a name="Enabling Debug Trace Events"></a> Enabling Debug Trace Events
+
+Normally, the `TraceOption` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` is 0, meaning no traces will be output to the Application Event Log. Setting it to 1 enables trace output.
+
+### <a name="Restricting the Number of Utiliz"></a> Restricting the Number of Utilized CPUs
+
+For most part, the [[OpenAFS]] client can use as many processors as available. It has, however, showed that Hyperthreaded Pentium 4 systems can cause the [[OpenAFS]] service to crash. If you have such a system, you should set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`) to 1. The default is undefined, and means all processors may be used.
 
 ## <a name="Windows Registry Keys of _OpenAF"></a> Windows Registry Keys of [[OpenAFS]]
 
