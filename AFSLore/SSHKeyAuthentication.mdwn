@@ -6,7 +6,7 @@ The first part of this document describes a way to set up your <code>**~/.ssh/**
 
 SSH Key Authentication no longer works in recent versions of [OpenSSH](http://www.openssh.org/) if your home directory lives in AFS. In older (pre-2.9) versions of OpenSSH, your token would be passed across during the authentication phase, so the remote sshd could read your <code>**~/.ssh/authorized\_keys**</code> file. (It needed this since the whole directory is hopefully ACL'd to keep people out, as your private keys live there, too.) Since the remote sshd could then read files in your <code>**~/.ssh**</code> dir, key authentication could happen normally, and all was good.
 
-Currently, however, OpenSSH doesn't accept passed AFS tokens until after authentication has already taken place. Since the remote sshd doesn't have a token to read your authorized\_key file, it falls back to other authentication methods. Once you're authed and it hits the session phase, then and only then does the AFS token get passed. The general consensus is that this was changed because passing an AFS token before actual authentication happened was seen as a security risk.
+Currently, however, OpenSSH does not accept passed AFS tokens until after authentication has already taken place. Since the remote sshd doesn't have a token to read your authorized\_key file, it falls back to other authentication methods. Once you're authed and it hits the session phase, then and only then does the AFS token get passed. The general consensus is that this was changed because passing an AFS token before actual authentication happened was seen as a security risk.
 
 ## <a name="Method 1: Directory Voodoo"></a> Method 1: Directory Voodoo
 
@@ -33,7 +33,7 @@ The directory layout (and permissions for the PTS group <code>**system:anyuser**
                 |         +--- id_dsa
                 |
                 +--- authorized_keys
-                +--- authorized_keys
+                +--- authorized_keys2
                 +--- indentiy.pub
                 +--- id_rsa.pub
                 +--- id_dsa.pub
