@@ -74,13 +74,23 @@ On line before the table use `%TABLE{...}%`:
     <td bgcolor="#ecf2f8" style=""><code>sort="on"</code></td>
   </tr>
   <tr>
+    <td bgcolor="#ffffff" style=""><code>initsort</code></td>
+    <td bgcolor="#ffffff" style=""> Column to sort initially (1 to number of columns) </td>
+    <td bgcolor="#ffffff" style=""><code>initsort="2"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>initdirection</code></td>
+    <td bgcolor="#ecf2f8" style=""> Initial sorting direction for <code>initsort</code>, set to <code>up</code> or <code>down</code></td>
+    <td bgcolor="#ecf2f8" style=""><code>initsort="down"</code></td>
+  </tr>
+  <tr>
     <td bgcolor="#ffffff" style=""><code>headerbg</code></td>
     <td bgcolor="#ffffff" style=""> Header cell background colour </td>
     <td bgcolor="#ffffff" style=""><code>headerbg="#99CCCC"</code></td>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code>databg</code></td>
-    <td bgcolor="#ecf2f8" style=""> Data cell background colour, a comma seperated list </td>
+    <td bgcolor="#ecf2f8" style=""> Data cell background colour, a comma separated list </td>
     <td bgcolor="#ecf2f8" style=""><code>databg="#C8CB8F,#DBDDB5"</code></td>
   </tr>
   <tr>
@@ -218,11 +228,11 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 12 Mar 2002 </td>
+    <td bgcolor="#ffffff" style=""> 13 Mar 2002 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
-    <td bgcolor="#ecf2f8" style=""> 12 Mar 2002 PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value <br /> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
+    <td bgcolor="#ecf2f8" style=""> 13 Mar 2002 PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection <br /> 12 Mar 2002 PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value <br /> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
@@ -248,4 +258,4 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 12 Mar 2002 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 13 Mar 2002 <br />
