@@ -1,7 +1,7 @@
-When [[OpenAFS]] was released, 3 files with HP copyrighted code could not be released. 2, the Rx kernel support, were reimplemented by Derrick Brashear from previously released open source Rx, and other platforms' kernel Rx implementations. The remaining file appears to have been a literal copy of a kernel header from HP-UX for the VM system interface to VFS, and so far despite email and teleconferences nothing has happened. Headers included with HP-UX appear to be insufficient to create a loadable file system driver against, so unless HP decides to co-operate or someone attempts to reverse-engineer some structures, no further progress is possible. If you care about AFS, you may wish to simply avoid HP entirely unless and until this is resolved.
+When [[OpenAFS]] was released, 3 files with HP copyrighted code could not be released. 2, the Rx kernel support, were reimplemented by Derrick Brashear from previously released open source Rx, and other platforms' kernel Rx implementations. The remaining file appears to have been a literal copy of a kernel header from HP-UX for the VM system interface to VFS, and so far despite email and teleconferences nothing has happened. Headers included with HP-UX appear to be insufficient to create a loadable file system driver against, so unless HP decides to co-operate or someone attempts to reverse-engineer some structures, no further progress is possible.
 
 -- [[DerrickBrashear]] - 18 Jan 2002
 
-HP has declined to release the single header file necessary for the client to work. You can use the existing IBM AFS client if you are an IBM AFS customer; Otherwise, you're stuck. Consider retiring your HP machines and getting hardware from a vendor with a more progressive attitude toward open source.
+Thanks to Esther Filderman we found a useful contact within HP, and hopefully results will be forthcoming in the near future.
 
--- [[DerrickBrashear]] - 1 Apr 2002
+-- [[DerrickBrashear]] - 10 Jul 2002
