@@ -1,101 +1,72 @@
-# <a name="Recommended Partition Types for"></a><a name="Recommended Partition Types for "></a> Recommended Partition Types for use with [[OpenAFS]]
+## <a name="Recommended Partition Types for"></a><a name="Recommended Partition Types for "></a> Recommended Partition Types for use with [[OpenAFS]]
 
-**Note**: These tables are not accurate! They are merely examples of what such tables could look like. Somebody who actually knows what should go where should edit these tables and put correct values in them.
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> namei Server </strong></th>
+    <th bgcolor="#99CCCC"><strong> Server vicexx Partition Types </strong></th>
+  </tr>
+  <tr>
+    <td> Any system type </td>
+    <td> Basically any filesystem you like, as the new namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though). </td>
+  </tr>
+</table>
 
-<div>
-  <center>
-    <table border="1" cellpadding="2" cellspacing="2">
-      <tbody>
-        <tr>
-          <td valign="top">Name-i server</td>
-          <td valign="top">
-            <table border="1" cellpadding="2" cellspacing="2">
-              <tbody>
-                <tr>
-                  <td valign="top">i386_linux24</td>
-                  <td valign="top">ext2, XFS</td>
-                </tr>
-                <tr>
-                  <td valign="top">sun4x_5[789]</td>
-                  <td valign="top">ufs w/o logging</td>
-                </tr>
-                <tr>
-                  <td valign="top">aix_4[345], aix_51</td>
-                  <td valign="top">ufs</td>
-                </tr>
-                <tr>
-                  <td valign="top">sgi_65</td>
-                  <td valign="top">xfs </td>
-                </tr>
-                <tr>
-                  <td valign="top">ppc_darwin_14</td>
-                  <td valign="top">???</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td valign="top">non name-i server</td>
-          <td valign="top">
-            <table border="1" cellpadding="2" cellspacing="2">
-              <tbody>
-                <tr>
-                  <td valign="top">i386_linux24</td>
-                  <td valign="top">ext2</td>
-                </tr>
-                <tr>
-                  <td valign="top">sun4x_5[789]</td>
-                  <td valign="top">ufs w/o logging</td>
-                </tr>
-                <tr>
-                  <td valign="top">aix_4[345], aix_51</td>
-                  <td valign="top">ufs</td>
-                </tr>
-                <tr>
-                  <td valign="top">sgi_65</td>
-                  <td valign="top">xfs </td>
-                </tr>
-                <tr>
-                  <td valign="top">ppc_darwin_14</td>
-                  <td valign="top">???</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td valign="top">client cache</td>
-          <td valign="top">
-            <table border="1" cellpadding="2" cellspacing="2">
-              <tbody>
-                <tr>
-                  <td valign="top">i386_linux24</td>
-                  <td valign="top">ext2</td>
-                </tr>
-                <tr>
-                  <td valign="top">sun4x_5[789]</td>
-                  <td valign="top">ufs w/o logging</td>
-                </tr>
-                <tr>
-                  <td valign="top">aix_4[345], aix_51</td>
-                  <td valign="top">ufs</td>
-                </tr>
-                <tr>
-                  <td valign="top">sgi_65</td>
-                  <td valign="top">xfs </td>
-                </tr>
-                <tr>
-                  <td valign="top">ppc_darwin_14</td>
-                  <td valign="top">???</td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </center>
-</div>
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> inode Server </strong></th>
+    <th bgcolor="#99CCCC"><strong> Server vicexx Partition Types </strong></th>
+  </tr>
+  <tr>
+    <td> i386_linux24 </td>
+    <td><code>ext2</code></td>
+  </tr>
+  <tr>
+    <td> sun4x_5[789] </td>
+    <td><code>ufs</code> w/o logging </td>
+  </tr>
+  <tr>
+    <td> aix_4[345] , aix_51 </td>
+    <td><code>ufs</code></td>
+  </tr>
+  <tr>
+    <td> sgi_65 </td>
+    <td><code>XFS</code></td>
+  </tr>
+  <tr>
+    <td> ppc_darwin_14 </td>
+    <td> ??? </td>
+  </tr>
+</table>
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Client </strong></th>
+    <th bgcolor="#99CCCC"><strong> Cache (<code>/usr/vice/cache</code>)Partition Types </strong></th>
+  </tr>
+  <tr>
+    <td> i386_linux24 </td>
+    <td><code>ext2</code></td>
+  </tr>
+  <tr>
+    <td> sun4x_5[789] </td>
+    <td><code>ufs</code> w/o logging </td>
+  </tr>
+  <tr>
+    <td> aix_4[345] , aix_51 </td>
+    <td><code>ufs</code></td>
+  </tr>
+  <tr>
+    <td> sgi_65 </td>
+    <td><code>XFS</code></td>
+  </tr>
+  <tr>
+    <td> ppc_darwin_14 </td>
+    <td> ??? </td>
+  </tr>
+  <tr>
+    <td> These Don't Work </td>
+    <td><code>reiserfs</code>, <code>vxfs</code> (HP-UX) </td>
+  </tr>
+</table>
 
 -- [[ToddLewis]] - 06 Nov 2002
