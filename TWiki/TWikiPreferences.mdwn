@@ -7,10 +7,11 @@ The following are **_site-level_** settings that affect all users in all webs on
 <div>
   <ul>
     <li><a href="#%WIKITOOLNAME% Site-Level Prefer">%WIKITOOLNAME% Site-Level Preferences</a><ul>
-        <li><a href="#General Preferences:"> General Preferences:</a></li>
+        <li><a href="#General Preferences"> General Preferences</a></li>
         <li><a href="#Email Settings"> Email Settings</a></li>
         <li><a href="#Plugins Settings"> Plugins Settings</a></li>
         <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
+        <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
         <li><a href="#Preferences Access Control"> Preferences Access Control</a></li>
         <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
         <li><a href="#Related Topics"> Related Topics</a></li>
@@ -21,7 +22,7 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 ----
 
-## <a name="General Preferences:"></a> General Preferences:
+## <a name="General Preferences"></a> General Preferences
 
 - List of %WIKITOOLNAME% webs - on the first line of the upper toolbar (to add a new web, see [[ManagingWebs]] and [[TWikiWebsTable]]):
   - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Test|Test/WebHome]]
@@ -105,6 +106,70 @@ The following are **_site-level_** settings that affect all users in all webs on
 - <code>**http-equiv**</code> meta tags for <code>**preview**</code> script:
 
           * Set HTTP_EQUIV_ON_PREVIEW =
+
+## <a name="Miscellaneous Settings"></a> Miscellaneous Settings
+
+- Colored text: (see more [[StandardColors]]) <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> You type: </td>
+    <td><code>%RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%</code></td>
+  </tr>
+  <tr>
+    <td> You get: </td>
+    <td> %RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR% </td>
+  </tr>
+</table>
+  - **_Note:_** `%<color>%` text must end with `%ENDCOLOR%` . If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
+  - Set YELLOW = <font>
+    - **YELLOW looks like this**</font>
+- Set RED = <font>
+  - **RED looks like this**</font>
+
+- Set PINK = <font>
+  - **PINK looks like this**</font>
+
+- Set PURPLE = <font>
+  - **PURPLE looks like this**</font>
+
+- Set TEAL = <font>
+  - **TEAL looks like this**</font>
+
+- Set NAVY = <font>
+  - **NAVY looks like this**</font>
+
+- Set BLUE = <font>
+  - **BLUE looks like this**</font>
+
+- Set AQUA = <font>
+  - **AQUA looks like this**</font>
+
+- Set LIME = <font>
+  - **LIME looks like this**</font>
+
+- Set GREEN = <font>
+  - **GREEN looks like this**</font>
+
+- Set OLIVE = <font>
+  - **OLIVE looks like this**</font>
+
+- Set MAROON = <font>
+  - **MAROON looks like this**</font>
+
+- Set BLACK = <font>
+  - **BLACK looks like this**</font>
+
+- Set GRAY = <font>
+  - **GRAY looks like this**</font>
+
+- Set SILVER = <font>
+  - **SILVER looks like this**</font>
+
+- Set WHITE = <font>
+  - **WHITE looks like this**</font>
+
+- And finally:
+- Set ENDCOLOR =
+  - To finish colored text
 
 ## <a name="Preferences Access Control"></a> Preferences Access Control
 
