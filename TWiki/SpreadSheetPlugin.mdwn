@@ -104,10 +104,6 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
     <td> Counts the number of cells in a list equal to a given string (if str is specified), or counts the number of non empty cells in a list. Example: To count the number of non empty cells above the current cell, write <code><b>%CALC{"$COUNTSTR( $ABOVE() )"}%</b></code>; to count the number of cells equal to <code><b>DONE</b></code>, write <code><b>%CALC{"$COUNTSTR( $ABOVE(), DONE )"}%</b></code>; </td>
   </tr>
   <tr>
-    <td><code><b>"$COUNTUNIQUE(list)"</b></code></td>
-    <td> Counts unique items in a list, separated by comma and/or space. Example: <code><b>%CALC{"$COUNTUNIQUE( $ABOVE() )"}%</b></code> returns <code><b>Alice: 2, Mike: 1, Tom: 2</b></code> assuming the cells above the current cell contain <code><b>Alice</b></code> and <code><b>Tom, Mike</b></code> and <code><b>Alice, Tom</b></code></td>
-  </tr>
-  <tr>
     <td><code><b>"$DEF(list)"</b></code></td>
     <td> Returns the first list item or cell reference that is not empty. Example: <code><b>%CALC{"$DEF( R1:C1..R1:C3 )"}%</b></code></td>
   </tr>
@@ -141,7 +137,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$IF(condition, value if true, value if 0)"</b></code></td>
-    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Examples:%BR% <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not%BR% <code><b>%CALC{"$IF( $EXACT($T(R1:C2),), empty, $T(R1:C2) )"}%</b></code> returns the content of R1:C2 or <code><b>empty</b></code> if empty%BR% <code><b>%CALC{"$SET(val, $IF( $T(R1:C2) == 0, zero, $T(R1:C2) ))"}%</b></code> sets a variable conditionally (notice that you cannot set a variable conditionally inside an $IF() since formulae in the "value if true" and "value if 0" are both evaluated before the condition is applied) </td>
+    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Examples:%BR% <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not%BR% <code><b>%CALC{"$IF( $EXACT($T(R1:C2),), empty, $T(R1:C2) )"}%</b></code> returns the content of R1:C2 or <code><b>empty</b></code> if empty%BR% <code><b>%CALC{"$SET(val, $IF( $T(R1:C2) == 0, zero, $T(R1:C2) ))"}%</b></code> sets a variable conditionally </td>
   </tr>
   <tr>
     <td><code><b>"$INT(formula)"</b></code></td>
@@ -157,7 +153,27 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$LIST(range)"</b></code></td>
-    <td> Converts the content of a range of cells into a flat list, delimited by comma. Example: <code><b>%CALC{"$LIST( $LEFT() )"}%</b></code> returns <code><b>Apples, Lemons, Oranges, Kiwis</b></code> assuming the cells to the left contain <code><b>| Apples | Lemons, Oranges | Kiwis |</b></code></td>
+    <td> Converts the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list. Example: <code><b>%CALC{"$LIST( $LEFT() )"}%</b></code> returns <code><b>Apples, Lemons, Oranges, Kiwis</b></code> assuming the cells to the left contain <code><b>| Apples | Lemons, Oranges | Kiwis |</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$LISTMAP(formula, list)"</b></code></td>
+    <td> Evaluate and update each element of a list. In the formla, <code><b>$item</b></code> indicates the element, <code><b>$index</b></code> the index of the list starting at 1. Example: <code><b>%CALC{"$LISTMAP($index: $EVAL(2 * $item), 3, 5, 7, 11)"}%</b></code> returns <code><b>1: 6, 2: 10, 3: 14, 4: 22</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$LISTREVERSE(list)"</b></code></td>
+    <td> The opposite order of a list. Example: <code><b>%CALC{"$LISTREVERSE(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Kiwi, Apple, Orange, Apple</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$LISTSIZE(list)"</b></code></td>
+    <td> The number of elements in a list. Example: <code><b>%CALC{"$LISTSIZE(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>4</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$LISTSORT(list)"</b></code></td>
+    <td> Sorts a list in ASCII order, or numerically if all elements are numeric. Example: <code><b>%CALC{"$LISTSORT(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Apple, Apple, Kiwi, Orange</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$LISTUNIQUE(list)"</b></code></td>
+    <td> Removes all duplicates from a list. Example: <code><b>%CALC{"$LISTUNIQUE(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Apple, Orange, Kiwi</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$LOWER(text)"</b></code></td>
@@ -234,6 +250,10 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   <tr>
     <td><code><b>"$SET(name, value)"</b></code></td>
     <td> Set a variable for later use. Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulas are evaluated before the variable assignment. This function returns no output. Use <code>$GET()</code> to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables. See also <code>$GET()</code>. Example: <code><b>%CALC{"$SET( my_total, $SUM($ABOVE()) )"}%</b></code> sets the <code>my_total</code> variable to the sum of all table cells located above the current cell and returns an empty string </td>
+  </tr>
+  <tr>
+    <td><code><b>"$SETM(name, formula)"</b></code></td>
+    <td> Updates an existing variable based on a formula. Specify the variable name (alphanumeric characters and underscores) and the formula. The formula must start with an operator to <code><b>+</b></code> (add), <code><b>-</b></code> (subtract), <code><b>*</b></code> (multiply), or <code><b>/</b></code> (divide) something to the variable. This function returns no output. Use <code>$GET()</code> to retrieve variables. Example: <code><b>%CALC{"$SETM( total, + $SUM($LEFT()) )"}%</b></code> adds the sum of all table cells on the left to the <code>total</code> variable, and returns an empty string </td>
   </tr>
   <tr>
     <td><code><b>"$SIGN(num)"</b></code></td>
@@ -399,11 +419,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 08 Mar 2004 </td>
+    <td> 16 Mar 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 16 Mar 2004: </td>
+    <td> Added $LISTMAP(), $LISTREVERSE(), $LISTSIZE(), $LISTSORT(), $LISTUNIQUE(), $SETM(); retired $COUNTUNIQUE() in favor of $COUNTITEMS($LISTUNIQUE(); fixed evaluation order issue of $IF(); fixed missing eval error messages suppressed since version 06 Mar 2004; redirect stderr messages to warning </td>
   </tr>
   <tr>
     <td align="right"> 08 Mar 2004: </td>
@@ -513,4 +537,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 08 Mar 2004
+-- TWiki:Main/PeterThoeny - 16 Mar 2004
