@@ -492,22 +492,13 @@ No. AFS was designed to work over TCP/IP.
 
 ### <a name="1.10  How can I access AFS from"></a><a name="1.10  How can I access AFS from "></a> 1.10 How can I access AFS from my PC?
 
-You can use PC-Interface which is available from Transarc and Locus Computing Corporations.
+You can use the native Windows AFS Clients.
 
-For more information on PC-Interface see the PC-Interface Frequently Asked Questions file in:
+There is also SAMBA (a SMB server for UNIX).
 
-- <file:///afs/transarc.com/public/afs-contrib/doc/faq/pci.faq>
-- <ftp://ftp.transarc.com/pub/afs-contrib/doc/faq/pci.faq>
+- <http://www.samba.org>
 
-There is also SAMBA (an SMB/netbios server for UNIX). The current version will authenticate the connecting process with AFS as well.
-
-- <http://samba.anu.edu.au/samba/>
-
-The SAMBA FAQ is in:
-
-- <http://samba.anu.edu.au/samba/docs/faq/sambafaq-1.html#ss1.1>
-
-The SAMBA mailing list can be joined via: <samba-request@anu.edu.au>
+There are several ways to integrate AFS with SAMBA. See [[SMBtoAFS]].
 
 ### <a name="1.11  How does AFS compare with"></a><a name="1.11  How does AFS compare with "></a> 1.11 How does AFS compare with NFS?
 
