@@ -24,15 +24,18 @@
 
 # <a name="TWiki Installation Guide"></a> TWiki Installation Guide
 
-_Installation instructions for the TWiki 01-Feb-2003 production release. Update notes for the new RCS configuration are marked_ **_Dataframework_**.
+_Installation instructions for the TWiki 01-Feb-2003 production release._
 
-These installation steps are based on the **Apache** web server on **Linux**. TWiki runs on other web servers and Unix systems, and should be fine with any web server and OS that meet the [[system requirements|Main/TWikiSystemRequirements]]. Documentation for other platforms is somewhat limited:
+_If you are reading this on your own TWiki installation, please get the latest installation guide (TWiki:TWiki.TWikiInstallationGuide), as this often has important updates to resolve installation issues._
 
-- For Unix or Linux, check TWiki:Codev/TWikiOnUnix and TWiki:Codev/TWikiOnLinux.
+These installation steps are based on the **Apache** web server on **Linux**. TWiki runs on other web servers and Unix systems, and should be fine with any web server and OS that meet the [[system requirements|Main/TWikiSystemRequirements]]. Official documentation for platforms other than Linux is somewhat limited, so _please check_ the topics listed below, they include some important tips for HP-UX, Solaris, OS/390, and many other platforms.
+
+- For Unix or Linux, check TWiki:Codev/TWikiOnUnix (install your own RCS, `diff` and `grep` tools if in doubt!) and TWiki:Codev/TWikiOnLinux.
 - For Windows, check the [[WindowsInstallCookbook]].
 - For MacOS X, check TWiki:Codev/TWikiOnMacOSX.
 - To install TWiki on SourceForge, for use on a software development project, read TWiki:Codev/TWikiOnSourceForge
 - For other platforms, see TWiki:Codev/TWikiOn, and search the TWiki:Codev and TWiki:Support webs for other installation notes.
+- If you need **_really urgent_** help, try the TWiki:Codev/TWikiIRC channel.
 
 <a name="StandardInstallation"></a>
 
@@ -45,7 +48,7 @@ Request and download the TWiki 01-Feb-2003 distribution in Unix ZIP format from 
 %X% **NOTE:** _If you don't have access to your Web server configuration files - for example, if you're installing on an ISP-hosted account, or you don't have administrator privileges on your intranet server - use the [[alternative Step 1|Main/WebHome#StepOneB]] instead._
 
 - Create directory `/home/httpd/twiki` and [unzip](http://www.info-zip.org/pub/infozip/UnZip.html) the TWiki distribution into this directory.
-- The `twiki/bin` directory of TWiki must be set as a cgi-bin directory. Add `/home/httpd/twiki/bin` to file `/etc/httpd/httpd.conf` with only `ExecCGI` option.
+- The `twiki/bin` directory of TWiki must be set as a cgi-bin directory. Add `/home/httpd/twiki/bin` to file `httpd.conf` (typcially located in `/etc/httpd/`) with only `ExecCGI` option.
 - The `twiki/pub` directory of TWiki must be set so that it is visible as a URL. Add `/home/httpd/twiki` to file `httpd.conf` with normal access options (copy from `/home/httpd/html` ).
 - Now add `ScriptAlias` for `/twiki/bin` and `Alias` for `/twiki` to file `httpd.conf` . <br /> %X% **NOTE:** The `ScriptAlias` **_must_** come before the `Alias`, otherwise, Apache will fail to correctly set up `/twiki/bin/`, by treating it as just another subdirectory of the `/twiki/` alias.
 - The `twiki/data` and `twiki/templates` directories should be set so that they are **not** visible as URLs. Add them to `httpd.conf` with `deny from all`.
@@ -150,7 +153,7 @@ You can also edit `$localPerlLibPath` in the `setlib.cfg` file if you are not ro
 ### <a name="Step 2: Set File Permissions"></a> Step 2: Set File Permissions
 
 - Make sure Perl 5 and the Perl CGI library are installed on your system. The default location of Perl is `/usr/bin/perl`. If it's elsewhere, change the path to Perl in the first line of each script in the `twiki/bin` directory, or create a symbolic link from `/usr/bin/perl`.
-  - **IMPORTANT:** On ISP-hosted accounts, Perl CGI scripts usually require a `.cgi` extension to run. Some systems need `.pl`, the regular Perl extension. Modify all `twiki/bin` script filenames if necessary.
+  - **IMPORTANT:** On ISP-hosted accounts (and some intranet servers), Perl CGI scripts may require a `.cgi` extension to run. Some systems need `.pl`, the regular Perl extension. Rename all `twiki/bin` scripts if necessary.
 - Set the file permission of all Perl scripts in the `twiki/bin` directory as executable to `-rwxr-xr-x` (755).
 - To be able to edit the Perl scripts and `.tmpl` files it is necessary to `chown` and `chgrp -R twiki` so all the files have the owner you want.
 - %H% This Guide assumes user `nobody` ownership for all files manipulated by the CGI scripts (executed by the Web server), and user `twiki` for all other files. You can:
