@@ -1,15 +1,17 @@
 # <a name="Edit Table Plugin"></a><a name=" Edit Table Plugin"></a> Edit Table Plugin
 
-This plugin allows you to edit TWiki tables using edit fields and drop down boxes. Tables have an **[ Edit table ]** button if preceeded by an `%EDITTABLE{...}%` variable. Each column can be a text field, a drop down box or a row number. Multiple tables per topic are editable, but only one at a time can be edited.
+This plugin allows you to edit TWiki tables using edit fields and drop down boxes. Tables have an **[ Edit table ]** button if preceeded by an `%EDITTABLE{...}%` variable. Each column can be a text field, a drop down box, a date field, etc. Multiple tables per topic are editable, but only one at a time can be edited.
 
 <div>
   <ul>
-    <li><a href="#Per Table Settings"> Per Table Settings</a></li>
-    <li><a href="#Table Buttons"> Table Buttons</a></li>
-    <li><a href="#Examples"> Examples</a><ul>
+    <li><a href="#Per Table Settings"> Per Table Settings</a><ul>
+        <li><a href="#Initial Values"> Initial Values</a></li>
         <li><a href="#Date Field Type"> Date Field Type</a></li>
       </ul>
     </li>
+    <li><a href="#Per Cell Settings"> Per Cell Settings</a></li>
+    <li><a href="#Table Buttons"> Table Buttons</a></li>
+    <li><a href="#Examples"> Examples</a></li>
     <li><a href="#Plugin Settings"> Plugin Settings</a></li>
     <li><a href="#Limitations and Known Issues"> Limitations and Known Issues</a></li>
     <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
@@ -35,7 +37,7 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
   </tr>
   <tr>
     <td><code>format</code></td>
-    <td> The format of one row when editing the table. A cell can be a text input field, a drop down box, a fixed label, or a row number. Cell definitions:%BR% - Text input field (1 line):%BR%   <code>| text, &lt;size&gt;, &lt;initial value&gt; |</code> %BR% - Textarea input field:%BR%   <code>| textarea, &lt;rows&gt;x&lt;columns&gt;, &lt;initial value&gt; |</code> %BR% - Drop down box: %BR%   <code>| select, &lt;size&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR% - Fixed label: %BR%   <code>| label, 0, &lt;label text&gt; |</code> %BR% - Row number: %BR%   <code>| row, &lt;offset&gt; |</code> %BR% - Date: %BR%   <code>| date, &lt;size&gt;, &lt;initial value&gt;, &lt;DHTML date format&gt; |</code></td>
+    <td> The format of one column when editing the table. A cell can be a text input field, or any of these edit field types:%BR% - Text input field (1 line):%BR%   <code>| text, &lt;size&gt;, &lt;initial value&gt; |</code> %BR% - Textarea input field:%BR%   <code>| textarea, &lt;rows&gt;x&lt;columns&gt;, &lt;initial value&gt; |</code> %BR% - Drop down box: %BR%   <code>| select, &lt;size&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR% - Fixed label: %BR%   <code>| label, 0, &lt;label text&gt; |</code> %BR% - Row number: %BR%   <code>| row, &lt;offset&gt; |</code> %BR% - Date: %BR%   <code>| date, &lt;size&gt;, &lt;initial value&gt;, &lt;DHTML date format&gt; |</code></td>
     <td><code>"text, 16"</code> %BR% for all cells </td>
   </tr>
   <tr>
@@ -53,9 +55,21 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
     <td> Topic name containing help text shown below the table when editing a table. The %STARTINCLUDE% and %STOPINCLUDE% variables can be used in the topic to specify what is shown. </td>
     <td> (no help text) </td>
   </tr>
+  <tr>
+    <td><code>headerislabel</code></td>
+    <td> Table header cells are read-only (labels) if <code>"on"</code>; header cells can be edited if <code>"off"</code> or "0" </td>
+    <td><code>"on"</code></td>
+  </tr>
+  <tr>
+    <td><code>editbutton</code></td>
+    <td> Set edit button text, e.g. <code>"Edit this table"</code>; set button image with alt text, e.g. <code>"Edit table, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/edittopic.gif"</code>; hide button, e.g. <code>"hide"</code> (Note: Automatically hidden if edit button is present in a cell) </td>
+    <td><code>EDITBUTTON</code> %BR% Plugin setting </td>
+  </tr>
 </table>
 
-**_Note:_** By default, variables in `<initial value>` (of text input field) and `<label text>` (of fixed label) get expanded when a new row is added. This can be used for example to add a timestamp to a label. You can escape characters if you do not want that:
+### <a name="Initial Values"></a> Initial Values
+
+By default, variables in `<initial value>` (of text input field) and `<label text>` (of fixed label) get expanded when a new row is added. This can be used for example to add a timestamp to a label. You can escape characters if you do not want that:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -79,6 +93,18 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
     <td> Is a "no operation" </td>
   </tr>
 </table>
+
+### <a name="Date Field Type"></a> Date Field Type
+
+<img src="http://www.dementia.org/twiki//view/EditTablePluginCalendarExample.gif" width="549" height="210" alt="Edit Table Calendar Example" /> The `date` field type allows one to choose a date with a popup calendar. Popup calendar works for Netscape 6.0 or better, all other Gecko-based browsers, Internet Explorer 5.0 or better for Windows, Opera 7 and Konqueror 3.1.2. The `...` button is inactive if the browser cannot support the popup calendar. It uses the nice [Mishoo DHTML calendar](http://dynarch.com/mishoo/calendar.epl), see also TWiki:Codev/JavaScriptDatePickerForForm <br />
+
+## <a name="Per Cell Settings"></a> Per Cell Settings
+
+The edit field type can be defined for each table cell by placing an `%EDITCELL{ "type, ..." }%` variable after the cell content. This is useful to override the per column `%EDITTABLE{ format="..." }%` settings, or to create tables with key/value rows. All edit field types of the `format="..."` parameter are supported, e.g. to define a text field, type: `| cell content %EDITCELL{ "text, 20" }% |`
+
+It is also possible to place the edit button into a cell instead of default location below the table. Type `| %EDITCELL{ "editbutton, 1, Edit this table" }% |` to show a button, or `| %EDITCELL{ "editbutton, 1, Edit table, Image-URL" }% |` to show a button image with alternate text.
+
+**_Note:_** The EDITCELL variable cannot be used by itself; place an EDITTABLE variable at the beginning of a table where you want to use EDITCELL variables.
 
 ## <a name="Table Buttons"></a> Table Buttons
 
@@ -156,22 +182,61 @@ If this plugin is installed you will see an **[ Edit table ]** button above; 
     </tr>
   </table><input name="etsave" onclick="return(false);" type="submit" value="Save table" /> <input name="etqsave" onclick="return(false);" type="submit" value="Quiet save" /> <input name="etaddrow" onclick="return(false);" type="submit" value="Add row" /> <input name="etdelrow" onclick="return(false);" type="submit" value="Delete last row" /> <input name="etcancel" onclick="return(false);" type="submit" value="Cancel" /> (demo only, these buttons do not work) </form>
 
-### <a name="Date Field Type"></a> Date Field Type
+The following example shows a simple table with key/value rows. The default edit field type for the value column is a text field. This is overloaded by a selector for the Gender, and a date picker for the DOB. This is typically used by TWiki applications where new topics with tables are created based on a template topic.
 
-<img src="http://www.dementia.org/twiki//view/EditTablePluginCalendarExample.gif" width="549" height="210" alt="Edit Table Calendar Example" /> The `date` field type allows one to choose a date with a popup calendar. Popup calendar works for Netscape 6.0 or better, all other Gecko-based browsers, Internet Explorer 5.0 or better for Windows, Opera 7 and Konqueror 3.1.2. The `...` button is inactive if the browser cannot support the popup calendar. It uses the nice [Mishoo DHTML calendar](http://dynarch.com/mishoo/calendar.epl), see also TWiki:Codev/JavaScriptDatePickerForForm <br />
+<table>
+  <tr>
+    <td valign="top"> You type: <pre>
+%EDITTABLE{ format="| label | text, 40 |" }%
+|*Key*|*Value*|
+| Name: | John Smith |
+| Gender: | M %EDITCELL{select, 1, , F, M}% |
+| DOB: | 1999/12/31 %EDITCELL{date, 10}% |
+| City: | New York |
+</pre></td>
+    <td valign="top"> You get: <a name="edittable2"></a><div>
+        <form action="http://www.dementia.org/twiki/viewauth#edittable2" method="post" name="edittable2"><input name="ettablenr" type="hidden" value="2" /> <input name="etedit" type="hidden" value="on" /><table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+              <th bgcolor="#99CCCC"><strong> Key </strong></th>
+              <th bgcolor="#99CCCC"><strong> Value </strong></th>
+            </tr>
+            <tr>
+              <td> Name: </td>
+              <td> John Smith </td>
+            </tr>
+            <tr>
+              <td> Gender: </td>
+              <td> M </td>
+            </tr>
+            <tr>
+              <td> DOB: </td>
+              <td> 1999/12/31 </td>
+            </tr>
+            <tr>
+              <td> City: </td>
+              <td> New York </td>
+            </tr>
+          </table><input name="etrows" type="hidden" value="5" /> <input type="submit" value="Edit table" /></form>
+      </div>
+    </td>
+  </tr>
+</table>
 
 ## <a name="Plugin Settings"></a> Plugin Settings
 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%EDITTABLEPLUGIN\_SHORTDESCRIPTION%**</code>
 
 - One line description, shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Edit TWiki tables using edit fields and drop down boxes
+  - Set SHORTDESCRIPTION = Edit TWiki tables using edit fields, date pickers and drop down boxes
 
 - Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
   - Set DEBUG = 0
 
 - Default for change rows flag: `on`, `off`, `add`
   - Set CHANGEROWS = on
+
+- Default text for edit button:
+  - Set EDITBUTTON = Edit table
 
 - Date format of [Mishoo DHTML calendar](http://dynarch.com/mishoo/calendar.epl):
   - Set JSCALENDARDATEFORMAT = %Y/%m/%d
@@ -190,7 +255,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - There is a performance issue when editing a large table, say, with more then 50 rows.
 - The Plugin fails if the table is at the very end of the topic (without a new line) Always ensure there is a newline after the table
 - Variables like `%ATTACHURL%` get expanded unless they are in a label.
-- %RED% **Warning:** %ENDCOLOR% This plugin uses undocumented functions to read, save and lock a topic. The plugin will likely break in a future TWiki release.
 - You cannot put two %EDITTABLE% statements on the same line in the source.
 - You can include %-vars now in select values, by quoting them with &lt;nop&gt;, as in %&lt;nop&gt;X% for %X%, say for instance: <br />`select,1,%<nop>X%,%<nop>Y%`
 
@@ -217,7 +281,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin Perl module </td>
   </tr>
 </table>
-- The plugin depends on the `viewauth` script to authenticate the user. As described in [[TWikiAccessControl]], copy the `view` script to `viewauth` (or better, create a symbolic link) and add `viewauth` to the list of authenticated scripts in the `.htaccess` file.
+- The Plugin depends on the `viewauth` script to authenticate the user. As described in [[TWikiAccessControl]], copy the `view` script to `viewauth` (or better, create a symbolic link) and add `viewauth` to the list of authenticated scripts in the `.htaccess` file.
 - The Mishoo DHTML calendar 0.9.5 is preinstalled and should work without any configuration. If you wish to use another language, specify the in the Plugin settings, or create a new language files, attach it to the Plugin topic, and change the Plugin settings
 - Test if the Plugin is correctly installed:
   - Check above example if there is an **[ Edit table ]** button below the table in above example
@@ -237,11 +301,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 20 Dec 2003 </td>
+    <td> 17 Feb 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 17 Feb 2004: </td>
+    <td> Added per cell definition of edit field types with <code>%EDITCELL{}%</code> variable; added <code>headerislabel</code> and <code>editbutton</code> parameters </td>
   </tr>
   <tr>
     <td align="right"> 20 Dec 2003: </td>
@@ -309,7 +377,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Other Dependencies: </td>
-    <td><a href="http://dynarch.com/mishoo/calendar.epl" target="_top">Mishoo DHTML calendar</a> (version 0.9.5 preinstalled) </td>
+    <td><a href="http://dynarch.com/mishoo/calendar.epl" target="_top">Mishoo DHTML calendar</a> (version 0.9.5 preinstalled); TWiki version 01 Feb 2003 or later </td>
   </tr>
   <tr>
     <td align="right"> Perl Version: </td>
@@ -327,4 +395,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 20 Dec 2003
+-- TWiki:Main/PeterThoeny - 17 Feb 2004
