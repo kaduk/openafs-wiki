@@ -1,8 +1,22 @@
-## <a name="RSS Feed"></a> RSS Feed
+## <a name="How to Find out What&#39;s New?"></a> How to Find out What's New?
 
-This is the base for the RSS feed for each web.
+There are three ways to find out what's new in each TWiki web:
 
-Each web has a [[WebRss]] that should contain the following text:
+1. [[WebChanges]] shows recent changes
+2. People subscribed in [[WebNotify]] get notified of recent changes by e-mail
+3. A news feed can be exported in RSS 1.0 format for TWiki:Codev/TWikiSyndication. RSS news readers like TWiki:Plugins/HeadlinesPlugin can display the recent changes
+
+## <a name="RSS Feed Usage"></a> RSS Feed Usage
+
+- The URL for an RSS feed is `http://www.dementia.org/twiki//view/<web>/WebRss?skin=rss`
+- For this %WEB% web it is <http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss> (or [http://www.dementia.org/twiki//view/Main/WebRss?skin=rss&amp;contenttype=text/plain](http://www.dementia.org/twiki//view/Main/WebRss?skin=rss&contenttype=text/plain) for plain text RSS)
+- You can also create a custom feed based on a search. Add a `search=value` parameter to the URL, e.g. [http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&amp;search=plugin=](http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&search=plugin=) is a what's new feed about Plugins.
+
+## <a name="RSS Feed Internals"></a> RSS Feed Internals
+
+Each web has a [[WebRss]] topic which includes part of this %TOPIC% topic. This topic is the base for the RSS feed and generates an RSS 1.0 feed for TWiki:Codev/TWikiSyndication.
+
+The [[WebRss]] topic in each web contains the following text:
 
 ----
 
@@ -11,6 +25,8 @@ Each web has a [[WebRss]] that should contain the following text:
       <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%</link>
       <description>(the description of the web). TWiki is a Web-Based Collaboration Platform for the Corporate World.</description>
     %INCLUDE{"%TWIKIWEB%.WebRssBase"}%
+
+----
 
 Below part is included by each WebRss topic:
 
@@ -29,7 +45,7 @@ Below part is included by each WebRss topic:
       </wiki:interwiki>
       <items>
         <rdf:Seq>
-    %SEARCH{".*" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="      <rdf:li rdf:resource=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\" />"}%
+    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="      <rdf:li rdf:resource=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\" />"}%
         </rdf:Seq>
       </items>
     </channel>
@@ -38,11 +54,11 @@ Below part is included by each WebRss topic:
       <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%</link>
       <url>%PUBURL%/%TWIKIWEB%/TWikiLogos/twikilogo88x31.gif</url>
     </image>
-    %SEARCH{".*" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="<item rdf:about=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\">$n  <title>$topic</title>$n  <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic</link>$n  <description>$summary</description>$n  <dc:date>$isodate</dc:date>$n  <dc:contributor>$n    <rdf:Description link=\"%SCRIPTURL%/view%SCRIPTSUFFIX%?topic=$wikiusername\">$n      <rdf:value>$username</rdf:value>$n    </rdf:Description>$n  </dc:contributor>$n  <wiki:version>$rev</wiki:version>$n  <wiki:status>updated</wiki:status>$n  <wiki:importance>major</wiki:importance>$n  <wiki:diff>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:diff>$n  <wiki:history>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:history>$n</item>"}%
+    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="<item rdf:about=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\">$n  <title>$topic</title>$n  <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic</link>$n  <description>$summary</description>$n  <dc:date>$isodate</dc:date>$n  <dc:contributor>$n    <rdf:Description link=\"%SCRIPTURL%/view%SCRIPTSUFFIX%?topic=$wikiusername\">$n      <rdf:value>$username</rdf:value>$n    </rdf:Description>$n  </dc:contributor>$n  <wiki:version>$rev</wiki:version>$n  <wiki:status>updated</wiki:status>$n  <wiki:importance>major</wiki:importance>$n  <wiki:diff>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:diff>$n  <wiki:history>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:history>$n</item>"}%
     %STOPINCLUDE%
 
 ----
 
 **_See also_**: TWiki:Codev/RichSiteSummary, TWiki:Codev/TWikiSyndication
 
--- [[PeterThoeny]] - 30 Jan 2003
+-- [[PeterThoeny]] - 02 Sep 2003
