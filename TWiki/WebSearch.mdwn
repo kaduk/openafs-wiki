@@ -1,7 +1,8 @@
 <form action="http://www.dementia.org/twiki//view/%INCLUDINGWEB%/%INCLUDINGTOPIC%">
   <table border="0" cellpadding="0" cellspacing="3">
     <tr>
-      <td><input name="search" size="32" type="text" value="" /><input type="submit" value="Search" />%BR% <input name="web" type="checkbox" /> All public webs </td>
+      <td><input name="search" size="32" type="text" value="" /><input type="submit" value="Search" />%BR% <input id="web" name="web" type="checkbox" /><label for="web">All public webs</label>
+      </td>
       <td>
         <ul>
           <li>[[Main/SearchHelp]]</li>
@@ -10,7 +11,8 @@
       </td>
     </tr>
     <tr>
-      <td><input checked name="scope" type="radio" value="text" /> Text body   <input name="scope" type="radio" value="topic" /> Topic title   <input name="scope" type="radio" value="all" /> Both </td>
+      <td><input checked id="textbody" name="scope" type="radio" value="text" /><label for="textbody">Text body  </label><input id="topictitle" name="scope" type="radio" value="topic" /><label for="topictitle">Topic title  </label><input id="both" name="scope" type="radio" value="all" /><label for="both">Both </label>
+      </td>
     </tr>
   </table>
 </form>
