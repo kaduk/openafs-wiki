@@ -63,7 +63,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%ICON{"type"}%</code></td>
-    <td> Small 16x16 pixel icon of common attachment types, like <code>bmp</code>, <code>doc</code>, <code>gif</code>, <code>hlp</code>, <code>html</code>, <code>pdf</code>, <code>ppt</code>, <code>txt</code>, <code>wav</code>, <code>xml</code>, <code>zip</code>, etc. Specify file type only, file name, or full path name. Example: <code>%ICON{"pdf"}%</code> returns <img align="top" alt="pdf" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" /></td>
+    <td> Small 16x16 pixel icon of common attachment types, like <img align="top" alt="bmp" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/bmp.gif" width="16" /> <code>bmp</code>, <img align="top" alt="doc" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/doc.gif" width="16" /> <code>doc</code>, <img align="top" alt="gif" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/gif.gif" width="16" /> <code>gif</code>, <img align="top" alt="hlp" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/hlp.gif" width="16" /> <code>hlp</code>, <img align="top" alt="html" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/html.gif" width="16" /> <code>html</code>, <img align="top" alt="mp3" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/mp3.gif" width="16" /> <code>mp3</code>, <img align="top" alt="pdf" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" /> <code>pdf</code>, <img align="top" alt="ppt" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/ppt.gif" width="16" /> <code>ppt</code>, <img align="top" alt="txt" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/txt.gif" width="16" /> <code>txt</code>, <img align="top" alt="xls" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/xls.gif" width="16" /> <code>xls</code>, <img align="top" alt="xml" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/xml.gif" width="16" /> <code>xml</code>, <img align="top" alt="zip" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/zip.gif" width="16" /> <code>zip</code>, etc. Specify file type only, file name, or full path name. Example: <code>%ICON{"pdf"}%</code> returns <img align="top" alt="pdf" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif" width="16" /></td>
   </tr>
   <tr>
     <td><code>%URLPARAM{"name"}%</code></td>
@@ -246,7 +246,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:42</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:43</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -296,15 +296,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:38</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:43:44</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:42</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:43</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:42</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:43</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
