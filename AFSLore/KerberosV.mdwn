@@ -26,6 +26,16 @@ For now a few links... explanations to follow later:
 
 - Setting up [[OpenSSH]] to use [[KerberosV]] authentication: you can either use PAM to authenticate people (boring) or you can add the patches at <http://www.sxw.org.uk/computing/patches/openssh.html> to use existing [[KerberosV]] tickets for single-sign-on and automatic ticket forwarding (interesting). Note that by default this patch won't grab tickets when logging in via password - post small patch to enable this later.
 - If you're having trouble with [[KenHornstein]]'s AFS-Kerberos5 migration kit available at <ftp://ftp.cmf.nrl.navy.mil/pub/kerberos5/>, see <http://www.mathematik.uni-karlsruhe.de/~iwrmm/Persons/Schulz/Unix/afs/afs-krb5.html> for tips. In particular check out the Makefile patches.
+- [[DenizKanca]] posted [Kerberos 5 and OpenAFS - Notes available](https://lists.openafs.org/pipermail/openafs-info/2003-January/007799.html) on 19-Jan-2003 saying
+> ... I took some notes on what I did when I set up Kerberos 5 and
+>
+>     [[OpenAFS]]
+>
+>     . Please note that this was done on a Redhat 8.0 installation and Redhat specifics (rpm, directory names etc) are assumed throughout.
+>
+>     [http://www.arayan.com/da/yazi/OpenAFS\_Kerberos\_5.html](http://www.arayan.com/da/yazi/OpenAFS_Kerberos_5.html)
+>
+>     ...
 - An older AFS link page: <http://www-2.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs.html>
 
 Some other issues to explain:

@@ -1,10 +1,33 @@
 # <a name="Installing Kerberos  AFS"></a> Installing Kerberos &amp; AFS
 
+<div>
+  <ul>
+    <li><a href="#Installing Kerberos  AFS"> Installing Kerberos &amp; AFS</a><ul>
+        <li><a href="#Basics"> Basics</a></li>
+        <li><a href="#OpenAFS"> OpenAFS</a><ul>
+            <li><a href="#Starting the Install"> Starting the Install</a></li>
+            <li><a href="#Create AFS Keys and Administrato"> Create AFS Keys and Administrators</a><ul>
+                <li><a href="#KerberosVMIT"> KerberosVMIT</a></li>
+                <li><a href="#HeimdalKTH"> HeimdalKTH</a></li>
+                <li><a href="#KTH Kerberos4"> KTH Kerberos4</a></li>
+              </ul>
+            </li>
+            <li><a href="#Finishing _OpenAFS installation"> Finishing OpenAFS installation</a></li>
+          </ul>
+        </li>
+        <li><a href="#Setting up Transparent Login"> Setting up Transparent Login</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
 AFS includes its own implementation of Kerberos, the KAServer. However, new installs of KAServer are not recommended as it is based on a draft version of the obsolete Kerberos 4 protocol. Even though AFS doesn't support [[KerberosV]] directly, it is highly recommended that you set up a [[KerberosV]] realm for your AFS cell and **not** install the KAServer. See [[KerberosV]] for the many advantages of using the latest Kerberos for your network authentication.
 
 Note that this document is under development. Also, I don't try to explain the [[OpenAFS]] specific parts of the install -- This document describes only the changes that have to be made to create a new [[OpenAFS]] cell with [[KerberosV]] authentication. If you have followed these instructions and are still having problems please email the openafs-info mailing list.
 
 Derrick wrote nice pages at: <http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html> <http://www.contrib.andrew.cmu.edu/~shadow/afs/afs-with-kerberos.html>
+
+[[DenizKanca]] [posted](https://lists.openafs.org/pipermail/openafs-info/2003-January/007799.html) his notes at [http://www.arayan.com/da/yazi/OpenAFS\_Kerberos\_5.html](http://www.arayan.com/da/yazi/OpenAFS_Kerberos_5.html).
 
 ## <a name="Basics"></a> Basics
 
@@ -149,18 +172,18 @@ You can create afs key using "kadmin add", you had to specify password on intera
 
 ksrvutil(1) does similar and doesn't require from you to have kadmind(1) running on your machine. The "get" command does same: downloads or (in our case) creates new afs principal using random password. The next example expects that joe.admin is you and you know the proper password to get full access to you kerberos database:
 
-       mv /etc/srvtab /etc/srvtab.orig
-       /usr/athena/sbin/ksrvutil -p joe.admin get
-       Name [rcmd]: afs
-       Instance [hostname]: greekmythology.com
-       Realm [GREEKMYTHOLOGY.COM]: GREEKMYTHOLOGY.COM
-       Is this correct? (y,n) [y]
-       Add more keys? (y,n) [n]
-       Password for joe.admin@GREEKMYTHOLOGY.COM
-       # list keys in /etc/srvtab, look for the AFS key and it's kvno
-       ksrvutil list
-       mv /etc/srvtab /etc/srvtab.afskey
-       mv /etc/srvtab.orig /etc/srvtab
+        mv /etc/srvtab /etc/srvtab.orig
+        /usr/athena/sbin/ksrvutil -p joe.admin get
+        Name [rcmd]: afs
+        Instance [hostname]: greekmythology.com
+        Realm [GREEKMYTHOLOGY.COM]: GREEKMYTHOLOGY.COM
+        Is this correct? (y,n) [y]
+        Add more keys? (y,n) [n]
+        Password for joe.admin@GREEKMYTHOLOGY.COM
+        # list keys in /etc/srvtab, look for the AFS key and it's kvno
+        ksrvutil list
+        mv /etc/srvtab /etc/srvtab.afskey
+        mv /etc/srvtab.orig /etc/srvtab
 
 If you want to make the above more complicated, you will need <code>**/usr/athena/sbin/ext\_srvtab**</code> utility to extract already existing key from Kerberos KDC and save it into /etc/srvtab. It will ask you for your master kerberos password (but if you installed kerberos in the "proper" way, you've used random password which you don't know at all), so better use <code>**ksrvutil**</code> as described above and forget <code>**ext\_srvtab**</code>.
 
@@ -174,8 +197,8 @@ This [[KeyFile]] with the AFS-key you can just always re-copy to new AFS machine
 
 You can test if you have same keys in kerberos and AFS like this:
 
-      kauth username
-      tokens
+        kauth username
+        tokens
 
 If you have some tokens now, then it works and you can now shutdown kaserver. Users, which you have created under kaserver are stored in /usr/afs/db/kaserver.\*, but you can just forget them. Create these users again in Kerberos. With [[KerberosIV]] from KTH they get stored under /var/kerberos, when using Heimdal under /var/heimdal/.
 
@@ -183,23 +206,23 @@ If you have some tokens now, then it works and you can now shutdown kaserver. Us
 
 Now we will use the <code>**pts**</code> command in [[OpenAFS]] to add this joe.admin user to the AFS administrators group named system:administrators. The username could be just "joe" or "admin", but it's a good habit to have .admin appended to it (it is called instance). Please note the notation "joe.admin", not "joe/admin" as would be typical in Kerberos5 style:
 
-       pts createuser -name joe.admin -cell greekmythology.com -noauth
-       pts adduser joe.admin system:administrators -cell  -noauth
+        pts createuser -name joe.admin -cell greekmythology.com -noauth
+        pts adduser joe.admin system:administrators -cell  -noauth
 
 where greekmythology.com is the name of your local cell. After your complete this step, you can continue on to...
 
 Activate the new AFS [[KeyFile]] by executing:
 
-       bos restart <machine name> -all -cell <cell name> -noauth
+        bos restart <machine name> -all -cell <cell name> -noauth
 
 After this restart, try using kinit to get Kerberos tickets for admin then (if necessary) use aklog to get an AFS token or use afslog if afsd client cache is already running. Basically ensure that the AFS [[KeyFile]] is valid:
 
-       /usr/heimdal/sbin/ktutil copy AFSKEYFILE:/usr/afs/etc/KeyFile FILE:/etc/afskeytabfile.krb5
-       /usr/heimdal/bin/kinit -k -t /etc/afskeytabfile.krb5 afs/greekmythology.com
-       # you should be able to autenticate against KDC using the /etc/afskeytabfile.krb5
-       #    where is saved your afs key in keytab form recognizable by Kerberos5
-       /usr/heimdal/klist
-       # you should see you have afs/greekmythology.com ticket having some expiration time etc.
+        /usr/heimdal/sbin/ktutil copy AFSKEYFILE:/usr/afs/etc/KeyFile FILE:/etc/afskeytabfile.krb5
+        /usr/heimdal/bin/kinit -k -t /etc/afskeytabfile.krb5 afs/greekmythology.com
+        # you should be able to autenticate against KDC using the /etc/afskeytabfile.krb5
+        #    where is saved your afs key in keytab form recognizable by Kerberos5
+        /usr/heimdal/klist
+        # you should see you have afs/greekmythology.com ticket having some expiration time etc.
 
 Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStartUnix/auqbg005.htm#HDRWQ60) section of the [[OpenAFS]] documentation. The rest of the documentation can be completed without any changes. (What about replacing NTP with something recent, though...? See FAQ [[3.22|Main/AdminFAQ#NTP]] and [[[NTP|Main/FurtherReading#NTP]]])
 
