@@ -1,0 +1,365 @@
+# <a name="Comment Plugin"></a><a name=" Comment Plugin"></a> Comment Plugin
+
+This plugin allows users to quickly post comments to a page without an edit/preview/save cycle.
+
+_( Discussion in TWiki:Plugins/CommentPluginDev )_
+
+<div>
+  <ul>
+    <li><a href="#Features"> Features</a></li>
+    <li><a href="#Syntax Rules"> Syntax Rules</a><ul>
+        <li><a href="#Positioning the comment"> Positioning the comment</a><ul>
+            <li><a href="#Location relative to %COMMENT ta"> Location relative to <code>%COMMENT</code> tag</a></li>
+            <li><a href="#Location relative to a TWiki anc"> Location relative to a TWiki anchor</a></li>
+            <li><a href="#Location relative to an arbitrar"> Location relative to an arbitrary text string</a></li>
+          </ul>
+        </li>
+        <li><a href="#Default templates"> Default templates</a></li>
+      </ul>
+    </li>
+    <li><a href="#Customisation"> Customisation</a><ul>
+        <li><a href="#The <code>PROMPT</code> template"> The PROMPT template</a></li>
+        <li><a href="#The <code>OUTPUT</code> template"> The OUTPUT template</a></li>
+      </ul>
+    </li>
+    <li><a href="#Important Note regarding Locks"> Important Note regarding Locks</a></li>
+    <li><a href="#Settings"> Settings</a></li>
+    <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
+    <li><a href="#Plugin Info"> Plugin Info</a></li>
+  </ul>
+</div>
+
+# <a name="Features"></a> Features
+
+Inserts an edit box into the page that allows users to type in and save comments. Comments can be made
+
+- in different formats (as defined by a template),
+- in both forward and reverse chronological order,
+- signed or unsigned, dated or undated (as defined by a template),
+- in other topics, or other positions within the current topic.
+
+# <a name="Syntax Rules"></a> Syntax Rules
+
+Write the command `%COMMENT{` _attributes_ `}%` anywhere in a TWiki topic. %COMMENT% is also legal.
+
+<a name="StandardAttrs"></a> The following attributes are [[recognised|Main/WebHome#MoreAttrs]]
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Name </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>type</code></td>
+    <td> (Required) This is the name of the template to use for this comment. Comment templates are defined in a TWiki template - see [[Main/WebHome#TemPlates]], below. If this attribute is not defined, the type is whatever is defined by COMMENTPLUGIN_DEFAULT_TYPE, either in this topic or in your [[Main/WebPreferences]]. By default this is 'below'. </td>
+  </tr>
+  <tr>
+    <td><code>target</code></td>
+    <td> Name of the topic to add the comment to. Defaults to the current topic. </td>
+  </tr>
+  <tr>
+    <td><code>location</code></td>
+    <td> Regular expression specifying the comment location in the target topic. Read <em>carefully</em> below! </td>
+  </tr>
+  <tr>
+    <td><code>mode</code></td>
+    <td> For compatability with older versions only, synonymous with <code>type</code></td>
+  </tr>
+  <tr>
+    <td><code>nonotify</code></td>
+    <td> Set to "on" to disable change notification for target topics </td>
+  </tr>
+</table>
+
+## <a name="Positioning the comment"></a> Positioning the comment
+
+`%COMMENT` supports several ways to specify _where_ a comment should be inserted in the target topic. This is referred to as the _location_ of the comment.
+
+### <a name="Location relative to %COMMENT ta"></a> Location relative to `%COMMENT` tag
+
+The default _location_ is the `%COMMENT` tag itself. For example:
+
+    %COMMENT{type="below"}%
+
+will add comments in the current topic, directly below the `%COMMENT` tag.
+
+### <a name="Location relative to a TWiki anc"></a> Location relative to a TWiki anchor
+
+The `target` attribute may specify a web, and may also specify an anchor within the target topic; for example,
+
+    %COMMENT{type="above" target="%MAINWEB%.PersonalRemarks#InsertHere"}%
+
+This uses a standard TWiki in-topic anchor as the insertion location. See [[TextFormattingRules]] for more about TWiki anchors.
+
+### <a name="Location relative to an arbitrar"></a> Location relative to an arbitrary text string
+
+Getting more sophisticated, you can also specify a regular expression for the target location using the `location` parameter. The target topic is searched for the regular expression, and the comment inserted relative to the string that the search matched. For example,
+
+    %COMMENT{type="above" location="Flights of Fancy"}%
+
+will place comments above the first occurence of the string `Flights of Fancy` in the current topic.
+
+**Warning** of course, if a user's comment contains the string "Flights of Fancy" they may and up _changing the location_ for the next comment! Also, if you use a tag in the location, then you've just inserted another tag in the page that contains the `%COMMENT`! So be very careful how you specify the RE for `location`. Note that the RE is matched using perl "multiple line" mode, so ^ and $ match the start of a line and the end of a line respectively.
+
+If you specify an anchor _and_ a `location`, the anchor will be ignored.
+
+## <a name="Default templates"></a> Default templates
+
+A set of default comment templates are shipped with the plugin. These are:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Template type </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>top</code></td>
+    <td> Comments, signed and dated, added at top of the topic (the anchor is ignored) </td>
+  </tr>
+  <tr>
+    <td><code>bottom</code></td>
+    <td> Comments, signed and dated, added at end of the target topic (the anchor is ignored) </td>
+  </tr>
+  <tr>
+    <td><code>above</code></td>
+    <td> Comments, signed and dated, added immediately before the target anchor, or the <code>%COMMENT</code> if no anchor is specified </td>
+  </tr>
+  <tr>
+    <td><code>below</code></td>
+    <td> Comments, signed and dated, added immediately below the target anchor, or the <code>%COMMENT</code> if no anchor is specified </td>
+  </tr>
+  <tr>
+    <td><code>tableprepend</code></td>
+    <td> Comments, signed and dated, formatted as an HTML table row, added below the anchor (which must be in an HTML &lt;table&gt;) </td>
+  </tr>
+  <tr>
+    <td><code>tableappend</code></td>
+    <td> Comments, signed and dated, formatted as an HTML table row, added above the anchor (which must be in an HTML &lt;table&gt;) </td>
+  </tr>
+</table>
+
+Your local installation may add more template types as well - see [[Customisation|Main/WebHome#TemPlates]], below.
+
+<a name="TemPlates"></a>
+
+# <a name="Customisation"></a> Customisation
+
+Customisation of the comment plugin requires
+
+- familiarity with HTML forms,
+- some familiarity with the [[TWiki templating language|TWiki/TWikiTemplates]].
+
+The plugin picks up its templates from a standard TWiki template file, named "comments". This allows different templates to be defined for different TWiki skins. This template file may include other template files, or may include a topic from a user web (this is an extension to the normal handling of `%TMPL:INCLUDE` described in the documentation). The shipped plugin defines default templates in `comments.tmpl` and then includes the topic [[CommentsTmpl]]. If you want to define your own templates, add them to [[UserTemplates]]. Note that you can use `%TMPL:INCLUDE` in this file to include other files of templates. Note also that if you want to override any of the default templates shipped with the plugin, you can simply do so by defining them in [[UserTemplates]], and they will replace the installed versions.
+
+To define a comment type, you have to provide two simple template definitions in the template file; one for the prompt box, and one for the generated output. If we have a template type "mytype", these are named `PROMPT:mytype` and `OUTPUT:mytype` respectively. See `comments.tmpl` in the templates directory for examples.
+
+## <a name="The &lt;code&gt;PROMPT&lt;/code&gt; template"></a> The `PROMPT` template
+
+The `PROMPT` template defines the contents of an HTML form that is used to capture the comment. This form invokes the comment generator when submitted. Parameters to the comment generator are defined using standard HTML input fields, such as `input`, `textarea` and `select`. The user enters values for these parameters, and these are then available when the `OUTPUT` template is expanded, in the form of `%URLPARAM%`s.
+
+Only the input fields of the form need be defined. The plugin automatically generates the `>form<` and `&gt:/form<` tags. **Note** that you must define a "submit" button if you want the form to work!
+
+<a name="MoreAttrs"></a> If an attribute is given to the `%COMMENT` tag that is not one of the [[standard attributes|Main/WebHome#StandardAttrs]], then that attribute is taken as the name of a parameter to be expanded in the `PROMPT` template. Expressions in the template of the form `%`_param_`|`_default_`%` (e.g. `%rows|3%`, `%button|Push me%`) are expanded to the values given in the `%COMMENT`. For example, if the `PROMPT` template 'example' contains:
+
+    <textarea rows=%rows|3% cols="%cols|50%" value="%tval|Rubbish%">
+
+and the %COMMENT tag is:
+
+    %COMMENT{type="example" rows="5" cols="20"}%
+
+then the template will be expanded as
+
+    <textarea rows=5 cols="20" value="Rubbish">
+
+As well as support for all the usual TWiki variables in templates, the following special variables are supported in the `PROMPT` definition:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Variable </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>%MESSAGE%</code></td>
+    <td> A helpful generated message, either a lock message or a reminder to refresh. </td>
+  </tr>
+  <tr>
+    <td><code>%DISABLED%</code></td>
+    <td> Set to 'disabled' when you cannot comment (see [[Main/WebHome#HandlingPageLock]], below). </td>
+  </tr>
+</table>
+
+## <a name="The &lt;code&gt;OUTPUT&lt;/code&gt; template"></a> The `OUTPUT` template
+
+The `OUTPUT` template defines the format for the text that actually gets embedded into the topic. All the usual TWiki variables are available in the `PROMPT` definition, but note that they get expanded _when the comment is inserted in the text_, so time, date and username will refer to the time and date when the comment was made and the user who made it.
+
+There are also four position tags that are used to indicate where the comment should be placed, relative to the `location` defined in the `%COMMENT` tag:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>%POS:TOP%</code></td>
+    <td> If present, comments will be inserted <strong>at the top of the topic</strong> i.e. before any other text </td>
+  </tr>
+  <tr>
+    <td><code>%POS:BOTTOM%</code></td>
+    <td> If present, comments will be inserted <strong>at the end of the topic</strong> i.e. after all existing text </td>
+  </tr>
+  <tr>
+    <td><code>%POS:BEFORE%</code></td>
+    <td> If present, comments will be inserted <b>immediately before the <code>%COMMENT%</code> tag</b></td>
+  </tr>
+  <tr>
+    <td><code>%POS:AFTER%</code></td>
+    <td> If present, comments will be inserted <b>immediately after the <code>%COMMENT%</code> tag</b></td>
+  </tr>
+</table>
+
+Note that these position tags are obviously mutually exclusive. If you define more than one, the result is undefined. If none is present, the default is taken from the plugin setting `DEFAULT_TYPE`
+
+<a name="HandlingPageLock"></a>
+
+# <a name="Important Note regarding Locks"></a> Important Note regarding Locks
+
+The plugin checks if the page is locked for edit. When a locked page is displayed in 'view' mode, comment input is automatically disabled.
+
+Note that if the page was read long time ago, it's possible that page was locked by another user **after** it was read, and the lock is still outstanding. In this case, comments cannot be saved, and you will be redirected to a "topic is locked" page. You then have two options:
+
+- **Cancel** - throw away your comment and return to viewing the page.
+- **Back** - **WARNING** some browsers might requery the page and **lose** your comments - so test how your browser behaves before using the Back button.
+
+To help avoid edit conflict, a reminder to refresh the page before entering comments is the default text for a `%COMMENT`. When the target page is known to be locked, the `PROMPT` form is automatically disabled.
+
+# <a name="Settings"></a> Settings
+
+- Description:
+  - Set SHORTDESCRIPTION = Allows users to quickly post comments to a page without an edit/preview/save cycle.
+- templates; includes user templates from [[CommentsTmpl]]
+  - Set TEMPLATES = comments
+- default template type (if not present, defaults to "below")
+  - Set DEFAULT\_TYPE = above
+
+# <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
+
+\* Make sure you have the TWiki:Plugins/SharedCode module installed. Among other things, TWiki:Plugins/SharedCode includes a compatibility module that enables plugins to use new TWiki features with earlier TWiki releases. If you don't already have it, install it now.
+
+- Download the ZIP file from the Plugin web (see below)
+- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> File: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/CommentPlugin.txt</b></code></td>
+    <td> Plugin doc page (this page) </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/CommentsTmpl.txt</b></code></td>
+    <td> Example user templates </td>
+  </tr>
+  <tr>
+    <td><code><b>templates/comments.tmpl</b></code></td>
+    <td> Master comment templates </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Plugins/CommentPlugin.pm</b></code></td>
+    <td> Plugin Perl module </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Plugins/CommentPlugin/Comment.pm</b></code></td>
+    <td> Plugin Perl module </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Plugins/CommentPlugin/Templates.pm</b></code></td>
+    <td> Plugin Perl module </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Plugins/CommentPlugin/test.zip</b></code></td>
+    <td> Tests </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Plugins/CommentPlugin/build.pl</b></code></td>
+    <td> Build file </td>
+  </tr>
+</table>
+
+- The Plugin depends on the `viewauth` script to authenticate the user. As described in [[TWikiAccessControl]], copy the `view` script to `viewauth` (or better, create a symbolic link) and add `viewauth` to the list of authenticated scripts in the `.htaccess` file.
+
+If installed correctly, you should see a `%COMMENT` edit box below here.
+
+<form action="http://www.dementia.org/twiki/save/Sandbox/Comments" enctype="multipart/form-data" id="top0" method="post" name="top0"><input name="comment_action" type="hidden" value="save" /><input name="comment_type" type="hidden" value="top" /><input name="comment_index" type="hidden" value="0" /></form>
+
+# <a name="Plugin Info"></a> Plugin Info
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"> Plugin Author: </td>
+    <td> v1.0 TWiki:Main/DavidWeller v2.0 TWiki:Main/PeterMasiar v3.0 TWiki:Main/CrawfordCurrie </td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Version: </td>
+    <td> 3.0 </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td> 3.003 11 Apr 2004: Minor line termination problem fixed, and "security" hyphen on standard comment removed and replaced with a bulleted list. </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 3.002 6 April 2004: Applied patches (thanks Peter Thoeny) for multiple comment adding, BOTTOM and TOP inside meta-data, and moved example to Sandbox. </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 3.001 13 March 2004: Modified to use viewauth save technique (safer), add nonotify parameter, move templates fully into topics, with a hook for site-specifics, support %COMMENT%, internationalisation fixes </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 3.000 18 Feb 2004: TWiki:Main/CrawfordCurrie rewrote for standard templates and other user requests. Recognition to Patrice Fournier and Sam Abrams for terrific testing and patch support. </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 7 Feb 2004: TWiki:Main/CrawfordCurrie rewrote this page and [[Main/CommentTemplates]] in an effort to make the plugin more user friendly. Added {TIME} variable. Also updated CVS. </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 23 Sep 2003 TWiki:Main/PeterMasiar: 80% rewrite/refactor, adding templates </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 15 July 2003: TWiki:Main/PeterMasiar added "reminder" parameter and feature to pass comments to oopslockedcomments.tmpl template to copy-paste later </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 5 March 2002 Bug fixes, TWiki:Main/JonLambert created oopslockedcomments.tmpl template </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 24 Feb 2002 added a few more user requests, made "English" text configurable </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 4 Dec 2001: 1.01 release, changed name to [[Main/CommentPlugin]], added $button var, changed textarea WRAP setting to "soft" </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 30 Nov 2001: Initial version </td>
+  </tr>
+  <tr>
+    <td align="right"> Dependencies: </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td align="right"> Perl Version: </td>
+    <td> 5.0 </td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Home: </td>
+    <td> TWiki:Plugins/%TOPIC% </td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td> TWiki:Plugins/%TOPIC%Dev </td>
+  </tr>
+</table>
+
+**_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
+
+-- TWiki:Main/DavidWeller - 05 Mar 2002 <br /> -- TWiki:Main/PeterMasiar - 15 Jul 2003, 23 Sep 2003<br /> -- TWiki:Main/CrawfordCurrie - 21 May 2004
