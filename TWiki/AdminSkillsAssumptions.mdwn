@@ -1,0 +1,16 @@
+# <a name="Administrator Skills Assumptions"></a> Administrator Skills Assumptions
+
+For each of these, the requirement is either pre-existing knowledge/skill, or the willingness to spend significant time (i.e. from hours to days) learning these.
+
+- **Operating system administration:** Ability to use Unix/Linux command line tools (or equivalent Windows tools), including ability to move/copy/delete files, change permissions, view web server log files, set environment variables, use a text editor, etc.
+- **Web server administration:** Ability to do basic setup, e.g. ability to edit config files or use GUI configuration tools to enable CGI scripts on a directory.
+- **Program compilation:** Where RCS is not pre-installed (that is most Unix systems), the ability to download and compile the RCS program from source, including use of `configure`, `make`, etc. This is normally not necessary on Linux or Windows.
+- **Troubleshooting**: Ability to perform tests, inspect error logs, talk to technical support (whether in an IT department or web hosting provider) and read documentation in order to help with diagnosing installation problems.
+
+Installing TWiki is **not** recommended for people who only know HTML and web design, unless they are willing to learn the above, or team up with someone who can handle the installation.
+
+Although the [[TWikiInstallationGuide]] is quite complete, there will on occasion be parts that don't work in your local environment (particularly with TWiki:Codev/TWikiOnWebHostingSites, which are sometimes challenging even for those with good OS and web server skills).
+
+There are many excellent resources for learning how to administer your OS and web server, including books, web sites, web forums and email lists. The TWiki:Support web is not one of these - in other words, it is not there to answer basic questions about operating system and web server administration. Asking and answering questions is time consuming for all concerned and is best used for specific TWiki related issues, rather than helping you learn the OS and web server.
+
+-- [[RichardDonkin]] - 27 Apr 2002
