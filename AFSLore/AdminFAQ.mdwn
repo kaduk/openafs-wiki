@@ -749,6 +749,10 @@ Other ports are:
     afsupdate       7008/udp                        # upserver (UPDATESERVICE)
     afsrmtsys       7009/udp                        # RMTSYSSERVICE
 
+When tcpdump doesn't help, try:
+
+    fstrace setset cm -active; make your error happen; fstrace dump cm
+
 ### <a name="3.33 Tuning client cache for hug"></a> 3.33 Tuning client cache for huge data
 
 Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache sizes afsd crashes on startup (Linux, [[Tru64Unix]] at least). It is possibly when dcache is too small. Go for:
