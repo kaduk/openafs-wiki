@@ -245,7 +245,7 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong> %BR% You can create a forced internal link by enclosing words in double square brackets. %BR% <strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; for example, <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. </td>
+    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong> %BR% You can create a forced internal link by enclosing words in double square brackets. %BR% <strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; for example, <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. %BR% <strong><em>Note:</em></strong> To "escape" double square brackets that would otherwise be a correct link, use <code>&lt;nop&gt;</code> between the leading left square brackets, that is, begin with <code>[&lt;nop&gt;[....</code></td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[wiki syntax]]
 
@@ -367,6 +367,8 @@ Variables are names that are enclosed in percent signs `%` that are expanded on 
   - **Documentation Graphics:** Write: <code><span><font> %H% Help, %T% Tip, %X% Alert</font></span></code> to get: %H% Help, %T% Tip, %X% Alert. For more info see [[TWikiDocGraphics]].
 
 - There are many more variables, see **[[TWikiVariables]]**.
+
+- To "escape" a percent sign that would otherwise be interpreted as a variable, add `<nop>` after the first percent sign. Write: <code><span><font> %&lt;nop&gt;SOMEVARIABLE% </font></span></code> to get: %SOMEVARIABLE%.
 
 ## <a name="TWikiPlugin Formatting Extension"></a><a name="_TWikiPlugin Formatting Extensio"></a> TWikiPlugin Formatting Extensions
 

@@ -5,6 +5,7 @@
         <li><a href="#Preinstalled Plugins"> Preinstalled Plugins</a></li>
         <li><a href="#Installing Plugins"> Installing Plugins</a><ul>
             <li><a href="#On-Site Pretesting"> On-Site Pretesting</a></li>
+            <li><a href="#A Note on Performance"> A Note on Performance</a></li>
           </ul>
         </li>
         <li><a href="#Managing Plugins"> Managing Plugins</a><ul>
@@ -89,6 +90,12 @@ To test new Plugins on your installation before making them public, you may want
   - **Copy** the modified files to the Production installation. You can update a TWiki installation live and users won't even notice.
 
 - **Method 2:** List the Plugin being tested in the `DISABLEDPLUGINS` variable in [[TWikiPreferences]]. Redefine the `DISABLEDPLUGINS` variable in the `Sandbox` web and do the testing there.
+
+### <a name="A Note on Performance"></a> A Note on Performance
+
+The performance of the system depends on the number of Plugins installed and on the Plugin implementation. Some Plugins impose no measurable performance decrease, some do. For example, `outsidePREHandler` is an expensive callback function, or a Plugin might use many Perl libraries that needs to be initialized with each page view (unless you run mod\_perl). It is recommended to measure the performance with and without a new Plugin.
+
+In case you need to install an "expensive" Plugin and you need its functionality only in one web you can place the Plugin topic into that web. TWiki will initialize the Plugin only if the Plugin topic is found (which won't be the case for other webs.)
 
 ## <a name="Managing Plugins"></a> Managing Plugins
 
