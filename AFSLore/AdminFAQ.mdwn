@@ -914,6 +914,10 @@ Don't forget it's related to these entries in Kerberos KDC:
     afs.cell.name@REALM
     krbtgt CELL.NAME@REALM
 
+If you use heimdal (or MIT krb5), do:
+
+echo "REALM" &gt; /usr/afs/etc/krb.conf
+
 ### <a name="3.38 Moving from kaserver to Hei"></a> 3.38 Moving from kaserver to Heimdal KDC
 
     > While converting all our administration tools, we have discovered that
