@@ -41,7 +41,8 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
 
 - The formula in the <code>**%CALC\{"formula"\}%**</code> variable can contain built-in functions
 - Built-in function are of format <code>**$FUNCNAME(parameter)%**</code>
-- Built-in functions may be nested, e.g. <code>**%CALC\{"$SUM( R2:C$COLUMN(0)..R$ROW(-1):C$COLUMN(0) )"\}%**</code>
+- Functions may be nested, e.g. <code>**%CALC\{"$SUM( R2:C$COLUMN(0)..R$ROW(-1):C$COLUMN(0) )"\}%**</code>
+- Functions are evaluated from left to right, and from inside to outside if nested
 - The function parameter can be text; a mathematical formula; a cell address; or a range of cell addresses
 - Multiple parameters form a list; they are separated by a comma, followed by optional space, e.g. <code>**%CALC\{"$SUM( 3, 5, 7 )"\}%**</code>
 - A table cell can be addressed as <code>**R1:C1**</code>. Table address matrix: <table border="1" cellpadding="0" cellspacing="0">
@@ -75,8 +76,12 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
     <td> The address range of cells above the current cell </td>
   </tr>
   <tr>
+    <td><code><b>"$AND(list)"</b></code></td>
+    <td> The logcial AND of a list. Example: <code><b>%CALC{"$AND(1, 0, 1)"}%</b></code> returns <code><b>0</b></code></td>
+  </tr>
+  <tr>
     <td><code><b>"$AVERAGE(list)"</b></code></td>
-    <td> The average of the content of a range of cells. Example: To get the average of column 5 excluding the title row, write in the last row: <code><b>%CALC{"$AVERAGE( R2:C5..R$ROW(-1):C5 )"}%</b></code></td>
+    <td> The average of a list or a range of cells. Example: To get the average of column 5 excluding the title row, write in the last row: <code><b>%CALC{"$AVERAGE( R2:C5..R$ROW(-1):C5 )"}%</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$CHAR(number)"</b></code></td>
@@ -136,7 +141,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$IF(condition, value if true, value if 0)"</b></code></td>
-    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Example: <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not </td>
+    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Examples:%BR% <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK )"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not%BR% <code><b>%CALC{"$IF( $EXACT($T(R1:C2),), empty, $T(R1:C2) )"}%</b></code> returns the content of R1:C2 or <code><b>empty</b></code> if empty%BR% <code><b>%CALC{"$SET(val, $IF( $T(R1:C2) == 0, zero, $T(R1:C2) ))"}%</b></code> sets a variable conditionally (notice that you cannot set a variable conditionally inside an $IF() since formulae in the "value if true" and "value if 0" are both evaluated before the condition is applied) </td>
   </tr>
   <tr>
     <td><code><b>"$INT(formula)"</b></code></td>
@@ -160,19 +165,47 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$MEDIAN(list)"</b></code></td>
-    <td> The median of a list or range of cells. Example: <code><b>%CALC{"$MEDIAN( 3, 9, 4, 5 )"}%</b></code> returns <code><b>4.5</b></code></td>
+    <td> The median of a list or range of cells. Example: <code><b>%CALC{"$MEDIAN(3, 9, 4, 5)"}%</b></code> returns <code><b>4.5</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$MIN(list)"</b></code></td>
-    <td> The smallest value of a list or range of cells. Example: <code><b>%CALC{"$MIN( 15, 3, 28 )"}%</b></code> returns <code><b>3</b></code></td>
+    <td> The smallest value of a list or range of cells. Example: <code><b>%CALC{"$MIN(15, 3, 28)"}%</b></code> returns <code><b>3</b></code></td>
   </tr>
   <tr>
-    <td><code><b>"$MULT(list)"</b></code></td>
-    <td> The product of a list or range of cells. Example: to calculate the product of the cells to the left of the current one use <code><b>%CALC{"$MULT($LEFT())"}%</b></code></td>
+    <td><code><b>"$MOD(num, divisor)"</b></code></td>
+    <td> The reminder after dividing <code><b>num</b></code> by <code><b>divisor</b></code>. Example: <code><b>%CALC{"$MOD(7, 3)"}%</b></code> returns <code><b>1</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$NOP(text)"</b></code></td>
     <td> A no-operation. Allows one to defy the order of Plugin execution. For example, it will allow preprossing to be done before <code>%SEARCH{}%</code> is evaluated. Use <code>$per</code> to escape '%'. </td>
+  </tr>
+  <tr>
+    <td><code><b>"$NOT(num)"</b></code></td>
+    <td> The reverse logic of a number. Returns 0 if <code><b>num</b></code> is not zero, 1 if zero. Example: <code><b>%CALC{"$NOT(0)"}%</b></code> returns <code><b>1</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$OR(list)"</b></code></td>
+    <td> The logcial OR of a list. Example: <code><b>%CALC{"$OR(1, 0, 1)"}%</b></code> returns <code><b>1</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$PRODUCT(list)"</b></code></td>
+    <td> The product of a list or range of cells. Example: to calculate the product of the cells to the left of the current one use <code><b>%CALC{"$PRODUCT($LEFT())"}%</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$PROPER(text)"</b></code></td>
+    <td> Capitalizes letters in <code><b>text</b></code> that follow any character other than a letter. Converts all other letters to lowercase letters. Examples:%BR% <code><b>%CALC{"PROPER(a small STEP)"}%</b></code> returns <code><b>A Small Step</b></code> %BR% <code><b>%CALC{"PROPER(f1 (formula-1))"}%</b></code> returns <code><b>F1 (Formula 1)</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$PROPERSPACE(text)"</b></code></td>
+    <td> Properly spaces out [[TWiki/WikiWords]] preceeded by white space, parenthesis, or <code><b>][</b></code>. Words listed in the DONTSPACE [[TWiki/TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded. Example, assuming DONTSPACE contains McIntosh: <code><b>%CALC{"PROPERSPACE(McIntosh likes WikiWord links like WebHome and [[WebHome][WebHome]])"}%</b></code> returns <code><b>McIntosh likes Wiki Word links like Web Home and [[Main/WebHome]]</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$RAND(max)"</b></code></td>
+    <td> Random number, evenly distributed between 0 and <code><b>max</b></code>, or 0 and 1 if max is not specified. </td>
+  </tr>
+  <tr>
+    <td><code><b>"$REPEAT(text)"</b></code></td>
+    <td> Repeat <code><b>text</b></code> a number of times. Example: <code><b>%CALC{"$REPEAT(Hi! , 3)"}%</b></code> returns <code><b>Hi! Hi! Hi!</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$REPLACE(text, start_num, num_chars, new_text)"</b></code></td>
@@ -183,8 +216,8 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
     <td> The address range of cells to the right of the current cell </td>
   </tr>
   <tr>
-    <td><code><b>"$ROUND(formula)"</b></code></td>
-    <td> Evaluates a simple formula and rounds the result up or down to the nearest integer. Example: <code><b>%CALC{"$INT( 10 / 6 )"}%</b></code> returns <code><b>2</b></code></td>
+    <td><code><b>"$ROUND(formula, digits)"</b></code></td>
+    <td> Evaluates a simple <code><b>formula</b></code> and rounds the result up or down to the number of digits if <code><b>digits</b></code> is positive; to the nearest integer if digits is missing; or to the left of the decimal point if digits is negative. Examples: %BR% <code><b>%CALC{"$ROUND(3.15, 1)"}%</b></code> returns <code><b>3.2</b></code> %BR% <code><b>%CALC{"$ROUND(3.149, 1)"}%</b></code> returns <code><b>3.1</b></code> %BR% <code><b>%CALC{"$ROUND(-2.475, 2)"}%</b></code> returns <code><b>-2.48</b></code> %BR% <code><b>%CALC{"$ROUND(34.9, -1)"}%</b></code> returns <code><b>30</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$ROW(offset)"</b></code></td>
@@ -197,6 +230,10 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   <tr>
     <td><code><b>"$SET(name, value)"</b></code></td>
     <td> Set a variable for later use. Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulas are evaluated before the variable assignment. This function returns no output. Use <code>$GET()</code> to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables. See also <code>$GET()</code>. Example: <code><b>%CALC{"$SET( my_total, $SUM($ABOVE()) )"}%</b></code> sets the <code>my_total</code> variable to the sum of all table cells located above the current cell and returns an empty string </td>
+  </tr>
+  <tr>
+    <td><code><b>"$SIGN(num)"</b></code></td>
+    <td> The sign of a number. Returns -1 if <code><b>num</b></code> is negative, 0 if zero, or 1 if positive. Example: <code><b>%CALC{"$SIGN(-12.5)"}%</b></code> returns <code><b>-1</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$SUBSTITUTE(text, old, new, instance, option)"</b></code></td>
@@ -245,6 +282,10 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   <tr>
     <td><code><b>"$UPPER(text)"</b></code></td>
     <td> The upper case string of a text. Example: <code><b>%CALC{"$UPPER( $T(R1:C5) )"}%</b></code> returns the upper case string of the text in cell <code><b>R1:C5</b></code></td>
+  </tr>
+  <tr>
+    <td><code><b>"$VALUE(text)"</b></code></td>
+    <td> Extracts a number from <code><b>text</b></code>. Returns <code><b>0</b></code> if not found. Examples:%BR% <code><b>%CALC{"$VALUE(US$1,200)"}%</b></code> returns <code><b>1200</b></code> %BR% <code><b>%CALC{"$VALUE(PrjNotebook1234)"}%</b></code> returns <code><b>1234</b></code> %BR% <code><b>%CALC{"$VALUE(Total: -12.5)"}%</b></code> returns <code><b>12.5</b></code></td>
   </tr>
 </table>
 
@@ -304,7 +345,7 @@ The last row is defined as:
 
 Above table is created manually. Another Plugin could build the table dynamically, e.g. by pulling data out of a bug tracking system. The Spreadsheet Plugin can be used to display table data statistics.
 
-## <a name="%TOPIC% Settings"></a> %TOPIC% Settings
+## <a name="Plugin Settings"></a> Plugin Settings
 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%SPREADSHEETPLUGIN\_SHORTDESCRIPTION%**</code>
 
@@ -316,6 +357,9 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 - Do not handle `%CALC{}%` tag in included topic while including topic: (default: 1)
   - Set SKIPINCLUDE = 1
+
+- [[WikiWords|TWiki/WikiWord]] to exclude from being spaced out by the <code>**$PROPERSPACE(text)**</code> function. This comma delimited list can be overloaded by a DONTSPACE preferences variable:
+  - Set DONTSPACE = CodeWarrior, McIntosh, RedHat, SuSE
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -351,11 +395,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 27 Feb 2004 </td>
+    <td> 06 Mar 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 06 Mar 2004: </td>
+    <td> Added $AND(), $MOD(), $NOT(), $OR(), $PRODUCT(), $PROPER(), $PROPERSPACE(), $RAND(), $REPEAT(), $SIGN(), $VALUE(); added digits parameter to $ROUND(); renamed $MULT() to $PRODUCT(); $MULT() is deprecated and undocumented </td>
   </tr>
   <tr>
     <td align="right"> 27 Feb 2004: </td>
@@ -457,4 +505,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 27 Feb 2004
+-- TWiki:Main/PeterThoeny - 06 Mar 2004
