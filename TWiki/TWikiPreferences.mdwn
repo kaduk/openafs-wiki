@@ -121,7 +121,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set WIKIWEBMASTER = <webmaster@your.company>
 
 - TWiki webmaster name (first name and last name, e.g. `Fred Smith`):
-  - Set WIKIWEBMASTERNAME = TWiki Webmaster
+  - Set WIKIWEBMASTERNAME = TWiki Administrator
 
 - Mail host for outgoing mail. This is used for [[WebChangesAlert]] if Perl module <code>**Net::SMTP**</code> is installed. If not, or if `SMTPMAILHOST` is empty, the external sendmail program is used instead (defined by <code>**$mailProgram**</code> in <code>**TWiki.cfg**</code>). Examples: <code>**mail.your.company**</code> or <code>**localhost**</code>
   - Set SMTPMAILHOST = mail
