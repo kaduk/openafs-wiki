@@ -171,16 +171,16 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Definition List:</strong> %BR% Three spaces, the term, a colon, a space, followed by the definition. %BR% <strong><em>Note:</em></strong> Terms with spaces are not supported. In case you do have a term with more then one word, separate the words with dashes or with the <code>&amp;nbsp;</code> non-breaking-space entity. </td>
+    <td valign="top"><strong>Definition List:</strong> %BR% Three spaces, a dollar sign, the term, a colon, a space, followed by the definition. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-	Sushi: Japan
-	Dim&amp;nbsp;Sum: S.F.
+	$ Sushi: Japan
+	$ Dim Sum: S.F.
 </pre> </font></span></td>
     <td valign="top">
       <dl>
-        <dt> Sushi</dt>
+        <dt> Sushi </dt>
         <dd> Japan </dd>
-        <dt> Dim Sum</dt>
+        <dt> Dim Sum </dt>
         <dd> S.F. </dd>
       </dl>
     </td>
@@ -194,6 +194,7 @@ class CatAnimal {
 | multi span |||
 | A4-6 | four | four |
 |^| five | five |
+
 |^| six | six |
 </pre> </font></span></td>
     <td valign="top">
@@ -398,4 +399,4 @@ TWiki formatting rules are fairly simple to use and quick to type. However, ther
 - **Q:** Why is the `'&'` character sometimes not displayed?
   - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- [[MikeMannix]] - 02 Dec 2001 <br /> -- [[PeterThoeny]] - 15 Jul 2003
+-- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 16 Mar 2004

@@ -85,7 +85,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
         </tr>
         <tr>
           <td><code>newline="&lt;br /&gt;"</code></td>
-          <td> Convert newlines to other delimiters </td>
+          <td> Convert newlines in textarea to other delimiters </td>
           <td> no conversion </td>
         </tr>
         <tr>
@@ -97,6 +97,16 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td><code>encode="url"</code></td>
           <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
           <td> no encoding </td>
+        </tr>
+        <tr>
+          <td><code>multiple="on"</code> %BR% <code>multiple="[[$item]]"</code></td>
+          <td> If set, gets all selected elements of a <code>&lt;select multiple="multiple"&gt;</code> tag. A format can be specified, with <code>$item</code> indicating the element, e.g. <code>multiple="Option: $item"</code></td>
+          <td> first element </td>
+        </tr>
+        <tr>
+          <td><code>separator=", "</code></td>
+          <td> Separator between multiple selections. Only relevant if multiple is specified </td>
+          <td><code>"\n"</code> (new line) </td>
         </tr>
       </table> Example: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
   </tr>
@@ -277,7 +287,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:43</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:44</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -288,54 +298,87 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <th bgcolor="#99CCCC"><strong> Example </strong></th>
         </tr>
         <tr>
-          <td> $seconds </td>
+          <td><code>$seconds</code></td>
           <td> seconds </td>
           <td> 59 </td>
         </tr>
         <tr>
-          <td> $minutes </td>
+          <td><code>$minutes</code></td>
           <td> minutes </td>
           <td> 59 </td>
         </tr>
         <tr>
-          <td> $hours </td>
+          <td><code>$hours</code></td>
           <td> hours </td>
           <td> 23 </td>
         </tr>
         <tr>
-          <td> $day </td>
+          <td><code>$day</code></td>
           <td> day of month </td>
           <td> 31 </td>
         </tr>
         <tr>
-          <td> $month </td>
+          <td><code>$wday</code></td>
+          <td> day of the Week (Sun, Mon, Tue, Wed, Thu, Fri, Sat) </td>
+          <td> Thu </td>
+        </tr>
+        <tr>
+          <td><code>$month</code></td>
           <td> month in ISO format </td>
           <td> Dec </td>
         </tr>
         <tr>
-          <td> $mo </td>
+          <td><code>$mo</code></td>
           <td> 2 digit month </td>
           <td> 12 </td>
         </tr>
         <tr>
-          <td> $year </td>
+          <td><code>$year</code></td>
           <td> 4 digit year </td>
           <td> 1999 </td>
         </tr>
         <tr>
-          <td> $ye </td>
+          <td><code>$ye</code></td>
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:43:57</b></td>
+        <tr>
+          <td><code>$tz</code></td>
+          <td> either "GMT" (if set to gmtime), or "Local" (if set to servertime) </td>
+          <td> GMT </td>
+        </tr>
+        <tr>
+          <td><code>$iso</code></td>
+          <td> ISO format timestamp </td>
+          <td> 2010-06-29T15:44:40Z </td>
+        </tr>
+        <tr>
+          <td><code>$rcs</code></td>
+          <td> RCS format timestamp </td>
+          <td> 2010/06/29 15:44:40 </td>
+        </tr>
+        <tr>
+          <td><code>$http</code></td>
+          <td> E-mail &amp; http format timestamp </td>
+          <td> Tue, 29 Jun 2010 15:44:40 GMT </td>
+        </tr>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:44:40</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:43</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:44</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:43</b></td>
+    <td> Formatted server time. Same format qualifiers as <code>%GMTIME%</code><br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:44</b></td>
+  </tr>
+  <tr>
+    <td><code>%DISPLAYTIME%</code></td>
+    <td> Display time, is <b>29 Jun 2010 - 15:44</b></td>
+  </tr>
+  <tr>
+    <td><code>%DISPLAYTIME{"format"}%</code></td>
+    <td> Formatted time - either GMT or Local server time, depending on setting in TWiki.cfg. Same format qualifiers as <code>%GMTIME%</code><br /> Example: <code>%DISPLAYTIME{"$hou:$min"}%</code> is <b>15:44</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -480,13 +523,13 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td><code>"text"</code></td>
         </tr>
         <tr>
-          <td><code>order="topic"</code><br /><code>order="modified"</code><br /><code>order="editby"</code><br /><code>order=<br /> "formfield(name)"</code></td>
-          <td> Sort the results of search by the topic names, last modified time, last editor, or named field of [[Main/TWikiForms]]</td>
+          <td><code>order="topic"</code><br /><code>order="created"</code><br /><code>order="modified"</code><br /><code>order="editby"</code><br /><code>order=<br /> "formfield(name)"</code></td>
+          <td> Sort the results of search by the topic names, topic creation time, last modified time, last editor, or named field of [[Main/TWikiForms]]. The sorting is done web by web; in case you want to sort across webs, create a [[Main/FormattedSearch]] table and sort it with [[Main/TablePlugin]]'s initsort </td>
           <td> Sort by topic name </td>
         </tr>
         <tr>
           <td><code>limit="all"</code><br /><code>limit="16"</code></td>
-          <td> Limit the number of results returned </td>
+          <td> Limit the number of results returned. This is done after sorting in case <code>order</code> is specified </td>
           <td> All results </td>
         </tr>
         <tr>
@@ -528,6 +571,11 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td><code>header="..."</code><br /><code>format="..."</code></td>
           <td> Custom format results: see <strong>[[Main/FormattedSearch]]</strong> for usage, variables &amp; examples </td>
           <td> Results in table </td>
+        </tr>
+        <tr>
+          <td><code>expandvariables="on"</code></td>
+          <td> Expand variables before applying a [[Main/FormattedSearch]] on a search hit. Useful to show the expanded text, e.g. to show the result of a [[Main/SpreadSheetPlugin]] <code>%CALC{}%</code> instead of the formula </td>
+          <td> Raw text </td>
         </tr>
         <tr>
           <td><code>multiple="on"</code></td>
@@ -750,4 +798,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 > - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, define the Variable on the web's [[WebPreferences]] page, and upload a logo file, ex: `mylogo.gif`. You can upload by [[attaching the file|Main/FileAttachment]] to [[WebPreferences]], or, to avoid clutter, to any other topic in the same web, ex: `LogoTopic`:
 >   - <code>**Set MYLOGO = %PUBURL%/TWiki/LogoTopic/mylogo.gif**</code>
 
--- TWiki:Main.PeterThoeny - 14 Jan 2004 <br /> -- TWiki:Main.MikeMannix - 12 May 2002
+-- TWiki:Main.PeterThoeny - 16 Mar 2004 <br /> -- TWiki:Main.MikeMannix - 12 May 2002
