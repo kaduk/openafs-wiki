@@ -23,7 +23,7 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 - List of %WIKITOOLNAME% webs - on the first line of the upper toolbar (to add a new web, see [[ManagingWebs]] and [[SiteMap]]):
   - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Sandbox|Sandbox/WebHome]]
-  - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use this variable instead: <br />Set WIKIWEBLIST =
+  - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use the `%WEBLIST{}%` variable instead: <br />
 
 - List of selected topics in a web - the second line of the upper toolbar (usually overwritten in individual [[WebPreferences]]):
   - Set WEBTOPICLIST = [[Home|Main/WebHome]] | [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
