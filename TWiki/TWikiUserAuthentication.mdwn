@@ -62,7 +62,7 @@ This section applies only if your TWiki site is installed on a server that is bo
 
 TWiki can automatically map an Intranet (Login) Username to a TWiki Username, provided that the username pair exists in the [[TWikiUsers]] topic. This is also handled automatically when you register.
 
-- %X% In the original TWiki distribution, in <code>**twiki/data**</code>, there are two registration form topics, [[TWikiRegistration]] and [[TWikiRegistrationPub]]. The original form includes an intranet Login Username field. For Basic Authentication, the original form is replaced by the Pub version. If you started using TWiki on Basic Authentication and want to change, you have to switch back forms for future use, and manually correct the existing entries, by editing [[TWikiUsers]], adding the Login Username for each member - `PeterThoeny - pthoeny - 01 Jan 1999` - and also in the <code>**.htpasswd**</code> file, where you can either replace the [[WikiNames]] or duplicate the entries and have both, so both usernames will work. **_verification and clearer rewrite to follow in a bit. also link to original installation mention._**
+- %X% In the original TWiki distribution, in <code>**twiki/data**</code>, there are two registration form topics, [[TWikiRegistration]] and [[TWikiRegistrationPub]]. The original form includes an intranet Login Username field. For Basic Authentication, the original form is replaced by the Pub version. If you started using TWiki on Basic Authentication and want to change, you have to switch back forms for future use, and manually correct the existing entries, by editing [[TWikiUsers]], adding the Login Username for each member - `PeterThoeny - pthoeny - 01 Jan 1999` - and also in the <code>**.htpasswd**</code> file, where you can either replace the [[WikiNames]] or duplicate the entries and have both, so both usernames will work.
 
 > **_NOTE:_**
 >
@@ -98,4 +98,4 @@ Change and reset passwords using forms on regular pages. Use [[TWikiAccessContro
 
 >
 
--- [[MikeMannix]] - 19 May 2002
+-- [[MikeMannix]] - 19 May 2002 %BR% -- [[PeterThoeny]] - 25 Apr 2004

@@ -165,8 +165,16 @@ The following variables get expanded when a user creates a new topic based on a 
 >     <td> Current date, e.g. <code>29 Jun 2010</code></td>
 >   </tr>
 >   <tr>
+>     <td><code>%USERNAME%</code></td>
+>     <td> Login name, e.g. <code>jsmith</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>%WIKINAME%</code></td>
+>     <td>[[Main/WikiName]] of user, e.g. <code>JohnSmith</code></td>
+>   </tr>
+>   <tr>
 >     <td><code>%WIKIUSERNAME%</code></td>
->     <td> User name, e.g. <code>Main.admin</code></td>
+>     <td> User name, e.g. <code>Main.JohnSmith</code></td>
 >   </tr>
 >   <tr>
 >     <td><code>%URLPARAM{"name"}%</code></td>
@@ -349,4 +357,4 @@ With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=W
 
 - A drawback of referring to a master template is that you can only test a template from within TWiki, where the include variables are resolved. In the previous system, each template was a structurally complete HTML document with a `.tmpl` filename extension - it contained unresolved `%VARIABLES%`, but could still be previewed directly in a browser.
 
--- TWiki:Main.PeterThoeny - 30 Dec 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002
+-- TWiki:Main.PeterThoeny - 25 Apr 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002

@@ -159,15 +159,67 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Ordered List:</strong> %BR% Three spaces, a number, and another space. </td>
+    <td valign="top"><strong>Ordered List:</strong> %BR% Three spaces, a number, a dot, and another space. Several types are available besides a number: <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> Type </strong></th>
+          <th bgcolor="#99CCCC"><strong> Generated Style </strong></th>
+          <th bgcolor="#99CCCC"><strong> Sample Sequence </strong></th>
+        </tr>
+        <tr>
+          <td> 1. </td>
+          <td> Arabic numerals </td>
+          <td> 1, 2, 3, 4... </td>
+        </tr>
+        <tr>
+          <td> A. </td>
+          <td> Uppercase letters </td>
+          <td> A, B, C, D... </td>
+        </tr>
+        <tr>
+          <td> a. </td>
+          <td> Lowercase letters </td>
+          <td> a, b, c, d... </td>
+        </tr>
+        <tr>
+          <td> I. </td>
+          <td> Uppercase Roman Numerals </td>
+          <td> I, II, III, IV... </td>
+        </tr>
+        <tr>
+          <td> i. </td>
+          <td> Lowercase Roman Numerals </td>
+          <td> i, ii, iii, iv... </td>
+        </tr>
+      </table>
+      <p>
+      </p>
+    </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-	1 Sushi
-	1 Dim Sum
+	1. Sushi
+	1. Dim Sum
+
+	A. Sushi
+	A. Dim Sum
+
+	i. Sushi
+	i. Dim Sum
 </pre> </font></span></td>
     <td valign="top">
       <ol>
         <li> Sushi </li>
         <li> Dim Sum </li>
+      </ol>
+      <p>
+      </p>
+      <ol>
+        <li type="A"> Sushi </li>
+        <li type="A"> Dim Sum </li>
+      </ol>
+      <p>
+      </p>
+      <ol>
+        <li type="i"> Sushi </li>
+        <li type="i"> Dim Sum </li>
       </ol>
     </td>
   </tr>
@@ -252,8 +304,12 @@ Know.ReadmeFirst
 [[wiki syntax]]
 
 [[Main.TWiki users]]
+
+escaped:
+![[wiki syntax]]
 </pre> </font></span></td>
     <td valign="top">[[Main/WikiSyntax]]<p>[[Main/TWikiUsers]]</p>
+      <p> escaped: [[wiki syntax]] </p>
     </td>
   </tr>
   <tr bgcolor="#ffffff">
@@ -330,7 +386,7 @@ You can use just about any HTML tag without a problem - however, there are a few
 
 ### <a name="TWiki and _JavaScript"></a> TWiki and JavaScript
 
-You can use JavaScript for your TWiki applications. Sice TWiki rendering might interfere with JavaScript code you need to escape it with HTML comments and `<pre>` tags:
+You can use JavaScript for your TWiki applications. Since TWiki rendering might interfere with JavaScript code you need to escape it with HTML comments and `<pre>` tags:
 
     <script language="JavaScript">
     <!-- Hide JavaScript and <pre> escape TWiki rendering
@@ -410,4 +466,4 @@ TWiki formatting rules are fairly simple to use and quick to type. However, ther
 - **Q:** Why is the `'&'` character sometimes not displayed?
   - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 29 Mar 2004
+-- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 25 Apr 2004

@@ -43,13 +43,56 @@ A Form Template is simply a page containing your form, defined as a table where 
 - **form** - a topic containing additional meta data (besides the freeform TEXTAREA) that categorizes the content (replaces _category table_)
   - Within a form-enabled web, individual topics can have a form or no form
 - **form field** - a named item in a form (replaces _category item name_)
-- **field type** - selects the INPUT type:
-  - **select** - drop-down menu or scrollable box
-  - **checkbox** - one or more checkboxes
-  - **checkbox+buttons** - one or more checkboxes, plus **Set** and **Clear** buttons
-  - **radio** - one or more radio buttons
-  - **text** - a one-line text field
-  - **textarea** - a text box; size is 40x10 (columns x rows)
+- **field type** - selects the INPUT type: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Input type </strong></th>
+    <th bgcolor="#99CCCC"><strong> Type field </strong></th>
+    <th bgcolor="#99CCCC"><strong> Size field </strong></th>
+    <th bgcolor="#99CCCC"><strong> Value field </strong></th>
+  </tr>
+  <tr>
+    <td> One or more checkboxes </td>
+    <td><code>checkbox</code></td>
+    <td> number of checkboxes per line </td>
+    <td> comma list of checkbox labels </td>
+  </tr>
+  <tr>
+    <td> One or more checkboxes, plus <strong>Set</strong> and <strong>Clear</strong> buttons </td>
+    <td><code>checkbox+buttons</code></td>
+    <td> (same) </td>
+    <td> (same) </td>
+  </tr>
+  <tr>
+    <td> Read-only label text </td>
+    <td><code>label</code></td>
+    <td><code>1</code></td>
+    <td> (unused) </td>
+  </tr>
+  <tr>
+    <td> One or more radio buttons </td>
+    <td><code>radio</code></td>
+    <td> number of radio buttons per line </td>
+    <td> comma list of checkbox labels </td>
+  </tr>
+  <tr>
+    <td> Drop-down menu or scrollable box </td>
+    <td><code>label</code></td>
+    <td><code>1</code> for drop down, <code>2</code> and up for scrollable box </td>
+    <td> comma list of options </td>
+  </tr>
+  <tr>
+    <td> A one-line text field </td>
+    <td><code>text</code></td>
+    <td> text box width in number of characters </td>
+    <td> (unused) </td>
+  </tr>
+  <tr>
+    <td> A text box; size is 40x10 (columns x rows) </td>
+    <td><code>textarea</code></td>
+    <td> columns x rows, e.g. <code>40x6</code></td>
+    <td> (unused) </td>
+  </tr>
+</table>
 - **field value** - one or more values from a fixed set (select, checkbox, radio type) or free-form (text). (replaces _category item value_)
 
 ### <a name="Defining a Form in One Topic"></a> Defining a Form in One Topic
@@ -245,4 +288,4 @@ The new Form Template system should work with old Category Table data with no sp
 
 %T% **NOTE:** If things aren't working correctly, there may be useful entries in `data/warning.txt`.
 
--- [[JohnTalintyre]] - 16 Aug 2001 <br /> -- [[MikeMannix]] - 05 Jan 2002
+-- TWiki:Main.JohnTalintyre - 16 Aug 2001 %BR% -- TWiki:Main.MikeMannix - 05 Jan 2002 %BR% -- TWiki:Main.PeterThoeny - 25 Apr 2004
