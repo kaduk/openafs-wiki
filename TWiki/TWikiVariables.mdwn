@@ -221,7 +221,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:38</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:39</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -271,15 +271,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:38:05</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:39:01</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:38</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:39</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:38</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:39</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -453,7 +453,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> Custom format results: see <strong>[[Main/FormattedSearch]]</strong> for usage, variables &amp; examples </td>
           <td> Results in table </td>
         </tr>
-      </table> Regular example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code><br /> Formatted example: <code><b>%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%</b></code> <em>(displays results in a table with header - [[Main/FormattedSearch]])</em></td>
+      </table> Regular example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code><br /> Formatted example: <code><b>%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%</b></code> <em>(displays results in a table with header - [[Main/FormattedSearch]])</em><br /> %H% If the TWiki:Plugins.TablePlugin is installed, you may set a <code>%TABLE{}%</code> variable just before the <code>%SEARCH{}%</code> to alter the output of a search. Example: <code><b>%TABLE{ tablewidth="90%" }%</b></code></td>
   </tr>
   <tr>
     <td><code>%METASEARCH{...}%</code></td>
@@ -679,4 +679,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 > - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, define the Variable on the web's [[WebPreferences]] page, and upload a logo file, ex: `mylogo.gif`. You can upload by [[attaching the file|Main/FileAttachment]] to [[WebPreferences]], or, to avoid clutter, to any other topic in the same web, ex: `LogoTopic`:
 >   - <code>**Set MYLOGO = %PUBURL%/TWiki/LogoTopic/mylogo.gif**</code>
 
--- [[PeterThoeny]] - 13 Sep 2001 <br /> -- [[MikeMannix]] - 12 May 2002
+-- [[PeterThoeny]] - 19 Jan 2003 <br /> -- [[MikeMannix]] - 12 May 2002

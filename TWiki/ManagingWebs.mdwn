@@ -2,6 +2,7 @@
   <ul>
     <li><a href="#Managing Webs"> Managing Webs</a><ul>
         <li><a href="#Overview"> Overview</a></li>
+        <li><a href="#Choose Web Template"> Choose Web Template</a></li>
         <li><a href="#Adding a New Web"> Adding a New Web</a></li>
         <li><a href="#Renaming or Deleting a Web"> Renaming or Deleting a Web</a></li>
       </ul>
@@ -17,6 +18,16 @@ _Adding webs is a web based operation; renaming and deleting webs are manual ope
 
 A [[TWikiSite]] is divided into webs; each one represents one subject, one area of collaboration. Administrators can add/rename/delete webs.
 
+<a name="WebTemplate"></a>
+
+## <a name="Choose Web Template"></a> Choose Web Template
+
+There are two methods used to create a new web. First you can use a specially designed [[TemplateWeb]]. This is an invisible web that begins with an underscore "\_" character. All topics in the \_default template web will be copied into your new web.
+
+The second method is to use an existing web as a template web. This may be useful if you already have a web that you like to use as a starting point. Only topics that have names beginning with **Web...** (like "WebHome", "WebNotify", etc.) are copied.
+
+In either case you will want to be sure to verify that your new web has all the custom modifications that you desire.
+
 <a name="CreateNewWeb"></a>
 
 ## <a name="Adding a New Web"></a> Adding a New Web
@@ -30,7 +41,7 @@ A [[TWikiSite]] is divided into webs; each one represents one subject, one area 
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Based on web: </strong></th>
       <td><select name="baseweb"> </select></td>
-      <td> Select a template web (starting with an underscore) or an existing web as a template for the new web. All topics are copied over from a template web; only topics that start with <strong>Web...</strong> (like "WebHome", "WebNotify") are copied from other webs </td>
+      <td> Select a [[Main/TemplateWeb]]</td>
     </tr>
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Web color: </strong></th>
@@ -56,11 +67,17 @@ A [[TWikiSite]] is divided into webs; each one represents one subject, one area 
     </tr>
   </table><input name="newtopic" type="hidden" value="" /> <input name="action" type="hidden" value="createweb" /></form>
 
+**Note:** Attachments will NOT get copied over along with their topics. This will be a feature added for the TWiki:Codev/CairoRelease.
+
+**Note:** This script does not yet edit the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] file to update the `WIKIWEBLIST`. This must be done by hand.
+
+The manage script while creating the new web will update the following variables in the [[WebPreferences]]: `WEBBGCOLOR`, `SITEMAPLIST`, `SITEMAPWHAT`, `SITEMAPUSETO` and `NOSEARCHALL`. These variables are now used to dynamically generate the [[SiteMap]].
+
 ## <a name="Renaming or Deleting a Web"></a> Renaming or Deleting a Web
 
 Renaming or deleting a web requires direct access to the installation files on the host server. There are currently no browser-based equivalents of the Rename/move/delete topic tools for working with webs.
 
-**NOTE:** If you plan to rename the %WIKITOOLNAME%.Main web, remember that TWiki stores user and group topics in <code>%MAINWEB%</code>, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
+**NOTE:** If you plan to rename the %WIKITOOLNAME%.Main web, remember that TWiki stores user and group topics in `%MAINWEB%`, default named `Main`. That means, every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout).
 
 1. Prepare your site: Search each web for links to the target web, searching topic text for `Oldwebname.`, including the dot so you'll find references like `Oldwebname.SomeTopic`.
   - Make changes as required, to `Newwebname.SomeTopic` or better yet, to `%MAINWEB%.SomeTopic`.
@@ -70,4 +87,4 @@ Renaming or deleting a web requires direct access to the installation files on t
 5. Go to `twiki/templates` and rename or remove the web directory if present.
 6. Go to `twiki/pub` and rename or remove the web directory if present.
 
--- [[MikeMannix]] - 14 Sep 2001 <br /> -- [[PeterThoeny]] - 07 Apr 2002 <br />
+-- [[MikeMannix]] - 14 Sep 2001 <br /> -- [[PeterThoeny]] - 07 Apr 2002 <br /> -- [[GrantBow]] - 16 Jan 2003
