@@ -1,0 +1,157 @@
+<div>
+  <ul>
+    <li><a href="#TWiki Upgrade Guide"> TWiki Upgrade Guide</a><ul>
+        <li><a href="#Overview"> Overview</a></li>
+        <li><a href="#Upgrade Requirements"> Upgrade Requirements</a></li>
+        <li><a href="#Major Changes Compared to TWiki"> Major Changes Compared to TWiki 01-Feb-2003</a></li>
+        <li><a href="#Automated Upgrade Procedure from"> Automated Upgrade Procedure from 01-Feb-2003 to 01-Sep-2004 Release</a></li>
+        <li><a href="#Manual Upgrade Procedure from 01"> Manual Upgrade Procedure from 01-Feb-2003 to 01-Sep-2004 Release</a></li>
+        <li><a href="#Known Issues"> Known Issues</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+# <a name="TWiki Upgrade Guide"></a> TWiki Upgrade Guide
+
+_Upgrade from the previous TWiki 01-Feb-2003 production release to TWiki 01-Sep-2004_
+
+## <a name="Overview"></a> Overview
+
+This guide describes how to upgrade from TWiki 01-Feb-2003 to TWiki 01-Sep-2004. This is a major new release. You can chose between an automated upgrade using a script or a manual update.
+
+## <a name="Upgrade Requirements"></a> Upgrade Requirements
+
+- Please review the [[AdminSkillsAssumptions]] before you upgrade TWiki
+- To upgrade from a 01-Feb-2003 standard installation to the latest 01-Sep-2004 TWiki Production Release, follow the instructions below
+- **_NOTE:_** To upgrade from a **pre-01-Feb-2003** TWiki, start with [[TWikiUpgradeTo01Feb2003]]
+- To upgrade from a Beta of the new release, or if you made custom modifications to the application, read through all new reference documentation, then use the procedure below as a guideline
+
+## <a name="Major Changes Compared to TWiki"></a><a name="Major Changes Compared to TWiki "></a> Major Changes Compared to TWiki 01-Feb-2003
+
+- Automatic upgrade script, and easier first-time installation
+- Attractive new skins, using a standard set of CSS classes, and a [[TWikiSkinBrowser]] to help you choose
+- New easier-to-use save options
+- Many improvements to SEARCH
+- Improved support for internationalisation
+- Better topic management screens
+- More pre-installed Plugins: [[CommentPlugin]], [[EditTablePlugin]], [[RenderListPlugin]], [[SlideShowPlugin]], [[SmiliesPlugin]], [[SpreadSheetPlugin]], [[TablePlugin]]
+- Improved Plugins API and more Plugin callbacks
+- Better support for different authentication methods
+- Many user interface and usability improvements
+- And many more enhancements, see the complete change log at [[TWikiHistory]]
+
+## <a name="Automated Upgrade Procedure from"></a> Automated Upgrade Procedure from 01-Feb-2003 to 01-Sep-2004 Release
+
+With the 01-Sep-2004 Release, for the first time, comes a helper script for upgrading from a previous version. This feature is currently at beta stage, it has only been sanity tested under Unix. It should be worth giving it a try, it won't mess up your existing TWiki installation because it leaves that untouched.
+
+If you would prefer to do things manually than trust a beta script, skip to the [[manual upgrade procedure|Main/WebHome#ManualUpgradeProcedure]] below.
+
+The upgrade script is called `"UpgradeTwiki"`, and is found in the root of the distribution.
+
+It will:
+
+- Create a new TWiki installation, placing the files from the distribution there as appropriate
+- Where possible, merge the changes you've made in your existing topics into the new twiki
+- Where not possible, it will tell you, and you can inspect those differences manually
+- Create new configuration files for the new TWiki based on your existing configuation information
+- Set the permissions in the new TWiki so that it should work straight away
+- Attempt to setup authentication for your new TWiki, if you are using .htaccess in the old one
+- Tell you what else you need to do
+
+To perform the upgrade, you need to:
+
+- Check first if there is a newer `UpgradeTwiki` script available, see TWiki:Codev.UpgradeTwiki
+- Create a new directory for your new installation: Let's call this `distro/`
+- Put the distribution zip file in `distro/`
+- Unzip it
+- Choose a directory for the new installation. I will call this `new_twiki`. This directory must not already exist.
+- Change directory to `distro/` and run: %BR% `./UpgradeTwiki <full path to new_twiki>`
+
+Assuming all goes well, `UpgradeTwiki` will give you the final instructions.
+
+There are a few points worth noting:
+
+- `UpgradeTwiki` may not be able to merge all the changes you made in your existing TWiki into the new installation, but it will tell you which ones it couldn't deal with
+- `UpgradeTwiki` creates the new installation in a new directory tree. It makes a complete copy of all your existing data, so:
+  - Clearly you need to point it to a location where there is enough space
+  - If you have symlinks under your `data/` directory in your existing installation, these are reproduced as actual directories in the new structure. It is up to you to pull these sub-directories out again and re-symlink as needed
+- `UpgradeTwiki` doesn't deal with custom templates or Plugins, you will have to reinstall these in the new installation
+- If you have done tricky stuff with $OS in your existing `TWiki.cfg` file, then you will need to manually examine the new `TWiki.cfg` file and possibly put your tricky changes in there manually
+
+If you use it, and would be kind enough to add your experiences to TWiki:Codev.UpgradeTwiki, it would be much appreciated. The report of your experience will help to make `UpgradeTwiki` more robust.
+
+<a name="ManualUpgradeProcedure"></a>
+
+## <a name="Manual Upgrade Procedure from 01"></a> Manual Upgrade Procedure from 01-Feb-2003 to 01-Sep-2004 Release
+
+The following steps describe the upgrade assuming that `$TWIKIROOT` is the root of your current 01-Feb-2003 release. As written this will require some downtime. A process for switching over without downtime is described at the end of this section.
+
+1. **Back up and prepare**:
+  - Back up all existing TWiki directories `$TWIKIROOT/bin`, `$TWIKIROOT/pub`, `$TWIKIROOT/data`, `$TWIKIROOT/templates`, `$TWIKIROOT/lib`
+  - Create a temporary directory and unpack the ZIP file there
+2. **Update files in TWiki root**:
+  - Overwrite all `*.html` and `*.txt` files in `$TWIKIROOT` with the new ones
+3. **Update template files**:
+  - Overwrite all template files in `$TWIKIROOT/templates` with the new ones
+    - If you have customized your templates, make sure to merge those changes back to the new files
+  - If you have customized skins or loaded new skins, make sure to merge or apply those changes to the new files
+  - Change to **view** templates and skins:
+    - Add `%BROADCASTMESSAGE%` somewhere on the top of the rendered HTML page (see the new `view.tmpl` for reference)
+  - Changes to **edit** templates and skins:
+    - Change the form action from `preview` to `save`: %BR% <code>&lt;form name="main" action="%SCRIPTURLPATH%/**save**%SCRIPTSUFFIX%/%WEB%/%TOPIC%" method="post"&gt;</code>
+    - Change the topic action to the following: %BR% `%TMPL:DEF{"topicaction"}%` %BR% `<input type="submit" name="action" value="Cancel" id="cancel" />` %BR% `<input type="submit" name="action" value="Preview" id="preview" />` %BR% `<input type="submit" name="action" value="Checkpoint" id="checkpoint" />` %BR% `<input type="submit" name="action" value="QuietSave" id="quietsave" />` %BR% `<input type="submit" name="action" value="Save" id="save" />%TMPL:END%`
+4. **Update script files**:
+  - Overwrite all script files in `$TWIKIROOT/bin` with the new ones.
+    - If necessary, rename the scrips to include the required extension, e.g. `.cgi`
+  - Edit `$TWIKIROOT/bin/setlib.cfg` and point `$twikiLibPath` to the **_absolute_** file path of `$TWIKIROOT/lib`
+  - Edit your existing `$TWIKIROOT/bin/.htaccess` file to include a directive for the new `rdiffauth` script:%BR% `<Files "rdiffauth">` %BR% `    require valid-user` %BR% `</Files>`
+  - Pay attention to the file and directory permissions, the scripts need to be executable, e.g. `chmod 775 $TWIKIROOT/bin/*`
+    - Certain hosted environments require a `755` (do so if you get a "Premature end of script headers" messages in the Apache error log)
+  - For Windows hosts, make sure the correct path to the perl interpreter is changed in the first line of every script file. See also [[WindowsInstallCookbook|Main/WindowsInstallCookbook#Editing_the_CGI_scripts]]
+5. **Update library files**:
+  - Overwrite the `TWiki.cfg` configuration file in `$TWIKIROOT/lib` with the new one
+  - Restore the configuration values from the backup. You typically need to configure just the ones in the section "variables that need to be changed when installing on a new server"
+  - Overwrite the `TWiki.pm` library in `$TWIKIROOT/lib` with the new one
+  - Copy and overwrite all subdirectories below `$TWIKIROOT/lib` with the new ones. Make sure to preserve any extra Plugins you might have in `$TWIKIROOT/lib/TWiki/Plugins`
+  - Pay attention to the file and directory permissions, the library files should not be executable but the directory files should be, e.g. ``chmod 664 `find -type f $TWIKIROOT/lib``` (for files) and ``chmod 775 `find -type d $TWIKIROOT/lib``` (for directories)
+6. **Update data files**:
+  - Run the `bin/testenv` script from the browser (e.g. `http://localhost/bin/testenv`) to verify if the cgi-scripts are running as user `nobody`. In case not:
+    - The `*,v` RCS repository files delivered with the installation package are locked by user `nobody` and need to be changed to the user of your cgi-scripts, for example `www-data`
+    - Run the `testenv` script from your browser; in the %BROWN% **Fix** %ENDCOLOR% line you can <u>relock</u> all the rcs files **(recommended)**
+    - Alternatively, execute the shell script commands described in [[TWikiInstallationGuide#StepTwo]]
+  - In the temporary `twiki/data/TWiki` directory where you unzipped the installation package:
+    - Remove the files you do **not** want to upgrade: `InterWikis.*`, `TWikiRegistration.*`, `TWikiRegistrationPub.*`, `WebPreferences.*`, `WebStatistics.*` and all `WebTopic*` files
+  - Rename in the temporary directory the file `$TWIKIROOT/data/TWiki/TWikiPreferences.*` to `TWikiPreferencesSave.*`.
+  - Move all remaining `*.txt` and `*.txt,v` files from the temporary `data/TWiki` directory to your `$TWIKIROOT/data/TWiki` directory, overwriting the existing ones
+  - Merge your original `TWikiPreferencesSave.txt` settings into `$TWIKIROOT/data/TWiki/TWikiPreferences.txt`. Notable changes are:
+    - New WIKIWEBMASTERNAME setting to avoid notifications being trapped by spam filters
+    - New ATTACHFILESIZELIMIT setting for maximum size of [[FileAttachments]] in KB, 0 for no limit
+    - New READTOPICPREFS and TOPICOVERRIDESUSER settings to allow override Preference settings in topics
+    - Changed FINALPREFERENCES:
+      - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE, READTOPICPREFS, TOPICOVERRIDESUSER
+  - Move the `data/_default` directory from the temporary location to your `$TWIKIROOT/data` directory
+  - Make sure that the directories and files below `$TWIKIROOT/data` are writable by your cgi-script user
+7. **Adapt the other webs (all other than `TWiki` and `_default`)**:
+  - Add [[WebLeftBar]] topic. See [[WebLeftBarExample]] for a clean example, and [[WebLeftBarCookbook]] for more information. ([[WebLeftBar]] is used by the [[PatternSkin]] skin)
+  - Add [[WebSearchAdvanced]] topic, which has this one line: %BR% `%INCLUDE{"%TWIKIWEB%.WebSearchAdvanced"}%`
+  - Consider changing [[WebPreferences]] settings:
+    - New NOAUTOLINK setting to prevent automatic linking of [[WikiWords]] and acronyms
+    - Changed FINALPREFERENCES:
+      - Set FINALPREFERENCES = NOSEARCHALL, ATTACHFILESIZELIMIT, WIKIWEBMASTER, WEBCOPYRIGHT, WEBTOPICLIST, DENYWEBVIEW, ALLOWWEBVIEW, DENYWEBCHANGE, ALLOWWEBCHANGE, DENYWEBRENAME, ALLOWWEBRENAME
+8. **Update pub files**:
+  - Move all subdirectories below `pub/TWiki` from your temporary directory into your `$TWIKIROOT/pub/TWiki` directory
+  - Make sure that the directories and files below `$TWIKIROOT/pub/TWiki` are writable by your cgi-script user
+  - Move all files in `pub/icn` directory from the temporary location to your `$TWIKIROOT/pub/icn` directory
+9. **Verify installation**:
+  - Execute the `$TWIKIROOT/bin/testenv` script from your browser (e.g. `http://localhost/bin/testenv`) to see if it reports any issues; address any potential problems
+  - Test your updated TWiki installation to see if you can view, create, edit and rename topics; upload and move attachments; register users
+  - Test if the installed Plugins work as expected. You should see the list of installed Plugins in [[TWiki.WebHome|TWiki/WebHome]]
+
+**Note:** These steps assume a downtime during the time of upgrade. You could install the new version in parallel to the existing one and switch over in an instant without affecting the users. As a guideline, install the new version into `$TWIKIROOT/bin1`, `$TWIKIROOT/lib1`, `$TWIKIROOT/templates1`, `$TWIKIROOT/data/TWiki1` (from `data/TWiki`), `$TWIKIROOT/pub/TWiki1` (from `pub/TWiki`), and configure `TWiki.cfg` to point to the same data and pub directory like the existing installation. Once tested and ready to go, reconfigure `$TWIKIROOT/bin1/setlib.cfg` and `$TWIKIROOT/lib1/TWiki.cfg`, then rename `$TWIKIROOT/bin` to `$TWIKIROOT/bin2`, `$TWIKIROOT/bin1` to `$TWIKIROOT/bin`. Do the same with the `lib`, `templates` and `data/TWiki` directories.
+
+## <a name="Known Issues"></a> Known Issues
+
+- Check TWiki:Codev/KnownIssuesOfTWiki01Sep2004 for known issues of TWiki 01-Sep-2004 production release
+
+-- TWiki:Main.PeterThoeny - 29 Aug 2004 %BR%
