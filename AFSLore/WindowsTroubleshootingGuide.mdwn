@@ -4,6 +4,7 @@
   <ul>
     <li><a href="#Troubleshooting Guide for _OpenA"> Troubleshooting Guide for OpenAFS for Windows</a><ul>
         <li><a href="#What is this _MrxSmb event 3019"> What is this MrxSmb event 3019 that pops up in my System Log?</a></li>
+        <li><a href="#How come my non-ASCII filename c"> How come my non-ASCII filename characters are wrong; code page problems?</a></li>
       </ul>
     </li>
   </ul>
@@ -11,4 +12,10 @@
 
 ## <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
 
-The [[MrxSmb]] event 3019 is due to the use of the Loop Back device. It can be safely ignored. [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm)
+The [[MrxSmb]] event 3019 is due to the use of the Loop Back device. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
+
+## <a name="How come my non-ASCII filename c"></a> How come my non-ASCII filename characters are wrong; code page problems?
+
+Yes, it is. Currently, the [[OpenAFS]] implementation uses a SMB server with which Windows communicates. This server is not yet able to handle all code pages. So, if you are accessing files from other systems as well, you will experience the old code page missmatch problem.
+
+The CIFS protocol itself has support for Unicode. Hopefully, it will be implemented in [[OpenAFS]] in the future. (from J. Altman)
