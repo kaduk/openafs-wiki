@@ -157,9 +157,9 @@ Line before table: `%EDITTABLE{ header="|*Nr*|*Text field sandbox*|*Drop down sa
     </table><input name="etrows" type="hidden" value="3" /> <input type="submit" value="Edit table" /></form>
 </div>
 
-**_Note:_** Please use TWiki:Sandbox.EditTablePluginTesting if you want to try out this Plugin
+%RED% **_Note:_** Please use TWiki:Sandbox.EditTablePluginTesting if you want to try out this Plugin %ENDCOLOR%
 
-If this plugin is installed you will see an **[ Edit table ]** button above; when you click on it you get this form:
+If this plugin is installed you will see an **[ Edit table ]** button above; if you were to click on it (please don't, use TWiki:Sandbox.EditTablePluginTesting for testing) you get this form:
 
 <form>
   <table border="1" cellpadding="0" cellspacing="1">
@@ -239,7 +239,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 ## <a name="Limitations and Known Issues"></a> Limitations and Known Issues
 
-- %X% Bug: The Plugin fails if the table is at the very end of the topic (without a new line) Always ensure there is a newline after the table
 - This Plugin does not support TWiki table formatting like Multi-span cells (e.g. `| ... ||`) and cell justification (e.g. `|  centered  |   right |`)
 - There is a performance issue when editing a large table, say, with more then 50 rows
 - Variables like `%ATTACHURL%` get expanded unless they are in a label
@@ -313,11 +312,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 07 Apr 2004 </td>
+    <td> 01 Aug 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 01 Aug 2004: </td>
+    <td> Fixed bug where edittable did not work if at the end of a topic </td>
   </tr>
   <tr>
     <td align="right"> 07 Apr 2004: </td>
@@ -427,4 +430,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 07 Apr 2004
+-- TWiki:Main/PeterThoeny - 01 Aug 2004

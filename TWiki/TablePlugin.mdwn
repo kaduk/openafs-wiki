@@ -283,94 +283,98 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 21 Mar 2004 </td>
+    <td bgcolor="#ffffff" style=""> 01 Aug 2004 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
     <td bgcolor="#ecf2f8" style="">  </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 21 Mar 2004: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Internal change: Fixed reference to inofficial variable </td>
+    <td align="right" bgcolor="#ffffff" style=""> 01 Aug 2004: </td>
+    <td bgcolor="#ffffff" style=""> AC: Added CSS support for first column and ascending/descending table headers </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 01 Jan 2004: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Alternating data row colors restart again after each header row </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 21 Mar 2004: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Internal change: Fixed reference to unofficial variable </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 01 Dec 2003: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Fixed error when footerrows was specified on an empty table, contributed by TWiki:Main/PaulineCheung </td>
+    <td align="right" bgcolor="#ffffff" style=""> 01 Jan 2004: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Alternating data row colors restart again after each header row </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 24 May 2003: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: New <code>|^|</code> rule for multi row span (TWiki:Main/WalterMundt); added tableframe and tablerules (TWiki:Main/JohannesMartin); ignore columnwidths for multi column span; validate headerrows and footerrows (TWiki:Main/DarrylGreen); fixed link color problem and up/down icon color problem for dark header background </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 01 Dec 2003: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed error when footerrows was specified on an empty table, contributed by TWiki:Main/PaulineCheung </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 17 Dec 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Removed individual table Plugin settings; added TABLEATTRIBUTES Plugins setting and TABLEATTRIBUTES preferences setting </td>
+    <td align="right" bgcolor="#ffffff" style=""> 24 May 2003: </td>
+    <td bgcolor="#ffffff" style=""> PTh: New <code>|^|</code> rule for multi row span (TWiki:Main/WalterMundt); added tableframe and tablerules (TWiki:Main/JohannesMartin); ignore columnwidths for multi column span; validate headerrows and footerrows (TWiki:Main/DarrylGreen); fixed link color problem and up/down icon color problem for dark header background </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 15 Dec 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added headerrows and footerrows params (TWiki:Main/DarrylGreen, TWiki:Main/WoutMertens); added tablewidth and columnwidths params (TWiki:Main/ThorstenSommermann) </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 17 Dec 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Removed individual table Plugin settings; added TABLEATTRIBUTES Plugins setting and TABLEATTRIBUTES preferences setting </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 09 Dec 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added headercolor and datacolor parameters </td>
+    <td align="right" bgcolor="#ffffff" style=""> 15 Dec 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added headerrows and footerrows params (TWiki:Main/DarrylGreen, TWiki:Main/WoutMertens); added tablewidth and columnwidths params (TWiki:Main/ThorstenSommermann) </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jun 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 09 Dec 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added headercolor and datacolor parameters </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 13 Mar 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
+    <td align="right" bgcolor="#ffffff" style=""> 05 Jun 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 12 Mar 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 13 Mar 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 05 Jan 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
+    <td align="right" bgcolor="#ffffff" style=""> 12 Mar 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 06 Dec 2001: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jan 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 29 Nov 2001: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Fixed Perl warnings </td>
+    <td align="right" bgcolor="#ffffff" style=""> 06 Dec 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 16 Nov 2001: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 29 Nov 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed Perl warnings </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 07 Oct 2001: </td>
-    <td bgcolor="#ffffff" style=""> JT: Initial version </td>
+    <td align="right" bgcolor="#ffffff" style=""> 16 Nov 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> CPAN Dependencies: </td>
-    <td bgcolor="#ecf2f8" style=""> none </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 07 Oct 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> JT: Initial version </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> Other Dependencies: </td>
+    <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
     <td bgcolor="#ffffff" style=""> none </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> Perl Version: </td>
-    <td bgcolor="#ecf2f8" style=""> 5.0 </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> Other Dependencies: </td>
+    <td bgcolor="#ecf2f8" style=""> none </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> Plugin Home: </td>
-    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+    <td align="right" bgcolor="#ffffff" style=""> Perl Version: </td>
+    <td bgcolor="#ffffff" style=""> 5.0 </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> Feedback: </td>
-    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+    <td align="right" bgcolor="#ecf2f8" style=""> Plugin Home: </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Feedback: </td>
+    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], [[StandardColors]]
 
--- TWiki:Main/JohnTalintyre - 07 Oct 2001 <br /> -- TWiki:Main/PeterThoeny - 21 Mar 2004 <br />
+-- TWiki:Main/JohnTalintyre - 07 Oct 2001 <br /> -- TWiki:Main/PeterThoeny - 01 Aug 2004 <br />
