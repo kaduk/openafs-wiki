@@ -77,6 +77,10 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
     <td> The address range of cells above the current cell </td>
   </tr>
   <tr>
+    <td><code><b>"$ABS(num)"</b></code></td>
+    <td> The absolute value of a number. Example: <code><b>%CALC{"$ABS(-12.5)"}%</b></code> returns <code><b>12.5</b></code></td>
+  </tr>
+  <tr>
     <td><code><b>"$AND(list)"</b></code></td>
     <td> The logcial AND of a list. Example: <code><b>%CALC{"$AND(1, 0, 1)"}%</b></code> returns <code><b>0</b></code></td>
   </tr>
@@ -118,7 +122,7 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
   </tr>
   <tr>
     <td><code><b>"$FIND(search_string, text, start_index)"</b></code></td>
-    <td> Finds one text string <code>search_string</code>, within another text string <code>text</code>, and returns the number of the starting position of <code>search_string</code>, from the first character of <code>text</code>. This search is case sensitive and is not a regular expression search; use <code>$SEARCH()</code> for regular expression searching. Starting position is 1; an empty string is returned if nothing is matched. Examples: %BR% <code><b>%CALC{"$FIND(f, fluffy)"}%</b></code> returns <code><b>1</b></code> %BR% <code><b>%CALC{"$FIND(f, fluffy, 2)"}%</b></code> returns <code><b>4</b></code> %BR% <code><b>%CALC{"$FIND(@, fluffy, 1)"}%</b></code> returns an empty string </td>
+    <td> Finds one text string <code>search_string</code>, within another text string <code>text</code>, and returns the number of the starting position of <code>search_string</code>, from the first character of <code>text</code>. This search is case sensitive and is not a regular expression search; use <code>$SEARCH()</code> for regular expression searching. Starting position is 1; a 0 is returned if nothing is matched. Examples: %BR% <code><b>%CALC{"$FIND(f, fluffy)"}%</b></code> returns <code><b>1</b></code> %BR% <code><b>%CALC{"$FIND(f, fluffy, 2)"}%</b></code> returns <code><b>4</b></code> %BR% <code><b>%CALC{"$FIND(@, fluffy, 1)"}%</b></code> returns <code><b>0</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$FORMAT(type, prec, number)"</b></code></td>
@@ -157,12 +161,16 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
     <td> Converts the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list. Example: <code><b>%CALC{"$LIST( $LEFT() )"}%</b></code> returns <code><b>Apples, Lemons, Oranges, Kiwis</b></code> assuming the cells to the left contain <code><b>| Apples | Lemons, Oranges | Kiwis |</b></code></td>
   </tr>
   <tr>
+    <td><code><b>"$LISTIF(condition, list)"</b></code></td>
+    <td> Remove elements from a list that do not meet a condition. In addition to the condition described in <code>$IF()</code>, you can use <code><b>$item</b></code> to indicate the current element. Examples: %BR% <code><b>%CALC{"$LISTIF($item &gt; 12, 14, 7, 25)"}%</b></code> returns <code><b>14, 25</b></code> %BR% <code><b>%CALC{"$LISTIF($NOT($EXACT($item,)), A, B, , C)"}%</b></code> returns <code><b>A, B, C</b></code></td>
+  </tr>
+  <tr>
     <td><code><b>"$LISTITEM(index, list)"</b></code></td>
-    <td> Get one item of a list. Index is 1 to size of list; use a negative number to count from the end of the list. Examples:%BR% <code><b>%CALC{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Orange</b></code> %BR% <code><b>%CALC{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Kiwi</b></code></td>
+    <td> Get one element of a list. Index is 1 to size of list; use a negative number to count from the end of the list. Examples:%BR% <code><b>%CALC{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Orange</b></code> %BR% <code><b>%CALC{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Kiwi</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$LISTMAP(formula, list)"</b></code></td>
-    <td> Evaluate and update each element of a list. In the formla, <code><b>$item</b></code> indicates the element, <code><b>$index</b></code> the index of the list starting at 1. Example: <code><b>%CALC{"$LISTMAP($index: $EVAL(2 * $item), 3, 5, 7, 11)"}%</b></code> returns <code><b>1: 6, 2: 10, 3: 14, 4: 22</b></code></td>
+    <td> Evaluate and update each element of a list. In the formula you can use <code><b>$item</b></code> to indicate the element; <code><b>$index</b></code> to show the index of the list, starting at 1. Example: <code><b>%CALC{"$LISTMAP($index: $EVAL(2 * $item), 3, 5, 7, 11)"}%</b></code> returns <code><b>1: 6, 2: 10, 3: 14, 4: 22</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$LISTREVERSE(list)"</b></code></td>
@@ -250,7 +258,7 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
   </tr>
   <tr>
     <td><code><b>"$SEARCH(search_string, text, start_index)"</b></code></td>
-    <td> Finds one text string <code>search_string</code>, within another text string <code>text</code>, and returns the number of the starting position of <code>search_string</code>, from the first character of <code>text</code>. This search a [[TWiki/RegularExpression]] search; use <code>$FIND()</code> for non-regular expression searching. Starting position is 1; an empty string is returned if nothing is matched. Examples: %BR% <code><b>%CALC{"$SEARCH([uy], fluffy)"}%</b></code> returns <code><b>3</b></code> %BR% <code><b>%CALC{"$SEARCH([uy], fluffy, 3)"}%</b></code> returns <code><b>6</b></code> %BR% <code><b>%CALC{"$SEARCH([abc], fluffy,)"}%</b></code> returns an empty string </td>
+    <td> Finds one text string <code>search_string</code>, within another text string <code>text</code>, and returns the number of the starting position of <code>search_string</code>, from the first character of <code>text</code>. This search a [[TWiki/RegularExpression]] search; use <code>$FIND()</code> for non-regular expression searching. Starting position is 1; a 0 is returned if nothing is matched. Examples: %BR% <code><b>%CALC{"$SEARCH([uy], fluffy)"}%</b></code> returns <code><b>3</b></code> %BR% <code><b>%CALC{"$SEARCH([uy], fluffy, 3)"}%</b></code> returns <code><b>6</b></code> %BR% <code><b>%CALC{"$SEARCH([abc], fluffy,)"}%</b></code> returns <code><b>0</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$SET(name, value)"</b></code></td>
@@ -424,15 +432,19 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 21 Mar 2004 </td>
+    <td> 03 Apr 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 03 Apr 2004: </td>
+    <td> Added $ABS(), $LISTIF(); fixed $VALUE() to remove leading zeros; changed $FIND() and $SEARCH() to return 0 instead of empty string if no match </td>
+  </tr>
+  <tr>
     <td align="right"> 21 Mar 2004: </td>
-    <td> Added $LISTINDEX(); fixed call to inofficial function </td>
+    <td> Added $LISTITEM(); fixed call to unofficial function </td>
   </tr>
   <tr>
     <td align="right"> 16 Mar 2004: </td>
@@ -546,4 +558,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 21 Mar 2004
+-- TWiki:Main/PeterThoeny - 03 Apr 2004
