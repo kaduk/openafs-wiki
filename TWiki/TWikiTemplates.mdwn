@@ -195,7 +195,7 @@ Here is an example for creating new topics based on a specific template topic:
 
 <form action="http://www.dementia.org/twiki//edit/%WEB%/" name="new">
   <ul>
-    <li> New example topic: <input name="topic" size="23" type="text" value="ExampleTopic2010x06x29" /> <input name="templatetopic" type="hidden" value="ExampleTopicTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input name="onlywikiname" type="hidden" value="on" /> <input type="submit" value="Create" /> (date format is YYYYxMMxDD) </li>
+    <li> New example topic: <input name="topic" size="23" type="text" value="ExampleTopic2010x06x29" /> <input name="templatetopic" type="hidden" value="ExampleTopicTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="onlynewtopic" type="hidden" value="on" /> <input type="submit" value="Create" /> (date format is YYYYxMMxDD) </li>
   </ul>
 </form>
 
@@ -207,6 +207,7 @@ The above form asks for a topic name. A hidden input tag named <code>**templatet
     	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate" />
     	  <input type="hidden" name="topicparent" value="%TOPIC%" />
     	  <input type="hidden" name="onlywikiname" value="on" />
+    	  <input type="hidden" name="onlynewtopic" value="on" />
     	  <input type="submit" value="Create" />
     	  (date format is <nop>YYYYxMMxDD)
     </form>
@@ -225,6 +226,10 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
 >   <tr>
 >     <td><code>onlywikiname</code></td>
 >     <td> If set, TWiki will complain if the topic name is not a [[Main/WikiWord]]</td>
+>   </tr>
+>   <tr>
+>     <td><code>onlynewtopic</code></td>
+>     <td> If set, TWiki will complain if a topic of the same name already exists </td>
 >   </tr>
 >   <tr>
 >     <td><code>templatetopic</code></td>
@@ -344,4 +349,4 @@ With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=W
 
 - A drawback of referring to a master template is that you can only test a template from within TWiki, where the include variables are resolved. In the previous system, each template was a structurally complete HTML document with a `.tmpl` filename extension - it contained unresolved `%VARIABLES%`, but could still be previewed directly in a browser.
 
--- TWiki:Main.PeterThoeny - 16 Dec 2003 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002
+-- TWiki:Main.PeterThoeny - 30 Dec 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002
