@@ -27,6 +27,9 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Table cell spacing. Default: 1
   - Set CELLSPACING = 1
 
+- Table width, e.g. `100%` for relative, `640` for absolute width. Default: (not set)
+  - Set TABLEWIDTH =
+
 - Vertical alignment of cells. Set to: `top`, `middle`, `bottom` or `baseline`; default: (empty)
   - Set VALIGN =
 
@@ -139,15 +142,38 @@ On line before the table use `%TABLE{...}%`:
     <td bgcolor="#ecf2f8" style=""> Data cell alignment, set to <code>left</code>, <code>center</code>, <code>right</code> or <code>justify</code>. Overrides individual cell settings </td>
     <td bgcolor="#ecf2f8" style=""><code>dataalign="center"</code></td>
   </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>tablewidth</code></td>
+    <td bgcolor="#ffffff" style=""> Table width: Percentage of window width, or absolute pixel value. Default is unspecified </td>
+    <td bgcolor="#ffffff" style=""><code>tablewidth="100%"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>columnwidths</code></td>
+    <td bgcolor="#ecf2f8" style=""> Column widths: Comma delimited list of column widths, percentage or absolute pixel value. Default is unspecified </td>
+    <td bgcolor="#ecf2f8" style=""><code>columnwidths="80%, 20%"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>headerrows</code></td>
+    <td bgcolor="#ffffff" style=""> Number of header rows to exclude from sort; default 1 </td>
+    <td bgcolor="#ffffff" style=""><code>headerrows="1"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>footerrows</code></td>
+    <td bgcolor="#ecf2f8" style=""> Number of footer rows to exclude from sort; default 0 </td>
+    <td bgcolor="#ecf2f8" style=""><code>footerrows="1"</code></td>
+  </tr>
 </table>
 
 All default to the global setting
 
 ## <a name="Example"></a> Example
 
-Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacing="3" headerbg="#000099" headercolor="#FFFFCC" databg="#C8CB8F, #DBDDB5" }%`
+Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacing="3" headerbg="#000099" headercolor="#FFFFCC" databg="#C8CB8F, #DBDDB5" headerrows="2" footerrows="1" }%`
 
 <table border="0" cellpadding="1" cellspacing="3" style="border-width: 0px">
+  <tr>
+    <th bgcolor="#000099" colspan="6" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Table with two Header Rows and Footer Row </strong> </font></span></th>
+  </tr>
   <tr>
     <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Num</font></a></th>
     <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Status</font></a></th>
@@ -195,6 +221,14 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
     <td bgcolor="#C8CB8F" style=""> John </td>
     <td bgcolor="#C8CB8F" style="">   </td>
     <td bgcolor="#C8CB8F" style="">   </td>
+  </tr>
+  <tr>
+    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Num </strong> </font></span></th>
+    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Status </strong> </font></span></th>
+    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Action </strong> </font></span></th>
+    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Who </strong> </font></span></th>
+    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> When </strong> </font></span></th>
+    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Progress </strong> </font></span></th>
   </tr>
 </table>
 
@@ -246,70 +280,74 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 09 Dec 2002 </td>
+    <td bgcolor="#ffffff" style=""> 15 Dec 2002 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
     <td bgcolor="#ecf2f8" style="">  </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 09 Dec 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added headercolor and datacolor parameters </td>
+    <td align="right" bgcolor="#ffffff" style=""> 15 Dec 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added headerrows and footerrows params (TWiki:Main/WoutMertens); added tablewidth and columnwidths params (TWiki:Main/ThorstenSommermann) </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jun 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 09 Dec 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added headercolor and datacolor parameters </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 13 Mar 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
+    <td align="right" bgcolor="#ffffff" style=""> 05 Jun 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 12 Mar 2002: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 13 Mar 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 05 Jan 2002: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
+    <td align="right" bgcolor="#ffffff" style=""> 12 Mar 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 06 Dec 2001: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jan 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 29 Nov 2001: </td>
-    <td bgcolor="#ffffff" style=""> PTh: Fixed Perl warnings </td>
+    <td align="right" bgcolor="#ffffff" style=""> 06 Dec 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> 16 Nov 2001: </td>
-    <td bgcolor="#ecf2f8" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 29 Nov 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed Perl warnings </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> 07 Oct 2001: </td>
-    <td bgcolor="#ffffff" style=""> JT: Initial version </td>
+    <td align="right" bgcolor="#ffffff" style=""> 16 Nov 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> CPAN Dependencies: </td>
-    <td bgcolor="#ecf2f8" style=""> none </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> 07 Oct 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> JT: Initial version </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> Other Dependencies: </td>
+    <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
     <td bgcolor="#ffffff" style=""> none </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> Perl Version: </td>
-    <td bgcolor="#ecf2f8" style=""> 5.0 </td>
+    <td align="right" bgcolor="#ecf2f8" style=""> Other Dependencies: </td>
+    <td bgcolor="#ecf2f8" style=""> none </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ffffff" style=""> Plugin Home: </td>
-    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+    <td align="right" bgcolor="#ffffff" style=""> Perl Version: </td>
+    <td bgcolor="#ffffff" style=""> 5.0 </td>
   </tr>
   <tr>
-    <td align="right" bgcolor="#ecf2f8" style=""> Feedback: </td>
-    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+    <td align="right" bgcolor="#ecf2f8" style=""> Plugin Home: </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Feedback: </td>
+    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], [[StandardColors]]
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 09 Dec 2002 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 15 Dec 2002 <br />
