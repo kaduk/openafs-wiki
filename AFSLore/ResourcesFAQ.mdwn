@@ -1,0 +1,187 @@
+## <a name="4  Getting more information"></a> 4 Getting more information
+
+The Administration Section of the [[AFSFrequentlyAskedQuestions]].
+
+- [[PreambleFAQ]]
+- [[GeneralFAQ]]
+- [[UsageFAQ]]
+- [[AdminFAQ]]
+
+<div>
+  <ul>
+    <li><a href="#4  Getting more information"> 4 Getting more information</a><ul>
+        <li><a href="#4.01  Is there an anonymous FTP"> 4.01 Is there an anonymous FTP site with AFS information?</a></li>
+        <li><a href="#4.02  Which USENET newsgroups di"> 4.02 Which USENET newsgroups discuss AFS?</a></li>
+        <li><a href="#4.03  Where can I get training i"> 4.03 Where can I get training in AFS?</a></li>
+        <li><a href="#4.04  Where can I find AFS resou"> 4.04 Where can I find AFS resources in World Wide Web (WWW)?</a></li>
+        <li><a href="#4.05  Is there a mailing list fo"> 4.05 Is there a mailing list for AFS topics?</a></li>
+        <li><a href="#4.06  Where can I find an archiv"> 4.06 Where can I find an archive of <a href="mailto:info-afs@transarc.com">info-afs@transarc.com</a>?</a></li>
+        <li><a href="#4.07  Where can I find an archiv"> 4.07 Where can I find an archive of alt.filesystems.afs?</a></li>
+        <li><a href="#4.08  Where can I find AFS relat"> 4.08 Where can I find AFS related GIFs?</a></li>
+        <li><a href="#4.09  Gibt es eine deutsche AFS"> 4.09 Gibt es eine deutsche AFS Benutzer Gruppe?</a></li>
+        <li><a href="#4.10  Donde puedo encontrar info"> 4.10 Donde puedo encontrar informacion en Espanol sobre AFS?</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+- [[AboutTheFAQ]]
+- [[FurtherReading]]
+
+### <a name="4.01  Is there an anonymous FTP"></a><a name="4.01  Is there an anonymous FTP "></a> 4.01 Is there an anonymous FTP site with AFS information?
+
+Yes, it is: ftp.transarc.com
+
+A brief summary of contents:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th align="center" bgcolor="#99CCCC"><strong> Path </strong></th>
+    <th align="center" bgcolor="#99CCCC"><strong> Contents </strong></th>
+  </tr>
+  <tr>
+    <td> pub/afsug/README </td>
+    <td> AFS user group </td>
+  </tr>
+  <tr>
+    <td> pub/afsug/newsletter/ </td>
+    <td> AFS user group newsletters </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/ </td>
+    <td> Contributed by other groups </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/bin/README </td>
+    <td> other client ports (US-only) </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/bin.export/ </td>
+    <td> other client ports </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/tools/MANIFEST </td>
+    <td> miscellaneous tools </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/src/README </td>
+    <td> submissions from source licensees </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/doc/MANIFEST </td>
+    <td> documentation </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/pointers/MANIFEST </td>
+    <td> infomation in other places </td>
+  </tr>
+  <tr>
+    <td> pub/afsps/README </td>
+    <td> AFS product support </td>
+  </tr>
+  <tr>
+    <td> pub/afsps/doc/ </td>
+    <td> release notes, SUPPORTED_SYSTEMS.afs.* </td>
+  </tr>
+  <tr>
+    <td> pub/afsps/doc/progint/ </td>
+    <td> AFS programming interface docs </td>
+  </tr>
+</table>
+
+These directories are also accessible via AFS. For example: <file:///afs/transarc.com/public/anon-ftp/pub/afs-contrib>
+
+(NB "pub" =&gt; "public/anon-ftp/pub" when using AFS to access these.)
+
+### <a name="4.02  Which USENET newsgroups di"></a> 4.02 Which USENET newsgroups discuss AFS?
+
+alt.filesystems.afs and occasionally in comp.unix.admin.
+
+### <a name="4.03  Where can I get training i"></a> 4.03 Where can I get training in AFS?
+
+Transarc provide user and administrator courses. These can be provided at the customer site or at Transarc's offices.
+
+Transarc's education coordinator may be contacted by:
+
+<dl>
+  <dt> telephone</dt>
+  <dd> +1 412 338 4363 email: <a href="mailto:education@transarc.com">education@transarc.com</a></dd>
+</dl>
+
+<http://www.transarc.com>
+
+### <a name="4.04  Where can I find AFS resou"></a> 4.04 Where can I find AFS resources in World Wide Web (WWW)?
+
+Here are some I have found (please let me know if you find more):
+
+    a) A collection of AFS information maintained by Derrick Brashear at CMU:
+
+       http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs.html
+       (Also accessible in: /afs/andrew.cmu.edu/usr/shadow/www)
+
+    b) AFS Beginners Guide (ALW/NIH):
+       http://www.alw.nih.gov/Docs/AFS/AFS_toc.html
+
+    c) NCSA AFS User Guide:
+       http://www.ncsa.uiuc.edu/Pubs/UserGuides/AFSGuide/AFSv2.1Book.html
+
+    d) Transarc AFS Product Information:
+       http://www.transarc.com/dfs/public/www/htdocs/.hosts/external/Product/EFS/AFS/afsoverview.html
+
+    e) CERN AFS User's Guide:
+       http://wsspinfo.cern.ch/file/doc/afsug.html
+
+    f) MIT SIPB's Inessential AFS
+       http://web.mit.edu/afs/sipb.mit.edu/project/doc/afs/html/afs-new.html
+
+    g) Stanford University hypermail archive of info-afs@transarc.com
+       http://www-archive.stanford.edu/lists/info-afs.html
+
+    h) Linux AFS FAQ:
+       http://www.umlug.umd.edu/linuxafs/
+
+### <a name="4.05  Is there a mailing list fo"></a> 4.05 Is there a mailing list for AFS topics?
+
+Yes, it is <info-afs@transarc.com>.
+
+An automated program called Majordomo is now handling the info-afs list. To join the mailing list, send a message to:
+
+<majordomo@transarc.com>
+
+In the body (not the Subject line) of the message, type:
+
+subscribe info-afs
+
+For example:
+
+$ mail -s "subscribe to info-afs" <majordomo@transarc.com> &lt;&lt;% subscribe info-afs %
+
+To unsubscribe:
+
+$ mail -s "unsubscribe from info-afs" <majordomo@transarc.com> &lt;&lt;% unsubscribe info-afs
+
+### <a name="4.06  Where can I find an archiv"></a> 4.06 Where can I find an archive of <info-afs@transarc.com>?
+
+There is a hypermail archive at: <http://www-archive.stanford.edu/lists/info-afs.html>
+
+### <a name="4.07  Where can I find an archiv"></a> 4.07 Where can I find an archive of alt.filesystems.afs?
+
+<file:///afs/ibm.uk/common/archive/alt.filesystems.afs/>
+
+Both the <info-afs@transarc.com> and alt.filesystems.afs archives are incomplete. If you have material to contribute, please let me know.
+
+### <a name="4.08  Where can I find AFS relat"></a> 4.08 Where can I find AFS related GIFs?
+
+<file:///afs/transarc.com/public/afs-contrib/doc/faq/images/index.html> <ftp://ftp.transarc.com/pub/afs-contrib/doc/faq/images/index.html>
+
+### <a name="4.09  Gibt es eine deutsche AFS"></a><a name="4.09  Gibt es eine deutsche AFS "></a> 4.09 Gibt es eine deutsche AFS Benutzer Gruppe?
+
+Ja, wenn Sie mitmachen wollen, schicken Sie bitte eine E-Mail an:
+
+<afsdeu-request@hrz.th-darmstadt.de>
+
+Ueber diese Adresse werden "subscribe" und "unsubscribe" Requests bearbeitet.
+
+### <a name="4.10  Donde puedo encontrar info"></a> 4.10 Donde puedo encontrar informacion en Espanol sobre AFS?
+
+Hay algunas notas en Espanol sobre AFS en: <http://w3.ing.puc.cl/~cet/afs.html>

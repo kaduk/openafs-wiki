@@ -1,0 +1,94 @@
+## <a name="5  About the AFS faq"></a> 5 About the AFS faq
+
+About the [[AFSFrequentlyAskedQuestions]].
+
+- [[PreambleFAQ]]
+- [[GeneralFAQ]]
+- [[UsageFAQ]]
+- [[AdminFAQ]]
+- [[ResourcesFAQ]]
+
+<div>
+  <ul>
+    <li><a href="#5  About the AFS faq"> 5 About the AFS faq</a><ul>
+        <li><a href="#5.01  How can I get a copy of th"> 5.01 How can I get a copy of the AFS faq?</a></li>
+        <li><a href="#5.02  How can I get my question"> 5.02 How can I get my question (and answer) into the AFS faq?</a></li>
+        <li><a href="#5.03  How can I access the AFS f"> 5.03 How can I access the AFS faq via the World Wide Web?</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+- [[FurtherReading]]
+
+I started compiling the FAQ after attending an AFS administrators class and while waiting for the distribution tape to arrive from Transarc (back in July 93). The initial goal was to assist users at my site to understand AFS issues.
+
+The FAQ seemed to be a more widely useful resource so it was made generally available.
+
+I hope you have found the AFS FAQ useful.
+
+Your criticism or suggestions for improving it are welcome, so please don't hesitate to email your views (or just say "hello").
+
+This compilation is dedicated to my AFS teacher and all those who inspire through good humour, enthusiasm, wit and wisdom. -- paul <http://acm.org/~mpb/homepage.html>
+
+### <a name="5.01  How can I get a copy of th"></a> 5.01 How can I get a copy of the AFS faq?
+
+If you do make a copy, please be aware that this compilation changes over time: you will need to do a periodic re-copy to keep your copy up-to-date.
+
+There are two reference sources:
+
+    1) The text only version, available via AFS from:
+          file:///afs/transarc.com/public/afs-contrib/doc/faq/afs.faq
+
+    2) The World Wide Web (HTML) version, available via URL:
+          http://www.angelfire.com/hi/plutonic/afs-faq.html
+
+There are several other ways to get a copy.
+
+via AFS: <file:///afs/transarc.com/public/afs-contrib/doc/faq/afs.faq>
+
+via FTP: <ftp://rtfm.mit.edu/pub/usenet/news.answers/afs-faq>
+
+via WWW: <http://www.angelfire.com/hi/plutonic/afs-faq.html>
+
+via Wiki: <http://grand.central.org/twiki/bin/view/AFSLore/AFSFrequentlyAskedQuestions>
+
+via USENET news:
+
+From time to time this faq will be posted to the USENET newsgroups: alt.filesystems.afs alt.answers news.answers
+
+via CD-ROM:
+
+The AFS faq is now available in the file $cd\_mount\_point/faqs/alt/filesystems.afs on CD-ROM "Internet Info" (containing 17,420 documents including other FAQs, RFCs, IENs, etc) from:
+
+          Walnut Creek CDROM              phone: 1 800 786-9907 (US tollfree)
+          4041 Pike Lane, Ste D-www              +1 510 674-0783
+          Concord, CA 94250               fax:   +1 510 674-0821
+          United States of America        email: orders@cdrom.com
+                                          WWW:   http://www.cdrom.com/
+
+### <a name="5.02  How can I get my question"></a><a name="5.02  How can I get my question "></a> 5.02 How can I get my question (and answer) into the AFS faq?
+
+Comments and contributions are welcome, please send to: <mpb@acm.org>
+
+I am looking for reviewers to help me check the material here, please let me know if you would like to help.
+
+### <a name="5.03  How can I access the AFS f"></a> 5.03 How can I access the AFS faq via the World Wide Web?
+
+To access the World Wide Web you either need your own browser or have telnet access to WWW servers.
+
+WWW browsers exist for most machines. Here's a list of some browsers;
+
+Name System/requirements Available from (among others) <code>**==     =================**</code> <code>**==========**</code> Mosaic X windows, MS-Windows, Mac ftp.ncsa.uiuc.edu /Web lynx vt100 ftp.wustl.edu /packages/www/lynx
+
+From your own browser, OPEN or GO to the following document:
+
+<http://www.angelfire.com/hi/plutonic/afs-faq.html>
+
+It is much better to run your own browser but if this is not possible there are several WWW servers accessible via telnet:
+
+\* telnet info.cern.ch then type: go <http://www.angelfire.com/hi/plutonic/afs-faq.html>
+
+\* telnet www.njit.edu (login: www) then type: g <http://www.angelfire.com/hi/plutonic/afs-faq.html>
+
+\* telnet ukanaix.cc.ukans.edu (login: www, needs vt100) then type: ghttp://www.angelfire.com/hi/plutonic/afs-faq.html
