@@ -117,7 +117,7 @@ SMBKlog uses out-of-band authentication over SSL. The server sends the client an
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td> URL </td>
-    <td><a href="http://www22.brinkster.com/jvrobert" target="_top">http://www22.brinkster.com/jvrobert</a> (down as of 2002-08-01) </td>
+    <td><a href="http://www22.brinkster.com/jvrobert" target="_top">http://www22.brinkster.com/jvrobert</a></td>
   </tr>
   <tr>
     <td> Email </td>
@@ -128,19 +128,17 @@ SMBKlog uses out-of-band authentication over SSL. The server sends the client an
 Advantages:
 
 - Password not sent over network in plain text
-- Not specific to any particular Kerberos implementation
+- Not specific to any particular Kerberos/AFS implementation [ Transarc/OpenAFS OK ]
 - Uses [[OpenSSL]] so probably relatively easy to write new Windows clients
 - Successfully used at Intel to comply with corporate security requirements
 
 Disadvantages:
 
 - Password exists in plain text form on Samba server, at least in memory, for some period of time (Samba server decrypts password to plaintext form and uses that to get AFS tokens)
-- Seems to be pretty specific to Intel's site - unclear if anyone else is using it.
 - Requires each Windows client to install some software
-  - Windows client software doesn't seem to be open source
-  - Windows client software dies on Windows 2000 and XP
-- Must run specific Samba version or do some porting to newer version
-- Web site no longer exists. Doesn't seem to be under active public development.
+  - Windows client software dies on Windows 2000 and XP [ May be fixed in current version ]
+- Must run specific Samba version or do some porting to newer version [ Should be straightforward ]
+- Not under heavy active development.
 
 ### <a name="FOKSTRAUT"></a> FOKSTRAUT
 
