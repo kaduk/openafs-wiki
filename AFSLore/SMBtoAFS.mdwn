@@ -10,10 +10,11 @@
             <li><a href="#kSAMBA"> kSAMBA</a></li>
             <li><a href="#SMBKlog"> SMBKlog</a></li>
             <li><a href="#FOKSTRAUT"> FOKSTRAUT</a></li>
+            <li><a href="#kimpersonate"> kimpersonate </a></li>
           </ul>
         </li>
         <li><a href="#Random Links"> Random Links</a></li>
-        <li><a href="#Discussion / What are you doing?"> Discussion / What are you doing?</a></li>
+        <li><a href="#Attachments"> Attachments</a></li>
       </ul>
     </li>
   </ul>
@@ -196,8 +197,23 @@ Disadvantages:
   - Another possibility would be a web application behind an SSL server running on the same host as the Samba server.
 - Passwords must be stored in cleartext on the Samba server.
 
+### <a name="kimpersonate"></a> kimpersonate
+
+The major problem when exporting the AFS filespace read-write to SMB (Windows fileshareing) using Samba is the transfer of the user token to the smb-server. The simple may is to use clear-text password between the Windows client and the samba-server, and then to get tokens for the user with this password. This solution is clearly not acceptable for security aware AFS administrators.
+
+Describe here how to make AFS work "securely" with samba.
+
+On solution is to use \`kimpersonate' + store afs key on fileserver (talk to Love).
+
+- <https://lists.openafs.org/pipermail/openafs-info/2003-July/010026.html>
+- <http://www.mail-archive.com/openafs-info@openafs.org/msg08471.html>
+- <http://openbsd.mirrors.pair.com/src/usr.sbin/afs/src/doc/arla.info>
+- <http://www.it.kth.se/~aep/licentiate/PB-lanman2001.pdf>
+
+Anyone have links to better doc on this?
+
 ## <a name="Random Links"></a> Random Links
 
 2002-05 discussion on samba-technical: [http://marc.theaimsgroup.com/?l=samba-technical&amp;m=102214554108308&amp;w=2](http://marc.theaimsgroup.com/?l=samba-technical&m=102214554108308&w=2)
 
-## <a name="Discussion / What are you doing?"></a> Discussion / What are you doing?
+## <a name="Attachments"></a> Attachments
