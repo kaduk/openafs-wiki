@@ -59,8 +59,9 @@ Everything to do with TWiki Plugins - demos, new releases, downloads, developmen
 TWiki comes with a set of Plugins as part of the standard installation.
 
 - [[DefaultPlugin]]: Optionally handles some legacy variables from older versions of TWiki. You can control this option from [[TWikiPreferences]]. (Perl programmers can also [[add rules|Main/WebHome#DefaultPluginAlt]] for simple custom processing.)
-- [[EmptyPlugin]]: Is a fully functional module, minus active code; it does nothing and serves as a template for new Plugin development.
-- [[InterwikiPlugin]]: Use it for shorthand linking to remote sites, ex: `TWiki:Plugins` expands to TWiki:Plugins on TWiki.org. You can edit the predefined set of of Wiki-related sites, and add your own.
+- [[EmptyPlugin]]: Is a fully functional module, minus active code; it does nothing and serves as a template for new Plugin development
+- [[CommentPlugin]]: %COMMENTPLUGIN\_SHORTDESCRIPTION%
+- [[InterwikiPlugin]]: Use it for shorthand linking to remote sites, ex: `TWiki:Plugins` expands to TWiki:Plugins on TWiki.org. You can edit the predefined set of of Wiki-related sites, and add your own
 - [[EditTablePlugin]]: %EDITTABLEPLUGIN\_SHORTDESCRIPTION%
 - [[RenderListPlugin]]: %RENDERLISTPLUGIN\_SHORTDESCRIPTION%
 - [[SlideShowPlugin]]: %SLIDESHOWPLUGIN\_SHORTDESCRIPTION%
