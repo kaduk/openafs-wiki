@@ -95,8 +95,8 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set SKIN =
 
 - Broadcast message for skins supporting a %BROADCASTMESSAGE% at the top of the page: (IMPORTANT: Set to empty message if not used; #Comment out unused messages)
-  - #Set BROADCASTMESSAGE =
-  - Set BROADCASTMESSAGE = <table border="0" cellpadding="3" cellspacing="0" width="100%">
+  - Set BROADCASTMESSAGE =
+  - #Set BROADCASTMESSAGE = <table border="0" cellpadding="3" cellspacing="0" width="100%">
   <tr>
     <td bgcolor="yellow"><font color="red"><strong>NOTE:</strong></font><font size="-1"> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance. </font></td>
   </tr>
@@ -141,11 +141,13 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 ## <a name="HTTP-EQUIV Settings"></a> HTTP-EQUIV Settings
 
+- %T% **NOTE:** Changing cache behaviour with these settings should not be necessary and may cause cache-related problems (e.g. TWiki:Codev/BackFromPreviewLosesText or TWiki:Codev/RefreshEditPage). These settings do not affect proxy caches.
+
 - <code>**http-equiv**</code> meta tags for <code>**view**</code>, <code>**rdiff**</code>, <code>**attach**</code>, <code>**search\***</code> scripts:
 
           * Set HTTP_EQUIV_ON_VIEW =
 
-- <code>**http-equiv**</code> meta tags for <code>**edit**</code> script. Example, to expire immediately: <br />`Set HTTP_EQUIV_ON_EDIT = <meta http-equiv="Expires" content="%GMTIME{"$day $month $year $hour:$min:$sec"}% GMT">`
+- <code>**http-equiv**</code> meta tags for <code>**edit**</code> script:
 
           * Set HTTP_EQUIV_ON_EDIT =
 
@@ -161,8 +163,11 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Bullet sign:
   - Set BULLET = •
 
-- Line break and bullet: (useful in table cells)
+- Line break and bullet with different levels of indentation:
   - Set BB = <br />•
+  - Set BB2 = <br />  •
+  - Set BB3 = <br />    •
+  - Set BB4 = <br />      •
 
 - Colored text: (see more [[StandardColors]]) <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -174,60 +179,44 @@ The following are **_site-level_** settings that affect all users in all webs on
     <td> %RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR% </td>
   </tr>
 </table>
-  - **_Note:_** `%<color>%` text must end with `%ENDCOLOR%` . If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
-  - Set YELLOW = <font>
-    - **YELLOW looks like this**</font>
-- Set ORANGE = <font>
-  - **ORANGE looks like this**</font>
+  - **_Note:_** `%<color>%` text must end with `%ENDCOLOR%`. If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
+  - %YELLOW% **Set YELLOW = looks like this** %ENDCOLOR%
+  - %ORANGE% **Set ORANGE = looks like this** %ENDCOLOR%
+  - %RED% **Set RED = looks like this** %ENDCOLOR%
+  - %PINK% **Set PINK = looks like this** %ENDCOLOR%
+  - %PURPLE% **Set PURPLE = looks like this** %ENDCOLOR%
+  - %TEAL% **Set TEAL = looks like this** %ENDCOLOR%
+  - %NAVY% **Set NAVY = looks like this** %ENDCOLOR%
+  - %BLUE% **Set BLUE = looks like this** %ENDCOLOR%
+  - %AQUA% **Set AQUA = looks like this** %ENDCOLOR%
+  - %LIME% **Set LIME = looks like this** %ENDCOLOR%
+  - %GREEN% **Set GREEN = looks like this** %ENDCOLOR%
+  - %OLIVE% **Set OLIVE = looks like this** %ENDCOLOR%
+  - %MAROON% **Set MAROON = looks like this** %ENDCOLOR%
+  - %BLACK% **Set BLACK = looks like this** %ENDCOLOR%
+  - %GRAY% **Set GRAY = looks like this** %ENDCOLOR%
+  - %SILVER% **Set SILVER = looks like this** %ENDCOLOR%
+  - <span>%WHITE% **Set WHITE = looks like this (with gray background)** %ENDCOLOR%</span>
+  - The following color settings are enclosed in verbatim tags to avoid incorrect nesting of XHTML tags:
 
-- Set RED = <font>
-  - **RED looks like this**</font>
-
-- Set PINK = <font>
-  - **PINK looks like this**</font>
-
-- Set PURPLE = <font>
-  - **PURPLE looks like this**</font>
-
-- Set TEAL = <font>
-  - **TEAL looks like this**</font>
-
-- Set NAVY = <font>
-  - **NAVY looks like this**</font>
-
-- Set BLUE = <font>
-  - **BLUE looks like this**</font>
-
-- Set AQUA = <font>
-  - **AQUA looks like this**</font>
-
-- Set LIME = <font>
-  - **LIME looks like this**</font>
-
-- Set GREEN = <font>
-  - **GREEN looks like this**</font>
-
-- Set OLIVE = <font>
-  - **OLIVE looks like this**</font>
-
-- Set MAROON = <font>
-  - **MAROON looks like this**</font>
-
-- Set BLACK = <font>
-  - **BLACK looks like this**</font>
-
-- Set GRAY = <font>
-  - **GRAY looks like this**</font>
-
-- Set SILVER = <font>
-  - **SILVER looks like this**</font>
-
-- Set WHITE = <font>
-  - **WHITE looks like this**</font>
-
-- And finally:<font> </font>
-- Set ENDCOLOR =
-  - To finish colored text
+          * Set YELLOW = <font color="#ffff00">
+          * Set ORANGE = <font color="#ff6600">
+          * Set RED = <font color="#ff0000">
+          * Set PINK = <font color="#ff00ff">
+          * Set PURPLE = <font color="#800080">
+          * Set TEAL = <font color="#008080">
+          * Set NAVY = <font color="#000080">
+          * Set BLUE = <font color="#0000ff">
+          * Set AQUA = <font color="#00ffff">
+          * Set LIME = <font color="#00ff00">
+          * Set GREEN = <font color="#008000">
+          * Set OLIVE = <font color="#808000">
+          * Set MAROON = <font color="#800000">
+          * Set BLACK = <font color="#000000">
+          * Set GRAY = <font color="#808080">
+          * Set SILVER = <font color="#c0c0c0">
+          * Set WHITE = <font color="#ffffff">
+          * Set ENDCOLOR = </font>
 
 <a name="DocGraphics"></a>
 
