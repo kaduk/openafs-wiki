@@ -226,7 +226,7 @@ Changes from the last version are to be found at the end of this file.
 
 AFS is a distributed filesystem that enables co-operating hosts (clients and servers) to efficiently share filesystem resources across both local area and wide area networks.
 
-AFS is marketed, maintained, and extended by Transarc Corporation.
+The commercial version of AFS is marketed, maintained, and extended by Transarc Corporation.
 
 AFS is based on a distributed file system originally developed at the Information Technology Center at Carnegie-Mellon University that was called the "Andrew File System".
 
@@ -234,7 +234,9 @@ AFS is based on a distributed file system originally developed at the Informatio
 
 ### <a name="1.02  Who supplies AFS?"></a> 1.02 Who supplies AFS?
 
-            Transarc Corporation          phone: +1 (412) 338-4400
+There are currently three sources for AFS: Commercial Transarc (now part of IBM), the open sourced version of former Transarc AFS called [[OpenAFS]] and the independent open source project Arla.
+
+    1.      Transarc Corporation          phone: +1 (412) 338-4400
             The Gulf Tower
             707 Grant Street              fax:   +1 (412) 338-4404
             Pittsburgh
@@ -242,6 +244,10 @@ AFS is based on a distributed file system originally developed at the Informatio
             United States of America             afs-sales@transarc.com
 
                                           WWW:    http://www.transarc.com
+
+    2.      OpenAFS                       WWW:    http://www.openafs.org/
+
+    3.      Arla                          WWW:    http://www.stacken.kth.se/projekt/arla/
 
 ### <a name="1.03  What is /afs?"></a> 1.03 What is /afs?
 
@@ -398,7 +404,9 @@ Finally, the AFS clients were moved - this was noticed!
 
 ### <a name="1.06  Which systems is AFS avail"></a> 1.06 Which systems is AFS available for?
 
-AFS runs on systems from: HP, Next, DEC, IBM, SUN, and SGI.
+AFS runs on systems from: HP, Compaq, IBM, SUN, SGI, Apple ([[MacOSX]]) and PCs with flavours of Unix.
+
+AFS has been available for Next and DEC (Ultrix).
 
 Transarc customers have done ports to Crays, and the 3090, but all are based on some flavour of unix. Some customers have done work to make AFS data available to PCs and Macs, although they are using something similar to the AFS/NFS translator (a system that enables "NFS only" clients to NFS mount the AFS filetree /afs).
 
@@ -429,6 +437,8 @@ There is some information about AFS on OS/2 at:
 The AFS on Linux FAQ may be found at:
 
 - <http://www.umlug.umd.edu/linuxafs/>
+
+Check out the [[OpenAFS]] and Arla pages for port avilablity.
 
 ### <a name="1.07  What does &quot;ls /afs&quot; displa"></a> 1.07 What does "ls /afs" display in the Internet AFS filetree?
 
