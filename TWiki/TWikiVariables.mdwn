@@ -288,7 +288,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:11</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:42:13</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -346,6 +346,11 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td><code>rev="1.2"</code></td>
           <td> Include a previous topic revision; N/A for URLs </td>
           <td> top revision </td>
+        </tr>
+        <tr>
+          <td><code>warn="off"</code></td>
+          <td> Warn if topic include fails: Fail silently (if <code>off</code>); output default warning (if set to <code>on</code>); else, output specific text (use <code>$topic</code> for topic name) </td>
+          <td><code>%INCLUDE- WARNING%</code> preferences setting </td>
         </tr>
       </table>
     </td>

@@ -42,8 +42,8 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set NOAUTOLINK =
   - **_Note:_** Use the `[[...][...]]` syntax to link topics in case you disabled WikiWord linking. The `<noautolink> ... </noautolink>` syntax can be used to prevents links within a block of text.
 
-- Warn if `%INCLUDE{}%` of other topic fails (if set to `on`); silently fail (if empty); can be overwritten by web preferences:
-  - Set INCLUDEWARNING =
+- Warn if `%INCLUDE{}%` of topic fails: Fail silently (if empty or `off`); output "Warning: Can't INCLUDE Topic, topic not found" (if set to `on`); else, output specific text (use `$topic` for topic). You can override this setting by web preferences and by a `warn="..."` parameter in `%INCLUDE{}%` :
+  - Set INCLUDEWARNING = %RED% **_Note:_** %ENDCOLOR% Included topic [[$topic|Main/Topic]] does not exist yet
 
 ## <a name="User Settings"></a> User Settings
 
