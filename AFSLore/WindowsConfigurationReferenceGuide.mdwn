@@ -12,6 +12,10 @@
             <li><a href="#System Tray"> System Tray</a></li>
           </ul>
         </li>
+        <li><a href="#Client Configuration"> Client Configuration</a><ul>
+            <li><a href="#General"> General</a></li>
+          </ul>
+        </li>
         <li><a href="#Windows Registry Keys of _OpenAF"> Windows Registry Keys of OpenAFS</a></li>
       </ul>
     </li>
@@ -80,6 +84,14 @@ The "Always show the AFS Client icon in the taskbar" option sets whether the Cre
 <img src="http://www.e.kth.se/~tommie/openafs/screens/windows/taskbar.png" width="135" height="26" /> A padlock is the icon for AFS Credentials Manager. It is locked when you have valid tokens, and has a small red cross when you do not.
 
 Clicking it brings the Credentials Manager up. Right-clicking opens a three-item menu. "Remove Icon..." will ask if you want to stop the AFS service or not. The Credentials Manager will then exit.
+
+## <a name="Client Configuration"></a> Client Configuration
+
+This program is located in `C:\Program Files\OpenAFS\Common\afs_config.exe` (default location). The configuration utility can perform most operations of the Credentials Manager, and more. In fact, the Client Configuration is not able to obtain tokens, but everything else can be updated with it.
+
+When installed, [[OpenAFS]] also installs this program as a Control Panel applet, called "AFS Client Configuration". No matter how you call it, the functionality is the same.
+
+### <a name="General"></a> General
 
 ## <a name="Windows Registry Keys of _OpenAF"></a> Windows Registry Keys of [[OpenAFS]]
 
