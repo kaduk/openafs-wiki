@@ -192,7 +192,7 @@
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:26</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:27</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -242,15 +242,15 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:59</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:27:16</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:26</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:27</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:26</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:27</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -300,7 +300,7 @@
   </tr>
   <tr>
     <td><code>%TOC{"SomeTopic" ...}%</code></td>
-    <td> Table of Content. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;h2&gt;"</code>) are taken into account. Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
+    <td> Table of Content. Shows a TOC that is generated automatically based on headings of a topic. Headings in [[Main/WikiSyntax]] (<code>"---++ text"</code>) and HTML (<code>"&lt;h2&gt;text&lt;h2&gt;"</code>) are taken into account. (But not <code>"&lt;H2&gt;text&lt;H2&gt;"</code>, which can be used to exclude a heading from the TOC.) Parameters are topic name, web and depth: <table border="1" cellpadding="0" cellspacing="0">
         <tr>
           <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
           <th bgcolor="#99CCCC"><strong> Description: </strong></th>
