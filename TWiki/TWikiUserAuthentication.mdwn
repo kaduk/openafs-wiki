@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li><a href="#TWiki Authentication"> TWiki Authentication</a><ul>
+    <li><a href="#TWiki User Authentication"> TWiki User Authentication</a><ul>
         <li><a href="#Authentication Options"> Authentication Options</a></li>
         <li><a href="#Tracking by IP Address"> Tracking by IP Address</a></li>
         <li><a href="#TWiki Username vs. Login Usernam"> TWiki Username vs. Login Username</a></li>
@@ -9,7 +9,7 @@
   </ul>
 </div>
 
-## <a name="TWiki Authentication"></a> TWiki Authentication
+## <a name="TWiki User Authentication"></a> TWiki User Authentication
 
 TWiki does not authenticate users internally, it depends on the <code>**REMOTE\_USER**</code> environment variable. This variable is set when you enable basic authentication or authentication via SSL (https protocol).
 
