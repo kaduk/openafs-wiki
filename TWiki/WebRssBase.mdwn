@@ -16,7 +16,7 @@ Below part is included by each WebRss topic:
 
 ----
 
-    %STARTINCLUDE%  <image rdf:resource="%PUBURL%/twikilogo88x31.gif" />
+    %STARTINCLUDE%  <image rdf:resource="%PUBURL%/%TWIKIWEB%/TWikiLogos/twikilogo88x31.gif" />
       <dc:language>en-us</dc:language>
       <dc:rights>Copyright %GMTIME{"$year"}%, Peter Thoeny and contributing authors.</dc:rights>
       <dc:publisher>Peter Thoeny [Peter@Thoeny.com]</dc:publisher>
@@ -33,7 +33,7 @@ Below part is included by each WebRss topic:
         </rdf:Seq>
       </items>
     </channel>
-    <image rdf:about="%PUBURL%/twikilogo88x31.gif">
+    <image rdf:about="%PUBURL%/%TWIKIWEB%/TWikiLogos/twikilogo88x31.gif">
       <title>TWiki.%INCLUDINGWEB%</title>
       <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%</link>
       <url>%PUBURL%/%TWIKIWEB%/TWikiLogos/twikilogo88x31.gif</url>
