@@ -6,30 +6,69 @@
 
 # <a name="TWiki Glossary"></a> TWiki Glossary
 
-TWiki uses a handful of general computer and Internet terms in a TWiki-specific way. This _could_ get confusing, but it actually works out fine in use. The TWikiGlossary is also a quick way to get familiar with the overall TWiki set-up...
+_Simple glossary of TWiki terms_
 
-**_(Under...construction: this is a rough draft)_**
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Term </strong></th>
+    <th bgcolor="#99CCCC"><strong> Definition </strong></th>
+  </tr>
+  <tr>
+    <td> Attachment: </td>
+    <td> Any type of file that is uploaded via browser and attached to a <em>topic</em>, where it can be viewed and downloaded. [[Main/FileAttachments]]</td>
+  </tr>
+  <tr>
+    <td> Form: </td>
+    <td> Web form at the bottom of a page that can be filled in with additional info and classification for the particular topic [[Main/TWikiForms]]</td>
+  </tr>
+  <tr>
+    <td> Page: </td>
+    <td> A regular Web page. A page in TWiki is composed of the <em>template/skin</em> decoration and <em>topic</em> content. </td>
+  </tr>
+  <tr>
+    <td> Plugin: </td>
+    <td> Prepackaged server-side extension that adds all sorts of additional functions, seamlessly integrated into TWiki. [[Main/TWikiPlugins]]</td>
+  </tr>
+  <tr>
+    <td> Plugin API: </td>
+    <td> The standard interface for creating TWiki <em>Plugins</em> and add-on programs that ensure a perfect integration. [[Main/TWikiFuncModule]]</td>
+  </tr>
+  <tr>
+    <td> Preferences: </td>
+    <td> The site-wide, single <em>web</em> and single user-level preferences settings. The settings are stored in [[Main/TWikiPreferences]], [[Main/WebPreferences]] and [[Main/TWikiUsers]] home pages. [[Main/TWikiVariables#PreferencesVariables]]</td>
+  </tr>
+  <tr>
+    <td> Site: </td>
+    <td> A TWiki installation consisting of one or more <em>webs</em>. [[Main/TWikiSite]]</td>
+  </tr>
+  <tr>
+    <td> Skin: </td>
+    <td> Skins overlay regular <em>templates</em> with alternate header/footer layout of <em>pages</em>; topic text is not affected. Skins are typically enabled site-wide or per <em>web</em>. [[Main/TWikiSkins]]</td>
+  </tr>
+  <tr>
+    <td> Templates: </td>
+    <td> (1) Regular templates define header/footer layout of <em>pages</em>; topic text is not affected. (2) Template topics set the default content for new <em>topics</em>. [[Main/TWikiTemplates]]</td>
+  </tr>
+  <tr>
+    <td> Topic: </td>
+    <td> The content of a TWiki <em>page</em>, consisting of text, an optional <em>form</em> and optional <em>attachments</em>. It has a [[Main/WikiName]] that's unique within its <em>web</em>. [[Main/TWikiTopics]]</td>
+  </tr>
+  <tr>
+    <td> TWiki: </td>
+    <td> A web-based collaboration platform targeting the corporate world. Contraction of "TakeFive Wiki". By chance, also happens to be the name of the AI robot star of the Buck Rogers 1979 movie and TV series. Features include browser based editing, automatic linking of text (based on ideas of the original WikiWikiWeb), revision control, file <em>attachments</em>, <em>form</em> handling, <em>preferences</em> settings, access control and more. <a href="http://TWiki.org/" target="_top">Details...</a></td>
+  </tr>
+  <tr>
+    <td> TWiki.org: </td>
+    <td> Official home site, center of all development. <a href="http://TWiki.org/" target="_top">Details...</a></td>
+  </tr>
+  <tr>
+    <td> Variables: </td>
+    <td> Text-strings of the form <code>%VARIABLE%</code> that are expanded on the fly into text, image, or any other type of embedded content; there are system variables coded into the main TWiki package, <em>preferences</em> settings, and Plugins variables. [[Main/TWikiVariables]]</td>
+  </tr>
+  <tr>
+    <td> Web: </td>
+    <td> A collection of <em>topics</em> under a common name. Various features, like search, access privileges, Plugin availability, template design, can be controlled on a web-wide basis. [[Main/ManagingWebs]]</td>
+  </tr>
+</table>
 
-**Attachment** _aka_ **File Attachment** - upload files by browser and attach them to any page, where they can be viewed, edited, downloaded; accessed by clicking **Attach** at page bottom ([[FileAttachments]])
-
-**Plugin** - a TWiki feature add-on; a Perl module that enhances TWiki, through the Plugin API spec; named `<_>Plugin.pm`, ex: `SomePlugin.pm` ([[TWikiPlugins|Main/TWikiDocumentation#TWiki_Plugins]])
-
-**Plugin API** - specs for building TWiki Plugins with Perl modules ([[TWikiPlugins|Main/TWikiDocumentation#TWiki_Plugins]])
-
-**Preference** - a customizable TWiki parameter; settings site-wide, by the web, by the topic on [[TWikiPreferences]] and [[WebPreferences]] pages, also on Plugins, user and regular topic pages.
-
-**site** - a TWiki installation consisting of one or more TWiki _[[webs|Main/WebHome#TWikiWeb]]_
-
-<a name="TWikiTopic"></a> **topic** _aka_ **WikiTopic** - a single TWiki page, it has a [[WikiName]] that's unique within its home _[[web|Main/WebHome#TWikiWeb]]_
-
-**TWiki** - based on "Wiki", from the original WikiWikiWeb, first OF this style of edit-anything-anywhere Web environment; by chance, also the name of a robot (as in, the robo-head in the TWiki logo) in the old _Buck Rogers_ TV series ([[TWikiSite]])
-
-**TWiki.org (twiki.org)** - official home site, center of all development, housed on SourceForge.com
-
-**variable** - text-strings of the form `%VARIABLE%` that are expanded on the fly into text, image, or any other type of embedded content; predefined variables are coded into the main TWiki package, Plugins variables, and user-specified variables are created in [[TWikiPreferences]], [[WebPreferences]], or single topics
-
-<a name="TWikiWeb"></a> **web** - with a small "w", as opposed to the Web, World Wide; a collection of TWiki topics under a common name; topics share Preference settings, disk file structure, and are handled as a group by search
-
-**WikiTopic** - _see: [[topic|Main/WebHome#TWikiTopic]]_
-
--- [[MikeMannix]] - 09 Sep 2001 <br />
+-- [[MikeMannix]] - 27 Aug 2001 %BR% -- [[PeterThoeny]] - 27 Jan 2003
