@@ -201,16 +201,119 @@ Disadvantages:
 
 The major problem when exporting the AFS filespace read-write to SMB (Windows fileshareing) using Samba is the transfer of the user token to the smb-server. The simple may is to use clear-text password between the Windows client and the samba-server, and then to get tokens for the user with this password. This solution is clearly not acceptable for security aware AFS administrators.
 
-Describe here how to make AFS work "securely" with samba.
+On solution is to use \`kimpersonate' + store afs key on fileserver. To obtain the kimersonate code contact "Love H�rnquist-�strand" &lt; lha () stacken ! kth ! se &gt;
 
-On solution is to use \`kimpersonate' + store afs key on fileserver (talk to Love).
+Here are some references to this technique:
 
 - <https://lists.openafs.org/pipermail/openafs-info/2003-July/010026.html>
 - <http://www.mail-archive.com/openafs-info@openafs.org/msg08471.html>
 - <http://openbsd.mirrors.pair.com/src/usr.sbin/afs/src/doc/arla.info>
 - <http://www.it.kth.se/~aep/licentiate/PB-lanman2001.pdf>
 
-Anyone have links to better doc on this?
+Here is the kimpersonate **README**:
+
+    kimpersonate
+    ============
+
+    kimpersonate takes a keytab/srvtab/AFS KeyFile and impersonates
+    kerberos credental case for a user. See manpage for documentation.
+
+    Very useful when using with samba.
+
+    Using kimpersonate with SAMBA
+    =============================
+
+    entry in smb.conf
+
+            root preexec = /usr/samba/bin/su-user-login '%u'
+
+    Also see the su-user-login file, note that this file contains hacks
+    that parses the %u for samba 3.0-alpha22 something using domain
+    logins. Check that is matches your usage.
+
+    You need to make sure that somehow the samba does a afs setpag call
+    before calling afslog/aklog. See the patch
+    samba-setpag-patch-linux-and-freebsd above.
+
+Here is a text rendition the kimpersonate-1.0 **man page**:
+
+    KERBEROS(SECTION)                    LOCAL                   KERBEROS(SECTION)
+
+    NAME
+         kimpersonate - impersonate a user when there exist a srvtab, keyfile or
+         KeyFile
+
+    SYNOPSIS
+         kimpersonate [-s string | --server=string] [-c string | --client=string]
+                      [-k string | --keytab=string] [-4 | --krb4] [-5 | --krb5]
+                      [-e integer | --expire-time=integer] [-a string |
+                      --client-address=string] [-t string | --enc-type=string] [-f
+                      string | --ticket-flags=string] [--verbose] [--version]
+                      [--help]
+
+    DESCRIPTION
+         The kimpersonate program create a "fake" ticket using the service-key of
+         the service, the service key can be read from a Kerberos 5 keytab, AFS
+         KeyFile or (if compiled with support for Kerberos 4) a Kerberos 4 srvtab.
+         Supported options:
+
+         -s string, --server=string
+                 name of server principal
+
+         -c string, --client=string
+                 name of client principal
+
+         -k string, --keytab=string
+                 name of keytab file
+
+         -4, --krb4
+                 create a kerberos 4 ticket
+
+         -5, --krb5
+                 create a kerberos 5 ticket
+
+         -e integer, --expire-time=integer
+                 lifetime of ticket in seconds
+
+         -a string, --client-address=string
+                 address of client
+
+         -t string, --enc-type=string
+                 encryption type
+
+         -f string, --ticket-flags=string
+                 ticket flags for krb5 ticket
+
+         --verbose
+                 Verbose output
+
+         --version
+                 Print version
+
+         --help
+
+    FILES
+         Uses /etc/krb5.keytab, /etc/srvtab and /usr/afs/etc/KeyFile when avalible
+         and the the -k is used with appropriate prefix.
+
+    EXAMPLES
+         kimpersonate can be used in samba root preexec option or for debugging.
+         kimpersonate -s host/hummel.e.kth.se@E.KTH.SE -c lha@E.KTH.SE -5 --no-
+         krb4 will create a Kerberos 5 ticket for lha@E.KTH.SE for the host hum-
+         mel.e.kth.se if there exist a keytab entry for it in /etc/krb5.keytab
+
+         kimpersonate -k krb4:/etc/srvtab -s host/hummel.e.kth.se@E.KTH.SE -c
+         lha@E.KTH.SE --no-krb5 -4 will create a Kerberos 4 ticket for
+         lha@E.KTH.SE for the host hummel.e.kth.se if there exist a srvtab entry
+         for it in /etc/srvtab Note the Kerberos 5 syntax of the server.
+
+    SEE ALSO
+         kinit(1)
+
+    AUTHORS
+         Love H�rnquist-�strand < lha () stacken ! kth ! se >
+
+    Heimdal                          July 30, 2000                         Heimdal
 
 ## <a name="Random Links"></a> Random Links
 
