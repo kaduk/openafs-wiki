@@ -11,7 +11,7 @@
 
 # <a name="TWiki System Requirements"></a> TWiki System Requirements
 
-_Server and client requirements for TWiki 01-Dec-2001_
+_Server and client requirements for TWiki 01-Feb-2003 (pending release)_
 
 Low client and server requirements are core features that keep TWiki widely deployable, particularly across a range of browser platforms and versions.
 
@@ -30,7 +30,7 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   </tr>
   <tr>
     <td> Perl </td>
-    <td align="center" colspan="2"> 5.005_03 or higher </td>
+    <td align="center" colspan="2"> 5.005_03 or higher (5.6.1 recommended) </td>
   </tr>
   <tr>
     <td> Non-standard Perl modules </td>
@@ -39,19 +39,28 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   </tr>
   <tr>
     <td> RCS </td>
-    <td align="center" colspan="2"> 5.7 or higher </td>
+    <td align="center" colspan="2"> 5.7 or higher (including GNU <code>diff</code>) %BR% Optional, but the all-Perl replacement is not currently recommended for live sites - see TWiki:Codev/RcsLite. </td>
+  </tr>
+  <tr>
+    <td> GNU <code>diff</code></td>
+    <td align="center" colspan="2"> GNU <code>diff</code> 2.7 or higher is required when TWiki's uses RCS binaries. %BR% Install on PATH if not included with RCS (check version with <code>diff -v</code>) </td>
   </tr>
   <tr>
     <td> Other external programs </td>
     <td align="center" colspan="2"><code>ls, fgrep, egrep</code></td>
   </tr>
   <tr>
+    <td> Cron/scheduler </td>
+    <td align="center"><code>cron</code></td>
+    <td><code>cron</code> equivalents </td>
+  </tr>
+  <tr>
     <td> Web server </td>
-    <td align="right" colspan="2"> Apache; others (with CGI support, authentication, extended path) </td>
+    <td align="center" colspan="2"> Apache is well supported; for other servers, CGI support, authentication, extended path required </td>
   </tr>
 </table>
 
-%X% **\*** _Current documentation covers Linux/Apache only. See TWiki:Codev/TWikiOnWindows for work-to-date on a Windows installation guide._
+%X% **\*** _Current documentation mainly covers Linux and Apache installations. See [[WindowsInstallCookbook]] for a Windows installation guide._
 
 <a name="ClientRequirements"></a>
 

@@ -1,4 +1,4 @@
-**Include Topics and Web Pages Using <code>**%INCLUDE\{...\}%**</code> Variable**
+# <a name="Include Topics and Web Pages Usi"></a><a name=" Include Topics and Web Pages Us"></a> Include Topics and Web Pages Using <code>**%INCLUDE\{...\}%**</code> Variable
 
 Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of another topic or web page inside a %WIKITOOLNAME% topic. The whole content or only parts of a page can be included.
 
@@ -35,31 +35,28 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
 ### <a name="1. Display regression test resul"></a> 1. Display regression test results in a TWiki page
 
       <pre>
-      %INCLUDEURL{"http://domain/~qa/v1.1/REDTest.log.txt"}%
+      %INCLUDE{"http://domain/~qa/v1.1/REDTest.log.txt"}%
       </pre>
 
 ### <a name="2. Display Yahoo&#39;s robot.txt fil"></a> 2. Display Yahoo's robot.txt file
 
 - You type:
-  - <code>**%INCLUDE\{"http://www.yahoo.com/robots.txt"\}%**</code><br />
-- You get:
-
-    %INCLUDE{"http://www.yahoo.com/robots.txt"}%
+  - <code>**%INCLUDE\{"http://www.yahoo.com/robots.txt"\}%**</code>
 
 ### <a name="3. Display the SUNW stock quote"></a><a name="3. Display the SUNW stock quote "></a> 3. Display the SUNW stock quote in a TWiki page
 
 - You type:
-  - <code>**SUNW: %INCLUDE\{"http://finance.yahoo.com/q?s=SUNW&amp;d=v1&amp;o=t" pattern="^.\*?&gt;SUNW&lt;/a&gt;[^&lt;]+(.\*?)\\s+\\S+\\s+&lt;small.\*"\}%**</code><br />
+  - <code>**SUNW: %INCLUDE\{"http://finance.yahoo.com/q?s=SUNW&amp;d=v1&amp;o=t" pattern="^.\*?&gt;SUNW&lt;/a&gt;[^&lt;]+(.\*?)\\s+\\S+\\s+&lt;small.\*"\}%**</code>
 - You get:
   - SUNW:
 
 ### <a name="4. Display the temperature in Sa"></a> 4. Display the temperature in San Francisco
 
 - You type:
-  - <code>**San Francisco: %INCLUDE\{"http://weather.yahoo.com/forecast/San\_Francisco\_CA\_US\_f.html" pattern="^.\*?([0-9]+\\&amp;ordm\\;F).\*"\}%**</code><br />
+  - <code>**San Francisco: %INCLUDE\{"http://weather.yahoo.com/forecast/San\_Francisco\_CA\_US\_f.html" pattern="^.\*?([0-9]+\\&amp;ordm\\;F).\*"\}%**</code>
 - You get:
   - San Francisco:
 
 See also other [[TWikiVariables]].
 
--- [[PeterThoeny]] - 25 Jun 2001 <br />
+-- [[PeterThoeny]] - 15 Jan 2003
