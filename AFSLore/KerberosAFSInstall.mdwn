@@ -32,6 +32,8 @@ Things to remember about AFS [[KeyFile]]: they must contain a key using the des-
 
 - The [[HeimdalKTH]] distribution's ktutil can copy directly into an AFS [[KeyFile]]
 
+           ktutil copy FILE:/etc/afskeytabfile.krb5 AFSKEYFILE:/usr/afs/etc/KeyFile
+
 (look for links in the mailing lists and explain this step; in the mean time, magic google words are [[KeyFile]], asetkey, and ktutil.)
 
 After you have a working [[KeyFile]] installed in the appropriate directory (/usr/afs/etc/KeyFile for transarc-paths, ???? otherwise) and with the appropriate permissions (0600, owner root), we can create administrative users for AFS. This is a two step process as we first create an authentication principal in the Kerberos database then add the admin user in the authorization ("protection") database in the AFS server.
