@@ -48,6 +48,8 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.37 afs_krb_get_lrealm() using"> 3.37 afs_krb_get_lrealm() using /usr/afs/etc/krb.conf</a></li>
         <li><a href="#3.38 Moving from kaserver to Hei"> 3.38 Moving from kaserver to Heimdal KDC</a></li>
         <li><a href="#3.39 Moving from KTH-KRB4 to Hei"> 3.39 Moving from KTH-KRB4 to Heimdal KDC</a></li>
+        <li><a href="#3.40 What are those bos(1) -type"> 3.40 What are those bos(1) -type values simple and cron?</a></li>
+        <li><a href="#3.41 KDC listens on port 88 inst"> 3.41 KDC listens on port 88 instead of 750</a></li>
       </ul>
     </li>
   </ul>
@@ -727,6 +729,22 @@ Other ports are:
 
 Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache sizes afsd crashes on startup (Linux, [[Tru64Unix]] at least).
 
+    > So I ran the full suite of iozone tests (13), but at a single file size
+    > (128M) and one record size (64K).  I set the AFS cache size to 80000K
+    > for both memcache and diskcache.
+
+    Note that memcache size and diskcache size are different things.
+    In the case of memcache, a fixed number of chunks are allocated
+    in memory, such that numChunks * chunkSize = memCacheSize.  In
+    the case of disk cache, there are a lot more chunks, because the
+    disk cache assumes not every chunk will be filled (the underlying
+    filesystem handles disk block allocation for us).  Thus, when you
+    have small file segments, they use up an entire chunk worth of
+    cache in the memcache case, but only their size worth of cache
+    in the diskcache cache.
+
+    -- kolya
+
 ### <a name="3.34 Settting up PAM with AFS"></a> 3.34 Settting up PAM with AFS
 
 Solaris
@@ -964,3 +982,38 @@ This somewhat doesn't:
     The special thing for me is the use of "-D" in the (3) which seems to
     cause conversion des-cbc-sha1 keys of old krb4 database entries to
     des-cbc-md5.
+
+### <a name="3.40 What are those bos(1) -type"></a> 3.40 What are those bos(1) -type values simple and cron?
+
+Typically, admins do this once they configure new afs server:
+
+    bos create foo ptserver simple /usr/afs/bin/ptserver -cell bar.baz
+    bos create foo vlserver simple /usr/afs/bin/vlserver -cell bar.baz
+    bos create foo fs fs /usr/afs/bin/fileserver /usr/afs/bin/volserver /usr/afs/bin/salvager -cell bar.baz
+
+Type "simple" has one process. type "cron" gets forked at the appropriate time.
+
+### <a name="3.41 KDC listens on port 88 inst"></a> 3.41 KDC listens on port 88 instead of 750
+
+    "Kramer, Matthew" <mattkr@bu.edu> writes:
+
+    > Hello,
+    >       Our Kerberos 4 environment listens on only port 750 and doesn't
+    > listen on port 88.  For Win2K/XP machines this causes a problem in
+    > C:\openafs-1.2.8\src\kauth\user_nt.c line 144 when the Kerberos port is
+    > queried from the %systemroot%\system32\drivers\etc\services file.  Win2K
+    > and XP both return 88 which is correct for Kerberos 5 but in our case
+    > not for Kerberos 4.  Why doesn't it instead query for kerberos-iv which
+    > would return the correct value of 750?
+    >
+    > Y:\src\kauth>diff user_nt.c.orig user_nt.c
+    > 144c144
+    > <       sp = getservbyname("kerberos", "udp");
+    > ---
+    > >       sp = getservbyname("kerberos-iv", "udp");
+    >
+    A quick work around could be to use Loves requestforwarder found at
+
+    ftp://ftp.stacken.kth.se/pub/projects/krb-forward/krb-forward-0.1.tar.gz
+
+    /JockeF
