@@ -33,76 +33,82 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
 
 ### <a name="4.01  Is there an anonymous FTP"></a><a name="4.01  Is there an anonymous FTP "></a> 4.01 Is there an anonymous FTP site with AFS information?
 
-Yes, it is: [ftp.transarc.com](ftp://ftp.transarc.com/).
+**No**, the transarc.com domain is pretty much gone from the Internet.
 
-**NOTE:** Due to security limitations on the FTP server, the 'ls' command is not allowed for anonymous users. Instead, use the MANIFEST document to find what you are looking for, and then issue 'get' or 'mget' commands to retrieve files.
-
-A brief summary of contents:
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th align="center" bgcolor="#99CCCC"><strong> Path </strong></th>
-    <th align="center" bgcolor="#99CCCC"><strong> Contents </strong></th>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afsug/README" target="_top">pub/afsug/README</a></td>
-    <td> AFS user group </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afsug/newsletter/" target="_top">pub/afsug/newsletter/</a></td>
-    <td> AFS user group newsletters </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/" target="_top">pub/afs-contrib/</a></td>
-    <td> Contributed by other groups </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/bin/README" target="_top">pub/afs-contrib/bin/README</a></td>
-    <td> other client ports (US-only) </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/bin.export/" target="_top">pub/afs-contrib/bin.export/</a></td>
-    <td> other client ports </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/tools/MANIFEST" target="_top">pub/afs-contrib/tools/MANIFEST</a></td>
-    <td> miscellaneous tools </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/src/README" target="_top">pub/afs-contrib/src/README</a></td>
-    <td> submissions from source licensees </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/doc/MANIFEST" target="_top">pub/afs-contrib/doc/MANIFEST</a></td>
-    <td> documentation </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/pointers/MANIFEST" target="_top">pub/afs-contrib/pointers/MANIFEST</a></td>
-    <td> infomation in other places </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afsps/README" target="_top">pub/afsps/README</a></td>
-    <td> AFS product support </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afsps/doc/" target="_top">pub/afsps/doc/</a></td>
-    <td> release notes, SUPPORTED_SYSTEMS.afs.* </td>
-  </tr>
-  <tr>
-    <td><a href="ftp://ftp.transarc.com/pub/afsps/doc/progint/" target="_top">pub/afsps/doc/progint/</a></td>
-    <td> AFS programming interface docs </td>
-  </tr>
-</table>
-
-These directories are also accessible via AFS. For example: <file:///afs/transarc.com/public/anon-ftp/pub/afs-contrib>
-
-This should be accessible if you have a currently running AFS client, and transarc.com is in your [[CellServDB]].
-
-(NB "pub" =&gt; "public/anon-ftp/pub" when using AFS to access these.)
-
-A final option allows you to use the [[WWWtoAFS]] trick to view the public FTP service. To reach te FTP site this way, try pointing your browser to the following URL:
-
-<http://lost-contact.mit.edu/afs/net/project/afs32/transarc.com/public/anon-ftp/pub/>
+> Yes, it is:
+>
+> [ftp.transarc.com](ftp://ftp.transarc.com/)
+>
+> .
+>
+> **NOTE:** Due to security limitations on the FTP server, the 'ls' command is not allowed for anonymous users. Instead, use the MANIFEST document to find what you are looking for, and then issue 'get' or 'mget' commands to retrieve files.
+>
+> A brief summary of contents:
+>
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th align="center" bgcolor="#99CCCC"><strong> Path </strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong> Contents </strong></th>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afsug/README" target="_top">pub/afsug/README</a></td>
+>     <td> AFS user group </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afsug/newsletter/" target="_top">pub/afsug/newsletter/</a></td>
+>     <td> AFS user group newsletters </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/" target="_top">pub/afs-contrib/</a></td>
+>     <td> Contributed by other groups </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/bin/README" target="_top">pub/afs-contrib/bin/README</a></td>
+>     <td> other client ports (US-only) </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/bin.export/" target="_top">pub/afs-contrib/bin.export/</a></td>
+>     <td> other client ports </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/tools/MANIFEST" target="_top">pub/afs-contrib/tools/MANIFEST</a></td>
+>     <td> miscellaneous tools </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/src/README" target="_top">pub/afs-contrib/src/README</a></td>
+>     <td> submissions from source licensees </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/doc/MANIFEST" target="_top">pub/afs-contrib/doc/MANIFEST</a></td>
+>     <td> documentation </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afs-contrib/pointers/MANIFEST" target="_top">pub/afs-contrib/pointers/MANIFEST</a></td>
+>     <td> infomation in other places </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afsps/README" target="_top">pub/afsps/README</a></td>
+>     <td> AFS product support </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afsps/doc/" target="_top">pub/afsps/doc/</a></td>
+>     <td> release notes, SUPPORTED_SYSTEMS.afs.* </td>
+>   </tr>
+>   <tr>
+>     <td><a href="ftp://ftp.transarc.com/pub/afsps/doc/progint/" target="_top">pub/afsps/doc/progint/</a></td>
+>     <td> AFS programming interface docs </td>
+>   </tr>
+> </table>
+>
+> These directories are also accessible via AFS. For example: <file:///afs/transarc.com/public/anon-ftp/pub/afs-contrib>
+>
+> This should be accessible if you have a currently running AFS client, and transarc.com is in your [[CellServDB]].
+>
+> (NB "pub" =&gt; "public/anon-ftp/pub" when using AFS to access these.)
+>
+> A final option allows you to use the [[WWWtoAFS]] trick to view the public FTP service. To reach te FTP site this way, try pointing your browser to the following URL:
+>
+> <http://lost-contact.mit.edu/afs/net/project/afs32/transarc.com/public/anon-ftp/pub/>
 
 ### <a name="4.02  Which USENET newsgroups di"></a> 4.02 Which USENET newsgroups discuss AFS?
 
@@ -125,51 +131,27 @@ Transarc's education coordinator may be contacted by:
 
 Here are some I have found (please let me know if you find more):
 
-    a) A collection of AFS information maintained by Derrick Brashear at CMU:
+- A collection of AFS information maintained by Derrick Brashear at CMU:<br /><http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs.html> (Also accessible in: /afs/andrew.cmu.edu/usr/shadow/www)
 
-       http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs.html
-       (Also accessible in: /afs/andrew.cmu.edu/usr/shadow/www)
+- AFS Beginners Guide (ALW/NIH):<br />[http://www.alw.nih.gov/Docs/AFS/AFS\_toc.html](http://www.alw.nih.gov/Docs/AFS/AFS_toc.html)
 
-    b) AFS Beginners Guide (ALW/NIH):
-       http://www.alw.nih.gov/Docs/AFS/AFS_toc.html
+- NCSA AFS User Guide:<br /><http://www.ncsa.uiuc.edu/Pubs/UserGuides/AFSGuide/AFSv2.1Book.html>
 
-    c) NCSA AFS User Guide:
-       http://www.ncsa.uiuc.edu/Pubs/UserGuides/AFSGuide/AFSv2.1Book.html
+- Transarc AFS Product Information:<br />[http://web.archive.org/web/20010604011953/www.transarc.ibm.com/Library/documentation/afs\_doc.html](http://web.archive.org/web/20010604011953/www.transarc.ibm.com/Library/documentation/afs_doc.html)
 
-    d) Transarc AFS Product Information:
-       http://web.archive.org/web/20010604011953/www.transarc.ibm.com/Library/documentation/afs_doc.html
+- CERN AFS User's Guide:<br /><http://wsspinfo.cern.ch/file/doc/afsug.html>
 
-    e) CERN AFS User's Guide:
-       http://wsspinfo.cern.ch/file/doc/afsug.html
+- MIT SIPB's Inessential AFS:<br /><http://web.mit.edu/afs/sipb.mit.edu/project/doc/afs/html/afs-new.html>
 
-    f) MIT SIPB's Inessential AFS
-       http://web.mit.edu/afs/sipb.mit.edu/project/doc/afs/html/afs-new.html
+- Stanford University hypermail archive of <info-afs@transarc.com>:<br /><http://www-archive.stanford.edu/lists/info-afs.html>
 
-    g) Stanford University hypermail archive of info-afs@transarc.com
-       http://www-archive.stanford.edu/lists/info-afs.html
+- Linux AFS FAQ:<br /><http://www.umlug.umd.edu/linuxafs/>
 
-    h) Linux AFS FAQ:
-       http://www.umlug.umd.edu/linuxafs/
+- Gentoo Linux Documentation:<br /><http://www.gentoo.org/doc/en/openafs.xml>
 
 ### <a name="4.05  Is there a mailing list fo"></a> 4.05 Is there a mailing list for AFS topics?
 
-Yes, it is <info-afs@transarc.com>.
-
-An automated program called Majordomo is now handling the info-afs list. To join the mailing list, send a message to:
-
-<majordomo@transarc.com>
-
-In the body (not the Subject line) of the message, type:
-
-subscribe info-afs
-
-For example:
-
-$ mail -s "subscribe to info-afs" <majordomo@transarc.com> &lt;&lt;% subscribe info-afs %
-
-To unsubscribe:
-
-$ mail -s "unsubscribe from info-afs" <majordomo@transarc.com> &lt;&lt;% unsubscribe info-afs
+The old <info-afs@transarc.com> mailing list doesn't work for posting questions. Instead [[OpenAFSInfo]] and [[OpenAFSDevel]] are quite active.
 
 ### <a name="4.06  Where can I find an archiv"></a> 4.06 Where can I find an archive of <info-afs@transarc.com>?
 
