@@ -1,6 +1,6 @@
 # <a name="Instant TWiki Site Enhancements"></a><a name=" Instant TWiki Site Enhancements"></a> Instant TWiki Site Enhancements
 
-These quick enhancements are aimed at improving TWiki's ease-of-use. New TWiki site administrators are especially encouraged to review this document for ideas before deploying a new [[TWikiSite]]. The metaphor of building a house is useful. The listed enhancedments are some of the details possible when moving into a new office or home. These small changes can make a **big** differences for user satisfaction at your site. All modifications can be done through your Web browser, and they don't take more then in a couple of minutes. No system administration expertise is required. Some of these enhancements are also mentioned in the reference manual and other topics.
+These quick enhancements are aimed at improving TWiki's ease-of-use. New TWiki site administrators are especially encouraged to review this document for ideas before deploying a new [[TWikiSite]]. The metaphor of building a house is useful. The listed enhancements are some of the details possible when moving into a new office or home. These small changes can make a **big** differences for user satisfaction at your site. All modifications can be done through your Web browser, and they don't take more then in a couple of minutes. No system administration expertise is required. Some of these enhancements are also mentioned in the reference manual and other topics.
 
 Many of these tips are based on setting some special [[TWikiVariables]].
 
@@ -16,12 +16,16 @@ This may spark your imagination to **really** customize your site so that it's o
         <li><a href="#Titles-Only Topic List - _WebTop"> Titles-Only Topic List - WebTopicList</a></li>
         <li><a href="#Simple way to create %RED% color"> Simple way to create %RED% colored text %ENDCOLOR% and graphics</a></li>
         <li><a href="#EZ Graphic Icons to Highlight Te"> EZ Graphic Icons to Highlight Text</a></li>
-        <li><a href="#Use TOC variable to create table"> Use TOC variable to create table of contens</a></li>
+        <li><a href="#Use TOC variable to create table"> Use TOC variable to create table of content</a></li>
       </ul>
     </li>
     <li><a href="#Personal Productivity - Tools an"> Personal Productivity - Tools and Tips for Working Faster</a><ul>
         <li><a href="#Use your favorite text editor fo"> Use your favorite text editor for major edits</a></li>
-        <li><a href="#Use SEARCH to Create a personal"> Use SEARCH to Create a personal directory of topics you're involved in</a></li>
+      </ul>
+    </li>
+    <li><a href="#Ready to use SEARCH"> Ready to use SEARCH </a><ul>
+        <li><a href="#Personal directory of topics you"> Personal directory of topics you're involved in</a></li>
+        <li><a href="#Recently changed pages"> Recently changed pages </a></li>
       </ul>
     </li>
     <li><a href="#Hidden Edit Lock for Individual"> Hidden Edit Lock for Individual Topics</a></li>
@@ -75,7 +79,7 @@ This should be enabled, see the "Miscellaneous Settings" in the [[TWikiPreferenc
 
 Graphics in text (like this: %X%) is done also by defining special variables. See [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]]. Some may prefer longer names, like `HELP`, `WARN` etc. You can also add your own images, e.g. a `NEW`, or a `ASK` to ask question.
 
-%T% Using graphic icons to highlight important text right from the start can seriously improve how well new users take to a TWiki site. A minimum set of two or three icons can make content much easier to follow, eye-catching, EXCITING. Research says, people tent not to read pages through, but scan them first - and graphics (used sparringly ;-) of course) can help them. On **HELP** pages, most people tend to jump around looking for answers rather than reading through - icons help point out the most important bits.
+%T% Using graphic icons to highlight important text right from the start can seriously improve how well new users take to a TWiki site. A minimum set of two or three icons can make content much easier to follow, eye-catching, EXCITING. Research says, people tend not to read pages through, but scan them first - and graphics (used sparringly ;-) of course) can help them. On **HELP** pages, most people tend to jump around looking for answers rather than reading through - icons help point out the most important bits.
 
 **How to create your own set of icons:**
 
@@ -87,9 +91,9 @@ Graphics in text (like this: %X%) is done also by defining special variables. Se
 - For documentation and help, this [[TWiki|TWiki/WebHome]] web uses three main icons: %H% for **HELP**, %T% for **TIP**, %X% for **IMPORTANT**.
 - **_Related:_** There are other approaches for creating more extensive TWiki icon libraries. This is a simply and quick way to get started. See [[TWikiDocGraphics]] for more info.
 
-### <a name="Use TOC variable to create table"></a> Use TOC variable to create table of contens
+### <a name="Use TOC variable to create table"></a> Use TOC variable to create table of content
 
-TOC is Table-Of-Contens, generated automagically from headers (defined like that: <code>**---++**</code> , see [[TWikiShorthand]]).
+TOC is Table-Of-Content, generated automagically from headers (defined like that: <code>**---++**</code> , see [[TWikiShorthand]]).
 
 For example, you may want to put all your custom variables in [[TWikiPreferences]] right on top of the page, and generate table of contens, like:
 
@@ -125,7 +129,9 @@ When you have a fair bit of TWiki formatting work - for example, compiling new i
 
 - An example on the Linux platform is the `w3m` pager/browser for Linux. This is a text based version similar to `lynx` but it includes text editor features and a configurable command set to act like `lynx` if you are more accustomed to it.
 
-### <a name="Use SEARCH to Create a personal"></a><a name="Use SEARCH to Create a personal "></a> Use SEARCH to Create a personal directory of topics you're involved in
+## <a name="Ready to use SEARCH"></a> Ready to use SEARCH
+
+### <a name="Personal directory of topics you"></a> Personal directory of topics you're involved in
 
 Here's how you can create your own personal directory of topics you've contributed to recently. Copy the text below (between **Start Copy** and **End Copy**) and paste it into your personal page (Main.admin). You can add other webs to search by duplicating one of the web subsections and editing the string \{web ="webname"\} in the search parameters to refer to the specific web you want to search. This script would also work for a group.
 
@@ -135,19 +141,26 @@ Here's how you can create your own personal directory of topics you've contribut
 
     ---++++ Codev
 
-    %SEARCH{ "%TOPIC%" web="Codev" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" regex="off" order="modified" reverse="on" limit="20"}%
-
+    %SEARCH{ "%TOPIC%" web="Codev" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" order="modified" reverse="on" limit="20"}%
     ---++++ Support
 
-    %SEARCH{ "%TOPIC%" web="Support" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" regex="off" order="modified" reverse="on" limit="20"}%
+    %SEARCH{ "%TOPIC%" web="Support" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" order="modified" reverse="on" limit="20"}%
 
     ---++++ TWiki
 
-    %SEARCH{ "%TOPIC%" web="TWiki" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" regex="off" order="modified" reverse="on" limit="10"}%
+    %SEARCH{ "%TOPIC%" web="TWiki" scope="text" nosearch="on" nosummary="on" noheader="on" nototal="on" order="modified" reverse="on" limit="10"}%
 
 **End Copy**
 
 The SEARCH variable has many more formatting options, see [[TWikiVariables]].
+
+### <a name="Recently changed pages"></a> Recently changed pages
+
+Here, last 15 is formatted into neat table.
+
+    &lt;font size="-1">&lt;table>
+     %SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="&lt;tr>&lt;td>  [[$topic]] &lt;/td>&lt;td>  $wikiusername  &lt;/td>&lt;td> $date  &lt;/td>&lt;/tr>" limit="15" }%
+     &lt;/table>&lt;/font>
 
 ----
 
@@ -161,11 +174,11 @@ When you're creating main gateway pages, you may want to temporarily (or permane
 
 ----
 
-## <a name="Change the Default Site Logo"></a> Change the Default Site Logo using TWiki:Codev/HighResolutionLogos.
+## <a name="Change the Default Site Logo"></a> Change the Default Site Logo
 
-Approved and already deployed on several TWiki sites, this logo set provides a professional alternative to the Robot.
+If you want to change the default TWiki logo, attach a new graphic to a topic of choice and change the WIKILOGOIMG variable in the [[TWikiPreferences]], e.g.
 
-The size of Robot icon is 46x50 pixels - there are countless 48x48 standard-sized, free-use grapics if you're stuck. Here are some decent places to look. Attach the new graphic to [[TWikiPreferences]], and change the WIKILOGOIMG variable.
+- `Set WIKILOGOIMG = %PUBURL%/TWiki/MyLogo/mylogo.gif`
 
 ----
 
@@ -187,4 +200,4 @@ You're no doubt familiar or better with HTML, JS, and "webmastering". Without ge
 
 %T% **_NOTE:_** Feel free to add your own tips to TWiki:%WEB%.%TOPIC% as quick notes at the end of the list, following the existing format!
 
-**Contributors:** TWiki:Main.GrantBow, TWiki:Main.LynnwoodBrown, TWiki:Main.MikeMannix, TWiki:Main.PeterMasiar, TWiki:Main.PeterThoeny
+**Contributors:** TWiki:Main.GrantBow, TWiki:Main.LynnwoodBrown, TWiki:Main.MikeMannix, TWiki:Main.PeterMasiar, TWiki:Main.PeterThoeny, TWiki:Main.MattWilkie
