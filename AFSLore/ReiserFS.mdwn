@@ -1,0 +1,25 @@
+## <a name="Where can you use _ReiserFS?"></a> Where can you use [[ReiserFS]]?
+
+There seems to be much confusion amongst new [[OpenAFS]] administrators about when and where they can use [[ReiserFS]]. This document attempts to describe supported uses, and explain why the others are unsupported.
+
+----
+
+### <a name="Supported:  Vice partitions on n"></a> Supported: Vice partitions on namei-based fileservers
+
+**Why:** Namei-based fileservers store volumes in regular files on the vice partitions. No meta-data is stored in the inodes of these files.
+
+----
+
+### <a name="Unsupported:  Vice partitions on"></a> Unsupported: Vice partitions on inode-based fileservers
+
+**Why:** Inode-based fileservers access volumes directly via inode, and sneakily stuff bits of volume metadata into portions of the inode structure. Since [[ReiserFS]] does not have persistent inodes, this process will not work.
+
+----
+
+### <a name="Unsupported:  Cache partitions o"></a> Unsupported: Cache partitions on [[OpenAFS]] clients
+
+**Why:** The cache manager operates directly on filesystem inodes. [[ReiserFS]] does not have persistent inodes.
+
+----
+
+-- [[RayLink]] - 04 Mar 2004
