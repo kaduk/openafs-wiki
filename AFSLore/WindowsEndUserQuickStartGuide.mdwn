@@ -2,7 +2,7 @@
 
 ## <a name="Introduction"></a> Introduction
 
-This guide is a (hopefully) straight forward manual for setting up [[OpenAFS]] for Windows 1.3.66. It was written with the not-so-experienced user in mind and is a step-by-step description of a sample configuration. Changing the settings to your specific needs should pose no problems.
+This guide is a (hopefully) straight forward manual for setting up [[OpenAFS]] for Windows 1.3.70. It was written with the not-so-experienced user in mind and is a step-by-step description of a sample configuration. Changing the settings to your specific needs should pose no problems.
 
 ### <a name="Before the Installation"></a> Before the Installation
 
@@ -44,16 +44,30 @@ Nowadays, [[OpenAFS]] for Windows does support [[KerberosV]] tickets ("ID cards"
 
 In order to use [[KerberosV]] (recommended), you will have to use Kerberos for Windows, an MIT product. Of course, this requires that you use [[KerberosV]] servers, which still is not always the case. Small sites may still use [[OpenAFS]]' own Kerberos server implementation, called the **_kaserver_**.
 
+### <a name="A Word of Warning"></a> A Word of Warning
+
+While installing and configuring AFS, you should keep in mind that the authentication part is the part which most often causes problems. This is partly due to the fact that different generations of Kerberos is kept in the software to be backwards-compatible. It may also be that some information is not available to the [[OpenAFS]] developers. Please be patient about getting Kerberos to work.
+
+If the AFS servers you are about to connect to already is in use, you can probably browse around in the public folders without being authenticated. This way, you can check if it is AFS in itself, or Kerberos that is causing your headache.
+
 ### <a name="The Software Installation"></a> The Software Installation
 
 Now that you know about the existence and uses of Kerberos, we can continue with the installation. This guide will first discuss the installation screens, then continuing with a simple sample configuration and end with some references. Happy installing!
 
-## <a name="Obtaining _OpenAFS for Windows"></a> Obtaining [[OpenAFS]] for Windows
+## <a name="Step by Step"></a> Step by Step
+
+### <a name="Obtaining _OpenAFS for Windows"></a> Obtaining [[OpenAFS]] for Windows
 
 The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of both all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/release/latest.html) you will always find the latest releases. The ready-to-install Windows package is usually located at the bottom of the page.
 
 The file you download is either an executable file, or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later.
 
-## <a name="Start the Installation"></a> Start the Installation
+### <a name="Optionally: Download Kerberos fo"></a> Optionally: Download Kerberos for Windows
+
+If you know, or believe, that the AFS cell you will be connecting to uses [[KerberosV]], you should download [MIT Kerberos for Windows](http://web.mit.edu/kerberos/www/). The latest release is available on [this page](http://web.mit.edu/kerberos/www/dist/). The download of interrest is the **Installer** for Windows.
+
+Note that installing MIT Kerberos for Windows will not prevent you from using the old Kerberos 4 protocol. It will, however, setup your computer for [[KerberosV]] as a first choice.
+
+### <a name="Start the Installation"></a> Start the Installation
 
 To begin installing, run the file you downloaded. The screens are pretty standard. Let us go through them one by one.
