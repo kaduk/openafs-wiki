@@ -40,7 +40,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set WEBBGCOLOR = #C0C0C0
 
 - Copyright notice:
-  - Set WEBCOPYRIGHT = <font>Copyright © 1999-2010 by the contributing authors. \\nAll material on this collaboration platform is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send feedback](mailto:?subject=%WIKITOOLNAME% Feedback on %WEB%.%TOPIC%). </font>
+  - Set WEBCOPYRIGHT = Copyright © 1999-2010 by the contributing authors. \\nAll material on this collaboration platform is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send feedback](mailto:?subject=%WIKITOOLNAME% Feedback on %WEB%.%TOPIC%)
 
 - Simplified Copyright notice for the [[WebRss]] feed (don't use any special characters or xml tags
   - Set WEBRSSCOPYRIGHT = Copyright 2010 by contributing authors
@@ -115,6 +115,8 @@ The following are **_site-level_** settings that affect all users in all webs on
     <td bgcolor="yellow"><font color="red"><strong>NOTE:</strong></font><font size="-1"> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance. </font></td>
   </tr>
 </table>
+  - If you use [[PatternSkin]]:
+  - #Set BROADCASTMESSAGE = <div><strong>NOTE:</strong> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance.</div>
 
 ### <a name="Search Settings"></a> Search Settings
 
@@ -181,21 +183,8 @@ The following are **_site-level_** settings that affect all users in all webs on
 ### <a name="PatternSkin"></a> [[PatternSkin]]
 
 - Using attachments for styles
-  - #Set TWIKILAYOUTURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css>
-  - #Set TWIKISTYLEURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css>
-
-- Using topics to define styles - these settings will override attachment style settings above -
-  - Default TWiki CSS styling topics where layout and style are are defined:
-    - #Set TWIKILAYOUTTOPIC = [[TWikiLayout]]
-    - #Set TWIKISTYLETOPIC = [[TWikiStyle]]
-  - CSS styling topics to be defined in local webs or in user topics (these can complement or override default TWiki style topics):
-    - Set LAYOUTTOPIC =
-    - Set STYLETOPIC =
-  - Use the CSS TOPIC setting above to build the URLS used in the templates
-    - #Set TWIKILAYOUTURL = ..//%TWIKILAYOUTTOPIC%?skin=text&amp;contenttype=text/css
-    - #Set TWIKISTYLEURL = ..//%TWIKISTYLETOPIC%?skin=text&amp;contenttype=text/css
-    - #Set USERLAYOUTURL = ..//%USERLAYOUTTOPIC%?skin=text&amp;contenttype=text/css
-    - #Set USERSTYLEURL = ..//%USERSTYLETOPIC%?skin=text&amp;contenttype=text/css
+  - Set TWIKILAYOUTURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css>
+  - Set TWIKISTYLEURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css>
 
 ### <a name="DragonSkin"></a> [[DragonSkin]]
 
