@@ -170,58 +170,17 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > ### <a name="Can I write colored text?"></a> Can I write colored text?
 >
-> Sure. The quickest way is to go &lt;font color="colorCode"&gt;colorize&lt;/font&gt; - `font` is an HTML tag that works in any browser, although it's been phased out in the latest HTML specs.
+> [[TWikiPreferences]] defines some commonly used colors: **%YELLOW% %YELLOW%%ENDCOLOR%, %RED% %RED%%ENDCOLOR%, %PINK% %PINK%%ENDCOLOR%, %PURPLE% %PURPLE%%ENDCOLOR%, %TEAL% %TEAL%%ENDCOLOR%, %NAVY% %NAVY%%ENDCOLOR%, %BLUE% %BLUE%%ENDCOLOR%, %AQUA% %AQUA%%ENDCOLOR%, %LIME% %LIME%%ENDCOLOR%, %GREEN% %GREEN%%ENDCOLOR%, %OLIVE% %OLIVE%%ENDCOLOR%, %MAROON% %MAROON%%ENDCOLOR%, %BLACK% %BLACK%%ENDCOLOR%, %GRAY% %GRAY%%ENDCOLOR%, %SILVER% %SILVER%%ENDCOLOR%** and **%ENDCOLOR%**.
 >
-> You can also use the up-to-date `style` attribute - ex: `style="color:#ff0000"` - placed in most HTML tags. `span` is an all-purpose choice: "&lt;span style="color:#ff0000"&gt;CoLoR&lt;/span&gt;. Only old (like 3.x IE &amp; NS) browsers have a problem with `style`.
+> - **_You enter:_** `%RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%`
+>     **_Result:_** %RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%
 >
-> "colorCode" is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or <code>"#ff000=" for Web page purposes. For a basic color selection (you can [[StandardColor|Main/StandardColors]] names instead of hex code in the =font</code> tag only):
+> **_Note:_** `%<color>%` text must end with `%ENDCOLOR%` . If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
 >
-> <table>
->   <tr bgcolor="#e0e0e0">
->     <td><font color="#000000"> <strong>Black:</strong> </font></td>
->     <td><code>"#000000"</code></td>
->     <td><font color="#008000"> <strong>Green:</strong> </font></td>
->     <td><code>"#008000"</code></td>
->     <td><font color="#c0c0c0"> <strong>Silver:</strong> </font></td>
->     <td><code>"#c0c0c0"</code></td>
->     <td><font color="#00ff00"> <strong>Lime:</strong> </font></td>
->     <td><code>"#00ff00"</code></td>
->   </tr>
->   <tr bgcolor="#c0c0c0">
->     <td><font color="#808080"> <strong>Gray:</strong> </font></td>
->     <td><code>"#808080"</code></td>
->     <td><font color="#808000"> <strong>Olive:</strong> </font></td>
->     <td><code>"#808000"</code></td>
->     <td><font color="#ffffff"> <strong>White:</strong> </font></td>
->     <td><code>"#ffffff"</code></td>
->     <td><font color="#ffff00"> <strong>Yellow:</strong> </font></td>
->     <td><code>"#ffff00"</code></td>
->   </tr>
->   <tr bgcolor="#e0e0e0">
->     <td><font color="#800000"> <strong>Maroon:</strong> </font></td>
->     <td><code>"#800000"</code></td>
->     <td><font color="#000080"> <strong>Navy:</strong> </font></td>
->     <td><code>"#000080"</code></td>
->     <td><font color="#ff0000"> <strong>Red:</strong> </font></td>
->     <td><code>"#ff0000"</code></td>
->     <td><font color="#0000ff"> <strong>Blue:</strong> </font></td>
->     <td><code>"#0000ff"</code></td>
->   </tr>
->   <tr bgcolor="#c0c0c0">
->     <td><font color="#800080"> <strong>Purple:</strong> </font></td>
->     <td><code>"#800080"</code></td>
->     <td><font color="#008080"> <strong>Teal:</strong> </font></td>
->     <td><code>"#008080"</code></td>
->     <td><font color="#ff00ff"> <strong>Fuchsia:</strong> </font></td>
->     <td><code>"#ff00ff"</code></td>
->     <td><font color="#00ffff"> <strong>Aqua:</strong> </font></td>
->     <td><code>"#00ffff"</code></td>
->   </tr>
-> </table>
+> If you need more colors you can use HTML, like `<font color="#ff0000"> red text </font>`. You can also use the up-to-date `style` attribute - ex: `style="color:#ff0000"` - placed in most HTML tags. `span` is an all-purpose choice: `<span style="color:#ff0000">CoLoR</span>`. Only old (like 3.x IE &amp; NS) browsers have a problem with `style`.
 >
-> - **_You enter:_** ` <font color="#ff0000"> Red color </font> draws attention. `
->     **_Result:_** <font> Red color </font> draws attention.
+> The code is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or `"#ff000"` for Web page purposes. [[StandardColors]] lists basic colors.
 >
 > ----
 
--- [[PeterThoeny]] - 13 Sep 2001 <br /> -- [[MikeMannix]] - 14 Sep 2001 <br />
+-- [[PeterThoeny]] - 21 Feb 2002 <br /> -- [[MikeMannix]] - 14 Sep 2001 <br />
