@@ -1,15 +1,14 @@
 <div>
   <ul>
-    <li><a href="#TWiki Implementation Notes"> TWiki Implementation Notes</a><ul>
-        <li><a href="#Platforms and System Requirement"> Platforms and System Requirements </a></li>
-        <li><a href="#Directory Structure"> Directory Structure</a><ul>
+    <li><a href="#TWiki Software Environment"> TWiki Software Environment</a><ul>
+        <li><a href="#System Requirements"> System Requirements</a></li>
+        <li><a href="#TWiki Directory Structure"> TWiki Directory Structure</a></li>
+        <li><a href="#File Descriptions"> File Descriptions</a><ul>
             <li><a href="#Files in twiki"> Files in <code>twiki</code></a></li>
             <li><a href="#Files in twiki/bin"> Files in <code>twiki/bin</code></a></li>
-            <li><a href="#Files in twiki/lib"> Files in <code>twiki/lib</code></a></li>
-            <li><a href="#Files in twiki/lib/TWiki"> Files in <code>twiki/lib/TWiki</code></a></li>
-            <li><a href="#Files in twiki/lib/TWiki/Plugins"> Files in <code>twiki/lib/TWiki/Plugins</code></a></li>
-            <li><a href="#Files in twiki/pub"> Files in <code>twiki/pub</code></a></li>
-            <li><a href="#Files in twiki/data"> Files in <code>twiki/data</code></a></li>
+            <li><a href="#Files under twiki/lib"> Files under <code>twiki/lib</code></a></li>
+            <li><a href="#Files under twiki/pub"> Files under <code>twiki/pub</code></a></li>
+            <li><a href="#Files under twiki/data"> Files under <code>twiki/data</code> </a></li>
             <li><a href="#Files in twiki/templates"> Files in <code>twiki/templates</code></a></li>
           </ul>
         </li>
@@ -18,11 +17,11 @@
   </ul>
 </div>
 
-## <a name="TWiki Implementation Notes"></a> TWiki Implementation Notes
+## <a name="TWiki Software Environment"></a> TWiki Software Environment
 
-### <a name="Platforms and System Requirement"></a> Platforms and System Requirements
+### <a name="System Requirements"></a> System Requirements
 
-TWiki is written in **Perl 5** and also uses some **shell commands**. The current implementation runs best on a Unix machine, but it is also possible on Microsoft Windows. **RCS** (for revision control) must be installed on the system. [ **_MM: Locate elsewhere and/or include one-liner and link for RCS..._** ]
+TWiki is written in **Perl 5** and also uses some **shell commands**. It also requires that **GNU RCS** (Revision Control System) is installed on the same system. The current implementation runs best on a Linux machine, but it can also run with Microsoft Windows.
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -70,9 +69,9 @@ TWiki is written in **Perl 5** and also uses some **shell commands**. The curren
   </tr>
 </table>
 
-### <a name="Directory Structure"></a> Directory Structure
+### <a name="TWiki Directory Structure"></a> TWiki Directory Structure
 
-You can easily rename the root TWiki directory - <code>**twiki**</code> - to whatever you like by changing it in the <code>**twiki.cfg**</code> configuration file. However, to keep the current installation and future upgrades simple, you should leave the subdirectory structure - the folder names and locations - exactly as is:
+You can easily rename the root TWiki directory - <code>**twiki**</code> - to whatever you like by changing it in the <code>**twiki.cfg**</code> configuration file. However, to keep the current installation and future upgrades simple, you should leave the subdirectory structure intact:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -97,12 +96,12 @@ You can easily rename the root TWiki directory - <code>**twiki**</code> - to wha
   </tr>
   <tr>
     <td><code><b>twiki/lib/TWiki</b></code></td>
-    <td align="center">[[Main/WebHome#LibTWiki]]</td>
+    <td align="center">[[Main/WebHome#LibFiles]]</td>
     <td> Perl modules </td>
   </tr>
   <tr>
     <td><code><b>twiki/lib/TWiki/Plugins</b></code></td>
-    <td align="center">[[Main/WebHome#libtwikiplugins]]</td>
+    <td align="center">[[Main/WebHome#LibFiles]]</td>
     <td>[[Main/TWikiPlugins]] Perl modules </td>
   </tr>
   <tr>
@@ -122,7 +121,9 @@ You can easily rename the root TWiki directory - <code>**twiki**</code> - to wha
   </tr>
 </table>
 
-**_Note: about the additional directories in data, elsewhere_**
+### <a name="File Descriptions"></a> File Descriptions
+
+A rundown of the individual files in the current %VERSION% distribution, organized by TWiki root directories. Note that there may be minor differences in the start-up <code>**data**</code> files.
 
 <a name="TWikiFiles"></a>
 
@@ -240,7 +241,7 @@ You can easily rename the root TWiki directory - <code>**twiki**</code> - to wha
 
 <a name="LibFiles"></a>
 
-#### <a name="Files in twiki/lib"></a> Files in `twiki/lib`
+#### <a name="Files under twiki/lib"></a> Files under `twiki/lib`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -255,86 +256,61 @@ You can easily rename the root TWiki directory - <code>**twiki**</code> - to wha
     <td><code><b>TWiki.cfg</b></code></td>
     <td> For configuration, used by <code><b>TWiki.pm</b></code></td>
   </tr>
-</table>
-
-<a name="LibTWiki"></a>
-
-#### <a name="Files in twiki/lib/TWiki"></a> Files in `twiki/lib/TWiki`
-
-<table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <th bgcolor="#99CCCC"><strong> File: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Used for: </strong></th>
-  </tr>
-  <tr>
-    <td><code><b>Access.pm</b></code></td>
+    <td><code><b>TWiki/Access.pm</b></code></td>
     <td> Access control </td>
   </tr>
   <tr>
-    <td><code><b>Attach.pm</b></code></td>
+    <td><code><b>TWiki/Attach.pm</b></code></td>
     <td> Attachment handling </td>
   </tr>
   <tr>
-    <td><code><b>Meta.pm</b></code></td>
+    <td><code><b>TWiki/Meta.pm</b></code></td>
     <td> Meta data in topics </td>
   </tr>
   <tr>
-    <td><code><b>Net.pm</b></code></td>
+    <td><code><b>TWiki/Net.pm</b></code></td>
     <td> SMTP mail handling </td>
   </tr>
   <tr>
-    <td><code><b>Plugins.pm</b></code></td>
+    <td><code><b>TWiki/Plugins.pm</b></code></td>
     <td> Plugin handling </td>
   </tr>
   <tr>
-    <td><code><b>Prefs.pm</b></code></td>
+    <td><code><b>TWiki/Prefs.pm</b></code></td>
     <td> Preferences handling </td>
   </tr>
   <tr>
-    <td><code><b>Search.pm</b></code></td>
+    <td><code><b>TWiki/Search.pm</b></code></td>
     <td> Search engine, used by wiki.pm </td>
   </tr>
   <tr>
-    <td><code><b>Store.pm</b></code></td>
+    <td><code><b>TWiki/Store.pm</b></code></td>
     <td> Back-end storage, <code>*.txt</code> text file and <code>*.txt,v</code> RCS repository file handling </td>
   </tr>
-</table>
-
-<a name="LibTWikiPlugins"></a>
-
-#### <a name="Files in twiki/lib/TWiki/Plugins"></a> Files in `twiki/lib/TWiki/Plugins`
-
-<table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <th bgcolor="#99CCCC"><strong> File: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Used for: </strong></th>
-  </tr>
-  <tr>
-    <td><code><b>DefaultPlugin.pm</b></code></td>
+    <td><code><b>TWiki/Plugins/DefaultPlugin.pm</b></code></td>
     <td> Default plugin </td>
   </tr>
   <tr>
-    <td><code><b>EmptyPlugin.pm</b></code></td>
+    <td><code><b>TWiki/Plugins/EmptyPlugin.pm</b></code></td>
     <td> Empty plugin, use to create your own </td>
   </tr>
   <tr>
-    <td><code><b>InterwikiPlugin.pm</b></code></td>
+    <td><code><b>TWiki/Plugins/InterwikiPlugin.pm</b></code></td>
     <td> Refer to external Wikis and other Web sites </td>
   </tr>
 </table>
 
 <a name="PubFiles"></a>
 
-#### <a name="Files in twiki/pub"></a> Files in `twiki/pub`
+#### <a name="Files under twiki/pub"></a> Files under `twiki/pub`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> File: </strong></th>
     <th bgcolor="#99CCCC"><strong> Used for: </strong></th>
   </tr>
-</table>
-
-<table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td><code><b>favicon.ico</b></code></td>
     <td> xxxx </td>
@@ -511,7 +487,7 @@ You can easily rename the root TWiki directory - <code>**twiki**</code> - to wha
 
 <a name="DataFiles"></a>
 
-#### <a name="Files in twiki/data"></a> Files in `twiki/data`
+#### <a name="Files under twiki/data"></a> Files under `twiki/data`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
