@@ -1,4 +1,4 @@
-# <a name="%WIKITOOLNAME% Site-Level Prefer"></a> %WIKITOOLNAME% Site-Level Preferences
+# <a name="%WIKITOOLNAME% Site-Level Prefer"></a><a name=" %WIKITOOLNAME% Site-Level Prefe"></a> %WIKITOOLNAME% Site-Level Preferences
 
 The following are **_site-level_** settings that affect all users in all webs on this [[TWikiSite]]. They can be selectively overwritten on the **_individual web level_** (see [[WebPreferences]] in each web), and on the **_user level_** (create preferences in your user account topic in the Main web, ex: Main.admin).
 
@@ -6,17 +6,14 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 <div>
   <ul>
-    <li><a href="#%WIKITOOLNAME% Site-Level Prefer">%WIKITOOLNAME% Site-Level Preferences</a><ul>
-        <li><a href="#General Preferences"> General Preferences</a></li>
-        <li><a href="#Email Settings"> Email Settings</a></li>
-        <li><a href="#Plugins Settings"> Plugins Settings</a></li>
-        <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
-        <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
-        <li><a href="#Access Control Settings"> Access Control Settings</a></li>
-        <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
-        <li><a href="#Related Topics"> Related Topics</a></li>
-      </ul>
-    </li>
+    <li><a href="#General Preferences"> General Preferences</a></li>
+    <li><a href="#Email Settings"> Email Settings</a></li>
+    <li><a href="#Plugins Settings"> Plugins Settings</a></li>
+    <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
+    <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
+    <li><a href="#Access Control Settings"> Access Control Settings</a></li>
+    <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
+    <li><a href="#Related Topics"> Related Topics</a></li>
   </ul>
 </div>
 
@@ -54,6 +51,9 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 - Vertical size of text edit box: (can be overwritten by user preferences)
   - Set EDITBOXHEIGHT = 15
+
+- Style of text edit box. Set to `width: 100%` for full window width (which will overwrite the EDITBOXWIDTH setting), or `width: auto` to disable (default). This setting works for IE and some other recent browsers. (can be overwritten by user preferences)
+  - Set EDITBOXSTYLE = width: auto
 
 - Default state of the **_Release edit lock_** ([[UnlockTopic]]) check box in preview. Checkbox is initially checked if `Set RELEASEEDITLOCKCHECKBOX = checked="checked"`, or unchecked if empty. If checked, make sure to click on <u>Edit</u> to do more changes; do **not** go back in your browser to the edit page, or you risk that someone else will edit the topic at the same time: (can be overwritten by user preferences)
   - Set RELEASEEDITLOCKCHECKBOX =
