@@ -1,0 +1,16 @@
+## <a name="Progress of the new Windows docu"></a> Progress of the new Windows documentation
+
+### <a name="Ideas"></a> Ideas
+
+- **AdministratorsInstallationGuide** Where to download the package. Walk-through of the installation steps. Optional steps afterwards ([[KfW]], references into the Configuration Guide.
+- **EndUserQuickStartGuide** Same as above, but maybe even more Walk-Through. Explain a sample configuration.
+- **ConfigurationReferenceGuide** One page for each screen of the afscreds program. Command-line switches reference.
+- **TroubleshootingGuide (FAQ)** Not questions like "Where do I download [[OpenAFS]]?"
+- It would be nice to write this in XML, then doing XSLT to create PDF, (online) HTML and (offline) HTML Help documents. Docbook might be suitable.
+
+### <a name="Links"></a> Links
+
+- [Rodney Dyer's presentation](http://www.coe.uncc.edu/~rmdyer/slac_presentation/).
+- The [afs-install-notes.txt](http://web.mit.edu/~jaltman/Public/OpenAFS/afs-install-notes.txt) file.
+- The [registry.txt](http://web.mit.edu/~jaltman/Public/OpenAFS/registry.txt) file.
+- The [[WindowsLoopBackAdapter]] page.
