@@ -58,8 +58,12 @@
     <td> Your login username, is <b>admin</b></td>
   </tr>
   <tr>
+    <td><code>%WIKINAME%</code></td>
+    <td> Your Wiki username. Same as %USERNAME% if not defined in the [[Main/TWikiUsers]] topic. Is <b>admin</b></td>
+  </tr>
+  <tr>
     <td><code>%WIKIUSERNAME%</code></td>
-    <td> Your Wiki username, if defined in [[Main/TWikiUsers]]. Same as %USERNAME% if not defined. Is <b>Main.admin</b></td>
+    <td> Your %WIKINAME% including the Main web name. Usefull for signatures. Is <b>Main.admin</b></td>
   </tr>
   <tr>
     <td><code>%WEB%</code></td>
@@ -149,7 +153,7 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:37</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:42</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
