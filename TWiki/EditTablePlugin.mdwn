@@ -157,6 +157,8 @@ Line before table: `%EDITTABLE{ header="|*Nr*|*Text field sandbox*|*Drop down sa
     </table><input name="etrows" type="hidden" value="3" /> <input type="submit" value="Edit table" /></form>
 </div>
 
+**_Note:_** Please use TWiki:Sandbox.EditTablePluginTesting if you want to try out this Plugin
+
 If this plugin is installed you will see an **[ Edit table ]** button above; when you click on it you get this form:
 
 <form>
@@ -237,11 +239,11 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 ## <a name="Limitations and Known Issues"></a> Limitations and Known Issues
 
-- This Plugin does not support TWiki table formatting like Multi-span cells (e.g. `| ... ||`) and cell justification (e.g. `|  centered  |   right |`).
-- There is a performance issue when editing a large table, say, with more then 50 rows.
-- The Plugin fails if the table is at the very end of the topic (without a new line) Always ensure there is a newline after the table
-- Variables like `%ATTACHURL%` get expanded unless they are in a label.
-- You cannot put two %EDITTABLE% statements on the same line in the source.
+- %X% Bug: The Plugin fails if the table is at the very end of the topic (without a new line) Always ensure there is a newline after the table
+- This Plugin does not support TWiki table formatting like Multi-span cells (e.g. `| ... ||`) and cell justification (e.g. `|  centered  |   right |`)
+- There is a performance issue when editing a large table, say, with more then 50 rows
+- Variables like `%ATTACHURL%` get expanded unless they are in a label
+- You cannot put two `%EDITTABLE{}%` statements on the same line in the source
 - You can include %-vars now in select values, by quoting them with &lt;nop&gt;, as in %&lt;nop&gt;X% for %X%, say for instance: <br />`select,1,%<nop>X%,%<nop>Y%`
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
@@ -311,11 +313,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 02 Mar 2004 </td>
+    <td> 07 Apr 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 07 Apr 2004: </td>
+    <td> Fixed bug where two tables got updated when you edit and save a table included into a topic containing other edit tables </td>
   </tr>
   <tr>
     <td align="right"> 02 Mar 2004: </td>
@@ -421,4 +427,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 02 Mar 2004
+-- TWiki:Main/PeterThoeny - 07 Apr 2004
