@@ -5,6 +5,7 @@
     <li><a href="#Troubleshooting Guide for _OpenA"> Troubleshooting Guide for OpenAFS for Windows</a><ul>
         <li><a href="#Bugs"> Bugs</a><ul>
             <li><a href="#How come my non-ASCII filename c"> How come my non-ASCII filename characters are wrong; code page problems?</a></li>
+            <li><a href="#Why does _OpenAFS for Windows cr"> Why does OpenAFS for Windows crash on my Hyperthreaded Pentium 4?</a></li>
           </ul>
         </li>
         <li><a href="#Error Messages"> Error Messages</a><ul>
@@ -28,6 +29,10 @@
 Yes, it is. Currently, the [[OpenAFS]] implementation uses a SMB server with which Windows communicates. This server is not yet able to handle all code pages. So, if you are accessing files from other systems as well, you will experience the old code page missmatch problem.
 
 The CIFS protocol itself has support for Unicode. Hopefully, it will be implemented in [[OpenAFS]] in the future. (from J. Altman)
+
+### <a name="Why does _OpenAFS for Windows cr"></a> Why does [[OpenAFS]] for Windows crash on my Hyperthreaded Pentium 4?
+
+This is due to a known bug. Set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`) to 1. This restricts the [[OpenAFS]] Client Service to use one processor.
 
 ## <a name="Error Messages"></a> Error Messages
 
