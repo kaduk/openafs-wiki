@@ -272,11 +272,21 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Prevent a Link:</strong><br /> Prevent a [[Main/WikiWord]] from being linked by prepending it with the <code>&lt;nop&gt;</code> tag. </td>
+    <td valign="top"><strong>Prevent a Link:</strong> %BR% Prevent a [[Main/WikiWord]] from being linked by prepending it with the <code>&lt;nop&gt;</code> tag. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 &lt;nop&gt;SunOS
 </pre> </font></span></td>
     <td valign="top"> SunOS </td>
+  </tr>
+  <tr bgcolor="#ffffff">
+    <td valign="top"><strong>Disable Links:</strong> %BR% You can disable automatic linking of [[Main/WikiWords]] by surrounding text with <code>&lt;noautolink&gt;</code> and <code>&lt;/noautolink&gt;</code> tags. %BR% <strong><em>Note:</em></strong> Each tag must be on a line by itself.%BR% <strong><em>Note:</em></strong> This also works for TWiki tables, but only if you add a blank line between the end of the table and the closing <code>&lt;/noautolink&gt;</code> tag (known issue of the [[Main/TablePlugin]]). </td>
+    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
+ &lt;noautolink&gt;
+ RedHat &amp;
+ SuSE
+ &lt;/noautolink&gt;
+</pre> </font></span></td>
+    <td valign="top"> RedHat &amp; SuSE </td>
   </tr>
 </table>
 
