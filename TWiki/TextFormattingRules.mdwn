@@ -12,7 +12,9 @@
             <li><a href="#External Links"> External Links</a></li>
           </ul>
         </li>
+        <li><a href="#TWiki Variables"> TWiki Variables</a></li>
         <li><a href="#TWikiPlugin Formatting Extension"> TWikiPlugin Formatting Extensions</a></li>
+        <li><a href="#Common Editing Errors"> Common Editing Errors</a></li>
       </ul>
     </li>
   </ul>
@@ -314,6 +316,24 @@ Being able to create links without any formatting required is a core TWiki featu
 - `[[Square bracket rules]]` let you easily create [[non-WikiWord links|Main/WebHome#SquareBrackets]].
   - You can also write `[[http://yahoo.com Yahoo home page]]` as an easier way of doing external links with descriptive text for the link, such as [Yahoo home page](http://yahoo.com).
 
+## <a name="TWiki Variables"></a> TWiki Variables
+
+Variables are names that are enclosed in percent signs `%` that are expanded on the fly.
+
+- `%TOC%` : Automatically generates a table of contents based on headings in a topic - see the top of this page for an example.
+
+- `%WEB%` : The current web, is **%WEB%**.
+
+- `%TOPIC%` : The current topic name, is **%TOPIC%**.
+
+- `%ATTACHURL%` : The attachment URL of the current topic. Example usage: If you attach a file to a topic you can refer to it as <code>**%ATTACHURL%/image.gif**</code> to show the URL of the file or the image in your text.
+
+- `%INCLUDE{"SomeTopic"}%` : Server side include, includes another topic. The current %WIKITOOLNAME% web is the default web. Example: <code>**%INCLUDE\{"TWiki.SiteMap"\}%**</code>
+
+- There are many more variables, see **[[TWikiVariables]]**.
+
+- [[TWikiPreferences]] defines site-wide variables like colors. For example, write: <code><span><font> %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors</font></span></code> to get: %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors.
+
 ## <a name="TWikiPlugin Formatting Extension"></a><a name="_TWikiPlugin Formatting Extensio"></a> TWikiPlugin Formatting Extensions
 
 Plugins provide additional text formatting capabilities and can extend the functionality of %WIKITOOLNAME% into many other areas. For example, the optional [SpreadSheetPlugin](http://twiki.org/cgi-bin/view/Plugins/SpreadSheetPlugin) lets you create a spreadsheet with the same basic notation used in TWiki tables.
@@ -332,12 +352,14 @@ Available Plugins are located in the [Plugins](http://twiki.org/cgi-bin/view/Plu
 
 Check on current Plugin status and settings for this site in [[TWikiPreferences]].
 
--- [[MikeMannix]] - 02 Dec 2001
+## <a name="Common Editing Errors"></a> Common Editing Errors
 
-Updated to cover TWiki:Codev/EasierExternalLinking (in the alpha release).
+TWiki formatting rules are fairly simple to use and quick to type. However, there are some things to watch out for, taken from the [[TextFormattingFAQ]]:
 
--- [[RichardDonkin]] - 26 Mar 2002
+- **Q:** Text enclosed in angle brackets like `<filename>` is not displayed. How can I show it as it is?
+  - **A:** The `'<'` and `'>'` characters have a special meaning in HTML, they define HTML tags. You need to escape them, so write `'&lt;'` instead of `'<'`, and `'&gt;'` instead of `'>'`. <br /> Example: Type `'prog &lt;filename&gt;'` to get `'prog <filename>'`.
 
-Latest updates to this topic are in the main TWiki, since that's got the TWikiAlphaRelease code.
+- **Q:** Why is the `'&'` character sometimes not displayed?
+  - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- [[RichardDonkin]] - 05 Apr 2002
+-- [[MikeMannix]] - 02 Dec 2001 <br /> -- [[PeterThoeny]] - 02 May 2002
