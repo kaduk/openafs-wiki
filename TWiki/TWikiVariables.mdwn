@@ -221,7 +221,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:37</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:38</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -271,15 +271,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:37:42</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:38:05</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:37</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:38</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:37</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:38</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -299,18 +299,36 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%INCLUDE{"page" ...}%</code></td>
-    <td> Server side include to [[Main/IncludeTopicsAndWebPages]]. Parameters are page name, and an optional <code>pattern="(reg-exp)"</code>. The page name is: <table border="1" cellpadding="0" cellspacing="0">
+    <td> Server side include to [[Main/IncludeTopicsAndWebPages]]: <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+        </tr>
         <tr>
           <td><code>"SomeTopic"</code></td>
           <td> The name of a topic located in the current web, i.e. <code>%INCLUDE{"WebNotify"}%</code></td>
+          <td>   </td>
         </tr>
         <tr>
           <td><code>"Web.Topic"</code></td>
           <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.SiteMap"}%</code></td>
+          <td>   </td>
         </tr>
         <tr>
           <td><code>"http://..."</code></td>
           <td> A full qualified URL, i.e. <code>%INCLUDE{"http://twiki.org/"}%</code></td>
+          <td>   </td>
+        </tr>
+        <tr>
+          <td><code>pattern="..."</code></td>
+          <td> A [[Main/RegularExpression]] pattern to include a subset of a topic or page </td>
+          <td> none </td>
+        </tr>
+        <tr>
+          <td><code>rev="1.2"</code></td>
+          <td> Include a previous topic revision; N/A for URLs </td>
+          <td> top revision </td>
         </tr>
       </table>
     </td>
@@ -431,7 +449,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> Show number </td>
         </tr>
         <tr>
-          <td><code><b>header="..."</b></code><br /><code><b>format="..."</b></code></td>
+          <td><code>header="..."</code><br /><code>format="..."</code></td>
           <td> Custom format results: see <strong>[[Main/FormattedSearch]]</strong> for usage, variables &amp; examples </td>
           <td> Results in table </td>
         </tr>
