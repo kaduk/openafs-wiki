@@ -2,6 +2,17 @@ Instead of mounting the home cell's root.afs volume at the AFS mount point (typi
 
 -- [[DerrickBrashear]] - 24 Jan 2002
 
-A similar feature exists in the Windows clients, known as the [[FreelanceClient]] feature.
+A similar feature exists in the Windows clients, known as the [[FreelanceClient]] feature. The technical details are available [here](https://lists.openafs.org/pipermail/openafs-devel/2001-October/001927.html).
 
 -- [[LeoShyhWeiLuan]] - 7 Feb 2002
+
+On Unix this option is enabled by specifying `-dynroot` on the `afsd` command line.
+
+On Windows add this DWORD to the registry: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters\FreelanceClient=1` and create the file `%SystemRoot%\afsdns.ini` containing:
+
+    [AFS Domain Name Servers]
+    ns1=your.ns.ip.here
+
+Then restart "IBM AFS Client" and the cells you touch get added to `%SystemRoot%\afs_freelance.ini`.
+
+-- [[TedAnderson]] - 19 Mar 2003
