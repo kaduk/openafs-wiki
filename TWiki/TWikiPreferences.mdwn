@@ -84,6 +84,9 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set WIKIWEBLIST = [[Main|Main/WebHome]] | [[TWiki|TWiki/WebHome]] | [[Know|Know/WebHome]] | [[Sandbox|Sandbox/WebHome]]
   - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use the `%WEBLIST{}%` variable instead: <br />
 
+- Skin overriding the default TWiki templates: (can be overwritten by [[WebPreferences]] and user preferences)
+  - Set SKIN =
+
 ## <a name="Email and Proxy Server Settings"></a> Email and Proxy Server Settings
 
 - TWiki webmaster email address:
@@ -137,19 +140,6 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Line break:
   - Set BR = <br />
 
-- Graphics used in TWiki documentation - view all images in [[TWikiDocGraphics]]. _(There are various ways to set up common icons as text variables. This is simply one quick approach.)_:
-  - Set H = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/help.gif" width="16" height="16" alt="HELP" />
-  - Set I = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/tip.gif" width="16" height="16" alt="IDEA!" />
-  - Set M = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/arrowright.gif" width="16" height="16" alt="MOVED TO..." />
-  - Set N = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/new.gif" width="28" height="8" alt="NEW" />
-  - Set P = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/pencil.gif" width="16" height="16" alt="REFACTOR" />
-  - Set Q = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/help.gif" width="16" height="16" alt="QUESTION?" />
-  - Set S = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/starred.gif" width="16" height="16" alt="PICK" />
-  - Set T = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/tip.gif" width="16" height="16" alt="TIP" />
-  - Set U = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/updated.gif" width="56" height="8" alt="UPDATED" />
-  - Set X = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/warning.gif" width="16" height="16" alt="ALERT!" />
-  - Set Y = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/choice-yes.gif" width="16" height="16" alt="DONE" />
-
 - Colored text: (see more [[StandardColors]]) <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td> You type: </td>
@@ -163,6 +153,9 @@ The following are **_site-level_** settings that affect all users in all webs on
   - **_Note:_** `%<color>%` text must end with `%ENDCOLOR%` . If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
   - Set YELLOW = <font>
     - **YELLOW looks like this**</font>
+- Set ORANGE = <font>
+  - **ORANGE looks like this**</font>
+
 - Set RED = <font>
   - **RED looks like this**</font>
 
@@ -208,9 +201,22 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Set WHITE = <font>
   - **WHITE looks like this**</font>
 
-- And finally:
+- And finally:<font> </font>
 - Set ENDCOLOR =
   - To finish colored text
+
+- Graphics used in TWiki documentation - view all images in [[TWikiDocGraphics]]. _(There are various ways to set up common icons as text variables. This is simply one quick approach.)_:
+  - Set H = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/help.gif" width="16" height="16" alt="HELP" />
+  - Set I = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/tip.gif" width="16" height="16" alt="IDEA!" />
+  - Set M = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/arrowright.gif" width="16" height="16" alt="MOVED TO..." />
+  - Set N = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/new.gif" width="28" height="8" alt="NEW" />
+  - Set P = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/pencil.gif" width="16" height="16" alt="REFACTOR" />
+  - Set Q = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/help.gif" width="16" height="16" alt="QUESTION?" />
+  - Set S = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/starred.gif" width="16" height="16" alt="PICK" />
+  - Set T = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/tip.gif" width="16" height="16" alt="TIP" />
+  - Set U = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/updated.gif" width="56" height="8" alt="UPDATED" />
+  - Set X = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/warning.gif" width="16" height="16" alt="ALERT!" />
+  - Set Y = <img src="http://www.dementia.org/twiki//view/TWiki/TWikiDocGraphics/choice-yes.gif" width="16" height="16" alt="DONE" />
 
 - Background color of non existing topic: ( default `cornsilk` or `#FFFFCE` )
   - Set NEWTOPICBGCOLOR = #FFFFCE
