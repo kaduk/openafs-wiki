@@ -4,13 +4,13 @@ This topic is a place to collect information on AFS performance measurements and
   <ul>
     <li><a href="#Tools"> Tools</a><ul>
         <li><a href="#Andrew Benchmark"> Andrew Benchmark</a></li>
-        <li><a href="#afsfsperf"> afsfsperf</a></li>
+        <li><a href="#afsfsperf (low-level fileserver"> afsfsperf (low-level fileserver performance tester)</a></li>
         <li><a href="#PostMark"> PostMark</a></li>
       </ul>
     </li>
     <li><a href="#Measurements"> Measurements</a><ul>
         <li><a href="#AFS vs NFS"> AFS vs NFS</a></li>
-        <li><a href="#Arla Numbers"> Arla Numbers</a></li>
+        <li><a href="#Afsfsperf collection"> Afsfsperf collection</a></li>
         <li><a href="#Solaris x86 Inode vs Red Hat Nam"> Solaris x86 Inode vs Red Hat Namei on same hardware</a></li>
       </ul>
     </li>
@@ -27,9 +27,9 @@ This old and venerable suite has been used many times. It is mentioned in the [F
 
 ----
 
-### <a name="afsfsperf"></a> afsfsperf
+### <a name="afsfsperf (low-level fileserver"></a><a name="afsfsperf (low-level fileserver "></a> afsfsperf (low-level fileserver performance tester)
 
-[[Arla]] comes with a tool called afsfsperf, apparently available as part of their release.
+[[ArlaAFS]] comes with a tool called afsfsperf, apparently available as part of their release. afsfsperf is a small programm that acts like an minimal afs-client to observe the performace of the fileserver. For relevant numbers you need to run your instance of afsfsperf on a machine that is at least as fast as the fileserver.
 
 ----
 
@@ -49,9 +49,9 @@ A chart showing scalability is in the [FAQ](https://grand.central.org/twiki/bin/
 
 ----
 
-### <a name="Arla Numbers"></a> Arla Numbers
+### <a name="Afsfsperf collection"></a> Afsfsperf collection
 
-A large collection of information. Maybe someone could add some context?
+A large collection of information. All numbers done with afsfsperf from the [[ArlaAFS]] package. Varios of OS'es and filesystems benchmarked.
 
 <http://www.e.kth.se/~jimmy/afsfsperf/afsfsperf.html>
 
