@@ -1,4 +1,4 @@
-# <a name="TWiki Spreadsheet Plugin"></a> TWiki Spreadsheet Plugin
+# <a name="TWiki Spreadsheet Plugin"></a><a name=" TWiki Spreadsheet Plugin"></a> TWiki Spreadsheet Plugin
 
 This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this Plugin provides general formula evaluation capability, not just classic spreadsheet functions.
 
@@ -42,21 +42,91 @@ This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like
     <td>     </td>
     <td valign="top"><strong><em>Interactive example:</em></strong><p>
       </p>
-      <form action="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%" method="get" name="interactive"> Formula: <code>%CALC{"</code><input name="formula" size="30" type="text" value="$PROPERSPACE(admin)" /><code>"}%</code>   <input type="submit" value="Go" /><br /> Result:     admin <p>
-        </p>
-        <p>
+      <form action="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%" method="get" name="interactive"> Formula: <code>%CALC{"</code><input name="formula" size="40" type="text" value="$PROPERSPACE(admin)" /><code>"}%</code>   <input type="submit" value="Go" /><br /> Result:     admin <p>
         </p>
       </form>
     </td>
   </tr>
   <tr>
-    <td colspan="3">
-      <p> The formula next to "Total" is <code><b>%CALC{"$SUM( $ABOVE() )"}%</b></code>. <br /> (you see the formula instead of the sum in case the Plugin is not installed or not enabled.) </p>
-      <p>
-      </p>
-    </td>
+    <td colspan="3"> The formula next to "Total" is <code><b>%CALC{"$SUM( $ABOVE() )"}%</b></code>. <br /> (you see the formula instead of the sum in case the Plugin is not installed or not enabled.) </td>
   </tr>
 </table>
+
+<div>
+  <ul>
+    <li><a href="#Syntax Rules"> Syntax Rules</a></li>
+    <li><a href="#Built-in Functions"> Built-in Functions</a><ul>
+        <li><a href="#ABOVE( ) -- address range of cel"> ABOVE( ) -- address range of cells above the current cell</a></li>
+        <li><a href="#ABS( num ) -- absolute value of"> ABS( num ) -- absolute value of a number</a></li>
+        <li><a href="#AND( list ) -- logcial AND of a"> AND( list ) -- logcial AND of a list</a></li>
+        <li><a href="#AVERAGE( list ) -- average of a"> AVERAGE( list ) -- average of a list or a range of cells</a></li>
+        <li><a href="#CHAR( number ) -- ASCII characte"> CHAR( number ) -- ASCII character represented by number</a></li>
+        <li><a href="#CODE( text ) -- ASCII numeric va"> CODE( text ) -- ASCII numeric value of character</a></li>
+        <li><a href="#COLUMN( offset ) -- current colu"> COLUMN( offset ) -- current column number</a></li>
+        <li><a href="#COUNTITEMS( list ) -- count indi"> COUNTITEMS( list ) -- count individual items in a list</a></li>
+        <li><a href="#COUNTSTR( list, str ) -- count t"> COUNTSTR( list, str ) -- count the number of cells in a list equal to a given string</a></li>
+        <li><a href="#DEF( list ) -- find first non-em"> DEF( list ) -- find first non-empty list item or cell</a></li>
+        <li><a href="#EVAL( formula ) -- evaluate a si"> EVAL( formula ) -- evaluate a simple formula</a></li>
+        <li><a href="#EXACT( text1, text2 ) -- compare"> EXACT( text1, text2 ) -- compare two text strings</a></li>
+        <li><a href="#FIND( string, text, start ) -- f"> FIND( string, text, start ) -- find one string within another string</a></li>
+        <li><a href="#FORMAT( type, prec, number ) --"> FORMAT( type, prec, number ) -- format a number to a certain type and precision</a></li>
+        <li><a href="#FORMATTIME( serial, text ) -- co"> FORMATTIME( serial, text ) -- convert a serialized date into a date string</a></li>
+        <li><a href="#FORMATGMTIME( serial, text ) --"> FORMATGMTIME( serial, text ) -- convert a serialized date into a GMT date string</a></li>
+        <li><a href="#GET( name ) -- get the value of"> GET( name ) -- get the value of a previously set variable</a></li>
+        <li><a href="#IF( condition, value if true, va"> IF( condition, value if true, value if 0 ) -- return a value based on a condition</a></li>
+        <li><a href="#INT( formula ) -- evaluate formu"> INT( formula ) -- evaluate formula and round down to nearest integer</a></li>
+        <li><a href="#LEFT( ) -- address range of cell"> LEFT( ) -- address range of cells to the left of the current cell</a></li>
+        <li><a href="#LENGTH( text ) -- length of text"> LENGTH( text ) -- length of text in bytes</a></li>
+        <li><a href="#LIST( range ) -- convert content"> LIST( range ) -- convert content of a cell range into a list</a></li>
+        <li><a href="#LISTIF( condition, list ) -- rem"> LISTIF( condition, list ) -- remove elements from a list that do not meet a condition</a></li>
+        <li><a href="#LISTITEM( index, list ) -- get o"> LISTITEM( index, list ) -- get one element of a list</a></li>
+        <li><a href="#LISTMAP( formula, list ) -- eval"> LISTMAP( formula, list ) -- evaluate and update each element of a list</a></li>
+        <li><a href="#LISTREVERSE( list ) -- opposite"> LISTREVERSE( list ) -- opposite order of a list</a></li>
+        <li><a href="#LISTSIZE( list ) -- number of el"> LISTSIZE( list ) -- number of elements in a list</a></li>
+        <li><a href="#LISTSORT( list ) -- sort a list"> LISTSORT( list ) -- sort a list</a></li>
+        <li><a href="#LISTUNIQUE( list ) -- remove all"> LISTUNIQUE( list ) -- remove all duplicates from a list</a></li>
+        <li><a href="#LOWER( text ) -- lower case stri"> LOWER( text ) -- lower case string of a text</a></li>
+        <li><a href="#MAX( list ) - biggest value of a"> MAX( list ) - biggest value of a list or range of cells</a></li>
+        <li><a href="#MEDIAN( list ) -- median of a li"> MEDIAN( list ) -- median of a list or range of cells</a></li>
+        <li><a href="#MIN( list ) -- smallest value of"> MIN( list ) -- smallest value of a list or range of cells</a></li>
+        <li><a href="#MOD( num, divisor ) -- reminder"> MOD( num, divisor ) -- reminder after dividing num by divisor</a></li>
+        <li><a href="#NOP( text ) -- no-operation"> NOP( text ) -- no-operation</a></li>
+        <li><a href="#NOT( num ) -- reverse logic of a"> NOT( num ) -- reverse logic of a number</a></li>
+        <li><a href="#OR( list ) -- logcial OR of a li"> OR( list ) -- logcial OR of a list</a></li>
+        <li><a href="#PRODUCT( list ) -- product of a"> PRODUCT( list ) -- product of a list or range of cells</a></li>
+        <li><a href="#PROPER( text ) -- properly capit"> PROPER( text ) -- properly capitalize trxt</a></li>
+        <li><a href="#PROPERSPACE( text ) -- properly"> PROPERSPACE( text ) -- properly space out WikiWords</a></li>
+        <li><a href="#RAND( max ) -- random number"> RAND( max ) -- random number</a></li>
+        <li><a href="#REPEAT(text) -- repeat text a nu"> REPEAT(text) -- repeat text a number of times</a></li>
+        <li><a href="#REPLACE( text, start, num, new )"> REPLACE( text, start, num, new ) -- replace part of a text string</a></li>
+        <li><a href="#RIGHT( ) -- address range of cel"> RIGHT( ) -- address range of cells to the right of the current cell</a></li>
+        <li><a href="#ROUND( formula, digits ) -- roun"> ROUND( formula, digits ) -- round a number</a></li>
+        <li><a href="#ROW( offset ) -- current row num"> ROW( offset ) -- current row number</a></li>
+        <li><a href="#SEARCH( string, text, start ) --"> SEARCH( string, text, start ) -- search a string within a text</a></li>
+        <li><a href="#SET( name, value ) -- set a vari"> SET( name, value ) -- set a variable for later use</a></li>
+        <li><a href="#SETM( name, formula ) -- update"> SETM( name, formula ) -- update an existing variable based on a formula</a></li>
+        <li><a href="#SIGN( num ) -- sign of a number"> SIGN( num ) -- sign of a number</a></li>
+        <li><a href="#SUBSTITUTE( text, old, new, inst"> SUBSTITUTE( text, old, new, instance, option ) -- substitute text</a></li>
+        <li><a href="#SUM( list ) -- sum of a list or"> SUM( list ) -- sum of a list or range of cells</a></li>
+        <li><a href="#SUMDAYS( list ) -- sum the days"> SUMDAYS( list ) -- sum the days in a list or range of cells</a></li>
+        <li><a href="#SUMPRODUCT( list, list ) -- scal"> SUMPRODUCT( list, list ) -- scalar product on ranges of cells</a></li>
+        <li><a href="#T( address ) -- content of a cel"> T( address ) -- content of a cell</a></li>
+        <li><a href="#TRANSLATE( text, from, to ) -- t"> TRANSLATE( text, from, to ) -- translate text from one set of characters to another</a></li>
+        <li><a href="#TIME( text ) -- convert a date s"> TIME( text ) -- convert a date string into a serialized date number</a></li>
+        <li><a href="#TIMEADD( serial, value, unit ) -"> TIMEADD( serial, value, unit ) -- add a value to a serialized date</a></li>
+        <li><a href="#TIMEDIFF( serial_1, serial_2, un"> TIMEDIFF( serial_1, serial_2, unit ) -- time difference between two serialized dates</a></li>
+        <li><a href="#TODAY( ) -- serialized date of t"> TODAY( ) -- serialized date of today at midnight GMT</a></li>
+        <li><a href="#TRIM( text ) -- trim spaces from"> TRIM( text ) -- trim spaces from text</a></li>
+        <li><a href="#UPPER( text ) -- upper case stri"> UPPER( text ) -- upper case string of a text</a></li>
+        <li><a href="#VALUE( text ) -- convert text to"> VALUE( text ) -- convert text to number</a></li>
+      </ul>
+    </li>
+    <li><a href="#Bug Tracking Example"> Bug Tracking Example</a></li>
+    <li><a href="#Plugin Settings"> Plugin Settings</a></li>
+    <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
+    <li><a href="#Plugin Info"> Plugin Info</a></li>
+  </ul>
+</div>
 
 ## <a name="Syntax Rules"></a> Syntax Rules
 
@@ -88,264 +158,574 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
 
 ## <a name="Built-in Functions"></a> Built-in Functions
 
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Function </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description </strong></th>
-  </tr>
-  <tr>
-    <td><code><b>"$ABOVE()"</b></code></td>
-    <td> The address range of cells above the current cell </td>
-  </tr>
-  <tr>
-    <td><code><b>"$ABS(num)"</b></code></td>
-    <td> The absolute value of a number. Example: <code><b>%CALC{"$ABS(-12.5)"}%</b></code> returns <code><b>12.5</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$AND(list)"</b></code></td>
-    <td> The logcial AND of a list. Example: <code><b>%CALC{"$AND(1, 0, 1)"}%</b></code> returns <code><b>0</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$AVERAGE(list)"</b></code></td>
-    <td> The average of a list or a range of cells. Example: To get the average of column 5 excluding the title row, write in the last row: <code><b>%CALC{"$AVERAGE( R2:C5..R$ROW(-1):C5 )"}%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$CHAR(number)"</b></code></td>
-    <td> The ASCII character represented by number. Example: <code><b>%CALC{"$CHAR(97)"}%</b></code> returns <code><b>a</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$CODE(text)"</b></code></td>
-    <td> The ASCII numeric value of the first character in text. Example: <code><b>%CALC{"$CODE(abc)"}%</b></code> returns <code><b>97</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$COLUMN(offset)"</b></code></td>
-    <td> The current column number with an optional offset </td>
-  </tr>
-  <tr>
-    <td><code><b>"$COUNTITEMS(list)"</b></code></td>
-    <td> Counts individual items in a list. Example: <code><b>%CALC{"$COUNTITEMS( $ABOVE() )"}%</b></code> returns <code><b>Closed: 1, Open: 2</b></code> assuming one cell above the current cell contains <code><b>Closed</b></code> and two cells contain <code><b>Open</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$COUNTSTR(list, str)"</b></code></td>
-    <td> Counts the number of cells in a list equal to a given string (if str is specified), or counts the number of non empty cells in a list. Example: To count the number of non empty cells above the current cell, write <code><b>%CALC{"$COUNTSTR( $ABOVE() )"}%</b></code>; to count the number of cells equal to <code><b>DONE</b></code>, write <code><b>%CALC{"$COUNTSTR( $ABOVE(), DONE )"}%</b></code>; </td>
-  </tr>
-  <tr>
-    <td><code><b>"$DEF(list)"</b></code></td>
-    <td> Returns the first list item or cell reference that is not empty. Example: <code><b>%CALC{"$DEF( R1:C1..R1:C3 )"}%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$EVAL(formula)"</b></code></td>
-    <td> Evaluates a simple formula. Only addition, substraction, multiplication, division and modulus of numbers are supported. Any nesting is permitted. Example: <code><b>%CALC{"$EVAL( (5 * 3) / 2 + 1.1 )"}%</b></code> returns <code><b>8.6</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$EXACT(text1, text2)"</b></code></td>
-    <td> Compares two text strings and returns <code><b>1</b></code> if they are exactly the same, or <code><b>0</b></code> if not. Example: <code><b>%CALC{"$EXACT( foo, Foo )"}%</b></code> returns <code><b>0</b></code>; <code><b>%CALC{"$EXACT( foo, $LOWER(Foo) )"}%</b></code> returns <code><b>1</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$FIND(search_string, text, start_index)"</b></code></td>
-    <td> Finds one text string <code>search_string</code>, within another text string <code>text</code>, and returns the number of the starting position of <code>search_string</code>, from the first character of <code>text</code>. This search is case sensitive and is not a regular expression search; use <code>$SEARCH()</code> for regular expression searching. Starting position is 1; a 0 is returned if nothing is matched. Examples: %BR% <code><b>%CALC{"$FIND(f, fluffy)"}%</b></code> returns <code><b>1</b></code> %BR% <code><b>%CALC{"$FIND(f, fluffy, 2)"}%</b></code> returns <code><b>4</b></code> %BR% <code><b>%CALC{"$FIND(@, fluffy, 1)"}%</b></code> returns <code><b>0</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$FORMAT(type, prec, number)"</b></code></td>
-    <td> Formats a number to a certain type and precision. Types with examples:<br />  - <code><b>%CALC{"$FORMAT( COMMA, 2, 12345.6789 )"}%</b></code> returns <code><b>12,345.68</b></code><br />  - <code><b>%CALC{"$FORMAT( DOLLAR, 2, 12345.67 )"}%</b></code> returns <code><b>$12,345.68</b></code><br />  - <code><b>%CALC{"$FORMAT( NUMBER, 1, 12345.67 )"}%</b></code> returns <code><b>12345.7</b></code><br />  - <code><b>%CALC{"$FORMAT( PERCENT, 1, 0.1234567 )"}%</b></code> returns <code><b>12.3%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$FORMATTIME(serial, text)"</b></code></td>
-    <td> Convert a serialized date into a date string; the following variables in text are expanded: <code>$second</code> (seconds, 00..59); <code>$minute</code> (minutes, 00..59); <code>$hour</code> (hours, 00..23); <code>$day</code> (day of month, 01..31); <code>$month</code> (month, 01..12); <code>$mon</code> (month in text format, Jan..Dec); <code>$year</code> (4 digit year, 1999); <code>$ye</code> (2 digit year, 99), <code>$wd</code> (day number of the week, 1 for Sunday, 2 for Monday, etc), <code>$wday</code> (day of the week, Sun..Sat), <code>$weekday</code> (day of the week, Sunday..Saturday), <code>$yearday</code> (day of the year, 1..365, or 1..366 in leap years). Date is assumed to be server time; add <code>GMT</code> to indicate Greenwich time zone. See also <code>$TIME()</code>, <code>$TODAY()</code>, <code>$FORMATGMTIME()</code>, <code>$TIMEDIFF()</code>. Example: <code><b>%CALC{"$FORMATTIME(0, $year/$month/$day GMT)"}%</b></code> returns <code><b>1970/01/01 GMT</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$FORMATGMTIME(serial, text)"</b></code></td>
-    <td> Convert a serialized date into a date string in Greenwich time zone. Same variables expansion as in <code>$FORMATTIME()</code>. Example: <code><b>%CALC{"$FORMATGMTIME(1041379200, $day $mon $year)"}%</b></code> returns <code><b>01 Jan 2003</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$GET(name)"</b></code></td>
-    <td> Get the value of a previously set variable. Specify the variable name (alphanumeric characters and underscores). An empty string is returned if the variable does not exist. Use <code>$SET()</code> to set a variable first. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables. See also <code>$SET()</code>. Example: <code><b>%CALC{"$GET(my_total)"}%</b></code> returns the value of the <code>my_total</code> variable </td>
-  </tr>
-  <tr>
-    <td><code><b>"$IF(condition, value if true, value if 0)"</b></code></td>
-    <td> Returns one value if a condition is met, and another value if not. The condition can be a number (where <code><b>0</b></code> means condition not met), or two numbers with a comparison operator <code><b>&lt;</b></code> (less than), <code><b>&lt;=</b></code> (less than or equal), <code><b>==</b></code> (equal), <code><b>!=</b></code> (not equal), <code><b>&gt;=</b></code> (greater than or equal), <code><b>&gt;</b></code> (greater than). Examples:%BR% <code><b>%CALC{"$IF( $T(R1:C5) &gt; 1000, Over Budget, OK)"}%</b></code> returns <code><b>Over Budget</b></code> if value in R1:C5 is over 1000, <code><b>OK</b></code> if not%BR% <code><b>%CALC{"$IF( $EXACT($T(R1:C2),), empty, $T(R1:C2))"}%</b></code> returns the content of R1:C2 or <code><b>empty</b></code> if empty%BR% <code><b>%CALC{"$SET(val, $IF( $T(R1:C2) == 0, zero, $T(R1:C2)))"}%</b></code> sets a variable conditionally </td>
-  </tr>
-  <tr>
-    <td><code><b>"$INT(formula)"</b></code></td>
-    <td> Evaluates a simple formula and rounds the result down to the nearest integer. Example: <code><b>%CALC{"$INT(10 / 4)"}%</b></code> returns <code><b>2</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LEFT()"</b></code></td>
-    <td> The address range of cells to the left of the current cell </td>
-  </tr>
-  <tr>
-    <td><code><b>"$LENGTH(text)"</b></code></td>
-    <td> The length in bytes of text. Example: <code><b>%CALC{"$LENGTH(abcd)"}%</b></code> returns <code><b>4</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LIST(range)"</b></code></td>
-    <td> Converts the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list. Example: <code><b>%CALC{"$LIST( $LEFT() )"}%</b></code> returns <code><b>Apples, Lemons, Oranges, Kiwis</b></code> assuming the cells to the left contain <code><b>| Apples | Lemons, Oranges | Kiwis |</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTIF(condition, list)"</b></code></td>
-    <td> Remove elements from a list that do not meet a condition. In addition to the condition described in <code>$IF()</code>, you can use <code><b>$item</b></code> to indicate the current element, and <code><b>$index</b></code> for the list index, starting at 1. Examples: %BR% <code><b>%CALC{"$LISTIF($item &gt; 12, 14, 7, 25)"}%</b></code> returns <code><b>14, 25</b></code> %BR% <code><b>%CALC{"$LISTIF($NOT($EXACT($item,)), A, B, , E)"}%</b></code> returns non-empty elements <code><b>A, B, E</b></code> %BR% <code><b>%CALC{"$LISTIF($index &gt; 2, A, B, C, D)"}%</b></code> returns <code><b>C, D</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTITEM(index, list)"</b></code></td>
-    <td> Get one element of a list. Index is 1 to size of list; use a negative number to count from the end of the list. Examples:%BR% <code><b>%CALC{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Orange</b></code> %BR% <code><b>%CALC{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Kiwi</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTMAP(formula, list)"</b></code></td>
-    <td> Evaluate and update each element of a list. In the formula you can use <code><b>$item</b></code> to indicate the element; <code><b>$index</b></code> to show the index of the list, starting at 1. Example: <code><b>%CALC{"$LISTMAP($index: $EVAL(2 * $item), 3, 5, 7, 11)"}%</b></code> returns <code><b>1: 6, 2: 10, 3: 14, 4: 22</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTREVERSE(list)"</b></code></td>
-    <td> The opposite order of a list. Example: <code><b>%CALC{"$LISTREVERSE(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Kiwi, Apple, Orange, Apple</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTSIZE(list)"</b></code></td>
-    <td> The number of elements in a list. Example: <code><b>%CALC{"$LISTSIZE(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>4</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTSORT(list)"</b></code></td>
-    <td> Sorts a list in ASCII order, or numerically if all elements are numeric. Example: <code><b>%CALC{"$LISTSORT(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Apple, Apple, Kiwi, Orange</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LISTUNIQUE(list)"</b></code></td>
-    <td> Removes all duplicates from a list. Example: <code><b>%CALC{"$LISTUNIQUE(Apple, Orange, Apple, Kiwi)"}%</b></code> returns <code><b>Apple, Orange, Kiwi</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$LOWER(text)"</b></code></td>
-    <td> The lower case string of a text. Example: <code><b>%CALC{"$LOWER( $T(R1:C5) )"}%</b></code> returns the lower case string of the text in cell <code><b>R1:C5</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$MAX(list)"</b></code></td>
-    <td> The biggest value of a list or range of cells. Example: To find the biggest number to the left of the current cell, write: <code><b>%CALC{"$MAX( $LEFT() )"}%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$MEDIAN(list)"</b></code></td>
-    <td> The median of a list or range of cells. Example: <code><b>%CALC{"$MEDIAN(3, 9, 4, 5)"}%</b></code> returns <code><b>4.5</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$MIN(list)"</b></code></td>
-    <td> The smallest value of a list or range of cells. Example: <code><b>%CALC{"$MIN(15, 3, 28)"}%</b></code> returns <code><b>3</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$MOD(num, divisor)"</b></code></td>
-    <td> The reminder after dividing <code><b>num</b></code> by <code><b>divisor</b></code>. Example: <code><b>%CALC{"$MOD(7, 3)"}%</b></code> returns <code><b>1</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$NOP(text)"</b></code></td>
-    <td> A no-operation. Allows one to defy the order of Plugin execution. For example, it will allow preprossing to be done before <code>%SEARCH{}%</code> is evaluated. Use <code>$per</code> to escape '%'. </td>
-  </tr>
-  <tr>
-    <td><code><b>"$NOT(num)"</b></code></td>
-    <td> The reverse logic of a number. Returns 0 if <code><b>num</b></code> is not zero, 1 if zero. Example: <code><b>%CALC{"$NOT(0)"}%</b></code> returns <code><b>1</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$OR(list)"</b></code></td>
-    <td> The logcial OR of a list. Example: <code><b>%CALC{"$OR(1, 0, 1)"}%</b></code> returns <code><b>1</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$PRODUCT(list)"</b></code></td>
-    <td> The product of a list or range of cells. Example: to calculate the product of the cells to the left of the current one use <code><b>%CALC{"$PRODUCT($LEFT())"}%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$PROPER(text)"</b></code></td>
-    <td> Capitalizes letters in <code><b>text</b></code> that follow any character other than a letter. Converts all other letters to lowercase letters. Examples:%BR% <code><b>%CALC{"PROPER(a small STEP)"}%</b></code> returns <code><b>A Small Step</b></code> %BR% <code><b>%CALC{"PROPER(f1 (formula-1))"}%</b></code> returns <code><b>F1 (Formula 1)</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$PROPERSPACE(text)"</b></code></td>
-    <td> Properly spaces out [[TWiki/WikiWords]] preceeded by white space, parenthesis, or <code><b>][</b></code>. Words listed in the DONTSPACE [[TWiki/TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded. Example, assuming DONTSPACE contains McIntosh: <code><b>%CALC{"PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh"}%</b></code> returns <code><b>Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$RAND(max)"</b></code></td>
-    <td> Random number, evenly distributed between 0 and <code><b>max</b></code>, or 0 and 1 if max is not specified. </td>
-  </tr>
-  <tr>
-    <td><code><b>"$REPEAT(text)"</b></code></td>
-    <td> Repeat <code><b>text</b></code> a number of times. Example: <code><b>%CALC{"$REPEAT(/\, 5)"}%</b></code> returns <code><b>/\/\/\/\/\</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$REPLACE(text, start_num, num_chars, new_text)"</b></code></td>
-    <td> Replaces part of text string <code>text</code>, based on the starting position <code>start_num</code>, and the number of characters to replace <code>num_chars</code>. The characters are replaced with <code>new_text</code>. Starting position is 1; use a negative <code>start_num</code> to count from the end of the text. See also <code>$SUBSTITUTE()</code>, <code>$TRANSLATE()</code>. Example: %BR% <code><b>%CALC{"$REPLACE(abcdefghijk,6,5,*)"}%</b></code> returns <code><b>abcde*k</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$RIGHT()"</b></code></td>
-    <td> The address range of cells to the right of the current cell </td>
-  </tr>
-  <tr>
-    <td><code><b>"$ROUND(formula, digits)"</b></code></td>
-    <td> Evaluates a simple <code><b>formula</b></code> and rounds the result up or down to the number of digits if <code><b>digits</b></code> is positive; to the nearest integer if digits is missing; or to the left of the decimal point if digits is negative. Examples: %BR% <code><b>%CALC{"$ROUND(3.15, 1)"}%</b></code> returns <code><b>3.2</b></code> %BR% <code><b>%CALC{"$ROUND(3.149, 1)"}%</b></code> returns <code><b>3.1</b></code> %BR% <code><b>%CALC{"$ROUND(-2.475, 2)"}%</b></code> returns <code><b>-2.48</b></code> %BR% <code><b>%CALC{"$ROUND(34.9, -1)"}%</b></code> returns <code><b>30</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$ROW(offset)"</b></code></td>
-    <td> The current row number with an offset. Example: To get the number of rows excluding table heading ( first row) and summary row (last row you are in), write: <code><b>%CALC{"$ROW(-2)"}%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$SEARCH(search_string, text, start_index)"</b></code></td>
-    <td> Finds one text string <code>search_string</code>, within another text string <code>text</code>, and returns the number of the starting position of <code>search_string</code>, from the first character of <code>text</code>. This search a [[TWiki/RegularExpression]] search; use <code>$FIND()</code> for non-regular expression searching. Starting position is 1; a 0 is returned if nothing is matched. Examples: %BR% <code><b>%CALC{"$SEARCH([uy], fluffy)"}%</b></code> returns <code><b>3</b></code> %BR% <code><b>%CALC{"$SEARCH([uy], fluffy, 3)"}%</b></code> returns <code><b>6</b></code> %BR% <code><b>%CALC{"$SEARCH([abc], fluffy,)"}%</b></code> returns <code><b>0</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$SET(name, value)"</b></code></td>
-    <td> Set a variable for later use. Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulas are evaluated before the variable assignment. This function returns no output. Use <code>$GET()</code> to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables. See also <code>$GET()</code>. Example: <code><b>%CALC{"$SET( my_total, $SUM($ABOVE()) )"}%</b></code> sets the <code>my_total</code> variable to the sum of all table cells located above the current cell and returns an empty string </td>
-  </tr>
-  <tr>
-    <td><code><b>"$SETM(name, formula)"</b></code></td>
-    <td> Updates an existing variable based on a formula. Specify the variable name (alphanumeric characters and underscores) and the formula. The formula must start with an operator to <code><b>+</b></code> (add), <code><b>-</b></code> (subtract), <code><b>*</b></code> (multiply), or <code><b>/</b></code> (divide) something to the variable. This function returns no output. Use <code>$GET()</code> to retrieve variables. Example: <code><b>%CALC{"$SETM( total, + $SUM($LEFT()) )"}%</b></code> adds the sum of all table cells on the left to the <code>total</code> variable, and returns an empty string </td>
-  </tr>
-  <tr>
-    <td><code><b>"$SIGN(num)"</b></code></td>
-    <td> The sign of a number. Returns -1 if <code><b>num</b></code> is negative, 0 if zero, or 1 if positive. Example: <code><b>%CALC{"$SIGN(-12.5)"}%</b></code> returns <code><b>-1</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$SUBSTITUTE(text, old, new, instance, option)"</b></code></td>
-    <td> Substitutes <code>new</code> text for <code>old</code> text in a <code>text</code> string. <code>instance</code> specifies which occurance of <code>old</code> you want to replace. If you specify <code>instance</code>, only that instance is replaced. Otherwise, every occurance is changed to the new text. A literal search is performed by default; a [[TWiki/RegularExpression]] search if the <code>option</code> is set to <code><b>r</b></code>. See also <code>$REPLACE()</code>, <code>$TRANSLATE()</code>. Examples: %BR% <code><b>%CALC{"$SUBSTITUTE(Good morning, morning, day)"}%</b></code> returns <code><b>Good day</b></code> %BR% <code><b>%CALC{"$SUBSTITUTE(Q2-2002,2,3)"}%</b></code> returns <code><b>Q3-3003</b></code> %BR% <code><b>%CALC{"$SUBSTITUTE(Q2-2002,2,3,3)"}%</b></code> returns <code><b>Q2-2003</b></code> %BR% <code><b>%CALC{"$SUBSTITUTE(abc123def,[0-9],9,,r)"}%</b></code> returns <code><b>abc999def</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$SUM(list)"</b></code></td>
-    <td> The sum of a list or range of cells. Example: To sum up column 5 excluding the title row, write: <code><b>%CALC{"$SUM( R2:C5..R$ROW(-1):C5 )"}%</b></code> in the last row; or simply <code><b>%CALC{"$SUM( $ABOVE() )"}%</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$SUMDAYS(list)"</b></code></td>
-    <td> The total number of days in a list or range of cells containing numbers of hours, days or weeks. The default unit is days; units are indicated by a <code><b>h</b></code>, <code><b>hours</b></code>, <code><b>d</b></code>, <code><b>days</b></code>, <code><b>w</b></code>, <code><b>weeks</b></code> suffix. One week is assumed to have 5 working days, one day 8 hours. Example: <code><b>%CALC{"$SUMDAYS( 2w, 1, 2d, 4h )"}%</b></code> returns <code><b>13.5</b></code>, the evaluation of <code>(2*5 + 1 + 2 + 4/8)</code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$SUMPRODUCT(list, list, ...)"</b></code></td>
-    <td> The scalar product on ranges of cells. Example: <code><b>%CALC{"$SUM( R2:C1..R4:C1, R2:C5..R4:C5 )"}%</b></code> evaluates and returns <code><b>($T(R2:C1) * $T(R2:C5) + $T(R3:C1) * $T(R3:C5) + $T(R4:C1) * $T(R4:C5))</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$T(address)"</b></code></td>
-    <td> The content of a cell. Example: <code><b>%CALC{"$T(R1:C5)"}%</b></code> returns the text in cell <code><b>R1:C5</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$TRANSLATE(text, from, to)"</b></code></td>
-    <td> Translate text from a set of characters to another set, one character by one. The <code>text</code> may contain commas; the last two comma separated parameters are required. For <code>from</code> and <code>to</code> parameters, you can write <code>$comma</code> to escape comma, <code>$sp</code> to escape space. See also <code>$REPLACE()</code>, <code>$SUBSTITUTE()</code>. Examples: %BR% <code><b>%CALC{"$TRANSLATE(boom,bm,cl)"}%</b></code> returns <code><b>cool</b></code> %BR% <code><b>%CALC{"$TRANSLATE(one, two,$comma,;)"}%</b></code> returns <code><b>one; two</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$TIME(text)"</b></code></td>
-    <td> Converts a date string into a serialized date number (seconds since the Epoch, e.g. midnight, 01 Jan 1970). Current time is taken if the date string is empty. Supported date formats: <code>31 Dec 2009</code>; <code>31 Dec 2009 GMT</code>; <code>31 Dec 09</code>; <code>31-Dec-2009</code>; <code>31/Dec/2009</code>; <code>2009/12/31</code>; <code>2009-12-31</code>; <code>2009/12/31</code>; <code>2009/12/31 23:59</code>; <code>2009/12/31 - 23:59</code>; <code>2009-12-31-23-59</code>; <code>2009/12/31 - 23:59:59</code>; <code>2009.12.31.23.59.59</code>. Date is assumed to be server time; add <code>GMT</code> to indicate Greenwich time zone. See also <code>$TODAY()</code>, <code>$FORMATTIME()</code>, <code>$FORMATGMTIME()</code>, <code>$TIMEDIFF()</code>. Example: <code><b>%CALC{"$TIME( 2003/10/14 GMT )"}%</b></code> returns <code><b>1066089600</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$TIMEADD( serial, value, unit )"</b></code></td>
-    <td> Add a value to a serialized date. The unit is seconds if not specified; unit can be <code>second</code>, <code>minute</code>, <code>hour</code>, <code>day</code>, <code>week</code>, <code>month</code>, <code>year</code>. Note: An approximation is used for month and year calculations. See also <code>$TIME()</code>, <code>$TIMEDIFF()</code>, <code>$TODAY()</code>, <code>$FORMATTIME()</code>. Example: <code><b>%CALC{"$TIMEADD( $TIME(), 2, week )"}%</b></code> returns the serialized date two weeks from now </td>
-  </tr>
-  <tr>
-    <td><code><b>"$TIMEDIFF( serial_1, serial_2, unit )"</b></code></td>
-    <td> Time difference between two serialized dates. The unit is seconds if not specified; unit can be specified as in <code>$TIMEADD()</code>. Note: An approximation is used for month and year calculations. Use <code>$FORMAT()</code> or <code>$INT()</code> to format real numbers. See also <code>$TIME()</code>, <code>$TIMEADD()</code>, <code>$TODAY()</code>, <code>$FORMATTIME()</code>. Example: <code><b>%CALC{"$TIMEDIFF( $TIME(), $EVAL($TIME()+90), minute )"}%</b></code> returns <code><b>1.5</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$TODAY()"</b></code></td>
-    <td> Get the serialized date of today at midnight GMT. The related <code>$TIME()</code> returns the serialized date of today at the current time, e.g. it includes the number of seconds since midnight GMT. See also <code>$FORMATTIME()</code>, <code>$FORMATGMTIME()</code>, <code>$TIMEDIFF()</code>. Example: <code><b>%CALC{"$TODAY()"}%</b></code> returns the number of seconds since Epoch </td>
-  </tr>
-  <tr>
-    <td><code><b>"$TRIM(text)"</b></code></td>
-    <td> Removes all spaces from text except for single spaces between words. Example: <code><b>%CALC{"$TRIM( eat  spaces  )"}%</b></code> returns <code><b>eat spaces</b></code>. </td>
-  </tr>
-  <tr>
-    <td><code><b>"$UPPER(text)"</b></code></td>
-    <td> The upper case string of a text. Example: <code><b>%CALC{"$UPPER( $T(R1:C5) )"}%</b></code> returns the upper case string of the text in cell <code><b>R1:C5</b></code></td>
-  </tr>
-  <tr>
-    <td><code><b>"$VALUE(text)"</b></code></td>
-    <td> Extracts a number from <code><b>text</b></code>. Returns <code><b>0</b></code> if not found. Examples:%BR% <code><b>%CALC{"$VALUE(US$1,200)"}%</b></code> returns <code><b>1200</b></code> %BR% <code><b>%CALC{"$VALUE(PrjNotebook1234)"}%</b></code> returns <code><b>1234</b></code> %BR% <code><b>%CALC{"$VALUE(Total: -12.5)"}%</b></code> returns <code><b>-12.5</b></code></td>
-  </tr>
-</table>
+Conventions for Syntax:
+
+- Required parameters are indicated in <code>**( bold )**</code>
+- Optional parameters are indicated in <code>**( _bold italic_ )**</code>
+
+<a name="FuncABOVE"></a>
+
+### <a name="ABOVE( ) -- address range of cel"></a> ABOVE( ) -- address range of cells above the current cell
+
+- Syntax: <code>**$ABOVE( )**</code>
+- Example: <code>**%CALC\{"$SUM($ABOVE())"\}%**</code> returns the sum of cells above the current cell
+- Related: <code>[[$LEFT()|Main/WebHome#FuncLEFT]]</code>, <code>[[$RIGHT()|Main/WebHome#FuncRIGHT]]</code>
+
+<a name="FuncABS"></a>
+
+### <a name="ABS( num ) -- absolute value of"></a><a name="ABS( num ) -- absolute value of "></a> ABS( num ) -- absolute value of a number
+
+- Syntax: <code>**$ABS( num )**</code>
+- Example: <code>**%CALC\{"$ABS(-12.5)"\}%**</code> returns <code>**12\.5**</code>
+- Related: <code>[[$SIGN()|Main/WebHome#FuncSIGN]]</code>
+
+<a name="FuncAND"></a>
+
+### <a name="AND( list ) -- logcial AND of a"></a><a name="AND( list ) -- logcial AND of a "></a> AND( list ) -- logcial AND of a list
+
+- Syntax: <code>**$AND( list )**</code>
+- Example: <code>**%CALC\{"$AND(1, 0, 1)"\}%**</code> returns <code>****</code>
+- Related: <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
+
+<a name="FuncAVERAGE"></a>
+
+### <a name="AVERAGE( list ) -- average of a"></a><a name="AVERAGE( list ) -- average of a "></a> AVERAGE( list ) -- average of a list or a range of cells
+
+- Syntax: <code>**$AVERAGE( list )**</code>
+- Example: <code>**%CALC\{"$AVERAGE(R2:C5..R$ROW(-1):C5)"\}%**</code> returns the average of column 5, excluding the title row
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
+
+<a name="FuncCHAR"></a>
+
+### <a name="CHAR( number ) -- ASCII characte"></a> CHAR( number ) -- ASCII character represented by number
+
+- Syntax: <code>**$CHAR( number )**</code>
+- Example: Example: <code>**%CALC\{"$CHAR(97)"\}%**</code> returns <code>**a**</code>
+- Related: <code>[[$CODE()|Main/WebHome#FuncCODE]]</code>
+
+<a name="FuncCODE"></a>
+
+### <a name="CODE( text ) -- ASCII numeric va"></a> CODE( text ) -- ASCII numeric value of character
+
+- The ASCII numeric value of the first character in text
+- Syntax: <code>**$CODE( text )**</code>
+- Example: <code>**%CALC\{"$CODE(abc)"\}%**</code> returns <code>**97**</code>
+- Related: <code>[[$CHAR()|Main/WebHome#FuncCHAR]]</code>
+
+<a name="FuncCOLUMN"></a>
+
+### <a name="COLUMN( offset ) -- current colu"></a> COLUMN( offset ) -- current column number
+
+- The current table column number with an optional offset
+- Syntax: <code>**$COLUMN( _offset_ )**</code>
+- Example: <code>**%CALC\{"$COLUMN()"\}%**</code> returns <code>**2**</code> for the second column
+- Related: <code>[[$ROW()|Main/WebHome#FuncROW]]</code>, <code>[[$T()|Main/WebHome#FuncT]]</code>
+
+<a name="FuncCOUNTITEMS"></a>
+
+### <a name="COUNTITEMS( list ) -- count indi"></a> COUNTITEMS( list ) -- count individual items in a list
+
+- Syntax: <code>**$COUNTITEMS( list )**</code>
+- Example: <code>**%CALC\{"$COUNTITEMS($ABOVE())"\}%**</code> returns <code>**Closed: 1, Open: 2**</code> assuming one cell above the current cell contains <code>**Closed**</code> and two cells contain <code>**Open**</code>
+- Related: <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>
+
+<a name="FuncCOUNTSTR"></a>
+
+### <a name="COUNTSTR( list, str ) -- count t"></a> COUNTSTR( list, str ) -- count the number of cells in a list equal to a given string
+
+- Count the number of cells in a list equal to a given string (if str is specified), or counts the number of non empty cells in a list
+- Syntax: <code>**$COUNTSTR( list, _str_ )**</code>
+- Example: <code>**%CALC\{"$COUNTSTR($ABOVE())"\}%**</code> counts the number of non empty cells above the current cell
+- Example: <code>**%CALC\{"$COUNTSTR($ABOVE(), DONE)"\}%**</code> counts the number of cells equal to <code>**DONE**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>
+
+<a name="FuncDEF"></a>
+
+### <a name="DEF( list ) -- find first non-em"></a> DEF( list ) -- find first non-empty list item or cell
+
+- Returns the first list item or cell reference that is not empty
+- Syntax: <code>**$DEF( list )**</code>
+- Example: <code>**%CALC\{"$DEF(R1:C1..R1:C3)"\}%**</code>
+- Related: <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>
+
+<a name="FuncEVAL"></a>
+
+### <a name="EVAL( formula ) -- evaluate a si"></a> EVAL( formula ) -- evaluate a simple formula
+
+- Addition, substraction, multiplication, division and modulus of numbers are supported. Any nesting is permitted
+- Syntax: <code>**$EVAL( formula )**</code>
+- Example: <code>**%CALC\{"$EVAL( (5 \* 3) / 2 + 1.1 )"\}%**</code> returns <code>**8\.6**</code>
+- Related: <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$MOD()|Main/WebHome#FuncMOD]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>, <code>[[$VALUE()|Main/WebHome#FuncVALUE]]</code>
+
+<a name="FuncEXACT"></a>
+
+### <a name="EXACT( text1, text2 ) -- compare"></a> EXACT( text1, text2 ) -- compare two text strings
+
+- Compares two text strings and returns <code>**1**</code> if they are exactly the same, or <code>****</code> if not
+- Syntax: <code>**$EXACT( text1, _text2_ )**</code>
+- Example: <code>**%CALC\{"$EXACT(foo, Foo)"\}%**</code> returns <code>****</code>
+- Example: <code>**%CALC\{"$EXACT(foo, $LOWER(Foo))"\}%**</code> returns <code>**1**</code>
+- Related: <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
+
+<a name="FuncFIND"></a>
+
+### <a name="FIND( string, text, start ) -- f"></a> FIND( string, text, start ) -- find one string within another string
+
+- Finds one text `string`, within another `text`, and returns the number of the starting position of `string`, from the first character of `text`. This search is case sensitive and is not a regular expression search; use `$SEARCH()` for regular expression searching. Starting position is 1; a 0 is returned if nothing is matched.
+- Syntax: <code>**$FIND( string, text, _start_ )**</code>
+- Example: <code>**%CALC\{"$FIND(f, fluffy)"\}%**</code> returns <code>**1**</code>
+- Example: <code>**%CALC\{"$FIND(f, fluffy, 2)"\}%**</code> returns <code>**4**</code>
+- Example: <code>**%CALC\{"$FIND(@, fluffy, 1)"\}%**</code> returns <code>****</code>
+- Related: <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>
+
+<a name="FuncFORMAT"></a>
+
+### <a name="FORMAT( type, prec, number ) --"></a><a name="FORMAT( type, prec, number ) -- "></a> FORMAT( type, prec, number ) -- format a number to a certain type and precision
+
+- Type can be COMMA for comma format, DOLLAR for Dollar format, NUMBER for number, and PERCENT for percent format
+- Syntax: <code>**$FORMAT( type, prec, number )**</code>
+- Example: <code>**%CALC\{"$FORMAT(COMMA, 2, 12345.6789)"\}%**</code> returns <code>**12,345.68**</code>
+- Example: <code>**%CALC\{"$FORMAT(DOLLAR, 2, 12345.67)"\}%**</code> returns <code>**$12,345.68**</code>
+- Example: <code>**%CALC\{"$FORMAT(NUMBER, 1, 12345.67)"\}%**</code> returns <code>**12345\.7**</code>
+- Example: <code>**%CALC\{"$FORMAT(PERCENT, 1, 0.1234567)"\}%**</code> returns <code>**12\.3%**</code>
+- Related: <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>
+
+<a name="FuncFORMATTIME"></a>
+
+### <a name="FORMATTIME( serial, text ) -- co"></a> FORMATTIME( serial, text ) -- convert a serialized date into a date string
+
+- The following variables in `text` are expanded: `$second` (seconds, 00..59); `$minute` (minutes, 00..59); `$hour` (hours, 00..23); `$day` (day of month, 01..31); `$month` (month, 01..12); `$mon` (month in text format, Jan..Dec); `$year` (4 digit year, 1999); `$ye` (2 digit year, 99), `$wd` (day number of the week, 1 for Sunday, 2 for Monday, etc), `$wday` (day of the week, Sun..Sat), `$weekday` (day of the week, Sunday..Saturday), `$yearday` (day of the year, 1..365, or 1..366 in leap years). Date is assumed to be server time; add `GMT` to indicate Greenwich time zone.
+- Syntax: <code>**$FORMATTIME( serial, text )**</code>
+- Example: <code>**%CALC\{"$FORMATTIME(0, $year/$month/$day GMT)"\}%**</code> returns <code>**1970/01/01 GMT**</code>
+- Related: <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncFORMATGMTIME"></a>
+
+### <a name="FORMATGMTIME( serial, text ) --"></a><a name="FORMATGMTIME( serial, text ) -- "></a> FORMATGMTIME( serial, text ) -- convert a serialized date into a GMT date string
+
+- The date string represents the time in Greenwich time zone. Same variable expansion as in `$FORMATTIME()`.
+- Syntax: <code>**$FORMATGMTIME( serial, text )**</code>
+- Example: <code>**%CALC\{"$FORMATGMTIME(1041379200, $day $mon $year)"\}%**</code> returns <code>**01 Jan 2003**</code>
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncGET"></a>
+
+### <a name="GET( name ) -- get the value of"></a><a name="GET( name ) -- get the value of "></a> GET( name ) -- get the value of a previously set variable
+
+- Specify the variable name (alphanumeric characters and underscores). An empty string is returned if the variable does not exist. Use `$SET()` to set a variable first. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables.
+- Syntax: <code>**$GET( name )**</code>
+- Example: <code>**%CALC\{"$GET(my\_total)"\}%**</code> returns the value of the `my_total` variable
+- Related: <code>[[$SET()|Main/WebHome#FuncSET]]</code>, <code>[[$SETM()|Main/WebHome#FuncSETM]]</code>
+
+<a name="FuncIF"></a>
+
+### <a name="IF( condition, value if true, va"></a> IF( condition, value if true, value if 0 ) -- return a value based on a condition
+
+- The condition can be a number (where <code>****</code> means condition not met), or two numbers with a comparison operator <code>**&lt;**</code> (less than), <code>**&lt;=**</code> (less than or equal), <code>**==**</code> (equal), <code>**!=**</code> (not equal), <code>**&gt;=**</code> (greater than or equal), <code>**&gt;**</code> (greater than).
+- Syntax: <code>**$IF( condition, value if true, value if 0 )**</code>
+- Example: <code>**%CALC\{"$IF($T(R1:C5) &gt; 1000, Over Budget, OK)"\}%**</code> returns <code>**Over Budget**</code> if value in R1:C5 is over 1000, <code>**OK**</code> if not
+- Example: <code>**%CALC\{"$IF($EXACT($T(R1:C2),), empty, $T(R1:C2))"\}%**</code> returns the content of R1:C2 or <code>**empty**</code> if empty
+- Example: <code>**%CALC\{"$SET(val, $IF($T(R1:C2) == 0, zero, $T(R1:C2)))"\}%**</code> sets a variable conditionally
+- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
+
+<a name="FuncINT"></a>
+
+### <a name="INT( formula ) -- evaluate formu"></a> INT( formula ) -- evaluate formula and round down to nearest integer
+
+- Addition, substraction, multiplication, division and modulus of numbers are supported. Any nesting is permitted
+- Syntax: <code>**$INT( formula )**</code>
+- Example: <code>**%CALC\{"$INT(10 / 4)"\}%**</code> returns <code>**2**</code>
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>, <code>[[$VALUE()|Main/WebHome#FuncVALUE]]</code>
+
+<a name="FuncLEFT"></a>
+
+### <a name="LEFT( ) -- address range of cell"></a> LEFT( ) -- address range of cells to the left of the current cell
+
+- Syntax: <code>**$LEFT( )**</code>
+- Example: <code>**%CALC\{"$SUM($LEFT())"\}%**</code> returns the sum of cells to the left of the current cell
+- Related: <code>[[$ABOVE()|Main/WebHome#FuncABOVE]]</code>, <code>[[$RIGHT()|Main/WebHome#FuncRIGHT]]</code>
+
+<a name="FuncLENGTH"></a>
+
+### <a name="LENGTH( text ) -- length of text"></a> LENGTH( text ) -- length of text in bytes
+
+- Syntax: <code>**$LENGTH( text )**</code>
+- Example: <code>**%CALC\{"$LENGTH(abcd)"\}%**</code> returns <code>**4**</code>
+- Related: <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>
+
+<a name="FuncLIST"></a>
+
+### <a name="LIST( range ) -- convert content"></a> LIST( range ) -- convert content of a cell range into a list
+
+- Convert the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list
+- Syntax: <code>**$LIST( range )**</code>
+- Example: <code>**%CALC\{"$LIST($LEFT())"\}%**</code> returns <code>**Apples, Lemons, Oranges, Kiwis**</code> assuming the cells to the left contain <code>**| Apples | Lemons, Oranges | Kiwis |**</code>
+- Related: <code>[[$AVERAGE()|Main/WebHome#FuncAVERAGE]]</code>, <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$DEF()|Main/WebHome#FuncDEF]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
+
+<a name="FuncLISTIF"></a>
+
+### <a name="LISTIF( condition, list ) -- rem"></a> LISTIF( condition, list ) -- remove elements from a list that do not meet a condition
+
+- In addition to the condition described in <code>[[$IF()|Main/WebHome#FuncIF]]</code>, you can use <code>**$item**</code> to indicate the current element, and <code>**$index**</code> for the list index, starting at 1
+- Syntax: <code>**$LISTIF( condition, list )**</code>
+- Example: <code>**%CALC\{"$LISTIF($item &gt; 12, 14, 7, 25)"\}%**</code> returns <code>**14, 25**</code>
+- Example: <code>**%CALC\{"$LISTIF($NOT($EXACT($item,)), A, B, , E)"\}%**</code> returns non-empty elements <code>**A, B, E**</code>
+- Example: <code>**%CALC\{"$LISTIF($index &gt; 2, A, B, C, D)"\}%**</code> returns <code>**C, D**</code>
+- Related: <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTITEM"></a>
+
+### <a name="LISTITEM( index, list ) -- get o"></a> LISTITEM( index, list ) -- get one element of a list
+
+- Index is 1 to size of list; use a negative number to count from the end of the list
+- Syntax: <code>**$LISTITEM( index, list )**</code>
+- Example: <code>**%CALC\{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Orange**</code>
+- Example: <code>**%CALC\{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Kiwi**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTMAP"></a>
+
+### <a name="LISTMAP( formula, list ) -- eval"></a> LISTMAP( formula, list ) -- evaluate and update each element of a list
+
+- In the formula you can use <code>**$item**</code> to indicate the element; <code>**$index**</code> to show the index of the list, starting at 1
+- Syntax: <code>**$LISTMAP( formula, list )**</code>
+- Example: <code>**%CALC\{"$LISTMAP($index: $EVAL(2 \* $item), 3, 5, 7, 11)"\}%**</code> returns <code>**1: 6, 2: 10, 3: 14, 4: 22**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTREVERSE"></a>
+
+### <a name="LISTREVERSE( list ) -- opposite"></a><a name="LISTREVERSE( list ) -- opposite "></a> LISTREVERSE( list ) -- opposite order of a list
+
+- Syntax: <code>**$LISTREVERSE( list )**</code>
+- Example: <code>**%CALC\{"$LISTREVERSE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Kiwi, Apple, Orange, Apple**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTSIZE"></a>
+
+### <a name="LISTSIZE( list ) -- number of el"></a> LISTSIZE( list ) -- number of elements in a list
+
+- Syntax: <code>**$LISTSIZE( list )**</code>
+- Example: <code>**%CALC\{"$LISTSIZE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**4**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTSORT"></a>
+
+### <a name="LISTSORT( list ) -- sort a list"></a> LISTSORT( list ) -- sort a list
+
+- Sorts a list in ASCII order, or numerically if all elements are numeric
+- Syntax: <code>**$LISTSORT( list )**</code>
+- Example: <code>**%CALC\{"$LISTSORT(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Apple, Apple, Kiwi, Orange**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTUNIQUE"></a>
+
+### <a name="LISTUNIQUE( list ) -- remove all"></a> LISTUNIQUE( list ) -- remove all duplicates from a list
+
+- Syntax: <code>**$LISTUNIQUE( list )**</code>
+- Example: <code>**%CALC\{"$LISTUNIQUE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Apple, Orange, Kiwi**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLOWER"></a>
+
+### <a name="LOWER( text ) -- lower case stri"></a> LOWER( text ) -- lower case string of a text
+
+- Syntax: <code>**$LOWER(text)**</code>
+- Example: <code>**%CALC\{"$LOWER( $T(R1:C5) )"\}%**</code> returns the lower case string of the text in cell <code>**R1:C5**</code>
+- Related: <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
+
+<a name="FuncMAX"></a>
+
+### <a name="MAX( list ) - biggest value of a"></a> MAX( list ) - biggest value of a list or range of cells
+
+- Syntax: <code>**$MAX( list )**</code>
+- Example: To find the biggest number to the left of the current cell, write: <code>**%CALC\{"$MAX($LEFT())"\}%**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
+
+<a name="FuncMEDIAN"></a>
+
+### <a name="MEDIAN( list ) -- median of a li"></a> MEDIAN( list ) -- median of a list or range of cells
+
+- Syntax: <code>**$MEDIAN( list )**</code>
+- Example: <code>**%CALC\{"$MEDIAN(3, 9, 4, 5)"\}%**</code> returns <code>**4\.5**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
+
+<a name="FuncMIN"></a>
+
+### <a name="MIN( list ) -- smallest value of"></a> MIN( list ) -- smallest value of a list or range of cells
+
+- Syntax: <code>**$MIN( list )**</code>
+- Example: <code>**%CALC\{"$MIN(15, 3, 28)"\}%**</code> returns <code>**3**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>
+
+<a name="FuncMOD"></a>
+
+### <a name="MOD( num, divisor ) -- reminder"></a><a name="MOD( num, divisor ) -- reminder "></a> MOD( num, divisor ) -- reminder after dividing <code>**num**</code> by <code>**divisor**</code>
+
+- Syntax: <code>**$MOD( num, divisor )**</code>
+- Example: <code>**%CALC\{"$MOD(7, 3)"\}%**</code> returns <code>**1**</code>
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$()|Main/WebHome#Func]]</code>
+
+<a name="FuncNOP"></a>
+
+### <a name="NOP( text ) -- no-operation"></a> NOP( text ) -- no-operation
+
+- Useful to change the order of Plugin execution. For example, it allows preprossing to be done before `%SEARCH{}%` is evaluated. The percent character '%' can be escaped with `$per`
+- Syntax: <code>**$NOP( text )**</code>
+
+<a name="FuncNOT"></a>
+
+### <a name="NOT( num ) -- reverse logic of a"></a> NOT( num ) -- reverse logic of a number
+
+- Returns 0 if <code>**num**</code> is not zero, 1 if zero
+- Syntax: <code>**$NOT( num )**</code>
+- Example: <code>**%CALC\{"$NOT(0)"\}%**</code> returns <code>**1**</code>
+- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
+
+<a name="FuncOR"></a>
+
+### <a name="OR( list ) -- logcial OR of a li"></a> OR( list ) -- logcial OR of a list
+
+- Syntax: <code>**$OR( list )**</code>
+- Example: <code>**%CALC\{"$OR(1, 0, 1)"\}%**</code> returns <code>**1**</code>
+- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>
+
+<a name="FuncPRODUCT"></a>
+
+### <a name="PRODUCT( list ) -- product of a"></a><a name="PRODUCT( list ) -- product of a "></a> PRODUCT( list ) -- product of a list or range of cells
+
+- Syntax: <code>**$PRODUCT( list )**</code>
+- Example: To calculate the product of the cells to the left of the current one use <code>**%CALC\{"$PRODUCT($LEFT())"\}%**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
+
+<a name="FuncPROPER"></a>
+
+### <a name="PROPER( text ) -- properly capit"></a> PROPER( text ) -- properly capitalize trxt
+
+- Capitalize letters that follow any character other than a letter; convert all other letters to lowercase letters
+- Syntax: <code>**$PROPER( text )**</code>
+- Example: <code>**%CALC\{"PROPER(a small STEP)"\}%**</code> returns <code>**A Small Step**</code>
+- Example: <code>**%CALC\{"PROPER(f1 (formula-1))"\}%**</code> returns <code>**F1 (Formula-1)**</code>
+- Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
+
+<a name="FuncPROPERSPACE"></a>
+
+### <a name="PROPERSPACE( text ) -- properly"></a><a name="PROPERSPACE( text ) -- properly "></a> PROPERSPACE( text ) -- properly space out WikiWords
+
+- Properly spaces out [[WikiWords]] preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE [[TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded
+- Syntax: <code>**$PROPERSPACE( text )**</code>
+- Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
+- Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
+
+<a name="FuncRAND"></a>
+
+### <a name="RAND( max ) -- random number"></a> RAND( max ) -- random number
+
+- Random number, evenly distributed between 0 and <code>**max**</code>, or 0 and 1 if max is not specified
+- Syntax: <code>**$RAND( max )**</code>
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>
+
+<a name="FuncREPEAT"></a>
+
+### <a name="REPEAT(text) -- repeat text a nu"></a> REPEAT(text) -- repeat text a number of times
+
+- Syntax: <code>**$REPEAT( text )**</code>
+- Example: <code>**%CALC\{"$REPEAT(/\\, 5)"\}%**</code> returns <code>**/\\/\\/\\/\\/\\**</code>
+
+<a name="FuncREPLACE"></a>
+
+### <a name="REPLACE( text, start, num, new )"></a> REPLACE( text, start, num, new ) -- replace part of a text string
+
+- Replace `num` number of characters of text string `text`, starting at `start`, with new text `new`. Starting position is 1; use a negative `start` to count from the end of the text
+- Syntax: <code>**$REPLACE( text, start, num, new )**</code>
+- Example: <code>**%CALC\{"$REPLACE(abcdefghijk,6,5,\*)"\}%**</code> returns <code>**abcde\*k**</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
+
+<a name="FuncRIGHT"></a>
+
+### <a name="RIGHT( ) -- address range of cel"></a> RIGHT( ) -- address range of cells to the right of the current cell
+
+- Syntax: <code>**$RIGHT( )**</code>
+- Example: <code>**%CALC\{"$SUM($RIGHT())"\}%**</code> returns the sum of cells to the right of the current cell
+- Related: <code>[[$ABOVE()|Main/WebHome#FuncABOVE]]</code>, <code>[[$LEFT()|Main/WebHome#FuncLEFT]]</code>
+
+<a name="FuncROUND"></a>
+
+### <a name="ROUND( formula, digits ) -- roun"></a> ROUND( formula, digits ) -- round a number
+
+- Evaluates a simple <code>**formula**</code> and rounds the result up or down to the number of digits if <code>**digits**</code> is positive; to the nearest integer if digits is missing; or to the left of the decimal point if digits is negative
+- Syntax: <code>**$ROUND( formula, digits )**</code>
+- Example: <code>**%CALC\{"$ROUND(3.15, 1)"\}%**</code> returns <code>**3\.2**</code>
+- Example: <code>**%CALC\{"$ROUND(3.149, 1)"\}%**</code> returns <code>**3\.1**</code>
+- Example: <code>**%CALC\{"$ROUND(-2.475, 2)"\}%**</code> returns <code>**-2.48**</code>
+- Example: <code>**%CALC\{"$ROUND(34.9, -1)"\}%**</code> returns <code>**30**</code>
+- Related: <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$FORMAT()|Main/WebHome#FuncFORMAT]]</code>
+
+<a name="FuncROW"></a>
+
+### <a name="ROW( offset ) -- current row num"></a> ROW( offset ) -- current row number
+
+- The current table row number with an optional offset
+- Syntax: <code>**$ROW( _offset_ )**</code>
+- Example: To get the number of rows excluding table heading (first row) and summary row (last row you are in), write: <code>**%CALC\{"$ROW(-2)"\}%**</code>
+- Related: <code>[[$COLUMN()|Main/WebHome#FuncCOLUMN]]</code>, <code>[[$T()|Main/WebHome#FuncT]]</code>
+
+<a name="FuncSEARCH"></a>
+
+### <a name="SEARCH( string, text, start ) --"></a> SEARCH( string, text, start ) -- search a string within a text
+
+- Finds one text `string`, within another `text`, and returns the number of the starting position of `string`, from the first character of `text`. This search is a [[RegularExpression]] search; use `$FIND()` for non-regular expression searching. Starting position is 1; a 0 is returned if nothing is matched
+- Syntax: <code>**$SEARCH( string, text, _start_ )**</code>
+- Example: <code>**%CALC\{"$SEARCH([uy], fluffy)"\}%**</code> returns <code>**3**</code>
+- Example: <code>**%CALC\{"$SEARCH([uy], fluffy, 3)"\}%**</code> returns <code>**6**</code>
+- Example: <code>**%CALC\{"$SEARCH([abc], fluffy,)"\}%**</code> returns <code>****</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>
+
+<a name="FuncSET"></a>
+
+### <a name="SET( name, value ) -- set a vari"></a> SET( name, value ) -- set a variable for later use
+
+- Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulas are evaluated before the variable assignment. This function returns no output. Use `$GET()` to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables
+- Syntax: <code>**$SET( name, value )**</code>
+- Example: <code>**%CALC\{"$SET(my\_total, $SUM($ABOVE()))"\}%**</code> sets the `my_total` variable to the sum of all table cells located above the current cell and returns an empty string
+- Related: <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[SETM()|Main/WebHome#FuncSETM]]</code>
+
+<a name="FuncSETM"></a>
+
+### <a name="SETM( name, formula ) -- update"></a><a name="SETM( name, formula ) -- update "></a> SETM( name, formula ) -- update an existing variable based on a formula
+
+- Specify the variable name (alphanumeric characters and underscores) and the formula. The formula must start with an operator to <code>**+**</code> (add), <code>**-**</code> (subtract), <code>**\***</code> (multiply), or <code>**/**</code> (divide) something to the variable. This function returns no output. Use `$GET()` to retrieve variables
+- Syntax: <code>**$SETM( name, formula )**</code>
+- Example: <code>**%CALC\{"$SETM(total, + $SUM($LEFT()))"\}%**</code> adds the sum of all table cells on the left to the `total` variable, and returns an empty string
+- Related: <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>
+
+<a name="FuncSIGN"></a>
+
+### <a name="SIGN( num ) -- sign of a number"></a> SIGN( num ) -- sign of a number
+
+- Returns -1 if <code>**num**</code> is negative, 0 if zero, or 1 if positive
+- Syntax: <code>**$SIGN( num )**</code>
+- Example: <code>**%CALC\{"$SIGN(-12.5)"\}%**</code> returns <code>**-1**</code>
+- Related: <code>[[$ABS()|Main/WebHome#FuncABS]]</code>, <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>
+
+<a name="FuncSUBSTITUTE"></a>
+
+### <a name="SUBSTITUTE( text, old, new, inst"></a> SUBSTITUTE( text, old, new, instance, option ) -- substitute text
+
+- Substitutes `new` text for `old` text in a `text` string. `instance` specifies which occurance of `old` you want to replace. If you specify `instance`, only that instance is replaced. Otherwise, every occurance is changed to the new text. A literal search is performed by default; a [[RegularExpression]] search if the `option` is set to <code>**r**</code>
+- Syntax: <code>**$SUBSTITUTE( text, old, _new_, _instance_, _option_ )**</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(Good morning, morning, day)"\}%**</code> returns <code>**Good day**</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002,2,3)"\}%**</code> returns <code>**Q3-3003**</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002,2,3,3)"\}%**</code> returns <code>**Q2-2003**</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(abc123def,[0-9],9,,r)"\}%**</code> returns <code>**abc999def**</code>
+- Related: <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
+
+<a name="FuncSUM"></a>
+
+### <a name="SUM( list ) -- sum of a list or"></a><a name="SUM( list ) -- sum of a list or "></a> SUM( list ) -- sum of a list or range of cells
+
+- Syntax: <code>**$SUM( list )**</code>
+- Example: To sum up column 5 excluding the title row, write <code>**%CALC\{"$SUM(R2:C5..R$ROW(-1):C5)"\}%**</code> in the last row; or simply <code>**%CALC\{"$SUM($ABOVE())"\}%**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
+
+<a name="FuncSUMDAYS"></a>
+
+### <a name="SUMDAYS( list ) -- sum the days"></a><a name="SUMDAYS( list ) -- sum the days "></a> SUMDAYS( list ) -- sum the days in a list or range of cells
+
+- The total number of days in a list or range of cells containing numbers of hours, days or weeks. The default unit is days; units are indicated by a <code>**h**</code>, <code>**hours**</code>, <code>**d**</code>, <code>**days**</code>, <code>**w**</code>, <code>**weeks**</code> suffix. One week is assumed to have 5 working days, one day 8 hours
+- Syntax: <code>**$SUMDAYS( list )**</code>
+- Example: <code>**%CALC\{"$SUMDAYS(2w, 1, 2d, 4h)"\}%**</code> returns <code>**13\.5**</code>, the evaluation of `(2*5 + 1 + 2 + 4/8)`
+- Related: <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>
+
+<a name="FuncSUMPRODUCT"></a>
+
+### <a name="SUMPRODUCT( list, list ) -- scal"></a> SUMPRODUCT( list, list ) -- scalar product on ranges of cells
+
+- Syntax: <code>**$SUMPRODUCT( list, list, _list..._ )**</code>
+- Example: <code>**%CALC\{"$SUM(R2:C1..R4:C1, R2:C5..R4:C5)"\}%**</code> evaluates and returns the result of <code>**($T(R2:C1) \* $T(R2:C5) + $T(R3:C1) \* $T(R3:C5) + $T(R4:C1) \* $T(R4:C5))**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncT"></a>
+
+### <a name="T( address ) -- content of a cel"></a> T( address ) -- content of a cell
+
+- Syntax: <code>**$T( address )**</code>
+- Example: <code>**%CALC\{"$T(R1:C5)"\}%**</code> returns the text in cell <code>**R1:C5**</code>
+- Related: <code>[[$COLUMN()|Main/WebHome#FuncCOLUMN]]</code>, <code>[[$ROW()|Main/WebHome#FuncROW]]</code>
+
+<a name="FuncTRANSLATE"></a>
+
+### <a name="TRANSLATE( text, from, to ) -- t"></a> TRANSLATE( text, from, to ) -- translate text from one set of characters to another
+
+- The translation is done `from` a set `to` a set, one character by one. The `text` may contain commas; all three parameters are required. In the `from` and `to` parameters you can write `$comma` to escape comma, `$sp` to escape space
+- Syntax: <code>**$TRANSLATE( text, from, to )**</code>
+- Example: <code>**%CALC\{"$TRANSLATE(boom,bm,cl)"\}%**</code> returns <code>**cool**</code>
+- Example: <code>**%CALC\{"$TRANSLATE(one, two,$comma,;)"\}%**</code> returns <code>**one; two**</code>
+- Related: <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>
+
+<a name="FuncTIME"></a>
+
+### <a name="TIME( text ) -- convert a date s"></a> TIME( text ) -- convert a date string into a serialized date number
+
+- Serialized date is seconds since the Epoch, e.g. midnight, 01 Jan 1970. Current time is taken if the date string is empty. Supported date formats: `31 Dec 2009`; `31 Dec 2009 GMT`; `31 Dec 09`; `31-Dec-2009`; `31/Dec/2009`; `2009/12/31`; `2009-12-31`; `2009/12/31`; `2009/12/31 23:59`; `2009/12/31 - 23:59`; `2009-12-31-23-59`; `2009/12/31 - 23:59:59`; `2009.12.31.23.59.59`. Date is assumed to be server time; add `GMT` to indicate Greenwich time zone
+- Syntax: <code>**$TIME( _text_ )**</code>
+- Example: <code>**%CALC\{"$TIME(2003/10/14 GMT)"\}%**</code> returns <code>**1066089600**</code>
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncTIMEADD"></a>
+
+### <a name="TIMEADD( serial, value, unit ) -"></a> TIMEADD( serial, value, unit ) -- add a value to a serialized date
+
+- The unit is seconds if not specified; unit can be `second`, `minute`, `hour`, `day`, `week`, `month`, `year`. Note: An approximation is used for month and year calculations
+- Syntax: <code>**$TIMEADD( serial, value, _unit_ )**</code>
+- Example: <code>**%CALC\{"$TIMEADD($TIME(), 2, week)"\}%**</code>
+- Related: <code>[[$()|Main/WebHome#Func]]</code>, <code>[[$()|Main/WebHome#Func]]</code> returns the serialized date two weeks from now
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncTIMEDIFF"></a>
+
+### <a name="TIMEDIFF( serial_1, serial_2, un"></a> TIMEDIFF( serial\_1, serial\_2, unit ) -- time difference between two serialized dates
+
+- The unit is seconds if not specified; unit can be specified as in `$TIMEADD()`. Note: An approximation is used for month and year calculations. Use `$FORMAT()` or `$INT()` to format real numbers
+- Syntax: <code>**$TIMEDIFF( serial\_1, serial\_2, _unit_ )**</code>
+- Example: <code>**%CALC\{"$TIMEDIFF($TIME(), $EVAL($TIME()+90), minute)"\}%**</code> returns <code>**1\.5**</code>
+- Related: <code>[[$FORMAT()|Main/WebHome#FuncFORMAT]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncTODAY"></a>
+
+### <a name="TODAY( ) -- serialized date of t"></a> TODAY( ) -- serialized date of today at midnight GMT
+
+- In contrast, the related `$TIME()` returns the serialized date of today at the current time, e.g. it includes the number of seconds since midnight GMT
+- Syntax: <code>**$TODAY( )**</code>
+- Example: <code>**%CALC\{"$TODAY()"\}%**</code> returns the number of seconds since Epoch
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>
+
+<a name="FuncTRIM"></a>
+
+### <a name="TRIM( text ) -- trim spaces from"></a> TRIM( text ) -- trim spaces from text
+
+- Removes all spaces from text except for single spaces between words
+- Syntax: <code>**$TRIM( text )**</code>
+- Example: <code>**%CALC\{"$TRIM( eat  spaces  )"\}%**</code> returns <code>**eat spaces**</code>
+- Related: <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>
+
+<a name="FuncUPPER"></a>
+
+### <a name="UPPER( text ) -- upper case stri"></a> UPPER( text ) -- upper case string of a text
+
+- Syntax: <code>**$UPPER( text )**</code>
+- Example: <code>**%CALC\{"$UPPER($T(R1:C5))"\}%**</code> returns the upper case string of the text in cell <code>**R1:C5**</code>
+- Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
+
+<a name="FuncVALUE"></a>
+
+### <a name="VALUE( text ) -- convert text to"></a> VALUE( text ) -- convert text to number
+
+- Extracts a number from <code>**text**</code>. Returns <code>****</code> if not found
+- Syntax: <code>**$VALUE( text )**</code>
+- Example: <code>**%CALC\{"$VALUE(US$1,200)"\}%**</code> returns <code>**1200**</code>
+- Example: <code>**%CALC\{"$VALUE(PrjNotebook1234)"\}%**</code> returns <code>**1234**</code>
+- Example: <code>**%CALC\{"$VALUE(Total: -12.5)"\}%**</code> returns <code>**-12.5**</code>
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>
 
 ## <a name="Bug Tracking Example"></a> Bug Tracking Example
 
@@ -453,11 +833,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 03 Apr 2004 </td>
+    <td> 24 May 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 24 May 2004: </td>
+    <td> Refactored documentation (no code changes) </td>
   </tr>
   <tr>
     <td align="right"> 03 Apr 2004: </td>
@@ -579,4 +963,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 03 Apr 2004
+-- TWiki:Main/PeterThoeny - 24 May 2004 \`
