@@ -20,6 +20,24 @@ Now you are ready to continue on to [Starting the BOS Server](http://www.openafs
 
 ### <a name="Create AFS Keys and Administrato"></a> Create AFS Keys and Administrators
 
+First you will need to create a principal "afs" or "afs/cell.name" in your [[KerberosV]] database. The latter is the preferred alternative, especially if you will support more than one [[AFSCell]] with a single [[KerberosRealm]].
+
+Your [[KerberosV]] realm must support krb524 for aklog to work, typically. [[KerberosVMIT]]:
+
+- set up krb524d. You will need to make sure your krb524d server host includes something like this in krb5.conf. Only one of the 2 entries should be needed for a realm, depending on how you did the setup in your [[KerberosV]] database.
+
+    [appdefaults]
+    afs_krb5 = {
+          REALM.NAME = {
+                    afs = false
+                    afs/cell.name = false
+          }
+    }
+
+[[HeimdalKTH]]:
+
+- kdc will service krb524 requests
+
 Next we will create an AFS [[KeyFile]] and an administrator principal in the Kerberos database. The procedure for creating an AFS [[KeyFile]] depends on which [[KerberosV]] implementation you have chosen to use.
 
 Things to remember about AFS [[KeyFile]]: they must contain a key using the des-cbc-crc encryption type and has the latest kvno in the Kerberos database.
@@ -61,4 +79,4 @@ Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStar
 
 In its current state, you have to manually log into your AFS cell through kinit and possibly aklog (explain aklog..., debugging using "tokens" etc). There are several methods to enable transparent login to both local resources (the machine itself) and AFS through a single password. See [[KerberosV]] and [[SettingUpAuthentication]] for some information.
 
--- [[JasonGarman]] - 05 Feb 2002
+-- [[JasonGarman]] - 05 Feb 2002 -- [[DerrickBrashear]] - 26 Nov 2002

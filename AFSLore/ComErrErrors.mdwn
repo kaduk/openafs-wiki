@@ -1,0 +1,9 @@
+A list of [errors](http://www.central.org/pages/numbers/errors.html) can be found at [[GrandCentralOrg]].
+
+When using [[KerberosV]] an error of 19270408 probably means one of:
+
+- kvno in the [[KeyFile]] doesn't match that in the Kerberos database
+- [[KerberosVMIT]] krb524d not configured correctly
+- des3 key in the database for the "afs" principal.
+
+-- [[DerrickBrashear]] - 26 Nov 2002

@@ -17,15 +17,15 @@ The following are items known to be in progress, and, where available, a point o
 
 - [[DisconnectedOperation]] provides the ability to use AFS while not connected to a network.
 
-- [[NestedGroups]] allows PTS groups to have other groups as members. Waiting for [[OpenAFS]] port.
+- [[NestedGroups]] allows PTS groups to have other groups as members. Code available, waiting for [[OpenAFS]] port.
 
-- [[FreeBSDPort]] -- Server ported. No cache manager support yet available.
+- [[FreeBSDPort]] -- Server ported. Cache manager available, not stable yet.
 
-- [[HPUX11Port|Main/HP-UX11Port]] -- Missing RX code reconstructed. Waiting on kernel header from HP. Contact [[DerrickBrashear]].
+- [[HPUX11Port|Main/HP-UX11Port]] -- Missing RX code reconstructed. Header needed, available from HP.
 
 - [[NetBSDPort]] -- No timeline available.
 
-- [[OpenBSDPort]] -- In progress. No cache manager support yet available.
+- [[OpenBSDPort]] -- In progress. Cache manager available, not stable yet.
 
 - [[AutoConf]] with automake too. In progress. Contact [[DerrickBrashear]].
 
@@ -57,7 +57,7 @@ The following are items which have been proposed, but which are not yet in progr
 
 - [[BetterServerPreferences]] allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact [[DerrickBrashear]]. _Do this for vldb servers too, or is that a separate project? [[TedAnderson]]_
 
-- [[NFSTranslatorServer]] -- Create an AFS/NFS translator for [[OpenAFS]] because there were licensing issues with the code in the IBM/Transarc product. A shell of one for Solaris only is in the source tree but needs more work before it will be useful. Contact [[DerrickBrashear]]. Another approach is a user-mode implementation. Contact [[JeffreyHutzelman]].
+- [[NFSTranslatorServer]] -- Create an AFS/NFS translator for [[OpenAFS]] because there were licensing issues with the code in the IBM/Transarc product. A Solaris-only version will be supported with and after 1.2.8. Another approach is a user-mode implementation. Contact [[JeffreyHutzelman]].
 
 - [[PartitionUUID]] -- Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact [[DerrickBrashear]].
 

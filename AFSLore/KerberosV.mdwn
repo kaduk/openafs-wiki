@@ -8,6 +8,18 @@ Installing [[KerberosV]] along with [[OpenAFS]] will provide the basis for many 
 
 The installation documentation on the [[OpenAFS]] web site unfortunately does not include any information on integrating AFS into a [[KerberosV]] realm. (Work on install document &amp; gotchas page later)
 
+If you're using [[KerberosVMIT]] versions 1.2.6 or later, you'll need to add a section to krb5.conf on the krb524d host if you wish to continue using old-style [[KerberosIV]] ticket derived tokens.
+
+    [appdefaults]
+    afs_krb5 = {
+    	  REALM.NAME = {
+    					afs = false
+    					afs/cell.name = false
+    	  }
+    }
+
+Where REALM.NAME and cell.name are the names of your [[KerberosRealm]] and [[AFSCell]] respectively.
+
 If you already have a working AFS cell using [[KaServer]], check out [[DerrickBrashear]]'s document for converting from the [[KaServer]] to [[HeimdalKTH]] [here](http://lost-contact.mit.edu/afs/net/project/afs32/andrew.cmu.edu/usr/shadow/ka2heim.txt): <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
 
 For now a few links... explanations to follow later:
