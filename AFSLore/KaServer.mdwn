@@ -1,4 +1,4 @@
-The [[KaServer]] is an implementation of [[KerberosIV]] that comes with AFS (Does [[OpenAFS]] still install/setup the kaserver?). It implements the standard version 4 UDP interface on port 750, but also suplements this with an [[RxRPC]] interface.
+The [[KaServer]] is an implementation of [[KerberosIV]] that comes with AFS ([[OpenAFS]] still includes the kaserver, but it's suggested you instead install a [[KerberosV]] implementation to use in its place). It implements the standard version 4 UDP interface on port 750, but also suplements this with an [[RxRPC]] interface.
 
 The [[RxRPC]] interface provides authentication services and is used by klog. It differs from the V4 interface in that it requires pre-authentication which avoids a problem identified with the V4 protocol and fixed in [[KerberosV]]. There is an option to the [[KaServer]] to disable port 750 but while improving security it reduces compatibility with non-AFS V4 applications.
 

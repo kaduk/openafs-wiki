@@ -1,0 +1,14 @@
+The [[AFSDB]] DNS resource record is used to specify DCE or AFS DBserver hosts.
+
+           name    {ttl}   addr-class      AFSDB   subtype server host name
+           toaster.com.            IN      AFSDB   1       jack.toaster.com
+           toaster.com.            IN      AFSDB   1       jill.toaster.com.
+           toaster.com.            IN      AFSDB   2       tracker.toaster.com.
+
+[[AFSDB]] records are used to specify the hosts that provide a style of distributed service advertised under this domain name. A subtype value (analogous to the "preference" value in the MX record) indicates which style of distributed service is provided with the given name. Subtype 1 indicates that the named host is an AFS database server for the AFS cell of the given domain name. Subtype 2 indicates that the named host provides intra-cell name service for the DCE cell named by the given domain name. In the example above, jack.toaster.com and jill.toaster.com are declared to be AFS database servers for the toaster.com AFS cell, so that AFS clients wishing service from toaster.com are directed to those two hosts for further information. The third record declares that tracker.toaster.com houses a directory server for the root of the DCE cell toaster.com, so that DCE clients that wish to refer to DCE services should consult with the host tracker.toaster.com for further information. The DCE sub-type of record is usually accompanied by a TXT record for other information specifying other details to be used in accessing the DCE cell. RFC 1183 contains more detailed information on the use of this record type.
+
+The [[AFSDB]] record is still experimental; not all name servers implement or recognize it.
+
+Copied from the BIND Operator's Guide
+
+-- [[DerrickBrashear]] - 24 Jan 2002

@@ -1,5 +1,7 @@
-The function that maps a password to an encryptio key is called [[StringToKey]]. The AFS standard one uses the realm name as a salt. The MIT standard is different from this and there were changes between v4 and v5 as well, I think.
+The function that maps a password to an encryption key is called [[StringToKey]]. The AFS standard one uses the realm name as a salt. The MIT standard is different from this and there were changes between v4 and v5 as well, I think.
 
 -- [[TedAnderson]] - 23 Jan 2002
 
 The MIT v5 [[StringToKey]] uses the same underlying algorithm as the v4 [[StringToKey]], but adds a salt based on the principal name.
+
+-- [[DerrickBrashear]] - 24 Jan 2002
