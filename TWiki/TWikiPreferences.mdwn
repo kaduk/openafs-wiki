@@ -44,7 +44,7 @@ The following settings are **_site-level preferences_** , e.g. affecting all use
 - http-equiv meta tags for **_view_**, **_rdiff_**, **_attach_**, **_search\*_** scripts:
   - Set HTTP\_EQUIV\_ON\_VIEW =
 
-- http-equiv meta tags for **_edit_** script. Example to expire immediately: <br />`Set HTTP_EQUIV_ON_EDIT = <meta http-equiv="Expires" content="%GMTIME{"day month, year - hour:min:sec"}% GMT">`
+- http-equiv meta tags for **_edit_** script. Example to expire immediately: <br />`Set HTTP_EQUIV_ON_EDIT = <meta http-equiv="Expires" content="%GMTIME{"$day $month, $year - $hour:$min:$sec"}% GMT">`
   - Set HTTP\_EQUIV\_ON\_EDIT =
 
 - http-equiv meta tags for **_preview_** script:
