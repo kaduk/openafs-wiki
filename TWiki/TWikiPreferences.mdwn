@@ -177,8 +177,11 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set ALLOWTOPICCHANGE =
   - Set ALLOWTOPICRENAME =
 
+- Users or groups allowed to [[create new webs|TWiki/ManagingWebs]]: (ex: [[TWikiAdminGroup]])
+  - Set ALLOWWEBCREATEWEB = [[TWikiAdminGroup]]
+
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST
+  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBCREATEWEB
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
