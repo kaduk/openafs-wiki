@@ -1,0 +1,9 @@
+-- [[JimmyEngelbrecht]] - 06 May 2004
+
+The [[OpenAFS]] client for windows expects the DB-servers to respond to kerberosrequests, which is not the case if you run for ex. a MIT or heimdal KDC on separate mashines. The krb-forward utility is installed on the DB-servers and acts as a proxy to the real KDC's.
+
+You can get it from my CVS-repo here. checkout the source like this (you need -R patch to your cvs):
+
+cvs -R -d /afs/e.kth.se/src/SourceRepository co s3/krb-forward
+
+the source builds on Linux, Digital UNIX and Solaris. The program was written by Love H�rnquist �strand
