@@ -1,0 +1,86 @@
+# <a name="Configuration Reference Guide"></a> Configuration Reference Guide
+
+<div>
+  <ul>
+    <li><a href="#Configuration Reference Guide"> Configuration Reference Guide</a><ul>
+        <li><a href="#Introduction"> Introduction</a></li>
+        <li><a href="#Credentials Manager"> Credentials Manager</a><ul>
+            <li><a href="#Command Line Options"> Command Line Options</a></li>
+            <li><a href="#Tokens"> Tokens</a></li>
+            <li><a href="#Drive Letters"> Drive Letters</a></li>
+            <li><a href="#Advanced"> Advanced</a></li>
+            <li><a href="#System Tray"> System Tray</a></li>
+          </ul>
+        </li>
+        <li><a href="#Windows Registry Keys of _OpenAF"> Windows Registry Keys of OpenAFS</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Introduction"></a> Introduction
+
+Once you have installed [[OpenAFS]] for Windows onto your computer, there are two programs you will be concerned with: The first one is the AFS Client (Credentials Manager), the second is the AFS Client Configuration program. Many of the options in [[OpenAFS]] can be set from both programs. This is a source of confusion, which this guide will try to sort out.
+
+Because this is a reference, the programs will be described in order, screen by screen. At the end, files and Windows Registry keys will be described.
+
+## <a name="Credentials Manager"></a> Credentials Manager
+
+This program is located in `C:\Program Files\OpenAFS\Client\Program\afscreds.exe` (default location). It is used for managing end-user tasks. This includes obtaining tickets and setting up per-user drive mappings.
+
+### <a name="Command Line Options"></a> Command Line Options
+
+If you intend to run `afscreds.exe` from a command line, the following options may be of interrest to you. NB: The flags are case-insensitive, and can begin with either **_-_** (� la Unix) or **_/_** (old Windows style).
+
+<dl>
+  <dt> -A</dt>
+  <dd> Auto Initialize. Starts the AFS service if it is stopped. Tries to obtain tokens when the Credentials Manager is started. </dd>
+  <dt> -E</dt>
+  <dd> Exit. Terminate another, already running, instance of Credentials Manager. Then exit this instance. </dd>
+  <dt> -I</dt>
+  <dd> Install in Startup. Make the Credentials Manager start when the user logs in. </dd>
+  <dt> -M</dt>
+  <dd> Renew Drive Mappings. Unmaps all drive mappings and then remaps them when the Credentials Manager is started. </dd>
+  <dt> -N</dt>
+  <dd> Net Change Detect. Tells the Credentials Manager to ask the user for new tokens if a network interface changes its IP address. </dd>
+  <dt> -Q</dt>
+  <dd> Quiet. Do not notify the user if the AFS service is not started when the Credentials Manager is begin started. </dd>
+  <dt> -S</dt>
+  <dd> Show Tokens. Open the tokens window on start. </dd>
+  <dt> -U</dt>
+  <dd> Uninstall. Remove Credentials Manager from Startup. The Credentials Manager will no longer start automatically when the user logs in. </dd>
+  <dt> -X</dt>
+  <dd> Remap All. Remap all drives, including global drives. </dd>
+  <dt> -Z</dt>
+  <dd> Unmap All. Unmaps all per-user drives. </dd>
+</dl>
+
+### <a name="Tokens"></a> Tokens
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" /> The Tokens Tab displays brief information about your AFS tokens. It shows your current cell, and when the tokens expire. It lets you obtain (or renew) tokens (kauth/kinit in Unix) and make it sound an alarm if they will be expiring any time soon. If you have sensitive information in AFS, you can discard (kdestroy) tokens when away. Of course, [[OpenAFS]] discards the tokens automatically when you log out. This window also shows what version of [[OpenAFS]] you are currently running.
+
+### <a name="Drive Letters"></a> Drive Letters
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/drive-letters.png" width="467" height="238" /> A fundamental entity in the Microsoft Windows operating systems is the **_drive_**. A drive is identified by one letter and a colon. To mask a network file system as a drive is called to "map a drive".
+
+Mapping a drive in [[OpenAFS]] requires you to know three things. You will have to know what drive you want to map, what AFS path to map from, and what to call the mapping. The first two should be obivous. If you are used to Unix, however, note that the AFS Path is written using backslash, not slash. You also have the option to automatically reconnect the drive on login.
+
+The Description field is not as obvious. It is an **_identifier_** for the mapping, and is called a **_submount_**. It is not a free text description. The same restrictions apply to the description as to any name of a Windows share. See the [[WindowsTroubleshootingGuide]] for more information on submounts.
+
+### <a name="Advanced"></a> Advanced
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/advanced.png" width="467" height="238" /> If you are an administrator, you will want to use this tab eventually. You can check the status of the AFS service, start it if needed and configure global parameters. Pressing "Configure AFS Client" brings up the "AFS Client Configuration" program, which is described in a later section.
+
+You should always start the AFS service when the computer starts up. Otherwise, you will have to start the service manually. This is equivalent to using the "Services" tab of Windows Administration Tools". This applies to all users.
+
+The "Always show the AFS Client icon in the taskbar" option sets whether the Credentials Manager should be started on each login or not.
+
+### <a name="System Tray"></a> System Tray
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/windows/taskbar.png" width="135" height="26" /> A padlock is the icon for AFS Credentials Manager. It is locked when you have valid tokens, and has a small red cross when you do not.
+
+Clicking it brings the Credentials Manager up. Right-clicking opens a three-item menu. "Remove Icon..." will ask if you want to stop the AFS service or not. The Credentials Manager will then exit.
+
+## <a name="Windows Registry Keys of _OpenAF"></a> Windows Registry Keys of [[OpenAFS]]
+
+During the preparation of this release of [[OpenAFS]], a lot of changes have been made to the way configuration is stored. The work is still not finished, why the list of registry keys currently used can be found [here](http://web.mit.edu/~jaltman/Public/OpenAFS/registry.txt).

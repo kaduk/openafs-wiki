@@ -3,19 +3,41 @@
 <div>
   <ul>
     <li><a href="#Troubleshooting Guide for _OpenA"> Troubleshooting Guide for OpenAFS for Windows</a><ul>
-        <li><a href="#What is this _MrxSmb event 3019"> What is this MrxSmb event 3019 that pops up in my System Log?</a></li>
-        <li><a href="#How come my non-ASCII filename c"> How come my non-ASCII filename characters are wrong; code page problems?</a></li>
+        <li><a href="#Bugs"> Bugs</a><ul>
+            <li><a href="#How come my non-ASCII filename c"> How come my non-ASCII filename characters are wrong; code page problems?</a></li>
+          </ul>
+        </li>
+        <li><a href="#Error Messages"> Error Messages</a><ul>
+            <li><a href="#What is this _MrxSmb event 3019"> What is this MrxSmb event 3019 that pops up in my System Log?</a></li>
+          </ul>
+        </li>
+        <li><a href="#Nomenclature"> Nomenclature</a><ul>
+            <li><a href="#What is a "submount"?"> What is a "submount"?</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
+## <a name="Bugs"></a> Bugs
 
-The [[MrxSmb]] event 3019 is due to the use of the Loop Back device. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
-
-## <a name="How come my non-ASCII filename c"></a> How come my non-ASCII filename characters are wrong; code page problems?
+### <a name="How come my non-ASCII filename c"></a> How come my non-ASCII filename characters are wrong; code page problems?
 
 Yes, it is. Currently, the [[OpenAFS]] implementation uses a SMB server with which Windows communicates. This server is not yet able to handle all code pages. So, if you are accessing files from other systems as well, you will experience the old code page missmatch problem.
 
 The CIFS protocol itself has support for Unicode. Hopefully, it will be implemented in [[OpenAFS]] in the future. (from J. Altman)
+
+## <a name="Error Messages"></a> Error Messages
+
+### <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
+
+The [[MrxSmb]] event 3019 is due to the use of the Loop Back device. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
+
+## <a name="Nomenclature"></a> Nomenclature
+
+### <a name="What is a &quot;submount&quot;?"></a> What is a "submount"?
+
+A submount is used in [[OpenAFS]] for Windows to map drives. Instead of mapping drives directly to the AFS server, the [[OpenAFS]] Client uses another approach. It uses the CIFS file system as an intermediary. So, the Windows computer really thinks it maps a normal Windows share. These shares are the same thing as a submount. When you want to map a drive, the [[OpenAFS]] service creates a submount, exports it for Windows to see it, and maps the share. The submount "all" is always available and is the root of the AFS file system (`/afs` in Unix). This means you can always access any cell by writing `\\AFS\all\cell\...`.
+
+This is a quick-and-dirty approach, but it has an upside. In Unix, the way to shorten a path is to install a symbolic link. In Windows, this is not possible. Using submounts, however, you can create shortcuts to any AFS path. Say you often use the path `/afs/openafs.org/usr/someone/development/code/openafs/src/WINNT`. Then you could create a submount (say, "openafs-nt") of it, thus reducing the path to `\\AFS\openafs-nt`.
