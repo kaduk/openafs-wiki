@@ -29,7 +29,7 @@
 - Improved support for internationalisation
 - Better topic management screens
 - More pre-installed Plugins: CommentPlugin, EditTablePlugin, RenderListPlugin, SlideShowPlugin, SmiliesPlugin, SpreadSheetPlugin, TablePlugin
-- More callbacks for Plugins
+- Improved Plugins API and more Plugin callbacks
 - Better support for different authentication methods
 - Many user interface and usability improvements
 - And many, many more enhancements
@@ -232,7 +232,7 @@
     <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
-    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Formatted Search with [[Main/WebForm]] variable to retrieve the name of the form attached to a topic. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchFormnameVariable" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Search: Formatted Search with Web Form variable to retrieve the name of the form attached to a topic. <a href="http://TWiki.org/cgi-bin/view/Codev/FormattedSearchFormnameVariable" target="_top">Details</a></td>
     <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.FrankSmith TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
@@ -304,7 +304,23 @@
     <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.MartinCleaver TWiki:Main.WalterMundt </td>
   </tr>
   <tr>
-    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: Adds new dependency checking function TWiki::Func::checkDependencies for Plugins. <a href="http://TWiki.org/cgi-bin/view/Codev/PluginDependencies" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: New function <code>TWiki::Func::formatTime</code> to format time into a string. <a href="http://TWiki.org/cgi-bin/view/Codev/FormatTime" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.SvenDowideit </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Plugins: New function <code>TWiki::Func::getRegularExpression</code> to get predefined regular expressions. <a href="http://TWiki.org/cgi-bin/view/Codev/GetRegularExpression" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.RichardDonkin </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: New functions <code>TWiki::Func::getPluginPreferences*</code> to get Plugin preferences. <a href="http://TWiki.org/cgi-bin/view/Codev/GetPluginPreferences" target="_top">Details</a></td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.WalterMundt </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Plugins: New function <code>TWiki::Func::extractParameters</code> to extract all parameters from a variable string. <a href="http://TWiki.org/cgi-bin/view/Codev/ExtractParameters" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Plugins: New function <code>TWiki::Func::checkDependencies</code> to check for module dependency. <a href="http://TWiki.org/cgi-bin/view/Codev/PluginDependencies" target="_top">Details</a></td>
     <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.CrawfordCurrie TWiki:Main.SvenDowideit </td>
   </tr>
   <tr>
