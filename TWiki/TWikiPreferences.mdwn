@@ -1,6 +1,6 @@
 # <a name="%WIKITOOLNAME% Site-Level Prefer"></a><a name=" %WIKITOOLNAME% Site-Level Prefe"></a> %WIKITOOLNAME% Site-Level Preferences
 
-The following are **_site-level_** settings that affect all users in all webs on this [[TWikiSite]]. They can be selectively overwritten on the **_individual web level_** (see [[WebPreferences]] in each web), and on the **_user level_** (create preferences in your user account topic in the Main web, ex: Main.admin).
+The following are **_site-level_** settings that affect all users in all webs on this [[TWikiSite]]. They can be selectively overwritten on the **_individual web level_** (see [[WebPreferences]] in each web), **_topic level_** (the topic being rendered), and on the **_user level_** (create preferences in your user account topic in the Main web, ex: Main.admin).
 
 - %X% **NOTE:** You can lock individual settings at the site or web levels using User &amp; Group Access Control - see section below.
 
@@ -18,6 +18,7 @@ The following are **_site-level_** settings that affect all users in all webs on
     <li><a href="#Plugins Settings"> Plugins Settings</a></li>
     <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
     <li><a href="#Access Control Settings"> Access Control Settings</a></li>
+    <li><a href="#Preferences Control Settings"> Preferences Control Settings</a></li>
     <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
     <li><a href="#Related Topics"> Related Topics</a></li>
   </ul>
@@ -35,6 +36,9 @@ The following are **_site-level_** settings that affect all users in all webs on
 
 - Copyright notice:
   - Set WEBCOPYRIGHT = <font>Copyright © 1999-2010 by the contributing authors. \\nAll material on this collaboration platform is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send](mailto:?subject=%WIKITOOLNAME% Feedback on %WEB%.%TOPIC%) feedback. </font>
+
+- Simplified Copyright notice for the [[WebRss]] feed (don't use any special characters or xml tags
+  - Set WEBRSSCOPYRIGHT = Copyright 2010 by contributing authors
 
 - Exclude web from a `web="all"` search: (Set to `on` for hidden webs; is overwritten by web preferences)
   - Set NOSEARCHALL =
@@ -264,8 +268,16 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Users or groups allowed to [[create new webs|TWiki/ManagingWebs]]: (ex: [[TWikiAdminGroup]])
   - Set ALLOWWEBMANAGE = [[TWikiAdminGroup]]
 
+## <a name="Preferences Control Settings"></a> Preferences Control Settings
+
+- Allow topic level preferences, on or off: If set to `on`, topic preferences will be read, and will override any web- or site-level preferences not set as `FINALPREFERENCES`. By default, user preferences will override topic preferences.
+  - Set READTOPICPREFS = on
+
+- Topic level overrides user level preferences, on or off: If set to `on`, topic preferences will override user preferences. The user can in turn override this behavior by setting further `FINALPREFERENCES` in his or her user topic.
+  - Set TOPICOVERRIDESUSER = off
+
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE
+  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE, READTOPICPREFS, TOPICOVERRIDESUSER
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
