@@ -28,7 +28,6 @@
           </ul>
         </li>
         <li><a href="#Settings Without a User Interfac"> Settings Without a User Interface</a><ul>
-            <li><a href="#Tokens For Roaming Profiles"> Tokens For Roaming Profiles</a></li>
             <li><a href="#Netbios Name"> Netbios Name</a></li>
             <li><a href="#Encryption of Network Traffic"> Encryption of Network Traffic</a></li>
             <li><a href="#Freelance Client Support"> Freelance Client Support</a></li>
@@ -86,7 +85,7 @@ If you intend to run `afscreds.exe` from a command line, the following options m
 
 ### <a name="Tokens"></a> Tokens
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" /> The Tokens Tab displays brief information about your AFS tokens. It shows your current cell, and when the tokens expire. It lets you obtain (or renew) tokens (kauth/kinit in Unix) and make it sound an alarm if they will be expiring any time soon. If you have sensitive information in AFS, you can discard (kdestroy) tokens when away. Of course, [[OpenAFS]] discards the tokens automatically when you log out. This window also shows what version of [[OpenAFS]] you are currently running.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" /> The Tokens Tab displays brief information about your AFS tokens. It shows your current cell, and when the tokens expire. It lets you obtain (or renew) tokens (kauth/kinit in Unix) and make it sound an alarm if they will be expiring any time soon. If you have sensitive information in AFS, you can discard (kdestroy) tokens when away. [[OpenAFS]] does not discard the tokens automatically when you log out. This window also shows what version of [[OpenAFS]] you are currently running.
 
 ### <a name="Drive Letters"></a> Drive Letters
 
@@ -187,12 +186,6 @@ Before [[OpenAFS]] for Windows began to use the Microsoft Loop Back Adapter, it 
 ## <a name="Settings Without a User Interfac"></a> Settings Without a User Interface
 
 Currently, some options have not yet been given a proper user interface. These can be changed directly in the Windows Registry using `regedit`.
-
-### <a name="Tokens For Roaming Profiles"></a> Tokens For Roaming Profiles
-
-The AFS service is capable of retaining the user's tokens some time after logging out. This enables a slow transfer of the user's roaming profile to be successfully completed. The registry keys can be found under `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters`. The values in question are called `LogoffTokenTransfer` (type DWORD) and `LogoffTokenTransferTimeout` (type QWORD).
-
-Setting `LogoffTokenTransfer` to 1 makes the AFS service keep the tokens for `LogoffTokenTransferTimeout` seconds.
 
 ### <a name="Netbios Name"></a> Netbios Name
 
