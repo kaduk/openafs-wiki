@@ -38,7 +38,7 @@ There are two options: run [confloop.msi](http://www.eos.ncsu.edu/wolfcall/loopb
 
 ### <a name="Turn on Automatic Lana Scan"></a> Turn on Automatic Lana Scan
 
-1. The automatic Lana scan should find and select the new loopback adapter, and is on by default. However, if you've turned it off, you can turn it back on by going to Start/Settings/Control Panel/AFS Client Configuration, clicking on the "Advanced" tab, going to "Miscellaneous", and checking the box for "Automatic Lana scan." Again, this step is not necessary step unless you have changed the settings.
+1. The automatic Lana scan should find and select the new loopback adapter, and is on by default. However, if you've turned it off, you can turn it back on by going to Start/Settings/Control Panel/AFS Client Configuration, clicking on the "Advanced" tab, going to "Miscellaneous", and checking the box for "Automatic Lana scan." Again, this step is not necessary unless you have changed the settings.
 
 Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) included in [[OpenAFS]] 1.2.8+, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
 
