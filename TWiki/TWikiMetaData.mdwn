@@ -268,48 +268,20 @@ Current support covers:
     <th bgcolor="#99CCCC"><strong> Comment: </strong></th>
   </tr>
   <tr>
-    <td> %META{"form"}% </td>
-    <td> Show form data, see [[Main/TWikiForms]]</td>
+    <td><code>%META{"form"}%</code></td>
+    <td> Show form data, see [[Main/TWikiForms]]. </td>
   </tr>
   <tr>
-    <td> %META{"attachments"}% </td>
-    <td> Show attachments, exclude hidden </td>
+    <td><code>%META{"attachments"}%</code></td>
+    <td> Show attachments, except for hidden ones. Options: <br /><code><b>all="on"</b></code>: Show all attachments, including hidden ones. </td>
   </tr>
   <tr>
-    <td> Options for [[Main/FileAttachments]]: </td>
-    <td>   </td>
+    <td><code>%META{"moved"}%</code></td>
+    <td> Details of any topic moves. </td>
   </tr>
   <tr>
-    <td> all="on" </td>
-    <td> Show ALL attachments (including hidden) </td>
-  </tr>
-  <tr>
-    <td> %META{"moved"}% </td>
-    <td> Details of any topic moves </td>
-  </tr>
-  <tr>
-    <td> %META{"parent [options]"}% </td>
-    <td> Show topic parent </td>
-  </tr>
-  <tr>
-    <td> Options for parent: </td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td> dontrecurse="on" </td>
-    <td> By default recurses up tree, at some cost </td>
-  </tr>
-  <tr>
-    <td> prefix="..." </td>
-    <td> Prefix for parents, only if there are parents; default "" </td>
-  </tr>
-  <tr>
-    <td> suffix="..." </td>
-    <td> Suffix, only appears if there are parents; default "" </td>
-  </tr>
-  <tr>
-    <td> separator="..." </td>
-    <td> Separator between parents, default is " &gt; " </td>
+    <td><code>%META{"parent"}%</code></td>
+    <td> Show topic parent. Options: <br /><code><b>dontrecurse="on"</b></code>: By default recurses up tree, at some cost. <br /><code><b>nowebhome="on"</b></code>: Suppress WebHome. <br /><code><b>prefix="..."</b></code>: Prefix for parents, only if there are parents, default <code>""</code>. <br /><code><b>suffix="..."</b></code>: Suffix, only appears if there are parents, default <code>""</code>. <br /><code><b>separator="..."</b></code>: Separator between parents, default is <code>" &gt; "</code>. </td>
   </tr>
 </table>
 
@@ -317,4 +289,4 @@ Current support covers:
 
 At present, there is no Meta Data support for Plugins. However, the format is readily extendable and the `Meta.pm` code that supports the format needs only minor alteration.
 
--- [[JohnTalintyre]] - 29 Aug 2001 <br /> -- [[MikeMannix]] - 03 Dec 2001
+-- [[JohnTalintyre]] - 29 Aug 2001 <br /> -- [[MikeMannix]] - 03 Dec 2001 <br /> -- [[PeterThoeny]] - 10 Jan 2002
