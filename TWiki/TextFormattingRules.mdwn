@@ -22,20 +22,20 @@
 
 # <a name="TWiki Text Formatting"></a> TWiki Text Formatting
 
-Working in TWiki is as easy as typing in text - exactly like email. You don't need to know HTML, though you can use it if you prefer. Links to topics are created automatically when you enter [[WikiWords]]. And TWiki shorthand gives you all the power of HTML with a simple coding system that takes no time to learn. It's all layed out below - refer back to this page in a pop-up window from the **Edit** screen.
+Working in TWiki is as easy as typing in text - **exactly like email**. You don't need to know HTML, though you can use it if you prefer. Links to topics are created automatically when you enter [[WikiWords]]. And TWiki shorthand gives you all the power of HTML with a simple coding system that takes no time to learn. It's all layed out below - refer back to this page in a pop-up window from the **Edit** screen.
 
 <a name="TWikiShorthand"></a>
 
 ## <a name="TWiki Editing Shorthand"></a> TWiki Editing Shorthand
 
-<table bgcolor="#000000" border="0" cellpadding="3" cellspacing="1">
+<table bgcolor="#000000" border="1" cellpadding="3" cellspacing="1">
   <tr bgcolor="#ffffff">
     <td><strong>Formatting Command:</strong></td>
     <td><strong>Example: You write:</strong></td>
     <td><strong>You get:</strong></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Paragraphs:</strong><br /> Blank lines will create new paragraphs. </td>
+    <td valign="top"><strong>Paragraphs:</strong> %BR% Blank lines will create new paragraphs. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 1st paragraph
 
@@ -45,7 +45,7 @@ Working in TWiki is as easy as typing in text - exactly like email. You don't ne
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Headings:</strong><br /> At least three dashes at the beginning of a line, followed by plus signs and the heading text. One plus creates a level 1 heading (most important), two pluses a level 2 heading; the maximum is level 6. <strong><em>Note:</em></strong> A Table of Content can be created automatically with the <code>%TOC%</code> variable, see [[Main/TWikiVariables]]. Any heading text after <code>!!</code> is excluded from the TOC; for example, write <code>---+!! text</code> if you do not want to list a header in the TOC. </td>
+    <td valign="top"><strong>Headings:</strong> %BR% At least three dashes at the beginning of a line, followed by plus signs and the heading text. One plus creates a level 1 heading (most important), two pluses a level 2 heading; the maximum is level 6. <strong><em>Note:</em></strong> A Table of Content can be created automatically with the <code>%TOC%</code> variable, see [[Main/TWikiVariables]]. Any heading text after <code>!!</code> is excluded from the TOC; for example, write <code>---+!! text</code> if you do not want to list a header in the TOC. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 ---++ Sushi
 
@@ -59,42 +59,42 @@ Working in TWiki is as easy as typing in text - exactly like email. You don't ne
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Bold Text:</strong><br /> Words get <strong>bold</strong> by enclosing them in <code>*</code> asterisks. </td>
+    <td valign="top"><strong>Bold Text:</strong> %BR% Words get <strong>bold</strong> by enclosing them in <code>*</code> asterisks. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 *Bold*
 </pre> </font></span></td>
     <td valign="top"><strong>Bold</strong></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Italic Text:</strong><br /> Words get <em>italic</em> by enclosing them in <code>_</code> underscores. </td>
+    <td valign="top"><strong>Italic Text:</strong> %BR% Words get <em>italic</em> by enclosing them in <code>_</code> underscores. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 _Italic_
 </pre> </font></span></td>
     <td valign="top"><em>Italic</em></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Bold Italic:</strong><br /> Words get <em>_bold italic</em> by enclosing them in <code>_</code> double-underscores. </td>
+    <td valign="top"><strong>Bold Italic:</strong> %BR% Words get <em>_bold italic</em> by enclosing them in <code>_</code> double-underscores. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 __Bold italic__
 </pre> </font></span></td>
     <td valign="top"><strong><em>Bold italic</em></strong></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Fixed Font:</strong><br /> Words get shown in <code>fixed font</code> by enclosing them in <code>=</code> equal signs. </td>
+    <td valign="top"><strong>Fixed Font:</strong> %BR% Words get shown in <code>fixed font</code> by enclosing them in <code>=</code> equal signs. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 =Fixed font=
 </pre> </font></span></td>
     <td valign="top"><code>Fixed font</code></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Bold Fixed Font:</strong><br /> Words get shown in <code><b>bold fixed font</b></code> by enclosing them in <code><b></b></code> double equal signs. </td>
+    <td valign="top"><strong>Bold Fixed Font:</strong> %BR% Words get shown in <code><b>bold fixed font</b></code> by enclosing them in <code><b></b></code> double equal signs. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 ==Bold fixed==
 </pre> </font></span></td>
     <td valign="top"><code><b>Bold fixed</b></code></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong><em>Note:</em></strong> Make sure to "stick" the <code>* _ = ==</code> signs to the words, e.g. take away spaces. </td>
+    <td valign="top"><strong><em>Note:</em></strong> Make sure to "stick" the <code>* _ = ==</code> signs to the words, that is, take away spaces. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 _This works_,
 _this not _
@@ -102,7 +102,7 @@ _this not _
     <td valign="top"><em>This works</em>, _this not _ </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Verbatim Mode:</strong><br /> Surround code excerpts and other formatted text with <code>&lt;verbatim&gt;</code> and <code>&lt;/verbatim&gt;</code> tags. <br /><strong><em>Note:</em></strong> Use <code>&lt;pre&gt;</code> and <code>&lt;/pre&gt;</code> tags instead if you want that HTML code is interpreted. <br /><strong><em>Note:</em></strong> Each tag must be on a line by itself. </td>
+    <td valign="top"><strong>Verbatim Mode:</strong> %BR% Surround code excerpts and other formatted text with <code>&lt;verbatim&gt;</code> and <code>&lt;/verbatim&gt;</code> tags. %BR% <strong><em>Note:</em></strong> Use <code>&lt;pre&gt;</code> and <code>&lt;/pre&gt;</code> tags instead if you want that HTML code is interpreted. %BR% <strong><em>Note:</em></strong> Each tag must be on a line by itself. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 &lt;verbatim&gt;
 class CatAnimal {
@@ -121,7 +121,7 @@ class CatAnimal {
 </pre></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Separator:</strong><br /> At least three dashes at the beginning of a line. </td>
+    <td valign="top"><strong>Separator:</strong> %BR% At least three dashes at the beginning of a line. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 -------
 </pre> </font></span></td>
@@ -130,7 +130,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>List Item:</strong><br /> Three spaces and an asterisk. </td>
+    <td valign="top"><strong>List Item:</strong> %BR% Three spaces and an asterisk. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 	* bullet item
 </pre> </font></span></td>
@@ -141,7 +141,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Nested List Item:</strong><br /> Six, nine, ... spaces and an asterisk. </td>
+    <td valign="top"><strong>Nested List Item:</strong> %BR% Six, nine, ... spaces and an asterisk. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 		* nested stuff
 </pre> </font></span></td>
@@ -156,7 +156,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Ordered List:</strong><br /> Three spaces and a number. </td>
+    <td valign="top"><strong>Ordered List:</strong> %BR% Three spaces and a number. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 	1 Sushi
 	1 Dim Sum
@@ -169,7 +169,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Definition List:</strong><br /> Three spaces, the term, a colon, a space, followed by the definition. <br /><strong><em>Note:</em></strong> Terms with spaces are not supported. In case you do have a term with more then one word, separate the words with dashes or with the <code>&amp;nbsp;</code> non-breaking-space entity. </td>
+    <td valign="top"><strong>Definition List:</strong> %BR% Three spaces, the term, a colon, a space, followed by the definition. %BR% <strong><em>Note:</em></strong> Terms with spaces are not supported. In case you do have a term with more then one word, separate the words with dashes or with the <code>&amp;nbsp;</code> non-breaking-space entity. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 	Sushi: Japan
 	Dim&amp;nbsp;Sum: S.F.
@@ -184,14 +184,13 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Table:</strong><br /> Optional spaces followed by the cells enclosed in vertical bars. <br /><strong><em>Note:</em></strong> <code>| *bold* |</code> cells are rendered as table headers. <br /><strong><em>Note:</em></strong> <code>|   spaced   |</code> cells are rendered center aligned. <br /><strong><em>Note:</em></strong> <code>|     spaced |</code> cells are rendered right aligned. <br /><strong><em>Note:</em></strong> <code>| 2 colspan ||</code> cells are rendered as multi-span columns. <br /><strong><em>Note:</em></strong> In case you have a long row and you want it to be more readable when you edit the table you can split the row into lines that end with a <code>'\'</code> backslash character. <br />
-    </td>
+    <td valign="top"><strong>Table:</strong> %BR% Optional spaces followed by the cells enclosed in vertical bars. %BR% <strong><em>Note:</em></strong> <code>| *bold* |</code> cells are rendered as table headers. %BR% <strong><em>Note:</em></strong> <code>|   spaced   |</code> cells are rendered center aligned. %BR% <strong><em>Note:</em></strong> <code>|     spaced |</code> cells are rendered right aligned. %BR% <strong><em>Note:</em></strong> <code>| 2 colspan ||</code> cells are rendered as multi-span columns. %BR% <strong><em>Note:</em></strong> In case you have a long row and you want it to be more readable when you edit the table you can split the row into lines that end with a <code>'\'</code> backslash character. %BR% </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 | *L* | *C* | *R* |
 | A2 |  2  |  2 |
 | A3 |  3  |  3 |
 | multi span |||
-| A4 \  | next \  | next |
+| A4 | next | next |
 </pre> </font></span></td>
     <td valign="top">
       <table border="1" cellpadding="0" cellspacing="0">
@@ -222,7 +221,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>WikiWord Links:</strong><br /> CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically. <br /><strong><em>Note:</em></strong> In case you want to link to a topic in a different %WIKITOOLNAME% web write <code>Webname.TopicName</code>. </td>
+    <td valign="top"><strong>WikiWord Links:</strong> %BR% CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically. %BR% <strong><em>Note:</em></strong> In case you want to link to a topic in a different %WIKITOOLNAME% web write <code>Webname.TopicName</code>. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 WebNotify
 
@@ -232,7 +231,7 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong><br /> You can create a forced internal link by enclosing words in double square brackets. <br /><strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; i.e. <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. </td>
+    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong> %BR% You can create a forced internal link by enclosing words in double square brackets. %BR% <strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; for example, <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[wiki syntax]]
 
@@ -242,24 +241,20 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Specific Links:</strong><br /> Create a link where you can specify the link text and the link reference separately, using nested square brackets like <code>[[reference][text]]</code>. Internal link references (i.e. [[Main/WikiSyntax]]) and external link references (i.e. <a href="http://TWiki.org/" target="_top">http://TWiki.org/</a>) are supported. The same <strong><em>Forced Links</em></strong> rules apply for internal link references. Anchor names can be added as well, like <code>[[WebHome#MyAnchor][go home]]</code> and <code>[[http://www.yahoo.com/#somewhere][Yahoo!]]</code>. </td>
+    <td valign="top"><strong>Specific Links:</strong> %BR% Create a link where you can specify the link text and the link reference separately, using nested square brackets like <code>[[reference][text]]</code>. Internal link references (e.g. [[Main/WikiSyntax]]) and external link references (e.g. <a href="http://TWiki.org/" target="_top">http://TWiki.org/</a>) are supported. %BR% <strong><em>Note:</em></strong> The same <strong><em>Forced Links</em></strong> rules apply for internal link references. %BR% <strong><em>Note:</em></strong> For external link references, you can simply use a space instead of <code>][</code> to separate the link URL from the descriptive text. %BR% <strong><em>Note:</em></strong> Anchor names can be added as well, like <code>[[WebHome#MyAnchor][go home]]</code> and <code>[[http://gnu.org/#Action][GNU Action]]</code>. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[WikiSyntax][syntax]]
 
 [[http://gnu.org][GNU]]
+
+[[http://xml.org XML]]
 </pre> </font></span></td>
     <td valign="top">[[Main/WikiSyntax]]<p><a href="http://gnu.org" target="_top">GNU</a></p>
+      <p><a href="http://xml.org" target="_top">XML</a></p>
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Easier External Links:</strong><br /> An easier syntax for external links is now available: <code>[[externalURL text]]</code> - just hit the spacebar to separate the link URL from the descriptive text, e.g. <code>[[http://gnu.org/ GNU]]</code>. This also supports anchors, e.g. <code>[[http://www.yahoo.com/#somewhere Yahoo!]]</code>. </td>
-    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-[[http://gnu.org GNU]]
-</pre> </font></span></td>
-    <td valign="top"><a href="http://gnu.org" target="_top">GNU</a></td>
-  </tr>
-  <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Anchors:</strong><br /> You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
+    <td valign="top"><strong>Anchors:</strong> %BR% You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[WebHome#NotThere]]
 
@@ -279,7 +274,7 @@ Know.ReadmeFirst
     <td valign="top"> SunOS </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Disable Links:</strong> %BR% You can disable automatic linking of [[Main/WikiWords]] by surrounding text with <code>&lt;noautolink&gt;</code> and <code>&lt;/noautolink&gt;</code> tags. %BR% <strong><em>Note:</em></strong> Each tag must be on a line by itself.%BR% <strong><em>Note:</em></strong> This also works for TWiki tables, but only if you add a blank line between the end of the table and the closing <code>&lt;/noautolink&gt;</code> tag (known issue of the [[Main/TablePlugin]]). </td>
+    <td valign="top"><strong>Disable Links:</strong> %BR% You can disable automatic linking of [[Main/WikiWords]] by surrounding text with <code>&lt;noautolink&gt;</code> and <code>&lt;/noautolink&gt;</code> tags. %BR% <strong><em>Note:</em></strong> Each tag must be on a line by itself. %BR% <strong><em>Note:</em></strong> This also works for TWiki tables, but only if you add a blank line between the end of the table and the closing <code>&lt;/noautolink&gt;</code> tag (known issue of the [[Main/TablePlugin]]). </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
  &lt;noautolink&gt;
  RedHat &amp;
@@ -287,6 +282,16 @@ Know.ReadmeFirst
  &lt;/noautolink&gt;
 </pre> </font></span></td>
     <td valign="top"> RedHat &amp; SuSE </td>
+  </tr>
+  <tr bgcolor="#ffffff">
+    <td valign="top"><strong>Mailto: Links:</strong> %BR% To create 'mailto:' links that have more descriptive link text, specify subject lines or message bodies, or omit the email address, you can write <code>[[mailto:user@domain descriptive text]]</code>. </td>
+    <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
+[[mailto:a@z.com Mail]]
+
+[[mailto:?subject=Hi Hi]]
+</pre> </font></span></td>
+    <td valign="top"><a href="mailto:a@z.com">Mail</a><p><a href="mailto:?subject=Hi">Hi</a></p>
+    </td>
   </tr>
 </table>
 
@@ -324,7 +329,7 @@ Being able to create links without any formatting required is a core TWiki featu
 - Email addresses like `name@domain.com` are linked automatically.
 
 - `[[Square bracket rules]]` let you easily create [[non-WikiWord links|Main/WebHome#SquareBrackets]].
-  - You can also write `[[http://yahoo.com Yahoo home page]]` as an easier way of doing external links with descriptive text for the link, such as [Yahoo home page](http://yahoo.com).
+  - You can also write `[[http://yahoo.com Yahoo home page]]` as an easier way of doing external links with descriptive text for the link, such as [Yahoo home page](http://yahoo.com/).
 
 ## <a name="TWiki Variables"></a> TWiki Variables
 
@@ -340,9 +345,14 @@ Variables are names that are enclosed in percent signs `%` that are expanded on 
 
 - `%INCLUDE{"SomeTopic"}%` : Server side include, includes another topic. The current %WIKITOOLNAME% web is the default web. Example: <code>**%INCLUDE\{"TWiki.SiteMap"\}%**</code>
 
-- There are many more variables, see **[[TWikiVariables]]**.
+- `%SEARCH{"sushi"}%` : Inline search showing the search result embedded in a topic. [[FormattedSearch]] gives you control over formatting, used to create web-based applications.
 
-- [[TWikiPreferences]] defines site-wide variables like colors. For example, write: <code><span><font> %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors</font></span></code> to get: %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors.
+- [[TWikiPreferences]] defines site-wide variables. Among others:
+  - **Line break:** Write <code><span><font>%BR%</font></span></code> to start a new line.
+  - **Colored text:** Write: <code><span><font> %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors</font></span></code> to get: %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors.
+  - **Documentation Graphics:** Write: <code><span><font> %H% Help, %T% Tip, %X% Alert</font></span></code> to get: %H% Help, %T% Tip, %X% Alert. For more info see [[TWikiDocGraphics]].
+
+- There are many more variables, see **[[TWikiVariables]]**.
 
 ## <a name="TWikiPlugin Formatting Extension"></a><a name="_TWikiPlugin Formatting Extensio"></a> TWikiPlugin Formatting Extensions
 
@@ -372,4 +382,4 @@ TWiki formatting rules are fairly simple to use and quick to type. However, ther
 - **Q:** Why is the `'&'` character sometimes not displayed?
   - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- [[MikeMannix]] - 02 Dec 2001 <br /> -- [[PeterThoeny]] - 02 May 2002
+-- [[MikeMannix]] - 02 Dec 2001 <br /> -- [[PeterThoeny]] - 01 Feb 2003
