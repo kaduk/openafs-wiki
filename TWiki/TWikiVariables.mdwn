@@ -5,7 +5,7 @@
         <li><a href="#Predefined Variables"> Predefined Variables</a></li>
         <li><a href="#Preferences Variables"> Preferences Variables</a></li>
         <li><a href="#Setting Preferences"> Setting Preferences</a></li>
-        <li><a href="#Creating Custom Variables"> Creating Custom Variables</a></li>
+        <li><a href="#Customizing Variables"> Customizing Variables</a></li>
       </ul>
     </li>
   </ul>
@@ -21,7 +21,7 @@ TWikiVariables are text strings - `%VARIABLE%` - that expand into content whenev
 
 ## <a name="Predefined Variables"></a> Predefined Variables
 
-With a couple of notable exceptions, predefined variables return set values that are defined on installation and left alone. Most are directory names and file paths, customized for your server, and only have to be updated once in the main configuration file if your server set-up changes.
+Most predefined variables return values that were either defined when TWiki was installed, or taken from server info (like current username, or date and time). Many of the variables let you control how the formatted results appear.
 
 %WIKITOOLNAME% expands the following variables (enclosed in <code>**%**</code> percent signs):
 
@@ -267,7 +267,7 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> 2 digit year </td>
               <td> 99 </td>
             </tr>
-          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:31:15</b></td>
+          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:31:41</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME%</code></td>
@@ -403,23 +403,13 @@ With a couple of notable exceptions, predefined variables return set values that
             </tr>
             <tr>
               <td><code>nosummary="on"</code></td>
-              <td> Show topic title only. [3] </td>
+              <td> Show topic title only </td>
               <td> Show topic summary </td>
             </tr>
             <tr>
               <td><code>bookview="on"</code></td>
-              <td>[[Main/BookView]] search, e.g. show complete topic text. [3] </td>
-              <td> Show topic summary. </td>
-            </tr>
-            <tr>
-              <td><code>format="..."</code></td>
-              <td> Define a [[Main/FormattedSearch]], i.e. <br /><code>"   * [[$topic]]: $summary"</code>. [3] </td>
-              <td> Show regular search result with topic summary </td>
-            </tr>
-            <tr>
-              <td><code>header="..."</code></td>
-              <td> Specify header of [[Main/FormattedSearch]], i.e. <br /><code>"   * *Topic: Summary:*"</code>. </td>
-              <td> Show regular header </td>
+              <td>[[Main/BookView]] search, e.g. show complete topic text </td>
+              <td> Show topic summary </td>
             </tr>
             <tr>
               <td><code>nosearch="on"</code></td>
@@ -437,6 +427,51 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> Show number </td>
             </tr>
           </table> Example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code></td>
+      </tr>
+      <tr>
+        <td><code>%SEARCH{... format="..."}%</code></td>
+        <td><strong>Control the formatting of an embedded search.</strong> By default, the search result display format is fixed: a table with rows of topic name and topic summary. Use the <code>format="..."</code> parameter to specify a custom format, typically, a bullet list or table row containing variables <br /> Ex: <code>%SEARCH{ "food" format="| $topic | $summary |" }%</code>) <br /><strong>Two paramters can be used to specify a customized search result:</strong><br /><strong>1.</strong> <code>header="..."</code> parameter <br /> Use the header paramter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. Ex: <code>header="| *Topic:* | *Summary:* |"</code><br /><strong>2.</strong> <code>format="..."</code> parameter <br /><strong>Use the format paramter to specify the format of one search hit.</strong><br /> Ex: <code>format="| $topic | $summary |"</code><br /><strong>Variables that can be used in the format string:</strong><table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+              <th bgcolor="#99CCCC"><strong> Name: </strong></th>
+              <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+            </tr>
+            <tr>
+              <td><code>$web</code></td>
+              <td> Name of the web </td>
+            </tr>
+            <tr>
+              <td><code>$topic</code></td>
+              <td> Topic name </td>
+            </tr>
+            <tr>
+              <td><code>$locked</code></td>
+              <td> LOCKED flag (if any) </td>
+            </tr>
+            <tr>
+              <td><code>$date</code></td>
+              <td> Time stamp of last topic update </td>
+            </tr>
+            <tr>
+              <td><code>$rev</code></td>
+              <td> Number of last topic revision, i.e. <code>1.4</code></td>
+            </tr>
+            <tr>
+              <td><code>$wikiusername</code></td>
+              <td> Wiki user name of last topic update, i.e. <code>Main.JohnSmith</code></td>
+            </tr>
+            <tr>
+              <td><code>$summary</code></td>
+              <td> Topic summary </td>
+            </tr>
+            <tr>
+              <td><code>$formfield(name)</code></td>
+              <td> The field value of a form field, i.e. <code>$formfield([[Main/TopicClassification]])</code> would get expanded to <code>PublicFAQ</code>. This applies only to topics that have a [[TWiki/TWikiForms]]</td>
+            </tr>
+            <tr>
+              <td><code>$pattern(reg-exp)</code></td>
+              <td> A regular expression pattern to extract some text from a topic, i.e. <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. </td>
+            </tr>
+          </table><strong><em>Note:</em></strong> For <code>$pattern(reg-exp)</code>, specify a [[TWiki/RegularExpression]] that scans from start to end and contains the text you want to keep in parenthesis, ex: <code>$pattern(.*?(from here.*?to here).*)</code>. You need to make sure that the integrity of a web page is not compromised, i.e. if you include a table make sure to include everything including the table end tag. <br /><strong>NOTE:</strong> Sorting is nicely covered by the [[TWiki/TablePlugin]]. <br /><strong><em>For how-to tips and tricks, see: [[Main/TWikiVariablesExamples]]</em></strong></td>
       </tr>
       <tr>
         <td><code>%METASEARCH{...}%</code></td>
@@ -480,8 +515,6 @@ With a couple of notable exceptions, predefined variables return set values that
 > : The search form uses identical names for input fields.
 >
 > [2] **_Note_**: A web can be excluded from a `web="all"` search if you define a `NOSEARCHALL=on` variable in its [[WebPreferences]].
->
-> [3] **_Note_**: Regular search, no summary, [[BookView]] and [[FormattedSearch]] are exclusive.
 
 ## <a name="Preferences Variables"></a> Preferences Variables
 
@@ -627,15 +660,8 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 - The syntax for Preferences variables is the same anywhere in TWiki. In Edit mode, from the start of a new line: <br />[6 spaces] \* [space] Set [space] VARIABLENAME [space] = [value] <br />**_Example:_**
   - <code>**Set VARIABLENAME = value**</code>
 
-## <a name="Creating Custom Variables"></a> Creating Custom Variables
+## <a name="Customizing Variables"></a> Customizing Variables
 
-- You can add your own preference variables for an entire site, a single web, or a single topic, using the standard syntax. Whatever you include in your variable will be expanded on display, and treated exactly as if it had been written out. So you can place formatted text, page links, image paths.
+**_See:_** [[TWikiVariables Examples|Main/TWikiVariablesExamples]]
 
-> **Example: Create a custom logo variable**
->
-> <br />
->
-> - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, simply define the variable on the web's [[WebPreferences]] page. You also have to upload `logo.gif` - this can be done by [[attaching a file|Main/FileAttachment]] to `LogoTopic` (any topic name you choose):
->   - <code>**Set MYLOGO = %PUBURL%/%MAINWEB%/LogoTopic/logo.gif**</code>
-
--- [[MikeMannix]] - 30 Aug 2001 <br /> -- [[PeterThoeny]] - 13 Sep 2001 <br />
+-- [[PeterThoeny]] - 13 Sep 2001 <br /> -- [[MikeMannix]] - 30 Nov 2001
