@@ -1,3 +1,21 @@
+<div>
+  <ul>
+    <li><a href="#TWiki Access Control"> TWiki Access Control</a><ul>
+        <li><a href="#Users and Groups"> Users and Groups</a></li>
+        <li><a href="#Write Access Restriction by Topi"> Write Access Restriction by Topic</a></li>
+        <li><a href="#Write Access Restriction by Web"> Write Access Restriction by Web</a></li>
+        <li><a href="#Rename Access Restriction by Top"> Rename Access Restriction by Topic</a></li>
+        <li><a href="#Rename Access Restriction by Web"> Rename Access Restriction by Web</a></li>
+        <li><a href="#Read Access Restriction by Web"> Read Access Restriction by Web</a><ul>
+            <li><a href="#Read Access Restriction Notes"> Read Access Restriction Notes</a></li>
+          </ul>
+        </li>
+        <li><a href="#The _SuperAdminGroup"> The SuperAdminGroup</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
 ## <a name="TWiki Access Control"></a> TWiki Access Control
 
 %WIKITOOLNAME% allows you to define restrictions of who is allowed to view a %WIKITOOLNAME% web, make changes to topics or attach files.
@@ -25,7 +43,7 @@ Access control is based on users and groups.
 - GROUP defines the members of the group; it is a comma delimited list of users and other groups. Example: <br />`    * Set GROUP = Main.SomeUser, Main.OtherUser, Main.SomeOtherGroup`
 - ALLOWTOPICCHANGE defines who is allowed to change the group topic; it is a comma delimited list of users and groups. You typically want to restrict that to the members of the group itself, so it should contain the name of the topic, i.e. <br />`    * Set ALLOWTOPICCHANGE = Main.TWikiAdminGroup`<br /> for the TWikiAdminGroup topic. (This is to prevent users not in the group from editing the topic and gaining unauthorized membership to the group.)
 
-### <a name="Write Access Restriction for Ind"></a> Write Access Restriction for Individual Topics
+### <a name="Write Access Restriction by Topi"></a> Write Access Restriction by Topic
 
 You can define restrictions of who is allowed to make changes to a topic or attach files to it.
 
@@ -40,7 +58,7 @@ ALLOWTOPICCHANGE defines users or groups that **are** allowed to make changes to
 
 DENYTOPICCHANGE is evaluated before ALLOWTOPICCHANGE. Access is denied if the authenticated person is in the DENYTOPICCHANGE list, or not in the ALLOWTOPICCHANGE list. Access is granted in case DENYTOPICCHANGE and ALLOWTOPICCHANGE is not defined.
 
-### <a name="Write Access Restriction for a W"></a> Write Access Restriction for a Whole %WIKITOOLNAME% Web
+### <a name="Write Access Restriction by Web"></a> Write Access Restriction by Web
 
 You can define restrictions of who is allowed to make changes to a %WIKITOOLNAME% web. This includes creating new topics, changing topics or attaching files.
 
@@ -54,7 +72,7 @@ The same rules apply like the one for Access Control for Individual Topics; with
 - DENYTOPICCHANGE (in topic) overrides DENYWEBCHANGE (in WebPreferences)
 - ALLOWTOPICCHANGE (in topic) overrides ALLOWWEBCHANGE (in WebPreferences)
 
-### <a name="Rename Access Restriction for In"></a> Rename Access Restriction for Individual Topics
+### <a name="Rename Access Restriction by Top"></a> Rename Access Restriction by Topic
 
 You can define restrictions of who is allowed to rename a topic. Note that users need this permission in addition to the CHANGE permission in order to rename a topic. They also need CHANGE access to change references in referring topics.
 
@@ -69,7 +87,7 @@ ALLOWTOPICRENAME defines users or groups that **are** allowed to rename the topi
 
 DENYTOPICRENAME is evaluated before ALLOWTOPICRENAME. Access is denied if the authenticated person is in the DENYTOPICRENAME list, or not in the ALLOWTOPICRENAME list. Access is granted in case DENYTOPICRENAME and ALLOWTOPICRENAME is not defined.
 
-### <a name="Rename Access Restriction for a"></a><a name="Rename Access Restriction for a "></a> Rename Access Restriction for a Whole %WIKITOOLNAME% Web
+### <a name="Rename Access Restriction by Web"></a> Rename Access Restriction by Web
 
 You can define restrictions of who is allowed to do renames for a %WIKITOOLNAME% web.
 
@@ -83,7 +101,7 @@ The same rules apply like the one for Access Control for Individual Topics; with
 - DENYTOPICRENAME (in topic) overrides DENYWEBRENAME (in WebPreferences)
 - ALLOWTOPICRENAME (in topic) overrides ALLOWWEBRENAME (in WebPreferences)
 
-### <a name="Read Access Restriction for a Wh"></a> Read Access Restriction for a Whole %WIKITOOLNAME% Web
+### <a name="Read Access Restriction by Web"></a> Read Access Restriction by Web
 
 You can define restrictions of who is allowed to view a %WIKITOOLNAME% web.
 
@@ -92,7 +110,7 @@ Define one or both of these variable in the [[WebPreferences]] topic:
 - Set DENYWEBVIEW = &lt; list of users and groups &gt;
 - Set ALLOWWEBVIEW = &lt; list of users and groups &gt;
 
-_Notes for read access restriction:_
+#### <a name="Read Access Restriction Notes"></a> Read Access Restriction Notes
 
 - The view restriction is not suitable for very sensitive content since there is a way to circumvent the read access restriction.
 - Read access restriction only works if the view script is authenticated, that means that users need to log on also just to read topics. [TWiki Installation](TWikiDocumentation#installation) has more on basic authentication based on the `.htaccess` file.
@@ -107,9 +125,7 @@ _Notes for read access restriction:_
 - It is not recommended to restrict view access to individual topics since all content is searchable **_within_** a web.
 - The view restriction is not suitable for very sensitive content since there is a way to circumvent the read access restriction.
 
--- [[PeterThoeny]] - 16 Mar 2001 <br />
-
-**_NOTE:_**
+### <a name="The _SuperAdminGroup"></a> The [[SuperAdminGroup]]
 
 The above schema can lock completely a topic in case of a typing error of the ALLOWTOPICCHANGE setting (see [UnchangeableTopicBug](http://www.twiki.org/cgi-bin/view/Codev/UnchangeableTopicBug)). To avoid this:
 
@@ -119,6 +135,6 @@ The above schema can lock completely a topic in case of a typing error of the AL
 
 - the default setting is not to have superusers
 
--- [[AndreaSterbini]] - 11 Apr 2001 <br />
+-- [[PeterThoeny]] - 16 Mar 2001 <br /> -- [[AndreaSterbini]] - 11 Apr 2001 <br />
 
 **_Related topics:_** [[TWikiPreferences]], [[WebPreferences]] (in every web), [[TWikiAdminGroup]], [[TWikiGroups]]
