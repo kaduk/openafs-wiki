@@ -46,7 +46,7 @@ Render bullet lists in a variety of formats
 - Wrap long text with continuation lines, the Plugin does not do that for you%BR% `Align continuation lines with leading spaces linke this`
 - You can specify an icon for a bullet of render type **tree** or **icon**:
   - Attach the icon to this Plugin topic, e.g. `myicon.gif`, or
-  - Use one of the existing icons: ![home.gif](http://www.dementia.org/twiki//view/home.gif) `home.gif`, ![virtualhome.gif](http://www.dementia.org/twiki//view/virtualhome.gif) `virtualhome.gif`, ![group.gif](http://www.dementia.org/twiki//view/group.gif) `group.gif`, ![persons.gif](http://www.dementia.org/twiki//view/persons.gif) `persons.gif`, ![virtualpersons.gif](http://www.dementia.org/twiki//view/virtualpersons.gif) `virtualpersons.gif`, ![person.gif](http://www.dementia.org/twiki//view/person.gif) `person.gif`, ![virtualperson.gif](http://www.dementia.org/twiki//view/virtualperson.gif) `virtualperson.gif`, ![email.gif](http://www.dementia.org/twiki//view/email.gif) `email.gif`, ![trend.gif](http://www.dementia.org/twiki//view/trend.gif) `trend.gif`
+  - Use one of the existing icons: ![globe.gif](http://www.dementia.org/twiki//view/globe.gif) `globe.gif`, ![home.gif](http://www.dementia.org/twiki//view/home.gif) `home.gif`, ![virtualhome.gif](http://www.dementia.org/twiki//view/virtualhome.gif) `virtualhome.gif`, ![group.gif](http://www.dementia.org/twiki//view/group.gif) `group.gif`, ![persons.gif](http://www.dementia.org/twiki//view/persons.gif) `persons.gif`, ![virtualpersons.gif](http://www.dementia.org/twiki//view/virtualpersons.gif) `virtualpersons.gif`, ![person.gif](http://www.dementia.org/twiki//view/person.gif) `person.gif`, ![virtualperson.gif](http://www.dementia.org/twiki//view/virtualperson.gif) `virtualperson.gif`, ![email.gif](http://www.dementia.org/twiki//view/email.gif) `email.gif`, ![trend.gif](http://www.dementia.org/twiki//view/trend.gif) `trend.gif`, ![folder.gif](http://www.dementia.org/twiki//view/folder.gif) `folder.gif`, ![file.gif](http://www.dementia.org/twiki//view/file.gif) `file.gif`, ![doc.gif](http://www.dementia.org/twiki//view/doc.gif) `doc.gif`, ![image.gif](http://www.dementia.org/twiki//view/image.gif) `image.gif`, ![pdf.gif](http://www.dementia.org/twiki//view/pdf.gif) `pdf.gif`, ![ppt.gif](http://www.dementia.org/twiki//view/ppt.gif) `ppt.gif`, ![sound.gif](http://www.dementia.org/twiki//view/sound.gif) `sound.gif`, ![xls.gif](http://www.dementia.org/twiki//view/xls.gif) `xls.gif`, ![zip.gif](http://www.dementia.org/twiki//view/zip.gif) `zip.gif`, ![see.gif](http://www.dementia.org/twiki//view/see.gif) `see.gif`
   - Refer to an attached icon at the beginning of the bullet with:
     - `icon:myicon Followed by normal bullet text`
 
@@ -439,6 +439,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   - Set GROUP\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![group.gif](http://www.dementia.org/twiki//view/group.gif)
   - Set EMAIL\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![email.gif](http://www.dementia.org/twiki//view/email.gif)
   - Set TREND\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![trend.gif](http://www.dementia.org/twiki//view/trend.gif)
+  - Set FILE\_THEME = icon, 0, 16, 16, ![empty.gif](http://www.dementia.org/twiki//view/empty.gif), ![dot\_udr.gif](http://www.dementia.org/twiki//view/dot_udr.gif), ![dot\_ud.gif](http://www.dementia.org/twiki//view/dot_ud.gif), ![dot\_ur.gif](http://www.dementia.org/twiki//view/dot_ur.gif), ![file.gif](http://www.dementia.org/twiki//view/file.gif)
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -479,11 +480,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 29 Dec 2003 (V1.030) </td>
+    <td> 01 Mar 2004 (V1.031) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 01 Mar 2004: </td>
+    <td> Added FILE_THEME and folder/file icons </td>
   </tr>
   <tr>
     <td align="right"> 29 Dec 2003: </td>
@@ -529,4 +534,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], TWiki:Plugins/TreePlugin
 
--- TWiki:Main/PeterThoeny - 29 Dec 2003
+-- TWiki:Main/PeterThoeny - 01 Mar 2004
