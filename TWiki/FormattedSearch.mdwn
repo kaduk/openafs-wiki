@@ -1,0 +1,143 @@
+**Formatted Search Using <code>**%SEARCH\{... format="..."\}%**</code> Variable**
+
+<div>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#Preface"> Preface</a></li>
+        <li><a href="#Syntax"> Syntax</a></li>
+        <li><a href="#Examples"> Examples</a><ul>
+            <li><a href="#Bullet list showing topic name a"> Bullet list showing topic name and summary</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li>
+          <ul>
+            <li><a href="#Table showing form field values"> Table showing form field values of topics with a form</a></li>
+            <li><a href="#Extract some text from a topic u"> Extract some text from a topic using regular expression</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
+  </ul>
+</div>
+
+## <a name="Preface"></a> Preface
+
+By default, the format for displaying a search result is fixed, e.g. a table with rows of topic name and topic summary. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (i.e. `%SEARCH{ "food" format="| $topic | $summary |" }%`).
+
+## <a name="Syntax"></a> Syntax
+
+Two paramters can be used to specify a customized search result:
+
+1. `header="..."` parameter
+
+Use the header paramter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. I.e. `header="| *Topic:* | *Summary:* |"`
+
+2. `format="..."` parameter
+
+Use the format paramter to specify the format of one search hit. I.e. `format="| $topic | $summary |"`
+
+Variables that can be used in the format string:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Name: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$web</code></td>
+    <td> Name of the web </td>
+  </tr>
+  <tr>
+    <td><code>$topic</code></td>
+    <td> Topic name </td>
+  </tr>
+  <tr>
+    <td><code>$locked</code></td>
+    <td> LOCKED flag (if any) </td>
+  </tr>
+  <tr>
+    <td><code>$date</code></td>
+    <td> Time stamp of last topic update </td>
+  </tr>
+  <tr>
+    <td><code>$rev</code></td>
+    <td> Number of last topic revision, i.e. <code>1.4</code></td>
+  </tr>
+  <tr>
+    <td><code>$wikiusername</code></td>
+    <td> Wiki user name of last topic update, i.e. <code>Main.JohnSmith</code></td>
+  </tr>
+  <tr>
+    <td><code>$summary</code></td>
+    <td> Topic summary </td>
+  </tr>
+  <tr>
+    <td><code>$formfield(name)</code></td>
+    <td> The field value of a form field, i.e. <code>$formfield([[Main/TopicClassification]])</code> would get expanded to <code>PublicFAQ</code>. This applies only to topics that have a [[Main/TWikiForms]]</td>
+  </tr>
+  <tr>
+    <td><code>$pattern(reg-exp)</code></td>
+    <td> A regular expression pattern to extract some text from a topic, i.e. <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. </td>
+  </tr>
+</table>
+
+**_Note:_** For `$pattern(reg-exp)`, specify a [[RegularExpression]] that scans from start to end and contains the text you want to keep in parenthesis, i.e. `$pattern(.*?(from here.*?to here).*)`. You need to make sure that the integrity of a web page is not compromised, i.e. if you include a table make sure to include everything including the table end tag.
+
+## <a name="Examples"></a> Examples
+
+### <a name="Bullet list showing topic name a"></a> Bullet list showing topic name and summary
+
+Write this:
+
+`%SEARCH{ "FAQ" scope="topic" nosearch="on" nototal="on" header="   * *Topic: Summary:*" format="   * [[$topic]]: $summary" }%`
+
+To get this:
+
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
+
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
+
+### <a name="Table showing form field values"></a><a name="Table showing form field values "></a> Table showing form field values of topics with a form
+
+Write this in the Know web:
+
+`| *Topic:* | *OperatingSystem:* | *OsVersion:* |`<br /><code>%SEARCH\{ "[T]opicClassification.\*?value=\\"[P]ublicFAQ\\"" scope="text" regex="on" nosearch="on" nototal="on" format="| \[[$topic]] | $formfield([[OperatingSystem]]) | $formfield([[OsVersion]]) |" \}%</code>
+
+To get this:
+
+<table border="1" cellpadding="1" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong>Topic:</strong></th>
+    <th bgcolor="#99CCCC"><strong>OperatingSystem:</strong></th>
+    <th bgcolor="#99CCCC"><strong>OsVersion:</strong></th>
+  </tr>
+  <tr>
+    <td><a href="http://www.dementia.org/twiki//view/Know/IncorrectDllVersionW32PTH10DLL">IncorrectDllVersionW32PTH10DLL</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/Know/OsWin">OsWin</a></td>
+    <td> 95/98 </td>
+  </tr>
+  <tr>
+    <td><a href="http://www.dementia.org/twiki//view/Know/WinDoze95Crash">WinDoze95Crash</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/Know/OsWin">OsWin</a></td>
+    <td> 95 </td>
+  </tr>
+</table>
+
+### <a name="Extract some text from a topic u"></a> Extract some text from a topic using regular expression
+
+Write this:
+
+`%SEARCH{ "__Back to\:__ TWikiFAQ" scope="text" regex="on" nosearch="on" nototal="on" header="TWiki FAQs:" format="   * $pattern(.*?FAQ\:[\n\r]*([^\n\r]+).*) [[$topic][Answer...]]" }%`
+
+To get this:
+
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
+
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
+
+-- [[PeterThoeny]] - 24 Oct 2001 <br />

@@ -217,7 +217,7 @@ With a couple of notable exceptions, predefined variables return set values that
       </tr>
       <tr>
         <td><code>%GMTIME%</code></td>
-        <td> GM time, is <b>29 Jun 2010 - 15:30</b></td>
+        <td> GM time, is <b>29 Jun 2010 - 15:31</b></td>
       </tr>
       <tr>
         <td><code>%GMTIME{"format"}%</code></td>
@@ -267,15 +267,15 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> 2 digit year </td>
               <td> 99 </td>
             </tr>
-          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:30:48</b></td>
+          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:31:15</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME%</code></td>
-        <td> Server time, is <b>29 Jun 2010 - 11:30</b></td>
+        <td> Server time, is <b>29 Jun 2010 - 11:31</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME{"format"}%</code></td>
-        <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:30</b></td>
+        <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:31</b></td>
       </tr>
       <tr>
         <td><code>%HTTP_HOST%</code></td>
@@ -403,13 +403,23 @@ With a couple of notable exceptions, predefined variables return set values that
             </tr>
             <tr>
               <td><code>nosummary="on"</code></td>
-              <td> Show topic title only </td>
+              <td> Show topic title only. [3] </td>
               <td> Show topic summary </td>
             </tr>
             <tr>
               <td><code>bookview="on"</code></td>
-              <td>[[Main/BookView]] search, e.g. show complete topic text </td>
-              <td> Show topic summary </td>
+              <td>[[Main/BookView]] search, e.g. show complete topic text. [3] </td>
+              <td> Show topic summary. </td>
+            </tr>
+            <tr>
+              <td><code>format="..."</code></td>
+              <td> Define a [[Main/FormattedSearch]], i.e. <br /><code>"   * [[$topic]]: $summary"</code>. [3] </td>
+              <td> Show regular search result with topic summary </td>
+            </tr>
+            <tr>
+              <td><code>header="..."</code></td>
+              <td> Specify header of [[Main/FormattedSearch]], i.e. <br /><code>"   * *Topic: Summary:*"</code>. </td>
+              <td> Show regular header </td>
             </tr>
             <tr>
               <td><code>nosearch="on"</code></td>
@@ -470,6 +480,8 @@ With a couple of notable exceptions, predefined variables return set values that
 > : The search form uses identical names for input fields.
 >
 > [2] **_Note_**: A web can be excluded from a `web="all"` search if you define a `NOSEARCHALL=on` variable in its [[WebPreferences]].
+>
+> [3] **_Note_**: Regular search, no summary, [[BookView]] and [[FormattedSearch]] are exclusive.
 
 ## <a name="Preferences Variables"></a> Preferences Variables
 
