@@ -1,0 +1,70 @@
+# <a name="Example uss Templates"></a> Example uss Templates
+
+This section describes example templates for the basic and full account types (the template for an authentication-only account is empty).
+
+The first example creates a basic account. It contains two G instructions and a V instruction that defines the volume name, file server machine, partition, quota in kilobytes, mount point, home directory owner, and home directory access control list. In the ABC Corporation cell, a suitable template is:
+
+       G /afs/.abc.com/usr1
+       G /afs/.abc.com/usr2
+       V  user.$USER  $SERVER.abc.com  /vicep$PART  5000  $AUTO/$USER   $UID $USER all staff rl
+
+When issuing the uss add command with this type of template, provide the following arguments:
+
+- -user to specify the username for the $USER variable
+
+- -server to specify the unique part of the file server machine name for the $SERVER variable
+
+- -partition to specify the unique part of the partition name for the $PART variable
+
+The Protection Server automatically assigns an AFS UID for the $UID variable, and the G instructions provide a value for the $AUTO variable.
+
+The following example template file creates a full account in the ABC Corporation cell. The following sections about each type of instruction describe the effect of the examples. Note that the V and E instructions appear on two lines each only for the sake of legibility.
+
+    #
+    # Specify the available grouping directories
+    #
+    G /afs/.abc.com/usr1
+    G /afs/.abc.com/usr2
+    #
+    # Create the user's home volume
+    #
+    V user.$USER $SERVER.abc.com /vicep$PART 5000  afs/.abc.com/$AUTO/$USER         $UID $USER all abc:staff rl
+    #
+    # Create directories and files for mail
+    #
+    D $MTPT/.MESSAGES 0700 $UID $USER all abc:staff none
+    D $MTPT/.Outgoing 0700 $UID $USER rlidwk postman rlidwk
+    D $MTPT/Mailbox 0700 $UID $USER all abc:staff none system:anyuser lik
+    #
+    # Here are some useful scripts for login etc.
+    #
+    F $MTPT/.Xbiff 0755 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/.Xresources 0644 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/.Xsession 0755 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/.cshrc 0755 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/.login 0755 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/.logout 0755 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/.twmrc 0644 $UID /afs/abc.com/admin/user/proto
+    F $MTPT/preferences 0644 $UID /afs/abc.com/admin/user/proto
+    #
+    # Make a passwd entry
+    #
+    E /afs/.abc.com/common/etc/newaccts/passwd_$USER 0644 root      "$USER:X:$UID:11:$NAME:$MTPT:/bin/csh"
+    #
+    # Put in the standard password/authentication checks
+    #
+    A $USER 250 noreuse 9 25
+    #
+    # Create and mount a public volume for the user
+    #
+    X "create_public_vol $USER $1 $2"
+    #
+    # Here we set up the symbolic link to public directory
+    #
+    S /afs/abc.com/public/$USER $MTPT/public
+
+Example execution command:
+
+uss add -user joe -admin admin -server server.example.com -uid 2001 -part a -dryrun
+
+-- [[CraigCook]] - 31 Mar 2005
