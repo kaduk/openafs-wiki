@@ -212,7 +212,7 @@ With a couple of notable exceptions, predefined variables return set values that
       </tr>
       <tr>
         <td><code>%GMTIME%</code></td>
-        <td> GM time, is <b>29 Jun 2010 - 15:29</b></td>
+        <td> GM time, is <b>29 Jun 2010 - 15:30</b></td>
       </tr>
       <tr>
         <td><code>%GMTIME{"format"}%</code></td>
@@ -262,15 +262,15 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> 2 digit year </td>
               <td> 99 </td>
             </tr>
-          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:29:33</b></td>
+          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:30:10</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME%</code></td>
-        <td> Server time, is <b>29 Jun 2010 - 11:29</b></td>
+        <td> Server time, is <b>29 Jun 2010 - 11:30</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME{"format"}%</code></td>
-        <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:29</b></td>
+        <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:30</b></td>
       </tr>
       <tr>
         <td><code>%HTTP_HOST%</code></td>
