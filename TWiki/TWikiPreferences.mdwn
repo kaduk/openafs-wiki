@@ -94,6 +94,14 @@ The following are **_site-level_** settings that affect all users in all webs on
 - Skin overriding the default TWiki templates: (can be overwritten by [[WebPreferences]] and user preferences)
   - Set SKIN =
 
+- Broadcast message for skins supporting a %BROADCASTMESSAGE% at the top of the page: (IMPORTANT: Set to empty message if not used; #Comment out unused messages)
+  - #Set BROADCASTMESSAGE =
+  - Set BROADCASTMESSAGE = <table border="0" cellpadding="3" cellspacing="0" width="100%">
+  <tr>
+    <td bgcolor="yellow"><font color="red"><strong>NOTE:</strong></font><font size="-1"> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance. </font></td>
+  </tr>
+</table>
+
 ## <a name="Email and Proxy Server Settings"></a> Email and Proxy Server Settings
 
 - TWiki webmaster email address:

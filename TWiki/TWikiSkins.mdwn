@@ -109,6 +109,10 @@ You can use [[template variables|Main/TWikiTemplates#TemplateVariables]], [[TWik
     <td><code>%WEBCOPYRIGHT%</code></td>
     <td> Copyright notice, defined in the [[Main/WebPreferences]]</td>
   </tr>
+  <tr>
+    <td><code>%BROADCASTMESSAGE%</code></td>
+    <td> Broadcast message at the beginning of your view template, can be used to alert users of scheduled downtimes; is defined in [[Main/TWikiPreferences]]</td>
+  </tr>
 </table>
 
 <a name="GoBox"></a>
@@ -138,7 +142,7 @@ Here is an example form that has a select box and the "Go" box for illustration 
 
 ## <a name="Packaging and Publishing Skins"></a> Packaging and Publishing Skins
 
-See TWiki:Plugins/SkinPackagingHowTo
+See TWiki:Plugins/SkinPackagingHowTo and TWiki:Plugins/SkinDeveloperFAQ
 
 ## <a name="Activating Skins"></a> Activating Skins
 
