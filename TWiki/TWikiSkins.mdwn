@@ -8,7 +8,9 @@
           </ul>
         </li>
         <li><a href="#Using Cascading Style Sheets"> Using Cascading Style Sheets</a></li>
+        <li><a href="#Attachment Tables"> Attachment Tables</a></li>
         <li><a href="#Packaging and Publishing Skins"> Packaging and Publishing Skins</a></li>
+        <li><a href="#Browsing Installed Skins"> Browsing Installed Skins</a></li>
         <li><a href="#Activating Skins"> Activating Skins</a></li>
       </ul>
     </li>
@@ -143,7 +145,7 @@ Here is an example form that has a select box and the "Go" box for illustration 
 
 ## <a name="Using Cascading Style Sheets"></a> Using Cascading Style Sheets
 
-The regular templates files currently do not use style sheets. Many skin developers choose to use them, it helps in separating style from content.
+Although work is underway at TWiki:Codev.CssClassNames, the regular templates files currently do not use style sheets. Many skin developers, however, choose to use them; it helps in separating style from content.
 
 Example: To use a style sheet for the broadcast message, add this to `view.myskin.tmpl`:
 
@@ -159,9 +161,118 @@ Then add a div tag to the `%BROADCASTMESSAGE%` variable located after the `#Page
 
     <div class="broadcastmessage"> %BROADCASTMESSAGE% </div>
 
+## <a name="Attachment Tables"></a> Attachment Tables
+
+Controlling the look and feel of attachment tables is a little bit more complex than for the rest of a skin. By default the attachment table is a standard TWiki table, and the look is controlled in the same ay as other tables. In a very few cases you may want to change the _content_ of the table as well.
+
+The format of standard attachment tables is defined through the use of special _TWiki template macros_ which by default are defined in the `templates/twiki.tmpl` template using the `%TMPL:DEF` macro syntax described in [[TWikiTemplates]]. These macros are:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Macro </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>ATTACH:files:header</code></td>
+    <td> Standard title bar </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:files:row</code></td>
+    <td> Standard row </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:files:footer</code></td>
+    <td> Footer for all screens </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:files:header:A</code></td>
+    <td> Title bar for upload screens, with attributes column </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:files:row:A</code></td>
+    <td> Row for upload screen </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:files:footer:A</code></td>
+    <td> Footer for all screens </td>
+  </tr>
+</table>
+
+The format of tables of file versions in the Upload screen are also formattable, using the macros:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Macro </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>ATTACH:versions:header</code></td>
+    <td> Header for versions table on upload screen </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:versions:row</code></td>
+    <td> Row format for versions table on upload screen </td>
+  </tr>
+  <tr>
+    <td><code>ATTACH:versions:footer</code></td>
+    <td> Footer for versions table on upload screen </td>
+  </tr>
+</table>
+
+The `ATTACH:row` macros are expanded for each file in the attachment table, using the following special tags:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Tag </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>%A_URL%</code></td>
+    <td> URL that will recover the file </td>
+  </tr>
+  <tr>
+    <td><code>%A_REV%</code></td>
+    <td> Revision of this file e.g. "1.1" </td>
+  </tr>
+  <tr>
+    <td><code>%A_ICON%</code></td>
+    <td> A file icon suitable for representing the attachment content </td>
+  </tr>
+  <tr>
+    <td><code>%A_FILE%</code></td>
+    <td> The name of the file </td>
+  </tr>
+  <tr>
+    <td><code>%A_SIZE%</code></td>
+    <td> The size of the file </td>
+  </tr>
+  <tr>
+    <td><code>%A_DATE%</code></td>
+    <td> The date the file was uploaded </td>
+  </tr>
+  <tr>
+    <td><code>%A_USER%</code></td>
+    <td> The user who uploaded it </td>
+  </tr>
+  <tr>
+    <td><code>%A_COMMENT%</code></td>
+    <td> The comment they put in when uploading it </td>
+  </tr>
+  <tr>
+    <td><code>%A_ATTRS%</code></td>
+    <td> The attributes of the file as seen on the upload screen e.g "h" for a hidden file </td>
+  </tr>
+</table>
+
+Note: it is easy to change the look and feel for an entire site by editing the `twiki.tmpl` template file. However, to simplify upgrading, you should avoid doing this. Instead, write a skin-specific template file e.g. `attach.myskin.tmpl` and use `%TMPL:INCLUDE{attach.myskin.tmpl}%` to include it in each of your skin files. As long as it it included _after_ twiki.tmpl, your macro definitions will override the defaults defined there.
+
 ## <a name="Packaging and Publishing Skins"></a> Packaging and Publishing Skins
 
 See TWiki:Plugins/SkinPackagingHowTo and TWiki:Plugins/SkinDeveloperFAQ
+
+## <a name="Browsing Installed Skins"></a> Browsing Installed Skins
+
+You can try all installed skins in [[TWikiSkinBrowser]].
 
 ## <a name="Activating Skins"></a> Activating Skins
 
@@ -176,4 +287,4 @@ A skin can be activated in two ways:
 
 The <code>**?skin=name**</code> URL parameter overrides the SKIN Preference value.
 
--- [[PeterThoeny]] - 05 Jan 2003
+-- TWiki:Main.PeterThoeny - 25 Jul 2004 %BR% -- TWiki:Main.CrawfordCurrie - 30 Jun 2004 %BR%
