@@ -1,0 +1,37 @@
+# <a name="WebLeftBar Cookbook"></a><a name="_WebLeftBar Cookbook"></a> WebLeftBar Cookbook
+
+**Instructions and tips how to use [[WebLeftBarPersonalTemplate]]**.
+
+WebLeftBarPersonalTemplate is a topic template to create a personal left bar block for each user. The personal topic, &lt;user&gt;LeftBar is included in [[WebLeftBar]], the left menu used in [[PatternSkin]]. It is only visible to you. You can put links to frequently visited topics there, or a dynamically generated list of topics.
+
+Each link is an item in a bullet list. So it can look like this:
+
+- **My links**
+  - [[WebHome]]
+  - [[WebIndex]]
+  - [[WebChanges]]
+
+(but with _your_ personal topics).
+
+The list is formatted with CSS, and the bullets themselves are not displayed, and also indents are flattened. To get an idea of the actual look, see the list above formatted as in the left bar (you need to have [[PatternSkin]] set to on):
+
+<div style="position: relative; top: 0; left: 0">
+  <div>
+    <div>
+      <ul>
+        <li><strong>My links</strong><ul>
+            <li>[[Main/WebHome]]</li>
+            <li>[[Main/WebIndex]]</li>
+            <li>[[Main/WebChanges]]</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+By default the &lt;user&gt;LeftBar topic has an edit link. In case you loose the edit link line of text, here's a copy:
+
+    <div class="twikiSmall"><a href="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%WEB%/%TOPIC%?t=%GMTIME{"$year$mo$day$hours$minutes$seconds"}%">edit</a></div>
+
+-- [[ArthurClemens]] - 15 Aug 2004
