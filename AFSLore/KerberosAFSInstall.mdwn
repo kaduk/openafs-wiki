@@ -20,9 +20,15 @@ Now you are ready to continue on to [Starting the BOS Server](http://www.openafs
 
 ### <a name="Create AFS Keys and Administrato"></a> Create AFS Keys and Administrators
 
-First you will need to create a principal "afs" or "afs/cell.name" in your [[KerberosV]] database. The latter is the preferred alternative, especially if you will support more than one [[AFSCell]] with a single [[KerberosRealm]].
+First you will need to create a principal "afs" or "afs/greekmythology.com" in your [[KerberosV]] database. The latter is the preferred alternative, especially if you will support more than one [[AFSCell]] with a single [[KerberosRealm]]. In case you have [[KerberosIV]], create afs or afs.greekmythology.com respectively.
 
-Your [[KerberosV]] realm must support krb524 for aklog to work, typically. [[KerberosVMIT]]:
+Your [[KerberosV]] realm must support krb524 for aklog to work, typically. In other words, it has to be able to respond to your version 4 requests (as AFS is based on [[KerberosIV]] protocol).
+
+Next we will create an AFS [[KeyFile]] and an administrator principal in the Kerberos database. The procedure for creating an AFS [[KeyFile]] depends on which Kerberos implementation you have chosen to use, but the logic is the same.
+
+Things to remember about AFS [[KeyFile]]: they must contain a key using the des-cbc-crc encryption type and the key must have exactly same kvno as the afs/greekmythology.com@GREEKMYTHOLOGY.COM in the Kerberos database. If cell is same as lowercased GREEKMYTHOLOGY.COM name, you can create <afs@GREEKMYTHOLOGY.COM> instead of afs/cell@GREEKMYTHOLOGY.COM.
+
+[[KerberosVMIT]]:
 
 - set up krb524d. You will need to make sure your krb524d server host includes something like this in krb5.conf. Only one of the 2 entries should be needed for a realm, depending on how you did the setup in your [[KerberosV]] database.
 
@@ -34,17 +40,81 @@ Your [[KerberosV]] realm must support krb524 for aklog to work, typically. [[Ker
           }
     }
 
-[[HeimdalKTH]]:
+[[HeimdalKTH]] from <http://www.pdc.kth.se/heimdal>:
 
 - kdc will service krb524 requests
+- edit /etc/krb5.conf similar to to example below
 
-Next we will create an AFS [[KeyFile]] and an administrator principal in the Kerberos database. The procedure for creating an AFS [[KeyFile]] depends on which Kerberos implementation you have chosen to use.
+    [logging]
+    default = FILE:/var/log/krb5libs.log
+    kdc = FILE:/var/log/krb5kdc.log
+    admin_server = FILE:/var/log/kadmind.log
 
-Things to remember about AFS [[KeyFile]]: they must contain a key using the des-cbc-crc encryption type and the key must have exactly same kvno as the afs/cell@REALM in the Kerberos database. If cell is same as lowercased REALM name, you can create afs@REALM instead of afs/cell@REALM.
+    [ktutil]
+            dns_lookup_realm = false
+            dns_lookup_kdc = false
+
+    [libdefaults]
+            dns_lookup_realm = false
+            dns_lookup_kdc = false
+            ktype_is_etype = true
+            encrypt = yes
+            forward = yes
+            srv_lookup = no
+            srv_try_txt = no
+            srv_try_rfc2052 = no
+            default_realm = GREEKMYTHOLOGY.COM
+            clockskew = 300
+            kdc = 127.0.0.1
+            v4_instance_resolve = true
+            krb4_get_tickets = yes
+            forwardable = true
+            v4_name_convert = {
+                    host = {
+                            rcmd = host
+                            ftp = ftp
+                    }
+                    plain = {
+                            something = something-else
+                    }
+            }
+
+    [realms]
+            GSF.DE = {
+                    kdc = 127.0.0.1
+                    admin_server = 127.0.0.1
+                    krb525_server = 127.0.0.1
+                    v4_name_convert = {
+                            ftp = ftp
+                            pop = pop
+                            rcmd = host
+                    }
+                    v4_instance_convert = true
+                    default_domain = greekmythology.com
+            }
+
+    [domain_realm]
+            .greekmythology.com = GREEKMYTHOLOGY.COM
+            greekmythology.com = GREEKMYTHOLOGY.COM
+
+    [kadmin]
+    kdc =
+    # you can disable fallback DNS queries, if don't have registered name like kerberos.yourdomain
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
+    default_keys = v4 v5 afs3
+    afs-cell = greekmythology.com
+    v4-realm = GREEKMYTHOLOGY.COM
+
+    [kdc]
+            enable-kerberos4 = true
+            afs-cell =
+            enable-524 = true
+            v4-realm = GREEKMYTHOLOGY.COM
 
 Someone wrote a nice pages at: <http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html> <http://www.contrib.andrew.cmu.edu/~shadow/afs/afs-with-kerberos.html>
 
-[[KerberosIV]], like KTH Kerberos4 from <code>**http://www.pdc.kth.se/kth-krb**</code> :
+[[KerberosIV]], like KTH Kerberos4 from <http://www.pdc.kth.se/kth-krb> :
 
 Create afs principal entry in kerberos database:
 
@@ -86,7 +156,7 @@ If you have some tokens now, then it works and you can now shutdown kaserver. Us
 
 - The AFS-Kerberos5 migration kit includes a program <code>**asetkey**</code>
 
-Save the AFS key from kerberos KDC to a file, possibly using kadmin(see KTH [[KerberosIV]] section above), and the use either <code>**asetkey**</code> or use ==ktutil==(see [[HeimdalKTH]] section below) to convert the format and save into [[KeyFile]].
+Save the AFS key from kerberos KDC to a file, possibly using kadmin(see KTH [[KerberosIV]] section above), and the use either <code>**asetkey**</code> or use <code>**ktutil**</code> (see [[HeimdalKTH]] section below) to convert the format and save into [[KeyFile]].
 
            asetkey add 0 /etc/srvtab.afskey afs.cell@REALM
 
