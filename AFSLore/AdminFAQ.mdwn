@@ -50,6 +50,10 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.39 Moving from KTH-KRB4 to Hei"> 3.39 Moving from KTH-KRB4 to Heimdal KDC</a></li>
         <li><a href="#3.40 What are those bos(1) -type"> 3.40 What are those bos(1) -type values simple and cron?</a></li>
         <li><a href="#3.41 KDC listens on port 88 inst"> 3.41 KDC listens on port 88 instead of 750</a></li>
+        <li><a href="#3.42 afsd gives me "Error -1 in"> 3.42 afsd gives me "Error -1 in basic initialization." on startup</a></li>
+        <li><a href="#3.43 Although I get krb tickets,"> 3.43 Although I get krb tickets, afslog doesn't give me tokens, I see UDP packets to port 4444</a></li>
+        <li><a href="#3.44 I get error message trhough"> 3.44 I get error message trhough syslogd: "afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)"</a></li>
+        <li><a href="#3.45 I get tickets and tokens, b"> 3.45 I get tickets and tokens, but still get Permission denied.</a></li>
       </ul>
     </li>
   </ul>
@@ -599,20 +603,18 @@ See also [[SupportedConfigurations]].
 
 You need to distinguish between the filesystem used by the file server to store the actual AFS data (by convention in /vicep?) and the filesystem used by the client cache manager to cache files.
 
-With the new namei file server you can basically use any filesystem you want. Tne namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though).
+Fileserver is started by bosserver. It depends, what ./configure switches were used during compilation from sources. To be always on the safe side, use --enable-namei-fileserver configure flag. That will give you fileserver binary which can act on any /vicep? partition regardless it's filesystem type. With the new namei file server you can basically use any filesystem you want. The namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though).
 
-But you cannot use SGI efs under [[OpenAFS]] at all.
+The opposite to namei fileserver is inode based nameserver. According to openafs-devel email list, it gave on some Solaris box 10% speedup over the namei based server. The namei based fileserver cannot run on every filesystem, as it stores some internal afs-specific data into the filesystem. Typically, /sbin/fsck distributed withthe operating system zaps these data. Inode based fileserver directly operates on the inodes of the underlying file system which therefore has to fully support the inode abstraction scheme. The the Administrators Guide for more details (they differ from system to system).
 
-It is a different story with the old inode based server. It directly operates on the inodes of the underlying file system which therefore has to fully support the inode abstraction scheme. The the Administrators Guide for more details (they differ from system to system).
-
-On the client side, you always have to use a file system supporting the inode abstraction for the cache (usually /usr/vice/cache) since the cache manager references files by their inode. Fortunately, it does not do such tricky stuff as the inode based server.
+On the client side where you run /usr/afs/etc/afsd as a kernel process, you always have to use a file system supporting the inode abstraction for the cache (usually /usr/vice/cache) since the cache manager references files by their inode. Fortunately, it does not do such tricky stuff as the inode based fileserver.
 
 The following file systems have been reported _not_ to work for the AFS client cache:
 
 - reiserfs
 - vxfs (HP-UX)
 - advfs (Tru64), it works but gives cachecurruption
-- efs (SGI) - IBM AFS does support efs, but openafs doesn't have a license for that
+- efs (SGI) - IBM AFS does support efs, but openafs doesn't have a license for that.
 
 - Patch committed to cvs around 6/2003 will now enforce this in some cases and generate a warning to the user if the filesystem type is wrong.
 
@@ -870,6 +872,7 @@ system:administrators (permissions for vos, pts, fs, i.e. 'pts adduser' etc)
     callisto#bin/fs la /afs
     Access list for /afs is
     Normal rights:
+
       system:administrators rlidwka
 
     --------------------------------------------------------------------------------
@@ -1017,3 +1020,47 @@ Type "simple" has one process. type "cron" gets forked at the appropriate time.
     ftp://ftp.stacken.kth.se/pub/projects/krb-forward/krb-forward-0.1.tar.gz
 
     /JockeF
+
+### <a name="3.42 afsd gives me &quot;Error -1 in"></a><a name="3.42 afsd gives me &quot;Error -1 in "></a> 3.42 afsd gives me "Error -1 in basic initialization." on startup
+
+When starting afsd, I get the following:
+
+    # /usr/vice/etc/afsd -nosettime -debug
+    afsd: My home cell is 'foo.bar.baz'
+    ParseCacheInfoFile: Opening cache info file '/usr/vice/etc/cacheinfo'...
+    ParseCacheInfoFile: Cache info file successfully parsed:
+           cacheMountDir: '/afs'
+           cacheBaseDir: '/usr/vice/cache'
+           cacheBlocks: 50000
+    afsd: 5000 inode_for_V entries at 0x8075078, 20000 bytes
+    SScall(137, 28, 17)=-1 afsd: Forking rx listener daemon.
+    afsd: Forking rx callback listener.
+    afsd: Forking rxevent daemon.
+    SScall(137, 28, 48)=-1 SScall(137, 28, 0)=-1 SScall(137, 28, 36)=-1 afsd: Error -1 in basic initialization.
+
+Solution: make sure you have kernel module loaded.
+
+### <a name="3.43 Although I get krb tickets,"></a> 3.43 Although I get krb tickets, afslog doesn't give me tokens, I see UDP packets to port 4444
+
+Using tcpdump I see the following traffic. What runs on the port 4444?
+
+    15:16:54.815194 IP foo.bar.baz.32772 > foo.bar.baz.4444: UDP, length: 269
+    15:16:54.815199 IP foo.bar.baz > foo.bar.baz: icmp 305: foo.bar.baz udp port 4444 unreachable
+
+This is the 5-&gt;4 ticket conversion service on UDP port 4444. Assuming your afs servers know how to deal with krb5 tickets (since openafs-1.2.10? and 1.3.6x?) include the following in /etc/krb5.conf:
+
+    [appdefaults]
+            libkafs = {
+                    afs-use-524 = local
+            }
+
+### <a name="3.44 I get error message trhough"></a> 3.44 I get error message trhough syslogd: "afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)"
+
+Answer:
+
+    grep 19270407 /usr/afsws/include/rx/*
+    /usr/afsws/include/rx/rxkad.h:#define RXKADBADTICKET (19270407L)
+
+### <a name="3.45 I get tickets and tokens, b"></a> 3.45 I get tickets and tokens, but still get Permission denied.
+
+Answer: /usr/afs/etc/UserList accepts only krb4 syntax. Use `joe.admin` instead of `joe/admin`. See `https://lists.openafs.org/pipermail/openafs-devel/2002-December/008673.html` and the rest of the thread.
