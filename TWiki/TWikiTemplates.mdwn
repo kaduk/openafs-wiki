@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li><a href="#TWiki Template System"> TWiki Template System</a><ul>
+    <li><a href="#TWiki Templates"> TWiki Templates</a><ul>
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Major changes from the previous"> Major changes from the previous template system</a></li>
         <li><a href="#Functional Specifications"> Functional Specifications</a></li>
@@ -25,22 +25,20 @@
   </ul>
 </div>
 
-# <a name="TWiki Template System"></a> TWiki Template System
+# <a name="TWiki Templates"></a> TWiki Templates
 
 _Definition of the templates used to render all HTML pages displayed in TWiki_
 
 ## <a name="Overview"></a> Overview
 
-The new modular template system is more flexible, efficient, and easily updated than the old set-up, where each template is a complete HTML file. The new master template approach places common templates parts, like headers and footers, in one shared file. This simplifies the conversion of templates into XHTML format, and provides a more versatile solution for templates and for [[TWikiSkins]].
+The new modular template system offers flexible, easy control over the layout of all TWiki pages. The master template approach groups parts that are shared by several templates - like headers and footers - in a common file. Special variables allow individual layouts to include parts from a master template - variables are mixed with regular HTML mark-up for template-specific content.
 
 ## <a name="Major changes from the previous"></a><a name="Major changes from the previous "></a> Major changes from the previous template system
 
-The main difference is that templates are now defined using variables to include template parts. You change one stored instance of a common element to update all occurrences. The new system:
+Where the old templates were each complete HTML documents, the new templates are defined using variables to include template parts from a master file. You can now change one instance of a common element to update all occurrences; previously, every affected template had to be updated. This simplifies the conversion of templates into XHTML format, and provides a more versatile solution for templates and for [[TWikiSkins]]. The new system:
 
 - separates a set of common template parts into a base template that is included by all of the related templates;
-
 - defines common variables, like a standard separator (ex: "|"), in the base template;
-
 - defines variable text in the individual templates and passes it back to the base template.
 
 ## <a name="Functional Specifications"></a> Functional Specifications
@@ -57,7 +55,7 @@ The main difference is that templates are now defined using variables to include
 - Variables are live in a global name space, there is no parameter passing.
 - Two-pass processing, so that you can use a variable before declaring it or after.
 - Templates and [[TWikiSkins]] work transparently and interchangeably. For example, you can create a skin that overloads just the `twiki.tmpl`, like `twiki.print.tmpl`, that redefines the header and footer.
-- **_Note:_** The template directives work only for templates, they do not get processed in topic text.
+- **_NOTE:_** The template directives work only for templates, they do not get processed in topic text.
 
 ## <a name="TWiki Master Template"></a> TWiki Master Template
 
