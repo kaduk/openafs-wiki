@@ -205,8 +205,9 @@ With a couple of notable exceptions, predefined variables return set values that
               <td><code>"selected"</code></td>
             </tr>
             <tr>
-              <td><code>selection</code></td>
-              <td> Current value e.g. current for current Web, =section="%WEB%" </td>
+              <td><code>selection="%WEB%"</code></td>
+              <td> Current value to be selected in list </td>
+              <td><code>section="%WEB%"</code></td>
             </tr>
           </table> Examples: <br /><code>%WEBLIST{"   * [[$name.WebHome]]"}%</code> creates a bullet list of all webs. <br /><code>%WEBLIST{"<select><option $marker="$marker" value="$qname">$name</option>" webs="Trash,public" selection="%WEB%" separator=" "}%</select></code> Dropdown of all public Webs + Trash Web, current Web highlighted. </td>
       </tr>
@@ -262,7 +263,7 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> 2 digit year </td>
               <td> 99 </td>
             </tr>
-          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:30:10</b></td>
+          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:30:15</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME%</code></td>
@@ -422,6 +423,36 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> Show number </td>
             </tr>
           </table> Example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code></td>
+      </tr>
+      <tr>
+        <td><code>%METASEARCH{...}%</code></td>
+        <td> Special search of meta data <table border="1" cellpadding="0" cellspacing="0">
+            <tr>
+              <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+              <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+              <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+            </tr>
+            <tr>
+              <td><code>type="topicmoved"</code></td>
+              <td> What sort of search is required? <br /><code>"topicmoved"</code> if search for a topic that may have been moved <br /><code>"parent"</code> if searcing for topics that have a specific parent i.e. its children </td>
+              <td> required </td>
+            </tr>
+            <tr>
+              <td><code>web="%WEB%"</code></td>
+              <td> Wiki web to search: A web, a list of webs separated by whitespace, or <code>all</code> webs. </td>
+              <td> required </td>
+            </tr>
+            <tr>
+              <td><code>topic="%TOPIC%"</code></td>
+              <td> The topic the search relates to </td>
+              <td> required </td>
+            </tr>
+            <tr>
+              <td><code>title="Title"</code></td>
+              <td> Text the is pre-pended to any search results </td>
+              <td> required </td>
+            </tr>
+          </table> Example: <code><b>%METASEARCH{type="topicmoved" web="%WEB%" topic="%TOPIC%" title="This topic used to exist and was moved to: "}%</b></code>, you may want to use this in [[Main/WebTopicViewTemplate]] and [[Main/WebTopicNonWikiTemplate]]<br /><code><b>%METASEARCH{type="parent" web="%WEB%" topic="%TOPIC%" title="Children: "}%</b></code></td>
       </tr>
       <tr>
         <td><code>%VAR{"NAME" web="Web"}%</code></td>
