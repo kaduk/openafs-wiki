@@ -26,11 +26,11 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   </tr>
   <tr>
     <td> Perl </td>
-    <td> 5.005_03 or higher (5.6.1 recommended, 5.8.0 <strong>not</strong> recommended yet, see TWiki:Codev.IssuesWithPerl5dot8) </td>
+    <td> 5.005_03 or higher (5.6.1 recommended, 5.8.x does work in most cases, but see TWiki:Codev.IssuesWithPerl5dot8) </td>
   </tr>
   <tr>
     <td> Non-standard Perl modules </td>
-    <td> %BULLET% Unix: <code>Net::SMTP</code> (or <code>sendmail</code>) %BB% Windows: <code>Net::SMTP</code>, <code>MIME::Base64</code>, <code>Digest::SHA1</code></td>
+    <td> %BULLET% Unix: <code>Net::SMTP</code> (or <code>sendmail</code>) %BB% Windows: <code>Net::SMTP</code>, <code>MIME::Base64</code>, <code>Digest::SHA1</code> %BB% Internationalisation: <code>Unicode::MapUTF8</code>   <font size="-1">(only for non-ISO-8859-1 sites using TWiki:Codev.EncodeURLsWithUTF8 with Perl 5.6 or lower)</font></td>
   </tr>
   <tr>
     <td> RCS </td>
@@ -75,4 +75,4 @@ You can easily add functionality, by customizing [[TWikiTemplates]], for one, wh
 - The [[TWikiPlugins]] feature currently does not have compatibility guidelines for developers. Plugins can require just about anything - browser-specific functions, stylesheets (CSS), Java applets, cookies, specific Perl modules,... - check the individual Plugin specs.
   - %H% Plugins included in the TWiki distribution do not add requirements.
 
--- TWiki:Main.MikeMannix - 12 Jan 2002 %BR% -- TWiki:Main.PeterThoeny - 16 Dec 2003
+-- TWiki:Main.MikeMannix - 12 Jan 2002 %BR% -- TWiki:Main.PeterThoeny - 15 Aug 2004

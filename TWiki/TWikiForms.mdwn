@@ -17,6 +17,7 @@
             <li><a href="#Importing Category Table Data"> Importing Category Table Data</a></li>
           </ul>
         </li>
+        <li><a href="#Using Forms For Settings"> Using Forms For Settings</a></li>
       </ul>
     </li>
   </ul>
@@ -106,12 +107,21 @@ A Form Template is simply a page containing your form, defined as a table where 
 >
 > <code>**WebForm**</code>
 >
->     | *Name* | *Type* | *Size* | *Values* | *Tooltip message* |
->     | Know.TopicClassification | select | 1 | Know.NoDisclosure,
->       Know.PublicSupported, Know.PublicFAQ | blah blah... |
->     | Know.OperatingSystem | checkbox | 3 | Know.OsHPUX, Know.OsLinux,
->       Know.OsSolaris, Know.OsWin | blah blah... |
->     | Know.OsVersion | text | 16 | | blah blah... |
+> %BR%
+>
+> `| *Name* | *Type* | *Size* | *Values* | *Tooltip message* |`
+>
+> %BR%
+>
+> `| TopicClassification | select | 1 | NoDisclosure, PublicSupported, PublicFAQ | blah blah... |`
+>
+> %BR%
+>
+> `| OperatingSystem | checkbox | 3 | OsHPUX, OsLinux, OsSolaris, OsWin | blah blah... |`
+>
+> %BR%
+>
+> `| OsVersion | text | 16 | | blah blah... |`
 >
 > <table border="1" cellpadding="0" cellspacing="0">
 >   <tr>
@@ -122,21 +132,21 @@ A Form Template is simply a page containing your form, defined as a table where 
 >     <th bgcolor="#99CCCC"><strong> Tooltip message </strong></th>
 >   </tr>
 >   <tr>
->     <td>[[Know/TopicClassification]]</td>
+>     <td><a href="http://www.dementia.org/twiki//view/Sandbox/TopicClassification">TopicClassification</a></td>
 >     <td> select </td>
 >     <td align="center"> 1 </td>
->     <td>[[Know/NoDisclosure]], [[Know/PublicSupported]], [[Know/PublicFAQ]]</td>
+>     <td><a href="http://www.dementia.org/twiki//view/Sandbox/NoDisclosure">NoDisclosure</a>, <a href="http://www.dementia.org/twiki//view/Sandbox/PublicSupported">PublicSupported</a>, <a href="http://www.dementia.org/twiki//view/Sandbox/PublicFAQ">PublicFAQ</a></td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
->     <td>[[Know/OperatingSystem]]</td>
+>     <td><a href="http://www.dementia.org/twiki//view/Sandbox/OperatingSystem">OperatingSystem</a></td>
 >     <td> checkbox </td>
 >     <td align="center"> 3 </td>
->     <td>[[Know/OsHPUX]], [[Know/OsLinux]], [[Know/OsSolaris]], [[Know/OsWin]]</td>
+>     <td><a href="http://www.dementia.org/twiki//view/Sandbox/OsHPUX">OsHPUX</a>, <a href="http://www.dementia.org/twiki//view/Sandbox/OsLinux">OsLinux</a>, <a href="http://www.dementia.org/twiki//view/Sandbox/OsSolaris">OsSolaris</a>, <a href="http://www.dementia.org/twiki//view/Sandbox/OsWin">OsWin</a></td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
->     <td>[[Know/OsVersion]]</td>
+>     <td><a href="http://www.dementia.org/twiki//view/Sandbox/OsVersion">OsVersion</a></td>
 >     <td> text </td>
 >     <td align="center"> 16 </td>
 >     <td>   </td>
@@ -153,7 +163,7 @@ Forms can also be defined by using form templates that retrieve field values fro
 
 > **Example: WebFormTemplate**
 >
-> - Know.WebFormTemplate main definition: <br />   <table border="1" cellpadding="0" cellspacing="0">
+> - WebFormTemplate main definition: <br />   <table border="1" cellpadding="0" cellspacing="0">
 >   <tr>
 >     <th bgcolor="#99CCCC"><strong> Name </strong></th>
 >     <th bgcolor="#99CCCC"><strong> Type </strong></th>
@@ -162,21 +172,21 @@ Forms can also be defined by using form templates that retrieve field values fro
 >     <th bgcolor="#99CCCC"><strong> Tooltip message </strong></th>
 >   </tr>
 >   <tr>
->     <td>[[Know/TopicClassification]]</td>
+>     <td> TopicClassification </td>
 >     <td> select </td>
 >     <td> 1 </td>
 >     <td>   </td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
->     <td>[[Know/OperatingSystem]]</td>
+>     <td> OperatingSystem </td>
 >     <td> checkbox </td>
 >     <td> 3 </td>
 >     <td>   </td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
->     <td>[[Know/OsVersion]]</td>
+>     <td> OsVersion </td>
 >     <td> text </td>
 >     <td> 16 </td>
 >     <td>   </td>
@@ -185,24 +195,24 @@ Forms can also be defined by using form templates that retrieve field values fro
 > </table>
 > <br /> %X% Leave the <code>**Values**</code> field **blank**.
 >
-> - Know.TopicClassification field value definition: <br />   <table border="1" cellpadding="0" cellspacing="0">
+> - TopicClassification field value definition: <br />   <table border="1" cellpadding="0" cellspacing="0">
 >   <tr>
 >     <th bgcolor="#99CCCC"><strong> Name </strong></th>
 >     <th bgcolor="#99CCCC"><strong> Type </strong></th>
 >     <th bgcolor="#99CCCC"><strong> Tooltip message </strong></th>
 >   </tr>
 >   <tr>
->     <td>[[Know/NoDisclosure]]</td>
+>     <td> NoDisclosure </td>
 >     <td> option </td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
->     <td>[[Know/PublicSupported]]</td>
+>     <td> PublicSupported </td>
 >     <td> option </td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
->     <td>[[Know/PublicFAQ]]</td>
+>     <td> PublicFAQ </td>
 >     <td> option </td>
 >     <td> blah blah... </td>
 >   </tr>
@@ -231,7 +241,7 @@ Forms are enabled on a per web basis. The <code>**WEBFORMS**</code> variable in 
 
 - Additionally a new topic can be given a Form using the `formtemplate` parameter in the URL. Initial values can then be provided in the URLs or as form values:
   - other than checkboxes: <code>**name**</code>, ex: <code>**?BugPriority=1**</code>
-  - checkbox: <code>**namevalue=1**</code>, ex: <code>**?ColourRed=1**</code>. <br /> Boxes with a tick must be specified.
+  - checkbox: <code>**namevalue=1**</code>, ex: <code>**?ColorRed=1**</code>. <br /> Boxes with a tick must be specified.
 
 ## <a name="Setting Up Multiple Form Options"></a> Setting Up Multiple Form Options
 
@@ -288,4 +298,174 @@ The new Form Template system should work with old Category Table data with no sp
 
 %T% **NOTE:** If things aren't working correctly, there may be useful entries in `data/warning.txt`.
 
--- TWiki:Main.JohnTalintyre - 16 Aug 2001 %BR% -- TWiki:Main.MikeMannix - 05 Jan 2002 %BR% -- TWiki:Main.PeterThoeny - 25 Apr 2004
+## <a name="Using Forms For Settings"></a> Using Forms For Settings
+
+Example process to change your [[WebPreferences]] to use forms instead of `{3 spaces}* Set` statements:
+
+1. create WebPrefencesForm topic
+2. fill it with a table like this: %BR% `| *Name*|*Type*|*Size*|*Value*|*Tooltip message*|*Attributes*|` %BR% `| WEBTOPICLIST |textarea| |     | List of topics of the %WEB% web |S|` %BR% `| SITEMAPLIST  |select  |3| on, | list this web in the Site Map  |S|` %BR% `| SITEMAPWHAT  |textarea| |     | short web summary             |S|` %BR% `| WEBBGCOLOR   |text    |8|     | Web specific background color |S|` %BR% etc...
+3. Edit [[WebPreferences]] and:
+  - Add or Change the form to WebPrefencesForm
+  - add WebPrefencesForm to the `Set WEBFORMS` line
+  - Save
+4. Edit [[WebPreferences]], jump straight down to the form ignoring all the `textarea` stuff, and set as you like
+5. if everything works as you like it, you can delete the Set statements (the form overrides set if they are both used).
+
+**_Notes:_**
+
+If it isn't working, double check that the <code>**S**</code> attribute has been specified (S for Setting). If you change the form, the changes will not take affect until you edit and save the preferences' topics again.
+
+Using the TWiki:Plugins.EditTablePlugin on WebPreferencesForm makes adding new prefedrences a breeze.
+
+A possibly unwanted side effect for using forms for the SKINS setting in their personal user topic: because the User Preferences are final you can't have different skins for different webs as the user's setting always wins. A workaround is to simply omit SKIN in the form.
+
+Another example, this one using EditTablePlugin, source:
+
+`%EDITTABLE{ header="|*Name*|*Type*|*Size*|*Values*|*Tooltip message*|*Attributes*|" format="|text,20|text,20|text,20|text,20|text,20|text,1|" }%`
+
+Result (after some editing):
+
+<a name="edittable1"></a>
+
+<div>
+  <form action="http://www.dementia.org/twiki/viewauth#edittable1" method="post" name="edittable1"><input name="ettablenr" type="hidden" value="1" /> <input name="etedit" type="hidden" value="on" /><table border="1" cellpadding="0" cellspacing="0">
+      <tr>
+        <th bgcolor="#99CCCC"><strong> Name </strong></th>
+        <th bgcolor="#99CCCC"><strong> Type </strong></th>
+        <th bgcolor="#99CCCC"><strong> Size </strong></th>
+        <th bgcolor="#99CCCC"><strong> Values </strong></th>
+        <th bgcolor="#99CCCC"><strong> tooltip message </strong></th>
+        <th bgcolor="#99CCCC"><strong> Attributes </strong></th>
+      </tr>
+      <tr>
+        <td> ALLOWTOPICCHANGE </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td> Users or groups <strong><em>allowed</em></strong> to change or rename this %TOPIC% topic: (I.e. [[Main/TWikiAdminGroup]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> ALLOWWEBCHANGE </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td> Users or groups who <strong><em>are</em></strong> allowed to <strong><em>change</em></strong> topics in the %WEB% web: (See [[TWiki/TWikiAccessControl]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> ALLOWWEBRENAME </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>[[Main/TWikiAdminGroup]]</td>
+        <td> Users or groups who <strong><em>are</em></strong> allowed to <strong><em>rename</em></strong> topics in the %WEB% web: (See [[TWiki/TWikiAccessControl]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> ALLOWWEBVIEW </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td> Users or groups who <strong><em>are</em></strong> allowed to <strong><em>view</em></strong> topics in the %WEB% web: (See [[TWiki/TWikiAccessControl]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> DENYWEBCHANGE </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td> Users or groups who <strong><em>are not</em></strong> allowed to <strong><em>change</em></strong> topics in the %WEB% web: (See [[TWiki/TWikiAccessControl]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> DENYWEBRENAME </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td> Users or groups who <strong><em>are not</em></strong> allowed to <strong><em>rename</em></strong> topics in the %WEB% web: (See [[TWiki/TWikiAccessControl]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> DENYWEBVIEW </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td> Users or groups who <strong><em>are not</em></strong> allowed to <strong><em>view</em></strong> topics in the %WEB% web: (See [[TWiki/TWikiAccessControl]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> FINALPREFERENCES </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td> "NOSEARCHALL, ATTACHFILESIZELIMIT, WIKIWEBMASTER, WEBCOPYRIGHT, WEBTOPICLIST, DENYWEBVIEW, ALLOWWEBVIEW, DENYWEBCHANGE, ALLOWWEBCHANGE, DENYWEBRENAME, ALLOWWEBRENAME" </td>
+        <td> Web preferences that are <strong>not</strong> allowed to be overridden by user preferences </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> NOSEARCHALL </td>
+        <td> text </td>
+        <td>   </td>
+        <td> ",on" </td>
+        <td> "Exclude web from a <code>web=""all""</code> search: (Set to <code>on</code> for hidden webs)" </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> SITEMAPLIST </td>
+        <td> select </td>
+        <td>   </td>
+        <td> "on, ," </td>
+        <td> List this web in the [[TWiki/SiteMap]]</td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> SITEMAPUSETO </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td> ...to do something. </td>
+        <td> ...to do something. </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> SITEMAPWHAT </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td> Describe what this web does. </td>
+        <td> Describe what this web does. </td>
+        <td>   </td>
+      </tr>
+      <tr>
+        <td> SKIN </td>
+        <td> select </td>
+        <td>   </td>
+        <td> "twiki, free, gnu, koala, pattern, plain, tiger" </td>
+        <td> list of installed skins </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> WEBBGCOLOR </td>
+        <td> select </td>
+        <td>   </td>
+        <td> lightpink, pink, crimson, lavenderblush, palevioletred, hotpink, deeppink, mediumvioletred, orchid, thistle, plum, violet, fuchsia, fuchsia, darkmagenta, purple, mediumorchid, darkviolet, darkorchid, indigo, blueviolet, mediumpurple, mediumslateblue, slateblue, darkslateblue, ghostwhite, lavender, blue, mediumblue, darkblue, navy, midnightblue, royalblue, cornflowerblue, lightsteelblue, lightslategray, slategray, dodgerblue, aliceblue, steelblue, lightskyblue, skyblue, deepskyblue, lightblue, powderblue, cadetblue, darkturquoise, azure, lightcyan, paleturquoise, aqua, aqua, darkcyan, teal, darkslategray, mediumturquoise, lightseagreen, turquoise, aquamarine, mediumaquamarine, mediumspringgreen, mintcream, springgreen, mediumseagreen, seagreen, honeydew, darkseagreen, palegreen, lightgreen, limegreen, lime, forestgreen, green, darkgreen, lawngreen, chartreuse, greenyellow, darkolivegreen, yellowgreen, olivedrab, ivory, beige, lightyellow, lightgoldenrodyellow, yellow, olive, darkkhaki, palegoldenrod, lemonchiffon, khaki, gold, cornsilk, goldenrod, darkgoldenrod, floralwhite, oldlace, wheat, orange, moccasin, papayawhip, blanchedalmond, navajowhite, antiquewhite, tan, burlywood, darkorange, bisque, linen, peru, peachpuff, sandybrown, chocolate, saddlebrown, seashell, sienna, lightsalmon, coral, orangered, darksalmon, tomato, salmon, mistyrose, lightcoral, snow, rosybrown, indianred, red, brown, firebrick, darkred, maroon, white, whitesmoke, gainsboro, lightgrey, silver, darkgray, gray, dimgray, black </td>
+        <td> Web specific background color: (Pick a lighter one of the [[TWiki/StandardColors]]) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> WEBFORMS </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>   </td>
+        <td>[[TWiki/TWikiForms]]: How to enable form(s) </td>
+        <td> S </td>
+      </tr>
+      <tr>
+        <td> WEBTOPICLIST </td>
+        <td> textarea </td>
+        <td>   </td>
+        <td>[[Main/WebHome]], [[Main/WebChanges]], [[Main/WebTopicList]], [[Main/WebIndex]], [[Main/WebSearch]], Go <input name="topic" size="16" type="text" /></td>
+        <td> the main entry point topics for this web </td>
+        <td> S </td>
+      </tr>
+    </table><input name="etrows" type="hidden" value="17" /> <input type="submit" value="Edit table" /></form>
+</div>
+
+-- TWiki:Main.JohnTalintyre - 16 Aug 2001 %BR% -- TWiki:Main.MikeMannix - 05 Jan 2002 %BR% -- TWiki:Main.PeterThoeny - 25 Apr 2004 %BR% -- TWiki:Main.MattWilkie - 27 Jul 2004 %BR%

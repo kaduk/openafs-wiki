@@ -242,13 +242,13 @@ There is no absolute need for Meta Data variables to be listed in a specific ord
 
 The recommended sequence is:
 
-- META:TOPICINFO
-- `text of topic`
-- META:TOPICMOVED (optional)
-- META:TOPICPARENT (optional)
-- META:FILEATTACHMENT (0 or more entries)
-- META:FORM (optional)
-- META:FIELD (0 or more entries; FORM required)
+- `META:TOPICINFO`
+- `META:TOPICPARENT` (optional)
+- text of topic
+- `META:TOPICMOVED` (optional)
+- `META:FILEATTACHMENT` (0 or more entries)
+- `META:FORM` (optional)
+- `META:FIELD` (0 or more entries; FORM required)
 
 ## <a name="Viewing Meta Data in Page Source"></a> Viewing Meta Data in Page Source
 
@@ -295,4 +295,4 @@ Current support covers:
 
 At present, there is no Meta Data support for Plugins. However, the format is readily extendable and the `Meta.pm` code that supports the format needs only minor alteration.
 
--- TWiki:Main.JohnTalintyre - 29 Aug 2001 <br /> -- TWiki:Main.MikeMannix - 03 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 10 Jan 2002
+-- TWiki:Main.JohnTalintyre - 29 Aug 2001 %BR% -- TWiki:Main.MikeMannix - 03 Dec 2001 %BR% -- TWiki:Main.PeterThoeny - 15 Aug 2004
