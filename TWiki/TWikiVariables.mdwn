@@ -59,7 +59,11 @@ TWiki expands the following variables enclosed in % percent signs:
   </tr>
   <tr>
     <td><code>%DATE%</code></td>
-    <td> Todays date, is <b>29 Jun 2010</b></td>
+    <td> Todays date (local server time), is <b>29 Jun 2010</b></td>
+  </tr>
+  <tr>
+    <td><code>%GMTIME%</code></td>
+    <td> Todays date (GM time), is <b>29 Jun 2010 - 15:24</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
@@ -178,4 +182,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
   </tr>
 </table>
 
--- [[PeterThoeny]] - 21 Apr 2000 <br />
+-- [[PeterThoeny]] - 29 May 2000 <br />
