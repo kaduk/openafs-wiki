@@ -7,6 +7,7 @@
             <li><a href="#The "Go" Box and Navigation Box"> The "Go" Box and Navigation Box</a></li>
           </ul>
         </li>
+        <li><a href="#Using Cascading Style Sheets"> Using Cascading Style Sheets</a></li>
         <li><a href="#Packaging and Publishing Skins"> Packaging and Publishing Skins</a></li>
         <li><a href="#Activating Skins"> Activating Skins</a></li>
       </ul>
@@ -111,7 +112,7 @@ You can use [[template variables|Main/TWikiTemplates#TemplateVariables]], [[TWik
   </tr>
   <tr>
     <td><code>%BROADCASTMESSAGE%</code></td>
-    <td> Broadcast message at the beginning of your view template, can be used to alert users of scheduled downtimes; is defined in [[Main/TWikiPreferences]]</td>
+    <td> Broadcast message at the beginning of your view template, can be used to alert users of scheduled downtimes; is set in [[Main/TWikiPreferences]]</td>
   </tr>
 </table>
 
@@ -139,6 +140,24 @@ Here is an example form that has a select box and the "Go" box for illustration 
     </tr>
   </table>
 </form>
+
+## <a name="Using Cascading Style Sheets"></a> Using Cascading Style Sheets
+
+The regular templates files currently do not use style sheets. Many skin developers choose to use them, it helps in separating style from content.
+
+Example: To use a style sheet for the broadcast message, add this to `view.myskin.tmpl`:
+
+    <style type="text/css">
+    .broadcastmessage {
+        background: yellow; display:block;
+        border-style:solid;border-width: 2px;border-color:red;
+    }
+    .broadcastmessage strong {color: red}
+    </style>
+
+Then add a div tag to the `%BROADCASTMESSAGE%` variable located after the `#PageTop` anchor or after the opening form tag:
+
+    <div class="broadcastmessage"> %BROADCASTMESSAGE% </div>
 
 ## <a name="Packaging and Publishing Skins"></a> Packaging and Publishing Skins
 
