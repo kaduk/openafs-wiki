@@ -102,6 +102,9 @@ The following are **_site-level_** settings that affect all users in all webs on
   </tr>
 </table>
 
+- Maximum size of [[FileAttachments]] in KB, 0 for no limit:
+  - Set ATTACHFILESIZELIMIT = 10000
+
 ## <a name="Email and Proxy Server Settings"></a> Email and Proxy Server Settings
 
 - TWiki webmaster email address:
@@ -252,7 +255,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set ALLOWWEBMANAGE = [[TWikiAdminGroup]]
 
 - Site-level preferences that are **not** allowed to be overridden by [[WebPreferences]] and user preferences:
-  - Set FINALPREFERENCES = PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBMANAGE
+  - Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST , SMTPSENDERHOST, ALLOWWEBMANAGE
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
