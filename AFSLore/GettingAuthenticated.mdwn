@@ -6,7 +6,7 @@ There are basically three options with several variants
 - [[KerberosIV]] -- the original MIT implementation, and [[Krb4KTH]], an export version of [[KerberosIVMIT]] (aka "bones"), but with encryption support put back in by the fine folks at KTH.
 - [[KerberosV]] -- version five of this protocol has numerous improvements over version four and is available from many sources: MIT, DCE, Microsoft (aka [[ActiveDirectory]]) and [[HeimdalKTH]].
 
-The consensus these days is to use [[KerberosV]], even though lacking native support for V5, AFS still needs various conversion and migration tools.
+The consensus these days is to use [[KerberosV]], even though lacking native support for V5, AFS still needs various conversion and migration tools. See [[KerberosAFSInstall]] for (what will be) a step-by-step procedure to install a new [[OpenAFS]] cell where authentication is handled by a [[KerberosV]] realm.
 
 For [[KerberosV]], there are two main open-source solutions for Unix: [[KerberosVMIT]] and [[HeimdalKTH]]. A quick comparison of the two:
 

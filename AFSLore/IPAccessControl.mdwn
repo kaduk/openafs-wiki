@@ -1,0 +1,9 @@
+## <a name="Controlling AFS Access using IP"></a><a name="Controlling AFS Access using IP "></a> Controlling AFS Access using IP Addresses.
+
+A common mistake is to put the IP address directly on a directory's ACL. As is explained in this [thread](https://lists.openafs.org/pipermail/openafs-info/2002-February/003292.html), that doesn't work. You need to create a group and put the IP addresses in there.
+
+The user should be warned that IP addresses can be spoofed relatively easily.
+
+See also [http://www.transarc.ibm.com/Support/afs/admin/IP\_acls.html](http://www.transarc.ibm.com/Support/afs/admin/IP_acls.html)
+
+-- [[TedAnderson]] - 07 Feb 2002

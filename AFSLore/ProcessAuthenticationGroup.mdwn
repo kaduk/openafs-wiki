@@ -1,0 +1,15 @@
+Some [words](https://lists.openafs.org/pipermail/openafs-info/2002-February/003281.html) from [[RussAllbery]] on [[process authentication groups|Main/ProcessAuthenticationGroup]] ([[PAG]]s) with edits:
+
+A PAG holds the authentication information (i.e. tokens or basically AFS service tickets) needed by the [[CacheManager]] to identify you to AFS servers and visa versa (i.e. Kerberos provides [[MutualAutentication]]). Each PAG is represented by a number, typically encoded as a pair of "funny" groups in your group list. Thus, because it is part of your credentials, it is naturally (on Unix systems at least) and automatically propagated to child processes. These children will have access to your tokens even if they have a diffenent UID (e.g. set uid root programs like lpr can still access your files).
+
+Part of what PAM does (and AFS integrated logon modules for other systems) is create a PAG for you and put your login session inside it, which means that any AFS tokens that you acquire are restricted to that particular PAG. If you don't create a PAG, however, those tokens are available to any other processes running under the same ID that also aren't in a PAG (or at least that's my understanding and my experiments seem to support that). This is occasionally useful for things like long-running daemons.
+
+For user logins, though, you generally want to be sure that something puts each login into a separate PAG.
+
+Use `klog -setpag` to create a (new) PAG after logging in. In a [[KerberosV]] environment, use `aklog -setpag`. There's also [[pagsh|Main/UsageFAQ#2_06_What_is_pagsh_]].
+
+-- [[TedAnderson]] - 07 Feb 2002
+
+----
+
+See [UsageFAQ#2\_06\_What\_is\_pagsh\_](UsageFAQ#2_06_What_is_pagsh_), [UsageFAQ#2\_07\_Why\_use\_a\_PAG\_](UsageFAQ#2_07_Why_use_a_PAG_), [UsageFAQ#2\_08\_How\_can\_I\_tell\_if\_I\_have\_a\_](UsageFAQ#2_08_How_can_I_tell_if_I_have_a_)
