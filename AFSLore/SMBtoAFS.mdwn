@@ -1,0 +1,177 @@
+# <a name="Using Samba as an AFS gateway"></a> Using Samba as an AFS gateway
+
+Recently I've been researching methods of using Samba as an AFS gateway. Below are my findings so far. Please feel free to add/correct stuff. -- [[DanielClark]] - 04 Aug 2002
+
+## <a name="Plain text passwords sent over n"></a> Plain text passwords sent over network
+
+In these solutions the plain text password is sent over the network. This requires [[EnablePlainTextPassword]] be set on your Windows hosts. Plain text passwords are necessary with stock Samba because the method that SMB uses for secure authentication is not compatible with Kerberos. Therefore the Samba server must have your plain text password so it can in turn get you AFS tokens using your password.
+
+Advantages:
+
+- No new software needs to be installed on clients
+- Only required change on clients is to set a registry key
+
+Disadvantages:
+
+- Passwords sent in plain text over the network
+- Clients may initially try to use plain text passwords to login to SMB servers other than the AFS gateway
+- Client gets no warning before AFS tokens expire
+- To get new tokens, client must unmap and then remap the drive letter corresponding to the AFS gateway
+
+### <a name="Compile Samba &lt;code&gt;&lt;b&gt;--with-pam=="></a> Compile Samba ==--with-pam
+
+This causes Samba to use pluggable authentication modules (PAM) for authentication. PAM is available on many Unix variants, notably Linux and Solaris. There are PAM modules for the various Kerberos implementations that work with AFS; the module for the default kaserver comes with [[OpenAFS]]. For some more info on PAM see the [Samba doc](http://de.samba.org/samba/ftp/docs/htmldocs/Samba-HOWTO-Collection.html#PAM). Many precompiled versions of Samba are built with this option (i.e. Redhat's Samba RPMs)
+
+Advantages:
+
+- The only method that is integrated into Samba core and pretty much guaranteed to be maintained and work with all future Samba releases, as it is generally useful to people for purposes other then using Samba as an AFS gateway. There seem to be no people on the Samba core team that have an active interest in AFS.
+
+Disadvantages:
+
+- Doesn't work with operating systems that do not support PAM.
+
+### <a name="Compile Samba &lt;code&gt;&lt;b&gt;--with-afs=="></a> Compile Samba ==--with-afs
+
+This links Samba against AFS authentication code directly.
+
+Advantages:
+
+- May work with systems that do not support PAM.
+
+Disadvantages:
+
+- Not actively maintained. Author states the option may be suffering from bit rot.
+- Several people have mentioned difficulty getting the library and header paths right, mentioning conflicts between [[OpenAFS]], [[OpenSSL]] and non-AFS Kerberos libraries and header files. It is unclear if this code is works with the latest Samba and [[OpenAFS]] releases at all.
+- May need to hunt around on the internet for a patch to make this work against a specific OS type and Samba version, and then use that older Samba version.
+  - Patch for AIX / Samba 2.0.4b: <http://www.mail-archive.com/info-afs@transarc.com/msg02493.html>
+
+## <a name="No plain text passwords sent ove"></a> No plain text passwords sent over network
+
+These methods that avoid sending plain text passwords over the network.
+
+Advantages:
+
+- Increased security
+
+Disadvantages:
+
+- Require modifications to stock Samba distribution
+- Requires additional infrastructure beyond Samba
+- All are primarily internal projects that people did for their employers, support may be minimal to nonexistent.
+
+### <a name="kSAMBA"></a> kSAMBA
+
+kSamba is used for AFS translation in University of Michigan Campus sites. It also allows Windows workstations to authenticate and connect to UNIX SMB (Server Message Block) servers via a Kerberos out-of-band negotiation. This allows users to connect without entering a SMB password. A version of Samba 2.0.6 modified to support AFS and Kerberos is implemented on the server side.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> URL </td>
+    <td><a href="http://rsug.itd.umich.edu/software/ksamba.html" target="_top">http://rsug.itd.umich.edu/software/ksamba.html</a></td>
+  </tr>
+  <tr>
+    <td> Email </td>
+    <td><a href="mailto:ifs.via.samba@umich.edu">ifs.via.samba@umich.edu</a></td>
+  </tr>
+</table>
+
+Advantages:
+
+- Very good security. Plain text passwords are not required to be sent over the network or kept on the Samba server.
+- Has been in active use by a good number of clients for several years.
+- Looks like it might have an interface to manipulate AFS permissions - see <http://lists.samba.org/pipermail/samba/1997-November/033982.html>
+
+Disadvantages:
+
+- Seems to be pretty specific to UMich's site - unclear if anyone else is using it.
+- Requires each Windows client to install some software
+  - Windows client software doesn't seem to be open source
+  - Windows client software won't install on Windows 2000 or XP
+- Looks like it may be tied to a specific Kerberos implementation
+- Must run Samba 2.0.6 or do some porting to newer version
+
+### <a name="SMBKlog"></a> SMBKlog
+
+SMBKlog uses out-of-band authentication over SSL. The server sends the client an RSA public key - the client encrypts the password with the public key and sends it to the server, which then decrypts it. It's home page no longer seems to exist. There is an email explaining it at <http://samba.cadcamlab.org/lists/samba-technical/Jul2001/00363.html> , and the code is available from <http://www.gentoo.org/cgi-bin/viewcvs/gentoo-x86/net-fs/samba/files/Attic/> (if you look hard).
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> URL </td>
+    <td><a href="http://www22.brinkster.com/jvrobert" target="_top">http://www22.brinkster.com/jvrobert</a> (down as of 2002-08-01) </td>
+  </tr>
+  <tr>
+    <td> Email </td>
+    <td> Jason Robertson <a href="mailto:jason.v.robertson@intel.com">jason.v.robertson@intel.com</a></td>
+  </tr>
+</table>
+
+Advantages:
+
+- Password not sent over network in plain text
+- Not specific to any particular Kerberos implementation
+- Uses [[OpenSSL]] so probably relatively easy to write new Windows clients
+- Successfully used at Intel to comply with corporate security requirements
+
+Disadvantages:
+
+- Password exists in plain text form on Samba server, at least in memory, for some period of time (Samba server decrypts password to plaintext form and uses that to get AFS tokens)
+- Seems to be pretty specific to Intel's site - unclear if anyone else is using it.
+- Requires each Windows client to install some software
+  - Windows client software doesn't seem to be open source
+  - Windows client software dies on Windows 2000 and XP
+- Must run specific Samba version or do some porting to newer version
+- Web site no longer exists. Doesn't seem to be under active public development.
+
+### <a name="FOKSTRAUT"></a> FOKSTRAUT
+
+**Fokstraut and Samba - Dealing with Authentication and Performance Issues On A Large Scale Samba Service**
+
+Robert Beck &amp; Steve Holstead, _University of Alberta_
+
+**Abstract**
+
+At the University of Alberta, we have approximately 55,000 user id's using central services authenticated by Kerberos. We use AFS for central file service. We use Samba to provide Windows compatible access to much of our central file service. Samba contains a number of useful features for Microsoft Windows compatibility, including a kludge to deal with the problem of Windows sending an all uppercase version of a user's password. We observed that when Windows connects to a share, it frequently attempts many incorrect passwords repeatedly before trying the correct one. This created a very heavy authentication load on our central Samba service when users would connect every morning and authenticate. We observed this load and noticed that most of our problems were caused by repeated attempts to authenticate, and the high cost of checking these attempts.
+
+To help reduce the load due to authentication, we implemented FOKSTRAUT, a set of modifications to Samba to cache recent password failures and successes in a DBM database built by the Samba server as it runs. By caching the recent failures we avoid expensive re-checks of the (many) other passwords Windows likes to send us. We also cache the correct case of the real password, and by doing so we avoid the expensive overhead of "cracking" an all uppercase password When Windows decides to send one. We also use FOKSTRAUT to cache the NT and LanMan password hashes of a users password once we see a successful authentication. This then allows us to use the newer Windows NT password hash after the user has connected once, without having to centrally convert and maintain a large SMB password file, and while maintaining the ability of our server to access services such as AFS which can not be authenticated against using the Windows password hash alone. Performance on our service has been drastically improved since the implementation of FOKSTRAUT.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> URL </td>
+    <td><a href="http://www.usenix.org/events/lisa2000/full_papers/beck/beck_html/" target="_top">http://www.usenix.org/events/lisa2000/full_papers/beck/beck_html/</a></td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td><a href="http://www.ualberta.ca/~sholstea/patches.tar" target="_top">http://www.ualberta.ca/~sholstea/patches.tar</a></td>
+  </tr>
+  <tr>
+    <td> Email </td>
+    <td> Steve Holstead <a href="mailto:Steve.Holstead@ualberta.ca">Steve.Holstead@ualberta.ca</a></td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> Robert Beck <a href="mailto:beck@bofh.ucs.ualberta.ca">beck@bofh.ucs.ualberta.ca</a> or <a href="mailto:beck@obtuse.com">beck@obtuse.com</a></td>
+  </tr>
+</table>
+
+Advantages:
+
+- Password not sent over network in plain text
+- Not specific to any particular Kerberos implementation
+- In use for several years with a large number of clients
+- Has advantages other than secure AFS login
+- Seems to be under active development
+  - Support for automatic reauthentication before token lifetime ends recently added
+- Requires no changes to Windows Clients. This is a unique feature of this method.
+- Everything is under BSD style license terms
+
+Disadvantages:
+
+- Requires some out-of-band secure infrastructure for users to change their passwords.
+  - Authors mention using a simple script on a login server in which a user can make an SMB connect and authenticate themselves. Unsure of the security of this solution.
+  - Another possibility would be a web application behind an SSL server running on the same host as the Samba server.
+- Passwords must be stored in plaintext on the Samba server.
+
+## <a name="Random Links"></a> Random Links
+
+2002-05 discussion on samba-technical: [http://marc.theaimsgroup.com/?l=samba-technical&amp;m=102214554108308&amp;w=2](http://marc.theaimsgroup.com/?l=samba-technical&m=102214554108308&w=2)
+
+## <a name="Discussion / What are you doing?"></a> Discussion / What are you doing?
