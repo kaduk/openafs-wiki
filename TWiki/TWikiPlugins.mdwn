@@ -93,7 +93,7 @@ To test new Plugins on your installation before making them public, you may want
 
 ### <a name="A Note on Performance"></a> A Note on Performance
 
-The performance of the system depends on the number of Plugins installed and on the Plugin implementation. Some Plugins impose no measurable performance decrease, some do. For example, `outsidePREHandler` is an expensive callback function, or a Plugin might use many Perl libraries that needs to be initialized with each page view (unless you run mod\_perl). It is recommended to measure the performance with and without a new Plugin.
+The performance of the system depends on the number of Plugins installed and on the Plugin implementation. Some Plugins impose no measurable performance decrease, some do. For example, `outsidePREHandler` is an expensive callback function, or a Plugin might use many Perl libraries that needs to be initialized with each page view (unless you run mod\_perl). It is recommended to measure the performance with and without a new Plugin. Example for Unix:%BR% `time wget -qO /dev/null http://www.dementia.org/twiki//view/TWiki/AbcPlugin`
 
 In case you need to install an "expensive" Plugin and you need its functionality only in one web you can place the Plugin topic into that web. TWiki will initialize the Plugin only if the Plugin topic is found (which won't be the case for other webs.)
 
