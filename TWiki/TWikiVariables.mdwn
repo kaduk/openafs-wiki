@@ -90,6 +90,14 @@
     <td> The current topic name with added spaces, for regular expression search of Ref-By, is <b></b></td>
   </tr>
   <tr>
+    <td><code>%TOPICLIST{"format"}%</code></td>
+    <td> Topic index of a web. Parameter is composed of the format, followed by an optional <code>web="Name"</code>. The <code>"format"</code> defines the format of one topic item; use it to create any formatting you need. The <code>$name</code> variable is expanded to the topic name; the <code>$web</code> variable is expanded to the name of the web. Examples: <br /><code>%TOPICLIST{"   * $web.$name"}%</code> creates a bullet list of all topics. <br /><code>%TOPICLIST{" &lt;option&gt;$name&lt;/option&gt;"}%</code> creates an option list (for drop down menus). </td>
+  </tr>
+  <tr>
+    <td><code>%WEBLIST{"format"}%</code></td>
+    <td> Web index, e.g. list of all webs. Hidden webs are excluded, e.g. webs with a <code>NOSEARCHALL=on</code> preference variable. The <code>"format"</code> defines the format of one web item. The <code>$name</code> variable is expanded to the name of the web. Example: <br /><code>%WEBLIST{"   * [[$name.WebHome]]"}%</code> creates a bullet list of all webs. </td>
+  </tr>
+  <tr>
     <td><code>%GMTIME%</code></td>
     <td> GM time, is <b>29 Jun 2010 - 15:26</b></td>
   </tr>
@@ -141,7 +149,7 @@
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:30</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:26:32</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
