@@ -1,0 +1,82 @@
+This topic is a place to collect information on AFS performance measurements and tools.
+
+<div>
+  <ul>
+    <li><a href="#Tools"> Tools</a><ul>
+        <li><a href="#Andrew Benchmark"> Andrew Benchmark</a></li>
+        <li><a href="#afsfsperf"> afsfsperf</a></li>
+        <li><a href="#PostMark"> PostMark</a></li>
+      </ul>
+    </li>
+    <li><a href="#Measurements"> Measurements</a><ul>
+        <li><a href="#AFS vs NFS"> AFS vs NFS</a></li>
+        <li><a href="#Arla Numbers"> Arla Numbers</a></li>
+        <li><a href="#Solaris x86 Inode vs Red Hat Nam"> Solaris x86 Inode vs Red Hat Namei on same hardware</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+----
+
+## <a name="Tools"></a> Tools
+
+### <a name="Andrew Benchmark"></a> Andrew Benchmark
+
+This old and venerable suite has been used many times. It is mentioned in the [FAQ](https://grand.central.org/twiki/bin/view/AFSLore/AdminFAQ#3_18_What_is_the_Andrew_Benchmar).
+
+----
+
+### <a name="afsfsperf"></a> afsfsperf
+
+[[Arla]] comes with a tool called afsfsperf, apparently available as part of their release.
+
+----
+
+### <a name="PostMark"></a><a name="_PostMark"></a> PostMark
+
+A [NetApp paper on PostMark](http://www.netapp.com/tech_library/3022.html).
+
+The numbers below were made with version 1.53 of PostMark from [[NetApp]]. <br /> Older versions of PostMark output wrong results for the number of "files deleted"!!<br /> Here is version [1\.53 of PostMark](http://www.slac.stanford.edu/~alfw/postmark-1.53.c.gz) [Jeffrey Katcher](mailto:katcher@netapp.com) sent me.
+
+----
+
+## <a name="Measurements"></a> Measurements
+
+### <a name="AFS vs NFS"></a> AFS vs NFS
+
+A chart showing scalability is in the [FAQ](https://grand.central.org/twiki/bin/view/AFSLore/GeneralFAQ#1_11_How_does_AFS_compare_with_N).
+
+----
+
+### <a name="Arla Numbers"></a> Arla Numbers
+
+A large collection of information. Maybe someone could add some context?
+
+<http://www.e.kth.se/~jimmy/afsfsperf/afsfsperf.html>
+
+----
+
+### <a name="Solaris x86 Inode vs Red Hat Nam"></a> Solaris x86 Inode vs Red Hat Namei on same hardware
+
+From a [message](https://lists.openafs.org/pipermail/openafs-info/2003-April/008916.html) on the [[OpenAFS-Info]] mailing list:
+
+> I was wondering how Solaris x86 would be doing as AFS fileserver compared to Red Hat 7.3 Linux on the same hardware.
+>
+> I've conducted some benchmarks using [[PostMark|Main/PerformanceWork#PostMark]] and arla's afsfsperf to get an answer (not _the_ answer!) to this question.
+>
+> I've used [[OpenAFS]]-1.2.8 with inode and namei interface on Solaris with non-logging and logging file system for the /vicepa partition.
+>
+> On Linux I've used [[OpenAFS]]-1.2.8 (namei only) with ext2, ext3, reiserfs v1, and reiserfs v2 for /vicepa.
+>
+> The results are available under [http://www.slac.stanford.edu/~alfw/AFS\_bench2.html](http://www.slac.stanford.edu/~alfw/AFS_bench2.html)
+>
+>       Alf Wachsmann							  | e-mail: alfw@slac.stanford.edu
+>       SLAC Computing Service				  | Phone:  +1-650-926-4802
+>       2575 Sand Hill Road, M/S 97			| FAX:	 +1-650-926-3329
+>       Menlo Park, CA 94025, USA			  | Office: Bldg. 50/323
+>     				  http://www.slac.stanford.edu/~alfw (PGP)
+
+----
+
+-- [[TedAnderson]] - 25 Apr 2003
