@@ -4,7 +4,7 @@ How does this relate to [[OpenAFS]]? [[OpenAFS]] uses Kerberos to perform strong
 
 Note that there are two versions of Kerberos in wide usage. The latest is [[KerberosV]], but AFS, for historical reasons, uses a modified version of Kerberos 4 (see [[KaServer]]). However, AFS can be integrated into a [[KerberosV]] realm, and in fact is highly suggested for any new installations of AFS. See [[SettingUpAuthentication]].
 
-Installing [[KerberosV]] along with [[OpenAFS]] will provide the basis for many other very cool features, such as a single repository for all authentication information for an administrative domain, integration with the Windows2000 login mechanism, and even single-sign-on capability. Note that the further down you get in that list, the harder things become. :)
+Installing [[KerberosV]] along with [[OpenAFS]] will provide the basis for many other very cool features, such as a single repository for all authentication information for an administrative domain, integration with the Windows 2000/XP login mechanism, and even single-sign-on capability. Note that the further down you get in that list, the harder things become. :)
 
 The installation documentation on the [[OpenAFS]] web site unfortunately does not include any information on integrating AFS into a [[KerberosV]] realm. (Work on install document &amp; gotchas page later)
 
