@@ -34,14 +34,6 @@ Each TWiki web has an automatic email alert service that sends a list of recent 
 
 - You can create a [[WebNotify]] link using [[TWikiVariables]] with <code>**%NOTIFYTOPIC%**</code>
 
-TWiki handles WebNotify entries that include the [[WikiName]] of a user or a [[TWikiGroup|Main/TWikiGroups]] and an optional e-mail address. Example entries in WebNotify:
-
-    	 * Main.FredBloggs
-    	 * Main.FredBloggs - secondary@home.com
-    	 * Main.EngineeringGroup
-
-The first entry is the default form, the notification gets sent to the e-mail address specified in the user's home page. The second entry lists an alternative e-mail address. The third entry specifies a group, the notification gets sent to each member of the group.
-
 You can also use `%MAINWEB%` instead of `Main`, but this is not necessary even if you have renamed the main web by configuring `$mainWebname` in `TWiki.cfg`.
 
 ### <a name="Configuring Outgoing Mail"></a> Configuring Outgoing Mail
@@ -101,7 +93,7 @@ TWiki generates monthly log files which are used by the statistics
 - The file name is `log<year><month>.txt`
 - Example path name: `twiki/data/log201006.txt`
 - Each access gets logged as: %BR% `| <time> | <wikiusername> | <action> | <web>.<topic> | <extra info> | <IP address> |`
-- Example log entry: %BR% `| 29 Jun 2010 - 11:45 | Main.TWikiGuest | view | TWiki.WebRss |  | 66.124.232.02 |`
+- Example log entry: %BR% `| 29 Jun 2010 - 11:48 | Main.TWikiGuest | view | TWiki.WebRss |  | 66.124.232.02 |`
 - Actions are logged if enabled in TWiki.cfg by the `$doLogTopic<action>` flags
 - Logged actions: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -194,4 +186,4 @@ This is simply a preset `SEARCH`. The number of topics listed by the `limit` par
 
 > %SEARCH{"\.*" scope="topic" regex="on" nosearch="on"}%
 
--- TWiki:Main.MikeMannix - 01 Dec 2001 %BR% -- TWiki:Main.PeterThoeny - 24 Apr 2004
+-- TWiki:Main.MikeMannix - 01 Dec 2001 %BR% -- TWiki:Main.PeterThoeny - 28 Aug 2004
