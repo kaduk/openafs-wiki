@@ -5,6 +5,7 @@
         <li><a href="#Using HTML"> Using HTML</a><ul>
             <li><a href="#HTML and TWiki Usability"> HTML and TWiki Usability</a></li>
             <li><a href="#TWiki HTML Rendering"> TWiki HTML Rendering</a></li>
+            <li><a href="#TWiki and _JavaScript"> TWiki and JavaScript</a></li>
           </ul>
         </li>
         <li><a href="#Hyperlinks"> Hyperlinks</a><ul>
@@ -132,7 +133,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>List Item:</strong> %BR% Three spaces and an asterisk. </td>
+    <td valign="top"><strong>List Item:</strong> %BR% Three spaces, an asterisk, and another space. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 	* bullet item
 </pre> </font></span></td>
@@ -143,7 +144,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Nested List Item:</strong> %BR% Six, nine, ... spaces and an asterisk. </td>
+    <td valign="top"><strong>Nested List Item:</strong> %BR% Six, nine, ... spaces, an asterisk, and another space. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 	* level 1
 		* level 2
@@ -158,7 +159,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Ordered List:</strong> %BR% Three spaces and a number. </td>
+    <td valign="top"><strong>Ordered List:</strong> %BR% Three spaces, a number, and another space. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 	1 Sushi
 	1 Dim Sum
@@ -186,7 +187,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Table:</strong> %BR% Any number of lines of text. Each line is one row of the table consisting of one or more cells. Each cell starts and ends with a vertical bar '|'. Any spaces at the beginning of a line are ignored.%BR% <strong><em>Notes:</em></strong> %BB% <code>| *bold* |</code> cells are displayed as table headers.%BB% <code>|   center-spaced   |</code> cells are displayed center aligned.%BB% <code>|     right-spaced |</code> cells are displayed right aligned.%BB% <code>| 2 colspan ||</code> cells are displayed as multi-span columns (i.e., a cell with no text spans a column).%BB% <code>|^|</code> cells with a caret indicate follow-up rows of multi-span rows.%BB% If a row contains a large amount of text, and you want it to be more readable while editing the table, split the row into multiple text lines by ending each line with a backslash character <code>'\'</code>.%BB% Table cells wrap automatically as determined by the browser. </td>
+    <td valign="top"><strong>Table:</strong> %BR% Any number of lines of text. Each line is one row of the table consisting of one or more cells. Each cell starts and ends with a vertical bar '|'. Any spaces at the beginning of a line are ignored.%BR% <strong><em>Notes:</em></strong> %BB% <code>| *bold* |</code> cells are displayed as table headers.%BB% <code>|   center-spaced   |</code> cells are displayed center aligned.%BB% <code>|     right-spaced |</code> cells are displayed right aligned.%BB% <code>| 2 colspan ||</code> cells are displayed as multi-span columns (i.e., a cell with no text spans a column).%BB% <code>|^|</code> cells with a caret indicate follow-up rows of multi-span rows (this functionality is provided by [[Main/TablePlugin]]).%BB% If a row contains a large amount of text, and you want it to be more readable while editing the table, split the row into multiple text lines by ending each line with a backslash character <code>'\'</code>.%BB% Table cells wrap automatically as determined by the browser. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 | *L* | *C* | *R* |
 | A2 |  2  |  2 |
@@ -246,7 +247,7 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong> %BR% You can create a forced internal link by enclosing words in double square brackets. %BR% <strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; for example, <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. %BR% <strong><em>Note:</em></strong> To "escape" double square brackets that would otherwise be a correct link, use <code>&lt;nop&gt;</code> between the leading left square brackets, that is, begin with <code>[&lt;nop&gt;[....</code></td>
+    <td valign="top"><a name="SquareBrackets"></a> <strong>Forced Links:</strong> %BR% You can create a forced internal link by enclosing words in double square brackets. %BR% <strong><em>Note:</em></strong> Text within the brackets may contain optional spaces; the topic name is formed by capitalizing the initial letter and by removing the spaces; for example, <code>[[text formatting FAQ]]</code> links to topic [[Main/TextFormattingFAQ]]. You can also refer to a different web and use anchors. %BR% <strong><em>Note:</em></strong> To "escape" double square brackets that would otherwise be a correct link, prefix the leading left square brackets with an exclamation point, that is, begin with <code>![[....</code></td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 [[wiki syntax]]
 
@@ -282,9 +283,9 @@ Know.ReadmeFirst
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Prevent a Link:</strong> %BR% Prevent a [[Main/WikiWord]] from being linked by prepending it with the <code>&lt;nop&gt;</code> tag. </td>
+    <td valign="top"><strong>Prevent a Link:</strong> %BR% Prevent a [[Main/WikiWord]] from being linked by prepending it with an exclamation point. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-&lt;nop&gt;SunOS
+!SunOS
 </pre> </font></span></td>
     <td valign="top"> SunOS </td>
   </tr>
@@ -326,6 +327,16 @@ You can use just about any HTML tag without a problem - however, there are a few
 - %X% **NOTE:** The opening and closing angle brackets - <code>**&lt;...&gt;**</code> - of an HTML tag **_must be on the same line_**, or the tag will be broken.
   - This feature allows you to enter an unclosed angle bracket - as a greater than or less than symbol - and have it automatically rendered as if you had entered its HTML character, `&lt;`, ex: <code>**a &lt; b**</code>
   - %T% If you're pasting in preformatted HTML text and notice problems, check the file in a text processor with no text wrap. Also, save without hard line breaks on text wrap, in your HTML editing program.
+
+### <a name="TWiki and _JavaScript"></a> TWiki and JavaScript
+
+You can use JavaScript for your TWiki applications. Sice TWiki rendering might interfere with JavaScript code you need to escape it with HTML comments and `<pre>` tags:
+
+    <script language="JavaScript">
+    <!-- Hide JavaScript and <pre> escape TWiki rendering
+    ... put your JavaScript code here...
+    // Stop hiding and stop </pre> escaping TWiki rendering -->
+    </script>
 
 ## <a name="Hyperlinks"></a> Hyperlinks
 
@@ -369,7 +380,7 @@ Variables are names that are enclosed in percent signs `%` that are expanded on 
 
 - There are many more variables, see **[[TWikiVariables]]**.
 
-- To "escape" a percent sign that would otherwise be interpreted as a variable, add `<nop>` after the first percent sign. Write: <code><span><font> %&lt;nop&gt;SOMEVARIABLE% </font></span></code> to get: %SOMEVARIABLE%.
+- To "escape" a variable, prefix it with an exclamation point. Write: <code><span><font> !%SOMEVARIABLE% </font></span></code> to get: %SOMEVARIABLE%.
 
 ## <a name="TWikiPlugin Formatting Extension"></a><a name="_TWikiPlugin Formatting Extensio"></a> TWikiPlugin Formatting Extensions
 
@@ -399,4 +410,4 @@ TWiki formatting rules are fairly simple to use and quick to type. However, ther
 - **Q:** Why is the `'&'` character sometimes not displayed?
   - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 16 Mar 2004
+-- TWiki:Main.MikeMannix - 02 Dec 2001 <br /> -- TWiki:Main.PeterThoeny - 29 Mar 2004
