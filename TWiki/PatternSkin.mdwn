@@ -87,17 +87,16 @@ You can eiter:
 - Change the `layout.css` and `style.css` attachment files for this topic (upload updated versions)
 - In [[TWikiPreferences]], point the variables `TWIKILAYOUTURL` and `TWIKISTYLEURL` to other attachments, perhaps in another topic (your new skin topic?)
 
-If you want to change colors and white space of screen elements, modify `style.css`. %BR% If you want to change the positioning of screen elements, modify `layout.css`.
-
 See for practical details: [[PatternSkinCustomization]] %BR% The CSS classes that PatternSkin uses are documented in [[PatternSkinCss]].
 
 ## <a name="Customization"></a> Customization
 
-See: [[PatternSkinCustomization]]
+See: [[PatternSkinCustomization]], [[PatternSkinPalette]]
 
 ## <a name="Further reading"></a> Further reading
 
 - [[PatternSkinCustomization]] - Practical information on how to change the looks of PatternSkin
+- [[PatternSkinPalette]] - How to change the colors only
 - [[PatternSkinCss]] - A reference to used CSS classes
 - TWiki:Plugins/PatternSkinDev - Development page, bug reports, solutions from users
 
@@ -122,11 +121,15 @@ See: [[PatternSkinCustomization]]
   </tr>
   <tr>
     <td align="right"> Skin Version: </td>
-    <td> 24 Aug 2004 (v1.0.8) </td>
+    <td> 28 Aug 2004 (v1.0.9) </td>
   </tr>
   <tr>
     <td align="right"> History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 28 Aug 2004: </td>
+    <td> v.1.0.9 - CAIRO RELEASE VERSION - Removed twikiTopic div from attach template </td>
   </tr>
   <tr>
     <td align="right"> 24 Aug 2004: </td>
@@ -207,4 +210,4 @@ Other skins:
 
 Leave remarks, suggestions and other feedback in TWiki:Plugins.PatternSkinDev.
 
--- TWiki:Main/ArthurClemens - 24 Aug 2004
+-- TWiki:Main/ArthurClemens - 28 Aug 2004
