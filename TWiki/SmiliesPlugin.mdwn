@@ -1,4 +1,4 @@
-# <a name="The Smilies Plugin"></a> The Smilies Plugin
+# <a name="The Smilies Plugin :-)"></a> The Smilies Plugin :-)
 
 Smilies are common in e-mail messages and bulletin board posts. They are used to convey an emotion, such as a smile :-) or a frown :-( . This plugin automatically converts certain smilies to a nice small icon.
 
@@ -95,6 +95,26 @@ Here is the list of smilies supported by this plugin. To add others, attach new 
     <td><img alt="confused.gif" src="http://www.dementia.org/twiki//view/confused.gif" /></td>
     <td> "confused" </td>
   </tr>
+  <tr>
+    <td>  &gt;:-) </td>
+    <td><img alt="devil.gif" src="http://www.dementia.org/twiki//view/devil.gif" /></td>
+    <td> "hehe!" </td>
+  </tr>
+  <tr>
+    <td> :devil: </td>
+    <td><img alt="devil.gif" src="http://www.dementia.org/twiki//view/devil.gif" /></td>
+    <td> "hehe!" </td>
+  </tr>
+  <tr>
+    <td>  &gt;;-) </td>
+    <td><img alt="devilwink.gif" src="http://www.dementia.org/twiki//view/devilwink.gif" /></td>
+    <td> "hehe! (friendly)" </td>
+  </tr>
+  <tr>
+    <td> :devilish: </td>
+    <td><img alt="devilwink.gif" src="http://www.dementia.org/twiki//view/devilwink.gif" /></td>
+    <td> "hehe! (friendly)" </td>
+  </tr>
 </table>
 
 ## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
@@ -140,22 +160,26 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
 </table>
 - Test if the plugin is correctly installed:
-  - You will see a series of icons on next line: <br /> :-) :) :cool: :( :o :D ;) :p :rolleyes: :mad: :eek: :confused:
+  - You will see a series of icons on next line: <br /> :-) :) :cool: :( :o :D ;) :p :rolleyes: :mad: :eek: :confused: &gt;:-) &gt;;-)
 
 ## <a name="Plugin Info"></a> Plugin Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td>[[TWiki/AndreaSterbini]]</td>
+    <td> TWiki:Main.AndreaSterbini </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 26 Feb 2003 </td>
+    <td> 16 Feb 2004 (v1.002) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 16 Feb 2004: </td>
+    <td> Added "devil" and "devilwink" smilies (by TWiki:Main.CrawfordCurrie) </td>
   </tr>
   <tr>
     <td align="right"> 26 Feb 2003: </td>
@@ -167,7 +191,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> 20 Apr 2002: </td>
-    <td> Improved performance; removed non-standard Plugin API dependencies; added standard plugin topic content -- [[TWiki/PeterThoeny]]</td>
+    <td> Improved performance; removed non-standard Plugin API dependencies; added standard plugin topic content -- TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
     <td align="right"> 23 Nov 2001: </td>
@@ -205,4 +229,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[AndreaSterbini]] - 28 Dec 2000 <br /> -- [[PeterThoeny]] - 26 Feb 2003
+-- TWiki:Main.AndreaSterbini - 28 Dec 2000 <br /> -- TWiki:Main.PeterThoeny - 16 Feb 2004
