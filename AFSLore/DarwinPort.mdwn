@@ -3,3 +3,7 @@ Darwin is the core of Apple's [[MacOSX]] product.
 The mailing list for this port is <https://lists.openafs.org/mailman/listinfo/port-darwin> and archived at <https://lists.openafs.org/pipermail/port-darwin/>.
 
 -- [[TedAnderson]] - 17 Jan 2002
+
+There are issues with the Finder in this port due to its desire to enumerate and traverse all directories to look for metadata and the poor interaction of this with a fully populated directory of mountpoints mounted as /afs.
+
+-- [[DerrickBrashear]] - 24 Jan 2002
