@@ -84,7 +84,9 @@ __Bold italic__
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 =Fixed font=
 </pre> </font></span></td>
-    <td valign="top"><code>Fixed font</code></td>
+    <td valign="top"><code>Fixed font</code><p>
+      </p>
+    </td>
   </tr>
   <tr bgcolor="#ffffff">
     <td valign="top"><strong>Bold Fixed Font:</strong> %BR% Words get shown in <code><b>bold fixed font</b></code> by enclosing them in <code><b></b></code> double equal signs. </td>
@@ -94,12 +96,12 @@ __Bold italic__
     <td valign="top"><code><b>Bold fixed</b></code></td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong><em>Note:</em></strong> Make sure to "stick" the <code>* _ = ==</code> signs to the words, that is, take away spaces. </td>
+    <td valign="top"><strong><em>Note:</em></strong> Make sure there is no space between the text and the bold, italic, or other indicators (<code>* _ __ = ==</code>). </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 _This works_,
 _this not _
 </pre> </font></span></td>
-    <td valign="top"><em>This works</em>, _this not _ </td>
+    <td valign="top"><em>This works</em>,%BR% _this not _ </td>
   </tr>
   <tr bgcolor="#ffffff">
     <td valign="top"><strong>Verbatim Mode:</strong> %BR% Surround code excerpts and other formatted text with <code>&lt;verbatim&gt;</code> and <code>&lt;/verbatim&gt;</code> tags. %BR% <strong><em>Note:</em></strong> Use <code>&lt;pre&gt;</code> and <code>&lt;/pre&gt;</code> tags instead if you want that HTML code is interpreted. %BR% <strong><em>Note:</em></strong> Each tag must be on a line by itself. </td>
@@ -143,13 +145,13 @@ class CatAnimal {
   <tr bgcolor="#ffffff">
     <td valign="top"><strong>Nested List Item:</strong> %BR% Six, nine, ... spaces and an asterisk. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-		* nested stuff
+	* level 1
+		* level 2
 </pre> </font></span></td>
     <td valign="top">
       <ul>
-        <li>
-          <ul>
-            <li> nested stuff </li>
+        <li> level 1 <ul>
+            <li> level 2 </li>
           </ul>
         </li>
       </ul>
@@ -184,13 +186,15 @@ class CatAnimal {
     </td>
   </tr>
   <tr bgcolor="#ffffff">
-    <td valign="top"><strong>Table:</strong> %BR% Optional spaces followed by the cells enclosed in vertical bars. %BR% <strong><em>Note:</em></strong> <code>| *bold* |</code> cells are rendered as table headers. %BR% <strong><em>Note:</em></strong> <code>|   spaced   |</code> cells are rendered center aligned. %BR% <strong><em>Note:</em></strong> <code>|     spaced |</code> cells are rendered right aligned. %BR% <strong><em>Note:</em></strong> <code>| 2 colspan ||</code> cells are rendered as multi-span columns. %BR% <strong><em>Note:</em></strong> In case you have a long row and you want it to be more readable when you edit the table you can split the row into lines that end with a <code>'\'</code> backslash character. %BR% </td>
+    <td valign="top"><strong>Table:</strong> %BR% Any number of lines of text. Each line is one row of the table consisting of one or more cells. Each cell starts and ends with a vertical bar '|'. Any spaces at the beginning of a line are ignored.%BR% <strong><em>Notes:</em></strong> %BB% <code>| *bold* |</code> cells are displayed as table headers.%BB% <code>|   center-spaced   |</code> cells are displayed center aligned.%BB% <code>|     right-spaced |</code> cells are displayed right aligned.%BB% <code>| 2 colspan ||</code> cells are displayed as multi-span columns (i.e., a cell with no text spans a column).%BB% <code>|^|</code> cells with a caret indicate follow-up rows of multi-span rows.%BB% If a row contains a large amount of text, and you want it to be more readable while editing the table, split the row into multiple text lines by ending each line with a backslash character <code>'\'</code>.%BB% Table cells wrap automatically as determined by the browser. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
 | *L* | *C* | *R* |
 | A2 |  2  |  2 |
 | A3 |  3  |  3 |
 | multi span |||
-| A4 | next | next |
+| A4-6 | four | four |
+|^| five | five |
+|^| six | six |
 </pre> </font></span></td>
     <td valign="top">
       <table border="1" cellpadding="0" cellspacing="0">
@@ -213,9 +217,19 @@ class CatAnimal {
           <td colspan="3"> multi span </td>
         </tr>
         <tr>
-          <td> A4 </td>
-          <td> next </td>
-          <td> next </td>
+          <td> A4-6 </td>
+          <td> four </td>
+          <td> four </td>
+        </tr>
+        <tr>
+          <td> ^ </td>
+          <td> five </td>
+          <td> five </td>
+        </tr>
+        <tr>
+          <td> ^ </td>
+          <td> six </td>
+          <td> six </td>
         </tr>
       </table>
     </td>
@@ -309,7 +323,7 @@ You can use just about any HTML tag without a problem - however, there are a few
 - TWiki converts shorthand notation to XHTML 1.0 for display. To copy a fully marked-up page, simply view source in your browser and save the contents.
   - %T% If you need to save HTML frequently, you may want to check out TWiki:Plugins/GenHTMLAddon - it will "generate a directory containing rendered versions of a set of TWiki pages together with any attached files."
 - %X% **NOTE:** The opening and closing angle brackets - <code>**&lt;...&gt;**</code> - of an HTML tag **_must be on the same line_**, or the tag will be broken.
-  - This feature allows you to enter an unclosed angle bracket - as a greater than or less than symbol - and have it automatically rendered as if you had entered its HTML character, `&lt;`, ex: <code>**a &gt; b**</code>
+  - This feature allows you to enter an unclosed angle bracket - as a greater than or less than symbol - and have it automatically rendered as if you had entered its HTML character, `&lt;`, ex: <code>**a &lt; b**</code>
   - %T% If you're pasting in preformatted HTML text and notice problems, check the file in a text processor with no text wrap. Also, save without hard line breaks on text wrap, in your HTML editing program.
 
 ## <a name="Hyperlinks"></a> Hyperlinks
@@ -382,4 +396,4 @@ TWiki formatting rules are fairly simple to use and quick to type. However, ther
 - **Q:** Why is the `'&'` character sometimes not displayed?
   - **A:** The `'&'` character has a special meaning in HTML, it starts a so called character entity, i.e. `'&copy;'` is the `©` copyright character. You need to escape `'&'` to see it as it is, so write `'&amp;'` instead of `'&'`. <br /> Example: Type `'This &amp; that'` to get `'This & that'`.
 
--- [[MikeMannix]] - 02 Dec 2001 <br /> -- [[PeterThoeny]] - 01 Feb 2003
+-- [[MikeMannix]] - 02 Dec 2001 <br /> -- [[PeterThoeny]] - 15 Jul 2003
