@@ -36,7 +36,7 @@ Form Templates replace TWikiCategoryTables from the 01-Dec-2000 version of TWiki
 
 ## <a name="Main Changes from Category Table"></a> Main Changes from Category Tables
 
-Form Templates more powerful, flexible replacement for the original TWikiCategoryTable. Data from existing category tables can be imported directly.
+The Form Template system is a more powerful, flexible replacement for the original TWikiCategoryTable. Data from existing category tables can be imported directly.
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -92,7 +92,7 @@ A Form Template is simply a page containing your form, defined as a table where 
 ### <a name="Defining a Form in One Topic"></a> Defining a Form in One Topic
 
 1. Create a new topic with your form name: <code>**YourForm**</code>, <code>**ExpenseReport**</code>, <code>**InfoCategory**</code>, <code>**RecordReview**</code>, whatever you need.
-2. Create a TWiki table, with each column head representing one element of an entry field: <code>**Name**</code>, <code>**Type**</code>, <code>**Size**</code>, <code>**Values**</code>, and <code>**Tooltip msessage**</code> _(see sample below)_.
+2. Create a TWiki table, with each column head representing one element of an entry field: <code>**Name**</code>, <code>**Type**</code>, <code>**Size**</code>, <code>**Values**</code>, and <code>**Tooltip message**</code> _(see sample below)_.
 3. For each field, fill in a new line; for the type of field, select from the list.
 4. Save the topic _(you can later choose to [[enable/disable|Main/WebHome#EnablingForms]] individual forms)_.
 
