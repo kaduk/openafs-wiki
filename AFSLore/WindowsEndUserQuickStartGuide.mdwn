@@ -44,7 +44,7 @@ Nowadays, [[OpenAFS]] for Windows does support [[KerberosV]] tickets ("ID cards"
 
 In order to use [[KerberosV]] (recommended), you will have to use Kerberos for Windows, an MIT product. Of course, this requires that you use [[KerberosV]] servers, which still is not always the case. Small sites may still use [[OpenAFS]]'s own Kerberos server implementation, called the **_kaserver_**.
 
-### <a name="A Word of Warning"></a> A Word of Warning
+### <a name="A Word of Advice"></a> A Word of Advice
 
 While installing and configuring AFS, you should keep in mind that the authentication part is the part which most often causes problems. This is partly due to the fact that different generations of Kerberos are kept in the software for backward compatiblity. It may also be that some information is not available to the [[OpenAFS]] developers. Please be patient about getting Kerberos to work.
 
@@ -60,7 +60,7 @@ Now that you know about the existence and uses of Kerberos, we can continue with
 
 The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/release/latest.html) you will always find the latest releases. The ready-to-install Windows package is usually located at the bottom of the page.
 
-The file you download is either an executable file ([[NullSoft]] Installer), or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later.
+The file you download is either an executable file (Nullsoft Installer), or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later. The Nullsoft Installer is preferred when installing interactively. The Microsoft Installer package was developed to make it easier for large sites to deploy [[OpenAFS]] without user interaction.
 
 Note that the [[NullSoft]] Installer and the Microsoft Installer look somewhat different on the screen. They will both be shown in the step-by-step guide below.
 
@@ -91,6 +91,8 @@ The icon with a grey background indicates **_some_** of the subcomponents will b
 <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/3 location.png" width="503" height="386" /> In the Nullsoft Installer, another dialog is used to specify the installation directory. The default location is a good choice.
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/4 cellservdb.png" width="503" height="386" /> For the Nullsoft Installer executable, you also have to decide which [[CellServDB]] to use. This is a deprecated way of telling [[OpenAFS]] which servers to contact to reach files from a specific cell. New sites use DNS lookups instead.
+
+In the Microsoft Installer package, the [[CellServDB]] is preserved if found. Otherwise, the packaged file will be installed. You will not need to confirm this.
 
 If you already have a [[CellServDB]], you should use the existing file. If you are doing a fresh install, download the file from grand.central.org if possible. Otherwise, use the packaged file.
 

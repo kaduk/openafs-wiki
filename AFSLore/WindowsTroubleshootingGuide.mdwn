@@ -31,6 +31,7 @@
             <li><a href="#What happened to the files in th"> What happened to the files in the Windows directory, like <tt>afsdcell.ini</tt>, <tt>afs_freelance.ini</tt> and <tt>afsdsbmt.ini</tt>?</a></li>
             <li><a href="#Why can I not use fs to set the"> Why can I not use <tt>fs</tt> to set the X option anymore?</a></li>
             <li><a href="#Why should I abandon Kerberos 4?"> Why should I abandon Kerberos 4?</a></li>
+            <li><a href="#What is the difference between t"> What is the difference between the Nullsoft Installer (.exe) and the Microsoft Installer (.msi)?</a></li>
           </ul>
         </li>
         <li><a href="#Nomenclature"> Nomenclature</a><ul>
@@ -150,6 +151,14 @@ Starting with version 1.3.65 several settings now require Administrator privileg
 A giant security hole was found in the Kerberos 4 protocol. This led the world to move over to the (already deployed) more secure Kerberos 5 protocol. The problem occurs when using trusted domains.
 
 Recent updates to [[OpenAFS]] include support for Kerberos 5. If your cell still uses **_kaserver_** or a plain Kerberos 4 server, you should update them to use Kerberos 5. The **_kaserver_** can be seen as deprecated. The most common Kerberos 5 servers (KDCs) are [Heimdal](http://www.pdc.kth.se/heimdal/), [MIT Kerberos](http://web.mit.edu/kerberos/www/) and [Microsoft's Active Directory services](http://www.microsoft.com/).
+
+### <a name="What is the difference between t"></a> What is the difference between the Nullsoft Installer (.exe) and the Microsoft Installer (.msi)?
+
+[[OpenAFS]] for Windows is distributed in two different packages. The first uses the Nullsoft Install System (NSIS) and is a stand-alone executable file. The second is the Microsoft (Windows) Installer (MSI) package, which relies on the pre-installed Microsoft Installer.
+
+The NSIS package is preferred for computers you want to install interactively on. The dialogs are more elaborate and gives you more control when installing. On the other hand, if you are deploying on a large Windows site, you may want to do this automagically on all computers at once, thus not using an interactive interface. For this reason, the (scriptable) Microsoft Installer package was design as a common base. You can modify the steps to suit your needs.
+
+For more information, see the [MSI Deployment Guide](http://www.openafs.org/dl/openafs/1.3.70/winnt/msi-deployment-guide.txt).
 
 ## <a name="Nomenclature"></a> Nomenclature
 
