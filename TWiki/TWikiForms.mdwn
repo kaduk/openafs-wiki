@@ -2,21 +2,18 @@
   <ul>
     <li><a href="#TWiki Form Templates"> TWiki Form Templates</a><ul>
         <li><a href="#Overview"> Overview</a></li>
-        <li><a href="#Changes from the Category Table"> Changes from the Category Table System</a><ul>
-            <li><a href="#Importing Existing Category Tabl"> Importing Existing Category Table Data</a></li>
+        <li><a href="#Main Changes from Category Table"> Main Changes from Category Tables</a><ul>
+            <li><a href="#Importing Category Table Data"> Importing Category Table Data</a></li>
           </ul>
         </li>
-        <li><a href="#Form Template Elements"> Form Template Elements</a><ul>
-            <li><a href="#Defining a Form Template"> Defining a Form Template</a></li>
+        <li><a href="#Defining a Form Template"> Defining a Form Template</a><ul>
+            <li><a href="#Form Template Elements"> Form Template Elements</a></li>
             <li><a href="#Defining a Form in One Topic"> Defining a Form in One Topic</a></li>
-            <li><a href="#Defining a Form in Multiple Topi"> Defining a Form in Multiple Topics</a><ul>
-                <li><a href="#Implementation Notes"> Implementation Notes</a></li>
-              </ul>
-            </li>
+            <li><a href="#Defining a Form with Multiple To"> Defining a Form with Multiple Topics</a></li>
           </ul>
         </li>
         <li><a href="#Enabling Forms by Web"> Enabling Forms by Web</a></li>
-        <li><a href="#Creating New Topics with Forms"> Creating New Topics with Forms</a></li>
+        <li><a href="#Including Forms in New Topics"> Including Forms in New Topics</a></li>
         <li><a href="#Setting Up Multiple Form Options"> Setting Up Multiple Form Options</a></li>
         <li><a href="#Form Template Data Storage"> Form Template Data Storage</a></li>
       </ul>
@@ -36,11 +33,9 @@ Form Templates replace TWikiCategory Tables from the 01-Dec-2000 version of TWik
 
 <a name="FormsVsCategoryTables"></a>
 
-## <a name="Changes from the Category Table"></a><a name="Changes from the Category Table "></a> Changes from the Category Table System
+## <a name="Main Changes from Category Table"></a> Main Changes from Category Tables
 
 Form Templates more powerful, flexible replacement for the original TWikiCategoryTable. Data from existing category tables can be imported directly.
-
-Main changes from TWikiCategoryTable:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -65,7 +60,7 @@ Main changes from TWikiCategoryTable:
   </tr>
 </table>
 
-### <a name="Importing Existing Category Tabl"></a> Importing Existing Category Table Data
+### <a name="Importing Category Table Data"></a> Importing Category Table Data
 
 On upgrading from the previous TWiki, a Form Template topic has to be built for each web that used a Category Table, recreating the fields and values from the old <code>**twikicatitems.tmpl**</code>. The replacement Form Template must be set as the first item in the [[WebPreferences]] variable `=WEBFORM`. If missing, pages will display, but attempting to edit results in an error message.
 
@@ -73,7 +68,11 @@ The new Form Template system should work with old Category Table data with no sp
 
 **_NOTE:_** If things aren't working correctly, there may be useful entries in `data/warning.txt`.
 
-## <a name="Form Template Elements"></a> Form Template Elements
+## <a name="Defining a Form Template"></a> Defining a Form Template
+
+A Form Template is simply a page containing your form, defined in a table where each row is one form field.
+
+### <a name="Form Template Elements"></a> Form Template Elements
 
 - **form template** - a set of fields defining a form (replaces _category table definition_)
   - A web can use one or more form templates.
@@ -89,9 +88,7 @@ The new Form Template system should work with old Category Table data with no sp
   - **textarea** - a text box; size is 40x10 (columns x rows)
 - **field value** - one or more values from a fixed set (select, checkbox, radio type) or free-form (text). (replaces _category item value_)
 
-### <a name="Defining a Form Template"></a> Defining a Form Template
-
-A Form Template is simply a page containing your form, defined in a table where each row is one form field.
+### <a name="Defining a Form in One Topic"></a> Defining a Form in One Topic
 
 1. Create a new topic with your Form name: MyForm, ExpenseReport, InfoCategory, RecordReview, whatever you need.
 2. Create a TWiki table, with each column representing one element of an entry field: Name, Type, Size, Values, and Tooltip msessage (see sample below).
@@ -106,10 +103,6 @@ A Form Template is simply a page containing your form, defined in a table where 
 >     | Know.OperatingSystem | checkbox | 3 | Know.OsHPUX, Know.OsLinux,
 >       Know.OsSolaris, Know.OsWin | blah blah... |
 >     | Know.OsVersion | text | 16 | | blah blah... |
-
-### <a name="Defining a Form in One Topic"></a> Defining a Form in One Topic
-
-> **Example: WebFormTemplate from the TWiki.Know web**
 >
 > <table border="1" cellpadding="0" cellspacing="0">
 >   <tr>
@@ -142,16 +135,16 @@ A Form Template is simply a page containing your form, defined in a table where 
 >   </tr>
 > </table>
 
-### <a name="Defining a Form in Multiple Topi"></a> Defining a Form in Multiple Topics
+### <a name="Defining a Form with Multiple To"></a> Defining a Form with Multiple Topics
 
 The Form Template can also be defined in an alternative way by using more then one topic:
 
-- A Form Template topic defines the form.
-- Values of fields that have more then one value - radio, select, checkbox - can be defined by field value Template topics.
+- A Form Template topic defines the Form.
+- Fields that have more then one value - radio, select, checkbox - can be defined in individual field value topics.
 
-> **Code from:**
+> **Example: WebFormTemplate**
 >
-> - WebFormTemplate of the TWiki.Know web: <table border="1" cellpadding="0" cellspacing="0">
+> - Know.WebFormTemplate Form main definition: <br />   <table border="1" cellpadding="0" cellspacing="0">
 >   <tr>
 >     <th bgcolor="#99CCCC"><strong> Name </strong></th>
 >     <th bgcolor="#99CCCC"><strong> Type </strong></th>
@@ -163,26 +156,26 @@ The Form Template can also be defined in an alternative way by using more then o
 >     <td>[[Know/TopicClassification]]</td>
 >     <td> select </td>
 >     <td> 1 </td>
->     <td>   </td>
+>     <td align="center"> ... </td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
 >     <td>[[Know/OperatingSystem]]</td>
 >     <td> checkbox </td>
 >     <td> 3 </td>
->     <td>   </td>
+>     <td align="center"> ... </td>
 >     <td> blah blah... </td>
 >   </tr>
 >   <tr>
 >     <td>[[Know/OsVersion]]</td>
 >     <td> text </td>
 >     <td> 16 </td>
->     <td>   </td>
+>     <td align="center"> ... </td>
 >     <td> blah blah... </td>
 >   </tr>
 > </table>
 >
-> - TopicClassification topic: <table border="1" cellpadding="0" cellspacing="0">
+> - Know.TopicClassification field value definition: <br />   <table border="1" cellpadding="0" cellspacing="0">
 >   <tr>
 >     <th bgcolor="#99CCCC"><strong> Name </strong></th>
 >     <th bgcolor="#99CCCC"><strong> Type </strong></th>
@@ -205,9 +198,7 @@ The Form Template can also be defined in an alternative way by using more then o
 >   </tr>
 > </table>
 
-#### <a name="Implementation Notes"></a> Implementation Notes
-
-- - This format allows you to define field items with / without [[WikiNames]], depending on your needs.
+- **Implementation Notes:** This format allows you to define field items with or without [[WikiNames]], depending on your needs.
 
 - - The topic can be protected in the usual manner so that not everybody can change the form template - see [[TWikiAccessControl]]
 
@@ -233,9 +224,13 @@ Forms are enabled on a per web basis. The <code>**WEBFORMS**</code> variable in 
   - other than checkboxes: `name`, ex: `?BugPriority=1`
   - checkbox: `namevalue=1`, ex: `?ColourRed=1`. <br /> Boxes with a tick must be specified.
 
-## <a name="Creating New Topics with Forms"></a> Creating New Topics with Forms
+## <a name="Including Forms in New Topics"></a> Including Forms in New Topics
 
-When you create a new topic in a web that has the WEBFORMS Preferences variable set, an **Add Form** button appears at the bottom of the page. If the [[WebTopicEditTemplate]] topic has a form added, the form will appear with values set; press **Change** to remove the template or to switch to a different one.
+When you create a new topic in a web that has the WEBFORMS Preferences variable set, an **Add Form** button appears at the bottom of the page. You can start all new topics with forms enabled, and pre-select a form if there's more than one available:
+
+1. **Edit** the [[WebTopicEditTemplate]] topic, adding the name of an available Form.
+2. **Create** a new topic to check - the Form should appear with values set.
+  - Click **Change** to switch or remove Forms.
 
 A form embedded in a topic also appears in a new topic. This is done by specifying the `formtemplate` parameter in the URL.
 
