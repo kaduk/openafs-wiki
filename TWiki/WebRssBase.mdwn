@@ -10,7 +10,7 @@ There are three ways to find out what's new in each TWiki web:
 
 - The URL for an RSS feed is `http://www.dementia.org/twiki//view/<web>/WebRss?skin=rss`
 - For this %WEB% web it is <http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss> (or [http://www.dementia.org/twiki//view/Main/WebRss?skin=rss&amp;contenttype=text/plain](http://www.dementia.org/twiki//view/Main/WebRss?skin=rss&contenttype=text/plain) for plain text RSS)
-- You can also create a custom feed based on a search. Add a `search=value` parameter to the URL, e.g. [http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&amp;search=plugin=](http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&search=plugin=) is a what's new feed about Plugins.
+- You can also create a custom feed based on a search. Add a `search=value` parameter to the URL, e.g. [http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&amp;search=plugin](http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&search=plugin) is a what's new feed about Plugins.
 
 ## <a name="RSS Feed Internals"></a> RSS Feed Internals
 
@@ -54,7 +54,7 @@ Below part is included by each WebRss topic:
       <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%</link>
       <url>%PUBURL%/%TWIKIWEB%/TWikiLogos/twikilogo88x31.gif</url>
     </image>
-    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="<item rdf:about=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\">$n  <title>$topic</title>$n  <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic</link>$n  <description>$summary</description>$n  <dc:date>$isodate</dc:date>$n  <dc:contributor>$n    <rdf:Description link=\"%SCRIPTURL%/view%SCRIPTSUFFIX%?topic=$wikiusername\">$n      <rdf:value>$username</rdf:value>$n    </rdf:Description>$n  </dc:contributor>$n  <wiki:version>$rev</wiki:version>$n  <wiki:status>updated</wiki:status>$n  <wiki:importance>major</wiki:importance>$n  <wiki:diff>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:diff>$n  <wiki:history>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:history>$n</item>"}%
+    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="<item rdf:about=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\">$n  <title>$topic</title>$n  <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic?t=$isodate</link>$n  <description>$summary</description>$n  <dc:date>$isodate</dc:date>$n  <dc:contributor>$n    <rdf:Description link=\"%SCRIPTURL%/view%SCRIPTSUFFIX%?topic=$wikiusername\">$n      <rdf:value>$username</rdf:value>$n    </rdf:Description>$n  </dc:contributor>$n  <wiki:version>$rev</wiki:version>$n  <wiki:status>updated</wiki:status>$n  <wiki:importance>major</wiki:importance>$n  <wiki:diff>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:diff>$n  <wiki:history>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:history>$n</item>"}%
     %STOPINCLUDE%
 
 ----
