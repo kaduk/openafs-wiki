@@ -162,6 +162,14 @@ TWiki expands the following variables enclosed in % percent signs:
         </tr>
       </table> Example: <code><b>%SEARCH{"wiki" web="Main" scope="topic"}%</b></code></td>
   </tr>
+  <tr>
+    <td><code>%VAR{"NAME" web="Web"}%</code></td>
+    <td> Get a preference value from another web then the current one. Example: To get <code>%WEBBGCOLOR%</code> of the Main web write <code>%VAR{"WEBBGCOLOR" web="Main"}%</code>, is <code><b></b></code></td>
+    <td>
+      <p>
+      </p>
+    </td>
+  </tr>
 </table>
 
 [1] **_Note_**: A web can be excluded from a `web="all"` search if you define a `NOSEARCHALL=on` variable in its [[WebPreferences]].
@@ -246,4 +254,11 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
   </tr>
 </table>
 
--- [[PeterThoeny]] - 18 Sep 2000 <br />
+**_Notes:_**
+
+- Preferences variables ( on site-level, web-level and user level ) are defined by bullet lines with this syntax:
+  - `Set VARIABLENAME = value`
+- Additional preferences variables can be defined on all three level as needed. Example:
+  - `Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif`
+
+-- [[PeterThoeny]] - 01 Nov 2000 <br />
