@@ -14,7 +14,6 @@
         </li>
         <li><a href="#Additional Server-Level Options"> Additional Server-Level Options</a><ul>
             <li><a href="#Enabling Authentication of Users"> Enabling Authentication of Users</a></li>
-            <li><a href="#Adding a New Web"> Adding a New Web</a></li>
           </ul>
         </li>
         <li><a href="#TWiki File System Info"> TWiki File System Info</a></li>
@@ -221,24 +220,6 @@ With your new TWiki installation up and running, you can manage most aspects of 
 - Edit the [[TWikiAdminGroup]] topic in the TWiki:Main web to include users with system administrator status.
 - Edit the [[TWikiPreferences]] topic in the TWiki:TWiki web to set access privileges.
 - Edit the [[WebPreferences]] topic in each web, if necessary: set access priviliges.
-
-<a name="CreateWeb"></a>
-
-### <a name="Adding a New Web"></a> Adding a New Web
-
-To create a new web:
-
-1. **Create** a new web data directory under `twiki/data` and check the file permission of the directory.
-  - Use a name consisting of characters `A..Z` , `a..z` but **_not_** in [[WikiNotation]]. (The name should start with one (or more) uppercase letters, but have no uppercase letters after the first group -- if it starts with a lowercase letter or is a [[WikiWord]], some features of TWiki will not work as expected.)
-2. **Copy** all files from the `twiki/data/_default` directory to the new data directory, preserving the original files' owner, group and permissions (on Unix, use `cp -p`). The data files must be writable by the owner the CGI scripts are running on (usually, `nobody`).
-  - %T% **HINT:** You can set permissions of `.txt` and `.txt,v` files to `-rw-rw-rw-` (666) and then edit the topic using your browser; RCS will restore the file permissions correctly when saving the topic.
-3. **Add** the new web to the web list (visible in the upper right corner of each topic) by editing the site-level preferences, [[TWikiPreferences]]:
-  - Add the new web to the `%WIKIWEBLIST%` variable.
-4. **Update** the web settings by editing the WebPreferences topic of the new web:
-  - Customize the `%WEBTOPICLIST%` variable to contain the web-specific links you prefer.
-  - Set the WEBBGCOLOR variable to a color. The number represents the unique color for the web.
-  - Set Plugins, access privileges, custom variables, other web-level options (ex: `%WEBCOPYRIGHT%` can be set for an individual web).
-5. **Test** the new web: view pages, create a new page.
 
 That's it for a basic new web set-up!
 

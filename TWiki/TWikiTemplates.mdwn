@@ -8,6 +8,7 @@
             <li><a href="#Master Templates"> Master Templates</a></li>
             <li><a href="#HTML Page Templates"> HTML Page Templates</a></li>
             <li><a href="#Template Topics"> Template Topics</a><ul>
+                <li><a href="#Edit Template Topics and Variabl"> Edit Template Topics and Variable Expansion</a></li>
                 <li><a href="#Template Topics in Action"> Template Topics in Action</a></li>
               </ul>
             </li>
@@ -150,6 +151,44 @@ All template topics are located in the TWiki web. The [[WebTopicEditTemplate]] c
 2. WebTopicEditTemplate in the current web
 3. WebTopicEditTemplate in the TWiki web
 
+#### <a name="Edit Template Topics and Variabl"></a> Edit Template Topics and Variable Expansion
+
+The following variables get expanded when a user creates a new topic based on a template topic:
+
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th bgcolor="#99CCCC"><strong> Variable: </strong></th>
+>     <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+>   </tr>
+>   <tr>
+>     <td><code>%DATE%</code></td>
+>     <td> Current date, e.g. <code>29 Jun 2010</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>%WIKIUSERNAME%</code></td>
+>     <td> User name, e.g. <code>Main.admin</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>%URLPARAM{"name"}%</code></td>
+>     <td> Value of a named URL parameter </td>
+>   </tr>
+>   <tr>
+>     <td><code>%NOP%</code></td>
+>     <td> A no-operation variable that gets removed. Useful to prevent a SEARCH from hitting an edit template topic; also useful to escape a variable like <code>%URLPARAM%NOP%{...}%</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>%NOP{ ... }%</code></td>
+>     <td> A no-operation text that gets removed. Useful to write-protect an edit template topic, but not the topics based this template topic. See notes below. Example:%BR% <code>%NOP{%BR%   * Set ALLOWTOPICCHANGE = Main.TWikiAdminGroup%BR% }%</code></td>
+>   </tr>
+> </table>
+
+**_Notes:_**
+
+- Unlike other variables, `%NOP{ ... }%` can span multiple lines.
+- The scan for the closing `}%` pattern is "non-greedy", that is, it stops at the first occurance. That means, you need to escape variables with parameters located inside `%NOP{ ... }%`: Insert a `%NOP%` between `}` and `%`. Silly example: `%NOP{ %GMTIME{"$year"}%NOP%% }%`.
+
+All other variables are unchanged, e.g. are carried over "as is" into the new topic.
+
 #### <a name="Template Topics in Action"></a> Template Topics in Action
 
 Here is an example for creating new topics based on a specific template topic:
@@ -273,4 +312,4 @@ With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=W
 
 - A drawback of referring to a master template is that you can only test a template from within TWiki, where the include variables are resolved. In the previous system, each template was a structurally complete HTML document with a `.tmpl` filename extension - it contained unresolved `%VARIABLES%`, but could still be previewed directly in a browser.
 
--- [[PeterThoeny]] - 23 Jul 2001 <br /> -- [[MikeMannix]] - 14 Sep 2001 <br /> -- TWiki:Main/DavidLeBlanc - 11 Mar 2002
+-- [[PeterThoeny]] - 01 Feb 2003 <br /> -- [[MikeMannix]] - 14 Sep 2001 <br /> -- TWiki:Main/DavidLeBlanc - 11 Mar 2002
