@@ -1,6 +1,7 @@
 <div>
   <ul>
     <li><a href="#Managing Webs"> Managing Webs</a><ul>
+        <li><a href="#Overview"> Overview</a></li>
         <li><a href="#How to Add a New Web"> How to Add a New Web</a></li>
         <li><a href="#How to Rename or Delete a Web"> How to Rename or Delete a Web</a></li>
       </ul>
@@ -10,7 +11,11 @@
 
 ## <a name="Managing Webs"></a> Managing Webs
 
-To work with entire TWiki webs, you need direct access to the installation files on the host server. Connecting by Telnet or FTP is the usual approach. Before making changes to a web, you can move individual topics through your browser (see [[ModifyTopics|TWiki/ManagingTopics]]). No similar web controls are available through the browser interface.
+Adding, renaming and deleting webs is done directly on the server
+
+### <a name="Overview"></a> Overview
+
+To work with entire TWiki webs, you need direct access to the installation files on the host server. Connecting by Telnet or FTP is the usual approach. There are no browser-based web management tools. You can prepare a web for changes through browser-based individual topics by browser (see [[ModifyTopics|TWiki/ManagingTopics]]).
 
 ### <a name="How to Add a New Web"></a> How to Add a New Web
 
