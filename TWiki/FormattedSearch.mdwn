@@ -1,10 +1,7 @@
-**Formatted Search Using <code>**%SEARCH\{... format="..."\}%**</code> Variable**
-
 <div>
   <ul>
-    <li>
-      <ul>
-        <li><a href="#Preface"> Preface</a></li>
+    <li><a href="#TWiki Formatted Search Results"> TWiki Formatted Search Results</a><ul>
+        <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Syntax"> Syntax</a></li>
         <li><a href="#Examples"> Examples</a><ul>
             <li><a href="#Bullet list showing topic name a"> Bullet list showing topic name and summary</a></li>
@@ -25,7 +22,11 @@
   </ul>
 </div>
 
-## <a name="Preface"></a> Preface
+# <a name="TWiki Formatted Search Results"></a> TWiki Formatted Search Results
+
+_Inline search feature allows flexible formatting of search result_
+
+## <a name="Overview"></a> Overview
 
 By default, the format for displaying a search result is fixed, e.g. a table with rows of topic name and topic summary. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (i.e. `%SEARCH{ "food" format="| $topic | $summary |" }%`).
 
