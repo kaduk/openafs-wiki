@@ -271,7 +271,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:04</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:08</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
@@ -626,7 +626,7 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 
 ## <a name="Setting Preferences"></a> Setting Preferences
 
-- The syntax for Preferences Bariables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />[3 spaces] \* [space] Set [space] VARIABLENAME [space] = [value]<br />**_Examples:_**
+- The syntax for Preferences Variables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />[3 spaces] \* [space] Set [space] VARIABLENAME [space] = [value]<br />**_Examples:_**
 - <code>**Set VARIABLENAME = =value=**</code>
   - <code>**Set VARIABLENAME = =value=**</code>
 
