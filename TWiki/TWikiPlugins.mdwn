@@ -5,7 +5,7 @@
         <li><a href="#Preinstalled Plugins"> Preinstalled Plugins</a></li>
         <li><a href="#Installing Plugins"> Installing Plugins</a><ul>
             <li><a href="#On-Site Pretesting"> On-Site Pretesting</a></li>
-            <li><a href="#A Note on Performance"> A Note on Performance</a></li>
+            <li><a href="#A Note on Plugin Performance"> A Note on Plugin Performance</a></li>
           </ul>
         </li>
         <li><a href="#Managing Plugins"> Managing Plugins</a><ul>
@@ -16,6 +16,7 @@
         <li><a href="#The TWiki Plugin API"> The TWiki Plugin API</a><ul>
             <li><a href="#Available Core Functions"> Available Core Functions</a></li>
             <li><a href="#Predefined Hooks"> Predefined Hooks</a></li>
+            <li><a href="#Hints on Writing Fast Plugins"> Hints on Writing Fast Plugins</a></li>
             <li><a href="#Plugin Version Detection"> Plugin Version Detection</a></li>
           </ul>
         </li>
@@ -49,13 +50,17 @@ Everything to do with TWiki Plugins - demos, new releases, downloads, developmen
 
 ## <a name="Preinstalled Plugins"></a> Preinstalled Plugins
 
-TWiki comes with three Plugins as part of the standard installation.
+TWiki comes with a set of Plugins as part of the standard installation.
 
-- **[[DefaultPlugin]]** optionally handles some legacy variables from older versions of TWiki. You can control this option from [[TWikiPreferences]]. (Perl programmers can also [[add rules|Main/WebHome#DefaultPluginAlt]] for simple custom processing.)
-
-- **[[EmptyPlugin]]** is a fully functional module, minus active code; it does nothing and serves as a template for new Plugin development.
-
-- **[[InterwikiPlugin]]** is preinstalled but can be disabled or removed. Use it for shorthand linking to remote sites, ex: `TWiki:Plugins` expands to TWiki:Plugins on TWiki.org. You can edit the predefined set of of Wiki-related sites, and add your own.
+- [[DefaultPlugin]]: Optionally handles some legacy variables from older versions of TWiki. You can control this option from [[TWikiPreferences]]. (Perl programmers can also [[add rules|Main/WebHome#DefaultPluginAlt]] for simple custom processing.)
+- [[EmptyPlugin]]: Is a fully functional module, minus active code; it does nothing and serves as a template for new Plugin development.
+- [[InterwikiPlugin]]: Use it for shorthand linking to remote sites, ex: `TWiki:Plugins` expands to TWiki:Plugins on TWiki.org. You can edit the predefined set of of Wiki-related sites, and add your own.
+- [[EditTablePlugin]]: %EDITTABLEPLUGIN\_SHORTDESCRIPTION%
+- [[RenderListPlugin]]: %RENDERLISTPLUGIN\_SHORTDESCRIPTION%
+- [[SlideShowPlugin]]: %SLIDESHOWPLUGIN\_SHORTDESCRIPTION%
+- [[SmiliesPlugin]]: %SMILIESPLUGIN\_SHORTDESCRIPTION%
+- [[SpreadSheetPlugin]]: %SPREADSHEETPLUGIN\_SHORTDESCRIPTION%
+- [[TablePlugin]]: %TABLEPLUGIN\_SHORTDESCRIPTION%
 
 <a name="InstallPlugin"></a>
 
@@ -91,9 +96,9 @@ To test new Plugins on your installation before making them public, you may want
 
 - **Method 2:** List the Plugin being tested in the `DISABLEDPLUGINS` variable in [[TWikiPreferences]]. Redefine the `DISABLEDPLUGINS` variable in the `Sandbox` web and do the testing there.
 
-### <a name="A Note on Performance"></a> A Note on Performance
+### <a name="A Note on Plugin Performance"></a> A Note on Plugin Performance
 
-The performance of the system depends on the number of Plugins installed and on the Plugin implementation. Some Plugins impose no measurable performance decrease, some do. For example, `outsidePREHandler` is an expensive callback function, or a Plugin might use many Perl libraries that needs to be initialized with each page view (unless you run mod\_perl). It is recommended to measure the performance with and without a new Plugin. Example for Unix:%BR% `time wget -qO /dev/null http://www.dementia.org/twiki//view/TWiki/AbcPlugin`
+The performance of the system depends on the number of Plugins installed and on the Plugin implementation. Some Plugins impose no measurable performance decrease, some do. For example, `outsidePREHandler` is an expensive callback function, or a Plugin might use many Perl libraries that need to be initialized with each page view (unless you run mod\_perl). It is recommended to measure the performance with and without a new Plugin. Example for Unix:%BR% `time wget -qO /dev/null http://www.dementia.org/twiki//view/TWiki/AbcPlugin`
 
 In case you need to install an "expensive" Plugin and you need its functionality only in one web you can place the Plugin topic into that web. TWiki will initialize the Plugin only if the Plugin topic is found (which won't be the case for other webs.)
 
@@ -161,6 +166,20 @@ In addition to TWiki core functions, Plugins can use **predefined hooks**, or **
 
 - All but the initPlugin are disabled. To enable a call back, remove `DISABLE_` from the function name.
 - For best performance, enable only the functions you really need. NOTE: `outsidePREHandler` and `insidePREHandler` are particularly expensive.
+
+Most Plugins use either the `commonTagsHandler` or `startRenderingHandler` for rendering tasks:
+
+- `commonTagsHandler:` Use it to expand `%XYZPLUGIN%` and `%XYZPLUGIN{...}%` variables
+- `startRenderingHandler:` Use it for your own rendering rules or to overload TWiki's internal rendering like `[[links]]`
+
+TWiki:Codev/StepByStepRenderingOrder helps you decide which rendering handler to use.
+
+### <a name="Hints on Writing Fast Plugins"></a> Hints on Writing Fast Plugins
+
+- Delay the Plugin initialization to the actual function which is handling the tag. This way all the expensive initialization is done only when needed.
+- For example, use an `eval` block like:%BR% `eval { require IPC::Run }` %BR% `return "<font color=\"red\">SamplePlugin: Can't load required modules ($@)</font>" if $@;`
+- You could return errors as strings to show what happened
+- You can use a flag to avoid running the initialization twice
 
 ### <a name="Plugin Version Detection"></a> Plugin Version Detection
 
@@ -269,4 +288,4 @@ You can release your tested, packaged Plugin to the TWiki community through the 
 2. **Attach** the distribution zip file to the topic, ex: `MyFirstPlugin.zip`
 3. **Link** from the doc page to a new, blank page named after the Plugin, and ending in `Dev`, ex: `MyFirstPluginDev`. This is the discussion page for future development. (User support for Plugins is handled in TWiki:Support.)
 
--- [[AndreaSterbini]] - 29 May 2001 <br /> -- [[PeterThoeny]] - 29 Jan 2003 <br /> -- [[MikeMannix]] - 03 Dec 2001
+-- [[AndreaSterbini]] - 29 May 2001 <br /> -- [[PeterThoeny]] - 11 Dec 2003 <br /> -- [[MikeMannix]] - 03 Dec 2001
