@@ -30,7 +30,9 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
 
 ### <a name="4.01  Is there an anonymous FTP"></a><a name="4.01  Is there an anonymous FTP "></a> 4.01 Is there an anonymous FTP site with AFS information?
 
-Yes, it is: [ftp.transarc.com](ftp://ftp.transarc.com/)
+Yes, it is: [ftp.transarc.com](ftp://ftp.transarc.com/).
+
+**NOTE:** Due to security limitations on the FTP server, the 'ls' command is not allowed for anonymous users. Instead, use the MANIFEST document to find what you are looking for, and then issue 'get' or 'mget' commands to retrieve files.
 
 A brief summary of contents:
 
@@ -91,7 +93,13 @@ A brief summary of contents:
 
 These directories are also accessible via AFS. For example: <file:///afs/transarc.com/public/anon-ftp/pub/afs-contrib>
 
+This should be accessible if you have a currently running AFS client, and transarc.com is in your [[CellServDB]].
+
 (NB "pub" =&gt; "public/anon-ftp/pub" when using AFS to access these.)
+
+A final option allows you to use the [[WWWtoAFS]] trick to view the public FTP service. To reach te FTP site this way, try pointing your browser to the following URL:
+
+<http://lost-contact.mit.edu/afs/net/project/afs32/transarc.com/public/anon-ftp/pub/>
 
 ### <a name="4.02  Which USENET newsgroups di"></a> 4.02 Which USENET newsgroups discuss AFS?
 
