@@ -35,11 +35,11 @@ Two paramters can be used to specify a customized search result:
 
 1. `header="..."` parameter
 
-Use the header paramter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. I.e. `header="| *Topic:* | *Summary:* |"`
+Use the header paramter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. I.e. <br />`header="| *Topic:* | *Summary:* |"`
 
 2. `format="..."` parameter
 
-Use the format paramter to specify the format of one search hit. I.e. `format="| $topic | $summary |"`
+Use the format paramter to specify the format of one search hit. I.e. <br />`format="| $topic | $summary |"`
 
 Variables that can be used in the format string:
 
@@ -47,6 +47,10 @@ Variables that can be used in the format string:
   <tr>
     <th bgcolor="#99CCCC"><strong> Name: </strong></th>
     <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$n</code></td>
+    <td> New line </td>
   </tr>
   <tr>
     <td><code>$web</code></td>
@@ -62,7 +66,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update </td>
+    <td> Time stamp of last topic update, i.e. <code>29 Jun 2010 - 15:31</code></td>
+  </tr>
+  <tr>
+    <td><code>$isodate</code></td>
+    <td> Time stamp of last topic update, i.e. <code>2010-06-29T15:31Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -73,12 +81,16 @@ Variables that can be used in the format string:
     <td> Wiki user name of last topic update, i.e. <code>Main.JohnSmith</code></td>
   </tr>
   <tr>
+    <td><code>$username</code></td>
+    <td> User name of last topic update, i.e. <code>JohnSmith</code></td>
+  </tr>
+  <tr>
     <td><code>$summary</code></td>
     <td> Topic summary </td>
   </tr>
   <tr>
     <td><code>$formfield(name)</code></td>
-    <td> The field value of a form field, i.e. <code>$formfield([[Main/TopicClassification]])</code> would get expanded to <code>PublicFAQ</code>. This applies only to topics that have a [[Main/TWikiForms]]</td>
+    <td> The field value of a form field, i.e. <code>$formfield(TopicClassification)</code> would get expanded to <code>PublicFAQ</code>. This applies only to topics that have a [[Main/TWikiForms]]</td>
   </tr>
   <tr>
     <td><code>$pattern(reg-exp)</code></td>
@@ -106,7 +118,7 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 Write this in the Know web:
 
-`| *Topic:* | *OperatingSystem:* | *OsVersion:* |`<br /><code>%SEARCH\{ "[T]opicClassification.\*?value=\\"[P]ublicFAQ\\"" scope="text" regex="on" nosearch="on" nototal="on" format="| \[[$topic]] | $formfield([[OperatingSystem]]) | $formfield([[OsVersion]]) |" \}%</code>
+`| *Topic:* | *OperatingSystem:* | *OsVersion:* |`<br />`%SEARCH{ "[T]opicClassification.*?value=\"[P]ublicFAQ\"" scope="text" regex="on" nosearch="on" nototal="on" format="| [[$topic]] | $formfield(OperatingSystem) | $formfield(OsVersion) |" }%`
 
 To get this:
 
@@ -140,4 +152,4 @@ To get this:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
--- [[PeterThoeny]] - 24 Oct 2001 <br />
+-- [[PeterThoeny]] - 28 Nov 2001 <br />
