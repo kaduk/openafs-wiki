@@ -74,7 +74,21 @@
     <td> no </td>
     <td> server </td>
     <td> yes </td>
-    <td> Intel x86 - [[Main/OpenBSD]] 2.9 </td>
+    <td> Intel x86 - [[Main/OpenBSD]] 2.9 openafs: 1.2.8, 1.3.2 - use 'configure --with-afs-sysname=i386_obsd29' </td>
+  </tr>
+  <tr>
+    <td> i386_obsd31 </td>
+    <td> no </td>
+    <td> server </td>
+    <td> yes </td>
+    <td> Intel x86 - [[Main/OpenBSD]] 3.1 - openafs: currently only via snapshots - use 'configure --with-afs-sysname=i386_obsd31' </td>
+  </tr>
+  <tr>
+    <td> i386_obsd32 </td>
+    <td> no </td>
+    <td> server </td>
+    <td> yes </td>
+    <td> Intel x86 - [[Main/OpenBSD]] 3.2 - openafs: currently only via snapshots - use 'configure --with-afs-sysname=i386_obsd32' </td>
   </tr>
   <tr>
     <td> i386_nbsd14 </td>
