@@ -7,9 +7,8 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
     <li><a href="#Syntax"> Syntax</a></li>
     <li><a href="#Usage Examples"> Usage Examples</a><ul>
         <li><a href="#1. Display regression test resul"> 1. Display regression test results in a TWiki page</a></li>
-        <li><a href="#2. Display Yahoo's robot.txt fil"> 2. Display Yahoo's robot.txt file</a></li>
-        <li><a href="#3. Display the SUNW stock quote"> 3. Display the SUNW stock quote in a TWiki page</a></li>
-        <li><a href="#4. Display the temperature in Sa"> 4. Display the temperature in San Francisco</a></li>
+        <li><a href="#2. Display Google's robot.txt fi"> 2. Display Google's robot.txt file</a></li>
+        <li><a href="#3. Display the current time in T"> 3. Display the current time in Tokyo in a TWiki page</a></li>
       </ul>
     </li>
   </ul>
@@ -28,7 +27,7 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
 
 - <code>**rev="1.x"**</code>: %BR% The **rev** parameter is optional and allows you to include an earlier revision of a topic. This can be used to include an official version of a topic, e.g. one that has been signed of by management. This parameter does not apply to URLs.
 
-**_Note:_** All text of a topic is included unless you specify <code>**%STARTINCLUDE%**</code>, <code>**%STOPINCLUDE%**</code> and/or a **pattern** parameter.
+**_Note:_** All text of a topic is included unless you specify <code>**%STARTINCLUDE%**</code>, <code>**%STOPINCLUDE%**</code> and/or a **pattern** parameter. A pattern will only search between <code>**%STARTINCLUDE%**</code> and <code>**%STOPINCLUDE%**</code>.
 
 ## <a name="Usage Examples"></a> Usage Examples
 
@@ -38,25 +37,18 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
       %INCLUDE{"http://domain/~qa/v1.1/REDTest.log.txt"}%
       </pre>
 
-### <a name="2. Display Yahoo&#39;s robot.txt fil"></a> 2. Display Yahoo's robot.txt file
+### <a name="2. Display Google&#39;s robot.txt fi"></a> 2. Display Google's robot.txt file
 
 - You type:
-  - <code>**%INCLUDE\{"http://www.yahoo.com/robots.txt"\}%**</code>
+  - <code>**%INCLUDE\{"http://www.google.com/robots.txt"\}%**</code>
 
-### <a name="3. Display the SUNW stock quote"></a><a name="3. Display the SUNW stock quote "></a> 3. Display the SUNW stock quote in a TWiki page
+### <a name="3. Display the current time in T"></a> 3. Display the current time in Tokyo in a TWiki page
 
 - You type:
-  - <code>**SUNW: %INCLUDE\{"http://finance.yahoo.com/q?s=SUNW&amp;d=v1&amp;o=t" pattern="^.\*?&gt;SUNW&lt;/a&gt;[^&lt;]+(.\*?)\\s+\\S+\\s+&lt;small.\*"\}%**</code>
+  - <code>**Tokyo: %INCLUDE\{"http://TWiki.org/cgi-bin/xtra/tzdate?tz=Asia/Tokyo" pattern="^.\*&lt;\\!--tzdate:date--&gt;(.\*?)&lt;\\!--/tzdate:date--&gt;.\*"\}%**</code>
 - You get:
-  - SUNW:
-
-### <a name="4. Display the temperature in Sa"></a> 4. Display the temperature in San Francisco
-
-- You type:
-  - <code>**San Francisco: %INCLUDE\{"http://weather.yahoo.com/forecast/San\_Francisco\_CA\_US\_f.html" pattern="^.\*?([0-9]+\\&amp;ordm\\;F).\*"\}%**</code>
-- You get:
-  - San Francisco:
+  - Tokyo:
 
 See also other [[TWikiVariables]].
 
--- [[PeterThoeny]] - 15 Jan 2003
+-- TWiki:Main.PeterThoeny - 15 Aug 2004
