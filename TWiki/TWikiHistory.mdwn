@@ -3,7 +3,7 @@
 <div>
   <ul>
     <li><a href="#Appendix B: TWiki Development Ti"> Appendix B: TWiki Development Timeline</a><ul>
-        <li><a href="#Yet to be released Beijing"> Yet to be released Beijing</a></li>
+        <li><a href="#01-Feb-2003 Release (Beijing, ye"> 01-Feb-2003 Release (Beijing, yet to be released)</a></li>
         <li><a href="#01-Dec-2001 Release (Athens)"> 01-Dec-2001 Release (Athens)</a></li>
         <li><a href="#01-Sep-2001 Release"> 01-Sep-2001 Release</a></li>
         <li><a href="#01-Dec-2000 Release"> 01-Dec-2000 Release</a></li>
@@ -17,12 +17,64 @@
   </ul>
 </div>
 
-## <a name="Yet to be released Beijing"></a> Yet to be released Beijing
+## <a name="01-Feb-2003 Release (Beijing, ye"></a> 01-Feb-2003 Release (Beijing, yet to be released)
 
+- **18 Jan 2003** - [[PeterThoeny]]
+  - Support for `/bin/view/Web.TopicName` topic view URL (besides the default `/bin/view/Web/TopicName` URL); useful for [[InterwikiPlugin]] links like TWiki:Codev.ReadmeFirst
+- **31 Dec 2002** - [[PeterThoeny]]
+  - Enhanced Plugin API to manipulate topic data with new functions in [[TWikiFuncModule]]: `readTopicText`, `saveTopicText`, `setTopicEditLock`, `checkTopicEditLock`
+- **31 Dec 2002** - [[PeterThoeny]]
+  - New `%NOAUTOLINK%` setting in the [[TWikiPreferences]] to disable the auto-linking of [[WikiWords]]
+- **29 Dec 2002** - [[AndreaSterbini]], [[PeterThoeny]], [[RichardDonkin]], [[SvenDowideit]]
+  - New Plugin hooks `registrationHandler`, `beforeEditHandler`, `afterEditHandler`, `beforeSaveHandler`, `writeHeaderHandler`, `redirectCgiQueryHandler`, `getSessionValueHandler`, `setSessionValueHandler`
+- **30 Nov 2002** - [[RichardDonkin]]
+  - Internationalization ('I18N') support 8-bit character sets in [[WikiWords]], such as ISO-8859-15, KOI8-R
+- **25 Nov 2002** - [[PeterThoeny]]
+  - Include previous topic revision with `%INCLUDE{ "OtherTopic" rev="1.2" }%`
+- **15 Nov 2002** - [[PeterThoeny]]
+  - The Go box understands also URLs, useful for special [[TWikiSkins]] handling
+- **08 Nov 2002** - [[ColasNahaboo]], [[RichardDonkin]]
+  - In [[WebNotify]], if only the [[WikiName]] is specified, the e-mail is taken from the user's home page; if the [[WikiName]] is a group name, a notification is sent to all members of the group
+- **30 Oct 2002** - [[PeterThoeny]]
+  - New `%NOP{}%` variable in [[TWikiTemplates]] topic gets removed at topic creation time; useful to write protect template topics
+- **28 Sep 2002** - [[PeterThoeny]]
+  - The `%URLPARAM{}%` variable in [[TWikiTemplates]] topic gets expanded at topic creation time; useful for dynamic content creation
+- **28 Sep 2002** - [[PeterThoeny]]
+  - New `$logDir` introduced in TWiki.cfg to set the log directory
+- **13 Sep 2002** - [[PeterThoeny]]
+  - Renamed the **Test** web to **Sandbox**
+- **03 Aug 2002** - [[RichardDonkin]]
+  - New `setlib.cfg` file in the bin directory to set the TWiki library path
+- **02 Aug 2002** - [[PeterThoeny]], [[RyanFreebern]]
+  - Support for outbound HTTP proxy when including URLs based on new `%PROXYHOST` and `%PROXYPORT%` settings in the [[TWikiPreferences]]
+- **12 Jul 2002** - [[PeterThoeny]]
+  - The page logo is configurable with new `%WIKILOGOIMG%`, `%TWIKILOGOURL%` and `%WIKILOGOALT%` variables in [[TWikiPreferences]]; replacing `$wikiHomeUrl` in TWiki.cfg
+- **12 Jun 2002** - [[PeterThoeny]]
+  - New `%WIKITOOLNAME%` variable in [[TWikiPreferences]]; replacing `$wikiToolName` in TWiki.cfg
+- **31 May 2002** - [[PeterThoeny]]
+  - New `%EDITBOXSTYLE%` preferences variable which sets the edit box width automatically to the window width
+- **17 May 2002** - [[PeterThoeny]]
+  - New `%URLENCODE{}%` variable to encodes a string for using in a URL parameter, e.g. `%URLENCODE{"spaced name"}%` returns `spaced%20name`
+- **17 May 2002** - [[PeterThoeny]]
+  - [[FormattedSearch]] can be nested
+- **05 May 2002** - [[PeterThoeny]]
+  - New user home pages are now based on the [[NewUserTemplate]], replacing the `/twiki/templates/register.tmpl` template file
+- **26 Apr 2002** - [[PeterThoeny]]
+  - New markup to exclude heading from a `%TOC%` table of content, e.g. `---+!! This heading` is not shown in a TOC
 - **13 Apr 2002** - [[PeterThoeny]]
-  - Form to create a new web, [[ManagingWebs]]
+  - Form and script to create new webs, see [[ManagingWebs]]
 - **01 Apr 2002** - [[JohnTalintyre]]
-  - Perl implementation for working with RCS history files. A data framework that lets you use this or RCS executables.
+  - New data storage framework that lets you use external RCS commands for revision control, or a new native Perl implementation that does not depend on the external RCS commands
+- **28 Mar 2002** - [[PeterThoeny]]
+  - Fixed IE5/IE6-specific problem whereby going back from preview sometimes removes all edit changes
+- **23 Mar 2002** - [[JohnTalintyre]]
+  - Added AND search to `%SEARCH{}%` variable; the semicolon `";"` in a regular expression search is the AND operator
+- **21 Mar 2002** - [[ColasNahaboo]], [[RichardDonkin]]
+  - Fixed cache issue where the edit page showed outdated content
+- **06 Mar 2002** - [[RichardDonkin]]
+  - Improved statistics script which uses less memory to process large log files
+- **09 Jan 2002** - [[JohnTalintyre]]
+  - Variables inside `<verbatim>` tags are no longer expanded
 
 ## <a name="01-Dec-2001 Release (Athens)"></a> 01-Dec-2001 Release (Athens)
 
@@ -277,12 +329,12 @@
 
 The typical TWiki development flow...
 
-- TWiki:Codev/FeatureBrainstorming: open forum for new ideas
-- TWiki:Codev/FeatureEnhancementRequest: specific detailed request
-- TWiki:Codev/FeatureToDo: prioritized to up-next dev status
-- TWiki:Codev/FeatureUnderConstruction: currently in development
-- TWiki:Codev/FeatureDone: completed and implemented
-- TWiki:Codev/DocRequest: request for documentation
-- TWiki:Codev/DocsToDo: feature documentation pending
-- TWiki:Codev/FeatureDocumented: documented feature
+- TWiki:Codev.FeatureBrainstorming: open forum for new ideas
+- TWiki:Codev.FeatureEnhancementRequest: specific detailed request
+- TWiki:Codev.FeatureToDo: prioritized to up-next dev status
+- TWiki:Codev.FeatureUnderConstruction: currently in development
+- TWiki:Codev.FeatureDone: completed and implemented
+- TWiki:Codev.DocRequest: request for documentation
+- TWiki:Codev.DocsToDo: feature documentation pending
+- TWiki:Codev.FeatureDocumented: documented feature
 - [[TWikiDocumentation]]: reference manual for the latest TWiki
