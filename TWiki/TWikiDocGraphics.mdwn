@@ -1,18 +1,20 @@
 # <a name="TWiki Documentation Graphics"></a> TWiki Documentation Graphics
 
-This is one way to create a library of common icons, accessible through user-defined [[TWikiVariables]]. There are other approaches, including custom-configuring the TWiki:Plugins/SmiliesPlugin.
+This is one way to create a library of common icons, accessible through user-defined [[TWikiVariables]] set in [[WebPreferences]], or in [[TWikiPreferences]] for site-wide use.
 
-Here, this topic - %TOPIC% - acts as the icon library. Graphics are uploaded and displayed. Then, the paths are set in [[TWikiPreferences]] for site-wide access. You can also create separate library pages in each web.
+There are other approaches as well: the TWiki:Plugins/TopicVarsPlugin lets you set variables in any topic, not just in [[WebPreferences]], for use in the same. The TWiki:Plugins/SmiliesPlugin, using a different short hand then `%VARIABLES%`. may be worth checking out for extended use.
+
+In this example, %TOPIC% - this topic - acts as the icon library. Graphics are uploaded and displayed. Then, the paths are set in [[TWikiPreferences]] for site-wide access. You can also create individual library pages in each web. And you don't have to restrict yourself to graphics: Prefernces Variables can include text and links to any type of file.
 
 - <img src="http://www.dementia.org/twiki//view/8831.gif" width="88" height="31" alt="8831.gif" /> Temporary: standard 88x31px logo ID button
-- <img src="http://www.dementia.org/twiki//view/help.gif" width="16" height="16" alt="help.gif" /> Help / question
-- <img src="http://www.dementia.org/twiki//view/tip.gif" width="16" height="16" alt="tip.gif" /> Tip / idea
-- <img src="http://www.dementia.org/twiki//view/warning.gif" width="16" height="16" alt="warning.gif" /> Warning
-- <img src="http://www.dementia.org/twiki//view/pencil.gif" width="16" height="16" alt="pencil.gif" /> Pencil
-- <img src="http://www.dementia.org/twiki//view/choice-yes.gif" width="16" height="16" alt="choice-yes.gif" /> Choice-Yes
+- <img src="http://www.dementia.org/twiki//view/help.gif" width="16" height="16" alt="help.gif" /> Help
+- <img src="http://www.dementia.org/twiki//view/tip.gif" width="16" height="16" alt="tip.gif" /> Tip / Idea
+- <img src="http://www.dementia.org/twiki//view/warning.gif" width="16" height="16" alt="warning.gif" /> Warning / Important
+- <img src="http://www.dementia.org/twiki//view/pencil.gif" width="16" height="16" alt="pencil.gif" /> Refactor / Edit
+- <img src="http://www.dementia.org/twiki//view/choice-yes.gif" width="16" height="16" alt="choice-yes.gif" /> Done
 - <img src="http://www.dementia.org/twiki//view/updated.gif" width="56" height="8" alt="updated.gif" /> Updated
 - <img src="http://www.dementia.org/twiki//view/new.gif" width="28" height="8" alt="new.gif" /> New
-- <img src="http://www.dementia.org/twiki//view/starred.gif" width="16" height="16" alt="starred.gif" /> Star
-- <img src="http://www.dementia.org/twiki//view/arrowright.gif" width="16" height="16" alt="arrowright.gif" /> Red arrow to right
+- <img src="http://www.dementia.org/twiki//view/starred.gif" width="16" height="16" alt="starred.gif" /> Highlight (positive)
+- <img src="http://www.dementia.org/twiki//view/arrowright.gif" width="16" height="16" alt="arrowright.gif" /> Moved to...
 
--- [[MikeMannix]] - 27 Dec 2001 <br /> -- [[PeterThoeny]] - 14 Apr 2002
+-- [[PeterThoeny]] - 14 Apr 2002<br /> -- [[MikeMannix]] - 16 May 2002
