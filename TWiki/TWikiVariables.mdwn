@@ -207,7 +207,7 @@ With a couple of notable exceptions, predefined variables return set values that
       </tr>
       <tr>
         <td><code>%GMTIME%</code></td>
-        <td> GM time, is <b>29 Jun 2010 - 15:28</b></td>
+        <td> GM time, is <b>29 Jun 2010 - 15:29</b></td>
       </tr>
       <tr>
         <td><code>%GMTIME{"format"}%</code></td>
@@ -257,15 +257,15 @@ With a couple of notable exceptions, predefined variables return set values that
               <td> 2 digit year </td>
               <td> 99 </td>
             </tr>
-          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:28:27</b></td>
+          </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:29:26</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME%</code></td>
-        <td> Server time, is <b>29 Jun 2010 - 11:28</b></td>
+        <td> Server time, is <b>29 Jun 2010 - 11:29</b></td>
       </tr>
       <tr>
         <td><code>%SERVERTIME{"format"}%</code></td>
-        <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:28</b></td>
+        <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:29</b></td>
       </tr>
       <tr>
         <td><code>%HTTP_HOST%</code></td>
@@ -579,24 +579,11 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 
 - You can add your own preference variables for an entire site, a single web, or a single topic, using the standard syntax. Whatever you include in your variable will be expanded on display, and treated exactly as if it had been written out. So you can place formatted text, page links, image paths.
 
-> <span><font>**HOW-TO: Create a custom logo variable**</font></span>
+> **Example: Create a custom logo variable**
 >
 > <br />
 >
-> To place a logo anywhere in a web by typing
->
-> <code>**%MYLOGO%**</code>
->
-> , simply define the variable on the web's
->
-> [[WebPreferences]]
->
-> page. In this case, you also have to upload
->
-> <code>**logo.gif**</code>
->
-> to the same directory.:
->
-> - - <code>**Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif**</code>
+> - To place a logo anywhere in a web by typing <code>**%MYLOGO%**</code>, simply define the variable on the web's [[WebPreferences]] page. You also have to upload `logo.gif` - this can be done by [[attaching a file|Main/FileAttachment]] to `LogoTopic` (any topic name you choose):
+>   - <code>**Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif**</code>
 
 -- [[MikeMannix]] - 30 Aug 2001 <br />
