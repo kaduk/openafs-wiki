@@ -2,7 +2,11 @@
 
 This is one way to create a library of common icons, accessible through user-defined [[TWikiVariables]] set in [[WebPreferences]], or in [[TWikiPreferences]] for site-wide use.
 
-There are other approaches as well: the TWiki:Plugins/TopicVarsPlugin lets you set variables in any topic, not just in [[WebPreferences]], for use in the same. The TWiki:Plugins/SmiliesPlugin, using a different short hand than `%VARIABLES%`, may be worth checking out for extended use.
+There are other approaches as well:
+
+- In any topic, write `%PUBURL%/%TWIKIWEB%/%TOPIC%/help.gif` to show the ![help.gif](http://www.dementia.org/twiki//view/TWiki/%TOPIC%/help.gif) icon
+- The TWiki:Plugins/TopicVarsPlugin lets you set variables in any topic, not just in [[WebPreferences]], for use in the same topic
+- The TWiki:Plugins/SmiliesPlugin, using a different short hand than `%VARIABLES%`, may be worth checking out for extended use
 
 In this example, %TOPIC% - this topic - acts as the icon library. Graphics are uploaded and displayed. Then, the paths are set in [[TWiki.TWikiPreferences#DocGraphics|TWiki/TWikiPreferences#DocGraphics]] for site-wide access. You can also create individual library pages in each web. And you don't have to restrict yourself to graphics: Preferences Variables can include text and links to any type of file.
 
@@ -17,6 +21,7 @@ In this example, %TOPIC% - this topic - acts as the icon library. Graphics are u
 - <img src="http://www.dementia.org/twiki//view/starred.gif" width="16" height="16" alt="starred.gif" /> Highlight (positive)
 - <img src="http://www.dementia.org/twiki//view/stargold.gif" width="16" height="16" alt="stargold.gif" /> Favorites (gold star)
 - <img src="http://www.dementia.org/twiki//view/arrowright.gif" width="16" height="16" alt="arrowright.gif" /> Moved to...
+- <img src="http://www.dementia.org/twiki//view/arrowdot.gif" width="16" height="16" alt="arrowdot.gif" /> Meet here (arrow to red dot)
 - <img src="http://www.dementia.org/twiki//view/wip.gif" width="16" height="16" alt="wip.gif" /> Work in progress
 - <img src="http://www.dementia.org/twiki//view/rfc.gif" width="16" height="16" alt="rfc.gif" /> Request for comments
 - <img src="http://www.dementia.org/twiki//view/days.gif" width="16" height="16" alt="days.gif" /> Days
@@ -28,6 +33,8 @@ In this example, %TOPIC% - this topic - acts as the icon library. Graphics are u
 - <img src="http://www.dementia.org/twiki//view/searchtopic.gif" width="16" height="16" alt="searchtopic.gif" /> Search topic
 - <img src="http://www.dementia.org/twiki//view/printtopic.gif" width="16" height="16" alt="printtopic.gif" /> Print topic
 - <img src="http://www.dementia.org/twiki//view/attachfile.gif" width="16" height="16" alt="attachfile.gif" /> Attach file
+- <img src="http://www.dementia.org/twiki//view/topicdiffs.gif" width="16" height="16" alt="topicdiffs.gif" /> Topic difference
+- <img src="http://www.dementia.org/twiki//view/topicbacklinks.gif" width="16" height="16" alt="topicbacklinks.gif" /> Topic back-links
 - <img src="http://www.dementia.org/twiki//view/home.gif" width="16" height="16" alt="home.gif" /> Home
 - <img src="http://www.dementia.org/twiki//view/changes.gif" width="16" height="16" alt="changes.gif" /> Changes
 - <img src="http://www.dementia.org/twiki//view/notify.gif" width="16" height="16" alt="notify.gif" /> Notify
@@ -55,4 +62,4 @@ In this example, %TOPIC% - this topic - acts as the icon library. Graphics are u
 - <img src="http://www.dementia.org/twiki//view/dot_udl.gif" width="16" height="16" alt="dot_udl.gif" /> Dot graph up-down-left
 - <img src="http://www.dementia.org/twiki//view/dot_ulr.gif" width="16" height="16" alt="dot_ulr.gif" /> Dot graph up-left-right
 
--- [[PeterThoeny]] - 17 Jan 2003<br /> -- [[MikeMannix]] - 16 May 2002
+-- TWiki:Main.PeterThoeny - 11 Jan 2004<br /> -- TWiki:Main.MikeMannix - 16 May 2002
