@@ -10,6 +10,7 @@
             <li><a href="#Sample screen shot of oopstest.t"> Sample screen shot of oopstest.tmpl</a></li>
           </ul>
         </li>
+        <li><a href="#TWiki master template"> TWiki master template</a></li>
         <li><a href="#Known Issues"> Known Issues</a></li>
       </ul>
     </li>
@@ -22,7 +23,7 @@ _Definition of the templates used to render all HTML pages displayed in TWiki_
 
 ## <a name="Overview"></a> Overview
 
-The new modular template system is more flexible, efficient, and easily updated than the old set-up, where each template is a complete HTML file. The new master template approach places common templates parts, like headers and footers, in one shared file. This simplifies the conversion of templates into XHTML format, and provides a more versatile solution for templates and for [[skins|Main/TWikiDocumentation#TWiki_Skins]].
+The new modular template system is more flexible, efficient, and easily updated than the old set-up, where each template is a complete HTML file. The new master template approach places common templates parts, like headers and footers, in one shared file. This simplifies the conversion of templates into XHTML format, and provides a more versatile solution for templates and for [[TWikiSkins]].
 
 ## <a name="Major changes from the previous"></a><a name="Major changes from the previous "></a> Major changes from the previous template system
 
@@ -40,15 +41,14 @@ The main difference is that templates are now defined using variables to include
 - Use of template directives is optional, templates work without them.
 - All template preprocessing is done in `&TWiki::Store::readTemplate()` so that the caller simply gets an expanded template file (the same as before).
 - Directives are of the form `%TMPL:<key>%` and `%TMPL:<key>{"attr"}%`.
-- Initial set of directives:
-  - `%TMPL:INCLUDE{"file"}%`: Includes a template file. The usual search path is applied.
+- Directives:
+  - `%TMPL:INCLUDE{"file"}%`: Includes a template file. The template directory of the current web is searched first, then the templates root (`twiki/templates`).
   - `%TMPL:DEF{"var"}%`: Define a variable. Text between this and the END directive is not returned, but put into a hash for later use.
   - `%TMPL:END%`: Ends variable definition.
   - `%TMPL:P{"var"}%`: Prints a previously defined variable.
-- New directives can be added over time when needed, ex: IF-THEN-ELSE.
 - Variables are live in a global name space, there is no parameter passing.
 - Two-pass processing, so that you can use a variable before declaring it or after.
-- Templates and [[skins|Main/TWikiDocumentation#TWiki_Skins]] work transparently and interchangeably. For example, you can create a skin that overloads just the `twiki.tmpl`, like `twiki.print.tmpl`, that redefines the header and footer.
+- Templates and [[TWikiSkins]] work transparently and interchangeably. For example, you can create a skin that overloads just the `twiki.tmpl`, like `twiki.print.tmpl`, that redefines the header and footer.
 - **_Note:_** The template directives work only for templates, they do not get processed in topic text.
 
 ## <a name="New Template System by Example"></a> New Template System by Example
@@ -59,51 +59,49 @@ Attached is an example of an oops base template `oopsbase.tmpl` and a example oo
 
 The first line declares the delimiter variable called "sep", used to separate multiple link items. The variable can be called anywhere by writing `%TMPL:P{"sep"}%`
 
-**_NOTE:_** Added a dot to escape rendering of variables, i.e. read <code>**%.WEB%**</code> as <code>**%WEB%**</code>.
-
-> <table border="1" cellspacing="0" cellpadding="1">
->     <tr><td>
->     <verbatim>
->     %.TMPL:DEF{"sep"}% | %.TMPL:END%
->     <html>
->     <head>
->       <title> %.WIKITOOLNAME% . %.WEB% . %.TOPIC% %.TMPL:P{"titleaction"}%</title>
->       <base href="%.SCRIPTURL%/view%.SCRIPTSUFFIX%/%.WEB%/%.TOPIC%">
->       <meta name="robots" content="noindex">
->     </head>
->     <body bgcolor="#FFFFFF">
->     <table width="100%" border="0" cellpadding="3" cellspacing="0">
->       <tr>
->     	 <td bgcolor="%.WEBBGCOLOR%" rowspan="2" valign="top" width="1%">
->     		<a href="%.WIKIHOMEURL%">
->     		<img src="%.PUBURLPATH%/wikiHome.gif" border="0"></a>
->     	 </td>
->     	 <td>
->     		<b>%.WIKITOOLNAME% . %.WEB% . </b><font size="+2">
->     		<B>%.TOPIC%</b> %.TMPL:P{"titleaction"}%</font>
->     	 </td>
->       </tr>
->       <tr bgcolor="%.WEBBGCOLOR%">
->     	 <td colspan="2">
->     		%.TMPL:P{"webaction"}%
->     	 </td>
->       </tr>
->     </table>
->     --- ++ %.TMPL:P{"heading"}%
->     %.TMPL:P{"message"}%
->     <table width="100%" border="0" cellpadding="3" cellspacing="0">
->       <tr bgcolor="%.WEBBGCOLOR%">
->     	 <td valign="top">
->     		Topic <b>%TOPIC%</b> . {
->     		  %.TMPL:P{"topicaction"}%
->     		}
->     	 </td>
->       </tr>
->     </table>
->     </body>
->     </verbatim>
->     </td></tr>
->     </table >
+> <table border="1" cellpadding="1" cellspacing="0">
+>   <tr>
+>     <td><pre>
+> %TMPL:DEF{"sep"}% | %TMPL:END%
+> &lt;html&gt;
+> &lt;head&gt;
+>   &lt;title&gt; %WIKITOOLNAME% . %WEB% . %TOPIC% %.TMPL:P{"titleaction"}%&lt;/title&gt;
+>   &lt;base href="%SCRIPTURL%/view%SCRIPTSUFFIX%/%WEB%/%TOPIC%"&gt;
+>   &lt;meta name="robots" content="noindex"&gt;
+> &lt;/head&gt;
+> &lt;body bgcolor="#FFFFFF"&gt;
+> &lt;table width="100%" border="0" cellpadding="3" cellspacing="0"&gt;
+>   &lt;tr&gt;
+> 	 &lt;td bgcolor="%WEBBGCOLOR%" rowspan="2" valign="top" width="1%"&gt;
+> 		&lt;a href="%WIKIHOMEURL%"&gt;
+> 		&lt;img src="%PUBURLPATH%/wikiHome.gif" border="0"&gt;&lt;/a&gt;
+> 	 &lt;/td&gt;
+> 	 &lt;td&gt;
+> 		&lt;b&gt;%WIKITOOLNAME% . %WEB% . &lt;/b&gt;&lt;font size="+2"&gt;
+> 		&lt;B&gt;%TOPIC%&lt;/b&gt; %TMPL:P{"titleaction"}%&lt;/font&gt;
+> 	 &lt;/td&gt;
+>   &lt;/tr&gt;
+>   &lt;tr bgcolor="%WEBBGCOLOR%"&gt;
+> 	 &lt;td colspan="2"&gt;
+> 		%TMPL:P{"webaction"}%
+> 	 &lt;/td&gt;
+>   &lt;/tr&gt;
+> &lt;/table&gt;
+> --- ++ %TMPL:P{"heading"}%
+> %TMPL:P{"message"}%
+> &lt;table width="100%" border="0" cellpadding="3" cellspacing="0"&gt;
+>   &lt;tr bgcolor="%WEBBGCOLOR%"&gt;
+> 	 &lt;td valign="top"&gt;
+> 		Topic &lt;b&gt;%TOPIC%&lt;/b&gt; . {
+> 		  %TMPL:P{"topicaction"}%
+> 		}
+> 	 &lt;/td&gt;
+>   &lt;/tr&gt;
+> &lt;/table&gt;
+> &lt;/body&gt;
+> </pre></td>
+>   </tr>
+> </table>
 
 ### <a name="Test template oopstest.tmpl"></a> Test template oopstest.tmpl
 
@@ -112,24 +110,24 @@ Each oops template basically just defines some variables and includes the base t
 > <table border="1" cellpadding="1" cellspacing="0">
 >   <tr>
 >     <td><pre>
-> %.TMPL:DEF{"titleaction"}% (test =titleaction=) %.TMPL:END%
-> %.TMPL:DEF{"webaction"}% test =webaction= %.TMPL:END%
-> %.TMPL:DEF{"heading"}%
-> Test heading %.TMPL:END%
-> %.TMPL:DEF{"message"}%
+> %TMPL:DEF{"titleaction"}% (test =titleaction=) %TMPL:END%
+> %TMPL:DEF{"webaction"}% test =webaction= %TMPL:END%
+> %TMPL:DEF{"heading"}%
+> Test heading %TMPL:END%
+> %TMPL:DEF{"message"}%
 > Test =message=. Blah blah blah blah blah blah blah blah blah blah blah...
 >
->    * Some more blah blah blah blah blah blah blah blah blah blah...
->    * Param1: %PARAM1%
->    * Param2: %PARAM2%
->    * Param3: %PARAM3%
->    * Param4: %PARAM4%
-> %.TMPL:END%
-> %.TMPL:DEF{"topicaction"}%
+> 	* Some more blah blah blah blah blah blah blah blah blah blah...
+> 	* Param1: %PARAM1%
+> 	* Param2: %PARAM2%
+> 	* Param3: %PARAM3%
+> 	* Param4: %PARAM4%
+> %TMPL:END%
+> %TMPL:DEF{"topicaction"}%
 > Test =topicaction=:
-> [[%.WEB%.%TOPIC%][OK]] %.TMPL:P{"sep"}%
-> [[%.TWIKIWEB%.TWikiRegistration][Register]] %.TMPL:END%
-> %.TMPL:INCLUDE{"oopsbase"}%
+> [[%WEB%.%TOPIC%][OK]] %TMPL:P{"sep"}%
+> [[%TWIKIWEB%.TWikiRegistration][Register]] %TMPL:END%
+> %TMPL:INCLUDE{"oopsbase"}%
 > </pre></td>
 >   </tr>
 >   <tr>
@@ -146,6 +144,8 @@ With URL: <code>**.../bin/oops/Test/TestTopic2?template=oopstest&amp;param1=WebH
 >     <td><img alt="testscreen.gif" height="304" src="http://www.dementia.org/twiki//view/testscreen.gif" width="554" /></td>
 >   </tr>
 > </table>
+
+## <a name="TWiki master template"></a> TWiki master template
 
 All common template parts are defined in one master template, `twiki.tmpl`, that all other templates include.
 
@@ -180,7 +180,7 @@ All common template parts are defined in one master template, `twiki.tmpl`, that
   </tr>
 </table>
 
-> **Example: `preview.tmpl` template**
+> **Example: `oopspreview.tmpl` template**
 >
 >     %TMPL:INCLUDE{"twiki"}%
 >     %TMPL:DEF{"titleaction"}% (oops) %TMPL:END%
