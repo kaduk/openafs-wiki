@@ -40,11 +40,10 @@ No special installation steps are required if the server is already authenticate
 **Tracking by IP address** is an experimental feature, enabled in `lib/TWiki.cfg`. It lets you combine open access to some functions, with authentication on others, with full user activity tracking:
 
 - Normally, the <code>**REMOTE\_USER**</code> environment variable is set for the scripts that are under authentication. If, for example, the <code>**edit**</code>, <code>**save**</code> and <code>**preview**</code> scripts are authenticated, but not <code>**view**</code>, you would get your [[WikiName]] in <code>**preview**</code> for the <code>**%WIKIUSERNAME%**</code> variable, but <code>**view**</code> will show <code>**TWikiGuest**</code> instead of your WikiName.
-
 - TWiki can be configured to remember the IP address/username pair whenever an authentication happens (edit topic, attach file). Once remembered, the non-authenticated scripts, like <code>**view**</code>, will show the correct username instead of [[TWikiGuest]].
-
 - Enable this feature by setting the <code>**$doRememberRemoteUser**</code> flag in `TWiki.cfg`. TWiki then persistently stores the IP address/username pairs in the file, `$remoteUserFilename`, which is `"$dataDir/remoteusers.txt"` by default.
-
+- Copy the `view` script to `viewauth` (or better, create a symbolic link)
+- Add `viewauth` to the list of authenticated scripts in the `twiki/bin/.htaccess` file. The `view` script should not be listed in the `.htaccess` file.
 - %X% This approach can fail if the IP address changes due to dynamically assigned IP addresses or proxy servers.
 
 **Quick Authentication Test** - Use the %WIKIUSERNAME% variable to return your current identity:
