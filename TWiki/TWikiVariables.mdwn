@@ -1,7 +1,6 @@
 <div>
   <ul>
     <li><a href="#TWiki Variables"> TWiki Variables</a><ul>
-        <li><a href="#About Variables"> About Variables</a></li>
         <li><a href="#Predefined Variables"> Predefined Variables</a></li>
         <li><a href="#Preferences Variables"> Preferences Variables</a></li>
         <li><a href="#Setting Variable Preferences"> Setting Variable Preferences</a></li>
@@ -12,8 +11,6 @@
 </div>
 
 ## <a name="TWiki Variables"></a> TWiki Variables
-
-### <a name="About Variables"></a> About Variables
 
 TWikiVariables are text strings enclosed in percentage signs: <code>**%VARIABLE%**</code> that represent stored data. When a topic is rendered for viewing, defined variables replaced by their actual values. TWiki has two types of variable, predefined, and Preference-based, where you can change settings. Through Preference variables, you can even define custom variables. Clearly, they are a power TWiki feature.
 
@@ -209,7 +206,7 @@ TWikiVariables are text strings enclosed in percentage signs: <code>**%VARIABLE%
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:27</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:28</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -259,15 +256,15 @@ TWikiVariables are text strings enclosed in percentage signs: <code>**%VARIABLE%
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:27:59</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:28:11</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:27</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:28</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:27</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:28</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
