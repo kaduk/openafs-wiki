@@ -17,11 +17,14 @@ The following settings are **_site-level preferences_** , e.g. affecting all use
 - Wiki webmaster email address:
   - Set WIKIWEBMASTER = <Peter@Thoeny.com>
 
+- Exclude web from a `web="all"` search: (Set to `on` for hidden webs; is overwritten by web preferences)
+  - Set NOSEARCHALL =
+
 - Web specific background color: (is overwritten by web preferences)
   - Set WEBBGCOLOR = #C0C0C0
 
-- Exclude web from a `web="all"` search: (Set to `on` for hidden webs; is overwritten by web preferences)
-  - Set NOSEARCHALL =
+- [[PreviewBackground]] image:
+  - Set PREVIEWBGIMAGE = ![previewbg.gif](http://www.dementia.org/twiki//view/TWiki/PreviewBackground/previewbg.gif)
 
 - Background color of non existing topic: ( default `cornsilk` or `#FFFFCE` )
   - Set NEWTOPICBGCOLOR = #FFFFCE
