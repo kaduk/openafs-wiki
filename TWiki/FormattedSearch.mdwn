@@ -36,6 +36,14 @@
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
         <li>
           <ul>
+            <li><a href="#Search with conditional output"> Search with conditional output</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li>
+          <ul>
             <li><a href="#Embedding search forms to return"> Embedding search forms to return a formatted result</a></li>
           </ul>
         </li>
@@ -100,11 +108,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:44</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:45</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:44Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:45Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -275,6 +283,33 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 **Write this:**
 
 `%SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="| [[$topic]] | $wikiusername  | $date |" limit="7" }%`
+
+**To get this:**
+
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
+
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
+
+### <a name="Search with conditional output"></a> Search with conditional output
+
+A regular expression search is flexible, but there are limitations. For example, you cannot show all topics that are up to exactly one week old, or create a report that shows all records with invalid form fields or fields within a certain range, etc. You need some additional logic to format output based on a condition:
+
+1. Specify a search which returns more hits then you need
+2. For each search hit apply a spreadsheet formula to determine if the hit is needed
+3. If needed, format and output the result
+4. Else supress the search hit
+
+This requires the TWiki:Plugins.SpreadSheetPlugin. The following example shows all topics that are up to exactly one week old.
+
+**Write this:**
+
+`%CALC{$SET(weekold, $TIMEADD($TIME(), -7, day))}%` %BR% `%SEARCH{ "." scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on" format="$percntCALC{$IF($TIME($date) < $GET(weekold), <nop>, | [[$topic]] | $wikiusername | $date | $rev |)}$percnt" limit="100" }%`
+
+- The first line sets the `weekold` variable to the serialized date of exactly one week ago
+- The SEARCH has a deferred CALC. The `$percnt` makes sure that the CALC gets executed once for each search hit
+- The CALC compares the date of the topic with the `weekold` date
+- If topic is older, a `<nop>` is returned, which gets removed at the end of the TWiki rendering process
+- Otherwise, the search hit is formatted and returned
 
 **To get this:**
 
