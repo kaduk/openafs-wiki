@@ -19,6 +19,10 @@ The following settings are **_web preferences_** of the [[%WEB%|WEB/WebHome]] we
 - Exclude web from a `web="all"` search: (Set to `on` for hidden webs)
   - Set NOSEARCHALL =
 
+- Prevent automatic linking of [[WikiWords]] and acronyms (if set to `on`); link WikiWords (if empty); can be overwritten by web preferences:
+  - Set NOAUTOLINK =
+  - **_Note:_** Use the `[[...][...]]` syntax to link topics in case you disabled WikiWord linking. The `<noautolink> ... </noautolink>` syntax can be used to prevents links within a block of text.
+
 - Default template for new topics and form(s) for this web:
   - [[WebTopicEditTemplate]]: Site-level default template for new topics
   - [[TWikiForms]]: How to enable form(s)

@@ -29,14 +29,18 @@ The following are **_site-level_** settings that affect all users in all webs on
 - List of selected topics in a web - the second line of the upper toolbar (usually overwritten in individual [[WebPreferences]]):
   - Set WEBTOPICLIST = [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
 
+- Web specific background color: (is overwritten by web preferences)
+  - Set WEBBGCOLOR = #C0C0C0
+
 - Copyright notice:
   - Set WEBCOPYRIGHT = <font>Copyright © 1999-2002 by the contributing authors. \\nAll material on this collaboration tool is the property of the contributing authors. <br /> \\nIdeas, requests, problems regarding %WIKITOOLNAME%? [Send](mailto:?subject=%WIKITOOLNAME% Feedback) feedback. </font>
 
 - Exclude web from a `web="all"` search: (Set to `on` for hidden webs; is overwritten by web preferences)
   - Set NOSEARCHALL =
 
-- Web specific background color: (is overwritten by web preferences)
-  - Set WEBBGCOLOR = #C0C0C0
+- Prevent automatic linking of [[WikiWords]] and acronyms (if set to `on`); link WikiWords (if empty); can be overwritten by web preferences:
+  - Set NOAUTOLINK =
+  - **_Note:_** Use the `[[...][...]]` syntax to link topics in case you disabled WikiWord linking. The `<noautolink> ... </noautolink>` syntax can be used to prevents links within a block of text.
 
 ## <a name="User Settings"></a> User Settings
 
