@@ -5,7 +5,7 @@ The following settings are **_web preferences_** of the %WIKITOOLNAME%.%WEB% web
 **_Preferences:_**
 
 - List of topics of the %WIKITOOLNAME%.%WEB% web:
-  - Set WEBTOPICLIST = %WEB% . \{ [Home](WebHome) | [Users](TWikiUsers) | [Offices](OfficeLocations) | [Changes](WebChanges) | [Index](WebIndex) | [Search](WebSearch) | Go <input name="topic" size="16" type="text" />
+  - Set WEBTOPICLIST = %WEB% . \{ [[Home|Main/WebHome]] | [[Users|Main/TWikiUsers]] | [[Groups|Main/TWikiGroups]] | [[Offices|Main/OfficeLocations]] | [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
  \}
 
 - Web specific background color: (Pick a lighter one of the [[StandardColors]])
@@ -37,5 +37,5 @@ The following settings are **_web preferences_** of the %WIKITOOLNAME%.%WEB% web
 
 - [[TWikiPreferences]] has site-level preferences.
 - [[TWikiUsers]] has a list of user topics. User topics can have optional user preferences.
-- [[TWikiVariables]] has a list of common `%VARIABLES%` .
+- [[TWikiVariables]] has a list of common `%VARIABLES%`.
 - [[TWikiAccessControl]] explains how to restrict access by users or groups.
