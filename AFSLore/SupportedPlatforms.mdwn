@@ -17,7 +17,7 @@
     <td> alpha_dux50 </td>
     <td> yes </td>
     <td> yes </td>
-    <td>   </td>
+    <td> yes </td>
     <td> Alpha - Tru64 UNIX 5.0 </td>
   </tr>
   <tr>
@@ -46,35 +46,42 @@
     <td> yes </td>
     <td> yes </td>
     <td>   </td>
-    <td> HP-PA - HP/UX 11.0 </td>
+    <td> HP-PA - [[Main/HP-UX11Port]]</td>
   </tr>
   <tr>
     <td> i386_fbsd_42 </td>
     <td> no </td>
     <td>   </td>
-    <td>   </td>
-    <td> Intel x86 - [[Main/FreeBSD]] 4.2 </td>
+    <td> yes </td>
+    <td> Intel x86 - [[Main/FreeBSDPort]] 4.2 </td>
   </tr>
   <tr>
     <td> i386_linux22 </td>
     <td> yes </td>
     <td> yes </td>
-    <td>   </td>
+    <td> yes </td>
     <td> Intel x86 - Linux 2.2.x </td>
   </tr>
   <tr>
     <td> i386_linux24 </td>
     <td> yes </td>
     <td> yes </td>
-    <td>   </td>
+    <td> yes </td>
     <td> Intel x86 - Linux 2.4.x </td>
   </tr>
   <tr>
     <td> i386_obsd29 </td>
     <td> no </td>
     <td>   </td>
-    <td>   </td>
+    <td> yes </td>
     <td> Intel x86 - [[Main/OpenBSD]] 2.9 </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td>   </td>
+    <td>   </td>
+    <td> yes </td>
+    <td>[[Main/NetBSD]] 1.4 and 1.5 </td>
   </tr>
   <tr>
     <td> parisc_linux24 </td>
@@ -88,14 +95,14 @@
     <td> no </td>
     <td> yes </td>
     <td>   </td>
-    <td>[[Main/PowerPC]] - Darwin 1.2 </td>
+    <td>[[Main/PowerPC]] - [[Main/DarwinPort]] 1.2 - [[Main/MacOSX]]</td>
   </tr>
   <tr>
     <td> ppc_darwin_13 </td>
     <td> no </td>
     <td> yes </td>
-    <td>   </td>
-    <td>[[Main/PowerPC]] - Darwin 1.3 </td>
+    <td> yes </td>
+    <td>[[Main/PowerPC]] - [[Main/DarwinPort]] 1.3 - [[Main/MacOSX]]</td>
   </tr>
   <tr>
     <td> ppc_linux22 </td>
@@ -226,3 +233,7 @@
 </table>
 
 -- [[JeffreyHutzelman]] - 18 Jan 2002
+
+Copied the Arla data from <http://www.stacken.kth.se/projekt/arla/>
+
+-- [[TedAnderson]] - 18 Jan 2002
