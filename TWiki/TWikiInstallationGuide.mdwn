@@ -81,7 +81,7 @@ Download the TWiki 01-Sep-2004 distribution in Unix ZIP format from <http://TWik
 
 - Restart Apache by `service httpd restart` (or as appropriate to your flavor of UNIX or Linux).
 - Test that the `twiki/bin` directory is CGI-enabled by trying visiting it in your browser:
-  - Enter the URL for the `bin` directory, `http://yourdomain.com/twiki/bin/`.
+  - Enter the URL for the `bin` directory, `http://yourdomain.com/twiki/bin/`
   - Your settings are OK if you get a message like `"Forbidden. You don't have permission to access /twiki/bin/ on this server"`.
   - Settings are NOT correct if you get something like `"Index of /twiki/bin"` - recheck your `httpd.conf` file.
 
@@ -259,7 +259,7 @@ With your new TWiki installation up and running, you can manage most aspects of 
 
 At this time, TWiki does not ship with an "what you see is what you get" editor. TWiki:Codev/IntegrateHtmlAreaEditor describes how to integrate an HTML editor.
 
-%X% **NOTE:** User home topics are located in the %WIKITOOLNAME%.Main web - don't try to move them or create them in other webs. From any other web, user signatures have to point to %WIKITOOLNAME%.Main web, using a `Main.UserName` or `%MAINWEB%.UserName` format. (The `%MAINWEB%` variable is an advantage if you ever change the Main web name, but the standard `Main.UserName` is easier for users to enter, which is the bottom line!
+%X% **NOTE:** User home topics are located in the %WIKITOOLNAME%.Main web - don't try to move them or create them in other webs. From any other web, user signatures have to point to %WIKITOOLNAME%.Main web, using a `Main.UserName` or `%MAINWEB%.UserName` format. (The `%MAINWEB%` variable is an advantage if you ever change the Main web name, but the standard `Main.UserName` is easier for users to enter, which is the bottom line!)
 
 ## <a name="TWiki File System Info"></a> TWiki File System Info
 
