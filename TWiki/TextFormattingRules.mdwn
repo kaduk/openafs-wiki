@@ -270,13 +270,13 @@ Know.ReadmeFirst
   <tr bgcolor="#ffffff">
     <td valign="top"><strong>Anchors:</strong> %BR% You can define a link reference inside a %WIKITOOLNAME% topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
     <td valign="top"><span style="background: #FFFFCC"><font color="#990000"> <pre>
-[[WebHome#NotThere]]
+[[WikiWord#NotThere]]
 
 [[#MyAnchor][Jump]]
 
 #MyAnchor To here
 </pre> </font></span></td>
-    <td valign="top">[[Main/WebHome#NotThere]]<p>[[Main/WebHome#MyAnchor]]</p>
+    <td valign="top">[[Main/WikiWord#NotThere]]<p>[[Main/WebHome#MyAnchor]]</p>
       <p><a name="MyAnchor"></a> To here </p>
     </td>
   </tr>
