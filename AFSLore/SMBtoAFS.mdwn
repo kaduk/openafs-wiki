@@ -140,6 +140,13 @@ Disadvantages:
 - Must run specific Samba version or do some porting to newer version [ Should be straightforward ]
 - Not under heavy active development.
 
+Updates:
+
+- Frank Cameron (<cameron@ctc.com>) updated Jason's smbklog patches to work with Samba 2.2.7
+  - [samba-2.2.7-afstoken.patch](http://www.dementia.org/twiki//view/samba-2.2.7-afstoken.patch): Updated smbklog patch for Samba 2.2.7
+- Also available is a patch to compile Samba 2.2.7 on [[RedHat]] 8
+  - [samba-2.2.7\_afstoken.spec](http://www.dementia.org/twiki//view/samba-2.2.7_afstoken.spec): Spec file to build Samba 2.2.7 w/ SMBKlog on RH 8
+
 ### <a name="FOKSTRAUT"></a> FOKSTRAUT
 
 **Fokstraut and Samba - Dealing with Authentication and Performance Issues On A Large Scale Samba Service**
