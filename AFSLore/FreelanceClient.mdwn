@@ -1,0 +1,19 @@
+Freelance AFS Client
+
+1 Introduction
+
+The current implementation of AFS requires that all AFS clients belong to a home cell. The home cell provides the client with a starting point to mount the entire AFS file system. The client's top most level view of AFS is determined by the home cell server's root.afs volume. Through root.afs, the home cell also controls which cells clients can access.
+
+To provide a more flexible and relevant view of the AFS file system to the user, this projects aims to remove the need for a home cell and to allow each client to customize its view of the AFS file system. To this end, the current Windows 2000 and 9x clients for AFS have been modified into a Freelance AFS Client that allows the user to mount and dismount AFS cells at will, without the need of a home cell.
+
+The new Freelance AFS Client also increases the scalability of the AFS file system since administrator intervention is no longer required for clients to access newly established cells. It also removes the client dependency on the availability of the home cell. Previously, if the home cell were not available, clients would not be able to access the AFS file system. This critical dependency is not present in the Freelance AFS Client.
+
+2 Usage
+
+The Freelance feature is available only for the Windows NT/2000 and 9x clients. In 9x, it can be enabled by running afsd.exe manually with the "-freelance" flag. It can be enabled in NT/2000 by setting the following registry key:
+
+HKEY\_LOCAL\_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\TransarcAFSDaemon\\Parameters\\FreelanceClient=1
+
+(GUI support to activate this feature will be available soon.)
+
+The Freelance client reads the available mount points from a file called afs\_freelance.ini. This file will be created if not found and the list of mount points will initially be empty. New mount points can be added using "fs mkmount" or the Explorer shell extension. Alternatively, a ccell will be mounted at /afs automatically simply by visting it in a DOS window. -- [[LeoShyhWeiLuan]] - 07 Feb 2002
