@@ -1,0 +1,11 @@
+I am not the right person to write this page, but here is a rough outline.
+
+There are basically three options with several variants
+
+- [[KaServer]] -- the standard option to comes with IBMAFS, implements [[KerberosIV]] with some custom features.
+- [[KerberosIV]] -- the original MIT implementation, and [[Krb4KTH]], an export version of [[MITKerberosIV]] (aka "bones"), but with encryption support put back in by the fine folks at KTH.
+- [[KerberosV]] -- version five of this protocol has numerous improvements over version four and is available from many sources: MIT, DCE, Microsoft (aka [[ActiveDirectory]]) and [[HeimdalKTH]].
+
+The consensus these days is to use [[KerberosV]], even though lacking native support for V5, AFS still needs various conversion and migration tools.
+
+-- [[TedAnderson]] - 22 Jan 2002

@@ -1,0 +1,18 @@
+I am not the right person to write this page but here is summary from a pretty good note from [[DerekAtkins]] in a [thread](https://lists.openafs.org/pipermail/openafs-info/2002-January/002959.html) on the [[OpenAFSInfo]] mailing list.
+
+In order to setup cross-realm:
+
+1. you need cross-realm Kerberos (a shared key)
+2. The foreign cell needs to setup a group to hold users from your.original.cell: `pts cg system:authuser@your.original.cell -c foreign.cell`.
+
+The "groupquota" on this group is the number of cross-cell users who can be created. Then, once that is setup, users can create themselves ids in the foreign cell:
+
+1. user needs to obtain a token in the foreign cell: `aklog -cell foreign.cell`
+2. user creates themselves an id in the foreign cell: `pts cu user@your.original.cell -c foreign.cell`
+3. user gets new tokens with proper ID `aklog -cell foreign.cell -force`
+
+The use of aklog assumes you have [[KerberosV]] tickets. Actually, with the [[OpenAFS]] aklog, you just the last step -- the aklog to the foreign cell does the pts create internally for you.
+
+I've augmented the description with other comments from the thread.
+
+-- [[TedAnderson]] - 22 Jan 2002
