@@ -36,6 +36,7 @@ Some other topics that should be explained.
 - SSH -- There are two issues. First is mutually authenticating you and the SSH server to each other using Kerberos. See [[KerberosV]] for a link to patches to kerberize [[OpenSSH]]. Second is passing local AFS authentication to the remote shell (in this case an AFS Client) in the form of AFS service tickets (tokens).
   - these instructions from [[CharlesClancy]] for building openssh might be useful <http://lists.openafs.org/pipermail/openafs-info/2002-January/002846.html>
   - another perspective from [[OwenLeBlanc]] <http://lists.openafs.org/pipermail/openafs-info/2002-January/002856.html>
+  - [[SSHKeyAuthentication]]
 - How to choose between [[KaServer]], [[KerberosVMIT]], [[HeimdalKTH]] and [[ActiveDirectory]].
 - [[StringToKey]] issues.
 - Authenticating applications that need AFS access and can't depend upon human interaction to enter a password.
@@ -48,7 +49,7 @@ Some other topics that should be explained.
 - [[OtherGroupServers]] are not well integrated as far as I know. The big ones are [[ActiveDirectory]] and [[NIS]] and maybe some LDAP systems. While one could imagine wrapping a [[PtServer]] interface around such a thing, there are probably some features that would make seamless integration difficult. Has anyone seriously looked into this?
   - In a 10-Oct-2002 message from [[DerrickBrashear]]: <q>...something to allow LDAP queries of the PTS database... /afs/andrew.cmu.edu/usr/shadow/back-pts.tar.gz / The README inside explains how it works.</q>
 
--- [[TedAnderson]] - 22-24, 29 Jan 2002<br /> -- [[JasonGarman]] - 30 Jan 2002<br /> -- [[TedAnderson]] - 06-07 Feb, 11 Oct 2002<br />
+-- [[TedAnderson]] - 22-24, 29 Jan 2002<br /> -- [[JasonGarman]] - 30 Jan 2002<br /> -- [[TedAnderson]] - 06-07 Feb, 11 Oct 2002<br /> -- [[TedAnderson]] - 27 Feb 2003<br />
 
 ----
 
