@@ -2,10 +2,6 @@
   <ul>
     <li><a href="#TWiki Forms"> TWiki Forms</a><ul>
         <li><a href="#Overview"> Overview</a></li>
-        <li><a href="#Main Changes from Category Table"> Main Changes from Category Tables</a><ul>
-            <li><a href="#Importing Category Table Data"> Importing Category Table Data</a></li>
-          </ul>
-        </li>
         <li><a href="#Defining a Form Template"> Defining a Form Template</a><ul>
             <li><a href="#Form Template Elements"> Form Template Elements</a></li>
             <li><a href="#Defining a Form in One Topic"> Defining a Form in One Topic</a></li>
@@ -17,6 +13,10 @@
         <li><a href="#Setting Up Multiple Form Options"> Setting Up Multiple Form Options</a></li>
         <li><a href="#Form Data Storage"> Form Data Storage</a></li>
         <li><a href="#Using Form Data"> Using Form Data</a></li>
+        <li><a href="#Main Changes from Category Table"> Main Changes from Category Tables</a><ul>
+            <li><a href="#Importing Category Table Data"> Importing Category Table Data</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -30,44 +30,7 @@ _Form-based input in topics, with name/value pairs stored as Meta Data variables
 
 By adding form-based input to freeform content, you can structure topics with unlimited, easily searchable categories. When forms are enabled for a web and selected in a topic, a single form appears in edit mode, and the contents are rendered as a table when viewed on the display page. You can define unlimited forms per web. For each topic, you can select a template if more than one is defined, or remove forms entirely. Form input values are stored as [[TWikiMetaData]]; all data is saved.
 
-Form Templates replace TWikiCategoryTables from the 01-Dec-2000 version of TWiki.
-
-<a name="FormsVsCategoryTables"></a>
-
-## <a name="Main Changes from Category Table"></a> Main Changes from Category Tables
-
-The Form Template system is a more powerful, flexible replacement for the original TWikiCategoryTable. Data from existing category tables can be imported directly.
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th align="center" bgcolor="#99CCCC"><strong> Form Templates </strong></th>
-    <th align="center" bgcolor="#99CCCC"><strong> Category Tables </strong></th>
-  </tr>
-  <tr>
-    <td align="center"> defined in topics </td>
-    <td align="center"> defined in templates </td>
-  </tr>
-  <tr>
-    <td align="center"> many forms per web </td>
-    <td align="center"> one table per web </td>
-  </tr>
-  <tr>
-    <td align="center"> saved as Meta Data </td>
-    <td align="center"> saved as HTML </td>
-  </tr>
-  <tr>
-    <td align="center"><strong>Change</strong> &amp; <strong>Add Form</strong> buttons </td>
-    <td align="center"><strong>UseCategory</strong> radio button </td>
-  </tr>
-</table>
-
-### <a name="Importing Category Table Data"></a> Importing Category Table Data
-
-On upgrading from the previous TWiki, a Form Template topic has to be built for each web that used a Category Table, recreating the fields and values from the old <code>**twikicatitems.tmpl**</code>. The replacement Form Template must be set as the first item in the [[WebPreferences]] variable `WEBFORMS`. If missing, pages will display, but attempting to edit results in an error message.
-
-The new Form Template system should work with old Category Table data with no special conversion. Data is assigned to Meta variables the first time an imported topic is edited and saved in the new system.
-
-%T% **NOTE:** If things aren't working correctly, there may be useful entries in `data/warning.txt`.
+Form Templates replace TWikiCategoryTables from the 01-Dec-2000 version of TWiki. - see [[#FormsVsCategoryTables|Main/WebHome#FormsVsCategoryTables]]
 
 ## <a name="Defining a Form Template"></a> Defining a Form Template
 
@@ -244,5 +207,42 @@ The form topic name, fields and values are stored as [[TWikiMetaData]] - the ord
 ## <a name="Using Form Data"></a> Using Form Data
 
 [[TWikiForms]] accept user-input data, stored as [[TWikiMetaData]]. Meta data also contains program-generated info about changes, attachments, etc. To find, format and display form and other meta data, see [[TWikiMetaData]], <code>**SEARCH**</code> and <code>**METASEARCH**</code> variables in [[TWikiVariables]], and [[TWiki Formatted Search|Main/FormattedSearch]] for various options.
+
+<a name="FormsVsCategoryTables"></a>
+
+## <a name="Main Changes from Category Table"></a> Main Changes from Category Tables
+
+The Form Template system is a more powerful, flexible replacement for the original TWikiCategoryTable. Data from existing category tables can be imported directly.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th align="center" bgcolor="#99CCCC"><strong> Form Templates </strong></th>
+    <th align="center" bgcolor="#99CCCC"><strong> Category Tables </strong></th>
+  </tr>
+  <tr>
+    <td align="center"> defined in topics </td>
+    <td align="center"> defined in templates </td>
+  </tr>
+  <tr>
+    <td align="center"> many forms per web </td>
+    <td align="center"> one table per web </td>
+  </tr>
+  <tr>
+    <td align="center"> saved as Meta Data </td>
+    <td align="center"> saved as HTML </td>
+  </tr>
+  <tr>
+    <td align="center"><strong>Change</strong> &amp; <strong>Add Form</strong> buttons </td>
+    <td align="center"><strong>UseCategory</strong> radio button </td>
+  </tr>
+</table>
+
+### <a name="Importing Category Table Data"></a> Importing Category Table Data
+
+On upgrading from the previous TWiki, a Form Template topic has to be built for each web that used a Category Table, recreating the fields and values from the old <code>**twikicatitems.tmpl**</code>. The replacement Form Template must be set as the first item in the [[WebPreferences]] variable `WEBFORMS`. If missing, pages will display, but attempting to edit results in an error message.
+
+The new Form Template system should work with old Category Table data with no special conversion. Data is assigned to Meta variables the first time an imported topic is edited and saved in the new system.
+
+%T% **NOTE:** If things aren't working correctly, there may be useful entries in `data/warning.txt`.
 
 -- [[JohnTalintyre]] - 16 Aug 2001 <br /> -- [[MikeMannix]] - 05 Jan 2002
