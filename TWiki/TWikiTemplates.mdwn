@@ -154,7 +154,7 @@ All template topics are located in the TWiki web. The [[WebTopicEditTemplate]] c
 
 Here is an example for creating new topics based on a specific template topic:
 
-<form action="http://www.dementia.org/twiki//edit/%WEB%/" name="new">
+<form action="http://www.dementia.org/twiki//edit/%WEBURLENCODED%/" name="new">
   <ul>
     <li> New example topic: <input name="topic" size="23" type="text" value="ExampleTopic2010x06x29" /> <input name="templatetopic" type="hidden" value="ExampleTopicTemplate" /> <input type="submit" value="Create" /> (date format is YYYYxMMxDD) </li>
   </ul>
@@ -162,7 +162,7 @@ Here is an example for creating new topics based on a specific template topic:
 
 The above form asks for a topic name. A hidden input tag named <code>**templatetopic**</code> specifies [[ExampleTopicTemplate]] as the template topic to use. Here is the HTML source of the form:
 
-    <form name="new" action="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%WEB%/">
+    <form name="new" action="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%WEBURLENCODED%/">
     	* New example topic:
     	  <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$yearx$mox$day}%" size="23" />
     	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate" />
