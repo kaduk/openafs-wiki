@@ -68,7 +68,8 @@ The following are **_site-level_** settings that affect all users in all webs on
   - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**\\t**</code> to tab (3 spaces for bullets).
 
 - Format of images when the **_link_** check box is checked: (can be overwritten by user preferences)
-  - Set ATTACHEDIMAGEFORMAT = \\t\* $comment: <br />![$name](http://www.dementia.org/twiki//view/$name) **_Example image is broken because there is no attached image file._**
+  - Set ATTACHEDIMAGEFORMAT = \\t\* $comment: <br />![$name](http://www.dementia.org/twiki//view/$name)
+  - %H% **NOTE:** **_Example image is broken because there is no attached image file._**
   - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**$size**</code> to <code>**width="..." height="..."**</code> attribute of <code>**img**</code> tag; <code>**\\t**</code> to tab (3 spaces for bullets).
 
 ## <a name="Email Settings"></a> Email Settings
