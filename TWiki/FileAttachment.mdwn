@@ -20,75 +20,81 @@
   </ul>
 </div>
 
-## <a name="File Attachments"></a> File Attachments
+# <a name="File Attachments"></a> File Attachments
 
-Each topic can have files attached to it, similar to an email attachment. Use your browser to upload or download a file. Attachments are stored under revision control, so uploads can never be lost, and files changes can be made with a rollback option that lets you retrieve all previous versions.
+_Each topic can have one or more files of any type attached to it by using the Attach screen to upload (or download) files from your local PC. Attachments are stored under revision control: uploads are automatically backed up; all previous versions of a modified file can be retrieved._
 
-### <a name="What Are Attachments Good For?"></a> What Are Attachments Good For?
+## <a name="What Are Attachments Good For?"></a> What Are Attachments Good For?
 
-File Attachments can be used to create powerful groupware solutions - file sharing, document management - and for speedy Web authoring.
+File Attachments can be used to create powerful customized groupware solutions, like file sharing and document management systems, and quick Web page authoring.
 
-#### <a name="Document Management System"></a> Document Management System
+### <a name="Document Management System"></a> Document Management System
 
-- You can use Attachments to store and retrieve documents (in any format, with associated graphics, and other media files); attach documents to specific TWiki topics; collaborate on documents with full revision control; distribute documents on a [[need-to-know basis|Main/WebHome#AttachmentAccess]] using; create a central reference library that's easy to access and manage by an entire user group.
+- You can use Attachments to store and retrieve documents (in any format, with associated graphics, and other media files); attach documents to specific TWiki topics; collaborate on documents with full revision control; distribute documents on a [[need-to-know basis|Main/WebHome#AttachmentAccess]] using web and topic-level access control; create a central reference library that's easy to share with an user group spread around the world.
 
-#### <a name="File Sharing"></a> File Sharing
+### <a name="File Sharing"></a> File Sharing
 
 - For file sharing, [[FileAttachments]] on a series of topics can be used to quickly create a well-documented, categorized digital download center for all types of files: documents; graphics and other media; drivers and patches; applications; anything you can safely upload!
 
-#### <a name="Web Authoring"></a> Web Authoring
+### <a name="Web Authoring"></a> Web Authoring
 
-- Through your Web browser, you can easily upload graphics (or sound files, or anything else you want to embed on a page) and place them anywhere in on a single page, or for use across a web, or site-wide.
-  - **_NOTE:_** You can also add graphics - any files - directly, typically by FTP upload. This requires server access, and may be more convenient if a large number of files, or a particular directory location, is required. These files can't be managed using browser-based Attachment controls.
+- Through your Web browser, you can easily upload graphics (or sound files, or anything else you want to link to on a page) and place them on a single page, or use them across a web, or site-wide.
+  - **_NOTE:_** You can also add graphics - any files - directly, typically by FTP upload. This requires FTP access, and may be more convenient if you have a large number of files to load. FTP-ed files can't be managed using browser-based Attachment controls. You can use your browser to create [[TWikiVariables]] shortcuts, like this %H% = %H%.
 
-### <a name="Uploading Files"></a> Uploading Files
+## <a name="Uploading Files"></a> Uploading Files
 
-- To upload: Click on the **Attach** link at the bottom of each page. A form is shown where you can browse for a file and upload it. The uploaded file will show up in the [[File Attachment table|Main/WebHome#FileAttachmentTable]].
-  - Files of any type can be uploaded. Some files that might impose a security risk are renamed, ex: `*.php` files are renamed to `*.php.txt`.
-  - Currently there is no file size limit besides the disk space on the server.
+- Click on the <code>**Attach**</code> link at the bottom of the page. The `Attach` screen lets you browse for a file, add a comment, and upload it. The uploaded file will show up in the [[File Attachment table|Main/WebHome#FileAttachmentTable]].
+  - Any type of file can be uploaded. Some files that might pose a security risk are renamed, ex: `*.php` files are renamed to `*.php.txt` so that no one can place code that would be read in a .php file.
   - The previous upload path is retained for convenience. In case you make some changes to the local file and want to upload it, again you can copy the previous upload path into the Local file field.
+  - Currently there is no file size limit other than the disk space on the server. \* %X% It's not recommended to upload files greater than a few hundred K through a browser. Large files can be extremely slow-loading, and often time out. Use FTP for large file uploads.
 
-### <a name="Downloading Files"></a> Downloading Files
+## <a name="Downloading Files"></a> Downloading Files
 
-- To download: Click on the file in the [[File Attachment table|Main/WebHome#FileAttachmentTable]].
+- Click on the file in the [[File Attachment table|Main/WebHome#FileAttachmentTable]].
 
 <a name="AttachmentAccess"></a>
 
-- **_NOTE:_** There is no access control on individual attachments. If you need this type of control, create separate topics and define [[access restrictions|Main/TWikiDocumentation#TWikiAccessControl]] per topic.
+- %X% _NOTE:_ There is no access control on individual attachments. If you need control over single files, create a separate topic per file and set topic-level [[access restrictions|Main/TWikiDocumentation#TWikiAccessControl]] for each.
 
-### <a name="Moving Attachment Files"></a> Moving Attachment Files
+## <a name="Moving Attachment Files"></a> Moving Attachment Files
 
-An attachement can be moved between topics. To do this click **Action** on the attachment to be moved. On the control page, select the new web and topic, the click **Move**. The attachment and its version history are moved. The original location is stored as [[topic Meta Data|Main/TWikiDocumentation#Meta_Data_Definition]].
+An attachment can be moved between topics.
 
-### <a name="Deleting Attachments"></a> Deleting Attachments
+- Click <code>**Action**</code> on the Attachment to be moved.
+- On the control screen, select the new web and/or topic.
+- Click <code>**Move**</code>. The attachment and its version history are moved. The original location is stored as [[topic Meta Data|Main/TWikiDocumentation#Meta_Data_Definition]].
 
-It is not possible to delete attached files with the current TWiki implementation. However, they can be moved to another topic. You may care to have a topic **Trash.TrashAttachments** - move attachments that are no longer wanted here.
+## <a name="Deleting Attachments"></a> Deleting Attachments
 
-### <a name="Linking to Attached Files"></a> Linking to Attached Files
+It is not possible to delete attached files directly. You can delete a topic, and its attachments with it.
+
+- %T% One easy workaround is to create a <code>**Trash.TrashAttachments**</code> - then, simply move unwanted Attachments to that topic.
+
+## <a name="Linking to Attached Files"></a> Linking to Attached Files
 
 - Once a file is attached it can be referenced in the topic. Example:
-  1. **Attach** file: `Sample.txt`
-  2. **Edit** topic and write text: `%ATTACHURL%/Sample.txt`
-  3. **Preview** - `%ATTACHURL` text appears as: <http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Sample.txt>, a link.
+  1. <code>**Attach**</code> file: `Sample.txt`
+  2. <code>**Edit**</code> topic and enter: `%ATTACHURL%/Sample.txt`
+  3. <code>**Preview**</code>: `%ATTACHURL%/Sample.txt` text appears as: <http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Sample.txt>, a link to the text file.
 
-- To reference an attachment located in another topic, write text:
-  - `%PUBURL%/%WEB%/OtherTopic/Sample.txt` (for the same web)
-  - `%PUBURL%/Otherweb/OtherTopic/Sample.txt` (for adifferent web)
+- To reference an attachment located in another topic, enter:
+  - `%PUBURL%/%WEB%/OtherTopic/Sample.txt` (if it's within the same web)
+  - `%PUBURL%/Otherweb/OtherTopic/Sample.txt` (if it's in a different web)
 
 - Attached HTML files and text files can be inlined in a topic. Example:
-  1. **Attach** file: `Sample.txt`
-  2. **Edit** topic and write text: `%INCLUDE{"%ATTACHURL%/Sample.txt"}%`
+  1. <code>**Attach**</code> file: `Sample.txt`
+  2. <code>**Edit**</code> topic and write text: `%INCLUDE{"%ATTACHURL%/Sample.txt"}%`
     - Content of attached file is shown inlined.
     - Read more in [[IncludeTopicsAndWebPages]].
 
 - GIF, JPG and PNG images can be attached and shown embedded in a topic. Example:
-  1. **Attach** file: `Smile.gif`
-  2. **Edit** topic and write text: `%ATTACHURL%/Smile.gif`
-  3. **Preview** - text appears as ![Smile.gif](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Smile.gif), an image.
+  1. <code>**Attach**</code> file: `Smile.gif`
+  2. <code>**Edit**</code> topic and write text: `%ATTACHURL%/Smile.gif`
+  3. <code>**Preview**</code>: text appears as ![Smile.gif](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Smile.gif), an image.
 
 <a name="FileAttachmentTable"></a>
 
-### <a name="File Attachment Contents Table"></a> File Attachment Contents Table
+## <a name="File Attachment Contents Table"></a> File Attachment Contents Table
 
 Files attached to a topic are displayed in a directory table, displayed at the bottom of the page, or optionally, hidden and accessed when you click **Attach**.
 
@@ -125,9 +131,9 @@ Files attached to a topic are displayed in a directory table, displayed at the b
 >   </tr>
 > </table>
 
-### <a name="File Attachment Controls"></a> File Attachment Controls
+## <a name="File Attachment Controls"></a> File Attachment Controls
 
-Clicking on an **Action** link takes you to a new page that looks like this:
+Clicking on an <code>**Action**</code> link takes you to a new page that looks like this:
 
 > <form>
 >   <table border="1" cellpadding="20" cellspacing="0">
@@ -215,8 +221,8 @@ Clicking on an **Action** link takes you to a new page that looks like this:
 
 - The second table is all the versions of the attachment. Click on **View** to see that version. If it's the most recent version, you'll be taken to an URL that always displays the latest version, which is usually what you want.
   - **To change the comment** on an attachment, enter a new comment and then click **Change properties**. Note that the comment listed against the specific version will not change, however the comment displayed when viewing the topic does change.
-  - **To hide/unhide** an attachment, enable the **Hide file** checkbox, then click **Change properties**.
+  - **To hide/unhide** an attachment, enable the <code>**Hide file**</code> checkbox, then click <code>**Change properties**</code>.
 
-### <a name="Known Issues"></a> Known Issues
+## <a name="Known Issues"></a> Known Issues
 
 - Unlike topics, attachments are not locked during editing. As a workaround, you can change the comment to indicate an attachment file is being worked on - the comment on the specific version isn't lost, it's there when you list all versions of the attachment.

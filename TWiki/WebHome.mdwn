@@ -1,8 +1,15 @@
 <table>
   <tr>
-    <td rowspan="2" valign="top"> Welcome to TWiki, a flexible, powerful, and simple, secure, Web-based collaboration platform. Use TWiki to run a project development space, a document management system, a knowledge base, or any other groupware tool, on an intranet or on the Web. <p>This is the place to learn about it, download it, and try it out for yourself... </p>
-      <p><a name="UsersGuide"></a></p>
-      <h2><a name="TWiki User's Guide"></a> TWiki User's Guide </h2>
+    <td valign="top"> Welcome to TWiki, a flexible, powerful, and simple, secure, Web-based collaboration platform. Use TWiki to run a project development space, a document management system, a knowledge base, or any other groupware tool, on an intranet or on the Web. <p>This is the place to learn about it, download it, and try it out for yourself... </p>
+    </td>
+    <td width="25"> </td>
+    <td align="center" valign="top" width="200"><a href="http://TWiki.org/"><img alt="Powered by TWiki" border="0" height="64" src="http://www.dementia.org/twiki//view/twikilogo3.gif" width="131" /></a><br /> The official TWiki<sup>TM</sup><br />site is <a href="http://twiki.org/" target="_top">http://twiki.org/</a></td>
+  </tr>
+</table>
+
+<table>
+  <tr valign="top">
+    <td><a name="UsersGuide"></a><h2><a name="TWiki User's Guide"></a> TWiki User's Guide </h2>
       <p>
       </p>
       <ul>
@@ -12,47 +19,44 @@
           </ul>
         </li>
       </ul>
+      <p>
+      </p>
+      <ul>
+        <li><strong>One-Page Primers</strong> cover TWiki basics <ul>
+            <li>[[Main/TWikiTutorial]]: A compact, 20-minute TWiki primer </li>
+            <li>[[Main/TWikiSite]]: Instant overview - first, there was Wiki </li>
+            <li>[[Main/TWikiPages]]: Customize, rename, move, or delete TWiki topics </li>
+            <li>[[Main/WikiSyntax]]: All of the TWiki shorthand basics </li>
+            <li>[[Main/GoodStyle]]: Working tips for an open collaboration environment </li>
+            <li>[[Main/TWikiShorthand]]: Scan all TWiki text formatting rules on one page </li>
+            <li>[[Main/TWikiVariables]]: How to easily embed text, graphics, dynamic content </li>
+            <li>[[Main/FileAttachments]]: Browser-upload files for distribution or display </li>
+            <li>[[Main/WebChangesAlert]]: Get email alerts linking to the latest page changes </li>
+          </ul>
+        </li>
+      </ul>
+      <p>
+      </p>
+      <ul>
+        <li><strong>TWiki Help FAQs</strong><ul>
+            <li>[[Main/TWikiFAQ]]: The first things people ask about TWiki </li>
+            <li>[[Main/TextFormattingFAQ]]: Common how-to questions about posting in TWiki </li>
+          </ul>
+        </li>
+        <li> Frequent users should also browse the full [[Main/WebHome#ReferenceManual]]! </li>
+      </ul>
+      <p>
+      </p>
+      <ul>
+        <li> %T% In less than an hour, you can read through and customize the [[Main/WebHome#UsersGuide]] to reflect the exact feature set enabled on your own TWiki site. </li>
+      </ul>
     </td>
-    <td rowspan="2" width="25"> </td>
-    <td align="center" valign="top" width="200"><a href="http://TWiki.org/"><img alt="Powered by TWiki" border="0" height="64" src="http://www.dementia.org/twiki//view/twikilogo3.gif" width="131" /></a><br /> The official TWiki<sup>TM</sup><br />site is <a href="http://twiki.org/" target="_top">http://twiki.org/</a></td>
-  </tr>
-  <tr>
+    <td width="25"> </td>
     <td align="left" valign="top" width="200">
       <form action="http://www.dementia.org/twiki//search/%WEB%/"><input name="search" size="22" type="text" /><br /><input type="submit" value="Search Docs" /><br /><font size="-2">More options in [[Main/WebSearch]]</font></form>
     </td>
   </tr>
 </table>
-
-- **One-Page Primers** cover TWiki basics
-  - [[TWikiTutorial]]: A compact, 20-minute TWiki primer
-  - [[TWikiSite]]: Instant overview - first, there was Wiki
-  - [[TWikiPages]]: Customize, rename, move, or delete TWiki topics
-  - [[WikiSyntax]]: All of the TWiki shorthand basics
-  - [[GoodStyle]]: Working tips for an open collaboration environment
-  - [[TWikiShorthand]]: Scan all TWiki text formatting rules on one page
-  - [[TWikiVariables]]: How to easily embed text, graphics, dynamic content
-  - [[FileAttachments]]: Browser-upload files for distribution or display
-  - [[WebChangesAlert]]: Get email alerts linking to the latest page changes
-
-- **Installed Plugins** extending the functionality of TWiki
->
-
-- [[SpreadSheetPlugin]] <span>(any TWiki, 10197)</span>:
-- [[CommentPlugin]] <span>(Dakar, 11359)</span>: Allows users to quickly post comments to a page without an edit/preview/save cycle
-- [[EditTablePlugin]] <span>(any TWiki, 11646)</span>:
-- [[InterwikiPlugin]] <span>(Dakar, $Rev: 11935$)</span>:
-- [[PreferencesPlugin]] <span>(Dakar, 9839)</span>:
-- [[SlideShowPlugin]] <span>(Any TWiki, $Rev: 12847$)</span>:
-- [[SmiliesPlugin]] <span>(Dakar, 8154)</span>:
-- [[TablePlugin]] <span>(1.020, 12339)</span>:
-- [[TwistyPlugin]] <span>(1.2.0, $Rev: 12154$)</span>:
-
-- **TWiki Help FAQs**
-  - [[TWikiFAQ]]: The first things people ask about TWiki
-  - [[TextFormattingFAQ]]: Common how-to questions about posting in TWiki
-
-- %T% It should take an hour or less to read through and customize the [[User's Guide|Main/WebHome#UsersGuide]] to reflect the features and settings enabled on your own TWiki site.
-- Frequent users should also browse the full [[Reference Manual|Main/WebHome#ReferenceManual]]!
 
 <a name="ReferenceManual"></a>
 
@@ -77,15 +81,25 @@ Documentation for webmasters, system administrators, project managers, team lead
   - [[TWikiPlugins]]
   - [[TWikiSiteTools]]
   - [[Managing Topics|Main/ManagingTopics]]
-  - [[Managing Webs|Main/ManagingWebs]]<br />**Appendices**<br />[[A. TWiki File System|Main/AppendixFileSystem]]<br />[[B. TWiki Dev Timeline|Main/TWikiHistory]]
+  - [[Managing Webs|Main/ManagingWebs]]<br />**Appendices**<br />[[A. TWiki File System|Main/AppendixFileSystem]]<br />[[B. TWiki Development Timeline|Main/TWikiHistory]]
 
-## <a name="TWiki Site Tools"></a> TWiki Site Tools
+## <a name="TWikiSiteTools"></a><a name="_TWikiSiteTools"></a> TWikiSiteTools
 
-- [[TWikiSiteTools]] include utilities for navigation and for monitoriing web and site-wide activity.
-- [[SiteMap]]: A color-coded directory of available webs that can be easily included on any page _(below)_
+[[TWikiSiteTools]] include utilities for navigation and for monitoring web and site-wide activity.
+
 - [[TWikiPreferences]]: %WIKITOOLNAME% site-wide preferences
+- **Installed Plugins** extending the functionality of TWiki
+  - [[SpreadSheetPlugin]] <span>(any TWiki, 10197)</span>:
+  - [[CommentPlugin]] <span>(Dakar, 11359)</span>: Allows users to quickly post comments to a page without an edit/preview/save cycle
+  - [[EditTablePlugin]] <span>(any TWiki, 11646)</span>:
+  - [[InterwikiPlugin]] <span>(Dakar, $Rev: 11935$)</span>:
+  - [[PreferencesPlugin]] <span>(Dakar, 9839)</span>:
+  - [[SlideShowPlugin]] <span>(Any TWiki, $Rev: 12847$)</span>:
+  - [[SmiliesPlugin]] <span>(Dakar, 8154)</span>:
+  - [[TablePlugin]] <span>(1.020, 12339)</span>:
+  - [[TwistyPlugin]] <span>(1.2.0, $Rev: 12154$)</span>:
 
-**Notes:**
+- The [[SiteMap]]: A color-coded directory of available webs that can be easily included on any page _(below)_
 
 - TWiki<sup>TM</sup> is a trademark of [[PeterThoeny]]
 - TWiki is developed as Free Software under the [[GNU/GPL|Main/GnuGeneralPublicLicense]]
