@@ -2,6 +2,7 @@
   <ul>
     <li><a href="#TWiki Access Control"> TWiki Access Control</a><ul>
         <li><a href="#An Important Control Considerati"> An Important Control Consideration</a></li>
+        <li><a href="#Authentication vs. Access Contro"> Authentication vs. Access Control</a></li>
         <li><a href="#Users and Groups"> Users and Groups</a><ul>
             <li><a href="#Managing Users"> Managing Users</a></li>
             <li><a href="#Managing Groups"> Managing Groups</a></li>
@@ -56,6 +57,12 @@ As a **collaboration guideline**:
 
 - Create broad-based Groups (for more and varied input), and...
 - Avoid creating view-only Users (if you can read it, you should be able to contribute to it).
+
+## <a name="Authentication vs. Access Contro"></a> Authentication vs. Access Control
+
+**Authentication:** Identifies who a user is based on a login procedure. See [[TWikiUserAuthentication]].
+
+**Access control:** Restrict access to content based on users and groups once a user is identified.
 
 ## <a name="Users and Groups"></a> Users and Groups
 
