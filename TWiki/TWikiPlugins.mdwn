@@ -34,7 +34,7 @@ TWikiPlugins allow you to add new features to TWiki without changing the core pr
 - heavily customize an installation and still do clean updates to new versions of TWiki;
 - rapidly develop new TWiki functions in Perl using the Plugin API.
 
-Everything to do with TWiki Plugins - including demos, new releases, downloads, and discussion - is available at TWiki.org, in the ** [TWiki.org Plugins web](http://twiki.org/cgi-bin/view/Plugins)**.
+Everything to do with TWiki Plugins - including demos, new releases, downloads, and discussion - is available at TWiki.org, in the ** [[TWiki.org Plugins web|Main/TWiki:Plugins]]**.
 
 <a name="InstallPlugin"></a>
 
@@ -72,7 +72,7 @@ Ideally, after you've [[installed a Plugin|Main/WebHome#InstallPlugin]], just re
 
 #### <a name="Set Preferences for Individual P"></a> Set Preferences for Individual Plugins
 
-Installed Plugins can be **toggled on or off**, site-wide or by web, through [[TWikiPreferences]] and individual [[WebPreferences]]:
+Installed Plugins can be **toggled on or off**, site-wide or by web, through TWikiPreferences and individual WebPreferences:
 
 - All Plugin modules present in the <code>**lib/TWiki/Plugins**</code> directory are activated automatically unless disabled by the <code>**DISABLEDPLUGINS**</code> Preferences variable in TWikiPreferences. You can optionally list the installed Plugins in the <code>**INSTALLEDPLUGINS**</code> Preferences variable. This is useful to define the sequence of Plugin execution, or to specify other webs than the %WIKITOOLNAME% web for the Plugin topics. Settings in [[TWikiPreferences]] are:
   - <code>**Set INSTALLEDPLUGINS = DefaultPlugin, ...**</code>
@@ -179,11 +179,11 @@ The Plugin documentation topic contains usage instructions and version details. 
 >
 > Check
 >
-> [EmptyPlugin](http://TWiki.org/cgi-bin/view/TWiki/EmptyPlugin)
+> [[EmptyPlugin]]
 >
 > on TWiki.org for the latest Plugin doc topic template. Here's a quick overview of what's covered:
 >
-> **Syntax Rules:** **_explanation coming up_**
+> **Syntax Rules:** Describe any special text formatting that will be rendered.
 >
 > **YourPlugin Settings:** Description and settings for your custom Plugin %VARIABLES%, and those required by TWiki.
 >
@@ -220,7 +220,7 @@ You can release your tested, packaged Plugin to the TWiki community through the 
 
 1. **Post** the Plugin documentation topic in the TWiki:Plugins web:
   - create a new topic using the Plugin name, ex: <code>**YourPlugin.txt**</code>;
-  - paste in the topic text from [[How to Create the Plugin Documentation Topic|Main/WebHome#CreatePluginTopic]] and Save.
+  - paste in the topic text from [[Creating Plugin Documentation|Main/WebHome#CreatePluginTopic]] and Save.
 2. **Attach** the distribution zip file to the topic, ex: <code>**YourPlugin.zip**</code>.
 3. **Link** from the doc page to a new, blank page named after the Plugin, and ending in <code>**Dev**</code>, ex: <code>**YourPluginDev**</code>. This is the discussion page for future development. (User support for Plugins is handled in TWiki:Support.)
 
