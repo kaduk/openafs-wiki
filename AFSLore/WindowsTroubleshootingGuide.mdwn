@@ -12,18 +12,29 @@
           </ul>
         </li>
         <li><a href="#Error Messages"> Error Messages</a><ul>
+            <li><a href="#I receive a "Delayed Write failu"> I receive a "Delayed Write failure" error when saving documents from Microsoft Office to AFS volumes. What can I do?</a></li>
+            <li><a href="#I receive errors stating that th"> I receive errors stating that the AFS Client Service may not have been started, what should I do?</a></li>
+            <li><a href="#When I have obtained tokens usin"> When I have obtained tokens using Kerberos for Windows, I receive errors similar to "Ticket contained unknown key version number", what is wrong?</a></li>
             <li><a href="#Why can't I use _OpenAFS with an"> Why can't I use OpenAFS with an Active Directory KDC?</a></li>
             <li><a href="#Why can't I install _OpenAFS on"> Why can't I install OpenAFS on Windows NT, ME or 9x?</a></li>
+            <li><a href="#Why do I receive "AFS is still s"> Why do I receive "AFS is still starting. Retry?" messages when I have turned off "Obtain tokens at logon"?</a></li>
             <li><a href="#What is this _MrxSmb event 3019"> What is this MrxSmb event 3019 that pops up in my System Log?</a></li>
             <li><a href="#Why isn't the AFS Light Gateway"> Why isn't the AFS Light Gateway working anymore?</a></li>
           </ul>
         </li>
         <li><a href="#Features"> Features</a><ul>
+            <li><a href="#There is only one cell listed in"> There is only one cell listed in <tt>\\AFS\all</tt> or when browsing <tt>\\AFS</tt>. Where are all my cells?</a><ul>
+                <li><a href="#Broken Root Volume"> Broken Root Volume</a></li>
+                <li><a href="#Freelance Mode"> Freelance Mode</a></li>
+              </ul>
+            </li>
+            <li><a href="#What happened to the files in th"> What happened to the files in the Windows directory, like <tt>afsdcell.ini</tt>, <tt>afs_freelance.ini</tt> and <tt>afsdsbmt.ini</tt>?</a></li>
             <li><a href="#Why can I not use fs to set the"> Why can I not use <tt>fs</tt> to set the X option anymore?</a></li>
             <li><a href="#Why should I abandon Kerberos 4?"> Why should I abandon Kerberos 4?</a></li>
           </ul>
         </li>
         <li><a href="#Nomenclature"> Nomenclature</a><ul>
+            <li><a href="#What is "Freelance Mode"?"> What is "Freelance Mode"?</a></li>
             <li><a href="#What is "High Security Mode"?"> What is "High Security Mode"?</a></li>
             <li><a href="#What is the Microsoft Loop Back"> What is the Microsoft Loop Back Adapter?</a></li>
             <li><a href="#What is a "submount"?"> What is a "submount"?</a></li>
@@ -65,6 +76,27 @@ This is due to a known bug. Set `MaxCPUs` (type DWORD) (in `HKEY_LOCAL_MACHINE\S
 
 ## <a name="Error Messages"></a> Error Messages
 
+### <a name="I receive a &quot;Delayed Write failu"></a> I receive a "Delayed Write failure" error when saving documents from Microsoft Office to AFS volumes. What can I do?
+
+Windows has support for a concept known as Overlapped I/O. It is frequently used in Microsoft Office programs. The idea is that the program sends several file read, or write, requests at once and handles them in the order they are completed. This way, writes to different locations do not have to wait for previous writes to complete. It is mostly a performance enhancement.
+
+Unfortunately, [[OpenAFS]] for Windows currently does not handle theses overlapping requests very well. You are probably best off saving to local disk and then copying them into AFS.
+
+### <a name="I receive errors stating that th"></a> I receive errors stating that the AFS Client Service may not have been started, what should I do?
+
+First, you should check if the service is running or not. You can do this in Control Panel\\Administration Tools\\Services. If it is not, try to start it. Won't work? File a bugreport!
+
+You could try to login on a local account (like Administrator) and browse `\\AFS`. Check that you have RPC running.
+
+If all fails, file a bugreport!
+
+### <a name="When I have obtained tokens usin"></a> When I have obtained tokens using Kerberos for Windows, I receive errors similar to "Ticket contained unknown key version number", what is wrong?
+
+As with most things on the computer, this error message is not entirely correct. It is not neccessarily the version number of the key that is wrong. Two of the most common reasons are
+
+- Wrong cell. You may have obtained tokens for one cell and is now trying to reach another cell. Try doing `afslog` for the new cell if you know you should have access to it.
+- Old server. Support for [[KerberosV]] tickets is a relatively new feature of [[OpenAFS]]. You will need an [[OpenAFS]] 1.2.8 or later server to use the feature. Either update the server, or disable [[KerberosV]]. Read about the latter in the [[Configuration Reference Guide|Main/WindowsConfigurationReferenceGuide#Disable_Automatic_Use_of_KerberosV]].
+
 ### <a name="Why can&#39;t I use _OpenAFS with an"></a> Why can't I use [[OpenAFS]] with an Active Directory KDC?
 
 You can, however Microsoft uses the Kerberos tickets in a way no one had anticipated during protocol design. While remaining syntactically valid, the tickets the AD KDC issues are very large. They can be 10 kB while other KDC implementations usually issue tickets around 500 bytes in size.
@@ -77,6 +109,10 @@ As of version 1.3.65, the old Windows branch will no longer be maintained. The i
 
 The main reason for this decision is the lack of developers and fundings. [[OpenAFS]] for Windows is a free project and requires donations ,or developers with time left, to move forward. Old versions of [[OpenAFS]] for Windows 9x and NT 4 are still available.
 
+### <a name="Why do I receive &quot;AFS is still s"></a> Why do I receive "AFS is still starting. Retry?" messages when I have turned off "Obtain tokens at logon"?
+
+The AFS Client Service is trying to start, but is waiting for something. This may be a slow or non-existent DNS server, a faulty AFS server, or simply an unplugged cable. The important thing to know is that AFS has not got enough information to begin its normal operation. Check your DNS, AFS servers and [[CellServDB]].
+
 ### <a name="What is this _MrxSmb event 3019"></a><a name="What is this _MrxSmb event 3019 "></a> What is this [[MrxSmb]] event 3019 that pops up in my System Log?
 
 The [[MrxSmb]] event 3019 is due to the use of the [[WindowsLoopBackAdapter]]. It can be safely ignored. (from [JSI FAQ, 3136](http://www.jsiinc.com/SUBG/TIP3100/rh3136.htm))
@@ -86,6 +122,24 @@ The [[MrxSmb]] event 3019 is due to the use of the [[WindowsLoopBackAdapter]]. I
 The Light Gateway works by simply publishing what [[OpenAFS]] has already built for internal use. If you install the [[WindowsLoopBackAdapter]], the submounts will only be published on the local computer. Either remove the Loop Back Adapter, or stop using the gateway functionality.
 
 ## <a name="Features"></a> Features
+
+### <a name="There is only one cell listed in"></a> There is only one cell listed in `\\AFS\all` or when browsing `\\AFS`. Where are all my cells?
+
+This is related to two reasons:
+
+#### <a name="Broken Root Volume"></a> Broken Root Volume
+
+You may have chosen the wrong default cell. Maybe that cell only has one cell mounted at the root.
+
+#### <a name="Freelance Mode"></a> Freelance Mode
+
+Your computer is currently using the Freelance Mode. Read about it in the below.
+
+### <a name="What happened to the files in th"></a> What happened to the files in the Windows directory, like `afsdcell.ini`, `afs_freelance.ini` and `afsdsbmt.ini`?
+
+They are gone. All INI files but one have been put into the Windows registry. Use the [[WindowsConfigurationReferenceGuide]] and `regedit` to change them.
+
+The only file preserved is the `afsdsbmt.ini`, which is now called `CellServDB` and moved to `C:\Program Files\OpenAFS\Client\` (default location).
 
 ### <a name="Why can I not use fs to set the"></a><a name="Why can I not use fs to set the "></a> Why can I not use `fs` to set the X option anymore?
 
@@ -98,6 +152,14 @@ A gigant security hole was found in the Kerberos 4 protocol. This led the world 
 Recent updates to [[OpenAFS]] include support for Kerberos 5. If your cell still uses **_kaserver_** or a plain Kerberos 4 server, you should update them to use Kerberos 5. The **_kaserver_** can be seen as deprecated. The most common Kerberos 5 servers (KDCs) are [Heimdal](http://www.pdc.kth.se/heimdal/), [MIT Kerberos](http://web.mit.edu/kerberos/www/) and [Microsoft's Active Directory services](http://www.microsoft.com/).
 
 ## <a name="Nomenclature"></a> Nomenclature
+
+### <a name="What is &quot;Freelance Mode&quot;?"></a> What is "Freelance Mode"?
+
+AFS was originally intended to be run on stationary office computers. It required the AFS servers to be reachable at any time. Now, the laptop has made that an impossibility. Users disconnect and connect their computers to different networks several times a day. This led the AFS community to the invention of "Freelance mode". Since the user's default cell determines which cells will be visible to the user, a workaround was neccessary when laptops began moving around.
+
+If you have a laptop, or will otherwise be without a connection to the servers of your default cell, you should have this enabled. If your computer can always communicate with the servers of the default cell, this mode is superflous.
+
+To switch it on and off, please read in the [[Configuration Reference|Main/WindowsConfigurationReferenceGuide#Freelance_Client_Support]].
 
 ### <a name="What is &quot;High Security Mode&quot;?"></a> What is "High Security Mode"?
 

@@ -6,7 +6,20 @@
 - [[WindowsEndUserQuickStartGuide]] Same as above, but maybe even more Walk-Through. Explain a sample configuration. Should also include some use cases.
 - [[WindowsConfigurationReferenceGuide]] One page for each screen of the afscreds program. Command-line switches reference.
 - [[WindowsTroubleshootingGuide]] (FAQ) Not questions like "Where do I download [[OpenAFS]]?"
-- It would be nice to write this in XML, then doing XSLT to create PDF, (online) HTML and (offline) HTML Help documents. Docbook might be suitable.
+
+### <a name="Done"></a> Done
+
+- Writing initial documents.
+
+### <a name="To Do"></a> To Do
+
+- Getting the facts right. Everybody should help out on this one.
+- Design a layout to use for the docs. Should be compatible with Windows own HTML Help layout.
+- Convert the Wiki into XML and create XSLTs for PDF, (online) HTML and (offline) HTML Help documents. Docbook might be suitable.
+- Spell and grammar check. By anyone up for it.
+- Get the XML and XSLT into CVS, creating makefiles.
+- Tag the XML for use with context help.
+- Update the source code to use the new help files.
 
 ### <a name="Links"></a> Links
 
@@ -19,17 +32,10 @@
 
 Registry:
 
-- [[AfscredsShortcutParams]] should be documented
-- CSCPolicy should be documented
-
 - [[LogoffTokenTransfer]], [[LogoffTokenTransferTimeout]] (are not used)
 - [[NoWarnings]] (not used anymore)
 - Class, [[DependOnGroup]], [[DependOnService]], Name, [[ProviderPath]] (Windows internal information)
 - Gateway (is deprecated)
-- Remainders/
-- [[ActiveMaps]]/
-- Mappings/
-
-Misc:
-
-- install-note 18, on SPNEGO and the cifs/ principal. Is the cifs/ principal important?
+- Remainders/ (why per-domain?)
+- [[ActiveMaps]]/ (via UI)
+- Mappings/ (via UI)
