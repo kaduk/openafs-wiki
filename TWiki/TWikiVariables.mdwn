@@ -47,7 +47,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%PUBURL%</code></td>
-    <td> The public URL of TWiki, is <b>http://www.dementia.org/twiki//view</b></td>
+    <td> The public URL of TWiki, is <b>http://www.dementia.org/twiki//view</b><br /> Example: You can refer to a file attached to another topic as <code><b>%PUBURL%/%WEB%/OtherTopic/image.gif</b></code></td>
   </tr>
   <tr>
     <td><code>%PUBURLPATH%</code></td>
@@ -64,6 +64,10 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   <tr>
     <td><code>%URLPARAM{"name"}%</code></td>
     <td> Returns the value of a URL parameter. Ex: <code>%URLPARAM{"skin"}%</code> returns <b>print</b> for a <code>.../view/%WEB%/%TOPIC%?skin=print</code> URL. Is <b></b></td>
+  </tr>
+  <tr>
+    <td><code>%URLENCODE{"string"}%</code></td>
+    <td> Encodes a string for use as a URL parameter. Ex: <code>%URLENCODE{"spaced name"}%</code> returns <b>spaced%20name</b></td>
   </tr>
   <tr>
     <td><code>%WIKITOOLNAME%</code></td>
@@ -217,7 +221,7 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:35</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:36</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -267,15 +271,15 @@ This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - expands the
           <td> 2 digit year </td>
           <td> 99 </td>
         </tr>
-      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:35:59</b></td>
+      </table> Variables can be shortened to 3 characters. Example: <br /><code>%GMTIME{"$day $month, $year - $hour:$min:$sec"}%</code> is <br /><b>29 Jun, 2010 - 15:36:04</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:35</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:36</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
-    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:35</b></td>
+    <td> Formatted server time. <br /> Example: <code>%SERVERTIME{"$hou:$min"}%</code> is <b>11:36</b></td>
   </tr>
   <tr>
     <td><code>%HTTP_HOST%</code></td>
