@@ -64,13 +64,14 @@ The following are **_site-level_** settings that affect all users in all webs on
   - Set ATTACHLINKBOX =
 
 - Format of file link when the **_link_** check box is checked: (can be overwritten by user preferences)
-  - Set ATTACHEDFILELINKFORMAT = \\t\* [$name](http://www.dementia.org/twiki//view/$name): $comment
   - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**\\t**</code> to tab (3 spaces for bullets).
+  - Set ATTACHEDFILELINKFORMAT = \\t\* [$name](http://www.dementia.org/twiki//view/$name): $comment
 
 - Format of images when the **_link_** check box is checked: (can be overwritten by user preferences)
-  - Set ATTACHEDIMAGEFORMAT = \\t\* $comment: <br />![$name](http://www.dementia.org/twiki//view/$name)
-  - %H% **NOTE:** **_Example image is broken because there is no attached image file._**
   - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**$size**</code> to <code>**width="..." height="..."**</code> attribute of <code>**img**</code> tag; <code>**\\t**</code> to tab (3 spaces for bullets).
+
+          * Set ATTACHEDIMAGEFORMAT = \t* $comment: <br />
+            <img src="%ATTACHURLPATH%/$name" alt="$name" $size />
 
 ## <a name="Email Settings"></a> Email Settings
 
@@ -97,7 +98,7 @@ The following are **_site-level_** settings that affect all users in all webs on
 
           * Set HTTP_EQUIV_ON_VIEW =
 
-- <code>**http-equiv**</code> meta tags for <code>**edit**</code> script. Example, to expire immediately: <br />`Set HTTP_EQUIV_ON_EDIT = <meta http-equiv="Expires" content="%GMTIME{"day month, year - hour:min:sec"}% GMT">`
+- <code>**http-equiv**</code> meta tags for <code>**edit**</code> script. Example, to expire immediately: <br />`Set HTTP_EQUIV_ON_EDIT = <meta http-equiv="Expires" content="%GMTIME{"$day $month $year $hour:$min:$sec"}% GMT">`
 
           * Set HTTP_EQUIV_ON_EDIT =
 
