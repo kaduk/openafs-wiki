@@ -154,7 +154,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **_NOTE:_** The images must be [[accessible|Main/WebHome#ImgUpload]] as a URL.
 >
-> - **_You enter:_** ` TWiki http://www.dementia.org/twiki//view/wikiHome.gif logo.`<br />**_Result:_** TWiki ![wikiHome.gif](http://www.dementia.org/twiki//view/wikiHome.gif) logo.
+> - **_You enter:_** ` TWiki http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif logo.`<br />**_Result:_** TWiki ![twikilogo88x31.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif) logo.
 >
 > <a name="ImgUpload"></a> You can upload images directly to your server with FTP access. You can also [[attach|Main/FileAttachment]] image files to a topic - you could even create a dedicated image topic, like `ImageLibrary` - and then link to the images directly:
 >
@@ -164,7 +164,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
 >
 > This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The display of the topic is faster if you include the `WIDTH` and `HEIGHT` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
 >
-> - **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/wikiHome.gif" width="46" height="50" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/wikiHome.gif" width="46" height="50" alt="logo" /> logo.
+> - **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" alt="logo" /> logo.
 >
 > ----
 >
