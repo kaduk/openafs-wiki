@@ -57,7 +57,7 @@
 
 _Inline search feature allows flexible formatting of search result_
 
-The `%SEARCH{...}%` variable documented in [[TWikiVariables]] has a fixed format for the search result, that is, a table consisting of topic names and topic summaries. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (such as `%SEARCH{ "food" format="| $topic | $summary |" }%`).
+The <code>[[%SEARCH{...}%|Main/TWikiVariables#VarSEARCH]]</code> variable documented in [[TWikiVariables]] has a fixed format for the search result, that is, a table consisting of topic names and topic summaries. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (such as `%SEARCH{ "food" format="| $topic | $summary |" }%`).
 
 ## <a name="Syntax"></a> Syntax
 
@@ -99,6 +99,14 @@ Variables that can be used in the format string:
     <td> Topic name, shortended to 40 characters with "<tt>...</tt>" indication </td>
   </tr>
   <tr>
+    <td><code>$parent</code></td>
+    <td> Name of parent topic; empty if not set </td>
+  </tr>
+  <tr>
+    <td><code>$parent(20)</code></td>
+    <td> Name of parent topic, same hyphenation/shortening like <code>$topic()</code></td>
+  </tr>
+  <tr>
     <td><code>$text</code></td>
     <td> Formatted topic text. In case of a <code>multiple="on"</code> search, it is the line found for each search hit. </td>
   </tr>
@@ -108,11 +116,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:45</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:46</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:45Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:46Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -172,7 +180,7 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$pattern(reg-exp)</code></td>
-    <td> A regular expression pattern to extract some text from a topic (does not search meta data; use <code>$formfield</code> instead). In case of a <code>multiple="on"</code> search, the pattern is applied to the line found in each search hit. The pattern must cover the whole text (topic or line). For example, <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code>. This example has non-greedy <code>.*?</code> patterns to scan for the first occurance of the Email bullet; use greedy <code>.*</code> patterns to scan for the last occurance. </td>
+    <td> A regular expression pattern to extract some text from a topic (does not search meta data; use <code>$formfield</code> instead). In case of a <code>multiple="on"</code> search, the pattern is applied to the line found in each search hit.%BB% Specify a [[Main/RegularExpression]] that covers the whole text (topic or line), which typically starts with <code>.*</code>, and must end in <code>.*</code> %BB% Put text you want to keep in parenthesis, like <code>$pattern(.*?(from here.*?to here).*)</code> %BB% Example: <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code> %BB% This example has non-greedy <code>.*?</code> patterns to scan for the first occurance of the Email bullet; use greedy <code>.*</code> patterns to scan for the last occurance %BB% Limitation: Do not use <code>.*)</code> inside the pattern, e.g. <code>$pattern(.*foo(.*)bar.*)</code> does not work, but <code>$pattern(.*foo(.*?)bar.*)</code> does %BB% Note: Make sure that the integrity of a web page is not compromised; for example, if you include an HTML table make sure to include everything including the table end tag </td>
   </tr>
   <tr>
     <td><code>$n</code> or <code>$n()</code></td>
@@ -196,8 +204,6 @@ Variables that can be used in the format string:
   </tr>
 </table>
 
-**_Note:_** For `$pattern(reg-exp)`, specify a [[RegularExpression]] that scans from start to end and contains the text you want to keep in parenthesis, like `$pattern(.*?(from here.*?to here).*)`. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table make sure to include everything including the table end tag.
-
 ## <a name="Examples"></a> Examples
 
 <a name="SearchBulletList"></a>
@@ -216,11 +222,11 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 ### <a name="Table showing form field values"></a><a name="Table showing form field values "></a> Table showing form field values of topics with a form
 
-**Write this in the Know web:**
+In a web where there is a form that contains a `TopicClassification` field, an `OperatingSystem` field and an `OsVersion` field we could write:
 
 `| *Topic:* | *OperatingSystem:* | *OsVersion:* |`<br />`%SEARCH{ "[T]opicClassification.*?value=\"[P]ublicFAQ\"" scope="text" regex="on" nosearch="on" nototal="on" format="| [[$topic]] | $formfield(OperatingSystem) | $formfield(OsVersion) |" }%`
 
-**To get this:**
+To get this:
 
 <table border="1" cellpadding="1" cellspacing="0">
   <tr>
@@ -229,13 +235,13 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
     <th bgcolor="#99CCCC"><strong>OsVersion:</strong></th>
   </tr>
   <tr>
-    <td><a href="http://www.dementia.org/twiki//view/Know/IncorrectDllVersionW32PTH10DLL">IncorrectDllVersionW32PTH10DLL</a></td>
-    <td><a href="http://www.dementia.org/twiki//view/Know/OsWin">OsWin</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/Sandbox/IncorrectDllVersionW32PTH10DLL">IncorrectDllVersionW32PTH10DLL</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/Sandbox/OsWin">OsWin</a></td>
     <td> 95/98 </td>
   </tr>
   <tr>
-    <td><a href="http://www.dementia.org/twiki//view/Know/WinDoze95Crash">WinDoze95Crash</a></td>
-    <td><a href="http://www.dementia.org/twiki//view/Know/OsWin">OsWin</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/Sandbox/WinDoze95Crash">WinDoze95Crash</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/Sandbox/OsWin">OsWin</a></td>
     <td> 95 </td>
   </tr>
 </table>
@@ -277,6 +283,8 @@ Here is an example. Let's search for all topics that contain the word "culture" 
 # <a name="TWiki Installation Error"></a> TWiki Installation Error
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
+
+**_Note:_** Nested search can be slow, especially if you nest more then 3 times. Nesting is limited to 16 levels. For each new nesting level you need to "escape the escapes", e.g. write `$dollarpercntSEARCH{` for level three, `$dollardollarpercntSEARCH{` for level four, etc.
 
 ### <a name="Most recently changed pages"></a> Most recently changed pages
 
@@ -341,4 +349,4 @@ Result:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
--- TWiki:Main.PeterThoeny - 16 Mar 2004
+-- TWiki:Main.PeterThoeny - 26 Jul 2004
