@@ -156,6 +156,10 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
     <td> The length in bytes of text. Example: <code><b>%CALC{"$LENGTH(abcd)"}%</b></code> returns <code><b>4</b></code></td>
   </tr>
   <tr>
+    <td><code><b>"$LIST(range)"</b></code></td>
+    <td> Converts the content of a range of cells into a flat list, delimited by comma. Example: <code><b>%CALC{"$LIST( $LEFT() )"}%</b></code> returns <code><b>Apples, Lemons, Oranges, Kiwis</b></code> assuming the cells to the left contain <code><b>| Apples | Lemons, Oranges | Kiwis |</b></code></td>
+  </tr>
+  <tr>
     <td><code><b>"$LOWER(text)"</b></code></td>
     <td> The lower case string of a text. Example: <code><b>%CALC{"$LOWER( $T(R1:C5) )"}%</b></code> returns the lower case string of the text in cell <code><b>R1:C5</b></code></td>
   </tr>
@@ -205,7 +209,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$REPEAT(text)"</b></code></td>
-    <td> Repeat <code><b>text</b></code> a number of times. Example: <code><b>%CALC{"$REPEAT(Hi! , 3)"}%</b></code> returns <code><b>Hi! Hi! Hi!</b></code></td>
+    <td> Repeat <code><b>text</b></code> a number of times. Example: <code><b>%CALC{"$REPEAT(/\, 5)"}%</b></code> returns <code><b>/\/\/\/\/\</b></code></td>
   </tr>
   <tr>
     <td><code><b>"$REPLACE(text, start_num, num_chars, new_text)"</b></code></td>
@@ -285,7 +289,7 @@ The formula next to "Total" is <code>**%CALC\{"$SUM( $ABOVE() )"\}%**</code>. <b
   </tr>
   <tr>
     <td><code><b>"$VALUE(text)"</b></code></td>
-    <td> Extracts a number from <code><b>text</b></code>. Returns <code><b>0</b></code> if not found. Examples:%BR% <code><b>%CALC{"$VALUE(US$1,200)"}%</b></code> returns <code><b>1200</b></code> %BR% <code><b>%CALC{"$VALUE(PrjNotebook1234)"}%</b></code> returns <code><b>1234</b></code> %BR% <code><b>%CALC{"$VALUE(Total: -12.5)"}%</b></code> returns <code><b>12.5</b></code></td>
+    <td> Extracts a number from <code><b>text</b></code>. Returns <code><b>0</b></code> if not found. Examples:%BR% <code><b>%CALC{"$VALUE(US$1,200)"}%</b></code> returns <code><b>1200</b></code> %BR% <code><b>%CALC{"$VALUE(PrjNotebook1234)"}%</b></code> returns <code><b>1234</b></code> %BR% <code><b>%CALC{"$VALUE(Total: -12.5)"}%</b></code> returns <code><b>-12.5</b></code></td>
   </tr>
 </table>
 
@@ -395,11 +399,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 06 Mar 2004 </td>
+    <td> 08 Mar 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 08 Mar 2004: </td>
+    <td> Added $LIST() </td>
   </tr>
   <tr>
     <td align="right"> 06 Mar 2004: </td>
@@ -505,4 +513,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 06 Mar 2004
+-- TWiki:Main/PeterThoeny - 08 Mar 2004
