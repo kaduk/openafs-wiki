@@ -27,6 +27,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Table cell spacing. Default: 1
   - Set CELLSPACING = 1
 
+- Vertical alignment of cells. Set to: `top`, `middle`, `bottom` or `baseline`; default: (empty)
+  - Set VALIGN =
+
+- Table header cell alignment. Set to: `left`, `center`, `right` or `justify`; default: (empty)
+  - Set HEADERALIGN =
+
+- Table data cell alignment. Set to: `left`, `center`, `right` or `justify`; default: (empty)
+  - Set DATAALIGN =
+
 - Color for header cells ('\*'s around text). Default: <span>\#99CCCC</span>
   - #Set HEADER\_BG = red
 
@@ -89,15 +98,30 @@ On line before the table use `%TABLE{...}%`:
     <td bgcolor="#ffffff" style=""> Cell spacing (pixels) </td>
     <td bgcolor="#ffffff" style=""><code>cellspacing="3"</code></td>
   </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>valign</code></td>
+    <td bgcolor="#ecf2f8" style=""> Vertical alignment of cells, set to <code>top</code>, <code>middle</code>, <code>bottom</code> or <code>baseline</code></td>
+    <td bgcolor="#ecf2f8" style=""><code>valign="top"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>headeralign</code></td>
+    <td bgcolor="#ffffff" style=""> Header cell alignment, set to <code>left</code>, <code>center</code>, <code>right</code> or <code>justify</code>. Overrides individual cell settings </td>
+    <td bgcolor="#ffffff" style=""><code>headeralign="left"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>dataalign</code></td>
+    <td bgcolor="#ecf2f8" style=""> Data cell alignment, set to <code>left</code>, <code>center</code>, <code>right</code> or <code>justify</code>. Overrides individual cell settings </td>
+    <td bgcolor="#ecf2f8" style=""><code>dataalign="center"</code></td>
+  </tr>
 </table>
 
 All default to the global setting
 
 ## <a name="Examples"></a> Examples
 
-Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="3" cellspacing="1" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"}%`
+Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing="3" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"}%`
 
-<table border="0" cellpadding="3" cellspacing="1" style="border-width: 0px">
+<table border="0" cellpadding="1" cellspacing="3" style="border-width: 0px">
   <tr>
     <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Num</font></a></th>
     <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Status</font></a></th>
@@ -194,11 +218,11 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="3" cellspacing
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 05 Jan 2002 </td>
+    <td bgcolor="#ffffff" style=""> 07 Mar 2002 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
-    <td bgcolor="#ecf2f8" style=""> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
+    <td bgcolor="#ecf2f8" style=""> 07 Mar 2002 PTh: Added valign, headeralign and dataalign; fixed swapped cellpadding/cellspacing bug <br /> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
@@ -224,4 +248,4 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="3" cellspacing
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 05 Jan 2002 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 07 Mar 2002 <br />
