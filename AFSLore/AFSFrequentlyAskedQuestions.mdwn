@@ -3,11 +3,15 @@ This is a work-in-progress. My plan is to wikify the existing text, make any upd
 Status:
 
 - Formatting Pass 1: Complete
-- Update Pass: Not Started
+- Update Pass: see below
 - Editing Pass: Not Started
 - Formatting Pass 2: Not Started
 
 -- [[DanielClark]] - 21 Jan 2002
+
+Updated:
+
+- Enlivened Arla links. Fixed a few heading markers. Corrected Transarc address and phone numbers. Improved references to paths in the transarc.com cell. Added MANIFEST for many ftp links because anonymous can't use the "LIST" command. -- [[TedAnderson]] - 29 Jan 2002
 
 ----
 
@@ -82,6 +86,7 @@ Most newsreaders can skip from topic to topic with control-G.
             <li><a href="#2.14  If an AFS server crashes,"> 2.14 If an AFS server crashes, do I have to reboot my AFS client?</a></li>
             <li><a href="#2.15  Can I use AFS on my diskle"> 2.15 Can I use AFS on my diskless workstation?</a></li>
             <li><a href="#2.16  Can I test for AFS tokens"> 2.16 Can I test for AFS tokens from within my program?</a></li>
+            <li><a href="#2.17  What's the difference betw"> 2.17 What's the difference between /afs/cellname and /afs/.cellname?</a></li>
             <li><a href="#2.18  Can I klog as two users on"> 2.18 Can I klog as two users on a machine in the same cell?</a></li>
             <li><a href="#2.19  What are the ~/._afsXXXX f"> 2.19 What are the ~/.__afsXXXX files?</a></li>
           </ul>
@@ -95,6 +100,7 @@ Most newsreaders can skip from topic to topic with control-G.
             <li><a href="#3.06  Are setuid programs execut"> 3.06 Are setuid programs executable across AFS cell boundaries?</a></li>
             <li><a href="#3.07  How does AFS maintain cons"> 3.07 How does AFS maintain consistency on read-write files?</a></li>
             <li><a href="#3.08  How can I run daemons with"> 3.08 How can I run daemons with tokens that do not expire?</a></li>
+            <li><a href="#3.09  Can I check my user's pass"> 3.09 Can I check my user's passwords for security purposes?</a></li>
             <li><a href="#3.10  Is there a way to automati"> 3.10 Is there a way to automatically balance disk usage across fileservers?</a></li>
             <li><a href="#3.11  Can I shutdown an AFS file"> 3.11 Can I shutdown an AFS fileserver without affecting users?</a></li>
             <li><a href="#3.12  How can I set up mail deli"> 3.12 How can I set up mail delivery to users with $HOMEs in AFS?</a></li>
@@ -234,20 +240,45 @@ AFS is based on a distributed file system originally developed at the Informatio
 
 ### <a name="1.02  Who supplies AFS?"></a> 1.02 Who supplies AFS?
 
-There are currently three sources for AFS: Commercial Transarc (now part of IBM), the open sourced version of former Transarc AFS called [[OpenAFS]] and the independent open source project Arla.
+There are currently three sources for AFS: Commercial Transarc (now part of IBM), the open sourced version of former Transarc AFS called [[OpenAFS]] and the independent open source project [[Arla]].
 
-    1.      Transarc Corporation          phone: +1 (412) 338-4400
-            The Gulf Tower
-            707 Grant Street              fax:   +1 (412) 338-4404
-            Pittsburgh
-            PA 15219                      email: information@transarc.com
-            United States of America             afs-sales@transarc.com
-
-                                          WWW:    http://www.transarc.com
-
-    2.      OpenAFS                       WWW:    http://www.openafs.org/
-
-    3.      Arla                          WWW:    http://www.stacken.kth.se/projekt/arla/
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> 1. </td>
+    <td> IBM Pittsburgh Lab </td>
+    <td> phone: +1 (412) 667-4400 </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> 11 Stanwix Street </td>
+    <td> fax: +1 (412) 667-6977 </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> Pittsburgh </td>
+    <td> email: <a href="mailto:information@transarc.com">information@transarc.com</a></td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> PA 15222 </td>
+    <td><a href="mailto:afs-sales@transarc.com">afs-sales@transarc.com</a></td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td> United States of America </td>
+    <td> WWW: <a href="http://www.transarc.com" target="_top">http://www.transarc.com</a></td>
+  </tr>
+  <tr>
+    <td> 2. </td>
+    <td>[[Main/OpenAFS]]</td>
+    <td> WWW: <a href="http://www.openafs.org/" target="_top">http://www.openafs.org/</a></td>
+  </tr>
+  <tr>
+    <td> 3. </td>
+    <td>[[Main/Arla]]</td>
+    <td> WWW: <a href="http://www.stacken.kth.se/projekt/arla/" target="_top">http://www.stacken.kth.se/projekt/arla/</a></td>
+  </tr>
+</table>
 
 ### <a name="1.03  What is /afs?"></a> 1.03 What is /afs?
 
@@ -420,7 +451,7 @@ There are also ports of AFS done by customers available from Transarc on an "as 
 
 More information on this can be found at:
 
-- /afs/transarc.com/public/afs-contrib/bin/README
+- <file:///afs/transarc.com/public/afs-contrib/bin/README>
 - <ftp://ftp.transarc.com/pub/afs-contrib/bin/README>
 
 These ports of AFS client code include:
@@ -438,7 +469,7 @@ The AFS on Linux FAQ may be found at:
 
 - <http://www.umlug.umd.edu/linuxafs/>
 
-Check out the [[OpenAFS]] and Arla pages for port avilablity.
+Check out the [[OpenAFS]] and [[Arla]] pages for port avilablity.
 
 ### <a name="1.07  What does &quot;ls /afs&quot; displa"></a> 1.07 What does "ls /afs" display in the Internet AFS filetree?
 
@@ -1113,7 +1144,7 @@ Cross-realm authentication (where co-operating cells are able to specify remore 
 The issue of printing in AFS is almost always the same: what do you send to the printing daemon? Do you send it the bytes you want to print or do you just send the file name containing those bytes? If you send it a file name, you have to be sure that the printing daemon can read it. Most daemons run with no AFS tokens, so can't access directories unless they are open for system:anyuser read access. Often, printing commands (lpr, lp, enq) have an option that allows for both modes of operation, though the default behavior varies from system to system. If you're interested in making your daemons authenticate to AFS, check out the example scripts in AFS-Contrib:
 
 - <file:///afs/transarc.com/public/afs-contrib/tools/reauth-example>
-- <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth-example/>
+- <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth-example/MANIFEST>
 
 Another common problem is setuid printing commands. For instance, the "enq" command runs as root, daemon, or some such user. If you aren't using the AFS login and simply issue "klog" to get tokens, those tokens are associated with your uid. When setuid programs run, they lose access to your token and often can't read the file name given as an argument. The solution in this case is to use "pagsh" before "klog" so that your tokens are transferred to subprocesses automatically by group membership. This works even if the uid changes, as for setuid programs.
 
@@ -1155,7 +1186,7 @@ Yes. Some sample code showing how to do this can be found in:
 
 <file:///afs/transarc.com/public/afs-contrib/tools/auth-samples/listtokens.c> <ftp://ftp.transarc.com/pub/afs-contrib/tools/auth-samples/listtokens.c>
 
-+++ 2.17 What's the difference between /afs/cellname and /afs/.cellname?
+### <a name="2.17  What&#39;s the difference betw"></a> 2.17 What's the difference between /afs/cellname and /afs/.cellname?
 
 AFS has [[ReadOnly]] (RO) and [[ReadWrite]] (RW) volumes.
 
@@ -1191,13 +1222,13 @@ Newer versions of AFS rename such files to .\_\_afsXXXX, thus making sure that t
 
 Yes, xdm can be found in:
 
-<file:///afs/transarc.com/public/afs-contrib/tools/xdm> <ftp://ftp.transarc.com/pub/afs-contrib/tools/xdm/>
+<file:///afs/transarc.com/public/afs-contrib/tools/xdm> <ftp://ftp.transarc.com/pub/afs-contrib/tools/xdm/MANIFEST>
 
 ### <a name="3.02  Is there a version of xloc"></a> 3.02 Is there a version of xlock available with AFS authentication?
 
 Yes, xlock can be found in:
 
-<file:///afs/transarc.com/public/afs-contrib/tools/xlock> <ftp://ftp.transarc.com/pub/afs-contrib/tools/xlock/>
+<file:///afs/transarc.com/public/afs-contrib/tools/xlock> <ftp://ftp.transarc.com/pub/afs-contrib/tools/xlock/MANIFEST>
 
 ### <a name="3.03  What is /afs/@cell?"></a> 3.03 What is /afs/@cell?
 
@@ -1303,13 +1334,13 @@ A better approach is to re-authenticate just before the token expires.
 
 There are two examples of this that have been contributed to afs-contrib. The first is "reauth":
 
-<file:///afs/transarc.com/public/afs-contrib/tools/reauth/> <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth/>
+<file:///afs/transarc.com/public/afs-contrib/tools/reauth/> <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth/MANIFEST>
 
 The second is "lat":
 
-/afs/transarc.com/public/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs <ftp://ftp.transarc.com/pub/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs>
+<file:///afs/transarc.com/public/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs> <ftp://ftp.transarc.com/pub/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs>
 
-+++ 3.09 Can I check my user's passwords for security purposes?
+### <a name="3.09  Can I check my user&#39;s pass"></a> 3.09 Can I check my user's passwords for security purposes?
 
 Yes. Alec Muffett's Crack tool (at version 4.1f) has been converted to work on the Transarc kaserver database. This modified Crack (AFS Crack) is available via anonymous ftp from:
 
@@ -1696,34 +1727,62 @@ A brief summary of contents:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <th align="center" bgcolor="#99CCCC"><strong> Directory </strong></th>
+    <th align="center" bgcolor="#99CCCC"><strong> Path </strong></th>
     <th align="center" bgcolor="#99CCCC"><strong> Contents </strong></th>
   </tr>
   <tr>
-    <td> pub/afsug/newsletter </td>
+    <td> pub/afsug/README </td>
+    <td> AFS user group </td>
+  </tr>
+  <tr>
+    <td> pub/afsug/newsletter/ </td>
     <td> AFS user group newsletters </td>
   </tr>
   <tr>
-    <td> pub/afs-contrib </td>
-    <td> Contributed tools and documents </td>
+    <td> pub/afs-contrib/ </td>
+    <td> Contributed by other groups </td>
   </tr>
   <tr>
-    <td> pub/afsps/doc </td>
+    <td> pub/afs-contrib/bin/README </td>
+    <td> other client ports (US-only) </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/bin.export/ </td>
+    <td> other client ports </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/tools/MANIFEST </td>
+    <td> miscellaneous tools </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/src/README </td>
+    <td> submissions from source licensees </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/doc/MANIFEST </td>
+    <td> documentation </td>
+  </tr>
+  <tr>
+    <td> pub/afs-contrib/pointers/MANIFEST </td>
+    <td> infomation in other places </td>
+  </tr>
+  <tr>
+    <td> pub/afsps/README </td>
+    <td> AFS product support </td>
+  </tr>
+  <tr>
+    <td> pub/afsps/doc/ </td>
     <td> release notes, SUPPORTED_SYSTEMS.afs.* </td>
   </tr>
   <tr>
-    <td> pub/afsug </td>
-    <td> AFS user group (see README for detail) </td>
-  </tr>
-  <tr>
-    <td> pub/afsps/progint </td>
+    <td> pub/afsps/doc/progint/ </td>
     <td> AFS programming interface docs </td>
   </tr>
 </table>
 
-These directories are also accessible via AFS. For example: /afs/transarc.com/public/afs-contrib
+These directories are also accessible via AFS. For example: <file:///afs/transarc.com/public/anon-ftp/pub/afs-contrib>
 
-(NB "pub" =&gt; "public" when using AFS to access these.)
+(NB "pub" =&gt; "public/anon-ftp/pub" when using AFS to access these.)
 
 ### <a name="4.02  Which USENET newsgroups di"></a> 4.02 Which USENET newsgroups discuss AFS?
 
@@ -1837,18 +1896,20 @@ If you do make a copy, please be aware that this compilation changes over time: 
 There are two reference sources:
 
     1) The text only version, available via AFS from:
-          /afs/transarc.com/public/afs-contrib/doc/faq/afs.faq
+          file:///afs/transarc.com/public/afs-contrib/doc/faq/afs.faq
 
     2) The World Wide Web (HTML) version, available via URL:
           http://www.angelfire.com/hi/plutonic/afs-faq.html
 
 There are several other ways to get a copy.
 
-via AFS: /afs/transarc.com/public/afs-contrib/doc/faq/afs.faq
+via AFS: <file:///afs/transarc.com/public/afs-contrib/doc/faq/afs.faq>
 
 via FTP: <ftp://rtfm.mit.edu/pub/usenet/news.answers/afs-faq>
 
 via WWW: <http://www.angelfire.com/hi/plutonic/afs-faq.html>
+
+via Wiki: <http://grand.central.org/twiki/bin/view/AFSLore/AFSFrequentlyAskedQuestions>
 
 via USENET news:
 
@@ -1856,15 +1917,13 @@ From time to time this faq will be posted to the USENET newsgroups: alt.filesyst
 
 via CD-ROM:
 
-The AFS faq is now available on CD-ROM "Internet Info" (containing
+The AFS faq is now available in the file $cd\_mount\_point/faqs/alt/filesystems.afs on CD-ROM "Internet Info" (containing 17,420 documents including other FAQs, RFCs, IENs, etc) from:
 
-1. ,420 documents including other FAQs, RFCs, IENs, etc) from:
-
-Walnut Creek CDROM phone: 1 800 786-9907 (US tollfree)
-
-1. 1. Pike Lane, Ste D-www +1 510 674-0783 Concord, CA 94250 fax: +1 510 674-0821 United States of America email: <orders@cdrom.com> WWW: <http://www.cdrom.com/>
-
-The file is in: $cd\_mount\_point/faqs/alt/filesystems.afs
+          Walnut Creek CDROM              phone: 1 800 786-9907 (US tollfree)
+          4041 Pike Lane, Ste D-www              +1 510 674-0783
+          Concord, CA 94250               fax:   +1 510 674-0821
+          United States of America        email: orders@cdrom.com
+                                          WWW:   http://www.cdrom.com/
 
 ### <a name="5.02  How can I get my question"></a><a name="5.02  How can I get my question "></a> 5.02 How can I get my question (and answer) into the AFS faq?
 
