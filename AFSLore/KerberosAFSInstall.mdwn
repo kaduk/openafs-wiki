@@ -230,6 +230,6 @@ Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStar
 
 ## <a name="Setting up Transparent Login"></a> Setting up Transparent Login
 
-In its current state, you have to manually log into your AFS cell through kinit and possibly aklog (explain aklog..., debugging using "tokens" etc). There are several methods to enable transparent login to both local resources (the machine itself) and AFS through a single password. See [[KerberosV]] and [[SettingUpAuthentication]] for some information.
+In its current state, you have to manually log into your AFS cell through kinit and possibly aklog (explain aklog..., debugging using "tokens" etc). There are several methods to enable transparent login to both local resources (the machine itself) and AFS through a single password. See [[KerberosV]] and [[SettingUpAuthentication]] for some information. The best option if you are using pam is probably the [pam\_krb5 project on sourceforge](http://sourceforge.net/projects/pam-krb5/).
 
 -- [[JasonGarman]] - 05 Feb 2002 -- [[DerrickBrashear]] - 26 Nov 2002
