@@ -491,6 +491,8 @@ As well as updating [[CellservDB]], your AFS administrator should ensure that ne
 
 Do a daily copy from a master source and update the AFS kernel sitelist.
 
+One good master source is the grand.central.org [[CellServDB]], available from <http://grand.central.org/dl/cellservdb/CellServDB> or <file:/afs/openafs.org/service/CellServDB> (N.B. update to /afs/grand.central.org path when available). You can send updates for this to <cellservdb@central.org>.
+
 The client [[CellServDB]] file must not reside under /afs and is best located in local filespace.
 
 Simply updating a client [[CellServDB]] file is not enough. You also need to update the AFS kernel sitelist by either: 1 rebooting the client or 1 running "fs newcell $cell\_name $server\_list" for each site in the [[CellServDB]] file.
