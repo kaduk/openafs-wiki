@@ -141,7 +141,7 @@ Template topics define the default text for new topics. There are three types of
 
 All template topics are located in the TWiki web. The [[WebTopicEditTemplate]] can be overloaded. The following search order applies when you create a new topic:
 
-1. The topic name specified by the `templatetopic` parameter.
+1. The topic name specified by the `templatetopic` CGI parameter.
 2. WebTopicEditTemplate in the current web.
 3. WebTopicEditTemplate in the TWiki web.
 
@@ -151,7 +151,7 @@ Here is an example for creating new topics based on a specific template topic:
 
 <form action="http://www.dementia.org/twiki//edit/%WEB%/" name="new">
   <ul>
-    <li> New example topic: <input name="topic" size="22" type="text" value="ExampleTopic20100629" /> <input name="templatetopic" type="hidden" value="ExampleTopicTemplate" /> <input type="submit" value="Create" /> (date format is YYYYMMDD) </li>
+    <li> New example topic: <input name="topic" size="23" type="text" value="ExampleTopic2010x06x29" /> <input name="templatetopic" type="hidden" value="ExampleTopicTemplate" /> <input type="submit" value="Create" /> (date format is YYYYxMMxDD) </li>
   </ul>
 </form>
 
@@ -159,10 +159,11 @@ Above form asks for a topic name. A hidden input tag of name "templatetopic" spe
 
     <form name="new" action="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%WEB%/">
     	* New example topic:
-    	  <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$year$mo$day}%" size="22">
-    	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate">
-    	  <input type="hidden" name="onlywikiname" value="on">
-    	  <input type="submit" value="Create"> (date format is YYYYMMDD)
+    	  <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$yearx$mox$day}%" size="23" />
+    	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate" />
+    	  <input type="hidden" name="onlywikiname" value="on" />
+    	  <input type="submit" value="Create" />
+    	  (date format is <nop>YYYYxMMxDD)
     </form>
 
 The "onlywikiname" parameter enforces [[WikiWords]] for topic names.
