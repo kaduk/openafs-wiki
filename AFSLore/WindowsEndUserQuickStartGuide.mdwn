@@ -28,7 +28,7 @@ However, if Eve has never met this Adam fellow, she might not want to just give 
 
 - Eve: "Yes, sure I do, they have information on everyone. Including me."
 
-- Adam: "So, you would accept if I were to show you an my ID card, signed by the ID Authority?"
+- Adam: "So, you would accept if I were to show you my ID card, signed by the ID Authority?"
 
 - Eve: "Absolutely, and apparently, you trust them too, so I could do the same for you."
 
@@ -60,7 +60,9 @@ Now that you know about the existence and uses of Kerberos, we can continue with
 
 The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/release/latest.html) you will always find the latest releases. The ready-to-install Windows package is usually located at the bottom of the page.
 
-The file you download is either an executable file, or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later.
+The file you download is either an executable file ([[NullSoft]] Installer), or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later.
+
+Note that the [[NullSoft]] Installer and the Microsoft Installer look somewhat different on the screen. They will both be shown in the step-by-step guide below.
 
 ### <a name="Optionally: Download Kerberos fo"></a> Optionally: Download Kerberos for Windows
 
@@ -72,19 +74,27 @@ Note that installing MIT Kerberos for Windows will not prevent you from using th
 
 To begin installing, run the file you downloaded. The screens are pretty standard. Let us go through them one by one.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/1 welcome.png" width="499" height="385" /> Installation begins at the welcome screen, shown to the right. Next, you will have to agree with the license. Those were the basic steps. From now on, you will need to make decisions. Some of them are "best practice," but some are site ("cell", in AFS lingo) specific.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/1 welcome.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/1 welcome.png" width="503" height="386" /> Installation begins at the welcome screen, shown to the right. Next, you will have to agree with the license. Those were the basic steps. From now on, you will need to make decisions. Some of them are "best practice," but some are site ("cell", in AFS lingo) specific.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/3 type.png" width="499" height="385" /> After the license agreement, you have the option of doing a "client only" installation (Typical) or a complete installation. You may also choose to configure [[OpenAFS]]'s components manually.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/3 type.png" width="499" height="385" /> After the license agreement, you have the option of doing a "client only" installation (Typical) or a complete installation. You may also choose to configure [[OpenAFS]]'s components manually.
 
 In the Typical Installation, only enough to get your Windows Client working is installed. Some configuration is postponed until after the installation. Using the Complete Installation, everything will be installed, including the experimental AFS Server, a software development kit and (rather outdated) administration documentation.
 
+This choice is skipped in the [[NullSoft]] installer.
+
 #### <a name="Custom Installation"></a> Custom Installation
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/4 custom.png" width="499" height="385" /> Choosing Custom Installation gives you more control over what is installed onto your computer. This is shown to the right. There are three different icons used when presenting the components: a grey, a white and a red cross.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/4 custom.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/2 components.png" width="503" height="386" /> Choosing Custom Installation gives you more control over what is installed onto your computer. This is shown to the right. There are three different icons used when presenting the components: a grey, a white and a red cross. Installation using the Nullsoft Installer is similar, except a standard checkbox list is being used.
 
 The icon with a grey background indicates **_some_** of the subcomponents will be installed. The one with a white background indicates that the **_entire_** component will be installed. Last, the red cross shows that the component will not be installed. Pressing the "Disk Usage" button brings up an overview of your computer's storage. From there, you can find a drive with enough space left to install [[OpenAFS]]. Press "OK" to return to the previous screen.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/6 configure.png" width="499" height="385" /> In the next step, you will need to decide upon:
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/3 location.png" width="503" height="386" /> In the Nullsoft Installer, another dialog is used to specify the installation directory. The default location is a good choice.
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/4 cellservdb.png" width="503" height="386" /> For the Nullsoft Installer executable, you also have to decide which [[CellServDB]] to use. This is a deprecated way of telling [[OpenAFS]] which servers to contact to reach files from a specific cell. New sites use DNS lookups instead.
+
+If you already have a [[CellServDB]], you should use the existing file. If you are doing a fresh install, download the file from grand.central.org if possible. Otherwise, use the packaged file.
+
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/6 configure.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/5 cellname.png" width="503" height="386" /> In the next step, you will need to decide upon (from the Microsoft Installer):
 
 - **Default Cell** The cell which knows what other cells you will be able to see. It is also used to find out which Kerberos KDC to authenticate your identity against. See also "Freelance Mode" below.
 
@@ -98,11 +108,11 @@ The icon with a grey background indicates **_some_** of the subcomponents will b
 
 Probably the only thing you have changed is the Default cell. All features can be left enabled, unless you have previously detected a bug in one of them.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/7 credentials.png" width="499" height="385" /> To be able to authenticate yourself to AFS, you will need to retrieve and renew Kerberos tickets. These are called "tokens" in the AFS world. Tokens must be renewed on regular intervals (a common setting is ten hours). In order to handle this, [[OpenAFS]] for Windows ships with a Credentials Manager. A credential is a common name for both tickets and tokens.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/7 credentials.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/6 credentials.png" width="503" height="386" /> To be able to authenticate yourself to AFS, you will need to retrieve and renew Kerberos tickets. These are called "tokens" in the AFS world. Tokens must be renewed on regular intervals (a common setting is ten hours). In order to handle this, [[OpenAFS]] for Windows ships with a Credentials Manager. A credential is a common name for both tickets and tokens.
 
 To have the program start when you login, leave the checkbox filled. If you intend to authenticate with [[KerberosV]], you have two options: you either go with AFS Credentials Manager, or use the Leash Credentials Manager of Kerberos for Windows instead. In the latter case, you can disable automatic startup, and ignore the other checkboxes. If unsure, leave it enabled.
 
-The rest of the checkboxes are:
+The rest of the checkboxes are (from the Microsoft Installer):
 
 - **Auto initialize AFS Credentials** If you are not able to use the Integrated Logon feature (because the usernames do not match, for instance), you can use this feature instead. Whenever the Credentials Manager is started, or a new network address is found (see below), you will be asked to get new tokens. (This is equivalent to the "-A" parameter to `afscreds.exe`.)
 
@@ -120,9 +130,9 @@ This is all it takes for Custom Installation. From now on, the differences betwe
 
 ### <a name="Finishing the Installation"></a> Finishing the Installation
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/8 ready.png" width="499" height="385" /> Now that you have setup your [[OpenAFS]] package, [[OpenAFS]] can be copied into the right directories. This will be reasonably fast, so don't go for a coffee yet!
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/8 ready.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/7 installing.png" width="503" height="386" /> Now that you have setup your [[OpenAFS]] package, [[OpenAFS]] can be copied into the right directories. This will be reasonably fast, so don't go for a coffee yet!
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/install/11 restart.png" width="366" height="165" /> The last thing you have to do is reboot your computer. Theoretically, you could start [[OpenAFS]] without rebooting. This is not recommended, though. With all of today's anti virus programs and synchronization drivers, you can have that well-deserved coffee break now. Soon, the final adventure will begin.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/11 restart.png" width="366" height="165" /> The last thing you have to do is reboot your computer. Theoretically, you could start [[OpenAFS]] without rebooting. This is not recommended, though. With all of today's anti virus programs and synchronization drivers, you can have that well-deserved coffee break now. Soon, the final adventure will begin.
 
 ## <a name="Configure the Rest"></a> Configure the Rest
 
