@@ -3,23 +3,30 @@
 Gives extra control off table display:
 
 - Allows sorting
-- Changing background colour for header cells
-- Changing background colour for data cells - colours can _alternate_
+- Changing background color for header cells
+- Changing background color for data cells - colors can _alternate_
 - Behaviour can be specified for a specific table using %TABLE\{...\}% or with global preferences
 
 ## <a name="Global Preferences"></a> Global Preferences
 
 - Set DEBUG to on to get debug messages in `data/debug.txt`. Default: `off`
-  - Set DEBUG = on
-- Colour for header cells ('\*'s around text). Default: <font>\#99CCCC</font>
+  - Set DEBUG = off
+- Table border width. Default: 1
+  - Set TABLEBORDER = 3
+- Table cell padding. Default: 0
+  - Set CELLPADDING = 5
+- Table cell spacing. Default: 1
+  - Set CELLSPACING = 2
+- Color for header cells ('\*'s around text). Default: <span>\#99CCCC</span>
   - #Set HEADER\_BG = red
-- #Set DATA\_BG = #C8CB8F,#DBDDB5
-- Set DATA\_BG = #FFFFCC,#FFFFFF
-- #Set SORT = attachments
-- Set SORT = all
-- #Set SORT = none
-
-- Set SHORTDESCRIPTION = Control sorting and colours for table display
+- Background color for table rows, two alternate colors. Default: <span>\#FFFFCC</span>,<span>\#FFFFFF</span>
+  - Set DATA\_BG = #FFFFCC,#FFFFFF
+- Make sortable:
+  - #Set SORT = attachments
+  - Set SORT = all
+  - #Set SORT = none
+- Short description:
+  - Set SHORTDESCRIPTION = Control attributes of tables and sorting of table columns
 
 ## <a name="Sorting"></a> Sorting
 
@@ -34,24 +41,43 @@ Click on column heading text to sort by a column. Initial column will be sorted 
 
 ## <a name="Per table settings"></a> Per table settings
 
-On line before the table use %TABLE\{...\}%:
+On line before the table use `%TABLE{...}%`:
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
     <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Argument</font></a></th>
     <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Comment</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Example</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code>sort</code></td>
-    <td bgcolor="#ecf2f8" style=""><code>on</code> or <code>off</code></td>
+    <td bgcolor="#ecf2f8" style=""> Set <code>on</code> or <code>off</code></td>
+    <td bgcolor="#ecf2f8" style=""><code>sort="on"</code></td>
   </tr>
   <tr>
     <td bgcolor="#ffffff" style=""><code>headerbg</code></td>
-    <td bgcolor="#ffffff" style=""> header cell background colour </td>
+    <td bgcolor="#ffffff" style=""> Header cell background colour </td>
+    <td bgcolor="#ffffff" style=""><code>headerbg="#99CCCC"</code></td>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code>databg</code></td>
-    <td bgcolor="#ecf2f8" style=""> data cell background colour, a comma seperated list </td>
+    <td bgcolor="#ecf2f8" style=""> Data cell background colour, a comma seperated list </td>
+    <td bgcolor="#ecf2f8" style=""><code>databg="#C8CB8F,#DBDDB5"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>tableborder</code></td>
+    <td bgcolor="#ffffff" style=""> Table border width (pixels) </td>
+    <td bgcolor="#ffffff" style=""><code>tableborder="2"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>cellpadding</code></td>
+    <td bgcolor="#ecf2f8" style=""> Cell padding (pixels) </td>
+    <td bgcolor="#ecf2f8" style=""><code>cellpadding="0"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>cellspacing</code></td>
+    <td bgcolor="#ffffff" style=""> Cell spacing (pixels) </td>
+    <td bgcolor="#ffffff" style=""><code>cellspacing="3"</code></td>
   </tr>
 </table>
 
@@ -59,9 +85,9 @@ All default to the global setting
 
 ## <a name="Examples"></a> Examples
 
-Line before table: %TABLE\{sort="on" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"\}%
+Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="2" cellspacing="1" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"}%`
 
-<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+<table border="0" cellpadding="3" cellspacing="0" style="border-width: 0px">
   <tr>
     <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Num</font></a></th>
     <th bgcolor="#99CCCC" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Status</font></a></th>
@@ -112,4 +138,4 @@ Line before table: %TABLE\{sort="on" headerbg="#99CCCC" databg="#C8CB8F,#DBDDB5"
   </tr>
 </table>
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 15 Nov 2001 <br />
