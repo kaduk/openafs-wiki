@@ -31,6 +31,7 @@
             <li><a href="#Netbios Name"> Netbios Name</a></li>
             <li><a href="#Encryption of Network Traffic"> Encryption of Network Traffic</a></li>
             <li><a href="#Freelance Client Support"> Freelance Client Support</a></li>
+            <li><a href="#Freelance Root Setup"> Freelance Root Setup</a></li>
             <li><a href="#Hiding Dot-Files"> Hiding Dot-Files</a></li>
             <li><a href="#Hiding the \\AFS\all Share"> Hiding the <tt>\\AFS\all</tt> Share</a></li>
             <li><a href="#Tweaking the SMB Connections"> Tweaking the SMB Connections</a></li>
@@ -44,6 +45,8 @@
             <li><a href="#Running a Logon Script"> Running a Logon Script</a></li>
             <li><a href="#Integrated Logon Usage"> Integrated Logon Usage</a></li>
             <li><a href="#Integrated Logon Silence"> Integrated Logon Silence</a></li>
+            <li><a href="#Disable Automatic Use of _Kerber"> Disable Automatic Use of KerberosV</a></li>
+            <li><a href="#Changing the Default Authenticat"> Changing the Default Authentication Cell</a></li>
           </ul>
         </li>
         <li><a href="#Per Domain Options"> Per Domain Options</a><ul>
@@ -96,7 +99,11 @@ If you intend to run `afscreds.exe` from a command line, the following options m
 
 ### <a name="Tokens"></a> Tokens
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" /> The Tokens Tab displays brief information about your AFS tokens. It shows your current cell, and when the tokens expire. It lets you obtain (or renew) tokens (kauth/kinit in Unix) and make it sound an alarm if they will be expiring any time soon. If you have sensitive information in AFS, you can discard (kdestroy) tokens when away. [[OpenAFS]] does not discard the tokens automatically when you log out. This window also shows what version of [[OpenAFS]] you are currently running.
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" /> The Tokens Tab displays brief information about your AFS tokens. It shows your current cell, and when the tokens expire. It lets you obtain (or renew) tokens (kauth/kinit in Unix) and make it sound an alarm if they will be expiring any time soon. If you have sensitive information in AFS, you can discard (kdestroy) tokens when away.
+
+[[OpenAFS]] and roaming profiles are a problematic issue. Windows does not notify [[OpenAFS]] when it is done putting the profile back into AFS. This means [[OpenAFS]] has no way to safely discard tokens when you log out, given you are using roaming profiles. When using a local profile, the tokens are discarded when you logout. See also the [[WindowsTroubleshootingGuide]] on this matter.
+
+The Credentials Manager can make use of MIT Kerberos for Windows, if installed. This lets you use [[KerberosV]] tickets directly in the AFS Credentials Manager. Thus, there is no longer a need to have a third party Credentials Manager running. This window also shows what version of [[OpenAFS]] you are currently running.
 
 ### <a name="Drive Letters"></a> Drive Letters
 
@@ -181,7 +188,7 @@ In a highly networked environment, it is not uncommon to read login scripts from
 
 #### <a name="Binding"></a> Binding
 
-Before [[OpenAFS]] for Windows began to use the Microsoft Loop Back Adapter, it used physical network interfaces to bind to. In certain situations, the default choice may be a bad choice. For instance, when the network interface connects directly to the Internet, this would be a bad idea. With the Loop Back Adapter, this is no longer an issue.
+Before [[OpenAFS]] for Windows began to use the [[WindowsLoopBackAdapter]], it used physical network interfaces to bind to. In certain situations, the default choice may be a bad choice. For instance, when the network interface connects directly to the Internet, this would be a bad idea. With the Loop Back Adapter, this is no longer an issue.
 
 #### <a name="Miscellaneous"></a> Miscellaneous
 
@@ -209,6 +216,22 @@ Historically, AFS did not support encrypted network traffic. This has changed in
 ### <a name="Freelance Client Support"></a> Freelance Client Support
 
 This option can be set during installation. After installation, a registry entry must be edited. It can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` and is called `FreelanceClient` (type DWORD). Set it to 1 to enable Freelance Mode. See the [[WindowsQuickStartGuide]] for more information on Freelance Mode. Default is off.
+
+### <a name="Freelance Root Setup"></a> Freelance Root Setup
+
+To be able to use Freelance Mode, the AFS Client Service needs to know which cells should be visible. This is equivalent to mounting `root.cell` volumes in `root.afs`. If there are no volumes described when the AFS Client Service first starts, the default cell is inserted into the list (including a forced R/W volume).
+
+To change the list, you need to edit the values under `HKEY_LOCAL_MACHINE\SOFTWARE\OpenAFS\Client\Freelance`. The values must be named with consecutive integers, starting from zero. Each value describes one volume to be mounted. The syntax is
+
+    	mountpoint#cell:volume.\n
+    	mountpoint%cell:volume.\n
+
+Note the trailing dot and newline (ASCII 10) characters. The first line (with a hash) describes a normal volume, the second (with a percent sign) describes a R/W volume. R/W volume mountpoints usually begin with a dot. For instance, the keyed values
+
+    	0 = openafs.org#openafs.org:root.cell.\n
+    	1 = .openafs.org%openafs.org:root.cell.\n
+
+will make two volumes available, one normal and one forced R/W.
 
 ### <a name="Hiding Dot-Files"></a> Hiding Dot-Files
 
@@ -283,6 +306,16 @@ High Security mode is a deprecated techinque to let several users logon to the s
 ### <a name="Integrated Logon Silence"></a> Integrated Logon Silence
 
 In the Client Configuration, you may choose whether the Intergrated Logon should warn when you cannot logon, or if it should not. Since this setting is domain-specific, here is the background. The `FailLoginsSilently` (type DWORD) in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider` can be set to 1 to ignore any failures. Default is to warn (i.e. a value of zero).
+
+### <a name="Disable Automatic Use of _Kerber"></a> Disable Automatic Use of [[KerberosV]]
+
+If you have MIT Kerberos for Windows installed, and you do not want to let AFS Credentials Manager use it, you can disable it setting `EnableKFW` (type DWORD) in `SOFTWARE\OpenAFS\Client`. This can be done in either of `HKEY_LOCAL_MACHINE` or `HKEY_CURRENT_USER`.
+
+### <a name="Changing the Default Authenticat"></a> Changing the Default Authentication Cell
+
+In some rare cases, you may want to authenticate to one cell, but keep using another cell as your home. You can do this by entering the authentication cell each time you obtain new tokens. If you intend to do it regularly, you can change it in the registry.
+
+The value `Authentication Cell` (type string) in `HKEY_CURRENT_USER\SOFTWARE\OpenAFS\Client` can be set to another cell name than the default cell.
 
 ## <a name="Per Domain Options"></a> Per Domain Options
 

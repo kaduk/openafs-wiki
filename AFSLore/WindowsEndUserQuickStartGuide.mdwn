@@ -128,6 +128,8 @@ This is all it takes for Custom Installation. From now on, the differences betwe
 
 When you logged in, you may have encountered an error message from "AFS Integrated Logon". This is because you enabled Integrated Logon, but did not have the same username and password for both Windows and the AFS servers. In a later section, we will see how we can make [[OpenAFS]] ignore these situations without bothering you about it.
 
+[[OpenAFS]] will automatically open ports as neccessary in Windows Internet Connection Firewall. If you have another firewall installed, you will have to open TCP and UDP ports 7000 through 7009.
+
 Browse to "Control Panel" of your computer. You should have a new alternative called "AFS Client Configuration". Double-clicking this, you should see (something like) the screen below.
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/general.png" width="356" height="495" /> Please note that this is only a starting point. If you are looking for a complete configuration reference to [[OpenAFS]] for Windows, you should read the [[WindowsConfigurationReferenceGuide]].
