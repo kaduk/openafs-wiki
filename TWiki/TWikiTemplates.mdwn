@@ -107,16 +107,63 @@ Common parts, appearing in two or more templates, can be defined in a master tem
 
 ### <a name="HTML Page Templates"></a> HTML Page Templates
 
-%WIKITOOLNAME% uses HTML template files for all actions, like topic view, edit, and preview. This allows you to change the look and feel of all pages by editing just a few template files.
+TWiki uses HTML template files for all actions, like topic view, edit, and preview. This allows you to change the look and feel of all pages by editing just a few template files.
 
-Templates are in the <code>**twiki/templates**</code> directory. As an example, <code>**twiki/templates/view.tmpl**</code> is the template file for the <code>**twiki/bin/view**</code> script. Templates can be overloaded by individual webs. The following search order applies:
+Templates are stored either in the <code>**twiki/templates**</code> directory or in user topics. As an example, <code>**twiki/templates/view.tmpl**</code> is the template file for the <code>**twiki/bin/view**</code> script.
 
-1. <code>**twiki/templates/$webName/$scriptName.tmpl**</code>
-2. <code>**twiki/templates/$scriptName.tmpl**</code>
-  - `$webName` is the name of the web (ex: `Main`)
-  - `$scriptName` is the script (ex: `view`).
+%H% Templates can be overloaded by individual webs.
 
-%H% **NOTE:** [[TWikiSkins]] can be defined to overload the standard templates.
+%H% [[TWikiSkins]] can overload the standard templates.
+
+TWiki uses the following search order to determine which template to use:
+
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th bgcolor="#99CCCC"><strong> If a skin is specified </strong></th>
+>     <th bgcolor="#99CCCC"><strong> If no skin is specified </strong></th>
+>   </tr>
+>   <tr>
+>     <td><code>templates/%WEB%/%RED%script.%RED%skin%ENDCOLOR%.tmpl</code></td>
+>     <td><code>templates/%WEB%/%RED%script%ENDCOLOR%.tmpl</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>templates/%RED%script%ENDCOLOR%.%RED%skin%ENDCOLOR%.tmpl</code></td>
+>     <td><code>templates/%RED%script%ENDCOLOR%.tmpl</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>data/%WEB%/%RED%Skin%ENDCOLOR%Skin%RED%Script%ENDCOLOR%Template.txt</code></td>
+>     <td><code>data/%WEB%/%RED%Script%ENDCOLOR%Template.txt</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>data/TWiki/%RED%Skin%ENDCOLOR%Skin%RED%Script%ENDCOLOR%Template.txt</code></td>
+>     <td><code>data/TWiki/%RED%Script%ENDCOLOR%Template.txt</code></td>
+>   </tr>
+>   <tr>
+>     <td colspan="2"><strong>Legend:</strong> %BB% %RED%script%ENDCOLOR% refers to the script name, e.g <code>view</code>, <code>edit</code> %BB% %RED%Script%ENDCOLOR% refers to the same, but with the first character capitalized, e.g <code>View</code> %BB% %RED%skin%ENDCOLOR% refers to the skin name, e.g <code>dragon</code>, <code>pattern</code> %BB% %RED%Skin%ENDCOLOR% refers to the same, but with the first character capitalized, e.g <code>Dragon</code> %BB% <code>%WEB%</code> refers to the current web </td>
+>   </tr>
+> </table>
+
+Additionally (and primarily for use in `%TMPL:INCLUDE{}%`) the template name may be a wiki topic name, specified as `%RED%Web%ENDCOLOR%.%RED%Topic%ENDCOLOR%`, in which case the search is:
+
+> <table border="1" cellpadding="0" cellspacing="0">
+>   <tr>
+>     <th bgcolor="#99CCCC"><strong> If a skin is specified </strong></th>
+>     <th bgcolor="#99CCCC"><strong> If no skin is specified </strong></th>
+>   </tr>
+>   <tr>
+>     <td><code>templates/%RED%web%ENDCOLOR%/%RED%Web%ENDCOLOR%.%RED%Topic%ENDCOLOR%.%RED%skin%ENDCOLOR%.tmpl</code></td>
+>     <td><code>templates/%RED%web%ENDCOLOR%/%RED%Web%ENDCOLOR%.%RED%Topic%ENDCOLOR%.tmpl</code></td>
+>   </tr>
+>   <tr>
+>     <td><code>templates/%RED%Web%ENDCOLOR%.%RED%Topic%ENDCOLOR%.%RED%skin%ENDCOLOR%.tmpl</code></td>
+>     <td><code>templates/%RED%Web%ENDCOLOR%.%RED%Topic%ENDCOLOR%.tmpl</code></td>
+>   </tr>
+>   <tr>
+>     <td align="center" colspan="2"><code>data/%RED%Web%ENDCOLOR%/%RED%Topic%ENDCOLOR%.txt</code></td>
+>   </tr>
+> </table>
+
+If %RED%Web%ENDCOLOR% is not specified in the INCLUDE, it defaults to TWiki, and the search to the first type.
 
 Special variables are used in templates, especially in `view`, to display [[meta data|Main/TWikiMetaData#MetaDataRendering]].
 
@@ -252,6 +299,10 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
 >     <td> Assuming the template topic has a form with a field called "TopicClassification", it will set the value of the field </td>
 >   </tr>
 >   <tr>
+>     <td><code>contenttype</code></td>
+>     <td> Optional parameter that defines the application type to write into the CGI header. Defaults to <code>text/html</code>. May be used to invoke alternative client applications </td>
+>   </tr>
+>   <tr>
 >     <td><code>anyname</code></td>
 >     <td> Any parameter can passed to the new topic; if the template topic contains <code>%URLPARAM{"anyname"}%</code>, it will be replaced by its value </td>
 >   </tr>
@@ -357,4 +408,4 @@ With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=W
 
 - A drawback of referring to a master template is that you can only test a template from within TWiki, where the include variables are resolved. In the previous system, each template was a structurally complete HTML document with a `.tmpl` filename extension - it contained unresolved `%VARIABLES%`, but could still be previewed directly in a browser.
 
--- TWiki:Main.PeterThoeny - 25 Apr 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002
+-- TWiki:Main.CrawfordCurrie - 30 Jun 2004 %BR% -- TWiki:Main.PeterThoeny - 15 Aug 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR% -- TWiki:Main.DavidLeBlanc - 11 Mar 2002

@@ -1,188 +1,191 @@
-## <a name="Text Formatting FAQ"></a><a name=" Text Formatting FAQ"></a> Text Formatting FAQ
+## <a name="Text Formatting FAQ"></a> Text Formatting FAQ
 
 The most frequently asked questions about text formatting are answered. Also, [[TextFormattingRules]] contains the complete TWiki shorthand system on one quick reference page.
 
 <div>
   <ul>
-    <li><a href="#How do I make a separator?"> How do I make a separator?</a></li>
-    <li><a href="#How do I create a heading?"> How do I create a heading?</a></li>
-    <li><a href="#Text enclosed in angle brackets"> Text enclosed in angle brackets like &lt;filename&gt; is not displayed. How can I show it as it is?</a></li>
-    <li><a href="#Some words appear highlighted, w"> Some words appear highlighted, with a "?" link at the end. How can I prevent that?</a></li>
-    <li><a href="#How can I write fixed font text?"> How can I write fixed font text?</a></li>
-    <li><a href="#Text I enter gets wrapped around"> Text I enter gets wrapped around. How can I keep the formatting as it is?</a></li>
-    <li><a href="#How do I create tables?"> How do I create tables?</a></li>
-    <li><a href="#Can I include images on a page?"> Can I include images on a page?</a></li>
-    <li><a href="#Can I write colored text?"> Can I write colored text?</a></li>
+    <li><a href="#Text Formatting FAQ"> Text Formatting FAQ</a><ul>
+        <li><a href="#How do I make a separator?"> How do I make a separator?</a></li>
+        <li><a href="#How do I create a heading?"> How do I create a heading?</a></li>
+        <li><a href="#Text enclosed in angle brackets"> Text enclosed in angle brackets like &lt;filename&gt; is not displayed. How can I show it as it is?</a></li>
+        <li><a href="#Some words appear highlighted, w"> Some words appear highlighted, with a "?" link at the end. How can I prevent that?</a></li>
+        <li><a href="#How can I write fixed font text?"> How can I write fixed font text?</a></li>
+        <li><a href="#Text I enter gets wrapped around"> Text I enter gets wrapped around. How can I keep the formatting as it is?</a></li>
+        <li><a href="#How do I create tables?"> How do I create tables?</a></li>
+        <li><a href="#Can I include images on a page?"> Can I include images on a page?</a></li>
+        <li><a href="#Can I write colored text?"> Can I write colored text?</a></li>
+      </ul>
+    </li>
   </ul>
 </div>
 
-> ----
->
-> ### <a name="How do I make a separator?"></a> How do I make a separator?
->
-> Create a separator - a horizontal rule - by entering three dashes at the beginning of a blank line: `---`. You can enter more than three if you like, for a more visible separator in edit mode: <br />`--------------`
->
-> ----
->
-> ### <a name="How do I create a heading?"></a> How do I create a heading?
->
-> You can create six sizes of headings - &lt;h1&gt;...&lt;h6&gt; in HTML - by typing, from the beginning of a line, three dashes (-), from one to six plus signs (+), a space, and your heading text. The FAQ questions on this page are created with: `---+++ Have a question?`.
->
-> - You can insert a nested table of contents, generated from headings, by placing `%TOC%` wherever you like on a page (see [[TWikiVariables]] for more `%TOC%` options).
->
-> ----
->
-> <a name="TextEnclosed"></a>
->
-> ### <a name="Text enclosed in angle brackets"></a><a name="Text enclosed in angle brackets "></a> Text enclosed in angle brackets like &lt;filename&gt; is not displayed. How can I show it as it is?
->
-> TWiki interprets text as HTML, and the '&lt;' and '&gt;' characters define where HTML commands start and end. Text _inside_ angle brackets is treated as HTML, and ignored if it doesn't actually do anything - either way, the brackets and its contents are not displayed.
->
-> If you want to display angle brackets, enter them as HTML codes instead of typing them in directly:
->
-> - `&lt;` = `<`<br />`&gt;` = `>`
->
-> - **_You enter:_** `(a &gt; 0)`
->     **_Result:_** `(a > 0)`
->
-> ----
->
-> ### <a name="Some words appear highlighted, w"></a> Some words appear highlighted, with a "?" link at the end. How can I prevent that?
->
-> A question mark after a word is a link to a topic that doesn't yet exist - click it to create the new page. This is a TWiki feature - typing a [[MeaningfulTitle]] in a comment is an invitation for someone else to add a new branch to the topic.
->
-> To prevent auto-linking - say you want to enter a word like JavaScript (the proper spelling!) - prefix the [[WikiStyleWord]] with the special TWiki HTML tag `<nop>`:
->
-> - `<nop>WikiStyleWord` displays as WikiStyleWord
->
-> ----
->
-> ### <a name="How can I write fixed font text?"></a> How can I write fixed font text?
->
-> The quickest way is to enclose the text in equal signs:
->
-> - **_You enter:_** `Proportional text, =fixed font=, proportional again.`
->     **_Result:_** Proportional text, `fixed font`, proportional again.
->
-> ----
->
-> <a name="VerbatimText"></a>
->
-> ### <a name="Text I enter gets wrapped around"></a> Text I enter gets wrapped around. How can I keep the formatting as it is?
->
-> TWiki interprets text as HTML, so you can use the `preformatted` HTML option to keep the new line of text as is. Enclose the text in &lt;pre&gt; &lt;/pre&gt;, or in TWiki's own &lt;verbatim&gt; &lt;/verbatim&gt; tag:
->
->     This text will keep its format as it is:
->     <verbatim>
->       Unit	  Price	Qty  Cost
->       -------  ------  ---  ------
->       aaa		 12.00	 3	36.00
->     </verbatim>
->
-> The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
->
-> ----
->
-> ### <a name="How do I create tables?"></a> How do I create tables?
->
-> There are three possibilities:
->
-> 1. Use Wiki rule with "|" vertical bars.
-> 2. Use HTML tables with &lt;table&gt;, &lt;tr&gt;, &lt;td&gt; tags.
-> 3. Use preformatted text with &lt;verbatim&gt; tags.
->
-> **1\. Use Wiki rule with "|" vertical bars**
->
-> - Example text: <br />`| cell A1 | cell B1 | cell C1 |`<br />`| cell A2 | cell B2 | cell C2 |`
-> - Example output: <table border="1" cellpadding="0" cellspacing="0">
->   <tr>
->     <td> cell A1 </td>
->     <td> cell B1 </td>
->     <td> cell C1 </td>
->   </tr>
->   <tr>
->     <td> cell A2 </td>
->     <td> cell B2 </td>
->     <td> cell C2 </td>
->   </tr>
-> </table>
->
-> **2\. Use HTML tables with &lt;table&gt;, &lt;tr&gt;, &lt;td&gt; tags**
->
-> This is a manual process using HTML commands.
->
-> **_You enter:_**
->
->     <table border="1">
->       <tr>
->     	 <th> Head A  </th> <th> Head B  </th>
->       </tr><tr>
->     	 <td> Cell A2 </td> <td> Cell B2 </td>
->       </tr><tr>
->     	 <td> Cell A3 </td> <td> Cell B3 </td>
->       </tr>
->     </table>
->
-> **_Result:_**
->
-> <table border="1">
->   <tr>
->     <th> Head A </th>
->     <th> Head B </th>
->   </tr>
->   <tr>
->     <td> Cell A2 </td>
->     <td> Cell B2 </td>
->   </tr>
->   <tr>
->     <td> Cell A3 </td>
->     <td> Cell B3 </td>
->   </tr>
-> </table>
->
-> **3\. Use preformatted text with &lt;verbatim&gt; tags**
->
-> See [["Text I enter gets wrapped around..."|Main/WebHome#VerbatimText]]
->
-> ----
->
-> ### <a name="Can I include images on a page?"></a> Can I include images on a page?
->
-> Yes. The easiest way is to [[attach|Main/FileAttachment]] a GIF, JPG or PNG file to a topic and then to place it with: `%ATTACHURL%/myImage.gif`. This works only for the page that the image is attached to.
->
-> To place an image on any page, ther are two ways of including inline images.
->
-> **1\. Using URL ending in .gif, .jpg, .jpeg, .png**
->
-> This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **_NOTE:_** The images must be [[accessible|Main/WebHome#ImgUpload]] as a URL.
->
-> - **_You enter:_** ` TWiki http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif logo.`<br />**_Result:_** TWiki ![twikilogo88x31.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif) logo.
->
-> <a name="ImgUpload"></a> You can upload images directly to your server with FTP access. You can also [[attach|Main/FileAttachment]] image files to a topic - you could even create a dedicated image topic, like `ImageLibrary` - and then link to the images directly:
->
-> - Attach `pic.gif` to `Someweb.SomeTopic`<br /> Display with <code>http://www.dementia.org/twiki//view/Someweb/SomeTopic/pic.gif</code>
->
-> **2\. Using &lt;img&gt; tag**
->
-> This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The display of the topic is faster if you include the `WIDTH` and `HEIGHT` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
->
-> - **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" alt="logo" /> logo.
->
-> ----
->
-> ### <a name="Can I write colored text?"></a> Can I write colored text?
->
-> [[TWikiPreferences]] defines some commonly used colors: **%YELLOW% %YELLOW%%ENDCOLOR%, %RED% %RED%%ENDCOLOR%, %PINK% %PINK%%ENDCOLOR%, %PURPLE% %PURPLE%%ENDCOLOR%, %TEAL% %TEAL%%ENDCOLOR%, %NAVY% %NAVY%%ENDCOLOR%, %BLUE% %BLUE%%ENDCOLOR%, %AQUA% %AQUA%%ENDCOLOR%, %LIME% %LIME%%ENDCOLOR%, %GREEN% %GREEN%%ENDCOLOR%, %OLIVE% %OLIVE%%ENDCOLOR%, %MAROON% %MAROON%%ENDCOLOR%, %BLACK% %BLACK%%ENDCOLOR%, %GRAY% %GRAY%%ENDCOLOR%, %SILVER% %SILVER%%ENDCOLOR%** and **%ENDCOLOR%**.
->
-> - **_You enter:_** `%RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%`
->     **_Result:_** %RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%
->
-> **_Note:_** `%<color>%` text must end with `%ENDCOLOR%` . If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
->
-> If you need more colors you can use HTML, like `<font color="#ff0000"> red text </font>`. You can also use the up-to-date `style` attribute - ex: `style="color:#ff0000"` - placed in most HTML tags. `span` is an all-purpose choice: `<span style="color:#ff0000">CoLoR</span>`. Only old (like 3.x IE &amp; NS) browsers have a problem with `style`.
->
-> The code is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or `"#ff0000"` for Web page purposes. [[StandardColors]] lists basic colors.
->
-> ----
+----
 
--- TWiki:Main.PeterThoeny - 16 Mar 2004 <br /> -- TWiki:Main.MikeMannix - 14 Sep 2001 <br />
+### <a name="How do I make a separator?"></a> How do I make a separator?
+
+Create a separator - a horizontal rule - by entering three dashes at the beginning of a blank line: `---`. You can enter more than three if you like, for a more visible separator in edit mode: <br />`--------------`
+
+----
+
+### <a name="How do I create a heading?"></a> How do I create a heading?
+
+You can create six sizes of headings - &lt;h1&gt;...&lt;h6&gt; in HTML - by typing, from the beginning of a line, three dashes (-), from one to six plus signs (+), a space, and your heading text. The FAQ questions on this page are created with: `---+++ Have a question?`.
+
+- You can insert a nested table of contents, generated from headings, by placing `%TOC%` wherever you like on a page (see [[TWikiVariables]] for more `%TOC%` options).
+
+----
+
+<a name="TextEnclosed"></a>
+
+### <a name="Text enclosed in angle brackets"></a><a name="Text enclosed in angle brackets "></a> Text enclosed in angle brackets like &lt;filename&gt; is not displayed. How can I show it as it is?
+
+TWiki interprets text as HTML, and the '&lt;' and '&gt;' characters define where HTML commands start and end. Text _inside_ angle brackets is treated as HTML, and ignored if it doesn't actually do anything - either way, the brackets and its contents are not displayed.
+
+If you want to display angle brackets, enter them as HTML codes instead of typing them in directly:
+
+- `&lt;` = `<`<br />`&gt;` = `>`
+
+- **_You enter:_** `(a &gt; 0)`
+    **_Result:_** `(a > 0)`
+
+----
+
+### <a name="Some words appear highlighted, w"></a> Some words appear highlighted, with a "?" link at the end. How can I prevent that?
+
+A question mark after a word is a link to a topic that doesn't yet exist - click it to create the new page. This is a TWiki feature - typing a [[MeaningfulTitle]] in a comment is an invitation for someone else to add a new branch to the topic.
+
+To prevent auto-linking - say you want to enter a word like JavaScript (the proper spelling!) - prefix the [[WikiStyleWord]] with an exclamation point:
+
+- `!WikiStyleWord` displays as WikiStyleWord
+
+----
+
+### <a name="How can I write fixed font text?"></a> How can I write fixed font text?
+
+The quickest way is to enclose the text in equal signs:
+
+- **_You enter:_** `Proportional text, =fixed font=, proportional again.`
+    **_Result:_** Proportional text, `fixed font`, proportional again.
+
+----
+
+<a name="VerbatimText"></a>
+
+### <a name="Text I enter gets wrapped around"></a> Text I enter gets wrapped around. How can I keep the formatting as it is?
+
+TWiki interprets text as HTML, so you can use the `preformatted` HTML option to keep the new line of text as is. Enclose the text in &lt;pre&gt; &lt;/pre&gt;, or in TWiki's own &lt;verbatim&gt; &lt;/verbatim&gt; tag:
+
+    This text will keep its format as it is:
+    <verbatim>
+      Unit	  Price	Qty  Cost
+      -------  ------  ---  ------
+      aaa		 12.00	 3	36.00
+    </verbatim>
+
+The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
+
+----
+
+### <a name="How do I create tables?"></a> How do I create tables?
+
+There are three possibilities:
+
+1. Use Wiki rule with "|" vertical bars.
+2. Use HTML tables with &lt;table&gt;, &lt;tr&gt;, &lt;td&gt; tags.
+3. Use preformatted text with &lt;verbatim&gt; tags.
+
+**1\. Use Wiki rule with "|" vertical bars**
+
+- Example text: <br />`| cell A1 | cell B1 | cell C1 |`<br />`| cell A2 | cell B2 | cell C2 |`
+- Example output: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> cell A1 </td>
+    <td> cell B1 </td>
+    <td> cell C1 </td>
+  </tr>
+  <tr>
+    <td> cell A2 </td>
+    <td> cell B2 </td>
+    <td> cell C2 </td>
+  </tr>
+</table>
+
+**2\. Use HTML tables with &lt;table&gt;, &lt;tr&gt;, &lt;td&gt; tags**
+
+This is a manual process using HTML commands.
+
+**_You enter:_**
+
+    <table border="1">
+      <tr>
+    	 <th> Head A  </th> <th> Head B  </th>
+      </tr><tr>
+    	 <td> Cell A2 </td> <td> Cell B2 </td>
+      </tr><tr>
+    	 <td> Cell A3 </td> <td> Cell B3 </td>
+      </tr>
+    </table>
+
+**_Result:_**
+
+<table border="1">
+  <tr>
+    <th> Head A </th>
+    <th> Head B </th>
+  </tr>
+  <tr>
+    <td> Cell A2 </td>
+    <td> Cell B2 </td>
+  </tr>
+  <tr>
+    <td> Cell A3 </td>
+    <td> Cell B3 </td>
+  </tr>
+</table>
+
+**3\. Use preformatted text with &lt;verbatim&gt; tags**
+
+See [["Text I enter gets wrapped around..."|Main/WebHome#VerbatimText]]
+
+----
+
+### <a name="Can I include images on a page?"></a> Can I include images on a page?
+
+Yes. The easiest way is to [[attach|Main/FileAttachment]] a GIF, JPG or PNG file to a topic and then to place it with: `%ATTACHURL%/myImage.gif`. This works only for the page that the image is attached to.
+
+To place an image on any page, ther are two ways of including inline images.
+
+**1\. Using URL ending in .gif, .jpg, .jpeg, .png**
+
+This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **_NOTE:_** The images must be [[accessible|Main/WebHome#ImgUpload]] as a URL.
+
+- **_You enter:_** ` TWiki http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif logo.`<br />**_Result:_** TWiki ![twikilogo88x31.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif) logo.
+
+<a name="ImgUpload"></a> You can upload images directly to your server with FTP access. You can also [[attach|Main/FileAttachment]] image files to a topic - you could even create a dedicated image topic, like `ImageLibrary` - and then link to the images directly:
+
+- Attach `pic.gif` to `Someweb.SomeTopic`<br /> Display with <code>http://www.dementia.org/twiki//view/Someweb/SomeTopic/pic.gif</code>
+
+**2\. Using &lt;img&gt; tag**
+
+This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The display of the topic is faster if you include the `WIDTH` and `HEIGHT` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
+
+- **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" alt="logo" /> logo.
+
+----
+
+### <a name="Can I write colored text?"></a> Can I write colored text?
+
+[[TWikiPreferences]] defines some commonly used colors: **%YELLOW% %YELLOW%%ENDCOLOR%, %RED% %RED%%ENDCOLOR%, %PINK% %PINK%%ENDCOLOR%, %PURPLE% %PURPLE%%ENDCOLOR%, %TEAL% %TEAL%%ENDCOLOR%, %NAVY% %NAVY%%ENDCOLOR%, %BLUE% %BLUE%%ENDCOLOR%, %AQUA% %AQUA%%ENDCOLOR%, %LIME% %LIME%%ENDCOLOR%, %GREEN% %GREEN%%ENDCOLOR%, %OLIVE% %OLIVE%%ENDCOLOR%, %MAROON% %MAROON%%ENDCOLOR%, %BLACK% %BLACK%%ENDCOLOR%, %GRAY% %GRAY%%ENDCOLOR%, %SILVER% %SILVER%%ENDCOLOR%** and **%ENDCOLOR%**.
+
+- **_You enter:_** `%RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%`
+    **_Result:_** %RED% red text %ENDCOLOR% and %GREEN% green text %ENDCOLOR%
+
+**_Note:_** `%<color>%` text must end with `%ENDCOLOR%` . If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
+
+If you need more colors you can use HTML, like `<font color="#ff0000"> red text </font>`. You can also use the up-to-date `style` attribute - ex: `style="color:#ff0000"` - placed in most HTML tags. `span` is an all-purpose choice: `<span style="color:#ff0000">CoLoR</span>`. Only old (like 3.x IE &amp; NS) browsers have a problem with `style`.
+
+The code is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or `"#ff0000"` for Web page purposes. [[StandardColors]] lists basic colors.
+
+----
+
+-- TWiki:Main.PeterThoeny - 15 Aug 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR%

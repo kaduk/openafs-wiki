@@ -27,7 +27,7 @@ No special installation steps are required if the server is already authenticate
 1. **No login at all:** Forget about authentication to make your site completely public - anyone can browse and edit freely, in classic Wiki mode. All visitors are assigned the [[TWikiGuest]] default identity, so you can't track individual user activity.
   - **How:** Default, no web server configuration necessary
 2. **No login to view; require login to edit:** Keeping track of who changed what and when, while keeping view access unrestricted is desirable in most TWiki deployments. This option is not suitable if you need [[TWikiAccessControl]] for view restricted content since TWiki does not know who a user is when looking at content.
-  - **How:** Use Basic Authentication (`.htaccess`) to control access by protecting key scripts: `attach`, `edit`, `installpasswd`, `manage`, `preview`, `rename`, `save`, `upload` using the <code>**.htaccess file**</code>. The [[TWikiInstallationGuide]] has step-by-step instructions.
+  - **How:** Use Basic Authentication to control access by protecting key scripts: `attach`, `edit`, `installpasswd`, `manage`, `preview`, `rename`, `save`, `upload`. The [[TWikiInstallationGuide]] has step-by-step instructions.
 3. **No login to view _unless necessary_; require login to edit:** You prefer not to bother the user with login for unrestricted content, but you need [[TWikiAccessControl]] for view restricted content. There are two ways to accomplish this:
   - **How 1:** Use Basic Authentication with Partial Authentication (described below)
   - **How 2:** Use one of the Session TWiki:Plugins where you give the user the option to login and logout.
@@ -98,4 +98,4 @@ Change and reset passwords using forms on regular pages. Use [[TWikiAccessContro
 
 >
 
--- [[MikeMannix]] - 19 May 2002 %BR% -- [[PeterThoeny]] - 25 Apr 2004
+-- TWiki:Main.MikeMannix - 19 May 2002 %BR% -- TWiki:Main.PeterThoeny - 25 Apr 2004
