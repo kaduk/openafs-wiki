@@ -1,0 +1,41 @@
+_This topic describes the "why" and "how" of making the Windows [[OpenAFS]] client use the Microsoft Loopback Adapter._
+
+## <a name="Why use the Loopback adapter?"></a> Why use the Loopback adapter?
+
+The AFS Client (both IBM and [[OpenAFS]]) relies on a network protocol called Server Message Block (SMB) to mount AFS drives (J:, K:, etc). This protocol runs on [[NetBIOS]] and is a part of the so-called Common Internet File System (CIFS). Normally, it is used to access Windows shares on remote machines. It is part of what Microsoft calls "File and Print Sharing".
+
+The AFS Client subverts this protocol for its own uses. Since Windows already knows how to access files on a remote [[NetBIOS]] share, the AFS Client simply pretends it is such a share. Therefore, one might view the Windows AFS Client as a gateway between the AFS world and the [[NetBIOS]] (or "CIFS" or "SMB") world.
+
+To reiterate, when you access files or use AFS commands (klog, fs, pts, etc) using the Windows AFS Client, you are effectively making your machine talk to itself using the SMB/NetBIOS protocol.
+
+Since this protocol stack is also used to talk to other computers, it is possible for the AFS Client to receive stray network traffic. Sometimes, this network traffic can interfere with the operation of the AFS Client, causing it to stop working properly or simply crash.
+
+Fortunately, it is possible to isolate the AFS Client's virtual SMB server from the outside world. This can be done using the "Microsoft Loopback Adapter," as described below.
+
+## <a name="How do I use the Loopback adapte"></a> How do I use the Loopback adapter?
+
+These instructions were written for Windows XP, but translate fairly directly to Windows 2000.
+
+### <a name="Add the Loopback Adapter"></a> Add the Loopback Adapter
+
+1. Go to Control Panel, and click on "Add Hardware".
+2. Tell the wizard you've already connected the hardware, and scroll to the bottom of the list to "Add a new hardware device".
+3. Choose to install the device from a list.
+4. Choose to install a "Network Adapter", and install the Microsoft Loopback Adapter.
+
+### <a name="Configure the Loopback Adapter"></a> Configure the Loopback Adapter
+
+1. Go to "Network Adapters" in Control Panel, and you should find the connection corresponding to the Microsoft Loopback Adapter.
+2. Right click on the new connection, and go to properties.
+3. Double-click on the TCP/IP settings.
+4. The adapter will be configured by default for DHCP; we want to change this. To configure the Loopback Adapter to use a reserved private network address, type in the following information:
+  - IP Address: 10.0.0.100
+  - Subnet Mask: 255.0.0.0
+  - Default Gateway: **Leave blank**.
+  - DNS servers: **Leave blank**.
+    - If you're on a private network that actually uses 10.\* addresses, change the IP to point to another RFC1918 address space.
+5. Before you leave the properties for the Loopback Adapter, be sure that "File and Print Sharing for Microsoft Networks" and "Client for Microsoft Networks" are installed and checked. If not, use the Install button to install these services, and check them in the list.
+
+Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) by Scott Williams, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
+
+-- [[BenCreech]] - 11 Jul 2003
