@@ -17,15 +17,14 @@ The %TOPIC% links <code>**ExternalSite:Page**</code> text to external sites base
 - All <code>**ExternalSite**</code> aliases are defined in the [[InterWikis]] topic.
 - Add and edit aliases in [[InterWikis]].
 - %H% For TWiki sites, both the **web** and the **topic** have to be specified: <code>**TWikisite:Webname/SomePage**</code>
-  - TWiki:Plugins/InterwikiPlugin, or
-  - TWiki:Plugins.InterwikiPlugin
+  - TWiki:Plugins/InterwikiPlugin or TWiki:Plugins.InterwikiPlugin
 
 ## <a name="%TOPIC% Settings"></a> %TOPIC% Settings
 
 Plugin settings are stored as Preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
 
 - One-line description, shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Link <code>**ExternalSite:Page**</code> text to external sites based on aliases defined in the [[InterWikis]] topic.
+  - Set SHORTDESCRIPTION = Link <code>**ExternalSite:Page**</code> text to external sites based on aliases defined in the %WEB%.InterWikis topic
 
 - Link rules topic name: (default is [[InterWikis]])
   - Set RULESTOPIC =
@@ -66,23 +65,31 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td>[[TWiki/AndreaSterbini]], [[TWiki/PeterThoeny]]</td>
+    <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 18 Jan 2003, 1.0.3 </td>
+    <td> 09 Mar 2004, 1.005 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 09 Mar 2004: </td>
+    <td> Internal changes: Use only official TWiki::Func Plugin API; for increased speed, moved Interwiki link handling from outsidePREHandler to startRenderingHandler </td>
+  </tr>
+  <tr>
+    <td align="right"> 16 Feb 2004: </td>
+    <td> Support <code>[[Site:Page][label]]</code> Interwiki links (PTh); use TWiki::Func interface for [[Main/I18N]] regular expressions (Walter Mundt) </td>
+  </tr>
+  <tr>
     <td align="right"> 18 Jan 2003: </td>
-    <td> Allow number sign <code>#</code> in Page name </td>
+    <td> Allow number sign <code>#</code> in Page name (PTh) </td>
   </tr>
   <tr>
     <td align="right"> 31 Aug 2002: </td>
-    <td> Allow percent sign <code>%</code> in page name </td>
+    <td> Allow percent sign <code>%</code> in page name (PTh) </td>
   </tr>
   <tr>
     <td align="right"> 27 Jul 2001: </td>
@@ -136,4 +143,4 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[InterWikis]], [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[AndreaSterbini]] - 20 Oct 2000 <br /> -- [[PeterThoeny]] - 18 Jan 2003 <br /> -- [[MikeMannix]] - 01 Oct 2001 <br />
+-- TWiki:Main.AndreaSterbini - 20 Oct 2000 <br /> -- TWiki:Main.PeterThoeny - 09 Mar 2004 <br /> -- TWiki:Main.MikeMannix - 01 Oct 2001 <br />
