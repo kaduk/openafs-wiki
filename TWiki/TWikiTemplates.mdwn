@@ -162,7 +162,7 @@ Here is an example for creating new topics based on a specific template topic:
 
 The above form asks for a topic name. A hidden input tag named <code>**templatetopic**</code> specifies [[ExampleTopicTemplate]] as the template topic to use. Here is the HTML source of the form:
 
-    <form name="new" action="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%URLENCODE{"%WEB%"}%/">
+    <form name="new" action="%SCRIPTURLPATH%/edit%SCRIPTSUFFIX%/%INTURLENCODE{"%WEB%"}%/">
     	* New example topic:
     	  <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$yearx$mox$day}%" size="23" />
     	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate" />

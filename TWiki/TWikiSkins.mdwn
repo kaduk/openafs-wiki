@@ -67,11 +67,11 @@ You can use [[template variables|Main/TWikiTemplates#TemplateVariables]], [[TWik
   </tr>
   <tr>
     <td><code>%WEB%</code></td>
-    <td> The name of the current web. <strong><em>Note:</em></strong> It is recommended to URL-encode the variable in form actions with <code>%URLENCODE{"%WEB%"}%</code> for proper handling in an internationalized environment </td>
+    <td> The name of the current web. <strong><em>Note:</em></strong> It is recommended to URL-encode the variable in form actions with <code>%INTURLENCODE{"%WEB%"}%</code> for proper handling in an internationalized environment </td>
   </tr>
   <tr>
     <td><code>%TOPIC%</code></td>
-    <td> The name of the current topic. <strong><em>Note:</em></strong> It is recommended to URL-encode the variable in form actions with <code>%URLENCODE{"%TOPIC%"}%</code> for proper handling in an internationalized environment </td>
+    <td> The name of the current topic. <strong><em>Note:</em></strong> It is recommended to URL-encode the variable in form actions with <code>%INTURLENCODE{"%TOPIC%"}%</code> for proper handling in an internationalized environment </td>
   </tr>
   <tr>
     <td><code>%WEBTOPICLIST%</code></td>
