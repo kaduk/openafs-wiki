@@ -1,4 +1,4 @@
-TWiki expands the following variables enclosed in % percent signs:
+%WIKITOOLNAME% expands the following variables enclosed in % percent signs:
 
 <table border="1">
   <tr>
@@ -7,15 +7,15 @@ TWiki expands the following variables enclosed in % percent signs:
   </tr>
   <tr>
     <td><code>%WIKIHOMEURL%</code></td>
-    <td> The base script URL of TWiki, link of Home icon in upper left corner, is <b>%WIKIHOMEURL%</b></td>
+    <td> The base script URL of %WIKITOOLNAME%, is the link of the Home icon in the upper left corner, is <b>%WIKIHOMEURL%</b></td>
   </tr>
   <tr>
     <td><code>%SCRIPTURL%</code></td>
-    <td> The script URL of TWiki, is <b>http://www.dementia.org/twiki/</b></td>
+    <td> The script URL of %WIKITOOLNAME%, is <b>http://www.dementia.org/twiki/</b></td>
   </tr>
   <tr>
     <td><code>%SCRIPTURLPATH%</code></td>
-    <td> The path of the script URL of TWiki, is <b>http://www.dementia.org/twiki/</b></td>
+    <td> The path of the script URL of %WIKITOOLNAME%, is <b>http://www.dementia.org/twiki/</b></td>
   </tr>
   <tr>
     <td><code>%PUBURL%</code></td>
@@ -23,7 +23,7 @@ TWiki expands the following variables enclosed in % percent signs:
   </tr>
   <tr>
     <td><code>%PUBURLPATH%</code></td>
-    <td> The path of the public URL of TWiki, is <b>http://www.dementia.org/twiki//view</b></td>
+    <td> The path of the public URL of %WIKITOOLNAME%, is <b>http://www.dementia.org/twiki//view</b></td>
   </tr>
   <tr>
     <td><code>%ATTACHURL%</code></td>
@@ -63,7 +63,7 @@ TWiki expands the following variables enclosed in % percent signs:
   </tr>
   <tr>
     <td><code>%GMTIME%</code></td>
-    <td> GM time, is <b>29 Jun 2010 - 15:24</b></td>
+    <td> GM time, is <b>29 Jun 2010 - 15:25</b></td>
   </tr>
   <tr>
     <td><code>%GMTIME{"format"}%</code></td>
@@ -71,7 +71,7 @@ TWiki expands the following variables enclosed in % percent signs:
   </tr>
   <tr>
     <td><code>%SERVERTIME%</code></td>
-    <td> Server time, is <b>29 Jun 2010 - 11:24</b></td>
+    <td> Server time, is <b>29 Jun 2010 - 11:25</b></td>
   </tr>
   <tr>
     <td><code>%SERVERTIME{"format"}%</code></td>
@@ -252,6 +252,31 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
     <td><strong><em>SL</em></strong> , <strong><em>UL</em></strong></td>
     <td> http-equiv meta tags for preview script. </td>
   </tr>
+  <tr>
+    <td><code>%DENYWEBCHANGE%</code></td>
+    <td><strong><em>WL</em></strong></td>
+    <td> List of users and groups who are <strong>not allowed</strong> to change topics in the %WIKITOOLNAME% web. (More in [[Main/TWikiAccessControl]]) </td>
+  </tr>
+  <tr>
+    <td><code>%ALLOWWEBCHANGE%</code></td>
+    <td><strong><em>WL</em></strong></td>
+    <td> List of users and groups who are <strong>allowed</strong> to change topics in the %WIKITOOLNAME% web. (More in [[Main/TWikiAccessControl]]) </td>
+  </tr>
+  <tr>
+    <td><code>%DENYTOPICCHANGE%</code></td>
+    <td><strong><em>(any topic)</em></strong></td>
+    <td> List of users and groups who are <strong>not allowed</strong> to change the current topic. (More in [[Main/TWikiAccessControl]]) </td>
+  </tr>
+  <tr>
+    <td><code>%ALLOWTOPICCHANGE%</code></td>
+    <td><strong><em>(any topic)</em></strong></td>
+    <td> List of users and groups who are <strong>allowed</strong> to change the current topic. (More in [[Main/TWikiAccessControl]]) </td>
+  </tr>
+  <tr>
+    <td><code>%FINALPREFERENCES%</code></td>
+    <td><strong><em>SL</em></strong> , <strong><em>WL</em></strong></td>
+    <td> List of preferences that are not allowed to be overridden by next level preferences</td>
+  </tr>
 </table>
 
 **_Notes:_**
@@ -261,4 +286,4 @@ Additional variables are defined in the preferences ( site-level ( **_SL_** ) in
 - Additional preferences variables can be defined on all three level as needed. Example:
   - `Set MYLOGO = %PUBURLPATH%/%MAINWEB%/LogoTopic/logo.gif`
 
--- [[PeterThoeny]] - 01 Nov 2000 <br />
+-- [[PeterThoeny]] - 10 Nov 2000 <br />
