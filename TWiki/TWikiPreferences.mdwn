@@ -80,7 +80,7 @@ The following are **_site-level_** settings that affect all users in all webs on
   - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**$size**</code> to <code>**width="..." height="..."**</code> attribute of <code>**img**</code> tag; <code>**\\t**</code> to tab (3 spaces for bullets).
 
           * Set ATTACHEDIMAGEFORMAT = \t* $comment: <br />
-            <img src="%ATTACHURLPATH%/$name" alt="$name" $size />
+            <img src="%ATTACHURLPATH%/$name" alt="$comment" $size />
 
 ## <a name="TWiki Platform Settings"></a> TWiki Platform Settings
 
