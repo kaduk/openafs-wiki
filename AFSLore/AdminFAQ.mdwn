@@ -564,6 +564,21 @@ This is a tar archive of <file:///afs/cs.cmu.edu/user/satya/ftp/ab/>
 
 ### <a name="3.28 Is the data sent over the n"></a> 3.28 Is the data sent over the network encrypted in AFS ?
 
+There is still no easy way to do this in Transarc AFS, but [[OpenAFS]] now has a "fs" subcommand to turn on encryption of regular file data sent and received by a client. This is a per client setting that persist until reboot. No server actions are needed to support this change. The syntax is:
+
+- `fs setcrypt on`
+- `fs setcrypt off`
+- `fs getcrypt`
+
+Note that this only encrypts network traffic between the client and server. The data on the server's disk is not encrypted nor is the data in the client's disk cache. The encryption algorithm used is [fcrypt](http://tedanderson.home.mindspring.com/fcrypt-paper.txt), which is a DES variant.
+
+Getting encryption enabled by default:
+
+- [[RedHat]] Linux: ([src](https://lists.openafs.org/pipermail/openafs-info/2002-July/005085.html)) change the last line of /etc/sysconfig/afs to `AFS_POST_INIT="/usr/bin/fs setcrypt on"`
+- Windows ([src](https://lists.openafs.org/pipermail/openafs-info/2003-June/009416.html)) set the following registry value named `SecurityLevel` under `HKLM\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` to 2.
+
+I have not tested either of these procedures. -- [[TedAnderson]] - 05 Jun 2003
+
 ### <a name="3.29 What underlying filesystems"></a> 3.29 What underlying filesystems can I use for AFS ?
 
 You need to distinguish between the filesystem used by the file server to store the actual AFS data (by convention in /vicep?) and the filesystem used by the client cache manager to cache files.
