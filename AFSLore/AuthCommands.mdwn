@@ -1,0 +1,29 @@
+[[KaServer]]
+
+- klog -- authentication with [[KaServer]] by getting AFS service tickets and sending them to the (kernel) [[CacheManager]]. Can save the TGT in a file compatible with kinit (V4) as a non-default option.
+- kpasswd -- change password in [[KaServer]]
+- kas -- administrative interface to [[KaServer]]
+
+[[KerberosIV]]
+
+- kinit -- authenticates using standard UDP port 750. Also works with [[KaServer]] but doesn't get AFS service tickets (tokens).
+
+[[KerberosV]]
+
+- kinit -- authenticates using standard UDP port 88. Works with DCE, [[HeimdalKTH]] and [[ActiveDirectory]] (maybe?).
+
+[[KerberosDCE]]
+
+- kinit -- authenticates to DCE Security Server and also obtains authorization informaion (groups) from the DCE Privilege Server.
+- chpass -- change password
+- dcecp -- admin suite
+
+[[ActiveDirectory]]
+
+- uses its own authorization data format. Big flamefest on this issue.
+
+Others
+
+- aklog -- converts V5 TGT to AFS service tickets and gives them to the [[CacheManager]].
+
+-- [[TedAnderson]] - 23 Jan 2002

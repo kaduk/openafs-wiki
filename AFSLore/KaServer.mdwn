@@ -1,0 +1,11 @@
+The [[KaServer]] is an implementation of [[KerberosIV]] that comes with AFS (Does [[OpenAFS]] still install/setup the kaserver?). It implements the standard version 4 UDP interface on port 750, but also suplements this with an [[RxRPC]] interface.
+
+The [[RxRPC]] interface provides authentication services and is used by klog. It differs from the V4 interface in that it requires pre-authentication which avoids a problem identified with the V4 protocol and fixed in [[KerberosV]]. There is an option to the [[KaServer]] to disable port 750 but while improving security it reduces compatibility with non-AFS V4 applications.
+
+The administration interface of V4 is not supported but instead is replaced by functions of the [[RxRPC]] interface which utilizes the transactional and replication features of [[UBIK]]. The user interface command for the admin functions are kas and kpasswd.
+
+----
+
+See [[SettingUpAuthentication]], [[KerberosIV]], [[KerberosV]], and [[AuthCommands]]
+
+-- [[TedAnderson]] - 23 Jan 2002
