@@ -21,6 +21,7 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#4.09  Gibt es eine deutsche AFS"> 4.09 Gibt es eine deutsche AFS Benutzer Gruppe?</a></li>
         <li><a href="#4.10  Donde puedo encontrar info"> 4.10 Donde puedo encontrar informacion en Espanol sobre AFS?</a></li>
         <li><a href="#4.11 Is there a book on AFS ??"> 4.11 Is there a book on AFS ??</a></li>
+        <li><a href="#4.12 Where can I find tools to u"> 4.12 Where can I find tools to use with AFS?</a></li>
       </ul>
     </li>
   </ul>
@@ -198,3 +199,7 @@ Hay algunas notas en Espanol sobre AFS en: <http://w3.ing.puc.cl/~cet/afs.html>
 ### <a name="4.11 Is there a book on AFS ??"></a> 4.11 Is there a book on AFS ??
 
 Yes, though now it is out of print. "Managing AFS: The Andrew File System" by Richard Campbell was published by Prentice Hall in February, 1998. You may be able to find copies at on-line stores such as Amazon, <http://www.amazon.com/exec/obidos/ASIN/0138027293/qid%3D1023720253/ref%3Dsr%5F11%5F0%5F1/104-0953845-2989550>.
+
+### <a name="4.12 Where can I find tools to u"></a> 4.12 Where can I find tools to use with AFS?
+
+A collection of AFS management tools used at Stanford University can be found at <http://www.eyrie.org/~eagle/software/> in the AFS section. Included in this collection are tools for handling volume creation, volume deletion, and migrating volumes, a tool for comparing read/write and read-only volumes, tools for monitoring AFS with Nagios, tools for tracking mount point locations for volumes, and some user utilities like a recursive wrapper around fs and a utility to find mount points in a file tree.
