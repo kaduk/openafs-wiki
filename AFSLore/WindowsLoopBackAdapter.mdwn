@@ -10,11 +10,21 @@ To reiterate, when you access files or use AFS commands (klog, fs, pts, etc) usi
 
 Since this protocol stack is also used to talk to other computers, it is possible for the AFS Client to receive stray network traffic. Sometimes, this network traffic can interfere with the operation of the AFS Client, causing it to stop working properly or simply crash.
 
-Fortunately, it is possible to isolate the AFS Client's virtual SMB server from the outside world. This can be done using the "Microsoft Loopback Adapter," as described below.
+More importantly for mobile users, the AFS Client Service requires a valid network adapter with an IP address to bind the SMB service to. If there is no valid IP address available, the AFS Client Service will fail to start. If there is a change to the available IP addresses after the AFS Client Service has started, it will crash.
+
+Fortunately, it is possible to isolate the AFS Client's virtual SMB server from the outside world and provide a long term stable IP address for the service to use. This can be done using the "Microsoft Loopback Adapter," as described below.
 
 ## <a name="How do I use the Loopback adapte"></a> How do I use the Loopback adapter?
 
-There are two options: run [confloop.msi](http://www.eos.ncsu.edu/wolfcall/loopback), or follow these instructions. I'd recommend the former for system administrators who must do this on lots of machines, and the latter for single users. The instructions were written for Windows XP, but translate fairly directly to Windows 2000.
+There are three options:
+
+(1) the Loopback adapter will be automatically installed and configured for you when you install [[OpenAFS]] version 1.3.65 or higher.
+
+(2) run [confloop.msi](http://www.eos.ncsu.edu/wolfcall/loopback).
+
+(3) follow these instructions.
+
+Use the first option if possible. The msi option is appropriate for system administrators who must install the loopback adapter on lots of machines. Finally, these instructions can be used by single users. The instructions were written for Windows XP, but translate fairly directly to Windows 2000.
 
 ### <a name="Add the Loopback Adapter"></a> Add the Loopback Adapter
 
@@ -29,22 +39,21 @@ There are two options: run [confloop.msi](http://www.eos.ncsu.edu/wolfcall/loopb
 2. Right click on the new connection, and go to properties.
 3. Double-click on the TCP/IP settings.
 4. The adapter will be configured by default for DHCP; we want to change this. To configure the Loopback Adapter to use a reserved private network address, type in the following information:
-  - IP Address: 10.0.0.100
-  - Subnet Mask: 255.0.0.0
+  - IP Address: 10.254.254.253
+  - Subnet Mask: 255.254.254.252
   - Default Gateway: **Leave blank**.
   - DNS servers: **Leave blank**.
     - If you're on a private network that actually uses 10.\* addresses, change the IP to point to another RFC1918 address space.
 5. Before you leave the properties for the Loopback Adapter, be sure that "File and Print Sharing for Microsoft Networks" and "Client for Microsoft Networks" are installed and checked. If not, use the Install button to install these services, and check them in the list.
-
-### <a name="Turn on Automatic Lana Scan"></a> Turn on Automatic Lana Scan
-
-1. The automatic Lana scan should find and select the new loopback adapter, and is on by default. However, if you've turned it off, you can turn it back on by going to Start/Settings/Control Panel/AFS Client Configuration, clicking on the "Advanced" tab, going to "Miscellaneous", and checking the box for "Automatic Lana scan." Again, this step is not necessary unless you have changed the settings.
+6. After installing the adapter, you may optionally rename the adapter to "AFS" from the Network Connections folder.
 
 Thanks to a [patch](http://www.openafs.org/cgi-bin/wdelta/STABLE12-windows-loopback-adapter-support-20021126) included in [[OpenAFS]] 1.2.8+, the next time the AFS service starts, it will automatically find and use the Loopback Adapter, preferring it over other adapters.
 
 -- [[BenCreech]] - 11 Jul 2003
 
 -- Modified by [[BenCreech]] - 15 Jul 2003
+
+-- Modified by Jeffrey Altman - 25 June 2004
 
 `Contributors:`
 
