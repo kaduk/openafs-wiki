@@ -38,6 +38,16 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.27  Where can I find the Andre"> 3.27 Where can I find the Andrew Benchmark?</a></li>
         <li><a href="#3.28 Is the data sent over the n"> 3.28 Is the data sent over the network encrypted in AFS ?</a></li>
         <li><a href="#3.29 What underlying filesystems"> 3.29 What underlying filesystems can I use for AFS ?</a></li>
+        <li><a href="#3.30 Compiling _OpenAFS"> 3.30 Compiling OpenAFS</a></li>
+        <li><a href="#3.31 Upgrading _OpenAFS"> 3.31 Upgrading OpenAFS</a></li>
+        <li><a href="#3.32 Debugging _OpenAFS"> 3.32 Debugging OpenAFS</a></li>
+        <li><a href="#3.33 Tuning client cache for hug"> 3.33 Tuning client cache for huge data</a></li>
+        <li><a href="#3.34 Settting up PAM with AFS"> 3.34 Settting up PAM with AFS</a></li>
+        <li><a href="#3.35 Setting up AFS key in KDC a"> 3.35 Setting up AFS key in KDC and KeyFile</a></li>
+        <li><a href="#3.36 Obtaining and getting asetk"> 3.36 Obtaining and getting asetkey compiled</a></li>
+        <li><a href="#3.37 afs_krb_get_lrealm() using"> 3.37 afs_krb_get_lrealm() using /usr/afs/etc/krb.conf</a></li>
+        <li><a href="#3.38 Moving from kaserver to Hei"> 3.38 Moving from kaserver to Heimdal KDC</a></li>
+        <li><a href="#3.39 Moving from KTH-KRB4 to Hei"> 3.39 Moving from KTH-KRB4 to Heimdal KDC</a></li>
       </ul>
     </li>
   </ul>
@@ -497,6 +507,8 @@ In order to keep up-to-date with such changes, the [[CellservDB]] file on each A
 
 As well as updating [[CellservDB]], your AFS administrator should ensure that new cells are mounted in your cell's root.afs volume.
 
+If a cell is added to [[CellServDB]] then the **client** must either be restared or you must the AFS command "fs newcell -cell .. -servers ... ...".
+
 ### <a name="3.24  How can I keep /usr/vice/e"></a> 3.24 How can I keep /usr/vice/etc/CellServDB current?
 
 Do a daily copy from a master source and update the AFS kernel sitelist.
@@ -587,13 +599,18 @@ You need to distinguish between the filesystem used by the file server to store 
 
 With the new namei file server you can basically use any filesystem you want. Tne namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though).
 
+But you cannot use SGI efs under [[OpenAFS]] at all.
+
 It is a different story with the old inode based server. It directly operates on the inodes of the underlying file system which therefore has to fully support the inode abstraction scheme. The the Administrators Guide for more details (they differ from system to system).
 
-On the client side, you always have to use a file system supporting the inode abstraction for the cache (usually /usr/vice/cache) since the cache manager references files by their inode. Fortunately, it does not do such tricky stuff as the inode based server. The following file systems have been reported _not_ to work:
+On the client side, you always have to use a file system supporting the inode abstraction for the cache (usually /usr/vice/cache) since the cache manager references files by their inode. Fortunately, it does not do such tricky stuff as the inode based server.
+
+The following file systems have been reported _not_ to work for the AFS client cache:
 
 - reiserfs
 - vxfs (HP-UX)
 - advfs (Tru64), it works but gives cachecurruption
+- efs (SGI) - IBM AFS does support efs, but openafs doesn't have a license for that
 
 - Patch committed to cvs around 6/2003 will now enforce this in some cases and generate a warning to the user if the filesystem type is wrong.
 
@@ -603,3 +620,327 @@ The following file systems have been reported to work for the AFS client cache:
 - ext3
 - hfs (HP-UX)
 - xfs (at least on IRIX 6.5)
+- ufs (Solaris, [[Tru64Unix]])
+
+### <a name="3.30 Compiling _OpenAFS"></a> 3.30 Compiling [[OpenAFS]]
+
+The kernel parts on Solaris have to be compiled with Sun cc, same for other platforms, i.e. you need same compiler used to compile kernel to compile your afs modules. [[Tru64Unix]] doesn't support modules, so you have to edit kernel config files and link statically into kernel. Kernel module insertion works fine on Linux, Solaris, Irix ...
+
+$ ./configure --enable-transarc-paths=/usr/etc --with-afs-sysname=i386\_linux24
+
+$ make dest
+
+$ cd dest/i386\_linux24
+
+... and continue the install process described in IBM AFS documentation. If you do "make install", you will end up with some stuff installed into /usr/local but something not, regardless the --enable-transarc-paths option ... "make install" it's messy.
+
+### <a name="3.31 Upgrading _OpenAFS"></a> 3.31 Upgrading [[OpenAFS]]
+
+Upgrade of AFS on Solaris 2.6
+
+    cd /etc/rc3.d/
+    mv S20afs aS20afs
+    init 6
+    cd root.server/usr/afs
+    tar cvf - ./bin | (cd /usr/afs; tar xfp -)
+    cd ../../..
+    cp root.client/usr/vice/etc/modload/libafs.nonfs.o /kernel/fs/afs
+    cp root.server/etc/vfsck /usr/lib/fs/afs/fsck
+    cd root.client/usr/vice
+    tar cvf - ./etc | (cd /usr/vice; tar xf -)
+    cd ../../..
+    cp lib/pam_afs.krb.so.1 /usr/lib/security
+    cp lib/pam_afs.so.1 /usr/lib/security
+    cd /etc/rc3.d
+    mv aS20afs S20afs
+    init 6
+
+Upgrade of AFS on Irix 6.5
+
+    /etc/chkconfig -f afsserver off
+    /etc/chkconfig -f afsclient off
+    /etc/chkconfig -f afsml off
+    /etc/chkconfig -f afsxnfs off
+    /etc/reboot
+    cd root.server/usr/afs
+    tar cvf - ./bin | (cd /usr/afs; tar xfp -)
+    cd ../../..
+    cp root.client/usr/vice/etc/sgiload/libafs.IP22.nonfs.o /usr/vice/etc/sgiload
+    echo "AFS will be compiled statically into kernel"
+    echo "otherwise skip following lines and use chkconfig afsml on"
+    cp root.client/bin/afs.sm  /var/sysgen/system
+    cp root.client/bin/afs /var/sysgen/master.d
+    echo "The next file comes from openafs-*/src/libafs/STATIC.*"
+    cp root.client/bin/libafs.IP22.nonfs.a /var/sysgen/boot/afs.a
+    cp /unix /unix_orig
+    /etc/autoconfig
+    echo "end of static kernel modifications"
+    cd root.client/usr/vice/etc
+    echo "Delete any of the modload/ files which don't fit your platform if you need space"
+    echo "These files originate from openafs-*/src/libafs/MODLOAD.*"
+    tar cvf - . | (cd /usr/vice/etc; tar xf -)
+    /etc/chkconfig -f afsserver on
+    /etc/chkconfig -f afsclient on
+    # /etc/chkconfig -f afsml on - afs is compiled statically into kernel, so leave afsml off
+    /etc/chkconfig -f afsml off
+    /etc/chkconfig -f afsxnfs off
+    /etc/reboot
+
+Upgrade of AFS on [[Tru64Unix]]
+
+    cd root.server/usr/afs/
+    tar cvf - ./bin | (cd /usr/afs; tar xfp -)
+    cd ../../../root.client/bin
+    cp ./libafs.nonfs.o /usr/sys/BINARY/afs.mod
+    ls -la /usr/sys/BINARY/afs.mod
+    doconfig -c FOO
+    cd ../../root.client/usr/vice
+    cp etc/afsd /usr/vice/etc/afsd
+    cp etc/C/afszcm.cat /usr/vice/etc/C/afszcm.cat
+
+### <a name="3.32 Debugging _OpenAFS"></a> 3.32 Debugging [[OpenAFS]]
+
+In case of troubles when you need only fileserver process to run (to be able to debug), run the lwp fileserver instead of the pthreads fileserver (src/viced/fileserver instead of src/tviced/fileserver if you have a buildtree handy):
+
+cp src/viced/fileserver /usr/afs/bin (or wherever)
+
+bos restart calomys fs -local
+
+... then attach with gdb
+
+To debug if client running afsd kernel process talks to the servers from [[CellServDB]], do:
+
+tcpdump -vv -s 1500 port 7001
+
+Other ports are:
+
+    fileserver      7000/udp                        # fileport (FILESERVICE)
+    afscb           7001/udp                        # kernel extensions
+    afsprot         7002/udp                        # ptserver (PROTSERVICE)
+    afsvldb         7003/udp                        # vlserver (VLDBSERVICE)
+    afskauth        7004/udp                        # kaserver (KAUTHSERVICE)
+    afsvol          7005/udp                        # volserver (VOLUMESERVICE)
+    afserror        7006/udp                        # ERRORSERVICE
+    afsnanny        7007/udp                        # bosserver (NANNYSERVICE)
+    afsupdate       7008/udp                        # upserver (UPDATESERVICE)
+    afsrmtsys       7009/udp                        # RMTSYSSERVICE
+
+### <a name="3.33 Tuning client cache for hug"></a> 3.33 Tuning client cache for huge data
+
+Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache sizes afsd crashes on startup (Linux, [[Tru64Unix]] at least).
+
+### <a name="3.34 Settting up PAM with AFS"></a> 3.34 Settting up PAM with AFS
+
+Solaris
+
+    auth        sufficient    /lib/security/pam_afs.so debug try_first_pass ignore_root debug
+    auth        required      /lib/security/pam_env.so
+    auth        sufficient    /lib/security/pam_unix.so likeauth nullok
+    auth        required      /lib/security/pam_deny.so
+
+    account     required      /lib/security/pam_unix.so
+
+    password    required      /lib/security/pam_cracklib.so retry=3 type=
+    password    sufficient    /lib/security/pam_unix.so nullok use_authtok md5 shadow
+    password    required      /lib/security/pam_deny.so
+
+    session     sufficient    /lib/security/pam_afs.so set_token
+    session     required      /lib/security/pam_limits.so
+    session     required      /lib/security/pam_unix.so
+
+    # reafslog is to unlock dtlogin's screensaver
+    other  auth sufficient /usr/athena/lib/pam_krb4.so reafslog
+
+### <a name="3.35 Setting up AFS key in KDC a"></a> 3.35 Setting up AFS key in KDC and [[KeyFile]]
+
+The easiest method is not much recommended, as the password is possibly very weak:
+
+    dattan# bos addkey server -kvno <n+1>
+    <pw>
+    <pw-again>
+
+    dattan# kstring2key -c <cellname>
+    <pw>
+
+    dattan# kadmin ckey afs
+    <cut-n-paste the ascii output from above>
+
+Beware, there is currently a byte order bug in the kadmin tool as of May 2001 in KTH-KRB. If you run kadmin on a little indian machine (PC, Alpha, ...) you must swap the bytes manually. Here is a small example:
+
+    bg$ kstring2key -c sics.se
+    password:
+    ascii = \361\334\211\221\221\206\325\334
+    hex   = f1dc89919186d5dc
+    bg$ kadmin
+    kadmin: ckey afs
+    bg.admin@SICS.SE's Password:
+    New DES key for afs: \221\211\334\361\334\325\206\221
+
+Please note how the bytes are swapped in groups of four.
+
+This bug is fixed in an upcoming release.
+
+Better approach is to create random key in KDC using "ksrvutil get" (rather then "ksrvutil add" which asks you for the new password), export it into /etc/srvtab ("ksrvutil ext") and from there copy it into /usr/afs/etc/KeyFile using asetkey utility from /afs/transarc.com/public/afs-contrib. After some years, you may wish to regenerate the random afs key using "ksrvutil change" in KDC and exporting it again.
+
+There are two nice pages abou this:
+
+<http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html> <http://www.contrib.andrew.cmu.edu/~shadow/afs/afs-with-kerberos.html>
+
+As someone noted, you might need some ext\_srvtab utility to extract the key from /etc/srvtab, but I don't remeber that I needed it. Then he also suggets to use asetkey utility.
+
+Create afs.natur\\.cuni\\.cz@NATUR.CUNI.CZ principal entry in kerberos:
+
+      principal name: afs
+      principal instance: natur.cuni.cz
+      principal realm: NATUR.CUNI.CZ
+
+Import this key from Kerberos (/etc/srvtab) into AFS /usr/afs/etc/KeyFile using asetkey utility, which is I think from /afs/transarc.com/public/afs-contrib
+
+./asetkey add 0 /etc/srvtab <afs.natur.cuni.cz@NATUR.CUNI.CZ>
+
+This [[KeyFile]] with the AFS-key you can just always re-copy to new AFS **server** machines. Be sure that the key version number KVNO is always same in this [[KeyFile]] and in Kerberos database. On all these machines you of course need afs.hostname.REALM key loaded into their /etc/srvtab (create them with 'ksrvutil get'). It seems klog(1) needs afs@REALM, so copy the principal afs.cell.name@REALM to it.
+
+You can test if you have same keys in kerberos and AFS like this:
+
+    kauth username
+    tokens
+
+If you have some tokens now, then it works and you can now shutdown kaserver. Users, which you have created in AFS under kaserver are in /usr/afs/db/kaserver.\*, but you can just forget them. Create these users again in Kerberos IV.
+
+AFS users are then looked up in:
+
+kerberos database (/var/kerberos/principal.db)
+
+/usr/afs/etc/UserList (permission to manipulate 'bos')
+
+system:administrators (permissions for vos, pts, fs, i.e. 'pts adduser' etc)
+
+    ---------------------------------------------------------------------------------
+    Another approach, untested:
+
+    http://www.natur.cuni.cz/~majordomo/krb4/krb4.9703/msg00002.html
+
+    Date: Tue, 9 May 2000 10:57:23 +0200 (MET DST)
+    From: Johan Hedin <johanh  at  fusion.kth.se>
+    To: Erland Fristedt <Erland.Fristedt@wcs.eraj.ericsson.se>
+    Cc: krb4@sics.se
+    Subject: Re: AFS+KTH-KRB problem
+
+    This is a printout how we got it to work. Hope this helps.
+
+    /Johan Hedin
+
+    callisto#/usr/athena/sbin/ksrvutil -p johanh.admin -f srvtab get
+    Name [rcmd]: afs
+    Instance [callisto]: fusion.kth.se
+    Realm [FUSION.KTH.SE]:
+    Is this correct? (y,n) [y]
+    Add more keys? (y,n) [n]
+    Password for johanh.admin@FUSION.KTH.SE:
+    Warning: Are you sure `fusion.kth.se' should not be `fusion'?
+    Added afs.fusion.kth.se@FUSION.KTH.SE
+    Old keyfile in srvtab.old.
+    callisto#/usr/athena/sbin/ksrvutil -p johanh.admin -f srvtab list
+    Version    Principal
+       4     afs.fusion.kth.se@FUSION.KTH.SE
+    callisto#/tmp/asetkey add 4 srvtab afs.fusion.kth.se@FUSION.KTH.SE
+    callisto#cd ..
+    callisto#bin/bos status callisto
+    Instance buserver, currently running normally.
+    Instance ptserver, currently running normally.
+    Instance vlserver, currently running normally.
+    Instance fs, currently running normally.
+        Auxiliary status is: file server running.
+    callisto#bin/fs la /afs
+    Access list for /afs is
+    Normal rights:
+      system:administrators rlidwka
+
+    --------------------------------------------------------------------------------
+    > Tokens held by the Cache Manager:
+    >
+    > User's (AFS ID 6020) tokens for afs@sunrise.ericsson.se [Expires May  5
+    > 04:05]
+    >    --End of list--
+
+    You got your tickets alright, but then
+
+    > > touch /afs/.sunrise.ericsson.se/tabort
+    > afs: Tokens for user of AFS id 6020 for cell sunrise.ericsson.se are
+    > discarded (rxkad error=19270407)
+
+    grep 19270407 /usr/afsws/include/rx/*
+    /usr/afsws/include/rx/rxkad.h:#define RXKADBADTICKET (19270407L)
+
+    so I would guess that the key version number and/or the key on your
+    AFS servers does not match the key of the afs principal.
+
+    Use klist -v to figure out about key version numbers and then use
+
+    $ kstring2key -c sunrise.ericsson.se
+    password:
+    ascii = \242\345\345\260\323p\263\233
+    hex   = a2e5e5b0d370b39b
+
+    or some other means to ensure that you use the same keys.
+
+### <a name="3.36 Obtaining and getting asetk"></a> 3.36 Obtaining and getting asetkey compiled
+
+Better approach is to create random key in KDC, export it into /etc/srvtab and from there move in /usr/afs/etc/KeyFile using asetkey utility from /afs/transarc.com/public/afs-contrib
+
+    |  I can not get asetkey to compile.
+    |
+    |  asetkey.c: In function `main':
+    |  asetkey.c:25: `AFSCONF_SERVERNAME' undeclared (first use in this function)
+    |  asetkey.c:25: (Each undeclared identifier is reported only once
+    |  asetkey.c:25: for each function it appears in.)
+    +--->8
+
+AFS 3.5 got rid of a few commonly-used AFS defines; I suspect they are now API calls of some kind, akin to the POSIX move from hardcoded constants to use of \{,f\}pathconf() and sysconf(). I have no idea what those calls are, though.
+
+In the meantime, the following two defines are useful in building stuff on AFS 3.5:
+
+    #define AFSCONF_CLIENTNAME      "/usr/vice/etc"
+    #define AFSCONF_SERVERNAME      "/usr/afs/etc"
+
+### <a name="3.37 afs_krb_get_lrealm() using"></a><a name="3.37 afs_krb_get_lrealm() using "></a> 3.37 afs\_krb\_get\_lrealm() using /usr/afs/etc/krb.conf
+
+In this file you can set also another REALM to be used by you afs server processes, if the REALM should differ from the system-wide REALM (/etc/krb.conf).
+
+Don't forget it's related to these entries in Kerberos KDC:
+
+afs.cell.name@REALM krbtgt CELL.NAME@REALM
+
+### <a name="3.38 Moving from kaserver to Hei"></a> 3.38 Moving from kaserver to Heimdal KDC
+
+    > While converting all our administration tools, we have discovered that
+    > the time a principal changed his/her/its password is _not_ carried over
+    > from the kaserver DB.
+
+First of all, some Heimdal's configure flags:
+
+--enable-kaserver requires krb4 libs, so for that you'll need a working krb4 are you still using a kaserver/kaserver emulation ?
+
+--enable-kaserver-db is just for dumping a kaserver krb4 database. If you are no longer running a kaserver, you don't need it.
+
+Migration itself:
+
+<https://lists.openafs.org/pipermail/openafs-info/2002-May/004326.html>
+
+This works while migrating from kaserver:
+
+/usr/heimdal/libexec/hprop --source=kaserver --cell=xxx --kaspecials --stdout | /usr/heimdal/libexec/hpropd --no-inetd --stdin
+
+This somewhat doesn't:
+
+/usr/heimdal/libexec/hprop --source=kaserver --cell=xxx --encrypt --master-key= --kaspecials --stdout | /usr/heimdal/libexec/hpropd --stdin
+
+### <a name="3.39 Moving from KTH-KRB4 to Hei"></a> 3.39 Moving from KTH-KRB4 to Heimdal KDC
+
+/usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /var/kerberos/dump.txt --master-key=/.k -D | /usr/heimdal/libexec/hpropd -n
+
+or
+
+1. dump of the krb4 database with kdb\_util 2. dump of the "default" heimdal database with kadmin -l 3. /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d where /etc/krb5.keytab contains hprop/\`hostname\` keys 4. merge of the converted database with file from (2) via kadmin
+
+The special thing for me is the use of "-D" in the (3) which seems to cause conversion des-cbc-sha1 keys of old krb4 database entries to des-cbc-md5.

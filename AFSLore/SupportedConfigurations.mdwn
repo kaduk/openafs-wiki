@@ -46,6 +46,12 @@ You can easily see that you are using an NAMEI file server if there is a directo
     <td> ppc_darwin_14 </td>
     <td> ??? </td>
   </tr>
+  <tr>
+    <td> alpha_dux[40 </td>
+    <td> 50 </td>
+    <td> 51] </td>
+    <td><code>ufs</code> , no <code>AdvFS</code> support </td>
+  </tr>
 </table>
 
 <table border="1" cellpadding="0" cellspacing="0">
@@ -75,9 +81,11 @@ You can easily see that you are using an NAMEI file server if there is a directo
   </tr>
   <tr>
     <td> These Don't Work </td>
-    <td><code>reiserfs</code>, <code>vxfs</code> (HP-UX, Solaris) </td>
+    <td><code>reiserfs</code>, <code>vxfs</code> (HP-UX, Solaris), <code>AdvFS</code> (OSF1/DigitalUnix/CompaqUnix/Tru64Unix) </td>
   </tr>
 </table>
+
+Further, [[Tru64Unix]] 5.1 has only server support on ufs. The client is supported under Arla including `AdvFS` (but no server support as of Apr 2002). Server and client should work under DU4.0 and [[Tru64Unix]] 5.0.
 
 - **Question:** Does this table imply that clients can't use the NAMEI backend and still need a specific filesystem? Will this ever change?
 
