@@ -90,7 +90,7 @@ On line before the table use `%TABLE{...}%`:
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code>databg</code></td>
-    <td bgcolor="#ecf2f8" style=""> Data cell background colour, a comma separated list </td>
+    <td bgcolor="#ecf2f8" style=""> Data cell background colour, a comma separated list. Specify <code>"none"</code> for no colour, that is to use the colour/background of the page the table is on. </td>
     <td bgcolor="#ecf2f8" style=""><code>databg="#C8CB8F,#DBDDB5"</code></td>
   </tr>
   <tr>
@@ -184,6 +184,8 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
+**Note:** You do not need to install anything on the browser to use this plugin. Below installation instructions are for the administrator who needs to install this plugin on the TWiki server.
+
 - Download the ZIP file from the Plugin web (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
@@ -232,7 +234,39 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
-    <td bgcolor="#ecf2f8" style=""> 13 Mar 2002 PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection <br /> 12 Mar 2002 PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value <br /> 05 Jan 2002 PTh: Fixed sorting bug of cells with leading white space <br /> 06 Dec 2001 PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more <br /> 29 Nov 2001: PTh fixed Perl warnings <br /> 16 Nov 2001: PTh added table border, cell spacing, cell padding, gif files <br /> 07 Oct 2001: Initial version </td>
+    <td bgcolor="#ecf2f8" style="">  </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 05 Jun 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added "none" value to databg parameter (suggested by TWiki:Main/TaitCyrus); fixed sorting by stripping HTML tags, removing links and making sort ignore case (suggested by TWiki:Main/ShawnBradford) </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 13 Mar 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Added TWiki:Main/ShawnBradford 's initsort and initdirection </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 12 Mar 2002: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added valign, headeralign and dataalign; fixed bug of swapped cellpadding/cellspacing; fixed warning of uninitialized value </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 05 Jan 2002: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed sorting bug of cells with leading white space </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 06 Dec 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Fixed date sorting bug <br /> 03 Dec 2001 PTh: Fixed sort="off" bug and more </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 29 Nov 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> PTh: Fixed Perl warnings </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 16 Nov 2001: </td>
+    <td bgcolor="#ffffff" style=""> PTh: Added table border, cell spacing, cell padding, gif files </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 07 Oct 2001: </td>
+    <td bgcolor="#ecf2f8" style=""> JT: Initial version </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> CPAN Dependencies: </td>
@@ -258,4 +292,4 @@ Line before table: `%TABLE{sort="on" tableborder="0" cellpadding="1" cellspacing
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 13 Mar 2002 <br />
+-- [[JohnTalintyre]] - 07 Oct 2001 <br /> -- [[PeterThoeny]] - 05 Jun 2002 <br />
