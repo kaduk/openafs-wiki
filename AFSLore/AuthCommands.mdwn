@@ -1,29 +1,64 @@
-[[KaServer]]
+An assortment of commands and tools related to AFS authentication sorted by authentication system.
+
+<div>
+  <ul>
+    <li><a href="#KaServer -- the AFS version of K"> KaServer -- the AFS version of Kerberos version 4</a></li>
+    <li><a href="#KerberosIV -- the MIT reference"> KerberosIV -- the MIT reference for version 4</a></li>
+    <li><a href="#KerberosV -- the MIT reference f"> KerberosV -- the MIT reference for version 5</a></li>
+    <li><a href="#KerberosDCE -- the DCE version o"> KerberosDCE -- the DCE version of version 5</a></li>
+    <li><a href="#HeimdalKTH -- the international"> HeimdalKTH -- the international version of Kerberos version 5</a></li>
+    <li><a href="#ActiveDirectory -- the Microsoft"> ActiveDirectory -- the Microsoft version of Kerberos version 5</a></li>
+    <li><a href="#Other commands"> Other commands</a></li>
+  </ul>
+</div>
+
+## <a name="KaServer -- the AFS version of K"></a> [[KaServer]] -- the AFS version of Kerberos version 4
+
+The klog command (and kpasswd too) try several [[StringToKey]] functions.
 
 - klog -- authentication with [[KaServer]] by getting AFS service tickets and sending them to the (kernel) [[CacheManager]]. Can save the TGT in a file compatible with kinit (V4) as a non-default option.
 - kpasswd -- change password in [[KaServer]]
 - kas -- administrative interface to [[KaServer]]
+- inetd -- passes authentication information to network servers. See [inetd ](http://www.cs.rose-hulman.edu/docs/afs-doc/html/AdminRef/auarf179.htm#HDRINETD). [Avoid](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002351.html).
+- r\* commands -- passes authentication information between trusting hosts (over a secure network). See [Remote Services](http://www.cs.rose-hulman.edu/docs/afs-doc/html/AdminGd/auagd007.htm#HDRWQ78). [Avoid](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002351.html) and [thread](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002372.html). These are not built by default in [[OpenAFS]] unless --enable-insecure is specified.
 
-[[KerberosIV]]
+## <a name="KerberosIV -- the MIT reference"></a><a name="KerberosIV -- the MIT reference "></a> [[KerberosIV]] -- the MIT reference for version 4
 
 - kinit -- authenticates using standard UDP port 750. Also works with [[KaServer]] but doesn't get AFS service tickets (tokens).
+- ktadd -- adds a new key/principal to KDC (or changes the key if it already exists?)
 
-[[KerberosV]]
+## <a name="KerberosV -- the MIT reference f"></a> [[KerberosV]] -- the MIT reference for version 5
+
+There are more types of [[StringToKey]] functions in V5.
 
 - kinit -- authenticates using standard UDP port 88. Works with DCE, [[HeimdalKTH]] and [[ActiveDirectory]] (maybe?).
+- ktadmin
+- ktadd
+- kprop
 
-[[KerberosDCE]]
+## <a name="KerberosDCE -- the DCE version o"></a> [[KerberosDCE]] -- the DCE version of version 5
 
 - kinit -- authenticates to DCE Security Server and also obtains authorization informaion (groups) from the DCE Privilege Server.
 - chpass -- change password
 - dcecp -- admin suite
 
-[[ActiveDirectory]]
+## <a name="HeimdalKTH -- the international"></a><a name="HeimdalKTH -- the international "></a> [[HeimdalKTH]] -- the international version of Kerberos version 5
 
-- uses its own authorization data format. Big flamefest on this issue.
+Here's some [mail](http://lists-openafs.central.org/pipermail/openafs-info/2001-April/000591.html) from [[DerrickBrashear]] for using [[HeimdalKTH]] for AFS authentication.
 
-Others
+- afslog
+- ktutil -- for example to create a [[KeyFile]] for AFS servers you can use this sequence<br />`ktutil -k keytab.afs get afs@MY.REALM`<br />`ktutil copy FILE:keytab.afs AFSKEYFILE:/usr/vice/etc/KeyFile`<br /> It can also convert from `srvtab` format.
+- hprop -- initializes a database from [[KaServer]] (?)
+- ipropd -- propagates KDC databases between master and slave servers?
 
-- aklog -- converts V5 TGT to AFS service tickets and gives them to the [[CacheManager]].
+## <a name="ActiveDirectory -- the Microsoft"></a> [[ActiveDirectory]] -- the Microsoft version of Kerberos version 5
+
+## <a name="Other commands"></a> Other commands
+
+- aklog -- converts V5 TGT to AFS service tickets and gives them to the [[CacheManager]]. Is this part of the standard MIT K5 distribution?
+- ka-forwarder -- allows klog to work in V5 environments, not needed if you are willing to use kinit/aklog. This is a [[HeimdalKTH]] tool?
+- asetkey -- converts a V5 keytab file containing the AFS service ticket key and stores it into a [[KeyFile]] which AFS servers understand.
+- fakeka
+- r\* commands -- where to get safe kerberized versions?
 
 -- [[TedAnderson]] - 23 Jan 2002
