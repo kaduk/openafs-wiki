@@ -112,7 +112,7 @@ Disadvantages:
 
 ### <a name="SMBKlog"></a> SMBKlog
 
-SMBKlog uses out-of-band authentication over SSL. The server sends the client an RSA public key - the client encrypts the password with the public key and sends it to the server, which then decrypts it. It's home page no longer seems to exist. There is an email explaining it at <http://samba.cadcamlab.org/lists/samba-technical/Jul2001/00363.html> , and the code is available from <http://www.gentoo.org/cgi-bin/viewcvs/gentoo-x86/net-fs/samba/files/Attic/> (if you look hard).
+SMBKlog uses out-of-band authentication over SSL. The server sends the client an RSA public key - the client encrypts the password with the public key and sends it to the server, which then decrypts it. There is an email explaining it at <http://samba.cadcamlab.org/lists/samba-technical/Jul2001/00363.html> .
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -155,19 +155,20 @@ To help reduce the load due to authentication, we implemented FOKSTRAUT, a set o
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td> URL </td>
-    <td><a href="http://www.usenix.org/events/lisa2000/full_papers/beck/beck_html/" target="_top">http://www.usenix.org/events/lisa2000/full_papers/beck/beck_html/</a></td>
+    <td colspan="2"><a href="http://www.usenix.org/events/lisa2000/full_papers/beck/beck_html/" target="_top">http://www.usenix.org/events/lisa2000/full_papers/beck/beck_html/</a></td>
   </tr>
   <tr>
     <td>   </td>
     <td><a href="http://www.ualberta.ca/~sholstea/patches.tar" target="_top">http://www.ualberta.ca/~sholstea/patches.tar</a></td>
+    <td> Patches against Samba 2.2.4 </td>
   </tr>
   <tr>
     <td> Email </td>
-    <td> Steve Holstead <a href="mailto:Steve.Holstead@ualberta.ca">Steve.Holstead@ualberta.ca</a></td>
+    <td colspan="2"> Steve Holstead <a href="mailto:Steve.Holstead@ualberta.ca">Steve.Holstead@ualberta.ca</a></td>
   </tr>
   <tr>
     <td>   </td>
-    <td> Robert Beck <a href="mailto:beck@bofh.ucs.ualberta.ca">beck@bofh.ucs.ualberta.ca</a> or <a href="mailto:beck@obtuse.com">beck@obtuse.com</a></td>
+    <td colspan="2"> Robert Beck <a href="mailto:beck@bofh.ucs.ualberta.ca">beck@bofh.ucs.ualberta.ca</a> or <a href="mailto:beck@obtuse.com">beck@obtuse.com</a></td>
   </tr>
 </table>
 
