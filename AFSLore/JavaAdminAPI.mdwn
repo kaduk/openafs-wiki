@@ -1,9 +1,9 @@
 In large AFS environments, local tools are usually written to manage AFS more effectly. Today these tools are usually written in scripts. These scripts typically issue AFS commands and parse the command output. This is not a good practice as command output are not well defined. Their format or even contents can change. An AFS Admin API is needed. Today some internal C libraries exist and are used by the AFS command suite as well as the Windows Admin GUI. But they are not clearly defined for external use and not easy to use.
 
-Here a set of Java Admin API is proposed. The goal is to make the API suitable not only for administrators to write custom AFS automation tools but also for developers to write general and powerful tools for easy and efficient AFS management. -- [[LeoShyhWeiLuan]] - 13 Feb 2002
+Here a set of Java API is proposed. The goal is to make the API suitable not only for administrators to write custom AFS automation tools but also for developers to write general and powerful tools for easy and efficient AFS management. -- [[LeoShyhWeiLuan]] - 13 Feb 2002
 
-All of the base class API documents have been updated to the most recent revision (v1.3). Additionally, the newly introduced PTSEntry interface and [[K5User]] class proposal have been posted as well.
+All of the base class API documents have been updated to the most recent revision (v1.4). Additionally, the newly introduced AFS ACL, Token, and File classes, as well as the associated file stream classes, have been posted as well.
 
-In addition to enhancing the overall documentation, this latest revision incorporates a number of modifications and new features, several of which were either suggested or inspired by the valued feedback we have received from some of you. -- [[ManuelPereira]] - 10 Apr 2002
+In addition to enhancing the overall documentation, this latest revision incorporates a number of modifications and new features, several of which were either suggested or inspired by the valued feedback we have received from some of you. -- [[ManuelPereira]] - 02 Jul 2002
 
-- [openafs-jafsadm-API-v1.3.tar.gz](http://www.dementia.org/twiki//view/openafs-jafsadm-API-v1.3.tar.gz): Complete Java AFS Admin API v1.3
+- [openafs-jafs-API-v1.4.tar.gz](http://www.dementia.org/twiki//view/openafs-jafs-API-v1.4.tar.gz): Complete Java AFS API v1.4
