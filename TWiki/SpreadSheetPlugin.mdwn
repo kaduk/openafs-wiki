@@ -119,6 +119,7 @@ This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like
         <li><a href="#TRIM( text ) -- trim spaces from"> TRIM( text ) -- trim spaces from text</a></li>
         <li><a href="#UPPER( text ) -- upper case stri"> UPPER( text ) -- upper case string of a text</a></li>
         <li><a href="#VALUE( text ) -- convert text to"> VALUE( text ) -- convert text to number</a></li>
+        <li><a href="#WORKINGDAYS( serial_1, serial_2"> WORKINGDAYS( serial_1, serial_2 ) -- working days between two serialized dates</a></li>
       </ul>
     </li>
     <li><a href="#Bug Tracking Example"> Bug Tracking Example</a></li>
@@ -625,7 +626,7 @@ Conventions for Syntax:
 
 - Syntax: <code>**$SUM( list )**</code>
 - Example: To sum up column 5 excluding the title row, write <code>**%CALC\{"$SUM(R2:C5..R$ROW(-1):C5)"\}%**</code> in the last row; or simply <code>**%CALC\{"$SUM($ABOVE())"\}%**</code>
-- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
 
 <a name="FuncSUMDAYS"></a>
 
@@ -669,7 +670,7 @@ Conventions for Syntax:
 - Serialized date is seconds since the Epoch, e.g. midnight, 01 Jan 1970. Current time is taken if the date string is empty. Supported date formats: `31 Dec 2009`; `31 Dec 2009 GMT`; `31 Dec 09`; `31-Dec-2009`; `31/Dec/2009`; `2009/12/31`; `2009-12-31`; `2009/12/31`; `2009/12/31 23:59`; `2009/12/31 - 23:59`; `2009-12-31-23-59`; `2009/12/31 - 23:59:59`; `2009.12.31.23.59.59`. Date is assumed to be server time; add `GMT` to indicate Greenwich time zone
 - Syntax: <code>**$TIME( _text_ )**</code>
 - Example: <code>**%CALC\{"$TIME(2003/10/14 GMT)"\}%**</code> returns <code>**1066089600**</code>
-- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
 
 <a name="FuncTIMEADD"></a>
 
@@ -688,7 +689,7 @@ Conventions for Syntax:
 - The unit is seconds if not specified; unit can be specified as in `$TIMEADD()`. Note: An approximation is used for month and year calculations. Use `$FORMAT()` or `$INT()` to format real numbers
 - Syntax: <code>**$TIMEDIFF( serial\_1, serial\_2, _unit_ )**</code>
 - Example: <code>**%CALC\{"$TIMEDIFF($TIME(), $EVAL($TIME()+90), minute)"\}%**</code> returns <code>**1\.5**</code>
-- Related: <code>[[$FORMAT()|Main/WebHome#FuncFORMAT]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+- Related: <code>[[$FORMAT()|Main/WebHome#FuncFORMAT]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
 
 <a name="FuncTODAY"></a>
 
@@ -726,6 +727,15 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$VALUE(PrjNotebook1234)"\}%**</code> returns <code>**1234**</code>
 - Example: <code>**%CALC\{"$VALUE(Total: -12.5)"\}%**</code> returns <code>**-12.5**</code>
 - Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>
+
+<a name="FuncWORKINGDAYS"></a>
+
+### <a name="WORKINGDAYS( serial_1, serial_2"></a><a name="WORKINGDAYS( serial_1, serial_2 "></a> WORKINGDAYS( serial\_1, serial\_2 ) -- working days between two serialized dates
+
+- Working days are Monday through Friday (sorry, Israel!)
+- Syntax: <code>**$WORKINGDAYS( serial\_1, serial\_2 )**</code>
+- Example: <code>**%CALC\{"$WORKINGDAYS($TIME(2004/07/15), $TIME(2004/08/03))"\}%**</code> returns <code>**13**</code>
+- Related: <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>
 
 ## <a name="Bug Tracking Example"></a> Bug Tracking Example
 
@@ -833,11 +843,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 24 May 2004 </td>
+    <td> 17 Jul 2004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 17 Jul 2004: </td>
+    <td> Added $WORKINGDAYS(), contributed by TWiki:Main/CrawfordCurrie </td>
   </tr>
   <tr>
     <td align="right"> 24 May 2004: </td>
@@ -963,4 +977,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 24 May 2004 \`
+-- TWiki:Main/PeterThoeny - 17 Jul 2004
