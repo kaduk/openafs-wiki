@@ -1,0 +1,13 @@
+It is clear that Wiki vandalizers or spammers have been targetting AFSLore. There has been some discussion on the [[OpenAFSInfo]] mailing list: [wiki docs contain spam](https://lists.openafs.org/pipermail/openafs-devel/2004-October/011121.html), [Wiki SPAM problems](https://lists.openafs.org/pipermail/openafs-info/2005-January/016269.html), [twiki vandalized](https://lists.openafs.org/pipermail/openafs-info/2005-February/016571.html), [Re: twiki vandalized](https://lists.openafs.org/pipermail/openafs-info/2005-February/016786.html) and others. I don't know what the solution is, but perhaps it would be good to collect, discuss and coordinate strategies for short term repair and long term prevention. To that end, I've created this page.
+
+The good news is that TWiki's revision control system makes it fairly easy to undo the bogus changes, but it is certainly tedious. I see that [[JosephHVilas]] has been fixing pages recently and others have done so earlier. Others who have tackled the problem should feel free to add their names here and comment on any techniques they've used to help in the process.
+
+The vandals clearly use automated techniques, we need some repair automation as well. It might be pretty easy to write a Perl script that takes a [[WikiName]] and a revision number and just resets the topic to that contents.
+
+One prevention strategy is to require more checking at registration time. Though this puts more burden on the admins, the pace of new, legitimate registration on AFSLore is probably pretty low. Maybe a volunteer system to monitor new registrations as [[JeffreyHutzelman]] [suggested](https://lists.openafs.org/pipermail/openafs-info/2005-March/016813.html) would be a good idea.
+
+Deploying some kind of fuzzy GIF interpretation step during registration might also be helpful, but I don't know how hard it would be to find and deploy such a system.
+
+We are certainly not alone in being victims of Wiki spam. One think I have not yet done is some research on what other sites and other Wikis are doing. Perhaps someone has already looked into this subject and could add a summary here?
+
+-- [[TedAnderson]] - 27 Apr 2005
