@@ -1,0 +1,59 @@
+Follow the instructions in this section to incorporate AFS modifications into the AIX secondary authentication system.
+
+1. Issue the ls command to verify that the afs\_dynamic\_auth and afs\_dynamic\_kerbauth programs are installed in the local /usr/vice/etc directory.
+
+       # ls /usr/vice/etc
+
+If the files do not exist, mount the AFS CD-ROM for AIX (if it is not already), change directory as indicated, and copy them.
+
+       # cd /cdrom/rs_aix42/root.client/usr/vice/etc
+
+       # cp  -p  afs_dynamic*  /usr/vice/etc
+
+1. Edit the local /etc/security/user file, making changes to the indicated stanzas:
+
+\* In the default stanza, set the registry attribute to DCE (not to AFS), as follows:
+
+       registry = DCE
+
+\* In the default stanza, set the SYSTEM attribute as indicated.
+
+If the machine is an AFS client only, set the following value:
+
+       SYSTEM = "AFS OR (AFS[UNAVAIL] AND compat[SUCCESS])"
+
+If the machine is both an AFS and a DCE client, set the following value (it must appear on a single line in the file):
+
+       SYSTEM = "DCE OR DCE[UNAVAIL] OR AFS OR (AFS[UNAVAIL]  \
+           AND compat[SUCCESS])"
+
+\* In the root stanza, set the registry attribute as follows. It enables the local superuser root to log into the local file system only, based on the password listed in the local password file.
+
+       root:
+             registry = files
+
+1. Edit the local /etc/security/login.cfg file, creating or editing the indicated stanzas:
+
+\* In the DCE stanza, set the program attribute as follows.
+
+If you use the AFS Authentication Server (kaserver process):
+
+       DCE:
+            program = /usr/vice/etc/afs_dynamic_auth
+
+If you use a Kerberos implementation of AFS authentication:
+
+       DCE:
+            program = /usr/vice/etc/afs_dynamic_kerbauth
+
+\* In the AFS stanza, set the program attribute as follows.
+
+If you use the AFS Authentication Server (kaserver process):
+
+       AFS:
+            program = /usr/vice/etc/afs_dynamic_auth
+
+If you use a Kerberos implementation of AFS authentication:
+
+       AFS:
+            program = /usr/vice/etc/afs_dynamic_kerbauth

@@ -1,0 +1,26 @@
+Wait for the message that confirms that Cache Manager initialization is complete.
+
+On machines that use a disk cache, it can take a while to initialize the Cache Manager for the first time, because the afsd program must create all of the Vn files in the cache directory. Subsequent Cache Manager initializations do not take nearly as long, because the Vn files already exist.
+
+As a basic test of correct AFS functioning, issue the klog command to authenticate as the admin user. Provide the password (admin\_passwd) you defined in Initializing Cell Security.
+
+       # /usr/afs/bin/klog admin
+       Password:  admin_passwd
+
+Issue the tokens command to verify that the klog command worked correctly. If it did, the output looks similar to the following example for the abc.com cell, where admin's AFS UID is 1. If the output does not seem correct, resolve the problem. Changes to the AFS initialization script are possibly necessary. The AFS Product Support group can provide assistance as necessary.
+
+       # /usr/afs/bin/tokens
+       Tokens held by the Cache Manager:
+
+       User's (AFS ID 1) tokens for afs@abc.com [Expires May 22 11:52]
+           --End of list--
+
+Issue the bos status command to verify that the output for each process reads Currently running normally.
+
+       # /usr/afs/bin/bos status <machine name>
+
+Change directory to the local file system root (/) and issue the fs checkvolumes command.
+
+       # cd /
+
+       # /usr/afs/bin/fs checkvolumes

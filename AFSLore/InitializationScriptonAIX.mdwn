@@ -1,0 +1,30 @@
+Reboot the machine and log in again as the local superuser root.
+
+       # cd /
+
+       # shutdown -r now
+
+       login: root
+       Password: root_password
+
+Run the AFS initialization script.
+
+       # /etc/rc.afs
+
+[[Confirm Cache Manager Initialization|Main/ConfirmCacheManagerInitialization]]
+
+## <a name="Automatically Start AFS on Syste"></a> Automatically Start AFS on System Boot
+
+Now that you have confirmed that the AFS initialization script works correctly, take the action necessary to have it run automatically at each reboot.
+
+Edit the AIX initialization file, /etc/inittab, adding the following line to invoke the AFS initialization script. Place it just after the line that starts NFS daemons.
+
+       rcafs:2:wait:/etc/rc.afs > /dev/console 2>&1 # Start AFS services
+
+(Optional) There are now copies of the AFS initialization file in both the /usr/vice/etc and /etc directories. If you want to avoid potential confusion by guaranteeing that they are always the same, create a link between them. You can always retrieve the original script from the AFS CD-ROM if necessary.
+
+       # cd  /usr/vice/etc
+
+       # rm  rc.afs
+
+       # ln -s  /etc/rc.afs

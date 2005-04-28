@@ -1,0 +1,29 @@
+The AIX kernel extension facility is the dynamic kernel loader provided by IBM Corporation. AIX does not support incorporation of AFS modifications during a kernel build.
+
+For AFS to function correctly, the kernel extension facility must run each time the machine reboots, so the AFS initialization script (included in the AFS distribution) invokes it automatically. In this section you copy the script to the conventional location and edit it to select the appropriate options depending on whether NFS is also to run.
+
+After editing the script, you run it to incorporate AFS into the kernel. In later sections you verify that the script correctly initializes all AFS components, then configure the AIX inittab file so that the script runs automatically at reboot.
+
+1. Mount the AFS CD-ROM for AIX on the local /cdrom directory. For instructions on mounting CD-ROMs (either locally or remotely via NFS), see your AIX documentation. Then change directory as indicated.
+
+       # cd  /cdrom/rs_aix42/root.client/usr/vice/etc
+
+1. Copy the AFS kernel library files to the local /usr/vice/etc/dkload directory, and the AFS initialization script to the /etc directory.
+
+       # cp -rp  dkload  /usr/vice/etc
+
+       # cp -p  rc.afs  /etc/rc.afs
+
+1. Edit the /etc/rc.afs script, setting the NFS variable as indicated.
+
+If the machine is not to function as an NFS/AFS Translator, set the NFS variable as follows.
+
+NFS=$NFS\_NONE
+
+If the machine is to function as an NFS/AFS Translator and is running AIX 4.2.1 or higher, set the NFS variable as follows. Note that NFS must already be loaded into the kernel, which happens automatically on systems running AIX 4.1.1 and later, as long as the file /etc/exports exists.
+
+NFS=$NFS\_IAUTH
+
+1. Invoke the /etc/rc.afs script to load AFS modifications into the kernel. You can ignore any error messages about the inability to start the BOS Server or the Cache Manager or AFS client.
+
+       # /etc/rc.afs

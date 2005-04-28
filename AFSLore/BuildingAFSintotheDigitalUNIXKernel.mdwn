@@ -1,0 +1,111 @@
+The sysconfig program is the dynamic kernel loader provided for Digital UNIX systems.
+
+For AFS to function correctly, the sysconfig program must run each time the machine reboots, so the AFS initialization script (included on the AFS CD-ROM) invokes it automatically. In this section you copy the appropriate AFS library file to the location where the sysconfig program accesses it and then run the script.
+
+## <a name="Building AFS into the Digital UN"></a> Building AFS into the Digital UNIX Kernel
+
+Use the following instructions to build AFS modifications into the kernel on a Digital UNIX system.
+
+1. Create a copy called AFS of the basic kernel configuration file included in the Digital UNIX distribution as /usr/sys/conf/machine\_name, where machine\_name is the machine's hostname in all uppercase letters.
+
+       # cd /usr/sys/conf
+
+       # cp machine_name AFS
+
+1. Add AFS to the list of options in the configuration file you created in the previous step, so that the result looks like the following:
+
+              .                   .
+              .                   .
+           options               UFS
+           options               NFS
+           options               AFS
+              .                   .
+              .                   .
+
+1. Add an entry for AFS to two places in the file /usr/sys/conf/files.
+
+\* Add a line for AFS to the list of OPTIONS, so that the result looks like the following:
+
+                 .                .      .
+                 .                .      .
+          OPTIONS/nfs          optional nfs
+          OPTIONS/afs          optional afs
+          OPTIONS/nfs_server   optional nfs_server
+                 .                .      .
+                 .                .      .
+
+\* Add an entry for AFS to the list of MODULES, so that the result looks like the following:
+
+                 .                  .        .          .
+                 .                  .        .          .
+          #
+          MODULE/nfs_server       optional nfs_server Binary
+          nfs/nfs_server.c      module nfs_server optimize -g3
+          nfs/nfs3_server.c       module nfs_server optimize -g3
+          #
+          MODULE/afs            optional afs Binary
+          afs/libafs.c          module afs
+          #
+
+1. Add an entry for AFS to two places in the file /usr/sys/vfs/vfs\_conf.c.
+
+\* Add AFS to the list of defined file systems, so that the result looks like the following:
+
+            .       .
+            .       .
+         #include <afs.h>
+         #if defined(AFS) && AFS
+                extern struct vfsops afs_vfsops;
+         #endif
+            .       .
+            .       .
+
+\* Put a declaration for AFS in the vfssw[] table's MOUNT\_ADDON slot, so that the result looks like the following:
+
+            .                          .              .
+            .                          .              .
+          &fdfs_vfsops,         "fdfs",   /* 12 = MOUNT_FDFS */
+       #if   defined(AFS)
+          &afs_vfsops,          "afs",
+       #else
+          (struct vfsops *)0,   "",       /* 13 = MOUNT_ADDON */
+       #endif
+       #if NFS && INFS_DYNAMIC
+           &nfs3_vfsops,        "nfsv3",  /* 14 = MOUNT_NFS3 */
+
+1. Mount the AFS CD-ROM for Digital UNIX on the local /cdrom directory. For instructions on mounting CD-ROMs (either locally or remotely via NFS), see your Digital UNIX documentation. Then change directory as indicated.
+
+       # cd /cdrom/alpha_dux40/root.client
+
+1. Copy the AFS initialization script to the local directory for initialization files (by convention, /sbin/init.d on Digital UNIX machines). Note the removal of the .rc extension as you copy the script.
+
+       # cp usr/vice/etc/afs.rc  /sbin/init.d/afs
+
+1. Copy the AFS kernel module to the local /usr/sys/BINARY directory.
+
+If the machine's kernel supports NFS server functionality:
+
+       # cp bin/libafs.o /usr/sys/BINARY/afs.mod
+
+If the machine's kernel does not support NFS server functionality:
+
+       # cp bin/libafs.nonfs.o /usr/sys/BINARY/afs.mod
+
+1. Configure and build the kernel. Respond to any prompts by pressing . The resulting kernel resides in the file /sys/AFS/vmunix.
+
+       # doconfig -c AFS
+
+1. Rename the existing kernel file and copy the new, AFS-modified file to the standard location.
+
+       # mv /vmunix /vmunix_noafs
+
+       # cp /sys/AFS/vmunix /vmunix
+
+10. Reboot the machine to start using the new kernel, and login again as the superuser root.
+
+       # cd /
+
+       # shutdown -r now
+
+       login: root
+       Password: root_password

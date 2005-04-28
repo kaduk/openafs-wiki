@@ -1,0 +1,68 @@
+By convention, the Cache Manager mounts the AFS filespace on the local /afs directory. In this section you create that directory.
+
+The afsd program sets several cache configuration parameters as it initializes the Cache Manager, and starts daemons that improve performance. You can use the afsd command's arguments to override the parameters' default values and to change the number of some of the daemons. Depending on the machine's cache size, its amount of RAM, and how many people work on it, you can sometimes improve Cache Manager performance by overriding the default values. For a discussion of all of the afsd command's arguments, see its reference page in the IBM AFS Administration Reference.
+
+The afsd command line in the AFS initialization script on each system type includes an OPTIONS variable. You can use it to set nondefault values for the command's arguments, in one of the following ways:
+
+\* You can create an afsd options file that sets values for arguments to the afsd command. If the file exists, its contents are automatically substituted for the OPTIONS variable in the AFS initialization script. The AFS distribution for some system types includes an options file; on other system types, you must create it.
+
+You use two variables in the AFS initialization script to specify the path to the options file: CONFIG and AFSDOPT. On system types that define a conventional directory for configuration files, the CONFIG variable indicates it by default; otherwise, the variable indicates an appropriate location.
+
+List the desired afsd options on a single line in the options file, separating each option with one or more spaces. The following example sets the -stat argument to 2500, the -daemons argument to 4, and the -volumes argument to 100.
+
+       -stat 2500 -daemons 4 -volumes 100
+
+\* On a machine that uses a disk cache, you can set the OPTIONS variable in the AFS initialization script to one of $SMALL, $MEDIUM, or $LARGE. The AFS initialization script uses one of these settings if the afsd options file named by the AFSDOPT variable does not exist. In the script as distributed, the OPTIONS variable is set to the value $MEDIUM.
+
+<dl>
+  <dd>
+    <dl>
+      <dt> Note</dt>
+      <dd> Do not set the OPTIONS variable to $SMALL, $MEDIUM, or $LARGE on a machine that uses a memory cache. The arguments it sets are appropriate only on a machine that uses a disk cache. </dd>
+    </dl>
+  </dd>
+</dl>
+
+The script (or on some system types the afsd options file named by the AFSDOPT variable) defines a value for each of SMALL, MEDIUM, and LARGE that sets afsd command arguments appropriately for client machines of different sizes:
+
+              o SMALL is suitable for a small machine that serves one or two users and has approximately 8 MB of RAM and a 20-MB cache
+
+              o MEDIUM is suitable for a medium-sized machine that serves two to six users and has 16 MB of RAM and a 40-MB cache
+
+              o LARGE is suitable for a large machine that serves five to ten users and has 32 MB of RAM and a 100-MB cache
+
+\* You can choose not to create an afsd options file and to set the OPTIONS variable in the initialization script to a null value rather than to the default $MEDIUM value. You can then either set arguments directly on the afsd command line in the script, or set no arguments (and so accept default values for all Cache Manager parameters).
+
+1. Create the local directory on which to mount the AFS filespace, by convention /afs. If the directory already exists, verify that it is empty.
+
+       # mkdir /afs
+
+1. On AIX systems, add the following line to the /etc/vfs file. It enables AIX to unmount AFS correctly during shutdown.
+
+       afs     4     none     none
+
+1. On Linux systems, copy the afsd options file from the /usr/vice/etc directory to the /etc/sysconfig directory, removing the .conf extension as you do so.
+
+       # cp /usr/vice/etc/afs.conf /etc/sysconfig/afs
+
+1. Edit the machine's AFS initialization script or afsd options file to set appropriate values for afsd command parameters. The script resides in the indicated location on each system type:
+
+- On AIX systems, /etc/rc.afs
+
+- On Digital UNIX systems, /sbin/init.d/afs
+
+- On HP-UX systems, /sbin/init.d/afs
+
+- On IRIX systems, /etc/init.d/afs
+
+- On Linux systems, /etc/sysconfig/afs (the afsd options file)
+
+- On Solaris systems, /etc/init.d/afs
+
+Use one of the methods described in the introduction to this section to add the following flags to the afsd command line. If you intend for the machine to remain an AFS client, also set any performance-related arguments you wish.
+
+\* Add the -nosettime flag, because this is a file server machine that is also a client. The flag prevents the machine from picking a file server machine in the cell as its source for the correct time, which client machines normally do. File server machines instead use NTPD (as controlled by the runntp process) or another protocol to synchronize their clocks.
+
+\* Add the -memcache flag if the machine is to use a memory cache.
+
+\* Add the -verbose flag to display a trace of the Cache Manager's initialization on the standard output stream.

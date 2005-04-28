@@ -1,0 +1,19 @@
+Every AFS file server machine must have at least one partition or logical volume dedicated to storing AFS volumes. Each server partition is mounted at a directory named /vicepxx, where xx is one or two lowercase letters. The /vicepxx directories must reside in the file server machine's root directory, not in one of its subdirectories (for example, /usr/vicepa is not an acceptable directory location). For additional information, see Performing Platform-Specific Procedures.
+
+1. Create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). Repeat the command for each partition.
+
+       # mkdir /vicepxx
+
+1. Add a line with the following format to the file systems registry file, /etc/fstab, for each directory just created. The entry maps the directory name to the disk partition to be mounted on it.
+
+       /dev/disk /vicepxx ufs rw 0 2
+
+The following is an example for the first partition being configured.
+
+       /dev/rz3a /vicepa ufs rw 0 2
+
+1. Create a file system on each partition that is to be mounted at a /vicepxx directory. The following command is probably appropriate, but consult the Digital UNIX documentation for more information.
+
+       # newfs -v /dev/disk
+
+1. Mount each partition by issuing either the mount -a command to mount all partitions at once or the mount command to mount each partition in turn.

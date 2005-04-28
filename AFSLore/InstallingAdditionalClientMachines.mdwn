@@ -1,0 +1,370 @@
+# <a name="Installing Additional Client Mac"></a> Installing Additional Client Machines
+
+This chapter describes how to install AFS client machines after you have installed the first AFS machine. Some parts of the installation differ depending on whether or not the new client is of the same AFS system type (uses the same AFS binaries) as a previously installed client machine. Summary of Procedures
+
+1. Incorporate AFS into the machine's kernel
+
+1. Define the machine's cell membership
+
+1. Define cache location and size
+
+1. Create the /usr/vice/etc/CellServDB file, which determines which foreign cells the client can access in addition to the local cell
+
+1. Create the /afs directory and start the Cache Manager
+
+1. Create and mount volumes for housing AFS client binaries (necessary only for clients of a new system type)
+
+1. Create a link from the local /usr/afsws directory to the AFS directory housing the AFS client binaries
+
+1. Modify the machine's authentication system to enable AFS users to obtain tokens at login
+
+# <a name="Creating AFS Directories on the"></a><a name="Creating AFS Directories on the "></a> Creating AFS Directories on the Local Disk
+
+Create the /usr/vice/etc directory on the local disk, to house client binaries and configuration files. Subsequent instructions copy files from the AFS CD-ROM into them. Create the /cdrom directory as a mount point for the CD-ROM, if it does not already exist.
+
+       # mkdir /usr/vice
+
+       # mkdir /usr/vice/etc
+
+       # mkdir /cdrom
+
+# <a name="Performing Platform-Specific Pro"></a> Performing Platform-Specific Procedures
+
+Every AFS client machine's kernel must incorporate AFS modifications. Some system types use a dynamic kernel loader program, whereas on other system types you build AFS modifications into a static kernel. Some system types support both methods.
+
+Also modify the machine's authentication system so that users obtain an AFS token as they log into the local file system. Using AFS is simpler and more convenient for your users if you make the modifications on all client machines. Otherwise, users must perform a two-step login procedure (login to the local file system and then issue the klog command). For further discussion of AFS authentication, see the chapter in the IBM AFS Administration Guide about cell configuration and administration issues.
+
+For convenience, the following sections group the two procedures by system type. Proceed to the appropriate section.
+
+\* Getting Started on AIX Systems
+
+\* Getting Started on Digital UNIX Systems
+
+\* Getting Started on HP-UX Systems
+
+\* Getting Started on IRIX Systems
+
+\* Getting Started on Linux Systems
+
+\* Getting Started on Solaris Systems
+
+# <a name="Getting Started on AIX Systems"></a> Getting Started on AIX Systems
+
+In this section you load AFS into the AIX kernel. Then incorporate AFS modifications into the machine's secondary authentication system, if you wish to enable AFS login.
+
+## <a name="Loading AFS into the AIX Kernel"></a> Loading AFS into the AIX Kernel
+
+[[Loading AFS into the AIX Kernel|Main/LoadingAFSIntoTheAIXKernel]]
+
+## <a name="Enabling AFS Login on AIX System"></a> Enabling AFS Login on AIX Systems
+
+[[Enabling AFS Login on AIX Systems|Main/EnablingAFSLoginOnAIXSystems]]
+
+Proceed to Loading and Creating Client Files.
+
+# <a name="Getting Started on Digital UNIX"></a><a name="Getting Started on Digital UNIX "></a> Getting Started on Digital UNIX Systems
+
+In this section you build AFS into the Digital UNIX kernel. Then incorporate AFS modifications into the machine's Security Integration Architecture (SIA) matrix, if you wish to enable AFS login.
+
+## <a name="Building AFS into the Digital UN"></a> Building AFS into the Digital UNIX Kernel
+
+[[Building AFS into the Digital UNIX Kernel|Main/BuildingAFSIntoTheDigitalUNIXKernel]]
+
+## <a name="Enabling AFS Login on Digital UN"></a> Enabling AFS Login on Digital UNIX Systems
+
+[[Enabling AFS Login on Digital UNIX Systems|Main/EnablingAFSLoginOnDigitalUNIXSystems]]
+
+Proceed to Loading and Creating Client Files.
+
+# <a name="Getting Started on HP-UX Systems"></a> Getting Started on HP-UX Systems
+
+In this section you build AFS into the HP-UX kernel. Then incorporate AFS modifications into the machine's Pluggable Authentication Module (PAM) system, if you wish to enable AFS login.
+
+## <a name="Building AFS into the HP-UX Kern"></a> Building AFS into the HP-UX Kernel
+
+[[Building AFS into the HP-UX Kernel|Main/BuildingAFSIntoTheHP-UXKernel]]
+
+## <a name="Enabling AFS Login on HP-UX Syst"></a> Enabling AFS Login on HP-UX Systems
+
+[[Enabling AFS Login on HP-UX Systems|Main/EnablingAFSLoginOnHP-UXSystems]]
+
+Proceed to Loading and Creating Client Files.
+
+# <a name="Getting Started on IRIX Systems"></a> Getting Started on IRIX Systems
+
+## <a name="Loading AFS Into The IRIX Kernel"></a> Loading AFS Into The IRIX Kernel
+
+[[Loading AFS into the IRIX Kernel|Main/LoadingAFSIntoTheIRIXKernel]]
+
+## <a name="Enabling AFS Login on IRIX Syste"></a> Enabling AFS Login on IRIX Systems
+
+[[Enabling AFS Login on IRIX Systems|Main/EnablingAFSLoginOnIRIXSystems]].
+
+After taking any necessary action, proceed to Loading and Creating Client Files.
+
+# <a name="Getting Started on Linux Systems"></a> Getting Started on Linux Systems
+
+In this section you load AFS into the Linux kernel. Then incorporate AFS modifications into the machine's Pluggable Authentication Module (PAM) system, if you wish to enable AFS login.
+
+## <a name="Loading AFS into the Linux Kerne"></a> Loading AFS into the Linux Kernel
+
+[[Loading AFS into the Linux Kernel|Main/LoadingAFSIntoTheLinuxKernel]]
+
+## <a name="Enabling AFS Login on Linux Syst"></a> Enabling AFS Login on Linux Systems
+
+[[Enabling AFS Login on Linux Systems|Main/EnablingAFSLoginOnLinuxSystems]]
+
+Proceed to Loading and Creating Client Files.
+
+# <a name="Getting Started on Solaris Syste"></a> Getting Started on Solaris Systems
+
+In this section you load AFS into the Solaris kernel. Then incorporate AFS modifications into the machine's Pluggable Authentication Module (PAM) system, if you wish to enable AFS login.
+
+## <a name="Loading AFS into the Solaris Ker"></a> Loading AFS into the Solaris Kernel
+
+[[Loading AFS into the Solaris Kernel|Main/LoadingAFSIntoTheSolarisKernel]]
+
+## <a name="Enabling AFS Login on Solaris Sy"></a> Enabling AFS Login on Solaris Systems
+
+[[Enabling AFS Login on Solaris Systems|Main/EnablingAFSLoginOnSolarisSystems]]
+
+Proceed to Loading and Creating Client Files.
+
+# <a name="Loading and Creating Client File"></a> Loading and Creating Client Files
+
+Now copy files from the AFS CD-ROM to the /usr/vice/etc directory. On some platforms that use a dynamic loader program to incorporate AFS modifications into the kernel, you have already copied over some the files. Copying them again does no harm.
+
+Every AFS client machine has a copy of the /usr/vice/etc/ThisCell file on its local disk to define the machine's cell membership for the AFS client programs that run on it. Among other functions, this file determines the following:
+
+\* The cell in which users authenticate when they log onto the machine, assuming it is using an AFS-modified login utility
+
+\* The cell in which users authenticate by default when they issue the klog command
+
+\* The cell membership of the AFS server processes that the AFS command interpreters on this machine contact by default
+
+Similarly, the /usr/vice/etc/CellServDB file on a client machine's local disk lists the database server machines in each cell that the local Cache Manager can contact. If there is no entry in the file for a cell, or the list of database server machines is wrong, then users working on this machine cannot access the cell. The chapter in the IBM AFS Administration Guide about administering client machines explains how to maintain the file after creating it. A version of the client [[CellServDB]] file was created during the installation of your cell's first machine (in Creating the Client [[CellServDB]] File). It is probably also appropriate for use on this machine.
+
+Remember that the Cache Manager consults the /usr/vice/etc/CellServDB file only at reboot, when it copies the information into the kernel. For the Cache Manager to perform properly, the [[CellServDB]] file must be accurate at all times. Refer to the chapter in the IBM AFS Administration Guide about administering client machines for instructions on updating this file, with or without rebooting.
+
+1. On the local /cdrom directory, mount the AFS CD-ROM for this machine's system type, if it is not already. For instructions on mounting CD-ROMs (either locally or remotely via NFS), consult the operating system documentation.
+
+1. Copy files to the local /usr/vice/etc directory.
+
+This step places a copy of the AFS initialization script (and related files, if applicable) into the /usr/vice/etc directory. In the preceding instructions for incorporating AFS into the kernel, you copied the script directly to the operating system's conventional location for initialization files. When you incorporate AFS into the machine's startup sequence in a later step, you can choose to link the two files.
+
+On some system types that use a dynamic kernel loader program, you previously copied AFS library files into a subdirectory of the /usr/vice/etc directory. On other system types, you copied the appropriate AFS library file directly to the directory where the operating system accesses it. The following commands do not copy or recopy the AFS library files into the /usr/vice/etc directory, because on some system types the library files consume a large amount of space. If you want to copy them, add the -r flag to the first cp command and skip the second cp command.
+
+# cd /cdrom/sysname/root.client/usr/vice/etc
+
+# cp -p \* /usr/vice/etc
+
+# cp -rp C /usr/vice/etc
+
+1. Create the /usr/vice/etc/ThisCell file.
+
+# echo "cellname" &gt; /usr/vice/etc/ThisCell
+
+1. Create the /usr/vice/etc/CellServDB file. Use a network file transfer program such as ftp or NFS to copy it from one of the following sources, which are listed in decreasing order of preference:
+
+\* Your cell's central [[CellServDB]] source file (the conventional location is /afs/cellname/common/etc/CellServDB)
+
+\* The global [[CellServDB]] file maintained by the AFS Product Support group
+
+\* An existing client machine in your cell
+
+\* The [[CellServDB]].sample file included in the sysname/root.client/usr/vice/etc directory of each AFS CD-ROM; add an entry for the local cell by following the instructions in [[Creating the Client CellServDB File|Main/CreatingTheClientCellServDBFile]]
+
+## <a name="Configuring the Cache"></a> Configuring the Cache
+
+[[Configuring the Cache|Main/ConfiguringTheCache]]
+
+## <a name="Configuring the Cache Manager"></a> Configuring the Cache Manager
+
+[[Configuring the Cache Manager|Main/ConfiguringTheCacheManager]]
+
+## <a name="Starting the Cache Manager and I"></a> Starting the Cache Manager and Installing the AFS Initialization Script
+
+In this section you run the AFS initialization script to start the Cache Manager. If the script works correctly, perform the steps that incorporate it into the machine's startup and shutdown sequence. If there are problems during the initialization, attempt to resolve them. The AFS Product Support group can provide assistance if necessary.
+
+On machines that use a disk cache, it can take a while for the afsd program to run the first time on a machine, because it must create all of the Vn files in the cache directory. Subsequent Cache Manager initializations do not take nearly as long, because the Vn files already exist.
+
+On system types that use a dynamic loader program, you must reboot the machine before running the initialization script, so that it can freshly load AFS modifications into the kernel.
+
+Proceed to the instructions for your system type:
+
+\* Running the Script on AIX Systems
+
+\* Running the Script on Digital UNIX Systems
+
+\* Running the Script on HP-UX Systems
+
+\* Running the Script on IRIX Systems
+
+\* Running the Script on Linux Systems
+
+\* Running the Script on Solaris Systems
+
+## <a name="Running the Script on AIX System"></a> Running the Script on AIX Systems
+
+[[Initialization Script on AIX|Main/InitializationScriptOnAIX]]
+
+If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
+
+## <a name="Running the Script on Digital UN"></a> Running the Script on Digital UNIX Systems
+
+[[Initialization Script on Digital UNIX|Main/InitializationScriptOnDigitalUNIX]]
+
+If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
+
+## <a name="Running the Script on HP-UX Syst"></a> Running the Script on HP-UX Systems
+
+[[Initialization Script on HP-UX|Main/InitializationScriptOnHP-UX]]
+
+If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
+
+## <a name="Running the Script on IRIX Syste"></a> Running the Script on IRIX Systems
+
+[[Initialization Script on IRIX|Main/InitializationScriptOnIRIX]]
+
+If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
+
+## <a name="Running the Script on Linux Syst"></a> Running the Script on Linux Systems
+
+[[Initialization Script on Linux|Main/InitializationScriptOnLinux]]
+
+If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
+
+## <a name="Running the Script on Solaris Sy"></a> Running the Script on Solaris Systems
+
+[[Initialization Script on Solaris|Main/InitializationScriptOnSolaris]]
+
+If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
+
+# <a name="Setting Up Volumes and Loading B"></a> Setting Up Volumes and Loading Binaries into AFS
+
+In this section, you link /usr/afsws on the local disk to the directory in AFS that houses AFS binaries for this system type. The conventional name for the AFS directory is /afs/cellname/sysname/usr/afsws.
+
+If this machine is an existing system type, the AFS directory presumably already exists. You can simply create a link from the local /usr/afsws directory to it. Follow the instructions in Linking /usr/afsws on an Existing System Type.
+
+If this machine is a new system type (there are no AFS machines of this type in your cell), you must first create and mount volumes to store its AFS binaries, and then create the link from /usr/afsws to the new directory. See Creating Binary Volumes for a New System Type.
+
+You can also store UNIX system binaries (the files normally stored in local disk directories such as /bin, /etc, and /lib) in volumes mounted under /afs/cellname/sysname. See Storing System Binaries in AFS .
+
+Linking /usr/afsws on an Existing System Type
+
+If this client machine is an existing system type, there is already a volume mounted in the AFS filespace that houses AFS client binaries for it.
+
+1. Create /usr/afsws on the local disk as a symbolic link to the directory /afs/cellname/@sys/usr/afsws. You can specify the actual system name instead of @sys if you wish, but the advantage of using @sys is that it remains valid if you upgrade this machine to a different system type.
+
+# ln -s /afs/cellname/@sys/usr/afsws /usr/afsws
+
+1. (Optional) If you believe it is helpful to your users to access the AFS documents in a certain format via a local disk directory, create /usr/afsdoc on the local disk as a symbolic link to the documentation directory in AFS (/afs/cellname/afsdoc/format\_name).
+
+# ln -s /afs/cellname/afsdoc/format\_name /usr/afsdoc
+
+An alternative is to create a link in each user's home directory to the /afs/cellname/afsdoc/format\_name directory.
+
+# <a name="Creating Binary Volumes for a Ne"></a> Creating Binary Volumes for a New System Type
+
+If this client machine is a new system type, you must create and mount volumes for its binaries before you can link the local /usr/afsws directory to an AFS directory.
+
+To create and mount the volumes, you use the klog command to authenticate as an administrator and then issue commands from the vos and fs command suites. However, the command binaries are not yet available on this machine (by convention, they are accessible via the /usr/afsws link that you are about to create). You have two choices:
+
+\* Perform all steps except the last one (Step 10) on an existing AFS machine. On a file server machine, the klog, fs and vos binaries reside in the /usr/afs/bin directory. On client machines, the klog and fs binaries reside in the /usr/afsws/bin directory and the vos binary in the /usr/afsws/etc directory. Depending on how your PATH environment variable is set, you possibly need to precede the command names with a pathname.
+
+If you work on another AFS machine, be sure to substitute the new system type name for the sysname argument in the following commands, not the system type of the machine on which you are issuing the commands.
+
+\* Copy the necessary command binaries to a temporary location on the local disk, which enables you to perform the steps on the local machine. The following procedure installs them in the /tmp directory and removes them at the end. Depending on how your PATH environment variable is set, you possibly need to precede the command names with a pathname.
+
+Perform the following steps to create a volume for housing AFS binaries.
+
+1. Working either on the local machine or another AFS machine, mount the AFS CD-ROM for the new system type on the /cdrom directory, if it is not already. For instructions on mounting CD-ROMs (either locally or remotely via NFS), consult the operating system documentation.
+
+1. If working on the local machine, copy the necessary binaries to a temporary location on the local disk. Substitute a different directory name for /tmp if you wish.
+
+# cd /cdrom/new\_sysname/root.server/usr/afs/bin
+
+# cp -p klog /tmp
+
+# cp -p fs /tmp
+
+# cp -p vos /tmp
+
+1. Authenticate as the user admin.
+
+# klog admin
+
+<dl>
+  <dt> Password</dt>
+  <dd> admin_password </dd>
+</dl>
+
+1. Issue the vos create command to create volumes for storing the AFS client binaries for this system type. The following example instruction creates volumes called sysname, sysname.usr, and sysname.usr.afsws. Refer to the IBM AFS Release Notes to learn the proper value of sysname for this system type.
+
+# vos create   sysname
+
+# vos create   sysname.usr
+
+# vos create   sysname.usr.afsws
+
+1. Issue the fs mkmount command to mount the newly created volumes. Because the root.cell volume is replicated, you must precede the cellname part of the pathname with a period to specify the read/write mount point, as shown. Then issue the vos release command to release a new replica of the root.cell volume, and the fs checkvolumes command to force the local Cache Manager to access them.
+
+# fs mkmount -dir /afs/.cellname/sysname -vol sysname
+
+# fs mkmount -dir /afs/.cellname/sysname/usr -vol sysname.usr
+
+# fs mkmount -dir /afs/.cellname/sysname/usr/afsws -vol sysname.usr.afsws
+
+# vos release root.cell
+
+# fs checkvolumes
+
+1. Issue the fs setacl command to grant the l (lookup) and r (read) permissions to the system:anyuser group on each new directory's ACL.
+
+# cd /afs/.cellname/sysname
+
+# fs setacl -dir . usr usr/afsws -acl system:anyuser rl
+
+1. Issue the fs setquota command to set an unlimited quota on the volume mounted at the /afs/cellname/sysname/usr/afsws directory. This enables you to copy all of the appropriate files from the CD-ROM into the volume without exceeding the volume's quota.
+
+If you wish, you can set the volume's quota to a finite value after you complete the copying operation. At that point, use the vos examine command to determine how much space the volume is occupying. Then issue the fs setquota command to set a quota that is slightly larger.
+
+# fs setquota /afs/.cellname/sysname/usr/afsws 0
+
+1. Copy the contents of the indicated directories from the CD-ROM into the /afs/cellname/sysname/usr/afsws directory.
+
+# cd /afs/.cellname/sysname/usr/afsws
+
+# cp -rp /cdrom/sysname/bin .
+
+# cp -rp /cdrom/sysname/etc .
+
+# cp -rp /cdrom/sysname/include .
+
+# cp -rp /cdrom/sysname/lib .
+
+1. Issue the fs setacl command to set the ACL on each directory appropriately. To comply with the terms of your AFS License agreement, you must prevent unauthorized users from accessing AFS software. To enable access for locally authenticated users only, set the ACL on the etc, include, and lib subdirectories to grant the l and r permissions to the system:authuser group rather than the system:anyuser group. The system:anyuser group must retain the l and r permissions on the bin subdirectory to enable unauthenticated users to access the klog binary. To ensure that unauthorized users are not accessing AFS software, check periodically that the ACLs on these directories are set properly.
+
+# cd /afs/.cellname/sysname/usr/afsws
+
+# fs setacl -dir etc include lib -acl system:authuser rl system:anyuser none
+
+10. Perform this step on the new client machine even if you have performed the previous steps on another machine. Create /usr/afsws on the local disk as a symbolic link to the directory /afs/cellname/@sys/usr/afsws. You can specify the actual system name instead of @sys if you wish, but the advantage of using @sys is that it remains valid if you upgrade this machine to a different system type.
+
+# ln -s /afs/cellname/@sys/usr/afsws /usr/afsws
+
+11. (Optional) To enable users to issue commands from the AFS suites (such as fs) without having to specify a pathname to their binaries, include the /usr/afsws/bin and /usr/afsws/etc directories in the PATH environment variable you define in each user's shell initialization file (such as .cshrc).
+
+12. (Optional) If you believe it is helpful to your users to access the AFS documents in a certain format via a local disk directory, create /usr/afsdoc on the local disk as a symbolic link to the documentation directory in AFS (/afs/cellname/afsdoc/format\_name).
+
+# ln -s /afs/cellname/afsdoc/format\_name /usr/afsdoc
+
+An alternative is to create a link in each user's home directory to the /afs/cellname/afsdoc/format\_name directory.
+
+13. (Optional) If working on the local machine, remove the AFS binaries from the temporary location. They are now accessible in the /usr/afsws directory.
+
+# cd /tmp
+
+# rm klog fs vos
+
+� IBM Corporation 2000. All Rights Reserved

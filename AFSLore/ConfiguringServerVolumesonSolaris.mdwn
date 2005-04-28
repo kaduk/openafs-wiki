@@ -1,0 +1,21 @@
+Every AFS file server machine must have at least one partition or logical volume dedicated to storing AFS volumes. Each server partition is mounted at a directory named /vicepxx, where xx is one or two lowercase letters. The /vicepxx directories must reside in the file server machine's root directory, not in one of its subdirectories (for example, /usr/vicepa is not an acceptable directory location). For additional information, see Performing Platform-Specific Procedures.
+
+If this AFS server it is not going to be a file server you can skip this step.
+
+Create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). Repeat this command for each partition.
+
+       # mkdir /vicepxx
+
+Add a line with the following format to the file systems registry file, /etc/vfstab, for each partition to be mounted on a directory created in the previous step. Note the value afs in the fourth field, which tells Solaris to use the AFS-modified fsck program on this partition.
+
+       /dev/dsk/disk   /dev/rdsk/disk   /vicepxx   afs   boot_order  yes  -
+
+The following is an example for the first partition being configured.
+
+       /dev/dsk/c0t6d0s1 /dev/rdsk/c0t6d0s1 /vicepa afs 3 yes -
+
+Create a file system on each partition that is to be mounted at a /vicepxx directory. The following command is probably appropriate, but consult the Solaris documentation for more information.
+
+       # newfs -v /dev/rdsk/disk
+
+Issue the mountall command to mount all partitions at once.

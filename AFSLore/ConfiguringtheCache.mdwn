@@ -1,0 +1,57 @@
+The Cache Manager uses a cache on the local disk or in machine memory to store local copies of files fetched from file server machines. As the afsd program initializes the Cache Manager, it sets basic cache configuration parameters according to definitions in the local /usr/vice/etc/cacheinfo file. The file has three fields:
+
+1. The first field names the local directory on which to mount the AFS filespace. The conventional location is the /afs directory.
+
+1. The second field defines the local disk directory to use for the disk cache. The conventional location is the /usr/vice/cache directory, but you can specify an alternate directory if another partition has more space available. There must always be a value in this field, but the Cache Manager ignores it if the machine uses a memory cache.
+
+1. The third field specifies the number of kilobyte (1024 byte) blocks to allocate for the cache.
+
+The values you define must meet the following requirements.
+
+\* On a machine using a disk cache, the Cache Manager expects always to be able to use the amount of space specified in the third field. Failure to meet this requirement can cause serious problems, some of which can be repaired only by rebooting. You must prevent non-AFS processes from filling up the cache partition. The simplest way is to devote a partition to the cache exclusively.
+
+\* The amount of space available in memory or on the partition housing the disk cache directory imposes an absolute limit on cache size.
+
+\* The maximum supported cache size can vary in each AFS release; see the IBM AFS Release Notes for the current version.
+
+\* For a disk cache, you cannot specify a value in the third field that exceeds 95% of the space available on the partition mounted at the directory named in the second field. If you violate this restriction, the afsd program exits without starting the Cache Manager and prints an appropriate message on the standard output stream. A value of 90% is more appropriate on most machines. Some operating systems (such as AIX) do not automatically reserve some space to prevent the partition from filling completely; for them, a smaller value (say, 80% to 85% of the space available) is more appropriate.
+
+\* For a memory cache, you must leave enough memory for other processes and applications to run. If you try to allocate more memory than is actually available, the afsd program exits without initializing the Cache Manager and produces the following message on the standard output stream.
+
+       afsd: memCache allocation failure at number KB
+
+The number value is how many kilobytes were allocated just before the failure, and so indicates the approximate amount of memory available.
+
+Within these hard limits, the factors that determine appropriate cache size include the number of users working on the machine, the size of the files with which they work, and (for a memory cache) the number of processes that run on the machine. The higher the demand from these factors, the larger the cache needs to be to maintain good performance.
+
+Disk caches smaller than 10 MB do not generally perform well. Machines serving multiple users usually perform better with a cache of at least 60 to 70 MB. The point at which enlarging the cache further does not really improve performance depends on the factors mentioned previously and is difficult to predict.
+
+Memory caches smaller than 1 MB are nonfunctional, and the performance of caches smaller than 5 MB is usually unsatisfactory. Suitable upper limits are similar to those for disk caches but are probably determined more by the demands on memory from other sources on the machine (number of users and processes). Machines running only a few processes possibly can use a smaller memory cache.
+
+## <a name="Configuring a Disk Cache"></a> Configuring a Disk Cache
+
+Note: Not all file system types that an operating system supports are necessarily supported for use as the cache partition. For possible restrictions, see the IBM AFS Release Notes.
+
+To configure the disk cache, perform the following procedures:
+
+1. Create the local directory to use for caching. The following instruction shows the conventional location, /usr/vice/cache. If you are devoting a partition exclusively to caching, as recommended, you must also configure it, make a file system on it, and mount it at the directory created in this step.
+
+       # mkdir /usr/vice/cache
+
+1. Create the cacheinfo file to define the configuration parameters discussed previously. The following instruction shows the standard mount location, /afs, and the standard cache location, /usr/vice/cache.
+
+       # echo "/afs:/usr/vice/cache:#blocks" > /usr/vice/etc/cacheinfo
+
+The following example defines the disk cache size as 50,000 KB:
+
+       # echo "/afs:/usr/vice/cache:50000" > /usr/vice/etc/cacheinfo
+
+## <a name="Configuring a Memory Cache"></a> Configuring a Memory Cache
+
+To configure a memory cache, create the cacheinfo file to define the configuration parameters discussed previously. The following instruction shows the standard mount location, /afs, and the standard cache location, /usr/vice/cache (though the exact value of the latter is irrelevant for a memory cache).
+
+       # echo "/afs:/usr/vice/cache:#blocks" > /usr/vice/etc/cacheinfo
+
+The following example allocates 25,000 KB of memory for the cache.
+
+       # echo "/afs:/usr/vice/cache:25000" > /usr/vice/etc/cacheinfo

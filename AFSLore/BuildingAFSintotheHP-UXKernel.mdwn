@@ -1,0 +1,73 @@
+Use the following instructions to build AFS modifications into the kernel on an HP-UX system.
+
+On HP-UX systems, you must build AFS modifications into a new static kernel; HP-UX does not support dynamic loading. If the machine's hardware and software configuration exactly matches another HP-UX machine on which AFS is already built into the kernel, you can choose to copy the kernel from that machine to this one. In general, however, it is better to build AFS modifications into the kernel on each machine according to the following instructions.
+
+1. Move the existing kernel-related files to a safe location.
+
+       # cp /stand/vmunix /stand/vmunix.noafs
+
+       # cp /stand/system /stand/system.noafs
+
+1. Mount the AFS CD-ROM for HP-UX on the local /cdrom directory. For instructions on mounting CD-ROMs (either locally or remotely via NFS), see your HP-UX documentation. Then change directory as indicated.
+
+       # cd /cdrom/hp_ux110/root.client
+
+1. Copy the AFS initialization file to the local directory for initialization files (by convention, /sbin/init.d on HP-UX machines). Note the removal of the .rc extension as you copy the file.
+
+       # cp usr/vice/etc/afs.rc  /sbin/init.d/afs
+
+1. Copy the file afs.driver to the local /usr/conf/master.d directory, changing its name to afs as you do.
+
+       # cp  usr/vice/etc/afs.driver  /usr/conf/master.d/afs
+
+1. Copy the AFS kernel module to the local /usr/conf/lib directory.
+
+If the machine's kernel supports NFS server functionality:
+
+       # cp bin/libafs.a /usr/conf/lib
+
+If the machine's kernel does not support NFS server functionality, change the file's name as you copy it:
+
+       # cp bin/libafs.nonfs.a /usr/conf/lib/libafs.a
+
+1. Incorporate the AFS driver into the kernel, either using the SAM program or a series of individual commands.
+
+\* To use the SAM program:
+
+1. 1. 1. 1. 1. Invoke the SAM program, specifying the hostname of the local machine as local\_hostname. The SAM graphical user interface pops up.
+
+       # sam -display local_hostname:0
+
+1. 1. 1. 1. 1. Choose the Kernel Configuration icon, then the Drivers icon. From the list of drivers, select afs.
+
+1. 1. 1. 1. 1. Open the pull-down Actions menu and choose the Add Driver to Kernel option.
+
+1. 1. 1. 1. 1. Open the Actions menu again and choose the Create a New Kernel option.
+
+1. 1. 1. 1. 1. Confirm your choices by choosing Yes and OK when prompted by subsequent pop-up windows. The SAM program builds the kernel and reboots the system.
+
+1. 1. 1. 1. 1. Login again as the superuser root.
+
+       login: root
+       Password: root_password
+
+\* To use individual commands:
+
+1. 1. 1. 1. 1. Edit the file /stand/system, adding an entry for afs to the Subsystems section.
+
+1. 1. 1. 1. 1. Change to the /stand/build directory and issue the mk\_kernel command to build the kernel.
+
+       # cd /stand/build
+
+       # mk_kernel
+
+1. 1. 1. 1. 1. Move the new kernel to the standard location (/stand/vmunix), reboot the machine to start using it, and login again as the superuser root.
+
+       # mv /stand/build/vmunix_test /stand/vmunix
+
+       # cd /
+
+       # shutdown -r now
+
+       login: root
+       Password: root_password

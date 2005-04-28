@@ -1,0 +1,46 @@
+The /usr/vice/etc/CellServDB file on a client machine's local disk lists the database server machines for each cell that the local Cache Manager can contact. If there is no entry in the file for a cell, or if the list of database server machines is wrong, then users working on this machine cannot access the cell. The chapter in the IBM AFS Administration Guide about administering client machines explains how to maintain the file after creating it.
+
+As the afsd program initializes the Cache Manager, it copies the contents of the [[CellServDB]] file into kernel memory. The Cache Manager always consults the list in kernel memory rather than the [[CellServDB]] file itself. Between reboots of the machine, you can use the fs newcell command to update the list in kernel memory directly; see the chapter in the IBM AFS Administration Guide about administering client machines.
+
+The AFS distribution includes the file [[CellServDB]].sample, and you have already copied it to the /usr/vice/etc directory. It includes an entry for all AFS cells that agreed to share their database server machine information at the time your AFS CD-ROM was created. The AFS Product Support group also maintains a copy of the file, updating it as necessary. If you are interested in participating in the global AFS namespace, it is a good policy to consult the file occasionally for updates. Ask the AFS Product Support group for a pointer to its location.
+
+The [[CellServDB]].sample file can be a good basis for the client [[CellServDB]] file, because all of the entries in it use the correct format. You can add or remove cell entries as you see fit. Later (in Enabling Access to Foreign Cells) you perform additional steps that enable the Cache Manager actually to reach the cells.
+
+In this section, you add an entry for the local cell to the local [[CellServDB]] file. The current working directory is still /usr/vice/etc.
+
+1. Remove the symbolic link created in Starting the BOS Server and rename the [[CellServDB]].sample file to [[CellServDB]].
+
+       # rm CellServDB
+
+       # mv CellServDB.sample CellServDB
+
+1. Add an entry for the local cell to the [[CellServDB]] file. One easy method is to use the cat command to append the contents of the server /usr/afs/etc/CellServDB file to the client version.
+
+        # cat  /usr/afs/etc/CellServDB >>  CellServDB
+
+Then open the file in a text editor to verify that there are no blank lines, and that all entries have the required format, which is described just following. The ordering of cells is not significant, but it can be convenient to have the client machine's home cell at the top; move it there now if you wish.
+
+\* The first line of a cell's entry has the following format:
+
+       >cell_name      #organization
+
+where cell\_name is the cell's complete Internet domain name (for example, abc.com) and organization is an optional field that follows any number of spaces and the number sign (#). By convention it names the organization to which the cell corresponds (for example, the ABC Corporation).
+
+\* After the first line comes a separate line for each database server machine. Each line has the following format:
+
+       IP_address   #machine_name
+
+where IP\_address is the machine's IP address in dotted decimal format (for example, 192.12.105.3). Following any number of spaces and the number sign (#) is machine\_name, the machine's fully-qualified hostname (for example, db1.abc.com). In this case, the number sign does not indicate a comment; machine\_name is a required field.
+
+1. If the file includes cells that you do not wish users of this machine to access, remove their entries.
+
+The following example shows entries for two cells, each of which has three database server machines:
+
+       >abc.com       #ABC Corporation (home cell)
+       192.12.105.3      #db1.abc.com
+       192.12.105.4      #db2.abc.com
+       192.12.105.55     #db3.abc.com
+       >stateu.edu    #State University cell
+       138.255.68.93     #serverA.stateu.edu
+       138.255.68.72     #serverB.stateu.edu
+       138.255.33.154    #serverC.stateu.edu

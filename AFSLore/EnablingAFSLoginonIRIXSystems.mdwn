@@ -1,0 +1,11 @@
+The standard IRIX command-line login program and the graphical xdm login program both automatically grant an AFS token when AFS is incorporated into the machine's kernel. However, some IRIX distributions use another login utility by default, and it does not necessarily incorporate the required AFS modifications. If that is the case, you must disable the default utility if you want AFS users to obtain AFS tokens at login. For further discussion, see the IBM AFS Release Notes.
+
+If you configure the machine to use an AFS-modified login utility, then the afsauthlib.so and afskauthlib.so files (included in the AFS distribution) must reside in the /usr/vice/etc directory. Issue the ls command to verify.
+
+       # ls /usr/vice/etc
+
+If the files do not exist, mount the AFS CD-ROM for IRIX (if it is not already), change directory as indicated, and copy them.
+
+       # cd /cdrom/sgi_65/root.client/usr/vice/etc
+
+       # cp  -p  *authlib*  /usr/vice/etc

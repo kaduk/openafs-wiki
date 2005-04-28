@@ -3,6 +3,79 @@
     <li><a href="#Installing the First AFS Machine"> Installing the First AFS Machine</a></li>
     <li><a href="#Overview: Installing Server Func"> Overview: Installing Server Functionality</a></li>
     <li><a href="#Choosing the First AFS Machine"> Choosing the First AFS Machine</a></li>
+    <li><a href="#Performing Platform-Specific Pro"> Performing Platform-Specific Procedures</a></li>
+    <li><a href="#Getting Started on AIX Systems"> Getting Started on AIX Systems</a><ul>
+        <li><a href="#Loading AFS into the AIX Kernel"> Loading AFS into the AIX Kernel</a></li>
+        <li><a href="#Replacing the fsck Program Helpe"> Replacing the fsck Program Helper on AIX Systems</a></li>
+        <li><a href="#Configuring Server Volumes on AI"> Configuring Server Volumes on AIX Systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#Getting Started on Digital UNIX"> Getting Started on Digital UNIX Systems</a><ul>
+        <li><a href="#Loading AFS into the Digital UNI">Loading AFS into the Digital UNIX Kernel</a></li>
+        <li><a href="#Replacing the fsck Program on Di"> Replacing the fsck Program on Digital UNIX Systems</a></li>
+        <li><a href="#Configuring Server Volumes on Di"> Configuring Server Volumes on Digital UNIX Systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#Getting Started on HP-UX Systems"> Getting Started on HP-UX Systems</a><ul>
+        <li><a href="#Building AFS into the HP-UX Kern"> Building AFS into the HP-UX Kernel</a></li>
+        <li><a href="#Configuring the AFS-modified fsc"> Configuring the AFS-modified fsck Program on HP-UX Systems</a></li>
+        <li><a href="#Configuring Server Volumes on HP"> Configuring Server Volumes on HP-UX Systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#Getting Started on IRIX Systems"> Getting Started on IRIX Systems</a><ul>
+        <li><a href="#Loading AFS into the IRIX Kernel"> Loading AFS into the IRIX Kernel</a></li>
+        <li><a href="#Configuring Server Volumes on IR"> Configuring Server Volumes on IRIX Systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#Getting Started on Linux Systems"> Getting Started on Linux Systems</a><ul>
+        <li><a href="#Loading AFS into the Linux Kerne"> Loading AFS into the Linux Kernel</a></li>
+        <li><a href="#Configuring Server Volumes on Li"> Configuring Server Volumes on Linux Systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#Getting Started on Solaris Syste"> Getting Started on Solaris Systems</a><ul>
+        <li><a href="#Loading AFS into the Solaris Ker"> Loading AFS into the Solaris Kernel</a></li>
+        <li><a href="#Configuring the AFS-modified fsc"> Configuring the AFS-modified fsck Program on Solaris Systems</a></li>
+        <li><a href="#Configuring Server Partitions on"> Configuring Server Partitions on Solaris Systems</a></li>
+        <li><a href="#Enabling AFS Login on Solaris Sy"> Enabling AFS Login on Solaris Systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#Starting the BOS Server"> Starting the BOS Server</a></li>
+    <li><a href="#Defining Cell Name and Membershi"> Defining Cell Name and Membership for Server Processes</a></li>
+    <li><a href="#Starting the Database Server Pro"> Starting the Database Server Processes</a></li>
+    <li><a href="#Initializing Cell Security"> Initializing Cell Security</a></li>
+    <li><a href="#Starting the File Server, Volume"> Starting the File Server, Volume Server, and Salvager</a></li>
+    <li><a href="#Starting the Server Portion of t"> Starting the Server Portion of the Update Server</a></li>
+    <li><a href="#Starting the Controller for NTPD"> Starting the Controller for NTPD</a></li>
+    <li><a href="#Overview: Installing Client Func"> Overview: Installing Client Functionality</a><ul>
+        <li><a href="#Copying Client Files to the Loca"> Copying Client Files to the Local Disk</a></li>
+        <li><a href="#Defining Cell Membership for Cli"> Defining Cell Membership for Client Processes</a></li>
+        <li><a href="#Creating the Client _CellServDB"> Creating the Client CellServDB File</a></li>
+        <li><a href="#Configuring the Cache"> Configuring the Cache</a></li>
+        <li><a href="#Configuring the Cache Manager"> Configuring the Cache Manager</a></li>
+      </ul>
+    </li>
+    <li><a href="#Overview: Completing the Install"> Overview: Completing the Installation of the First AFS Machine</a><ul>
+        <li><a href="#Verifying the AFS Initialization"> Verifying the AFS Initialization Script</a></li>
+        <li><a href="#On AIX systems:"> On AIX systems:</a></li>
+        <li><a href="#On Digital UNIX systems:"> On Digital UNIX systems:</a></li>
+        <li><a href="#On HP-UX systems:"> On HP-UX systems:</a></li>
+        <li><a href="#On IRIX systems:"> On IRIX systems:</a></li>
+        <li><a href="#On Linux systems:"> On Linux systems:</a></li>
+        <li><a href="#On Solaris systems:"> On Solaris systems:</a></li>
+      </ul>
+    </li>
+    <li><a href="#Configuring the Top Levels of th"> Configuring the Top Levels of the AFS Filespace</a></li>
+    <li><a href="#Storing AFS Binaries in AFS"> Storing AFS Binaries in AFS</a></li>
+    <li><a href="#The AFS distribution includes th"> The AFS distribution includes the following documents:</a></li>
+    <li><a href="#Storing System Binaries in AFS"> Storing System Binaries in AFS</a></li>
+    <li><a href="#Enabling Access to Foreign Cells"> Enabling Access to Foreign Cells</a></li>
+    <li><a href="#Improving Cell Security"> Improving Cell Security</a></li>
+    <li><a href="#Controlling root Access"> Controlling root Access</a><ul>
+        <li><a href="#Controlling System Administrator"> Controlling System Administrator Access</a></li>
+        <li><a href="#Protecting Sensitive AFS Directo"> Protecting Sensitive AFS Directories</a></li>
+      </ul>
+    </li>
+    <li><a href="#Removing Client Functionality"> Removing Client Functionality</a></li>
   </ul>
 </div>
 
@@ -89,3 +162,999 @@ Create the /usr/afs and /usr/vice/etc directories on the local disk, to house se
        # mkdir -p /usr/vice/etc
 
        # mkdir /cdrom
+
+# <a name="Performing Platform-Specific Pro"></a> Performing Platform-Specific Procedures
+
+Several of the initial procedures for installing a file server machine differ for each system type. For convenience, the following sections group them together for each system type:
+
+- Incorporate AFS modifications into the kernel.
+
+The kernel on every AFS file server and client machine must incorporate AFS extensions. On machines that use a dynamic kernel module loader, it is conventional to alter the machine's initialization script to load the AFS extensions at each reboot.
+
+- Configure server partitions or logical volumes to house AFS volumes.
+
+Every AFS file server machine must have at least one partition or logical volume dedicated to storing AFS volumes (for convenience, the documentation hereafter refers to partitions only). Each server partition is mounted at a directory named /vicepxx, where xx is one or two lowercase letters. By convention, the first 26 partitions are mounted on the directories called /vicepa through /vicepz, the 27th one is mounted on the /vicepaa directory, and so on through /vicepaz and /vicepba, continuing up to the index corresponding to the maximum number of server partitions supported in the current version of AFS (which is specified in the IBM AFS Release Notes).
+
+The /vicepxx directories must reside in the file server machine's root directory, not in one of its subdirectories (for example, /usr/vicepa is not an acceptable directory location).
+
+You can also add or remove server partitions on an existing file server machine. For instructions, see the chapter in the IBM AFS Administration Guide about maintaining server machines.
+
+<dl>
+  <dd>
+    <dl>
+      <dt> Note</dt>
+      <dd> Not all file system types supported by an operating system are necessarily supported as AFS server partitions. For possible restrictions, see the IBM AFS Release Notes. </dd>
+    </dl>
+  </dd>
+</dl>
+
+- On some system types, install and configure a modified fsck program which recognizes the structures that the File Server uses to organize volume data on AFS server partitions. The fsck program provided with the operating system does not understand the AFS data structures, and so removes them to the lost+found directory.
+
+- If the machine is to remain an AFS client machine, modify the machine's authentication system so that users obtain an AFS token as they log into the local file system. Using AFS is simpler and more convenient for your users if you make the modifications on all client machines. Otherwise, users must perform a two-step login procedure (login to the local file system and then issue the klog command). For further discussion of AFS authentication, see the chapter in the IBM AFS Administration Guide about cell configuration and administration issues.
+
+# <a name="Getting Started on AIX Systems"></a> Getting Started on AIX Systems
+
+Begin by running the AFS initialization script to call the AIX kernel extension facility, which dynamically loads AFS modifications into the kernel. Then use the SMIT program to configure partitions for storing AFS volumes, and replace the AIX fsck program helper with a version that correctly handles AFS volumes. If the machine is to remain an AFS client machine, incorporate AFS into the AIX secondary authentication system.
+
+## <a name="Loading AFS into the AIX Kernel"></a> Loading AFS into the AIX Kernel
+
+[[Loading AFS into the AIX Kernel|Main/LoadingAFSIntoTheAIXKernel]]
+
+## <a name="Replacing the fsck Program Helpe"></a> Replacing the fsck Program Helper on AIX Systems
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+[[Replacing the fsck Program Helper on AIX Systems|Main/ReplacingTheFsckProgramHelperOnAIXSystems]]
+
+## <a name="Configuring Server Volumes on AI"></a> Configuring Server Volumes on AIX Systems
+
+If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
+
+[[Configuring Server Volumes on AIX|Main/ConfiguringServerVolumesOnAIX]]
+
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on AIX Systems|Main/EnablingAFSLoginOnAIXSystems]]. Otherwise, proceed to Starting the BOS Server.
+
+# <a name="Getting Started on Digital UNIX"></a><a name="Getting Started on Digital UNIX "></a> Getting Started on Digital UNIX Systems
+
+Begin by either building AFS modifications into a new static kernel or by setting up to dynamically load the AFS kernel module. Then create partitions for storing AFS volumes, and replace the Digital UNIX fsck program with a version that correctly handles AFS volumes. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Security Integration Architecture (SIA) matrix.
+
+## <a name="Loading AFS into the Digital UNI"></a> Loading AFS into the Digital UNIX Kernel
+
+[[Building AFS into the Digital UNIX Kernel|Main/BuildingAFSIntoTheDigitalUNIXKernel]]
+
+## <a name="Replacing the fsck Program on Di"></a> Replacing the fsck Program on Digital UNIX Systems
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+[[Replacing the fsck Program on Digital UNIX Systems|Main/ReplacingTheFsckProgramOnDigitalUNIXSystems]]
+
+## <a name="Configuring Server Volumes on Di"></a> Configuring Server Volumes on Digital UNIX Systems
+
+If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
+
+[[Configuring Server Volumes on Digital UNIX|Main/ConfiguringServerVolumesOnDigitalUNIX]]
+
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Digital UNIX Systems|Main/EnablingAFSLoginOnDigitalUNIXSystems]]. Otherwise, proceed to Starting the BOS Server.
+
+# <a name="Getting Started on HP-UX Systems"></a> Getting Started on HP-UX Systems
+
+Begin by building AFS modifications into a new kernel; HP-UX does not support dynamic loading. Then create partitions for storing AFS volumes, and install and configure the AFS-modified fsck program to run on AFS server partitions. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Pluggable Authentication Module (PAM) scheme.
+
+## <a name="Building AFS into the HP-UX Kern"></a> Building AFS into the HP-UX Kernel
+
+[[Building AFS into the HP-UX Kernel|Main/BuildingAFSIntoTheHP-UXKernel]]
+
+## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on HP-UX Systems
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+[[Configuring the AFS-modified fsck Program on HP-UX Systems|Main/ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
+
+## <a name="Configuring Server Volumes on HP"></a> Configuring Server Volumes on HP-UX Systems
+
+If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
+
+[[Configuring Server Volumes on HP-UX|Main/ConfiguringServerVolumesOnHP-UX]]
+
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on HP-UX Systems|Main/EnablingAFSLoginOnHP-UXSystems]]. Otherwise, proceed to Starting the BOS Server.
+
+# <a name="Getting Started on IRIX Systems"></a> Getting Started on IRIX Systems
+
+Begin by incorporating AFS modifications into the kernel. Either use the ml dynamic loader program, or build a static kernel. Then configure partitions to house AFS volumes. AFS supports use of both EFS and XFS partitions for housing AFS volumes. SGI encourages use of XFS partitions.
+
+You do not need to replace IRIX fsck program, because the version that SGI distributes handles AFS volumes properly.
+
+## <a name="Loading AFS into the IRIX Kernel"></a> Loading AFS into the IRIX Kernel
+
+[[Loading AFS into the IRIX Kernel|Main/LoadingAFSIntoTheIRIXKernel]]
+
+Proceed to Configuring Server Partitions on IRIX Systems.
+
+## <a name="Configuring Server Volumes on IR"></a> Configuring Server Volumes on IRIX Systems
+
+If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
+
+[[Configuring Server Volumes on IRIX|Main/ConfiguringServerVolumesOnIRIX]]
+
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on IRIX Systems|Main/EnablingAFSLoginOnIRIXSystems]]. Otherwise, proceed to Starting the BOS Server.
+
+# <a name="Getting Started on Linux Systems"></a> Getting Started on Linux Systems
+
+Begin by running the AFS initialization script to call the insmod program, which dynamically loads AFS modifications into the kernel. Then create partitions for storing AFS volumes. You do not need to replace the Linux fsck program. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Pluggable Authentication Module (PAM) scheme.
+
+## <a name="Loading AFS into the Linux Kerne"></a> Loading AFS into the Linux Kernel
+
+[[Loading AFS into the Linux Kernel|Main/LoadingAFSIntoTheLinuxKernel]]
+
+## <a name="Configuring Server Volumes on Li"></a> Configuring Server Volumes on Linux Systems
+
+If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
+
+[[Configuring Server Volumes On Linux|Main/ConfiguringServerVolumesOnLinux]]
+
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Linux Systems|Main/EnablingAFSLoginOnLinuxSystems]]. Otherwise, proceed to Starting the BOS Server.
+
+# <a name="Getting Started on Solaris Syste"></a> Getting Started on Solaris Systems
+
+Begin by running the AFS initialization script to call the modload program distributed by Sun Microsystems, which dynamically loads AFS modifications into the kernel. Then create partitions for storing AFS volumes, and install and configure the AFS-modified fsck program to run on AFS server partitions. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Pluggable Authentication Module (PAM) scheme.
+
+## <a name="Loading AFS into the Solaris Ker"></a> Loading AFS into the Solaris Kernel
+
+[[Loading AFS into the Solaris Kernel|Main/LoadingAFSIntoTheSolarisKernel]]
+
+## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on Solaris Systems
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+[[Configuring the AFS-modified fsck Program on Solaris Systems|Main/ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
+
+## <a name="Configuring Server Partitions on"></a> Configuring Server Partitions on Solaris Systems
+
+If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
+
+[[Configuring Server Volumes On Solaris|Main/ConfiguringServerVolumesOnSolaris]]
+
+If you plan to retain client functionality on this machine after completing the installation, proceed to Enabling AFS Login on Solaris Systems. Otherwise, proceed to Starting the BOS Server.
+
+## <a name="Enabling AFS Login on Solaris Sy"></a> Enabling AFS Login on Solaris Systems
+
+Note: If you plan to remove client functionality from this machine after completing the installation, skip this section and proceed to Starting the BOS Server.
+
+[[Enabling AFS Login on Solaris Systems|Main/EnablingAFSLoginOnSolarisSystems]]
+
+Proceed to Starting the BOS Server (or if referring to these instructions while installing an additional file server machine, return to Starting Server Programs).
+
+# <a name="Starting the BOS Server"></a> Starting the BOS Server
+
+You are now ready to start the AFS server processes on this machine. Begin by copying the AFS server binaries from the CD-ROM to the conventional local disk location, the /usr/afs/bin directory. The following instructions also create files in other subdirectories of the /usr/afs directory.
+
+Then issue the bosserver command to initialize the Basic [[OverSeer]] (BOS) Server, which monitors and controls other AFS server processes on its server machine. Include the -noauth flag to disable authorization checking. Because you have not yet configured your cell's AFS authentication and authorization mechanisms, the BOS Server cannot perform authorization checking as it does during normal operation. In no-authorization mode, it does not verify the identity or privilege of the issuer of a bos command, and so performs any operation for anyone.
+
+Disabling authorization checking gravely compromises cell security. You must complete all subsequent steps in one uninterrupted pass and must not leave the machine unattended until you restart the BOS Server with authorization checking enabled, in Verifying the AFS Initialization Script.
+
+As it initializes for the first time, the BOS Server creates the following directories and files, setting the owner to the local superuser root and the mode bits to limit the ability to write (and in some cases, read) them. For a description of the contents and function of these directories and files, see the chapter in the IBM AFS Administration Guide about administering server machines. For further discussion of the mode bit settings, see Protecting Sensitive AFS Directories.
+
+- /usr/afs/db
+
+- /usr/afs/etc/CellServDB
+
+- /usr/afs/etc/ThisCell
+
+- /usr/afs/local
+
+- /usr/afs/logs
+
+The BOS Server also creates symbolic links called /usr/vice/etc/ThisCell and /usr/vice/etc/CellServDB to the corresponding files in the /usr/afs/etc directory. The AFS command interpreters consult the [[CellServDB]] and [[ThisCell]] files in the /usr/vice/etc directory because they generally run on client machines. On machines that are AFS servers only (as this machine currently is), the files reside only in the /usr/afs/etc directory; the links enable the command interpreters to retrieve the information they need. Later instructions for installing the client functionality replace the links with actual files.
+
+1. On the local /cdrom directory, mount the AFS CD-ROM for this machine's system type, if it is not already. For instructions on mounting CD-ROMs (either locally or remotely via NFS), consult the operating system documentation.
+
+1. Copy files from the CD-ROM to the local /usr/afs directory.
+
+       # cd /cdrom/sysname/root.server/usr/afs
+
+       # cp -rp  *  /usr/afs
+
+1. Issue the bosserver command. Include the -noauth flag to disable authorization checking.
+
+       # /usr/afs/bin/bosserver -noauth &
+
+1. Verify that the BOS Server created /usr/vice/etc/ThisCell and /usr/vice/etc/CellServDB as symbolic links to the corresponding files in the /usr/afs/etc directory.
+
+       # ls -l  /usr/vice/etc
+
+If either or both of /usr/vice/etc/ThisCell and /usr/vice/etc/CellServDB do not exist, or are not links, issue the following commands.
+
+       # cd /usr/vice/etc
+
+       # ln -s /usr/afs/etc/ThisCell
+
+       # ln -s /usr/afs/etc/CellServDB
+
+# <a name="Defining Cell Name and Membershi"></a> Defining Cell Name and Membership for Server Processes
+
+Now assign your cell's name. The chapter in the IBM AFS Administration Guide about cell configuration and administration issues discusses the important considerations, explains why changing the name is difficult, and outlines the restrictions on name format. Two of the most important restrictions are that the name cannot include uppercase letters or more than 64 characters.
+
+Use the bos setcellname command to assign the cell name. It creates two files:
+
+- /usr/afs/etc/ThisCell, which defines this machine's cell membership
+
+- /usr/afs/etc/CellServDB, which lists the cell's database server machines; the machine named on the command line is placed on the list automatically
+
+Note: In the following and every instruction in this guide, for the machine name argument substitute the fully-qualified hostname (such as fs1.abc.com) of the machine you are installing. For the cell name argument substitute your cell's complete name (such as abc.com).
+
+1. Issue the bos setcellname command to set the cell name.
+
+       # cd /usr/afs/bin
+
+       # ./bos setcellname <machine name> <cell name> -noauth
+
+Because you are not authenticated and authorization checking is disabled, the bos command interpreter possibly produces error messages about being unable to obtain tickets and running unauthenticated. You can safely ignore the messages.
+
+1. Issue the bos listhosts command to verify that the machine you are installing is now registered as the cell's first database server machine.
+
+       # ./bos listhosts <machine name> -noauth
+       Cell name is cell_name
+           Host 1 is machine_name
+
+# <a name="Starting the Database Server Pro"></a> Starting the Database Server Processes
+
+Next use the bos create command to create entries for the four database server processes in the /usr/afs/local/BosConfig file and start them running. The four processes run on database server machines only:
+
+- The Authentication Server (the kaserver process) maintains the Authentication Database
+
+- The Backup Server (the buserver process) maintains the Backup Database
+
+- The Protection Server (the ptserver process) maintains the Protection Database
+
+- The Volume Location (VL) Server (the vlserver process) maintains the Volume Location Database (VLDB)
+
+Note: AFS's authentication and authorization software is based on algorithms and other procedures known as Kerberos, as originally developed by Project Athena at the Massachusetts Institute of Technology. Some cells choose to replace the AFS Authentication Server and other security-related protocols with Kerberos as obtained directly from Project Athena or other sources. If you wish to do this, contact the AFS Product Support group now to learn about necessary modifications to the installation.
+
+The remaining instructions in this chapter include the -cell argument on all applicable commands. Provide the cell name you assigned in Defining Cell Name and Membership for Server Processes. If a command appears on multiple lines, it is only for legibility.
+
+1. Issue the bos create command to start the Authentication Server. The current working directory is still /usr/afs/bin.
+
+       # ./bos create <machine name> kaserver simple /usr/afs/bin/kaserver  \
+                      -cell <cell name>  -noauth
+
+You can safely ignore the messages that tell you to add Kerberos to the /etc/services file; AFS uses a default value that makes the addition unnecessary. You can also ignore messages about the failure of authentication.
+
+1. Issue the bos create command to start the Backup Server.
+
+       # ./bos create <machine name> buserver simple /usr/afs/bin/buserver  \
+                      -cell <cell name>  -noauth
+
+1. Issue the bos create command to start the Protection Server.
+
+       # ./bos create <machine name> ptserver simple /usr/afs/bin/ptserver  \
+                      -cell <cell name>  -noauth
+
+1. Issue the bos create command to start the VL Server.
+
+       # ./bos create <machine name> vlserver simple /usr/afs/bin/vlserver  \
+                      -cell <cell name>  -noauth
+
+# <a name="Initializing Cell Security"></a> Initializing Cell Security
+
+Now initialize the cell's security mechanisms. Begin by creating the following two initial entries in the Authentication Database:
+
+- A generic administrative account, called admin by convention. If you choose to assign a different name, substitute it throughout the remainder of this document.
+
+After you complete the installation of the first machine, you can continue to have all administrators use the admin account, or you can create a separate administrative account for each of them. The latter scheme implies somewhat more overhead, but provides a more informative audit trail for administrative operations.
+
+- The entry for AFS server processes, called afs. No user logs in under this identity, but the Authentication Server's Ticket Granting Service (TGS) module uses the associated key to encrypt the server tickets that it grants to AFS clients for presentation to server processes during mutual authentication. (The chapter in the IBM AFS Administration Guide about cell configuration and administration describes the role of server encryption keys in mutual authentication.)
+
+In Step 7, you also place the initial AFS server encryption key into the /usr/afs/etc/KeyFile file. The AFS server processes refer to this file to learn the server encryption key when they need to decrypt server tickets.
+
+You also issue several commands that enable the new admin user to issue privileged commands in all of the AFS suites.
+
+The following instructions do not configure all of the security mechanisms related to the AFS Backup System. See the chapter in the IBM AFS Administration Guide about configuring the Backup System.
+
+1. Enter kas interactive mode. Because the machine is in no-authorization checking mode, include the -noauth flag to suppress the Authentication Server's usual prompt for a password.
+
+       # kas  -cell <cell name> -noauth
+       ka>
+
+1. Issue the kas create command to create Authentication Database entries called admin and afs.
+
+Do not provide passwords on the command line. Instead provide them as afs\_passwd and admin\_passwd in response to the kas command interpreter's prompts as shown, so that they do not appear on the standard output stream.
+
+You need to enter the afs\_passwd string only in this step and in Step 7, so provide a value that is as long and complex as possible, preferably including numerals, punctuation characters, and both uppercase and lowercase letters. Also make the admin\_passwd as long and complex as possible, but keep in mind that administrators need to enter it often. Both passwords must be at least six characters long.
+
+       ka> create afs
+       initial_password:  afs_passwd
+       Verifying, please re-enter initial_password: afs_passwd
+
+       ka> create admin
+       initial_password: admin_passwd
+       Verifying, please re-enter initial_password: admin_passwd
+
+1. Issue the kas examine command to display the afs entry. The output includes a checksum generated by encrypting a constant with the server encryption key derived from the afs\_passwd string. In Step 8 you issue the bos listkeys command to verify that the checksum in its output matches the checksum in this output.
+
+       ka> examine afs
+       User data for afs
+        key (0) cksum is checksum . . .
+
+1. Issue the kas setfields command to turn on the ADMIN flag in the admin entry. This enables the admin user to issue privileged kas commands. Then issue the kas examine command to verify that the ADMIN flag appears in parentheses on the first line of the output, as shown in the example.
+
+       ka> setfields admin -flags admin
+
+       ka> examine admin
+       User data for admin (ADMIN) . . .
+
+1. Issue the kas quit command to leave kas interactive mode.
+
+       ka> quit
+
+1. Issue the bos adduser command to add the admin user to the /usr/afs/etc/UserList file. This enables the admin user to issue privileged bos and vos commands.
+
+       # ./bos adduser <machine name> admin -cell <cell name> -noauth
+
+1. Issue the bos addkey command to define the AFS server encryption key in the /usr/afs/etc/KeyFile file.
+
+Do not provide the password on the command line. Instead provide it as afs\_passwd in response to the bos command interpreter's prompts, as shown. Provide the same string as in Step 2.
+
+       # ./bos addkey <machine name> -kvno 0 -cell <cell name>  -noauth
+       Input key: afs_passwd
+       Retype input key: afs_passwd
+
+1. Issue the bos listkeys command to verify that the checksum for the new key in the [[KeyFile]] file is the same as the checksum for the key in the Authentication Database's afs entry, which you displayed in Step 3.
+
+       # ./bos listkeys <machine name> -cell <cell name> -noauth
+       key 0 has cksum checksum
+
+You can safely ignore any error messages indicating that bos failed to get tickets or that authentication failed.
+
+If the keys are different, issue the following commands, making sure that the afs\_passwd string is the same in each case. The checksum strings reported by the kas examine and bos listkeys commands must match; if they do not, repeat these instructions until they do, using the -kvno argument to increment the key version number each time.
+
+       # ./kas  -cell <cell name> -noauth
+
+       ka> setpassword afs -kvno 1
+       new_password: afs_passwd
+       Verifying, please re-enter initial_password: afs_passwd
+
+       ka> examine afs
+       User data for afs
+        key (1) cksum is checksum . . .
+
+       ka> quit
+
+       # ./bos addkey <machine name> -kvno 1 -cell <cell name> -noauth
+       Input key: afs_passwd
+       Retype input key: afs_passwd
+
+       # ./bos listkeys <machine name> -cell <cell name> -noauth
+       key 1 has cksum checksum
+
+1. Issue the pts createuser command to create a Protection Database entry for the admin user.
+
+By default, the Protection Server assigns AFS UID 1 (one) to the admin user, because it is the first user entry you are creating. If the local password file (/etc/passwd or equivalent) already has an entry for admin that assigns it a UNIX UID other than 1, it is best to use the -id argument to the pts createuser command to make the new AFS UID match the existing UNIX UID. Otherwise, it is best to accept the default.
+
+       # ./pts createuser -name admin -cell <cell name> [-id <AFS UID>]  -noauth
+       User admin has id AFS UID
+
+10. Issue the pts adduser command to make the admin user a member of the system:administrators group, and the pts membership command to verify the new membership. Membership in the group enables the admin user to issue privileged pts commands and some privileged fs commands.
+
+       # ./pts adduser admin system:administrators -cell <cell name> -noauth
+
+       # ./pts membership admin -cell  <cell name> -noauth
+       Groups admin (id: 1) is a member of:
+         system:administrators
+
+11. Issue the bos restart command with the -all flag to restart the database server processes, so that they start using the new server encryption key.
+
+       # ./bos restart <machine name> -all -cell <cell name> -noauth
+
+# <a name="Starting the File Server, Volume"></a> Starting the File Server, Volume Server, and Salvager
+
+Start the fs process, which consists of the File Server, Volume Server, and Salvager (fileserver, volserver and salvager processes).
+
+1. Issue the bos create command to start the fs process. The command appears here on multiple lines only for legibility.
+
+       # ./bos create  <machine name> fs fs /usr/afs/bin/fileserver   \
+                       /usr/afs/bin/volserver /usr/afs/bin/salvager  \
+                       -cell <cell name>  -noauth
+
+Sometimes a message about Volume Location Database (VLDB) initialization appears, along with one or more instances of an error message similar to the following:
+
+       FSYNC_clientInit temporary failure (will retry)
+
+This message appears when the volserver process tries to start before the fileserver process has completed its initialization. Wait a few minutes after the last such message before continuing, to guarantee that both processes have started successfully.
+
+You can verify that the fs process has started successfully by issuing the bos status command. Its output mentions two proc starts.
+
+       # ./bos status <machine name> fs -long -noauth
+
+1. Your next action depends on whether you have ever run AFS file server machines in the cell:
+
+\* If you are installing the first AFS server machine ever in the cell (that is, you are not upgrading the AFS software from a previous version), create the first AFS volume, root.afs.
+
+For the partition name argument, substitute the name of one of the machine's AFS server partitions (such as /vicepa).
+
+       # ./vos create  <machine name> <partition name> root.afs   \
+                       -cell <cell name>  -noauth
+
+The Volume Server produces a message confirming that it created the volume on the specified partition. You can ignore error messages indicating that tokens are missing, or that authentication failed.
+
+\* If there are existing AFS file server machines and volumes in the cell, issue the vos syncvldb and vos syncserv commands to synchronize the VLDB with the actual state of volumes on the local machine. To follow the progress of the synchronization operation, which can take several minutes, use the -verbose flag.
+
+       # ./vos syncvldb <machine name> -cell <cell name> -verbose  -noauth
+
+       # ./vos syncserv <machine name> -cell <cell name> -verbose  -noauth
+
+You can ignore error messages indicating that tokens are missing, or that authentication failed.
+
+# <a name="Starting the Server Portion of t"></a> Starting the Server Portion of the Update Server
+
+Start the server portion of the Update Server (the upserver process), to distribute the contents of directories on this machine to other server machines in the cell. It becomes active when you configure the client portion of the Update Server on additional server machines.
+
+Distributing the contents of its /usr/afs/etc directory makes this machine the cell's system control machine. The other server machines in the cell run the upclientetc process (an instance of the client portion of the Update Server) to retrieve the configuration files. Use the -crypt argument to the upserver initialization command to specify that the Update Server distributes the contents of the /usr/afs/etc directory only in encrypted form, as shown in the following instruction. Several of the files in the directory, particularly the [[KeyFile]] file, are crucial to cell security and so must never cross the network unencrypted.
+
+(You can choose not to configure a system control machine, in which case you must update the configuration files in each server machine's /usr/afs/etc directory individually. The bos commands used for this purpose also encrypt data before sending it across the network.)
+
+Distributing the contents of its /usr/afs/bin directory to other server machines of its system type makes this machine a binary distribution machine. The other server machines of its system type run the upclientbin process (an instance of the client portion of the Update Server) to retrieve the binaries.
+
+The binaries in the /usr/afs/bin directory are not sensitive, so it is not necessary to encrypt them before transfer across the network. Include the -clear argument to the upserver initialization command to specify that the Update Server distributes the contents of the /usr/afs/bin directory in unencrypted form unless an upclientbin process requests encrypted transfer.
+
+Note that the server and client portions of the Update Server always mutually authenticate with one another, regardless of whether you use the -clear or -crypt arguments. This protects their communications from eavesdropping to some degree.
+
+For more information on the upclient and upserver processes, see their reference pages in the IBM AFS Administration Reference. The commands appear on multiple lines here only for legibility.
+
+1. Issue the bos create command to start the upserver process.
+
+       # ./bos create  <machine name> upserver simple  \
+                 "/usr/afs/bin/upserver  -crypt /usr/afs/etc    \
+                 -clear /usr/afs/bin" -cell <cell name>  -noauth
+
+# <a name="Starting the Controller for NTPD"></a> Starting the Controller for NTPD
+
+Keeping the clocks on all server and client machines in your cell synchronized is crucial to several functions, and in particular to the correct operation of AFS's distributed database technology, Ubik. The chapter in the IBM AFS Administration Guide about administering server machines explains how time skew can disturb Ubik's performance and cause service outages in your cell.
+
+The AFS distribution includes a version of the Network Time Protocol Daemon (NTPD) for synchronizing the clocks on server machines. If a time synchronization program is not already running on the machine, then in this section you start the runntp process to configure NTPD for use with AFS. Note: Do not run the runntp process if NTPD or another time synchronization protocol is already running on the machine. Some versions of some operating systems run a time synchronization program by default, as detailed in the IBM AFS Release Notes.
+
+Attempting to run multiple instances of the NTPD causes an error. Running NTPD together with another time synchronization protocol is unnecessary and can cause instability in the clock setting.
+
+If you run the runntp process and your cell has reliable network connectivity to machines outside your cell, then it is conventional to configure the first AFS machine to refer to a time source outside the cell. When you later install the runntp program on other server machines in the cell, it configures NTPD to choose a time source at random from among the database server machines listed in the /usr/afs/etc/CellServDB file. Time synchronization therefore works in a chained manner: this database server machine refers to a time source outside the cell, the database server machines refer to the machine among them that has access to the most accurate time (NTPD itself includes code for determining this), and each non-database server machine refers to a local database server machine chosen at random from the /usr/afs/etc/CellServDB file. If you ever decide to remove database server functionality from this machine, it is best to transfer responsibility for consulting an external time source to a remaining database server machine.
+
+If your cell does not have network connectivity to external machines, or if the connectivity is not reliable, include the -localclock flag to the runntp command as indicated in the following instructions. The flag tells NTPD to rely on the machine's internal clock when all external time sources are inaccessible. The runntp command has other arguments that are possibly useful given your cell configuration; see the IBM AFS Administration Reference.
+
+Choosing an appropriate external time source is important, but involves more considerations than can be discussed here. If you need help in selecting a source, contact the AFS Product Support group.
+
+As the runntp process initializes NTPD, trace messages sometimes appear on the standard output stream. You can ignore them, but they can be informative if you understand how NTPD works.
+
+1. Issue the bos create command to start the runntp process. For the host argument, substitute the fully-qualified hostname or IP address of one or more machines outside the cell that are to serve as time sources. Separate each name with a space.
+
+\* If your cell usually has reliable network connectivity to an external time source, use the following command:
+
+       # ./bos create  <machine name>   runntp simple   \
+            "/usr/afs/bin/runntp <host>+"  -cell <cell name>  -noauth
+
+\* If your cell does not have network connectivity to an external time source, use the following command:
+
+       # ./bos create  <machine name> runntp simple  \
+            "/usr/afs/bin/runntp -localclock"  -cell <cell name>  -noauth
+
+\* If your cell has network connectivity to an external time source, but the network connection is frequently interrupted, use the following command:
+
+       # ./bos create  <machine name> runntp simple  \
+             "/usr/afs/bin/runntp -localclock <host>+"  \
+             -cell <cell name>  -noauth
+
+# <a name="Overview: Installing Client Func"></a> Overview: Installing Client Functionality
+
+The machine you are installing is now an AFS file server machine, database server machine, system control machine, and binary distribution machine. Now make it a client machine by completing the following tasks:
+
+1. Define the machine's cell membership for client processes
+
+1. Create the client version of the [[CellServDB]] file
+
+1. Define cache location and size
+
+1. Create the /afs directory and start the Cache Manager
+
+## <a name="Copying Client Files to the Loca"></a> Copying Client Files to the Local Disk
+
+Before installing and configuring the AFS client, copy the necessary files from the AFS CD-ROM to the local /usr/vice/etc directory.
+
+1. On the local /cdrom directory, mount the AFS CD-ROM for this machine's system type, if it is not already. For instructions on mounting CD-ROMs (either locally or remotely via NFS), consult the operating system documentation.
+
+1. Copy files to the local /usr/vice/etc directory.
+
+This step places a copy of the AFS initialization script (and related files, if applicable) into the /usr/vice/etc directory. In the preceding instructions for incorporating AFS into the kernel, you copied the script directly to the operating system's conventional location for initialization files. When you incorporate AFS into the machine's startup sequence in a later step, you can choose to link the two files.
+
+On some system types that use a dynamic kernel loader program, you previously copied AFS library files into a subdirectory of the /usr/vice/etc directory. On other system types, you copied the appropriate AFS library file directly to the directory where the operating system accesses it. The following commands do not copy or recopy the AFS library files into the /usr/vice/etc directory, because on some system types the library files consume a large amount of space. If you want to copy them, add the -r flag to the first cp command and skip the second cp command.
+
+       # cd /cdrom/sun4x_59/dest/root.client/usr/vice/etc
+
+       # cp -p  *  /usr/vice/etc
+
+       # cp -rp  C  /usr/vice/etc
+
+## <a name="Defining Cell Membership for Cli"></a> Defining Cell Membership for Client Processes
+
+Every AFS client machine has a copy of the /usr/vice/etc/ThisCell file on its local disk to define the machine's cell membership for the AFS client programs that run on it. The [[ThisCell]] file you created in the /usr/afs/etc directory (in Defining Cell Name and Membership for Server Processes) is used only by server processes.
+
+Among other functions, the [[ThisCell]] file on a client machine determines the following:
+
+\* The cell in which users authenticate when they log onto the machine, assuming it is using an AFS-modified login utility
+
+\* The cell in which users authenticate by default when they issue the klog command
+
+\* The cell membership of the AFS server processes that the AFS command interpreters on this machine contact by default
+
+1. Change to the /usr/vice/etc directory and remove the symbolic link created in Starting the BOS Server.
+
+       # cd /usr/vice/etc
+
+       # rm ThisCell
+
+1. Create the [[ThisCell]] file as a copy of the /usr/afs/etc/ThisCell file. Defining the same local cell for both server and client processes leads to the most consistent AFS performance.
+
+       # cp  /usr/afs/etc/ThisCell  ThisCell
+
+## <a name="Creating the Client _CellServDB"></a><a name="Creating the Client _CellServDB "></a> Creating the Client [[CellServDB]] File
+
+[[Creating the Client CellServDB File|Main/CreatingTheClientCellServDBFile]]
+
+## <a name="Configuring the Cache"></a> Configuring the Cache
+
+[[Configuring the Cache|Main/ConfiguringTheCache]]
+
+## <a name="Configuring the Cache Manager"></a> Configuring the Cache Manager
+
+[[Configuring the Cache Manager|Main/ConfiguringTheCacheManager]]
+
+# <a name="Overview: Completing the Install"></a> Overview: Completing the Installation of the First AFS Machine
+
+The machine is now configured as an AFS file server and client machine. In this final phase of the installation, you initialize the Cache Manager and then create the upper levels of your AFS filespace, among other procedures. The procedures are:
+
+1. Verify that the initialization script works correctly, and incorporate it into the operating system's startup and shutdown sequence
+
+1. Create and mount top-level volumes
+
+1. Create and mount volumes to store system binaries in AFS
+
+1. Enable access to foreign cells
+
+1. Institute additional security measures
+
+1. Remove client functionality if desired
+
+## <a name="Verifying the AFS Initialization"></a> Verifying the AFS Initialization Script
+
+At this point you run the AFS initialization script to verify that it correctly invokes all of the necessary programs and AFS processes, and that they start correctly. The following are the relevant commands:
+
+\* The command that dynamically loads AFS modifications into the kernel, on some system types (not applicable if the kernel has AFS modifications built in)
+
+\* The bosserver command, which starts the BOS Server; it in turn starts the server processes for which you created entries in the /usr/afs/local/BosConfig file
+
+\* The afsd command, which initializes the Cache Manager
+
+On system types that use a dynamic loader program, you must reboot the machine before running the initialization script, so that it can freshly load AFS modifications into the kernel.
+
+If there are problems during the initialization, attempt to resolve them. The AFS Product Support group can provide assistance if necessary.
+
+1. Issue the bos shutdown command to shut down the AFS server processes other than the BOS Server. Include the -wait flag to delay return of the command shell prompt until all processes shut down completely.
+
+       # /usr/afs/bin/bos shutdown <machine name> -wait
+
+1. Issue the ps command to learn the bosserver process's process ID number (PID), and then the kill command to stop it.
+
+       # ps appropriate_ps_options | grep bosserver
+
+       # kill bosserver_PID
+
+1. Issue the appropriate commands to run the AFS initialization script for this system type.
+
+## <a name="On AIX systems:"></a> On AIX systems:
+
+[[Initialization Script on AIX|Main/InitializationScriptOnAIX]]
+
+Proceed to Step 4.
+
+## <a name="On Digital UNIX systems:"></a> On Digital UNIX systems:
+
+[[Initialization Script on Digital UNIX|Main/InitializationScriptOnDigitalUNIX]]
+
+Proceed to Step 4.
+
+## <a name="On HP-UX systems:"></a> On HP-UX systems:
+
+[[Initialization Script on HP-UX|Main/InitializationScriptOnHP-UX]]
+
+Proceed to Step 4.
+
+## <a name="On IRIX systems:"></a> On IRIX systems:
+
+[[Initialization Script on IRIX|Main/InitializationScriptOnIRIX]]
+
+Proceed to Step 4.
+
+## <a name="On Linux systems:"></a> On Linux systems:
+
+[[Initialization Script on Linux|Main/InitializationScriptOnLinux]]
+
+Proceed to Step 4.
+
+## <a name="On Solaris systems:"></a> On Solaris systems:
+
+[[Initialization Script on Solaris|Main/InitializationScriptOnSolaris]]
+
+Step 4. Verify that /usr/afs and its subdirectories on the new file server machine meet the ownership and mode bit requirements outlined in Protecting Sensitive AFS Directories. If necessary, use the chmod command to correct the mode bits.
+
+Proceed to Configuring the Top Levels of the AFS Filespace.
+
+# <a name="Configuring the Top Levels of th"></a> Configuring the Top Levels of the AFS Filespace
+
+If you have not previously run AFS in your cell, you now configure the top levels of your cell's AFS filespace. If you have run a previous version of AFS, the filespace is already configured. Proceed to Storing AFS Binaries in AFS.
+
+You created the root.afs volume in Starting the File Server, Volume Server, and Salvager, and the Cache Manager mounted it automatically on the local /afs directory when you ran the AFS initialization script in Verifying the AFS Initialization Script. You now set the access control list (ACL) on the /afs directory; creating, mounting, and setting the ACL are the three steps required when creating any volume.
+
+After setting the ACL on the root.afs volume, you create your cell's root.cell volume, mount it as a subdirectory of the /afs directory, and set the ACL. Create both a read/write and a regular mount point for the root.cell volume. The read/write mount point enables you to access the read/write version of replicated volumes when necessary. Creating both mount points essentially creates separate read-only and read-write copies of your filespace, and enables the Cache Manager to traverse the filespace on a read-only path or read/write path as appropriate. For further discussion of these concepts, see the chapter in the IBM AFS Administration Guide about administering volumes.
+
+Then replicate both the root.afs and root.cell volumes. This is required if you want to replicate any other volumes in your cell, because all volumes mounted above a replicated volume must themselves be replicated in order for the Cache Manager to access the replica.
+
+When the root.afs volume is replicated, the Cache Manager is programmed to access its read-only version (root.afs.readonly) whenever possible. To make changes to the contents of the root.afs volume (when, for example, you mount another cell's root.cell volume at the second level in your filespace), you must mount the root.afs volume temporarily, make the changes, release the volume and remove the temporary mount point. For instructions, see Enabling Access to Foreign Cells.
+
+1. Issue the fs setacl command to edit the ACL on the /afs directory. Add an entry that grants the l (lookup) and r (read) permissions to the system:anyuser group, to enable all AFS users who can reach your cell to traverse through the directory. If you prefer to enable access only to locally authenticated users, substitute the system:authuser group.
+
+Note that there is already an ACL entry that grants all seven access rights to the system:administrators group. It is a default entry that AFS places on every new volume's root directory.
+
+       # /usr/afs/bin/fs setacl /afs system:anyuser rl
+
+1. Issue the vos create command to create the root.cell volume. Then issue the fs mkmount command to mount it as a subdirectory of the /afs directory, where it serves as the root of your cell's local AFS filespace. Finally, issue the fs setacl command to create an ACL entry for the system:anyuser group (or system:authuser group).
+
+For the partition name argument, substitute the name of one of the machine's AFS server partitions (such as /vicepa). For the cellname argument, substitute your cell's fully-qualified Internet domain name (such as abc.com).
+
+       # /usr/afs/bin/vos create  <machine name> <partition name> root.cell
+
+       # /usr/afs/bin/fs mkmount /afs/cellname  root.cell
+
+       # /usr/afs/bin/fs setacl /afs/cellname  system:anyuser rl
+
+1. (Optional) Create a symbolic link to a shortened cell name, to reduce the length of pathnames for users in the local cell. For example, in the abc.com cell, /afs/abc is a link to /afs/abc.com.
+
+       # cd /afs
+
+       # ln -s  full_cellname  short_cellname
+
+1. Issue the fs mkmount command to create a read/write mount point for the root.cell volume (you created a regular mount point in Step 2).
+
+By convention, the name of a read/write mount point begins with a period, both to distinguish it from the regular mount point and to make it visible only when the -a flag is used on the ls command.
+
+Change directory to /usr/afs/bin to make it easier to access the command binaries.
+
+       # cd /usr/afs/bin
+
+       # ./fs mkmount   /afs/.cellname   root.cell -rw
+
+1. Issue the vos addsite command to define a replication site for both the root.afs and root.cell volumes. In each case, substitute for the partition name argument the partition where the volume's read/write version resides. When you install additional file server machines, it is a good idea to create replication sites on them as well.
+
+       # ./vos addsite <machine name> <partition name> root.afs
+
+       # ./vos addsite <machine name> <partition name> root.cell
+
+1. Issue the fs examine command to verify that the Cache Manager can access both the root.afs and root.cell volumes, before you attempt to replicate them. The output lists each volume's name, volumeID number, quota, size, and the size of the partition that houses them. If you get an error message instead, do not continue before taking corrective action.
+
+       # ./fs examine /afs
+
+       # ./fs examine /afs/cellname
+
+1. Issue the vos release command to release a replica of the root.afs and root.cell volumes to the sites you defined in Step 5.
+
+       # ./vos release root.afs
+
+       # ./vos release root.cell
+
+1. Issue the fs checkvolumes to force the Cache Manager to notice that you have released read-only versions of the volumes, then issue the fs examine command again. This time its output mentions the read-only version of the volumes (root.afs.readonly and root.cell.readonly) instead of the read/write versions, because of the Cache Manager's bias to access the read-only version of the root.afs volume if it exists.
+
+       # ./fs checkvolumes
+
+       # ./fs examine /afs
+
+       # ./fs examine /afs/cellname
+
+# <a name="Storing AFS Binaries in AFS"></a> Storing AFS Binaries in AFS
+
+In the conventional configuration, you make AFS client binaries and configuration files available in the subdirectories of the /usr/afsws directory on client machines (afsws is an acronym for AFS workstation). You can conserve local disk space by creating /usr/afsws as a link to an AFS volume that houses the AFS client binaries and configuration files for this system type.
+
+In this section you create the necessary volumes. The conventional location to which to link /usr/afsws is /afs/cellname/sysname/usr/afsws, where sysname is the appropriate system type name as specified in the IBM AFS Release Notes. The instructions in Installing Additional Client Machines assume that you have followed the instructions in this section.
+
+If you have previously run AFS in the cell, the volumes possibly already exist. If so, you need to perform Step 8 only.
+
+The current working directory is still /usr/afs/bin, which houses the fs and vos command suite binaries. In the following commands, it is possible you still need to specify the pathname to the commands, depending on how your PATH environment variable is set.
+
+1. Issue the vos create command to create volumes for storing the AFS client binaries for this system type. The following example instruction creates volumes called sysname, sysname.usr, and sysname.usr.afsws. Refer to the IBM AFS Release Notes to learn the proper value of sysname for this system type.
+
+       # vos create <machine name> <partition name> sysname
+
+       # vos create <machine name> <partition name> sysname.usr
+
+       # vos create <machine name> <partition name> sysname.usr.afsws
+
+1. Issue the fs mkmount command to mount the newly created volumes. Because the root.cell volume is replicated, you must precede the cellname part of the pathname with a period to specify the read/write mount point, as shown. Then issue the vos release command to release a new replica of the root.cell volume, and the fs checkvolumes command to force the local Cache Manager to access them.
+
+       # fs mkmount -dir /afs/.cellname/sysname -vol sysname
+
+       # fs mkmount -dir /afs/.cellname/sysname/usr  -vol sysname.usr
+
+       # fs mkmount -dir /afs/.cellname/sysname/usr/afsws -vol sysname.usr.afsws
+
+       # vos release root.cell
+
+       # fs checkvolumes
+
+1. Issue the fs setacl command to grant the l (lookup) and r (read) permissions to the system:anyuser group on each new directory's ACL.
+
+       # cd /afs/.cellname/sysname
+
+       # fs setacl  -dir  .  usr  usr/afsws  -acl  system:anyuser rl
+
+1. Issue the fs setquota command to set an unlimited quota on the volume mounted at the /afs/cellname/sysname/usr/afsws directory. This enables you to copy all of the appropriate files from the CD-ROM into the volume without exceeding the volume's quota.
+
+If you wish, you can set the volume's quota to a finite value after you complete the copying operation. At that point, use the vos examine command to determine how much space the volume is occupying. Then issue the fs setquota command to set a quota that is slightly larger.
+
+       # fs setquota /afs/.cellname/sysname/usr/afsws  0
+
+1. Mount the AFS CD-ROM for this machine's system type on the local /cdrom directory, if it is not already. For instructions on mounting CD-ROMs (either locally or remotely via NFS), consult the operating system documentation.
+
+1. Copy the contents of the indicated directories from the CD-ROM into the /afs/cellname/sysname/usr/afsws directory.
+
+       # cd /afs/.cellname/sysname/usr/afsws
+
+       # cp -rp /cdrom/sysname/bin  .
+
+       # cp -rp /cdrom/sysname/etc  .
+
+       # cp -rp /cdrom/sysname/include  .
+
+       # cp -rp /cdrom/sysname/lib  .
+
+1. Issue the fs setacl command to set the ACL on each directory appropriately. To comply with the terms of your AFS License agreement, you must prevent unauthorized users from accessing AFS software. To enable access for locally authenticated users only, set the ACL on the etc, include, and lib subdirectories to grant the l and r permissions to the system:authuser group rather than the system:anyuser group. The system:anyuser group must retain the l and r permissions on the bin subdirectory to enable unauthenticated users to access the klog binary. To ensure that unauthorized users are not accessing AFS software, check periodically that the ACLs on these directories are set properly.
+
+       # cd /afs/.cellname/sysname/usr/afsws
+
+       # fs setacl  -dir etc include lib  -acl  system:authuser rl  \
+                  system:anyuser none
+
+1. Create /usr/afsws on the local disk as a symbolic link to the directory /afs/cellname/@sys/usr/afsws. You can specify the actual system name instead of @sys if you wish, but the advantage of using @sys is that it remains valid if you upgrade this machine to a different system type.
+
+       # ln -s /afs/cellname/@sys/usr/afsws  /usr/afsws
+
+1. (Optional) To enable users to issue commands from the AFS suites (such as fs) without having to specify a pathname to their binaries, include the /usr/afsws/bin and /usr/afsws/etc directories in the PATH environment variable you define in each user's shell initialization file (such as .cshrc).
+
+Storing AFS Documents in AFS
+
+# <a name="The AFS distribution includes th"></a> The AFS distribution includes the following documents:
+
+- IBM AFS Release Notes
+
+- IBM AFS Quick Beginnings
+
+- IBM AFS User Guide
+
+- IBM AFS Administration Reference
+
+- IBM AFS Administration Guide
+
+The AFS CD-ROM for each system type has a top-level Documentation directory, with a subdirectory for each document format provided. The different formats are suitable for online viewing, printing, or both.
+
+This section explains how to create and mount a volume to house the documents, making them available to your users. The recommended mount point for the volume is /afs/cellname/afsdoc. If you wish, you can create a link to the mount point on each client machine's local disk, called /usr/afsdoc. Alternatively, you can create a link to the mount point in each user's home directory. You can also choose to permit users to access only certain documents (most probably, the IBM AFS User Guide) by creating different mount points or setting different ACLs on different document directories.
+
+The current working directory is still /usr/afs/bin, which houses the fs and vos command suite binaries you use to create and mount volumes. In the following commands, it is possible you still need to specify the pathname to the commands, depending on how your PATH environment variable is set.
+
+1. Issue the vos create command to create a volume for storing the AFS documentation. Include the -maxquota argument to set an unlimited quota on the volume. This enables you to copy all of the appropriate files from the CD-ROM into the volume without exceeding the volume's quota.
+
+If you wish, you can set the volume's quota to a finite value after you complete the copying operations. At that point, use the vos examine command to determine how much space the volume is occupying. Then issue the fs setquota command to set a quota that is slightly larger.
+
+       # vos create  <machine name> <partition name>  afsdoc  -maxquota  0
+
+1. Issue the fs mkmount command to mount the new volume. Because the root.cell volume is replicated, you must precede the cellname with a period to specify the read/write mount point, as shown. Then issue the vos release command to release a new replica of the root.cell volume, and the fs checkvolumes command to force the local Cache Manager to access them.
+
+       # fs mkmount -dir /afs/.cellname/afsdoc -vol afsdoc
+
+       # vos release root.cell
+
+       # fs checkvolumes
+
+1. Issue the fs setacl command to grant the rl permissions to the system:anyuser group on the new directory's ACL.
+
+       # cd /afs/.cellname/afsdoc
+
+       # fs setacl  .  system:anyuser rl
+
+1. Mount the AFS CD-ROM for any system type on the local /cdrom directory, if one is not already. For instructions on mounting CD-ROMs (either locally or remotely via NFS), consult the operating system documentation.
+
+1. Copy the AFS documents in one or more formats from the CD-ROM into subdirectories of the /afs/cellname/afsdoc directory. Repeat the commands for each format.
+
+       # mkdir format_name
+
+       # cd format_name
+
+       # cp -rp /cdrom/Documentation/format  .
+
+If you choose to store the HTML version of the documents in AFS, note that in addition to a subdirectory for each document there are several files with a .gif extension, which enable readers to move easily between sections of a document. The file called index.htm is an introductory HTML page that contains a hyperlink to each of the documents. For online viewing to work properly, these files must remain in the top-level HTML directory (the one named, for example, /afs/cellname/afsdoc/html).
+
+1. (Optional) If you believe it is helpful to your users to access the AFS documents in a certain format via a local disk directory, create /usr/afsdoc on the local disk as a symbolic link to the documentation directory in AFS (/afs/cellname/afsdoc/format\_name).
+
+       # ln -s /afs/cellname/afsdoc/format_name /usr/afsdoc
+
+An alternative is to create a link in each user's home directory to the /afs/cellname/afsdoc/format\_name directory.
+
+# <a name="Storing System Binaries in AFS"></a> Storing System Binaries in AFS
+
+You can also choose to store other system binaries in AFS volumes, such as the standard UNIX programs conventionally located in local disk directories such as /etc, /bin, and /lib. Storing such binaries in an AFS volume not only frees local disk space, but makes it easier to update binaries on all client machines.
+
+The following is a suggested scheme for storing system binaries in AFS. It does not include instructions, but you can use the instructions in Storing AFS Binaries in AFS (which are for AFS-specific binaries) as a template.
+
+Some files must remain on the local disk for use when AFS is inaccessible (during bootup and file server or network outages). The required binaries include the following:
+
+- A text editor, network commands, and so on
+
+- Files used during the boot sequence before the afsd program runs, such as initialization and configuration files, and binaries for commands that mount file systems
+
+- Files used by dynamic kernel loader programs
+
+In most cases, it is more secure to enable only locally authenticated users to access system binaries, by granting the l (lookup) and r (read) permissions to the system:authuser group on the ACLs of directories that contain the binaries. If users need to access a binary while unauthenticated, however, the ACL on its directory must grant those permissions to the system:anyuser group.
+
+The following chart summarizes the suggested volume and mount point names for storing system binaries. It uses a separate volume for each directory. You already created a volume called sysname for this machine's system type when you followed the instructions in Storing AFS Binaries in AFS.
+
+You can name volumes in any way you wish, and mount them at other locations than those suggested here. However, this scheme has several advantages:
+
+- Volume names clearly identify volume contents
+
+- Using the sysname prefix on every volume makes it is easy to back up all of the volumes together, because the AFS Backup System enables you to define sets of volumes based on a string included in all of their names
+
+- It makes it easy to track related volumes, keeping them together on the same file server machine if desired
+
+- There is a clear relationship between volume name and mount point name
+
+    Volume Name    Mount Point
+    sysname    /afs/cellname/sysname
+    sysname.bin    /afs/cellname/sysname/bin
+    sysname.etc    /afs/cellname/sysname/etc
+    sysname.usr    /afs/cellname/sysname/usr
+    sysname.usr.afsws    /afs/cellname/sysname/usr/afsws
+    sysname.usr.bin    /afs/cellname/sysname/usr/bin
+    sysname.usr.etc    /afs/cellname/sysname/usr/etc
+    sysname.usr.inc    /afs/cellname/sysname/usr/include
+    sysname.usr.lib    /afs/cellname/sysname/usr/lib
+    sysname.usr.loc    /afs/cellname/sysname/usr/local
+    sysname.usr.man    /afs/cellname/sysname/usr/man
+    sysname.usr.sys    /afs/cellname/sysname/usr/sys
+
+# <a name="Enabling Access to Foreign Cells"></a> Enabling Access to Foreign Cells
+
+In this section you create a mount point in your AFS filespace for the root.cell volume of each foreign cell that you want to enable your users to access. For users working on a client machine to access the cell, there must in addition be an entry for it in the client machine's local /usr/vice/etc/CellServDB file. (The instructions in Creating the Client [[CellServDB]] File suggest that you use the [[CellServDB]].sample file included in the AFS distribution as the basis for your cell's client [[CellServDB]] file. The sample file lists all of the cells that had agreed to participate in the AFS global namespace at the time your AFS CD-ROM was created. As mentioned in that section, the AFS Product Support group also maintains a copy of the file, updating it as necessary.)
+
+The chapter in the IBM AFS Administration Guide about cell administration and configuration issues discusses the implications of participating in the global AFS namespace. The chapter about administering client machines explains how to maintain knowledge of foreign cells on client machines, and includes suggestions for maintaining a central version of the file in AFS.
+
+1. Issue the fs mkmount command to mount each foreign cell's root.cell volume on a directory called /afs/foreign\_cell. Because the root.afs volume is replicated, you must create a temporary mount point for its read/write version in a directory to which you have write access (such as your cell's /afs/.cellname directory). Create the mount points, issue the vos release command to release new replicas to the read-only sites for the root.afs volume, and issue the fs checkvolumes command to force the local Cache Manager to access the new replica. <dl>
+  <dt> Note</dt>
+  <dd> You need to issue the fs mkmount command only once for each foreign cell's root.cell volume. You do not need to repeat the command on each client machine. </dd>
+</dl>
+
+Substitute your cell's name for cellname.
+
+       # cd /afs/.cellname
+
+       # /usr/afs/bin/fs  mkmount  temp  root.afs
+
+Repeat the fs mkmount command for each foreign cell you wish to mount at this time.
+
+       # /usr/afs/bin/fs mkmount temp/foreign_cell root.cell -c foreign_cell
+
+Issue the following commands only once.
+
+       # /usr/afs/bin/fs rmmount temp
+
+       # /usr/afs/bin/vos release root.afs
+
+       # /usr/afs/bin/fs checkvolumes
+
+1. If this machine is going to remain an AFS client after you complete the installation, verify that the local /usr/vice/etc/CellServDB file includes an entry for each foreign cell.
+
+For each cell that does not already have an entry, complete the following instructions:
+
+1. 1. 1. Create an entry in the [[CellServDB]] file. Be sure to comply with the formatting instructions in Creating the Client [[CellServDB]] File.
+
+1. 1. 1. Issue the fs newcell command to add an entry for the cell directly to the list that the Cache Manager maintains in kernel memory. Provide each database server machine's fully qualified hostname.
+
+       # /usr/afs/bin/fs newcell <foreign_cell> <dbserver1>    \
+                [<dbserver2>] [<dbserver3>]
+
+1. 1. 1. If you plan to maintain a central version of the [[CellServDB]] file (the conventional location is /afs/cellname/common/etc/CellServDB), create it now as a copy of the local /usr/vice/etc/CellServDB file. Verify that it includes an entry for each foreign cell you want your users to be able to access.
+
+       # mkdir common
+
+       # mkdir common/etc
+
+       # cp  /usr/vice/etc/CellServDB  common/etc
+
+       # /usr/afs/bin/vos release root.cell
+
+1. Issue the ls command to verify that the new cell's mount point is visible in your filespace. The output lists the directories at the top level of the new cell's AFS filespace.
+
+       # ls /afs/foreign_cell
+
+1. Please register your cell with the AFS Product Support group at this time. If you do not want to participate in the global AFS namespace, they list your cell in a private [[CellServDB]] file that is not available to other AFS cells.
+
+# <a name="Improving Cell Security"></a> Improving Cell Security
+
+This section discusses ways to improve the security of AFS data in your cell. Also see the chapter in the IBM AFS Administration Guide about configuration and administration issues.
+
+# <a name="Controlling root Access"></a> Controlling root Access
+
+As on any machine, it is important to prevent unauthorized users from logging onto an AFS server or client machine as the local superuser root. Take care to keep the root password secret.
+
+The local root superuser does not have special access to AFS data through the Cache Manager (as members of the system:administrators group do), but it does have the following privileges:
+
+- On client machines, the ability to issue commands from the fs suite that affect AFS performance
+
+- On server machines, the ability to disable authorization checking, or to install rogue process binaries
+
+## <a name="Controlling System Administrator"></a> Controlling System Administrator Access
+
+Following are suggestions for managing AFS administrative privilege:
+
+- Create an administrative account for each administrator named something like username.admin. Administrators authenticate under these identities only when performing administrative tasks, and destroy the administrative tokens immediately after finishing the task (either by issuing the unlog command, or the klog command to adopt their regular identity).
+
+- Set a short ticket lifetime for administrator accounts (for example, 20 minutes) by using the -lifetime argument to the kas setfields command, which is described in the IBM AFS Administration Reference. Do not however, use a short lifetime for users who issue long-running backup commands.
+
+- Limit the number of system administrators in your cell, especially those who belong to the system:administrators group. By default they have all ACL rights on all directories in the local AFS filespace, and therefore must be trusted not to examine private files.
+
+- Limit the use of system administrator accounts on machines in public areas. It is especially important not to leave such machines unattended without first destroying the administrative tokens.
+
+- Limit the use by administrators of standard UNIX commands that make connections to remote machines (such as the telnet utility). Many of these programs send passwords across the network without encrypting them.
+
+## <a name="Protecting Sensitive AFS Directo"></a> Protecting Sensitive AFS Directories
+
+Some subdirectories of the /usr/afs directory contain files crucial to cell security. Unauthorized users must not read or write to these files because of the potential for misuse of the information they contain.
+
+As the BOS Server initializes for the first time on a server machine, it creates several files and directories (as mentioned in Starting the BOS Server). It sets their owner to the local superuser root and sets their mode bits to enable writing by the owner only; in some cases, it also restricts reading.
+
+At each subsequent restart, the BOS Server checks that the owner and mode bits on these files are still set appropriately. If they are not, it write the following message to the /usr/afs/logs/BosLog file:
+
+       Bosserver reports inappropriate access on server directories
+
+The BOS Server does not reset the mode bits, which enables you to set alternate values if you wish.
+
+The following charts lists the expected mode bit settings. A question mark indicates that the BOS Server does not check that mode bit.
+
+    /usr/afs    drwxr?xr-x
+    /usr/afs/backup    drwx???---
+    /usr/afs/bin    drwxr?xr-x
+    /usr/afs/db    drwx???---
+    /usr/afs/etc    drwxr?xr-x
+    /usr/afs/etc/KeyFile    -rw????---
+    /usr/afs/etc/UserList    -rw?????--
+    /usr/afs/local    drwx???---
+    /usr/afs/logs    drwxr?xr-x
+
+# <a name="Removing Client Functionality"></a> Removing Client Functionality
+
+Follow the instructions in this section only if you do not wish this machine to remain an AFS client. Removing client functionality means that you cannot use this machine to access AFS files.
+
+1. Remove the files from the /usr/vice/etc directory. The command does not remove the directory for files used by the dynamic kernel loader program, if it exists on this system type. Those files are still needed on a server-only machine.
+
+       # cd /usr/vice/etc
+
+       # rm  *
+
+       # rm -rf  C
+
+1. Create symbolic links to the [[ThisCell]] and [[CellServDB]] files in the /usr/afs/etc directory. This makes it possible to issue commands from the AFS command suites (such as bos and fs) on this machine.
+
+       # ln -s /usr/afs/etc/ThisCell ThisCell
+
+       # ln -s /usr/afs/etc/CellServDB CellServDB
+
+1. On IRIX systems, issue the chkconfig command to deactivate the afsclient configuration variable.
+
+       # /etc/chkconfig -f afsclient off
+
+1. Reboot the machine. Most system types use the shutdown command, but the appropriate options vary.
+
+       # cd /
+
+       # shutdown appropriate_options

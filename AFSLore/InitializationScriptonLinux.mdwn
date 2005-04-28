@@ -1,0 +1,32 @@
+Reboot the machine and log in again as the local superuser root.
+
+       # cd /
+
+       # shutdown -r now
+
+       login: root
+       Password: root_password
+
+Run the AFS initialization script.
+
+       # /etc/rc.d/init.d/afs  start
+
+[[Confirm Cache Manager Initialization|Main/ConfirmCacheManagerInitialization]]
+
+## <a name="Automatically Start AFS on Syste"></a> Automatically Start AFS on System Boot
+
+Now that you have confirmed that the AFS initialization script works correctly, take the action necessary to have it run automatically at each reboot.
+
+Issue the chkconfig command to activate the afs configuration variable. Based on the instruction in the AFS initialization file that begins with the string #chkconfig, the command automatically creates the symbolic links that incorporate the script into the Linux startup and shutdown sequence.
+
+       # /sbin/chkconfig  --add afs
+
+(Optional) There are now copies of the AFS initialization file in both the /usr/vice/etc and /etc/rc.d/init.d directories, and copies of the afsd options file in both the /usr/vice/etc and /etc/sysconfig directories. If you want to avoid potential confusion by guaranteeing that the two copies of each file are always the same, create a link between them. You can always retrieve the original script or options file from the AFS CD-ROM if necessary.
+
+       # cd /usr/vice/etc
+
+       # rm afs.rc afs.conf
+
+       # ln -s  /etc/rc.d/init.d/afs  afs.rc
+
+       # ln -s  /etc/sysconfig/afs  afs.conf

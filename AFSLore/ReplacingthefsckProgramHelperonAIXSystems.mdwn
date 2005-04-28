@@ -1,0 +1,13 @@
+In this section, you make modifications to guarantee that the appropriate fsck program runs on AFS server partitions. The fsck program provided with the operating system must never run on AFS server partitions. Because it does not recognize the structures that the File Server uses to organize volume data, it removes all of the data. To repeat:
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+On AIX systems, you do not replace the fsck binary itself, but rather the program helper file included in the AIX distribution as /sbin/helpers/v3fshelper.
+
+1. Move the AIX fsck program helper to a safe location and install the version from the AFS distribution in its place. The AFS CD-ROM must still be mounted at the /cdrom directory.
+
+       # cd /sbin/helpers
+
+       # mv v3fshelper v3fshelper.noafs
+
+       # cp -p /cdrom/rs_aix42/root.server/etc/v3fshelper v3fshelper

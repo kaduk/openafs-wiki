@@ -1,0 +1,43 @@
+The modload program is the dynamic kernel loader provided by Sun Microsystems for Solaris systems. Solaris does not support incorporation of AFS modifications during a kernel build.
+
+For AFS to function correctly, the modload program must run each time the machine reboots, so the AFS initialization script (included on the AFS CD-ROM) invokes it automatically. In this section you copy the appropriate AFS library file to the location where the modload program accesses it and then run the script.
+
+In later sections you verify that the script correctly initializes all AFS components, then create the links that incorporate AFS into the Solaris startup and shutdown sequence.
+
+1. Mount the AFS CD-ROM for Solaris on the /cdrom directory. For instructions on mounting CD-ROMs (either locally or remotely via NFS), see your Solaris documentation. Then change directory as indicated.
+
+       # cd  /cdrom/sysname/dest/root.client/usr/vice/etc/modload
+
+1. Copy the AFS initialization script to the local directory for initialization files (by convention, /etc/init.d on Solaris machines). Note the removal of the .rc extension as you copy the script.
+
+       # cp -p  afs.rc  /etc/init.d/afs
+       # chmod u+x /etc/init.d/afs
+
+1. Copy the appropriate AFS kernel library file to the local file /kernel/fs/afs.
+
+If the machine is running Solaris 2.6 or the 32-bit version of Solaris 7, its kernel supports NFS server functionality, and the nfsd process is running:
+
+       # cp -p libafs.o /kernel/fs/afs
+
+If the machine is running Solaris 2.6 or the 32-bit version of Solaris 7,8 or 9, and its kernel does not support NFS server functionality or the nfsd process is not running:
+
+       # cp -p libafs.nonfs.o /kernel/fs/afs
+
+If the machine is running the 64-bit version of Solaris 7,8 or 9, its kernel supports NFS server functionality, and the nfsd process is running:
+
+       # cp -p libafs64.o /kernel/fs/sparcv9/afs
+
+If the machine is running the 64-bit version of Solaris 7, 8 or 9, and its kernel does not support NFS server functionality or the nfsd process is not running:
+
+       # cp -p libafs64.nonfs.o /kernel/fs/sparcv9/afs
+
+1. Run the AFS initialization script to load AFS modifications into the kernel. You can ignore any error messages about the inability to start the BOS Server or the Cache Manager or AFS client.
+
+       # /etc/init.d/afs start
+
+When an entry called afs does not already exist in the local /etc/name\_to\_sysnum file, the script automatically creates it and reboots the machine to start using the new version of the file. If this happens, log in again as the superuser root after the reboot and run the initialization script again. This time the required entry exists in the /etc/name\_to\_sysnum file, and the modload program runs.
+
+       login: root
+       Password: root_password
+
+       # /etc/init.d/afs start

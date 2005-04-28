@@ -1,0 +1,40 @@
+Use the following instructions to build AFS modifications into the kernel on an IRIX system.
+
+1. Copy the kernel initialization file afs.sm to the local /var/sysgen/system directory, and the kernel master file afs to the local /var/sysgen/master.d directory.
+
+       # cp -p  bin/afs.sm  /var/sysgen/system
+
+       # cp -p  bin/afs  /var/sysgen/master.d
+
+1. Copy the appropriate AFS kernel library file to the local file /var/sysgen/boot/afs.a; the IPxx portion of the library file name must match the value previously returned by the uname -m command. Also choose the file appropriate to whether the machine's kernel supports NFS server functionality (NFS must be supported for the machine to act as an NFS/AFS Translator). Single- and multiprocessor machines use the same library file.
+
+If the machine's kernel supports NFS server functionality:
+
+       # cp -p   bin/libafs.IPxx.a   /var/sysgen/boot/afs.a
+
+If the machine's kernel does not support NFS server functionality:
+
+       # cp -p  bin/libafs.IPxx.nonfs.a  /var/sysgen/boot/afs.a
+
+1. Issue the chkconfig command to deactivate the afsml configuration variable.
+
+       # /etc/chkconfig -f afsml off
+
+If the machine is to function as an NFS/AFS Translator and the kernel supports NFS server functionality, activate the afsxnfs variable.
+
+       # /etc/chkconfig -f afsxnfs on
+
+1. Copy the existing kernel file, /unix, to a safe location. Compile the new kernel, which is created in the file /unix.install. It overwrites the existing /unix file when the machine reboots in the next step.
+
+       # cp /unix /unix_noafs
+
+       # autoconfig
+
+1. Reboot the machine to start using the new kernel, and login again as the superuser root.
+
+       # cd /
+
+       # shutdown -i6 -g0 -y
+
+       login: root
+       Password: root_password

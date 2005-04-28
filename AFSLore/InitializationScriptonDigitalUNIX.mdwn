@@ -1,0 +1,25 @@
+Run the AFS initialization script.
+
+       # /sbin/init.d/afs  start
+
+[[Confirm Cache Manager Initialization|Main/ConfirmCacheManagerInitialization]]
+
+## <a name="Automatically Start AFS on Syste"></a> Automatically Start AFS on System Boot
+
+Now that you have confirmed that the AFS initialization script works correctly, take the action necessary to have it run automatically at each reboot.
+
+Change to the /sbin/init.d directory and issue the ln -s command to create symbolic links that incorporate the AFS initialization script into the Digital UNIX startup and shutdown sequence.
+
+       # cd  /sbin/init.d
+
+       # ln -s  ../init.d/afs  /sbin/rc3.d/S67afs
+
+       # ln -s  ../init.d/afs  /sbin/rc0.d/K66afs
+
+(Optional) There are now copies of the AFS initialization file in both the /usr/vice/etc and /sbin/init.d directories. If you want to avoid potential confusion by guaranteeing that they are always the same, create a link between them. You can always retrieve the original script from the AFS CD-ROM if necessary.
+
+       # cd /usr/vice/etc
+
+       # rm afs.rc
+
+       # ln -s  /sbin/init.d/afs  afs.rc

@@ -1,0 +1,21 @@
+## <a name="Enabling AFS Login on Digital UN"></a> Enabling AFS Login on Digital UNIX Systems
+
+On Digital UNIX systems, the AFS initialization script automatically incorporates the AFS authentication library file into the Security Integration Architecture (SIA) matrix on the machine, so that users with AFS accounts obtain a token at login. In this section you copy the library file to the appropriate location.
+
+For more information on SIA, see the Digital UNIX reference page for matrix.conf, or consult the section on security in your Digital UNIX documentation. Note: If the machine runs both the DCE and AFS client software, AFS must start after DCE. Consult the AFS initialization script for suggested symbolic links to create for correct ordering. Also, the system startup script order must initialize SIA before any long-running process that uses authentication.
+
+Perform the following steps to enable AFS login.
+
+1. Mount the AFS CD-ROM for Digital UNIX on the local /cdrom directory, if it is not already. Change directory as indicated.
+
+       # cd /cdrom/alpha_dux40/lib/afs
+
+1. Copy the appropriate AFS authentication library file to the local /usr/shlib directory.
+
+If you use the AFS Authentication Server (kaserver process) in the cell:
+
+       # cp  libafssiad.so  /usr/shlib
+
+If you use a Kerberos implementation of AFS authentication, rename the library file as you copy it:
+
+       # cp  libafssiad.krb.so  /usr/shlib/libafssiad.so

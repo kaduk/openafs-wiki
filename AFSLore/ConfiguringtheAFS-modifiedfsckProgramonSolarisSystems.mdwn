@@ -1,0 +1,114 @@
+In this section, you make modifications to guarantee that the appropriate fsck program runs on AFS server partitions. The fsck program provided with the operating system must never run on AFS server partitions. Because it does not recognize the structures that the File Server uses to organize volume data, it removes all of the data. To repeat:
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+1. Create the /usr/lib/fs/afs directory to house the AFS-modified fsck program and related files.
+
+       # mkdir /usr/lib/fs/afs
+
+       # cd /usr/lib/fs/afs
+
+       2. Copy the vfsck binary to the newly created directory, changing the name as you do so.
+
+       # cp  /cdrom/sysname/dest/root.server/etc/vfsck  fsck
+
+1. Working in the /usr/lib/fs/afs directory, create the following links to Solaris libraries:
+
+       # ln -s /usr/lib/fs/ufs/clri
+       # ln -s /usr/lib/fs/ufs/df
+       # ln -s /usr/lib/fs/ufs/edquota
+       # ln -s /usr/lib/fs/ufs/ff
+       # ln -s /usr/lib/fs/ufs/fsdb
+       # ln -s /usr/lib/fs/ufs/fsirand
+       # ln -s /usr/lib/fs/ufs/fstyp
+       # ln -s /usr/lib/fs/ufs/labelit
+       # ln -s /usr/lib/fs/ufs/lockfs
+       # ln -s /usr/lib/fs/ufs/mkfs
+       # ln -s /usr/lib/fs/ufs/mount
+       # ln -s /usr/lib/fs/ufs/ncheck
+       # ln -s /usr/lib/fs/ufs/newfs
+       # ln -s /usr/lib/fs/ufs/quot
+       # ln -s /usr/lib/fs/ufs/quota
+       # ln -s /usr/lib/fs/ufs/quotaoff
+       # ln -s /usr/lib/fs/ufs/quotaon
+       # ln -s /usr/lib/fs/ufs/repquota
+       # ln -s /usr/lib/fs/ufs/tunefs
+       # ln -s /usr/lib/fs/ufs/ufsdump
+       # ln -s /usr/lib/fs/ufs/ufsrestore
+       # ln -s /usr/lib/fs/ufs/volcopy
+
+1. Append the following line to the end of the file /etc/dfs/fstypes.
+
+       afs AFS Utilities
+
+1. Edit the /sbin/mountall file, making two changes.
+
+\* Add an entry for AFS to the case statement for option 2, so that it reads as follows:
+
+       case "$2" in
+       ufs)    foptions="-o p"
+               ;;
+       afs)    foptions="-o p"
+               ;;
+       s5)     foptions="-y -t /var/tmp/tmp$$ -D"
+               ;;
+       *)      foptions="-y"
+               ;;
+
+### <a name="Solaris 6"></a> Solaris 6
+
+\* Edit the file so that all AFS and UFS partitions are checked in parallel. Replace the following section of code:
+
+       # For  fsck purposes, we make a distinction between ufs and
+       # other file systems
+       #
+       if [ "$fstype" = "ufs" ]; then
+            ufs_fscklist="$ufs_fscklist $fsckdev"
+            saveentry $fstype "$OPTIONS" $special $mountp
+            continue
+       fi
+
+with the following section of code:
+
+       # For fsck purposes, we make a distinction between ufs/afs
+       # and other file systems.
+       #
+       if [ "$fstype" = "ufs" -o "$fstype" = "afs" ]; then
+            ufs_fscklist="$ufs_fscklist $fsckdev"
+            saveentry $fstype "$OPTIONS" $special $mountp
+            continue
+       fi
+
+### <a name="Solaris 9"></a> Solaris 9
+
+\* Edit the file so that all AFS and UFS partitions are checked in parallel.
+
+You must copy /usr/lib/fs/ufs/fsckall to /usr/lib/fs/afs/fsckall and change the word ufs to afs in file /usr/lib/fs/afs/fsckall as indicated below. This ensures that AFS fsck is called on vice partitions.
+
+1. 1. 1. Copy /usr/lib/fs/ufs/fsckall to /usr/lib/fs/afs/fsckall.
+
+    cp /usr/lib/fs/ufs/fsckall /usr/lib/fs/afs/fsckall
+
+1. 1. 1. Edit /usr/lib/fs/afs/fsckall and replace ufs with afs as indicated below.
+
+Original:
+
+    for fsckdev in $*; do
+    /usr/sbin/fsck -m -F ufs $fsckdev >/dev/null 2>&1
+
+Modified:
+
+    for fsckdev in $*; do
+    /usr/lib/fs/afs/fsck -m -F afs $fsckdev >/dev/null 2>&1
+
+Also, this section of the same file:
+
+Original:
+
+            echo "checking ufs filesystems"
+            /usr/sbin/fsck -o p $ufs_fscklist
+
+Modified:
+
+            echo "checking afs filesystems"
+            /usr/lib/fs/afs/fsck -o p $ufs_fscklist

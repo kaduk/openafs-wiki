@@ -1,0 +1,42 @@
+If you have configured the machine to use the ml dynamic loader program, reboot the machine and log in again as the local superuser root.
+
+       # cd /
+
+       # shutdown -i6 -g0 -y
+
+       login: root
+       Password: root_password
+
+Issue the chkconfig command to activate the afsserver configuration variable.
+
+       # /etc/chkconfig -f afsserver on
+
+If you have configured this machine as an AFS client and want to it remain one, also issue the chkconfig command to activate the afsclient configuration variable.
+
+       # /etc/chkconfig -f afsclient on
+
+Run the AFS initialization script.
+
+       # /etc/init.d/afs  start
+
+[[Confirm Cache Manager Initialization|Main/ConfirmCacheManagerInitialization]]
+
+## <a name="Automatically Start AFS on Syste"></a> Automatically Start AFS on System Boot
+
+Now that you have confirmed that the AFS initialization script works correctly, take the action necessary to have it run automatically at each reboot.
+
+Change to the /etc/init.d directory and issue the ln -s command to create symbolic links that incorporate the AFS initialization script into the IRIX startup and shutdown sequence.
+
+       # cd /etc/init.d
+
+       # ln -s ../init.d/afs /etc/rc2.d/S35afs
+
+       # ln -s ../init.d/afs /etc/rc0.d/K35afs
+
+(Optional) There are now copies of the AFS initialization file in both the /usr/vice/etc and /etc/init.d directories. If you want to avoid potential confusion by guaranteeing that they are always the same, create a link between them. You can always retrieve the original script from the AFS CD-ROM if necessary.
+
+       # cd /usr/vice/etc
+
+       # rm afs.rc
+
+       # ln -s  /etc/init.d/afs  afs.rc

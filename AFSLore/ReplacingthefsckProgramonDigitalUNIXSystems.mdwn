@@ -1,0 +1,27 @@
+In this section, you make modifications to guarantee that the appropriate fsck program runs on AFS server partitions. The fsck program provided with the operating system must never run on AFS server partitions. Because it does not recognize the structures that the File Server uses to organize volume data, it removes all of the data. To repeat:
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+On Digital UNIX systems, the files /sbin/fsck and /usr/sbin/fsck are driver programs. Rather than replacing either of them, you replace the actual binary included in the Digital UNIX distribution as /sbin/ufs\_fsck and /usr/sbin/ufs\_fsck.
+
+1. Install the vfsck binary to the /sbin and /usr/sbin directories. The AFS CD-ROM must still be mounted at the /cdrom directory.
+
+       # cd /cdrom/alpha_dux40/root.server/etc
+
+       # cp vfsck /sbin/vfsck
+
+       # cp vfsck /usr/sbin/vfsck
+
+1. Rename the Digital UNIX fsck binaries and create symbolic links to the vfsck program.
+
+       # cd /sbin
+
+       # mv ufs_fsck ufs_fsck.noafs
+
+       # ln -s vfsck ufs_fsck
+
+       # cd /usr/sbin
+
+       # mv ufs_fsck ufs_fsck.noafs
+
+       # ln -s vfsck ufs_fsck

@@ -1,0 +1,21 @@
+The insmod program is the dynamic kernel loader for Linux. Linux does not support incorporation of AFS modifications during a kernel build.
+
+For AFS to function correctly, the insmod program must run each time the machine reboots, so the AFS initialization script (included on the AFS CD-ROM) invokes it automatically. The script also includes commands that select the appropriate AFS library file automatically. In this section you run the script.
+
+In later sections you verify that the script correctly initializes all AFS components, then activate a configuration variable, which results in the script being incorporated into the Linux startup and shutdown sequence.
+
+1. Mount the AFS CD-ROM for Linux on the local /cdrom directory. For instructions on mounting CD-ROMs (either locally or remotely via NFS), see your Linux documentation. Then change directory as indicated.
+
+       # cd  /cdrom/i386_linux22/root.client/usr/vice/etc
+
+1. Copy the AFS kernel library files to the local /usr/vice/etc/modload directory. The filenames for the libraries have the format libafs-version.o, where version indicates the kernel build level. The string .mp in the version indicates that the file is appropriate for machines running a multiprocessor kernel.
+
+       # cp -rp  modload  /usr/vice/etc
+
+1. Copy the AFS initialization script to the local directory for initialization files (by convention, /etc/rc.d/init.d on Linux machines). Note the removal of the .rc extension as you copy the script.
+
+       # cp -p   afs.rc  /etc/rc.d/init.d/afs
+
+1. Run the AFS initialization script to load AFS extensions into the kernel. You can ignore any error messages about the inability to start the BOS Server or the Cache Manager or AFS client.
+
+       # /etc/rc.d/init.d/afs  start

@@ -1,0 +1,38 @@
+Every AFS file server machine must have at least one partition or logical volume dedicated to storing AFS volumes. Each server partition is mounted at a directory named /vicepxx, where xx is one or two lowercase letters. The /vicepxx directories must reside in the file server machine's root directory, not in one of its subdirectories (for example, /usr/vicepa is not an acceptable directory location). For additional information, see Performing Platform-Specific Procedures.
+
+AFS supports use of both EFS and XFS partitions for housing AFS volumes. SGI encourages use of XFS partitions.
+
+1. Create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). Repeat the command for each partition.
+
+       # mkdir /vicepxx
+
+1. Add a line with the following format to the file systems registry file, /etc/fstab, for each partition (or logical volume created with the XLV volume manager) to be mounted on one of the directories created in the previous step.
+
+For an XFS partition or logical volume:
+
+       /dev/dsk/disk  /vicepxx  xfs  rw,raw=/dev/rdsk/disk  0  0
+
+For an EFS partition:
+
+       /dev/dsk/disk  /vicepxx  efs  rw,raw=/dev/rdsk/disk  0  0
+
+The following are examples of an entry for each file system type:
+
+       /dev/dsk/dks0d2s6 /vicepa  xfs rw,raw=/dev/rdsk/dks0d2s6  0 0
+       /dev/dsk/dks0d3s1 /vicepb  efs rw,raw=/dev/rdsk/dks0d3s1  0 0
+
+1. Create a file system on each partition that is to be mounted on a /vicepxx directory. The following commands are probably appropriate, but consult the IRIX documentation for more information. In both cases, raw\_device is a raw device name like /dev/rdsk/dks0d0s0 for a single disk partition or /dev/rxlv/xlv0 for a logical volume.
+
+For XFS file systems, include the indicated options to configure the partition or logical volume with inodes large enough to accommodate AFS-specific information:
+
+       # mkfs -t xfs -i size=512 -l size=4000b raw_device
+
+For EFS file systems:
+
+       # mkfs -t efs raw_device
+
+1. Mount each partition by issuing either the mount -a command to mount all partitions at once or the mount command to mount each partition in turn.
+
+1. (Optional) If you have configured partitions or logical volumes to use XFS, issue the following command to verify that the inodes are configured properly (are large enough to accommodate AFS-specific information). If the configuration is correct, the command returns no output. Otherwise, it specifies the command to run in order to configure each partition or logical volume properly.
+
+       # /usr/afs/bin/xfs_size_check

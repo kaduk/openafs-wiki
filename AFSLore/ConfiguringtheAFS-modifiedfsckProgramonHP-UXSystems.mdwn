@@ -1,0 +1,38 @@
+In this section, you make modifications to guarantee that the appropriate fsck program runs on AFS server partitions. The fsck program provided with the operating system must never run on AFS server partitions. Because it does not recognize the structures that the File Server uses to organize volume data, it removes all of the data. To repeat:
+
+Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
+
+On HP-UX systems, there are several configuration files to install in addition to the AFS-modified fsck program (the vfsck binary).
+
+1. Create the command configuration file /sbin/lib/mfsconfig.d/afs. Use a text editor to place the indicated two lines in it:
+
+       format_revision 1
+       fsck            0        m,P,p,d,f,b:c:y,n,Y,N,q,
+
+1. Create and change directory to an AFS-specific command directory called /sbin/fs/afs.
+
+       # mkdir /sbin/fs/afs
+
+       # cd  /sbin/fs/afs
+
+1. Copy the AFS-modified version of the fsck program (the vfsck binary) and related files from the distribution directory to the new AFS-specific command directory.
+
+       # cp -p /cdrom/hp_ux110/root.server/etc/*  .
+
+1. Change the vfsck binary's name to fsck and set the mode bits appropriately on all of the files in the /sbin/fs/afs directory.
+
+       # mv  vfsck  fsck
+
+       # chmod  755  *
+
+1. Edit the /etc/fstab file, changing the file system type for each AFS server partition from hfs to afs. This ensures that the AFS-modified fsck program runs on the appropriate partitions.
+
+The sixth line in the following example of an edited file shows an AFS server partition, /vicepa.
+
+       /dev/vg00/lvol1 / hfs defaults 0 1
+       /dev/vg00/lvol4 /opt hfs defaults 0 2
+       /dev/vg00/lvol5 /tmp hfs defaults 0 2
+       /dev/vg00/lvol6 /usr hfs defaults 0 2
+       /dev/vg00/lvol8 /var hfs defaults 0 2
+       /dev/vg00/lvol9 /vicepa afs defaults 0 2
+       /dev/vg00/lvol7 /usr/vice/cache hfs defaults 0 2

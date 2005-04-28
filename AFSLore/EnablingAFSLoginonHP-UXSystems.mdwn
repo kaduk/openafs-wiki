@@ -1,0 +1,71 @@
+At this point you incorporate AFS into the operating system's Pluggable Authentication Module (PAM) scheme. PAM integrates all authentication mechanisms on the machine, including login, to provide the security infrastructure for authenticated access to and from the machine.
+
+Explaining PAM is beyond the scope of this document. It is assumed that you understand the syntax and meanings of settings in the PAM configuration file (for example, how the other entry works, the effect of marking an entry as required, optional, or sufficient, and so on).
+
+The following instructions explain how to alter the entries in the PAM configuration file for each service for which you wish to use AFS authentication. Other configurations possibly also work, but the instructions specify the recommended and tested configuration. Note: The instructions specify that you mark each entry as optional. However, marking some modules as optional can mean that they grant access to the corresponding service even when the user does not meet all of the module's requirements. In some operating system revisions, for example, if you mark as optional the module that controls login via a dial-up connection, it allows users to login without providing a password. See the IBM AFS Release Notes for a discussion of any limitations that apply to this operating system.
+
+Also, with some operating system versions you must install patches for PAM to interact correctly with certain authentication programs. For details, see the IBM AFS Release Notes.
+
+The recommended AFS-related entries in the PAM configuration file make use of one or more of the following three attributes.
+
+    try_first_pass
+
+This is a standard PAM attribute that can be included on entries after the first one for a service; it directs the module to use the password that was provided to the first module. For the AFS module, it means that AFS authentication succeeds if the password provided to the module listed first is the user's correct AFS password. For further discussion of this attribute and its alternatives, see the operating system's PAM documentation.
+
+    ignore_root
+
+This attribute, specific to the AFS PAM module, directs it to ignore not only the local superuser root, but also any user with UID 0 (zero).
+
+    setenv_password_expires
+
+This attribute, specific to the AFS PAM module, sets the environment variable PASSWORD\_EXPIRES to the expiration date of the user's AFS password, which is recorded in the Authentication Database.
+
+Perform the following steps to enable AFS login.
+
+1. Mount the AFS CD-ROM for HP-UX on the /cdrom directory, if it is not already. Then change directory as indicated.
+
+       # cd /usr/lib/security
+
+1. Copy the AFS authentication library file to the /usr/lib/security directory. Then create a symbolic link to it whose name does not mention the version. Omitting the version eliminates the need to edit the PAM configuration file if you later update the library file.
+
+If you use the AFS Authentication Server (kaserver process) in the cell:
+
+       # cp /cdrom/hp_ux110/lib/pam_afs.so.1  .
+
+       # ln -s  pam_afs.so.1  pam_afs.so
+
+If you use a Kerberos implementation of AFS authentication:
+
+       # cp /cdrom/hp_ux110/lib/pam_afs.krb.so.1   .
+
+       # ln -s pam_afs.krb.so.1 pam_afs.so
+
+1. Edit the Authentication management section of the HP-UX PAM configuration file, /etc/pam.conf by convention. The entries in this section have the value auth in their second field.
+
+First edit the standard entries, which refer to the HP-UX PAM module (usually, the file /usr/lib/security/libpam\_unix.1) in their fourth field. For each service for which you want to use AFS authentication, edit the third field of its entry to read optional. The pam.conf file in the HP-UX distribution usually includes standard entries for the login and ftp services, for instance.
+
+If there are services for which you want to use AFS authentication, but for which the pam.conf file does not already include a standard entry, you must create that entry and place the value optional in its third field. For instance, the HP-UX pam.conf file does not usually include standard entries for the remsh or telnet services.
+
+Then create an AFS-related entry for each service, placing it immediately below the standard entry. The following example shows what the Authentication Management section looks like after you have you edited or created entries for the services mentioned previously. Note that the example AFS entries appear on two lines only for legibility.
+
+       login   auth  optional  /usr/lib/security/libpam_unix.1
+       login   auth  optional  /usr/lib/security/pam_afs.so      \
+             try_first_pass  ignore_root  setenv_password_expires
+       ftp     auth  optional  /usr/lib/security/libpam_unix.1
+       ftp     auth  optional  /usr/lib/security/pam_afs.so      \
+             try_first_pass  ignore_root
+       remsh   auth  optional  /usr/lib/security/libpam_unix.1
+       remsh   auth  optional  /usr/lib/security/pam_afs.so      \
+             try_first_pass  ignore_root
+       telnet  auth  optional  /usr/lib/security/libpam_unix.1
+       telnet  auth  optional  /usr/lib/security/pam_afs.so      \
+             try_first_pass  ignore_root  setenv_password_expires
+
+1. If you use the Common Desktop Environment (CDE) on the machine and want users to obtain an AFS token as they log in, also add or edit the following four entries in the Authentication management section. Note that the AFS-related entries appear on two lines here only for legibility.
+
+       dtlogin   auth  optional  /usr/lib/security/libpam_unix.1
+       dtlogin   auth  optional  /usr/lib/security/pam_afs.so     \
+             try_first_pass  ignore_root
+       dtaction  auth  optional  /usr/lib/security/libpam_unix.1
+       dtaction  auth  optional  /usr/lib/security/pam_afs.so     \
+             try_first_pass  ignore_root
