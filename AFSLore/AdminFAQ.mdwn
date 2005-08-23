@@ -1077,9 +1077,7 @@ Using tcpdump I see the following traffic. What runs on the port 4444?
 This is the 5-&gt;4 ticket conversion service on UDP port 4444. Assuming your afs servers know how to deal with krb5 tickets (since openafs-1.2.10? and 1.3.6x?) include the following in /etc/krb5.conf:
 
     [appdefaults]
-            libkafs = {
-                    afs-use-524 = local
-            }
+            afs-use-524 = local
 
 ### <a name="3.44 I get error message trhough"></a> 3.44 I get error message trhough syslogd: "afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)"
 
