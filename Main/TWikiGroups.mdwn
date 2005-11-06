@@ -6,7 +6,7 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 <form action="http://www.dementia.org/twiki//edit/%WEB%/" method="get">
   <ul>
-    <li> New Group: <input name="topic" size="30" type="text" value="NameGroup" /> <input name="templatetopic" type="hidden" value="TWikiGroupTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="onlynewtopic" type="hidden" value="on" /> <input type="submit" value="Add" /><ul>
+    <li> New Group: <input name="topic" size="30" type="text" value="NameGroup" /> <input type="submit" value="Add" /> <input name="templatetopic" type="hidden" value="TWikiGroupTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="onlynewtopic" type="hidden" value="on" /><ul>
         <li><strong><em>Note:</em></strong> A group topic name must be a [[TWiki/WikiWord]] and <strong><em>must</em></strong> end in <code>...Group</code>. New topics are based on [[Main/TWikiGroupTemplate]]</li>
       </ul>
     </li>
@@ -20,5 +20,3 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 - A topic revision can be undone by a member of the [[TWikiAdminGroup]] in case it needs to be.
 
 **_Related topics:_** [[TWikiAccessControl]], [[WebPreferences]], [[TWikiUsers]], [[WikiCulture]]
-
--- TWiki:Main.PeterThoeny - 04 Aug 2004 %BR% -- TWiki:Main.AurelioAHeckert - 03 Aug 2004

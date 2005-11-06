@@ -1,3 +1,26 @@
-The site-level preferences are located in [[TWiki.%TOPIC%|TWiki/TOPIC]]
-
--- [[PeterThoeny]] - 20 Dec 2003
+<form action="http://www.dementia.org/twiki/viewauth/Main/WebHome" enctype="multipart/form-data" method="post" name="editpreferences">
+  <p>
+  </p>
+  <p>
+  </p>
+  <table border="1" cellpadding="0" cellspacing="0">
+    <tr>
+      <td> Site-level preferences are located in [[TWiki/TOPIC]], however this [[Main/TOPIC]] prefs topic has overrride priority and should be used for local customisations. This allows for easier upgrades as you don't need to worry about the shipped preferences clobbering yours. It's easier to keep a handle on if you only copy over the settings you actually change. </td>
+    </tr>
+  </table>
+  <p>
+  </p><input name="prefsaction" type="submit" value="Edit" /> <em>(Click for form-based editing of existing preferences.)</em><p>
+  </p>
+  <p>
+  </p>
+  <ul>
+    <li><code>FINALPREFERENCES</code> locks site-level preferences that are <strong>not</strong> allowed to be overridden by [[Main/WebPreferences]] or user preferences: <ul>
+        <li> Set FINALPREFERENCES = ATTACHFILESIZELIMIT, PREVIEWBGIMAGE, WIKITOOLNAME, WIKIWEBMASTER, SMTPMAILHOST, SMTPSENDERHOST, ALLOWWEBMANAGE, PROXYHOST, PROXYPORT </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+  </p>
+  <p>
+  </p>
+</form>
