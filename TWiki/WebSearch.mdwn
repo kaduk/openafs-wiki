@@ -1,33 +1,35 @@
-<form action="http://www.dementia.org/twiki//view/%INCLUDINGWEB%/%INCLUDINGTOPIC%">
-  <table border="0" cellpadding="0" cellspacing="3">
-    <tr>
-      <td><input name="search" size="32" type="text" value="" /><input type="submit" value="Search" />%BR% <input id="web" name="web" type="checkbox" /><label for="web">All public webs</label>
-      </td>
-      <td>
-        <ul>
-          <li>[[Main/SearchHelp]]</li>
-          <li>[[INCLUDINGWEB/WebSearchAdvanced]]</li>
-        </ul>
-      </td>
-    </tr>
-    <tr>
-      <td><input checked id="textbody" name="scope" type="radio" value="text" /><label for="textbody">Text body  </label><input id="topictitle" name="scope" type="radio" value="topic" /><label for="topictitle">Topic title  </label><input id="both" name="scope" type="radio" value="all" /><label for="both">Both </label>
-      </td>
-    </tr>
-  </table>
-</form>
+# <a name="Web Search"></a> Web Search
 
 # <a name="TWiki Installation Error"></a> TWiki Installation Error
 
 Incorrect format of search template (missing sections? There should be 4 %SPLIT% tags)
 
-- **[Topic index](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=\.*)**: List of %INCLUDINGWEB% topics in alphabetical order. <br />**|[All](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=\.*)|[A](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ea)|[B](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eb)|[C](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ec)|[D](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ed)|[E](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ee)|[F](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ef)|[G](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eg)|[H](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eh)|[I](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ei)|[J](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ej)|[K](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ek)|[L](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5El)|[M](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Em)|[N](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5En)|[O](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eo)|[P](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ep)|[Q](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eq)|[R](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Er)|[S](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Es)|[T](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Et)|[U](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eu)|[V](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ev)|[W](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ew)|[X](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ex)|[Y](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ey)|[Z](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ez)| <br /> | [All](http://www.dementia.org/twiki//search/%INCLUDINGWEB%/?scope=topic&regex=on&bookview=on&search=\.*)** topics in [[BookView]] **|**
+<a name="twikiSearchForm"></a>
 
-- **Jump to topic**: If you already know the name of the topic, enter the name of the topic into the [[GoBox]] at the top
+<div>
+  <form action="http://www.dementia.org/twiki/view/%INCLUDINGWEB%/%INCLUDINGTOPIC%">
+    <table border="0" cellpadding="0" cellspacing="0" id="twikiSearchTable">
+      <tr>
+        <td colspan="2">
+          <div><input name="search" size="40" type="text" value="" /> <input type="submit" value="Search" /></div>
+          <div><span> [[INCLUDINGWEB/WebSearchAdvanced]] | [[TWiki/SearchHelp]]</span></div>
+          <br />
+          <div style="padding: 1em 0 0 0">TIP: to search for all topics that contain <code>"SOAP"</code>, <code>"WSDL"</code>, a literal <code>"web service"</code>, but not <code>"shampoo"</code>, write: <code>soap wsdl "web service" -shampoo</code></div>
+        </td>
+      </tr>
+      <tr>
+        <th>Search where:</th>
+        <td><input checked id="textbody" name="scope" type="radio" value="text" /><label for="textbody"> Text body</label>   <input id="topictitle" name="scope" type="radio" value="topic" /><label for="topictitle"> Topic title</label>   <input id="both" name="scope" type="radio" value="all" /><label for="both"> Both body and title</label>
+          <hr /><input id="web" name="web" type="checkbox" /><label for="web"> All public webs</label><span>(otherwise search %INCLUDINGWEB% Web only)</span></td>
+      </tr>
+    </table>
+  </form>
+</div>
 
-- ** [[WebChanges]]**: Find out what topics in %INCLUDINGWEB% have changed recently
-
-- **[[How to edit text|TWiki/GoodStyle]]**:
-  - Make changes to topics in [[GoodStyle]],
-  - Learn the [[TextFormattingRules]], and
-  - Have a look at the [[TextFormattingFAQ]]
+<div><strong>Other search options:</strong><ul>
+    <li><img align="top" alt="arrowright" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/arrowright.gif" width="16" /> If you already know the name of the topic, enter the name of the topic into the [[TWiki/GoBox]] at the top </li>
+    <li><img align="top" alt="indexlist" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/indexlist.gif" width="16" /> <a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=\.*">List all topics in the %INCLUDINGWEB% web in alphabetical order</a></li>
+    <li><img align="top" alt="filter" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/filter.gif" width="16" /> List topics that start with the letter: <a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ea">A</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eb">B</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ec">C</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ed">D</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ee">E</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ef">F</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eg">G</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eh">H</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ei">I</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ej">J</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ek">K</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5El">L</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Em">M</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5En">N</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eo">O</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ep">P</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eq">Q</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Er">R</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Es">S</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Et">T</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Eu">U</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ev">V</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ew">W</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ex">X</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ey">Y</a><span> | </span><a href="http://www.dementia.org/twiki/search/%INCLUDINGWEB%/?scope=topic&regex=on&search=%5Ez">Z</a></li>
+    <li><img align="top" alt="recentchanges" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/recentchanges.gif" width="16" /> [[INCLUDINGWEB/WebChanges]]</li>
+  </ul>
+</div>

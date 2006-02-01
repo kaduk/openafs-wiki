@@ -1,0 +1,167 @@
+# <a name="Package &lt;code&gt;TWiki::Render="></a> Package =TWiki::Render
+
+This module provides most of the actual HTML rendering code in TWiki.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Render="> Package TWiki::Render</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>renderParent</strong> ($we"> ObjectMethod renderParent <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>renderMoved</strong> ($web"> ObjectMethod renderMoved <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *render_FormField*"> ObjectMethod renderFormField <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>make_AnchorName</strong> ("> ObjectMethod makeAnchorName <tt>($anchorName,$compatibilityMode) -&gt; $anchorName</tt></a></li>
+        <li><a href="#ObjectMethod <strong>internalLink</strong> ($th"> ObjectMethod internalLink <tt>($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb) -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod <strong>renderFORMFIELD</strong> ("> ObjectMethod renderFORMFIELD <tt>(%params,$topic,$web) -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod *get_RenderedVersio"> ObjectMethod getRenderedVersion <tt>($text,$theWeb,$theTopic) -&gt; $html</tt></a></li>
+        <li><a href="#StaticMethod *verbatim_CallBack*"> StaticMethod verbatimCallBack <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>_TML2PlainText</strong> ($"> ObjectMethod TML2PlainText <tt>($text,$web,$topic,$opts) -&gt; $plainText</tt></a></li>
+        <li><a href="#ObjectMethod *protect_PlainText*"> ObjectMethod protectPlainText <tt>($text) -&gt; $tml</tt></a></li>
+        <li><a href="#ObjectMethod *make_TopicSummary*"> ObjectMethod makeTopicSummary <tt>($theText,$theTopic,$theWeb,$theFlags) -&gt; $tml</tt></a></li>
+        <li><a href="#ObjectMethod *take_OutProtected*"> ObjectMethod takeOutProtected <tt>(\$text,$re,\%map) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *put_BackProtected*"> ObjectMethod putBackProtected <tt>(\$text,\%map,$tag,$newtag,$callBack) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>take_OutBlocks</strong> (\"> ObjectMethod takeOutBlocks <tt>(\$text,$tag,\%map) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>put_BackBlocks</strong> (\"> ObjectMethod putBackBlocks <tt>(\$text,\%map,$tag,$newtag,$callBack) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *render_RevisionInf"> ObjectMethod renderRevisionInfo <tt>($web,$topic,$meta,$rev,$format) -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod *summariseChanges*"> ObjectMethod summariseChanges <tt>($user,$web,$topic,$orev,$nrev,$tml) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>for_EachLine</strong> ($te"> ObjectMethod forEachLine <tt>($text,\&amp;fn,\%options) -&gt; $newText</tt></a></li>
+        <li><a href="#StaticMethod *replace_TopicRefer"> StaticMethod replaceTopicReferences <tt>($text,\%options) -&gt; $text</tt></a></li>
+        <li><a href="#StaticMethod *replace_WebReferen"> StaticMethod replaceWebReferences <tt>($text,\%options) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *replace_WebInterna"> ObjectMethod replaceWebInternalReferences <tt>(\$text,\%meta,$oldWeb,$oldTopic)</tt></a></li>
+        <li><a href="#StaticMethod *render_FormFieldAr"> StaticMethod renderFormFieldArg <tt>($meta,$args) -&gt; $text</tt></a></li>
+        <li><a href="#StaticMethod <strong>breakName</strong> ($text,"> StaticMethod breakName <tt>($text,$args) -&gt; $text</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
+
+Creates a new renderer with initial state from preference values (NEWTOPICBGCOLOR, NEWTOPICFONTCOLOR NEWTOPICLINKSYMBOL LINKTOOLTIPINFO)
+
+## <a name="ObjectMethod &lt;strong&gt;renderParent&lt;/strong&gt; ($we"></a> [[ObjectMethod]] **renderParent** `($web,$topic,$meta,$params) -> $text`
+
+Render parent meta-data
+
+## <a name="ObjectMethod &lt;strong&gt;renderMoved&lt;/strong&gt; ($web"></a> [[ObjectMethod]] **renderMoved** `($web,$topic,$meta,$params) -> $text`
+
+Render moved meta-data
+
+## <a name="ObjectMethod &lt;strong&gt;render_FormField*"></a><a name="ObjectMethod *render_FormField&lt;/strong&gt; "></a> [[ObjectMethod]] **renderFormField** `($web,$topic,$meta,$params) -> $text`
+
+Render meta-data for a single formfield
+
+## <a name="ObjectMethod &lt;strong&gt;make_AnchorName&lt;/strong&gt; ("></a> [[ObjectMethod]] **makeAnchorName** `($anchorName,$compatibilityMode) -> $anchorName`
+
+- `$anchorName` -
+- `$compatibilityMode` -
+
+Build a valid HTML anchor name
+
+## <a name="ObjectMethod &lt;strong&gt;internalLink&lt;/strong&gt; ($th"></a> [[ObjectMethod]] **internalLink** `($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb) -> $html`
+
+Generate a link.
+
+SMELL: why can topic be spaced out? is this to support auto squishing of [[Spaced Topic Naming|Main/SpacedTopicNaming]]? and [[lowercase Spaced Topic Naming|Main/LowercaseSpacedTopicNaming]]
+
+- `$theWeb` - the web containing the topic
+- `$theTopic` - the topic to be lunk
+- `$theLinkText` - text to use for the link
+- `$theAnchor` - the link anchor, if any
+- `$doLinkToMissingPages` - boolean: false means suppress link for non-existing pages
+- `$doKeepWeb` - boolean: true to keep web prefix (for non existing Web.TOPIC)
+
+Called by \_handleWikiWord and \_handleSquareBracketedLink and by Func::internalLink
+
+Calls \_renderWikiWord, which in turn will use Plurals.pm to match fold plurals to equivalency with their singular form
+
+SMELL: why is this available to Func?
+
+## <a name="ObjectMethod &lt;strong&gt;renderFORMFIELD&lt;/strong&gt; ("></a> [[ObjectMethod]] **renderFORMFIELD** `(%params,$topic,$web) -> $html`
+
+Returns the fully rendered expansion of a tag.
+
+## <a name="ObjectMethod &lt;strong&gt;get_RenderedVersio"></a> [[ObjectMethod]] \*getRenderedVersion `($text,$theWeb,$theTopic) -> $html`
+
+The main rendering function.
+
+## <a name="StaticMethod &lt;strong&gt;verbatim_CallBack*"></a> [[StaticMethod]] \*verbatimCallBack ``
+
+Callback for use with putBackBlocks that replaces &lt; and &gt; by their HTML entities &amp;lt; and &amp;gt;
+
+## <a name="ObjectMethod &lt;strong&gt;_TML2PlainText&lt;/strong&gt; ($"></a> [[ObjectMethod]] **TML2PlainText** `($text,$web,$topic,$opts) -> $plainText`
+
+Clean up TWiki text for display as plain text without pushing it through the full rendering pipeline. Intended for generation of topic and change summaries. Adds nop tags to prevent TWiki subsequent rendering; nops get removed at the very end.
+
+Defuses TML.
+
+$opts:
+
+- showvar - shows %VAR% names if not expanded
+- expandvar - expands %VARS%
+- nohead - strips ---+ headings at the top of the text
+- showmeta - does not filter meta-data
+
+## <a name="ObjectMethod &lt;strong&gt;protect_PlainText*"></a> [[ObjectMethod]] \*protectPlainText `($text) -> $tml`
+
+Protect plain text from expansions that would normally be done duing rendering, such as wikiwords. Topic summaries, for example, have to be protected this way.
+
+## <a name="ObjectMethod &lt;strong&gt;make_TopicSummary*"></a> [[ObjectMethod]] \*makeTopicSummary `($theText,$theTopic,$theWeb,$theFlags) -> $tml`
+
+Makes a plain text summary of the given topic by simply trimming a bit off the top. Truncates to $TMTRUNC chars or, if a number is specified in $theFlags, to that length.
+
+## <a name="ObjectMethod &lt;strong&gt;take_OutProtected*"></a> [[ObjectMethod]] \*takeOutProtected `(\$text,$re,\%map) -> $text`
+
+- `$text` - Text to process
+- `$re` - Regular expression that matches tag expressions to remove
+- `\%map` - Reference to a hash to contain the removed blocks
+
+Return value: $text with blocks removed
+
+used to extract from $text comment type tags like &lt;!DOCTYPE blah&gt;
+
+WARNING: if you want to take out &lt;!-- comments --&gt; you _will_ need to re-write all the takeOuts to use a different placeholder
+
+## <a name="ObjectMethod &lt;strong&gt;put_BackProtected*"></a> [[ObjectMethod]] \*putBackProtected `(\$text,\%map,$tag,$newtag,$callBack) -> $text`
+
+Return value: $text with blocks added back
+
+- `\$text` - reference to text to process
+- `\%map` - map placeholders to blocks removed by takeOutBlocks
+
+Reverses the actions of takeOutProtected.
+
+## <a name="ObjectMethod &lt;strong&gt;take_OutBlocks&lt;/strong&gt; (\"></a> [[ObjectMethod]] **takeOutBlocks** `(\$text,$tag,\%map) -> $text`
+
+- `$text` - Text to process
+- `$tag` - XHTML-style tag.
+- `\%map` - Reference to a hash to contain the removed blocks
+
+Return value: $text with blocks removed
+
+Searches through $text and extracts blocks delimited by a tag, appending each onto the end of the @buffer and replacing with a token string which is not affected by TWiki rendering. The text after these substitutions is returned.
+
+Parameters to the open tag are recorded.
+
+This is _different_ to takeOutProtected, because it requires tags to be on their own line. it also supports a callback for post- processing the data before re-insertion.
+
+## <a name="ObjectMethod &lt;strong&gt;put_BackBlocks&lt;/strong&gt; (\"></a> [[ObjectMethod]] **putBackBlocks** `(\$text,\%map,$tag,$newtag,$callBack) -> $text`
+
+Return value: $text with blocks added back
+
+- `\$text` - reference to text to process
+- `\%map` - map placeholders to blocks removed by takeOutBlocks
+- `$tag` - Tag name processed by takeOutBlocks
+- `$newtag` - Tag name to use in output, in place of $tag. If undefined, uses $tag.
+- `$callback` - Reference to function to call on each block being inserted (optional)
+
+Reverses the actions of takeOutBlocks.
+
+Each replaced block is processed by the callback (if there is one) before re-insertion.
+
+Parameters to the outermost cut block are replaced into the open tag, even if that tag is changed. This allows things like &lt;verbatim class=''&gt; to be mapped to &lt;pre class=''&gt;
+
+Cool, eh what? Jolly good show.
+
+And if you set $newtag to '', we replace the taken out block with the valuse itself
+
+- which i'm using to stop the rendering process, but then at the end put in the html directly (for tag. ---++ ObjectMethod \*renderRevisionInfo\* `($web,$topic,$meta,$rev,$format) -> $string` Obtain and render revision info for a topic. \* =$web= - the web of the topic \* =$topic= - the topic \* =$meta= if specified, get rev info from here. If not specified, or meta contains rev info for a different version than the one requested, will reload the topic \* =$rev= - the rev number, defaults to latest rev \* =$format= - the render format, defaults to =$rev - $time - $wikiusername= =$format= can contain the following keys for expansion: | =$web= | the web name | | =$topic= | the topic name | | =$rev= | the rev number | | =$date= | the date of the rev (no time) | | =$time= | the full date and time of the rev | | =$comment= | the comment | | =$username= | the login of the saving user | | =$wikiname= | the wikiname of the saving user | | =$wikiusername= | the web.wikiname of the saving user | ---++ ObjectMethod \*summariseChanges\* `($user,$web,$topic,$orev,$nrev,$tml) -> $text` \* =$user= - user (null to ignore permissions) \* =$web= - web \* =$topic= - topic \* =$orev= - older rev \* =$nrev= - later rev \* =$tml= - if true will generate renderable TML (i.e. HTML with NOPs. if false will generate a summary suitable for use in plain text (mail, for example) Generate a (max 3 line) summary of the differences between the revs. If there is only one rev, a topic summary will be returned. If =$tml= is not set, all HTML will be removed. In non-tml, lines are truncated to 70 characters. Differences are shown using + and - to indicate added and removed text. ---++ ObjectMethod \*forEachLine\* `($text,\&fn,\%options) -> $newText` Iterate over each line, calling =\\&amp;fn= on each. \\%options may contain: \* =pre= =&gt; true, will call fn for each line in pre blocks \* =verbatim= =&gt; true, will call fn for each line in verbatim blocks \* =noautolink= =&gt; true, will call fn for each line in =noautolink= blocks The spec of \\&amp;fn is sub fn( \\$line, \\%options ) -&gt; $newLine; the %options hash passed into this function is passed down to the sub, and the keys =in\_pre=, =in\_verbatim= and =in\_noautolink= are set boolean TRUE if the line is from one (or more) of those block types. The return result replaces $line in $newText. ---++ StaticMethod \*replaceTopicReferences\* `($text,\%options) -> $text` Callback designed for use with forEachLine, to replace topic references. \\%options contains: \* =oldWeb= =&gt; Web of reference to replace \* =oldTopic= =&gt; Topic of reference to replace \* =spacedTopic= =&gt; RE matching spaced out oldTopic \* =newWeb= =&gt; Web of new reference \* =newTopic= =&gt; Topic of new reference \* =inWeb= =&gt; the web which the text we are presently processing resides in \* =fullPaths= =&gt; optional, if set forces all links to full web.topic form For a usage example see TWiki::UI::Manage.pm ---++ StaticMethod \*replaceWebReferences\* `($text,\%options) -> $text` Callback designed for use with forEachLine, to replace web references. \\%options contains: \* =oldWeb= =&gt; Web of reference to replace \* =newWeb= =&gt; Web of new reference For a usage example see TWiki::UI::Manage.pm ---++ ObjectMethod \*replaceWebInternalReferences\* `(\$text,\%meta,$oldWeb,$oldTopic)` Change within-web wikiwords in $$text and $meta to full web.topic syntax. \\%options must include topics =&gt; list of topics that must have references to them changed to include the web specifier. ---++ StaticMethod \*renderFormFieldArg\* `($meta,$args) -> $text` Parse the arguments to a $formfield specification and extract the relevant formfield from the given meta data. ---++ StaticMethod \*breakName\* `($text,$args) -> $text` \* =$text= - text to "break" \* =$args= - string of format (\\d+)([,\\s\*]\\.\\.\\.)?) Hyphenates $text every $1 characters, or if $2 is "..." then shortens to $1 characters and appends "..." (making the final string $1+3 characters long) \_Moved from Search.pm because it was obviously unhappy there, as it is a rendering function\_

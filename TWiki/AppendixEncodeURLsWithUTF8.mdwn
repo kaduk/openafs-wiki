@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li><a href="#Appendix C: Encode URLs With UTF"> Appendix C: Encode URLs With UTF8 </a><ul>
+    <li><a href="#Appendix B: Encode URLs With UTF"> Appendix B: Encode URLs With UTF8 </a><ul>
         <li><a href="#Current Status"> Current Status</a></li>
         <li><a href="#Details of Implementation"> Details of Implementation</a></li>
         <li><a href="#Testing and Limitation"> Testing and Limitation</a></li>
@@ -11,9 +11,11 @@
 
 <a name="EncodeURLsUTF8"></a>
 
-# <a name="Appendix C: Encode URLs With UTF"></a> Appendix C: Encode URLs With UTF8
+# <a name="Appendix B: Encode URLs With UTF"></a> Appendix B: Encode URLs With UTF8
 
-_This page addresses implemented UTF-8 support for URLs only. The overall plan for UTF-8 support for TWiki is described in TWiki:Codev.ProposedUTF8SupportForI18N ._
+_Use internationalised characters within WikiWords and attachment names_
+
+This topic addresses implemented UTF-8 support for URLs only. The overall plan for UTF-8 support for TWiki is described in TWiki:Codev.ProposedUTF8SupportForI18N.
 
 ## <a name="Current Status"></a> Current Status
 
@@ -27,9 +29,9 @@ System requirements are updated as follows:
 - Perl 5.8 sites using any character set do not require additional modules, since CPAN:Encode is installed as part of Perl.
 - This feature still works on Perl 5.005\_03 as per [[TWikiSystemRequirements]], or Perl 5.6, as long as CPAN:Unicode::MapUTF8 is installed.
 
-ISO-2022-\*, HZ-\* and other 'non-ASCII-safe' multi-byte character sets are now specifically excluded from use as the site character set, since they interfere with TWiki ML; however, many multi-byte character sets work fine, e.g. EUC-JP, GB2312, etc.
+The following 'non-ASCII-safe' character encodings are now excluded from use as the site character set, since they interfere with TWiki markup: ISO-2022-\*, HZ-\*, Shift-JIS, MS-Kanji, GB2312, GBK, GB18030, Johab and UHC. However, many multi-byte character sets work fine, e.g. EUC-JP, EUC-KR, EUC-TW, and EUC-CN. In addition, UTF-8 can already be used, with some limitations, for East Asian languages where EUC character encodings are not acceptable - see TWiki:Codev.ProposedUTF8SupportForI18N.
 
-It's now possible to override the site character set defined in the `$siteLocale` setting in TWiki.cfg - this enables you to have a slightly different spelling of the character set in the server locale (e.g. 'eucjp') and the HTTP header sent to the browser (e.g. 'euc-jp').
+It's now possible to override the site character set defined in the `{SiteLocale}` setting in [configure](http://www.dementia.org/twiki/configure) - this enables you to have a slightly different spelling of the character set in the server locale (e.g. 'eucjp') and the HTTP header sent to the browser (e.g. 'euc-jp').
 
 This feature should also support use of Mozilla Browser with TWiki:Codev.TWikiOnMainframe (as long as mainframe web server can convert or pass through UTF-8 URLs) - however, this specific combination is not tested. Other browser-server combinations should not have any problems.
 
@@ -51,7 +53,7 @@ The code automatically detects whether a URL is UTF-8 or not, taking care to avo
 
 The main point is that you can use TWiki with international characters in [[WikiWords]] without changing your browser setup from the default, and you can also still use TWiki using non-UTF-8 URLs. This works on any Perl version from 5.005\_03 onwards and corresponds to Phase 1 of TWiki:Codev.ProposedUTF8SupportForI18N. You can have different users using different URL formats transparently on the same server.
 
-UTF-8 URLs are automatically converted to the current `$siteCharset` (from the `TWiki.cfg` locale setting), using modules such as CPAN:Encode if needed.
+UTF-8 URLs are automatically converted to the current [\{Site\}\{Charset\}](http://www.dementia.org/twiki/configure#Localisation), using modules such as CPAN:Encode if needed.
 
 TWiki generates the whole page in the site charset, e.g. ISO-8859-1 or EUC-JP, but the browser dynamically UTF-8 encodes the attachment's URL when it's used. Since Apache serves attachment downloads without TWiki being involved, TWiki's code can't do its UTF-8 decoding trick, so TWiki URL-encodes such URLs in ISO-8859-1 or whatever when generating the page, to bypass this URL encoding, ensuring that the URLs and filenames seen by Apache remain in the site charset.
 
@@ -65,4 +67,4 @@ Opera Browser on the P800 smartphone is working for page viewing but leads to co
 
 For up to date information see TWiki:Codev.EncodeURLsWithUTF8
 
--- TWiki:Main.RichardDonkin - 7 Jan 2004 %BR% -- TWiki:Main.MattWilkie - 10 Aug 2004 %BR% -- TWiki:Main.PeterThoeny - 14 Aug 2004
+**_Related Topics:_** [[AdminDocumentationCategory]]

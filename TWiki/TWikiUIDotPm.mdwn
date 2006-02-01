@@ -1,0 +1,41 @@
+# <a name="Package &lt;code&gt;TWiki::UI="></a> Package =TWiki::UI
+
+Service functions used by the UI packages
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::UI="> Package TWiki::UI</a><ul>
+        <li><a href="#StaticMethod <strong>run</strong> (\method)"> StaticMethod run <tt>(\&amp;method)</tt></a></li>
+        <li><a href="#StaticMethod <strong>check_WebExists</strong> ("> StaticMethod checkWebExists <tt>($session,$web,$topic,$op)</tt></a></li>
+        <li><a href="#StaticMethod <strong>topicExists</strong> ($ses"> StaticMethod topicExists <tt>($session,$web,$topic,$op)=&gt;boolean</tt></a></li>
+        <li><a href="#StaticMethod <strong>checkMirror</strong> ($ses"> StaticMethod checkMirror <tt>($session,$web,$topic)</tt></a></li>
+        <li><a href="#StaticMethod <strong>checkAccess</strong> ($web"> StaticMethod checkAccess <tt>($web,$topic,$mode,$user)</tt></a></li>
+        <li><a href="#StaticMethod *read_TemplateTopic"> StaticMethod readTemplateTopic <tt>($session,$theTopicName) -&gt; ($meta,$text)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;run&lt;/strong&gt; (\method)"></a> [[StaticMethod]] **run** `(\&method)`
+
+Entry point for execution of a UI function. The parameter is a reference to the method.
+
+## <a name="StaticMethod &lt;strong&gt;check_WebExists&lt;/strong&gt; ("></a> [[StaticMethod]] **checkWebExists** `($session,$web,$topic,$op)`
+
+Check if the web exists. If it doesn't, will throw an oops exception. $op is the user operation being performed.
+
+## <a name="StaticMethod &lt;strong&gt;topicExists&lt;/strong&gt; ($ses"></a> [[StaticMethod]] **topicExists** `($session,$web,$topic,$op)=>boolean`
+
+Check if the given topic exists, throwing an [[OopsException]] if it doesn't. $op is the user operation being performed.
+
+## <a name="StaticMethod &lt;strong&gt;checkMirror&lt;/strong&gt; ($ses"></a> [[StaticMethod]] **checkMirror** `($session,$web,$topic)`
+
+Checks if this web is a mirror web, throwing an [[OopsException]] if it is.
+
+## <a name="StaticMethod &lt;strong&gt;checkAccess&lt;/strong&gt; ($web"></a> [[StaticMethod]] **checkAccess** `($web,$topic,$mode,$user)`
+
+Check if the given mode of access by the given user to the given web.topic is permissible, throwing a TWiki::OopsException if not.
+
+## <a name="StaticMethod &lt;strong&gt;read_TemplateTopic"></a> [[StaticMethod]] \*readTemplateTopic `($session,$theTopicName) -> ($meta,$text)`
+
+Read a topic from the TWiki web, or if that fails from the current web.

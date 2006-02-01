@@ -1,0 +1,20 @@
+<div>
+  <form action="http://www.dementia.org/twiki/view/Main/WebHome" name="jumpForm">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th><input name="topic" onfocus="clearDefaultandCSS(this);" size="16" type="text" value="Jump" /></th>
+        <th> </th>
+        <th width="16"><input align="middle" src="http://www.dementia.org/twiki//view/Main/WebHome/arrowright.gif" title="Jump" type="image" /></th>
+      </tr>
+    </table>
+  </form>
+  <form action="http://www.dementia.org/twiki/view/%INCLUDINGWEB%/WebSearch" name="quickSearchForm">
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <th><input name="search" onfocus="clearDefaultandCSS(this);" size="16" type="text" value="Search" /></th>
+        <th> </th>
+        <th width="16"><input align="middle" src="http://www.dementia.org/twiki//view/Main/WebHome/searchtopic.gif" title="Search" type="image" /></th>
+      </tr>
+    </table>
+  </form>
+</div>

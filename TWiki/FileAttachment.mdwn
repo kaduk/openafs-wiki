@@ -26,7 +26,7 @@ _Each topic can have one or more files of any type attached to it by using the A
 
 ## <a name="What Are Attachments Good For?"></a> What Are Attachments Good For?
 
-File Attachments can be used to create powerful customized groupware solutions, like file sharing and document management systems, and quick Web page authoring.
+File Attachments can be used to archive data, or to create powerful customized groupware solutions, like file sharing and document management systems, and quick Web page authoring.
 
 ### <a name="Document Management System"></a> Document Management System
 
@@ -49,6 +49,10 @@ File Attachments can be used to create powerful customized groupware solutions, 
   - The previous upload path is retained for convenience. In case you make some changes to the local file and want to upload it, again you can copy the previous upload path into the Local file field.
   - TWiki can limit the file size. This is defined by the `%ATTACHFILESIZELIMIT%` variable of the [[TWikiPreferences]], currently set at %ATTACHFILESIZELIMIT% KB.
     - %X% It's not recommended to upload files greater than a few hundred K through a browser. Large files can be extremely slow-loading, and often time out. Use an FTP site for large file uploads.
+- Automatic attachments:
+  - When enabled, all files in a topic's attachment directory are shown as attachments to the topic - even if they were directly copied to the directory and never attached by using an 'Attach' link. This is a convenient way to quickly "attach" files to a topic without uploading them one by one; although at the cost of losing audit trail and version control.
+  - To enable this feature, set the \{AutoAttachPubDir\} configuration option.
+  - **_NOTE:_** The automatic attachment feature can only be used by an administrator who has access to the server's file system.
 
 ## <a name="Downloading Files"></a> Downloading Files
 
@@ -78,14 +82,14 @@ Move unwanted Attachments to web `Trash`, topic `TrashAttachment`.
   3. <code>**Preview**</code>: `%ATTACHURL%/Sample.txt` text appears as: <http://www.dementia.org/twiki//view/%WEB%/%TOPIC%/Sample.txt>, a link to the text file.
 
 - To reference an attachment located in another topic, enter:
-  - `%PUBURL%/%WEB%/OtherTopic/Sample.txt` (if it's within the same web)
-  - `%PUBURL%/Otherweb/OtherTopic/Sample.txt` (if it's in a different web)
+  - `%PUBURLPATH%/%WEB%/OtherTopic/Sample.txt` (if it's within the same web)
+  - `%PUBURLPATH%/Otherweb/OtherTopic/Sample.txt` (if it's in a different web)
 
 - Attached HTML files and text files can be inlined in a topic. Example:
   1. <code>**Attach**</code> file: `Sample.txt`
   2. <code>**Edit**</code> topic and write text: `%INCLUDE{"%ATTACHURL%/Sample.txt"}%`
     - Content of attached file is shown inlined.
-    - Read more in [[IncludeTopicsAndWebPages]].
+    - Read more about INCLUDE in [[TWikiVariables|Main/TWikiVariables#VarINCLUDE]]
 
 - GIF, JPG and PNG images can be attached and shown embedded in a topic. Example:
   1. <code>**Attach**</code> file: `Smile.gif`
@@ -98,121 +102,103 @@ Move unwanted Attachments to web `Trash`, topic `TrashAttachment`.
 
 Files attached to a topic are displayed in a directory table, displayed at the bottom of the page, or optionally, hidden and accessed when you click **Attach**.
 
-> <table border="1" cellpadding="20" cellspacing="0" width="90%">
+> <table border="1" cellpadding="1" cellspacing="0">
 >   <tr>
->     <td>
->       <table border="1" cellpadding="1" cellspacing="0">
->         <tr>
->           <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttachment">Attachment</a></strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Size</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
->           <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
->         </tr>
->         <tr>
->           <td><img align="top" height="16" src="http://www.dementia.org/twiki//view/icn/txt.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=&filename=Sample.txt">Sample.txt</a></td>
->           <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">manage</a></td>
->           <td align="right"> 0.1 K </td>
->           <td> 22 Jul 2000 - 19:37 </td>
->           <td><a href="PeterThoeny">PeterThoeny</a></td>
->           <td> Just a sample </td>
->         </tr>
->         <tr>
->           <td><img align="top" hight="16" src="http://www.dementia.org/twiki//view/icn/bmp.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=&filename=Smile.gif">Smile.gif</a></td>
->           <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">manage</a></td>
->           <td align="right"> 0.1 K </td>
->           <td> 22 Jul 2000 - 19:38 </td>
->           <td><a href="PeterThoeny">PeterThoeny</a></td>
->           <td> Smiley face </td>
->         </tr>
->       </table>
->     </td>
+>     <th align="center" bgcolor="#99CCCC"><strong>I</strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong>Attachment</strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong>Size</strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
+>     <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
+>   </tr>
+>   <tr>
+>     <td><img align="top" alt="txt" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/txt.gif" width="16" /></td>
+>     <td><a href="http://www.dementia.org/twiki/viewfile/%WEB%/%TOPIC%?rev=&filename=Sample.txt">Sample.txt</a></td>
+>     <td><a href="http://www.dementia.org/twiki/attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">manage</a></td>
+>     <td align="right"> 0.1 K </td>
+>     <td> 22 Jul 2000 - 19:37 </td>
+>     <td><a href="UploadingUser">UploadingUser</a></td>
+>     <td> Just a sample </td>
+>   </tr>
+>   <tr>
+>     <td><img align="top" alt="bmp" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/bmp.gif" width="16" /></td>
+>     <td><a href="http://www.dementia.org/twiki/viewfile/%WEB%/%TOPIC%?rev=&filename=Smile.gif">Smile.gif</a></td>
+>     <td><a href="http://www.dementia.org/twiki/attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">manage</a></td>
+>     <td align="right"> 0.1 K </td>
+>     <td> 22 Jul 2000 - 19:38 </td>
+>     <td><a href="UploadingUser">UploadingUser</a></td>
+>     <td> Smiley face </td>
 >   </tr>
 > </table>
 
 ## <a name="File Attachment Controls"></a> File Attachment Controls
 
-Clicking on a <code>**Manage**</code> link takes you to a new page that looks like this:
+Clicking on a <code>**Manage**</code> link takes you to a new page that looks a bit like this (depending on what [[skin|Main/TWikiSkins]] is selected):
 
 > <form>
 >   <table border="1" cellpadding="20" cellspacing="0">
 >     <tr>
 >       <td>
->         <table border="1" cellpadding="1" cellspacing="0">
->           <tr>
->             <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttachment">Attachment</a></strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Size</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong><a href="FileAttribute">Attribute</a></strong></th>
->           </tr>
->           <tr>
->             <td><img align="top" height="16" src="http://www.dementia.org/twiki//view/icn/txt.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/TWiki/%WEB%/%TOPIC%?rev=&filename=Sample.txt">Sample.txt</a></td>
->             <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Sample.txt&revInfo=1">manage</a></td>
->             <td align="right"> 0.1 K </td>
->             <td> 22 Jul 2000 - 19:37 </td>
->             <td><a href="PeterThoeny">PeterThoeny</a></td>
->             <td> Just a sample </td>
->             <td align="center">   </td>
->           </tr>
->           <tr>
->             <td><img align="top" height="16" src="http://www.dementia.org/twiki//view/icn/bmp.gif" width="16" /> <a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=&filename=Smile.gif">Smile.gif</a></td>
->             <td><a href="http://www.dementia.org/twiki//attach/%WEB%/%TOPIC%?filename=Smile.gif&revInfo=1">manage</a></td>
->             <td align="right"> 0.1 K </td>
->             <td> 22 Jul 2000 - 19:38 </td>
->             <td><a href="PeterThoeny">PeterThoeny</a></td>
->             <td> Smiley face </td>
->             <td align="center">   </td>
->           </tr>
->         </table>
->         <p>
->         </p>
 >         <h2>Update attachment <code>Sample.txt</code></h2>
+>         <div>
+>           <table border="1" cellpadding="1" cellspacing="0">
+>             <tr>
+>               <th align="center" bgcolor="#99CCCC"><strong>Version</strong></th>
+>               <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
+>               <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
+>               <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
+>               <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
+>             </tr>
+>             <tr>
+>               <td> 1 </td>
+>               <td><a href="http://www.dementia.org/twiki/viewfile/%WEB%/%TOPIC%?rev=1&filename=Sample.txt">view</a></td>
+>               <td> 22 Jul 2000 - 19:37 </td>
+>               <td><a href="UploadingUser">UploadingUser</a></td>
+>               <td> Just a sample </td>
+>             </tr>
+>           </table>
+>         </div>
 >         <p>
 >         </p>
->         <table border="1" cellpadding="1" cellspacing="0">
->           <tr>
->             <th align="center" bgcolor="#99CCCC"><strong>Version</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Action</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Date</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Who</strong></th>
->             <th align="center" bgcolor="#99CCCC"><strong>Comment</strong></th>
->           </tr>
->           <tr>
->             <td> 1.1 </td>
->             <td><a href="http://www.dementia.org/twiki//viewfile/%WEB%/%TOPIC%?rev=1.1&filename=Sample.txt">view</a></td>
->             <td> 2001.08.30.09.28.56 </td>
->             <td><a href="PeterThoeny">PeterThoeny</a></td>
->             <td>   </td>
->           </tr>
->         </table>
->         <p>
->         </p>
->         <table width="100%">
->           <tr>
->             <td align="right"> Previous <br /> upload: </td>
->             <td><code>C:\DATA\Sample.txt</code> (<a href="PeterThoeny">PeterThoeny</a>) </td>
->           </tr>
->           <tr>
->             <td align="right"> Local file: </td>
->             <td><input name="filename" type="hidden" value="Sample.txt" /> <input name="filepath" size="50" type="file" value="C:\DATA\Sample.txt" /></td>
->           </tr>
->           <tr>
->             <td align="right"> Comment: </td>
->             <td><input maxlength="50" name="filecomment" size="50" type="text" value="Just a sample" /></td>
->           </tr>
->           <tr>
->             <td align="right"> Link: </td>
->             <td><input name="createlink" type="checkbox" /> Create a link to the attached file at the end of the topic. </td>
->           </tr>
->           <tr>
->             <td align="right"> Hide file: </td>
->             <td><input name="hidefile" type="checkbox" /> Hide attachment in normal topic view. </td>
->           </tr>
->         </table><em>Help text ...</em><p> Topic <b>FileAttachment</b> . { </p><input type="submit" value="   Upload file   " /> | <input name="changeproperties" type="submit" value="Change properties" /> | <a href="http://www.dementia.org/twiki//rename/%WEB%/%TOPIC%?attachment=Sample.txt">Move attachment</a> | <a href="FileAttachment">Cancel</a> } </td>
+>         <div>
+>           <table>
+>             <tr>
+>               <th>Previous upload</th>
+>               <td><code>Sample.txt</code> <span>(<a href="http://visiblearea.com/devtwiki/bin/view/Main/TWikiContributor">TWikiContributor</a>)</span></td>
+>               <td>Select a new local file to update this attachment.</td>
+>             </tr>
+>             <tr>
+>               <th> Local file </th>
+>               <td><input name="filename" type="hidden" value="Sample.txt" /><input name="filepath" size="30" type="file" value="Sample.txt" /></td>
+>               <td> Upload up to 10000 KB. </td>
+>             </tr>
+>             <tr>
+>               <th> Comment </th>
+>               <td><input maxlength="256" name="filecomment" size="50" type="text" value="Just a sample" /></td>
+>               <td>
+>               </td>
+>             </tr>
+>             <tr>
+>               <th> Link </th>
+>               <td><input id="createlink" name="createlink" type="checkbox" /><label for="createlink">Create a link to the attached file</label>
+>               </td>
+>               <td> Images will be displayed, for other attachments a link will be created. </td>
+>             </tr>
+>             <tr>
+>               <th> Hide file </th>
+>               <td><input id="hidefile" name="hidefile" type="checkbox" /><label for="hidefile">Do not show attachment in table</label>
+>               </td>
+>               <td>Attachments will not be shown in topic view page.</td>
+>             </tr>
+>             <tr>
+>               <th>
+>               </th>
+>               <td colspan="2"><input name="changeproperties" type="submit" value="Change properties only" /></td>
+>             </tr>
+>           </table>
+>         </div>
+>       </td>
 >     </tr>
 >   </table>
 > </form>
@@ -226,3 +212,6 @@ Clicking on a <code>**Manage**</code> link takes you to a new page that looks li
 ## <a name="Known Issues"></a> Known Issues
 
 - Unlike topics, attachments are not locked during editing. As a workaround, you can change the comment to indicate an attachment file is being worked on - the comment on the specific version isn't lost, it's there when you list all versions of the attachment.
+- Attachments are not secured. Anyone can read them if they know the name of the web, topic and attachment.
+
+**_Related Topics:_** [[UserDocumentationCategory]]

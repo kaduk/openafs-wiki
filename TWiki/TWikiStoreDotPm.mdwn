@@ -1,0 +1,502 @@
+# <a name="Package &lt;code&gt;TWiki::Store="></a> Package =TWiki::Store
+
+This module hosts the generic storage backend. This module provides the interface layer between the "real" store provider - which is hidden behind a handler - and the rest of the system. it is responsible for checking for topic existance, access permissions, and all the other general admin tasks that are common to all store implementations.
+
+This module knows nothing about how the data is actually _stored_ - that knowledge is entirely encapsulated in the handlers.
+
+The general contract for methods in the class requires that errors are signalled using exceptions. TWiki::AccessControlException is used for access control exceptions, and Error::Simple for all other types of error.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Store="> Package TWiki::Store</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ()"> ClassMethod new <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>readTopic</strong> ($user,"> ObjectMethod readTopic <tt>($user,$web,$topic,$version) -&gt; ($metaObject,$text)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>read_TopicRaw</strong> ($u"> ObjectMethod readTopicRaw <tt>($user,$web,$topic,$version) -&gt; $topicText</tt></a></li>
+        <li><a href="#ObjectMethod <strong>moveAttachment</strong> ($"> ObjectMethod moveAttachment <tt>($oldWeb,$oldTopic,$oldAttachment,$newWeb,$newTopic,$newAttachment,$user)</tt></a></li>
+        <li><a href="#ObjectMethod *get_AttachmentStre"> ObjectMethod getAttachmentStream <tt>($user,$web,$topic,$attName) -&gt; \*STREAM</tt></a></li>
+        <li><a href="#ObjectMethod *get_AttachmentList"> ObjectMethod getAttachmentList <tt>($web,$topic)</tt></a></li>
+        <li><a href="#ObjectMethod *attachmentExists*"> ObjectMethod attachmentExists <tt>($web,$topic,$att) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod *_remove_AutoAttach"> ObjectMethod _removeAutoAttachmentsFromMeta <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>moveTopic</strong> ($oldWe"> ObjectMethod moveTopic <tt>($oldWeb,$oldTopic,$newWeb,$newTopic,$user)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>moveWeb</strong> ($oldWeb,"> ObjectMethod moveWeb <tt>($oldWeb,$newWeb,$user)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>readAttachment</strong> ($"> ObjectMethod readAttachment <tt>($user,$web,$topic,$attachment,$theRev) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionNumber"> ObjectMethod getRevisionNumber <tt>($web,$topic,$attachment) -&gt; $integer</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_WorkArea</strong> ($ke"> ObjectMethod getWorkArea <tt>($key) -&gt; $directorypath</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionDiff*"> ObjectMethod getRevisionDiff <tt>($web,$topic,$rev1,$rev2,$contextLines) -&gt; \@diffArray</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionInfo*"> ObjectMethod getRevisionInfo <tt>($web,$topic,$rev,$attachment) -&gt; ($date,$user,$rev,$comment)</tt></a></li>
+        <li><a href="#StaticMethod <strong>dataEncode</strong> ($unco"> StaticMethod dataEncode <tt>($uncoded) -&gt; $coded</tt></a></li>
+        <li><a href="#StaticMethod <strong>dataDecode</strong> ($enco"> StaticMethod dataDecode <tt>($encoded) -&gt; $decoded</tt></a></li>
+        <li><a href="#ObjectMethod <strong>saveTopic</strong> ($user,"> ObjectMethod saveTopic <tt>($user,$web,$topic,$text,$meta,$options)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>saveAttachment</strong> ($"> ObjectMethod saveAttachment <tt>($web,$topic,$attachment,$user,$opts)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>repRev</strong> ($user,$we"> ObjectMethod repRev <tt>($user,$web,$topic,$text,$meta,$options)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>delRev</strong> ($user,$we"> ObjectMethod delRev <tt>($user,$web,$topic,$text,$meta,$options)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>lockTopic</strong> ($web,$"> ObjectMethod lockTopic <tt>($web,$topic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>unlockTopic</strong> ($use"> ObjectMethod unlockTopic <tt>($user,$web,$topic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>webExists</strong> ($web)"> ObjectMethod webExists <tt>($web) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>topicExists</strong> ($web"> ObjectMethod topicExists <tt>($web,$topic) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_TopicParent</strong> ("> ObjectMethod getTopicParent <tt>($web,$topic) -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod *get_TopicLatestRev"> ObjectMethod getTopicLatestRevTime <tt>($web,$topic) -&gt; $epochSecs</tt></a></li>
+        <li><a href="#ObjectMethod <strong>read_MetaData</strong> ($w"> ObjectMethod readMetaData <tt>($web,$name) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>save_MetaData</strong> ($w"> ObjectMethod saveMetaData <tt>($web,$name) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_TopicNames</strong> ($"> ObjectMethod getTopicNames <tt>($web) -&gt; @topics</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_ListOfWebs</strong> ($"> ObjectMethod getListOfWebs <tt>($filter) -&gt; @webNames</tt></a></li>
+        <li><a href="#ObjectMethod <strong>createWeb</strong> ($user,"> ObjectMethod createWeb <tt>($user,$newWeb,$baseWeb,$opts)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>removeWeb</strong> ($user,"> ObjectMethod removeWeb <tt>($user,$web)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_DebugText</strong> ($m"> ObjectMethod getDebugText <tt>($meta,$text) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>clean_UpRevID</strong> ($r"> ObjectMethod cleanUpRevID <tt>($rev) -&gt; $integer</tt></a></li>
+        <li><a href="#ObjectMethod <strong>copyTopic</strong> ($user,"> ObjectMethod copyTopic <tt>($user,$fromweb,$fromtopic,$toweb,$totopic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>search_MetaData</strong> ("> ObjectMethod searchMetaData <tt>($params) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *search_InWebConten"> ObjectMethod searchInWebContent <tt>($searchString,$web,\@topics,\%options) -&gt; \%map</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionAtTime"> ObjectMethod getRevisionAtTime <tt>($web,$topic,$time) -&gt; $rev</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getLease</strong> ($web,$t"> ObjectMethod getLease <tt>($web,$topic) -&gt; $lease</tt></a></li>
+        <li><a href="#ObjectMethod <strong>setLease</strong> ($web,$t"> ObjectMethod setLease <tt>($web,$topic,$user,$length)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>clearLease</strong> ($web,"> ObjectMethod clearLease <tt>($web,$topic)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ()"></a> [[ClassMethod]] **new** `()`
+
+Construct a Store module, linking in the chosen sub-implementation.
+
+## <a name="ObjectMethod &lt;strong&gt;readTopic&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **readTopic** `($user,$web,$topic,$version) -> ($metaObject,$text)`
+
+Reads the given version of a topic and it's meta-data. If the version is undef, then read the most recent version. The version number must be an integer, or undef for the latest version.
+
+If $user is defined, view permission will be required for the topic read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the user name passed in.
+
+If the topic contains a web specification (is of the form Web.Topic) the web specification will override whatever is passed in $web.
+
+The metadata and topic text are returned separately, with the metadata in a TWiki::Meta object. (The topic text is, as usual, just a string.)
+
+## <a name="ObjectMethod &lt;strong&gt;read_TopicRaw&lt;/strong&gt; ($u"></a> [[ObjectMethod]] **readTopicRaw** `($user,$web,$topic,$version) -> $topicText`
+
+Reads the given version of a topic, without separating out any embedded meta-data. If the version is undef, then read the most recent version. The version number must be an integer or undef.
+
+If $user is defined, view permission will be required for the topic read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the user name passed in.
+
+If the topic contains a web specification (is of the form Web.Topic) the web specification will override whatever is passed in $web.
+
+SMELL: DO NOT CALL THIS METHOD UNLESS YOU HAVE NO CHOICE. This method breaks encapsulation of the store, as it assumes meta is stored embedded in the text. Other implementors of store will be forced to insert meta-data to ensure correct operation of View raw=debug and the 'repRev' mode of Edit.
+
+$web and $topic _must_ be untainted.
+
+## <a name="ObjectMethod &lt;strong&gt;moveAttachment&lt;/strong&gt; ($"></a> [[ObjectMethod]] **moveAttachment** `($oldWeb,$oldTopic,$oldAttachment,$newWeb,$newTopic,$newAttachment,$user)`
+
+Move an attachment from one topic to another.
+
+The caller to this routine should check that all topics are valid.
+
+All parameters must be defined, and must be untainted.
+
+## <a name="ObjectMethod &lt;strong&gt;get_AttachmentStre"></a> [[ObjectMethod]] \*getAttachmentStream `($user,$web,$topic,$attName) -> \*STREAM`
+
+- `$user` - the user doing the reading, or undef if no access checks
+- `$web` - The web
+- `$topic` - The topic
+- `$attName` - Name of the attachment
+
+Open a standard input stream from an attachment.
+
+If $user is defined, view permission will be required for the topic read to be successful. Access control violations and errors will cause exceptions to be thrown.
+
+Permissions are checked for the user name passed in.
+
+## <a name="ObjectMethod &lt;strong&gt;get_AttachmentList"></a> [[ObjectMethod]] \*getAttachmentList `($web,$topic)`
+
+returns @($attachmentName =&gt; [stat]) for any given web, topic
+
+## <a name="ObjectMethod &lt;strong&gt;attachmentExists*"></a><a name="ObjectMethod *attachmentExists&lt;/strong&gt; "></a> [[ObjectMethod]] **attachmentExists** `($web,$topic,$att) -> $boolean`
+
+Determine if the attachment already exists on the given topic
+
+## <a name="ObjectMethod &lt;strong&gt;_remove_AutoAttach"></a> [[ObjectMethod]] \*\_removeAutoAttachmentsFromMeta ``
+
+This is where we are going to remove from meta any entry that is marked as an automatic attachment.
+
+## <a name="ObjectMethod &lt;strong&gt;moveTopic&lt;/strong&gt; ($oldWe"></a> [[ObjectMethod]] **moveTopic** `($oldWeb,$oldTopic,$newWeb,$newTopic,$user)`
+
+All parameters must be defined and must be untainted.
+
+## <a name="ObjectMethod &lt;strong&gt;moveWeb&lt;/strong&gt; ($oldWeb,"></a> [[ObjectMethod]] **moveWeb** `($oldWeb,$newWeb,$user)`
+
+Move a web.
+
+All parrameters must be defined and must be untainted.
+
+## <a name="ObjectMethod &lt;strong&gt;readAttachment&lt;/strong&gt; ($"></a> [[ObjectMethod]] **readAttachment** `($user,$web,$topic,$attachment,$theRev) -> $text`
+
+Read the given version of an attachment, returning the content.
+
+View permission on the topic is required for the read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the user passed in.
+
+If $theRev is not given, the most recent rev is assumed.
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionNumber"></a> [[ObjectMethod]] \*getRevisionNumber `($web,$topic,$attachment) -> $integer`
+
+Get the revision number of the most recent revision. Returns the integer revision number or '' if the topic doesn't exist.
+
+WORKS FOR ATTACHMENTS AS WELL AS TOPICS
+
+## <a name="ObjectMethod &lt;strong&gt;get_WorkArea&lt;/strong&gt; ($ke"></a> [[ObjectMethod]] **getWorkArea** `($key) -> $directorypath`
+
+Gets a private directory uniquely identified by $key. The directory is intended as a work area for plugins. The directory will exist.
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionDiff*"></a><a name="ObjectMethod *get_RevisionDiff&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionDiff** `($web,$topic,$rev1,$rev2,$contextLines) -> \@diffArray`
+
+Return reference to an array of [ diffType, $right, $left ]
+
+- `$web` - the web
+- `$topic` - the topic
+- `$rev1` Integer revision number
+- `$rev2` Integer revision number
+- `$contextLines` - number of lines of context required
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionInfo*"></a><a name="ObjectMethod *get_RevisionInfo&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionInfo** `($web,$topic,$rev,$attachment) -> ($date,$user,$rev,$comment)`
+
+Get revision info of a topic.
+
+- `$web` Web name, optional, e.g. `'Main'`
+- `$topic` Topic name, required, e.g. `'TokyoOffice'`
+- `$rev` revision number. If 0, undef, or out-of-range, will get info about the most recent revision.
+- `$attachment` attachment filename; undef for a topic
+
+Return list with: ( last update date, last user object, =
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> $date </td>
+    <td> in epochSec </td>
+  </tr>
+  <tr>
+    <td> $user </td>
+    <td> user <strong>object</strong></td>
+  </tr>
+  <tr>
+    <td> $rev </td>
+    <td> the revision number </td>
+  </tr>
+  <tr>
+    <td> $comment </td>
+    <td> WHAT COMMENT? </td>
+  </tr>
+</table>
+
+e.g. =( 1234561, 'phoeny', 5, 'no comment' )
+
+NOTE NOTE NOTE if you are working within the TWiki code DO NOT USE THIS FUNCTION FOR GETTING REVISION INFO OF TOPICS - use TWiki::Meta::getRevisionInfo instead. This is essential to allow clean transition to a topic object model later, and avoids the risk of confusion coming from meta and Store revision information being out of step. (it's OK to use it for attachments)
+
+## <a name="StaticMethod &lt;strong&gt;dataEncode&lt;/strong&gt; ($unco"></a> [[StaticMethod]] **dataEncode** `($uncoded) -> $coded`
+
+Encode meta-data fields, escaping out selected characters. The encoding is chosen to avoid problems with parsing the attribute values, while minimising the number of characters encoded so searches can still work (fairly) sensibly.
+
+The encoding has to be exported because TWiki (and plugins) use encoded field data in other places e.g. RDiff, mainly as a shorthand for the properly parsed meta object. Some day we may be able to eliminate that....
+
+## <a name="StaticMethod &lt;strong&gt;dataDecode&lt;/strong&gt; ($enco"></a> [[StaticMethod]] **dataDecode** `($encoded) -> $decoded`
+
+Decode escapes in a string that was encoded using dataEncode
+
+The encoding has to be exported because TWiki (and plugins) use encoded field data in other places e.g. RDiff, mainly as a shorthand for the properly parsed meta object. Some day we may be able to eliminate that....
+
+## <a name="ObjectMethod &lt;strong&gt;saveTopic&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **saveTopic** `($user,$web,$topic,$text,$meta,$options)`
+
+- `$user` - user doing the saving (object)
+- `$web` - web for topic
+- `$topic` - topic to atach to
+- `$text` - topic text
+- `$meta` - topic meta-data
+- `$options` - Ref to hash of options
+
+`$options` may include:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>dontlog</code></td>
+    <td> don't log this change in twiki log </td>
+  </tr>
+  <tr>
+    <td><code>hide</code></td>
+    <td> if the attachment is to be hidden in normal topic view </td>
+  </tr>
+  <tr>
+    <td><code>comment</code></td>
+    <td> comment for save </td>
+  </tr>
+  <tr>
+    <td><code>file</code></td>
+    <td> Temporary file name to upload </td>
+  </tr>
+  <tr>
+    <td><code>minor</code></td>
+    <td> True if this is a minor change (used in log) </td>
+  </tr>
+  <tr>
+    <td><code>savecmd</code></td>
+    <td> Save command </td>
+  </tr>
+  <tr>
+    <td><code>forcedate</code></td>
+    <td> grr </td>
+  </tr>
+  <tr>
+    <td><code>unlock</code></td>
+    <td>   </td>
+  </tr>
+</table>
+
+Save a new revision of the topic, calling plugins handlers as appropriate.
+
+## <a name="ObjectMethod &lt;strong&gt;saveAttachment&lt;/strong&gt; ($"></a> [[ObjectMethod]] **saveAttachment** `($web,$topic,$attachment,$user,$opts)`
+
+- `$user` - user doing the saving
+- `$web` - web for topic
+- `$topic` - topic to atach to
+- `$attachment` - name of the attachment
+- `$opts` - Ref to hash of options
+
+`$opts` may include:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>dontlog</code></td>
+    <td> don't log this change in twiki log </td>
+  </tr>
+  <tr>
+    <td><code>comment</code></td>
+    <td> comment for save </td>
+  </tr>
+  <tr>
+    <td><code>hide</code></td>
+    <td> if the attachment is to be hidden in normal topic view </td>
+  </tr>
+  <tr>
+    <td><code>stream</code></td>
+    <td> Stream of file to upload </td>
+  </tr>
+  <tr>
+    <td><code>file</code></td>
+    <td> Name of a file to use for the attachment data. ignored is stream is set. </td>
+  </tr>
+  <tr>
+    <td><code>filepath</code></td>
+    <td> Client path to file </td>
+  </tr>
+  <tr>
+    <td><code>filesize</code></td>
+    <td> Size of uploaded data </td>
+  </tr>
+  <tr>
+    <td><code>filedate</code></td>
+    <td> Date </td>
+  </tr>
+</table>
+
+Saves a new revision of the attachment, invoking plugin handlers as appropriate.
+
+If file is not set, this is a properties-only save.
+
+## <a name="ObjectMethod &lt;strong&gt;repRev&lt;/strong&gt; ($user,$we"></a> [[ObjectMethod]] **repRev** `($user,$web,$topic,$text,$meta,$options)`
+
+Replace last (top) revision with different text.
+
+Parameters and return value as saveTopic, except
+
+- `$options` - as for saveTopic, with the extra option:
+  - `timetravel` - if we want to force the deposited revision to look as much like the revision specified in `$rev` as possible.
+
+Used to try to avoid the deposition of 'unecessary' revisions, for example where a user quickly goes back and fixes a spelling error.
+
+Also provided as a means for administrators to rewrite history (timetravel).
+
+It is up to the store implementation if this is different to a normal save or not.
+
+## <a name="ObjectMethod &lt;strong&gt;delRev&lt;/strong&gt; ($user,$we"></a> [[ObjectMethod]] **delRev** `($user,$web,$topic,$text,$meta,$options)`
+
+Parameters and return value as saveTopic.
+
+Provided as a means for administrators to rewrite history.
+
+Delete last entry in repository, restoring the previous revision.
+
+It is up to the store implementation whether this actually does delete a revision or not; some implementations will simply promote the previous revision up to the head.
+
+## <a name="ObjectMethod &lt;strong&gt;lockTopic&lt;/strong&gt; ($web,$"></a> [[ObjectMethod]] **lockTopic** `($web,$topic)`
+
+Grab a topic lock on the given topic. A topic lock will cause other processes that also try to claim a lock to block. A lock has a maximum lifetime of 2 minutes, so operations on a locked topic must be completed within that time. You cannot rely on the lock timeout clearing the lock, though; that should always be done by calling unlockTopic. The best thing to do is to guard the locked section with a try..finally clause. See man Error for more info.
+
+Topic locks are used to make store operations atomic. They are _note_ the locks used when a topic is edited; those are Leases (see `getLease`)
+
+## <a name="ObjectMethod &lt;strong&gt;unlockTopic&lt;/strong&gt; ($use"></a> [[ObjectMethod]] **unlockTopic** `($user,$web,$topic)`
+
+Release the topic lock on the given topic. A topic lock will cause other processes that also try to claim a lock to block. It is important to release a topic lock after a guard section is complete. This should normally be done in a 'finally' block. See man Error for more info.
+
+Topic locks are used to make store operations atomic. They are _note_ the locks used when a topic is edited; those are Leases (see `getLease`)
+
+## <a name="ObjectMethod &lt;strong&gt;webExists&lt;/strong&gt; ($web)"></a><a name="ObjectMethod &lt;strong&gt;webExists&lt;/strong&gt; ($web) "></a> [[ObjectMethod]] **webExists** `($web) -> $boolean`
+
+Test if web exists
+
+- `$web` - Web name, required, e.g. `'Sandbox'`
+
+A web _has_ to have a home topic to be a web.
+
+## <a name="ObjectMethod &lt;strong&gt;topicExists&lt;/strong&gt; ($web"></a> [[ObjectMethod]] **topicExists** `($web,$topic) -> $boolean`
+
+Test if topic exists
+
+- `$web` - Web name, optional, e.g. `'Main'`
+- `$topic` - Topic name, required, e.g. `'TokyoOffice'`, or `"Main.TokyoOffice"`
+
+## <a name="ObjectMethod &lt;strong&gt;get_TopicParent&lt;/strong&gt; ("></a> [[ObjectMethod]] **getTopicParent** `($web,$topic) -> $string`
+
+Get the name of the topic parent. Needs to be fast because of use by Render.pm.
+
+## <a name="ObjectMethod &lt;strong&gt;get_TopicLatestRev"></a> [[ObjectMethod]] \*getTopicLatestRevTime `($web,$topic) -> $epochSecs`
+
+Get an approximate rev time for the latest rev of the topic. This method is used to optimise searching. Needs to be as fast as possible.
+
+## <a name="ObjectMethod &lt;strong&gt;read_MetaData&lt;/strong&gt; ($w"></a> [[ObjectMethod]] **readMetaData** `($web,$name) -> $text`
+
+Read a named meta-data string. If web is given the meta-data is stored alongside a web.
+
+## <a name="ObjectMethod &lt;strong&gt;save_MetaData&lt;/strong&gt; ($w"></a> [[ObjectMethod]] **saveMetaData** `($web,$name) -> $text`
+
+Write a named meta-data string. If web is given the meta-data is stored alongside a web.
+
+## <a name="ObjectMethod &lt;strong&gt;get_TopicNames&lt;/strong&gt; ($"></a> [[ObjectMethod]] **getTopicNames** `($web) -> @topics`
+
+Get list of all topics in a web
+
+- `$web` - Web name, required, e.g. `'Sandbox'`
+
+Return a topic list, e.g. `( 'WebChanges',  'WebHome', 'WebIndex', 'WebNotify' )`
+
+## <a name="ObjectMethod &lt;strong&gt;get_ListOfWebs&lt;/strong&gt; ($"></a> [[ObjectMethod]] **getListOfWebs** `($filter) -> @webNames`
+
+Gets a list of webs, filtered according to the spec in the $filter, which may include one of:
+
+1. 'user' (for only user webs)
+2. 'template' (for only template webs)
+
+$filter may also contain the word 'public' which will further filter webs on whether NOSEARCHALL is specified for them or not. 'allowed' filters out webs that the user is denied access to by a \*WEBVIEW.
+
+If $TWiki::cfg\{EnableHierarchicalWebs\} is set, will also list sub-webs recursively.
+
+## <a name="ObjectMethod &lt;strong&gt;createWeb&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **createWeb** `($user,$newWeb,$baseWeb,$opts)`
+
+$newWeb is the name of the new web.
+
+$baseWeb is the name of an existing web (a template web). If the base web is a system web, all topics in it will be copied into the new web. If it is a normal web, only topics starting with 'Web' will be copied. If no base web is specified, an empty web (with no topics) will be created. If it is specified but does not exist, an error will be thrown.
+
+$opts is a ref to a hash that contains settings to be modified in the web preferences topic in the new web.
+
+## <a name="ObjectMethod &lt;strong&gt;removeWeb&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **removeWeb** `($user,$web)`
+
+- `$user` - user doing the removing (for the history)
+- `$web` - web being removed
+
+Destroy a web, utterly. Removed the data and attachments in the web.
+
+Use with great care!
+
+The web must be a known web to be removed this way.
+
+## <a name="ObjectMethod &lt;strong&gt;get_DebugText&lt;/strong&gt; ($m"></a> [[ObjectMethod]] **getDebugText** `($meta,$text) -> $text`
+
+Generate a debug text form of the text/meta, for use in debug displays, by annotating the text with meta informtion.
+
+## <a name="ObjectMethod &lt;strong&gt;clean_UpRevID&lt;/strong&gt; ($r"></a> [[ObjectMethod]] **cleanUpRevID** `($rev) -> $integer`
+
+Cleans up (maps) a user-supplied revision ID and converts it to an integer number that can be incremented to create a new revision number.
+
+This method should be used to sanitise user-provided revision IDs.
+
+## <a name="ObjectMethod &lt;strong&gt;copyTopic&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **copyTopic** `($user,$fromweb,$fromtopic,$toweb,$totopic)`
+
+Copy a topic and all it's attendant data from one web to another.
+
+SMELL: Does not fix up meta-data!
+
+## <a name="ObjectMethod &lt;strong&gt;search_MetaData&lt;/strong&gt; ("></a> [[ObjectMethod]] **searchMetaData** `($params) -> $text`
+
+Search meta-data associated with topics. Parameters are passed in the $params hash, which may contain:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>type</code></td>
+    <td><code>topicmoved</code>, <code>parent</code> or <code>field</code></td>
+  </tr>
+  <tr>
+    <td><code>topic</code></td>
+    <td> topic to search for, for <code>topicmoved</code> and <code>parent</code></td>
+  </tr>
+  <tr>
+    <td><code>name</code></td>
+    <td> form field to search, for <code>field</code> type searches. May be a regex. </td>
+  </tr>
+  <tr>
+    <td><code>value</code></td>
+    <td> form field value. May be a regex. </td>
+  </tr>
+  <tr>
+    <td><code>title</code></td>
+    <td> Title prepended to the returned search results </td>
+  </tr>
+  <tr>
+    <td><code>default</code></td>
+    <td> defualt value if there are no results </td>
+  </tr>
+  <tr>
+    <td><code>web</code></td>
+    <td> web to search in, default is all webs </td>
+  </tr>
+</table>
+
+The idea is that people can search for meta-data values without having to be aware of how or where meta-data is stored.
+
+SMELL: should be replaced with a proper SQL-like search, c.f. [[DBCacheContrib]].
+
+## <a name="ObjectMethod &lt;strong&gt;search_InWebConten"></a> [[ObjectMethod]] \*searchInWebContent `($searchString,$web,\@topics,\%options) -> \%map`
+
+Search for a string in the content of a web. The search must be over all content and all formatted meta-data, though the latter search type is deprecated (use searchMetaData instead).
+
+- `$searchString` - the search string, in egrep format if regex
+- `$web` - The web to search in
+- `\@topics` - reference to a list of topics to search
+- `\%options` - reference to an options hash
+
+The `\%options` hash may contain the following options:
+
+- `type` - if `regex` will perform a egrep-syntax RE search (default '')
+- `casesensitive` - false to ignore case (defaulkt true)
+- `files_without_match` - true to return files only (default false)
+
+The return value is a reference to a hash which maps each matching topic name to a list of the lines in that topic that matched the search, as would be returned by 'grep'. If `files_without_match` is specified, it will return on the first match in each topic (i.e. it will return only one match per topic, and will not return matching lines).
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionAtTime"></a> [[ObjectMethod]] \*getRevisionAtTime `($web,$topic,$time) -> $rev`
+
+- `$web` - web for topic
+- `$topic` - topic
+- `$time` - time (in epoch secs) for the rev
+
+Get the revision number of a topic at a specific time. Returns a single-digit rev number or undef if it couldn't be determined (either because the topic isn't that old, or there was a problem)
+
+## <a name="ObjectMethod &lt;strong&gt;getLease&lt;/strong&gt; ($web,$t"></a> [[ObjectMethod]] **getLease** `($web,$topic) -> $lease`
+
+- `$web` - web for topic
+- `$topic` - topic
+
+If there is an lease on the topic, return the lease, otherwise undef. A lease is a block of meta-information about a topic that can be recovered (this is a hash containing `user`, `taken` and `expires`). Leases are taken out when a topic is edited. Only one lease can be active on a topic at a time. Leases are used to warn if another user is already editing a topic.
+
+## <a name="ObjectMethod &lt;strong&gt;setLease&lt;/strong&gt; ($web,$t"></a> [[ObjectMethod]] **setLease** `($web,$topic,$user,$length)`
+
+Take out an lease on the given topic for this user for $length seconds.
+
+See `getLease` for more details about Leases.
+
+## <a name="ObjectMethod &lt;strong&gt;clearLease&lt;/strong&gt; ($web,"></a> [[ObjectMethod]] **clearLease** `($web,$topic)`
+
+Cancel the current lease.
+
+See `getLease` for more details about Leases.

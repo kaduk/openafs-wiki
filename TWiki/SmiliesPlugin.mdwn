@@ -146,9 +146,9 @@ Here is the list of smilies supported by this plugin. To add others, attach new 
     <td> "in love" </td>
   </tr>
   <tr>
-    <td> :scull: </td>
-    <td><img alt="scull.gif" src="http://www.dementia.org/twiki//view/scull.gif" /></td>
-    <td> "scull" </td>
+    <td> :skull: </td>
+    <td><img alt="skull.gif" src="http://www.dementia.org/twiki//view/skull.gif" /></td>
+    <td> "skull" </td>
   </tr>
 </table>
 
@@ -157,19 +157,18 @@ Here is the list of smilies supported by this plugin. To add others, attach new 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
 
 - One line description, shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Render smilies as icons, like ` :-)` for :-) or ` :cool:` for :cool:
-
-- Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
-  - Set DEBUG = 0
+- Set SHORTDESCRIPTION = Render smilies as icons, like ` :-)` for :-) or ` :cool:` for :cool:
 
 - The name of the topic containig your Smilies. Default: <code>**%WEB%.SmiliesPlugin**</code>
-  - #Set TOPIC = [[SmiliesPlugin]]
+- #Set TOPIC = [[SmiliesPlugin]]
 
 - The way the _emoticon_ is displayed. You can use <code>**$emoticon**</code> (e.g. `:D`), <code>**$url**</code> (e.g. `%ATTACHURL%/biggrin.gif`) and <code>**$tooltip**</code> (e.g. `"big grin"`). Default: <code>**&lt;img src="$url" alt="$tooltip" title="$tooltip" border="0" /&gt;**</code>
 
-          * #Set FORMAT = <img src="$url" alt="$emoticon" title="$emoticon" border="0" />
+       * #Set FORMAT = <img src="$url" alt="$emoticon" title="$emoticon" border="0" />
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
+
+This plugin is installed by default with a TWiki release. You should not need to install the plugin unless it is for an upgrade.
 
 - Download the ZIP file from the Plugin web (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
@@ -194,8 +193,9 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin icon files </td>
   </tr>
 </table>
+- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 - Test if the plugin is correctly installed:
-  - You will see a series of icons on next line: <br /> :-) :) :cool: :( :o :D ;) :p :rolleyes: :mad: :eek: :confused: &gt;:-) &gt;;-) :-X :ok: :yes: :no: :love: :scull:
+- You will see a series of icons on next line: <br /> :-) :) :cool: :( :o :D ;) :p :rolleyes: :mad: :eek: :confused: &gt;:-) &gt;;-) :-X :ok: :yes: :no: :love: :skull:
 
 ## <a name="Plugin Info"></a> Plugin Info
 
@@ -206,15 +206,27 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 21 Aug 2004 (v1.003) </td>
+    <td> 1.004 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 16 Mar 2005: </td>
+    <td> Fixed typo "scull" </td>
+  </tr>
+  <tr>
+    <td align="center"> 5 Mar 2005 </td>
+    <td> 1.004 Crawford Currie prepared for Dakar </td>
+  </tr>
+  <tr>
+    <td align="right"> 21 Nov 2004: </td>
+    <td> Added benchmarks (no code changes) </td>
+  </tr>
+  <tr>
     <td align="right"> 21 Aug 2004: </td>
-    <td> Fixed tooltip for Netscape; added "sealed lips", "thumbs up", "yes" "no", "in love", "scull" </td>
+    <td> Fixed tooltip for Netscape; added "sealed lips", "thumbs up", "yes" "no", "in love", "skull" </td>
   </tr>
   <tr>
     <td align="right"> 16 Feb 2004: </td>
@@ -257,6 +269,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> 5.0 </td>
   </tr>
   <tr>
+    <td align="right"> TWiki:Plugins/Benchmark: </td>
+    <td>[[TWiki/GoodStyle]] 96%, [[TWiki/FormattedSearch]] 98%, [[Main/SmiliesPlugin]] 96% </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Home: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
   </tr>
@@ -264,8 +280,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
-
--- TWiki:Main.AndreaSterbini - 28 Dec 2000 <br /> -- TWiki:Main.PeterThoeny - 21 Aug 2004

@@ -1,0 +1,29 @@
+# <a name="Package &lt;code&gt;TWiki::_AccessControlEx"></a> Package =TWiki::AccessControlException
+
+**extends** `Error`
+
+Exception used raise an access control violation.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::_AccessControlEx"> Package TWiki::AccessControlException</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($mode,$user,$"> ClassMethod new <tt>($mode,$user,$web,$topic,$reason)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>stringify</strong> () -> $"> ObjectMethod stringify <tt>() -&gt; $string</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($mode,$user,$"></a> [[ClassMethod]] **new** `($mode,$user,$web,$topic,$reason)`
+
+- `$mode` - mode of access (view, change etc)
+- `$user` - user object doing the accessing
+- `$web` - web being accessed
+- `$topic` - topic being accessed
+- `$reason` - string reason for failure
+
+All the above fields are accessible from the object in a catch clause in the usual way e.g. `$e->{web}` and `$e->{reason}`
+
+## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; () - $s"></a> [[ObjectMethod]] **stringify** `() -> $string`
+
+Generate a summary string

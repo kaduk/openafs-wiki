@@ -1,0 +1,56 @@
+# <a name="Package &lt;code&gt;TWiki::Users="></a> Package =TWiki::Users
+
+Singleton object that handles mapping of users to wikinames and vice versa, and user authentication checking.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Users="> Package TWiki::Users</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session,$imp"> ClassMethod new <tt>($session,$impl)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>findUser</strong> ($name[,"> ObjectMethod findUser <tt>($name[,$wikiname][,$nocreate]) -&gt; $userObject</tt></a></li>
+        <li><a href="#ObjectMethod <strong>createUser</strong> ($logi"> ObjectMethod createUser <tt>($login,$wikiname) -&gt; $userobject</tt></a></li>
+        <li><a href="#ObjectMethod *add_UserToTWikiUse"> ObjectMethod addUserToTWikiUsersTopic <tt>($user) -&gt; $topicName</tt></a></li>
+        <li><a href="#ObjectMethod *initialize_RemoteU"> ObjectMethod initializeRemoteUser <tt>($remoteUser) -&gt; $loginName</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$imp"></a> [[ClassMethod]] **new** `($session,$impl)`
+
+Construct the user management object
+
+## <a name="ObjectMethod &lt;strong&gt;findUser&lt;/strong&gt; ($name[,"></a> [[ObjectMethod]] **findUser** `($name[,$wikiname][,$nocreate]) -> $userObject`
+
+- `$name` - login name or wiki name
+- `$wikiname` - optional, wikiname for created user
+- `$nocreate` - optional, disable creation of user object for user not found in [[TWikiUsers]]
+
+Find the user object corresponding to `$name`, which may be either a login name or a wiki name. The name is looked up in the [[TWikiUsers]] topic. If `$name` is found (either in the list of login names or the list of wiki names) the corresponding user object is returned. In this case `$wikiname` is ignored.
+
+If they are not found, and `$nocreate` is true, then return undef.
+
+If `$nocreate` is false, then a user object is returned even if the user is not listed in [[TWikiUsers]].
+
+If `$nocreate` is false, and no `$wikiname` is given, then the `$name` is used for both login name and wiki name.
+
+If nocreate is off, then a default user will be created with their wikiname set the same as their login name. This user/wiki name pair can be overridden by a later createUser call when the correct wikiname is known, if necessary.
+
+## <a name="ObjectMethod &lt;strong&gt;createUser&lt;/strong&gt; ($logi"></a> [[ObjectMethod]] **createUser** `($login,$wikiname) -> $userobject`
+
+Create a user, and insert them in the maps (overwriting any current entry). Use this instead of findUser when you want to be sure you are not going to pick up any default user created by findUser. All parameters are required.
+
+## <a name="ObjectMethod &lt;strong&gt;add_UserToTWikiUse"></a> [[ObjectMethod]] \*addUserToTWikiUsersTopic `($user) -> $topicName`
+
+Add a user to the [[TWikiUsers]] topic. This is a topic that maps from usernames to wikinames. It is maintained by Register.pm, or manually outside TWiki.
+
+## <a name="ObjectMethod &lt;strong&gt;initialize_RemoteU"></a> [[ObjectMethod]] \*initializeRemoteUser `($remoteUser) -> $loginName`
+
+Return value: $remoteUser
+
+Acts as a filter for $remoteUser. If set, $remoteUser is filtered for insecure characters and untainted.
+
+If not user is passed, the remote user defaults to $cfg\{DefaultUserLogin\} (usually 'guest').
+
+If we got here via an authentication status failure, then the remote user is set to blank, effectively signalling an illegal access.
+
+If no remote user name was passed in, the user defaults to $cfg\{DefaultUserLogin\}.

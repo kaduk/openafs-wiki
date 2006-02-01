@@ -1,6 +1,6 @@
 <div>
   <ul>
-    <li><a href="#TWiki Formatted Search Results"> TWiki Formatted Search Results</a><ul>
+    <li><a href="#TWiki Formatted Search"> TWiki Formatted Search</a><ul>
         <li><a href="#Syntax"> Syntax</a></li>
         <li><a href="#Examples"> Examples</a><ul>
             <li><a href="#Bullet list showing topic name a"> Bullet list showing topic name and summary</a></li>
@@ -53,11 +53,11 @@
   </ul>
 </div>
 
-# <a name="TWiki Formatted Search Results"></a> TWiki Formatted Search Results
+# <a name="TWiki Formatted Search"></a> TWiki Formatted Search
 
 _Inline search feature allows flexible formatting of search result_
 
-The <code>[[%SEARCH{...}%|Main/TWikiVariables#VarSEARCH]]</code> variable documented in [[TWikiVariables]] has a fixed format for the search result, that is, a table consisting of topic names and topic summaries. Use the `format="..."` parameter to specify a customized format of the search result. The string of the format parameter is typically a bullet list or table row containing variables (such as `%SEARCH{ "food" format="| $topic | $summary |" }%`).
+The default output format of a <code>[[%SEARCH{...}%|Main/TWikiVariables#VarSEARCH]]</code> is a table consisting of topic names and topic summaries. Use the `format="..."` parameter to customize the search result. The format parameter typically defines a bullet or a table row containing variables, such as `%SEARCH{ "food" format="| $topic | $summary |" }%`.
 
 ## <a name="Syntax"></a> Syntax
 
@@ -116,15 +116,15 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:46</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:56</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:46Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:56Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
-    <td> Number of last topic revision, e.g. <code>1.4</code></td>
+    <td> Number of last topic revision, e.g. <code>4</code></td>
   </tr>
   <tr>
     <td><code>$username</code></td>
@@ -140,23 +140,43 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$createdate</code></td>
-    <td> Time stamp of topic revision 1.1 </td>
+    <td> Time stamp of topic revision 1 </td>
   </tr>
   <tr>
     <td><code>$createusername</code></td>
-    <td> Login name of topic revision 1.1, e.g. <code>jsmith</code></td>
+    <td> Login name of topic revision 1, e.g. <code>jsmith</code></td>
   </tr>
   <tr>
     <td><code>$createwikiname</code></td>
-    <td> Wiki user name of topic revision 1.1, e.g. <code>JohnSmith</code></td>
+    <td> Wiki user name of topic revision 1, e.g. <code>JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$createwikiusername</code></td>
-    <td> Wiki user name of topic revision 1.1, e.g. <code>Main.JohnSmith</code></td>
+    <td> Wiki user name of topic revision 1, e.g. <code>Main.JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$summary</code></td>
-    <td> Topic summary </td>
+    <td> Topic summary, just the plain text, all formatting and line breaks removed; up to 162 characters </td>
+  </tr>
+  <tr>
+    <td><code>$summary(50)</code></td>
+    <td> Topic summary, up to 50 characters shown </td>
+  </tr>
+  <tr>
+    <td><code>$summary(showvarnames)</code></td>
+    <td> Topic summary, with <code>%ALLTWIKI{...}%</code> variables shown as <code>ALLTWIKI{...}</code></td>
+  </tr>
+  <tr>
+    <td><code>$summary(noheader)</code></td>
+    <td> Topic summary, with leading <code>---+ headers</code> removed%BR% <strong><em>Note:</em></strong> The tokens can be combined, for example <code>$summary(100, showvarnames, noheader)</code></td>
+  </tr>
+  <tr>
+    <td><code>$changes</code></td>
+    <td> Summary of changes between latest rev and previous rev </td>
+  </tr>
+  <tr>
+    <td><code>$changes(n)</code></td>
+    <td> Summary of changes between latest rev and rev n </td>
   </tr>
   <tr>
     <td><code>$formname</code></td>
@@ -180,11 +200,15 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$pattern(reg-exp)</code></td>
-    <td> A regular expression pattern to extract some text from a topic (does not search meta data; use <code>$formfield</code> instead). In case of a <code>multiple="on"</code> search, the pattern is applied to the line found in each search hit.%BB% Specify a [[Main/RegularExpression]] that covers the whole text (topic or line), which typically starts with <code>.*</code>, and must end in <code>.*</code> %BB% Put text you want to keep in parenthesis, like <code>$pattern(.*?(from here.*?to here).*)</code> %BB% Example: <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the email address from a bullet of format <code>* Email: ...</code> %BB% This example has non-greedy <code>.*?</code> patterns to scan for the first occurance of the Email bullet; use greedy <code>.*</code> patterns to scan for the last occurance %BB% Limitation: Do not use <code>.*)</code> inside the pattern, e.g. <code>$pattern(.*foo(.*)bar.*)</code> does not work, but <code>$pattern(.*foo(.*?)bar.*)</code> does %BB% Note: Make sure that the integrity of a web page is not compromised; for example, if you include an HTML table make sure to include everything including the table end tag </td>
+    <td> A regular expression pattern to extract some text from a topic (does not search meta data; use <code>$formfield</code> instead). In case of a <code>multiple="on"</code> search, the pattern is applied to the line found in each search hit.%BB% Specify a [[Main/RegularExpression]] that covers the whole text (topic or line), which typically starts with <code>.*</code>, and must end in <code>.*</code> %BB% Put text you want to keep in parenthesis, like <code>$pattern(.*?(from here.*?to here).*)</code> %BB% Example: <code>$pattern(.*?\*.*?Email\:\s*([^\n\r]+).*)</code> extracts the e-mail address from a bullet of format <code>* Email: ...</code> %BB% This example has non-greedy <code>.*?</code> patterns to scan for the first occurance of the Email bullet; use greedy <code>.*</code> patterns to scan for the last occurance %BB% Limitation: Do not use <code>.*)</code> inside the pattern, e.g. <code>$pattern(.*foo(.*)bar.*)</code> does not work, but <code>$pattern(.*foo(.*?)bar.*)</code> does %BB% Note: Make sure that the integrity of a web page is not compromised; for example, if you include an HTML table make sure to include everything including the table end tag </td>
+  </tr>
+  <tr>
+    <td><code>$count(reg-exp)</code></td>
+    <td> Count of number of times a regular expression pattern appears in the text of a topic (does not search meta data). Follows guidelines for use and limitations outlined above under <code>$pattern(reg-exp)</code>. Example: <code>$count(.*?(---[+][+][+][+]) .*)</code> counts the number of &lt;H4&gt; headers in a page. </td>
   </tr>
   <tr>
     <td><code>$n</code> or <code>$n()</code></td>
-    <td> New line </td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
   </tr>
   <tr>
     <td><code>$nop</code> or <code>$nop()</code></td>
@@ -235,13 +259,13 @@ To get this:
     <th bgcolor="#99CCCC"><strong>OsVersion:</strong></th>
   </tr>
   <tr>
-    <td><a href="http://www.dementia.org/twiki//view/Sandbox/IncorrectDllVersionW32PTH10DLL">IncorrectDllVersionW32PTH10DLL</a></td>
-    <td><a href="http://www.dementia.org/twiki//view/Sandbox/OsWin">OsWin</a></td>
+    <td>[[Sandbox/IncorrectDllVersionW32PTH10DLL]]</td>
+    <td>[[Sandbox/OsWin]]</td>
     <td> 95/98 </td>
   </tr>
   <tr>
-    <td><a href="http://www.dementia.org/twiki//view/Sandbox/WinDoze95Crash">WinDoze95Crash</a></td>
-    <td><a href="http://www.dementia.org/twiki//view/Sandbox/OsWin">OsWin</a></td>
+    <td>[[Sandbox/WinDoze95Crash]]</td>
+    <td>[[Sandbox/OsWin]]</td>
     <td> 95 </td>
   </tr>
 </table>
@@ -331,17 +355,16 @@ Use an HTML form and an embedded formatted search on the same topic. You can lin
 
 **Write this:**
 
-    <form action="%SCRIPTURLPATH%/view%SCRIPTSUFFIX%/%WEB%/%TOPIC%">
+    <form action="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">
     Find Topics:
-    <input type="text" name="q" size="32" value="%URLPARAM{"q"}%" />
-    <input type="submit" value="Search" />
+    <input type="text" name="q" size="32" value="%URLPARAM{"q"}%" />&nbsp;<input type="submit" class="twikiSubmit" value="Search" />
     </form>
     Result:
     %SEARCH{ search="%URLPARAM{"q"}%" format="   * $web.$topic: %BR% $summary" nosearch="on" }%
 
 **To get this:**
 
-<form action="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%"> Find Topics: <input name="q" size="32" type="text" value="" /> <input type="submit" value="Search" /></form>
+<form action="http://www.dementia.org/twiki/view/%WEB%/%TOPIC%"> Find Topics: <input name="q" size="32" type="text" value="" /> <input type="submit" value="Search" /></form>
 
 Result:
 
@@ -349,4 +372,4 @@ Result:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
--- TWiki:Main.PeterThoeny - 26 Jul 2004
+**_Related Topics:_** [[UserDocumentationCategory]]

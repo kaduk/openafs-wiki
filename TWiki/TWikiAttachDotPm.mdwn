@@ -1,0 +1,56 @@
+# <a name="Package &lt;code&gt;TWiki::Attach="></a> Package =TWiki::Attach
+
+A singleton object of this class is used to deal with attachments to topics.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Attach="> Package TWiki::Attach</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>render_MetaData</strong> ("> ObjectMethod renderMetaData <tt>($web,$topic,$meta,$args) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>formatVersions</strong> ($"> ObjectMethod formatVersions <tt>($web,$topic,$attrs) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *get_AttachmentLink"> ObjectMethod getAttachmentLink <tt>($user,$web,$topic,$name,$meta) -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod *migrate_ToFileAtta"> ObjectMethod migrateToFileAttachmentMacro <tt>($meta,$text) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *upgradeFrom1v0beta"> ObjectMethod upgradeFrom1v0beta <tt>($meta) -&gt; $text</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
+
+Constructor
+
+## <a name="ObjectMethod &lt;strong&gt;render_MetaData&lt;/strong&gt; ("></a> [[ObjectMethod]] **renderMetaData** `($web,$topic,$meta,$args) -> $text`
+
+Generate a table of attachments suitable for the bottom of a topic view, using templates for the header, footer and each row.
+
+- `$web` the web
+- `$topic` the topic
+- `$meta` meta-data hash for the topic
+- `$args` hash of attachment arguments
+
+## <a name="ObjectMethod &lt;strong&gt;formatVersions&lt;/strong&gt; ($"></a> [[ObjectMethod]] **formatVersions** `($web,$topic,$attrs) -> $text`
+
+Generate a version history table for a single attachment
+
+- `$web` - the web
+- `$topic` - the topic
+- `$attrs` - Hash of meta-data attributes
+
+## <a name="ObjectMethod &lt;strong&gt;get_AttachmentLink"></a> [[ObjectMethod]] \*getAttachmentLink `($user,$web,$topic,$name,$meta) -> $html`
+
+- `$user` - User doing the reading
+- `$web` - Name of the web
+- `$topic` - Name of the topic
+- `$name` - Name of the attachment
+- `$meta` - Meta object that contains the meta info
+
+Build a link to the attachment, suitable for insertion in the topic.
+
+## <a name="ObjectMethod &lt;strong&gt;migrate_ToFileAtta"></a> [[ObjectMethod]] \*migrateToFileAttachmentMacro `($meta,$text) -> $text`
+
+Migrate old HTML format
+
+## <a name="ObjectMethod &lt;strong&gt;upgradeFrom1v0beta"></a> [[ObjectMethod]] \*upgradeFrom1v0beta `($meta) -> $text`
+
+CODE\_SMELL: Is this really necessary? upgradeFrom1v0beta?

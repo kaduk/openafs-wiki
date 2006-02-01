@@ -1,133 +1,42 @@
-<table>
-  <tr>
-    <td valign="top"><strong>Welcome to TWiki:</strong> a flexible, powerful, secure, yet simple web-based collaboration platform. Use TWiki to run a project development space, a document management system, a knowledge base or any other groupware tool on either an intranet or on the Internet. <p> This is the place to learn about TWiki features, find where to download it, and try it out for yourself... </p>
-    </td>
-    <td width="25"> </td>
-    <td align="center" valign="top" width="200"><a href="http://TWiki.org/"><img alt="Powered by TWiki" border="0" height="64" src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikiRobot131x64.gif" width="131" /></a><br /> The official TWiki<sup>TM</sup><br /> site is <a href="http://twiki.org/" target="_top">http://twiki.org/</a></td>
-  </tr>
-</table>
-<div>
-  <ul>
-    <li><a href="#TWiki User's Guide"> TWiki User's Guide</a></li>
-    <li><a href="#TWiki Reference Manual"> TWiki Reference Manual</a></li>
-    <li><a href="#TWikiSiteTools"> TWikiSiteTools</a></li>
-  </ul>
+<div style="float: right; width: 255px; padding: 1em; text-align: center"><a href="http://twiki.org"><img alt="Collaborate with TWiki -- visit TWiki.org" border="0" height="67" src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-235x67-t.gif" style="margin: .3em 0" title="Collaborate with TWiki -- visit TWiki.org" width="235" /></a><br />The official TWiki site is <a href="http://twiki.org"><span>twiki.org</span></a></div>
+
+# <a name="Welcome to the %WEB% Web"></a><a name=" Welcome to the %WEB% Web"></a> Welcome to the %WEB% Web
+
+_The place to learn about TWiki features and perform TWiki system maintenance._
+
+TWiki is a flexible, powerful, secure, yet simple web-based collaboration platform. Use TWiki to run a project development space, a document management system, a knowledge base or any other groupware tool on either an intranet or on the Internet.
+
+## <a name="TWiki Documentation and Configur"></a> TWiki Documentation and Configuration
+
+<div style="float: right; width: 255px; padding: 1em">
 </div>
-<table>
-  <tr valign="top">
-    <td><a name="UsersGuide"></a><h2><a name="TWiki User's Guide"></a> TWiki User's Guide </h2>
-      <p><em>Documentation for TWiki users.</em></p>
-      <p>
-      </p>
-      <ul>
-        <li><strong>TWiki Quick Start</strong> - the fast track approach <ul>
-            <li>[[Main/WelcomeGuest]]: A fast track intro covering all the basics </li>
-            <li>[[Main/ATasteOfTWiki]]: A short introduction training course for beginners </li>
-            <li>[[Main/TWikiRegistration]]: Sign up so you can edit pages and select options </li>
-          </ul>
-        </li>
-      </ul>
-      <p>
-      </p>
-      <ul>
-        <li><strong>One-Page Primers</strong> cover TWiki basics <ul>
-            <li>[[Main/TWikiTutorial]]: A compact, 20-minute TWiki primer </li>
-            <li>[[Main/TWikiSite]]: Instant overview - first, there was Wiki </li>
-            <li>[[Main/TWikiTopics]]: Customize, rename, move, or delete TWiki topics </li>
-            <li>[[Main/SearchHelp]]: Tips and help on search </li>
-            <li>[[Main/GoodStyle]]: Working tips for an open collaboration environment </li>
-            <li>[[Main/TWikiShorthand]]: All of the TWiki shorthand basics </li>
-            <li>[[Main/TextFormattingRules]]: Scan all TWiki text formatting rules on one page </li>
-            <li>[[Main/TWikiVariables]]: How to easily embed text, graphics, dynamic content </li>
-            <li>[[Main/FileAttachments]]: Browser-upload files for distribution or display </li>
-            <li>[[Main/WebChangesAlert]]: Get email alerts linking to the latest page changes </li>
-            <li>[[Main/TWikiGlossary]]: A simple glossary of TWiki terms </li>
-          </ul>
-        </li>
-      </ul>
-      <p>
-      </p>
-      <ul>
-        <li><strong>TWiki Help FAQs</strong><ul>
-            <li>[[Main/TWikiFAQ]]: The first things people ask about TWiki </li>
-            <li>[[Main/TextFormattingFAQ]]: Common how-to questions about posting in TWiki </li>
-            <li> Frequent users should also browse the full [[Main/WebHome#ReferenceManual]]! </li>
-          </ul>
-        </li>
-      </ul>
-      <p>
-      </p>
-    </td>
-    <td width="25"> </td>
-    <td align="left" valign="top" width="200">
-      <form action="http://www.dementia.org/twiki//search/%WEB%/"><input name="search" size="22" type="text" /><br /><input type="submit" value="Search Docs" /><br /><font size="-2">More options in [[Main/WebSearch]]</font></form>
-    </td>
-  </tr>
-</table>
 
-- **Help on Installed Plugins**
+- [[Welcome Guest|Main/WelcomeGuest]] - look here first
+- [[Tutorial|Main/TWikiTutorial]] - 20 minutes TWiki tutorial
+- [[User's Guide|Main/TWikiUsersGuide]] - documentation for TWiki users
+- [[Frequently Asked Questions|Main/TWikiFAQ]] - about TWiki
+- [[Reference Manual|Main/TWikiReferenceManual]] - documentation for system administrators
+- [[Admin Tools|Main/AdminToolsCategory]] - manage the TWiki site
+- [[TWiki-4.0.0 Release Notes|Main/TWikiReleaseNotes04x00x00]] - describes what's new in this release
 
-> - [[SpreadSheetPlugin]] <span>(any TWiki, 10197)</span>:
-> - [[CommentPlugin]] <span>(Dakar, 11359)</span>: Allows users to quickly post comments to a page without an edit/preview/save cycle
-> - [[EditTablePlugin]] <span>(any TWiki, 11646)</span>:
-> - [[InterwikiPlugin]] <span>(Dakar, $Rev: 11935$)</span>:
-> - [[PreferencesPlugin]] <span>(Dakar, 9839)</span>:
-> - [[SlideShowPlugin]] <span>(Any TWiki, $Rev: 12847$)</span>:
-> - [[SmiliesPlugin]] <span>(Dakar, 8154)</span>:
-> - [[TablePlugin]] <span>(1.020, 12339)</span>:
-> - [[TwistyPlugin]] <span>(1.2.0, $Rev: 12154$)</span>:
+## <a name="%WEB% Web Utilities"></a> %WEB% Web Utilities
 
-<a name="ReferenceManual"></a>
+<form action="http://www.dementia.org/twiki/search/%WEB%/">
+  <ul>
+    <li><input name="search" size="22" type="text" /> <input type="submit" value="Search" /> - [[Main/WebSearchAdvanced]]</li>
+    <li>[[Main/WebTopicList]] - all topics in alphabetical order </li>
+    <li>[[Main/WebChanges]] - recent topic changes in this web </li>
+    <li>[[Main/WebNotify]] - subscribe to an e-mail alert sent when topics change </li>
+    <li>[[Main/WebRss]], [[Main/WebAtom]] - RSS and ATOM news feeds of topic changes </li>
+    <li>[[Main/WebStatistics]] - listing popular topics and top contributors </li>
+    <li>[[Main/WebPreferences]] - preferences of this web </li>
+  </ul>
+</form>
 
-## <a name="TWiki Reference Manual"></a> TWiki Reference Manual
+## <a name="Disclaimer"></a> Disclaimer
 
-_Documentation for webmasters, system administrators, project managers, team leaders, and all other users of the TWiki advanced online collaboration platform._
-
-- All manual sections in one big page:
-  - [[TWiki Documentation|Main/TWikiDocumentation]] (560k)
-- Manual sections in separate pages:
-  1. [[TWiki System Requirements|Main/TWikiSystemRequirements]]
-  2. [[TWiki Installation Guide|Main/TWikiInstallationGuide]]
-  3. [[Windows Install Cookbook|Main/WindowsInstallCookbook]]
-  4. [[TWiki Upgrade Guide|Main/TWikiUpgradeGuide]]
-  5. [[TWiki User Authentication|Main/TWikiUserAuthentication]]
-  6. [[TWiki Access Control|Main/TWikiAccessControl]]
-  7. [[Text Formatting Rules|Main/TextFormattingRules]]
-  8. [[TWiki Variables|Main/TWikiVariables]]
-  9. [[File Attachment|Main/FileAttachment]]
-  10. [[TWiki Forms|Main/TWikiForms]]
-  11. [[TWiki Templates|Main/TWikiTemplates]]
-  12. [[TWiki Skins|Main/TWikiSkins]]
-  13. [[Formatted Search|Main/FormattedSearch]]
-  14. [[TWiki MetaData|Main/TWikiMetaData]]
-  15. [[TWiki Plugins|Main/TWikiPlugins]]
-  16. [[TWiki::Func Module Documentation|Main/TWikiFuncModule]]
-  17. [[TWiki Site Tools|Main/TWikiSiteTools]]
-  18. [[Managing Topics|Main/ManagingTopics]]
-  19. [[Managing Webs|Main/ManagingWebs]]
-  20. [[Managing Users|Main/ManagingUsers]]
-  - **Appendices**
-    - [[A. TWiki File System|Main/AppendixFileSystem]]
-    - [[B. TWiki CSS|Main/TWikiCss]]
-    - [[C. Encode URLs With UTF8|Main/AppendixEncodeURLsWithUTF8]]
-    - [[D. TWiki Development Timeline|Main/TWikiHistory]]
-
-- %T% **ADMINS:** In less than an hour, you can read through and customize the [[User's Guide|Main/WebHome#UsersGuide]] to reflect the exact feature set enabled on your own TWiki site. See also other enhancement pages:
-  - [[TWikiAdminCookBook]]: Some tips that can be applied **before installation**
-  - [[InstantEnhancements]]: Simple tips (using just browser, no install needed) and quick (max couple of minutes).
-  - [[AdminTools]]: Topics an admin typically needs, all in one page
-
-## <a name="TWikiSiteTools"></a><a name="_TWikiSiteTools"></a> TWikiSiteTools
-
-- [[TWikiSiteTools]] include utilities for navigation and for monitoring TWiki web and site-wide activity.
-
-- [[TWikiPreferences]]: %WIKITOOLNAME% site-wide preferences
-- [[InstalledPlugins]]: currently available TWiki add-on features
-
-- The [[SiteMap]]: A color-coded directory of available webs that can be easily included on any page _(below)_
-
-- TWiki<sup>TM</sup> is a trademark of [[PeterThoeny]]
-  - **_Note_**: Twiki (with a lower case "w") is a robot character in the _Buck Rogers<sup>TM</sup> in the 25th Century_ TV series. TWiki (with an upper case "W") is not affiliated with the Dillie Family Trust, the registered trademark owner of the _Buck Rogers_ name
+- TWiki™, the [[TWiki logo|Main/TWikiLogos]] and the "Collaborate with TWiki" tagline are trademarks of [Peter Thoeny](http://twiki.org/cgi-bin/view/Main/PeterThoeny)
+- **_Note_**: Twiki (with a lower case "w") is a robot character from the _Buck Rogers™ in the 25th Century_ TV series. TWiki (with an upper case "W") is not affiliated with the Dille Family Trust, the registered trademark owner of the _Buck Rogers_ name
 - TWiki is developed as Free Software under the [[GNU/GPL|Main/GnuGeneralPublicLicense]]
 - This site is running TWiki version **TWiki-4.1.2, Sat, 03 Mar 2007, build 13046**, Plugin API version **1\.11**
-- Get the current version from [TWiki.org Downloads](http://TWiki.org/download.html)<br />![twikiRobot88x31.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikiRobot88x31.gif)
+- Get the latest version from [TWiki.org downloads](http://TWiki.org/download.html)

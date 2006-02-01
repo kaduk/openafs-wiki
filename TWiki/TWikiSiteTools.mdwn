@@ -1,22 +1,22 @@
 <div>
   <ul>
     <li><a href="#TWiki Site Tools"> TWiki Site Tools</a><ul>
-        <li><a href="#WebNotify Recent Changes Alert"> WebNotify Recent Changes Alert</a><ul>
-            <li><a href="#Configuring Outgoing Mail"> Configuring Outgoing Mail</a></li>
-            <li><a href="#Setting the Automatic Email Sche"> Setting the Automatic Email Schedule</a></li>
+        <li><a href="#WebNotify - recent changes alert"> WebNotify - recent changes alert</a></li>
+        <li><a href="#WebSearch - search TWiki site"> WebSearch - search TWiki site</a></li>
+        <li><a href="#WebChanges - what's new"> WebChanges - what's new</a></li>
+        <li><a href="#WebIndex - list of topics"> WebIndex - list of topics</a></li>
+        <li><a href="#WebStatistics - site statistics"> WebStatistics - site statistics</a><ul>
+            <li><a href="#Configuring for automatic operat"> Configuring for automatic operation</a></li>
+            <li><a href="#Generating statistics manually b"> Generating statistics manually by URL</a></li>
           </ul>
         </li>
-        <li><a href="#WebStatistics Site Usage Log"> WebStatistics Site Usage Log</a><ul>
-            <li><a href="#Configuring for Automatic Operat"> Configuring for Automatic Operation</a></li>
-            <li><a href="#Generating Statistics Manually b"> Generating Statistics Manually by URL</a></li>
-            <li><a href="#Log File Details"> Log File Details</a></li>
+        <li><a href="#Log Files"> Log Files</a></li>
+        <li><a href="#E-mail"> E-mail</a><ul>
+            <li><a href="#Configuring outgoing mail"> Configuring outgoing mail</a></li>
+            <li><a href="#Setting the automatic e-mail sch"> Setting the automatic e-mail schedule</a></li>
           </ul>
         </li>
-        <li><a href="#WebSearch"> WebSearch</a><ul>
-            <li><a href="#WebChanges"> WebChanges</a></li>
-            <li><a href="#WebIndex"> WebIndex</a></li>
-          </ul>
-        </li>
+        <li><a href="#Site Permissions"> Site Permissions</a></li>
       </ul>
     </li>
   </ul>
@@ -26,75 +26,86 @@
 
 _Utilities for searching, navigation, and monitoring site activity_
 
-[[TWikiSiteTools]] include utilities for navigating, searching and keeping up with site activity. Preferences can be configured by web or site-wide. You are currently in the **TWiki** web. In particular, TWiki provides two highly configurable, automated site monitoring tools, **WebNotify**, to email alerts when topics are edited, and **WebStats**, to generate detailed activity reports.
+TWiki Site Tools include utilities for navigating, searching and keeping up with site activity. Preferences can be configured by web or site-wide. You are currently in the **TWiki** web. In particular, TWiki provides two highly configurable, automated site monitoring tools, **WebNotify**, to e-mail alerts when topics are edited, and **WebStatistics**, to generate detailed activity reports.
 
-## <a name="WebNotify Recent Changes Alert"></a><a name="_WebNotify Recent Changes Alert"></a> WebNotify Recent Changes Alert
+<a name="WebNotify"></a>
 
-Each TWiki web has an automatic email alert service that sends a list of recent changes on a preset schedule, like once a day. Users can subscribe and unsubscribe using [[WebNotify]] in each web. The Perl script `mailnotify` is called by a background process at regular intervals. The script sends an automated email to subscribed users if topics were changed in a web since the script was last run.
+## <a name="WebNotify - recent changes alert"></a><a name="_WebNotify - recent changes aler"></a> WebNotify - recent changes alert
+
+Each TWiki web has an automatic e-mail alert service that sends a list of recent changes on a preset schedule, like once a day. Users can subscribe and unsubscribe using [[WebNotify]] in each web. The Perl script `mailnotify` is called by a background process at regular intervals. The script sends an automated e-mail to subscribed users if topics were changed in a web since the script was last run.
 
 - You can create a [[WebNotify]] link using [[TWikiVariables]] with <code>**%NOTIFYTOPIC%**</code>
 
-You can also use `%MAINWEB%` instead of `Main`, but this is not necessary even if you have renamed the main web by configuring `$mainWebname` in `TWiki.cfg`.
+You can also use `%MAINWEB%` instead of `Main`, but this is not necessary even if you have renamed the main web by configuring `{MainWebName}` in [configure](http://www.dementia.org/twiki/configure).
 
-### <a name="Configuring Outgoing Mail"></a> Configuring Outgoing Mail
+<a name="WebSearch"></a>
 
-%WIKITOOLNAME% will use the <code>**Net::SMTP**</code> module if it is installed on your system. Set this with the <code>**SMTPMAILHOST**</code> variable in [[TWikiPreferences]].
+## <a name="WebSearch - search TWiki site"></a><a name="_WebSearch - search TWiki site"></a> WebSearch - search TWiki site
 
-The notify e-mail uses the default `changes.tmpl` template, or a skin if activated in the [[TWikiPreferences]].
+[[WebSearch]] is an extremely fast and flexible search facility, part of the core TWiki feature set. [[WebSearchAdvanced]] offers more options, including:
 
-mailnotify also relies on two hidden files in each `TWiki/data/[web]` directory: `.changes` and `.mailnotify.` Make sure both are writable by your web server process. `.changes` contains a list of changes; go ahead and make this empty. `.mailnotify` contains a timestamp of the last time notification was done.
+- topic title or full-text search
+- regular expressions
+- search within web or site-wide
+- index-style A-Z alphabetical listing sorted topic title
+- many more
 
-You can use an external mail program, like <code>**sendmail**</code>, if the `Net::SMTP` module is not installed. Set the program path in <code>**$mailProgram**</code> in <code>**TWiki.cfg**</code>.
+See also: [[SearchHelp]] for help; [[TWikiVariables]] and [[FormattedSearch]] for including hard-coded searches in text.
 
-- %H% Net::SMTP can be easily disabled (ex: if there is an installation error) by setting <code>**SMTPMAILHOST**</code> in [[TWikiPreferences]] to an empty value.
+<a name="WebChanges"></a>
 
-- %T% You can set a separate <code>**SMTPSENDERHOST**</code> variable to define the mail sender host (some SMTP installations require this).
+## <a name="WebChanges - what&#39;s new"></a><a name="_WebChanges - what&#39;s new"></a> WebChanges - what's new
 
-### <a name="Setting the Automatic Email Sche"></a> Setting the Automatic Email Schedule
+To check for the most recently edited topics while on-site, use the [[WebChanges]] link, usually located in the toolbar. It lists the most recently modified topics, newest first, along with the first couple of lines of the page content.
 
-**For Unix platforms:** Edit the `cron` table so that `mailnotify` is called in an interval of your choice. Please consult `man crontab` of how to modify the table that schedules program execution at certain intervals. Example:
+This is simply a preset `SEARCH`. The number of topics listed by the `limit` parameter.:
 
-    % crontab -e
-    0 2 * * * (cd /path/to/twiki/bin; ./mailnotify -q)
+> %SEARCH{ ".*" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified"%BR% reverse="on" limit="50" }%
 
-The above line will run mailnotify nightly at 02:00. The `-q` switch suppresses all normal output.
+<a name="WebIndex"></a>
 
-**For ISP installations:** Many ISPs don't allow hosted accounts direct cron access, as it's often used for things that can heavily load the server. Workaround scripts are available.
+## <a name="WebIndex - list of topics"></a><a name="_WebIndex - list of topics"></a> WebIndex - list of topics
 
-**On Windows NT/2000:** You can use a scheduled task if you have administrative privileges. **_Note:_** AT on an NT machine is pretty limited. Microsoft lists several third-party [replacements](http://www.microsoft.com/ntserver/partners/findoffering/serversolutions/Maintnce.asp#cron). TWiki:Codev/CronTabWin is a free scheduler for Windows.
+[[WebIndex]] lists all web topics in alphabetical order, with the first couple of lines of text. This is simply a preset `SEARCH`:
 
-## <a name="WebStatistics Site Usage Log"></a><a name="_WebStatistics Site Usage Log"></a> WebStatistics Site Usage Log
+> %SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" }%
+
+<a name="WebStatistics"></a>
+
+## <a name="WebStatistics - site statistics"></a><a name="_WebStatistics - site statistics"></a> WebStatistics - site statistics
 
 You can generate a listing manually, or on an automated schedule, of visits to individual pages, on a per web basis. Compiled as a running total on a monthly basis. Includes totals for Topic Views, Topic Saves, Attachment Uploads, Most Popular Topics with number of views, and Top Contributors showing total of saves and attachment uploads. Previous months are saved.
 
 - You can create a [[WebStatistics]] link using [[TWikiVariables]] with <code>**%STATISTICSTOPIC%**</code>
 
-### <a name="Configuring for Automatic Operat"></a> Configuring for Automatic Operation
+### <a name="Configuring for automatic operat"></a> Configuring for automatic operation
 
 - You can automatically generate usage statistics for all webs. To enable this:
-  - Make sure variable `$doLogTopicView, $doLogTopicSave and $doLogTopicUpload` in `TWiki.cfg` are set. This will generate log file entries (see below).
+  - Make sure variable **\{Log\}\{view\}**, **\{Log\}\{save\}** and \*\{Log\}\{upload\} in are set in [configure](http://www.dementia.org/twiki/configure). This will generate log file entries (see below).
   - The [[WebStatistics]] topic must be present in all webs where you want to have statistics. You can use the topic in the Main web as a template.
   - Call the `twiki/bin/statistics` script from a cron job, once a day is recommended. This will update the [[WebStatistics]] topics in all webs.
-  - **_Attention:_** The script must run as the same user as the CGI scripts are running, which is user `nobody` on many systems. Example crontab entry: <br />`0 0 * * * (cd /path/to/TWiki/bin; ./statistics >/dev/null 2>&1)`
-  - There is a workaround in case you can't run the script as user `nobody` : Run the utility `twiki/bin/geturl` in your cron job and specify the URL of the `twiki/bin/statistics` script as a parameter. Example: <br />`0 0 * * * (cd /path/to/TWiki/bin; ./geturl mydomain.com /urlpath/to/TWiki/bin/statistics >/dev/null 2>&1)`
+  - **_Attention:_** The script must run as the same user as the CGI scripts are running, which is user `nobody` on many systems. Example crontab entry: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./statistics >/dev/null 2>&1)`
+  - There is a workaround in case you can't run the script as user `nobody` : Run the utility `twiki/bin/geturl` in your cron job and specify the URL of the `twiki/bin/statistics` script as a parameter. Example: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./geturl mydomain.com /urlpath/to/twiki/bin/statistics >/dev/null 2>&1)`
 
-### <a name="Generating Statistics Manually b"></a> Generating Statistics Manually by URL
+### <a name="Generating statistics manually b"></a> Generating statistics manually by URL
 
 - The `twiki/bin/statistics` script can also be executed as a CGI script, just enter the URL in your browser. Examples:
-  - Update current month for all webs: <br />`http://mydomain.com/twiki/bin/statistics`
-  - Update current month for Main web only: <br />`http://mydomain.com/twiki/bin/statistics/Main`
-  - Update January 2000 for Main web: <br />`http://mydomain.com/twiki/bin/statistics/Main?logdate=200001`
+  - Update current month for all webs: %BR% `http://www.dementia.org/twiki/statistics`
+  - Update current month for Main web only: %BR% `http://www.dementia.org/twiki/statistics/Main`
+  - Update January 2000 for Main web: %BR% `http://www.dementia.org/twiki/statistics/Main?logdate=201006`
 
-### <a name="Log File Details"></a> Log File Details
+<a name="LogFiles"></a>
 
-TWiki generates monthly log files which are used by the statistics
+## <a name="Log Files"></a> Log Files
 
-- The log directory is defined by the `$logDir` variable in TWiki.cfg
+TWiki generates monthly log files which are used by the statistics script
+
+- The log file is defined by the **\{LogFileName\}** setting in [configure](http://www.dementia.org/twiki/configure)
 - The file name is `log<year><month>.txt`
-- Example path name: `twiki/data/log201006.txt`
+- Example path name: `twiki/logs/log201006.txt`
 - Each access gets logged as: %BR% `| <time> | <wikiusername> | <action> | <web>.<topic> | <extra info> | <IP address> |`
-- Example log entry: %BR% `| 29 Jun 2010 - 11:48 | Main.TWikiGuest | view | TWiki.WebRss |  | 66.124.232.02 |`
-- Actions are logged if enabled in TWiki.cfg by the `$doLogTopic<action>` flags
+- Example log entry: %BR% <code>| 29 Jun 2010 - 11:57 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
+- Actions are logged if enabled in [configure](http://www.dementia.org/twiki/configure) by the **\{Log\}\{_action_\}** flags
 - Logged actions: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> Script </strong></th>
@@ -117,24 +128,24 @@ TWiki generates monthly log files which are used by the statistics
     <td> when editing non-existing topic: <code>(not exist)</code></td>
   </tr>
   <tr>
-    <td> register </td>
-    <td><code>register</code></td>
-    <td> E-mail address </td>
-  </tr>
-  <tr>
-    <td> save </td>
-    <td><code>save</code></td>
-    <td> when replacing existing revision: <code>repRev 1.3</code> %BR% when user checks the minor changes box: <code>dontNotify</code></td>
-  </tr>
-  <tr>
-    <td> search </td>
-    <td><code>search</code></td>
-    <td> search string </td>
-  </tr>
-  <tr>
     <td> rdiff </td>
     <td><code>rdiff</code></td>
-    <td><code>1.4 1.3</code></td>
+    <td> higher and lower revision numbers: <code>4 3</code></td>
+  </tr>
+  <tr>
+    <td> register </td>
+    <td><code>regstart</code></td>
+    <td> WikiUserName, e-Mail address, [[Main/LoginName]]: <code>user attempts to register</code></td>
+  </tr>
+  <tr>
+    <td> register </td>
+    <td><code>register</code></td>
+    <td> E-mail address: <code>user successfully registers</code></td>
+  </tr>
+  <tr>
+    <td> register </td>
+    <td><code>bulkregister</code></td>
+    <td> WikiUserName of new, e-mail address, admin ID </td>
   </tr>
   <tr>
     <td> rename </td>
@@ -147,6 +158,26 @@ TWiki generates monthly log files which are used by the statistics
     <td> when moving attachment: <code>Attachment filename moved to Newweb.NewTopic</code></td>
   </tr>
   <tr>
+    <td> passwd </td>
+    <td><code>resetpasswd</code></td>
+    <td>[[Main/LoginName]], [[Main/WikiName]], E-mail address, success code from addUserPassword </td>
+  </tr>
+  <tr>
+    <td> passwd </td>
+    <td><code>changepasswd</code></td>
+    <td>[[Main/LoginName]], [[Main/WikiName]]</td>
+  </tr>
+  <tr>
+    <td> save </td>
+    <td><code>save</code></td>
+    <td> when replacing existing revision: <code>repRev 3</code> %BR% when user checks the minor changes box: <code>dontNotify</code></td>
+  </tr>
+  <tr>
+    <td> search </td>
+    <td><code>search</code></td>
+    <td> search string </td>
+  </tr>
+  <tr>
     <td> upload </td>
     <td><code>upload</code></td>
     <td> filename </td>
@@ -154,36 +185,46 @@ TWiki generates monthly log files which are used by the statistics
   <tr>
     <td> view </td>
     <td><code>view</code></td>
-    <td> when viewing non-existing topic: <code>(not exist)</code> %BR% when viewing previous topic revision: <code>r1.3</code></td>
+    <td> when viewing non-existing topic: <code>(not exist)</code> %BR% when viewing previous topic revision: <code>r3</code></td>
   </tr>
 </table>
 
-## <a name="WebSearch"></a><a name="_WebSearch"></a> WebSearch
+<a name="ConfigureEmail"></a>
 
-[[WebSearch]] is an extremely fast and flexible search facility, part of the core TWiki feature set. Options include:
+## <a name="E-mail"></a> E-mail
 
-- topic title or full-text search
-- regular expressions
-- search within web or site-wide
-- index-style A-Z alphabetical listing sorted topic title
-- many more
+### <a name="Configuring outgoing mail"></a> Configuring outgoing mail
 
-See also: [[TWikiVariables]] for including hard-coded searches in text.
+Outgoing mail is required for [[TWikiRegistration]] and for [[recent changes alert|Main/WebHome#WebNotify]].
 
-### <a name="WebChanges"></a><a name="_WebChanges"></a> WebChanges
+TWiki will use the <code>**Net::SMTP**</code> module if it is installed on your system. Set this with the <code>**SMTPMAILHOST**</code> variable in [[TWikiPreferences]].
 
-To check for the most recently edited topics while on-site, use the [[WebChanges]] link, usually located on the upper toolbar. It lists the most recently modified topics, newest first, along with the first couple of lines of the page content.
+The notify e-mail uses the default `changes.tmpl` template, or a skin if activated in the [[TWikiPreferences]].
 
-This is simply a preset `SEARCH`. The number of topics listed by the `limit` parameter.:
+mailnotify also relies on two hidden files in each `twiki/data/Web` directory: `.changes` and `.mailnotify.` Make sure both are writable by your web server process. `.changes` contains a list of changes; go ahead and make this empty. `.mailnotify` contains a timestamp of the last time notification was done.
 
-> <pre>
-> %SEARCH{".*" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" <br />reverse="on" limit="50"}%
-> </pre>
+You can use an external mail program, such as <code>**sendmail**</code>, if the `Net::SMTP` module is not installed. Set the program path in <code>**\{MailProgram\}**</code> in [configure](http://www.dementia.org/twiki/configure).
 
-### <a name="WebIndex"></a><a name="_WebIndex"></a> WebIndex
+- %H% Net::SMTP can be easily disabled (if there is an installation error) by setting <code>**SMTPMAILHOST**</code> in [[TWikiPreferences]] to an empty value.
 
-[[WebIndex]] lists all web topics in alphabetical order, with the first couple of lines of text. This is simply a preset `SEARCH`:
+- %T% You can set a separate <code>**SMTPSENDERHOST**</code> variable to define the mail sender host (some SMTP installations require this).
 
-> %SEARCH{"\.*" scope="topic" regex="on" nosearch="on"}%
+### <a name="Setting the automatic e-mail sch"></a> Setting the automatic e-mail schedule
 
--- TWiki:Main.MikeMannix - 01 Dec 2001 %BR% -- TWiki:Main.PeterThoeny - 28 Aug 2004
+**For Unix platforms:** Edit the `cron` table so that `mailnotify` is called in an interval of your choice. Please consult `man crontab` of how to modify the table that schedules program execution at certain intervals. Example:
+
+    % crontab -e
+    0 2 * * * (cd /path/to/twiki/bin; ./mailnotify -q)
+
+The above line will run mailnotify nightly at 02:00. The `-q` switch suppresses all normal output.
+
+**For ISP installations:** Many ISPs don't allow hosted accounts direct cron access, as it's often used for things that can heavily load the server. Workaround scripts are available.
+
+**On Windows:** You can use a scheduled task if you have administrative privileges. TWiki:Codev/CronTabWin is a free scheduler for Windows.
+
+## <a name="Site Permissions"></a> Site Permissions
+
+- [[TWikiAccessControl]] describes how to restrict read and write access to topics and webs, by users and groups
+- [[SitePermissions]] lists the permissions settings of the webs on this TWiki site
+
+**_Related Topics:_** [[AdminDocumentationCategory]], [[AdminToolsCategory]]

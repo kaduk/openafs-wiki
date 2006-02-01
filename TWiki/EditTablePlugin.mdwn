@@ -37,7 +37,7 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
   </tr>
   <tr>
     <td><code>format</code></td>
-    <td> The format of one column when editing the table. A cell can be a text input field, or any of these edit field types:%BR% - Text input field (1 line):%BR%   <code>| text, &lt;size&gt;, &lt;initial value&gt; |</code> %BR% - Textarea input field:%BR%   <code>| textarea, &lt;rows&gt;x&lt;columns&gt;, &lt;initial value&gt; |</code> %BR% - Drop down box: %BR%   <code>| select, &lt;size&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR% - Fixed label: %BR%   <code>| label, 0, &lt;label text&gt; |</code> %BR% - Row number: %BR%   <code>| row, &lt;offset&gt; |</code> %BR% - Date: %BR%   <code>| date, &lt;size&gt;, &lt;initial value&gt;, &lt;DHTML date format&gt; |</code></td>
+    <td> The format of one column when editing the table. A cell can be a text input field, or any of these edit field types:%BR% • Text input field (1 line):%BR%   <code>| text, &lt;size&gt;, &lt;initial value&gt; |</code> %BR% • Textarea input field:%BR%   <code>| textarea, &lt;rows&gt;x&lt;columns&gt;, &lt;initial value&gt; |</code> %BR% • Drop down box: %BR%   <code>| select, &lt;size&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR% • Radio buttons: %BR%   <code>| radio, &lt;size*&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR%   <code>*</code> size indicates the number of buttons per line in edit mode %BR% • Checkboxes: %BR%   <code>| checkbox, &lt;size*&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR%   <code>*</code> size indicates the number of checkboxes per line in edit mode %BR% • Fixed label: %BR%   <code>| label, 0, &lt;label text&gt; |</code> %BR% • Row number: %BR%   <code>| row, &lt;offset&gt; |</code> %BR% • Date: %BR%   <code>| date, &lt;size&gt;, &lt;initial value&gt;, &lt;DHTML date format&gt; |</code></td>
     <td><code>"text, 16"</code> %BR% for all cells </td>
   </tr>
   <tr>
@@ -132,32 +132,35 @@ It is also possible to place the edit button inside a cell instead of default lo
 
 ## <a name="Examples"></a> Examples
 
-Line before table: `%EDITTABLE{ header="|*Nr*|*Text field sandbox*|*Drop down sandbox*|*Timestamp*|" format="| row, -1 | text, 20, init | select, 1, one, two, three, four | label, 0, %SERVERTIME{"$day $mon $year $hour:$min"}% |" changerows="on" }%` <a name="edittable1"></a>
+Line before table: `%EDITTABLE{ format="| row, -1 | text, 20, init | select, 1, one, two, three, four | radio, 3,:-),:-I,:-( | label, 0, %SERVERTIME{"$day $mon $year $hour:$min"}% |" changerows="on" }%` <a name="edittable1"></a>
 
 <div>
   <form action="http://www.dementia.org/twiki/viewauth#edittable1" method="post" name="edittable1"><input name="ettablenr" type="hidden" value="1" /> <input name="etedit" type="hidden" value="on" /><table border="1" cellpadding="0" cellspacing="0">
       <tr>
         <th bgcolor="#99CCCC"><strong> Nr </strong></th>
-        <th bgcolor="#99CCCC"><strong> Text field sandbox </strong></th>
-        <th bgcolor="#99CCCC"><strong> Drop down sandbox </strong></th>
+        <th bgcolor="#99CCCC"><strong> Text field </strong></th>
+        <th bgcolor="#99CCCC"><strong> Drop down </strong></th>
+        <th bgcolor="#99CCCC"><strong> Mood </strong></th>
         <th bgcolor="#99CCCC"><strong> Timestamp </strong></th>
       </tr>
       <tr>
         <td> 1 </td>
         <td> hello table </td>
         <td> one </td>
+        <td> :-) </td>
         <td> 26 Jun 2002 12:30 </td>
       </tr>
       <tr>
         <td> 2 </td>
         <td>   </td>
         <td> two </td>
+        <td> :-( </td>
         <td> 27 Jun 2002 12:40 </td>
       </tr>
     </table><input name="etrows" type="hidden" value="3" /> <input type="submit" value="Edit table" /></form>
 </div>
 
-%RED% **_Note:_** Please use TWiki:Sandbox.EditTablePluginTesting if you want to try out this Plugin %ENDCOLOR%
+%RED% **_Note:_** Please do not save this example table! Use TWiki:Sandbox.EditTablePluginTesting if you want to try out this Plugin %ENDCOLOR%
 
 If this plugin is installed you will see an **[ Edit table ]** button above; if you were to click on it (please don't, use TWiki:Sandbox.EditTablePluginTesting for testing) you get this form:
 
@@ -165,8 +168,9 @@ If this plugin is installed you will see an **[ Edit table ]** button above; 
   <table border="1" cellpadding="0" cellspacing="1">
     <tr>
       <th bgcolor="#99CCCC"> Nr </th>
-      <th bgcolor="#99CCCC"> Text field sandbox </th>
-      <th bgcolor="#99CCCC"> Drop down sandbox </th>
+      <th bgcolor="#99CCCC"> Text field </th>
+      <th bgcolor="#99CCCC"> Drop down </th>
+      <th bgcolor="#99CCCC"> Mood </th>
       <th bgcolor="#99CCCC"> Timestamp </th>
     </tr>
     <tr>
@@ -176,7 +180,8 @@ If this plugin is installed you will see an **[ Edit table ]** button above; 
           <option>two</option>
           <option>three</option>
           <option>four</option></select></td>
-      <td bgcolor="#FFFFFF"> 26 Jun 2002 12:30<input name="etcell2x4" type="hidden" value="26 Jun 2002 12:30" /></td>
+      <td bgcolor="#FFFFFF"><input checked name="etcell2x4" type="radio" value=":-)" /> <img alt="smile" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SmiliesPlugin/smile.gif" title="smile" /> <input name="etcell2x4" type="radio" value=":-I" /> <img alt="indifferent" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SmiliesPlugin/indifferent.gif" title="indifferent" /> <input name="etcell2x4" type="radio" value=":-(" /> <img alt="frown" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SmiliesPlugin/frown.gif" title="frown" /></td>
+      <td bgcolor="#FFFFFF"> 26 Jun 2002 12:30<input name="etcell2x5" type="hidden" value="26 Jun 2002 12:30" /></td>
     </tr>
     <tr>
       <td bgcolor="#FFFF99"> 2<input name="etcell3x1" type="hidden" value="2" /></td>
@@ -185,7 +190,8 @@ If this plugin is installed you will see an **[ Edit table ]** button above; 
           <option selected>two</option>
           <option>three</option>
           <option>four</option></select></td>
-      <td bgcolor="#FFFF99"> 27 Jun 2002 12:40<input name="etcell3x4" type="hidden" value="27 Jun 2002 12:40" /></td>
+      <td bgcolor="#FFFF99"><input name="etcell2x4" type="radio" value=":-)" /> <img alt="smile" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SmiliesPlugin/smile.gif" title="smile" /> <input name="etcell2x4" type="radio" value=":-I" /> <img alt="indifferent" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SmiliesPlugin/indifferent.gif" title="indifferent" /> <input checked name="etcell2x4" type="radio" value=":-(" /> <img alt="frown" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SmiliesPlugin/frown.gif" title="frown" /></td>
+      <td bgcolor="#FFFF99"> 27 Jun 2002 12:40<input name="etcell3x5" type="hidden" value="27 Jun 2002 12:40" /></td>
     </tr>
   </table><input name="etsave" onclick="return(false);" type="submit" value="Save table" /> <input name="etqsave" onclick="return(false);" type="submit" value="Quiet save" /> <input name="etaddrow" onclick="return(false);" type="submit" value="Add row" /> <input name="etdelrow" onclick="return(false);" type="submit" value="Delete last row" /> <input name="etcancel" onclick="return(false);" type="submit" value="Cancel" /> (demo only, these buttons do not work) </form>
 
@@ -312,11 +318,19 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 01 Aug 2004 </td>
+    <td> 8670 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 21 Jan 2006: </td>
+    <td> TWiki:Main.CrawfordCurrie ported to TWiki-4.0.0, changed to use [[Main/JSCalendarContrib]]</td>
+  </tr>
+  <tr>
+    <td align="right"> 16 Sep 2004: </td>
+    <td> Added radio buttons and checkbox controls; escaped "|" pipe symbol found in input fields to preserve tables </td>
   </tr>
   <tr>
     <td align="right"> 01 Aug 2004: </td>
@@ -403,12 +417,8 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Initial version </td>
   </tr>
   <tr>
-    <td align="right"> CPAN Dependencies: </td>
-    <td> none </td>
-  </tr>
-  <tr>
-    <td align="right"> Other Dependencies: </td>
-    <td><a href="http://dynarch.com/mishoo/calendar.epl" target="_top">Mishoo DHTML calendar</a> (version 0.9.5 preinstalled); TWiki version 01 Feb 2003 or later </td>
+    <td align="right"> Dependencies: </td>
+    <td> None </td>
   </tr>
   <tr>
     <td align="right"> Perl Version: </td>
@@ -430,4 +440,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 01 Aug 2004
+-- TWiki:Main/PeterThoeny - 16 Sep 2004

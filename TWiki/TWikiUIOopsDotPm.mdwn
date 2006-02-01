@@ -1,0 +1,34 @@
+# <a name="Package &lt;code&gt;TWiki::UI::Oops="></a> Package =TWiki::UI::Oops
+
+UI delegate for oops function
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::UI::Oops="> Package TWiki::UI::Oops</a><ul>
+        <li><a href="#StaticMethod <strong>oops_cgi</strong> ($sessio"> StaticMethod oops_cgi <tt>($session)</tt></a></li>
+        <li><a href="#StaticMethod <strong>oops</strong> ($session,$w"> StaticMethod oops <tt>($session,$web,$topic,$query,$keep)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;oops_cgi&lt;/strong&gt; ($sessio"></a> [[StaticMethod]] **oops\_cgi** `($session)`
+
+`oops` command handler. This method is designed to be invoked via the `TWiki::UI::run` method. CGI parameters:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>template</code></td>
+    <td> name of template to use </td>
+  </tr>
+  <tr>
+    <td><code>paramN</code></td>
+    <td> Parameter for expansion of template </td>
+  </tr>
+</table>
+
+%PARAMn% tags will be expanded in the template using the 'paramN' values in the query.
+
+## <a name="StaticMethod &lt;strong&gt;oops&lt;/strong&gt; ($session,$w"></a> [[StaticMethod]] **oops** `($session,$web,$topic,$query,$keep)`
+
+The body of an oops script call, abstracted out so it can be called for the case where an oops is required, but all the parameters in the query must be saved for passing on to another URL invoked from a form in the template. If $keep is defined, it must be a reference to a hash (usually an oopsexception) that defines the parameters to the script (template, def etc). In this case, all the parameters in the `$query` are added as hiddens into the expanded template.

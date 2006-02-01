@@ -9,14 +9,12 @@
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li><a href="#Creating your own look"> Creating your own look</a></li>
         <li><a href="#Supported browsers"> Supported browsers</a></li>
         <li><a href="#Installation"> Installation</a><ul>
             <li><a href="#Troubleshooting"> Troubleshooting</a></li>
           </ul>
         </li>
-        <li><a href="#Creating your own look"> Creating your own look</a></li>
-        <li><a href="#Customization"> Customization</a></li>
-        <li><a href="#Further reading"> Further reading</a></li>
         <li><a href="#Skin Info"> Skin Info</a></li>
         <li><a href="#Related topics"> Related topics</a></li>
         <li><a href="#Feedback"> Feedback</a></li>
@@ -27,7 +25,17 @@
 
 ## <a name="Screen Shot"></a> Screen Shot
 
-[<img src="http://www.dementia.org/twiki//view/patternskin_screenshot.gif" width="600" height="130" alt="Click for full screen image" style="border: 1px solid #eee" />](http://www.dementia.org/twiki//view/patternskin_screenshot_full.gif)
+[<img src="http://www.dementia.org/twiki//view/patternskin_screenshot.jpg" width="600" height="130" alt="Click for full screen image" style="border: 1px solid #eee" />](http://www.dementia.org/twiki//view/patternskin_screenshot_full.png)
+
+## <a name="Creating your own look"></a> Creating your own look
+
+It is easy to tune the look and feel of PatternSkin by changing the color and space (margin, padding) settings in the Style Sheet files.
+
+You may also choose to radically change the look and create a PatternSkin-based new skin. This is easier than to create a skin by writing new template files; you can concentrate on how things should look instead of what elements should get displayed.
+
+- [[PatternSkinCustomization]] - how to configure page elements
+- [[PatternSkinCssCookbook]] - how to customize the default look of TWiki
+- [[PatternSkinCss]] - documentation of PatternSkin CSS classes
 
 ## <a name="Supported browsers"></a> Supported browsers
 
@@ -37,11 +45,8 @@ PatternSkin has been tested successfully on the following browsers:
   - Internet Explorer 6.0, 5.5 (note: Explorer 5.0 is **not** supported: will function but shows visual quirks)
   - Mozilla/Firefox
 - Mac OS X
-  - Safari 1.2
+  - Safari 2.0.3
   - Mozilla/Firefox
-
-Not tested, but will probably work (let me know):
-
 - \*nix
   - Mozilla/Firefox
 
@@ -53,7 +58,7 @@ Not tested, but will probably work (let me know):
 
 - Download the ZIP file from the Skin Home page (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory
-- Test if installed: <http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?skin=pattern>
+- Test if installed: [[http://www.dementia.org/twiki/view/%WEB%/%TOPIC%?skin=pattern|%WEB%/%TOPIC%?skin=pattern]]
 - For skin activation see [[TWikiSkins]]
 
 ### <a name="Troubleshooting"></a> Troubleshooting
@@ -64,52 +69,34 @@ Check these variables here:
 
 - TWIKILAYOUTURL = %TWIKILAYOUTURL%
 - TWIKISTYLEURL = %TWIKISTYLEURL%
+- TWIKICOLORSURL = %TWIKICOLORSURL%
 - SKIN = %SKIN%
 
 If TWIKILAYOUTURL or TWIKISTYLEURL don't give a value or point to non-existing files, check in [[TWikiPreferences]] that the following variables do exist and that they are set to on:
 
     	* %TWIKIWEB%.PatternSkin settings:
-    		* Set TWIKILAYOUTURL = %PUBURL%/%TWIKIWEB%/PatternSkin/layout.css
-    		* Set TWIKISTYLEURL = %PUBURL%/%TWIKIWEB%/PatternSkin/style.css
+    		* Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/layout.css
+    		* Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/style.css
+    		* Set TWIKICOLORSURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/colors.css
 
 If this still does not work, contact the administrator who installs skins.
 
-For further troubleshooting and feedback, go to TWiki:Plugins/PatternSkinDev.
-
-## <a name="Creating your own look"></a> Creating your own look
-
-It is easy to tune the look and feel of PatternSkin by changing the color and space (margin, padding) settings in the Style Sheet files.
-
-You may also choose to radically change the look and create a PatternSkin-based new skin. This is easier than to create a skin by writing new template files; you can concentrate on how things should look instead of what elements should get displayed.
-
-You can either:
-
-- Change the `layout.css` and `style.css` attachment files for this topic (upload updated versions)
-- In [[TWikiPreferences]], point the variables `TWIKILAYOUTURL` and `TWIKISTYLEURL` to other attachments, perhaps in another topic (your new skin topic?)
-
-See for practical details: [[PatternSkinCustomization]] %BR% The CSS classes that PatternSkin uses are documented in [[PatternSkinCss]].
-
-## <a name="Customization"></a> Customization
-
-See: [[PatternSkinCustomization]], [[PatternSkinPalette]]
-
-## <a name="Further reading"></a> Further reading
-
-- [[PatternSkinCustomization]] - Practical information on how to change the looks of PatternSkin
-- [[PatternSkinPalette]] - How to change the colors only
-- [[PatternSkinCss]] - A reference to used CSS classes
-- TWiki:Plugins/PatternSkinDev - Development page, bug reports, solutions from users
+For further troubleshooting and feedback, go to TWiki:Plugins/PatternSkinDev. Report bugs in the [[Support web|TWiki:Support/WebHome]].
 
 ## <a name="Skin Info"></a> Skin Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Description: </td>
-    <td> Provides a CSS based default look and feel for TWiki - flexible and [[Main/W3C]]-compliant </td>
+    <td> TWiki's default skin; CSS based, flexible and [[Main/W3C]]-compliant </td>
   </tr>
   <tr>
     <td align="right"> Screenshot: </td>
-    <td><a href="http://www.dementia.org/twiki//view/patternskin_screenshot_full.gif"><img alt="Click for full screen image" height="130" src="http://www.dementia.org/twiki//view/patternskin_screenshot.gif" style="border: 1px solid #eee" width="600" /></a></td>
+    <td><a href="http://www.dementia.org/twiki//view/patternskin_screenshot_full.png"><img alt="Click for full screen image" height="130" src="http://www.dementia.org/twiki//view/patternskin_screenshot.jpg" style="border: 1px solid #eee" width="600" /></a></td>
+  </tr>
+  <tr>
+    <td align="right"> Preview: </td>
+    <td>[[%WEB%/%TOPIC%?skin=pattern]]</td>
   </tr>
   <tr>
     <td align="right"> Base Name: </td>
@@ -121,51 +108,19 @@ See: [[PatternSkinCustomization]], [[PatternSkinPalette]]
   </tr>
   <tr>
     <td align="right"> Skin Version: </td>
-    <td> 28 Aug 2004 (v1.0.9) </td>
+    <td> 31 Jan 2006 (v2.0.0) </td>
   </tr>
   <tr>
     <td align="right"> History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 31 Jan 2006: </td>
+    <td> v.2.0.0 - DAKAR RELEASE VERSION </td>
+  </tr>
+  <tr>
     <td align="right"> 28 Aug 2004: </td>
-    <td> v.1.0.9 - CAIRO RELEASE VERSION - Removed twikiTopic div from attach template </td>
-  </tr>
-  <tr>
-    <td align="right"> 24 Aug 2004: </td>
-    <td> v.1.0.8 - Fix for disabled TablePlugin; added plain.pattern.tmpl </td>
-  </tr>
-  <tr>
-    <td align="right"> 23 Aug 2004: </td>
-    <td> v.1.0.7 - Change to checkboxes in edit and preview screen; removed REVINFO at bottom; style changes </td>
-  </tr>
-  <tr>
-    <td align="right"> 22 Aug 2004: </td>
-    <td> v.1.0.6b - Removed files from zip that are now part of the TWiki distribution; removed .DS_Store files </td>
-  </tr>
-  <tr>
-    <td align="right"> 17 Aug 2004: </td>
-    <td> v.1.0.6 - Support for twikiMoved css class </td>
-  </tr>
-  <tr>
-    <td align="right"> 17 Aug 2004: </td>
-    <td> v.1.0.5 - Fix for not showing SEARCHSTRING </td>
-  </tr>
-  <tr>
-    <td align="right"> 16 Aug 2004: </td>
-    <td> v.1.0.4 - Fixes search results layout with noheader="on" </td>
-  </tr>
-  <tr>
-    <td align="right"> 14 Aug 2004: </td>
-    <td> v.1.0.3 - Update to attach template, css fix to edit template </td>
-  </tr>
-  <tr>
-    <td align="right"> 14 Aug 2004: </td>
-    <td> v.1.0.2 - Fixes print template, table paddings in topics, minor changes to style.css </td>
-  </tr>
-  <tr>
-    <td align="right"> 13 Aug 2004: </td>
-    <td> v.1.0.1 - Updated /data/TWiki/WebLeftBarPersonalTemplate and style.css </td>
+    <td> v.1.0.9 - CAIRO RELEASE VERSION </td>
   </tr>
   <tr>
     <td align="right"> 08 Aug 2004: </td>
@@ -173,7 +128,7 @@ See: [[PatternSkinCustomization]], [[PatternSkinPalette]]
   </tr>
   <tr>
     <td align="right"> Dependencies: </td>
-    <td>   </td>
+    <td> TWiki:Plugins/TwistyContrib (automatically supported by Dakar) </td>
   </tr>
   <tr>
     <td align="right"> Skin Home: </td>
@@ -192,14 +147,25 @@ See: [[PatternSkinCustomization]], [[PatternSkinPalette]]
 ## <a name="Related topics"></a> Related topics
 
 - [[TWikiCss]]
+- [[PatternSkinCss]]
+- [[PatternSkinCssCookbook]]
+- [[PatternSkinCssCookbookCenterPage]]
+- [[PatternSkinCssCookbookEditTableStyle]]
+- [[PatternSkinCssCookbookFonts]]
+- [[PatternSkinCssCookbookNoLeftBar]]
+- [[PatternSkinCssCookbookNoTopBar]]
+- [[PatternSkinCustomization]]
+- [[PatternSkinJavascripts]]
 - [[WebBottomBar]]
 - [[WebLeftBar]]
-- [[WebLeftBarExample]]
-- [[WebLeftBarPersonalTemplate]]
 - [[WebLeftBarCookbook]]
+- [[WebLeftBarExample]]
+- [[WebLeftBarLogin]]
+- [[WebLeftBarPersonalTemplate]]
+- [[WebLeftBarSearch]]
+- [[WebLeftBarWebsList]]
 - [[WebTopBar]]
-
-See also [[Further reading|Main/TOPIC#Further_reading]] on this page.
+- [[AdminDocumentationCategory]]
 
 Other skins:
 
@@ -209,5 +175,3 @@ Other skins:
 ## <a name="Feedback"></a> Feedback
 
 Leave remarks, suggestions and other feedback in TWiki:Plugins.PatternSkinDev.
-
--- TWiki:Main/ArthurClemens - 28 Aug 2004

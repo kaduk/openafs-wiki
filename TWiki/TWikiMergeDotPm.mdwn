@@ -1,0 +1,31 @@
+# <a name="Package &lt;code&gt;TWiki::Merge="></a> Package =TWiki::Merge
+
+Support for merging strings
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Merge="> Package TWiki::Merge</a><ul>
+        <li><a href="#StaticMethod <strong>ins_DelMerge</strong> ($a,"> StaticMethod insDelMerge <tt>($a,$b,$sep,$session,$info)</tt></a></li>
+        <li><a href="#StaticMethod <strong>simpleMerge</strong> ($a,$"> StaticMethod simpleMerge <tt>($a,$b,$sep) -&gt; \@arr</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;ins_DelMerge&lt;/strong&gt; ($a,"></a> [[StaticMethod]] **insDelMerge** `($a,$b,$sep,$session,$info)`
+
+Perform a merge of two versions of the same text, using HTML tags to mark conflicts.
+
+The granularity of the merge depends on the setting of $sep. For example, if it is `"\\n"`, a line-by-line merge will be done.
+
+Where conflicts exist, they are marked using HTML &lt;del&gt; and &lt;ins&gt; tags. &lt;del&gt; marks content from $a while &lt;ins&gt; marks content from $b.
+
+Non-conflicting content (insertions from either set) are not marked.
+
+The plugins mergeHandler is called for each merge.
+
+## <a name="StaticMethod &lt;strong&gt;simpleMerge&lt;/strong&gt; ($a,$"></a> [[StaticMethod]] **simpleMerge** `($a,$b,$sep) -> \@arr`
+
+Perform a merge of two versions of the same text, returning and array of strings representing the blocks in the merged context where each string starts with one of "+", "-" or " " depending on whether it is an insertion, a deletion, or just text. Insertions and deletions alway happen in pairs, as text taken in from either version that does not replace text in the other version will simply be accepted.
+
+The granularity of the merge depends on the setting of $sep. For example, if it is `"\\n"`, a line-by-line merge will be done. $sep characters are retained in the outout.

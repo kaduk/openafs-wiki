@@ -1,0 +1,18 @@
+# <a name="Package &lt;code&gt;TWiki::UI::Statistics="></a> Package =TWiki::UI::Statistics
+
+Statistics extraction and presentation
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::UI::Statistics="> Package TWiki::UI::Statistics</a><ul>
+        <li><a href="#StaticMethod <strong>statistics</strong> ($sess"> StaticMethod statistics <tt>($session)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;statistics&lt;/strong&gt; ($sess"></a> [[StaticMethod]] **statistics** `($session)`
+
+`statistics` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+
+Generate statistics topic. If a web is specified in the session object, generate [[WebStatistics]] topic update for that web. Otherwise do it for all webs

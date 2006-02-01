@@ -1,0 +1,278 @@
+# <a name="Package &lt;code&gt;TWiki::Store::_RcsFile="></a> Package =TWiki::Store::RcsFile
+
+This class is PACKAGE PRIVATE to Store, and should never be used from anywhere else. Base class of implementations of stores that manipulate RCS format files.
+
+The general contract of the methods on this class and its subclasses calls for errors to be signalled by Error::Simple exceptions.
+
+Refer to Store.pm for models of usage.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Store::_RcsFile="> Package TWiki::Store::RcsFile</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$topic,$attachment)</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionInfo*"> ObjectMethod getRevisionInfo <tt>($version) -&gt; ($rev,$date,$user,$comment)</tt></a></li>
+        <li><a href="#ObjectMethod *get_LatestRevision"> ObjectMethod getLatestRevision <tt>() -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *get_LatestRevision"> ObjectMethod getLatestRevisionTime <tt>() -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>read_MetaData</strong> ($n"> ObjectMethod readMetaData <tt>($name) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_WorkArea</strong> ($ke"> ObjectMethod getWorkArea <tt>($key) -&gt; $directorypath</tt></a></li>
+        <li><a href="#ObjectMethod <strong>save_MetaData</strong> ($w"> ObjectMethod saveMetaData <tt>($web,$name) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_TopicNames</strong> ()"> ObjectMethod getTopicNames <tt>() -&gt; @topics</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_WebNames</strong> () -"> ObjectMethod getWebNames <tt>() -&gt; @webs</tt></a></li>
+        <li><a href="#ObjectMethod *search_InWebConten"> ObjectMethod searchInWebContent <tt>($searchString,$web,\@topics,\%options) -&gt; \%map</tt></a></li>
+        <li><a href="#ObjectMethod <strong>moveWeb</strong> ($newWeb)"> ObjectMethod moveWeb <tt>($newWeb)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getRevision</strong> ($ver"> ObjectMethod getRevision <tt>($version) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *stored_DataExists*"> ObjectMethod storedDataExists <tt>() -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getTimestamp</strong> () -"> ObjectMethod getTimestamp <tt>() -&gt; $integer</tt></a></li>
+        <li><a href="#ObjectMethod *restore_LatestRevi"> ObjectMethod restoreLatestRevision <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>removeWeb</strong> ($web)"> ObjectMethod removeWeb <tt>($web)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>moveTopic</strong> ($newWe"> ObjectMethod moveTopic <tt>($newWeb,$newTopic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>copyTopic</strong> ($newWe"> ObjectMethod copyTopic <tt>($newWeb,$newTopic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>moveAttachment</strong> ($"> ObjectMethod moveAttachment <tt>($newWeb,$newTopic,$newAttachment)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>copyAttachment</strong> ($"> ObjectMethod copyAttachment <tt>($newWeb,$newTopic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>is_AsciiDefault</strong> ("> ObjectMethod isAsciiDefault <tt>() -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>setLock</strong> ($lock,$u"> ObjectMethod setLock <tt>($lock,$user)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>isLocked</strong> () -> ($"> ObjectMethod isLocked <tt>() -&gt; ($user,$time)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>setLease</strong> ($lease)"> ObjectMethod setLease <tt>($lease)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getLease</strong> () -> $l"> ObjectMethod getLease <tt>() -&gt; $lease</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getStream</strong> () -> \"> ObjectMethod getStream <tt>() -&gt; \*STREAM</tt></a></li>
+        <li><a href="#ObjectMethod <strong>numRevisions</strong> () -"> ObjectMethod numRevisions <tt>() -&gt; $integer</tt></a></li>
+        <li><a href="#ObjectMethod <strong>initBinary</strong> ()"> ObjectMethod initBinary <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>initText</strong> ()"> ObjectMethod initText <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod *add_RevisionFromTe"> ObjectMethod addRevisionFromText <tt>($text,$comment,$user,$date)</tt></a></li>
+        <li><a href="#ObjectMethod *add_RevisionFromSt"> ObjectMethod addRevisionFromStream <tt>($fh,$comment,$user,$date)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>replaceRevision</strong> ("> ObjectMethod replaceRevision <tt>($text,$comment,$user,$date)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>deleteRevision</strong> ()"> ObjectMethod deleteRevision <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>revisionDiff</strong> ($re"> ObjectMethod revisionDiff <tt>($rev1,$rev2,$contextLines) -&gt; \@diffArray</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionAtTime"> ObjectMethod getRevisionAtTime <tt>($time) -&gt; $rev</tt></a></li>
+        <li><a href="#ObjectMethod *get_AttachmentAttr"> ObjectMethod getAttachmentAttributes <tt>($web,$topic,$attachment)</tt></a></li>
+        <li><a href="#ObjectMethod *get_AttachmentList"> ObjectMethod getAttachmentList <tt>($web,$topic)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$web"></a> [[ClassMethod]] **new** `($session,$web,$topic,$attachment)`
+
+Constructor. There is one object per stored file.
+
+Note that $web, $topic and $attachment must be untainted!
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionInfo*"></a><a name="ObjectMethod *get_RevisionInfo&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionInfo** `($version) -> ($rev,$date,$user,$comment)`
+
+- `$version` if 0 or undef, or out of range (version number &gt; number of revs) will return info about the latest revision.
+
+Returns (rev, date, user, comment) where rev is the number of the rev for which the info was recovered, date is the date of that rev (epoch s), user is the login name of the user who saved that rev, and comment is the comment associated with the rev.
+
+Designed to be overridden by subclasses, which can call up to this method if file-based rev info is required.
+
+## <a name="ObjectMethod &lt;strong&gt;get_LatestRevision"></a> [[ObjectMethod]] \*getLatestRevision `() -> $text`
+
+Get the text of the most recent revision
+
+## <a name="ObjectMethod &lt;strong&gt;get_LatestRevision"></a> [[ObjectMethod]] \*getLatestRevisionTime `() -> $text`
+
+Get the time of the most recent revision
+
+## <a name="ObjectMethod &lt;strong&gt;read_MetaData&lt;/strong&gt; ($n"></a> [[ObjectMethod]] **readMetaData** `($name) -> $text`
+
+Get a meta-data block for this web
+
+## <a name="ObjectMethod &lt;strong&gt;get_WorkArea&lt;/strong&gt; ($ke"></a> [[ObjectMethod]] **getWorkArea** `($key) -> $directorypath`
+
+Gets a private directory uniquely identified by $key. The directory is intended as a work area for plugins.
+
+The standard is a directory named the same as "key" under $TWiki::cfg\{RCS\}\{WorkAreaDir\}
+
+## <a name="ObjectMethod &lt;strong&gt;save_MetaData&lt;/strong&gt; ($w"></a> [[ObjectMethod]] **saveMetaData** `($web,$name) -> $text`
+
+Write a named meta-data string. If web is given the meta-data is stored alongside a web.
+
+## <a name="ObjectMethod &lt;strong&gt;get_TopicNames&lt;/strong&gt; ()"></a> [[ObjectMethod]] **getTopicNames** `() -> @topics`
+
+Get list of all topics in a web
+
+- `$web` - Web name, required, e.g. `'Sandbox'`
+
+Return a topic list, e.g. `( 'WebChanges',  'WebHome', 'WebIndex', 'WebNotify' )`
+
+## <a name="ObjectMethod &lt;strong&gt;get_WebNames&lt;/strong&gt; () -"></a> [[ObjectMethod]] **getWebNames** `() -> @webs`
+
+Gets a list of names of subwebs in the current web
+
+## <a name="ObjectMethod &lt;strong&gt;search_InWebConten"></a> [[ObjectMethod]] \*searchInWebContent `($searchString,$web,\@topics,\%options) -> \%map`
+
+Search for a string in the content of a web. The search must be over all content and all formatted meta-data, though the latter search type is deprecated (use searchMetaData instead).
+
+- `$searchString` - the search string, in egrep format if regex
+- `$web` - The web to search in
+- `\@topics` - reference to a list of topics to search
+- `\%options` - reference to an options hash
+
+The `\%options` hash may contain the following options:
+
+- `type` - if `regex` will perform a egrep-syntax RE search (default '')
+- `casesensitive` - false to ignore case (defaulkt true)
+- `files_without_match` - true to return files only (default false)
+
+The return value is a reference to a hash which maps each matching topic name to a list of the lines in that topic that matched the search, as would be returned by 'grep'. If `files_without_match` is specified, it will return on the first match in each topic (i.e. it will return only one match per topic, and will not return matching lines).
+
+## <a name="ObjectMethod &lt;strong&gt;moveWeb&lt;/strong&gt; ($newWeb)"></a> [[ObjectMethod]] **moveWeb** `($newWeb)`
+
+Move a web.
+
+## <a name="ObjectMethod &lt;strong&gt;getRevision&lt;/strong&gt; ($ver"></a> [[ObjectMethod]] **getRevision** `($version) -> $text`
+
+Get the text for a given revision. The version number must be an integer.
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;stored_DataExists*"></a> [[ObjectMethod]] \*storedDataExists `() -> $boolean`
+
+Establishes if there is stored data associated with this handler.
+
+## <a name="ObjectMethod &lt;strong&gt;getTimestamp&lt;/strong&gt; () -"></a> [[ObjectMethod]] **getTimestamp** `() -> $integer`
+
+Get the timestamp of the file Returns 0 if no file, otherwise epoch seconds
+
+## <a name="ObjectMethod &lt;strong&gt;restore_LatestRevi"></a> [[ObjectMethod]] \*restoreLatestRevision `()`
+
+Restore the plaintext file from the revision at the head.
+
+## <a name="ObjectMethod &lt;strong&gt;removeWeb&lt;/strong&gt; ($web)"></a> [[ObjectMethod]] **removeWeb** `($web)`
+
+- `$web` - web being removed
+
+Destroy a web, utterly. Removed the data and attachments in the web.
+
+Use with great care! No backup is taken!
+
+## <a name="ObjectMethod &lt;strong&gt;moveTopic&lt;/strong&gt; ($newWe"></a> [[ObjectMethod]] **moveTopic** `($newWeb,$newTopic)`
+
+Move/rename a topic.
+
+## <a name="ObjectMethod &lt;strong&gt;copyTopic&lt;/strong&gt; ($newWe"></a> [[ObjectMethod]] **copyTopic** `($newWeb,$newTopic)`
+
+Copy a topic.
+
+## <a name="ObjectMethod &lt;strong&gt;moveAttachment&lt;/strong&gt; ($"></a> [[ObjectMethod]] **moveAttachment** `($newWeb,$newTopic,$newAttachment)`
+
+Move an attachment from one topic to another. The name is retained.
+
+## <a name="ObjectMethod &lt;strong&gt;copyAttachment&lt;/strong&gt; ($"></a> [[ObjectMethod]] **copyAttachment** `($newWeb,$newTopic)`
+
+Copy an attachment from one topic to another. The name is retained.
+
+## <a name="ObjectMethod &lt;strong&gt;is_AsciiDefault&lt;/strong&gt; ("></a> [[ObjectMethod]] **isAsciiDefault** `() -> $boolean`
+
+Check if this file type is known to be an ascii type file.
+
+## <a name="ObjectMethod &lt;strong&gt;setLock&lt;/strong&gt; ($lock,$u"></a> [[ObjectMethod]] **setLock** `($lock,$user)`
+
+Set a lock on the topic, if $lock, otherwise clear it. $user is a wikiname.
+
+SMELL: there is a tremendous amount of potential for race conditions using this locking approach.
+
+## <a name="ObjectMethod &lt;strong&gt;isLocked&lt;/strong&gt; () - ($u"></a> [[ObjectMethod]] **isLocked** `() -> ($user,$time)`
+
+See if a twiki lock exists. Return the lock user and lock time if it does.
+
+## <a name="ObjectMethod &lt;strong&gt;setLease&lt;/strong&gt; ($lease)"></a> [[ObjectMethod]] **setLease** `($lease)`
+
+- `$lease` reference to lease hash, or undef if the existing lease is to be cleared.
+
+Set an lease on the topic.
+
+## <a name="ObjectMethod &lt;strong&gt;getLease&lt;/strong&gt; () - $le"></a> [[ObjectMethod]] **getLease** `() -> $lease`
+
+Get the current lease on the topic.
+
+## <a name="ObjectMethod &lt;strong&gt;getStream&lt;/strong&gt; () - \*"></a> [[ObjectMethod]] **getStream** `() -> \*STREAM`
+
+Return a text stream that will supply the text stored in the topic.
+
+## <a name="ObjectMethod &lt;strong&gt;numRevisions&lt;/strong&gt; () -"></a> [[ObjectMethod]] **numRevisions** `() -> $integer`
+
+Must be provided by subclasses.
+
+Find out how many revisions there are. If there is a problem, such as a nonexistent file, returns 0.
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;initBinary&lt;/strong&gt; ()"></a> [[ObjectMethod]] **initBinary** `()`
+
+Initialise a binary file.
+
+Must be provided by subclasses.
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;initText&lt;/strong&gt; ()"></a> [[ObjectMethod]] **initText** `()`
+
+Initialise a text file.
+
+Must be provided by subclasses.
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;add_RevisionFromTe"></a> [[ObjectMethod]] \*addRevisionFromText `($text,$comment,$user,$date)`
+
+Add new revision. Replace file with text.
+
+- `$text` of new revision
+- `$comment` checkin comment
+- `$user` is a wikiname.
+- `$date` in epoch seconds; may be ignored
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;add_RevisionFromSt"></a> [[ObjectMethod]] \*addRevisionFromStream `($fh,$comment,$user,$date)`
+
+Add new revision. Replace file with contents of stream.
+
+- `$fh` filehandle for contents of new revision
+- `$comment` checkin comment
+- `$user` is a wikiname.
+- `$date` in epoch seconds; may be ignored
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;replaceRevision&lt;/strong&gt; ("></a> [[ObjectMethod]] **replaceRevision** `($text,$comment,$user,$date)`
+
+Replace the top revision.
+
+- `$text` is the new revision
+- `$date` is in epoch seconds.
+- `$user` is a wikiname.
+- `$comment` is a string
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;deleteRevision&lt;/strong&gt; ()"></a> [[ObjectMethod]] **deleteRevision** `()`
+
+Delete the last revision - do nothing if there is only one revision
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;revisionDiff&lt;/strong&gt; ($re"></a> [[ObjectMethod]] **revisionDiff** `($rev1,$rev2,$contextLines) -> \@diffArray`
+
+rev2 newer than rev1. Return reference to an array of [ diffType, $right, $left ]
+
+**Virtual method** - must be implemented by subclasses
+
+!!!getRevision!!!
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionAtTime"></a> [[ObjectMethod]] \*getRevisionAtTime `($time) -> $rev`
+
+Get a single-digit version number for the rev that was alive at the given epoch-secs time, or undef it none could be found.
+
+**Virtual method** - must be implemented by subclasses
+
+## <a name="ObjectMethod &lt;strong&gt;get_AttachmentAttr"></a> [[ObjectMethod]] \*getAttachmentAttributes `($web,$topic,$attachment)`
+
+returns [stat] for any given web, topic, $attachment SMELL - should this return a hash of arbitrary attributes so that SMELL + attributes supported by the underlying filesystem are supported SMELL + (eg: windows directories supporting photo "author", "dimension" fields)
+
+sub \_constructAttributesForAutoAttached as long as stat is defined, return an emulated set of attributes for that attachment.
+
+## <a name="ObjectMethod &lt;strong&gt;get_AttachmentList"></a> [[ObjectMethod]] \*getAttachmentList `($web,$topic)`
+
+returns \{\} of filename =&gt; \{ key =&gt; value, key2 =&gt; value \} for any given web, topic Ignores files starting with \_ or ending with ,v

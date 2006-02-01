@@ -1,10 +1,10 @@
-# <a name="Include Topics and Web Pages Usi"></a><a name=" Include Topics and Web Pages Us"></a> Include Topics and Web Pages Using <code>**%INCLUDE\{...\}%**</code> Variable
+# <a name="Include Topics and Web Pages Usi"></a><a name=" Include Topics and Web Pages Us"></a> Include Topics and Web Pages Using `%INCLUDE{...}%` Variable
 
-Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of another topic or web page inside a %WIKITOOLNAME% topic. The whole content or only parts of a page can be included. If needed, set a proxy server in [[TWikiPreferences]].
+Use the `%INCLUDE{...}%` variable to embed the content of another topic or web page inside a TWiki topic. The whole content or only parts of a page can be included. If needed, set a proxy server in [[TWikiPreferences]].
 
 <div>
   <ul>
-    <li><a href="#Syntax"> Syntax</a></li>
+    <li><a href="#Syntax Example"> Syntax Example</a></li>
     <li><a href="#Usage Examples"> Usage Examples</a><ul>
         <li><a href="#1. Display regression test resul"> 1. Display regression test results in a TWiki page</a></li>
         <li><a href="#2. Display Google's robot.txt fi"> 2. Display Google's robot.txt file</a></li>
@@ -14,20 +14,15 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
   </ul>
 </div>
 
-## <a name="Syntax"></a> Syntax
+## <a name="Syntax Example"></a> Syntax Example
 
-<code>**%INCLUDE\{ "page" pattern="reg-exp" rev="1.2" \}%**</code>
+`%INCLUDE{ "page" pattern="reg-exp" rev="2" warn="off" section="clients" }%`
 
-- <code>**"page"**</code>: %BR% The nameless parameter specifies the page to include. It is
-  - The name of a topic located in the current web, e.g., <code>**%INCLUDE\{"WebNotify"\}%**</code>
-  - A `Web.Topic` name specifying a topic in another web, e.g., <code>**%INCLUDE\{"TWiki.SiteMap"\}%**</code>
-  - A full qualified URL with <code>**http**</code> protocol, domain name and optional port number, e.g., <code>**%INCLUDE\{"http://twiki.org:80/index.html"\}%**</code>. Supported content types are <code>**text/html**</code> and <code>**text/plain**</code>. The full page is included by default, but the HTML header and scripts are stripped in case it is a web page.
+The `pattern` parameter is optional and allows you to extract some parts of a web page. Specify a [[RegularExpression]] that scans from start (`'^'`) to end and contains the text you want to keep in parenthesis, e.g., `pattern="^.*?(from here.*?to here).*"`. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table, make sure to include everything including the table end tag.
 
-- <code>**pattern="reg-exp"**</code>: %BR% The **pattern** parameter is optional and allows you to extract some parts of a web page. Specify a [[RegularExpression]] that scans from start (`'^'`) to end and contains the text you want to keep in parenthesis, e.g., <code>**pattern="^.\*?(from here.\*?to here).\*"**</code>. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table, make sure to include everything including the table end tag.
+[[TWikiVariables#VarINCLUDE]] explains the other parameters.
 
-- <code>**rev="1.x"**</code>: %BR% The **rev** parameter is optional and allows you to include an earlier revision of a topic. This can be used to include an official version of a topic, e.g. one that has been signed of by management. This parameter does not apply to URLs.
-
-**_Note:_** All text of a topic is included unless you specify <code>**%STARTINCLUDE%**</code>, <code>**%STOPINCLUDE%**</code> and/or a **pattern** parameter. A pattern will only search between <code>**%STARTINCLUDE%**</code> and <code>**%STOPINCLUDE%**</code>.
+**_Note:_** All text of a topic is included unless it contains a `%STARTINCLUDE%` and `%STOPINCLUDE%`, or you specify a `section` parameter and/or a `pattern` parameter. A pattern will only search between `%STARTINCLUDE%` and `%STOPINCLUDE%`.
 
 ## <a name="Usage Examples"></a> Usage Examples
 
@@ -39,8 +34,7 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
 
 ### <a name="2. Display Google&#39;s robot.txt fi"></a> 2. Display Google's robot.txt file
 
-- You type:
-  - <code>**%INCLUDE\{"http://www.google.com/robots.txt"\}%**</code>
+      %INCLUDE{"http://www.google.com/robots.txt"}%
 
 ### <a name="3. Display the current time in T"></a> 3. Display the current time in Tokyo in a TWiki page
 
@@ -49,6 +43,4 @@ Use the <code>**%INCLUDE\{...\}%**</code> variable to embed the content of anoth
 - You get:
   - Tokyo:
 
-See also other [[TWikiVariables]].
-
--- TWiki:Main.PeterThoeny - 15 Aug 2004
+**_Related Topics:_** [[TWikiVariables#VarINCLUDE]], [[UserDocumentationCategory]]

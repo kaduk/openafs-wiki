@@ -1,0 +1,93 @@
+# <a name="Package &lt;code&gt;TWiki::Prefs="></a> Package =TWiki::Prefs
+
+The Prefs class is a singleton that implements management of preferences. It uses a stack of TWiki::Prefs::PrefsCache objects to store the preferences for global, web, user and topic contexts, and provides the means to look up preferences in these.
+
+Preferences from different places stack on top of each other, so there are global preferences, then site, then web (and subweb and subsubweb), then topic, included topic and so on. Each level of the stack is tagged with a type identifier.
+
+The module also maintains a separate of the preferences found in every topic and web it reads. This supports the lookup of preferences for webs and topics that are not on the stack, and must not be chained in (you can't allow a user to override protections from their home topic!)
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Prefs="> Package TWiki::Prefs</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session[,$ca"> ClassMethod new <tt>($session[,$cache])</tt></a></li>
+        <li><a href="#ObjectMethod *push_GlobalPrefere"> ObjectMethod pushGlobalPreferences <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>pushPreferences</strong> ("> ObjectMethod pushPreferences <tt>($web,$topic,$type)</tt></a></li>
+        <li><a href="#ObjectMethod *push_WebPreference"> ObjectMethod pushWebPreferences <tt>($web)</tt></a></li>
+        <li><a href="#ObjectMethod *push_PreferencesVa"> ObjectMethod pushPreferencesValues <tt>($type,\%values)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>mark</strong> ()"> ObjectMethod mark <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>resetTo</strong> ($mark)"> ObjectMethod resetTo <tt>($mark)</tt></a></li>
+        <li><a href="#ObjectMethod *get_PreferencesVal"> ObjectMethod getPreferencesValue <tt>($key) -&gt; $value</tt></a></li>
+        <li><a href="#ObjectMethod <strong>isFinalised</strong> ($key"> ObjectMethod isFinalised <tt>($key)</tt></a></li>
+        <li><a href="#ObjectMethod *get_TopicPreferenc"> ObjectMethod getTopicPreferencesValue <tt>($key,$web,$topic) -&gt; $value</tt></a></li>
+        <li><a href="#get_TextPreferencesValue( $key,"> getTextPreferencesValue( $key, $text, $web, $topic ) -&gt; $value</a></li>
+        <li><a href="#ObjectMethod *get_WebPreferences"> ObjectMethod getWebPreferencesValue <tt>($key,$web) -&gt; $value</tt></a></li>
+        <li><a href="#ObjectMethod stringify() -> $tex">ObjectMethod stringify() -&gt; $text</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session[,$ca"></a> [[ClassMethod]] **new** `($session[,$cache])`
+
+Creates a new Prefs object. If $cache is defined, it will be pushed onto the stack.
+
+## <a name="ObjectMethod &lt;strong&gt;push_GlobalPrefere"></a> [[ObjectMethod]] \*pushGlobalPreferences `()`
+
+Add global preferences to this preferences stack.
+
+## <a name="ObjectMethod &lt;strong&gt;pushPreferences&lt;/strong&gt; ("></a> [[ObjectMethod]] **pushPreferences** `($web,$topic,$type)`
+
+- `$web` - web to read from
+- `$topic` - topic to read
+- `$type` - DEFAULT, SITE, USER, SESSION, WEB, TOPIC or PLUGIN
+- `$prefix` - key prefix for all preferences (used for plugins)
+
+Reads preferences from the given topic, and pushes them onto the preferences stack.
+
+## <a name="ObjectMethod &lt;strong&gt;push_WebPreference"></a> [[ObjectMethod]] \*pushWebPreferences `($web)`
+
+Pushes web preferences. Web preferences for a particular web depend on the preferences of all containing webs.
+
+## <a name="ObjectMethod &lt;strong&gt;push_PreferencesVa"></a> [[ObjectMethod]] \*pushPreferencesValues `($type,\%values)`
+
+Push a new preference level using type and values given
+
+## <a name="ObjectMethod &lt;strong&gt;mark&lt;/strong&gt; ()"></a> [[ObjectMethod]] **mark** `()`
+
+Return a marker representing the current top of the preferences stack. Used to remember the stack when new web and topic preferences are pushed during a topic include.
+
+## <a name="ObjectMethod &lt;strong&gt;resetTo&lt;/strong&gt; ($mark)"></a> [[ObjectMethod]] **resetTo** `($mark)`
+
+Resets the preferences stack to the given mark, to recover after a topic include.
+
+## <a name="ObjectMethod &lt;strong&gt;get_PreferencesVal"></a> [[ObjectMethod]] \*getPreferencesValue `($key) -> $value`
+
+- =$key - key to look up
+
+Returns the value of the preference `$key`, or undef.
+
+Looks up local preferences when the level topic is the same as the current web,topic in the session.
+
+## <a name="ObjectMethod &lt;strong&gt;isFinalised&lt;/strong&gt; ($key"></a> [[ObjectMethod]] **isFinalised** `($key)`
+
+Return true if $key is finalised somewhere in the prefs stack
+
+## <a name="ObjectMethod &lt;strong&gt;get_TopicPreferenc"></a> [[ObjectMethod]] \*getTopicPreferencesValue `($key,$web,$topic) -> $value`
+
+Recover a preferences value that is defined in a specific topic. Does not recover web, user or global settings.
+
+Intended for use in protections mechanisms, where the order doesn't match the prefs stack.
+
+## <a name="get_TextPreferencesValue( $key,"></a><a name="get_TextPreferencesValue( $key, "></a> getTextPreferencesValue( $key, $text, $web, $topic ) -&gt; $value
+
+Get a preference value from the settings in the text. The parsed values are cached against the web, topic.
+
+## <a name="ObjectMethod &lt;strong&gt;get_WebPreferences"></a> [[ObjectMethod]] \*getWebPreferencesValue `($key,$web) -> $value`
+
+Recover a preferences value that is defined in the webhome topic of a specific web.. Does not recover user or global settings, but does recover settings from containing webs.
+
+Intended for use in protections mechanisms, where the order doesn't match the prefs stack.
+
+## <a name="ObjectMethod stringify() - $text"></a> [[ObjectMethod]] stringify() -&gt; $text
+
+Generate a TML-formatted version of the current preferences

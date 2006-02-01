@@ -1,6 +1,7 @@
 <div>
   <ul>
-    <li><a href="#Appendix D: TWiki Development Ti"> Appendix D: TWiki Development Timeline</a><ul>
+    <li><a href="#Appendix A: TWiki Development Ti"> Appendix A: TWiki Development Timeline</a><ul>
+        <li><a href="#TWiki Release 4.0.0 (Dakar), 01"> TWiki Release 4.0.0 (Dakar), 01 Feb 2006</a></li>
         <li><a href="#01-Sep-2004 Release (Cairo)"> 01-Sep-2004 Release (Cairo)</a></li>
         <li><a href="#01-Feb-2003 Release (Beijing)"> 01-Feb-2003 Release (Beijing)</a></li>
         <li><a href="#01-Dec-2001 Release (Athens)"> 01-Dec-2001 Release (Athens)</a></li>
@@ -16,7 +17,235 @@
   </ul>
 </div>
 
-# <a name="Appendix D: TWiki Development Ti"></a> Appendix D: TWiki Development Timeline
+# <a name="Appendix A: TWiki Development Ti"></a> Appendix A: TWiki Development Timeline
+
+<a name="DakarRelease"></a>
+
+## <a name="TWiki Release 4.0.0 (Dakar), 01"></a><a name="TWiki Release 4.0.0 (Dakar), 01 "></a> TWiki Release 4.0.0 (Dakar), 01 Feb 2006
+
+**_Major New Features_**
+
+- Much simpler install and configuration
+- Integrated session support
+- Webserver-independent login/logout
+- Security sandbox blocking exploits for remote command execution on the server
+- Edit conflict resolution with automatic merge
+- Multilingual UI
+- E-mail confirmations for registration
+- WYSIWYG editor (beta)
+- Hierarchical sub-webs (beta)
+
+Many, many people worked on TWiki-4.0.0. The credits in the table below only list the people who worked on individual enhancements. If you find an omission please fix it at TWiki:TWiki.%TOPIC%. There were many other contributors; for a full list, visit [[TWikiContributor]].
+
+Most of the redesign, refactoring and new documentation work in Dakar release was done by [Crawford Currie](http://c-dot.co.uk). [Michael Sparks](http://kamaelia.org/Michael.html) provided ideas and proof of concept for several improvements. Other people who gave _large_ amounts of their time and patience to less sexy aspects of the work, such as testing, infrastructure and documentation, are [[AntonAylward]], [[KennethLavrsen]], [[LynnwoodBrown]], [[MichaelDaum]], [Peter Thoeny](http://www.structuredwikis.com/), [Sven Dowideit](http://www.home.org.au), [[WillNorris]].
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th align="left" bgcolor="#6b7f93" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> Installation &amp; configuration </strong> </font></span></th>
+    <th align="left" bgcolor="#6b7f93" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> Contributor </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Much simpler install and configuration </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/LynnwoodBrown]], [[TWiki:Main/ArthurClemens]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>mod_perl</code> safe code for better performance </td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> Security </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Security sandbox blocking exploits for remote command execution on the server </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://www.enyo.de/fw/" target="_top">Florian Weimer</a>, <a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, <a href="http://www.home.org.au" target="_top">Sven Dowideit</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Reworked access permission model </td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> Internationalization &amp; localization </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Codev/UserInterfaceInternationalisation]]</td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/AntonioTerceiro]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Chinese translation </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/CheDong]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Danish translation </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/SteffenPoulsen]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Dutch translation </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/ArthurClemens]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> French translation </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/BenVoui]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> German translation </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/AndreUlrich]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Portuguese translation </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/AntonioTerceiro]], [[TWiki:Main/CarlinhosCecconi]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Spanish translation </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/WillNorris]], [[TWiki:Main/MiguelABayona]]</td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> New features for users </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Edit conflict resolution with automatic merge </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Fine grained change notification on page level and parent/child relationship </td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> WYSIWYG editor </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/ColasNahaboo]], [[TWiki:Main/DamienMandrioli]], [[TWiki:Main/RomainRaugi]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Integrated session support </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/GregAbbas]], <a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Webserver-independent login/logout </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="">[[TWiki:Codev/RegisterCgiScriptRewrite]]</td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/MartinCleaver]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Codev/TipOfTheDayFeatureRequest]]</td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/PaulineCheung]], <a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a>, [[TWiki:Main/AntonAylward]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="">[[Main/WebAtomBase]]</td>
+    <td bgcolor="#ffffff" style=""><a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Codev/ForceNewRevisionCheckBox]]</td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/WillNorris]]</td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> New features for TWiki administrators and wiki application developers </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Improved preferences handling </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/ThomasWeigert]], <a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Named include sections </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/RafaelAlvarez]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Codev/AllowDynamicTopicNameCreation]]</td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://www.home.org.au" target="_top">Sven Dowideit</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="">[[TWiki:Codev/ParameterizedIncludes]]</td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Codev/DynamicFormOptionDefinitions]] of [[Main/TWikiForms]] with [[Main/FormattedSearch]]</td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/MartinCleaver]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> SEARCH enhancements with new parameters <code>excludeweb</code>, <code>newline</code>, <code>noempty</code>, <code>nofinalnewline</code>, <code>nonoise</code>, <code>recurse</code>, <code>zeroresults</code></td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/ArthurClemens]], <a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a>, [[TWiki:Main/ThomasWeigert]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[Main/FormattedSearch]] enhancements with <code>$changes</code>, <code>$count</code>, <code>$formfield(name, 30, ...)</code>, <code>$summary(expandvar)</code>, <code>$summary(noheaders)</code>, <code>$summary(showvarnames)</code></td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/ColasNahaboo]], <a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, <a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a>, <a href="http://www.home.org.au" target="_top">Sven Dowideit</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> New [[Main/TWikiVariables]] [[Main/TWikiVariables#VarACTIVATEDPLUGINS]], [[Main/TWikiVariables#VarALLVARIABLES]], [[Main/TWikiVariables#VarAUTHREALM]], [[Main/TWikiVariables#VarEMAILS]], [[Main/TWikiVariables#VarFAILEDPLUGINS]], [[Main/TWikiVariables#VarHTTP]], [[Main/TWikiVariables#VarHTTPS]], [[Main/TWikiVariables#VarICONURL]], [[Main/TWikiVariables#VarICONURLPATH]], [[Main/TWikiVariables#VarIF]], [[Main/TWikiVariables#VarLANGUAGES]], [[Main/TWikiVariables#VarLOCALSITEPREFS]], [[Main/TWikiVariables#VarLOGIN]], [[Main/TWikiVariables#VarLOGOUT]], [[Main/TWikiVariables#VarMAKETEXT]], [[Main/TWikiVariables#VarMETA]], [[Main/TWikiVariables#VarPLUGINDESCRIPTIONS]], [[Main/TWikiVariables#VarQUERYSTRING]], [[Main/TWikiVariables#VarSTARTSECTION]]/[[Main/TWikiVariables#VarENDSECTION]], [[Main/TWikiVariables#VarSESSION_VARIABLE]], [[Main/TWikiVariables#VarSESSIONID]], [[Main/TWikiVariables#VarSESSIONVAR]], [[Main/TWikiVariables#VarSPACEOUT]], [[Main/TWikiVariables#VarUSERLANGUAGE]], [[Main/TWikiVariables#VarWIKIHOMEURL]]</td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/ArthurClemens]], [[TWiki:Main/AntonioTerceiro]], <a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/GregAbbas]], [[TWiki:Main/PeterThoeny]], <a href="http://www.home.org.au" target="_top">Sven Dowideit</a>, [[TWiki:Main/WillNorris]] and many more </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Codev/TWikiFormWithHiddenType]] and other form enhancements </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/LynnwoodBrown]], [[TWiki:Main/ThomasWeigert]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="">[[TWiki:Codev/SupportTopicSpecificTemplates]] for TWiki applications </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/ThomasWeigert]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Direct save feature for one-click template-based topic creation </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/LynnwoodBrown]], <a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/ThomasWeigert]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="">[[TWiki:Codev/AutomaticAttachments]] showing all files in the attachment directory </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/MartinCleaver]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Rename, move or delete webs </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/PeterNixon]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Hierarchical subwebs (beta) </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/PeterNixon]]</td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> New features for Plugin developers </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> REST (representational state transfer) interface for Plugins </td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/RafaelAlvarez]], [[TWiki:Main/MartinCleaver]], <a href="http://www.home.org.au" target="_top">Sven Dowideit</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> New and improved Plugins APIs </td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/ThomasWeigert]]</td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> Improvements in the TWiki engine room </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Major OO redesign and refactoring of codebase </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Automatic build system </td>
+    <td bgcolor="#ffffff" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Extensive test suite, unit tests and testcases </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> TWiki:Codev.DevelopBranch , <a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs" target="_top">DEVELOP branch Bugs system</a></td>
+    <td bgcolor="#ffffff" style=""><a href="http://www.home.org.au" target="_top">Sven Dowideit</a></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#6b7f93" colspan="2" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> Documentation, logo artwork, skins: </strong> </font></span></th>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Documentation </td>
+    <td bgcolor="#ecf2f8" style=""><a href="http://c-dot.co.uk" target="_top">Crawford Currie</a>, [[TWiki:Main/LynnwoodBrown]], <a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a>, <a href="http://www.home.org.au" target="_top">Sven Dowideit</a> and others </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""> Design of [[Main/TWikiLogos]] with big "T" in a speech bubble </td>
+    <td bgcolor="#ffffff" style="">[[TWiki:Main/ArthurClemens]], [[TWiki:Main/PeterThoeny]]</td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""> Improved templates and [[Main/PatternSkin]]</td>
+    <td bgcolor="#ecf2f8" style="">[[TWiki:Main/ArthurClemens]]</td>
+  </tr>
+</table>
+
+See more details at [[TWikiReleaseNotes04x00x00]]
+
+<a name="CairoRelease"></a>
 
 ## <a name="01-Sep-2004 Release (Cairo)"></a> 01-Sep-2004 Release (Cairo)
 
@@ -28,7 +257,7 @@
 - Many improvements to SEARCH
 - Improved support for internationalisation
 - Better topic management screens
-- More pre-installed Plugins: CommentPlugin, EditTablePlugin, RenderListPlugin, SlideShowPlugin, SmiliesPlugin, SpreadSheetPlugin, TablePlugin
+- More pre-installed Plugins: [[CommentPlugin]], [[EditTablePlugin]], [[RenderListPlugin]], [[SlideShowPlugin]], [[SmiliesPlugin]], [[SpreadSheetPlugin]], [[TablePlugin]]
 - Improved Plugins API and more Plugin callbacks
 - Better support for different authentication methods
 - Many user interface and usability improvements
@@ -36,8 +265,8 @@
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style="width: 90%" width="90%"><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Details of New Features and Enhancements of 01-Sep-2004 Release</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style="width: 10%" width="10%"><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Developer, Sponsor</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 90%" width="90%"><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Details of New Features and Enhancements of 01-Sep-2004 Release</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 10%" width="10%"><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Developer, Sponsor</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Install: Ship with an automatic upgrade script to facilitate TWiki upgrades. <a href="http://TWiki.org/cgi-bin/view/Codev/CairoReleaseUpgradeGuide" target="_top">Details</a></td>
@@ -435,8 +664,8 @@
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style="width: 90%" width="90%"><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Bug Fixes of 01-Sep-2004 Release</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style="width: 10%" width="10%"><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Developer, Sponsor</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 90%" width="90%"><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Bug Fixes of 01-Sep-2004 Release</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style="width: 10%" width="10%"><a href="http://localhost?sortcol=1;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Developer, Sponsor</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Consistently create headings with empty anchor tags. <a href="http://TWiki.org/cgi-bin/view/Codev/AllcapsHeadingsProduceBrokenAnchors" target="_top">Details</a></td>
@@ -480,7 +709,7 @@
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style="width: 90%" width="90%"> Fix: Double quotes got replaced by " in TWiki forms. <a href="http://TWiki.org/cgi-bin/view/Codev/DoubleQuoteHandlingInTwikiForms" target="_top">Details</a></td>
-    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki: MS TWiki:Main.PeterThoeny </td>
+    <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.MichaelSparks TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
     <td bgcolor="#ffffff" style="width: 90%" width="90%"> Fix: Duplicated Wiki name in .htpasswd entry for sha1 encoding. <a href="http://TWiki.org/cgi-bin/view/Codev/DuplicatedWikiNameInHtpasswdEntry" target="_top">Details</a></td>
@@ -692,12 +921,14 @@
   </tr>
 </table>
 
+<a name="BeijingRelease"></a>
+
 ## <a name="01-Feb-2003 Release (Beijing)"></a> 01-Feb-2003 Release (Beijing)
 
 - **18 Jan 2003** - TWiki:Main.PeterThoeny
   - Support for `/bin/view/Web.TopicName` topic view URL (besides the default `/bin/view/Web/TopicName` URL); useful for [[InterwikiPlugin]] links like TWiki:Codev.ReadmeFirst
 - **31 Dec 2002** - TWiki:Main.PeterThoeny
-  - Enhanced Plugin API to manipulate topic data with new functions in [[TWikiFuncModule]]: `readTopicText`, `saveTopicText`, `setTopicEditLock`, `checkTopicEditLock`
+  - Enhanced Plugin API to manipulate topic data with new functions in Func.pm: `readTopicText`, `saveTopicText`, `setTopicEditLock`, `checkTopicEditLock`
 - **31 Dec 2002** - TWiki:Main.PeterThoeny
   - New `%NOAUTOLINK%` setting in the [[TWikiPreferences]] to disable the auto-linking of [[WikiWords]]
 - **29 Dec 2002** - TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny, TWiki:Main.RichardDonkin, TWiki:Main.SvenDowideit
@@ -750,6 +981,8 @@
   - Improved statistics script which uses less memory to process large log files
 - **09 Jan 2002** - TWiki:Main.JohnTalintyre
   - Variables inside `<verbatim>` tags are no longer expanded
+
+<a name="AthensRelease"></a>
 
 ## <a name="01-Dec-2001 Release (Athens)"></a> 01-Dec-2001 Release (Athens)
 
@@ -824,9 +1057,9 @@
 ## <a name="01-Dec-2000 Release"></a> 01-Dec-2000 Release
 
 - **03 Nov 2000** - TWiki:Main.PeterThoeny
-  - Flag `$doHidePasswdInRegistration` in `wikicfg.pm` to hide plain text password in registration email.
+  - Flag `$doHidePasswdInRegistration` in `wikicfg.pm` to hide plain text password in registration e-mail.
 - **01 Nov 2000** - TWiki:Main.PeterThoeny
-  - New variable `%VAR{"NAME" web="Web"}%` to get web specific preferences. More in [[TWikiVariables]].
+  - New variable `%VAR{"NAME" web="Web"}%` to get web-specific preferences. More in [[TWikiVariables]].
 - **01 Nov 2000** - TWiki:Main.PeterThoeny
   - Added a "Cancel" link in edit that releases the edit lock.
 - **23 Oct 2000** - TWiki:Main.PeterThoeny
@@ -901,11 +1134,11 @@
 - **29 Jan 2000** - TWiki:Main.PeterThoeny
   - Fixed bug where TWiki would not initialize correctly under certain circumstances, i.e. when running it under mod\_perl. Sub `initialize` in `wiki.pm` did not handle `$thePathInfo` correctly.
 - **24 Jan 2000** - TWiki:Main.PeterThoeny
-  - Fixed bug where an email address starting with a [[WikiName]] was rendered as an internal Wiki link instead of an email address, i.e. <SomeWikiName@somewhere.test> .
+  - Fixed bug where an e-mail address starting with a [[WikiName]] was rendered as an internal Wiki link instead of an e-mail address, i.e. <SomeWikiName@somewhere.test> .
 - **10 Jan 2000** - TWiki:Main.PeterThoeny
   - No more escaping for '%' percent characters. (Number of consecutive '%' entered and displayed is identical.)
 - **03 Oct 1999** - TWiki:Main.PeterThoeny
-  - Limit the number of revisions shown at the bottom of the topic. Example <br /> Topic %TOPIC% . \{ ..... [Diffs](../../rdiff/%WEB%/%TOPIC%) r1.10 [&gt;](../../rdiff/%WEB%/%TOPIC%?rev1=1.10&rev2=1.9) [r1.9](../../view/%WEB%/%TOPIC%?rev=1.9) [&gt;](../../rdiff/%WEB%/%TOPIC%?rev1=1.9&rev2=1.8) [r1.8](../../view/%WEB%/%TOPIC%?rev=1.8) [&gt;](../../rdiff/%WEB%/%TOPIC%?rev1=1.8&rev2=1.7) [r1.7](../../view/%WEB%/%TOPIC%?rev=1.7) [&gt;...](../../oops/%WEB%/%TOPIC%?template=oopsrev&param1=1.10) \} <br /> Additional revisions can be selected by pressing the `>...` link.
+  - Limit the number of revisions shown at the bottom of the topic. Example %BR% Topic %TOPIC% . \{ ..... [Diffs](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%) r1.10 [&gt;](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%?rev1=1.10&rev2=1.9) [r1.9](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?rev=1.9) [&gt;](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%?rev1=1.9&rev2=1.8) [r1.8](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?rev=1.8) [&gt;](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%?rev1=1.8&rev2=1.7) [r1.7](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?rev=1.7) [&gt;...](http://www.dementia.org/twiki//oops/%WEB%/%TOPIC%?template=oopsrev&param1=1.10) \} %BR% Additional revisions can be selected by pressing the `>...` link.
 
 ## <a name="01-Sep-1999 Release"></a> 01-Sep-1999 Release
 
@@ -947,7 +1180,7 @@
 - **09 Feb 1999** - TWiki:Main.PeterThoeny
   - No new topic revision is created if the _same_ person saves a topic again within _one_ hour.
 - **03 Feb 1999** - TWiki:Main.PeterThoeny
-  - Possible to view complete revision history of a topic on one page. Access at the linked date in the Changes page, or the `Diffs` link at the bottom of each topic, e.g. <br /><code> Topic TWikiHistory . \{ Edit Ref-By Diffs r1.3 &gt; r1.2 &gt; r1.1 \} <br /> Revision r1.3 1998/11/10 01:34 by PeterThoeny </code>
+  - Possible to view complete revision history of a topic on one page. Access at the linked date in the Changes page, or the `Diffs` link at the bottom of each topic, e.g. %BR% ` Topic TWikiHistory . { Edit Ref-By Diffs r1.3 > r1.2 > r1.1 } %BR% Revision r1.3 1998/11/10 01:34 by PeterThoeny `
 - **04 Jan 1999** - TWiki:Main.PeterThoeny
   - Fixed bug when viewing differences between topic revisions that include HTML table tags like &lt;table&gt;, &lt;tr&gt;, &lt;td&gt;.
 
@@ -960,23 +1193,23 @@
 - **18 Nov 1998** - TWiki:Main.PeterThoeny
   - Internal log of topic save actions to the file `data/logYYYYMM.txt`, where `YYYYMM` the year and month in numeric format is. Intended for auditing only, not accessible from the web.
 - **10 Nov 1998** - TWiki:Main.PeterThoeny
-  - The email notification and the Changes topic have now a topic date that is linked. Clicking on the link will show the difference between the two most recent topic revisions.
+  - The e-mail notification and the Changes topic have now a topic date that is linked. Clicking on the link will show the difference between the two most recent topic revisions.
 - **10 Nov 1998** - TWiki:Main.PeterThoeny
-  - View differences between topic revisions. Each topic has a list of revisions (e.g. `r1.3`) and differences thereof (e.g. `>`) at the bottom <br /><code> Topic TWikiHistory . \{ Edit Ref-By r1.3 &gt; r1.2 &gt; r1.1 \} <br /> Revision r1.3 1998/11/10 01:34 by TWiki:Main.PeterThoeny </code>
+  - View differences between topic revisions. Each topic has a list of revisions (e.g. `r1.3`) and differences thereof (e.g. `>`) at the bottom %BR% ` Topic TWikiHistory . { Edit Ref-By r1.3 > r1.2 > r1.1 } %BR% Revision r1.3 1998/11/10 01:34 by TWiki:Main.PeterThoeny `
 - **26 Oct 1998** - TWiki:Main.PeterThoeny
   - Added preview of topic changes before saving the topic. This was necessary to prevent unneeded revisions.
 - **26 Oct 1998** - TWiki:Main.PeterThoeny
-  - Added revision control using RCS. Each topic has now a list of revisions at the bottom and a revision info, e.g. <br /><code> Topic TWikiHistory . \{ Edit Ref-By r1.3 r1.2 r1.1 \} <br /> Revision r1.3 1998/10/26 01:34:00 by TWiki:Main.PeterThoeny </code>
+  - Added revision control using RCS. Each topic has now a list of revisions at the bottom and a revision info, e.g. %BR% ` Topic TWikiHistory . { Edit Ref-By r1.3 r1.2 r1.1 } %BR% Revision r1.3 1998/10/26 01:34:00 by TWiki:Main.PeterThoeny `
 - **14 Oct 1998** - TWiki:Main.PeterThoeny
   - Refered-By Find out which topics have a link to the current topic. Each topic has a Ref-By link for that. Note Only references from the current web are shown, not references from other webs.
 - **13 Oct 1998** - TWiki:Main.PeterThoeny
   - Alphabetical topic index in [[WebSearch]].
 - **24 Sep 1998** - TWiki:Main.PeterThoeny
-  - Corrected templates for automatic email notification so that MS Outlook can display attachment as an HTML file.
+  - Corrected templates for automatic e-mail notification so that MS Outlook can display attachment as an HTML file.
 - **13 Aug 1998** - TWiki:Main.PeterThoeny
   - [[WikiNotation]] allows also numbers after the `AaA` sequence, e.g. `AaA1` is a valid [[WikiTopic]] name, but not `Aa1`.
 - **07 Aug 1998** - TWiki:Main.PeterThoeny
-  - Automatic email notification when something has changed in a TWiki web. Each web has a topic [[WebNotify]] where one can subscribe and unsubscribe.
+  - Automatic e-mail notification when something has changed in a TWiki web. Each web has a topic [[WebNotify]] where one can subscribe and unsubscribe.
 - **06 Aug 1998** - TWiki:Main.PeterThoeny
   - Added server side include of files. Syntax is `%INCLUDE:"filename.ext"%`
 - **05 Aug 1998** - TWiki:Main.PeterThoeny
@@ -1013,3 +1246,5 @@ The typical TWiki development flow...
 - TWiki:Codev.DocsToDo: feature documentation pending
 - TWiki:Codev.FeatureDocumented: documented feature
 - [[TWikiDocumentation]]: reference manual for the latest TWiki
+
+**_Related Topics:_** [[DeveloperDocumentationCategory]]

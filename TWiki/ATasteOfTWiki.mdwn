@@ -1,40 +1,37 @@
-This is a short introduction training course for TWiki beginners (newbies).
+This is a short introductory training course for TWiki beginners.
 
 <a name="StartPresentation"></a> <span>[[Main/WebHome?slideshow=on;skin=print#GoSlide1]]</span>
 
 ## <a name="Slide 1: A Taste of TWiki"></a> Slide 1: A Taste of TWiki
 
-The basic function of TWiki is a Wiki (if that helps!)
-
-A Wiki is like a normal web site, except that you can edit the content in your browser
-
-<table width="100%">
+<table cellspacing="10">
   <tr>
-    <td>
+    <td><img alt="Hula girl" height="111" src="http://www.dementia.org/twiki//view/hula.gif" width="113" /></td>
+    <td> The basic function of TWiki is a Wiki (if that helps!) <p> A Wiki is like a web site, except that you can edit the content in your browser </p>
+      <p>
+      </p>
       <ul>
         <li> "Wiki" is short for "wiki wiki", the Hawaiian for "Quick" </li>
         <li> The idea originates from <a href="http://www.hyperdictionary.com/computing/hypercard" target="_top">Macintosh Hypercard</a>, via <a href="http://www.c2.com/cgi/wiki?WardCunningham" target="_top">Ward Cunningham</a></li>
         <li> In Ward's words, Wiki is <em>"the simplest online database that could possibly work"</em></li>
-        <li> A Wiki is basically a shared, online, persistant whiteboard </li>
+        <li> A Wiki is basically a shared, online, persistent whiteboard </li>
       </ul>
     </td>
-    <td align="right"><img alt="" height="112" src="http://www.dementia.org/twiki//view/hula.gif" width="88" /></td>
   </tr>
 </table>
 
 ## <a name="Slide 2: TWiki Wiki"></a> Slide 2: TWiki Wiki
 
-TWiki implements the basic Wiki idea of a shared whiteboard
-
-<table width="100%">
+<table cellspacing="10">
   <tr>
-    <td>
+    <td><img alt="Whiteboard" height="160" src="http://www.dementia.org/twiki//view/whiteboard.gif" width="240" /></td>
+    <td>TWiki implements the basic Wiki idea of a shared whiteboard <p>
+      </p>
       <ul>
         <li> Anyone can add content<br />... or change what is written<br />... or change the organisation of the content </li>
         <li> Whatever what you write is<br />... nicely presented<br />... remembered... and never forgotten </li>
       </ul>
     </td>
-    <td align="right"><img alt="" height="112" src="http://www.dementia.org/twiki//view/anarchy.gif" width="112" /></td>
   </tr>
 </table>
 
@@ -47,10 +44,21 @@ TWiki is an Open-Source development on [TWiki.org](http://twiki.org/)
 
 ## <a name="Slide 3: Where is it used?"></a> Slide 3: Where is it used?
 
-- TWiki is mainly used in commercial environments, often on corporate intranets
-  - Examples: Disney, SAP, British Telecom, Wind River, Motorola, [Epic Games](http://udn.epicgames.com/Main/WebHome)
-- A number of public Wiki sites also use TWiki
-  - Examples: <br /><http://www.trommetter.com/cgi-bin/view.cgi/><br /><http://csci.mrs.umn.edu/twiki/view><br />
+TWiki is mainly used in commercial environments, often on corporate intranets
+
+- Examples: Disney, British Telecom, SAP, Wind River, Motorola, [Epic Games](http://udn.epicgames.com/Main/WebHome)<br /><table cellspacing="20">
+  <tr>
+    <td><img alt="Disney logo" height="31" src="http://www.dementia.org/twiki//view/Disney_logo.gif" width="80" /></td>
+    <td><img alt="British Telecom logo" height="41" src="http://www.dementia.org/twiki//view/BT_logo.gif" width="80" /></td>
+    <td><img alt="SAP logo" height="40" src="http://www.dementia.org/twiki//view/SAP_logo.gif" width="80" /></td>
+    <td><img alt="Motorola logo" height="65" src="http://www.dementia.org/twiki//view/Motorola_logo.gif" width="80" /></td>
+    <td><img alt="Epic Games logo" height="65" src="http://www.dementia.org/twiki//view/EpicGames_logo.gif" width="80" /></td>
+  </tr>
+</table>
+
+A number of public Wiki sites also use TWiki
+
+- Examples: <br /><https://uimon.cern.ch/twiki/bin/view/><br /><http://csci.mrs.umn.edu/twiki/view>
 
 ## <a name="Slide 4: TWiki Features"></a> Slide 4: TWiki Features
 
@@ -58,7 +66,7 @@ TWiki builds on the original Wiki concept and adds a number of features that mak
 
 - TWiki pages are fully revision controlled, so a record of every change to every page is kept <table border="0" cellpadding="3" cellspacing="0">
   <tr>
-    <td bgcolor="#D0D0D0"><font color="black" size="-1">r1.6 <a>&gt;</a> r1.5 <a>&gt;</a> r1.4</font></td>
+    <td bgcolor="#D0D0D0"><font color="black" size="-1">r6 <a>&lt;</a> r5 <a>&lt;</a> r4</font></td>
   </tr>
 </table>
 - The look-and-feel is highly configurable, through use of templates
@@ -137,7 +145,7 @@ It will also usually contain a number of 'links' that you can click on. You will
 - Go <input name="topic" size="16" type="text" />
  - lets you type in the name of a page you already know
 
-## <a name="Slide 9: The Page Header"></a> Slide 9: The Page Header
+## <a name="Slide 9: The Page Header ... con"></a> Slide 9: The Page Header ... continued
 
 <table bgcolor="white" border="0" cellpadding="3" cellspacing="0" width="90%">
   <tr>
@@ -162,7 +170,7 @@ The footer of the page is also highlighted in colour, and is usually where you w
 
 <table bgcolor="white" border="0" cellpadding="3" cellspacing="0" width="90%">
   <tr bgcolor="#D0D0D0">
-    <td colspan="2" valign="top"><font color="black" size="-1"> <a href="none"><b>Edit</b></a> | <a href="none">Attach</a> | <a href="none">Diffs</a> | r1.2 <a href="none">&gt;</a> r1.1 | <a href="none">More</a> </font></td>
+    <td colspan="2" valign="top"><font color="black" size="-1"> <a href="none"><b>Edit</b></a> | <a href="none">Attach</a> | <a href="none">Diffs</a> | r2 <a href="none">&gt;</a> r1 | <a href="none">More</a> </font></td>
   </tr>
   <tr>
     <td valign="top"><font color="black" size="-1">Revision r1.2 - 13 Feb 2004 - 09:09 GMT - <a href="none">TWikiPresenter</a> </font></td>
@@ -294,7 +302,7 @@ TWiki understands pages in plain text just fine, but you can %RED% **_jazz_** %E
     - <code>\[[BumpyWords]\[bumpy words]] appears as [[bumpy words|Main/BumpyWords]]</code>
 - An ordinary URL pasted into text will appear as a link - <http://www.google.com>
   - You can also prettify URLs using square brackets:
-    - `[[http://www..google.com][google]]` appears as [google](http://www.google.com)
+    - `[[http://www.google.com/][Google]]` appears as [Google](http://www.google.com/)
 - Use %SEARCH. This is an interface to a sophisticated search engine that embeds the results of the search in your page. See [[TWikiVariables]] for full details.
 
 ## <a name="Slide 19: More formatting"></a> Slide 19: More formatting
@@ -390,7 +398,7 @@ You may see a comment box on a page in ThreadMode that makes it easy to quickly 
 - A Wiki trick for grouping pages together
 - Example: to group together a set of pages all relating to the weather:
   1. Create a page called 'CategoryWeather'
-  2. Put a SEARCH that contain the word 'CategoryWeather' into it
+  2. Put a SEARCH that contains the word 'CategoryWeather' into it
     - `%SEARCH{"CategoryWeather" nosearch="on" nosummary="on"}%`
   3. Put the [[BumpyWord]] 'CategoryWeather' on all the pages relating to the weather<br />(usually at the bottom, below a horizontal bar)
 
@@ -417,7 +425,7 @@ Here's a brief description of some of the more common plugins, together with the
 
 The following plugins are installed on this TWiki: [[SpreadSheetPlugin]], [[CommentPlugin]], [[EditTablePlugin]], [[InterwikiPlugin]], [[PreferencesPlugin]], [[SlideShowPlugin]], [[SmiliesPlugin]], [[TablePlugin]], [[TwistyPlugin]]
 
-There are many other plugins, see <http://www.twiki.org/cgi-bin/view/Plugins>
+There are many other plugins, see <http://TWiki.org/cgi-bin/view/Plugins>
 
 ## <a name="Slide 29: Credits and Acknowledg"></a> Slide 29: Credits and Acknowledgements
 
@@ -428,5 +436,3 @@ There are many other plugins, see <http://www.twiki.org/cgi-bin/view/Plugins>
 - The latest version of this presentation is available at TWiki:%WEB%.%TOPIC%, where you can also provide feedback
 
 **_Related topics:_** [[WelcomeGuest]], [[TWikiTutorial]], [[ATasteOfTWikiTemplate]]
-
--- TWiki:Main.CrawfordCurrie - 17 Feb 2004

@@ -1,16 +1,21 @@
-## <a name="How to Find out What&#39;s New?"></a> How to Find out What's New?
+# <a name="RSS News Feeds"></a> RSS News Feeds
 
-There are three ways to find out what's new in each TWiki web:
+## <a name="Find out What&#39;s New"></a> Find out What's New
 
-1. [[WebChanges]] shows recent changes
-2. People subscribed in [[WebNotify]] get notified of recent changes by e-mail
-3. A news feed can be exported in RSS 1.0 format for TWiki:Codev/TWikiSyndication. RSS news readers like TWiki:Plugins/HeadlinesPlugin can display the recent changes
+There are several ways to find out what's new in each TWiki web:
+
+1. Visit [[WebChanges]] to see recent changes
+2. Subscribed in [[WebNotify]] get notified of recent changes by e-mail
+3. Use a news readers such as TWiki:Plugins/HeadlinesPlugin to display the recent changes
+  - The source can be a RSS 1.0 feed ([[WebRss]]) or ATOM 1.0 feed ([[WebAtom]])
+  - Learn more on RSS at TWiki:Codev/TWikiSyndication
+  - Learn more on ATOM at [[WebAtomBase]] and TWiki:Codev/AtomSyndication
 
 ## <a name="RSS Feed Usage"></a> RSS Feed Usage
 
-- The URL for an RSS feed is `http://www.dementia.org/twiki//view/<web>/WebRss?skin=rss`
-- For this %WEB% web it is <http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss> (or [http://www.dementia.org/twiki//view/Main/WebRss?skin=rss&amp;contenttype=text/plain](http://www.dementia.org/twiki//view/Main/WebRss?skin=rss&contenttype=text/plain) for plain text RSS)
-- You can also create a custom feed based on a search. Add a `search=value` parameter to the URL, e.g. [http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&amp;search=plugin](http://www.dementia.org/twiki//view/%WEB%/WebRss?skin=rss&search=plugin) is a what's new feed about Plugins.
+- The URL for an RSS feed is `http://www.dementia.org/twiki/view/<web>/WebRss`
+- For this %WEB% web it is [[http://www.dementia.org/twiki/view/%WEB%/WebRss|%WEB%/WebRss]]
+- You can also create a custom feed based on a search. Add a `search=value` parameter to the URL, e.g. [[http://www.dementia.org/twiki/view/%WEB%/WebRss?search=plugin|%WEB%/WebRss?search=plugin]] is a what's new feed about Plugins.
 
 ## <a name="RSS Feed Internals"></a> RSS Feed Internals
 
@@ -20,11 +25,13 @@ The [[WebRss]] topic in each web contains the following text:
 
 ----
 
-    <channel rdf:about="%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%">
-      <title>%WIKITOOLNAME%'s %INCLUDINGWEB% web</title>
-      <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%</link>
-      <description>(the description of the web). TWiki is a Web-Based Collaboration Platform for the Corporate World.</description>
-    %INCLUDE{"%TWIKIWEB%.WebRssBase"}%
+    <channel rdf:about="%SCRIPTURL{"view"}%/%INCLUDINGWEB%">
+      <title>%WIKITOOLNAME%'s <nop>%INCLUDINGWEB% web</title>
+      <link>%SCRIPTURL{"view"}%/%INCLUDINGWEB%</link>
+      <description>(the description of the web). TWiki is a Web-Based Collaboration Platform for the Enterprise.</description>
+    %INCLUDE{"TWiki.WebRssBase"}% <!--
+    	* Set SKIN = rss
+    -->
 
 ----
 
@@ -38,27 +45,20 @@ Below part is included by each WebRss topic:
       <dc:publisher>%WIKIWEBMASTERNAME% [%WIKIWEBMASTER%]</dc:publisher>
       <dc:creator>%WIKIWEBMASTERNAME% [%WIKIWEBMASTER%]</dc:creator>
       <dc:source>%WIKITOOLNAME%</dc:source>
-      <wiki:interwiki>
-        <rdf:Description link="%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%/">
-          <rdf:value>TWiki.%INCLUDINGWEB%</rdf:value>
-        </rdf:Description>
-      </wiki:interwiki>
       <items>
         <rdf:Seq>
-    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="      <rdf:li rdf:resource=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\" />"}%
+    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" excludetopic="WebStatistics" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="      <rdf:li rdf:resource=\"%SCRIPTURL{"view"}%/$web/$topic\" />"}%
         </rdf:Seq>
       </items>
     </channel>
     <image rdf:about="%WIKILOGOIMG%">
       <title>%WIKILOGOALT%.%INCLUDINGWEB%</title>
-      <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/%INCLUDINGWEB%</link>
+      <link>%SCRIPTURL{"view"}%/%INCLUDINGWEB%</link>
       <url>%WIKILOGOIMG%</url>
     </image>
-    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="<item rdf:about=\"%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic\">$n  <title>$topic</title>$n  <link>%SCRIPTURL%/view%SCRIPTSUFFIX%/$web/$topic?t=$isodate</link>$n  <description>$summary (last changed by <nop>$wikiname)</description>$n  <dc:date>$isodate</dc:date>$n  <dc:contributor>$n    <rdf:Description link=\"%SCRIPTURL%/view%SCRIPTSUFFIX%?topic=$wikiusername\">$n      <rdf:value>$username</rdf:value>$n    </rdf:Description>$n  </dc:contributor>$n  <wiki:version>$rev</wiki:version>$n  <wiki:status>updated</wiki:status>$n  <wiki:importance>major</wiki:importance>$n  <wiki:diff>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:diff>$n  <wiki:history>%SCRIPTURL%/rdiff%SCRIPTSUFFIX%/$web/$topic</wiki:history>$n</item>"}%
+    %SEARCH{"%URLPARAM{"search" default=".*" }%" web="%INCLUDINGWEB%" excludetopic="WebStatistics" regex="on" nosearch="on" order="modified" reverse="on" nototal="on" limit="16" format="<item rdf:about=\"%SCRIPTURL{"view"}%/$web/$topic\">$n  <title>$topic</title>$n  <link>%SCRIPTURL{"view"}%/$web/$topic?t=$isodate</link>$n  <description>$summary (last changed by <nop>$wikiname)</description>$n  <dc:date>$isodate</dc:date>$n  <dc:contributor>$n    <rdf:Description link=\"%SCRIPTURL{"view"}%?topic=$wikiusername\">$n      <rdf:value>$username</rdf:value>$n    </rdf:Description>$n  </dc:contributor>$n</item>"}%
     %STOPINCLUDE%
 
 ----
 
-**_See also_**: TWiki:Codev/RichSiteSummary, TWiki:Codev/TWikiSyndication
-
--- TWiki:Main.PeterThoeny - 02 Sep 2003
+**_See also_**: [[WebAtomBase]], TWiki:Codev/RichSiteSummary, TWiki:Codev/TWikiSyndication

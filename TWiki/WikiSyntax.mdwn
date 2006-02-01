@@ -18,31 +18,28 @@ If you can enter text, you're ready for TWiki. With a few simple, intuitive [[Te
 
 - For an external link, type the full URL: `http://twiki.org/`.
 
-- To prevent a WikiWord from becoming a link, type `<nop>` first, <code>**&lt;nop&gt;NoLinkPlease**</code>.
+- To prevent a WikiWord from becoming a link, type `<nop>` or an exclamation point first: <code>**&lt;nop&gt;NoLinkPlease**</code> or <code>**!NoLinkPlease**</code>.
 
 - To indent with a bullet, enter `[space][space][space][asterisk][space]`.
   - Use multiples of 3 spaces to start **nested bullets**.
     - That's 3-6-9-...
 
-1. Start items in a **numbered list** with `[space][space][space][1][space]`.
-2. The "1" (or **any number**) will be replaced by the correct number, in order.
-3. To add a new paragraph without restarting list numbering, use the %BR% variable, like below:%BR% Text added (in new paragraph)
-4. and list numbering continues.
+- To create a numbered list:
+  1. Start items in a **numbered list** with `[space][space][space][1][space]`.
+  2. The "1" (or **any number**) will be replaced by the correct number, in order.
+  3. To add a new paragraph without restarting list numbering, use the %BR% variable, like below:%BR% Text added (in new paragraph)
+  4. and list numbering continues.
 
 - Always start **counting** spaces for bullets and such from the beginning of a new line.
 
-- To include an image, type its URL. You also can Attach an image to the page and display it with text <br />`%ATTACHURL%/yourimagefilename.jpg` .
+- To include an image, type its URL. You also can Attach an image to the page and display it with text <br />`%ATTACHURL%/yourimagefilename.jpg`
 
 - To display a word or phrase in `MONOSPACED TYPE`, put it in equal signs: `=like this=`. <br />Use `==two==` for bold: <code>**bold mono**</code>.
 
-- Use <code>**&lt;verbatim&gt;**</code> to enclose code excerpts, filenames, and other unformatted text, with the opening and closing tags on their own separate lines:
-
-> <pre>
-> <b>&lt;verbatim&gt;</b>
-> unformatted text!
-> <b>&lt;/verbatim&gt;</b>
-> </pre>
+- Use <code>**&lt;verbatim&gt;**</code> to enclose code excerpts, filenames, and other unformatted text:%BR% <code>**&lt;verbatim&gt;**</code> %BR% `unformatted text!` %BR% <code>**&lt;/verbatim&gt;**</code> %BR%%BR% **_%X% NOTE:_** VARIABLES can be set within verbatim tags, that is, they are not disabled
 
 - Three (or more) consecutive **hyphens** expand into a horizontal rule:%BR% `---`
+
+- Follow [[GoodStyle]] recommendations when editing topics.
 
 - See [[TextFormattingRules]] for the complete set of formatting rules.

@@ -1,0 +1,57 @@
+# <a name="Package &lt;code&gt;TWiki::UI::RDiff="></a> Package =TWiki::UI::RDiff
+
+UI functions for diffing.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::UI::RDiff="> Package TWiki::UI::RDiff</a><ul>
+        <li><a href="#StaticMethod <strong>diff</strong> ($session,$w"> StaticMethod diff <tt>($session,$web,$topic,$query)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;diff&lt;/strong&gt; ($session,$w"></a> [[StaticMethod]] **diff** `($session,$web,$topic,$query)`
+
+`diff` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+
+Renders the differences between version of a [[TwikiTopic]]
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> topic </td>
+    <td> topic that we are showing the differences of </td>
+  </tr>
+  <tr>
+    <td> rev1 </td>
+    <td> the higher revision </td>
+  </tr>
+  <tr>
+    <td> rev2 </td>
+    <td> the lower revision </td>
+  </tr>
+  <tr>
+    <td> render </td>
+    <td> the rendering style {sequential, sidebyside, raw, debug} </td>
+    <td> (preferences) DIFFRENDERSTYLE, <code>sequential</code></td>
+  </tr>
+  <tr>
+    <td> type </td>
+    <td> {history, diff, last} history diff, version to version, last version to previous </td>
+    <td><code>history</code></td>
+  </tr>
+  <tr>
+    <td> context </td>
+    <td> number of lines of context </td>
+  </tr>
+  <tr>
+    <td> skin </td>
+    <td> the skin(s) to use to display the diff </td>
+  </tr>
+</table>
+
+TODO:
+
+- add a \{word\} render style
+- move the common CGI param handling to one place
+- move defaults somewhere

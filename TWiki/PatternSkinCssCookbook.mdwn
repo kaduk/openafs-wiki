@@ -1,0 +1,95 @@
+# <a name="TWiki._PatternSkin CSS Cookbook"></a><a name=" TWiki._PatternSkin CSS Cookbook"></a> [[PatternSkin]] CSS Cookbook
+
+**Questions and answers on how to customize the default look of TWiki for your own needs, using style sheets.** For configuring page elements, see [[PatternSkinCustomization]].
+
+<div>
+  <ul>
+    <li><a href="#Introduction"> Introduction</a><ul>
+        <li><a href="#When you need lots of graphic ch"> When you need lots of graphic changes: Rewriting CSS</a></li>
+        <li><a href="#When you need small adjustments:"> When you need small adjustments: Adding to existing CSS</a></li>
+      </ul>
+    </li>
+    <li><a href="#Recipes"> Recipes</a><ul>
+        <li><a href="#Hide the left bar"> Hide the left bar</a></li>
+        <li><a href="#Use different fonts"> Use different fonts</a></li>
+        <li><a href="#No top bar"> No top bar</a></li>
+        <li><a href="#Centered page"> Centered page</a></li>
+        <li><a href="#Centered page (with a border aro"> Centered page (with a border around the page)</a></li>
+        <li><a href="#Setting _EditTablePlugin styles"> Setting EditTablePlugin styles</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Introduction"></a> Introduction
+
+PatternSkin uses 3 style sheets (attached to [[PatternSkin]]):
+
+- [layout.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css) - the positioning of main page elements (blocks), widths and heights
+- [stylestyle.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css) - fonts, sizes, margins and paddings
+- [colors.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/colors.css) - border colors, text colors and background colors
+
+When customizing your TWiki installation, you can either choose to completely rewrite all css styles, or to selectively override some styles. The latter option is by far less time consuming, but all depends on your graphical wishes.
+
+### <a name="When you need lots of graphic ch"></a> When you need lots of graphic changes: Rewriting CSS
+
+- Create a new topic that will contain your new CSS files
+- Attach 3 new style sheets to the topic
+- Point the CSS variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to your new files:
+
+    		* Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
+    		* Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+    		* Set TWIKICOLORURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
+
+### <a name="When you need small adjustments:"></a> When you need small adjustments: Adding to existing CSS
+
+With CSS you cannot remove already defined classes, you can only add to it, or overwrite existing styles. <br /> Overriding default CSS is done with 3 variables: `USERLAYOUTURL`, `USERSTYLEURL`, `USERCOLORSURL`.
+
+- Create a new topic that will contain your new CSS files
+- Attach 1, 2 or 3 new style sheets to the topic, dependent on your CSS setup (if you don't change much, you might as well put everything in one CSS file, layout, margins and colors)
+- Point the CSS variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to your new files (below the `TWIKIXXXURL` variables):
+
+    		* Set USERLAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
+    		* Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+    		* Set USERCOLORSURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
+
+- If you use only little CSS and you've only attached one file, write:
+
+    		* Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+
+Instead of setting these variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]], you can set these in your home topic, or in any other topic. Setting style URL variables in:
+
+- [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]]: the style is visible for all users, site-wide
+- [[WebPreferences]]: the style is visible for all users in one web
+- Home topic: the style is visible for that one user when viewing the site
+- Some other topic: the style is only visible in that one topic
+
+User styles are always loaded after TWiki styles.
+
+The rest of this topic shows examples of small CSS changes.
+
+## <a name="Recipes"></a> Recipes
+
+### <a name="Hide the left bar"></a> Hide the left bar
+
+See example at: [[PatternSkinCssCookbookNoLeftBar]]
+
+### <a name="Use different fonts"></a> Use different fonts
+
+See example at: [[PatternSkinCssCookbookFonts]]
+
+### <a name="No top bar"></a> No top bar
+
+See example at: [[PatternSkinCssCookbookNoTopBar]]
+
+### <a name="Centered page"></a> Centered page
+
+See example at: [[PatternSkinCssCookbookCenterPage]]
+
+### <a name="Centered page (with a border aro"></a> Centered page (with a border around the page)
+
+See example at: [[PatternSkinCssCookbookCenterPageBorder]]
+
+### <a name="Setting _EditTablePlugin styles"></a> Setting EditTablePlugin styles
+
+See example at: [[PatternSkinCssCookbookEditTableStyle]]

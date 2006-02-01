@@ -11,6 +11,7 @@ Gives extra control of table display:
   - A `TABLEATTRIBUTES` preferences setting on site-level ([[TWikiPreferences]]) or web-level (any [[WebPreferences]]), e.g.
     - `Set TABLEATTRIBUTES = tableborder="0" cellpadding="1" ...`
   - Before a table using `%TABLE{...}%`
+- Row spans
 
 ## <a name="Sorting"></a> Sorting
 
@@ -23,6 +24,37 @@ Click on column heading text to sort by a column. Initial column will be sorted 
 - number is digits, with optional decimal point
 - otherwise treated as text
 
+## <a name="Row spans"></a> Row spans
+
+Table cells with a single caret indicate follow-up rows of multi-row spans. For example,
+
+<table width="100%">
+  <tr>
+    <td><pre>
+| One One | One Two | One Three |
+| ^ | Two Two | Two Three |
+| Three One | ^ | Three Three |
+</pre></td>
+    <td align="right">
+      <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+        <tr>
+          <td bgcolor="#ecf2f8" rowspan="2" style=""> One One </td>
+          <td bgcolor="#ecf2f8" style=""> One Two </td>
+          <td bgcolor="#ecf2f8" style=""> One Three </td>
+        </tr>
+        <tr>
+          <td bgcolor="#ffffff" rowspan="2" style=""> Two Two </td>
+          <td bgcolor="#ffffff" style=""> Two Three </td>
+        </tr>
+        <tr>
+          <td bgcolor="#ecf2f8" style=""> Three One </td>
+          <td bgcolor="#ecf2f8" style=""> Three Three </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
 ## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
@@ -33,13 +65,14 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
   - Set DEBUG = 0
 
-- Make sortable:
-  - #Set SORT = attachments
-  - Set SORT = all
+- Make all tables in a topic sortable. If this is set to `all`, all tables that have a header row (including those that do not have %TABLE before them) will be made sortable. If set to `none`, only tables with %TABLE will be sortable. Topic rendering is faster if this is set to `none`.
   - #Set SORT = none
+  - Set SORT = all
 
 - Default table attributes:
-  - Set TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99CCCC" databg="#FFFFCC, #FFFFFF"
+  - Set TABLEATTRIBUTES = tableborder="0" cellpadding="1" cellspacing="1" headerbg="#dadada" headercolor="#000000" databg="#eaeaea, #ffffff"
+  - Classic skin table attributes:
+    - #Set TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99CCCC" databg="#FFFFCC, #FFFFFF"
 
 ## <a name="Table Attributes"></a> Table Attributes
 
@@ -47,9 +80,9 @@ Attributes are defined as a `TABLEATTRIBUTES` Plugin setting in this topic, a `T
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Argument</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Comment</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Example</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Argument</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Comment</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Example</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code>sort</code></td>
@@ -128,12 +161,12 @@ Attributes are defined as a `TABLEATTRIBUTES` Plugin setting in this topic, a `T
   </tr>
   <tr>
     <td bgcolor="#ffffff" style=""><code>tablewidth</code></td>
-    <td bgcolor="#ffffff" style=""> Table width: Percentage of window width, or absolute pixel value. Default is unspecified </td>
+    <td bgcolor="#ffffff" style=""> Table width: Percentage of window width, or absolute pixel value. Default is unspecified. </td>
     <td bgcolor="#ffffff" style=""><code>tablewidth="100%"</code></td>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code>columnwidths</code></td>
-    <td bgcolor="#ecf2f8" style=""> Column widths: Comma delimited list of column widths, percentage or absolute pixel value. Default is unspecified </td>
+    <td bgcolor="#ecf2f8" style=""> Column widths: Comma delimited list of column widths, percentage or absolute pixel value. Default is unspecified. </td>
     <td bgcolor="#ecf2f8" style=""><code>columnwidths="80%, 20%"</code></td>
   </tr>
   <tr>
@@ -146,6 +179,21 @@ Attributes are defined as a `TABLEATTRIBUTES` Plugin setting in this topic, a `T
     <td bgcolor="#ecf2f8" style=""> Number of footer rows to exclude from sort; default <code>"0"</code></td>
     <td bgcolor="#ecf2f8" style=""><code>footerrows="1"</code></td>
   </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>id</code></td>
+    <td bgcolor="#ffffff" style=""> Table identifier string. Default is unspecified. </td>
+    <td bgcolor="#ffffff" style=""><code>id="userTable"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>summary</code></td>
+    <td bgcolor="#ecf2f8" style=""> Table summary used by screenreaders: A summary of what the table presents. It should provide an orientation for someone who listens to the table. Default is unspecified. </td>
+    <td bgcolor="#ecf2f8" style=""><code>summary="List of subscribed users"</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>caption</code></td>
+    <td bgcolor="#ffffff" style=""> Table caption: A title that will be displayed just above the table. Default is unspecified. </td>
+    <td bgcolor="#ffffff" style=""><code>caption="Users"</code></td>
+  </tr>
 </table>
 
 The `%TABLE{...}%` settings override `TABLEATTRIBUTES` preferences settings, which override the `TABLEATTRIBUTES` Plugin settings.
@@ -154,67 +202,67 @@ The `%TABLE{...}%` settings override `TABLEATTRIBUTES` preferences settings, whi
 
 ### <a name="Use of %TABLE{...}%"></a> Use of %TABLE\{...\}%
 
-Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacing="3" headerbg="#000099" headercolor="#FFFFCC" databg="#C8CB8F, #DBDDB5" headerrows="2" footerrows="1" }%`
+Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacing="3" headerbg="#D5CCB1" headercolor="#666666" databg="#FAF0D4, #F3DFA8" headerrows="2" footerrows="1" }%`
 
 <table border="0" cellpadding="1" cellspacing="3" style="border-width: 0px">
   <tr>
-    <th bgcolor="#000099" colspan="6" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Table with two Header Rows and Footer Row </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" colspan="6" maxcols="0" style=""><span><font color="#666666"> <strong> Table with two Header Rows and Footer Row </strong> </font></span></th>
   </tr>
   <tr>
-    <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Num</font></a></th>
-    <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Status</font></a></th>
-    <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Action</font></a></th>
-    <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Who</font></a></th>
-    <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=4;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">When</font></a></th>
-    <th bgcolor="#000099" maxcols="0" style=""><a href="http://localhost?sortcol=5;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#FFFFCC">Progress</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Num</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Status</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Action</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Who</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><a href="http://localhost?sortcol=4;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">When</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><a href="http://localhost?sortcol=5;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Progress</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#C8CB8F" style=""> 1 </td>
-    <td bgcolor="#C8CB8F" style=""> C </td>
-    <td bgcolor="#C8CB8F" style=""> Chose new colours </td>
-    <td bgcolor="#C8CB8F" style=""> John </td>
-    <td bgcolor="#C8CB8F" style=""> 1-Dec-02 </td>
-    <td bgcolor="#C8CB8F" style="">   </td>
+    <td bgcolor="#FAF0D4" style=""> 1 </td>
+    <td bgcolor="#FAF0D4" style=""> C </td>
+    <td bgcolor="#FAF0D4" style=""> Chose new colours </td>
+    <td bgcolor="#FAF0D4" style=""> John </td>
+    <td bgcolor="#FAF0D4" style=""> 1-Dec-02 </td>
+    <td bgcolor="#FAF0D4" style="">   </td>
   </tr>
   <tr>
-    <td bgcolor="#DBDDB5" style=""> 2 </td>
-    <td bgcolor="#DBDDB5" style=""> X </td>
-    <td bgcolor="#DBDDB5" style=""> Release </td>
-    <td bgcolor="#DBDDB5" style=""> John </td>
-    <td bgcolor="#DBDDB5" style=""> 1-Apr-02 </td>
-    <td bgcolor="#DBDDB5" style="">   </td>
+    <td bgcolor="#F3DFA8" style=""> 2 </td>
+    <td bgcolor="#F3DFA8" style=""> X </td>
+    <td bgcolor="#F3DFA8" style=""> Release </td>
+    <td bgcolor="#F3DFA8" style=""> John </td>
+    <td bgcolor="#F3DFA8" style=""> 1-Apr-02 </td>
+    <td bgcolor="#F3DFA8" style="">   </td>
   </tr>
   <tr>
-    <td bgcolor="#C8CB8F" style=""> 3 </td>
-    <td bgcolor="#C8CB8F" style="">   </td>
-    <td bgcolor="#C8CB8F" style=""> Get feedback </td>
-    <td bgcolor="#C8CB8F" style=""> Anne </td>
-    <td bgcolor="#C8CB8F" style=""> 1-Feb-02 </td>
-    <td bgcolor="#C8CB8F" style="">   </td>
+    <td bgcolor="#FAF0D4" style=""> 3 </td>
+    <td bgcolor="#FAF0D4" style="">   </td>
+    <td bgcolor="#FAF0D4" style=""> Get feedback </td>
+    <td bgcolor="#FAF0D4" style=""> Anne </td>
+    <td bgcolor="#FAF0D4" style=""> 1-Feb-02 </td>
+    <td bgcolor="#FAF0D4" style="">   </td>
   </tr>
   <tr>
-    <td bgcolor="#DBDDB5" style=""> 12 </td>
-    <td bgcolor="#DBDDB5" style=""> C </td>
-    <td bgcolor="#DBDDB5" style=""> Spec error handling </td>
-    <td bgcolor="#DBDDB5" style=""> Jack </td>
-    <td bgcolor="#DBDDB5" style=""> 1-Dec-02 </td>
-    <td bgcolor="#DBDDB5" style="">   </td>
+    <td bgcolor="#F3DFA8" style=""> 12 </td>
+    <td bgcolor="#F3DFA8" style=""> C </td>
+    <td bgcolor="#F3DFA8" style=""> Spec error handling </td>
+    <td bgcolor="#F3DFA8" style=""> Jack </td>
+    <td bgcolor="#F3DFA8" style=""> 1-Dec-02 </td>
+    <td bgcolor="#F3DFA8" style="">   </td>
   </tr>
   <tr>
-    <td bgcolor="#C8CB8F" style=""> 5 </td>
-    <td bgcolor="#C8CB8F" style="">   </td>
-    <td bgcolor="#C8CB8F" style=""> Abc </td>
-    <td bgcolor="#C8CB8F" style=""> John </td>
-    <td bgcolor="#C8CB8F" style="">   </td>
-    <td bgcolor="#C8CB8F" style="">   </td>
+    <td bgcolor="#FAF0D4" style=""> 5 </td>
+    <td bgcolor="#FAF0D4" style="">   </td>
+    <td bgcolor="#FAF0D4" style=""> Abc </td>
+    <td bgcolor="#FAF0D4" style=""> John </td>
+    <td bgcolor="#FAF0D4" style="">   </td>
+    <td bgcolor="#FAF0D4" style="">   </td>
   </tr>
   <tr>
-    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Num </strong> </font></span></th>
-    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Status </strong> </font></span></th>
-    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Action </strong> </font></span></th>
-    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Who </strong> </font></span></th>
-    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> When </strong> </font></span></th>
-    <th bgcolor="#000099" maxcols="0" style=""><span><font color="#FFFFCC"> <strong> Progress </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><span><font color="#666666"> <strong> Num </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><span><font color="#666666"> <strong> Status </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><span><font color="#666666"> <strong> Action </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><span><font color="#666666"> <strong> Who </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><span><font color="#666666"> <strong> When </strong> </font></span></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style=""><span><font color="#666666"> <strong> Progress </strong> </font></span></th>
   </tr>
 </table>
 
@@ -222,7 +270,7 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">When</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">When</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""> 1-Jan-2004 </td>
@@ -237,13 +285,13 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
-**Note:** You do not need to install anything on the browser to use this plugin. Below installation instructions are for the administrator who needs to install this plugin on the TWiki server.
+This plugin is pre-installed with your TWiki release. You should not have to install it other than to do an upgrade.
 
 - Download the ZIP file from the Plugin web (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File:</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description:</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File:</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description:</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
@@ -270,6 +318,7 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
     <td bgcolor="#ffffff" style=""> Up arrow </td>
   </tr>
 </table>
+- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 - Test if the plugin is correctly installed:
   - Check above example if the table renders as expected
   - Try click on heading to sort. Other tables should also be sortable
@@ -283,11 +332,19 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 01 Aug 2004 </td>
+    <td bgcolor="#ffffff" style=""> 1.014 </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
     <td bgcolor="#ecf2f8" style="">  </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 13 Dec 2005 </td>
+    <td bgcolor="#ffffff" style=""> AC: Added support for id, summary and caption </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 5 Mar 2005 </td>
+    <td bgcolor="#ecf2f8" style=""> 1.014: Crawford Currie eliminated deprecated handlers for Dakar </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> 01 Aug 2004: </td>
@@ -376,5 +433,3 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="1" cellspacin
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], [[StandardColors]]
-
--- TWiki:Main/JohnTalintyre - 07 Oct 2001 <br /> -- TWiki:Main/PeterThoeny - 01 Aug 2004 <br />

@@ -2,30 +2,74 @@
 
 - %KEY%: %VALUE%%SPLIT%
 
-**_My Links_**
+## <a name="My Links"></a> My Links
 
-- [[WelcomeGuest]] to learn TWiki
-- [[Sandbox|Sandbox/WebHome]] web to try out TWiki
-- Sandbox.%TOPIC%Sandbox just for me
+- [[ATasteOfTWiki]] - view a short introductory presentation on TWiki for beginners
+- [[WelcomeGuest]] - starting points on TWiki
+- [[TWikiUsersGuide]] - complete TWiki documentation, Quick Start to Reference
+- [[Sandbox|Sandbox/WebHome]] - try out TWiki on your own
+- Sandbox.%TOPIC%Sandbox - just for me
 -
 -
 
-**_Personal Preferences (details in [[TWikiVariables]])_**
+## <a name="Personal Preferences"></a> Personal Preferences
 
-- Show tool-tip topic info on mouse-over of [[WikiWord]] links, on or off: (see details in [[TWikiPreferences]])
-  - Set LINKTOOLTIPINFO = off
+Uncomment preferences variables to activate them (remove the #-sign). Help and details on preferences variables are available in [[TWikiPreferences]].
+
+- Show tool-tip topic info on mouse-over of [[WikiWord]] links, on or off:
+  - #Set LINKTOOLTIPINFO = off
 - Horizontal size of text edit box:
-  - Set EDITBOXWIDTH = 70
+  - #Set EDITBOXWIDTH = 70
 - Vertical size of text edit box:
-  - Set EDITBOXHEIGHT = 22
+  - #Set EDITBOXHEIGHT = 22
 - Style of text edit box. `width: 99%` for full window width (default), `width: auto` to disable.
-  - Set EDITBOXSTYLE = width: 99%
-- Optionally write protect your home page: (set it to your [[WikiName]])
-  - Set ALLOWTOPICCHANGE =
+  - #Set EDITBOXSTYLE = width: 99%
+- Write protect your home page: (set it to your [[WikiName]])
+  - #Set ALLOWTOPICCHANGE = Main.admin
 
-**_Related topics_**
+## <a name="Related Topics"></a> Related Topics
 
-- [[ChangePassword]]
-- [[TWikiPreferences]] has site-level preferences of %WIKITOOLNAME%.
-- [[WebPreferences]] has preferences of the %WIKITOOLNAME%.%WEB% web.
-- [[TWikiUsers]] has a list of other TWiki users.
+- [[ChangePassword]] for changing your password
+- [[ChangeEmailAddress]] for changing your email address
+- [[TWikiUsers]] has a list of other TWiki users
+- [[UserDocumentationCategory]] is a list of TWiki user documentation
+- [[UserToolsCategory]] lists all TWiki user tools
+
+Note to TWiki Administrator:
+
+Above text is for English speaking users. If you have a multilingual wiki community you can replace the "My Links", "Personal Preferences" and "Related Topics" sections above with the localized text below. Text enclosed in %MAKETEXT will be shown in the language selected by the user. Please note that the %MAKETEXT can be quite intimidating to new users. Consider translating above text to your own language if your community uses a non-English language. (Remove all text from `%STARTSECTION{type="templateonly"}%` to `%ENDSECTION{type="templateonly"}%` when you are done)
+
+Text for multilingual wiki community, copy from here to %ENDSECTION\{type="templateonly"\}%
+
+## <a name="My Links"></a> My Links
+
+- [[ATasteOfTWiki]] - view a short introductory presentation on TWiki for beginners
+- [[WelcomeGuest]] - starting points on TWiki
+- [[TWikiUsersGuide]] - complete TWiki documentation, Quick Start to Reference
+- [[Sandbox|Sandbox/WebHome]] - try out TWiki on your own
+- Sandbox.%TOPIC%Sandbox - just for me
+-
+-
+
+## <a name="Personal Preferences"></a> Personal Preferences
+
+Uncomment preferences variables to activate them (remove the #-sign). Help and details on preferences variables are available in [[TWikiPreferences]].
+
+- Show tool-tip topic info on mouse-over of [[WikiWord]] links, on or off:
+  - #Set LINKTOOLTIPINFO = off
+- Horizontal size of text edit box:
+  - #Set EDITBOXWIDTH = 70
+- Vertical size of text edit box:
+  - #Set EDITBOXHEIGHT = 22
+- Style of text edit box. `width: 99%` for full window width (default), `width: auto` to disable.
+  - #Set EDITBOXSTYLE = width: 99%
+- Write protect your home page: (set it to your [[WikiName]])
+  - Set ALLOWTOPICCHANGE = Main.admin
+
+## <a name="Related Topics"></a> Related Topics
+
+- [[ChangePassword]] for changing your password
+- [[ChangeEmailAddress]] for changing your email address
+- [[TWikiUsers]] has a list of other TWiki users
+- [[UserDocumentationCategory]] is a list of TWiki user documentation
+- [[UserToolsCategory]] lists all TWiki user tools

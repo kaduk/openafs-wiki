@@ -1,0 +1,25 @@
+# <a name="Package &lt;code&gt;TWiki::Plurals="></a> Package =TWiki::Plurals
+
+Handle conversion of plural topic names to singular form.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Plurals="> Package TWiki::Plurals</a><ul>
+        <li><a href="#StaticMethod <strong>singularForm</strong> ($we"> StaticMethod singularForm <tt>($web,$pluralForm) -&gt; $singularForm</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;singularForm&lt;/strong&gt; ($we"></a> [[StaticMethod]] **singularForm** `($web,$pluralForm) -> $singularForm`
+
+Try to singularise plural topic name.
+
+- `$web` - the web the topic must be in
+- `$pluralForm` - topic name
+
+Returns undef if no singular form exists, otherwise returns the singular form of the topic
+
+[[I18N]] - Only apply plural processing if site language is English, or if a built-in English-language web (Main, TWiki or Plugins). Plurals apply to names ending in 's', where topic doesn't exist with plural name.
+
+SMELL: this is highly langauge specific, and shoud be overridable on a per-installation basis.

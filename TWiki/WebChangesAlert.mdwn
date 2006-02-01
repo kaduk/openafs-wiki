@@ -1,23 +1,7 @@
-## <a name="Web Changes Notification Service"></a> Web Changes Notification Service
+### <a name="Web Changes Notification Service"></a> Web Changes Notification Service
 
-Each TWiki web has an automatic email notification service that sends you an email with links to all of the topics modified since the last alert.
+Each TWiki web has an automatic e-mail notification service that sends you an e-mail with links to all of the topics modified since the last alert.
 
-### <a name="Subscription"></a> Subscription
+**_Note for System Administrators:_** Notification is supported by an add-on to the TWiki kernel called the MailerContrib. See the [[MailerContrib]] topic for details of how to set up this service.
 
-You can subscribe and unsubscribe yourself in [[WebNotify]] on each web. Please keep the list in alphabetical order so that names can be found easily.
-
-**_Format:_** TWiki handles entries in bullet list (`<space><space><space>*`) format containing the [[WikiName]] of a user; a WikiName with e-mail address; or a [[TWikiGroup|Main/TWikiGroups]]. Examples:
-
-- `Main.FredBloggs`
-- `Main.FredBloggs - secondary@home.com`
-- `Main.EngineeringGroup`
-
-The first entry is the default form, the notification gets sent to the e-mail address specified in the user's home page. The second entry lists an alternative e-mail address. The third entry specifies a group, the notification gets sent to each member of the group.
-
-### <a name="E-mail Alerts"></a> E-mail Alerts
-
-The frequency of alerts is set by the TWiki site administrator: It could be once a day, every hour, whatever works for the particular web. On TWiki.org, alerts are sent once a day.
-
-See [[TWikiSiteTools]] for information on how to setup the alerts.
-
--- TWiki:Main.MikeMannix - 20 Nov 2001 %BR% -- [[PeterThoeny]] - 28 Aug 2004
+**_Note:_** If you prefer a news feed, point your reader to %INCLUDINGWEB%.WebRss (for RSS 1.0 feeds) or %INCLUDINGWEB%.WebAtom (for ATOM 1.0 feeds). Learn more at [[WebRssBase]] and [[WebAtomBase]], respectively.

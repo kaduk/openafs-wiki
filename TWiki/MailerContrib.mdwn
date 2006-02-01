@@ -1,0 +1,144 @@
+This module is an add-on to the TWiki kernel that supports e-mail notification of changes.
+
+<div>
+  <ul>
+    <li><a href="#Summary of Contents"> Summary of Contents</a><ul>
+        <li><a href="#tools/mailnotify"> <code>tools/mailnotify</code></a></li>
+        <li><a href="#TWiki/Contrib/_MailerContrib cod"> <code>TWiki/Contrib/MailerContrib</code> code library</a></li>
+      </ul>
+    </li>
+    <li><a href="#Installation Instructions"> Installation Instructions</a></li>
+    <li><a href="#Setting up your cron job"> Setting up your cron job</a></li>
+    <li><a href="#Settings"> Settings</a></li>
+    <li><a href="#Contrib Info"> Contrib Info</a></li>
+  </ul>
+</div>
+
+# <a name="Summary of Contents"></a> Summary of Contents
+
+## <a name="tools/mailnotify"></a> `tools/mailnotify`
+
+The main part of the mailer module is a script, `tools/mailnotify`. This script is designed to be run from 'cron' (or an equivalent offline job scheduler), and processes the contents of the standard WebNotify topic. As well as providing the usual notification service, it also provides per-topic notification services. The script may be run from the command line or a cron job.
+
+Subscribers are listed in WebNotify following one of these bullet list formats:
+
+_three spaces_ \* [ _webname_ . ] _wikiName_ - _SMTP mail address_<br />_three spaces_ \* [ _webName_ . ] _wikiName_<br />_three spaces_ \* _SMTP mail address_<br />_three spaces_ \* _SMTP mail address_ : _topics_<br />_three spaces_ \* [ _webname_ . ] _wikiName_ : _topics_
+
+where _topics_ is a space-separated list of topic names.
+
+- Specify topics without a _Web._ prefix
+- Topics must exist in this web.
+- Topics may be specified using \* wildcards
+- Each topic may optionally be followed by an integer in parentheses, indicating the depth of the tree of children below that topic. Changes in all these children will be detected and reported along with changes to the topic itself. _Note_ This uses the TWiki "Topic parent" feature.
+- Each topic may optionally be preceded by a '+' or '-' sign. The '+' sign means "subscribe to this topic" (the same as not putting anything). The '-' sign means "don't send notifications regarding this topic". This allows users to elect to filter out changes to certain topics (and their children, to an arbitrary depth). Topic filters ('-') take precedence over topic includes ('+').
+
+For example:
+
+       * daisy@flowers.com
+       * daisy@flowers.com: Web*
+       * DaisyCutter: Petal* (1) WeedKillers (3) Red*Phlox
+       * StarTrekFan: * - *Wars - *sInTheirEyes - *shipTroopers
+
+A user may be listed many times in the WebNotify topic. Where a user has several lines in WebNotify that all match the same topic, they will only be notified of changes to that topic _once_.
+
+If a _TWiki group_ is listed for notification, the group will be recursively expanded to the e-mail addresses of all members.
+
+**_%T% Tip:_** List names in alphabetical order to make it easier to find the names.
+
+In the future it is intended that individual users will be able to control the frequency with which they are notified of topic changes, by changing a schedule specification in their home topic. However at present, the notification schedule is controlled by the frequency of activation of the `cron` job that runs the `mailnotify` script.
+
+%RED% **_Note_** `mailnotify` ignores permissions in webs. It is entirely possible for a user to get added to a WebNotify topic in a web, when they are not authorised to view the topics in that web. This could result in them having limited access to sensitive information (the topic summaries). %ENDCOLOR%
+
+## <a name="TWiki/Contrib/_MailerContrib cod"></a> `TWiki/Contrib/MailerContrib` code library
+
+The second part of the module is a code library that provides the services for other applications to modify WebNotify through a clean, well documented interface. This allows (for example) plugin developers to add a "Register me for notification" button to their pages. The main interface is the `WebNotify` package described below.
+
+# <a name="Installation Instructions"></a> Installation Instructions
+
+This Contrib is pre-installed as part of the TWiki release package, and should only have to be re-installed if an upgrade is required.
+
+- Download the ZIP file from the Plugin web (see below)
+- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory.
+- Run the installer script `MailContrib_intaller.pl` or alternatively resolve all dependencies manually.
+- To make sure the installation was successful, run the `mailnotify` script from the command line, with no parameters. In this case it will print out what it would have done to STDOUT.
+
+# <a name="Setting up your cron job"></a> Setting up your cron job
+
+You need to set up a `cron` (or equivalent) job to run `mailnotify`.
+
+<code>Usage: perl -I  tools/mailnotify [-q] [ _web1 web2 ... webN_ ]</code>  is the path to the TWiki bin directory, so that the script can find the rest of TWiki.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>-q</code></td>
+    <td> Don't print progress information </td>
+  </tr>
+  <tr>
+    <td><code><i>web1 web2 ... webN</i></code></td>
+    <td> List of webs to process, separated by spaces or commas. Default is to process all legal TWiki webs. Wildcards (*) are supported. </td>
+  </tr>
+</table>
+
+For example, `perl -I /usr/local/twiki/bin mailnotify -q Public Private` will generate notifications for the Public and Private webs.
+
+# <a name="Settings"></a> Settings
+
+- Name of the perl package
+  - Set STUB = TWiki::Contrib::Mailer
+
+# <a name="Contrib Info"></a> Contrib Info
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"> Author: </td>
+    <td> TWiki:Main/CrawfordCurrie (<a href="http://c-dot.co.uk" target="_top">http://c-dot.co.uk</a>) </td>
+  </tr>
+  <tr>
+    <td align="right"> Copyright ©: </td>
+    <td> 2004, Wind River Systems </td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 4 March 2005 </td>
+    <td> 1.010 Dakar release ready. </td>
+  </tr>
+  <tr>
+    <td align="right"> 12 Oct 2004 </td>
+    <td> 1.004 Added support for anti-subscriptions. Doc fixes from TWiki:Main.PeterThoeny. Bug fixes to permissions code. Back-off and retry if the mailer can't be reached (should really be in Net::sendEmail) </td>
+  </tr>
+  <tr>
+    <td align="right"> 6 Oct 2004 </td>
+    <td> 1.003 Excluded _ webs from processing, added <code>bin/remove_obsolete_locks</code> for full reverse-compatibility </td>
+  </tr>
+  <tr>
+    <td align="right"> 1 Oct 2004 </td>
+    <td> 1.002 PeterThoeny provided additional documentation </td>
+  </tr>
+  <tr>
+    <td align="right"> 27 Sep 2004 </td>
+    <td> 1.001 runnable as CGI script, minor bugfixes, removed dependency on DBCacheContrib </td>
+  </tr>
+  <tr>
+    <td align="right"> 8 Sep 2004 </td>
+    <td> 1.000 Initial version </td>
+  </tr>
+  <tr>
+    <td align="right"> Home: </td>
+    <td> TWiki:Plugins/%TOPIC% </td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td> TWiki:Plugins/%TOPIC%Dev </td>
+  </tr>
+</table>
+
+**_Related Topics:_** [[TWikiPreferences]]
+
+-- TWiki:Main/CrawfordCurrie

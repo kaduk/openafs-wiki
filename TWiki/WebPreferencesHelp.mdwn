@@ -1,0 +1,19 @@
+## <a name="Help on Preferences"></a> Help on Preferences
+
+- A preference setting is defined by: <br />`3 or 6 spaces * Set NAME = value`<br /> Example:
+  - Set WEBBGCOLOR = #FFFFC0
+- A preferences setting can be disabled with a # sign. Remove the # sign to enable a local customisation. Example:%BR%
+  - #Set DENYWEBCHANGE = [[UnknownUser]]
+- Preferences are used as [[TWikiVariables]] by enclosing the name in percent signs. Example:
+  - When you write variable `%WEBBGCOLOR%` , it gets expanded to `%WEBBGCOLOR%`
+- The sequential order of the preference settings is significant. Define preferences that use other preferences first, i.e. set `WEBCOPYRIGHT` before `WIKIWEBMASTER` since `%WEBCOPYRIGHT%` uses the `%WIKIWEBMASTER%` variable.
+- You can introduce your own preferences variables and use them in your topics and templates.
+
+## <a name="Related Topics"></a> Related Topics
+
+- [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]], [[Main.TWikiPreferences|Main/TWikiPreferences]] - site-level preferences
+- [[TWikiUsers]] - list of user topics. User topics can have optional user preferences
+- [[TWikiVariables]] - list of common `%VARIABLES%`
+- [[TWikiAccessControl]] - explains how to restrict access by users or groups
+
+## <a name="Tools"></a> Tools

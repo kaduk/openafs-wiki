@@ -2,22 +2,17 @@
 
 <div>
   <ul>
-    <li><a href="#Basic Search Form"> Basic Search Form</a></li>
-    <li><a href="#Advanced Search Form"> Advanced Search Form</a></li>
+    <li><a href="#Search Pages"> Search Pages</a></li>
     <li><a href="#Formatted Searches"> Formatted Searches</a></li>
     <li><a href="#Search Preferences"> Search Preferences</a></li>
   </ul>
 </div>
 
-## <a name="Basic Search Form"></a> Basic Search Form
+## <a name="Search Pages"></a> Search Pages
 
-The [[WebSearch]] form offers basic search features:
+There are two search pages; [[WebSearch]] offers basic search features, while [[WebSearchAdvanced]] offers more control over searches.
 
-- Search field: Enter one or more keywords
-- All webs flag: Check the flag if you want to search all public webs, not just the current web
-- Scope: Select if you want to search the topic title, text body or both
-
-The search is keyword based like in a typical search engine:
+By default searches are keyword based like in a typical search engine:
 
 - Specify word(s) you want to find
 - Multiple words form an **AND** search, `intranet web service` returns all pages that have the three words anywhere in the page
@@ -30,19 +25,9 @@ The search is keyword based like in a typical search engine:
   - If you want to search for a word in the stop word list, prefix the word with a plus sign
 - **Example:** To search for all topics that contain `"SOAP"`, `"WSDL"`, a literal `"web service"`, but not `"shampoo"`,%BR% enter this: `soap +wsdl "web service" -shampoo`
 
-## <a name="Advanced Search Form"></a> Advanced Search Form
+Regular expression search searches for a set of regular expression patterns:
 
-The [[WebSearchAdvanced]] form offers more control over search.
-
-TWiki supports three types of searches:
-
-- `keyword`: The basic search type
-- `literal`: Simple search where text is searched literally
-- `regex`: A [[RegularExpression]] search for power users
-
-TWiki's regex search is a set of regular expression patterns:
-
-- Patterns are delimited by a semicolon
+- Patterns are separated by semicolons
 - An AND search is performed for the list of patterns
 - An exclamation point preceeding a pattern indicates an AND NOT search; use it to exclude a pattern, like `!web service`
 - If you want to search for a semicolon or an exclamation point, escape them with a leading backslash, like `\!shampoo`
@@ -50,14 +35,17 @@ TWiki's regex search is a set of regular expression patterns:
 
 ## <a name="Formatted Searches"></a> Formatted Searches
 
-You can embed a nicely [[formatted search|Main/FormattedSearch]] in a topic by using the `%SEARCH{}%` variable described in [[TWikiVariables]].
+You can embed a nicely [[formatted search|Main/FormattedSearch]] in a topic by using the `%SEARCH{}%` variable described in [[TWikiVariables#VarSEARCH]].
 
 ## <a name="Search Preferences"></a> Search Preferences
 
-The [[TWikiPreferences]] has these settings:
+[[TWikiPreferences]] defines these search preferences:
 
 - `SEARCHDEFAULTTTYPE`: Default search type for search forms which calls the `search` script
+  - Currently `%SEARCHDEFAULTTTYPE%`
 - `SEARCHVARDEFAULTTYPE`: Default search type for `%SEARCH{}` variable
-- `SEARCHSTOPWORDS`: List of stop words
+  - Currenty `%SEARCHVARDEFAULTTYPE%`
+- `SEARCHSTOPWORDS`: List of stop words (common words and characters to exclude from a keyword search)
+  - Currently `%SEARCHSTOPWORDS%`
 
--- TWiki:Main.PeterThoeny - 18 Jan 2004
+**_Related Topics:_** [[UserDocumentationCategory]]

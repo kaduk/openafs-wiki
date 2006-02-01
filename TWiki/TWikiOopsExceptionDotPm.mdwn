@@ -1,0 +1,31 @@
+# <a name="Package &lt;code&gt;TWiki::_OopsException="></a> Package =TWiki::OopsException
+
+**extends** `Error`
+
+Exception used to raise a request to redirect to an Oops URL. An [[OopsException]] thrown anywhere in the code will redirect the browser to a url based on the `oops` script. `oops` requires a `template` parameter, that is the name of a template file from the `templates` directory. This file will be expanded and the parameter values passed to the exception instantiated. The result will be shown in the browser.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::_OopsException="> Package TWiki::OopsException</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($template,..."> ClassMethod new <tt>($template,...)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>stringify</strong> () -> $"> ObjectMethod stringify <tt>() -&gt; $string</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($template,..."></a> [[ClassMethod]] **new** `($template,...)`
+
+- `template` is the name of an oops template
+
+The remaining parameters are interpreted as key-value pairs. The following keys are used:
+
+- `web` will be used as the web for the oops
+- `topic` will be used as the topic for the oops
+- `def` - is the (optional) name of a TMPL:DEF within the template
+- `keep` - if set, the exception handler should try it's damndest to retain parameter values from the query.
+- `params` is a reference to an array of parameters. These will be substituted for %PARAM1%, %PARAM2% ... %PARAMn% in the template.
+
+## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; () - $s"></a> [[ObjectMethod]] **stringify** `() -> $string`
+
+Generates a string representation for the object, mainly for debugging.

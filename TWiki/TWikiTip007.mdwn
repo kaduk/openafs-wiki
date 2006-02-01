@@ -1,0 +1,15 @@
+# <a name="Linking to a file attachment"></a> Linking to a file attachment
+
+One can create a link to a file attachment using one of the following [[TWikiVariables]], `%ATTACHURL%` or `%PUBURL%`.
+
+`%ATTACHURL%` is the full URL for attachments in the current topic. For example:
+
+`%ATTACHURL%/image.gif`
+
+To link to a file attachment in another topic, use the `%PUBURL%` variable. For example:
+
+`%PUBURL%/%WEB%/OtherTopic/image.gif`
+
+[[See More Tips...|Main/TWikiTipsOfTheDay]]
+
+-- TWiki:Main.PaulineCheung - 29 Jan 2005

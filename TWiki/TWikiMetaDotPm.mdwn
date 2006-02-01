@@ -1,0 +1,170 @@
+# <a name="Package &lt;code&gt;TWiki::Meta="></a> Package =TWiki::Meta
+
+Meta-data handling.
+
+A meta-data object is a hash of different types of meta-data (keyed on the type, such as 'FIELD' and 'TOPICINFO').
+
+Each entry in the hash is an array, where each entry in the array contains another hash of the key=value pairs, corresponding to a single meta-datum.
+
+If there may be multiple entries of the same top-level type (i.e. for FIELD and FILEATTACHMENT) then the array hash multiple entries. These types are referred to as "keyed" types. The array entries are keyed with the attribute 'name' which must be in each entry in the array.
+
+For unkeyed types, the array has only one entry.
+
+The module knows nothing about how meta-data is stored. That is entirely the responsibility of the Store module.
+
+Meta-data objects are created by the Store engine when topics are read. They are populated using the `put` method.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Meta="> Package TWiki::Meta</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$topic)</tt></a></li>
+        <li><a href="#ClassMethod <strong>web</strong> ()"> ClassMethod web <tt>()</tt></a></li>
+        <li><a href="#ClassMethod <strong>topic</strong> ()"> ClassMethod topic <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>put</strong> ($type,\%args"> ObjectMethod put <tt>($type,\%args)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>putKeyed</strong> ($type,\"> ObjectMethod putKeyed <tt>($type,\%args)</tt></a></li>
+        <li><a href="#ObjectMethod *putAll*"> ObjectMethod putAll <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>get</strong> ($type,$key)"> ObjectMethod get <tt>($type,$key) -&gt; \%hash</tt></a></li>
+        <li><a href="#ObjectMethod <strong>find</strong> ($type) -> @"> ObjectMethod find <tt>($type) -&gt; @values</tt></a></li>
+        <li><a href="#StaticMethod *index_ByKey*"> StaticMethod indexByKey <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>remove</strong> ($type,$ke"> ObjectMethod remove <tt>($type,$key)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>copyFrom</strong> ($otherM"> ObjectMethod copyFrom <tt>($otherMeta,$type,$nameFilter)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>count</strong> ($type) ->"> ObjectMethod count <tt>($type) -&gt; $integer</tt></a></li>
+        <li><a href="#ObjectMethod <strong>addTOPICINFO</strong> ($re"> ObjectMethod addTOPICINFO <tt>($rev,$time,$user)</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionInfo*"> ObjectMethod getRevisionInfo <tt>($fromrev) -&gt; ($date,$author,$rev,$comment)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>merge</strong> ($otherMeta"> ObjectMethod merge <tt>($otherMeta,$formDef)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>stringify</strong> ($types"> ObjectMethod stringify <tt>($types) -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod *for_EachSelectedVa"> ObjectMethod forEachSelectedValue <tt>($types,$keys,\&amp;fn,\%options)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getParent</strong> () -> $"> ObjectMethod getParent <tt>() -&gt; $parent</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_FormName</strong> () -"> ObjectMethod getFormName <tt>() -&gt; $formname</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$web"></a> [[ClassMethod]] **new** `($session,$web,$topic)`
+
+Construct a new, empty Meta collection.
+
+## <a name="ClassMethod &lt;strong&gt;web&lt;/strong&gt; ()"></a> [[ClassMethod]] **web** `()`
+
+Get the web name
+
+## <a name="ClassMethod &lt;strong&gt;topic&lt;/strong&gt; ()"></a> [[ClassMethod]] **topic** `()`
+
+Get the topic name
+
+## <a name="ObjectMethod &lt;strong&gt;put&lt;/strong&gt; ($type,\%args"></a> [[ObjectMethod]] **put** `($type,\%args)`
+
+Put a hash of key=value pairs into the given type set in this meta.
+
+See the main comment for this package to understand how meta-data is represented.
+
+## <a name="ObjectMethod &lt;strong&gt;putKeyed&lt;/strong&gt; ($type,\"></a> [[ObjectMethod]] **putKeyed** `($type,\%args)`
+
+Put a hash of key=value pairs into the given type set in this meta. The entries are keyed by 'name'.
+
+See the main comment for this package to understand how meta-data is represented.
+
+## <a name="ObjectMethod &lt;strong&gt;putAll*"></a><a name="ObjectMethod *putAll&lt;/strong&gt; "></a> [[ObjectMethod]] **putAll** ``
+
+Replaces all the items of a given key with a new array This is the logical inverse of the find method
+
+## <a name="ObjectMethod &lt;strong&gt;get&lt;/strong&gt; ($type,$key)"></a><a name="ObjectMethod &lt;strong&gt;get&lt;/strong&gt; ($type,$key) "></a> [[ObjectMethod]] **get** `($type,$key) -> \%hash`
+
+Find the value of a meta-datum in the map. If the type is keyed, the $key parameter is required to say _which_ entry you want. Otherwise it can be undef.
+
+WARNING SMELL If key is undef but the type is keyed you get the FIRST entry If you want all the keys of a given type use the 'find' method.
+
+The result is a reference to the hash for the item.
+
+## <a name="ObjectMethod &lt;strong&gt;find&lt;/strong&gt; ($type) - @v"></a> [[ObjectMethod]] **find** `($type) -> @values`
+
+Get all meta data for a specific type Returns the array stored for the type. This will be zero length if there are no entries.
+
+## <a name="StaticMethod &lt;strong&gt;index_ByKey*"></a><a name="StaticMethod *index_ByKey&lt;/strong&gt; "></a> [[StaticMethod]] **indexByKey** ``
+
+See tests/unit/MetaTests.pm for an example
+
+The result is a hash the same as the array provided by find but keyed by the keyName. NB. results are indeterminate if the key you choose is not unique in the find.
+
+Flattens a keyed hash structure, taking only the values. Returns a hash.
+
+See tests/unit/MetaTests.pm for an example
+
+## <a name="ObjectMethod &lt;strong&gt;remove&lt;/strong&gt; ($type,$ke"></a> [[ObjectMethod]] **remove** `($type,$key)`
+
+With no type, will remove all the contents of the object.
+
+With a $type but no $key, will remove _all_ items of that type (so for example if $type were FILEATTACHMENT it would remove all of them)
+
+With a $type and a $key it will remove only the specific item.
+
+## <a name="ObjectMethod &lt;strong&gt;copyFrom&lt;/strong&gt; ($otherM"></a> [[ObjectMethod]] **copyFrom** `($otherMeta,$type,$nameFilter)`
+
+Copy all entries of a type from another meta data set. This will destroy the old values for that type, unless the copied object doesn't contain entries for that type, in which case it will retain the old values.
+
+If $type is undef, will copy ALL TYPES.
+
+If $nameFilter is defined (an RE), it will copy only data where \{name\} matches $nameFilter.
+
+SMELL: That spec absolutely _STINKS_ !! SMELL: this is a shallow copy
+
+## <a name="ObjectMethod &lt;strong&gt;count&lt;/strong&gt; ($type) - $"></a> [[ObjectMethod]] **count** `($type) -> $integer`
+
+Return the number of entries of the given type that are in this meta set
+
+## <a name="ObjectMethod &lt;strong&gt;addTOPICINFO&lt;/strong&gt; ($re"></a> [[ObjectMethod]] **addTOPICINFO** `($rev,$time,$user)`
+
+- `$rev` - the revision number
+- `$time` - the time stamp
+- `$user` - the user object
+
+Add TOPICINFO type data to the object, as specified by the parameters.
+
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionInfo*"></a><a name="ObjectMethod *get_RevisionInfo&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionInfo** `($fromrev) -> ($date,$author,$rev,$comment)`
+
+Try and get revision info from the meta information, or, if it is not present, kick down to the Store module for the same information.
+
+Returns ( $revDate, $author, $rev, $comment )
+
+$rev is an integer revision number.
+
+## <a name="ObjectMethod &lt;strong&gt;merge&lt;/strong&gt; ($otherMeta"></a> [[ObjectMethod]] **merge** `($otherMeta,$formDef)`
+
+- `$otherMeta` - a block of meta-data to merge with $this
+- `$formDef` reference to a TWiki::Form that gives the types of the fields in $this
+
+Merge the data in the other meta block.
+
+- File attachments that only appear in one set are preserved.
+- Form fields that only appear in one set are preserved.
+- Form field values that are different in each set are text-merged
+- We don't merge for field attributes or title
+- Topic info is not touched
+- The `mergeable` method on the form def is used to determine if that fields is mergeable. if it isn't, the value currently in meta will _not_ be changed.
+
+## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; ($types"></a> [[ObjectMethod]] **stringify** `($types) -> $string`
+
+Return a string version of the meta object. Uses \\n to separate lines. If $types is specified, return only types specified by that RE.
+
+## <a name="ObjectMethod &lt;strong&gt;for_EachSelectedVa"></a> [[ObjectMethod]] \*forEachSelectedValue `($types,$keys,\&fn,\%options)`
+
+Iterate over the values selected by the regular expressions in $types and $keys.
+
+- `$types` - regular expression matching the names of fields to be processed. Will default to qr/^[A-Z]+$/ if undef.
+- `$keys` - regular expression matching the names of keys to be processed. Will default to qr/^[a-z]+$/ if undef.
+
+Iterates over each value, calling `\&fn` on each, and replacing the value with the result of \\&amp;fn.
+
+\\%options will be passed on to $fn, with the following additions:
+
+- `_type` =&gt; the type name (e.g. "FILEATTACHMENT")
+- `_key` =&gt; the key name (e.g. "user")
+
+## <a name="ObjectMethod &lt;strong&gt;getParent&lt;/strong&gt; () - $p"></a> [[ObjectMethod]] **getParent** `() -> $parent`
+
+Gets the TOPICPARENT name.
+
+## <a name="ObjectMethod &lt;strong&gt;get_FormName&lt;/strong&gt; () -"></a> [[ObjectMethod]] **getFormName** `() -> $formname`
+
+Returns the name of the FORM, or '' if none.

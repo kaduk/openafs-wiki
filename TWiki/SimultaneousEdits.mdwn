@@ -4,8 +4,10 @@ What happens if two of us try to edit the same topic simultaneously?
 
 ## <a name="Answer:"></a> Answer:
 
-The second person gets a warning that the topic is currently being edited by another user. A topic gets locked automatically for some time (default is one hour) when you edit, preview or save the topic. If you get the lock warning you should wait until the lock is gone or contact the other person to ask if you can go ahead and break the lock. See also [[UnlockTopic]].
+TWiki allows multiple simultaneous edits of the same topic, and then merges the different changes automatically. You probably won't even notice this happening unless there is a conflict that cannot be merged automatically. In this case, you may see TWiki inserting "change marks" into the text to highlight conflicts between your edits and another person's. These change marks are only used if you edit the same part of a topic as someone else, and they indicate what the text used to look like, what the other person's edits were, and what your edits were.
+
+TWiki will warn if you attempt to edit a topic that someone else is editing. It will also warn if a merge was required during a save.
 
 **_Back to:_** [[TWikiFAQ]]
 
--- TWiki:Main.PeterThoeny - 27 Nov 2000
+**_Related Topics:_** [[UserDocumentationCategory]]

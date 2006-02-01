@@ -1,0 +1,24 @@
+# <a name="Comment box with _CommentPlugin"></a> Comment box with CommentPlugin
+
+The [[CommentPlugin]] allows users to quickly post comments to a page without an edit/preview/save cycle.
+
+Write `%COMMENT{ attributes }%` or simply `%COMMENT%` anywhere in a TWiki topic.
+
+Example:
+
+<form name="disabled">
+  <table>
+    <tr valign="middle">
+      <td>
+        <textarea cols="40" name="comment" onblur="if(this.value=='')this.value=''" onfocus="if(this.value=='')this.value=''" rows="3" wrap="soft">This non-working example is for demonstration purposes only</textarea>
+      </td>
+      <td><input disabled type="submit" value="Add comment" /></td>
+    </tr>
+  </table>
+</form>
+
+[[More Information...|Main/CommentPlugin]]
+
+[[See More Tips...|Main/TWikiTipsOfTheDay]]
+
+-- TWiki:Main.PaulineCheung - 29 Jan 2005

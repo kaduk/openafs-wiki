@@ -1,0 +1,53 @@
+# <a name="Package &lt;code&gt;TWiki::UI::View="></a> Package =TWiki::UI::View
+
+UI delegate for view function
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::UI::View="> Package TWiki::UI::View</a><ul>
+        <li><a href="#StaticMethod <strong>view</strong> ($session,$w"> StaticMethod view <tt>($session,$web,$topic,$scruptUrl,$query)</tt></a></li>
+        <li><a href="#StaticMethod <strong>viewfile</strong> ($sessio"> StaticMethod viewfile <tt>($session,$web,$topic,$query)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;view&lt;/strong&gt; ($session,$w"></a> [[StaticMethod]] **view** `($session,$web,$topic,$scruptUrl,$query)`
+
+`view` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+
+Generate a complete HTML page that represents the viewed topics. The view is controlled by CGI parameters as follows:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>rev</code></td>
+    <td> topic revision to view </td>
+  </tr>
+  <tr>
+    <td><code>raw</code></td>
+    <td> no format body text if set </td>
+  </tr>
+  <tr>
+    <td><code>skin</code></td>
+    <td> comma-separated list of skin(s) to use </td>
+  </tr>
+  <tr>
+    <td><code>contenttype</code></td>
+    <td> Allows you to specify an alternate content type </td>
+  </tr>
+</table>
+
+## <a name="StaticMethod &lt;strong&gt;viewfile&lt;/strong&gt; ($sessio"></a> [[StaticMethod]] **viewfile** `($session,$web,$topic,$query)`
+
+`viewfile` command handler. This method is designed to be invoked via the `TWiki::UI::run` method. Command handler for viewfile. View a file in the browser. Some parameters are passed in CGI query:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>filename</code></td>
+    <td> Attachment to view </td>
+  </tr>
+  <tr>
+    <td><code>rev</code></td>
+    <td> Revision to view </td>
+  </tr>
+</table>

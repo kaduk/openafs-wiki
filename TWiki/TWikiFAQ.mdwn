@@ -4,7 +4,7 @@ This is a real FAQ, and also a demo of one easily implemented knowledge base sol
 
 # <a name="TWiki Installation Error"></a> TWiki Installation Error
 
-Incorrect format of search template (missing sections? There should be 4 %SPLIT% tags)
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
 **_NOTE:_** The most recent version of this FAQ is at TWiki:TWiki/TWikiFAQ.
 
@@ -12,7 +12,7 @@ Incorrect format of search template (missing sections? There should be 4 %SPLIT%
 
 **_%RED%NOTE:%ENDCOLOR%_** The FAQs here are for frequently asked questions **_including_** answers; please ask support questions in the TWiki:Support web. New FAQ topics are based on the [[TWikiFaqTemplate]].
 
-<form action="http://www.dementia.org/twiki//edit/%WEB%/"> New FAQ topic:   (Use a name in [[TWiki/WikiNotation]]) <br /><input name="topic" size="32" type="text" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="templatetopic" type="hidden" value="TWikiFaqTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input type="submit" value="Create Topic" /><br />
+<form action="http://www.dementia.org/twiki/edit/%WEB%/"> New FAQ topic:   (Use a name in [[TWiki/WikiNotation]]) <br /><input name="topic" size="32" type="text" /> <input type="submit" value="Create Topic" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="templatetopic" type="hidden" value="TWikiFaqTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /><br />
 </form>
 
 ## <a name="More sources..."></a> More sources...
@@ -25,5 +25,3 @@ Other places where you can find answers to your questions:
 - [[WikiSyntax]], [[TextFormattingRules]]: A quick one-two guide to TWiki shorthand basics
 - [[TextFormattingFAQ]]: Answers to frequently asked questions about text styling in TWiki
 - If you can't find an answer, ask a question - post it in the TWiki:Support web
-
--- TWiki:Main.PeterThoeny - 26 Nov 2000 %BR% -- TWiki:Main.MikeMannix - 13 Sep 2001

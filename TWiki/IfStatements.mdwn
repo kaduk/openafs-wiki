@@ -1,0 +1,179 @@
+The `%IF%` construct gives TWiki the power to include content in topics based on the value of simple expressions.
+
+`%IF{"CONDITION" then="THEN" else="ELSE"}%`
+
+In the example above, if CONDITION evaluates to TRUE, then THEN will be included in the topic; otherwise ELSE will be included.
+
+What can be included in the THEN and ELSE parameters is obviously limited by standard TWiki syntax for parameters. The best way to use this feature is to define two [[TWikiVariables]], one for the THEN case and the other for the ELSE case. For example:
+
+    <!--
+       * Set LI = Fred is here!
+       * Set LO = Fred is there!
+    -->
+    %IF{"context authenticated and defined WIKINAME and $ WIKINAME='FredBloggs'" then="%LI%" else="%LO%"}%
+
+The basic syntax of a condition is as follows:
+
+    expr ::= '(' expr ')' ;
+    expr ::= andexpr | andexpr 'or' expr ;
+    andexpr ::= notexpr | notexpr 'and' andexpr ;
+    notexpr ::= basexpr | 'not' baseexpr ;
+    basexpr ::= atom | uop atom | atom bop basexpr ;
+    uop ::= 'context' | 'defined' | '$' ;
+    bop ::= '=' | '!=' | '>' | '<' | '>=' | '<=' ;
+    atom ::= context identifier, TWiki variable name, single-quoted string
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC" colspan="2"><strong> Operators </strong></th>
+  </tr>
+  <tr>
+    <td> and </td>
+    <td> True if both sides are true </td>
+  </tr>
+  <tr>
+    <td> or </td>
+    <td> True if one or other side is true </td>
+  </tr>
+  <tr>
+    <td> not </td>
+    <td> negate the following expression </td>
+  </tr>
+  <tr>
+    <td> =, != </td>
+    <td> String comparison </td>
+  </tr>
+  <tr>
+    <td> &lt;, &gt;, &lt;=, &gt;= </td>
+    <td> Number comparison (there is no explicit numeric =) </td>
+  </tr>
+  <tr>
+    <td> context </td>
+    <td> True if the current context is set (see below) </td>
+  </tr>
+  <tr>
+    <td> defined </td>
+    <td> True if a preference variable or url parameter of this name is defined. </td>
+  </tr>
+  <tr>
+    <td> $ </td>
+    <td> expands a URL parameter or [[Main/TWikiVariables]]. Plugin handlers <strong>are not called</strong>. Built-in variables and user-defined preferences are supported. You can pass a limited subset of parameters to TWiki variables by enclosing the variable name in single quotes; for example, <code>$ 'VARIABLE{value}'</code>. The quoted string may <strong>not</strong> contain quotes (' or "). </td>
+  </tr>
+</table>
+
+examples:
+
+    %IF{"defined WIKINAME" then="WIKINAME is defined" else="WIKINAME is not defined"}%
+
+    You are %IF{ "$ WIKINAME='TWikiGuest' and not defined OPEN_DAY" then="not" }% allowed to
+    %IF{ "context view" then="view" else="edit"}% this TWiki today.
+
+    %IF{ "defined search" then="Search: %URLPARAM{search}%" else="No search passed in"}%
+
+    url param t is %IF{ "0 < $ t and $ t < 1000" then="in" else="out of"}% range.
+
+    %IF{ "$'URLPARAM{scope}'='text'" then="Plain text search" }%
+
+Given
+
+- Set OPEN\_DAY = yes
+
+this expands to:
+
+You are allowed to edit this TWiki today.
+
+Context identifiers are used in TWiki to label various stages of the rendering process. They are especially useful for [[skin|Main/TWikiSkins]] authors to find out where they are in the rendering process. The following context identifiers are available:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> id </strong></th>
+    <th bgcolor="#99CCCC"><strong> context </strong></th>
+  </tr>
+  <tr>
+    <td> absolute_urls </td>
+    <td> Set if absolute URLs are required </td>
+  </tr>
+  <tr>
+    <td> authenticated </td>
+    <td> a user is authenticated </td>
+  </tr>
+  <tr>
+    <td> body_text </td>
+    <td> when the body text is being processed in a view (useful in plugin handlers) </td>
+  </tr>
+  <tr>
+    <td> can_login </td>
+    <td> current environment supports login </td>
+  </tr>
+  <tr>
+    <td> changes </td>
+    <td> in changes script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> command_line </td>
+    <td> the running script was run from the command line, and not from CGI </td>
+  </tr>
+  <tr>
+    <td> diff </td>
+    <td> in rdiff script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> edit </td>
+    <td> in edit script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> footer_text </td>
+    <td> when the footer text is being processed in a view (useful in plugin handlers) </td>
+  </tr>
+  <tr>
+    <td> header_text </td>
+    <td> when the header text is being processed in a view (useful in plugin handlers) </td>
+  </tr>
+  <tr>
+    <td> i18n_enabled </td>
+    <td> when user interface [[Main/I18N]] support is enabled (i.e., user can choose the language for UI) </td>
+  </tr>
+  <tr>
+    <td> inactive </td>
+    <td> if active links such as 'edit' and 'attach' should be disabled </td>
+  </tr>
+  <tr>
+    <td> mirror </td>
+    <td> if this is a mirror </td>
+  </tr>
+  <tr>
+    <td> new_topic </td>
+    <td> if the topic doesn't already exist </td>
+  </tr>
+  <tr>
+    <td> oops </td>
+    <td> in oops script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> preview </td>
+    <td> in preview script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> rss </td>
+    <td> if this is an RSS skin rendering </td>
+  </tr>
+  <tr>
+    <td> save </td>
+    <td> in save script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> search </td>
+    <td> in search script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> view </td>
+    <td> in view script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+  <tr>
+    <td> rest </td>
+    <td> in rest script (see [[Main/TWikiScripts]]) </td>
+  </tr>
+</table>
+
+In addition there is an identifier for each enabled plugin; for example, if `GallousBreeksPlugin` is installed **and enabled**, then the context ID `GallousBreeksPluginEnabled` will be set.
+
+The `%IF%` statement is deliberately kept simple. In particular, note that there is no way to conditionally execute a Set statement. If you need more sophisticated control over formatting, then consider using the [[SpreadSheetPlugin]].

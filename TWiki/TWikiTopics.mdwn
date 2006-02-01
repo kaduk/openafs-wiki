@@ -18,11 +18,11 @@ A TWiki topic is a rich information unit. **Each** topic has:
 
 - name
   - instantly identify what the topic is about
-  - link to it from other topics just by typing it in it's [[WikiWord]]
+  - link to it from other topics just by typing in its [[WikiWord]]
 - content
   - edited by simply clicking the [[edit link|Main/WebHome#PageBottom]]
-  - enter plain text, leaving a blank space between paragraphs like email (all you need)
-  - enter simple TWiki shorthand to represent complex HTML and special TWiki tags
+  - enter plain text, leaving a blank space between paragraphs like e-mail (all you need)
+  - enter simple TWiki shorthand to represent complex HTML and special TWiki variables
   - enter HTML if you are familiar with it
   - include links to other topics, URLs, Web sites, files, images, sounds, or anything else you can put on a regular Web page
   - handy pop-up quick reference
@@ -57,7 +57,7 @@ Features that can be used by topics and sites include:
   - fully configurable look and feel
   - apply skins across an entire TWiki web, or to a single displayed page
   - use included skins and easily create new ones
-  - try the <code>**[Printable]**</code> skin below: stripped down headers and footers suitable for clean hard copy
+  - try the <code>**Printable**</code> skin below: stripped down headers and footers suitable for clean hard copy
 - plug-ins
   - new feature packages
   - developer community evolving existing and new capabilities
@@ -108,11 +108,11 @@ Another way to add a topic is to type a new topic name in the Go box or an unkno
 
 The color-coded toolbar at the bottom of every topic displays a series of links, including:
 
-- <code>**[Attach]**</code> - pops a new screen for [[FileAttachments]]
-- <code>**[Ref-By]**</code> - displays all the TWiki topics with links to the current topic
-- <code>**[Diffs]**</code> - generates a page showing every change made to the current topic, with names, dates, and changes made (diffs)
-- <code>**r1.3 | &gt; | r1.2**</code> _(ex)_ - view most recent revision and changes
-- <code>**[More]**</code> - opens up a new screen containing additional controls
+- <code>**Attach**</code> - pops a new screen for [[FileAttachments]]
+- <code>**Backlinks**</code> - displays all the TWiki topics with links to the current topic
+- <code>**History**</code> - generates a page showing every change made to the current topic, with names, dates, and changes made (diffs)
+- <code>**r3 &gt; r2 &gt; r1**</code> - view most recent revision and changes
+- <code>**More**</code> - opens up a new screen containing additional controls
 
 It looks complicated, but the basics you need to begin with are very simple to use. The flexible and optional features are ready when you care to learn about them - the only way to confuse yourself or your site set-up and users is by using features you really don't need. Unlike the usual expensive, complex collaboration and project management packages, TWiki is fully functional and effective just by typing in text and making [[WikiWord]] links. All the additional features are there, but only if you need them!
 
@@ -134,7 +134,7 @@ You can rename, move and delete individual topics by clicking <code>**More**</co
   - Any problems are listed - take note, and you can fix them later.
   - If a linked topic can't be updated (it may be locked because someone's editing it), an alert will appear. You can update missed topics later by again pressing <code>**Rename/move**</code>.
 
-%H% Deleting means moving a topic to the Trash web. Since all webs share the one Trash, name conflicts may come up.
+**_%H% Note:_** Deleting means moving a topic to the Trash web. Since all webs share the one Trash, name conflicts may come up.
 
 <a name="RevisionRollback"></a>
 
@@ -148,8 +148,10 @@ RCS revision control automatically saves all topic changes. To look at earlier v
 4. Select either the portion of that version you want to reclaim or the entire text of the topic if you want to revert completely to that version. Select `Copy` under your browser's `Edit` menu.
 5. Return to the most recent version of the topic and select `Edit` from the topic commands.
 6. Either paste in the portion of the topic you wish to reclaimed or replace the entire text with the text you copied from the earlier version.
-7. Preview and save the topic.
+7. Save the topic.
 
 See: [[ManagingTopics|Main/TWikiDocumentation#Managing_Topics]] for more details.
 
--- TWiki:MikeMannix - 22 May 2002 %BR% -- TWiki:Main.GrantBow - 17 Jan 2003 %BR%
+----
+
+**_Related Topics:_** [[UserDocumentationCategory]], [[AdminDocumentationCategory]]

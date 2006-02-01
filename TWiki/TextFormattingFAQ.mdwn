@@ -84,6 +84,8 @@ TWiki interprets text as HTML, so you can use the `preformatted` HTML option to 
 
 The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
 
+**NOTE:** VARIABLES are still Set within verbatim tags (this is a historical peculiarity)
+
 ----
 
 ### <a name="How do I create tables?"></a> How do I create tables?
@@ -96,7 +98,7 @@ There are three possibilities:
 
 **1\. Use Wiki rule with "|" vertical bars**
 
-- Example text: <br />`| cell A1 | cell B1 | cell C1 |`<br />`| cell A2 | cell B2 | cell C2 |`
+- Example text: %BR% `| cell A1 | cell B1 | cell C1 |` %BR% `| cell A2 | cell B2 | cell C2 |`
 - Example output: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td> cell A1 </td>
@@ -151,25 +153,25 @@ See [["Text I enter gets wrapped around..."|Main/WebHome#VerbatimText]]
 
 ### <a name="Can I include images on a page?"></a> Can I include images on a page?
 
-Yes. The easiest way is to [[attach|Main/FileAttachment]] a GIF, JPG or PNG file to a topic and then to place it with: `%ATTACHURL%/myImage.gif`. This works only for the page that the image is attached to.
+Yes. The easiest way is to [[attach|Main/FileAttachment]] a GIF, JPG or PNG file to a topic and then to place it with: `%ATTACHURL%/myImage.gif`. This works only for the topic where the image is attached to.
 
-To place an image on any page, ther are two ways of including inline images.
+To place an image on any topic, there are two ways of including inline images.
 
 **1\. Using URL ending in .gif, .jpg, .jpeg, .png**
 
 This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **_NOTE:_** The images must be [[accessible|Main/WebHome#ImgUpload]] as a URL.
 
-- **_You enter:_** ` TWiki http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif logo.`<br />**_Result:_** TWiki ![twikilogo88x31.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif) logo.
+- **_You enter:_** ` %PUBURL%/TWiki/TWikiLogos/T-logo-80x15.gif logo.`<br />**_Result:_** ![T-logo-80x15.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-80x15.gif) logo.
 
 <a name="ImgUpload"></a> You can upload images directly to your server with FTP access. You can also [[attach|Main/FileAttachment]] image files to a topic - you could even create a dedicated image topic, like `ImageLibrary` - and then link to the images directly:
 
-- Attach `pic.gif` to `Someweb.SomeTopic`<br /> Display with <code>http://www.dementia.org/twiki//view/Someweb/SomeTopic/pic.gif</code>
+- Attach `pic.gif` to `Someweb.SomeTopic`<br /> Display with `%PUBURL%/Someweb/SomeTopic/pic.gif`
 
 **2\. Using &lt;img&gt; tag**
 
-This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The display of the topic is faster if you include the `WIDTH` and `HEIGHT` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
+This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The rendering of the topic is faster if you include the `width` and `height` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
 
-- **_You enter:_** `TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /> TWiki <img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/twikilogo88x31.gif" width="88" height="31" alt="logo" /> logo.
+- **_You enter:_** ` <img src="%PUBURLPATH%/TWiki/TWikiLogos/T-logo-80x15.gif" width="80" height="15" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /><img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-80x15.gif" width="80" height="15" alt="logo" /> logo.
 
 ----
 
@@ -187,5 +189,3 @@ If you need more colors you can use HTML, like `<font color="#ff0000"> red text 
 The code is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or `"#ff0000"` for Web page purposes. [[StandardColors]] lists basic colors.
 
 ----
-
--- TWiki:Main.PeterThoeny - 15 Aug 2004 %BR% -- TWiki:Main.MikeMannix - 14 Sep 2001 %BR%

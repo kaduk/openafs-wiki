@@ -1,0 +1,17 @@
+<form action="http://www.dementia.org/twiki/edit/Main/" name="new">
+  <h1><a name="Create New Topic in Main Web"></a> Create New Topic in Main Web </h1>
+  <table>
+    <tr>
+      <td> Topic name: </td>
+      <td><input --="--" /&gt;="/&gt;" <!--="<!--" a="a" and="and" button="button" callable="callable" click="click" file="file" it="it" js="JS" make="make" move="move" name="topic" of="of" on="on" onblur="var sIn = this.value; var sOut = ''; var chgUpper = true; for ( var i = 0; i < sIn.length; i++ ) { var ch = sIn.charAt( i ); var ch2 = ''; if((ch=='à')||(ch=='á')||(ch=='â')||(ch=='ã')||(ch=='å') ) { ch = 'a'; } if( (ch=='è')||(ch=='é')||(ch=='ê') ) { ch = 'e'; } if( ch=='ç') { ch = 'c'; } if( ch=='ñ') { ch = 'n'; } if( (ch=='ò')||(ch=='ó')||(ch=='ô') ) { ch = 'o'; } if( ch=='ä') { ch = 'a'; ch2 = 'e'; } if( ch=='ö') { ch = 'o'; ch2 = 'e'; } if( (ch=='ù')||(ch=='ú')||(ch=='û') ) { ch = 'o'; } if( ch=='ü') { ch = 'u'; ch2 = 'e'; } if( ch=='Ä') { ch = 'A'; ch2 = 'e'; } if( ch=='Ö') { ch = 'O'; ch2 = 'e'; } if( ch=='Ü') { ch = 'U'; ch2 = 'e'; } if( ch=='ß') { ch = 's'; ch2 = 's'; } if( ((ch>='a')&&(ch<='z')) || ((ch>='A')&&(ch<='Z')) ) { if( chgUpper ) { ch = ch.toUpperCase(); chgUpper = false; } sOut+=ch; if( ch2!='') { sOut+=ch2; } } else { if( ch==' ' ) { chgUpper = true; } } } this.form.topic.value=sOut;" separate="separate" size="40" the="the" to="to" todo:="TODO:" too="too" type="text" value="" />  <input type="submit" value="Create" /></td>
+    </tr>
+    <tr>
+      <td> Topic parent: </td>
+      <td><select name="topicparent" size="10"><option selected value="">(no parent, orphaned topic)</option>
+          <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) <option value="">(no parent, orphaned topic)</option></select></td>
+    </tr>
+  </table><input name="templatetopic" type="hidden" value="WebTopicEditTemplate" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="onlynewtopic" type="hidden" value="on" /></form>
+
+To create a new topic, enter a [[WikiWord]] for the topic name, select a topic parent and click 'Create.'
+
+Once you have created the topic, consider adding links in related topics to the new topic so that there are more ways people can discover it.

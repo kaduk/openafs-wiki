@@ -64,7 +64,7 @@ You can use [[TWikiMetaData]] to place a command in the [[WebTopicViewTemplate]]
 
 ### <a name="How Referring Topics Are Found"></a> How Referring Topics Are Found
 
-Referring topics are found using the %SEARCH% variable - see the template <code>**searchrenameview.tmpl**</code>. First, matching topics in the current web are listed - matches are to <code>**topic**</code>. Next, all webs (including the current one) are listed that match <code>**web.topic**</code>. Because %SEARCH% is used, webs marked in [[WebPreferences]] as `NOSEARCHALL` will not show up in the search for references to the `topic` being changed.
+First, matching topics in the current web are listed - matches are to <code>**topic**</code>. Next, all webs (including the current one) are listed that match <code>**web.topic**</code>. _All_ webs will be searched during rename, even if `NOSEARCHALL` is defined on a web, though access permissions will of course be honoured.
 
 Changed references are kept are as short as possible, ex: `topic` is used in preference to `web.topic`.
 
@@ -94,4 +94,4 @@ The following shows some limitations of square bracket processing.
 >     [[old t opic]] => not changed
 >     [[OldTopic]]   => [[NewTopic]]
 
--- TWiki:Main.MikeMannix - 27 Dec 2001
+**_Related Topics:_** [[UserDocumentationCategory]], [[AdminDocumentationCategory]]

@@ -1,6 +1,6 @@
 # <a name="TWiki Spreadsheet Plugin"></a><a name=" TWiki Spreadsheet Plugin"></a> TWiki Spreadsheet Plugin
 
-This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this Plugin provides general formula evaluation capability, not just classic spreadsheet functions.
+This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this Plugin provides general formula evaluation capability, not just classic spreadsheet functions.
 
 <table>
   <tr>
@@ -66,8 +66,11 @@ This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like
         <li><a href="#COUNTITEMS( list ) -- count indi"> COUNTITEMS( list ) -- count individual items in a list</a></li>
         <li><a href="#COUNTSTR( list, str ) -- count t"> COUNTSTR( list, str ) -- count the number of cells in a list equal to a given string</a></li>
         <li><a href="#DEF( list ) -- find first non-em"> DEF( list ) -- find first non-empty list item or cell</a></li>
-        <li><a href="#EVAL( formula ) -- evaluate a si"> EVAL( formula ) -- evaluate a simple formula</a></li>
+        <li><a href="#EVAL( formula ) -- evaluate a si"> EVAL( formula ) -- evaluate a simple mathematical formula</a></li>
+        <li><a href="#EVEN( num ) -- test for even num"> EVEN( num ) -- test for even number</a></li>
         <li><a href="#EXACT( text1, text2 ) -- compare"> EXACT( text1, text2 ) -- compare two text strings</a></li>
+        <li><a href="#EXEC( formula ) -- execute a spr"> EXEC( formula ) -- execute a spreadsheet formula</a></li>
+        <li><a href="#EXISTS( topic ) -- check if topi"> EXISTS( topic ) -- check if topic exists</a></li>
         <li><a href="#FIND( string, text, start ) -- f"> FIND( string, text, start ) -- find one string within another string</a></li>
         <li><a href="#FORMAT( type, prec, number ) --"> FORMAT( type, prec, number ) -- format a number to a certain type and precision</a></li>
         <li><a href="#FORMATTIME( serial, text ) -- co"> FORMATTIME( serial, text ) -- convert a serialized date into a date string</a></li>
@@ -80,6 +83,7 @@ This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like
         <li><a href="#LIST( range ) -- convert content"> LIST( range ) -- convert content of a cell range into a list</a></li>
         <li><a href="#LISTIF( condition, list ) -- rem"> LISTIF( condition, list ) -- remove elements from a list that do not meet a condition</a></li>
         <li><a href="#LISTITEM( index, list ) -- get o"> LISTITEM( index, list ) -- get one element of a list</a></li>
+        <li><a href="#LISTJOIN( separator, list ) -- c"> LISTJOIN( separator, list ) -- convert a list into a string</a></li>
         <li><a href="#LISTMAP( formula, list ) -- eval"> LISTMAP( formula, list ) -- evaluate and update each element of a list</a></li>
         <li><a href="#LISTREVERSE( list ) -- opposite"> LISTREVERSE( list ) -- opposite order of a list</a></li>
         <li><a href="#LISTSIZE( list ) -- number of el"> LISTSIZE( list ) -- number of elements in a list</a></li>
@@ -90,11 +94,14 @@ This Plugin adds speadsheet capabilities to %WIKITOOLNAME% topics. Formulae like
         <li><a href="#MEDIAN( list ) -- median of a li"> MEDIAN( list ) -- median of a list or range of cells</a></li>
         <li><a href="#MIN( list ) -- smallest value of"> MIN( list ) -- smallest value of a list or range of cells</a></li>
         <li><a href="#MOD( num, divisor ) -- reminder"> MOD( num, divisor ) -- reminder after dividing num by divisor</a></li>
+        <li><a href="#NOEXEC( formula ) -- do not exec"> NOEXEC( formula ) -- do not execute a spreadsheet formula</a></li>
         <li><a href="#NOP( text ) -- no-operation"> NOP( text ) -- no-operation</a></li>
         <li><a href="#NOT( num ) -- reverse logic of a"> NOT( num ) -- reverse logic of a number</a></li>
+        <li><a href="#ODD( num ) -- test for odd numbe"> ODD( num ) -- test for odd number</a></li>
         <li><a href="#OR( list ) -- logcial OR of a li"> OR( list ) -- logcial OR of a list</a></li>
+        <li><a href="#PERCENTILE( num, list ) -- perce"> PERCENTILE( num, list ) -- percentile of a list or range of cells</a></li>
         <li><a href="#PRODUCT( list ) -- product of a"> PRODUCT( list ) -- product of a list or range of cells</a></li>
-        <li><a href="#PROPER( text ) -- properly capit"> PROPER( text ) -- properly capitalize trxt</a></li>
+        <li><a href="#PROPER( text ) -- properly capit"> PROPER( text ) -- properly capitalize text</a></li>
         <li><a href="#PROPERSPACE( text ) -- properly"> PROPERSPACE( text ) -- properly space out WikiWords</a></li>
         <li><a href="#RAND( max ) -- random number"> RAND( max ) -- random number</a></li>
         <li><a href="#REPEAT(text) -- repeat text a nu"> REPEAT(text) -- repeat text a number of times</a></li>
@@ -178,7 +185,7 @@ Conventions for Syntax:
 
 - Syntax: <code>**$ABS( num )**</code>
 - Example: <code>**%CALC\{"$ABS(-12.5)"\}%**</code> returns <code>**12\.5**</code>
-- Related: <code>[[$SIGN()|Main/WebHome#FuncSIGN]]</code>
+- Related: <code>[[$SIGN()|Main/WebHome#FuncSIGN]]</code>, <code>[[$EVEN()|Main/WebHome#FuncEVEN]]</code>, <code>[[$ODD()|Main/WebHome#FuncODD]]</code>
 
 <a name="FuncAND"></a>
 
@@ -251,12 +258,20 @@ Conventions for Syntax:
 
 <a name="FuncEVAL"></a>
 
-### <a name="EVAL( formula ) -- evaluate a si"></a> EVAL( formula ) -- evaluate a simple formula
+### <a name="EVAL( formula ) -- evaluate a si"></a> EVAL( formula ) -- evaluate a simple mathematical formula
 
 - Addition, substraction, multiplication, division and modulus of numbers are supported. Any nesting is permitted
 - Syntax: <code>**$EVAL( formula )**</code>
 - Example: <code>**%CALC\{"$EVAL( (5 \* 3) / 2 + 1.1 )"\}%**</code> returns <code>**8\.6**</code>
-- Related: <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$MOD()|Main/WebHome#FuncMOD]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>, <code>[[$VALUE()|Main/WebHome#FuncVALUE]]</code>
+- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$MOD()|Main/WebHome#FuncMOD]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>, <code>[[$VALUE()|Main/WebHome#FuncVALUE]]</code>
+
+<a name="FuncEVEN"></a>
+
+### <a name="EVEN( num ) -- test for even num"></a> EVEN( num ) -- test for even number
+
+- Syntax: <code>**$EVEN( num )**</code>
+- Example: <code>**%CALC\{"$EVEN(2)"\}%**</code> returns <code>**1**</code>
+- Related: <code>[[$ABS()|Main/WebHome#FuncABS]]</code>, <code>[[$MOD()|Main/WebHome#FuncMOD]]</code>, <code>[[$ODD()|Main/WebHome#FuncODD]]</code>, <code>[[$SIGN()|Main/WebHome#FuncSIGN]]</code>
 
 <a name="FuncEXACT"></a>
 
@@ -267,6 +282,26 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$EXACT(foo, Foo)"\}%**</code> returns <code>****</code>
 - Example: <code>**%CALC\{"$EXACT(foo, $LOWER(Foo))"\}%**</code> returns <code>**1**</code>
 - Related: <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
+
+<a name="FuncEXEC"></a>
+
+### <a name="EXEC( formula ) -- execute a spr"></a> EXEC( formula ) -- execute a spreadsheet formula
+
+- Execute a spreadsheet formula, typically retrieved from a variable. This can be used to store a formula in a variable once and execute it many times using different parameters.
+- Syntax: <code>**$EXEC( formula )**</code>
+- Example: <code>**%CALC\{"$SET(msg, $NOEXEC(Hi $GET(name)))"\}%**</code> sets the `msg` variable with raw formula `Hi $GET(name)`
+- Example: <code>**%CALC\{"$SET(name, Tom) $EXEC($GET(msg))"\}%**</code> executes content of `msg` variable and returns `Hi Tom`
+- Example: <code>**%CALC\{"$SET(name, Jerry) $EXEC($GET(msg))"\}%**</code> returns `Hi Jerry`
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>
+
+<a name="FuncEXISTS"></a>
+
+### <a name="EXISTS( topic ) -- check if topi"></a> EXISTS( topic ) -- check if topic exists
+
+- Topic can be `TopicName` or a `Web.TopicName`
+- Syntax: <code>**$EXISTS( topic )**</code>
+- Example: <code>**%CALC\{"$EXISTS(WebHome)"\}%**</code> returns <code>**1**</code>
+- Example: <code>**%CALC\{"$EXISTS(ThisDoesNotExist)"\}%**</code> returns <code>****</code>
 
 <a name="FuncFIND"></a>
 
@@ -283,10 +318,14 @@ Conventions for Syntax:
 
 ### <a name="FORMAT( type, prec, number ) --"></a><a name="FORMAT( type, prec, number ) -- "></a> FORMAT( type, prec, number ) -- format a number to a certain type and precision
 
-- Type can be COMMA for comma format, DOLLAR for Dollar format, NUMBER for number, and PERCENT for percent format
+- Type can be COMMA for comma format, DOLLAR for Dollar format, KB for Kilo Byte format, MB for Mega Byte format, KBMB for Kilo/Mega/Giga/Tera Byte auto-adjust format, NUMBER for number, and PERCENT for percent format
 - Syntax: <code>**$FORMAT( type, prec, number )**</code>
 - Example: <code>**%CALC\{"$FORMAT(COMMA, 2, 12345.6789)"\}%**</code> returns <code>**12,345.68**</code>
 - Example: <code>**%CALC\{"$FORMAT(DOLLAR, 2, 12345.67)"\}%**</code> returns <code>**$12,345.68**</code>
+- Example: <code>**%CALC\{"$FORMAT(KB, 2, 1234567)"\}%**</code> returns <code>**1205\.63 KB**</code>
+- Example: <code>**%CALC\{"$FORMAT(MB, 2, 1234567)"\}%**</code> returns <code>**1\.18 MB**</code>
+- Example: <code>**%CALC\{"$FORMAT(KBMB, 2, 1234567)"\}%**</code> returns <code>**1\.18 MB**</code>
+- Example: <code>**%CALC\{"$FORMAT(KBMB, 2, 1234567890)"\}%**</code> returns <code>**1\.15 GB**</code>
 - Example: <code>**%CALC\{"$FORMAT(NUMBER, 1, 12345.67)"\}%**</code> returns <code>**12345\.7**</code>
 - Example: <code>**%CALC\{"$FORMAT(PERCENT, 1, 0.1234567)"\}%**</code> returns <code>**12\.3%**</code>
 - Related: <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>
@@ -316,7 +355,7 @@ Conventions for Syntax:
 - Specify the variable name (alphanumeric characters and underscores). An empty string is returned if the variable does not exist. Use `$SET()` to set a variable first. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables.
 - Syntax: <code>**$GET( name )**</code>
 - Example: <code>**%CALC\{"$GET(my\_total)"\}%**</code> returns the value of the `my_total` variable
-- Related: <code>[[$SET()|Main/WebHome#FuncSET]]</code>, <code>[[$SETM()|Main/WebHome#FuncSETM]]</code>
+- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>, <code>[[$SETM()|Main/WebHome#FuncSETM]]</code>
 
 <a name="FuncIF"></a>
 
@@ -361,7 +400,7 @@ Conventions for Syntax:
 - Convert the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list
 - Syntax: <code>**$LIST( range )**</code>
 - Example: <code>**%CALC\{"$LIST($LEFT())"\}%**</code> returns <code>**Apples, Lemons, Oranges, Kiwis**</code> assuming the cells to the left contain <code>**| Apples | Lemons, Oranges | Kiwis |**</code>
-- Related: <code>[[$AVERAGE()|Main/WebHome#FuncAVERAGE]]</code>, <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$DEF()|Main/WebHome#FuncDEF]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
+- Related: <code>[[$AVERAGE()|Main/WebHome#FuncAVERAGE]]</code>, <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$DEF()|Main/WebHome#FuncDEF]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTJOIN()|Main/WebHome#FuncLISTJOIN]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
 
 <a name="FuncLISTIF"></a>
 
@@ -383,6 +422,15 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Orange**</code>
 - Example: <code>**%CALC\{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Kiwi**</code>
 - Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTJOIN"></a>
+
+### <a name="LISTJOIN( separator, list ) -- c"></a> LISTJOIN( separator, list ) -- convert a list into a string
+
+- By default, list items are separated by a comma and a space. Use this function to indicate a specific `separator` string, which may include `$comma` for comma, `$n` for newline, and `$sp` for space.
+- Syntax: <code>**$LISTJOIN( separator, list )**</code>
+- Example: <code>**%CALC\{"$LISTJOIN($n, Apple, Orange, Apple, Kiwi)"\}%**</code> returns the four items separated by new lines
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>
 
 <a name="FuncLISTMAP"></a>
 
@@ -407,7 +455,7 @@ Conventions for Syntax:
 
 - Syntax: <code>**$LISTSIZE( list )**</code>
 - Example: <code>**%CALC\{"$LISTSIZE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**4**</code>
-- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTJOIN()|Main/WebHome#FuncLISTJOIN]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncLISTSORT"></a>
 
@@ -440,7 +488,7 @@ Conventions for Syntax:
 
 - Syntax: <code>**$MAX( list )**</code>
 - Example: To find the biggest number to the left of the current cell, write: <code>**%CALC\{"$MAX($LEFT())"\}%**</code>
-- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PERCENTILE()|Main/WebHome#FuncPERCENTILE]]</code>
 
 <a name="FuncMEDIAN"></a>
 
@@ -448,7 +496,7 @@ Conventions for Syntax:
 
 - Syntax: <code>**$MEDIAN( list )**</code>
 - Example: <code>**%CALC\{"$MEDIAN(3, 9, 4, 5)"\}%**</code> returns <code>**4\.5**</code>
-- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PERCENTILE()|Main/WebHome#FuncPERCENTILE]]</code>
 
 <a name="FuncMIN"></a>
 
@@ -456,7 +504,7 @@ Conventions for Syntax:
 
 - Syntax: <code>**$MIN( list )**</code>
 - Example: <code>**%CALC\{"$MIN(15, 3, 28)"\}%**</code> returns <code>**3**</code>
-- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$PERCENTILE()|Main/WebHome#FuncPERCENTILE]]</code>
 
 <a name="FuncMOD"></a>
 
@@ -464,7 +512,16 @@ Conventions for Syntax:
 
 - Syntax: <code>**$MOD( num, divisor )**</code>
 - Example: <code>**%CALC\{"$MOD(7, 3)"\}%**</code> returns <code>**1**</code>
-- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$()|Main/WebHome#Func]]</code>
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>
+
+<a name="FuncNOEXEC"></a>
+
+### <a name="NOEXEC( formula ) -- do not exec"></a> NOEXEC( formula ) -- do not execute a spreadsheet formula
+
+- Prevent a formula from getting executed. This is typically used to store a raw formula in a variable for later use as described in <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>.
+- Syntax: <code>**$NOEXEC( formula )**</code>
+- Example: <code>**%CALC\{"$SET(msg, $NOEXEC(Hi $GET(name)))"\}%**</code> sets the `msg` variable with the formula `Hi $GET(name)` without executing it
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>
 
 <a name="FuncNOP"></a>
 
@@ -482,6 +539,14 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$NOT(0)"\}%**</code> returns <code>**1**</code>
 - Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
 
+<a name="FuncODD"></a>
+
+### <a name="ODD( num ) -- test for odd numbe"></a> ODD( num ) -- test for odd number
+
+- Syntax: <code>**$ODD( num )**</code>
+- Example: <code>**%CALC\{"$ODD(2)"\}%**</code> returns <code>****</code>
+- Related: <code>[[$ABS()|Main/WebHome#FuncABS]]</code>, <code>[[$EVEN()|Main/WebHome#FuncEVEN]]</code>, <code>[[$MOD()|Main/WebHome#FuncMOD]]</code>, <code>[[$SIGN()|Main/WebHome#FuncSIGN]]</code>
+
 <a name="FuncOR"></a>
 
 ### <a name="OR( list ) -- logcial OR of a li"></a> OR( list ) -- logcial OR of a list
@@ -489,6 +554,15 @@ Conventions for Syntax:
 - Syntax: <code>**$OR( list )**</code>
 - Example: <code>**%CALC\{"$OR(1, 0, 1)"\}%**</code> returns <code>**1**</code>
 - Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>
+
+<a name="FuncPERCENTILE"></a>
+
+### <a name="PERCENTILE( num, list ) -- perce"></a> PERCENTILE( num, list ) -- percentile of a list or range of cells
+
+- Calculates the num-th percentile, useful to establish a threshold of acceptance. num is the percentile value, range 0..100
+- Syntax: <code>**$PERCENTILE( num, list )**</code>
+- Example: <code>**%CALC\{"$PERCENTILE(75, 400, 200, 500, 100, 300)"\}%**</code> returns <code>**450**</code>
+- Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
 
 <a name="FuncPRODUCT"></a>
 
@@ -500,7 +574,7 @@ Conventions for Syntax:
 
 <a name="FuncPROPER"></a>
 
-### <a name="PROPER( text ) -- properly capit"></a> PROPER( text ) -- properly capitalize trxt
+### <a name="PROPER( text ) -- properly capit"></a> PROPER( text ) -- properly capitalize text
 
 - Capitalize letters that follow any character other than a letter; convert all other letters to lowercase letters
 - Syntax: <code>**$PROPER( text )**</code>
@@ -514,7 +588,7 @@ Conventions for Syntax:
 
 - Properly spaces out [[WikiWords]] preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE [[TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded
 - Syntax: <code>**$PROPERSPACE( text )**</code>
-- Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
+- Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"$PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
 - Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
 
 <a name="FuncRAND"></a>
@@ -585,10 +659,10 @@ Conventions for Syntax:
 
 ### <a name="SET( name, value ) -- set a vari"></a> SET( name, value ) -- set a variable for later use
 
-- Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulas are evaluated before the variable assignment. This function returns no output. Use `$GET()` to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables
+- Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulae are evaluated before the variable assignment; see <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code> if you want to prevent that. This function returns no output. Use `$GET()` to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables and also included topics
 - Syntax: <code>**$SET( name, value )**</code>
 - Example: <code>**%CALC\{"$SET(my\_total, $SUM($ABOVE()))"\}%**</code> sets the `my_total` variable to the sum of all table cells located above the current cell and returns an empty string
-- Related: <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[SETM()|Main/WebHome#FuncSETM]]</code>
+- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[SETM()|Main/WebHome#FuncSETM]]</code>
 
 <a name="FuncSETM"></a>
 
@@ -606,7 +680,7 @@ Conventions for Syntax:
 - Returns -1 if <code>**num**</code> is negative, 0 if zero, or 1 if positive
 - Syntax: <code>**$SIGN( num )**</code>
 - Example: <code>**%CALC\{"$SIGN(-12.5)"\}%**</code> returns <code>**-1**</code>
-- Related: <code>[[$ABS()|Main/WebHome#FuncABS]]</code>, <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>
+- Related: <code>[[$ABS()|Main/WebHome#FuncABS]]</code>, <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$EVEN()|Main/WebHome#FuncEVEN]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>, <code>[[$ODD()|Main/WebHome#FuncODD]]</code>
 
 <a name="FuncSUBSTITUTE"></a>
 
@@ -642,7 +716,7 @@ Conventions for Syntax:
 ### <a name="SUMPRODUCT( list, list ) -- scal"></a> SUMPRODUCT( list, list ) -- scalar product on ranges of cells
 
 - Syntax: <code>**$SUMPRODUCT( list, list, _list..._ )**</code>
-- Example: <code>**%CALC\{"$SUM(R2:C1..R4:C1, R2:C5..R4:C5)"\}%**</code> evaluates and returns the result of <code>**($T(R2:C1) \* $T(R2:C5) + $T(R3:C1) \* $T(R3:C5) + $T(R4:C1) \* $T(R4:C5))**</code>
+- Example: <code>**%CALC\{"$SUMPRODUCT(R2:C1..R4:C1, R2:C5..R4:C5)"\}%**</code> evaluates and returns the result of <code>**($T(R2:C1) \* $T(R2:C5) + $T(R3:C1) \* $T(R3:C5) + $T(R4:C1) \* $T(R4:C5))**</code>
 - Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncT"></a>
@@ -678,8 +752,7 @@ Conventions for Syntax:
 
 - The unit is seconds if not specified; unit can be `second`, `minute`, `hour`, `day`, `week`, `month`, `year`. Note: An approximation is used for month and year calculations
 - Syntax: <code>**$TIMEADD( serial, value, _unit_ )**</code>
-- Example: <code>**%CALC\{"$TIMEADD($TIME(), 2, week)"\}%**</code>
-- Related: <code>[[$()|Main/WebHome#Func]]</code>, <code>[[$()|Main/WebHome#Func]]</code> returns the serialized date two weeks from now
+- Example: <code>**%CALC\{"$TIMEADD($TIME(), 2, week)"\}%**</code> returns the serialized date two weeks from now
 - Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
 
 <a name="FuncTIMEDIFF"></a>
@@ -803,7 +876,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Debug plugin: (See output in `data/debug.txt`)
   - Set DEBUG = 0
 
-- Do not handle `%CALC{}%` tag in included topic while including topic: (default: 1)
+- Do not handle `%CALC{}%` variable in included topic while including topic: (default: 1)
   - Set SKIPINCLUDE = 1
 
 - [[WikiWords|TWiki/WikiWord]] to exclude from being spaced out by the <code>**$PROPERSPACE(text)**</code> function. This comma delimited list can be overloaded by a DONTSPACE preferences variable:
@@ -832,6 +905,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin Perl module </td>
   </tr>
 </table>
+- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 - Test if the "Total" in the first table in this topic is correct.
 
 ## <a name="Plugin Info"></a> Plugin Info
@@ -843,11 +917,31 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 17 Jul 2004 </td>
+    <td> 17 Jun 2005 (1.018) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 17 Jun 2005: </td>
+    <td> Added $NOEXEC(), $EXEC() </td>
+  </tr>
+  <tr>
+    <td align="right"> 25 Mar 2005: </td>
+    <td> Fixed evaluation bug when using SpeedyCGI accelerator; code refactor to load module only when needed, contributed by TWiki:Main/CrawfordCurrie </td>
+  </tr>
+  <tr>
+    <td align="right"> 24 Oct 2004: </td>
+    <td> Added $EXISTS(), contributed by TWiki:Main/RodrigoChandia; added $PERCENTILE() </td>
+  </tr>
+  <tr>
+    <td align="right"> 18 Oct 2004: </td>
+    <td> Added $LISTJOIN() </td>
+  </tr>
+  <tr>
+    <td align="right"> 26 Sep 2004: </td>
+    <td> Added $FORMAT(KB), $FORMAT(MB), contributed by TWiki:Main/ArthurClemens; added $FORMAT(KBMB), $EVEN(), $ODD() </td>
   </tr>
   <tr>
     <td align="right"> 17 Jul 2004: </td>
@@ -907,7 +1001,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> 19 Apr 2003: </td>
-    <td> Added $COUNTSTR(), $EXACT(), $IF(), $ROUND(), $TRIM(); added $FORMAT(), contributed by TWiki:Main/JimStraus; support <code>%</code> modulus operator in $EVAL, $INT, and $ROUND; fixed bug in $DEF </td>
+    <td> Added $COUNTSTR(), $EXACT(), $IF(), $ROUND(), $TRIM(); added $FORMAT(), contributed by TWiki:Main/JimStraus; support <code>%</code> modulus operator in $EVAL(), $INT(), and $ROUND(); fixed bug in $DEF() </td>
   </tr>
   <tr>
     <td align="right"> 07 Jun 2002: </td>
@@ -931,7 +1025,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> 19 Jul 2001: </td>
-    <td> Fixed incorrect $SUM calculation of cell with value <code>0</code></td>
+    <td> Fixed incorrect $SUM() calculation of cell with value <code>0</code></td>
   </tr>
   <tr>
     <td align="right"> 14 Jul 2001: </td>
@@ -939,15 +1033,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> 01 Jun 2001: </td>
-    <td> Fixed insecure dependencies for $MIN and $MAX </td>
+    <td> Fixed insecure dependencies for $MIN() and $MAX() </td>
   </tr>
   <tr>
     <td align="right"> 16 Apr 2001: </td>
-    <td> Fixed div by 0 bug in $AVERAGE </td>
+    <td> Fixed div by 0 bug in $AVERAGE() </td>
   </tr>
   <tr>
     <td align="right"> 17 Mar 2001: </td>
-    <td> Initial version </td>
+    <td> Initial version with $ABOVE(), $AVERAGE(), $COLUMN(), $COUNTITEMS(), $EVAL(), $INT(), $LEFT(), $LOWER(), $MAX(), $MIN(), $ROW(), $SUM(), $T(), $UPPER() </td>
   </tr>
   <tr>
     <td align="right"> CPAN Dependencies: </td>
@@ -977,4 +1071,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 17 Jul 2004
+-- TWiki:Main/PeterThoeny - 17 Jun 2005

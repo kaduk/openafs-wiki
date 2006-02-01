@@ -1,0 +1,140 @@
+# <a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC%
+
+<div>
+  <ul>
+    <li><a href="#Summary"> Summary</a><ul>
+        <li><a href="#Customization"> Customization</a></li>
+        <li><a href="#Settings"> Settings</a></li>
+      </ul>
+    </li>
+    <li><a href="#Installation Instructions"> Installation Instructions</a></li>
+    <li><a href="#Demo  Text"> Demo &amp; Text</a></li>
+    <li><a href="#Contrib Info"> Contrib Info</a></li>
+  </ul>
+</div>
+
+# <a name="Summary"></a> Summary
+
+This contrib packages in a convenient way the Javascript library and the CSS file needed to implement TWisty Sections.
+
+To use the libraries, you must place the following scriplet either in the head section of the page (by modifying the [[TWikiSkins]]) or putting it somewhere in the topic:
+
+    <style type="text/css" media="all">
+    @import url("%PUBURLPATH%/TWiki/TwistyContrib/twist.css");
+    </style>
+
+    <script type="text/javascript" src="%PUBURLPATH%/TWiki/TwistyContrib/twist.js"></script>
+
+It's recommended to use the TWiki:Plugins.TwistyPlugin, as it eases the deployment and use of this contrib.
+
+%RED%Caution: If the previous scriplet is put in the HEAD section of the page or the TWiki:Plugins.TwistyPlugin is used, it won't work if the `<body onload="">` manager is set by the skin. Check the [twist.js](http://www.dementia.org/twiki//view/twist.js) file for an idea on how to register an eventmanager for the onload event without overwriting the previous one.%ENDCOLOR%
+
+This Contrib should work in all versions of TWiki. It has been tested against TWiki:Codev.CairoRelease and TWiki:Codev.DakarRelease.
+
+## <a name="Customization"></a> Customization
+
+Skins can customize the color of the twisty placeholder by modifiying the `.twistyPlaceholder` style.
+
+## <a name="Settings"></a> Settings
+
+- Name of the perl package
+  - Set STUB = TWiki::Contrib::TwistyContrib
+
+- One line description:
+  - Set SHORTDESCRIPTION = Placeholder for the twisty javascript library.
+
+# <a name="Installation Instructions"></a> Installation Instructions
+
+- Download the ZIP file from the Plugin web (see below)
+- Unzip <code>**%TOPIC%.zip**</code> in your ($TWIKI\_ROOT) directory. Content: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> File: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TwistyContrib.txt</b></code></td>
+    <td> NEW </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Contrib/TwistyContrib.pm</b></code></td>
+    <td> NEW </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/toggle-optm-jsoff-sep.html</b></code></td>
+    <td> NEW </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist.css</b></code></td>
+    <td> NEW </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist.js</b></code></td>
+    <td> NEW </td>
+  </tr>
+</table>
+
+- Optionally, run <code>**%TOPIC%\_installer**</code> to automatically check and install other TWiki modules that this module depends on. You can also do this step manually.
+- Alternatively, manually make sure the dependencies listed in the table below are resolved. None
+
+# <a name="Demo  Text"></a> Demo &amp; Text
+
+If the contrib is properly installed (and Javascript is enabled in your browser!), then you should see some folding sections below. Look at [[http://www.dementia.org/twiki/view/%WEB%.%TOPIC%?raw=on|%WEB%.%TOPIC%?raw=on]] to see how it's done.
+
+<span> </span>
+
+<button> Unfold </button>
+
+<span> </span>
+
+<button> Fold </button>
+<div id="demotoggle">
+  <hr /> Click on the button above to fold this section. <hr />
+</div>
+
+<span> [Expand...](#) <span>Hamlet is without question the most famous play in the English language...</span> </span> <span> [Collapse...](#) </span>
+
+<div id="no_1toggle"> Hamlet is without question the most famous play in the English language. Probably written in 1601 or 1602, the tragedy is a milestone in Shakespeare's dramatic development; the playwright achieved artistic maturity in this work through his brilliant depiction of the hero's struggle with two opposing forces: moral integrity and the need to avenge his father's murder. <p><span id="no_2show"> <a href="#">More...</a> </span> <span id="no_2hide"> <a href="#">Hide more</a> </span></p>
+  <p>
+  </p>
+</div>
+
+<div id="no_2toggle"> For more Shakespeare plays, see Wikipedia:WilliamShakespeare </div>
+
+# <a name="Contrib Info"></a> Contrib Info
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> Authors: </td>
+    <td> Javascript created by TWiki:Main.SamHasler, Contrib packaged by TWiki:Main.RafaelAlvarez </td>
+  </tr>
+  <tr>
+    <td> Copyright ©: </td>
+    <td> 2005 Sam Hasler and Rafael Alvarez </td>
+  </tr>
+  <tr>
+    <td> License: </td>
+    <td><a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GPL</a></td>
+  </tr>
+  <tr>
+    <td> Dependencies: </td>
+    <td> None </td>
+  </tr>
+  <tr>
+    <td> 12/09/2005 </td>
+    <td> 1.000 First Version </td>
+  </tr>
+  <tr>
+    <td align="right"> Home: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
+</table>
+
+**_Related Topics:_** [[TWikiPreferences]]

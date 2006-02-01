@@ -1,0 +1,18 @@
+# <a name="PatternSkinCssCookbook Recipe: H"></a><a name=" _PatternSkinCssCookbook Recipe:"></a> [[PatternSkinCssCookbook]] Recipe: Hide the top bar
+
+**This recipe shows how to hide the top bar and to put the logo in the left bar.**
+
+<div> This line loads the extra style definition: <pre>
+   * Set USERSTYLEURL=%ATTACHURL%/notopbar.css
+</pre> You can write this line in [[TWiki/TWikiPreferences]], in [[Main/WebPreferences]], in your user topic or on a single page. </div>
+
+Add the dynamic variable link to the logo image to the topic text:
+
+    <style type="text/css" media="all">
+    #patternLeftBar { background-image:url("%PUBURLPATH%/%WEB%/%WEBPREFSTOPIC%/logo.gif"); }
+    </style>
+<div><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you don't write this overloading style in a template and use an external <code>.css</code> file, you need to set the image to the absolute url: <pre>
+&lt;style type="text/css" media="all"&gt;
+#patternLeftBar { background-image:url("http://www.dementia.org/twiki//view/%WEB%/WebPreferences/logo.gif"); }
+&lt;/style&gt;
+</pre> You can always write a <code>&lt;style&gt;</code> in a topic - all current browsers support this - but the page won't validate as valid XHTML. </div>

@@ -4,11 +4,11 @@
         <li><a href="#1. Get set..."> 1. Get set...</a></li>
         <li><a href="#2. Take a quick tour..."> 2. Take a quick tour...</a></li>
         <li><a href="#3. Open a private account..."> 3. Open a private account...</a></li>
-        <li><a href="#4. Check out TWiki users, groups"> 4. Check out TWiki users, groups, offices...</a></li>
+        <li><a href="#4. Check out TWiki users, groups"> 4. Check out TWiki users, groups.</a></li>
         <li><a href="#5. Test the page controls..."> 5. Test the page controls...</a></li>
         <li><a href="#6. Change a page, and create a n"> 6. Change a page, and create a new one...</a></li>
         <li><a href="#7. Use your browser to upload fi"> 7. Use your browser to upload files as page attachments...</a></li>
-        <li><a href="#8. Get email alerts whenever pag"> 8. Get email alerts whenever pages are changed...</a></li>
+        <li><a href="#8. Get e-mail alerts whenever pa"> 8. Get e-mail alerts whenever pages are changed...</a></li>
       </ul>
     </li>
   </ul>
@@ -43,27 +43,23 @@ This step-by-step, hands-on tutorial gets you up to speed with all the [[TWikiSi
 >
 > - Go to the [[TWikiRegistration]] page to create your TWiki account. Fill in a couple of lines and you're set!
 >
-> ## <a name="4. Check out TWiki users, groups"></a> 4. Check out TWiki users, groups, offices...
+> ## <a name="4. Check out TWiki users, groups"></a> 4. Check out TWiki users, groups.
 >
 > - Go to the [[TWikiUsers]] topic in the TWiki.Main web; it has a list of all users of TWiki. Your [[WikiName]] will be in this list after you register.
-> - Go to the [[TWikiGroups]] topic in the TWiki.Main web; it has a list of groups which can be used to define fine grained [[TWikiAccessControl]] in TWiki.
-> - Go to the [[OfficeLocations]] topic in the TWiki.Main web; it has a sample list of corporate offices. This type of set-up can be used for departments, client companies, or any other type of organizational divisions.
+> - Go to the [[TWikiGroups]] topic in the Main web; it has a list of groups which can be used to define fine grained [[TWikiAccessControl]] in TWiki.
 >
 > ## <a name="5. Test the page controls..."></a> 5. Test the page controls...
 >
-> Go to the
+> The color-coded control strips at the top and/or bottom of the page has a collection of action links. Different skins show different links, but most will have some or all of::
 >
-> [[bottom of the page|Main/WebHome#PageBottom]]
->
-> to see what you can do. The color-coded control strip has a collection of action links:
->
-> - <code>**[Edit]**</code> - add to or edit the topic (discussed later)
-> - <code>**[Attach]**</code> - attach files to a topic (discussed later)
-> - <code>**[Ref-By]**</code> - find out what other topics link to this topic (reverse link)
-> - <code>**[Printable]**</code> - goes to a stripped down version of the page, good for printing
-> - <code>**[Diffs]**</code> - topics are under revision control - `[Diffs]` shows you the complete change history of the topic, ex: who changed what and when.
-> - <code>**[r1.3 | &gt; | r1.2 | &gt; | r1.1]**</code> - view a previous version of the topic or the difference between two versions.
-> - <code>**[More]**</code> - additional controls, like <code>**[Rename/move]**</code>, version control and setting the topic's parent.
+> - <code>**Edit**</code> - add to or edit the topic (discussed later)
+> - <code>**Raw View**</code> - show the source text without editing the topic
+> - <code>**Attach**</code> - attach files to a topic (discussed later)
+> - <code>**Backlinks**</code> - find out what other topics link to this topic (reverse link)
+> - <code>**Printable**</code> - goes to a stripped down version of the page, good for printing
+> - <code>**History**</code> - topics are under revision control - `History` shows you the complete change history of the topic, for example, who changed what and when
+> - <code>**r3 &gt; r2 &gt; r1**</code> - view a previous version of the topic or the difference between two versions
+> - <code>**More**</code> - additional controls, such as rename/move, version control and setting the topic's parent.
 >
 > ## <a name="6. Change a page, and create a n"></a> 6. Change a page, and create a new one...
 >
@@ -73,17 +69,18 @@ This step-by-step, hands-on tutorial gets you up to speed with all the [[TWikiSi
 >
 > . This is the sandbox web, where you can make changes and try it all out at will.
 >
-> - Click the <code>**[Edit]**</code> link. You are now in edit mode and you can see the source of the page. (Go to a different topic like [[TestTopic3]] in case you see a "Topic is locked by an other user" warning.)
+> - Click the <code>**Edit**</code> link. You are now in edit mode and you can see the source of the page. (Go to a different topic like Sandbox.adminSandbox if you see a "Topic is being edited by an other user" warning.)
 > - Look at the text in edit mode and compare it with the rendered page (move back and forth in your browser.)
+> - **_%T% Tip:_** When you only want to see the source code of a topic click the <code>**Raw View**</code> link.
 > - Notice how [[WikiWords]] are linked automatically; there is no link if you look at the text in edit mode.
 > - Now, create a new topic - your own test page:
->   1. In edit mode, enter a new text with a [[WikiWord]], ex: <br />`This is YourOwnSandBox topic.`
+>   1. In edit mode, enter a new text with a [[WikiWord]], for example: <br />`This is adminSandbox topic.`
 >   2. Preview and save the topic. The name appears, highlighted, with a linked question mark at the end. This means that the topic doesn't exist yet.
 >   3. Click on the question mark. Now you're in edit mode of the new topic.
->   4. Type some text, basically, like you write an email.
+>   4. Type some text, basically, like you write an e-mail.
 >   5. A signature with your name is already entered by default. **_NOTE:_** The `Main.` in front of your name means that you have a link from the current web to your personal topic located in the Main web.
 >   6. Preview and save the topic...
-> - Learn about text formatting. You can enter text in [[TWikiShorthand]], a very simple markup language. Follow the [[TWikiShorthand]] link to see how, then:
+> - Learn about text formatting. You can enter text in TWikiShorthand, a very simple markup language. Follow the [[TWikiShorthand]] link to see how, then:
 >   1. Go back to your sandbox topic end edit it.
 >   2. Enter some text in [[TWikiShorthand]]: **bold** text, _italic_ text, **_bold italic_** text, a bullet list, tables, paragraphs, etc. **_Hint:_** If you need help, click on the [[TextFormattingRules]] link located below the text box in edit mode.
 >   3. Preview and save the topic.
@@ -96,27 +93,27 @@ This step-by-step, hands-on tutorial gets you up to speed with all the [[TWikiSi
 >
 > type of file to a topic - documents, images, programs, whatever - where they can be opened, viewed, or downloaded.
 >
-> - Attaching files is just like including a file with an email.
+> - Attaching files is just like including a file with an e-mail.
 >   1. Go back to your sandbox topic and click on the <code>**[Attach]**</code> link at the bottom.
 >   2. Click <code>**[Browse]**</code> to find a file on your PC that you'd like to attach; enter an optional comment; leave everything else unchecked.
 >   3. Click <code>**[Upload file]**</code>, then scroll to the end of the page to see the new attachment listing.
 > - Do this again - this time, upload a GIF, JPG or PNG image file.
 >   - Check the <code>**[Link:]**</code> box to _Create a link to the attached file at the end of the topic_. The image will show up at the bottom of the topic.
 >   - To move the image, edit the topic and place the last line (containing `%ATTACHURL%`) anywhere on the page.
-> - If you have a GIF, JPG or PNG image of yourself, your cat, your sprawling family estate...why not upload it now to personalize your account page: Main.admin?
+> - If you have a GIF, JPG or PNG image of yourself, your cat, your sprawling family estate...why not upload it now to personalize your account page Main.admin?
 >
-> ## <a name="8. Get email alerts whenever pag"></a> 8. Get email alerts whenever pages are changed...
+> ## <a name="8. Get e-mail alerts whenever pa"></a> 8. Get e-mail alerts whenever pages are changed...
 >
 > [[WebNotify]]
 >
-> is a subscription service that automatically notifies you by email when topics change in a TWiki web. This is a convenience service - for many people, checking email is easier than checking the Web.
+> is a subscription service that automatically notifies you by e-mail when topics change in a TWiki web. This is a convenience service - for many people, checking e-mail is easier than checking the Web.
 >
 > - If you're using TWiki to collaborate on a project, it's important to know when anyone on your team posts an update. If you're following a specific discussion, it's convenient to know when there's new input.
-> - Alerts are emailed as links to individual topics that've been changed in a set period: each day, every hour, whatever is configured for your system.
+> - Alerts are e-mailed as links to individual topics that've been changed in a set period: each day, every hour, whatever is configured for your system.
 > - It's strongly recommended that you try out the service by subscribing to each TWiki web that's relevant to you. You can subscribe and unsubscribe instantly, on a per web basis using [[WebNotify]].
 
 That's it! You're now equipped with all the TWiki essentials. You are ready to roll.
 
-**_NOTE:_** When first using TWiki, it will probably seem strange to be able to change other people's postings - we're used to _separating_ individual messages, with email, message boards, non-Wiki collaboration platforms. **_Don't worry about it._** You can't accidentally delete important stuff - you can always check previous versions, and copy-and-paste from them if you want to undo any changes. After a short while, TWiki-style free-form communication becomes second-nature. You'll expect it everywhere!
+**_NOTE:_** When first using TWiki, it will probably seem strange to be able to change other people's postings - we're used to _separating_ individual messages, with e-mail, message boards, non-Wiki collaboration platforms. **_Don't worry about it._** You can't accidentally delete important stuff - you can always check previous versions, and copy-and-paste from them if you want to undo any changes. After a short while, TWiki-style free-form communication becomes second-nature. You'll expect it everywhere!
 
--- [[MikeMannix]] - 01 Dec 2001
+**_Related Topics:_** [[UserDocumentationCategory]]

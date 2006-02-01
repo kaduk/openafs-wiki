@@ -1,0 +1,248 @@
+# <a name="Tips Contrib Package"></a><a name=" Tips Contrib Package"></a> Tips Contrib Package
+
+Displays a rotating "TWiki Tip of the Day" to help familiarize new users with TWiki features. Includes an application for creating custom tips for local installation.
+
+<div>
+  <ul>
+    <li><a href="#Summary of Contents"> Summary of Contents</a></li>
+    <li><a href="#Detailed Documentation"> Detailed Documentation</a></li>
+    <li><a href="#Settings"> Settings</a></li>
+    <li><a href="#CSS used by _TipsContrib"> CSS used by TipsContrib</a></li>
+    <li><a href="#Installation Instructions"> Installation Instructions</a></li>
+    <li><a href="#Contrib Info"> Contrib Info</a></li>
+  </ul>
+</div>
+
+## <a name="Summary of Contents"></a> Summary of Contents
+
+- Set on `TWikiTip` topics providing brief lessons on TWiki features. See [[TWikiTips]].
+- Set of topics for creating and managing `TWikiTipXXX` topics. See [[TWikiTipsOfTheDayAdmin]].
+
+## <a name="Detailed Documentation"></a> Detailed Documentation
+
+- See [[TWikiTipsOfTheDayAdmin]] for instructions on managing and displaying tips.
+- See [[TWikiTipsOfTheDayAddNew]] for instructions for adding new custom tips.
+
+## <a name="Settings"></a> Settings
+
+This extension requires no settings. See [[TWikiTipsOfTheDayAdmin]] for administration details.
+
+- One line description:
+- Set SHORTDESCRIPTION = Displays rotating list of "TWiki Tip-of-the-day"
+
+## <a name="CSS used by _TipsContrib"></a> CSS used by TipsContrib
+
+- .tipsOfTheDay - overall container
+- .tipsOfTheDayContents - container for tipsOfTheDayHeader and tipsOfTheDayText
+- strong.tipsOfTheDayHeader - header that says "TWiki Tip of the Day"
+- .tipsOfTheDayText - the tip; contains title and tip summary and link "Read on"
+- .tipsOfTheDayTitle - title of the tip; the link to the tip topic
+
+## <a name="Installation Instructions"></a> Installation Instructions
+
+**_Note:_** You do not need to install anything on the browser to use this contrib package. The following instructions are for the administrator who installs the package on the server where TWiki is running.
+
+- Download the ZIP file from the Plugin web (see below)
+- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> File: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Contrib/TipsContrib.pm</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TipsContrib.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip001.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip002.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip003.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip004.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip005.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip006.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip007.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip008.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip009.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip010.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip011.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip012.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip013.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip014.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip015.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip016.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip017.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip018.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip019.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip020.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip021.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip022.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip023.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip024.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip025.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip026.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip027.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip028.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTip029.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTips.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTipsOfTheDay.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTipsOfTheDayAddNew.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTipsOfTheDayAdmin.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTipsOfTheDayInclude.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TWikiTipsOfTheDayTemplate.txt</b></code></td>
+    <td>   </td>
+  </tr>
+</table>
+
+## <a name="Contrib Info"></a> Contrib Info
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"> Author: </td>
+    <td> TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td align="right"> Copyright ©: </td>
+    <td> Copyright 2005 Peter Thoeny. All Rights Reserved. </td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
+    <td align="right"> Dependencies: </td>
+    <td> none </td>
+  </tr>
+  <tr>
+    <td align="right"> Version: </td>
+    <td> 8670 </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 10 Oct 2005: </td>
+    <td> Initial version - Packaging by TWiki:Main.LynnwoodBrown </td>
+  </tr>
+  <tr>
+    <td align="right"> Home: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
+</table>
+
+**_Related Topics:_** [[TWikiPreferences]]
+
+-- TWiki:Main.LynnwoodBrown - 23:00:23 01 February 2006

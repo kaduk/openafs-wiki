@@ -1,0 +1,157 @@
+<form action="http://www.dementia.org/twiki/viewauth/Main/WebHome" enctype="multipart/form-data" method="post" name="editpreferences">
+  <p>
+  </p>
+  <h1><a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC% </h1>
+  <p> Allows editing of preferences using fields predefined in a [[TWiki/TWikiForms]]. However, the edit fields are inlined in the text, similar to how tables are edited in TWiki:Plugins/EditTablePlugin. </p>
+  <p>
+  </p>
+  <div>
+    <ul>
+      <li><a href="#Syntax Rules"> Syntax Rules</a></li>
+      <li><a href="#Examples"> Examples</a></li>
+      <li><a href="#Plugin Settings"> Plugin Settings</a></li>
+      <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
+      <li><a href="#Plugin Info"> Plugin Info</a></li>
+    </ul>
+  </div>
+  <p> Insert the <code>%EDITPREFERENCES%</code> variable (see below) anywhere in your topic. It will be replaced by a button that allows editing each preference in its predefined input format (or a text box, when no format is defined for this preference). </p>
+  <p> In edit mode, the edit button is replaced by save and cancel buttons, with their obvious meanings. </p>
+  <p>
+  </p>
+  <h2><a name="Syntax Rules"></a> Syntax Rules </h2>
+  <p>
+  </p>
+  <ul>
+    <li><code>%EDITPREFERENCES{ "</code> <em>topic</em> <code>" }%</code><ul>
+        <li><em>topic</em> references a [[TWiki/TWikiForms]] defining the format of the edit fields for preferences. It may be prefixed by a web. </li>
+        <li> If a preference setting is not mentioned in the form referenced by <em>topic</em>, a text input box of the specified length is provided. </li>
+        <li> Otherwise, the input can be through textareas, select, radio, checkbox, date, or text, as provided by [[TWiki/TWikiForms]]. </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+  </p>
+  <h2><a name="Examples"></a> Examples </h2>
+  <p>
+  </p>
+  <ul>
+    <li><code>%EDITPREFERENCES{ "%TWIKIWEB%.TWikiPreferencesForm" }%</code></li>
+  </ul>
+  <p>
+  </p>
+  <h2><a name="Plugin Settings"></a> Plugin Settings </h2>
+  <p> Plugin settings are stored as preferences variables. To reference a plugin setting write <code><b>%&lt;plugin&gt;_&lt;setting&gt;%</b></code>, i.e. <code><b>%PREFERENCESPLUGIN_SHORTDESCRIPTION%</b></code></p>
+  <p>
+  </p>
+  <ul>
+    <li> One line description, is shown in the [[TWiki/TextFormattingRules]] topic: <ul>
+        <li> Set SHORTDESCRIPTION = Allows editing of preferences using fields predefined in a form </li>
+      </ul>
+    </li>
+  </ul>
+  <p>
+  </p>
+  <h2><a name="Plugin Installation Instructions"></a> Plugin Installation Instructions </h2>
+  <p><strong><em>Note:</em></strong> You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the server where TWiki is running. </p>
+  <p>
+  </p>
+  <ul>
+    <li> Download the ZIP file from the Plugin web (see below) </li>
+    <li> Unzip <code><b>%TOPIC%.zip</b></code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
+        <tr>
+          <th bgcolor="#99CCCC"><strong> File: </strong></th>
+          <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+        </tr>
+        <tr>
+          <td><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
+          <td> Plugin topic </td>
+        </tr>
+        <tr>
+          <td><code><b>data/TWiki/%TOPIC%.txt,v</b></code></td>
+          <td> Plugin topic repository </td>
+        </tr>
+        <tr>
+          <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+          <td> Plugin Perl module </td>
+        </tr>
+        <tr>
+          <td><code><b>data/TWiki/TWikiPreferencesForm.txt</b></code></td>
+          <td> Example form </td>
+        </tr>
+      </table>
+    </li>
+    <li> (Dakar) Visit <code>configure</code> in your TWiki installation, and enable the plugin in the {Plugins} section. </li>
+    <li> If the installation was successful, an edit button should appear below: <input name="prefsaction" type="submit" value="Edit" /></li>
+  </ul>
+  <p>
+  </p>
+  <h2><a name="Plugin Info"></a> Plugin Info </h2>
+  <p>
+  </p>
+  <table border="1" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="right"> Plugin Author: </td>
+      <td> TWiki:Main.ThomasWeigert </td>
+    </tr>
+    <tr>
+      <td align="right"> Plugin Version: </td>
+      <td> 08 May 2005 </td>
+    </tr>
+    <tr>
+      <td align="right"> Change History: </td>
+      <td>  </td>
+    </tr>
+    <tr>
+      <td align="right"> 26 May 2005: </td>
+      <td> Crawford Currie recoded to use code from Form.pm to render form fields. </td>
+    </tr>
+    <tr>
+      <td align="right"> 08 May 2005: </td>
+      <td> Add plugin preference to define default input length </td>
+    </tr>
+    <tr>
+      <td align="right"> 07 May 2005: </td>
+      <td> Initial version </td>
+    </tr>
+    <tr>
+      <td align="right"> TWiki Dependency: </td>
+      <td> $TWiki::Plugins::VERSION 1.026 </td>
+    </tr>
+    <tr>
+      <td align="right"> CPAN Dependencies: </td>
+      <td> none </td>
+    </tr>
+    <tr>
+      <td align="right"> Other Dependencies: </td>
+      <td> none </td>
+    </tr>
+    <tr>
+      <td align="right"> Perl Version: </td>
+      <td> 5.005 </td>
+    </tr>
+    <tr>
+      <td align="right"> License: </td>
+      <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+    </tr>
+    <tr>
+      <td align="right"> TWiki:Plugins/Benchmark: </td>
+      <td>[[TWiki/GoodStyle]] nn%, [[TWiki/FormattedSearch]] nn%, %TOPIC% nn% </td>
+    </tr>
+    <tr>
+      <td align="right"> Plugin Home: </td>
+      <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+    </tr>
+    <tr>
+      <td align="right"> Feedback: </td>
+      <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+    </tr>
+    <tr>
+      <td align="right"> Appraisal: </td>
+      <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+    </tr>
+  </table>
+  <p><strong><em>Related Topics:</em></strong> [[TWiki/TWikiPreferences]], [[TWiki/TWikiForms]]</p>
+  <p> -- TWiki:Main.ThomasWeigert - 08 May 2005 </p>
+  <p>
+  </p>
+</form>

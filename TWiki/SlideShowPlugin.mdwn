@@ -69,6 +69,10 @@ To create your own template topic, copy the "Default Slide Template" section bel
     <td> The text of the slide </td>
   </tr>
   <tr>
+    <td><code>%SLIDECOMMENT%</code></td>
+    <td> The comment of the slide (optional; appended to slide of missing) </td>
+  </tr>
+  <tr>
     <td><code>%SLIDENUM%</code></td>
     <td> The current slide number </td>
   </tr>
@@ -215,6 +219,7 @@ The part between the rulers defines the default format of a slide:
     <td> Various button image files </td>
   </tr>
 </table>
+- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 - Test above example if the installation was successful.
 
 ## <a name="Plugin Info"></a> Plugin Info
@@ -226,15 +231,23 @@ The part between the rulers defines the default format of a slide:
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 21 Mar 2004 (V1.003) </td>
+    <td> 1.005 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 16 Mar 2005: </td>
+    <td> 1.005 Crawford Currie prepped for Dakar, and fixed multiple evaluation bug </td>
+  </tr>
+  <tr>
+    <td align="right"> 21 Nov 2004: </td>
+    <td> 1.004 Added support for <code>%SLIDECOMMENT%</code> template keyword (TWiki:Main/ArthurClemens); added benchmarks </td>
+  </tr>
+  <tr>
     <td align="right"> 21 Mar 2004: </td>
-    <td> Internal change: Fixed inofficial function call </td>
+    <td> Internal change: Fixed unofficial function call </td>
   </tr>
   <tr>
     <td align="right"> 14 Dec 2002: </td>
@@ -265,6 +278,10 @@ The part between the rulers defines the default format of a slide:
     <td> 5.005 </td>
   </tr>
   <tr>
+    <td align="right"> TWiki:Plugins/Benchmark: </td>
+    <td>[[TWiki/GoodStyle]] 98%, [[TWiki/FormattedSearch]] 99%, [[Main/SlideShowPlugin]] 99% </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Home: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
   </tr>
@@ -272,8 +289,10 @@ The part between the rulers defines the default format of a slide:
     <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
-
--- TWiki:Main.PeterThoeny - 21 Mar 2004

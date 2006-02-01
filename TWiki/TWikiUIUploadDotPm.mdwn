@@ -1,0 +1,61 @@
+# <a name="Package &lt;code&gt;TWiki::UI::Upload="></a> Package =TWiki::UI::Upload
+
+UI delegate for attachment management functions
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::UI::Upload="> Package TWiki::UI::Upload</a><ul>
+        <li><a href="#StaticMethod <strong>attach</strong> ($session)"> StaticMethod attach <tt>($session)</tt></a></li>
+        <li><a href="#StaticMethod <strong>upload</strong> ($session)"> StaticMethod upload <tt>($session)</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;attach&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **attach** `($session)`
+
+`upload` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+
+Attach a file to a topic. CGI parameters are:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>filename</code></td>
+    <td> Name of attachment </td>
+  </tr>
+  <tr>
+    <td><code>skin</code></td>
+    <td> Skin(s) to use in presenting pages </td>
+  </tr>
+</table>
+
+## <a name="StaticMethod &lt;strong&gt;upload&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **upload** `($session)`
+
+`upload` command handler. This method is designed to be invoked via the `TWiki::UI::run` method. CGI parameters, passed in $query:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>hidefile</code></td>
+    <td> if defined, will not show file in attachment table </td>
+  </tr>
+  <tr>
+    <td><code>filepath</code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>filename</code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>filecomment</code></td>
+    <td> Comment to associate with file in attachment table </td>
+  </tr>
+  <tr>
+    <td><code>createlink</code></td>
+    <td> if defined, will create a link to file at end of topic </td>
+  </tr>
+  <tr>
+    <td><code>changeproperties</code></td>
+    <td>   </td>
+  </tr>
+</table>

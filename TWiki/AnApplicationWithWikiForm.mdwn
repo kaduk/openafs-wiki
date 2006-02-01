@@ -1,0 +1,37 @@
+## <a name="FAQ:"></a> FAQ:
+
+How can I create a simple [[TWiki Form|Main/TWikiForms]] based application?
+
+## <a name="Answer:"></a> Answer:
+
+1. Create a [[TWiki Form|Main/TWikiForms]] and define fields ([[TWikiForms]])
+2. Add the form in the list of Web Forms. Set the variable WEBFORMS in [[WebPreferences]]
+3. Create a Template Topic and in Edit mode
+4. In edit mode add the [[TWiki Form|Main/TWikiForms]] you defined to the Template Topic
+5. Create a HTML Form with necessary fields
+6. Define `SEARCH` function for listing items. See [[TWikiVariables#VarSEARCH]]
+
+For more information follow the links...
+
+The following is the code source of [[TWikiFAQ]]:
+
+    <form action="%SCRIPTURLPATH{edit}%/%WEB%/">
+    New FAQ topic: &nbsp; (Use a name in TWiki.WikiNotation) <br />
+    <input type="text" name="topic" size="32" />&nbsp;<input type="submit" class="twikiSubmit" value="Create Topic" />
+    <input type="hidden" name="onlywikiname" value="on" />
+    <input type="hidden" name="templatetopic" value="TWikiFaqTemplate" />
+    <input type="hidden" name="topicparent" value="%TOPIC%" />
+    <br />
+    </form>
+
+----
+
+And the `SEARCH` function:
+
+    %SEARCH{ "Back to\:__ TWikiFAQ" casesensitive="on" regex="on" nosearch="on" nototal="on"}%
+
+**_Back to:_** [[TWikiFAQ]]
+
+**_Related Topics:_** [[UserDocumentationCategory]]
+
+-- TWiki:Main.MiyokoTakushima - 18 Oct 2004 <br />

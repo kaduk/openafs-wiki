@@ -24,16 +24,13 @@ The %TOPIC% links <code>**ExternalSite:Page**</code> text to external sites base
 Plugin settings are stored as Preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, for example, <code>**%INTERWIKIPLUGIN\_SHORTDESCRIPTION%**</code>
 
 - One-line description, shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Link <code>**ExternalSite:Page**</code> text to external sites based on aliases defined in the %WEB%.InterWikis topic
+  - Set SHORTDESCRIPTION = Link <code>**ExternalSite:Page**</code> text to external sites based on aliases defined in a rules topic
 
 - Link rules topic name: (default is [[InterWikis]])
   - Set RULESTOPIC =
 
 - Suppress tooltip help for links: (<code>****</code> or <code>**1**</code>, default is <code>****</code>)
   - Set SUPPRESSTOOLTIP = 0
-
-- Debug plugin: (See output in `data/debug.txt`)
-  - Set DEBUG = 0
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -69,15 +66,19 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 25 Aug 2004, 1.005 </td>
+    <td> 1.008 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 26 Feb 2005: </td>
+    <td> 1.008 TWiki:Main.CrawfordCurrie cleaned up code and made Dakar-ready </td>
+  </tr>
+  <tr>
     <td align="right"> 25 Aug 2004: </td>
-    <td> Updated [[Main/InterWikis]] link rules (no code change) </td>
+    <td> 1.005 TWiki:Main.PeterThoeny updated [[Main/InterWikis]] link rules (no code change) </td>
   </tr>
   <tr>
     <td align="right"> 09 Mar 2004: </td>
@@ -121,7 +122,7 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> 20 Feb 2001: </td>
-    <td> Initial version </td>
+    <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny - Initial version </td>
   </tr>
   <tr>
     <td align="right"> CPAN Dependencies: </td>
@@ -137,14 +138,12 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Home: </td>
-    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a> (TWiki:Plugins/%TOPIC%) </td>
+    <td> TWiki:Plugins/%TOPIC% (TWiki:Plugins/%TOPIC%) </td>
   </tr>
   <tr>
     <td align="right"> Feedback: </td>
-    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a> (TWiki:Plugins/%TOPIC%Dev) </td>
+    <td> TWiki:Plugins/%TOPIC%Dev (TWiki:Plugins/%TOPIC%Dev) </td>
   </tr>
 </table>
 
 **_Related Topics:_** [[InterWikis]], [[TWikiPreferences]], [[TWikiPlugins]]
-
--- TWiki:Main.AndreaSterbini - 20 Oct 2000 <br /> -- TWiki:Main.MikeMannix - 01 Oct 2001 <br /> -- TWiki:Main.PeterThoeny - 25 Aug 2004 <br />

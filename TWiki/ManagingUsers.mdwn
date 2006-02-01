@@ -21,24 +21,27 @@ _Register users on your TWiki site; change/reset/install passwords; remove user 
 
 ## <a name="Register User"></a> Register User
 
+It is not necessary to have user home pages in the TWiki system for Authentication to work - see [[TWikiUserAuthentication]] for details.
+
 - [[TWikiRegistration]] is for users to fill out a form
-- [[NewUserTemplate]] can be changed to customize user home pages
+- [[NewUserTemplate]] can be changed to customize user home pages, it can optionally use the [[UserForm]] to define user fields as meta data
+- [[BulkRegistration]] is for administrators to use to set up one or more accounts: either from a table or from an external file
 
 ## <a name="Change, Reset and Install Passwo"></a> Change, Reset and Install Passwords
 
-- [[ChangePassword]] is for users who remember their password
-- [[ResetPassword]] is for users who do _not_ remember their password; they are asked to send a request to the site administrator to install a new password
-- [[InstallPassword]] is for the site administrator to install a password
+- [[ChangePassword]] is for users who can remember their password and want to change it
+- [[ResetPassword]] is for users who cannot remember their password; a system generated password is e-mailed to them
+- [[BulkResetPassword]] if for administrators who want to reset many passwords at once
 
 ## <a name="Removing User Accounts"></a> Removing User Accounts
 
-To remove a user account:
+To remove a user account (FredQuimby, who logs in as "fred"):
 
-1. Edit the `data/.htpasswd` file to delete their entry (only applies if you are using a .htpasswd file)
-2. Remove the `FredQuimby` line from the Main.TWikiUsers topic
-3. Remove user from all groups and from all the `ALLOWWEB/ALLOWTOPIC...` declarations, if any.%BR% **_Note:_** Otherwise this is a security hole as the first one to re-register with this name will be granted the permissions of the previous user.
-4. _[optional]_ Remove their topic files: `data/Main/FredQuimby.txt` and `data/Main/FredQuimby.txt,v`
+1. If you are using a `.htpasswd` file, edit the `.htpasswd` file to delete the line starting `fred:`
+2. Remove the `FredQuimby - fred` line from the Main.TWikiUsers topic
+3. Remove `FredQuimby` from all groups and from all the `ALLOWWEB/ALLOWTOPIC...` declarations, if any.%BR% **_Note:_** If you fail to do this you risk creating a security hole, as the next user to register with the wikiname FredQuimby will inherit the old FredQuimby's permissions.
+4. _[optional]_ Delete their user topic Main.FredQuimby.
 
-**_Note:_** Consider leaving the user topic file in place so their past signatures and revision author entries don't end up looking like [[AnUncreatedTopic]]. If you want to make it clear the user is inactive on your site (e.g. [[PeterThoeny]]) or has been banished add a note to that effect and write protect the page ([[TWikiAccessControl]]). The existance of the UserName topic prevent that user name from being re-used.
+**_Note:_** Consider leaving the user topic file in place so their past signatures and revision author entries don't end up looking like [[AnUncreatedTopic]]. If you want to make it clear the user is no longer with the organization or has been banished, replace the topic content with a note to that effect. The existance of the UserName topic should also prevent that user name from being re-used, sealing the potential security hole regarding inherited permissions..
 
--- TWiki:Main.MattWilkie - 21 Jul 2003 %BR% -- TWiki:Main.PeterThoeny - 15 Aug 2004
+**_Related Topics:_** [[AdminDocumentationCategory]]
