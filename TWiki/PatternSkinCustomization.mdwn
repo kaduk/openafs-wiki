@@ -1,0 +1,198 @@
+# <a name="TWiki._PatternSkin Customization"></a><a name=" TWiki._PatternSkin Customizatio"></a> [[PatternSkin]] Customization
+
+**Questions and answers on configuring page elements.** For styling your TWiki, see [[PatternSkinCssCookbook]].
+
+<div>
+  <ul>
+    <li><a href="#Logo questions"> Logo questions</a><ul>
+        <li><a href="#How can I change the web logo?"> How can I change the web logo?</a></li>
+        <li><a href="#How do I set a site-wide logo?"> How do I set a site-wide logo?</a></li>
+        <li><a href="#My logo does not fit the top bar"> My logo does not fit the top bar</a></li>
+        <li><a href="#I want to change the white space"> I want to change the white space above and below the logo</a></li>
+      </ul>
+    </li>
+    <li><a href="#Top bar questions"> Top bar questions</a><ul>
+        <li><a href="#I want to set or change the top"> I want to set or change the top background image</a></li>
+        <li><a href="#I want to have the web color in"> I want to have the web color in the top bar</a></li>
+        <li><a href="#I want to remove the Jump and Se"> I want to remove the Jump and Search boxes from the top bar </a></li>
+        <li><a href="#I want to hide the top bar"> I want to hide the top bar</a></li>
+      </ul>
+    </li>
+    <li><a href="#Left bar questions"> Left bar questions</a><ul>
+        <li><a href="#I want to hide the left bar"> I want to hide the left bar</a></li>
+      </ul>
+    </li>
+    <li><a href="#Other page parts"> Other page parts</a><ul>
+        <li><a href="#I want to hide the edit buttons"> I want to hide the edit buttons from certain users</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Logo questions"></a> Logo questions
+
+### <a name="How can I change the web logo?"></a> How can I change the web logo?
+
+By default the logo at the top left of each web points to the image with name `logo.gif` that is attached to each web's [[WebPreferences]]. <br /> The default variables that cause this behavior are defined in [[TWikiPreferences]].
+
+Redefine your custom variables in [[Main.TWikiPreferences|Main/TWikiPreferences]] (to keep [[TWikiPreferences]] intact):
+
+          * Set WEBLOGONAME = logo.gif
+          * Set WEBLOGOIMG = %PUBURLPATH%/%BASEWEB%/%WEBPREFSTOPIC%/%WEBLOGONAME%
+          * Set WEBLOGOURL = %SCRIPTURLPATH{"view"}%/%BASEWEB%/%HOMETOPIC%
+          * Set WEBLOGOALT = Home
+
+There are 2 ways to change the logo in a web:
+
+**Using logo.gif:**
+
+> - Create a new image named `logo.gif` and attach it to the web's [[WebPreferences]] topic. [[PatternSkin]]'s stylesheet assumes the logo is 40px high. More about that later.
+> - You can also upload the image with FTP to `/pub/YourWeb/WebPreferences/`.
+
+**Using a new filename:**
+
+> - Attach whatever image and attach it to the web's [[WebPreferences]] topic. Then add to the [[WebPreferences]] (under _Custom web preferences_):
+>
+>           * Set WEBLOGONAME = your-logo-name.gif-or-png
+
+### <a name="How do I set a site-wide logo?"></a> How do I set a site-wide logo?
+
+There is a bunch of site-wide logo variables in [[Main.TWikiPreferences|Main/TWikiPreferences]]: `WIKILOGOIMG`, `WIKILOGOURL` and `WIKILOGOALT`. To change only the web logo image to site-wide, in [[Main.TWikiPreferences|Main/TWikiPreferences]] set:
+
+       * Set WEBLOGOIMG = %WIKILOGOIMG%
+
+### <a name="My logo does not fit the top bar"></a> My logo does not fit the top bar
+
+The top bar is 64 pixels high by default.
+
+**Using templates:**
+
+> Change the height of the top bar in
+>
+> `templates/viewtopbar.pattern.tmpl`
+>
+> :
+>
+>     %TMPL:DEF{"topbardimensions"}%
+>     #patternTopBar,
+>     #patternClearHeaderCenter,
+>     #patternClearHeaderLeft,
+>     #patternClearHeaderRight,
+>     #patternTopBarContentsOuter {
+>        height:64px; /* top bar height; make room for header columns */
+>        overflow:hidden;
+>     }
+>     %TMPL:END%
+>
+> Only change the number.
+
+**Using style sheets:**
+
+> Create a new stylesheet with above definition in it, attach it to a topic and point
+>
+> `USERLAYOUTURL`
+>
+> to that topic attachment. See
+>
+> [[PatternSkinCssCookbook]]
+>
+> about creating custom styles.
+
+### <a name="I want to change the white space"></a> I want to change the white space above and below the logo
+
+Change the table style in [[WebTopBar]]. Default top padding is 11px.
+
+## <a name="Top bar questions"></a> Top bar questions
+
+### <a name="I want to set or change the top"></a><a name="I want to set or change the top "></a> I want to set or change the top background image
+
+The image at the top is called "header art" - commonly the top image found on blog sites. The image that is displayed by default is set by the variable `WEBHEADERART`, defined in [[TWikiPreferences]].
+
+Redefine your custom variables in [[Main.TWikiPreferences|Main/TWikiPreferences]] (to keep [[TWikiPreferences]] intact):
+
+       * Set WEBHEADERART = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/TWiki_header.gif
+       * Set WEBHEADERBGCOLOR = somehexcolor (no quotes, for example: #ffffff)
+
+You can also set `WEBHEADERART` per web, by defining the variable in the Web's WebPreferences.
+
+### <a name="I want to have the web color in"></a><a name="I want to have the web color in "></a> I want to have the web color in the top bar
+
+Redefine `WEBHEADERBGCOLOR` in [[Main.TWikiPreferences|Main/TWikiPreferences]] (to keep [[TWikiPreferences]] intact):
+
+       * Set WEBHEADERBGCOLOR = %WEBBGCOLOR%
+
+### <a name="I want to remove the Jump and Se"></a> I want to remove the Jump and Search boxes from the top bar
+
+If you have localization enabled, you will also see a language dropdown box at the far right.
+
+You can remove these items from [[WebTopBar]].
+
+### <a name="I want to hide the top bar"></a> I want to hide the top bar
+
+**Using templates:**
+
+> The view template is populated like this:
+>
+>     %TMPL:INCLUDE{"page"}%
+>     %TMPL:INCLUDE{"viewtopbar"}%
+>     %TMPL:INCLUDE{"viewtoolbar"}%
+>     %TMPL:INCLUDE{"viewleftbar"}%
+>     %TMPL:INCLUDE{"viewrightbar"}%
+>     %TMPL:INCLUDE{"viewtopicactionbuttons"}%
+>     %TMPL:INCLUDE{"viewbottombar"}%
+>
+> Each included template draws a part of the screen. Omit
+>
+> `%TMPL:INCLUDE{"viewtopbar"}%`
+>
+> to hide the top bar, or in a view template clear it using
+>
+> `%TMPL:INCLUDE{"viewtopbar"}%%TMPL:END%`
+
+**Using style sheets:**
+
+> See
+>
+> [[PatternSkinCssCookbookNoTopBar]]
+>
+> .
+
+## <a name="Left bar questions"></a> Left bar questions
+
+### <a name="I want to hide the left bar"></a> I want to hide the left bar
+
+**Using templates:**
+
+> Omit
+>
+> `%TMPL:INCLUDE{"viewleftbar"}%`
+>
+> to hide the left bar, or in a view template clear it using
+>
+> `%TMPL:INCLUDE{"viewleftbar"}%%TMPL:END%`
+
+**Using style sheets:**
+
+> See
+>
+> [[PatternSkinCssCookbookNoLeftBar]]
+>
+> .
+
+## <a name="Other page parts"></a> Other page parts
+
+### <a name="I want to hide the edit buttons"></a><a name="I want to hide the edit buttons "></a> I want to hide the edit buttons from certain users
+
+It may defy the wiki-ness of your TWiki installation, but in certain circumstances it could be useful to hide the edit buttons from users that are not logged in, for instance for customers.
+
+Create in the template directory the file `view.customer.tmpl`. 'Empty' `topicaction` and `toolbar` by writing in the template:
+
+    %TMPL:INCLUDE{"view.pattern"}%
+    %TMPL:DEF{"topicaction"}%%TMPL:END%
+    %TMPL:DEF{"toolbar"}%%TMPL:END%
+
+In [[TWikiGuest]], set the cover to
+
+       * Set COVER = customer
+
+By default this topic is editable only by TWikiAdminGroup members.

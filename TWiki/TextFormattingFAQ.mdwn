@@ -77,9 +77,9 @@ TWiki interprets text as HTML, so you can use the `preformatted` HTML option to 
 
     This text will keep its format as it is:
     <verbatim>
-      Unit	  Price	Qty  Cost
+      Unit     Price   Qty  Cost
       -------  ------  ---  ------
-      aaa		 12.00	 3	36.00
+      aaa       12.00    3   36.00
     </verbatim>
 
 The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
@@ -120,11 +120,11 @@ This is a manual process using HTML commands.
 
     <table border="1">
       <tr>
-    	 <th> Head A  </th> <th> Head B  </th>
+        <th> Head A  </th> <th> Head B  </th>
       </tr><tr>
-    	 <td> Cell A2 </td> <td> Cell B2 </td>
+        <td> Cell A2 </td> <td> Cell B2 </td>
       </tr><tr>
-    	 <td> Cell A3 </td> <td> Cell B3 </td>
+        <td> Cell A3 </td> <td> Cell B3 </td>
       </tr>
     </table>
 

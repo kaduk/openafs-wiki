@@ -80,7 +80,7 @@ Intended for use in protections mechanisms, where the order doesn't match the pr
 
 ## <a name="get_TextPreferencesValue( $key,"></a><a name="get_TextPreferencesValue( $key, "></a> getTextPreferencesValue( $key, $text, $web, $topic ) -&gt; $value
 
-Get a preference value from the settings in the text. The parsed values are cached against the web, topic.
+Get a preference value from the settings in the text. The values are **not** cached.
 
 ## <a name="ObjectMethod &lt;strong&gt;get_WebPreferences"></a> [[ObjectMethod]] \*getWebPreferencesValue `($key,$web) -> $value`
 

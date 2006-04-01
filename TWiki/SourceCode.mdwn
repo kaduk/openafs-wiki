@@ -19,7 +19,6 @@
     <li><a href="#TWiki::_I18N::Extract"> TWiki::I18N::Extract </a></li>
     <li><a href="#TWiki::If"> TWiki::If </a></li>
     <li><a href="#TWiki::Merge"> TWiki::Merge </a></li>
-    <li><a href="#TWiki::Merge"> TWiki::Merge </a></li>
     <li><a href="#TWiki::Meta"> TWiki::Meta </a></li>
     <li><a href="#TWiki::Net"> TWiki::Net </a></li>
     <li><a href="#TWiki::_OopsException"> TWiki::OopsException </a></li>
@@ -153,7 +152,7 @@ This package has smell factor of **29**
 
 Object representing a single form definition.
 
-This package has smell factor of **11**
+This package has smell factor of **10**
 
 ## <a name="TWiki::Func"></a> [[TWiki::Func|Main/TWikiFuncDotPm]]
 
@@ -190,7 +189,7 @@ This package has smell factor of **1**
 
 Support for strings translation and language detection.
 
-This package has smell factor of **1**
+This package has smell factor of **2**
 
 ## <a name="TWiki::_I18N::Extract"></a> [[TWiki::I18N::Extract|Main/TWikiI18NExtractDotPm]]
 
@@ -204,17 +203,11 @@ Support for the conditions in %IF\{\} statements. Basically a simple stack-based
 
 This package doesn't smell
 
-## <a name="TWiki::Merge"></a> [[TWiki::Merge|Main/TWikiMerge3DotPm]]
-
-Support for 3-way merging of strings. Similar to Merge.pm, except that: a) it's considers the ancestor revision of the string, and b) it works. :-P
-
-This package doesn't smell
-
 ## <a name="TWiki::Merge"></a> [[TWiki::Merge|Main/TWikiMergeDotPm]]
 
 Support for merging strings
 
-This package doesn't smell
+This package has smell factor of **1**
 
 ## <a name="TWiki::Meta"></a> [[TWiki::Meta|Main/TWikiMetaDotPm]]
 
@@ -299,7 +292,7 @@ This package has smell factor of **1**
 
 This module provides most of the actual HTML rendering code in TWiki.
 
-This package has smell factor of **24**
+This package has smell factor of **23**
 
 ## <a name="TWiki::Sandbox"></a> [[TWiki::Sandbox|Main/TWikiSandboxDotPm]]
 
@@ -321,7 +314,7 @@ This module knows nothing about how the data is actually _stored_ - that knowled
 
 The general contract for methods in the class requires that errors are signalled using exceptions. TWiki::AccessControlException is used for access control exceptions, and Error::Simple for all other types of error.
 
-This package has smell factor of **17**
+This package has smell factor of **18**
 
 ## <a name="TWiki::Store::_RcsFile"></a> [[TWiki::Store::RcsFile|Main/TWikiStoreRcsFileDotPm]]
 
@@ -528,4 +521,4 @@ The methods of this class should be overridded by subclasses that want to implem
 
 This package doesn't smell
 
-There were a total of **231** smells
+There were a total of **232** smells

@@ -57,8 +57,6 @@ UI functions for web, topic and user management
   </tr>
 </table>
 
-!!!rename!!!
-
 ## <a name="StaticMethod &lt;strong&gt;move&lt;/strong&gt; ($session,$o"></a> [[StaticMethod]] **move** `($session,$oldWeb,$oldTopic,$newWeb,$newTopic,$attachment,\@refs)`
 
 Move the given topic, or an attachment in the topic, correcting refs to the topic in the topic itself, and in the list of topics (specified as web.topic pairs) in the \\@refs array.

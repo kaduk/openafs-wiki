@@ -2,9 +2,7 @@
 
 This plugin allows users to quickly post comments to a page without an edit/preview/save cycle.
 
-_( Discussion in TWiki:Plugins/CommentPluginDev )_
-
-**_Note: this version of the [[CommentPlugin]] will _not_ work with TWiki versions released prior to June 2005_**
+**WARNING: TWiki-4 only. If you want to use this plugin with an earlier version of TWiki, please see [here](http://twiki.org/cgi-bin/view/Plugins/%TOPIC%?rev=1.57)**
 
 <div>
   <ul>
@@ -164,7 +162,7 @@ Customisation of the comment plugin requires
 
 To define a comment type, you have to provide two simple template definitions in the template file; one for the prompt box, and one for the generated output. If we have a template type "mytype", these are named `PROMPT:mytype` and `OUTPUT:mytype` respectively. See `comments.tmpl` in the templates directory for examples.
 
-The plugin picks up these template definitions from a standard TWiki template file, `templates/comments.tmpl`. This allows different templates to be defined for different TWiki skins. By default, this template includes the topic [[CommentsTemplate]], which contains all the shipped standard templates and in turn includes TWiki.UserCommentsTemplate. This allows for several levels of customisation:
+The plugin picks up these template definitions from a standard TWiki template file, `templates/comments.tmpl`. This allows different templates to be defined for different TWiki skins. By default, this template includes the topic [[CommentPluginTemplate]], which contains all the shipped standard templates and in turn includes TWiki.UserCommentsTemplate. This allows for several levels of customisation:
 
 1. To override all default templates, everywhere, change `comments.tmpl` to include a different topic (this customisation will be lost next time you upgrade, though).
 2. To add site-wide local template customisations, add them to TWiki.UserCommentsTemplate. You can redefine the standard templates here if you want, and your definitions will override the standard definitions.
@@ -264,11 +262,75 @@ All the usual [[TWikiVariables]] that can be used in a topic template can also b
   </tr>
   <tr>
     <td> Change History: </td>
-    <td> Please refer to the TWiki Subversion repository for a complete change history of this plugin. </td>
+    <td>   </td>
   </tr>
   <tr>
-    <td align="right"> Dependencies: </td>
-    <td> None </td>
+    <td> 8788 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Item1577: reverted 8433 to fix inclusion of correct user templates </td>
+  </tr>
+  <tr>
+    <td> 8787 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1573" rel="nofollow">Item1573</a> renamed standard templates topic to avoid naming clash on Windows, where filenames are case-insensitive </td>
+  </tr>
+  <tr>
+    <td> 8433 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Fix 'TWiki.' to '%TWIKIEB%.'; also fixed include 'UserComments' to 'UserCommentsTemplate' (at least that is what the doc suggests) </td>
+  </tr>
+  <tr>
+    <td> 7427 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item845" rel="nofollow">Item845</a> removed duplicate date in default comments; stick with server time </td>
+  </tr>
+  <tr>
+    <td> 7251 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item810" rel="nofollow">Item810</a> fix for user template inclusion; reorganised templates to make customisation easier </td>
+  </tr>
+  <tr>
+    <td> 5906 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item143" rel="nofollow">Item143</a> apache warning from comment plugin when [[Main/CommentsTmpl]].txt not foudn </td>
+  </tr>
+  <tr>
+    <td> 5519 </td>
+    <td>[[Main/CommentPluginOnAnchorsBroken]]: incorporated [[Main/JacobEisinger]]'s fix </td>
+  </tr>
+  <tr>
+    <td> 5518 </td>
+    <td>[[Main/CommentPluginOnAnchorsBroken]]: incorporated [[Main/OlivierBerger]]'s fix </td>
+  </tr>
+  <tr>
+    <td> 5455 </td>
+    <td> On Niels Kodslo's prompting, removed the global recursion prevention that I believe is no longer needed. </td>
+  </tr>
+  <tr>
+    <td> 5280 </td>
+    <td> Removed templates, and some minor fixes </td>
+  </tr>
+  <tr>
+    <td> 5250 </td>
+    <td> Removed newlines from prompt box </td>
+  </tr>
+  <tr>
+    <td> 4902 </td>
+    <td> Changed to use viewauth. Moved templates into user topics. </td>
+  </tr>
+  <tr>
+    <td> 4901 </td>
+    <td> Added templates in user webs support </td>
+  </tr>
+  <tr>
+    <td> 4897 </td>
+    <td> Fixes for disabling during preview; re-enabled old legacy parameters </td>
+  </tr>
+  <tr>
+    <td> 4889 </td>
+    <td> Chopped down from [[Main/PeterMasiar]] version, removing several parameters, savecomment script, changing way templates are done. Major rewrite, atcherly. </td>
+  </tr>
+  <tr>
+    <td> 4882 </td>
+    <td> Update from [[Main/PeterMasiar]]'s 2.0 version, plus documentation and small code improvements. </td>
+  </tr>
+  <tr>
+    <td> 4745 </td>
+    <td> 06Mar 2002 initial commit </td>
   </tr>
   <tr>
     <td align="right"> Perl Version: </td>
@@ -286,4 +348,4 @@ All the usual [[TWikiVariables]] that can be used in a topic template can also b
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/CrawfordCurrie - 23:00:07 01 February 2006
+-- TWiki:Main/CrawfordCurrie - 21:44:41 31 March 2006

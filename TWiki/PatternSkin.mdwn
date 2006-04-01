@@ -46,9 +46,9 @@ PatternSkin has been tested successfully on the following browsers:
   - Mozilla/Firefox
 - Mac OS X
   - Safari 2.0.3
-  - Mozilla/Firefox
+  - Mozilla/Firefox 1.5 (note: Firefox 1.0 will show visual quirks)
 - \*nix
-  - Mozilla/Firefox
+  - Mozilla/Firefox 1.5 (note: Firefox 1.0 will show visual quirks)
 
 ## <a name="Installation"></a> Installation
 
@@ -74,10 +74,10 @@ Check these variables here:
 
 If TWIKILAYOUTURL or TWIKISTYLEURL don't give a value or point to non-existing files, check in [[TWikiPreferences]] that the following variables do exist and that they are set to on:
 
-    	* %TWIKIWEB%.PatternSkin settings:
-    		* Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/layout.css
-    		* Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/style.css
-    		* Set TWIKICOLORSURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/colors.css
+       * %TWIKIWEB%.PatternSkin settings:
+          * Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/layout.css
+          * Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/style.css
+          * Set TWIKICOLORSURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/colors.css
 
 If this still does not work, contact the administrator who installs skins.
 

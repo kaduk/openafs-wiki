@@ -1,1 +1,17 @@
-<span>[![%WEBLOGOALT%](%WEBLOGOIMG%)](%WEBLOGOURL%)</span>
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; margin-top: 11px">
+  <tr>
+    <td valign="middle"><a href="%WEBLOGOURL%"><img alt="%WEBLOGOALT%" border="0" src="%WEBLOGOIMG%" /></a></td>
+    <td align="right" valign="top">
+      <ul>
+        <li>
+          <form action="http://www.dementia.org/twiki/view/Main/WebHome" name="jumpForm"><input id="jumpFormField" name="topic" onblur="setDefaultText(this);" onfocus="clearDefaultandCSS(this);" size="14" type="text" value="Jump" /></form>
+        </li>
+        <li>
+          <form action="http://www.dementia.org/twiki/view/%INCLUDINGWEB%/WebSearch" name="quickSearchForm"><input name="search" onblur="setDefaultText(this);" onfocus="clearDefaultandCSS(this);" size="14" type="text" value="Search" /></form>
+        </li>
+        <li>
+        </li>
+      </ul>
+    </td>
+  </tr>
+</table>

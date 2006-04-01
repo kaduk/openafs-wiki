@@ -10,7 +10,7 @@ Object representing a single form definition.
         <li><a href="#ObjectMethod *render_FieldForEdi"> ObjectMethod renderFieldForEdit <tt>($fieldDef,$web,$topic,$value) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderHidden</strong> ($me"> ObjectMethod renderHidden <tt>($meta,$useDefaults) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod <strong>cgiName</strong> ($field)"> ObjectMethod cgiName <tt>($field) -&gt; $string</tt></a></li>
-        <li><a href="#ObjectMethod *get_FieldValuesFro"> ObjectMethod getFieldValuesFromQuery <tt>($query,$metaObject,$handleMandatory) -&gt; $metaObject</tt></a></li>
+        <li><a href="#ObjectMethod *get_FieldValuesFro"> ObjectMethod getFieldValuesFromQuery <tt>($query,$metaObject,$initialiseMissing) -&gt; ($seen,\@missing)</tt></a></li>
         <li><a href="#ObjectMethod *is_TextMergeable*"> ObjectMethod isTextMergeable <tt>($name) -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>getField</strong> ($name)"> ObjectMethod getField <tt>($name) -&gt; \%row</tt></a></li>
         <li><a href="#StaticMethod *render_ForDisplay*"> StaticMethod renderForDisplay <tt>($templates,$meta)</tt></a></li>
@@ -56,15 +56,17 @@ Render form fields found in the meta as hidden inputs, so they pass through edit
 
 Generate the 'name' of the CGI parameter used to represent a field.
 
-## <a name="ObjectMethod &lt;strong&gt;get_FieldValuesFro"></a> [[ObjectMethod]] \*getFieldValuesFromQuery `($query,$metaObject,$handleMandatory) -> $metaObject`
+## <a name="ObjectMethod &lt;strong&gt;get_FieldValuesFro"></a> [[ObjectMethod]] \*getFieldValuesFromQuery `($query,$metaObject,$initialiseMissing) -> ($seen,\@missing)`
 
 Extract new values for form fields from a query.
 
 - `$query` - the query
 - `$metaObject` - the meta object that is storing the form values
-- `$handleMandatory` - if set, will throw an [[OopsException]] if any mandatory fields are absent from the query.
+- `$initialiseMissing` - if true, will cause fields that are in the form but have no value in the query or in the meta to be initialised to ''.
 
-For each field, if there is a value in the query, use it. Otherwise if there is already entry for the field in the meta, keep it. Otherwise, if $handleMandatory, initialise the field to '' and set it in the meta.
+For each field, if there is a value in the query, use it. Otherwise if there is already entry for the field in the meta, keep it.
+
+Returns the number of fields which had values provided by the query, and a references to an array of the names of mandatory fields that were missing from the query.
 
 ## <a name="ObjectMethod &lt;strong&gt;is_TextMergeable*"></a><a name="ObjectMethod *is_TextMergeable&lt;/strong&gt; "></a> [[ObjectMethod]] **isTextMergeable** `($name) -> $boolean`
 

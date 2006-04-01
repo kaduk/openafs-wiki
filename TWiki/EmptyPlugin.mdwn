@@ -1,11 +1,11 @@
 # <a name="Empty TWiki Plugin"></a> Empty TWiki Plugin
 
-This is an empty plugin you can use as a template to build your own [[TWikiPlugins]]. This plugin does nothing, but is ready to be used.
+This is an empty Plugin you can use as a template to build your own [[TWikiPlugins]]. This Plugin does nothing, but is ready to be used.
 
-To create your own plugin:
+To create your own Plugin:
 
 - Copy file <code>**TWiki/Plugins/EmptyPlugin.pm**</code> to <code>**&lt;name&gt;Plugin.pm**</code> and customize the plugin.
-- Create a <code>**&lt;name&gt;Plugin**</code> topic in the TWiki web. Do so by visiting <http://TWiki.org/cgi-bin/view/Plugins/> and starting a new topic to get the default plugin topic text (don't save the topic). Customize your plugin topic to your needs.
+- Create a <code>**&lt;name&gt;Plugin**</code> topic in the TWiki web. Do so by visiting <http://TWiki.org/cgi-bin/view/Plugins/PluginPackage#NewPlugin> and starting a new topic to get the default plugin topic text (don't save the topic). Customize your plugin topic to your needs.
 - See details in [[TWikiPlugins]].
 
 ## <a name="Syntax Rules"></a> Syntax Rules
@@ -17,7 +17,7 @@ To create your own plugin:
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%EMPTYPLUGIN\_SHORTDESCRIPTION%**</code>
 
 - One line description, is shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = This plugin does nothing, but can be used as a template for your own plugins.
+  - Set SHORTDESCRIPTION = Empty Plugin used as a template for new Plugins
 
 - Your own setting, for example:
   - Set EXAMPLE = got it!
@@ -34,15 +34,27 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny </td>
+    <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie </td>
+  </tr>
+  <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2001-2006, [[TWiki/TWikiContributor]]</td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 21 Mar 2004 </td>
+    <td> 01 Feb 2006 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 01 Feb 2006: </td>
+    <td> Dakar changes </td>
   </tr>
   <tr>
     <td align="right"> 21 Mar 2004: </td>
@@ -57,6 +69,10 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Initial version </td>
   </tr>
   <tr>
+    <td align="right"> TWiki Dependency: </td>
+    <td> $TWiki::Plugins::VERSION 1.1 </td>
+  </tr>
+  <tr>
     <td align="right"> CPAN Dependencies: </td>
     <td> none </td>
   </tr>
@@ -66,7 +82,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Perl Version: </td>
-    <td> 5.0 </td>
+    <td> 5.005 </td>
   </tr>
   <tr>
     <td align="right"> TWiki:Plugins/Benchmark: </td>
@@ -86,4 +102,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
 </table>
 
-**_Related Topics:_** [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]], [[TWikiPreferences]], [[TWikiPlugins]]
+**_Related Topics:_** [[TWikiPlugins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]], [[TWikiPreferences]]
+
+-- [[TWikiContributor]] - 01 Feb 2006

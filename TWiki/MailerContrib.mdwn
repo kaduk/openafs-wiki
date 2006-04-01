@@ -1,5 +1,7 @@
 This module is an add-on to the TWiki kernel that supports e-mail notification of changes.
 
+**WARNING: TWiki-4 only. If you want to use this extension with an earlier version of TWiki, please see [here](http://twiki.org/cgi-bin/view/Plugins/%TOPIC%?rev=1.17)**
+
 <div>
   <ul>
     <li><a href="#Summary of Contents"> Summary of Contents</a><ul>
@@ -102,8 +104,104 @@ For example, `perl -I /usr/local/twiki/bin mailnotify -q Public Private` will ge
     <td> GPL </td>
   </tr>
   <tr>
-    <td align="right"> Change History: </td>
-    <td>  </td>
+    <td> Change History: </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> 8808 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1654" rel="nofollow">Item1654</a> mailnotify must enter the command_line context </td>
+  </tr>
+  <tr>
+    <td> 8625 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1508" rel="nofollow">Item1508</a> Making the dashes in the separatator clearer </td>
+  </tr>
+  <tr>
+    <td> 8606 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1508" rel="nofollow">Item1508</a> [[Main/MailerContrib]]: Brushing up HTML mailnotify template </td>
+  </tr>
+  <tr>
+    <td> 8602 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1508" rel="nofollow">Item1508</a> [[Main/MailerContrib]]: Cleaning up plaintext e-mail template, removing TEXTAREA </td>
+  </tr>
+  <tr>
+    <td> 8522 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1511" rel="nofollow">Item1511</a> arguments to getScriptUrl in wrong order :-( </td>
+  </tr>
+  <tr>
+    <td> 8434 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Fix 'TWiki.' to '%TWIKIEB%.' </td>
+  </tr>
+  <tr>
+    <td> 8398 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1460" rel="nofollow">Item1460</a> polished up the comment a bit </td>
+  </tr>
+  <tr>
+    <td> 8308 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1362" rel="nofollow">Item1362</a> moving mailnotify cron script </td>
+  </tr>
+  <tr>
+    <td> 7848 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1167" rel="nofollow">Item1167</a> forced all mail operations to generate absolute URLs </td>
+  </tr>
+  <tr>
+    <td> 7568 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item910" rel="nofollow">Item910</a> use SCRIPTURL{view} instead of complex url expr </td>
+  </tr>
+  <tr>
+    <td> 6864 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item624" rel="nofollow">Item624</a> mailer templates moved the the right places </td>
+  </tr>
+  <tr>
+    <td> 6861 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item624" rel="nofollow">Item624</a> Added proper templates support for plain text mails </td>
+  </tr>
+  <tr>
+    <td> 6809 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item623" rel="nofollow">Item623</a> don't print anything if verbosity is switched off. </td>
+  </tr>
+  <tr>
+    <td> 6659 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item528" rel="nofollow">Item528</a> Updated [[Main/MailerContrib]]. it's working and the sendmail parameter is used. </td>
+  </tr>
+  <tr>
+    <td> 6474 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item420" rel="nofollow">Item420</a> removed spurious remove_obsolete_locks from [[Main/MailerContrib]]</td>
+  </tr>
+  <tr>
+    <td> 5924 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item153" rel="nofollow">Item153</a> fix mail URL-fixing scheme </td>
+  </tr>
+  <tr>
+    <td> 5269 </td>
+    <td> Minor doc fixes </td>
+  </tr>
+  <tr>
+    <td> 5266 </td>
+    <td> Doc tidy-ups, added filtering of _ webs, added obsolete lock script </td>
+  </tr>
+  <tr>
+    <td> 5264 </td>
+    <td> Changed default to add web name to user name (I hope) </td>
+  </tr>
+  <tr>
+    <td> 5263 </td>
+    <td> Minor doc tidyups </td>
+  </tr>
+  <tr>
+    <td> 5261 </td>
+    <td> Documentation changes, and fixed to scan all webs. </td>
+  </tr>
+  <tr>
+    <td> 5253 </td>
+    <td> runnable as CGI script, minor bugfixes, removed dependency on [[Main/DBCacheContrib]]</td>
+  </tr>
+  <tr>
+    <td> 5234 </td>
+    <td> Minor doc changes </td>
+  </tr>
+  <tr>
+    <td> 5231 </td>
+    <td> Made a change an object, added unit tests to CVS, lots of testing. </td>
   </tr>
   <tr>
     <td align="right"> 4 March 2005 </td>

@@ -29,7 +29,6 @@ Meta-data objects are created by the Store engine when topics are read. They are
         <li><a href="#ObjectMethod <strong>remove</strong> ($type,$ke"> ObjectMethod remove <tt>($type,$key)</tt></a></li>
         <li><a href="#ObjectMethod <strong>copyFrom</strong> ($otherM"> ObjectMethod copyFrom <tt>($otherMeta,$type,$nameFilter)</tt></a></li>
         <li><a href="#ObjectMethod <strong>count</strong> ($type) ->"> ObjectMethod count <tt>($type) -&gt; $integer</tt></a></li>
-        <li><a href="#ObjectMethod <strong>addTOPICINFO</strong> ($re"> ObjectMethod addTOPICINFO <tt>($rev,$time,$user)</tt></a></li>
         <li><a href="#ObjectMethod *get_RevisionInfo*"> ObjectMethod getRevisionInfo <tt>($fromrev) -&gt; ($date,$author,$rev,$comment)</tt></a></li>
         <li><a href="#ObjectMethod <strong>merge</strong> ($otherMeta"> ObjectMethod merge <tt>($otherMeta,$formDef)</tt></a></li>
         <li><a href="#ObjectMethod <strong>stringify</strong> ($types"> ObjectMethod stringify <tt>($types) -&gt; $string</tt></a></li>
@@ -112,14 +111,6 @@ SMELL: That spec absolutely _STINKS_ !! SMELL: this is a shallow copy
 ## <a name="ObjectMethod &lt;strong&gt;count&lt;/strong&gt; ($type) - $"></a> [[ObjectMethod]] **count** `($type) -> $integer`
 
 Return the number of entries of the given type that are in this meta set
-
-## <a name="ObjectMethod &lt;strong&gt;addTOPICINFO&lt;/strong&gt; ($re"></a> [[ObjectMethod]] **addTOPICINFO** `($rev,$time,$user)`
-
-- `$rev` - the revision number
-- `$time` - the time stamp
-- `$user` - the user object
-
-Add TOPICINFO type data to the object, as specified by the parameters.
 
 ## <a name="ObjectMethod &lt;strong&gt;get_RevisionInfo*"></a><a name="ObjectMethod *get_RevisionInfo&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionInfo** `($fromrev) -> ($date,$author,$rev,$comment)`
 

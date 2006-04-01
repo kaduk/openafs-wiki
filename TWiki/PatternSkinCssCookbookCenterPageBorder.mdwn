@@ -9,8 +9,8 @@
 Add the dynamic variable link to the logo image to the topic text:
 
     <style type="text/css" media="all">
-    html body {
-    background-image:url("%PUBURLPATH%/%TWIKIWEB%/PatternSkin/gradient_page.gif");
+    #patternScreen {
+    background-image:url("%ATTACHURLPATH%/gradient_page.gif");
     background-repeat:repeat-x;
     }
     #patternPageShadow {
@@ -19,8 +19,8 @@ Add the dynamic variable link to the logo image to the topic text:
     </style>
 <div><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you don't write this overloading style in a template and use an external <code>.css</code> file, you need to set the image to the absolute url: <pre>
 &lt;style type="text/css" media="all"&gt;
-html body {
-background-image:url("http://www.dementia.org/twiki//view/TWiki/PatternSkin/gradient_page.gif");
+#patternScreen {
+background-image:url("%ATTACHURLPATH%/gradient_page.gif");
 background-repeat:repeat-x;
 }
 &lt;/style&gt;

@@ -26,7 +26,7 @@
 PatternSkin uses 3 style sheets (attached to [[PatternSkin]]):
 
 - [layout.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css) - the positioning of main page elements (blocks), widths and heights
-- [stylestyle.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css) - fonts, sizes, margins and paddings
+- [style.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css) - fonts, sizes, margins and paddings
 - [colors.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/colors.css) - border colors, text colors and background colors
 
 When customizing your TWiki installation, you can either choose to completely rewrite all css styles, or to selectively override some styles. The latter option is by far less time consuming, but all depends on your graphical wishes.
@@ -37,9 +37,9 @@ When customizing your TWiki installation, you can either choose to completely re
 - Attach 3 new style sheets to the topic
 - Point the CSS variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to your new files:
 
-    		* Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
-    		* Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
-    		* Set TWIKICOLORURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
+          * Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
+          * Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+          * Set TWIKICOLORURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
 
 ### <a name="When you need small adjustments:"></a> When you need small adjustments: Adding to existing CSS
 
@@ -49,13 +49,13 @@ With CSS you cannot remove already defined classes, you can only add to it, or o
 - Attach 1, 2 or 3 new style sheets to the topic, dependent on your CSS setup (if you don't change much, you might as well put everything in one CSS file, layout, margins and colors)
 - Point the CSS variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to your new files (below the `TWIKIXXXURL` variables):
 
-    		* Set USERLAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
-    		* Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
-    		* Set USERCOLORSURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
+          * Set USERLAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
+          * Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+          * Set USERCOLORSURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
 
 - If you use only little CSS and you've only attached one file, write:
 
-    		* Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+          * Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
 
 Instead of setting these variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]], you can set these in your home topic, or in any other topic. Setting style URL variables in:
 

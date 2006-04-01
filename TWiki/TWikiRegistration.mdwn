@@ -2,7 +2,7 @@
 
 To edit pages on this [[TWikiSite]], you must have a registered user name and password.
 
-- %H% **Note:** Registered users can [[ChangePasswords]] and [[ResetPasswords]].
+%H% **Note:** Registered users can [[change|TWiki/ChangePassword]] and [[reset|TWiki/ResetPassword]] their passwords.
 
 To register as a new user, simply fill out this form:
 
@@ -64,6 +64,7 @@ To register as a new user, simply fill out this form:
             <option>Belgium</option>
             <option>Belize</option>
             <option>Benin</option>
+            <option>Bhutan</option>
             <option>Bolivia</option>
             <option>Bosnia and Hercegovina</option>
             <option>Brazil</option>
@@ -199,7 +200,7 @@ To register as a new user, simply fill out this form:
         <td><span>Fields marked <code><font color="red">**</font></code> are required</span></td>
       </tr>
       <tr>
-        <td align="right" valign="top">   <input name="topic" type="hidden" value="%TOPIC%" /><input name="action" type="hidden" value="register" /></td>
+        <td align="right" valign="top">   <input name="rx" type="hidden" value="%BLACKLISTPLUGIN{ action="magic" }%" /><input name="topic" type="hidden" value="%TOPIC%" /><input name="action" type="hidden" value="register" /></td>
         <td><input type="submit" value=" Submit " /></td>
       </tr>
     </table>

@@ -68,7 +68,9 @@ Change the user's password and/or email. Details of the user and password are pa
 4. TWiki::User::updateUserPassword
 5. 'oopschangepasswd'
 
-The [[NoPasswdUser]] case is not handled
+The [[NoPasswdUser]] case is not handled.
+
+An admin user can change other user's passwords.
 
 ## <a name="StaticMethod &lt;strong&gt;verify_EmailAddres"></a> [[StaticMethod]] \*verifyEmailAddress `($session,$tempUserDir)`
 
@@ -92,5 +94,3 @@ Presently this is called in [[RegisterCgiScript]] directly after a call to verif
 7. redirects browser to 'oopsregthanks'
 
 reloads the context by code these two are separate in here to ease the implementation of administrator approval
-
-generate user entry If a password exists (either in Data\{PasswordA\} or data\{CryptPassword\}, use it. Otherwise generate a random one, and store it back in the user record.

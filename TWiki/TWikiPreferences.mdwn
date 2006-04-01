@@ -97,7 +97,7 @@
   <p>
   </p>
   <ul>
-    <li> Exclude web from a <code>web="all"</code> search: (Set to <code>on</code> for hidden webs; is overwritten by web preferences) <ul>
+    <li> Exclude web from a <code>web="all"</code> search: (Set to <code>on</code> for hidden webs; is overwritten by web preferences) <strong><em>Note</em></strong> it is much better to use [[Main/TWikiAccessControls]] in individual webs to control who can and can't view the contents of a web. NOSEARCHALL is retained for compatibility, but you should avoid using it. <ul>
         <li> Set NOSEARCHALL = </li>
       </ul>
     </li>
@@ -400,7 +400,7 @@
 ### <a name="Legacy support"></a> Legacy support
 
 - Support for legacy "EDITTOPIC", used to be hard-coded, now replaced by TMPL:P conditional instantiation
-  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827044>
+  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827148>
   - Set EDITTOPIC = [Edit](%EDITURL% Edit Topic - deprecated usage - please see release notes)
 
 ## <a name="Plugins Settings"></a> Plugins Settings

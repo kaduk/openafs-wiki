@@ -41,6 +41,10 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
     <td> GNU <code>diff</code> 2.7 or higher is required when not using the all-Perl RcsLite. %BR% Install on PATH if not included with RCS (check version with <code>diff -v</code>) %BR% Must be the version used by RCS, to avoid problems with binary attachments - RCS may have hard-coded path to <code>diff</code></td>
   </tr>
   <tr>
+    <td> GNU <code>patch</code></td>
+    <td> For upgrades only: GNU <code>patch</code> is required when using the TWiki:Codev.UpgradeTWiki script </td>
+  </tr>
+  <tr>
     <td> Other external programs </td>
     <td><code>fgrep, egrep</code></td>
   </tr>

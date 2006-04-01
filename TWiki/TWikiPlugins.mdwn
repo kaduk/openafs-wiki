@@ -86,7 +86,7 @@ Each Plugin has a standard release topic, located in the TWiki:Plugins web at TW
 
 The recommended approach to testing new Plugins before making them public is to create a second local TWiki installation, and test the Plugin there. You can allow selected users access to the test area. Once you are satisifed that it won't compromise your main installation, you can install it there as well.
 
-[[InstalledPlugins]] shows which Plugins are: 1) installed, 2) loading properly, and 3) what TWiki:Codev.PluginHandlers they invoke. Any failures are shown in the Errors section. The <code>[[%FAILEDPLUGINS%|Main/TWikiVariables#VarFAILEDPLUGINS]]</code> variable can be used to debug failures. You may also want to check your webserver error log and the various TWiki log files.
+[[InstalledPlugins]] shows which Plugins are: 1) installed, 2) loading properly, and 3) what TWiki:Codev.PluginHandlers they invoke. Any failures are shown in the Errors section. The <code>[[%FAILEDPLUGINS%|Main/VarFAILEDPLUGINS]]</code> variable can be used to debug failures. You may also want to check your webserver error log and the various TWiki log files.
 
 ### <a name="Some Notes on Plugin Performance"></a> Some Notes on Plugin Performance
 
@@ -273,7 +273,7 @@ To eliminate the incompatibility problems bound to arise from active open Plugin
   - The Plugin initialization code does not register a Plugin that returns FALSE (or that has no `initPlugin` handler).
 
 - `$TWiki::Plugins::VERSION` in the `TWiki::Plugins` module contains the TWiki Plugin API version, currently **1\.11**.
-  - You can also use the <code>[[%PLUGINVERSION{}%|Main/TWikiVariables#VarPLUGINVERSION]]</code> variable to query the Plugin API version or the version of installed Plugins.
+  - You can also use the <code>[[%PLUGINVERSION{}%|Main/VarPLUGINVERSION]]</code> variable to query the Plugin API version or the version of installed Plugins.
 
 ### <a name="Security"></a> Security
 

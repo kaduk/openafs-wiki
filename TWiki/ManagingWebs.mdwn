@@ -67,9 +67,9 @@ In either case you will want to be sure to verify that your new web has all the 
       <td colspan="2"><input name="sitemapuseto" size="60" type="text" value="...collaborate on" /><br /> Continue the sentence describing the intended use. This is also for the [[TWiki/SiteMap]]</td>
     </tr>
     <tr>
-      <th align="right" bgcolor="#99CCCC"><strong> Exclude web from "search all": </strong></th>
+      <th align="right" bgcolor="#99CCCC"><strong> Set NOSEARCHALL: </strong></th>
       <td><input checked name="nosearchall" type="radio" value="" /> No   <input name="nosearchall" type="radio" value="on" /> Yes </td>
-      <td> Specify if you want to exclude the web from a "search all webs" search. Note that the [[TWiki/SiteMap]] will not list the web if you select Yes. </td>
+      <td> Specify if you want to exclude the web from a "search all webs" search. <strong>This will not prevent users accessing the web</strong>. It will simply hide it from searches. </td>
     </tr>
     <tr>
       <th bgcolor="#99CCCC"><strong>   </strong></th>

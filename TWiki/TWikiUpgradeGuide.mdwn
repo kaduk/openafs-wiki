@@ -61,7 +61,7 @@ To perform the upgrade, you need to:
 - Unzip it
 - Choose a directory for the new installation. I will call this `new_twiki`. This directory must not already exist.
 - Change directory to `distro/` and run: %BR% `./UpgradeTwiki <full path to existing_twiki's setlib.cfg> <full path to new_twiki>`
-- confirm your system settings by pointing your browser to `cgi-bin/configure`
+- confirm your system settings by pointing your browser to the `configure` script
 
 Assuming all goes well, `UpgradeTwiki` will give you the final instructions.
 
@@ -74,8 +74,7 @@ There are a few points worth noting:
   - Clearly you need to point it to a location where there is enough space
   - If you have symlinks under your `data/` directory in your existing installation, these are reproduced as actual directories in the new structure. It is up to you to pull these sub-directories out again and re-symlink as needed
 - `UpgradeTwiki` doesn't deal with custom templates or Plugins, you will have to reinstall these in the new installation.
-
-If you use it, and would be kind enough to add your experiences to TWiki:Codev.UpgradeTWiki, it would be much appreciated. The report of your experience will help to make `UpgradeTwiki` more robust.
+- If you are using the Htpasswd login manager, then note that email addresses for users have moved out of user topics and into the password database. There is a script that performs this extra upgrade step for you - see `tools/upgrade_emails.pl`.
 
 <a name="ManualUpgradeProcedure"></a>
 
@@ -98,6 +97,7 @@ The following steps are a rough guide to upgrading only. It is impossible to giv
   3. Install updated plugins into your new area.
 7. Point your webserver at the new install.
 8. Visit TWiki:Codev.KnownIssuesOfTWiki04x00x00 and fix known issues that apply to you.
+9. If you are using the Htpasswd login manager, then note that email addresses for users have moved out of user topics and into the password database. There is a script that performs this extra upgrade step for you - see `tools/upgrade_emails.pl`.
 
 You are **highly** recommended **not** to change any distributed files if you can avoid it, to simplify future upgrades!
 
@@ -107,8 +107,10 @@ You are **highly** recommended **not** to change any distributed files if you ca
 
 1. Follow the installation instructions, and install the new release in a new directory.
 2. Copy your local webs over to the data and pub directories of the new install
-3. Copy over your `bin/setlib.cfg` and `lib/LocalLib.cfg` files
-4. Point your webserver at the new install.
+  - Be careful to copy over the user topics and [[TWikiUsers]].txt in the Main web
+3. Copy over your `bin/LocalLib.cfg` and `lib/LocalSite.cfg` files
+4. Copy over any local files you created (such as .htpasswd and .htaccess files)
+5. Point your webserver at the new install.
 
 **If** you changed any of the distributed files, you will have to continue from Step 5 above.
 

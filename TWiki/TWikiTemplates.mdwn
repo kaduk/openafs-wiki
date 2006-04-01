@@ -215,15 +215,15 @@ The following variables get expanded when a user creates a new topic based on a 
 >   </tr>
 >   <tr>
 >     <td><code>%DATE%</code></td>
->     <td> Signature format date. See [[Main/TWikiVariables#VarDATE]]</td>
+>     <td> Signature format date. See [[Main/VarDATE]]</td>
 >   </tr>
 >   <tr>
 >     <td><code>%GMTIME%</code></td>
->     <td> Date/time. See [[Main/TWikiVariables#VarGMTIME]]</td>
+>     <td> Date/time. See [[Main/VarGMTIME]]</td>
 >   </tr>
 >   <tr>
 >     <td><code>%GMTIME{...}%</code></td>
->     <td> Formatted date/time. See [[Main/TWikiVariables#VarGMTIME2]]</td>
+>     <td> Formatted date/time. See [[Main/VarGMTIME2]]</td>
 >   </tr>
 >   <tr>
 >     <td><code>%NOP%</code></td>
@@ -235,11 +235,11 @@ The following variables get expanded when a user creates a new topic based on a 
 >   </tr>
 >   <tr>
 >     <td><code>%SERVERTIME%</code></td>
->     <td> Date/time. See [[Main/TWikiVariables#VarSERVERTIME]]</td>
+>     <td> Date/time. See [[Main/VarSERVERTIME]]</td>
 >   </tr>
 >   <tr>
 >     <td><code>%SERVERTIME{...}%</code></td>
->     <td> Formatted date/time. See [[Main/TWikiVariables#VarSERVERTIME2]]</td>
+>     <td> Formatted date/time. See [[Main/VarSERVERTIME2]]</td>
 >   </tr>
 >   <tr>
 >     <td><code>%USERNAME%</code></td>
@@ -285,14 +285,14 @@ Here is an example for creating new topics based on a specific template topic:
 The above form asks for a topic name. A hidden input tag named <code>**templatetopic**</code> specifies [[ExampleTopicTemplate]] as the template topic to use. Here is the HTML source of the form:
 
     <form name="new" action="%SCRIPTURLPATH{edit}%/%WEB%/">
-    	* New example topic:
-    	  <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$yearx$mox$day}%" size="26" />
-    	  <input type="hidden" name="templatetopic" value="ExampleTopicTemplate" />
-    	  <input type="hidden" name="topicparent" value="%TOPIC%" />
-    	  <input type="hidden" name="onlywikiname" value="on" />
-    	  <input type="hidden" name="onlynewtopic" value="on" />
-    	  <input type="submit"  value="Create" />
-    	  (date format is <nop>YYYYxMMxDD)
+       * New example topic:
+         <input type="text" name="topic" value="ExampleTopic%SERVERTIME{$yearx$mox$day}%" size="26" />
+         <input type="hidden" name="templatetopic" value="ExampleTopicTemplate" />
+         <input type="hidden" name="topicparent" value="%TOPIC%" />
+         <input type="hidden" name="onlywikiname" value="on" />
+         <input type="hidden" name="onlynewtopic" value="on" />
+         <input type="submit"  value="Create" />
+         (date format is <nop>YYYYxMMxDD)
     </form>
 
 See [[TWikiScripts]] for details of the parameters that the `edit` script understands.
@@ -330,30 +330,30 @@ The first line declares a delimiter variable called "sep", used to separate mult
 > &lt;body bgcolor="#FFFFFF"&gt;
 > &lt;table width="100%" border="0" cellpadding="3" cellspacing="0"&gt;
 >   &lt;tr&gt;
-> 	 &lt;td bgcolor="%WEBBGCOLOR%" rowspan="2" valign="top" width="1%"&gt;
-> 		&lt;a href="%WIKIHOMEURL%"&gt;
-> 		&lt;img src="%PUBURLPATH%/wikiHome.gif" border="0"&gt;&lt;/a&gt;
-> 	 &lt;/td&gt;
-> 	 &lt;td&gt;
-> 		&lt;b&gt;%WIKITOOLNAME% . %WEB% . &lt;/b&gt;&lt;font size="+2"&gt;
-> 		&lt;B&gt;%TOPIC%&lt;/b&gt; %TMPL:P{"titleaction"}%&lt;/font&gt;
-> 	 &lt;/td&gt;
+>     &lt;td bgcolor="%WEBBGCOLOR%" rowspan="2" valign="top" width="1%"&gt;
+>       &lt;a href="%WIKIHOMEURL%"&gt;
+>       &lt;img src="%PUBURLPATH%/wikiHome.gif" border="0"&gt;&lt;/a&gt;
+>     &lt;/td&gt;
+>     &lt;td&gt;
+>       &lt;b&gt;%WIKITOOLNAME% . %WEB% . &lt;/b&gt;&lt;font size="+2"&gt;
+>       &lt;B&gt;%TOPIC%&lt;/b&gt; %TMPL:P{"titleaction"}%&lt;/font&gt;
+>     &lt;/td&gt;
 >   &lt;/tr&gt;
 >   &lt;tr bgcolor="%WEBBGCOLOR%"&gt;
-> 	 &lt;td colspan="2"&gt;
-> 		%TMPL:P{"webaction"}%
-> 	 &lt;/td&gt;
+>     &lt;td colspan="2"&gt;
+>       %TMPL:P{"webaction"}%
+>     &lt;/td&gt;
 >   &lt;/tr&gt;
 > &lt;/table&gt;
 > --- ++ %TMPL:P{"heading"}%
 > %TMPL:P{"message"}%
 > &lt;table width="100%" border="0" cellpadding="3" cellspacing="0"&gt;
 >   &lt;tr bgcolor="%WEBBGCOLOR%"&gt;
-> 	 &lt;td valign="top"&gt;
-> 		Topic &lt;b&gt;%TOPIC%&lt;/b&gt; . {
-> 		  %TMPL:P{"topicaction"}%
-> 		}
-> 	 &lt;/td&gt;
+>     &lt;td valign="top"&gt;
+>       Topic &lt;b&gt;%TOPIC%&lt;/b&gt; . {
+>         %TMPL:P{"topicaction"}%
+>       }
+>     &lt;/td&gt;
 >   &lt;/tr&gt;
 > &lt;/table&gt;
 > &lt;/body&gt;
@@ -375,11 +375,11 @@ Each oops template basically just defines some variables and includes the base t
 > %TMPL:DEF{"message"}%
 > Test =message=. Blah blah blah blah blah blah blah blah blah blah blah...
 >
-> 	* Some more blah blah blah blah blah blah blah blah blah blah...
-> 	* Param1: %PARAM1%
-> 	* Param2: %PARAM2%
-> 	* Param3: %PARAM3%
-> 	* Param4: %PARAM4%
+>    * Some more blah blah blah blah blah blah blah blah blah blah...
+>    * Param1: %PARAM1%
+>    * Param2: %PARAM2%
+>    * Param3: %PARAM3%
+>    * Param4: %PARAM4%
 > %TMPL:END%
 > %TMPL:DEF{"topicaction"}%
 > Test =topicaction=:

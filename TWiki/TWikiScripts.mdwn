@@ -499,7 +499,7 @@ Renders the differences between version of a TWiki topic
   </tr>
   <tr>
     <td> type </td>
-    <td> history, diff, last} history diff, version to version, last version to previous </td>
+    <td> {history, diff, last} history diff, version to version, last version to previous </td>
     <td><code>diff</code></td>
   </tr>
   <tr>
@@ -794,7 +794,7 @@ CGI gateway to the `%SEARCH%` functionality driven by the following CGI paramete
   </tr>
   <tr>
     <td><code>web="Name"</code><br /><code>web="Main, Know"</code><br /><code>web="all"</code></td>
-    <td> Comma-separated list of webs to search. The special word <code>all</code> means all webs that doe <strong>not</strong> have the <code>NOSEARCHALL</code> variable set to <code>on</code> in their [[Main/WebPreferences]]. You can specifically <strong>exclude</strong> webs from an <code>all</code> search using a minus sign - for example, <code>web="all,-Secretweb"</code>. </td>
+    <td> Comma-separated list of webs to search. See [[Main/TWikiVariables#VarSEARCH]] for more details. </td>
     <td> Current web </td>
   </tr>
   <tr>

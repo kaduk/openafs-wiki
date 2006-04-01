@@ -104,7 +104,7 @@ TWiki generates monthly log files which are used by the statistics script
 - The file name is `log<year><month>.txt`
 - Example path name: `twiki/logs/log201006.txt`
 - Each access gets logged as: %BR% `| <time> | <wikiusername> | <action> | <web>.<topic> | <extra info> | <IP address> |`
-- Example log entry: %BR% <code>| 29 Jun 2010 - 11:57 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
+- Example log entry: %BR% <code>| 29 Jun 2010 - 11:59 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
 - Actions are logged if enabled in [configure](http://www.dementia.org/twiki/configure) by the **\{Log\}\{_action_\}** flags
 - Logged actions: <table border="1" cellpadding="0" cellspacing="0">
   <tr>

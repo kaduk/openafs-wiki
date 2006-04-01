@@ -2,20 +2,20 @@
 
 <div>
   <ul>
-    <li><a href="#Summary"> Summary</a><ul>
-        <li><a href="#Customization"> Customization</a></li>
-        <li><a href="#Settings"> Settings</a></li>
-      </ul>
-    </li>
+    <li><a href="#Summary"> Summary</a></li>
+    <li><a href="#Customization"> Customization</a></li>
+    <li><a href="#Settings"> Settings</a></li>
     <li><a href="#Installation Instructions"> Installation Instructions</a></li>
     <li><a href="#Demo  Text"> Demo &amp; Text</a></li>
     <li><a href="#Contrib Info"> Contrib Info</a></li>
   </ul>
 </div>
 
-# <a name="Summary"></a> Summary
+## <a name="Summary"></a> Summary
 
 This contrib packages in a convenient way the Javascript library and the CSS file needed to implement TWisty Sections.
+
+See the [attached file](http://www.dementia.org/twiki//view/toggle-optm-jsoff-sep.html) for a demo and an example of usage.
 
 To use the libraries, you must place the following scriplet either in the head section of the page (by modifying the [[TWikiSkins]]) or putting it somewhere in the topic:
 
@@ -37,13 +37,10 @@ Skins can customize the color of the twisty placeholder by modifiying the `.twis
 
 ## <a name="Settings"></a> Settings
 
-- Name of the perl package
-  - Set STUB = TWiki::Contrib::TwistyContrib
+- Set SHORTDESCRIPTION = Twisty section javascript library to open/close content dynamically
+- Set STUB = TWiki::Contrib::TwistyContrib
 
-- One line description:
-  - Set SHORTDESCRIPTION = Placeholder for the twisty javascript library.
-
-# <a name="Installation Instructions"></a> Installation Instructions
+## <a name="Installation Instructions"></a> Installation Instructions
 
 - Download the ZIP file from the Plugin web (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your ($TWIKI\_ROOT) directory. Content: <table border="1" cellpadding="0" cellspacing="0">
@@ -76,7 +73,7 @@ Skins can customize the color of the twisty placeholder by modifiying the `.twis
 - Optionally, run <code>**%TOPIC%\_installer**</code> to automatically check and install other TWiki modules that this module depends on. You can also do this step manually.
 - Alternatively, manually make sure the dependencies listed in the table below are resolved. None
 
-# <a name="Demo  Text"></a> Demo &amp; Text
+## <a name="Demo  Text"></a> Demo &amp; Text
 
 If the contrib is properly installed (and Javascript is enabled in your browser!), then you should see some folding sections below. Look at [[http://www.dementia.org/twiki/view/%WEB%.%TOPIC%?raw=on|%WEB%.%TOPIC%?raw=on]] to see how it's done.
 
@@ -100,7 +97,7 @@ If the contrib is properly installed (and Javascript is enabled in your browser!
 
 <div id="no_2toggle"> For more Shakespeare plays, see Wikipedia:WilliamShakespeare </div>
 
-# <a name="Contrib Info"></a> Contrib Info
+## <a name="Contrib Info"></a> Contrib Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -120,7 +117,7 @@ If the contrib is properly installed (and Javascript is enabled in your browser!
     <td> None </td>
   </tr>
   <tr>
-    <td> 12/09/2005 </td>
+    <td align="right"> 12 Sep 2005 </td>
     <td> 1.000 First Version </td>
   </tr>
   <tr>
@@ -138,3 +135,5 @@ If the contrib is properly installed (and Javascript is enabled in your browser!
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]]
+
+-- TWiki:Main.SamHasler - 12 Sep 2005

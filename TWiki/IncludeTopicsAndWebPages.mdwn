@@ -20,7 +20,7 @@ Use the `%INCLUDE{...}%` variable to embed the content of another topic or web p
 
 The `pattern` parameter is optional and allows you to extract some parts of a web page. Specify a [[RegularExpression]] that scans from start (`'^'`) to end and contains the text you want to keep in parenthesis, e.g., `pattern="^.*?(from here.*?to here).*"`. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table, make sure to include everything including the table end tag.
 
-[[TWikiVariables#VarINCLUDE]] explains the other parameters.
+[[VarINCLUDE]] explains the other parameters.
 
 **_Note:_** All text of a topic is included unless it contains a `%STARTINCLUDE%` and `%STOPINCLUDE%`, or you specify a `section` parameter and/or a `pattern` parameter. A pattern will only search between `%STARTINCLUDE%` and `%STOPINCLUDE%`.
 
@@ -43,4 +43,4 @@ The `pattern` parameter is optional and allows you to extract some parts of a we
 - You get:
   - Tokyo:
 
-**_Related Topics:_** [[TWikiVariables#VarINCLUDE]], [[UserDocumentationCategory]]
+**_Related Topics:_** [[VarINCLUDE]], [[UserDocumentationCategory]]

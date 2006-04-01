@@ -11,8 +11,10 @@ This is the TWiki icon library. The graphics can be used in topics and by web ap
         <li><a href="#Changes,  notification icons"> <img align="top" alt="changes" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/changes.gif" width="16" /> Changes, <img align="top" alt="notify" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/notify.gif" width="16" /> notification icons</a></li>
         <li><a href="#Status,  flag,  LED icons"> <img align="top" alt="choice-yes" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/choice-yes.gif" width="16" /> Status, <img align="top" alt="flag" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/flag.gif" width="16" /> flag, <img align="top" alt="led-box-red" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/led-box-red.gif" width="16" /> LED icons</a></li>
         <li><a href="#Navigation icons"> <img align="top" alt="home" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/home.gif" width="16" /> Navigation icons</a></li>
+        <li><a href="#Interface icons"> <img align="top" alt="toggleclose" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/toggleclose.gif" width="16" /> Interface icons</a></li>
         <li><a href="#Block graphics"> <img align="top" alt="line_ur" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/line_ur.gif" width="16" /> Block graphics</a></li>
         <li><a href="#Filetype icons"> <img align="top" alt="gif" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/gif.gif" width="16" /> Filetype icons</a></li>
+        <li><a href="#TWiki icons"> <img align="top" alt="twiki" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/twiki.gif" width="16" /> TWiki icons</a></li>
       </ul>
     </li>
   </ul>
@@ -30,7 +32,7 @@ There are several ways to put an image in a topic.
   - You are not restricted to use the TWikiDocGraphics topic - in a similar way you can show attached images by replacing `TWikiDocGraphics` with the topic name.
   - The TWiki:Plugins.SmiliesPlugin, using a different short hand than `%VARIABLES%`, may be worth checking out for extended use
 - To create an image with a link, write: `[[WebHome][%ICON{home}%]]` to get: [[Main/WebHome]]
-- To get the full URL of the icon, use [[ICONURL|Main/TWikiVariables#VarICONURL]]: `%ICONURL{"toggleopen"}%` gets you: `http://www.dementia.org/twiki//view/Main/WebHome/toggleopen.gif` (if you paste that in a topic you will get: ![toggleopen.gif](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen.gif))
+- To get the full URL of the icon, use [[ICONURL|Main/VarICONURL]]: `%ICONURL{"toggleopen"}%` gets you: `http://www.dementia.org/twiki//view/Main/WebHome/toggleopen.gif` (if you paste that in a topic you will get: ![toggleopen.gif](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen.gif))
 - **_Note:_** Most images have 16x16 pixels. For those images you can use the `%ICON{}%` syntax. Use an HTML img tag with `%ICONURL{}%` for image with other sizes.
 
 **_Related Topics:_** [[TWikiSkins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]]
@@ -43,172 +45,172 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=1;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Speech bubble" src="http://www.dementia.org/twiki//view/bubble.gif" title="Speech bubble" /></td>
-    <td bgcolor="#ffffff" style=""><code>bubble.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Speech bubble </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{bubble}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Speech bubble" src="http://www.dementia.org/twiki//view/bubble.gif" title="Speech bubble" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>bubble.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Speech bubble </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{bubble}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Days / Calendar" src="http://www.dementia.org/twiki//view/days.gif" title="Days / Calendar" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Days / Calendar" src="http://www.dementia.org/twiki//view/days.gif" title="Days / Calendar" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>days.gif</code></td>
     <td bgcolor="#ffffff" style=""> Days, Calendar </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{days}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Download" src="http://www.dementia.org/twiki//view/download.gif" title="Download" /></td>
-    <td bgcolor="#ffffff" style=""><code>download.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Download </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{download}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Download" src="http://www.dementia.org/twiki//view/download.gif" title="Download" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>download.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Download </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{download}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Filter" src="http://www.dementia.org/twiki//view/filter.gif" title="Filter" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Filter" src="http://www.dementia.org/twiki//view/filter.gif" title="Filter" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>filter.gif</code></td>
     <td bgcolor="#ffffff" style=""> Filter </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{filter}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Gear" src="http://www.dementia.org/twiki//view/gear.gif" title="Gear" /></td>
-    <td bgcolor="#ffffff" style=""><code>gear.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Gear </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{gear}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Gear" src="http://www.dementia.org/twiki//view/gear.gif" title="Gear" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>gear.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Gear </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{gear}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Globe" src="http://www.dementia.org/twiki//view/globe.gif" title="Globe" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Globe" src="http://www.dementia.org/twiki//view/globe.gif" title="Globe" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>globe.gif</code></td>
     <td bgcolor="#ffffff" style=""> Globe </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{globe}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Pointing hand" src="http://www.dementia.org/twiki//view/hand.gif" title="Pointing hand" /></td>
-    <td bgcolor="#ffffff" style=""><code>hand.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Pointing hand </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{hand}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Pointing hand" src="http://www.dementia.org/twiki//view/hand.gif" title="Pointing hand" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>hand.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Pointing hand </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{hand}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Help" src="http://www.dementia.org/twiki//view/help.gif" title="Help" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Help" src="http://www.dementia.org/twiki//view/help.gif" title="Help" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>help.gif</code></td>
     <td bgcolor="#ffffff" style=""> Help </td>
     <td bgcolor="#ffffff" style=""><code>%H%</code>, <code>%ICON{help}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Information" src="http://www.dementia.org/twiki//view/info.gif" title="Information" /></td>
-    <td bgcolor="#ffffff" style=""><code>info.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Info </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{info}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Information" src="http://www.dementia.org/twiki//view/info.gif" title="Information" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>info.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Info </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{info}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Hour glass (clock)" src="http://www.dementia.org/twiki//view/hourglass.gif" title="Hour glass (clock)" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Hour glass (clock)" src="http://www.dementia.org/twiki//view/hourglass.gif" title="Hour glass (clock)" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>hourglass.gif</code></td>
     <td bgcolor="#ffffff" style=""> Hour glass (clock) </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{hourglass}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Read more" src="http://www.dementia.org/twiki//view/more.gif" title="Read more" /></td>
-    <td bgcolor="#ffffff" style=""><code>more.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Read more </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{more}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Read more" src="http://www.dementia.org/twiki//view/more.gif" title="Read more" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>more.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Read more </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{more}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Read more" src="http://www.dementia.org/twiki//view/more-small.gif" title="Read more" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Read more" src="http://www.dementia.org/twiki//view/more-small.gif" title="Read more" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>more-small.gif</code></td>
     <td bgcolor="#ffffff" style=""> Read more, 13x13 </td>
     <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{more-small}%" width="13" height="13" alt="Read more" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Move" src="http://www.dementia.org/twiki//view/move.gif" title="Move" /></td>
-    <td bgcolor="#ffffff" style=""><code>move.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Move </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{move}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Move" src="http://www.dementia.org/twiki//view/move.gif" title="Move" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>move.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Move </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{move}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Note" src="http://www.dementia.org/twiki//view/note.gif" title="Note" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Note" src="http://www.dementia.org/twiki//view/note.gif" title="Note" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>note.gif</code></td>
     <td bgcolor="#ffffff" style=""> Note </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{note}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Parked" src="http://www.dementia.org/twiki//view/parked.gif" title="Parked" /></td>
-    <td bgcolor="#ffffff" style=""><code>parked.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Parked </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{parked}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Parked" src="http://www.dementia.org/twiki//view/parked.gif" title="Parked" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>parked.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Parked </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{parked}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Pencil / Refactor / Edit" src="http://www.dementia.org/twiki//view/pencil.gif" title="Pencil / Refactor / Edit" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Pencil / Refactor / Edit" src="http://www.dementia.org/twiki//view/pencil.gif" title="Pencil / Refactor / Edit" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>pencil.gif</code></td>
     <td bgcolor="#ffffff" style=""> Pencil / Refactor / Edit </td>
     <td bgcolor="#ffffff" style=""><code>%P%</code>, <code>%ICON{pencil}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Request for comments" src="http://www.dementia.org/twiki//view/rfc.gif" title="Request for comments" /></td>
-    <td bgcolor="#ffffff" style=""><code>rfc.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Request for comments </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{rfc}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Request for comments" src="http://www.dementia.org/twiki//view/rfc.gif" title="Request for comments" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>rfc.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Request for comments </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{rfc}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Sort" src="http://www.dementia.org/twiki//view/sort.gif" title="Sort" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Sort" src="http://www.dementia.org/twiki//view/sort.gif" title="Sort" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>sort.gif</code></td>
     <td bgcolor="#ffffff" style=""> Sort </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{sort}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Gold star, favorites" src="http://www.dementia.org/twiki//view/stargold.gif" title="Gold star, favorites" /></td>
-    <td bgcolor="#ffffff" style=""><code>stargold.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Gold star, favorites </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{stargold}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Gold star, favorites" src="http://www.dementia.org/twiki//view/stargold.gif" title="Gold star, favorites" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>stargold.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Gold star, favorites </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{stargold}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Red star, highlight" src="http://www.dementia.org/twiki//view/starred.gif" title="Red star, highlight" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Red star, highlight" src="http://www.dementia.org/twiki//view/starred.gif" title="Red star, highlight" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>starred.gif</code></td>
     <td bgcolor="#ffffff" style=""> Red star, highlight </td>
     <td bgcolor="#ffffff" style=""><code>%S%</code>, <code>%ICON{starred}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Stop" src="http://www.dementia.org/twiki//view/stop.gif" title="Stop" /></td>
-    <td bgcolor="#ffffff" style=""><code>stop.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Stop </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{stop}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Stop" src="http://www.dementia.org/twiki//view/stop.gif" title="Stop" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>stop.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Stop </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{stop}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Target" src="http://www.dementia.org/twiki//view/target.gif" title="Target" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Target" src="http://www.dementia.org/twiki//view/target.gif" title="Target" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>target.gif</code></td>
     <td bgcolor="#ffffff" style=""> Target </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{target}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Tip, idea" src="http://www.dementia.org/twiki//view/tip.gif" title="Tip, idea" /></td>
-    <td bgcolor="#ffffff" style=""><code>tip.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Tip, idea </td>
-    <td bgcolor="#ffffff" style=""><code>%T%</code>, <code>%ICON{tip}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Tip, idea" src="http://www.dementia.org/twiki//view/tip.gif" title="Tip, idea" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>tip.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Tip, idea </td>
+    <td bgcolor="#eaeaea" style=""><code>%T%</code>, <code>%ICON{tip}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Warning, important" src="http://www.dementia.org/twiki//view/warning.gif" title="Warning, important" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Warning, important" src="http://www.dementia.org/twiki//view/warning.gif" title="Warning, important" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>warning.gif</code></td>
     <td bgcolor="#ffffff" style=""> Warning, important </td>
     <td bgcolor="#ffffff" style=""><code>%W%</code>, <code>%ICON{warning}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Watch" src="http://www.dementia.org/twiki//view/watch.gif" title="Watch" /></td>
-    <td bgcolor="#ffffff" style=""><code>watch.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Watch </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{watch}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Watch" src="http://www.dementia.org/twiki//view/watch.gif" title="Watch" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>watch.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Watch </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{watch}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Work in progress, under construction" src="http://www.dementia.org/twiki//view/wip.gif" title="Work in progress, under construction" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Work in progress, under construction" src="http://www.dementia.org/twiki//view/wip.gif" title="Work in progress, under construction" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>wip.gif</code></td>
     <td bgcolor="#ffffff" style=""> Work in progress, under construction </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{wip}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Wrench, tools" src="http://www.dementia.org/twiki//view/wrench.gif" title="Wrench, tools" /></td>
-    <td bgcolor="#ffffff" style=""><code>wrench.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Wrench, tools </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{wrench}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Wrench, tools" src="http://www.dementia.org/twiki//view/wrench.gif" title="Wrench, tools" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>wrench.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Wrench, tools </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{wrench}%</code></td>
   </tr>
 </table>
 
@@ -216,130 +218,118 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="View topic" src="http://www.dementia.org/twiki//view/viewtopic.gif" title="View topic" /></td>
-    <td bgcolor="#ffffff" style=""><code>viewtopic.gif</code></td>
-    <td bgcolor="#ffffff" style=""> View topic </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{viewtopic}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="View topic" src="http://www.dementia.org/twiki//view/viewtopic.gif" title="View topic" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>viewtopic.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> View topic </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{viewtopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Print topic" src="http://www.dementia.org/twiki//view/printtopic.gif" title="Print topic" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Print topic" src="http://www.dementia.org/twiki//view/printtopic.gif" title="Print topic" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>printtopic.gif</code></td>
     <td bgcolor="#ffffff" style=""> Print topic </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{printtopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Refresh topic" src="http://www.dementia.org/twiki//view/refreshtopic.gif" title="Refresh topic" /></td>
-    <td bgcolor="#ffffff" style=""><code>refreshtopic.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Refresh topic </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{refreshtopic}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Refresh topic" src="http://www.dementia.org/twiki//view/refreshtopic.gif" title="Refresh topic" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>refreshtopic.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Refresh topic </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{refreshtopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="New topic" src="http://www.dementia.org/twiki//view/newtopic.gif" title="New topic" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="New topic" src="http://www.dementia.org/twiki//view/newtopic.gif" title="New topic" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>newtopic.gif</code></td>
     <td bgcolor="#ffffff" style=""> New topic </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{newtopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Edit topic" src="http://www.dementia.org/twiki//view/edittopic.gif" title="Edit topic" /></td>
-    <td bgcolor="#ffffff" style=""><code>edittopic.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Edit topic </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{edittopic}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Edit topic" src="http://www.dementia.org/twiki//view/edittopic.gif" title="Edit topic" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>edittopic.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Edit topic </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{edittopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Save" src="http://www.dementia.org/twiki//view/save.gif" title="Save" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Save" src="http://www.dementia.org/twiki//view/save.gif" title="Save" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>save.gif</code></td>
     <td bgcolor="#ffffff" style=""> Save </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{save}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Attach file" src="http://www.dementia.org/twiki//view/attachfile.gif" title="Attach file" /></td>
-    <td bgcolor="#ffffff" style=""><code>attachfile.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Attach file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{attachfile}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Attach file" src="http://www.dementia.org/twiki//view/attachfile.gif" title="Attach file" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>attachfile.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Attach file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{attachfile}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Download" src="http://www.dementia.org/twiki//view/download.gif" title="Download" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Download" src="http://www.dementia.org/twiki//view/download.gif" title="Download" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>download.gif</code></td>
     <td bgcolor="#ffffff" style=""> Download </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{download}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Trash" src="http://www.dementia.org/twiki//view/trash.gif" title="Trash" /></td>
-    <td bgcolor="#ffffff" style=""><code>trash.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Trash </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{trash}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Trash" src="http://www.dementia.org/twiki//view/trash.gif" title="Trash" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>trash.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Trash </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{trash}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Search topic" src="http://www.dementia.org/twiki//view/searchtopic.gif" title="Search topic" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Search topic" src="http://www.dementia.org/twiki//view/searchtopic.gif" title="Search topic" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>searchtopic.gif</code></td>
     <td bgcolor="#ffffff" style=""> Search topic </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{searchtopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Search" src="http://www.dementia.org/twiki//view/search-small.gif" title="Search" /></td>
-    <td bgcolor="#ffffff" style=""><code>search-small.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Small search button, 13x13 </td>
-    <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{search-small}%" width="13" height="13" alt="Search" border="0" /&gt;</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Search" src="http://www.dementia.org/twiki//view/search-small.gif" title="Search" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>search-small.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Small search button, 13x13 </td>
+    <td bgcolor="#eaeaea" style=""><code>&lt;img src="%ICONURL{search-small}%" width="13" height="13" alt="Search" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Topic back-links" src="http://www.dementia.org/twiki//view/topicbacklinks.gif" title="Topic back-links" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Topic back-links" src="http://www.dementia.org/twiki//view/topicbacklinks.gif" title="Topic back-links" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>topicbacklinks.gif</code></td>
     <td bgcolor="#ffffff" style=""> Topic back-links </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{topicbacklinks}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Topic difference" src="http://www.dementia.org/twiki//view/topicdiffs.gif" title="Topic difference" /></td>
-    <td bgcolor="#ffffff" style=""><code>topicdiffs.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Topic difference </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{topicdiffs}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Topic difference" src="http://www.dementia.org/twiki//view/topicdiffs.gif" title="Topic difference" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>topicdiffs.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Topic difference </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{topicdiffs}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Statistics" src="http://www.dementia.org/twiki//view/statistics.gif" title="Statistics" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Statistics" src="http://www.dementia.org/twiki//view/statistics.gif" title="Statistics" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>statistics.gif</code></td>
     <td bgcolor="#ffffff" style=""> Statistics </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{statistics}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Index" src="http://www.dementia.org/twiki//view/index.gif" title="Index" /></td>
-    <td bgcolor="#ffffff" style=""><code>index.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Index </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{index}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Index" src="http://www.dementia.org/twiki//view/index.gif" title="Index" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>index.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Index </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{index}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Index list" src="http://www.dementia.org/twiki//view/indexlist.gif" title="Index list" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Index list" src="http://www.dementia.org/twiki//view/indexlist.gif" title="Index list" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>indexlist.gif</code></td>
     <td bgcolor="#ffffff" style=""> Index list </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{indexlist}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Cache topic" src="http://www.dementia.org/twiki//view/cachetopic.gif" title="Cache topic" /></td>
-    <td bgcolor="#ffffff" style=""><code>cachetopic.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Cache topic </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{cachetopic}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Cache topic" src="http://www.dementia.org/twiki//view/cachetopic.gif" title="Cache topic" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>cachetopic.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Cache topic </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{cachetopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Folder" src="http://www.dementia.org/twiki//view/folder.gif" title="Folder" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Folder" src="http://www.dementia.org/twiki//view/folder.gif" title="Folder" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>folder.gif</code></td>
     <td bgcolor="#ffffff" style=""> Folder </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{folder}%</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Web" src="http://www.dementia.org/twiki//view/web-bg.gif" title="Web" /></td>
-    <td bgcolor="#ffffff" style=""><code>web-bg.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Web background, used in [[TWiki/WebLeftBarWebsList]]</td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{web-bg}%</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Web" src="http://www.dementia.org/twiki//view/web-bg-small.gif" title="Web" /></td>
-    <td bgcolor="#ffffff" style=""><code>web-bg-small.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Web background, 13x13 </td>
-    <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{web-bg-small}%" width="13" height="13" alt="Web" border="0" /&gt;</code></td>
   </tr>
 </table>
 
@@ -347,79 +337,79 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Person" src="http://www.dementia.org/twiki//view/person.gif" title="Person" /></td>
-    <td bgcolor="#ffffff" style=""><code>person.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Person </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{person}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Person" src="http://www.dementia.org/twiki//view/person.gif" title="Person" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>person.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Person </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{person}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Persons" src="http://www.dementia.org/twiki//view/persons.gif" title="Persons" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Persons" src="http://www.dementia.org/twiki//view/persons.gif" title="Persons" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>persons.gif</code></td>
     <td bgcolor="#ffffff" style=""> Persons </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{persons}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Group" src="http://www.dementia.org/twiki//view/group.gif" title="Group" /></td>
-    <td bgcolor="#ffffff" style=""><code>group.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Group </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{group}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Group" src="http://www.dementia.org/twiki//view/group.gif" title="Group" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>group.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Group </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{group}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Building" src="http://www.dementia.org/twiki//view/building.gif" title="Building" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Building" src="http://www.dementia.org/twiki//view/building.gif" title="Building" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>building.gif</code></td>
     <td bgcolor="#ffffff" style=""> Building </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{building}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Buildings" src="http://www.dementia.org/twiki//view/buildings.gif" title="Buildings" /></td>
-    <td bgcolor="#ffffff" style=""><code>buildings.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Buildings </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{buildings}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Buildings" src="http://www.dementia.org/twiki//view/buildings.gif" title="Buildings" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>buildings.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Buildings </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{buildings}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Log out" src="http://www.dementia.org/twiki//view/logout.gif" title="Log out" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Log out" src="http://www.dementia.org/twiki//view/logout.gif" title="Log out" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>logout.gif</code></td>
     <td bgcolor="#ffffff" style=""> Log out </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{logout}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Key" src="http://www.dementia.org/twiki//view/key.gif" title="Key" /></td>
-    <td bgcolor="#ffffff" style=""><code>key.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Key </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{key}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Key" src="http://www.dementia.org/twiki//view/key.gif" title="Key" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>key.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Key </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{key}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Lock" src="http://www.dementia.org/twiki//view/lock.gif" title="Lock" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Lock" src="http://www.dementia.org/twiki//view/lock.gif" title="Lock" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>lock.gif</code></td>
     <td bgcolor="#ffffff" style=""> Lock </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{lock}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Locked topic" src="http://www.dementia.org/twiki//view/locktopic.gif" title="Locked topic" /></td>
-    <td bgcolor="#ffffff" style=""><code>locktopic.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Locked topic </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{locktopic}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Locked topic" src="http://www.dementia.org/twiki//view/locktopic.gif" title="Locked topic" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>locktopic.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Locked topic </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{locktopic}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Locked topic, gray" src="http://www.dementia.org/twiki//view/locktopicgray.gif" title="Locked topic, gray" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Locked topic, gray" src="http://www.dementia.org/twiki//view/locktopicgray.gif" title="Locked topic, gray" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>locktopicgray.gif</code></td>
     <td bgcolor="#ffffff" style=""> Locked topic, gray </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{locktopicgray}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Locked folder" src="http://www.dementia.org/twiki//view/lockfolder.gif" title="Locked folder" /></td>
-    <td bgcolor="#ffffff" style=""><code>lockfolder.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Locked folder </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{lockfolder}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Locked folder" src="http://www.dementia.org/twiki//view/lockfolder.gif" title="Locked folder" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>lockfolder.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Locked folder </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{lockfolder}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Locked folder, gray" src="http://www.dementia.org/twiki//view/lockfoldergray.gif" title="Locked folder, gray" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Locked folder, gray" src="http://www.dementia.org/twiki//view/lockfoldergray.gif" title="Locked folder, gray" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>lockfoldergray.gif</code></td>
     <td bgcolor="#ffffff" style=""> Locked folder, gray </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{lockfoldergray}%</code></td>
@@ -430,64 +420,64 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Changes" src="http://www.dementia.org/twiki//view/changes.gif" title="Changes" /></td>
-    <td bgcolor="#ffffff" style=""><code>changes.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Changes </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{changes}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Changes" src="http://www.dementia.org/twiki//view/changes.gif" title="Changes" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>changes.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Changes </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{changes}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Changes" src="http://www.dementia.org/twiki//view/changes-small.gif" title="Changes" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Changes" src="http://www.dementia.org/twiki//view/changes-small.gif" title="Changes" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>changes-small.gif</code></td>
     <td bgcolor="#ffffff" style=""> Changes (small), 13x13 </td>
     <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{changes-small}%" width="13" height="13" alt="Changes" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Recent changes" src="http://www.dementia.org/twiki//view/recentchanges.gif" title="Recent changes" /></td>
-    <td bgcolor="#ffffff" style=""><code>recentchanges.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Recent changes </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{recentchanges}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Recent changes" src="http://www.dementia.org/twiki//view/recentchanges.gif" title="Recent changes" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>recentchanges.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Recent changes </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{recentchanges}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Mail" src="http://www.dementia.org/twiki//view/mail.gif" title="Mail" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Mail" src="http://www.dementia.org/twiki//view/mail.gif" title="Mail" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>mail.gif</code></td>
     <td bgcolor="#ffffff" style=""> Mail </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{mail}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Notify" src="http://www.dementia.org/twiki//view/notify.gif" title="Notify" /></td>
-    <td bgcolor="#ffffff" style=""><code>notify.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Notify </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{notify}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Notify" src="http://www.dementia.org/twiki//view/notify.gif" title="Notify" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>notify.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Notify </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{notify}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="RSS feed" src="http://www.dementia.org/twiki//view/rss-feed.gif" title="RSS feed" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="RSS feed" src="http://www.dementia.org/twiki//view/rss-feed.gif" title="RSS feed" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>rss-feed.gif</code></td>
     <td bgcolor="#ffffff" style=""> RSS feed, 36x14 </td>
     <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{rss-feed}%" width="36" height="14" alt="RSS feed" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="RSS feed" src="http://www.dementia.org/twiki//view/rss-small.gif" title="RSS feed" /></td>
-    <td bgcolor="#ffffff" style=""><code>rss-small.gif</code></td>
-    <td bgcolor="#ffffff" style=""> RSS feed </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{rss-small}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="RSS feed" src="http://www.dementia.org/twiki//view/rss-small.gif" title="RSS feed" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>rss-small.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> RSS feed </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{rss-small}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="XML feed" src="http://www.dementia.org/twiki//view/xml-feed.gif" title="XML feed" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="XML feed" src="http://www.dementia.org/twiki//view/xml-feed.gif" title="XML feed" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>xml-feed.gif</code></td>
     <td bgcolor="#ffffff" style=""> XML feed, 36x14 </td>
     <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{xml-feed}%" width="36" height="13" alt="XML feed" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="XML feed" src="http://www.dementia.org/twiki//view/xml-small.gif" title="XML feed" /></td>
-    <td bgcolor="#ffffff" style=""><code>xml-small.gif</code></td>
-    <td bgcolor="#ffffff" style=""> XML feed </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{xml-small}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="XML feed" src="http://www.dementia.org/twiki//view/xml-small.gif" title="XML feed" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>xml-small.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> XML feed </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{xml-small}%</code></td>
   </tr>
 </table>
 
@@ -495,196 +485,196 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=5;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="NEW" src="http://www.dementia.org/twiki//view/new.gif" title="NEW" /></td>
-    <td bgcolor="#ffffff" style=""><code>new.gif</code></td>
-    <td bgcolor="#ffffff" style=""> NEW, 30x16 </td>
-    <td bgcolor="#ffffff" style=""><code>%N%</code>, <code>&lt;img src="%ICONURL{new}%" width="30" height="16" alt="New" border="0" /&gt;</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="NEW" src="http://www.dementia.org/twiki//view/new.gif" title="NEW" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>new.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> NEW, 30x16 </td>
+    <td bgcolor="#eaeaea" style=""><code>%N%</code>, <code>&lt;img src="%ICONURL{new}%" width="30" height="16" alt="New" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="TODO" src="http://www.dementia.org/twiki//view/todo.gif" title="TODO" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="TODO" src="http://www.dementia.org/twiki//view/todo.gif" title="TODO" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>todo.gif</code></td>
     <td bgcolor="#ffffff" style=""> TODO, 37x16 </td>
     <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{todo}%" width="37" height="16" alt="TODO" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="UPDATED" src="http://www.dementia.org/twiki//view/updated.gif" title="UPDATED" /></td>
-    <td bgcolor="#ffffff" style=""><code>updated.gif</code></td>
-    <td bgcolor="#ffffff" style=""> UPDATED, 55x16 </td>
-    <td bgcolor="#ffffff" style=""><code>%U%</code>, <code>&lt;img src="%ICONURL{updated}%" width="55" height="16" alt="UPDATED" border="0" /&gt;</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="UPDATED" src="http://www.dementia.org/twiki//view/updated.gif" title="UPDATED" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>updated.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> UPDATED, 55x16 </td>
+    <td bgcolor="#eaeaea" style=""><code>%U%</code>, <code>&lt;img src="%ICONURL{updated}%" width="55" height="16" alt="UPDATED" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="DONE" src="http://www.dementia.org/twiki//view/done.gif" title="DONE" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="DONE" src="http://www.dementia.org/twiki//view/done.gif" title="DONE" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>done.gif</code></td>
     <td bgcolor="#ffffff" style=""> DONE, 37x16 </td>
     <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{done}%" width="37" height="16" alt="Done" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="CLOSED" src="http://www.dementia.org/twiki//view/closed.gif" title="CLOSED" /></td>
-    <td bgcolor="#ffffff" style=""><code>closed.gif</code></td>
-    <td bgcolor="#ffffff" style=""> CLOSED, 48x16 </td>
-    <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{closed}%" width="48" height="16" alt="Closed" border="0" /&gt;</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="CLOSED" src="http://www.dementia.org/twiki//view/closed.gif" title="CLOSED" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>closed.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> CLOSED, 48x16 </td>
+    <td bgcolor="#eaeaea" style=""><code>&lt;img src="%ICONURL{closed}%" width="48" height="16" alt="Closed" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Minus" src="http://www.dementia.org/twiki//view/minus.gif" title="Minus" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Minus" src="http://www.dementia.org/twiki//view/minus.gif" title="Minus" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>minus.gif</code></td>
     <td bgcolor="#ffffff" style=""> Minus </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{minus}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Plus" src="http://www.dementia.org/twiki//view/plus.gif" title="Plus" /></td>
-    <td bgcolor="#ffffff" style=""><code>plus.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Plus </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{plus}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Plus" src="http://www.dementia.org/twiki//view/plus.gif" title="Plus" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>plus.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Plus </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{plus}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Cancel" src="http://www.dementia.org/twiki//view/choice-cancel.gif" title="Cancel" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Cancel" src="http://www.dementia.org/twiki//view/choice-cancel.gif" title="Cancel" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>choice-cancel.gif</code></td>
     <td bgcolor="#ffffff" style=""> Cancel </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{choice-cancel}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="No" src="http://www.dementia.org/twiki//view/choice-no.gif" title="No" /></td>
-    <td bgcolor="#ffffff" style=""><code>choice-no.gif</code></td>
-    <td bgcolor="#ffffff" style=""> No </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{choice-no}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="No" src="http://www.dementia.org/twiki//view/choice-no.gif" title="No" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>choice-no.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> No </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{choice-no}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Yes / Done" src="http://www.dementia.org/twiki//view/choice-yes.gif" title="Yes / Done" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Yes / Done" src="http://www.dementia.org/twiki//view/choice-yes.gif" title="Yes / Done" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>choice-yes.gif</code></td>
     <td bgcolor="#ffffff" style=""> Yes / Done </td>
     <td bgcolor="#ffffff" style=""><code>%Y%</code>, <code>%ICON{choice-yes}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Unchecked checkbox" src="http://www.dementia.org/twiki//view/unchecked.gif" title="Unchecked checkbox" /></td>
-    <td bgcolor="#ffffff" style=""><code>unchecked.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Unchecked checkbox </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{unchecked}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Unchecked checkbox" src="http://www.dementia.org/twiki//view/unchecked.gif" title="Unchecked checkbox" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>unchecked.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Unchecked checkbox </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{unchecked}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Checked checkbox" src="http://www.dementia.org/twiki//view/checked.gif" title="Checked checkbox" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Checked checkbox" src="http://www.dementia.org/twiki//view/checked.gif" title="Checked checkbox" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>checked.gif</code></td>
     <td bgcolor="#ffffff" style=""> Checked checkbox </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{checked}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Flag" src="http://www.dementia.org/twiki//view/flag.gif" title="Flag" /></td>
-    <td bgcolor="#ffffff" style=""><code>flag.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Flag </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{flag}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Flag" src="http://www.dementia.org/twiki//view/flag.gif" title="Flag" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>flag.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Flag </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{flag}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Flag" src="http://www.dementia.org/twiki//view/flag-gray.gif" title="Flag" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Flag" src="http://www.dementia.org/twiki//view/flag-gray.gif" title="Flag" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>flag-gray.gif</code></td>
     <td bgcolor="#ffffff" style=""> Gray flag </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{flag-gray}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Flag" src="http://www.dementia.org/twiki//view/flag-gray-small.gif" title="Flag" /></td>
-    <td bgcolor="#ffffff" style=""><code>flag-gray-small.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Small gray flag, 13x13 </td>
-    <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{flag-gray-small}%" width="13" height="13" alt="Flag" border="0" /&gt;</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Flag" src="http://www.dementia.org/twiki//view/flag-gray-small.gif" title="Flag" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>flag-gray-small.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Small gray flag, 13x13 </td>
+    <td bgcolor="#eaeaea" style=""><code>&lt;img src="%ICONURL{flag-gray-small}%" width="13" height="13" alt="Flag" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Aqua led" src="http://www.dementia.org/twiki//view/led-aqua.gif" title="Aqua led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Aqua led" src="http://www.dementia.org/twiki//view/led-aqua.gif" title="Aqua led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-aqua.gif</code></td>
     <td bgcolor="#ffffff" style=""> Aqua led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-aqua}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Blue led" src="http://www.dementia.org/twiki//view/led-blue.gif" title="Blue led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-blue.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Blue led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-blue}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Blue led" src="http://www.dementia.org/twiki//view/led-blue.gif" title="Blue led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-blue.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Blue led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-blue}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Gray led" src="http://www.dementia.org/twiki//view/led-gray.gif" title="Gray led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Gray led" src="http://www.dementia.org/twiki//view/led-gray.gif" title="Gray led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-gray.gif</code></td>
     <td bgcolor="#ffffff" style=""> Gray led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-gray}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Green led" src="http://www.dementia.org/twiki//view/led-green.gif" title="Green led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-green.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Green led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-green}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Green led" src="http://www.dementia.org/twiki//view/led-green.gif" title="Green led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-green.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Green led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-green}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Orange led" src="http://www.dementia.org/twiki//view/led-orange.gif" title="Orange led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Orange led" src="http://www.dementia.org/twiki//view/led-orange.gif" title="Orange led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-orange.gif</code></td>
     <td bgcolor="#ffffff" style=""> Orange led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-orange}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Purple led" src="http://www.dementia.org/twiki//view/led-purple.gif" title="Purple led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-purple.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Purple led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-purple}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Purple led" src="http://www.dementia.org/twiki//view/led-purple.gif" title="Purple led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-purple.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Purple led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-purple}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Red led" src="http://www.dementia.org/twiki//view/led-red.gif" title="Red led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Red led" src="http://www.dementia.org/twiki//view/led-red.gif" title="Red led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-red.gif</code></td>
     <td bgcolor="#ffffff" style=""> Red led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-red}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Yellow led" src="http://www.dementia.org/twiki//view/led-yellow.gif" title="Yellow led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-yellow.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Yellow led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-yellow}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Yellow led" src="http://www.dementia.org/twiki//view/led-yellow.gif" title="Yellow led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-yellow.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Yellow led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-yellow}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Aqua led" src="http://www.dementia.org/twiki//view/led-box-aqua.gif" title="Aqua led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Aqua led" src="http://www.dementia.org/twiki//view/led-box-aqua.gif" title="Aqua led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-box-aqua.gif</code></td>
     <td bgcolor="#ffffff" style=""> Aqua led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-box-aqua}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Blue led" src="http://www.dementia.org/twiki//view/led-box-blue.gif" title="Blue led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-box-blue.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Blue led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-box-blue}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Blue led" src="http://www.dementia.org/twiki//view/led-box-blue.gif" title="Blue led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-box-blue.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Blue led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-box-blue}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Gray led" src="http://www.dementia.org/twiki//view/led-box-gray.gif" title="Gray led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Gray led" src="http://www.dementia.org/twiki//view/led-box-gray.gif" title="Gray led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-box-gray.gif</code></td>
     <td bgcolor="#ffffff" style=""> Gray led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-box-gray}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Green led" src="http://www.dementia.org/twiki//view/led-box-green.gif" title="Green led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-box-green.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Green led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-box-green}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Green led" src="http://www.dementia.org/twiki//view/led-box-green.gif" title="Green led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-box-green.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Green led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-box-green}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Orange led" src="http://www.dementia.org/twiki//view/led-box-orange.gif" title="Orange led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Orange led" src="http://www.dementia.org/twiki//view/led-box-orange.gif" title="Orange led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-box-orange.gif</code></td>
     <td bgcolor="#ffffff" style=""> Orange led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-box-orange}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Purple led" src="http://www.dementia.org/twiki//view/led-box-purple.gif" title="Purple led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-box-purple.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Purple led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-box-purple}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Purple led" src="http://www.dementia.org/twiki//view/led-box-purple.gif" title="Purple led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-box-purple.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Purple led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-box-purple}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Red led" src="http://www.dementia.org/twiki//view/led-box-red.gif" title="Red led" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Red led" src="http://www.dementia.org/twiki//view/led-box-red.gif" title="Red led" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>led-box-red.gif</code></td>
     <td bgcolor="#ffffff" style=""> Red led </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{led-box-red}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Yellow led" src="http://www.dementia.org/twiki//view/led-box-yellow.gif" title="Yellow led" /></td>
-    <td bgcolor="#ffffff" style=""><code>led-box-yellow.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Yellow led </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{led-box-yellow}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Yellow led" src="http://www.dementia.org/twiki//view/led-box-yellow.gif" title="Yellow led" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>led-box-yellow.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Yellow led </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{led-box-yellow}%</code></td>
   </tr>
 </table>
 
@@ -692,166 +682,213 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=6;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Home" src="http://www.dementia.org/twiki//view/home.gif" title="Home" /></td>
-    <td bgcolor="#ffffff" style=""><code>home.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Home </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{home}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Home" src="http://www.dementia.org/twiki//view/home.gif" title="Home" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>home.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Home </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{home}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Meet here (arrows to red dot)" src="http://www.dementia.org/twiki//view/arrowdot.gif" title="Meet here (arrows to red dot)" /></td>
-    <td bgcolor="#ffffff" style=""><code>arrowdot.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Meet here (arrows to red dot) </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{arrowdot}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="External site" src="http://www.dementia.org/twiki//view/external.gif" title="External site" /> </strong> </font></span></th>
+    <td bgcolor="#ffffff" style=""><code>external.gif</code></td>
+    <td bgcolor="#ffffff" style=""> External site </td>
+    <td bgcolor="#ffffff" style=""><code>%ICON{external}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Left" src="http://www.dementia.org/twiki//view/left.gif" title="Left" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Meet here (arrows to red dot)" src="http://www.dementia.org/twiki//view/arrowdot.gif" title="Meet here (arrows to red dot)" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>arrowdot.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Meet here (arrows to red dot) </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{arrowdot}%</code></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Left" src="http://www.dementia.org/twiki//view/left.gif" title="Left" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>left.gif</code></td>
     <td bgcolor="#ffffff" style=""> Left </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{left}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Right" src="http://www.dementia.org/twiki//view/right.gif" title="Right" /></td>
-    <td bgcolor="#ffffff" style=""><code>right.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{right}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Right" src="http://www.dementia.org/twiki//view/right.gif" title="Right" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>right.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{right}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Up" src="http://www.dementia.org/twiki//view/up.gif" title="Up" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Up" src="http://www.dementia.org/twiki//view/up.gif" title="Up" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>up.gif</code></td>
     <td bgcolor="#ffffff" style=""> Up </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{up}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Down" src="http://www.dementia.org/twiki//view/down.gif" title="Down" /></td>
-    <td bgcolor="#ffffff" style=""><code>down.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{down}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Down" src="http://www.dementia.org/twiki//view/down.gif" title="Down" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>down.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{down}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow blue left" src="http://www.dementia.org/twiki//view/arrowbleft.gif" title="Arrow blue left" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow blue left" src="http://www.dementia.org/twiki//view/arrowbleft.gif" title="Arrow blue left" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>arrowbleft.gif</code></td>
     <td bgcolor="#ffffff" style=""> Arrow blue left </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{arrowbleft}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow blue right" src="http://www.dementia.org/twiki//view/arrowbright.gif" title="Arrow blue right" /></td>
-    <td bgcolor="#ffffff" style=""><code>arrowbright.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Arrow blue right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{arrowbright}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow blue right" src="http://www.dementia.org/twiki//view/arrowbright.gif" title="Arrow blue right" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>arrowbright.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Arrow blue right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{arrowbright}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow blue up" src="http://www.dementia.org/twiki//view/arrowbup.gif" title="Arrow blue up" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow blue up" src="http://www.dementia.org/twiki//view/arrowbup.gif" title="Arrow blue up" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>arrowbup.gif</code></td>
     <td bgcolor="#ffffff" style=""> Arrow blue up </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{arrowbup}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow blue down" src="http://www.dementia.org/twiki//view/arrowbdown.gif" title="Arrow blue down" /></td>
-    <td bgcolor="#ffffff" style=""><code>arrowbdown.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Arrow blue down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{arrowbdown}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow blue down" src="http://www.dementia.org/twiki//view/arrowbdown.gif" title="Arrow blue down" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>arrowbdown.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Arrow blue down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{arrowbdown}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow left" src="http://www.dementia.org/twiki//view/arrowleft.gif" title="Arrow left" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow left" src="http://www.dementia.org/twiki//view/arrowleft.gif" title="Arrow left" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>arrowleft.gif</code></td>
     <td bgcolor="#ffffff" style=""> Arrow left </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{arrowleft}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow right" src="http://www.dementia.org/twiki//view/arrowright.gif" title="Arrow right" /></td>
-    <td bgcolor="#ffffff" style=""><code>arrowright.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Arrow right </td>
-    <td bgcolor="#ffffff" style=""><code>%M%</code>, <code>%ICON{arrowright}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow right" src="http://www.dementia.org/twiki//view/arrowright.gif" title="Arrow right" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>arrowright.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Arrow right </td>
+    <td bgcolor="#eaeaea" style=""><code>%M%</code>, <code>%ICON{arrowright}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow up" src="http://www.dementia.org/twiki//view/arrowup.gif" title="Arrow up" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow up" src="http://www.dementia.org/twiki//view/arrowup.gif" title="Arrow up" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>arrowup.gif</code></td>
     <td bgcolor="#ffffff" style=""> Arrow up </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{arrowup}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Arrow down" src="http://www.dementia.org/twiki//view/arrowdown.gif" title="Arrow down" /></td>
-    <td bgcolor="#ffffff" style=""><code>arrowdown.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Arrow down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{arrowdown}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Arrow down" src="http://www.dementia.org/twiki//view/arrowdown.gif" title="Arrow down" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>arrowdown.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Arrow down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{arrowdown}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Go to start" src="http://www.dementia.org/twiki//view/go_start.gif" title="Go to start" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Go to start" src="http://www.dementia.org/twiki//view/go_start.gif" title="Go to start" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>go_start.gif</code></td>
     <td bgcolor="#ffffff" style=""> Go to start </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{go_start}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Go fast back" src="http://www.dementia.org/twiki//view/go_fb.gif" title="Go fast back" /></td>
-    <td bgcolor="#ffffff" style=""><code>go_fb.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Go fast back </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{go_fb}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Go fast back" src="http://www.dementia.org/twiki//view/go_fb.gif" title="Go fast back" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>go_fb.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Go fast back </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{go_fb}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Go back" src="http://www.dementia.org/twiki//view/go_back.gif" title="Go back" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Go back" src="http://www.dementia.org/twiki//view/go_back.gif" title="Go back" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>go_back.gif</code></td>
     <td bgcolor="#ffffff" style=""> Go back </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{go_back}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Go forward" src="http://www.dementia.org/twiki//view/go_forward.gif" title="Go forward" /></td>
-    <td bgcolor="#ffffff" style=""><code>go_forward.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Go forward </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{go_forward}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Go forward" src="http://www.dementia.org/twiki//view/go_forward.gif" title="Go forward" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>go_forward.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Go forward </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{go_forward}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Go fast forward" src="http://www.dementia.org/twiki//view/go_ff.gif" title="Go fast forward" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Go fast forward" src="http://www.dementia.org/twiki//view/go_ff.gif" title="Go fast forward" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>go_ff.gif</code></td>
     <td bgcolor="#ffffff" style=""> Go fast forward </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{go_ff}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Go to end" src="http://www.dementia.org/twiki//view/go_end.gif" title="Go to end" /></td>
-    <td bgcolor="#ffffff" style=""><code>go_end.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Go to end </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{go_end}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Go to end" src="http://www.dementia.org/twiki//view/go_end.gif" title="Go to end" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>go_end.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Go to end </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{go_end}%</code></td>
+  </tr>
+</table>
+
+### <a name="Interface icons"></a><a name=" Interface icons"></a> <img src="http://www.dementia.org/twiki//view/Main/WebHome/toggleclose.gif" width="16" height="16" alt="toggleclose" /> Interface icons
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Monospace" src="http://www.dementia.org/twiki//view/monospace.gif" title="Monospace" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>monospace.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Monospace </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{monospace}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Close toggle, Twisty close toggle" src="http://www.dementia.org/twiki//view/toggleclose.gif" title="Close toggle, Twisty close toggle" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Proportional" src="http://www.dementia.org/twiki//view/proportional.gif" title="Proportional" /> </strong> </font></span></th>
+    <td bgcolor="#ffffff" style=""><code>proportional.gif</code></td>
+    <td bgcolor="#ffffff" style=""> Proportional </td>
+    <td bgcolor="#ffffff" style=""><code>%ICON{proportional}%</code></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopen.gif" title="Open toggle, Twisty open toggle" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>toggleopen.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Open toggle, Twisty open toggle </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{toggleopen}%</code></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Close toggle, Twisty close toggle" src="http://www.dementia.org/twiki//view/toggleclose.gif" title="Close toggle, Twisty close toggle" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>toggleclose.gif</code></td>
     <td bgcolor="#ffffff" style=""> Close toggle, Twisty close toggle </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{toggleclose}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Close toggle, Twisty close toggle" src="http://www.dementia.org/twiki//view/toggleclose-small.gif" title="Close toggle, Twisty close toggle" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopen-small.gif" title="Open toggle, Twisty open toggle" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>toggleopen-small.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Open toggle, Twisty open toggle </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{toggleopen-small}%</code></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Close toggle, Twisty close toggle" src="http://www.dementia.org/twiki//view/toggleclose-small.gif" title="Close toggle, Twisty close toggle" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>toggleclose-small.gif</code></td>
     <td bgcolor="#ffffff" style=""> Close toggle, Twisty close toggle </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{toggleclose-small}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopen.gif" title="Open toggle, Twisty open toggle" /></td>
-    <td bgcolor="#ffffff" style=""><code>toggleopen.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Open toggle, Twisty open toggle </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{toggleopen}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopen-mini.gif" title="Open toggle, Twisty open toggle" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>toggleopen-mini.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Open toggle, Twisty open toggle </td>
+    <td bgcolor="#eaeaea" style=""><code>&lt;img src="%ICONURL{toggleopen-mini}%" width="7" height="9" alt="Open" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopen-small.gif" title="Open toggle, Twisty open toggle" /></td>
-    <td bgcolor="#ffffff" style=""><code>toggleopen-small.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Open toggle, Twisty open toggle </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{toggleopen-small}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Close toggle, Twisty close toggle" src="http://www.dementia.org/twiki//view/toggleclose-mini.gif" title="Close toggle, Twisty close toggle" /> </strong> </font></span></th>
+    <td bgcolor="#ffffff" style=""><code>toggleclose-mini.gif</code></td>
+    <td bgcolor="#ffffff" style=""> Close toggle, Twisty close toggle </td>
+    <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{toggleclose-mini}%" width="7" height="9" alt="Close" border="0" /&gt;</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopenleft.gif" title="Open toggle, Twisty open toggle" /></td>
-    <td bgcolor="#ffffff" style=""><code>toggleopenleft.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Open toggle, Twisty open toggle </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{toggleopenleft}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopenleft.gif" title="Open toggle, Twisty open toggle" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>toggleopenleft.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Open toggle, Twisty open toggle </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{toggleopenleft}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopenleft-small.gif" title="Open toggle, Twisty open toggle" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Open toggle, Twisty open toggle" src="http://www.dementia.org/twiki//view/toggleopenleft-small.gif" title="Open toggle, Twisty open toggle" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>toggleopenleft-small.gif</code></td>
     <td bgcolor="#ffffff" style=""> Open toggle, Twisty open toggle </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{toggleopenleft-small}%</code></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Web" src="http://www.dementia.org/twiki//view/web-bg.gif" title="Web" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>web-bg.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Web background, used in [[TWiki/WebLeftBarWebsList]]</td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{web-bg}%</code></td>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="Web" src="http://www.dementia.org/twiki//view/web-bg-small.gif" title="Web" /> </strong> </font></span></th>
+    <td bgcolor="#ffffff" style=""><code>web-bg-small.gif</code></td>
+    <td bgcolor="#ffffff" style=""> Web background, 13x13 </td>
+    <td bgcolor="#ffffff" style=""><code>&lt;img src="%ICONURL{web-bg-small}%" width="13" height="13" alt="Web" border="0" /&gt;</code></td>
   </tr>
 </table>
 
@@ -859,148 +896,148 @@ There are several ways to put an image in a topic.
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=7;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=7;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=7;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=7;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_ld.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>line_ld.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Line graph left-down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{line_ld}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_ld.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>line_ld.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Line graph left-down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{line_ld}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_lr.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_lr.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>line_lr.gif</code></td>
     <td bgcolor="#ffffff" style=""> Line graph left-right </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{line_lr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_lrd.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>line_lrd.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Line graph left-right-down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{line_lrd}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_lrd.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>line_lrd.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Line graph left-right-down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{line_lrd}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_rd.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_rd.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>line_rd.gif</code></td>
     <td bgcolor="#ffffff" style=""> Line graph right-down </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{line_rd}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_ud.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>line_ud.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Line graph up-down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{line_ud}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_ud.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>line_ud.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Line graph up-down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{line_ud}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_udl.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_udl.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>line_udl.gif</code></td>
     <td bgcolor="#ffffff" style=""> Line graph up-down-left </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{line_udl}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_udlr.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>line_udlr.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Line graph up-down-left-right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{line_udlr}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_udlr.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>line_udlr.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Line graph up-down-left-right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{line_udlr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_udr.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_udr.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>line_udr.gif</code></td>
     <td bgcolor="#ffffff" style=""> Line graph up-down-right </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{line_udr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_ul.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>line_ul.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Line graph up-left </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{line_ul}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_ul.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>line_ul.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Line graph up-left </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{line_ul}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_ulr.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_ulr.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>line_ulr.gif</code></td>
     <td bgcolor="#ffffff" style=""> Line graph up-left-right </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{line_ulr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/line_ur.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>line_ur.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Line graph up-right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{line_ur}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/line_ur.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>line_ur.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Line graph up-right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{line_ur}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_ld.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_ld.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>dot_ld.gif</code></td>
     <td bgcolor="#ffffff" style=""> Dot graph left-down </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{dot_ld}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_lr.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>dot_lr.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Dot graph left-right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{dot_lr}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_lr.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>dot_lr.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Dot graph left-right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{dot_lr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_lrd.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_lrd.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>dot_lrd.gif</code></td>
     <td bgcolor="#ffffff" style=""> Dot graph left-right-down </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{dot_lrd}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_rd.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>dot_rd.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Dot graph right-down </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{dot_rd}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_rd.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>dot_rd.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Dot graph right-down </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{dot_rd}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_ud.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_ud.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>dot_ud.gif</code></td>
     <td bgcolor="#ffffff" style=""> Dot graph up-down </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{dot_ud}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_udl.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>dot_udl.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Dot graph up-down-left </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{dot_udl}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_udl.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>dot_udl.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Dot graph up-down-left </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{dot_udl}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_udlr.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_udlr.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>dot_udlr.gif</code></td>
     <td bgcolor="#ffffff" style=""> Dot graph up-down-left-right </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{dot_udlr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_udr.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>dot_udr.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Dot graph up-down-right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{dot_udr}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_udr.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>dot_udr.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Dot graph up-down-right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{dot_udr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_ul.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_ul.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>dot_ul.gif</code></td>
     <td bgcolor="#ffffff" style=""> Dot graph up-left </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{dot_ul}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_ulr.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>dot_ulr.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Dot graph up-left-right </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{dot_ulr}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_ulr.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>dot_ulr.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Dot graph up-left-right </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{dot_ulr}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/dot_ur.gif" title="" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/dot_ur.gif" title="" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>dot_ur.gif</code></td>
     <td bgcolor="#ffffff" style=""> Dot graph up-right </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{dot_ur}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="" src="http://www.dementia.org/twiki//view/empty.gif" title="" /></td>
-    <td bgcolor="#ffffff" style=""><code>empty.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Empty transparent 16x16 spacer </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{empty}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="" src="http://www.dementia.org/twiki//view/empty.gif" title="" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>empty.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Empty transparent 16x16 spacer </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{empty}%</code></td>
   </tr>
 </table>
 
@@ -1010,249 +1047,266 @@ Filetype icons are used by the attachment table and are seldom used in topics. W
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Name</font></a></th>
-    <th bgcolor="#ffffff" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=8;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=9;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=9;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=9;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=9;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="as" src="http://www.dementia.org/twiki//view/as.gif" title="as" /></td>
-    <td bgcolor="#ffffff" style=""><code>as.gif</code></td>
-    <td bgcolor="#ffffff" style=""> ActionScript </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{as}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="as" src="http://www.dementia.org/twiki//view/as.gif" title="as" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>as.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> ActionScript </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{as}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="bat" src="http://www.dementia.org/twiki//view/bat.gif" title="bat" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="bat" src="http://www.dementia.org/twiki//view/bat.gif" title="bat" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>bat.gif</code></td>
     <td bgcolor="#ffffff" style=""> MS-DOS batch file </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{bat}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="bmp" src="http://www.dementia.org/twiki//view/bmp.gif" title="bmp" /></td>
-    <td bgcolor="#ffffff" style=""><code>bmp.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Bitmap </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{bmp}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="bmp" src="http://www.dementia.org/twiki//view/bmp.gif" title="bmp" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>bmp.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Bitmap </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{bmp}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="c" src="http://www.dementia.org/twiki//view/c.gif" title="c" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="c" src="http://www.dementia.org/twiki//view/c.gif" title="c" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>c.gif</code></td>
     <td bgcolor="#ffffff" style=""> C source code file </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{c}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="dll" src="http://www.dementia.org/twiki//view/dll.gif" title="dll" /></td>
-    <td bgcolor="#ffffff" style=""><code>dll.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Dynamic Linked Library; Microsoft application file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{dll}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="dll" src="http://www.dementia.org/twiki//view/dll.gif" title="dll" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>dll.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Dynamic Linked Library; Microsoft application file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{dll}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="doc" src="http://www.dementia.org/twiki//view/doc.gif" title="doc" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="doc" src="http://www.dementia.org/twiki//view/doc.gif" title="doc" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>doc.gif</code></td>
     <td bgcolor="#ffffff" style=""> Microsoft Word file </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{doc}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="else" src="http://www.dementia.org/twiki//view/else.gif" title="else" /></td>
-    <td bgcolor="#ffffff" style=""><code>else.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Unknown file format </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{else}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="else" src="http://www.dementia.org/twiki//view/else.gif" title="else" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>else.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Unknown file format </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{else}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="eml" src="http://www.dementia.org/twiki//view/eml.gif" title="eml" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="eml" src="http://www.dementia.org/twiki//view/eml.gif" title="eml" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>eml.gif</code></td>
     <td bgcolor="#ffffff" style=""> Microsoft Outlook e-mail file </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{eml}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="exe" src="http://www.dementia.org/twiki//view/exe.gif" title="exe" /></td>
-    <td bgcolor="#ffffff" style=""><code>exe.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Microsoft Executable file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{exe}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="exe" src="http://www.dementia.org/twiki//view/exe.gif" title="exe" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>exe.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Microsoft Executable file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{exe}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="fla" src="http://www.dementia.org/twiki//view/fla.gif" title="fla" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="fla" src="http://www.dementia.org/twiki//view/fla.gif" title="fla" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>fla.gif</code></td>
     <td bgcolor="#ffffff" style=""> Macromedia Flash Movie </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{fla}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="fon" src="http://www.dementia.org/twiki//view/fon.gif" title="fon" /></td>
-    <td bgcolor="#ffffff" style=""><code>fon.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Windows bitmapped font file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{fon}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="fon" src="http://www.dementia.org/twiki//view/fon.gif" title="fon" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>fon.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Windows bitmapped font file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{fon}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="gif" src="http://www.dementia.org/twiki//view/gif.gif" title="gif" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="gif" src="http://www.dementia.org/twiki//view/gif.gif" title="gif" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>gif.gif</code></td>
     <td bgcolor="#ffffff" style=""> GIF </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{gif}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="h" src="http://www.dementia.org/twiki//view/h.gif" title="h" /></td>
-    <td bgcolor="#ffffff" style=""><code>h.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Header file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{h}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="h" src="http://www.dementia.org/twiki//view/h.gif" title="h" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>h.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Header file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{h}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="hlp" src="http://www.dementia.org/twiki//view/hlp.gif" title="hlp" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="hlp" src="http://www.dementia.org/twiki//view/hlp.gif" title="hlp" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>hlp.gif</code></td>
     <td bgcolor="#ffffff" style=""> Standard help file </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{hlp}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="html" src="http://www.dementia.org/twiki//view/html.gif" title="html" /></td>
-    <td bgcolor="#ffffff" style=""><code>html.gif</code></td>
-    <td bgcolor="#ffffff" style=""> HTML </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{html}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="html" src="http://www.dementia.org/twiki//view/html.gif" title="html" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>html.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> HTML </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{html}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="java" src="http://www.dementia.org/twiki//view/java.gif" title="java" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="java" src="http://www.dementia.org/twiki//view/java.gif" title="java" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>java.gif</code></td>
     <td bgcolor="#ffffff" style=""> Java source code file </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{java}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="jpg" src="http://www.dementia.org/twiki//view/jpg.gif" title="jpg" /></td>
-    <td bgcolor="#ffffff" style=""><code>jpg.gif</code></td>
-    <td bgcolor="#ffffff" style=""> JPEG </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{jpg}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="jpg" src="http://www.dementia.org/twiki//view/jpg.gif" title="jpg" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>jpg.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> JPEG </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{jpg}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="js" src="http://www.dementia.org/twiki//view/js.gif" title="js" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="js" src="http://www.dementia.org/twiki//view/js.gif" title="js" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>js.gif</code></td>
     <td bgcolor="#ffffff" style=""> JavaScript </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{js}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="mdb" src="http://www.dementia.org/twiki//view/mdb.gif" title="mdb" /></td>
-    <td bgcolor="#ffffff" style=""><code>mdb.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Microsoft Access database File </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{mdb}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="mdb" src="http://www.dementia.org/twiki//view/mdb.gif" title="mdb" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>mdb.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Microsoft Access database File </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{mdb}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="mov" src="http://www.dementia.org/twiki//view/mov.gif" title="mov" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="mov" src="http://www.dementia.org/twiki//view/mov.gif" title="mov" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>mov.gif</code></td>
     <td bgcolor="#ffffff" style=""> Quicktime movie </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{mov}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="mp3" src="http://www.dementia.org/twiki//view/mp3.gif" title="mp3" /></td>
-    <td bgcolor="#ffffff" style=""><code>mp3.gif</code></td>
-    <td bgcolor="#ffffff" style=""> MP3 </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{mp3}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="mp3" src="http://www.dementia.org/twiki//view/mp3.gif" title="mp3" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>mp3.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> MP3 </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{mp3}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="pdf" src="http://www.dementia.org/twiki//view/pdf.gif" title="pdf" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="pdf" src="http://www.dementia.org/twiki//view/pdf.gif" title="pdf" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>pdf.gif</code></td>
     <td bgcolor="#ffffff" style=""> PDF </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{pdf}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="pl" src="http://www.dementia.org/twiki//view/pl.gif" title="pl" /></td>
-    <td bgcolor="#ffffff" style=""><code>pl.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Perl source code file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{pl}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="pl" src="http://www.dementia.org/twiki//view/pl.gif" title="pl" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>pl.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Perl source code file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{pl}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="png" src="http://www.dementia.org/twiki//view/png.gif" title="png" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="png" src="http://www.dementia.org/twiki//view/png.gif" title="png" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>png.gif</code></td>
     <td bgcolor="#ffffff" style=""> PNG </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{png}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="ppt" src="http://www.dementia.org/twiki//view/ppt.gif" title="ppt" /></td>
-    <td bgcolor="#ffffff" style=""><code>ppt.gif</code></td>
-    <td bgcolor="#ffffff" style=""> PowerPoint </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{ppt}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="ppt" src="http://www.dementia.org/twiki//view/ppt.gif" title="ppt" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>ppt.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> PowerPoint </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{ppt}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="ps" src="http://www.dementia.org/twiki//view/ps.gif" title="ps" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="ps" src="http://www.dementia.org/twiki//view/ps.gif" title="ps" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>ps.gif</code></td>
     <td bgcolor="#ffffff" style=""> Postscript </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{ps}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="py" src="http://www.dementia.org/twiki//view/py.gif" title="py" /></td>
-    <td bgcolor="#ffffff" style=""><code>py.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Python source code file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{py}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="py" src="http://www.dementia.org/twiki//view/py.gif" title="py" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>py.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Python source code file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{py}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="ram" src="http://www.dementia.org/twiki//view/ram.gif" title="ram" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="ram" src="http://www.dementia.org/twiki//view/ram.gif" title="ram" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>ram.gif</code></td>
     <td bgcolor="#ffffff" style=""> RealAudio </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{ram}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="reg" src="http://www.dementia.org/twiki//view/reg.gif" title="reg" /></td>
-    <td bgcolor="#ffffff" style=""><code>reg.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Registry file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{reg}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="reg" src="http://www.dementia.org/twiki//view/reg.gif" title="reg" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>reg.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Registry file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{reg}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="sh" src="http://www.dementia.org/twiki//view/sh.gif" title="sh" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="sh" src="http://www.dementia.org/twiki//view/sh.gif" title="sh" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>sh.gif</code></td>
     <td bgcolor="#ffffff" style=""> Unix shell script </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{sh}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="sniff" src="http://www.dementia.org/twiki//view/sniff.gif" title="sniff" /></td>
-    <td bgcolor="#ffffff" style=""><code>sniff.gif</code></td>
-    <td bgcolor="#ffffff" style=""> sniff </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{sniff}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="sniff" src="http://www.dementia.org/twiki//view/sniff.gif" title="sniff" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>sniff.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> sniff </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{sniff}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="swf" src="http://www.dementia.org/twiki//view/swf.gif" title="swf" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="swf" src="http://www.dementia.org/twiki//view/swf.gif" title="swf" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>swf.gif</code></td>
     <td bgcolor="#ffffff" style=""> SWF (Shockwave Flash) </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{swf}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="ttf" src="http://www.dementia.org/twiki//view/ttf.gif" title="ttf" /></td>
-    <td bgcolor="#ffffff" style=""><code>ttf.gif</code></td>
-    <td bgcolor="#ffffff" style=""> True Type font </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{ttf}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="ttf" src="http://www.dementia.org/twiki//view/ttf.gif" title="ttf" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>ttf.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> True Type font </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{ttf}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="txt" src="http://www.dementia.org/twiki//view/txt.gif" title="txt" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="txt" src="http://www.dementia.org/twiki//view/txt.gif" title="txt" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>txt.gif</code></td>
     <td bgcolor="#ffffff" style=""> Text </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{txt}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="wav" src="http://www.dementia.org/twiki//view/wav.gif" title="wav" /></td>
-    <td bgcolor="#ffffff" style=""><code>wav.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Waveform sound file </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{wav}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="wav" src="http://www.dementia.org/twiki//view/wav.gif" title="wav" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>wav.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Waveform sound file </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{wav}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="wri" src="http://www.dementia.org/twiki//view/wri.gif" title="wri" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="wri" src="http://www.dementia.org/twiki//view/wri.gif" title="wri" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>wri.gif</code></td>
     <td bgcolor="#ffffff" style=""> Windows Write </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{wri}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="xls" src="http://www.dementia.org/twiki//view/xls.gif" title="xls" /></td>
-    <td bgcolor="#ffffff" style=""><code>xls.gif</code></td>
-    <td bgcolor="#ffffff" style=""> Microsoft Excel Spreadsheet </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{xls}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="xls" src="http://www.dementia.org/twiki//view/xls.gif" title="xls" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>xls.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> Microsoft Excel Spreadsheet </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{xls}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="xml" src="http://www.dementia.org/twiki//view/xml.gif" title="xml" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="xml" src="http://www.dementia.org/twiki//view/xml.gif" title="xml" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>xml.gif</code></td>
     <td bgcolor="#ffffff" style=""> XML </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{xml}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="xsl" src="http://www.dementia.org/twiki//view/xsl.gif" title="xsl" /></td>
-    <td bgcolor="#ffffff" style=""><code>xsl.gif</code></td>
-    <td bgcolor="#ffffff" style=""> XSL (XML style sheet) </td>
-    <td bgcolor="#ffffff" style=""><code>%ICON{xsl}%</code></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="xsl" src="http://www.dementia.org/twiki//view/xsl.gif" title="xsl" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>xsl.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> XSL (XML style sheet) </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{xsl}%</code></td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><img alt="zip" src="http://www.dementia.org/twiki//view/zip.gif" title="zip" /></td>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="zip" src="http://www.dementia.org/twiki//view/zip.gif" title="zip" /> </strong> </font></span></th>
     <td bgcolor="#ffffff" style=""><code>zip.gif</code></td>
     <td bgcolor="#ffffff" style=""> Compressed Zip archive </td>
     <td bgcolor="#ffffff" style=""><code>%ICON{zip}%</code></td>
+  </tr>
+</table>
+
+### <a name="TWiki icons"></a><a name=" TWiki icons"></a> <img src="http://www.dementia.org/twiki//view/Main/WebHome/twiki.gif" width="16" height="16" alt="twiki" /> TWiki icons
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=0;table=10;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff"> </font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=1;table=10;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">File Name</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=2;table=10;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Description</font></a></th>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><a href="http://localhost?sortcol=3;table=10;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Write...</font></a></th>
+  </tr>
+  <tr>
+    <th align="left" bgcolor="#ffffff" maxcols="0" style="text-align: left"><span><font color="#ffffff"> <strong> <img alt="TWiki" src="http://www.dementia.org/twiki//view/twiki.gif" title="TWiki" /> </strong> </font></span></th>
+    <td bgcolor="#eaeaea" style=""><code>twiki.gif</code></td>
+    <td bgcolor="#eaeaea" style=""> TWiki logo </td>
+    <td bgcolor="#eaeaea" style=""><code>%ICON{twiki}%</code></td>
   </tr>
 </table>

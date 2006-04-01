@@ -22,7 +22,7 @@ The general contract for methods in the class requires that errors are signalled
         <li><a href="#ObjectMethod <strong>readAttachment</strong> ($"> ObjectMethod readAttachment <tt>($user,$web,$topic,$attachment,$theRev) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *get_RevisionNumber"> ObjectMethod getRevisionNumber <tt>($web,$topic,$attachment) -&gt; $integer</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_WorkArea</strong> ($ke"> ObjectMethod getWorkArea <tt>($key) -&gt; $directorypath</tt></a></li>
-        <li><a href="#ObjectMethod *get_RevisionDiff*"> ObjectMethod getRevisionDiff <tt>($web,$topic,$rev1,$rev2,$contextLines) -&gt; \@diffArray</tt></a></li>
+        <li><a href="#ObjectMethod *get_RevisionDiff*"> ObjectMethod getRevisionDiff <tt>($user,$web,$topic,$rev1,$rev2,$contextLines) -&gt; \@diffArray</tt></a></li>
         <li><a href="#ObjectMethod *get_RevisionInfo*"> ObjectMethod getRevisionInfo <tt>($web,$topic,$rev,$attachment) -&gt; ($date,$user,$rev,$comment)</tt></a></li>
         <li><a href="#StaticMethod <strong>dataEncode</strong> ($unco"> StaticMethod dataEncode <tt>($uncoded) -&gt; $coded</tt></a></li>
         <li><a href="#StaticMethod <strong>dataDecode</strong> ($enco"> StaticMethod dataDecode <tt>($encoded) -&gt; $decoded</tt></a></li>
@@ -64,7 +64,7 @@ Construct a Store module, linking in the chosen sub-implementation.
 
 Reads the given version of a topic and it's meta-data. If the version is undef, then read the most recent version. The version number must be an integer, or undef for the latest version.
 
-If $user is defined, view permission will be required for the topic read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the user name passed in.
+if $user is defined, view permission will be required for the topic read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the user name passed in.
 
 If the topic contains a web specification (is of the form Web.Topic) the web specification will override whatever is passed in $web.
 
@@ -143,10 +143,11 @@ WORKS FOR ATTACHMENTS AS WELL AS TOPICS
 
 Gets a private directory uniquely identified by $key. The directory is intended as a work area for plugins. The directory will exist.
 
-## <a name="ObjectMethod &lt;strong&gt;get_RevisionDiff*"></a><a name="ObjectMethod *get_RevisionDiff&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionDiff** `($web,$topic,$rev1,$rev2,$contextLines) -> \@diffArray`
+## <a name="ObjectMethod &lt;strong&gt;get_RevisionDiff*"></a><a name="ObjectMethod *get_RevisionDiff&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionDiff** `($user,$web,$topic,$rev1,$rev2,$contextLines) -> \@diffArray`
 
 Return reference to an array of [ diffType, $right, $left ]
 
+- `$user` - the user object, or undef to suppress access control checks
 - `$web` - the web
 - `$topic` - the topic
 - `$rev1` Integer revision number

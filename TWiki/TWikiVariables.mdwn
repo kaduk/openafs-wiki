@@ -2,6 +2,7 @@
   <ul>
     <li><a href="#TWiki Variables"> TWiki Variables</a><ul>
         <li><a href="#Using Variables"> Using Variables</a></li>
+        <li><a href="#Variable Names"> Variable Names</a></li>
         <li><a href="#Preferences Variables"> Preferences Variables</a><ul>
             <li><a href="#Setting Preferences Variables"> Setting Preferences Variables</a></li>
             <li><a href="#Access Control Variables"> Access Control Variables</a></li>
@@ -12,6 +13,7 @@
         <li><a href="#Predefined Variables"> Predefined Variables</a></li>
       </ul>
     </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
   </ul>
 </div>
 
@@ -37,6 +39,12 @@ To use a variable type its name. For example,
 - To leave a variable unexpanded, precede it with an exclamation point, e.g. type `!%TOPIC%` to get `%TOPIC%`
 - Variables are expanded relative to the topic they are _used_ in, not the topic they are _defined_ in
 - Type `%ALLVARIABLES%` to get a full listing of all variables defined for a particular topic
+
+## <a name="Variable Names"></a> Variable Names
+
+Variable names must start with a letter. The following characters can be letters, numbers and the underscore '\_'. You can use both upper-case and lower-case letters and you can mix the characteres. E.g. `%MYVAR%`, `%MyVar%`, `%My2ndVar%`, and `%My_Var%` are all valid variable names. Variables are case sensitive. `%MyVAR%` and `%MYVAR%` are not the same variable.
+
+By convention all settings, predefined variables and variables used by plugins are always UPPER-CASE.
 
 <a name="SettingPrefs"></a> <a name="PreferencesVariables"></a>
 
@@ -68,8 +76,8 @@ Spaces between the = sign and the value will be ignored. You can split a value o
 
 > **Example:**
 >
->     	* Set VARIABLENAME = value starts here
->     	  and continues here
+>        * Set VARIABLENAME = value starts here
+>          and continues here
 
 Whatever you include in your Variable will be expanded on display, exactly as if it had been entered directly.
 
@@ -131,5 +139,9 @@ Most predefined variables return values that were either set in the configuratio
 - %T% **Take the time to thoroughly read through ALL preference variables.** If you actively configure your site, review variables periodically. They cover a wide range of functions, and it can be easy to miss the one perfect variable for something you have in mind. For example, see `%INCLUDINGTOPIC%`, `%INCLUDE%`, and the mighty `%SEARCH%`.
 
 This version of TWiki - TWiki-4.1.2, Sat, 03 Mar 2007, build 13046 - predefines the following variables:
+
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
+
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
 **_Related Topics:_** [[UserDocumentationCategory]]
