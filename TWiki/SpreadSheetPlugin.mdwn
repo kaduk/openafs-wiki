@@ -58,7 +58,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
     <li><a href="#Built-in Functions"> Built-in Functions</a><ul>
         <li><a href="#ABOVE( ) -- address range of cel"> ABOVE( ) -- address range of cells above the current cell</a></li>
         <li><a href="#ABS( num ) -- absolute value of"> ABS( num ) -- absolute value of a number</a></li>
-        <li><a href="#AND( list ) -- logcial AND of a"> AND( list ) -- logcial AND of a list</a></li>
+        <li><a href="#AND( list ) -- logical AND of a"> AND( list ) -- logical AND of a list</a></li>
         <li><a href="#AVERAGE( list ) -- average of a"> AVERAGE( list ) -- average of a list or a range of cells</a></li>
         <li><a href="#CHAR( number ) -- ASCII characte"> CHAR( number ) -- ASCII character represented by number</a></li>
         <li><a href="#CODE( text ) -- ASCII numeric va"> CODE( text ) -- ASCII numeric value of character</a></li>
@@ -98,7 +98,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#NOP( text ) -- no-operation"> NOP( text ) -- no-operation</a></li>
         <li><a href="#NOT( num ) -- reverse logic of a"> NOT( num ) -- reverse logic of a number</a></li>
         <li><a href="#ODD( num ) -- test for odd numbe"> ODD( num ) -- test for odd number</a></li>
-        <li><a href="#OR( list ) -- logcial OR of a li"> OR( list ) -- logcial OR of a list</a></li>
+        <li><a href="#OR( list ) -- logical OR of a li"> OR( list ) -- logical OR of a list</a></li>
         <li><a href="#PERCENTILE( num, list ) -- perce"> PERCENTILE( num, list ) -- percentile of a list or range of cells</a></li>
         <li><a href="#PRODUCT( list ) -- product of a"> PRODUCT( list ) -- product of a list or range of cells</a></li>
         <li><a href="#PROPER( text ) -- properly capit"> PROPER( text ) -- properly capitalize text</a></li>
@@ -111,6 +111,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#ROW( offset ) -- current row num"> ROW( offset ) -- current row number</a></li>
         <li><a href="#SEARCH( string, text, start ) --"> SEARCH( string, text, start ) -- search a string within a text</a></li>
         <li><a href="#SET( name, value ) -- set a vari"> SET( name, value ) -- set a variable for later use</a></li>
+        <li><a href="#SETIFEMPTY( name, value ) -- set"> SETIFEMPTY( name, value ) -- set a variable only if empty</a></li>
         <li><a href="#SETM( name, formula ) -- update"> SETM( name, formula ) -- update an existing variable based on a formula</a></li>
         <li><a href="#SIGN( num ) -- sign of a number"> SIGN( num ) -- sign of a number</a></li>
         <li><a href="#SUBSTITUTE( text, old, new, inst"> SUBSTITUTE( text, old, new, instance, option ) -- substitute text</a></li>
@@ -189,7 +190,7 @@ Conventions for Syntax:
 
 <a name="FuncAND"></a>
 
-### <a name="AND( list ) -- logcial AND of a"></a><a name="AND( list ) -- logcial AND of a "></a> AND( list ) -- logcial AND of a list
+### <a name="AND( list ) -- logical AND of a"></a><a name="AND( list ) -- logical AND of a "></a> AND( list ) -- logical AND of a list
 
 - Syntax: <code>**$AND( list )**</code>
 - Example: <code>**%CALC\{"$AND(1, 0, 1)"\}%**</code> returns <code>****</code>
@@ -355,7 +356,7 @@ Conventions for Syntax:
 - Specify the variable name (alphanumeric characters and underscores). An empty string is returned if the variable does not exist. Use `$SET()` to set a variable first. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables.
 - Syntax: <code>**$GET( name )**</code>
 - Example: <code>**%CALC\{"$GET(my\_total)"\}%**</code> returns the value of the `my_total` variable
-- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>, <code>[[$SETM()|Main/WebHome#FuncSETM]]</code>
+- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>, <code>[[$SETIFEMPTY()|Main/WebHome#FuncSETIFEMPTY]]</code>, <code>[[$SETM()|Main/WebHome#FuncSETM]]</code>
 
 <a name="FuncIF"></a>
 
@@ -549,7 +550,7 @@ Conventions for Syntax:
 
 <a name="FuncOR"></a>
 
-### <a name="OR( list ) -- logcial OR of a li"></a> OR( list ) -- logcial OR of a list
+### <a name="OR( list ) -- logical OR of a li"></a> OR( list ) -- logical OR of a list
 
 - Syntax: <code>**$OR( list )**</code>
 - Example: <code>**%CALC\{"$OR(1, 0, 1)"\}%**</code> returns <code>**1**</code>
@@ -588,7 +589,7 @@ Conventions for Syntax:
 
 - Properly spaces out [[WikiWords]] preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE [[TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded
 - Syntax: <code>**$PROPERSPACE( text )**</code>
-- Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"$PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
+- Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"$PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh)"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
 - Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
 
 <a name="FuncRAND"></a>
@@ -659,10 +660,19 @@ Conventions for Syntax:
 
 ### <a name="SET( name, value ) -- set a vari"></a> SET( name, value ) -- set a variable for later use
 
-- Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulae are evaluated before the variable assignment; see <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code> if you want to prevent that. This function returns no output. Use `$GET()` to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables and also included topics
+- Specify the variable name (alphanumeric characters and underscores) and the value. The value may contain a formula; formulae are evaluated before the variable assignment; see <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code> if you want to prevent that. This function returns no output. Use `$GET()` to retrieve variables. Unlike table ranges, variables live for the time of the page view and persist across tables, i.e. you can use it to summarize results across several tables and also across included topics
 - Syntax: <code>**$SET( name, value )**</code>
 - Example: <code>**%CALC\{"$SET(my\_total, $SUM($ABOVE()))"\}%**</code> sets the `my_total` variable to the sum of all table cells located above the current cell and returns an empty string
-- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[SETM()|Main/WebHome#FuncSETM]]</code>
+- Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$NOEXEC()|Main/WebHome#FuncNOEXEC]]</code>, <code>[[$SETIFEMPTY()|Main/WebHome#FuncSETIFEMPTY]]</code>, <code>[[SETM()|Main/WebHome#FuncSETM]]</code>
+
+<a name="FuncSETIFEMPTY"></a>
+
+### <a name="SETIFEMPTY( name, value ) -- set"></a> SETIFEMPTY( name, value ) -- set a variable only if empty
+
+- Specify the variable name (alphanumeric characters and underscores) and the value.
+- Syntax: <code>**$SETIFEMPTY( name, value )**</code>
+- Example: <code>**%CALC\{"$SETIFEMPTY(result, default)"\}%**</code> sets the `result` variable to `default` if the variable is empty or 0; in any case an empty string is returned
+- Related: <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>
 
 <a name="FuncSETM"></a>
 
@@ -671,7 +681,7 @@ Conventions for Syntax:
 - Specify the variable name (alphanumeric characters and underscores) and the formula. The formula must start with an operator to <code>**+**</code> (add), <code>**-**</code> (subtract), <code>**\***</code> (multiply), or <code>**/**</code> (divide) something to the variable. This function returns no output. Use `$GET()` to retrieve variables
 - Syntax: <code>**$SETM( name, formula )**</code>
 - Example: <code>**%CALC\{"$SETM(total, + $SUM($LEFT()))"\}%**</code> adds the sum of all table cells on the left to the `total` variable, and returns an empty string
-- Related: <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>
+- Related: <code>[[$GET()|Main/WebHome#FuncGET]]</code>, <code>[[$SET()|Main/WebHome#FuncSET]]</code>, <code>[[$SETIFEMPTY()|Main/WebHome#FuncSETIFEMPTY]]</code>
 
 <a name="FuncSIGN"></a>
 
@@ -905,7 +915,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin Perl module </td>
   </tr>
 </table>
-- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
+- TWiki 4 and up: Visit `configure` in your TWiki installation, and enable the Plugin in the \{Plugins\} section.
 - Test if the "Total" in the first table in this topic is correct.
 
 ## <a name="Plugin Info"></a> Plugin Info
@@ -916,12 +926,24 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> TWiki:Main/PeterThoeny </td>
   </tr>
   <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2001-2006, <a href="mailto:Peter@Thoeny.org">Peter@Thoeny.org</a>, <a href="http://www.structuredwikis.com/" target="_top">StructuredWikis LLC</a></td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 17 Jun 2005 (1.018) </td>
+    <td> 13 May 2006 (10197) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 13 May 2006: </td>
+    <td> Added $SETIFEMPTY(); fixes in documentation </td>
   </tr>
   <tr>
     <td align="right"> 17 Jun 2005: </td>
@@ -1067,8 +1089,12 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 17 Jun 2005
+-- TWiki:Main/PeterThoeny - 13 May 2006

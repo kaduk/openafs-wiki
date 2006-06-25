@@ -1,0 +1,32 @@
+<a name="VarSTARTSECTION"></a>
+
+### <a name="STARTSECTION -- marks the start"></a><a name="STARTSECTION -- marks the start "></a> STARTSECTION -- marks the start of a section within a topic
+
+- Section boundaries are defined with `%STARTSECTION{}%` and `%ENDSECTION{}%`.
+- Sections may be given a name to help identify them, and/or a type, which changes how they are used.
+  - `type="section"` - the default, used for a generic section, such as a named section used by [[INCLUDE|Main/WebHome#VarINCLUDE]].
+  - `type="include"` - like `%STARTINCLUDE%` ... `%STOPINCLUDE%` except that you can have as many include blocks as you want (`%STARTINCLUDE%` is restricted to only one).
+  - `type="templateonly"` - start position of text to be removed when a template topic is used. This is used to embed text that you _do not_ want expanded when a new topic based on the template topic is created. See [[TWikiTemplates]] for more information.
+- Syntax: `%STARTSECTION{"name"}% ................ %ENDSECTION{"name"}%`
+- Syntax: `%STARTSECTION{type="include"}% ........ %ENDSECTION{type="include"}%`
+- Syntax: `%STARTSECTION{type="templateonly"}% ... %ENDSECTION{type="templateonly"}%`
+- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default </strong></th>
+  </tr>
+  <tr>
+    <td><code>"name"</code></td>
+    <td> Name of the section. Must be unique inside a topic. </td>
+    <td> Generated name </td>
+  </tr>
+  <tr>
+    <td><code>type="..."</code></td>
+    <td> Type of the section; type <code>"section"</code>, <code>"include"</code> or <code>"templateonly"</code></td>
+    <td><code>"section"</code></td>
+  </tr>
+</table>
+- **_%X% Note:_** If a section is not given a name, it will be assigned one. Unnamed sections are assigned names starting with `_SECTION0` for the first unnamed section in the topic, `_SECTION1` for the second, etc..
+- **_%X% Note:_** You can define nested sections. It is not recommended to overlap sections, although it is valid in TWiki. Use named sections to make sure that the correct START and ENDs are matched. Section markers are **not** displayed when a topic is viewed.
+- Related: [[ENDSECTION|Main/WebHome#VarENDSECTION]], [[INCLUDE|Main/WebHome#VarINCLUDE]], [[NOP|Main/WebHome#VarNOP]], [[STARTINCLUDE|Main/WebHome#VarSTARTINCLUDE]], [[STOPINCLUDE|Main/WebHome#VarSTOPINCLUDE]]

@@ -191,7 +191,10 @@ Constructs a new TWiki object. Parameters are taken from the query object.
 
 ## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
 
-Complete processing after the client's HTTP request has been responded to. Right now this only entails one activity: calling TWiki::Client to flushing the user's session (if any) to disk.
+Complete processing after the client's HTTP request has been responded to. Right now this does two things:
+
+1. calling TWiki::Client to flushing the user's session (if any) to disk,
+2. breaking circular references to allow garbage collection in persistent environments
 
 ## <a name="ObjectMethod &lt;strong&gt;writeLog&lt;/strong&gt; ($action"></a> [[ObjectMethod]] **writeLog** `($action,$webTopic,$extra,$user)`
 

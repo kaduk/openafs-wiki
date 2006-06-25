@@ -1,0 +1,39 @@
+<a name="VarMETA"></a>
+
+### <a name="META -- displays meta-data"></a> META -- displays meta-data
+
+- Provided mainly for use in templates, this variable generates the parts of the topic view that relate to meta-data (attachments, forms etc.) The `formfield` item is the most likely to be useful to casual users.
+- Syntax: `%META{ "item" ...}%`
+- Parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Item </strong></th>
+    <th bgcolor="#99CCCC"><strong> Options </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+  </tr>
+  <tr>
+    <td><code>"formfield"</code></td>
+    <td><code>name="..."</code> - name of the field. The field value can be shortened as described in [[TWiki/FormattedSearch]] for <code>$formfield</code></td>
+    <td> Show a single form field </td>
+  </tr>
+  <tr>
+    <td><code>"form"</code></td>
+    <td><em>none</em></td>
+    <td> Generates the table showing the form fields. See [[Main/TWikiDocumentation#Form_Templates]]</td>
+  </tr>
+  <tr>
+    <td><code>"attachments"</code></td>
+    <td><code>all="on"</code> to show hidden attachments </td>
+    <td> Generates the table showing the attachments </td>
+  </tr>
+  <tr>
+    <td><code>"moved"</code></td>
+    <td><em>none</em></td>
+    <td> Details of any topic moves </td>
+  </tr>
+  <tr>
+    <td><code>"parent"</code></td>
+    <td><code><b>dontrecurse="on"</b></code>: By default recurses up tree, this has some cost. %BR% <code><b>nowebhome="on"</b></code>: Suppress WebHome. %BR% <code><b>prefix="..."</b></code>: Prefix that goes before parents, but only if there are parents, default <code>""</code>. %BR% <code><b>format="..."</b></code>: format string used to display each partent topic, default <code>"[[$web.$topic][$topic]]"</code> %BR% <code><b>suffix="..."</b></code>: Suffix, only appears if there are parents, default <code>""</code>. %BR% <code><b>separator="..."</b></code>: Separator between parents, default <code>" &gt; "</code>. </td>
+    <td> Generates the parent link </td>
+  </tr>
+</table>
+- Related: [[METASEARCH|Main/WebHome#VarMETASEARCH]]

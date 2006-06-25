@@ -6,13 +6,14 @@ Object representing a single form definition.
   <ul>
     <li><a href="#Package =TWiki::Form="> Package TWiki::Form</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$form)</tt></a></li>
-        <li><a href="#ObjectMethod <strong>render_ForEdit</strong> ($"> ObjectMethod renderForEdit <tt>($web,$topic,$meta,$useDefaults) -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod <strong>render_ForEdit</strong> ($"> ObjectMethod renderForEdit <tt>($web,$topic,$meta) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod *render_FieldForEdi"> ObjectMethod renderFieldForEdit <tt>($fieldDef,$web,$topic,$value) -&gt; $html</tt></a></li>
-        <li><a href="#ObjectMethod <strong>renderHidden</strong> ($me"> ObjectMethod renderHidden <tt>($meta,$useDefaults) -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod <strong>renderHidden</strong> ($me"> ObjectMethod renderHidden <tt>($meta) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod <strong>cgiName</strong> ($field)"> ObjectMethod cgiName <tt>($field) -&gt; $string</tt></a></li>
-        <li><a href="#ObjectMethod *get_FieldValuesFro"> ObjectMethod getFieldValuesFromQuery <tt>($query,$metaObject,$initialiseMissing) -&gt; ($seen,\@missing)</tt></a></li>
+        <li><a href="#ObjectMethod *get_FieldValuesFro"> ObjectMethod getFieldValuesFromQuery <tt>($query,$metaObject) -&gt; ($seen,\@missing)</tt></a></li>
         <li><a href="#ObjectMethod *is_TextMergeable*"> ObjectMethod isTextMergeable <tt>($name) -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>getField</strong> ($name)"> ObjectMethod getField <tt>($name) -&gt; \%row</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getFields</strong> () -> \"> ObjectMethod getFields <tt>() -&gt; \@fields</tt></a></li>
         <li><a href="#StaticMethod *render_ForDisplay*"> StaticMethod renderForDisplay <tt>($templates,$meta)</tt></a></li>
       </ul>
     </li>
@@ -26,12 +27,11 @@ Object representing a single form definition.
 
 May throw TWiki::OopsException
 
-## <a name="ObjectMethod &lt;strong&gt;render_ForEdit&lt;/strong&gt; ($"></a> [[ObjectMethod]] **renderForEdit** `($web,$topic,$meta,$useDefaults) -> $html`
+## <a name="ObjectMethod &lt;strong&gt;render_ForEdit&lt;/strong&gt; ($"></a> [[ObjectMethod]] **renderForEdit** `($web,$topic,$meta) -> $html`
 
 - `$web` the web of the topic being rendered
 - `$topic` the topic being rendered
 - `$meta` the meta data for the form
-- `$useDefaults` if true, will use default values from the form definition if no other value is given
 
 Render the form fields for entry during an edit session, using data values from $meta
 
@@ -46,9 +46,7 @@ Render a single form field for entry during an edit session, using data values f
 
 SMELL: this should be a method on a field class SMELL: [[JSCalendarContrib]] ought to provide a 'date' handler.
 
-## <a name="ObjectMethod &lt;strong&gt;renderHidden&lt;/strong&gt; ($me"></a> [[ObjectMethod]] **renderHidden** `($meta,$useDefaults) -> $html`
-
-- `$useDefaults` if true, will use default values from the form definition if no other value is given
+## <a name="ObjectMethod &lt;strong&gt;renderHidden&lt;/strong&gt; ($me"></a> [[ObjectMethod]] **renderHidden** `($meta) -> $html`
 
 Render form fields found in the meta as hidden inputs, so they pass through edits untouched.
 
@@ -56,13 +54,12 @@ Render form fields found in the meta as hidden inputs, so they pass through edit
 
 Generate the 'name' of the CGI parameter used to represent a field.
 
-## <a name="ObjectMethod &lt;strong&gt;get_FieldValuesFro"></a> [[ObjectMethod]] \*getFieldValuesFromQuery `($query,$metaObject,$initialiseMissing) -> ($seen,\@missing)`
+## <a name="ObjectMethod &lt;strong&gt;get_FieldValuesFro"></a> [[ObjectMethod]] \*getFieldValuesFromQuery `($query,$metaObject) -> ($seen,\@missing)`
 
 Extract new values for form fields from a query.
 
 - `$query` - the query
 - `$metaObject` - the meta object that is storing the form values
-- `$initialiseMissing` - if true, will cause fields that are in the form but have no value in the query or in the meta to be initialised to ''.
 
 For each field, if there is a value in the query, use it. Otherwise if there is already entry for the field in the meta, keep it.
 
@@ -81,6 +78,10 @@ If the form does not define the field, it is assumed to be mergeable.
 - `$name` - name of a form field (value of the `name` attribute)
 
 Returns the field, or undef if the form does not define the field.
+
+## <a name="ObjectMethod &lt;strong&gt;getFields&lt;/strong&gt; () - \@"></a> [[ObjectMethod]] **getFields** `() -> \@fields`
+
+Return a list containing references to field name/value pairs. Each entry in the list has a \{name\} field and a \{value\} field. It may have other fields as well, which caller should ignore. The returned list should be treated as **read only** (must not be written to).
 
 ## <a name="StaticMethod &lt;strong&gt;render_ForDisplay*"></a> [[StaticMethod]] \*renderForDisplay `($templates,$meta)`
 

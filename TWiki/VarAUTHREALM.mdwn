@@ -1,0 +1,8 @@
+<a name="VarAUTHREALM"></a>
+
+### <a name="AUTHREALM -- authentication real"></a> AUTHREALM -- authentication realm
+
+- String defined as \{AuthRealm\} in `configure`. This is used in certain password encodings, and in login templates as part of the login prompt.
+- Syntax: `%AUTHREALM%`
+- Expands to: Enter your [[LoginName]]. (Typically First name and last name, no space, no dots, capitalized, e.g. JohnSmith, unless you chose otherwise). Visit [[TWikiRegistration]] if you do not have one.
+- Related: [[TWikiUserAuthentication]], [[SESSIONID|Main/WebHome#VarSESSIONID]], [[SESSIONVAR|Main/WebHome#VarSESSIONVAR]], [[LOGIN|Main/WebHome#VarLOGIN]], [[LOGOUT|Main/WebHome#VarLOGOUT]], [[SESSION_VARIABLE|Main/WebHome#VarSESSION_VARIABLE]]

@@ -10,6 +10,7 @@ The general contract for methods in the class requires that errors are signalled
   <ul>
     <li><a href="#Package =TWiki::Store="> Package TWiki::Store</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ()"> ClassMethod new <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
         <li><a href="#ObjectMethod <strong>readTopic</strong> ($user,"> ObjectMethod readTopic <tt>($user,$web,$topic,$version) -&gt; ($metaObject,$text)</tt></a></li>
         <li><a href="#ObjectMethod <strong>read_TopicRaw</strong> ($u"> ObjectMethod readTopicRaw <tt>($user,$web,$topic,$version) -&gt; $topicText</tt></a></li>
         <li><a href="#ObjectMethod <strong>moveAttachment</strong> ($"> ObjectMethod moveAttachment <tt>($oldWeb,$oldTopic,$oldAttachment,$newWeb,$newTopic,$newAttachment,$user)</tt></a></li>
@@ -59,6 +60,12 @@ The general contract for methods in the class requires that errors are signalled
 ## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ()"></a> [[ClassMethod]] **new** `()`
 
 Construct a Store module, linking in the chosen sub-implementation.
+
+## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+
+Complete processing after the client's HTTP request has been responded to.
+
+1. breaking circular references to allow garbage collection in persistent environments
 
 ## <a name="ObjectMethod &lt;strong&gt;readTopic&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **readTopic** `($user,$web,$topic,$version) -> ($metaObject,$text)`
 

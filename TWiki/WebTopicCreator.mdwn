@@ -1,19 +1,23 @@
-<form action="http://www.dementia.org/twiki/edit/Main/" name="newtopic" onsubmit="return canSubmit(this);">
-  <h1><a name="Create New Topic in Main Web"></a> Create New Topic in Main Web </h1>
+# <a name="Create New Topic in Main Web"></a> Create New Topic in Main Web
+
+<form action="http://www.dementia.org/twiki/edit/Main/" id="newtopic" name="newtopic" onsubmit="return canSubmit(this,true);">
   <div>
     <div>
       <h3><a name="Topic name:"></a> Topic name: </h3>
       <p>
-      </p><input name="topic" onblur="this.value=capitalize(this.form, this.value);" size="40" type="text" value="" /><p>
-      </p><input id="nonwikiword" name="nonwikiword" type="checkbox" /><label for="nonwikiword">Allow non WikiWord for the new topic name</label>
-      <p>It's usually best to choose a <a href="TWiki" onclick="return launchWindow('TWiki','WikiWord')" rel="nofollow" target="WikiWord">WikiWord</a> for the new topic name, otherwise automatic linking may not work. Characters not allowed in topic names, such as spaces will automatically be removed.</p>
-    </div>
+      </p><input id="topic" name="topic" onblur="canSubmit(this.form,true);" onchange="canSubmit(this.form,false);" onkeyup="canSubmit(this.form,false);" size="40" tabindex="10" type="text" value="" /> <span id="webTopicCreatorFeedback"></span><p>
+      </p><input id="nonwikiword" name="nonwikiword" onchange="canSubmit(this.form,false);" onmouseup="canSubmit(this.form,false);" tabindex="11" type="checkbox" /><label for="nonwikiword">Allow non WikiWord for the new topic name</label>
+      <br /><span>It's usually best to choose a <a href="TWiki" onclick="return launchWindow('TWiki','WikiWord')" rel="nofollow" target="WikiWord">WikiWord</a> for the new topic name, otherwise automatic linking may not work. Characters not allowed in topic names, such as spaces will automatically be removed.</span></div>
     <div>
-      <h3><a name="Topic parent:"></a> Topic parent: </h3><select name="topicparent" size="10"><p>
+      <h3><a name="Topic parent:"></a> Topic parent: </h3>
+      <p>
+      </p><select name="topicparent" size="10" tabindex="12"><p>
         </p>
         <option value="">(no parent, orphaned topic)</option></select></div>
-    <div><input type="submit" value="Create this topic" /></div>
-  </div><input name="onlywikiname" type="hidden" value="off" /> <input name="onlynewtopic" type="hidden" value="on" /></form>
+    <div>
+      <p>
+      </p><input id="submit" tabindex="13" type="submit" value="Create this topic" /></div>
+  </div><input name="onlywikiname" type="hidden" /> <input name="onlynewtopic" type="hidden" value="on" /></form>
 
 %BR%
 

@@ -1,0 +1,96 @@
+<a name="VarGMTIME2"></a>
+
+### <a name="GMTIME{&quot;format&quot;} -- formatted GM"></a> GMTIME\{"format"\} -- formatted GM time
+
+- Syntax: `%GMTIME{"format"}%`
+- Supported variables: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Variable: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Unit: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Example </strong></th>
+  </tr>
+  <tr>
+    <td><code>$seconds</code></td>
+    <td> seconds </td>
+    <td> 59 </td>
+  </tr>
+  <tr>
+    <td><code>$minutes</code></td>
+    <td> minutes </td>
+    <td> 59 </td>
+  </tr>
+  <tr>
+    <td><code>$hours</code></td>
+    <td> hours </td>
+    <td> 23 </td>
+  </tr>
+  <tr>
+    <td><code>$day</code></td>
+    <td> day of month </td>
+    <td> 31 </td>
+  </tr>
+  <tr>
+    <td><code>$wday</code></td>
+    <td> day of the Week (Sun, Mon, Tue, Wed, Thu, Fri, Sat) </td>
+    <td> Thu </td>
+  </tr>
+  <tr>
+    <td><code>$dow</code></td>
+    <td> day of the week (Sun = 0) </td>
+    <td> 2 </td>
+  </tr>
+  <tr>
+    <td><code>$week</code></td>
+    <td> number of week in year (ISO 8601) </td>
+    <td> 34 </td>
+  </tr>
+  <tr>
+    <td><code>$month</code></td>
+    <td> month in ISO format </td>
+    <td> Dec </td>
+  </tr>
+  <tr>
+    <td><code>$mo</code></td>
+    <td> 2 digit month </td>
+    <td> 12 </td>
+  </tr>
+  <tr>
+    <td><code>$year</code></td>
+    <td> 4 digit year </td>
+    <td> 1999 </td>
+  </tr>
+  <tr>
+    <td><code>$ye</code></td>
+    <td> 2 digit year </td>
+    <td> 99 </td>
+  </tr>
+  <tr>
+    <td><code>$tz</code></td>
+    <td> either "GMT" (if set to gmtime), or "Local" (if set to servertime) </td>
+    <td> GMT </td>
+  </tr>
+  <tr>
+    <td><code>$iso</code></td>
+    <td> ISO format timestamp </td>
+    <td> 2010-06-29T16:00:39Z </td>
+  </tr>
+  <tr>
+    <td><code>$rcs</code></td>
+    <td> RCS format timestamp </td>
+    <td> 2010/06/29 16:00:39 </td>
+  </tr>
+  <tr>
+    <td><code>$http</code></td>
+    <td> E-mail &amp; http format timestamp </td>
+    <td> Tue, 29 Jun 2010 16:00:39 GMT </td>
+  </tr>
+  <tr>
+    <td><code>$epoch</code></td>
+    <td> Number of seconds since 00:00 on 1st January, 1970 </td>
+    <td> 1277827239 </td>
+  </tr>
+</table>
+- Variables can be shortened to 3 characters
+- Example: `%GMTIME{"$day $month, $year - $hour:$min:$sec"}%` expands to `29 Jun, 2010 - 16:00:39`
+- **_%X% Note:_** When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
+- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]

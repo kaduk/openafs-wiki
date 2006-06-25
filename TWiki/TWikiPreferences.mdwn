@@ -26,6 +26,7 @@
       <li><a href="#Plugins Settings"> Plugins Settings</a></li>
       <li><a href="#Rendering Shortcuts Settings"> Rendering Shortcuts Settings</a></li>
       <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
+      <li><a href="#Access Control Settings"> Access Control Settings</a></li>
       <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
       <li><a href="#Related Topics"> Related Topics</a></li>
     </ul>
@@ -117,8 +118,6 @@
   </ul>
   <p>
   </p>
-  <p>
-  </p>
   <h2><a name="Default User Settings"></a> Default User Settings </h2>
   <p> %X% <strong>NOTE:</strong> They are typically redefined in topics of individual [[Main/TWikiUsers]]</p>
   <p>
@@ -191,11 +190,11 @@
   <ul>
     <li> Format of file link when the <strong><em>link</em></strong> check box is checked: (can be overwritten by user preferences) <ul>
         <li> %H% <strong>NOTE:</strong> Keyword <code><b>$name</b></code> gets expanded to filename; <code><b>$comment</b></code> to comment; <code><b>\t</b></code> to tab (3 spaces for bullets). </li>
-        <li> Set ATTACHEDFILELINKFORMAT = \n * <a href="http://www.dementia.org/twiki//view/$name" target="_top">$name</a>: $comment </li>
       </ul>
     </li>
-  </ul>
-  <p>
+  </ul><pre>
+      * Set ATTACHEDFILELINKFORMAT = \n   * [[%ATTACHURL%/$name][$name]]: $comment
+</pre><p>
   </p>
   <ul>
     <li> Format of images when the <strong><em>link</em></strong> check box is checked: (can be overwritten by user preferences) <ul>
@@ -260,7 +259,7 @@
         <li> Set BROADCASTMESSAGE = </li>
         <li> #Set BROADCASTMESSAGE = <table border="0" cellpadding="3" cellspacing="0" width="100%">
             <tr>
-              <td bgcolor="yellow"><font color="red"><strong>NOTE:</strong></font><font size="-1"> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance. </font></td>
+              <td bgcolor="yellow"><font color="red"><strong>NOTE:</strong></font> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance. </td>
             </tr>
           </table>
         </li>
@@ -400,7 +399,7 @@
 ### <a name="Legacy support"></a> Legacy support
 
 - Support for legacy "EDITTOPIC", used to be hard-coded, now replaced by TMPL:P conditional instantiation
-  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827148>
+  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827220>
   - Set EDITTOPIC = [Edit](%EDITURL% Edit Topic - deprecated usage - please see release notes)
 
 ## <a name="Plugins Settings"></a> Plugins Settings
@@ -503,6 +502,12 @@
 
 - [[PreviewBackground]] image:
   - Set PREVIEWBGIMAGE = ![preview2bg.gif](http://www.dementia.org/twiki//view/TWiki/PreviewBackground/preview2bg.gif)
+
+## <a name="Access Control Settings"></a> Access Control Settings
+
+- Users or groups allowed to change or rename this %TOPIC% topic:
+  - Set ALLOWTOPICCHANGE = [[TWikiAdminGroup]]
+  - Set ALLOWTOPICRENAME = [[TWikiAdminGroup]]
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 

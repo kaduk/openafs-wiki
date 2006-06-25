@@ -1,0 +1,9 @@
+<a name="VarSCRIPTURL2"></a>
+
+### <a name="SCRIPTURL{&quot;script&quot;} -- URL of TW"></a> SCRIPTURL\{"script"\} -- URL of TWiki script
+
+- Syntax: `%SCRIPTURL{"script"}%`
+- Expands to: `http://www.dementia.org/twiki/script`
+- Example: To get the authenticated version of the current topic you can write `%SCRIPTURL{"viewauth"}%/%WEB%/%TOPIC%` which expands to `http://www.dementia.org/twiki/viewauth/%WEB%/%INCLUDINGTOPIC%`
+- **_%X% Note:_** In most cases you should use `%SCRIPTURLPATH{"script"}%` instead, as it works with URL rewriting much better
+- Related: [[PUBURL|Main/WebHome#VarPUBURL]], [[SCRIPTNAME|Main/WebHome#VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/WebHome#VarSCRIPTSUFFIX]], [[SCRIPTURL|Main/WebHome#VarSCRIPTURL]], [[SCRIPTURLPATH|Main/WebHome#VarSCRIPTURLPATH]], [[SCRIPTURLPATH{"script"}|Main/WebHome#VarSCRIPTURLPATH2]]

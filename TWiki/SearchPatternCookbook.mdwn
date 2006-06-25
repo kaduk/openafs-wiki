@@ -22,23 +22,27 @@ Most people not familiar (enough) with Regular Expressions mostly cut and paste 
             <li><a href="#Solution"> Solution</a></li>
           </ul>
         </li>
-        <li><a href="#Pattern 3a: listbox with all use"> Pattern 3a: listbox with all user names</a><ul>
+        <li><a href="#Pattern 3: Creating lists of TWi"> Pattern 3: Creating lists of TWiki usernames</a><ul>
             <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
+            <li><a href="#Solution 1: Appropriate for Sep"> Solution 1: Appropriate for Sep 2004 TWiki (Cairo)</a></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li><a href="#Pattern 3b: listbox with all use"> Pattern 3b: listbox with all user names - select multiple names</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-            <li><a href="#Test case"> Test case</a></li>
+        <li>
+          <ul>
+            <li><a href="#Solution 2: As Solution 1, but w"> Solution 2: As Solution 1, but with possibility for multi-selecting usernames</a></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li>
+          <ul>
+            <li><a href="#Solution 3: Appropriate for TWik"> Solution 3: Appropriate for TWiki 4 (Dakar)</a></li>
+          </ul>
+        </li>
         <li><a href="#Pattern 4: Extract the parent of"> Pattern 4: Extract the parent of a given topic</a><ul>
             <li><a href="#Problem"> Problem</a></li>
             <li><a href="#Solution"> Solution</a></li>
@@ -157,13 +161,13 @@ The filtering select dialogue is created as in Pattern 1:
 
 This will create similar functionality as TWiki:Plugins.TopicClassificationAddOn %BR%
 
-## <a name="Pattern 3a: listbox with all use"></a> Pattern 3a: listbox with all user names
+## <a name="Pattern 3: Creating lists of TWi"></a> Pattern 3: Creating lists of TWiki usernames
 
 ### <a name="Problem"></a> Problem
 
 How to populate a list box with all usernames of registered TWiki users
 
-### <a name="Solution"></a> Solution
+### <a name="Solution 1: Appropriate for Sep"></a><a name="Solution 1: Appropriate for Sep "></a> Solution 1: Appropriate for Sep 2004 TWiki (Cairo)
 
     <form name="testing" action="%SCRIPTURLPATH{"view"}%/%MAINWEB%" method="get">
     <select name="topic">
@@ -180,26 +184,35 @@ Which expands to this: (here limited to all Z\* users because TWiki.org has so m
 
 This searches all topics in the Main web that contain "Name", "Email" and "Country" bullets. Alternatively, do a [[FormattedSearch]] with `multiple="on"` on the [[Main.TWikiUsers|Main/TWikiUsers]] topic.
 
-## <a name="Pattern 3b: listbox with all use"></a> Pattern 3b: listbox with all user names - select multiple names
+### <a name="Solution 2: As Solution 1, but w"></a> Solution 2: As Solution 1, but with possibility for multi-selecting usernames
 
-### <a name="Problem"></a> Problem
-
-Suppose you want to send mail from a form on topic page to a selected list of **_multiple_** [[TWikiUsers]]
-
-### <a name="Solution"></a> Solution
-
-The example of Pattern 3a produces the list box. Add a MULTIPLE to the _select_ statement, i.e.:
+The example of Solution 1 produces the list box. Add a MULTIPLE to the _select_ statement, i.e.:
 
     <select name="topic" size="2" MULTIPLE>
 
-Please note that the Search pattern is unchanged compared to Pattern 3a. The change is in the HTML form element.
+Please note that the Search pattern is unchanged compared to Solution 1. The change is in the HTML form element.
 
-### <a name="Test case"></a> Test case
-
-The Search pattern 3a with the abovementioned modification is, in effect:
+The abovementioned modification is, in effect:
 
 <form action="http://www.dementia.org/twiki/view/Main" method="get" name="testing"><select multiple="MULTIPLE" name="topic" size="2"><option>Select user...</option>
     <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) </select> <input type="submit" value="Go" /></form>
+
+### <a name="Solution 3: Appropriate for TWik"></a> Solution 3: Appropriate for TWiki 4 (Dakar)
+
+When the User information is stored in a [[UserForm]] (as is default in Dakar) then this list can be generated as follows:
+
+    <form name="testing" action="%SCRIPTURLPATH{"view"}%/%MAINWEB%" method="get">
+    <select name="topic">
+    <option>Select user...</option>
+    %SEARCH{"%META:FORM.*[U]serForm" web="%MAINWEB%" regex="on" casesensitive="on" nosearch="on" format="<option>$topic</option>" sort="topic" excludetopic="Test*, TWiki*"}%
+    </select>
+    <input type="submit" value="Go" />
+    </form>
+
+In the above example:
+
+- <code>**META:FORM.\*[U]serForm**</code> will search for all topics with a [[UserForm]] attached - change this if you have a different form where userdata is stored. Please note that this search does not actually extract anything from the form - it just uses it to identify the appropriate pages
+- <code>**excludetopic="Test\*, TWiki\*"**</code> allows to skip all topics starting with Test and TWiki, such as TestUser or TWikiAdmin. Use this if you have any special users who you do not want appearing in this list
 
 ## <a name="Pattern 4: Extract the parent of"></a> Pattern 4: Extract the parent of a given topic
 

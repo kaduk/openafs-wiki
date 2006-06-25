@@ -1,0 +1,34 @@
+<a name="VarENCODE"></a>
+
+### <a name="ENCODE{&quot;string&quot;} -- encodes a st"></a> ENCODE\{"string"\} -- encodes a string to HTML entities
+
+- Encode "special" characters to HTML numeric entities. Encoded characters are:
+  - all non-printable ASCII characters below space, except newline (`"\n"`) and linefeed (`"\r"`)
+  - HTML special characters `"<"`, `">"`, `"&"`, single quote (`'`) and double quote (`"`)
+  - TWiki special characters `"%"`, `"["`, `"]"`, `"@"`, `"_"`, `"*"`, `"="` and `"|"`
+- Syntax: `%ENCODE{"string"}%`
+- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+  </tr>
+  <tr>
+    <td><code>"string"</code></td>
+    <td> String to encode </td>
+    <td> required (can be empty) </td>
+  </tr>
+  <tr>
+    <td><code>type="entity"</code></td>
+    <td> Encode special characters into HTML entities, like a double quote into <code>&amp;#034;</code></td>
+    <td> URL encoding </td>
+  </tr>
+  <tr>
+    <td><code>type="url"</code></td>
+    <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
+    <td> (this is the default) </td>
+  </tr>
+</table>
+- Example: `%ENCODE{"spaced name"}%` expands to `spaced%20name`
+- **_%X% Note:_** Values of HTML input fields must be entity encoded, for example:%BR% `<input type="text" name="address" value="%ENCODE{ "any text" type="entity" }%" />`
+- Related: [[URLPARAM|Main/WebHome#VarURLPARAM]]

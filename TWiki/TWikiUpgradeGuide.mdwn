@@ -7,6 +7,10 @@
         <li><a href="#Automated Upgrade Procedure"> Automated Upgrade Procedure</a></li>
         <li><a href="#Manual Upgrade Procedure"> Manual Upgrade Procedure</a></li>
         <li><a href="#Upgrading a Beta"> Upgrading a Beta</a></li>
+        <li><a href="#Upgrading from Cairo to TWiki4 ("> Upgrading from Cairo to TWiki4 (additional advice)</a><ul>
+            <li><a href="#Favicon"> Favicon</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -31,7 +35,7 @@ TWiki-4.0.0 is a major new release. You can chose between an automated upgrade u
 
 ## <a name="Major Changes Compared to TWiki"></a><a name="Major Changes Compared to TWiki "></a> Major Changes Compared to TWiki Release 01-Sep-2004
 
-See [[TWikiReleaseNotes04x00x00]].
+See [[TWikiReleaseNotes04x00]].
 
 ## <a name="Automated Upgrade Procedure"></a> Automated Upgrade Procedure
 
@@ -113,5 +117,20 @@ You are **highly** recommended **not** to change any distributed files if you ca
 5. Point your webserver at the new install.
 
 **If** you changed any of the distributed files, you will have to continue from Step 5 above.
+
+## <a name="Upgrading from Cairo to TWiki4 ("></a> Upgrading from Cairo to TWiki4 (additional advice)
+
+### <a name="Favicon"></a> Favicon
+
+TWiki4's [[PatternSkin]] introduces the use of the favicon feature which most browsers use to show a small icon in front of the URL and for bookmarks.
+
+In TWiki4 it is assumed that each web has a favicon.ico file attached to the WebPreferences topic. When you upgrade from Cairo to TWiki4 you do not have this file and you will get flooded with errors the error log of your web server. There are two solutions to this.
+
+- Attach a favicon.ico file to WebPreferences in each web.
+- Change the setting of the location of favicon.ico in TWikiPreferences so all webs use the favicon.ico from the TWiki web. This is the fastest and easiest solution.
+
+To change the location of favicon.ico in TWikiPreferences to the TWiki web add this line to [[TWikiPreferences]]
+
+       * Set FAVICON = %PUBURLPATH%/%TWIKIWEB%/%WEBPREFSTOPIC%/favicon.ico
 
 **_Related Topics:_** [[AdminDocumentationCategory]], TWiki:TWiki.UpgradingTWiki

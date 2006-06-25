@@ -1,0 +1,23 @@
+<a name="VarHTTP"></a>
+
+### <a name="HTTP -- get HTTP headers"></a> HTTP -- get HTTP headers
+
+- Called with the name of an HTTP header field, returns its value. Capitalization and the use of hyphens versus underscores are not significant.
+- Syntax: `%HTTP%`
+- Syntax: `%HTTP{"Header-name"}%`
+- Examples: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>%HTTP%</code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>%HTTP{"Accept-language"}%</code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>%HTTP{"User-Agent"}%</code></td>
+    <td>   </td>
+  </tr>
+</table>
+- **_%X% Note:_** You can see the HTTP headers your browser sends to the server on a number of sites e.g. <http://www.ericgiguere.com/tools/http-header-viewer.html>
+- Related: [[HTTPS|Main/WebHome#VarHTTPS]], [[REMOTE_ADDR|Main/WebHome#VarREMOTEADDR]], [[REMOTE_PORT|Main/WebHome#VarREMOTEPORT]], [[REMOTE_USER|Main/WebHome#VarREMOTEUSER]]

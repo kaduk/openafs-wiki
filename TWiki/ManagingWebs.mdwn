@@ -34,7 +34,7 @@ A [[TWikiSite]] is divided into webs; each one represents one subject, one area 
 
 There are two methods used to create a new web. First you can use a specially designed [[TemplateWeb]]. This is an invisible web that begins with an underscore "\_" character (for example `_default`). All topics in the template web will be copied into your new web.
 
-The second method is to use an existing web as a template web. This may be useful if you already have a web that you like to use as a starting point. Only topics that have names beginning with **Web...** (like "WebHome", "WebNotify", etc.) are copied.
+The second method is to use an existing web as a template web. This may be useful if you already have a web that you would like to use as a starting point. Only topics that have names beginning with **Web...** (like "WebHome", "WebNotify", etc.) are copied.
 
 In either case you will want to be sure to verify that your new web has all the custom modifications that you desire.
 
@@ -83,6 +83,8 @@ In either case you will want to be sure to verify that your new web has all the 
 - While creating the new web, TWiki will update the following variables in the [[WebPreferences]]: `WEBBGCOLOR`, `SITEMAPLIST`, `SITEMAPWHAT`, `SITEMAPUSETO` and `NOSEARCHALL`. These variables are used to dynamically generate the [[SiteMap]]
 - TWiki does not edit the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to update the `WIKIWEBLIST`. This must be done by hand
 
+<a name="RenameWeb"></a>
+
 ## <a name="Renaming or Deleting a Web"></a> Renaming or Deleting a Web
 
 Rename a web via the Tools section in each web's [[WebPreferences]] topic. You may delete a web by moving it into a Trash web.
@@ -97,9 +99,9 @@ If anyone is editing a topic which requires updating, or which lives in the web 
 
 ### <a name="Renaming the webs in the distrib"></a> Renaming the webs in the distribution
 
-If you plan to rename the Main web, remember that TWiki stores user and group topics in `%MAINWEB%`, which by default is `Main` (this is assigned in the site configuration). That means that every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout). This potentially large change can be performed automatically with the renameweb function mentioned above, in the [[Main.WebPreferences|Main/WebPreferences]] topic.
+If you plan to rename the Main web, remember that TWiki stores user and group topics in this web. That means that every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout). This potentially large change can be performed automatically if you rename the web from the Tools section of [[WebPreferences]], as described above.
 
-If you want to rename the TWiki web, remember it is referred to by `%TWIKIWEB%` which is also defined by a configuration setting.
+%X% If you want to rename the TWiki or Main webs, remember they are referred to in the TWiki configuration. You will need to change the relevant settings in the configuration using the [configure](http://www.dementia.org/twiki/configure) interface.
 
 ## <a name="Hierarchical Webs"></a> Hierarchical Webs
 

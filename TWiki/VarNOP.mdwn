@@ -1,0 +1,11 @@
+<a name="VarNOP"></a>
+
+### <a name="NOP -- template text not to be e"></a> NOP -- template text not to be expanded in instantiated topics
+
+- Syntax: `%NOP%`
+  - In normal topic text, expands to &lt;nop&gt;, which prevents expansion of adjacent variables and wikiwords
+  - When the topic containing this is used as a template for another topic, it is removed.
+- Syntax: `%NOP{...}%` **deprecated**
+  - In normal topic text, expands to whatever is in the curly braces (if anything).
+  - **_%X% Note:_** This is deprecated. Do not use it. Use `%STARTSECTION{type="templateonly"}%` .. `%ENDSECTION{type="templateonly"}%` instead (see [[TWikiTemplates]] for more details).
+- Related: [[STARTSECTION|Main/WebHome#VarSTARTSECTION]], [[TWikiTemplates]]

@@ -1,0 +1,9 @@
+<a name="VarPLUGINVERSION"></a>
+
+### <a name="PLUGINVERSION -- the version of"></a><a name="PLUGINVERSION -- the version of "></a> PLUGINVERSION -- the version of a TWiki Plugin, or the TWiki Plugins API
+
+- Syntax: `%PLUGINVERSION{"name"}%` to get the version of a specific plugin
+- Example: `%PLUGINVERSION{"InterwikiPlugin"}%` expands to `$Rev: 11935$`
+- Syntax: `%PLUGINVERSION%` to get the version of the API
+- Expands to: `1.11`
+- Related: [[WIKIVERSION|Main/WebHome#VarWIKIVERSION]], [[ACTIVATEDPLUGINS|Main/WebHome#VarACTIVATEDPLUGINS]], [[FAILEDPLUGINS|Main/WebHome#FAILEDPLUGINS]], [[PLUGINDESCRIPTIONS|Main/WebHome#VarPLUGINDESCRIPTIONS]]

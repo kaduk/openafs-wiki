@@ -87,12 +87,17 @@ You can generate a listing manually, or on an automated schedule, of visits to i
   - **_Attention:_** The script must run as the same user as the CGI scripts are running, which is user `nobody` on many systems. Example crontab entry: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./statistics >/dev/null 2>&1)`
   - There is a workaround in case you can't run the script as user `nobody` : Run the utility `twiki/bin/geturl` in your cron job and specify the URL of the `twiki/bin/statistics` script as a parameter. Example: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./geturl mydomain.com /urlpath/to/twiki/bin/statistics >/dev/null 2>&1)`
 
+When running from the command line or a cron job, you can pass parameters to the script like this:
+
+    ./statistics -logdate 200605 -webs TWiki,Sandbox
+
 ### <a name="Generating statistics manually b"></a> Generating statistics manually by URL
 
 - The `twiki/bin/statistics` script can also be executed as a CGI script, just enter the URL in your browser. Examples:
-  - Update current month for all webs: %BR% `http://www.dementia.org/twiki/statistics`
+  - Update current month for all webs you have access to: %BR% `http://www.dementia.org/twiki/statistics`
   - Update current month for Main web only: %BR% `http://www.dementia.org/twiki/statistics/Main`
-  - Update January 2000 for Main web: %BR% `http://www.dementia.org/twiki/statistics/Main?logdate=201006`
+  - Update Jun 2010 for Main web: %BR% `http://www.dementia.org/twiki/statistics/Main?logdate=201006`
+  - Update Jun 2010 for the ProjectX, ProjectY and ProjectZ webs: %BR% `http://www.dementia.org/twiki/statistics?logdate=201006;webs=ProjectX,ProjectY,ProjectZ`
 
 <a name="LogFiles"></a>
 
@@ -104,7 +109,7 @@ TWiki generates monthly log files which are used by the statistics script
 - The file name is `log<year><month>.txt`
 - Example path name: `twiki/logs/log201006.txt`
 - Each access gets logged as: %BR% `| <time> | <wikiusername> | <action> | <web>.<topic> | <extra info> | <IP address> |`
-- Example log entry: %BR% <code>| 29 Jun 2010 - 11:59 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
+- Example log entry: %BR% <code>| 29 Jun 2010 - 12:00 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
 - Actions are logged if enabled in [configure](http://www.dementia.org/twiki/configure) by the **\{Log\}\{_action_\}** flags
 - Logged actions: <table border="1" cellpadding="0" cellspacing="0">
   <tr>

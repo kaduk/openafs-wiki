@@ -1,0 +1,53 @@
+<a name="VarURLPARAM"></a>
+
+### <a name="URLPARAM{&quot;name&quot;} -- get value of"></a> URLPARAM\{"name"\} -- get value of a URL parameter
+
+- Returns the value of a URL parameter.
+- Syntax: `%URLPARAM{"name"}%`
+- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+  </tr>
+  <tr>
+    <td><code>"name"</code></td>
+    <td> The name of a URL parameter </td>
+    <td> required </td>
+  </tr>
+  <tr>
+    <td><code>default="..."</code></td>
+    <td> Default value in case parameter is empty or missing </td>
+    <td> empty string </td>
+  </tr>
+  <tr>
+    <td><code>newline="&lt;br /&gt;"</code></td>
+    <td> Convert newlines in textarea to other delimiters </td>
+    <td> no conversion </td>
+  </tr>
+  <tr>
+    <td><code>encode="entity"</code></td>
+    <td> Encode special characters into HTML entities. See [[Main/WebHome#VarENCODE]] for more details. </td>
+    <td> no encoding </td>
+  </tr>
+  <tr>
+    <td><code>encode="url"</code></td>
+    <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
+    <td> no encoding </td>
+  </tr>
+  <tr>
+    <td><code>multiple="on"</code> %BR% <code>multiple="[[$item]]"</code></td>
+    <td> If set, gets all selected elements of a <code>&lt;select multiple="multiple"&gt;</code> tag. A format can be specified, with <code>$item</code> indicating the element, e.g. <code>multiple="Option: $item"</code></td>
+    <td> first element </td>
+  </tr>
+  <tr>
+    <td><code>separator=", "</code></td>
+    <td> Separator between multiple selections. Only relevant if multiple is specified </td>
+    <td><code>"\n"</code> (new line) </td>
+  </tr>
+</table>
+- Example: `%URLPARAM{"skin"}%` returns `print` for a `.../view/%WEB%/%INCLUDINGTOPIC%?skin=print` URL
+- **_%X% Note:_** URL parameters passed into HTML form fields must be entity [[ENCODEd|Main/WebHome#VarENCODE]]
+- **_%X% Note:_** When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
+- **_%X% Note:_** There is a risk that this variable could be misused for cross-site scripting.
+- Related: [[ENCODE|Main/WebHome#VarENCODE]], [[SEARCH|Main/WebHome#VarSEARCH]], [[FormattedSearch]], [[QUERYSTRING|Main/WebHome#VarQUERYSTRING]]

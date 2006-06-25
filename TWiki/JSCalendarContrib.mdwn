@@ -1,10 +1,24 @@
+# <a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC%
+
 [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl), packaged for use by plugins, skins and add-ons.
 
-# <a name="Summary of Contents"></a> Summary of Contents
+<div>
+  <ul>
+    <li><a href="#Summary of Contents"> Summary of Contents</a></li>
+    <li><a href="#Detailed Documentation"> Detailed Documentation</a><ul>
+        <li><a href="#Settings"> Settings</a></li>
+        <li><a href="#Installation Instructions"> Installation Instructions</a></li>
+        <li><a href="#Contrib Info"> Contrib Info</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Summary of Contents"></a> Summary of Contents
 
 This module packages the [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl) Javascript in a form suitable for use with TWiki.
 
-# <a name="Detailed Documentation"></a> Detailed Documentation
+## <a name="Detailed Documentation"></a> Detailed Documentation
 
 Read [the Mishoo documentation](http://www.dementia.org/twiki//view/doc/html/reference.html) or [visit the demo page](http://www.dementia.org/twiki//view).
 
@@ -45,25 +59,23 @@ Note that the header will only be added once, regardless of the number of times 
 
 `addHEAD` can be called from `commonTagsHandler` for adding the header to all pages, or to `beforeEditHandler` just for edit pages etc.
 
-## <a name="Settings"></a> Settings
+### <a name="Settings"></a> Settings
 
 - Name of the perl package
   - Set STUB = TWiki::Contrib::JSCalendarContrib
+- What do I do
+  - Set SHORTDESCRIPTION = [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl), packaged for use by plugins, skins and add-ons.
 
-## <a name="Installation Instructions"></a> Installation Instructions
+### <a name="Installation Instructions"></a> Installation Instructions
 
-- Download the ZIP file from the Plugin web (see below)
-- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
+- Download the archive from the Plugins web (see below)
+- Unpack it in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> File: </strong></th>
     <th bgcolor="#99CCCC"><strong> Description: </strong></th>
   </tr>
   <tr>
     <td><code><b>data/TWiki/JSCalendarContrib.txt</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>lib/TWiki/Contrib/JSCalendarContrib/build.pl</b></code></td>
     <td>   </td>
   </tr>
   <tr>
@@ -387,6 +399,10 @@ Note that the header will only be added once, regardless of the number of times 
     <td>   </td>
   </tr>
   <tr>
+    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/transparent-bg.png</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
     <td><code><b>pub/TWiki/JSCalendarContrib/menuarrow.gif</b></code></td>
     <td>   </td>
   </tr>
@@ -430,7 +446,7 @@ Note that the header will only be added once, regardless of the number of times 
 
 - Make sure that all files are readable by the web server user
 
-## <a name="Contrib Info"></a> Contrib Info
+### <a name="Contrib Info"></a> Contrib Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -439,7 +455,7 @@ Note that the header will only be added once, regardless of the number of times 
   </tr>
   <tr>
     <td align="right"> Version: </td>
-    <td> 9105 of the Mishoo calendar </td>
+    <td> 10613 of the Mishoo calendar </td>
   </tr>
   <tr>
     <td align="right"> Copyright ©: </td>
@@ -447,8 +463,13 @@ Note that the header will only be added once, regardless of the number of times 
   </tr>
   <tr>
     <td align="right"> License: </td>
-    <td> GNU LGPL </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
   </tr>
+</table>
+
+|
+
+<table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Dependencies: </td>
     <td> None </td>
@@ -456,6 +477,10 @@ Note that the header will only be added once, regardless of the number of times 
   <tr>
     <td> Change History: </td>
     <td>   </td>
+  </tr>
+  <tr>
+    <td> 10247 </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2054" rel="nofollow">Item2054</a> put the calendar at z-index 2000, way above pattern skin divs. </td>
   </tr>
   <tr>
     <td> 6634 </td>
@@ -489,8 +514,10 @@ Note that the header will only be added once, regardless of the number of times 
     <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]]
-
--- TWiki:Main/CrawfordCurrie - 21:44:48 31 March 2006

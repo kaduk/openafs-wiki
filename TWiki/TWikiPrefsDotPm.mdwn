@@ -10,6 +10,7 @@ The module also maintains a separate of the preferences found in every topic and
   <ul>
     <li><a href="#Package =TWiki::Prefs="> Package TWiki::Prefs</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session[,$ca"> ClassMethod new <tt>($session[,$cache])</tt></a></li>
+        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
         <li><a href="#ObjectMethod *push_GlobalPrefere"> ObjectMethod pushGlobalPreferences <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>pushPreferences</strong> ("> ObjectMethod pushPreferences <tt>($web,$topic,$type)</tt></a></li>
         <li><a href="#ObjectMethod *push_WebPreference"> ObjectMethod pushWebPreferences <tt>($web)</tt></a></li>
@@ -30,6 +31,12 @@ The module also maintains a separate of the preferences found in every topic and
 ## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session[,$ca"></a> [[ClassMethod]] **new** `($session[,$cache])`
 
 Creates a new Prefs object. If $cache is defined, it will be pushed onto the stack.
+
+## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+
+Complete processing after the client's HTTP request has been responded to.
+
+1. breaking circular references to allow garbage collection in persistent environments
 
 ## <a name="ObjectMethod &lt;strong&gt;push_GlobalPrefere"></a> [[ObjectMethod]] \*pushGlobalPreferences `()`
 

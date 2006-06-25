@@ -1,4 +1,6 @@
-This module is an add-on to the TWiki kernel that supports e-mail notification of changes.
+# <a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC%
+
+Add-on to the TWiki kernel that supports e-mail notification of changes.
 
 **WARNING: TWiki-4 only. If you want to use this extension with an earlier version of TWiki, please see [here](http://twiki.org/cgi-bin/view/Plugins/%TOPIC%?rev=1.17)**
 
@@ -16,9 +18,9 @@ This module is an add-on to the TWiki kernel that supports e-mail notification o
   </ul>
 </div>
 
-# <a name="Summary of Contents"></a> Summary of Contents
+## <a name="Summary of Contents"></a> Summary of Contents
 
-## <a name="tools/mailnotify"></a> `tools/mailnotify`
+### <a name="tools/mailnotify"></a> `tools/mailnotify`
 
 The main part of the mailer module is a script, `tools/mailnotify`. This script is designed to be run from 'cron' (or an equivalent offline job scheduler), and processes the contents of the standard WebNotify topic. As well as providing the usual notification service, it also provides per-topic notification services. The script may be run from the command line or a cron job.
 
@@ -51,11 +53,11 @@ In the future it is intended that individual users will be able to control the f
 
 %RED% **_Note_** `mailnotify` ignores permissions in webs. It is entirely possible for a user to get added to a WebNotify topic in a web, when they are not authorised to view the topics in that web. This could result in them having limited access to sensitive information (the topic summaries). %ENDCOLOR%
 
-## <a name="TWiki/Contrib/_MailerContrib cod"></a> `TWiki/Contrib/MailerContrib` code library
+### <a name="TWiki/Contrib/_MailerContrib cod"></a> `TWiki/Contrib/MailerContrib` code library
 
 The second part of the module is a code library that provides the services for other applications to modify WebNotify through a clean, well documented interface. This allows (for example) plugin developers to add a "Register me for notification" button to their pages. The main interface is the `WebNotify` package described below.
 
-# <a name="Installation Instructions"></a> Installation Instructions
+## <a name="Installation Instructions"></a> Installation Instructions
 
 This Contrib is pre-installed as part of the TWiki release package, and should only have to be re-installed if an upgrade is required.
 
@@ -64,11 +66,11 @@ This Contrib is pre-installed as part of the TWiki release package, and should o
 - Run the installer script `MailContrib_intaller.pl` or alternatively resolve all dependencies manually.
 - To make sure the installation was successful, run the `mailnotify` script from the command line, with no parameters. In this case it will print out what it would have done to STDOUT.
 
-# <a name="Setting up your cron job"></a> Setting up your cron job
+## <a name="Setting up your cron job"></a> Setting up your cron job
 
 You need to set up a `cron` (or equivalent) job to run `mailnotify`.
 
-<code>Usage: perl -I  tools/mailnotify [-q] [ _web1 web2 ... webN_ ]</code>  is the path to the TWiki bin directory, so that the script can find the rest of TWiki.
+<code>Usage: perl -I &lt;bin&gt; mailnotify [-q] [ _web1 web2 ... webN_ ]</code> &lt;bin&gt; is the path to the TWiki bin directory (usually `../bin`), so that the script can find the rest of TWiki.
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -83,12 +85,12 @@ You need to set up a `cron` (or equivalent) job to run `mailnotify`.
 
 For example, `perl -I /usr/local/twiki/bin mailnotify -q Public Private` will generate notifications for the Public and Private webs.
 
-# <a name="Settings"></a> Settings
+## <a name="Settings"></a> Settings
 
-- Name of the perl package
-  - Set STUB = TWiki::Contrib::Mailer
+- Set STUB = TWiki::Contrib::Mailer
+- Set SHORTDESCRIPTION = Supports e-mail notification of changes.
 
-# <a name="Contrib Info"></a> Contrib Info
+## <a name="Contrib Info"></a> Contrib Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -235,8 +237,8 @@ For example, `perl -I /usr/local/twiki/bin mailnotify -q Public Private` will ge
     <td align="right"> Feedback: </td>
     <td> TWiki:Plugins/%TOPIC%Dev </td>
   </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
 </table>
-
-**_Related Topics:_** [[TWikiPreferences]]
-
--- TWiki:Main/CrawfordCurrie

@@ -75,6 +75,7 @@ PatternSkin uses namespaces for templates, by adding one (sometimes two - multip
   - .patternTopBarOverlay - striped white image background
   - .patternTopic - TWiki topic text
   - .patternTop - area at top of topic text, with patternHomePath, revision and action buttons
+  - .patternTopicActions - container for multiple .patternTopicAction rows
   - .patternTopicAction - container for .patternActionButtons
   - .patternActionButtons - action buttons at bottom of page
   - .patternMoved - topic moved info (only visible when the topic has changed name or web)
@@ -95,7 +96,7 @@ PatternSkin uses namespaces for templates, by adding one (sometimes two - multip
   - .patternSig - signature copy box
   - .patternSaveOptions - holder for .patternSaveOptionsContents
   - .patternSaveOptionsContents - checkboxes that change the state of a topic save; for instance "Force revision" checkbox
-  - .patternAccessKeyInfo - info block with access key information
+  - .patternSaveHelp - info block with help on save options (access keys and potentially other info)
 
 - Preview page
   - .patternPreviewArea - container around preview of .patternTopic

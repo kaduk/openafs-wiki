@@ -12,7 +12,18 @@
 -
 -
 
-## <a name="Personal Preferences"></a> Personal Preferences
+## <a name="My Personal Data"></a> My Personal Data
+
+Note: if personal data is being stored using a secret database, then it is only visible to the user and to administrators.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> E-mail </td>
+    <td> %USERINFO{"%TOPIC%" format="$emails"}% </td>
+  </tr>
+</table>
+
+## <a name="My Personal Preferences"></a> My Personal Preferences
 
 Uncomment preferences variables to activate them (remove the #-sign). Help and details on preferences variables are available in [[TWikiPreferences]].
 

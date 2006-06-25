@@ -1,0 +1,1630 @@
+# <a name="TWiki Release 4.0 (Dakar)"></a><a name=" TWiki Release 4.0 (Dakar)"></a> TWiki Release 4.0 (Dakar)
+
+'Dakar' is the first major release of the TWiki Enterprise Collaboration Platform in over a year. The focus of this release has been on refactoring the code in the interests of **security**, **efficiency** and **maintainability**, though a range of powerful new features are also included. The refactoring work has included tightening up the specification of certain key TWiki behaviours, which has resulted in some specification changes. The impact on end users has been minimised as far as possible.
+
+**_Major New Features_**
+
+- Much simpler install and configuration
+- Integrated session support
+- Webserver-independent login/logout
+- Security sandbox blocks all possible routes for remote command execution on the server
+- New editing model allows freer collaboration, without fear of overwriting other people's changes
+- Multilingual UI
+- E-mail confirmations for registration
+- WYSIWYG editor
+- Hierarchical sub-webs
+
+%M% See feature list at [[TWikiHistory#DakarRelease]]. TWiki 4.0 patch release details are at the end of this release notes document.
+
+**_Note:_** In what follows, \{This\} (words in curly braces) refers to settings in the new 'configure' interface.
+
+<div>
+  <ul>
+    <li><a href="#Notes for end users"> Notes for end users</a><ul>
+        <li><a href="#Editing at the same time as othe"> Editing at the same time as other people</a></li>
+        <li><a href="#User Interface Internationalisat"> User Interface Internationalisation</a></li>
+        <li><a href="#New options on the editing scree"> New options on the editing screen</a></li>
+        <li><a href="#Change notification"> Change notification</a></li>
+        <li><a href="#E-mail addresses"> E-mail addresses</a></li>
+        <li><a href="#Parameterised Includes"> Parameterised Includes</a></li>
+        <li><a href="#Named Section Include"> Named Section Include</a></li>
+        <li><a href="#RSS Feeds"> RSS Feeds</a></li>
+      </ul>
+    </li>
+    <li><a href="#Notes for _TWikiAdmins and _Wi"> Notes for TWikiAdmins and WikiMasters</a><ul>
+        <li><a href="#Upgrading"> Upgrading</a></li>
+        <li><a href="#Security"> Security</a></li>
+        <li><a href="#CPAN Requirements"> CPAN Requirements</a></li>
+        <li><a href="#Installation and configuration"> Installation and configuration</a><ul>
+            <li><a href="#setlib.cfg"> setlib.cfg</a></li>
+            <li><a href="#TWiki.cfg"> TWiki.cfg</a></li>
+            <li><a href="#=testenv= / =configure="> testenv / configure</a></li>
+            <li><a href="#=configure= optional features"> configure optional features</a></li>
+            <li><a href="#Improved support for shorter URL"> Improved support for shorter URLs</a></li>
+          </ul>
+        </li>
+        <li><a href="#Preferences"> Preferences</a><ul>
+            <li><a href="#Changes to the evaluation order"> Changes to the evaluation order</a></li>
+            <li><a href="#Preferences Plugin"> Preferences Plugin</a></li>
+            <li><a href="#{_LocalSitePreferences} (was Mai"> {LocalSitePreferences} (was Main.TWikiPreferences)</a></li>
+            <li><a href="#=FAVICON="> FAVICON</a></li>
+            <li><a href="#=FORCENEWREVISIONCHECKBOX="> FORCENEWREVISIONCHECKBOX</a></li>
+            <li><a href="#=WEBLOGONAME=, <code>WEBLOGOIMG</code>, =WE"> WEBLOGONAME, WEBLOGOIMG, WEBLOGOURL, WEBLOGOALT</a></li>
+            <li><a href="#=WIKILOGOIMG=, <code>WIKILOGOURL</code>, =W"> WIKILOGOIMG, WIKILOGOURL, WIKILOGOALT</a></li>
+          </ul>
+        </li>
+        <li><a href="#Final Preferences"> Final Preferences</a></li>
+        <li><a href="#=mod_perl= support improvements"> mod_perl support improvements</a></li>
+        <li><a href="#Plugins"> Plugins</a></li>
+        <li><a href="#Logins, Logouts, Sessions and Pa"> Logins, Logouts, Sessions and Passwords</a></li>
+        <li><a href="#Protections"> Protections</a><ul>
+            <li><a href="#Site Permissions Overview"> Site Permissions Overview</a></li>
+          </ul>
+        </li>
+        <li><a href="#Frustrating Robots and Spammers"> Frustrating Robots and Spammers</a></li>
+        <li><a href="#New User Registration"> New User Registration </a></li>
+        <li><a href="#E-mail addresses"> E-mail addresses</a></li>
+        <li><a href="#Change notification support"> Change notification support</a></li>
+        <li><a href="#Site Changes Summary"> Site Changes Summary</a></li>
+        <li><a href="#What's a Web"> What's a Web</a></li>
+        <li><a href="#Disable script tags"> Disable &lt;script&gt; tags</a></li>
+      </ul>
+    </li>
+    <li><a href="#Notes for _TWikiApplication Dev"> Notes for TWikiApplication Developers</a><ul>
+        <li><a href="#Space/Tab conversion"> Space/Tab conversion</a></li>
+        <li><a href="#Evaluation order of _TWikiVaria"> Evaluation order of TWikiVariables</a></li>
+        <li><a href="#Encoding of form-field values"> Encoding of form-field values</a></li>
+        <li><a href="#script tags in topics"> &lt;script&gt; tags in topics</a></li>
+        <li><a href="#verbatim tags in topics"> &lt;verbatim&gt; tags in topics</a></li>
+        <li><a href="#=ALLVARIABLES="> ALLVARIABLES</a></li>
+        <li><a href="#=IF="> IF</a></li>
+        <li><a href="#New <code>$count(reg-exp)</code> variable i"> New $count(reg-exp) variable in Formatted Search</a></li>
+      </ul>
+    </li>
+    <li><a href="#Notes for Skin Developers"> Notes for Skin Developers</a><ul>
+        <li><a href="#Skin search path"> Skin search path</a></li>
+        <li><a href="#Supporting web names that are !"> Supporting web names that are WikiWords</a></li>
+        <li><a href="#Deprecation of %EDITTOPIC%"> Deprecation of %EDITTOPIC%</a></li>
+        <li><a href="#Template Parameters"> Template Parameters</a></li>
+        <li><a href="#HTTP and HTTPS"> HTTP and HTTPS</a></li>
+        <li><a href="#QUERYSTRING"> QUERYSTRING</a></li>
+      </ul>
+    </li>
+    <li><a href="#Notes for Plugin Developers"> Notes for Plugin Developers</a><ul>
+        <li><a href="#Changes to variable parsing"> Changes to variable parsing</a></li>
+        <li><a href="#Internals"> Internals</a></li>
+        <li><a href="#Extensions to the Func API"> Extensions to the Func API</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki 4.0.1 Patch Release Detail"> TWiki 4.0.1 Patch Release Details</a><ul>
+        <li><a href="#TWiki 4.0.1 Fixes"> TWiki 4.0.1 Fixes</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki 4.0.2 Patch Release Detail"> TWiki 4.0.2 Patch Release Details</a><ul>
+        <li><a href="#TWiki 4.0.2 Fixes"> TWiki 4.0.2 Fixes</a></li>
+        <li><a href="#TWiki 4.0.2 Enhancements"> TWiki 4.0.2 Enhancements</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki 4.0.3 Patch Release Detail"> TWiki 4.0.3 Patch Release Details</a><ul>
+        <li><a href="#TWiki 4.0.3 Fixes"> TWiki 4.0.3 Fixes</a></li>
+        <li><a href="#TWiki 4.0.3 Enhancements"> TWiki 4.0.3 Enhancements</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Notes for end users"></a> Notes for end users
+
+### <a name="Editing at the same time as othe"></a> Editing at the same time as other people
+
+Dakar release introduces a brand-new strategy for handling simultaneous changes to a topic by several people. Instead of one person locking the topic, and other having to wait until they are finished, Dakar allows multiple simultaneous edits of the same topic, and then _merges_ the different changes.
+
+You probably won't even notice this happening unless you are changing existing text in the file at the same time as someone else. In this case, you may see TWiki inserting "change marks" into the text to highlight conflicts between your edits and another persons. These change marks are only used if you edit the same part of a topic as someone else, and they indicate what the text used to look like, what the other person's edits were, and what your edits were. For example, let's say you have a topic that contains this text:
+
+<table>
+  <tr bgcolor="lightgrey">
+    <th>You edit</th>
+    <th>You see</th>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td><pre>
+Casablanca is
+Humphrey Bogart's finest film.
+Of all the gin joints in all the world,
+you had to walk into mine.
+</pre></td>
+    <td> Casablanca is Humphrey Bogart's finest film. Of all the gin joints in all the world, you had to walk into mine. </td>
+  </tr>
+  <tr>
+    <td colspan="2">and you start editing this text before going for coffee. Meanwhile, a colleague also starts editng the same topic and changes the text to:</td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td><pre>
+<b>The Maltese Falcon</b> is
+Humphrey Bogart's finest film.
+Of all the gin joints in all the world,
+you had to walk into mine.
+</pre></td>
+    <td> The Maltese Falcon is Humphrey Bogart's finest film. Of all the gin joints in all the world, you had to walk into mine. </td>
+  </tr>
+  <tr>
+    <td colspan="2">When you get back from coffee, you finish your edit, changing the text to</td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td><pre>
+<b>To Have or Have Not</b> is
+Humphrey Bogart's finest film.
+<b>You know how to whistle, don't you Steve?
+You just put your lips together and blow.</b>
+</pre></td>
+    <td> To Have or Have Not is Humphrey Bogart's finest film. You know how to whistle, don't you Steve? You just put your lips together and blow. </td>
+  </tr>
+  <tr>
+    <td colspan="2">and saving it. The topic will now look like this when you display it:</td>
+  </tr>
+  <tr bgcolor="lightgrey">
+    <td><pre>
+&lt;div &gt;&lt;b&gt;CONFLICT&lt;/b&gt; original 5:&lt;/div&gt;
+Casablanca is
+&lt;div &gt;&lt;b&gt;CONFLICT&lt;/b&gt; version 6:&lt;/div&gt;
+The Maltese Falcon is
+&lt;div &gt;&lt;b&gt;CONFLICT&lt;/b&gt; version 7:&lt;/div&gt;
+To Have or Have Not is
+&lt;div &gt;&lt;b&gt;CONFLICT&lt;/b&gt; end&lt;/div&gt;
+Humphrey Bogart's finest film.
+You know how to whistle, don't you Steve?
+You just put your lips together and blow.
+</pre></td>
+    <td>
+      <div><b>CONFLICT</b> original 5:</div> Casablanca is <div><b>CONFLICT</b> version 6:</div> The Maltese Falcon is <div><b>CONFLICT</b> version 7:</div> To Have or Have Not is <div><b>CONFLICT</b> end</div> Humphrey Bogart's finest film. You know how to whistle, don't you Steve? You just put your lips together and blow. </td>
+  </tr>
+</table>
+
+As you can see, your changes have been merged with your colleagues. The merge is done on a line-by-line basis, and if your changes do not overlap, then change marks will not be used (as is the case for the last line of the example).
+
+Merging only applies to text fields. When there are conflicts in field data in forms such as checkboxes, radio buttons and selects, the most recent change (usually your change) always wins, even if someone else has changed the form since you started editing. Of course, all changes are available from the topic history.
+
+Because there are cases where you actually want to avoid overlapping edits altogether (e.g. if you are changing forms data) TWiki will **warn** if you attempt to edit a topic that someone else is editing. It will also warn if a merge was required during a save.
+
+### <a name="User Interface Internationalisat"></a> User Interface Internationalisation
+
+TWiki will now pick up the language you are using in your browser, and try to present system messages in that language, if it is available. If your preferred language is not available, TWiki will revert to English. You'll also have an option to choose a language different from that used in your browser.
+
+User Interface Internationalisation support is optional and enabled by the \{UserInterfaceInternationalisation\} setting.
+
+The translation is performed by the Perl standard internationalization framework. If you want to contribute a new language, it would be most welcome: see TWiki:Codev.UserInterfaceLocalisation for instructions on how to help.
+
+### <a name="New options on the editing scree"></a> New options on the editing screen
+
+You will notice a couple of changes to the editing screen: first, there is no switch for releasing the edit lock any more (if locks are enabled, they are always released when an edit finishes). You will also notice a new "force new revision" checkbox. TWiki normally doesn't add a new revision if the same user re-edits a topic within a certain time period; this checkbox allows you to _force_ TWiki to add a revision for every change, regardless of how small it is.
+
+### <a name="Change notification"></a> Change notification
+
+You now have much more control over _which_ topics in a web you are interested in changes to. You can choose to receive notifications about topics selected by name, or by their parent relationship. See [[MailerContrib]] for more details. Note that the `mailnotify` cron script has moved out of the `bin` directory and into the `tools` directory - active crontab entries needs to be updated accordingly.
+
+### <a name="E-mail addresses"></a> E-mail addresses
+
+Because of the security risks inherent in publishing e-mail addresses in personal topics, the storage of user's emails has been moved to the password manager. For sites that use the `.htpasswd` password manager, e-mail addresses that new users provide during registration are stored in the `.htpasswd` file. To aid in migration, if TWiki can't find a registered e-mail address in `.htpasswd`, it will still look in the personal topic. All users should register a valid e-mail address at [[ChangeEmailAddress]].
+
+If a different password manager is in use (e.g. LDAP, or 'none'), user e-mails will still be stored in personal topics. Sites that use other password systems (such as LDAP) should consider implementing a TWiki password manager, so that TWiki can look up email addresses, rather than storing them in personal topics.
+
+### <a name="Parameterised Includes"></a> Parameterised Includes
+
+`%INCLUDE{}%` variables have a predefined set of parameters. In the past, any parameters not in this set were simply ignored. With Dakar, these parameters are now defined as [[TWikiVariables]] within the included topic - for example,
+
+    %INCLUDE{ "BugList" FAVOURITE="Damsel Flies" }%
+
+will define `%FAVOURITE%` as `Damsel Flies` in the included topic, so if `BugList` contained the line
+
+    My favourite bugs are %FAVOURITE%
+
+it will be expanded to
+
+    My favourite bugs are Damsel Flies
+
+### <a name="Named Section Include"></a> Named Section Include
+
+The `%INCLUDE{}%` variable allows to include only a named section of the included topic. These sections are defined in the included topic using the `%STARTSECTION%` and `%ENDSECTION%` variables. For example, if the included topic has:
+
+    ---+ News
+
+    ---++ IT News
+    All news related to IT.
+    %STARTSECTION{"itnews"}%
+       * 2005-10-02 Final deployment of Dakar
+       * 2005-10-01 Moving platform to Dakar
+    %ENDSECTION{"itnews"}%
+
+Using `%INCLUDE{ "AllNews" section="itnews" }%` will produce:
+
+       * 2005-10-02 Final deployment of Dakar
+       * 2005-10-01 Moving platform to Dakar
+
+This syntax also allows for nested sections. For example, given the following topic:
+
+    %STARTSECTION{"outer"}%
+       * Top Outer Text
+    %STARTSECTION{"inner"}%
+       * Inner Text
+    %ENDSECTION{"inner"}%
+       * Top Outer Text
+    %ENDSECTION{"outer"}%
+
+Using `%INCLUDE{"SampleTopic" section="outer"}%` will produce:
+
+       * Top Outer Text
+       * Inner Text
+       * Top Outer Text
+
+And `%INCLUDE{"SampleTopic" section="inner"}%` will produce:
+
+       * Inner Text
+
+Overlapped sections are also allowed.
+
+### <a name="RSS Feeds"></a> RSS Feeds
+
+RSS feeds have been enhanced to display links as links to make the feeds more useful. They also now use the web-specific logos.
+
+## <a name="Notes for _TWikiAdmins and _Wiki"></a> Notes for TWikiAdmins and WikiMasters
+
+### <a name="Upgrading"></a> Upgrading
+
+See [[TWikiUpgradeGuide]] for help in upgrading an existing Cairo (Sep 2004) installation.
+
+### <a name="Security"></a> Security
+
+Dakar Release introduces the use of 'safe pipes' to prevent any malicious request from executing code on the server. This strategy stops any of the known attacks dead in its tracks. The Dakar codebase has not been impacted by any of the recent security advisories in any way. Several public sites have been running Dakar code for some months now, and to the best of our knowledge none has been hacked.
+
+### <a name="CPAN Requirements"></a> CPAN Requirements
+
+CPAN:Text::Diff is a prerequisite for the UpgradeTWiki script only. CPAN:URI is a prerequisite for `configure`. Other new prerequisites are CPAN:CGI::Session and CPAN:CGI::Cookie, if you want to take advantage of the new session support.
+
+If you want user interface internationalization support, CPAN:Locale::Maketext::Lexicon and CPAN:Encode (in perl 5.8's core) are required, as well as perl 5.8 or higher. See TWiki:Codev.UserInterfaceLocalisation for details on TWiki internationalization support.
+
+### <a name="Installation and configuration"></a> Installation and configuration
+
+The installation and configuration processes have been simplified.
+
+#### <a name="setlib.cfg"></a> setlib.cfg
+
+The installer should now provide a file called `LocalLib.cfg` that contains local path settings. `setlib.cfg` contains documentation of what has to be done. Old `setlib.cfg` files **will not work** with Dakar.
+
+#### <a name="TWiki.cfg"></a> TWiki.cfg
+
+`TWiki.cfg` now contains all the default configuration settings, and the installer should provide a file called `LocalSite.cfg` that contains just those settings that are different than the defaults. The syntax of the settings in the file has also changed. Old `TWiki.cfg` files **will not work** with Dakar. The UpgradeTWiki script can be used to automate most of the necessary changes.
+
+#### <a name="=testenv= / &lt;code&gt;configure="></a> =testenv / `configure`
+
+`testenv` has been removed, and replaced with the new `configure` interface. This interface performs all the checking functions of the old `testenv`, adds several new ones (including permissions checks) and also acts as a browser interface allowing you to do **all** TWiki configuration from the browser. `configure` is now the main installation interface for TWiki.
+
+The `configure` script can be used like the old `testenv` for public review of the configuration of the site. Saving from the interface is password-protected, using a password set in the configuration files, so to ordinary users `configure` just looks like a posh version of `testenv`. If you want to hide your configuration from public view, you can restrict access to the script using webserver access controls (Apache users see the Apache documentation on the 'require' directive for more infomation on how to do this).
+
+#### <a name="=configure= optional features"></a> `configure` optional features
+
+New optional features include \{AutoAttachPubFiles\} and \{EnableHierarchicalWebs\}. Both are switched off by default but can be enabled in `configure`.
+
+#### <a name="Improved support for shorter URL"></a> Improved support for shorter URLs
+
+See TWiki:TWiki.ShorterUrlCookbook
+
+### <a name="Preferences"></a> Preferences
+
+There have been some significant changes to the handling of preferences, aimed at making them more logical, consistent and easy to use.
+
+#### <a name="Changes to the evaluation order"></a> Changes to the evaluation order
+
+The rules for preference evaluation (whether the user setting overrides the topic setting etc) have always been a bit confusing and difficult to use. For example, a topic setting would override a user setting, but a user setting would override a web setting, making per-web settings awkward to use. Mainly due to the introduction of hierarchical webs, preferences are now evaluated in the following order:
+
+1. Topic
+2. Web
+3. Parent Web(s) (if appropriate. All parent webs are evaluated in bottom-up order)
+4. Session
+5. User
+6. Local Site (as set in \{LocalSitePreferences\}, typically =%MAINWEB%.TWikiPreferences))
+7. Default (as set in \{SitePrefsTopic\}, typically =%TWIKIWEB%.TWikiPreferences))
+
+This is a change from previous versions, where the User preferences were evaluated between the topic and the web.
+
+Note that a user can still dictate preference values that can't be overridden by the topic or the web level settings, but they will now need to set those preferences as FINALPREFERENCES. You can use `%ALLVARIABLES%` in a topic to get a dump of all preferences set in that context.
+
+Permissions controls are not affected by this change.
+
+#### <a name="Preferences Plugin"></a> Preferences Plugin
+
+TWiki:Plugins.PreferencesPlugin has been included to allow more convenient editing of preferences. This plugin provides input controls, such as menus, radio buttons, and checkboxes to select preference settings.
+
+The following standard preferences have been removed: [MAILTHISTOPIC](http://www.dementia.org/twiki/search?scope=text&web=all&order=topic&search=%25MAILTHISTOPIC%25&casesensitive=on&limit=all), [MAILTHISTOPICTEXT](http://www.dementia.org/twiki/search?scope=text&web=all&order=topic&search=%25MAILTHISTOPICTEXT%25&casesensitive=on&limit=all), [TOPICURL](http://www.dementia.org/twiki/search?scope=text&web=all&order=topic&search=%25TOPICURL%25&casesensitive=on&limit=all), [READTOPICPREFS](http://www.dementia.org/twiki/search?scope=text&web=all&order=topic&search=%25READTOPICPREFS%25&casesensitive=on&limit=all), [TOPICOVERRIDESUSER](http://www.dementia.org/twiki/search?scope=text&web=all&order=topic&search=%25TOPICOVERRIDESUSER%25&casesensitive=on&limit=all) (click on the name to search for occurrences on this site). If they are in use on your site, you can restore them to their Cairo settings by simply cutting and pasting the old definitions.
+
+#### <a name="{_LocalSitePreferences} (was Mai"></a> \{LocalSitePreferences\} (was Main.TWikiPreferences)
+
+Customized site preferences can now be saved in the \{LocalSitePreferences\} topic which will override settings in \{SitePrefsTopicName\}. This simplifies upgrades as you can overwrite the \{SitePrefsTopicName\} topic and gain any new or updated preference settings without losing your local customizations.
+
+#### <a name="=FAVICON="></a> `FAVICON`
+
+`favicon.ico` is a small graphic that _can_ appear in a variety of places in the browser: the titlebar, the taskbar, the address bar, bookmarks/favourites, and page tabs. Each web browser has a unique user interface, and as a result uses the Favicon in different ways. _Most_ browsers display it in _most_ of the locations listed.
+
+Out of the box, TWiki is configured to easily customise the `favicon.ico` for each web. To switch to a new `favicon.ico`, upload it to the desired web's WebPreferences.
+
+- - Set FAVICON = <http://www.dementia.org/twiki//view/%WEB%/WebPreferences/favicon.ico>
+
+To provide a single, site-wide `favicon.ico`, hardcode a specific web, for example:
+
+- - Set FAVICON = <http://www.dementia.org/twiki//view/TWiki/WebPreferences/favicon.ico>
+
+#### <a name="=FORCENEWREVISIONCHECKBOX="></a> `FORCENEWREVISIONCHECKBOX`
+
+Normally, if you make another edit within a one hour period (was `$editLockTime` in `lib/TWiki.cfg`, now `{ReplaceIfEditedAgainWithin}`), TWiki will fold together your changes. This is often the "right thing to do", as it can reduce the visual clutter of diffs.
+
+The "Force New Revision" checkbox is a way to force it to create a separate revision each time you save.
+
+The [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] variable `FORCENEWREVISIONCHECKBOX` controls whether this is checked by default or not.
+
+On a related note, you can force **_every_** save to be a new revision number by editing `lib/TWiki.cfg` and setting <code>**\{ReplaceIfEditedAgainWithin\}**</code> to 0.
+
+NOTE: Although this feature is being introduced in this release, it is also being deprecated at the same time. TWiki:Codev.EdinburghRelease is planned to provide the ability to elide revisions at the GUI level, rather than the Store level, thus obviating the need for this stopgap measure.
+
+#### <a name="=WEBLOGONAME=, &lt;code&gt;WEBLOGOIMG&lt;/code&gt;, &lt;code&gt;WE"></a> =WEBLOGONAME, `WEBLOGOIMG`, `WEBLOGOURL`, `WEBLOGOALT`
+
+Each web can have its own customised logo. The simplest way is to upload a `logo.gif` to a web's WebPreferences, and it will appear in the top-left corner.
+
+To change the logo's filename, set the `WEBLOGONAME` variable. You'll especially need to do this if you use a different logo file format:
+
+- - Set WEBLOGONAME = MyLogo.jpg
+
+If you don't want to have custom logos on a per-web basic, but instead want to use a single, site-wide logo, hardcode a specific web in the `WEBLOGOURL` variable. For example:
+
+- - Set WEBLOGOURL = %PUBURLPATH%/Main/WebPreferences/logo.png
+
+#### <a name="=WIKILOGOIMG=, &lt;code&gt;WIKILOGOURL&lt;/code&gt;, &lt;code&gt;W"></a> =WIKILOGOIMG, `WIKILOGOURL`, `WIKILOGOALT`
+
+These variables are now more closely associated with `WIKITOOLNAME`. If you change `WIKITOOLNAME`, you'll probably want to change these variables, too. `WIKILOGOIMG`, `WIKILOGOURL`, `WIKILOGOALT`, and `WIKITOOLNAME` are now used more consistently together.
+
+### <a name="Final Preferences"></a> Final Preferences
+
+The `FINALPREFERENCES` setting prevents particular preference settings from being over-ridden at a lower level. The hierarchy of how `FINALPREFERENCES` settings are applied has been clarified/formalized as reflected in the following chart:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Level </strong></th>
+    <th bgcolor="#99CCCC"><strong> Set By </strong></th>
+    <th bgcolor="#99CCCC"><strong> Local site examples </strong></th>
+  </tr>
+  <tr>
+    <td> default site </td>
+    <td> %TWIKIWEB%.TWikiPreferences or %WIKIPREFSTOPIC% </td>
+    <td>[[TWiki/TWikiPreferences]]</td>
+  </tr>
+  <tr>
+    <td> local site </td>
+    <td> %MAINWEB%.TWikiPreferences or %LOCALSITEPREFS% </td>
+    <td>[[Main/TWikiPreferences]]</td>
+  </tr>
+  <tr>
+    <td> web </td>
+    <td> WebPreferences </td>
+    <td> %WEB%.WebPreferences </td>
+  </tr>
+  <tr>
+    <td> user </td>
+    <td> In one's user topic </td>
+    <td> Main.admin </td>
+  </tr>
+  <tr>
+    <td> topic </td>
+    <td> "Edit topic preferences settings" under "More topic actions" </td>
+    <td> %WEB%.%TOPIC% </td>
+  </tr>
+</table>
+
+By default, the site level `FINALPREFERENCES` are set in [[Main.TWikiPreferences|Main/TWikiPreferences]] so as not to conflict with preference settings in that topic.
+
+### <a name="=mod_perl= support improvements"></a> `mod_perl` support improvements
+
+TWiki no longer uses global variables other than for constants. Each CGI script creates a new "session object" that holds all session-specific information.
+
+There is still an issue with the `@INC` path in `mod_perl`, that mainly impacts plugins that lazy-load modules. You should use the `PerlSetEnv` directive that `mod_perl` provides to make sure that your TWiki `lib` directory is permanently on the path, if you are using `mod_perl`.
+
+### <a name="Plugins"></a> Plugins
+
+Plugins are no longer searched for every time a TWiki script is run. Instead they are automatically discovered in `configure`. To enable and disable plugins, use the `configure` interface. The entire @INC path is searched for plugins, so you can easily point at plugins outside the installation. However only the first instance of a plugin on the @INC path will be found (it is a path, after all).
+
+`%INSTALLEDPLUGINS%` and `%DISABLEDPLUGINS%` are no longer supported in TWikiPreferences. If you have set `%INSTALLEDPLUGINS%` in TWikiPreferences, you need to move that setting into the `{PluginsOrder}` configuration key, using the `configure` interface. To disable plugins, uncheck them in the `configure` interface, and save the changes.
+
+%X% Whenever you install a plugin, make sure you check [[TWikiPlugins#FAILEDPLUGINS]]. Several handlers have been deprecated, and updates of the plugins may be required. Contact the plugin author directly to get an update if none is available on the web.
+
+### <a name="Logins, Logouts, Sessions and Pa"></a> Logins, Logouts, Sessions and Passwords
+
+TWiki:Plugins.SessionPlugin and TWiki:Plugins.AuthPagePlugin have been integrated into the core. TWiki now supports cookied sessions, in the context of a much improved authentication architecture. The setup for authentication is now much simpler, and for most sites can be done entirely from the `configure` interface. There are some incompatibilities with TWiki:Plugins.SessionPlugin, with resepect to the in-line variables. See [[TWikiUserAuthentication]] in the release for full details of how authentication works now. TWiki also now supports the concept of pluggable password managers, making the integration of corporate authentication services much simpler.
+
+Administrators, especially of public sites, need to be aware of the security implications of cookied sessions, and the potential risks of cross-site scripting attacks that may be used to steal user sessions. See [[TWikiUserAuthentication]] for more details.
+
+### <a name="Protections"></a> Protections
+
+The evaluation of protections has been re-worked to make it more naturally understandable, and also fill a number of holes in the protection scheme, These holes meant that it was relatively easy to _deny_ access to a topic, but rather difficult to subsequently _restore_ access without either compromising other topics, or compromising old revisions.
+
+When deciding whether to grant access, TWiki now evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW, CHANGE and RENAME access may be granted/denied separately.
+
+1. If the user is a [[super-user|Main/WebHome#SuperAdminGroup]]
+  - access is **PERMITTED**.
+2. If DENYTOPIC is set to a list of wikinames
+  - people in the list will be **DENIED**.
+3. If DENYTOPIC is set to _empty_ ( i.e. `Set DENYTOPIC =` )
+  - access is **PERMITTED** _i.e._ no-one is denied access to this topic
+4. If ALLOWTOPIC is set
+  1. people in the list are **PERMITTED**
+  2. everyone else is **DENIED**
+5. If DENYWEB is set to a list of wikiname
+  - people in the list are **DENIED** access
+6. If ALLOWWEB is set to a list of wikinames
+  - people in the list will be **PERMITTED**
+  - everyone else will be **DENIED**
+7. If you got this far, access is **PERMITTED**
+
+In addition, permissions set on a specific revision of a topic now _always_ apply to that revision, even if access to the topic is relaxed in a later revision. This change was necessary to prevent accidentally permitting access to sensitive data in old revisions.
+
+The major impact of this change is that WebPreferences topics shipped with earlier releases of TWiki will have excessively restrictive controls, as the default settings were:
+
+- Set DENYWEBVIEW =
+- Set ALLOWWEBVIEW =
+  - This will now _deny_ view access to everyone _not_ in the list (i.e. everyone except admins)
+- Set DENYWEBCHANGE =
+- Set ALLOWWEBCHANGE =
+  - This will now _deny_ change access to everyone _not_ in the list (i.e. everyone except admins)
+- Set DENYWEBRENAME =
+- Set ALLOWWEBRENAME =
+  - This will now _deny_ rename access to everyone _not_ in the list (i.e. everyone except admins)
+- Set ALLOWTOPICCHANGE =
+  - This will now _deny_ change access to everyone _not_ in the list (i.e. everyone except admins)
+- Set ALLOWTOPICRENAME = Main.TWikiAdminGroup
+
+The standard webs shipped with this release have these settings disabled. However you are likely to have inherited the old default settings in your user webs. The easiest way to deal with this is to simply insert a # sign in these settings; for example:
+
+- #Set DENYWEBVIEW =
+- #Set ALLOWWEBVIEW =
+- _etc_
+
+%RED%Note:%ENDCOLOR% For security reasons, the [[Trash|Trash/WebHome]] web is shipped with `ALLOWWEBVIEW` set to [[TWikiAdminGroup]].
+
+#### <a name="Site Permissions Overview"></a> Site Permissions Overview
+
+The [[SitePermissions]] topic gives you a quick view of the permissions on each web - i.e. it aggregates ALLOWWEB\* etc. into a handy table. It is also installed on TWiki.org as TWiki:TWiki.SitePermissions.
+
+### <a name="Frustrating Robots and Spammers"></a> Frustrating Robots and Spammers
+
+Standard TWiki incorporates some simple measures to protect e-mail addresses and control the activities of benign robots. These should be enough to handle intranet requirements. Administrators of public (internet) sites are **strongly** recommended to investigate the TWiki:Plugins/BlackListPlugin.
+
+### <a name="New User Registration"></a> New User Registration
+
+The new user registration process has been extensively reworked to improve usability and security of the registration process.
+
+1. FirstName and LastName are recorded separately and tabulated. See [[UserListByLocation]]
+2. Sends a e-mail that the user has to respond to; registration data is staged until this is done
+3. Populates a form in the user topic, if there is one in the NewUserTemplate. If there is no form, then bullets are used, as in pre-Dakar TWiki.
+4. Sends different e-mails to the WIKIWEBMASTER and the USER, with the users containing the password unless \{HidePasswdInRegistration\} is set.
+5. There is now a mechanism for bulk registration, with callbacks for augmentation (e.g. from other sources).
+6. Absorbed TWiki:Codev.ResetPasswordByEmail.
+7. Obsoleted TWiki:Codev.InstallPassword
+
+### <a name="E-mail addresses"></a> E-mail addresses
+
+E-mail addresses for new users are no longer stored in home topics. Instead, the password manager API has been extended to support storing e-mails.
+
+The default password manager stores e-mails in the `.htpasswd` file - you can safely edit this file with a text editor to modify the info field that contains the e-mail addresses (the format of each line in this file is <code>username&gt;::</code>, and TWiki expects the info field to be a ;-separated list of e-mail addresses). Password managers for other systems e.g. LDAP can esily be extended to support the new API. If the password manager does not have an e-mail address for a user, then TWiki will still look in the users' personal topic.
+
+The script `tools/upgrade_emails.pl` can be used to extract e-mail addresses for existing TWiki users from personal topics, and add them to the password manager.
+
+- You are strongly recommended to run this script if you are running a public site.
+- It will not modify existing personal topics.
+- The script will tell you if any users are found that don't have an e-mail.
+- You can re-run the script as many times as you like; once the password manager has an e-mail for a user, the e-mail in their personal topic is ignored.
+
+You should also advise all your registered users to make sure they have a valid e-mail. They can do this by logging in and visiting [[ChangeEmailAddress]].
+
+### <a name="Change notification support"></a> Change notification support
+
+The old `mailnotify` script has been retired in favour of the MailerContrib. See [[MailerContrib]] for information about functional changes.
+
+### <a name="Site Changes Summary"></a> Site Changes Summary
+
+The [[SiteChanges]] topic mimics TWiki.org's TWiki:Codev:WebChangesForAllWebs - i.e. it shows a [[WebChanges]] view across a whole site. It's name was chosen to parallel SiteMap; at some point you can expect the arrival of SiteStatistics too.
+
+### <a name="What&#39;s a Web"></a> What's a Web
+
+Old versions of TWiki would consider all subdirectories of the TWiki data directory to be webs. This behaviour has changed; now only subdirectories that contain a web preferences topic (`WebPreferences.txt`) will be considered to be webs. This may result in directories that used to return search matches no longer doing so.
+
+### <a name="Disable script tags"></a> Disable &lt;script&gt; tags
+
+In recognition of security concerns around &lt;script&gt; tags, the administrator has the choice whether to allow users to add script to topics or not. See the `{AllowInlineScript}` setting in the **Security** section of <code>[configure](http://www.dementia.org/twiki/configure)</code>.
+
+## <a name="Notes for _TWikiApplication Deve"></a> Notes for TWikiApplication Developers
+
+### <a name="Space/Tab conversion"></a> Space/Tab conversion
+
+Previous TWiki versions would automatically convert three spaces at the start of lines to a tab when the topic was saved. This meant that the saved topic was _not_ the same as the edited topic, which could result in considerable confusion. This conversion has been disabled, and the saved topic is now exactly what you see in the editor. One impact of this change is that any add-on scripts you may have developed that rely on bulleted list lines starting with a tab will no longer work. They must be adapted to treat groups of three spaces and single tabs as equivalent.
+
+### <a name="Evaluation order of _TWikiVariab"></a> Evaluation order of TWikiVariables
+
+In previous TWiki versions the evaluation order of `%VARIABLE%s` depended on where they were expanded in the code. The parser was somewhat crude, and could easily be confused when embedded variables (variables embedded in the parameters of other variables) were used.
+
+The parser has been replaced in Dakar with a deterministic variable parser with predictable behaviour. Specifically, variables are now always evaluated left to right and inside out. For example, consider `%VAR2{ "%VAR1{ "%VAR0{ "params" }%" }%" }% %VAR3%`. Previously, the expansion order would have depended on the order of expressions in the code, so the expansion may have proceeded VAR3 - VAR0 - VAR2 - VAR1. If you were lucky, this was the intended order. In Dakar, the order is now guranteed to be VAR0 - VAR1 - VAR2 - VAR3 (i.e. inside out and left to right).
+
+The main impact of this is that some TWikiApplications may cease to work if they have been written to take advantage of the old chaotic order. There is no way to predict which will work and which will fail, so you will have to deal with this on a case-by-case basis. In most cases TWikiApplication authors will have worked hard to do the "sensible thing" so instances of this problem should be rare.
+
+Note that because the TWiki spec allows double quotes within double-quoted strings in certain variable parameters it has been impossible to make the parser 100% deterministic. There may still be pathological cases where the parser may fail. In these cases, consider how open and close curly brackets are matched up.
+
+### <a name="Encoding of form-field values"></a> Encoding of form-field values
+
+The encoding used to escape characters in form-field values has had to change. The old encoding could very easily be confused by text strings in data values. Existing topics with the old encoding will still be loaded into TWiki as before, but if edited they will be saved with the new encoding. This should not affect you unless you have searches that look for the old encodings; specifically, the %\_G\_%, %\_Q\_%, and %\_P\_% character sequences. Any such searches will not work any more, and need to be converted to search for the new encoding. Assuming they are `regex` type searches, you can use `(%_G_%|%0A)` to match encoded newlines in field data in both old and new format topics, `(%_Q_%|%22)` to match quotes, and `(%_P_%|25)` for percent signs.
+
+### <a name="script tags in topics"></a> &lt;script&gt; tags in topics
+
+Previous releases of TWiki would attempt to interpret the content of &lt;script&gt; tags in topics as TWiki formatting language, often resulting in non-functional scripts. This release protects script sections from expansion by TWiki. Note that this means that [[TWikiVariables]] will **not** be expanded in script tags - they are passed through _verbatim_.
+
+In recognition of security concerns around &lt;script&gt; tags, the administrator has the choice whether to allow users to add script to topics or not. Check the setting of `{AllowInlineScript}` in <code>[configure](http://www.dementia.org/twiki/configure)</code> to see if it is allowed on your site. If not, script sections will simply disappear from topics.
+
+### <a name="verbatim tags in topics"></a> &lt;verbatim&gt; tags in topics
+
+Previous releases required `verbatim` tags to be on their own line. TWiki can now deal with inline verbatim blocks such as
+
+    blah<verbatim>inside</verbatim>after
+
+results in
+
+blah
+
+    inside
+
+after
+
+**NOTE:** VARIABLES are still Set within verbatim tags (this is a historical peculiarity)
+
+### <a name="=ALLVARIABLES="></a> `ALLVARIABLES`
+
+You can use `%ALLVARIABLES%` in a topic to get a dump of all variables set in that context. Invaluable for debugging those tricky TWikiApplications!
+
+### <a name="=IF="></a> `IF`
+
+The new `%IF()%` variable defines simple conditional statements that are evaluated at view time. This allows you to include content conditionally based on environmental factors. See [[IfStatements]] for more information on usage.
+
+### <a name="New &lt;code&gt;$count(reg-exp)&lt;/code&gt; variable i"></a> New `$count(reg-exp)` variable in Formatted Search
+
+This new variable for [[FormattedSearch]] returns the number of instances a specified [[RegularExpression]] occur in a topic. This is useful for such things as counting the number of comments on a page (assuming they are marked my a unique heading level).
+
+## <a name="Notes for Skin Developers"></a> Notes for Skin Developers
+
+### <a name="Skin search path"></a> Skin search path
+
+Earlier releases of TWiki only allowed for a single skin, so customising a single template in a skin meant deriving a whole new skin. Dakar introduces the concept of a skin search path, which lets you combine skins additively. For example, you can customise just the view template by defining a new `view.mylocalskin.tmpl` and then setting
+
+- `Set SKIN = mylocalskin,pattern`
+
+Since you have defined a view template for `mylocalskin`, it will be picked up when you view a topic because `mylocalskin` is first on the search path. But you didn't define `edit.mylocalskin.tmpl`, so when you edit the next skin on the search path will be used instead (in this case `edit.pattern.tmpl`). You can put as many skins on the search path as you like.
+
+As with older releases, setting SKIN (or the `skin` parameter in the URL) replaces the existing skin path setting. Dakar supports _extension_ of the path as well, using _covers_.
+
+- `Set COVER = mylocalskin`
+
+pushes a different skin to the front of the skin search path. There is also an equivalent `cover` URL parameter. For example, [[http://www.dementia.org/twiki/view/%WEB%/WhatIsWikiWiki?cover=print.pattern|%WEB%/WhatIsWikiWiki?cover=print.pattern]]. This gives you an extra level of flexibility when defining skins.
+
+See [[TWikiSkins]] for more information.
+
+### <a name="Supporting web names that are _W"></a> Supporting web names that are WikiWords
+
+Although web names have been [[permitted to be WikiWords|TWiki:Codev/WebNameAsWikiName]] since the TWiki:Codev.CairoRelease, the base templates have been [[fixed|TWiki:Codev/DefaultTemplatesSupportWebNameAsWikiWord]] for Dakar.
+
+Skins should be upgraded if they have standalone `%WEB%` variables; only standalone `%WEB%` text that potentially could be turned into a link (because of a [[WikiWord]]) needs to be escaped. Same for `%MAINWEB%` and `%TWIKIWEB%`.
+
+Examples:
+
+- `%WEB%` -- needs to be escaped with `<nop>%WEB%`
+- `(%WEB%)` -- needs to be escaped because of parenthesis
+- `"%WEB%"` -- no need to escape, does not get linked
+- `<b>%WEB%</b>` -- no need to escape, does not get linked
+- `%WEB%.%TOPIC%` -- no need, is a `Web.TopicName`
+- `(%WEB%.%TOPIC%)` -- no need, is a `Web.TopicName`
+
+Basically, any prefix other then space and parenthesis needs to be looked at. `%WEB%` in a `%SEARCH%` should not be escaped.
+
+### <a name="Deprecation of %EDITTOPIC%"></a> Deprecation of %EDITTOPIC%
+
+In Cairo release (and earlier) the only way to have an edit link that changed with the context was to use `%EDITTOPIC%`. This was only available in view templates, and had no flexibility in formatting. It was also impossible to disable other active links, such as Attach.
+
+Dakar release includes new support for "context if" parameters to the `%TMPL:P%` construct. See [[TWikiTemplates]] for details. The default templates shipped with Dakar have been modified to use this support. %EDITTOPIC has been deprecated, though it is still available as a simple edit link, defined in [[TWikiPreferences]]. Skin authors are strongly recommended to replace this link with context-if conditionals.
+
+### <a name="Template Parameters"></a> Template Parameters
+
+`%TMPL:P%` now accepts parameters. Values passed in these parameters will be expanded when the `%TMPL:DEF%` is instantiated. See [[TWikiTemplates]] for full details. (Remember, this happens at template expansion time, which is usually very early in the rendering process.)
+
+### <a name="HTTP and HTTPS"></a> HTTP and HTTPS
+
+These two new TWikiVariables give access to the HTTP headers sent by your browser. For example, your browser says your browser is %HTTP:\{"User-Agent"\}% (this will be filled in if you are running Dakar).
+
+### <a name="QUERYSTRING"></a> QUERYSTRING
+
+This new TWikiVariable gives access to the full query string from the URL sent to your browser. For example, for the URL `http://www.dementia.org/twiki/view/%WEB%/%TOPIC%?make=Reliant&model=Robin`, the query string is `?make=Reliant;model=Robin` (yes, the semicolon is correct!)
+
+## <a name="Notes for Plugin Developers"></a> Notes for Plugin Developers
+
+### <a name="Changes to variable parsing"></a> Changes to variable parsing
+
+In earlier TWiki versions there was considerable confusion over the syntax and semantics of Preferences, TWiki Variables, and Plugin variables. The documentation suggested that all %VARIABLES% were equal, but in fact some were more equal than others.
+
+The syntax and semantics of preferences and [[TWikiVariables]] has been made consistent. `%VARIABLE%` has been made semantically identical to `%VARIABLE()%`, so if you set a preference named `%VARIABLE%` it will automatically be instantiated in place of `%VARIABLE{}%`. This is an elegant solution in several ways: first, it allows an administrator to electively disable TWikiVariables, simply by defining an overriding preference. Second, it rationalises the semantics in line with the common syntax. Third, it allows a single parser to do all the work, allowing localised optimisation. Fourth, it prevents a plugin from accidentally kidnapping system [[TWikiVariables]] (while this can still be done by registering a tag handler, it's a much more explicit process). Fifth, the ground rules are set for a possible future extension to support parameterised [[TWikiVariables]] e.g.
+
+- `Set CAR{make model accessory} = I drive %make% %model% with %accessory% in my dreams`
+
+`%CAR{make="an Aston Martin" model="DB9" accessory="a gorgeous blonde"}%`
+
+### <a name="Internals"></a> Internals
+
+A lot of the TWiki internals have changed. As a result, plugins that bypass the `TWiki::Func` API and call core functions directly are unlikely to work.
+
+The restructuring of the code internals is such that there are no 1:1 equivalents for the old core functions. Only the TWiki::Func API is guaranteed to work.
+
+You should convert your plugins to call the `TWiki::Func` API. If you have called unpublished functions that have no equivalent in `TWiki::Func`, then you may still be able to call the function via the TWiki "session" object, `$TWiki::Plugins::SESSION`. See the implementation of the `TWiki::Func` module for ideas on how to do this. However calling internals is **not** recommended, even using this new mechanism, as they are liable to change without prior notice.
+
+### <a name="Extensions to the Func API"></a> Extensions to the Func API
+
+- The `TWiki::Func` API has been extended to expose a number of new core functions. Review [[TWikiFuncDotPm]] for details.
+- The `TWiki::Meta` API, which was previously for internal core use only, has now been exposed and may be used in plugins. See [[TWikiMetaDotPm]] for full details.
+- Plugins which observed the existing published API (TWiki::Func) should continue to work.
+
+## <a name="TWiki 4.0.1 Patch Release Detail"></a> TWiki 4.0.1 Patch Release Details
+
+The following fixes have been addressed in this release:
+
+### <a name="TWiki 4.0.1 Fixes"></a> TWiki 4.0.1 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item1597]]</td>
+    <td> configure shows text outside the text boxes - thanks KoenMartens </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1592]]</td>
+    <td> Whoops, deprecated syntax was both alive and documented, trying something else </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1592]]</td>
+    <td> Killing some never documented syntax, allowing for more flexibility in explicit external [[]]-style links </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1591]]</td>
+    <td> Friendly fallback added to meta-&gt;getParent() </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1591]]</td>
+    <td> small fix to parent search but bug remains </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1590]]</td>
+    <td> Don't loose old TOPICPARENT on save </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1589]]</td>
+    <td> Don't report cfg-files as non-executable </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1587]]</td>
+    <td> Including upgrade_emails.pl in distro </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1583]]</td>
+    <td> Cairo compatibility for rev argument syntax </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1579]]</td>
+    <td> corrected spanish access key. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1574]]</td>
+    <td> Net.pm: Tidying up e-mail split </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1574]]</td>
+    <td> Net.pm: Split only on , not on spaces when sending e-mail </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1572]]</td>
+    <td> made optional - thus removing the horrible slowdown it causes from the main loop </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item663]]</td>
+    <td> Fix %MAINWEB%.TWikiPreferences to %LOCALSITEPREFS%; remove %TWIKIWEB% prefix where not needed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item663]]</td>
+    <td> TWiki.org doc merge: GNU patch requirement </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item240]]</td>
+    <td> layout of more screen; added line "Current parent" with 2 searches inside IF - must be a more efficient way but how? </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item240]]</td>
+    <td> just to be sure: replacing MAKETEXT text with English, to be translated later. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item240]]</td>
+    <td> removes unwanted left border in non-view pages </td>
+  </tr>
+  <tr>
+    <td> Item000 </td>
+    <td> replaced 9 tabs by 9 x 3 spaces </td>
+  </tr>
+  <tr>
+    <td> Item000 </td>
+    <td> Typo in ClassicSkin.pm </td>
+  </tr>
+  <tr>
+    <td> Item000 </td>
+    <td> Committed a whole lot of local setup by accident, reverting - sorry folks </td>
+  </tr>
+  <tr>
+    <td> Item000 </td>
+    <td> Typo fix in Search.pm </td>
+  </tr>
+  <tr>
+    <td> Item0 </td>
+    <td> Untainting the tainted title </td>
+  </tr>
+</table>
+
+The 4.0.1 release was built from SVN <http://svn.twiki.org:8181/svn/twiki/branches/TWikiRelease04x00> revision **8740**.
+
+## <a name="TWiki 4.0.2 Patch Release Detail"></a> TWiki 4.0.2 Patch Release Details
+
+The following fixes and minor enhancements have been addressed in this release:
+
+### <a name="TWiki 4.0.2 Fixes"></a> TWiki 4.0.2 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item2004]]</td>
+    <td> Syntax error in DelimitedFile.pm </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1983]]</td>
+    <td> Search box bust when searching for WikiWords </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1978]]</td>
+    <td> Form.pm fails when the name field is [[Topic][fieldname]] for controls </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1971]]</td>
+    <td> Not possible to INCLUDE javascript from external sites </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1963]]</td>
+    <td> "public" in WEBLIST should include all webs if the user is an admin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1961]]</td>
+    <td> LANGUAGES variable very slow </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1958]]</td>
+    <td> RSS feed mentions the TWikiAdministrator as creator </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1951]]</td>
+    <td> Excluding topic from SEARCH does not exclude WebHome (Doc improvement) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1950]]</td>
+    <td> Denial of Service attack very easy on both Cairo and Dakar </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1944]]</td>
+    <td> Add Comment to Configure Page - AuthScripts section </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1937]]</td>
+    <td> rename script doesn't honour access control restrictions </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1935]]</td>
+    <td> preview script ignores access control settings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1925]]</td>
+    <td> rdiff and changes scripts ignore access settings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1921]]</td>
+    <td> Merging 3part duplicates the text screwing up the page </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1920]]</td>
+    <td> Hide form twisty gives poor usability for TWiki apps that use the form </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1912]]</td>
+    <td> 3-way merge doesn't call the plugins merge handler </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1911]]</td>
+    <td> Small typo correction in MANIFEST for upgrade_emails.pl </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1909]]</td>
+    <td> TWiki.pot should be included in distribution </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1903]]</td>
+    <td> Special chars not escaped in registration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1902]]</td>
+    <td> New chars to escape during registration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1900]]</td>
+    <td> Compatibility issue: variables only work when upper case. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1899]]</td>
+    <td> statistics ignore pages with dashes and underscores </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1898]]</td>
+    <td> configure is unhelpful if rcs is not installed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1897]]</td>
+    <td> Simultaneous edit feature is not at all reliable. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1896]]</td>
+    <td> Skin fallback not working </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1895]]</td>
+    <td> $topic not substituted right in INCLUDEWARNING </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1882]]</td>
+    <td> "Plural to singular" unmarked breaks documentation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1878]]</td>
+    <td> FORMLIST in ChangeForm.pm generates invalid html </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1871]]</td>
+    <td> Attachment table broken with version history </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1864]]</td>
+    <td> "Modify search" link in search results not working </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1863]]</td>
+    <td> missing oopslanguagechanged template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1853]]</td>
+    <td> Sandbox doesn't report full errors for command execution on Windows </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1850]]</td>
+    <td> checkPassword not checkPasswd </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1849]]</td>
+    <td> Typo in code: checkPassword not checkPasswd, so remove user does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1848]]</td>
+    <td> .htaccess.txt internal documentation unclear </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1840]]</td>
+    <td> Inadequate upgrade documentation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1838]]</td>
+    <td> commonTagHandler garbles square bracket links in WebTopBar </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1830]]</td>
+    <td> Rename web does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1829]]</td>
+    <td> the templates for SEARCH are broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1820]]</td>
+    <td> Reproducible case of not being able to log out </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1819]]</td>
+    <td> tainted username prevents exec() </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1803]]</td>
+    <td> Sorting bugs by merge field causes an internal error </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1789]]</td>
+    <td> User::isAdmin can create an empty SuperAdminGroup </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1788]]</td>
+    <td> Formatted search does not return values that are zero </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1787]]</td>
+    <td> I18N: Translation updates for 4.0.2 / new PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1781]]</td>
+    <td> Allow admin users to change passwords and mail addresses </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1778]]</td>
+    <td> Registration gives strange TWiki vars in user topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1771]]</td>
+    <td> Error message 'Oh dear' in warnyyyymm.txt isn't helpful </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1743]]</td>
+    <td> Attachment sort order is cockeyed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1729]]</td>
+    <td> Better localisation of variable in Net.pm </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1724]]</td>
+    <td> Attach: FILENAME AND FILEPATH not showing the file name with non-alpha characters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1720]]</td>
+    <td> Save script fails on old topic when sole argument is topicparent and there's a mandatory field in the form. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1714]]</td>
+    <td> quotes in attachment comment break manage form </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1687]]</td>
+    <td> Must set TWiki::Plugins::SESSION before invoking registered tag handler </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1677]]</td>
+    <td> STARTSECTION/ENDSECTION variables being stripped from templates </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1672]]</td>
+    <td> Change PatternSkin to use non-table based layout </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1657]]</td>
+    <td> RenderListPlugin broken. The case where you draw a tree view does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1654]]</td>
+    <td> mailnotify does not enter the command_line context </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1652]]</td>
+    <td> REVINFO{$time} should display time, not date - time </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1649]]</td>
+    <td> TWikiJavascripts prototype.js causes crash on Internet Explorer. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1645]]</td>
+    <td> Someweb.WebTopicEditTemplate topic does not exist </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1636]]</td>
+    <td> ResetPasswd deletes email entry in .htpasswd </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1634]]</td>
+    <td> Pattern Skin in Dakar: verbatim text and large images makes everything wider than the screen. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1624]]</td>
+    <td> FORMFIELD variable always expands to value of most recent topic revision </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1623]]</td>
+    <td> PatternSkin: WebLeftBar border margin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1621]]</td>
+    <td> beforeSaveHandler not functioning correctly </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1619]]</td>
+    <td> Label form field content destroyed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1616]]</td>
+    <td> inaccurate password_changed message </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1611]]</td>
+    <td> Generic doc work for TWiki 4.0.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1610]]</td>
+    <td> Configure script corrupts NameFilter (Unmatched Bracket in Regex) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1608]]</td>
+    <td> TOC{"MyTopic" web="MyWeb" } no longer forwards </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1599]]</td>
+    <td> "Upgrading a Beta" documentation errors </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1595]]</td>
+    <td> WebTopicCreator disallows topic names containing numbers </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1587]]</td>
+    <td> upgrade_emails.pl script missing in TWiki 4 distro </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1583]]</td>
+    <td> INCLUDE of a topic of a specific revision is not backwards compatible. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1579]]</td>
+    <td> Incorrect properties in the Discard button in the action bar for the spanish translation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1574]]</td>
+    <td> Registration process tries to send extra emails </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1566]]</td>
+    <td> DakarReleaseNotes.html and TWikiDocumentation.html not included in distribution of TWiki4.0 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1553]]</td>
+    <td> Clean up "oops attention: merge_notice" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1515]]</td>
+    <td> Localise formatting help </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1430]]</td>
+    <td> inconsistent width constraints on topbar and content area </td>
+  </tr>
+</table>
+
+### <a name="TWiki 4.0.2 Enhancements"></a> TWiki 4.0.2 Enhancements
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item1964]]</td>
+    <td> Configurable user homepage layout </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1960]]</td>
+    <td> WebRss lacks search options </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1956]]</td>
+    <td> Cleaned up Plugins.EmptyPlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1926]]</td>
+    <td> Usability: Add tabindex + setfocus to template login form in TWiki.PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1801]]</td>
+    <td> Improved doc </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1728]]</td>
+    <td> increase security by defaulting "send password" in email off </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1689]]</td>
+    <td> Add more colors for text ink in Plugins.WysiwygPlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1148]]</td>
+    <td> Consistent buttons in edit and editsettings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1147]]</td>
+    <td> "Raw view" should turn into "Normal View" in raw mode </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1146]]</td>
+    <td> Two "Create" buttons </td>
+  </tr>
+</table>
+
+The 4.0.2 release was built from SVN <http://svn.twiki.org:8181/svn/twiki/branches/TWikiRelease04x00> revision **9626**.
+
+## <a name="TWiki 4.0.3 Patch Release Detail"></a> TWiki 4.0.3 Patch Release Details
+
+The following fixes and minor enhancements have been addressed in this release:
+
+### <a name="TWiki 4.0.3 Fixes"></a> TWiki 4.0.3 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item668]]</td>
+    <td> _default web gives include error for WebLeftBar but the topic does exist </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item444]]</td>
+    <td> oops upload message with empty file is not intelligent </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2530]]</td>
+    <td> Prevent infinite recursion in TMPL:INCLUDE when including generic templates </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2528]]</td>
+    <td> Support for shortest view URLs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2524]]</td>
+    <td> Make templates independent on TablePlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2509]]</td>
+    <td> Render::getRenderedVersion converts translation token </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2487]]</td>
+    <td> Re-introducing attachment table list count </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2481]]</td>
+    <td> Need a configure data type to select a pluggable class (like TWiki::Store::*) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2476]]</td>
+    <td> Topic action buttons shown with search result </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2472]]</td>
+    <td> Get user web name from config and not from registration form </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2469]]</td>
+    <td> TWikiAdminGroup definition topic must be called TWikiAdminGroup (not configurable) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2467]]</td>
+    <td> Non-existing abbreviations in other than current web have web part stripped (AAA.BBB.FFF renders as FFF) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2464]]</td>
+    <td> Definition of a group always requires "Group" in the group name </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2463]]</td>
+    <td> rdiff should show HTML comments </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2441]]</td>
+    <td> Func::getWikiToolName documentation is incorrect </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2439]]</td>
+    <td> Rename TWikiRelease04x00x00.html to TWikiRelease04x00.html </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2436]]</td>
+    <td> PatternSkin does not support PAGEBGCOLOR </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2427]]</td>
+    <td> viewfile delivers .tgz files as text (wrong mime type) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2426]]</td>
+    <td> ICONTOPIC variable: Incorrect value deadlocks topic (no edit possible) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2422]]</td>
+    <td> Inconsistent LocalSite.cfg.txt settings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2421]]</td>
+    <td> Rename: Referrer topics need to be linked explicit </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2409]]</td>
+    <td> Form field checkbox option lost on topic edit </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2402]]</td>
+    <td> Sandbox not aware of I18N for user names </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2399]]</td>
+    <td> statistics does not like date variable sent to it because its tainted </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2395]]</td>
+    <td> Always show e-mail addresses to admins (USERINFO / HideUserDetails setting) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2394]]</td>
+    <td> Allow registration without a running e-mail service (error during registration using TWiki::Net::_sendEmailBySendmail) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2390]]</td>
+    <td> beforeAttachmentSaveHandler is broken on Solaris and RedHat </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2380]]</td>
+    <td> Logins / logouts with template login does not work with I18N topic names </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2379]]</td>
+    <td> Inconsistent meta data in registration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2369]]</td>
+    <td> WIKIUSERNAME incorrectly expanded </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2365]]</td>
+    <td> Email address handling for registration and in users homepage is confusing and not working </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2356]]</td>
+    <td> in sequential rdiff a changed region is classified as twikiDiffAdd* </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2353]]</td>
+    <td> Cannot lock out re-registration by using htpasswd file anymore </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2352]]</td>
+    <td> Support secret values in configure (display stars for passwords) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2347]]</td>
+    <td> Statistics without params updates only Main web </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2339]]</td>
+    <td> Unable to cleanly turn off WEBHEADERART completely causing unexpected major problems </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2338]]</td>
+    <td> Improve doc on session vars to preclude override of perms </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2336]]</td>
+    <td> Using htpasswd on the command line wipes out email address in .htpasswd file </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2333]]</td>
+    <td> TWiki::Func::readAttachment my line shows wrong parameters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2332]]</td>
+    <td> GoodStyle talks about "Initials"; obsolete </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2331]]</td>
+    <td> Calling a speedy-fied view cgi from the commandline breaks template login </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2327]]</td>
+    <td> TWiki on Apache 2.0 hangs (Diab's TWikiOnApache2dot0Hangs patch) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2324]]</td>
+    <td> PatternSkin menu layout issue with MS Internet Explorer 7 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2322]]</td>
+    <td> Comment box should have ability to be disabled by skin template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2321]]</td>
+    <td> Performance improvements to Users.pm implementation (large user bases) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2318]]</td>
+    <td> Links in square brackets breaks if there is a space in front of chars like - and ( </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2317]]</td>
+    <td> ChangePassword confirms change without password-handler </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2315]]</td>
+    <td> Template file permissions more restrictive in tgz dist </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2309]]</td>
+    <td> Prevent change password to empty string (add MinPasswordLength configuration option) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2302]]</td>
+    <td> Restore Using Forms for Settings Feature </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2298]]</td>
+    <td> TWiki::Data::DelimitedFile is not as robust as it could be </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2297]]</td>
+    <td> Lock down TWiki.TWikiPreferences to admin group </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2293]]</td>
+    <td> Registration fails if no mail available </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2292]]</td>
+    <td> SMTP mail fails if the server requires auth </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2287]]</td>
+    <td> When printing a view page, the print style is not called </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2286]]</td>
+    <td> When you move an attachment the rename screen shows all topics that refers to the topic name </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2278]]</td>
+    <td> userToWikiName broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2274]]</td>
+    <td> I18N: Non US-ASCII chars in usernames breaks groups </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2271]]</td>
+    <td> Cannot "put back" a moved non-wikiword topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2261]]</td>
+    <td> Error in Apache log due to TWikiWebPreferences (File does not exist / ATTACHEDFILELINKFORMAT preference) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2259]]</td>
+    <td> TWiki::UI::Save::buildNewTopic does not treat onlywikiname as a Boolean </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2247]]</td>
+    <td> Unclosed DIV in viewprint.pattern.tmpl </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2244]]</td>
+    <td> Documented METASEARCH parameter defaults are not the actual defaults </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2234]]</td>
+    <td> natlogon broken due to recent changes in Client.pm </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2227]]</td>
+    <td> PatternSkin CSS updates for IE 7 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2226]]</td>
+    <td> When you delete an attachment the rename screen shows all topics that refers to the topic name </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2225]]</td>
+    <td> Attachments are being named the full path name instead of the filename only </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2223]]</td>
+    <td> Empty textarea generated in raw mode (VIEW_TEMPLATE issue) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2214]]</td>
+    <td> WebTopicCreator not stripping some disallowed characters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2186]]</td>
+    <td> TWiki.SiteChanges shows oldest (not latest) changes </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2163]]</td>
+    <td> Groups should be defined in UsersWebName only (performance improvement) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2158]]</td>
+    <td> TWiki leaks memory - mod_perl processes continually grow </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2157]]</td>
+    <td> Rendering of links containing periods does not work properly </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2151]]</td>
+    <td> Delete usecase broken in PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2142]]</td>
+    <td> Add option to write email into user topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2141]]</td>
+    <td> Error.pm not in sync with CPAN state </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2140]]</td>
+    <td> AUTHORS missing translators' credits </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2133]]</td>
+    <td> Editform templates are missing some save parameters (templatetopic and text) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2126]]</td>
+    <td> Bulk register shouldn't change passwords of existing users </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2116]]</td>
+    <td> I18N: updated translations for TWiki 4.0.3 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2109]]</td>
+    <td> Add css classes to PreferencesPlugin buttons </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2105]]</td>
+    <td> A form field defined as [[Main/Topic]] assumes that the topic is in the same web as the form </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2102]]</td>
+    <td> Clicking Upload without choosing a file gives error </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2097]]</td>
+    <td> Plugin API / Store.pm: beforeAttachmentSaveHandler broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2096]]</td>
+    <td> New topic missing from notification when renamed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2090]]</td>
+    <td> Default values for fields not picked up in new form (TWIKI4 only) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2088]]</td>
+    <td> PatternSkin MANIFEST is missing PatternSkin.pm </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2057]]</td>
+    <td> TMPL:P parameters broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2054]]</td>
+    <td> JSCalendarContrib only works with IE in PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2050]]</td>
+    <td> Easier overriding of PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2048]]</td>
+    <td> Mailto links written as <a href="mailto:address">mailto:address</a> causes flooding with warning messages about uninitialized value </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2032]]</td>
+    <td> Some UTF8 characters in form values broken (CGI.pm interaction) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2029]]</td>
+    <td> Build script: New topics added to distribution are not versioned correctly </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2019]]</td>
+    <td> Add tracing to Client.pm (login scenarios) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2012]]</td>
+    <td> Break RCS locks on topics automatically when saving (Cairo upgrade issue) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2010]]</td>
+    <td> Email address in the email field for the user is not turned into a link </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2009]]</td>
+    <td> Email addresses are not fully padded with the NOSPAM </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2003]]</td>
+    <td> lib/CPAN/lib/Error.pm has debugging print enabled </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1989]]</td>
+    <td> Latest CGI::Session is broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1982]]</td>
+    <td> Sequence of form fields in topics do not follow form definition </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1980]]</td>
+    <td> Login text remains untranslated </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1941]]</td>
+    <td> If REPEATs are munged in templates, RDiff bombs out </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1939]]</td>
+    <td> Inconsistent handling of non-wikiword topic names when creating new topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1890]]</td>
+    <td> Wysiwyg plugin in infinite loop </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1869]]</td>
+    <td> Clarify security docs in configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1843]]</td>
+    <td> A 1.2 version of a topic cannot be deleted (spam) with cmd=delRev </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1651]]</td>
+    <td> Extract UserMapping and GroupMapping code out of User.pm and Users.pm (enable non-TWikiTopic based User and Groups definititions) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1613]]</td>
+    <td> Renaming the Main web breaks several links to users </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1602]]</td>
+    <td> link to TWikiUpgradeGuide needed from TWiki Installation Guide </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1560]]</td>
+    <td> Non-existing favicon.ico is referenced in upgraded Cairo webs </td>
+  </tr>
+</table>
+
+### <a name="TWiki 4.0.3 Enhancements"></a> TWiki 4.0.3 Enhancements
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item2452]]</td>
+    <td> mime.types lacks some widely used file types </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2301]]</td>
+    <td> Put {linkProtocolPattern} into configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2282]]</td>
+    <td> SpreadSheetPlugin with SETIFEMPTY </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2155]]</td>
+    <td> Remove hardcoded fonts from twiki's default content </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2125]]</td>
+    <td> Add format parameter to META{"parent"} </td>
+  </tr>
+</table>
+
+The 4.0.3 release was built from SVN <http://svn.twiki.org:8181/svn/twiki/branches/TWikiRelease04x00> revision **10706**..

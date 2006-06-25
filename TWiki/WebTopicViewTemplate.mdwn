@@ -5,8 +5,8 @@
 - Make sure you spelled the [[WikiWord]] correctly and try again. Remember, a WikiWord is case sensitive
 - Similar topics in this web (if any):
 # TWiki Installation Error
-Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) [...](http://www.dementia.org/twiki/search/%WEB%/?scope=topic&nosummary=on&nototal=on&search=%TOPIC%)
-- [Search for similar topics in all public webs](http://www.dementia.org/twiki/search/%WEB%/?web=all&scope=topic&nosummary=on&nototal=on&search=%TOPIC%)
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) [...](http://www.dementia.org/twiki/search/Main/?scope=topic&nosummary=on&nototal=on&search=WebHome)
+- [Search for similar topics in all public webs](http://www.dementia.org/twiki/search/Main/?web=all&scope=topic&nosummary=on&nototal=on&search=WebHome)
 
 # <a name="TWiki Installation Error"></a> TWiki Installation Error
 
@@ -14,13 +14,15 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 ### <a name="If you intend to do a full text"></a><a name=" If you intend to do a full text"></a> <img src="http://www.dementia.org/twiki//view/Main/WebHome/searchtopic.gif" width="16" height="16" alt="searchtopic" /> If you intend to do a full text search:
 
-<form action="http://www.dementia.org/twiki/search/%WEB%/" name="search">
+<form action="http://www.dementia.org/twiki/search/Main/" name="search">
   <ul>
     <li> Use the [[Main/WebSearch]] link on top of this page, or do a simple </li>
-    <li><input name="search" size="32" type="text" value="%TOPIC%" /> <input type="submit" value="Search" /> <input name="scope" type="hidden" value="text" /> <input name="ignorecase" type="hidden" value="on" />    (More options in [[Main/WebSearch]]) </li>
+    <li><input name="search" size="32" type="text" value="WebHome" /> <input type="submit" value="Search" /> <input name="scope" type="hidden" value="text" /> <input name="ignorecase" type="hidden" value="on" />    (More options in [[Main/WebSearch]]) </li>
   </ul>
 </form>
 
 ### <a name="If you would like to create this"></a><a name=" If you would like to create thi"></a> <img src="http://www.dementia.org/twiki//view/Main/WebHome/newtopic.gif" width="16" height="16" alt="newtopic" /> If you would like to create this page:
 
-- Continue to **[create topic %TOPIC%](http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%)**
+> **Topic name:**<br />
+>
+> **Topic parent:**<br />

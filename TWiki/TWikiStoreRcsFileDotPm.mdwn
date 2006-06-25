@@ -23,7 +23,7 @@ Refer to Store.pm for models of usage.
         <li><a href="#ObjectMethod <strong>getRevision</strong> ($ver"> ObjectMethod getRevision <tt>($version) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *stored_DataExists*"> ObjectMethod storedDataExists <tt>() -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>getTimestamp</strong> () -"> ObjectMethod getTimestamp <tt>() -&gt; $integer</tt></a></li>
-        <li><a href="#ObjectMethod *restore_LatestRevi"> ObjectMethod restoreLatestRevision <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod *restore_LatestRevi"> ObjectMethod restoreLatestRevision <tt>($wikiname)</tt></a></li>
         <li><a href="#ObjectMethod <strong>removeWeb</strong> ($web)"> ObjectMethod removeWeb <tt>($web)</tt></a></li>
         <li><a href="#ObjectMethod <strong>moveTopic</strong> ($newWe"> ObjectMethod moveTopic <tt>($newWeb,$newTopic)</tt></a></li>
         <li><a href="#ObjectMethod <strong>copyTopic</strong> ($newWe"> ObjectMethod copyTopic <tt>($newWeb,$newTopic)</tt></a></li>
@@ -46,6 +46,7 @@ Refer to Store.pm for models of usage.
         <li><a href="#ObjectMethod *get_RevisionAtTime"> ObjectMethod getRevisionAtTime <tt>($time) -&gt; $rev</tt></a></li>
         <li><a href="#ObjectMethod *get_AttachmentAttr"> ObjectMethod getAttachmentAttributes <tt>($web,$topic,$attachment)</tt></a></li>
         <li><a href="#ObjectMethod *get_AttachmentList"> ObjectMethod getAttachmentList <tt>($web,$topic)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>stringify</strong> ()"> ObjectMethod stringify <tt>()</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -134,7 +135,7 @@ Establishes if there is stored data associated with this handler.
 
 Get the timestamp of the file Returns 0 if no file, otherwise epoch seconds
 
-## <a name="ObjectMethod &lt;strong&gt;restore_LatestRevi"></a> [[ObjectMethod]] \*restoreLatestRevision `()`
+## <a name="ObjectMethod &lt;strong&gt;restore_LatestRevi"></a> [[ObjectMethod]] \*restoreLatestRevision `($wikiname)`
 
 Restore the plaintext file from the revision at the head.
 
@@ -276,3 +277,7 @@ sub \_constructAttributesForAutoAttached as long as stat is defined, return an e
 ## <a name="ObjectMethod &lt;strong&gt;get_AttachmentList"></a> [[ObjectMethod]] \*getAttachmentList `($web,$topic)`
 
 returns \{\} of filename =&gt; \{ key =&gt; value, key2 =&gt; value \} for any given web, topic Ignores files starting with \_ or ending with ,v
+
+## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; ()"></a> [[ObjectMethod]] **stringify** `()`
+
+Generate string representation for debugging

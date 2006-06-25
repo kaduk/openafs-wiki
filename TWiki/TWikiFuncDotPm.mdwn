@@ -365,8 +365,6 @@ Get toolname as defined in TWiki.cfg
 
 Return: `$name` Name of tool, e.g. `'TWiki'`
 
-Synonymous with TWiki::Func::getPreferencesValue('WIKITOOLNAME');
-
 **Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
 
 ### <a name="get_MainWebname( ) - $name"></a> getMainWebname( ) -&gt; $name
@@ -375,8 +373,6 @@ Get name of Main web as defined in TWiki.cfg
 
 Return: `$name` Name, e.g. `'Main'`
 
-Synonymous with TWiki::Func::getPreferencesValue('MAINWEB');
-
 **Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
 
 ### <a name="get_TwikiWebname( ) - $name"></a> getTwikiWebname( ) -&gt; $name
@@ -384,8 +380,6 @@ Synonymous with TWiki::Func::getPreferencesValue('MAINWEB');
 Get name of TWiki documentation web as defined in TWiki.cfg
 
 Return: `$name` Name, e.g. `'TWiki'`
-
-Synonymous with TWiki::Func::getPreferencesValue('TWIKIWEB');
 
 **Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
 
@@ -772,15 +766,15 @@ $web and $topic are parsed as described in the documentation for `normalizeWebTo
 - `$name` - attachment name
 - `$rev` - revision to read (default latest)
 
-Read an attachment from the store for a topic, and return it as a string. The names of attachments on a topic can be recovered from the meta-data returned by `readTopic`. If the attachment does not exist, or cannot be read, undef will be returned.
+Read an attachment from the store for a topic, and return it as a string. The names of attachments on a topic can be recovered from the meta-data returned by `readTopic`. If the attachment does not exist, or cannot be read, undef will be returned. If the revision is not specified, the latest version will be returned.
 
-View permission on the topic is required for the read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the user passed in.
+View permission on the topic is required for the read to be successful. Access control violations are flagged by a TWiki::AccessControlException. Permissions are checked for the current user.
 
     my( $meta, $text ) = TWiki::Func::readTopic( $web, $topic );
     my @attachments = $meta->find( 'FILEATTACHMENT' );
     foreach my $a ( @attachments ) {
        try {
-           my $data = TWiki::Func::readAttachment( $meta, $a->{name} );
+           my $data = TWiki::Func::readAttachment( $web, $topic, $a->{name} );
            ...
        } catch TWiki::AccessControlException with {
        };

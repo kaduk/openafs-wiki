@@ -10,6 +10,7 @@
     <li><a href="#TWiki::Attrs"> TWiki::Attrs </a></li>
     <li><a href="#TWiki::Client::_ApacheLogin"> TWiki::Client::ApacheLogin </a></li>
     <li><a href="#TWiki::Client"> TWiki::Client </a></li>
+    <li><a href="#ObjectData =twiki="> ObjectData twiki</a></li>
     <li><a href="#TWiki::Client::_TemplateLogin"> TWiki::Client::TemplateLogin </a></li>
     <li><a href="#TWiki::Compatibility"> TWiki::Compatibility </a></li>
     <li><a href="#TWiki"> TWiki </a></li>
@@ -55,6 +56,7 @@
     <li><a href="#TWiki::Users::_ApacheHtpasswdUse"> TWiki::Users::ApacheHtpasswdUser </a></li>
     <li><a href="#TWiki::Users"> TWiki::Users </a></li>
     <li><a href="#TWiki::Users::Password"> TWiki::Users::Password </a></li>
+    <li><a href="#TWiki::Users::_TWikiUserMapping"> TWiki::Users::TWikiUserMapping </a></li>
   </ul>
 </div>
 
@@ -108,6 +110,12 @@ On it's own, an object of this class is used when you specify 'none' in the secu
 
 If you are building a new login manager, then you should write a new subclass of this class, implementing the methods marked as **VIRTUAL**. There are already examples in the `lib/TWiki/Client` directory.
 
+The class has extensive tracing, which is enabled by $TWiki::cfg\{Trace\}\{Client.pm\}. The tracing is done in such a way as to let the perl optimiser optimise out the trace function as a no-op if tracing is disabled.
+
+## <a name="ObjectData &lt;code&gt;twiki="></a> [[ObjectData]] =twiki
+
+The TWiki object this login manager is attached to.
+
 This package has smell factor of **3**
 
 ## <a name="TWiki::Client::_TemplateLogin"></a> [[TWiki::Client::TemplateLogin|Main/TWikiClientTemplateLoginDotPm]]
@@ -146,7 +154,7 @@ TWiki operates by creating a singleton object (known as the Session object) that
 
 Global variables are avoided wherever possible to avoid problems with CGI accelerators such as mod\_perl.
 
-This package has smell factor of **29**
+This package has smell factor of **30**
 
 ## <a name="TWiki::Form"></a> [[TWiki::Form|Main/TWikiFormDotPm]]
 
@@ -273,7 +281,7 @@ This Prefs-internal class is used to parse \* Set and \* Local statements from a
 
 This class does no validation or duplicate-checking on the settings; it simply returns the recognized settings in the order it sees them in.
 
-This package has smell factor of **1**
+This package has smell factor of **2**
 
 ## <a name="TWiki::Prefs::_PrefsCache"></a> [[TWiki::Prefs::PrefsCache|Main/TWikiPrefsPrefsCacheDotPm]]
 
@@ -292,7 +300,7 @@ This package has smell factor of **1**
 
 This module provides most of the actual HTML rendering code in TWiki.
 
-This package has smell factor of **23**
+This package has smell factor of **22**
 
 ## <a name="TWiki::Sandbox"></a> [[TWiki::Sandbox|Main/TWikiSandboxDotPm]]
 
@@ -453,7 +461,7 @@ This package has smell factor of **12**
 
 User registration handling.
 
-This package has smell factor of **28**
+This package has smell factor of **20**
 
 ## <a name="TWiki::UI::Rest"></a> [[TWiki::UI::Rest|Main/TWikiUIRestDotPm]]
 
@@ -465,7 +473,7 @@ This package doesn't smell
 
 UI delegate for save function
 
-This package has smell factor of **1**
+This package doesn't smell
 
 ## <a name="TWiki::UI::Search"></a> [[TWiki::UI::Search|Main/TWikiUISearchDotPm]]
 
@@ -483,7 +491,7 @@ This package has smell factor of **4**
 
 UI delegate for attachment management functions
 
-This package has smell factor of **5**
+This package has smell factor of **6**
 
 ## <a name="TWiki::UI::View"></a> [[TWiki::UI::View|Main/TWikiUIViewDotPm]]
 
@@ -495,7 +503,7 @@ This package has smell factor of **1**
 
 A User object is an internal representation of a user in the real world. The object knows about users having login names, wiki names, personal topics, and email addresses.
 
-This package has smell factor of **5**
+This package has smell factor of **4**
 
 ## <a name="TWiki::Users::_ApacheHtpasswdUse"></a> [[TWiki::Users::ApacheHtpasswdUser|Main/TWikiUsersApacheHtpasswdUserDotPm]]
 
@@ -511,7 +519,7 @@ This package doesn't smell
 
 Singleton object that handles mapping of users to wikinames and vice versa, and user authentication checking.
 
-This package has smell factor of **4**
+This package has smell factor of **2**
 
 ## <a name="TWiki::Users::Password"></a> [[TWiki::Users::Password|Main/TWikiUsersPasswordDotPm]]
 
@@ -519,6 +527,26 @@ Base class of all password handlers. Default behaviour is no passwords, so anyon
 
 The methods of this class should be overridded by subclasses that want to implement other password handling methods.
 
-This package doesn't smell
+This package has smell factor of **1**
 
-There were a total of **232** smells
+## <a name="TWiki::Users::_TWikiUserMapping"></a> [[TWiki::Users::TWikiUserMapping|Main/TWikiUsersTWikiUserMappingDotPm]]
+
+User mapping is the process by which TWiki maps from a username (a login name) to a wikiname and back. It is also where groups are maintained.
+
+By default TWiki maintains user topics and group topics in the Main that define users and group. These topics are
+
+- TWikiUsers - stores a mapping from usernames to TWiki names
+- WikiName - for each user, stores info about the user
+- GroupNameGroup - for each group, a topic ending with "Group" stores a list of users who are part of that group.
+
+Many sites will want to override this behaviour, for example to get users and groups from a corporate database.
+
+This class implements the basic TWiki behaviour using topics to store users, but is also designed to be subclassed so that other services can be used.
+
+Subclasses should be named 'XxxxUserMapping' so that configure can find them.
+
+**All** methods in this class should be implemented by subclasses.
+
+This package has smell factor of **4**
+
+There were a total of **227** smells

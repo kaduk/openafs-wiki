@@ -1,0 +1,7 @@
+<a name="VarSTOPINCLUDE"></a>
+
+### <a name="STOPINCLUDE -- end position of t"></a> STOPINCLUDE -- end position of topic text if included
+
+- If present in included topic, stop to include text at this location and ignore the remaining text. A normal view of the topic shows everyting exept the `%STOPINCLUDE%` variable itself.
+- Syntax: `%STOPINCLUDE%`
+- Related: [[INCLUDE|Main/WebHome#VarINCLUDE]], [[STARTINCLUDE|Main/WebHome#VarSTARTINCLUDE]]

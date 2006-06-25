@@ -1,0 +1,46 @@
+<a name="VarWEBLIST"></a>
+
+### <a name="WEBLIST{&quot;format&quot;} -- index of al"></a> WEBLIST\{"format"\} -- index of all webs
+
+- List of all webs. Obfusticated webs are excluded, e.g. webs with a `NOSEARCHALL = on` preference variable. The `"format"` defines the format of one web item. The `$name` variable gets expanded to the name of the web, `$qname` gets expanded to double quoted name, `$marker` to `marker` where web matches `selection`.
+- Syntax: `%WEBLIST{"format" ...}%`
+- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+  </tr>
+  <tr>
+    <td><code>"format"</code></td>
+    <td> Format of one line, may include <code>$name</code> (the name of the web), $qname (the name of the web in double quotes), <code>$indentedname</code> (the name of the web with parent web names replaced by indents, for use in indented lists), and <code>$marker</code> (which expands to <code>marker</code> for the item matching <code>selection</code> only) </td>
+    <td><code>"$name"</code></td>
+  </tr>
+  <tr>
+    <td><code>format="format"</code></td>
+    <td> (Alternative to above) </td>
+    <td><code>"$name"</code></td>
+  </tr>
+  <tr>
+    <td><code>separator=", "</code></td>
+    <td> line separator </td>
+    <td><code>"$n"</code> (new line) </td>
+  </tr>
+  <tr>
+    <td><code>webs="public"</code></td>
+    <td> comma separated list of webs, <code>public</code> expands to all non-hidden </td>
+    <td><code>"public"</code></td>
+  </tr>
+  <tr>
+    <td><code>marker="selected"</code></td>
+    <td> Text for <code>$marker</code> if the item matches <code>selection</code></td>
+    <td><code>"selected"</code></td>
+  </tr>
+  <tr>
+    <td><code>selection="%WEB%"</code></td>
+    <td> Current value to be selected in list </td>
+    <td><code>section="%WEB%"</code></td>
+  </tr>
+</table>
+- Example: `%WEBLIST{"   * [[$name.WebHome]]"}%` creates a bullet list of all webs.
+- Example: `%WEBLIST{"<option $marker value=$qname>$name</option>" webs="Trash, public" selection="%WEB%" separator=" "}%` creates a dropdown of all public webs + Trash web, with the current web highlighted.
+- Related: [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[SEARCH|Main/WebHome#VarSEARCH]]

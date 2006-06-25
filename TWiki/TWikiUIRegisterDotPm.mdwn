@@ -86,10 +86,10 @@ This is called: on receipt of the activation password -&gt; [[RegisterCgiScript]
 Presently this is called in [[RegisterCgiScript]] directly after a call to verify. The separation is intended for the [[RegistrationApprovals]] functionality
 
 1. calls \_reloadUserContext (throws oops if appropriate)
-2. calls newUserFromTemplate()
+2. calls createUserTopic()
 3. if using the htpasswdFormatFamily, calls \_addUserToPasswordSystem
 4. calls the misnamed [[RegistrationHandler]] to set cookies
-5. calls addUserToTWikiUsersTopic
+5. calls addUserToMapping
 6. writes the logEntry (if wanted :/)
 7. redirects browser to 'oopsregthanks'
 

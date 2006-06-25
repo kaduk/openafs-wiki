@@ -1,0 +1,48 @@
+<a name="VarTOPICLIST"></a>
+
+### <a name="TOPICLIST{&quot;format&quot;} -- topic ind"></a> TOPICLIST\{"format"\} -- topic index of a web
+
+- List of all topics in a web. The "format" defines the format of one topic item. It may include variables: The `$name` variable gets expanded to the topic name, `$qname` to double quoted name, `$marker` to `marker` parameter where topic matches `selection`, and `$web` to the name of the web.
+- Syntax: `%TOPICLIST{"format" ...}%`
+- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+  </tr>
+  <tr>
+    <td><code>"format"</code></td>
+    <td> Format of one line, may include <code>$web</code> (name of web), <code>$name</code> (name of the topic), <code>$qname</code> (name of topic in double quotes), <code>$marker</code> (which expands to <code>marker</code> for the item matching <code>selection</code> only) </td>
+    <td><code>"$name"</code></td>
+  </tr>
+  <tr>
+    <td><code>format="format"</code></td>
+    <td> (Alternative to above) </td>
+    <td><code>"$name"</code></td>
+  </tr>
+  <tr>
+    <td><code>separator=", "</code></td>
+    <td> line separator </td>
+    <td><code>"$n"</code> (new line) </td>
+  </tr>
+  <tr>
+    <td><code>marker="selected"</code></td>
+    <td> Text for <code>$marker</code> if the item matches <code>selection</code></td>
+    <td><code>"selected"</code></td>
+  </tr>
+  <tr>
+    <td><code>selection="TopicA, TopicB"</code></td>
+    <td> Current value to be selected in list </td>
+    <td><code>(none)</code></td>
+  </tr>
+  <tr>
+    <td><code>web="Name"</code></td>
+    <td> Name of web </td>
+    <td> Current web </td>
+  </tr>
+</table>
+- Example: `%TOPICLIST{"   * $web.$name"}%` creates a bullet list of all topics
+- Example: `%TOPICLIST{separator=", "}%` creates a comma separated list of all topics
+- Example: `%TOPICLIST{" <option>$name</option>"}%` creates an option list (for drop down menus)
+- Example: `<select>%TOPICLIST{" <option $marker value='$name'>$name</option>" separator=" " selection="%TOPIC%"}%</select>` creates an option list of web topics with the current topic selected
+- Related: [[SEARCH|Main/WebHome#VarSEARCH]], [[WEBLIST|Main/WebHome#VarWEBLIST]]

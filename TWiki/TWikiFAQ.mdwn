@@ -1,6 +1,6 @@
-# <a name="Frequently Asked Questions About"></a> Frequently Asked Questions About %WIKITOOLNAME%
+# <a name="Frequently Asked Questions About"></a> Frequently Asked Questions About TWiki
 
-This is a real FAQ, and also a demo of one easily implemented knowledge base solution. See how it's done, click <code>**[Edit]**</code>.
+This is a real FAQ, and also a demo of an easily implemented knowledge-base solution. To see how it's done, [view the source of this topic](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?raw=on).
 
 # <a name="TWiki Installation Error"></a> TWiki Installation Error
 
@@ -10,18 +10,19 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 ## <a name="Submit a new FAQ"></a> Submit a new FAQ
 
-**_%RED%NOTE:%ENDCOLOR%_** The FAQs here are for frequently asked questions **_including_** answers; please ask support questions in the TWiki:Support web. New FAQ topics are based on the [[TWikiFaqTemplate]].
+%X% **_NOTE:_** These topics are for frequently asked questions **_including_** answers; please ask support questions in the TWiki:Support web. New FAQ topics are based on the [[TWikiFaqTemplate]].
 
-<form action="http://www.dementia.org/twiki/edit/%WEB%/"> New FAQ topic:   (Use a name in [[TWiki/WikiNotation]]) <br /><input name="topic" size="32" type="text" /> <input type="submit" value="Create Topic" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="templatetopic" type="hidden" value="TWikiFaqTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /><br />
-</form>
+<form action="http://www.dementia.org/twiki//edit/%WEB%/"> New FAQ topic:   (Use a name in [[Main/WikiNotation]]) <br /><input name="topic" size="32" type="text" /> <input name="onlywikiname" type="hidden" value="on" /> <input name="templatetopic" type="hidden" value="TWikiFaqTemplate" /> <input name="topicparent" type="hidden" value="%TOPIC%" /> <input type="submit" value="Create Topic" /></form>
 
 ## <a name="More sources..."></a> More sources...
 
 Other places where you can find answers to your questions:
 
-- [[TWikiDocumentation]]: All you need to know to install and configure %WIKITOOLNAME%
+- [[TWikiDocumentation]]: All you need to know to install and configure TWiki
 - [[TWikiTutorial]]: Get a jump start on using TWiki
 - [[GoodStyle]]: Things to consider when changing text
 - [[WikiSyntax]], [[TextFormattingRules]]: A quick one-two guide to TWiki shorthand basics
 - [[TextFormattingFAQ]]: Answers to frequently asked questions about text styling in TWiki
 - If you can't find an answer, ask a question - post it in the TWiki:Support web
+
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.CrawfordCurrie

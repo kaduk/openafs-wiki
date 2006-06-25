@@ -1,0 +1,22 @@
+<a name="VarENDSECTION"></a>
+
+### <a name="ENDSECTION{&quot;name&quot;} -- marks the"></a><a name="ENDSECTION{&quot;name&quot;} -- marks the "></a> ENDSECTION\{"name"\} -- marks the end of a named section within a topic
+
+- Syntax: `%ENDSECTION{"name"}%`
+- Syntax: `%ENDSECTION{type="include"}%`
+- Supported parameter: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+  </tr>
+  <tr>
+    <td><code>"name"</code></td>
+    <td> Name of the section. </td>
+  </tr>
+  <tr>
+    <td><code>type="..."</code></td>
+    <td> Type of the section being terminated; supported types <code>"section"</code>, <code>"include"</code>, <code>"templateonly"</code>. </td>
+  </tr>
+</table>
+- If the `STARTSECTION` is named, the corresponding `ENDSECTION` must also be named with the same name. If the `STARTSECTION` specifies a type, then the corresponding `ENDSECTION` must also specify the same type. If the section is unnamed, `ENDSECTION` will match with the nearest unnamed `%STARTSECTION%` **of the same type** above it.
+- Related: [[STARTSECTION|Main/WebHome#VarSTARTSECTION]]

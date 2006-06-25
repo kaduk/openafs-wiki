@@ -1,0 +1,9 @@
+<a name="VarSESSIONVARIABLE"></a>
+
+### <a name="SESSION_VARIABLE -- get, set or"></a><a name="SESSION_VARIABLE -- get, set or "></a> SESSION\_VARIABLE -- get, set or clear a session variable
+
+- Syntax: `%SESSION_VARIABLE{"name"}%`
+- Syntax: `%SESSION_VARIABLE{"name" set="value"}%`
+- Syntax: `%SESSION_VARIABLE{"name" clear=""}%`
+- %H% Hint: The users ID is in the `AUTHUSER` session variable, and is read-only
+- Related: [[TWikiUserAuthentication]], [[AUTHREALM|Main/WebHome#VarAUTHREALM]], [[SESSIONID|Main/WebHome#VarSESSIONID]], [[SESSIONVAR|Main/WebHome#VarSESSIONVAR]], [[LOGIN|Main/WebHome#VarLOGIN]], [[LOGOUT|Main/WebHome#VarLOGOUT]]

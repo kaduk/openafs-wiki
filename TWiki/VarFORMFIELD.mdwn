@@ -1,0 +1,39 @@
+<a name="VarFORMFIELD"></a>
+
+### <a name="FORMFIELD{&quot;fieldname&quot;} -- render"></a> FORMFIELD\{"fieldname"\} -- renders a field in the form attached to some topic
+
+- Syntax: `%FORMFIELD{"fieldname"}%`
+- Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default: </strong></th>
+  </tr>
+  <tr>
+    <td><code>"fieldname"</code></td>
+    <td> The name of a [[Main/TWikiForms]] field </td>
+    <td> required </td>
+  </tr>
+  <tr>
+    <td><code>topic="..."</code></td>
+    <td> Topic where form data is located. May be of the form <code>Web.TopicName</code></td>
+    <td> Current topic </td>
+  </tr>
+  <tr>
+    <td><code>format="..."</code></td>
+    <td> Format string. <code>$value</code> expands to the field value, and <code>$title</code> expands to the field title </td>
+    <td><code>"$value"</code></td>
+  </tr>
+  <tr>
+    <td><code>default="..."</code></td>
+    <td> Text shown when no value is defined for the field </td>
+    <td><code>""</code></td>
+  </tr>
+  <tr>
+    <td><code>alttext="..."</code></td>
+    <td> Text shown when field is not found in the form </td>
+    <td><code>""</code></td>
+  </tr>
+</table>
+- Example: `%FORMFIELD{"ProjectName" topic="Projects.SushiProject" default="(not set)" alttext="ProjectName field found"}%`
+- Related: [[SEARCH|Main/WebHome#VarSEARCH]]

@@ -76,7 +76,7 @@ In the CGI environment parameters are passed to the scripts via the URL and URL 
 
 You **must** be cd'd to the `twiki/bin` directory to run the scripts from the command line. To avoid issues with file permissions, run the scripts as the web server user such as `nobody` or `www`.
 
-Parameters are passed using '-name' - for example,
+Parameters are passed on the command line using '-name' - for example,
 
     $ cd /usr/local/twiki/bin
     $ save -topic MyWeb.MyTopic -user admin -action save -text "New text of the topic"
@@ -921,8 +921,13 @@ Refresh the [[WebStatistics]] topics in range of webs.
   </tr>
   <tr>
     <td><code>webs</code></td>
-    <td><strong>list</strong> of webs to run stats on </td>
-    <td> none </td>
+    <td> comma-separated list of webs to run stats on </td>
+    <td> all accessible webs </td>
+  </tr>
+  <tr>
+    <td><code>logdate</code></td>
+    <td> YYYYMM to generate statistics for </td>
+    <td> current month </td>
   </tr>
 </table>
 
