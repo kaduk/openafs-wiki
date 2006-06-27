@@ -589,7 +589,7 @@ There is still no easy way to do this in Transarc AFS, but [[OpenAFS]] now has a
 - `fs setcrypt off`
 - `fs getcrypt`
 
-Note that this only encrypts network traffic between the client and server. The data on the server's disk is not encrypted nor is the data in the client's disk cache. The encryption algorithm used is [fcrypt](http://tedanderson.home.mindspring.com/fcrypt-paper.txt), which is a DES variant.
+Note that this only encrypts network traffic between the client and server. The data on the server's disk is not encrypted nor is the data in the client's disk cache. The encryption algorithm used is [fcrypt](http://surfvi.com/~ota/fcrypt-paper.txt), which is a DES variant.
 
 Getting encryption enabled by default:
 
