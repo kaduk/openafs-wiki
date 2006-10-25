@@ -137,8 +137,13 @@
   </tr>
   <tr>
     <td><code>separator=", "</code></td>
-    <td> Line separator between hits </td>
-    <td> Newline <code>"$n"</code></td>
+    <td> Line separator <em>between</em> search hits </td>
+    <td><code>"$n"</code> (Newline) </td>
+  </tr>
+  <tr>
+    <td><code>newline="%BR%"</code></td>
+    <td> Line separator <em>within</em> a search hit. Useful if the format="" parameter contains a $pattern() that captures more than one line, i.e. contents of a textfield in a form. </td>
+    <td><code>"$n"</code> (Newline) </td>
   </tr>
 </table>
 - Example: `%SEARCH{"wiki" web="Main" scope="topic"}%`

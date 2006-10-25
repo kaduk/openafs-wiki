@@ -15,7 +15,7 @@ As each cache level is built, the values are copied down from the parent cache l
         <li><a href="#ClassMethod <strong>new</strong> ($prefs,$paren"> ClassMethod new <tt>($prefs,$parent,$type,$web,$topic,$prefix)</tt></a></li>
         <li><a href="#ObjectMethod <strong>finalise</strong> ($parent"> ObjectMethod finalise <tt>($parent)</tt></a></li>
         <li><a href="#ObjectMethod *load_PrefsFromTopi"> ObjectMethod loadPrefsFromTopic <tt>($web,$topic,$keyPrefix)</tt></a></li>
-        <li><a href="#ObjectMethod *load_PrefsFromText"> ObjectMethod loadPrefsFromText <tt>($text,$web,$topic)</tt></a></li>
+        <li><a href="#ObjectMethod *load_PrefsFromText"> ObjectMethod loadPrefsFromText <tt>($text,$meta,$web,$topic)</tt></a></li>
         <li><a href="#ObjectMethod <strong>insert</strong> ($type,$ke"> ObjectMethod insert <tt>($type,$key,$val)</tt></a></li>
         <li><a href="#ObjectMethod <strong>stringify</strong> ($html,"> ObjectMethod stringify <tt>($html,\%shown) -&gt; $text</tt></a></li>
       </ul>
@@ -46,9 +46,9 @@ Finalise preferences in this cache, by freezing any preferences listed in FINALP
 
 Loads preferences from a topic. All settings loaded are prefixed with the key prefix (default '').
 
-## <a name="ObjectMethod &lt;strong&gt;load_PrefsFromText"></a> [[ObjectMethod]] \*loadPrefsFromText `($text,$web,$topic)`
+## <a name="ObjectMethod &lt;strong&gt;load_PrefsFromText"></a> [[ObjectMethod]] \*loadPrefsFromText `($text,$meta,$web,$topic)`
 
-Loads preferences from a topic. All settings loaded are prefixed with the key prefix (default '').
+Loads preferences from text and optional metadata. All settings loaded are prefixed with the key prefix (default ''). If `$meta` is defined, then metadata will be taken from that object. Otherwise, `$text` will be parsed to extract meta-data.
 
 ## <a name="ObjectMethod &lt;strong&gt;insert&lt;/strong&gt; ($type,$ke"></a> [[ObjectMethod]] **insert** `($type,$key,$val)`
 

@@ -8,6 +8,7 @@ This object provides an interface to the outside world. All calls to system func
         <li><a href="#ClassMethod <strong>new</strong> ($os,$realOS)"> ClassMethod new <tt>($os,$realOS)</tt></a></li>
         <li><a href="#StaticMethod *untaintUnchecked*"> StaticMethod untaintUnchecked <tt>($string) -&gt; $untainted</tt></a></li>
         <li><a href="#StaticMethod *normalize_FileName"> StaticMethod normalizeFileName <tt>($string) -&gt; $filename</tt></a></li>
+        <li><a href="#StaticMethod *sanitize_Attachmen"> StaticMethod sanitizeAttachmentName <tt>($fname) -&gt; ($fileName,$origName)</tt></a></li>
         <li><a href="#ObjectMethod <strong>sysCommand</strong> ($temp"> ObjectMethod sysCommand <tt>($template,@params) -&gt; ($data,$exit)</tt></a></li>
       </ul>
     </li>
@@ -26,9 +27,15 @@ The intent is to use this routine to be able to find all untainting places using
 
 ## <a name="StaticMethod &lt;strong&gt;normalize_FileName"></a> [[StaticMethod]] \*normalizeFileName `($string) -> $filename`
 
-STATIC Errors out if $string contains filtered characters.
+Errors out if $string contains filtered characters.
 
 The returned string is not tainted, but it may contain shell metacharacters and even control characters.
+
+## <a name="StaticMethod &lt;strong&gt;sanitize_Attachmen"></a> [[StaticMethod]] \*sanitizeAttachmentName `($fname) -> ($fileName,$origName)`
+
+Given a file name received in a query parameter, sanitise it. Returns the sanitised name together with the basename before sanitisation.
+
+Sanitisation includes filtering illegal characters and mapping client file names to legal server names.
 
 ## <a name="ObjectMethod &lt;strong&gt;sysCommand&lt;/strong&gt; ($temp"></a> [[ObjectMethod]] **sysCommand** `($template,@params) -> ($data,$exit)`
 

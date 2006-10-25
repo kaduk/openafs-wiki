@@ -16,18 +16,7 @@ UI delegate for attachment management functions
 
 `upload` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
 
-Attach a file to a topic. CGI parameters are:
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td><code>filename</code></td>
-    <td> Name of attachment </td>
-  </tr>
-  <tr>
-    <td><code>skin</code></td>
-    <td> Skin(s) to use in presenting pages </td>
-  </tr>
-</table>
+Adds the meta-data for an attachment to a toic. Does **not** upload the attachment itself, just modifies the meta-data.
 
 ## <a name="StaticMethod &lt;strong&gt;upload&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **upload** `($session)`
 
@@ -59,3 +48,5 @@ Attach a file to a topic. CGI parameters are:
     <td>   </td>
   </tr>
 </table>
+
+Does the work of uploading a file to a topic. Designed to be useable as a REST method (it will redirect to the 'view' script unless the 'noredirect' parameter is specified, in which case it will print a message to STDOUT, starting with 'OK' on success and 'ERROR' on failure.

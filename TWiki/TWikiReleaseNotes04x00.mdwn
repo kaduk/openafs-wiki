@@ -62,7 +62,7 @@
           </ul>
         </li>
         <li><a href="#Frustrating Robots and Spammers"> Frustrating Robots and Spammers</a></li>
-        <li><a href="#New User Registration"> New User Registration </a></li>
+        <li><a href="#New User Registration"> New User Registration</a></li>
         <li><a href="#E-mail addresses"> E-mail addresses</a></li>
         <li><a href="#Change notification support"> Change notification support</a></li>
         <li><a href="#Site Changes Summary"> Site Changes Summary</a></li>
@@ -108,6 +108,16 @@
     <li><a href="#TWiki 4.0.3 Patch Release Detail"> TWiki 4.0.3 Patch Release Details</a><ul>
         <li><a href="#TWiki 4.0.3 Fixes"> TWiki 4.0.3 Fixes</a></li>
         <li><a href="#TWiki 4.0.3 Enhancements"> TWiki 4.0.3 Enhancements</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki 4.0.4 Patch Release Detail"> TWiki 4.0.4 Patch Release Details</a><ul>
+        <li><a href="#TWiki 4.0.4 Fixes"> TWiki 4.0.4 Fixes</a></li>
+        <li><a href="#TWiki 4.0.4 Enhancements"> TWiki 4.0.4 Enhancements</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki 4.0.5 Patch Release Detail"> TWiki 4.0.5 Patch Release Details</a><ul>
+        <li><a href="#TWiki 4.0.5 Fixes"> TWiki 4.0.5 Fixes</a></li>
+        <li><a href="#TWiki 4.0.5 Enhancements"> TWiki 4.0.5 Enhancements</a></li>
       </ul>
     </li>
   </ul>
@@ -443,7 +453,7 @@ Administrators, especially of public sites, need to be aware of the security imp
 
 The evaluation of protections has been re-worked to make it more naturally understandable, and also fill a number of holes in the protection scheme, These holes meant that it was relatively easy to _deny_ access to a topic, but rather difficult to subsequently _restore_ access without either compromising other topics, or compromising old revisions.
 
-When deciding whether to grant access, TWiki now evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW, CHANGE and RENAME access may be granted/denied separately.
+When deciding whether to grant access, TWiki now evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW and CHANGE access may be granted/denied separately.
 
 1. If the user is a [[super-user|Main/WebHome#SuperAdminGroup]]
   - access is **PERMITTED**.
@@ -471,12 +481,8 @@ The major impact of this change is that WebPreferences topics shipped with earli
 - Set DENYWEBCHANGE =
 - Set ALLOWWEBCHANGE =
   - This will now _deny_ change access to everyone _not_ in the list (i.e. everyone except admins)
-- Set DENYWEBRENAME =
-- Set ALLOWWEBRENAME =
-  - This will now _deny_ rename access to everyone _not_ in the list (i.e. everyone except admins)
 - Set ALLOWTOPICCHANGE =
   - This will now _deny_ change access to everyone _not_ in the list (i.e. everyone except admins)
-- Set ALLOWTOPICRENAME = Main.TWikiAdminGroup
 
 The standard webs shipped with this release have these settings disabled. However you are likely to have inherited the old default settings in your user webs. The easiest way to deal with this is to simply insert a # sign in these settings; for example:
 
@@ -771,7 +777,7 @@ The following fixes have been addressed in this release:
   </tr>
 </table>
 
-The 4.0.1 release was built from SVN <http://svn.twiki.org:8181/svn/twiki/branches/TWikiRelease04x00> revision **8740**.
+The 4.0.1 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x00> revision **8740**.
 
 ## <a name="TWiki 4.0.2 Patch Release Detail"></a> TWiki 4.0.2 Patch Release Details
 
@@ -1151,7 +1157,7 @@ The following fixes and minor enhancements have been addressed in this release:
   </tr>
 </table>
 
-The 4.0.2 release was built from SVN <http://svn.twiki.org:8181/svn/twiki/branches/TWikiRelease04x00> revision **9626**.
+The 4.0.2 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x00> revision **9626**.
 
 ## <a name="TWiki 4.0.3 Patch Release Detail"></a> TWiki 4.0.3 Patch Release Details
 
@@ -1627,4 +1633,172 @@ The following fixes and minor enhancements have been addressed in this release:
   </tr>
 </table>
 
-The 4.0.3 release was built from SVN <http://svn.twiki.org:8181/svn/twiki/branches/TWikiRelease04x00> revision **10706**..
+The 4.0.3 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x00> revision **10706**..
+
+## <a name="TWiki 4.0.4 Patch Release Detail"></a> TWiki 4.0.4 Patch Release Details
+
+The following fixes and minor enhancements have been addressed in this release:
+
+### <a name="TWiki 4.0.4 Fixes"></a> TWiki 4.0.4 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item2578]]</td>
+    <td> SECURITY HOTFIX: Improved protection against attaching php scripts that can be executed afterwords by simple view </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2568]]</td>
+    <td> Fix potential script error when attachment twisty is removed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2558]]</td>
+    <td> TWiki 4.0.3 distributed LocalSite.cfg.txt uses incorrect syntax </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2546]]</td>
+    <td> Handmade twisty buttons has underline under them </td>
+  </tr>
+</table>
+
+### <a name="TWiki 4.0.4 Enhancements"></a> TWiki 4.0.4 Enhancements
+
+No enhancements.
+
+The 4.0.4 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x00> revision **10799**
+
+## <a name="TWiki 4.0.5 Patch Release Detail"></a> TWiki 4.0.5 Patch Release Details
+
+Note that TWiki 4.0.5 contains all fixes previously released at hotfixes 1 to 4 for TWiki 4.0.4.
+
+The following fixes have been addressed in this release:
+
+### <a name="TWiki 4.0.5 Fixes"></a> TWiki 4.0.5 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item2609]]</td>
+    <td> Func.pm API function wikiToEmail has a coding error. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2602]]</td>
+    <td> AfterEditHandler only called by preview, not save </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2595]]</td>
+    <td> Emails are not stored in user topic when TWiki setup in a corporate environment </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2573]]</td>
+    <td> %META{"formfield" name="formfieldname"}% broken (returns nothing) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2518]]</td>
+    <td> INCLUDE from external url with filename breaks relative links of included content </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2607]]</td>
+    <td> Crash TWiki with IF variable. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2619]]</td>
+    <td> TOC Link URI References are not Relative </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2322]]</td>
+    <td> Incomplete fix for Comment box should have ability to be disabled by skin template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2594]]</td>
+    <td> Hierarchical webs and WEBLIST can make things excruciatingly slow </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2666]]</td>
+    <td> Javascript errors caused by twiki.js </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2669]]</td>
+    <td> Configure robustness update </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2565]]</td>
+    <td> SEARCH parameter newline not documented. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2631]]</td>
+    <td> Reset Password does not work when $TWiki::cfg{MapUserToWikiName} = 0. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2684]]</td>
+    <td> EditTablePlugin Don't complain on lock taken if taken by one self </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2714]]</td>
+    <td> SECURITY ISSUE! - Topics with ALLOWTOPICVIEW defined in "Edit Settings" (META) can be read by anyone with a specially crafted SEARCH. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2758]]</td>
+    <td> Updated TWiki.TWikiVariables so that the variable precedence includes both TWiki.TWikiPreferences and Main.TWikiPreferences </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2780]]</td>
+    <td> Rename to non wikiword name gives empty message </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2806]]</td>
+    <td> Security Alert CVE-2006-4294 - viewfile doesn't follow rules for mapping attachment names </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2821]]</td>
+    <td> Potential bugs from parsing settings in topics when the following line contains white space. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2825]]</td>
+    <td> Potential source of error related to code that checks access permissions. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2823]]</td>
+    <td> SMTP recipient name format issue </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2829]]</td>
+    <td> EditTablePlugin select drops selected item if cell has whitespace </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2625]]</td>
+    <td> %SEARCH% does not work when non-wikiword used in topic="" parameter </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2859]]</td>
+    <td> Attachments are being named the full path name instead of the filename only </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2746]]</td>
+    <td> Disable tag parameter issue in preview </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2856]]</td>
+    <td> make TWikiForms defined in another web clickable in "changeform" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2721]]</td>
+    <td> Newly created topics have wrong version number when using RcsLite </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2928]]</td>
+    <td> Mailto links in brackets [[Main/WebHome]] contain visible when text is upper case </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2884]]</td>
+    <td> EditTablePlugin does not honour ALLOWTOPICCHANGE (bug introduced in 4.0.4 hotfix 3) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2980]]</td>
+    <td> TWiki::Func::checkAccessPermission issue with '' vs. undef </td>
+  </tr>
+</table>
+
+### <a name="TWiki 4.0.5 Enhancements"></a> TWiki 4.0.5 Enhancements
+
+No enhancements
+
+The 4.0.5 release was built from SVN <http://svn.twiki.org/svn/twiki/tags/TWikiRelease04x00x05> revision **11821**...

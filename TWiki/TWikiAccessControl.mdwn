@@ -14,14 +14,6 @@
             <li><a href="#Controlling access to a Web"> Controlling access to a Web</a></li>
             <li><a href="#Controlling access to a Topic"> Controlling access to a Topic</a></li>
             <li><a href="#Controlling access to Attachment"> Controlling access to Attachments</a></li>
-            <li><a href="#How TWiki evaluates ALLOW/DENY s"> How TWiki evaluates ALLOW/DENY settings</a></li>
-          </ul>
-        </li>
-        <li><a href="#Access Control quick recipes"> Access Control quick recipes</a><ul>
-            <li><a href="#Obfuscating Webs"> Obfuscating Webs</a></li>
-            <li><a href="#Authenticate all Webs and Restri"> Authenticate all Webs and Restrict Selected Webs</a></li>
-            <li><a href="#Authenticate and Restrict Select"> Authenticate and Restrict Selected Webs Only</a></li>
-            <li><a href="#Hide Control Settings"> Hide Control Settings</a></li>
           </ul>
         </li>
       </ul>
@@ -169,83 +161,80 @@ Attachments are referred to directly, and are not normally indirected via TWiki 
 
 The easiest way to apply the same access control rules for attachments as apply to topics is to use the Apache `mod_rewrite` module, and configure your webserver to redirect accesses to attachments to the TWiki `viewfile` script. For example,
 
-      ScriptAlias /twiki/bin/ /filesystem/path/to/twiki/bin/
-      Alias /twiki/pub/       /filesystem/path/to/twiki/pub/
+        ScriptAlias /twiki/bin/ /filesystem/path/to/twiki/bin/
+        Alias /twiki/pub/       /filesystem/path/to/twiki/pub/
 
-      RewriteEngine on
-      RewriteRule ^/twiki/pub/TWiki/(.*)$ /twiki/pub/TWiki/$1 [L,PT]
-      RewriteRule ^/twiki/pub/([^\/]+)/([^\/]+)/([^\/]+)$ /twiki/bin/viewfile/$1/$2?filename=$3 [L,PT]
+        RewriteEngine on
+        RewriteCond %{REQUEST_URI} !^/+twiki/+pub/+TWiki/+.+
+        RewriteRule ^/+twiki/+pub/+([^/]+)/+((([^/]+)/+)+)(.+) /twiki/bin/viewfile/$1/$4?filename=$5 [L,PT]
+    </verbatim
 
-That way all the controls that apply to the topic also apply to attachments to the topic. Other types of webserver have similar support.
+    That way all the controls that apply to the topic also apply to attachments to the topic. Other types of webserver have similar support.
 
-**_Note:_** Images embedded in topics will load much slower since each image will be delivered by the `viewfile` script.
+    __Note:__ Images embedded in topics will load much slower since each image will be delivered by the =viewfile= script.
 
-### <a name="How TWiki evaluates ALLOW/DENY s"></a> How TWiki evaluates ALLOW/DENY settings
+    ---+++ How TWiki evaluates ALLOW/DENY settings
 
-When deciding whether to grant access, TWiki evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW, CHANGE and RENAME access may be granted/denied separately.
+    When deciding whether to grant access, TWiki evaluates the following rules in order (read from the top of the list; if the logic arrives at *PERMITTED* or *DENIED* that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW, CHANGE and RENAME access may be granted/denied separately.
+       1 If the user is a [[#SuperAdminGroup][super-user]]
+          * access is *PERMITTED*.
+       1 If DENYTOPIC is set to a list of wikinames
+          * people in the list will be *DENIED*.
+       1 If DENYTOPIC is set to _empty_ ( i.e. <tt>Set DENYTOPIC =</tt> )
+          * access is *PERMITTED* _i.e_ no-one is denied access to this topic
+       1 If ALLOWTOPIC is set
+          1 people in the list are *PERMITTED*
+          1 everyone else is *DENIED*
+             * Note that this means that setting ALLOWTOPIC to empty _denies access to everyone except admins_ (unless DENYTOPIC is also set to empty, as described above)
+       1 If DENYWEB is set to a list of wikiname
+          * people in the list are *DENIED* access
+       1 If ALLOWWEB is set to a list of wikinames
+          * people in the list will be *PERMITTED*
+          * everyone else will be *DENIED*
+             * Note that setting ALLOWWEB to empty _denies access to everyone except admins_
+       1 If you got this far, access is *PERMITTED*
 
-1. If the user is a [[super-user|Main/WebHome#SuperAdminGroup]]
-  - access is **PERMITTED**.
-2. If DENYTOPIC is set to a list of wikinames
-  - people in the list will be **DENIED**.
-3. If DENYTOPIC is set to _empty_ ( i.e. `Set DENYTOPIC =` )
-  - access is **PERMITTED** _i.e_ no-one is denied access to this topic
-4. If ALLOWTOPIC is set
-  1. people in the list are **PERMITTED**
-  2. everyone else is **DENIED**
-    - Note that this means that setting ALLOWTOPIC to empty _denies access to everyone except admins_ (unless DENYTOPIC is also set to empty, as described above)
-5. If DENYWEB is set to a list of wikiname
-  - people in the list are **DENIED** access
-6. If ALLOWWEB is set to a list of wikinames
-  - people in the list will be **PERMITTED**
-  - everyone else will be **DENIED**
-    - Note that setting ALLOWWEB to empty _denies access to everyone except admins_
-7. If you got this far, access is **PERMITTED**
+    ---++ Access Control quick recipes
 
-## <a name="Access Control quick recipes"></a> Access Control quick recipes
+    ---+++ Obfuscating Webs
 
-### <a name="Obfuscating Webs"></a> Obfuscating Webs
+    Another way of hiding webs is to keep them hidden by not publishing the URL and by preventing the ==all webs== search option from accessing obfuscated webs. Do so by enabling the ==NOSEARCHALL== variable in %WEBPREFSTOPIC%:
+       * ==Set <nop>NOSEARCHALL = on==
 
-Another way of hiding webs is to keep them hidden by not publishing the URL and by preventing the <code>**all webs**</code> search option from accessing obfuscated webs. Do so by enabling the <code>**NOSEARCHALL**</code> variable in [[WebPreferences]]:
+    This setup can be useful to hide a new web until content its ready for deployment, or to hide view access restricted webs.
 
-- <code>**Set NOSEARCHALL = on**</code>
+    __%X% Note:__ Obfuscating a web without view access control is *very* insecure, as anyone who knows the URL can access the web.
 
-This setup can be useful to hide a new web until content its ready for deployment, or to hide view access restricted webs.
+    ---+++ Authenticate all Webs and Restrict Selected Webs
 
-**_%X% Note:_** Obfuscating a web without view access control is **very** insecure, as anyone who knows the URL can access the web.
+    Use the following setup to authenticate users for topic viewing in all webs and to restrict access to selected webs. Requires TWikiUserAuthentication to be enabled.
 
-### <a name="Authenticate all Webs and Restri"></a> Authenticate all Webs and Restrict Selected Webs
+       1. *Restrict* view access to selected Users and Groups. Set one or both of these variables in its %WEBPREFSTOPIC% topic:
+          * ==Set <nop>DENYWEBVIEW = &lt; list of Users and Groups &gt;==
+          * ==Set <nop>ALLOWWEBVIEW = &lt; list of Users and Groups &gt;==
+          * __Note:__ =DENYWEBVIEW= is evaluated before =ALLOWWEBVIEW=. Access is denied if the authenticated person is in the =DENYWEBVIEW= list, or not in the =ALLOWWEBVIEW= list. Access is granted in case =DENYWEBVIEW= and =ALLOWWEBVIEW= is not defined.
 
-Use the following setup to authenticate users for topic viewing in all webs and to restrict access to selected webs. Requires [[TWikiUserAuthentication]] to be enabled.
+    ---+++ Authenticate and Restrict Selected Webs Only
 
-1. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
-  - <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
-  - <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
-  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted in case `DENYWEBVIEW` and `ALLOWWEBVIEW` is not defined.
+    Use the following setup to provide unrestricted viewing access to open webs, with authentication only on selected webs. Requires TWikiUserAuthentication to be enabled.
 
-### <a name="Authenticate and Restrict Select"></a> Authenticate and Restrict Selected Webs Only
+       1. *Restrict* view access to selected Users and Groups. Set one or both of these variables in its %WEBPREFSTOPIC% topic:
+          * ==Set <nop>DENYWEBVIEW = &lt; list of Users and Groups &gt;==
+          * ==Set <nop>ALLOWWEBVIEW = &lt; list of Users and Groups &gt;==
+          * __Note:__ =DENYWEBVIEW= is evaluated before =ALLOWWEBVIEW=. Access is denied if the authenticated person is in the =DENYWEBVIEW= list, or not in the =ALLOWWEBVIEW= list. Access is granted in case =DENYWEBVIEW= and =ALLOWWEBVIEW= is not defined.
 
-Use the following setup to provide unrestricted viewing access to open webs, with authentication only on selected webs. Requires [[TWikiUserAuthentication]] to be enabled.
+    ---+++ Hide Control Settings
 
-1. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
-  - <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
-  - <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
-  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted in case `DENYWEBVIEW` and `ALLOWWEBVIEW` is not defined.
+    __%T% Tip:__ To hide access control settings from normal browser viewing, place them in HTML comment markers.
 
-### <a name="Hide Control Settings"></a> Hide Control Settings
+    <blockquote>
+    ==&lt;!--== <br />
+    ==&nbsp;  * Set <nop>DENYTOPICCHANGE = %MAINWEB%.<nop>SomeGroup== <br />
+    ==--&gt;==
+    </blockquote>
 
-**_%T% Tip:_** To hide access control settings from normal browser viewing, place them in HTML comment markers.
+    %STOPINCLUDE%
 
-> <code>**&lt;!--**</code>
->
-> <br />
->
-> <code>**   \* Set DENYTOPICCHANGE = Main.SomeGroup**</code>
->
-> <br />
->
-> <code>**--&gt;**</code>
+    __Related Topics:__ AdminDocumentationCategory, TWikiUserAuthentication, TWiki:TWiki.TWikiAccessControlSupplement
 
-**_Related Topics:_** [[AdminDocumentationCategory]], [[TWikiUserAuthentication]], TWiki:TWiki.TWikiAccessControlSupplement
-
--- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.CrawfordCurrie
+    -- __Contributors:__ TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.CrawfordCurrie

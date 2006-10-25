@@ -232,7 +232,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   - #Set EDITBUTTON = Edit table
   - Set EDITBUTTON = Edit this table, ![edittable.gif](http://www.dementia.org/twiki//view/edittable.gif)
 
-**_Note:_** The Plugin uses base settings like language and style from the [[JSCalendarContrib]]. The standard date format is '%e %B %Y' and is defined within this plugin.
+**_Note:_** The Plugin uses base settings like date format, language and style from the [[JSCalendarContrib]].
 
 ## <a name="Limitations and Known Issues"></a> Limitations and Known Issues
 
@@ -291,6 +291,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 </table>
 - The Plugin depends on the `viewauth` script to authenticate the user. As described in [[TWikiAccessControl]], copy the `view` script to `viewauth` (or better, create a symbolic link) and add `viewauth` to the list of authenticated scripts in the `.htaccess` file.
 - The Mishoo DHTML calendar 0.9.5 is preinstalled and should work without any configuration. If you wish to use another language, specify the in the Plugin settings, or create a new language files, attach it to the Plugin topic, and change the Plugin settings
+- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 - Test if the Plugin is correctly installed:
   - Check above example if there is an **[ Edit table ]** button below the table in above example
   - Click on **[ Edit table ]**, make changes and save the table
@@ -305,15 +306,39 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td> TWiki:Main/PeterThoeny </td>
+    <td><a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2002-2006, TWiki:Main.PeterThoeny </td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 9598 </td>
+    <td> 11706 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 12 Oct 2006: </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2982" rel="nofollow">Item2982</a> Use default date format from [[Main/JSCalendarContrib]]</td>
+  </tr>
+  <tr>
+    <td align="right"> 02 Oct 2006: </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2884" rel="nofollow">Item2884</a> Check also for access permission in meta data; proper fix to not warn if oneself has a lock on topic </td>
+  </tr>
+  <tr>
+    <td align="right"> 30 Aug 2006: </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2829" rel="nofollow">Item2829</a> Remove whitespace from select, radio and checkbox items; restored topic lock if $TWiki::Plugins::VERSION &lt; 1.1 </td>
+  </tr>
+  <tr>
+    <td align="right"> 29 Jul 2006: </td>
+    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2684" rel="nofollow">Item2684</a> - Quietly ignore topic edit locks on table edit </td>
   </tr>
   <tr>
     <td align="right"> 21 Jan 2006: </td>
@@ -427,8 +452,12 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 16 Sep 2004
+-- TWiki:Main/PeterThoeny - 02 Oct 2006

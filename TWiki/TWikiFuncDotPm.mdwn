@@ -449,10 +449,12 @@ Test if any access restrictions are set for this web, ignoring settings on indiv
 Check access permission for a topic based on the [[TWiki.TWikiAccessControl|TWiki/TWikiAccessControl]] rules
 
 - `$type` - Access type, e.g. `'VIEW'`, `'CHANGE'`, `'CREATE'`
-- `$wikiName` - [[WikiName]] of remote user, i.e. `"Main.PeterThoeny"`
-- `$text` - Topic text, optional. If empty, topic `$web.$topic` is consulted
+- `$wikiName` - [[WikiName]] of remote user, e.g. `"PeterThoeny"`. If `$wikiName` is '', 0 or undef then access is always **permitted**.
+- `$text` - Topic text, optional. If 'perl false' (undef, 0 or ''), topic `$web.$topic` is consulted
 - `$topic` - Topic name, required, e.g. `'PrivateStuff'`
 - `$web` - Web name, required, e.g. `'Sandbox'`
+
+A perl true result indicates that access is permitted.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
 

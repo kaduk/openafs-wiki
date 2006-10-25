@@ -70,7 +70,7 @@ This package doesn't smell
 
 A singleton object of this class manages the access control database.
 
-This package has smell factor of **1**
+This package doesn't smell
 
 ## <a name="TWiki::Attach"></a> [[TWiki::Attach|Main/TWikiAttachDotPm]]
 
@@ -154,7 +154,7 @@ TWiki operates by creating a singleton object (known as the Session object) that
 
 Global variables are avoided wherever possible to avoid problems with CGI accelerators such as mod\_perl.
 
-This package has smell factor of **30**
+This package has smell factor of **29**
 
 ## <a name="TWiki::Form"></a> [[TWiki::Form|Main/TWikiFormDotPm]]
 
@@ -273,7 +273,7 @@ Preferences from different places stack on top of each other, so there are globa
 
 The module also maintains a separate of the preferences found in every topic and web it reads. This supports the lookup of preferences for webs and topics that are not on the stack, and must not be chained in (you can't allow a user to override protections from their home topic!)
 
-This package has smell factor of **1**
+This package doesn't smell
 
 ## <a name="TWiki::Prefs::Parser"></a> [[TWiki::Prefs::Parser|Main/TWikiPrefsParserDotPm]]
 
@@ -491,7 +491,7 @@ This package has smell factor of **4**
 
 UI delegate for attachment management functions
 
-This package has smell factor of **6**
+This package has smell factor of **3**
 
 ## <a name="TWiki::UI::View"></a> [[TWiki::UI::View|Main/TWikiUIViewDotPm]]
 
@@ -547,6 +547,6 @@ Subclasses should be named 'XxxxUserMapping' so that configure can find them.
 
 **All** methods in this class should be implemented by subclasses.
 
-This package has smell factor of **4**
+This package has smell factor of **3**
 
-There were a total of **227** smells
+There were a total of **220** smells

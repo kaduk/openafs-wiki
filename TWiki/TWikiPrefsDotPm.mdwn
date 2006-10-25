@@ -20,7 +20,7 @@ The module also maintains a separate of the preferences found in every topic and
         <li><a href="#ObjectMethod *get_PreferencesVal"> ObjectMethod getPreferencesValue <tt>($key) -&gt; $value</tt></a></li>
         <li><a href="#ObjectMethod <strong>isFinalised</strong> ($key"> ObjectMethod isFinalised <tt>($key)</tt></a></li>
         <li><a href="#ObjectMethod *get_TopicPreferenc"> ObjectMethod getTopicPreferencesValue <tt>($key,$web,$topic) -&gt; $value</tt></a></li>
-        <li><a href="#get_TextPreferencesValue( $key,"> getTextPreferencesValue( $key, $text, $web, $topic ) -&gt; $value</a></li>
+        <li><a href="#get_TextPreferencesValue( $key,"> getTextPreferencesValue( $key, $text, $meta, $web, $topic ) -&gt; $value</a></li>
         <li><a href="#ObjectMethod *get_WebPreferences"> ObjectMethod getWebPreferencesValue <tt>($key,$web) -&gt; $value</tt></a></li>
         <li><a href="#ObjectMethod stringify() -> $tex">ObjectMethod stringify() -&gt; $text</a></li>
       </ul>
@@ -85,9 +85,9 @@ Recover a preferences value that is defined in a specific topic. Does not recove
 
 Intended for use in protections mechanisms, where the order doesn't match the prefs stack.
 
-## <a name="get_TextPreferencesValue( $key,"></a><a name="get_TextPreferencesValue( $key, "></a> getTextPreferencesValue( $key, $text, $web, $topic ) -&gt; $value
+## <a name="get_TextPreferencesValue( $key,"></a><a name="get_TextPreferencesValue( $key, "></a> getTextPreferencesValue( $key, $text, $meta, $web, $topic ) -&gt; $value
 
-Get a preference value from the settings in the text. The values are **not** cached.
+Get a preference value from the settings in the text (and/or optional $meta). The values read are **not** cached.
 
 ## <a name="ObjectMethod &lt;strong&gt;get_WebPreferences"></a> [[ObjectMethod]] \*getWebPreferencesValue `($key,$web) -> $value`
 

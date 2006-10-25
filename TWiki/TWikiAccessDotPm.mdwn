@@ -8,7 +8,7 @@ A singleton object of this class manages the access control database.
         <li><a href="#ClassMethod <strong>new</strong> ()"> ClassMethod new <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>permissionsSet</strong> ($"> ObjectMethod permissionsSet <tt>($web) -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>getReason</strong> () -> $"> ObjectMethod getReason <tt>() -&gt; $string</tt></a></li>
-        <li><a href="#ObjectMethod *check_AccessPermis"> ObjectMethod checkAccessPermission <tt>($action,$user,$text,$topic,$web) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod *check_AccessPermis"> ObjectMethod checkAccessPermission <tt>($action,$user,$text,$meta,$topic,$web) -&gt; $boolean</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -26,13 +26,14 @@ Are there any security restrictions for this Web (ignoring settings on individua
 
 Return a string describing the reason why the last access control failure occurred.
 
-## <a name="ObjectMethod &lt;strong&gt;check_AccessPermis"></a> [[ObjectMethod]] \*checkAccessPermission `($action,$user,$text,$topic,$web) -> $boolean`
+## <a name="ObjectMethod &lt;strong&gt;check_AccessPermis"></a> [[ObjectMethod]] \*checkAccessPermission `($action,$user,$text,$meta,$topic,$web) -> $boolean`
 
 Check if user is allowed to access topic
 
 - `$action` - 'VIEW', 'CHANGE', 'CREATE', etc.
 - `$user` - User object
 - `$text` - If undef or '': Read '$theWebName.$theTopicName' to check permissions
+- `$meta` - If undef, but `$text` is defined, then metadata will be parsed from `$text`. If defined, then metadata embedded in `$text` will be ignored. Always ignored if `$text` is undefined. Settings in `$meta` override \* Set settings in plain text.
 - `$topic` - Topic name to check, e.g. 'SomeTopic' \*undef to check web perms only)
 - `$web` - Web, e.g. 'Know'
 
