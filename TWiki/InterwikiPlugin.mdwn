@@ -14,8 +14,12 @@ The %TOPIC% links <code>**ExternalSite:Page**</code> text to external sites base
 ## <a name="Syntax Rules"></a> Syntax Rules
 
 - Enter <code>**ExternalSite:Page**</code> to create a link that points to the <code>**Page**</code> on the <code>**ExternalSite**</code> server.
+- Enter <code>**\[[ExternalSite:Page]\[any label]]**</code> to specify a custom label.
 - All <code>**ExternalSite**</code> aliases are defined in the [[InterWikis]] topic.
 - Add and edit aliases in [[InterWikis]].
+- Each entry must be of format: <br /><code>**| External site alias | URL | Tooltip help text |**</code>.
+- Site aliases must start with an upper case letter and may contain alphanumeric letters.
+- The URL and Tooltip Text may contain optional <code>**$page**</code> variables; the variable gets expanded to the page name.
 - %H% For TWiki sites, both the **web** and the **topic** have to be specified: <code>**TWikisite:Webname/SomePage**</code>
   - TWiki:Plugins/InterwikiPlugin or TWiki:Plugins.InterwikiPlugin
 
@@ -29,8 +33,29 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
 - Link rules topic name: (default is [[InterWikis]])
   - Set RULESTOPIC =
 
-- Suppress tooltip help for links: (<code>****</code> or <code>**1**</code>, default is <code>****</code>)
-  - Set SUPPRESSTOOLTIP = 0
+- Inter-link format, with variables: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> $site </td>
+    <td> Site alias </td>
+  </tr>
+  <tr>
+    <td> $page </td>
+    <td> Page (part after colon) </td>
+  </tr>
+  <tr>
+    <td> $url </td>
+    <td> Site URL (might contain $page) </td>
+  </tr>
+  <tr>
+    <td> $label </td>
+    <td> Equal to $site:$page </td>
+  </tr>
+  <tr>
+    <td> $tooltip </td>
+    <td> Tooltip message </td>
+  </tr>
+</table>
+  - Set INTERLINKFORMAT = [$label]($url $tooltip)
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
@@ -65,12 +90,28 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
     <td> TWiki:Main.AndreaSterbini, TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2006, TWiki:Main.AndreaSterbini, <a href="http://www.structuredwikis.com/" target="_top">Peter Thoeny</a></td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 1.008 </td>
+    <td> 11935 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 08 Nov 2006: </td>
+    <td> 11935 - Added css <code></code> (TWiki:Main.PeterThoeny) </td>
+  </tr>
+  <tr>
+    <td align="right"> 07 Nov 2006: </td>
+    <td> 11924 - Added INTERLINKFORMAT; removed redundant SUPPRESSTOOLTIP; allow @ signs in page part of interwiki link; support single digit page part (TWiki:Main.PeterThoeny) </td>
   </tr>
   <tr>
     <td align="right"> 26 Feb 2005: </td>
@@ -86,7 +127,7 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> 16 Feb 2004: </td>
-    <td> Support <code>[[Site:Page][label]]</code> Interwiki links (PTh); use TWiki::Func interface for [[Main/I18N]] regular expressions (Walter Mundt) </td>
+    <td> Support <code>[[Site:Page][label]]</code> Interwiki links (PTh); use TWiki::Func interface for I18N regular expressions (Walter Mundt) </td>
   </tr>
   <tr>
     <td align="right"> 18 Jan 2003: </td>
@@ -137,13 +178,23 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
     <td> 5.0 </td>
   </tr>
   <tr>
+    <td align="right">[[TWiki:Plugins/Benchmark]]: </td>
+    <td>[[TWiki/GoodStyle]] 100%, [[TWiki/FormattedSearch]] 98%, %TOPIC% 98% </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Home: </td>
-    <td> TWiki:Plugins/%TOPIC% (TWiki:Plugins/%TOPIC%) </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
   </tr>
   <tr>
     <td align="right"> Feedback: </td>
-    <td> TWiki:Plugins/%TOPIC%Dev (TWiki:Plugins/%TOPIC%Dev) </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
   </tr>
 </table>
 
-**_Related Topics:_** [[InterWikis]], [[TWikiPreferences]], [[TWikiPlugins]]
+**_Related Topics:_** [[TWikiPlugins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]], [[TWikiPreferences]], [[InterWikis]]
+
+-- TWiki:Main.PeterThoeny - 08 Nov 2006

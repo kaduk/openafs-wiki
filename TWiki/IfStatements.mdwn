@@ -1,3 +1,5 @@
+# <a name="=IF= Statements"></a> `IF` Statements
+
 The `%IF%` construct gives TWiki the power to include content in topics based on the value of simple expressions.
 
 `%IF{"CONDITION" then="THEN" else="ELSE"}%`
@@ -73,7 +75,7 @@ examples:
     Text comparison
     %IF{ "$'URLPARAM{scope}'='text'" then="Plain text search" }%
 
-**Configuration items** are defined in `configure`. You cannot see the value of a configuration item, you can only see if the item is set or not.
+**Configuration items** are defined in [configure](http://www.dementia.org/twiki/configure). You cannot see the value of a configuration item, you can only see if the item is set or not.
 
 **Context identifiers** are used in TWiki to label various stages of the rendering process. They are especially useful for [[skin|Main/TWikiSkins]] authors to find out where they are in the rendering process. The following context identifiers are available:
 

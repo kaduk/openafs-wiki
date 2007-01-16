@@ -72,25 +72,25 @@
   <tr>
     <td><code>$iso</code></td>
     <td> ISO format timestamp </td>
-    <td> 2010-06-29T16:00:39Z </td>
+    <td> 2010-06-29T16:03:15Z </td>
   </tr>
   <tr>
     <td><code>$rcs</code></td>
     <td> RCS format timestamp </td>
-    <td> 2010/06/29 16:00:39 </td>
+    <td> 2010/06/29 16:03:15 </td>
   </tr>
   <tr>
     <td><code>$http</code></td>
     <td> E-mail &amp; http format timestamp </td>
-    <td> Tue, 29 Jun 2010 16:00:39 GMT </td>
+    <td> Tue, 29 Jun 2010 16:03:15 GMT </td>
   </tr>
   <tr>
     <td><code>$epoch</code></td>
     <td> Number of seconds since 00:00 on 1st January, 1970 </td>
-    <td> 1277827239 </td>
+    <td> 1277827395 </td>
   </tr>
 </table>
 - Variables can be shortened to 3 characters
-- Example: `%GMTIME{"$day $month, $year - $hour:$min:$sec"}%` expands to `29 Jun, 2010 - 16:00:39`
+- Example: `%GMTIME{"$day $month, $year - $hour:$min:$sec"}%` expands to `29 Jun, 2010 - 16:03:15`
 - **_%X% Note:_** When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
+- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[REVINFO|Main/WebHome#VarREVINFO2]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]

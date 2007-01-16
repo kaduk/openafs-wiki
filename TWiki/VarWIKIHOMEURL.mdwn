@@ -1,5 +1,9 @@
 <a name="VarWIKIHOMEURL"></a>
 
-### <a name="WIKIHOMEURL -- site home URL &lt;strong&gt;de"></a> WIKIHOMEURL -- site home URL \*deprecated
+### <a name="WIKIHOMEURL -- site home URL"></a> WIKIHOMEURL -- site home URL
 
-- **_%X% Note:_** use `%WIKILOGOURL%` defined in [[WebPreferences]] instead.
+- Syntax `%WIKIHOMEURL%`
+- Expands to `%WIKIHOMEURL%`
+- Defined in [[TWikiPreferences]] and normally per default set to `%SCRIPTURLPATH{"view"}%`
+- **_%X% Note:_** For the top bar logo URL use `%WIKILOGOURL%` defined in [[WebPreferences]] instead.
+- Related: [[WIKITOOLNAME|Main/VarWIKITOOLNAME]]

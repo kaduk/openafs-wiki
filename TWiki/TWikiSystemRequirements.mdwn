@@ -45,8 +45,8 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
     <td> For upgrades only: GNU <code>patch</code> is required when using the TWiki:Codev.UpgradeTWiki script </td>
   </tr>
   <tr>
-    <td> Other external programs </td>
-    <td><code>fgrep, egrep</code></td>
+    <td> GNU <code>fgrep</code>, <code>egrep</code></td>
+    <td> Modify command line parameters in configure if you use non-GNU grep programs </td>
   </tr>
   <tr>
     <td> Cron/scheduler </td>

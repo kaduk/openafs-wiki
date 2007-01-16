@@ -52,6 +52,7 @@ The general contract for methods in the class requires that errors are signalled
         <li><a href="#ObjectMethod <strong>getLease</strong> ($web,$t"> ObjectMethod getLease <tt>($web,$topic) -&gt; $lease</tt></a></li>
         <li><a href="#ObjectMethod <strong>setLease</strong> ($web,$t"> ObjectMethod setLease <tt>($web,$topic,$user,$length)</tt></a></li>
         <li><a href="#ObjectMethod <strong>clearLease</strong> ($web,"> ObjectMethod clearLease <tt>($web,$topic)</tt></a></li>
+        <li><a href="#ObjectMethod *remove_SpuriousLea"> ObjectMethod removeSpuriousLeases <tt>($web)</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -312,6 +313,7 @@ Parameters and return value as saveTopic, except
 
 - `$options` - as for saveTopic, with the extra option:
   - `timetravel` - if we want to force the deposited revision to look as much like the revision specified in `$rev` as possible.
+  - `operation` - set to the name of the operation performing the save. This is used only in the log, and is normally `cmd` or `save`. It defaults to `save`.
 
 Used to try to avoid the deposition of 'unecessary' revisions, for example where a user quickly goes back and fixes a spelling error.
 
@@ -508,3 +510,7 @@ See `getLease` for more details about Leases.
 Cancel the current lease.
 
 See `getLease` for more details about Leases.
+
+## <a name="ObjectMethod &lt;strong&gt;remove_SpuriousLea"></a> [[ObjectMethod]] \*removeSpuriousLeases `($web)`
+
+Remove leases that are not related to a topic. These can get left behind in some store implementations when a topic is created, but never saved.

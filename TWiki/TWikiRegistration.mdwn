@@ -1,222 +1,223 @@
 # <a name="Registration"></a> Registration
 
-To edit pages on this [[TWikiSite]], you must have a registered user name and password.
+**To edit pages on this [[TWikiSite]], you must have a registered user name and password.**
 
 %H% **Note:** Registered users can [[change|TWiki/ChangePassword]] and [[reset|TWiki/ResetPassword]] their passwords.
 
-To register as a new user, simply fill out this form:
-
 **Important:** the information provided in this form will be stored in a database on the TWiki server. This database is accessible to anyone who can access the server through the web (though passwords will be encrypted, and e-mail addresses will be obfusticated to help prevent spamming). Your country, or the country where the server is hosted, may have Data Protection laws governing the maintenance of such databases. If you are in doubt, you should contact [](mailto:?subject=Data%20Protection%20Policy) for details of the Data Protection Policy of this TWiki server before registering.
 
+<form action="http://www.dementia.org/twiki/register/Main/WebHome" method="post">
+  <div>
+    <div><strong>To register as a new user, simply fill out this form:</strong></div>
+    <div>
+      <table border="0" cellpadding="0" cellspacing="6">
+        <tr>
+          <td>
+          </td>
+          <td>Fields marked <code><font color="red">**</font></code> are required</td>
+        </tr>
+        <tr>
+          <td align="right"> First Name: </td>
+          <td><input name="Twk1FirstName" onblur="this.form.Twk1WikiName.value=capitalise(this.value)+capitalise(this.form.Twk1LastName.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+        </tr>
+        <tr>
+          <td align="right"> Last Name: </td>
+          <td><input name="Twk1LastName" onblur="this.form.Twk1WikiName.value=capitalise(this.form.Twk1FirstName.value)+capitalise(this.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+        </tr>
+        <tr>
+          <td align="right"> (identifies you to others) [[Main/WikiName]]: </td>
+          <td><input name="Twk1WikiName" onblur="" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+        </tr>
+        <tr>
+          <td>
+            <p>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td align="right"> E-mail address: </td>
+          <td><input name="Twk1Email" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+        </tr>
+        <tr>
+          <td> %BESPOKE_PASSWORD% </td>
+        </tr>
+        <tr>
+          <td align="right"> Organisation name: </td>
+          <td><input name="Twk0OrganisationName" size="40" type="text" value="" /></td>
+        </tr>
+        <tr>
+          <td align="right"> Organisation URL: </td>
+          <td><input name="Twk0OrganisationURL" onblur="if(this.value=='http://') { this.value='' }" onfocus="if(this.value=='') { this.value='http://' }" size="40" type="text" /></td>
+        </tr>
+        <tr>
+          <td align="right"> Country: </td>
+          <td><select name="Twk1Country" size="1"><option selected value="">Select...</option>
+              <option>USA</option>
+              <option>Albania</option>
+              <option>Algeria</option>
+              <option>Andorra</option>
+              <option>Angola</option>
+              <option>Argentina</option>
+              <option>Armenia</option>
+              <option>Aruba</option>
+              <option>Australia</option>
+              <option>Austria</option>
+              <option>Azerbaijan</option>
+              <option>Bahrain</option>
+              <option>Bangladesh</option>
+              <option>Belarus</option>
+              <option>Belgium</option>
+              <option>Belize</option>
+              <option>Benin</option>
+              <option>Bhutan</option>
+              <option>Bolivia</option>
+              <option>Bosnia and Hercegovina</option>
+              <option>Brazil</option>
+              <option>Bulgaria</option>
+              <option>Burundi</option>
+              <option>Cambodia</option>
+              <option>Cameroon</option>
+              <option>Canada</option>
+              <option>Central African Republic</option>
+              <option>Chile</option>
+              <option>China</option>
+              <option>Colombia</option>
+              <option>Congo</option>
+              <option>Costa Rica</option>
+              <option>Croatia</option>
+              <option>Cuba</option>
+              <option>Cyprus</option>
+              <option>Czech Republic</option>
+              <option>Denmark</option>
+              <option>Ecuador</option>
+              <option>Egypt</option>
+              <option>El Salvador</option>
+              <option>Estonia</option>
+              <option>Ethiopia</option>
+              <option>Fiji</option>
+              <option>Finland</option>
+              <option>France</option>
+              <option>Georgia</option>
+              <option>Germany</option>
+              <option>Gibraltar</option>
+              <option>Greece</option>
+              <option>Guam</option>
+              <option>Guatemala</option>
+              <option>Haiti</option>
+              <option>Hong Kong</option>
+              <option>Hungary</option>
+              <option>Iceland</option>
+              <option>India</option>
+              <option>Indonesia</option>
+              <option>Iran</option>
+              <option>Iraq</option>
+              <option>Ireland</option>
+              <option>Israel</option>
+              <option>Italy</option>
+              <option>Jamaica</option>
+              <option>Japan</option>
+              <option>Jordan</option>
+              <option>Kazakstan</option>
+              <option>Kenya</option>
+              <option>Korea</option>
+              <option>Kuwait</option>
+              <option>Kyrgyz Rebublic</option>
+              <option>Laos</option>
+              <option>Latvia</option>
+              <option>Lebanon</option>
+              <option>Liberia</option>
+              <option>Liechtenstein</option>
+              <option>Lithuania</option>
+              <option>Luxembourg</option>
+              <option>Libya</option>
+              <option>Macao</option>
+              <option>Macedonia</option>
+              <option>Malaysia</option>
+              <option>Malawi</option>
+              <option>Malta</option>
+              <option>Mauritius</option>
+              <option>Mexico</option>
+              <option>Moldova</option>
+              <option>Monaco</option>
+              <option>Morocco</option>
+              <option>Mozambique</option>
+              <option>Namibia</option>
+              <option>Nepal</option>
+              <option>Netherlands</option>
+              <option>New Zealand</option>
+              <option>Nicaragua</option>
+              <option>Nigeria</option>
+              <option>Norway</option>
+              <option>Oman</option>
+              <option>Pakistan</option>
+              <option>Panama</option>
+              <option>Paraguay</option>
+              <option>Peru</option>
+              <option>Philippines</option>
+              <option>Poland</option>
+              <option>Portugal</option>
+              <option>Romania</option>
+              <option>Russia</option>
+              <option>Saudi Arabia</option>
+              <option>Senegal</option>
+              <option>Singapore</option>
+              <option>Slovakia</option>
+              <option>Slovenia</option>
+              <option>South Africa</option>
+              <option>Spain</option>
+              <option>Sri Lanka</option>
+              <option>Suriname</option>
+              <option>Sweden</option>
+              <option>Switzerland</option>
+              <option>Syria</option>
+              <option>Taiwan</option>
+              <option>Tanzania</option>
+              <option>Thailand</option>
+              <option>Tajikistan</option>
+              <option>Tunisia</option>
+              <option>Turkey</option>
+              <option>Turkmenistan</option>
+              <option>Uganda</option>
+              <option>Ukraine</option>
+              <option>United Arab Emirates</option>
+              <option>United Kingdom</option>
+              <option>Uruguay</option>
+              <option>USA</option>
+              <option>Uzbekistan</option>
+              <option>Vatican City</option>
+              <option>Venezuela</option>
+              <option>Vietnam</option>
+              <option>Yemen</option>
+              <option>Yugoslavia</option>
+              <option>Zaire</option>
+              <option>Zambia</option>
+              <option>Zimbabwe</option>
+              <option value="Other Country">Other Country</option></select> <code><font color="red">**</font></code></td>
+        </tr>
+        <tr>
+          <td align="right" valign="top"> Comments:<br /> (optional) </td>
+          <td>
+            <textarea cols="38" name="Twk0Comment" rows="4" wrap="virtual">
+            </textarea>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div> When %WIKITOOLNAME% receives the form, it will mail an account activation code to the e-mail address you gave above. Enter that activation code in the following screen, or follow the link in the e-mail, to activate your account. Once your account is activated, %WIKITOOLNAME% will: <ul>
+        <li> Finish creating an account for you, so that you can start editing pages using your [[Main/WikiName]]. </li>
+        <li> Create your personal %WIKITOOLNAME% topic using your [[Main/WikiName]] as topic name, and add the data you submitted to the topic. </li>
+        <li> Add your name to the list of users in the [[Main/TWikiUsers]] topic in the Main web. </li>
+        <li> Send you a confirmation of your registration by e-mail. </li>
+      </ul> Once registered you can login using your %LOGIN_METHOD_IN_THIS_SITE% and password. </div>
+    <div><input name="rx" type="hidden" value="%BLACKLISTPLUGIN{ action="magic" }%" /> <input name="topic" type="hidden" value="%TOPIC%" /> <input name="action" type="hidden" value="register" /> <input type="submit" value=" Submit " /></div>
+  </div>
+</form>
+
 <div>
-  <form action="http://www.dementia.org/twiki/register/Main/WebHome" method="post">
-    <table border="1">
-      <tr>
-        <td align="right"> First Name: </td>
-        <td><input name="Twk1FirstName" onblur="this.form.Twk1WikiName.value=capitalise(this.value)+capitalise(this.form.Twk1LastName.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
-      </tr>
-      <tr>
-        <td align="right"> Last Name: </td>
-        <td><input name="Twk1LastName" onblur="this.form.Twk1WikiName.value=capitalise(this.form.Twk1FirstName.value)+capitalise(this.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
-      </tr>
-      <tr>
-        <td align="right"> (identifies you to others) [[Main/WikiName]]: </td>
-        <td><input name="Twk1WikiName" onblur="" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
-      </tr>
-      <tr>
-        <td>
-          <p>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td align="right"> E-mail address: </td>
-        <td><input name="Twk1Email" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
-      </tr>
-      <tr>
-        <td> %BESPOKE_PASSWORD% </td>
-      </tr>
-      <tr>
-        <td align="right"> Organisation name: </td>
-        <td><input name="Twk0OrganisationName" size="40" type="text" value="" /></td>
-      </tr>
-      <tr>
-        <td align="right"> Organisation URL: </td>
-        <td><input name="Twk0OrganisationURL" onblur="if(this.value=='http://') { this.value='' }" onfocus="if(this.value=='') { this.value='http://' }" size="40" type="text" /></td>
-      </tr>
-      <tr>
-        <td align="right"> Country: </td>
-        <td><select name="Twk1Country" size="1"><option selected value="">Select...</option>
-            <option>USA</option>
-            <option>Albania</option>
-            <option>Algeria</option>
-            <option>Andorra</option>
-            <option>Angola</option>
-            <option>Argentina</option>
-            <option>Armenia</option>
-            <option>Aruba</option>
-            <option>Australia</option>
-            <option>Austria</option>
-            <option>Azerbaijan</option>
-            <option>Bahrain</option>
-            <option>Bangladesh</option>
-            <option>Belarus</option>
-            <option>Belgium</option>
-            <option>Belize</option>
-            <option>Benin</option>
-            <option>Bhutan</option>
-            <option>Bolivia</option>
-            <option>Bosnia and Hercegovina</option>
-            <option>Brazil</option>
-            <option>Bulgaria</option>
-            <option>Burundi</option>
-            <option>Cambodia</option>
-            <option>Cameroon</option>
-            <option>Canada</option>
-            <option>Central African Republic</option>
-            <option>Chile</option>
-            <option>China</option>
-            <option>Colombia</option>
-            <option>Congo</option>
-            <option>Costa Rica</option>
-            <option>Croatia</option>
-            <option>Cuba</option>
-            <option>Cyprus</option>
-            <option>Czech Republic</option>
-            <option>Denmark</option>
-            <option>Ecuador</option>
-            <option>Egypt</option>
-            <option>El Salvador</option>
-            <option>Estonia</option>
-            <option>Ethiopia</option>
-            <option>Fiji</option>
-            <option>Finland</option>
-            <option>France</option>
-            <option>Georgia</option>
-            <option>Germany</option>
-            <option>Gibraltar</option>
-            <option>Greece</option>
-            <option>Guam</option>
-            <option>Guatemala</option>
-            <option>Haiti</option>
-            <option>Hong Kong</option>
-            <option>Hungary</option>
-            <option>Iceland</option>
-            <option>India</option>
-            <option>Indonesia</option>
-            <option>Iran</option>
-            <option>Iraq</option>
-            <option>Ireland</option>
-            <option>Israel</option>
-            <option>Italy</option>
-            <option>Japan</option>
-            <option>Jordan</option>
-            <option>Kazakstan</option>
-            <option>Kenya</option>
-            <option>Korea</option>
-            <option>Kuwait</option>
-            <option>Kyrgyz Rebublic</option>
-            <option>Laos</option>
-            <option>Latvia</option>
-            <option>Lebanon</option>
-            <option>Liberia</option>
-            <option>Liechtenstein</option>
-            <option>Lithuania</option>
-            <option>Luxembourg</option>
-            <option>Libya</option>
-            <option>Macao</option>
-            <option>Macedonia</option>
-            <option>Malaysia</option>
-            <option>Malawi</option>
-            <option>Malta</option>
-            <option>Mexico</option>
-            <option>Moldova</option>
-            <option>Monaco</option>
-            <option>Morocco</option>
-            <option>Mozambique</option>
-            <option>Namibia</option>
-            <option>Nepal</option>
-            <option>Netherlands</option>
-            <option>New Zealand</option>
-            <option>Nicaragua</option>
-            <option>Nigeria</option>
-            <option>Norway</option>
-            <option>Oman</option>
-            <option>Pakistan</option>
-            <option>Panama</option>
-            <option>Paraguay</option>
-            <option>Peru</option>
-            <option>Philippines</option>
-            <option>Poland</option>
-            <option>Portugal</option>
-            <option>Romania</option>
-            <option>Russia</option>
-            <option>Saudi Arabia</option>
-            <option>Senegal</option>
-            <option>Singapore</option>
-            <option>Slovakia</option>
-            <option>Slovenia</option>
-            <option>South Africa</option>
-            <option>Spain</option>
-            <option>Sri Lanka</option>
-            <option>Suriname</option>
-            <option>Sweden</option>
-            <option>Switzerland</option>
-            <option>Syria</option>
-            <option>Taiwan</option>
-            <option>Tanzania</option>
-            <option>Thailand</option>
-            <option>Tajikistan</option>
-            <option>Tunisia</option>
-            <option>Turkey</option>
-            <option>Turkmenistan</option>
-            <option>Uganda</option>
-            <option>Ukraine</option>
-            <option>United Arab Emirates</option>
-            <option>United Kingdom</option>
-            <option>Uruguay</option>
-            <option>USA</option>
-            <option>Uzbekistan</option>
-            <option>Vatican City</option>
-            <option>Venezuela</option>
-            <option>Vietnam</option>
-            <option>Yemen</option>
-            <option>Yugoslavia</option>
-            <option>Zaire</option>
-            <option>Zambia</option>
-            <option>Zimbabwe</option>
-            <option value="Other Country">Other Country</option></select> <code><font color="red">**</font></code></td>
-      </tr>
-      <tr>
-        <td align="right" valign="top"> Comments:<br /> (optional) </td>
-        <td>
-          <textarea cols="38" name="Twk0Comment" rows="4" wrap="virtual">
-          </textarea>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-        <td><span>Fields marked <code><font color="red">**</font></code> are required</span></td>
-      </tr>
-      <tr>
-        <td align="right" valign="top">   <input name="rx" type="hidden" value="%BLACKLISTPLUGIN{ action="magic" }%" /><input name="topic" type="hidden" value="%TOPIC%" /><input name="action" type="hidden" value="register" /></td>
-        <td><input type="submit" value=" Submit " /></td>
-      </tr>
-    </table>
-  </form>
+  <ul>
+    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you have any questions about registration, send an e-mail to <a href="mailto:?subject=%TOPIC% Question"></a>. </li>
+  </ul>
 </div>
-
-When %WIKITOOLNAME% receives the form, it will mail an account activation code to the e-mail address you gave above. Enter that activation code in the following screen, or follow the link in the e-mail, to activate your account. Once your account is activated, %WIKITOOLNAME% will:
-
-- Finish creating an account for you, so that you can start editing pages using your [[WikiName]].
-- Create your personal %WIKITOOLNAME% topic using your [[WikiName]] as topic name, and add the data you submitted to the topic.
-- Add your name to the list of users in the [[TWikiUsers]] topic in the Main web.
-- Send you a confirmation of your registration by e-mail.
-
-Once registered you can login using your %LOGIN\_METHOD\_IN\_THIS\_SITE% and password.
-
-If you have any questions about registration, send an e-mail to [](mailto:?subject=%TOPIC% Question).
 
 <table bgcolor="yellow">
   <tr>

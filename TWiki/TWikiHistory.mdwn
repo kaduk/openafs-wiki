@@ -1,6 +1,7 @@
 <div>
   <ul>
     <li><a href="#Appendix A: TWiki Development Ti"> Appendix A: TWiki Development Timeline</a><ul>
+        <li><a href="#TWiki Release 4.1 (Edinburgh), 1"> TWiki Release 4.1 (Edinburgh), 17 Jan 2007</a></li>
         <li><a href="#TWiki Release 4.0.0 (Dakar), 01"> TWiki Release 4.0.0 (Dakar), 01 Feb 2006</a></li>
         <li><a href="#01-Sep-2004 Release (Cairo)"> 01-Sep-2004 Release (Cairo)</a></li>
         <li><a href="#01-Feb-2003 Release (Beijing)"> 01-Feb-2003 Release (Beijing)</a></li>
@@ -18,6 +19,103 @@
 </div>
 
 # <a name="Appendix A: TWiki Development Ti"></a> Appendix A: TWiki Development Timeline
+
+<a name="EdinburghRelease"></a>
+
+## <a name="TWiki Release 4.1 (Edinburgh), 1"></a> TWiki Release 4.1 (Edinburgh), 17 Jan 2007
+
+**_New Features and Enhancements of TWiki Release 4.1_**
+
+- **Easier Installation and Upgrade**
+  - Plugins can now be installed from the configure script.
+  - The loading of plugin preferences settings has been moved earlier in the preferences evaluation order so that plugin settings can be redefined in [[Main.TWikiPreferences|Main/TWikiPreferences]], WebPreferences and in topics. To make TWiki upgrades easier, it is recommended to set the plugin settings in Main.TWikiPreferences, and not to customize the settings in the plugin topic. For example, to change the TEMPLATES setting of the [[CommentPlugin]], create a new COMMENTPLUGIN\_TEMPLATES setting in Main.TWikiPreferences.
+  - Plugin settings can now be defined in configure instead of in the plugin topic (requires that the individual plugin has implemented this). TWiki performs slightly better by not looking for preferences settings in plugin topics.
+  - Configure no longer shows many unnecessary errors when run first time.
+  - The webmaster email address is now defined in configure instead of TWikiPreferences.
+  - Default file access rights in the distribution package have been changed to be more universally defined and in line with the default access rights for new topics.
+
+- **Usability Enhancements**
+  - Redesigned result page when typing incomplete topic name into the Jump box, so that it is possible to quickly navigate to a topic, also in a very large TWiki installation. For example, "I know there is a topic about Ajax somewhere in the Eng web. OK, let my type `Eng.ajax` into the Jump box... Here we go, the third link is the AjaxCookbook I was looking for."
+  - Many user documentation improvements.
+  - URL parameters maintained in Table of Contents links so you can stay in a temporary skin (e.g. print) and keep URLPARAM values when you click the TOC links
+  - Attachment tables now sorted alphabetically.
+  - Better printing of tables and verbatim text in [[PatternSkin]].
+
+- **Application Platform Enhancements**
+  - Auto-incremented topic name on save with AUTOINC&lt;n&gt; in topic name; used by TWiki applications to create topic based database records.
+  - The edit and save scripts support a `redirectto` parameter to redirect to a topic or a URL; for security, redirect to URL needs to be enabled with a `{AllowRedirectUrl}` configure flag.
+  - [[CommentPlugin]] supports the `redirectto` parameter to redirect to a URL or link to TWiki topic after submitting comment.
+  - The `topic` URL parameter also respects the `{AllowRedirectUrl}` configure flag so redirects to URLs can be disabled which could be abused for phishing attacks.
+  - The view script supports a `section` URL parameter to view just a named section within a topic. Useful for simple AJAX type applications.
+  - New plugin handler for content move.
+  - Enhancements for Ajax based applications with TWiki:Plugins/YahooUserInterfaceContrib and TWiki:Plugins.TWikiAjaxContrib (available at twiki.org).
+
+- **Search Enhancements**
+  - METASEARCH handles a format parameter like SEARCH.
+  - Topic not found / [[WebTopicViewTemplate]] search now case insensitive.
+  - [[FormattedSearch]] header supporting `$nop`, `$quot`, `$percnt`, `$dollar`.
+  - Add search by createdate option to SEARCH.
+  - New newline option for SEARCH to protect e.g. formfields from being altered during rendering in SEARCH.
+
+- **Skins and Templates Enhancements**
+  - Support for templates to have text rendering affecting aspect outside of textarea.
+  - Pattern skin dependence on [[TwistyPlugin]] instead of [[TwistyContrib]] (performance improvement.)
+  - Don't strip newlines from the front of TMPL:DEFs.
+
+- **Miscellaneous Feature Enhancements**
+  - Change in [[WikiWord]] definition: Numbers are treated as lower case letters, e.g. Y2K is now a WikiWord.
+  - Configurable template load path. Advanced feature for those that work with customized templates.
+  - Added %VBAR% to [[TWikiPreferences]] for vertical bar symbol.
+  - On topic creation, force initial letter of topic name to be upper case.
+  - Allow date format in form fields.
+  - Enhance REVINFO\{\} variable with same date qualifiers as GMTIME\{\}.
+  - [[WebTopicCreator]] - adding ability to select a template from any topic name ending in ...Template
+  - Functionality of DateFieldPlugin merged into core
+
+- **Enhancements of Pre-installed Plugins**
+  - [[CommentPlugin]]: Supports removal of comment prompt after a comment is made.
+  - [[EditTablePlugin]]: Default date format based on [[JSCalendarContrib]] instead of plugin topic.
+  - [[InterwikiPlugin]]: Supports custom link formats.
+  - [[SlideShowPlugin]]: Preserves URL parameters in slideshow
+  - [[SpreadSheetPlugin]]: New functions `$LISTRAND()`, `$LISTSHUFFLE()`, `$LISTTRUNCATE()`.
+  - [[TablePlugin]]: New attribute `cellborder`.
+  - [[TablePlugin]]: Highlight the sorted column with custom colors; includes also a general cosmetic update of default colors.
+  - [[TablePlugin]]: Support for initsort on more than one table. A table with the initsort option is initsorted UNLESS it is sorted by clicking on a column header. If you click on a header of another table all other tables goes back to the default sort defined by initsort or not sorted if no initsort, and the new table is sorted based on the user clicking on a table header.
+
+- **Bugfixes**
+  - More than 200 bugs fixed since 4.0.5
+
+**_Hall of Fame of TWiki Release 4.1_**
+
+Although many more people have been involved in creating TWiki-4.1, special thanks go to the most active contributors in the following areas:
+
+- **Sponsor and facilitator:** TWiki:Main.PeterThoeny
+- **Process improvement:** TWiki:Main.KennethLavrsen, TWiki:Main.PeterThoeny, TWiki:Main.SteffenPoulsen, TWiki:Main.CrawfordCurrie
+- **Release management:** TWiki:Main.KennethLavrsen
+- **Spec, code, testing:** TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, TWiki:Main.SteffenPoulsen, TWiki:Main.PeterThoeny, TWiki:Main.ThomasWeigert, TWiki:Main.KennethLavrsen, TWiki:Main.SvenDowideit, TWiki:Main.HaraldJoerg, TWiki:Main.MichaelDaum, TWiki:Main.MeredithLesly, TWiki:Main.WillNorris, TWiki:Main.RafaelAlvarez, TWiki:Main.AntonioTerceiro
+- **Templates and skins:** TWiki:Main.ArthurClemens, TWiki:Main.MichaelDaum, TWiki:Main.SvenDowideit
+- **Documentation:** TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, TWiki:Main.SteffenPoulsen, TWiki:Main.KennethLavrsen
+- **Translations:** Coordinated by TWiki:Main.AntonioTerceiro
+  - Chinese: TWiki:Main.CheDong
+  - Czech: TWiki:Main.IvanKuncl
+  - Danish: TWiki:Main.SteffenPoulsen
+  - Dutch: TWiki:Main.ArthurClemens
+  - French: TWiki:Main.BenVoui
+  - German: TWiki:Main.AndreUlrich
+  - Italian: TWiki:Main.MassimoMancini
+  - Polish: TWiki:Main.ZbigniewKulesza
+  - Portuguese: TWiki:Main.AntonioTerceiro, TWiki:Main.CarlinhosCecconi
+  - Russian: TWiki:Main.AndreyTkachenko, TWiki:Main.SergejZnamenskij, TWiki:Main.SergeyJSinx, TWiki:Main.AlexTananaev
+  - Spanish: TWiki:Main.WillNorris, TWiki:Main.MiguelABayona
+  - Swedish: TWiki:Main.ErikAman
+- **Public relations:** TWiki:Main.PeterThoeny, TWiki:Main.TomTansy
+- **TWiki.org wiki champions:** TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie, TWiki:Main.KennethLavrsen, TWiki:Main.SteffenPoulsen, TWiki:Main.ArthurClemens, TWiki:Main.ThomasWeigert, TWiki:Main.MichaelDaum
+- **Customer support:** TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, TWiki:Main.SteffenPoulsen, TWiki:Main.SteveStark, TWiki:Main.MichaelDaum
+- **System administration:** TWiki:Main.SvenDowideit, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie
+
+If you find an omission please fix it at TWiki:TWiki.TWikiHistory. For the full list of contributors see [[TWikiContributor]].
+
+See more details on the TWiki 4.1 release at [[TWikiReleaseNotes04x01]].
 
 <a name="DakarRelease"></a>
 
@@ -1105,7 +1203,7 @@ See more details at [[TWikiReleaseNotes04x00]]
 - **07 Jul 2000** - TWiki:Main.PeterThoeny
   - Added an "Release edit lock" checkbox in preview to let other people edit the topic immediately without the one hour lock.
 - **07 Jul 2000** - TWiki:Main.PeterThoeny
-  - Fixed problem of losing carriage returns when editing topics with KDE KFM browser or [[W3M]] browser.
+  - Fixed problem of losing carriage returns when editing topics with KDE KFM browser or W3M browser.
 - **21 Jun 2000** - TWiki:Main.PeterThoeny
   - Fixed problem that a page redirect on some server environments is not working (host name is needed in URL).
 - **21 Jun 2000** - TWiki:Main.CrisBailiff, TWiki:Main.PeterThoeny
@@ -1150,12 +1248,12 @@ See more details at [[TWikiReleaseNotes04x00]]
 - **10 Jan 2000** - TWiki:Main.PeterThoeny
   - No more escaping for '%' percent characters. (Number of consecutive '%' entered and displayed is identical.)
 - **03 Oct 1999** - TWiki:Main.PeterThoeny
-  - Limit the number of revisions shown at the bottom of the topic. Example %BR% Topic %TOPIC% . \{ ..... [Diffs](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%) r1.10 [&gt;](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%?rev1=1.10&rev2=1.9) [r1.9](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?rev=1.9) [&gt;](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%?rev1=1.9&rev2=1.8) [r1.8](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?rev=1.8) [&gt;](http://www.dementia.org/twiki//rdiff/%WEB%/%TOPIC%?rev1=1.8&rev2=1.7) [r1.7](http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?rev=1.7) [&gt;...](http://www.dementia.org/twiki//oops/%WEB%/%TOPIC%?template=oopsrev&param1=1.10) \} %BR% Additional revisions can be selected by pressing the `>...` link.
+  - Limit the number of revisions shown at the bottom of the topic. Example %BR% Topic %TOPIC% . \{ ..... [Diffs](http://www.dementia.org/twiki/rdiff/%WEB%/%TOPIC%) r1.10 [&gt;](http://www.dementia.org/twiki/rdiff/%WEB%/%TOPIC%?rev1=1.10&rev2=1.9) [[r1.9|%WEB%/%TOPIC%?rev=1.9]] [&gt;](http://www.dementia.org/twiki/rdiff/%WEB%/%TOPIC%?rev1=1.9&rev2=1.8) [[r1.8|%WEB%/%TOPIC%?rev=1.8]] [&gt;](http://www.dementia.org/twiki/rdiff/%WEB%/%TOPIC%?rev1=1.8&rev2=1.7) [[r1.7|%WEB%/%TOPIC%?rev=1.7]] [&gt;...](http://www.dementia.org/twiki/oops/%WEB%/%TOPIC%?template=oopsrev&param1=1.10) \} %BR% Additional revisions can be selected by pressing the `>...` link.
 
 ## <a name="01-Sep-1999 Release"></a> 01-Sep-1999 Release
 
 - **31 Aug 1999** - TWiki:Main.PeterThoeny
-  - Fixed [[Y2K]] bug. (Date in year 2000 had wrong format.)
+  - Fixed Y2K bug. (Date in year 2000 had wrong format.)
 - **08 Aug 1999** - TWiki:Main.PeterThoeny
   - New text formatting rule for creating tables. Text gets rendered as a table if enclosed in " " vertical bars. Example line as it is written and how it shows up
 - **03 Aug 1999** - TWiki:Main.PeterThoeny
@@ -1219,7 +1317,7 @@ See more details at [[TWikiReleaseNotes04x00]]
 - **24 Sep 1998** - TWiki:Main.PeterThoeny
   - Corrected templates for automatic e-mail notification so that MS Outlook can display attachment as an HTML file.
 - **13 Aug 1998** - TWiki:Main.PeterThoeny
-  - [[WikiNotation]] allows also numbers after the `AaA` sequence, e.g. `AaA1` is a valid [[WikiTopic]] name, but not `Aa1`.
+  - [[WikiNotation]] allows also numbers after the `AaA` sequence, e.g. `AaA1` is a valid [[TWikiTopics]] name, but not `Aa1`.
 - **07 Aug 1998** - TWiki:Main.PeterThoeny
   - Automatic e-mail notification when something has changed in a TWiki web. Each web has a topic [[WebNotify]] where one can subscribe and unsubscribe.
 - **06 Aug 1998** - TWiki:Main.PeterThoeny

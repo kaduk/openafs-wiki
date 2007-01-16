@@ -1,6 +1,6 @@
 # <a name="Change E-mail Address"></a> Change E-mail Address
 
-This form is used to change your registered e-mail addresses. Your registered e-mails are used by TWiki for sending you e-mails, include notifications of password changes. The addresses you register via this form are kept secret and will **not** be published anywhere on this site.
+**This form is used to change your registered e-mail addresses. Your registered e-mails are used by TWiki for sending you e-mails, include notifications of password changes. The addresses you register via this form are kept secret and will **not** be published anywhere on this site.**
 
 %X% **_Security Note_**: You really ought to register a valid e-mail address. If TWiki can't find a registered e-mail for you in the secret database, it will look in your user topic for a line like this:
 
@@ -10,38 +10,40 @@ If your user topic is not protected from changes by other people, and you don't 
 
 If your old e-mail addresses are all invalid (you can't receive mail there any more) and you have forgotten your password, please contact 0 for help.
 
-Registered e-mail addresses for currently logged in user (`admin`):
-
-[[TWikiUsers]] has a list of other TWiki users.
-
 <form action="http://www.dementia.org/twiki/passwd/%WEB%/%TOPIC%" method="post" name="passwd">
   <div>
+    <div><strong>After submitting this form your e-mail will be changed, and you will be returned to this form.</strong></div>
+    <div> Registered e-mail addresses for currently logged in user (<code>admin</code>): </div>
     <div>
-      <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+      <table border="0" cellpadding="0" cellspacing="0" style="border-width: 0px">
         <tr>
-          <td align="right" style=""> Your [[TWiki/LoginName]]: </td>
-          <td style=""><input name="username" size="40" type="text" value="admin" /> <code><font color="red">**</font></code></td>
+          <td style="border-width: 0px">   </td>
+          <td style="border-width: 0px"> Fields marked <code><font color="red">**</font></code> are required </td>
         </tr>
         <tr>
-          <td align="right" style=""> Password: </td>
-          <td style=""><input name="oldpassword" size="40" type="password" value="" /> <code><font color="red">**</font></code></td>
+          <td align="right" style="border-width: 0px"> Your [[TWiki/LoginName]]: </td>
+          <td style="border-width: 0px"><input name="username" size="40" type="text" value="admin" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
-          <td align="right" style=""> New e-mails (space-separated list): </td>
-          <td style=""><input name="email" size="40" type="text" /> <code><font color="red">**</font></code></td>
+          <td align="right" style="border-width: 0px"> Password: </td>
+          <td style="border-width: 0px"><input name="oldpassword" size="40" type="password" value="" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
-          <td align="right" style="">  <input name="TopicName" type="hidden" value="%TOPIC%" /><input name="action" type="hidden" value="changePassword" /></td>
-          <td style=""><input type="submit" value="Change e-mail address" />    (Fields marked <code><font color="red">**</font></code> are required) </td>
+          <td align="right" style="border-width: 0px"> New e-mails (space-separated list): </td>
+          <td style="border-width: 0px"><input name="email" size="40" type="text" /> <code><font color="red">**</font></code></td>
         </tr>
       </table>
     </div>
+    <div><input name="TopicName" type="hidden" value="%TOPIC%" /> <input name="action" type="hidden" value="changePassword" /> <input type="submit" value="Change e-mail address" /></div>
   </div>
 </form>
 
-After submitting this form your e-mail will be changed, and you will be returned to this form.
-
-If you have any questions, please contact 0.
+<div>
+  <ul>
+    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you have any questions, please contact 0. </li>
+    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> [[Main/TWikiUsers]] has a list of other TWiki users. </li>
+  </ul>
+</div>
 
 **_Related topics:_** [[ChangePassword]], [[ResetPassword]], [[UserToolsCategory]], [[AdminToolsCategory]]
 

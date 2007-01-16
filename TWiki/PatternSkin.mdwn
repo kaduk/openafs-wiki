@@ -1,15 +1,19 @@
 # <a name="Pattern skin"></a><a name=" Pattern skin"></a> Pattern skin
 
-**PatternSkin is developed to provide a CSS based default look and feel for TWiki - flexible and [[W3C]]-compliant.** Its layout and color scheme are designed to provide a nice, clean and productive _editing environment_. For use in corporate or perhaps in personal websites it should be fairly easy to tune the looks or even create a PatternSkin-based new skin.
+**PatternSkin provides a CSS based default look and feel for TWiki - flexible and W3C-compliant.** Its layout and color scheme are designed to provide a nice, clean and productive _editing environment_. For use in corporate or perhaps in personal websites it should be fairly easy to tune the looks or even create a PatternSkin-based new skin.
 
 <div><span>Page contents</span><ul>
     <li>
       <ul>
-        <li><a href="#Screen Shot"> Screen Shot</a></li>
+        <li><a href="#Screenshot"> Screenshot</a></li>
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li><a href="#Creating your own look"> Creating your own look</a></li>
+        <li><a href="#Creating your own look"> Creating your own look</a><ul>
+            <li><a href="#Template customization"> Template customization</a></li>
+            <li><a href="#Style sheet customization"> Style sheet customization</a></li>
+          </ul>
+        </li>
         <li><a href="#Supported browsers"> Supported browsers</a></li>
         <li><a href="#Installation"> Installation</a><ul>
             <li><a href="#Troubleshooting"> Troubleshooting</a></li>
@@ -23,19 +27,19 @@
   </ul>
 </div>
 
-## <a name="Screen Shot"></a> Screen Shot
+## <a name="Screenshot"></a> Screenshot
 
 [<img src="http://www.dementia.org/twiki//view/patternskin_screenshot.jpg" width="600" height="130" alt="Click for full screen image" style="border: 1px solid #eee" />](http://www.dementia.org/twiki//view/patternskin_screenshot_full.png)
 
 ## <a name="Creating your own look"></a> Creating your own look
 
-It is easy to tune the look and feel of PatternSkin by changing the color and space (margin, padding) settings in the Style Sheet files.
+### <a name="Template customization"></a> Template customization
 
-You may also choose to radically change the look and create a PatternSkin-based new skin. This is easier than to create a skin by writing new template files; you can concentrate on how things should look instead of what elements should get displayed.
+[[PatternSkinCustomization]] - how to configure page elements
 
-- [[PatternSkinCustomization]] - how to configure page elements
-- [[PatternSkinCssCookbook]] - how to customize the default look of TWiki
-- [[PatternSkinCss]] - documentation of PatternSkin CSS classes
+### <a name="Style sheet customization"></a> Style sheet customization
+
+[[PatternSkinCssCookbook]] - how to customize the visual style
 
 ## <a name="Supported browsers"></a> Supported browsers
 
@@ -79,6 +83,8 @@ If TWIKILAYOUTURL or TWIKISTYLEURL don't give a value or point to non-existing f
           * Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/style.css
           * Set TWIKICOLORSURL = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/colors.css
 
+**NOTE:** customization of these values should be done in [[Main.TWikiPreferences|Main/TWikiPreferences]]
+
 If this still does not work, contact the administrator who installs skins.
 
 For further troubleshooting and feedback, go to TWiki:Plugins/PatternSkinDev. Report bugs in the [[Support web|TWiki:Support/WebHome]].
@@ -88,7 +94,7 @@ For further troubleshooting and feedback, go to TWiki:Plugins/PatternSkinDev. Re
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Description: </td>
-    <td> TWiki's default skin; CSS based, flexible and [[Main/W3C]]-compliant </td>
+    <td> TWiki's default skin; CSS based, flexible and W3C-compliant </td>
   </tr>
   <tr>
     <td align="right"> Screenshot: </td>
@@ -108,19 +114,35 @@ For further troubleshooting and feedback, go to TWiki:Plugins/PatternSkinDev. Re
   </tr>
   <tr>
     <td align="right"> Skin Version: </td>
-    <td> 31 Jan 2006 (v2.0.0) </td>
+    <td> 15 Jan 2006 (v2.0.6) </td>
   </tr>
   <tr>
     <td align="right"> History: </td>
     <td>  </td>
   </tr>
   <tr>
+    <td align="right"> 15 Jan 2006: </td>
+    <td> v.2.0.6 - TWiki 4.1.0 (Edinburgh) RELEASE VERSION </td>
+  </tr>
+  <tr>
+    <td align="right"> 26 Sep 2006: </td>
+    <td> v.2.0.5 - Fixed form background colors </td>
+  </tr>
+  <tr>
+    <td align="right"> 22 Jul 2006: </td>
+    <td> v.2.0.4 - Refactored info in colors.css; fixed textarea color </td>
+  </tr>
+  <tr>
+    <td align="right"> 26 Jun 2006: </td>
+    <td> v.2.0.3 - TWiki 4.0.3 (Dakar) RELEASE VERSION </td>
+  </tr>
+  <tr>
     <td align="right"> 31 Jan 2006: </td>
-    <td> v.2.0.0 - DAKAR RELEASE VERSION </td>
+    <td> v.2.0.0 - TWiki 4.0.0 (Dakar) RELEASE VERSION </td>
   </tr>
   <tr>
     <td align="right"> 28 Aug 2004: </td>
-    <td> v.1.0.9 - CAIRO RELEASE VERSION </td>
+    <td> v.1.0.9 - TWiki 3.0 (Cairo) RELEASE VERSION </td>
   </tr>
   <tr>
     <td align="right"> 08 Aug 2004: </td>

@@ -68,7 +68,15 @@ Everything to do with TWiki Plugins - demos, new releases, downloads, developmen
 
 TWiki Plugins are developed and contributed by interested members of the community. Plugins are provided on an 'as is' basis; they are not a part of TWiki, but are independently developed and maintained.
 
-**_%T% Tip:_** TWiki:TWiki.TWikiPluginsSupplement on TWiki.org has supplemental documentation on TWiki Plugins.
+**_Relevant links on TWiki.org:_**
+
+- TWiki:TWiki.TWikiPluginsSupplement - **_%T% tip:_** supplemental documentation on TWiki plugins
+- TWiki:Plugins.PluginPackage - list of all contributed plugin packages
+- TWiki:Plugins.PluginDevelopment - discussion and feedback on contributed plugins
+- TWiki:Plugins.PluginBrainstorming - open forum for new plugin ideas
+- TWiki:Plugins.PluginPackageHowTo - template to create a new plugin package
+
+**_See other types of extensions:_** [[TWikiAddOns]], [[TWikiContribs]], [[TWikiSkins]]
 
 <a name="InstallPlugin"></a>
 
@@ -92,7 +100,11 @@ The recommended approach to testing new Plugins before making them public is to 
 
 The performance of the system depends to some extent on the number of Plugins installed and on the Plugin implementation. Some Plugins impose no measurable performance decrease, some do. For example, a Plugin might use many Perl libraries that need to be initialized with each page view (unless you run mod\_perl). You can only really tell the performance impact by installing the Plugin and by measuring the performance with and without the new Plugin. Use the TWiki:Plugins.PluginBenchmarkAddOn, or test manually with the Apache `ab` utility. Example on Unix:%BR% `time wget -qO /dev/null http://www.dementia.org/twiki/view/TWiki/AbcPlugin`
 
-%T% If you need to install an "expensive" Plugin, and you need its functionality only in one web, you can place the Plugin topic into that web. TWiki will initialize the Plugin only if the Plugin topic is found (which won't be the case for other webs.)
+%T% If you need to install an "expensive" Plugin, but you only need its functionality only in a subset of your data, you can disable it elsewhere by defining the %DISABLEDPLUGINS% TWiki variable.
+
+Define `DISABLEDPLUGINS` to be a comma-separated list of names of plugins to disable. Define it in Main.TWikiPreferences to disable those plugins everywhere, in the WebPreferences topic to disable them in an individual web, or in a topic to disable them in that topic. For example,
+
+       * Set DISABLEDPLUGINS = SpreadSheetPlugin, EditTablePlugin
 
 <a name="ManagingPlugins"></a>
 
@@ -110,14 +122,11 @@ By default, TWiki executes Plugins in alphabetical order on Plugin name. It is p
 
 ### <a name="Plugin-Specific Settings"></a> Plugin-Specific Settings
 
-Plugin-specific settings are done in individual Plugin topics. Two settings are standard for each Plugin:
+Plugins are usually configured by variables accessible though the [configure](http://www.dementia.org/twiki/configure) interface, but in some cases (usually older plugins) TWiki preferences are used. If a TWiki variable is defined in a Plugin topic e.g:
 
-1. One line description, used to form the bullets describing the Plugins in the [[TextFormattingRules]] topic:
-  - `Set SHORTDESCRIPTION = Create dynamic foo bar reports`
-2. Debug Plugin, output can be seen in `data/debug.txt`. Set to 0=off or 1=on:
-  - `Set DEBUG = 0`
+- Set SETTING = Create dynamic foo bar reports
 
-- The settings can be retrieved as Preferences variables like `%<pluginname>_<var>%`. For example, `%DEFAULTPLUGIN_SHORTDESCRIPTION%` shows the description of the DefaultPlugin.
+Then these settings can be retrieved as preferences variables like `%<pluginname>_<var>%`. For example, `%RUBBERPLUGIN_SETTING%` shows the value of SETTING in the RubberPlugin topic.
 
 ### <a name="Listing Active Plugins"></a> Listing Active Plugins
 
@@ -404,7 +413,7 @@ You can create a Plugin "work area" using the `TWiki::Func::getWorkArea()` funct
 
 ### <a name="Web Accessible Data"></a> Web Accessible Data
 
-**_Topic-specific data_** such as generated images can be stored in the topics attachment area, which is web accessible. Use the `TWiki::Func::saveAttachment()` function to store the data.
+**_Topic-specific data_** such as generated images can be stored in the topic's attachment area, which is web accessible. Use the `TWiki::Func::saveAttachment()` function to store the data.
 
 Recommendation for file name:
 

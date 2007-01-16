@@ -46,9 +46,11 @@ Render bullet lists in a variety of formats
 - Wrap long text with continuation lines, the Plugin does not do that for you%BR% `Align continuation lines with leading spaces like this`
 - You can specify an icon for a bullet of render type **tree** or **icon**:
   - Attach the icon to this Plugin topic, e.g. `myicon.gif`, or
-  - Use one of the existing icons: ![globe.gif](http://www.dementia.org/twiki//view/globe.gif) `globe.gif`, ![home.gif](http://www.dementia.org/twiki//view/home.gif) `home.gif`, ![virtualhome.gif](http://www.dementia.org/twiki//view/virtualhome.gif) `virtualhome.gif`, ![group.gif](http://www.dementia.org/twiki//view/group.gif) `group.gif`, ![persons.gif](http://www.dementia.org/twiki//view/persons.gif) `persons.gif`, ![virtualpersons.gif](http://www.dementia.org/twiki//view/virtualpersons.gif) `virtualpersons.gif`, ![person.gif](http://www.dementia.org/twiki//view/person.gif) `person.gif`, ![virtualperson.gif](http://www.dementia.org/twiki//view/virtualperson.gif) `virtualperson.gif`, ![email.gif](http://www.dementia.org/twiki//view/email.gif) `email.gif`, ![trend.gif](http://www.dementia.org/twiki//view/trend.gif) `trend.gif`, ![folder.gif](http://www.dementia.org/twiki//view/folder.gif) `folder.gif`, ![file.gif](http://www.dementia.org/twiki//view/file.gif) `file.gif`, ![doc.gif](http://www.dementia.org/twiki//view/doc.gif) `doc.gif`, ![image.gif](http://www.dementia.org/twiki//view/image.gif) `image.gif`, ![pdf.gif](http://www.dementia.org/twiki//view/pdf.gif) `pdf.gif`, ![ppt.gif](http://www.dementia.org/twiki//view/ppt.gif) `ppt.gif`, ![sound.gif](http://www.dementia.org/twiki//view/sound.gif) `sound.gif`, ![xls.gif](http://www.dementia.org/twiki//view/xls.gif) `xls.gif`, ![zip.gif](http://www.dementia.org/twiki//view/zip.gif) `zip.gif`, ![see.gif](http://www.dementia.org/twiki//view/see.gif) `see.gif`
+  - Use one of the existing icons: ![globe.gif](http://www.dementia.org/twiki//view/globe.gif) `globe.gif`, ![home.gif](http://www.dementia.org/twiki//view/home.gif) `home.gif`, ![virtualhome.gif](http://www.dementia.org/twiki//view/virtualhome.gif) `virtualhome.gif`, ![group.gif](http://www.dementia.org/twiki//view/group.gif) `group.gif`, ![persons.gif](http://www.dementia.org/twiki//view/persons.gif) `persons.gif`, ![virtualpersons.gif](http://www.dementia.org/twiki//view/virtualpersons.gif) `virtualpersons.gif`, ![person.gif](http://www.dementia.org/twiki//view/person.gif) `person.gif`, ![virtualperson.gif](http://www.dementia.org/twiki//view/virtualperson.gif) `virtualperson.gif`, ![email.gif](http://www.dementia.org/twiki//view/email.gif) `email.gif`, ![trend.gif](http://www.dementia.org/twiki//view/trend.gif) `trend.gif`, ![folder.gif](http://www.dementia.org/twiki//view/folder.gif) `folder.gif`, ![folders.gif](http://www.dementia.org/twiki//view/folders.gif) `folders.gif`, ![file.gif](http://www.dementia.org/twiki//view/file.gif) `file.gif`, ![files.gif](http://www.dementia.org/twiki//view/files.gif) `files.gif`, ![doc.gif](http://www.dementia.org/twiki//view/doc.gif) `doc.gif`, ![image.gif](http://www.dementia.org/twiki//view/image.gif) `image.gif`, ![pdf.gif](http://www.dementia.org/twiki//view/pdf.gif) `pdf.gif`, ![ppt.gif](http://www.dementia.org/twiki//view/ppt.gif) `ppt.gif`, ![sound.gif](http://www.dementia.org/twiki//view/sound.gif) `sound.gif`, ![xls.gif](http://www.dementia.org/twiki//view/xls.gif) `xls.gif`, ![zip.gif](http://www.dementia.org/twiki//view/zip.gif) `zip.gif`, ![see.gif](http://www.dementia.org/twiki//view/see.gif) `see.gif`
   - Refer to an attached icon at the beginning of the bullet with:
     - `icon:myicon Followed by normal bullet text`
+  - Any [[TWikiDocGraphics]] icon can be used as well:
+    - `%ICON{name}% Followed by normal bullet text`
 
 ## <a name="Examples"></a> Examples
 
@@ -443,7 +445,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
-**_Note:_** You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the server where TWiki is running.
+**_Note:_** You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the TWiki server.
 
 - Download the ZIP file from the Plugin web (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
@@ -468,8 +470,8 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Image files for themes </td>
   </tr>
 </table>
-- Test if the installation was successful:
-  - See if the above example works
+- TWiki 4.0 and up: Run the [configure](http://www.dementia.org/twiki//configure) script to enable the Plugin
+- Test if the installation was successful: See if above examples work
 
 ## <a name="Plugin Info"></a> Plugin Info
 
@@ -479,12 +481,24 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> TWiki:Main/PeterThoeny </td>
   </tr>
   <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2006, <a href="http://www.structuredwikis.com/peter.html" target="_top">Peter Thoeny</a></td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 25 Apr 2006 (V1.033) </td>
+    <td> 23 Sep 2006 (V1.034) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 23 Sep 2006: </td>
+    <td> Support for img tag and image URL after <code>icon:</code> (suggested by TWiki:Main.JanFilipsky); support for [[TWiki/TWikiDocGraphics]] icons, such as <code>%ICON{folder}%</code> instead of <code>icon:folder</code>; added files.gif and folders.gif (contributed by TWiki:Main.SteveHobbs) </td>
   </tr>
   <tr>
     <td align="right"> 25 Apr 2006: </td>
@@ -556,6 +570,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
 </table>
 
-**_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]], TWiki:Plugins/TreePlugin
+**_Related Topics:_** [[TWikiPlugins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]], [[TWikiPreferences]], TWiki:Plugins/TreePlugin
 
--- TWiki:Main/PeterThoeny - 21 Nov 2004
+-- TWiki:Main/PeterThoeny - 23 Sep 2006

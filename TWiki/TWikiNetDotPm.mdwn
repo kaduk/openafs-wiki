@@ -5,7 +5,7 @@ Object that brokers access to network resources.
 <div>
   <ul>
     <li><a href="#Package =TWiki::Net="> Package TWiki::Net</a><ul>
-        <li><a href="#ObjectMethod <strong>getUrl</strong> ($host,$po"> ObjectMethod getUrl <tt>($host,$port,$url,$user,$pass,$header) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getUrl</strong> ($protocol"> ObjectMethod getUrl <tt>($protocol,$host,$port,$url,$user,$pass) -&gt; $text</tt></a></li>
         <li><a href="#set_MailHandler( \fn )"> setMailHandler( \&amp;fn )</a></li>
         <li><a href="#ObjectMethod <strong>sendEmail</strong> ($text,"> ObjectMethod sendEmail <tt>($text,$retries) -&gt; $error</tt></a></li>
       </ul>
@@ -13,7 +13,7 @@ Object that brokers access to network resources.
   </ul>
 </div>
 
-## <a name="ObjectMethod &lt;strong&gt;getUrl&lt;/strong&gt; ($host,$po"></a> [[ObjectMethod]] **getUrl** `($host,$port,$url,$user,$pass,$header) -> $text`
+## <a name="ObjectMethod &lt;strong&gt;getUrl&lt;/strong&gt; ($protocol"></a> [[ObjectMethod]] **getUrl** `($protocol,$host,$port,$url,$user,$pass) -> $text`
 
 Get the text at the other end of a URL
 

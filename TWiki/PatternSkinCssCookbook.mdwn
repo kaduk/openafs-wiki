@@ -4,9 +4,10 @@
 
 <div>
   <ul>
-    <li><a href="#Introduction"> Introduction</a><ul>
+    <li><a href="#First Read: How to modify _Patt"> First Read: How to modify PatternSkin styles</a><ul>
+        <li><a href="#Changing the color scheme"> Changing the color scheme</a></li>
         <li><a href="#When you need lots of graphic ch"> When you need lots of graphic changes: Rewriting CSS</a></li>
-        <li><a href="#When you need small adjustments:"> When you need small adjustments: Adding to existing CSS</a></li>
+        <li><a href="#When you need to make small adju"> When you need to make small adjustments: Adding to existing CSS</a></li>
       </ul>
     </li>
     <li><a href="#Recipes"> Recipes</a><ul>
@@ -18,10 +19,11 @@
         <li><a href="#Setting _EditTablePlugin styles"> Setting EditTablePlugin styles</a></li>
       </ul>
     </li>
+    <li><a href="#Style sheet documentation"> Style sheet documentation</a></li>
   </ul>
 </div>
 
-## <a name="Introduction"></a> Introduction
+## <a name="First Read: How to modify _Patte"></a> First Read: How to modify PatternSkin styles
 
 PatternSkin uses 3 style sheets (attached to [[PatternSkin]]):
 
@@ -30,6 +32,10 @@ PatternSkin uses 3 style sheets (attached to [[PatternSkin]]):
 - [colors.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/colors.css) - border colors, text colors and background colors
 
 When customizing your TWiki installation, you can either choose to completely rewrite all css styles, or to selectively override some styles. The latter option is by far less time consuming, but all depends on your graphical wishes.
+
+### <a name="Changing the color scheme"></a> Changing the color scheme
+
+Have a look at [[PatternSkinColorSettings]].
 
 ### <a name="When you need lots of graphic ch"></a> When you need lots of graphic changes: Rewriting CSS
 
@@ -41,7 +47,7 @@ When customizing your TWiki installation, you can either choose to completely re
           * Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
           * Set TWIKICOLORSURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
 
-### <a name="When you need small adjustments:"></a> When you need small adjustments: Adding to existing CSS
+### <a name="When you need to make small adju"></a> When you need to make small adjustments: Adding to existing CSS
 
 With CSS you cannot remove already defined classes, you can only add to it, or overwrite existing styles. <br /> Overriding default CSS is done with 3 variables: `USERLAYOUTURL`, `USERSTYLEURL`, `USERCOLORSURL`.
 
@@ -93,3 +99,7 @@ See example at: [[PatternSkinCssCookbookCenterPageBorder]]
 ### <a name="Setting _EditTablePlugin styles"></a> Setting EditTablePlugin styles
 
 See example at: [[PatternSkinCssCookbookEditTableStyle]]
+
+## <a name="Style sheet documentation"></a> Style sheet documentation
+
+See [[PatternSkinCss]] for documentation of PatternSkin CSS classes

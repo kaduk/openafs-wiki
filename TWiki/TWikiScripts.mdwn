@@ -74,14 +74,14 @@ In the CGI environment parameters are passed to the scripts via the URL and URL 
 
 #### <a name="Command-line"></a> Command-line
 
-You **must** be cd'd to the `twiki/bin` directory to run the scripts from the command line. To avoid issues with file permissions, run the scripts as the web server user such as `nobody` or `www`.
+You **must** be have the `twiki/bin` directory on the perl path to run the scripts from the command line. To avoid issues with file permissions, run the scripts as the web server user such as `nobody` or `www`.
 
 Parameters are passed on the command line using '-name' - for example,
 
     $ cd /usr/local/twiki/bin
     $ save -topic MyWeb.MyTopic -user admin -action save -text "New text of the topic"
 
-All parameters require a value.
+All parameters require a value, even if that is the empty string.
 
 #### <a name="Common parameters"></a> Common parameters
 
@@ -157,7 +157,7 @@ The main difference between invoking this script and using [[WebChanges]] is tha
 
 ### <a name="=configure="></a> `configure`
 
-`configure` is the browser script used for inspection and configuration of the TWiki configuration. None of the parameters to this script are useable for any purpose except `configure`.
+`configure` is the browser script used for inspection and configuration of the TWiki configuration. None of the parameters to this script are useable for any purpose except `configure`. See [configure](http://www.dementia.org/twiki/configure).
 
 ### <a name="=edit="></a> `edit`
 
@@ -217,6 +217,11 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
   <tr>
     <td><code>breaklock</code></td>
     <td> If set, any lease conflicts will be ignored, and the edit will proceed even if someone is already editing the topic. </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>redirectto</code></td>
+    <td> If the user continues from edit to save, and if the save process is successful, save will redirect to this topic or URL. The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL.%BR% <strong><em>Note:</em></strong> Redirect to a URL only works if it is enabled in <code>configure</code> (Miscellaneous <code>{AllowRedirectUrl}</code>). </td>
     <td>   </td>
   </tr>
 </table>
@@ -608,18 +613,32 @@ This is used by [[BulkResetPassword]] and [[ResetPassword]]. Only users belongin
 
 ### <a name="=rest="></a> `rest`
 
-This REST ([Representational State Transfer](http://en.wikipedia.org/wiki/REST)) script can be invoked via http in a similar way as the view script (see **Invocation Examples**, below) to execute a function that is associated to a "subject" and a "verb" (see below). It'll print the result directly to the stream unless the `endPoint` parameter is specified, in which case the control is redirected to the given topic.
+This REST ([Representational State Transfer](http://en.wikipedia.org/wiki/REST)) script can be invoked via http in the same way as the other TWiki scripts (see **Invocation Examples**, below) to execute a function that is associated to a "subject" and a "verb" (see below). These functions are usually registered by plugins using the `TWiki::Func::registerRESTHandler` method. The `rest` script will print the result directly to the browser unless the `endPoint` parameter is specified, in which case it will output a redirect to the given topic.
 
-The `rest` script itself uses one parameter:
+The `rest` script supports the following parameters:
 
 <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>username</code></td>
+    <td> If <code>TemplateLogin</code>, or a similar login manager not embedded in the web server, is used, then you need to pass a username and password to the server. The <code>username</code> and <code>password</code> parameters are used for this purpose. </td>
+  </tr>
+  <tr>
+    <td><code>password</code></td>
+    <td> See <code>username</code></td>
+  </tr>
+  <tr>
+    <td><code>topic</code></td>
+    <td> If defined as the full name (including web) of a topic, then when the script starts up plugins will be passed this as the "current" topic. If not defined, then %USERWEB%.WebHome will be passed to plugins. </td>
+  </tr>
   <tr>
     <td><code>endPoint</code></td>
     <td> Where to redirect the response once the request is served, in the form "Web.Topic" </td>
   </tr>
 </table>
 
-Any additional parameters are passed directly to the function (i.e: The function can get any other parameter using the CGI $query object)
+The function is free to use any other query parameters for its own purposes.
+
+%X% The `rest` script should **always** require authentication in any TWiki that has logins. Otherwise there is a risk of opening up major security holes. So make sure you add it to the list of authenticated scripts if you are using `ApacheLogin`.
 
 #### <a name="Invocation Examples"></a> Invocation Examples
 
@@ -627,9 +646,7 @@ The `rest` script assumes that it will be called with URL in the form:
 
 `http://my.host/bin/rest/<subject>/<verb>`
 
-where `<subject>` must be the [[WikiWord]] name of one of the installed [[TWikiPlugins]], and the `<verb>` is the alias for the function registered using the `registerRESTHandler`. The `<subject>` and `<verb>` are then used to lookup and call the registered function.
-
-Functions outside the Plugins also can be registered, but please consider the security implications of allowing URL access, as functions can sidestep TWiki Authentication &amp; Authorisation settings.
+where `<subject>` must be the [[WikiWord]] name of one of the installed [[TWikiPlugins]], and the `<verb>` is the alias for the function registered using the `TWiki::Func::registerRESTHandler` method. The `<subject>` and `<verb>` are then used to lookup and call the registered function.
 
 `<subject>` and `<verb>` are checked for illegal characters exactly in the same way as the web and topic names.
 
@@ -637,11 +654,7 @@ As an example, the [[EmptyPlugin]] has registered a function to be used with the
 
 [Call the Plugin](http://www.dementia.org/twiki/rest/EmptyPlugin/example?debugenableplugin=EmptyPlugin)
 
-You can also call the function from the command line, but this will be run as the [[TWikiAdminGroup]] (as it is assumed that shell access is secure) - eg:
-
-    ./rest EmptyPlugin.example
-
-Note that for calls to Plugins, they must be enabled in `configure`.
+Note that for Plugins to register REST handlers, they must be enabled in `configure`.
 
 ### <a name="=save="></a> `save`
 
@@ -655,17 +668,17 @@ The `save` script performs a range of save-related functions, as selected by the
   </tr>
   <tr>
     <td><code>action_save=1</code></td>
-    <td><strong>default</strong>; save, return to view, dontnotify is OFF </td>
+    <td><strong>default</strong>; save, return to view, dontnotify is <code>off</code></td>
     <td>   </td>
   </tr>
   <tr>
     <td><code>action_quietsave=1</code></td>
-    <td> save, and return to view, <code>dontnotify</code> is ON </td>
+    <td> save, and return to view, <code>dontnotify</code> is <code>on</code></td>
     <td>   </td>
   </tr>
   <tr>
     <td><code>action_checkpoint</code></td>
-    <td> save and redirect to the edit script, <code>dontnotify</code> is ON </td>
+    <td> save and redirect to the edit script, <code>dontnotify</code> is <code>on</code></td>
     <td>   </td>
   </tr>
   <tr>
@@ -747,6 +760,21 @@ The `save` script performs a range of save-related functions, as selected by the
     <td><code>originalrev</code></td>
     <td> Revision on which the edit started. </td>
     <td>   </td>
+  </tr>
+  <tr>
+    <td><code>edit</code></td>
+    <td> The script to use to edit the topic when action is <code>checkpoint</code></td>
+    <td><code>edit</code></td>
+  </tr>
+  <tr>
+    <td><code>editparams</code></td>
+    <td> The parameter string to use to edit the topic </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>redirectto</code></td>
+    <td> The save process will redirect to this topic or URL if it is successful. (Typically this would be the URL that was being viewed when edit was invoked). The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL.%BR% <strong><em>Note:</em></strong> Redirect to a URL only works if it is enabled in <code>configure</code> (Miscellaneous <code>{AllowRedirectUrl}</code>). </td>
+    <td> view topic being edited </td>
   </tr>
 </table>
 
@@ -931,6 +959,17 @@ Refresh the [[WebStatistics]] topics in range of webs.
   </tr>
 </table>
 
+for example:
+
+1. from browser <http://www.dementia.org/twiki/statistics> updates _all user webs_
+2. from browser <http://www.dementia.org/twiki/statistics?webs=TWiki,Main,Sandbox> updates _TWiki,Main,Sandbox_
+3. from browser <http://www.dementia.org/twiki/statistics/%WEB%> updates %WEB%
+4. from command line twiki/bin/statistics updates _all user webs_
+5. from command line twiki/bin/statistics -webs=TWiki,Main,Sandbox updates _TWiki,Main,Sandbox_
+6. from command line twiki/bin/statistics %WEB%.WebHome updates %WEB%
+
+see [[TWikiSiteTools#WebStatistics_site_statistics]] for updating statistics using cron.
+
 ### <a name="=twiki="></a> `twiki`
 
 Single-script interface to the functionality of all the other scripts. Experimental, not for production use. Read the code if you want to know more.
@@ -1009,6 +1048,11 @@ Used for viewing topics.
     <td>   </td>
   </tr>
   <tr>
+    <td><code>section</code></td>
+    <td> Allows to view only a part of the topic delimited by a named section (see [[TWiki/VarSTARTSECTION]]). If the given section is not present, no topic content is displayed. </td>
+    <td>   </td>
+  </tr>
+  <tr>
     <td><code>contenttype</code></td>
     <td> Allows you to specify a different <strong>Content-Type:</strong> (e.g. <code>contenttype=text/plain</code>) </td>
     <td>   </td>
@@ -1057,8 +1101,8 @@ Details on command line scripts located in the `twiki/tools` directory.
 
 This is a very simple script to get the content of a web site. It is marked as _deprecated_ and might be removed (or enhanced) in a future TWiki release. Its functions are covered by the standard `wget` and `curl` commands.
 
-- Usage: `geturl <host> <path> [<port> [<header>]]`
-- Example: `geturl some.domain /some/dir/file.html 80`
+- Usage: `geturl.pl <host> <path> [<port> [<header>]]`
+- Example: `geturl.pl some.domain /some/dir/file.html 80`
 - Will get: `http://some.domain:80/some/dir/file.html`
 
 ### <a name="=rewriteshebang.pl="></a> `rewriteshebang.pl`

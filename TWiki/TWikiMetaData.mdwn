@@ -127,7 +127,7 @@ Notes:
   </tr>
   <tr>
     <td> name </td>
-    <td> The topic from which this was created, [[Main/WebHome]] if done from <code>Go</code>, othewise topic where <code>?</code> or form used. Normally just topic, but is full web.topic format if parent is in a different Web. Renaming a Web will then only break a few of these references or they can be scanned and fixed. </td>
+    <td> The topic from which this was created, typically when clicking on a <code>?</code> questionmark link, or by filling out a form. Normally just <code>TopicName</code>, but it can be a full <code>Web.TopicName</code> format if the parent is in a different Web. </td>
   </tr>
 </table>
 
@@ -291,8 +291,12 @@ Current support covers:
   </tr>
 </table>
 
+**_Note:_** SEARCH can also be used to render meta data, see examples in [[FormattedSearch]] and [[SearchPatternCookbook]].
+
 ## <a name="Known Issues"></a> Known Issues
 
 At present, there is no Meta Data support for Plugins. However, the format is readily extendable and the `Meta.pm` code that supports the format needs only minor alteration.
 
 **_Related Topics:_** [[DeveloperDocumentationCategory]], [[UserDocumentationCategory]]
+
+-- **_Contributors:_** TWiki:Main.JohnTalintyre, TWiki:Main.MikeMannix, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie

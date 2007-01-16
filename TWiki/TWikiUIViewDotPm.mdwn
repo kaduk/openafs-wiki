@@ -5,14 +5,14 @@ UI delegate for view function
 <div>
   <ul>
     <li><a href="#Package =TWiki::UI::View="> Package TWiki::UI::View</a><ul>
-        <li><a href="#StaticMethod <strong>view</strong> ($session,$w"> StaticMethod view <tt>($session,$web,$topic,$scruptUrl,$query)</tt></a></li>
+        <li><a href="#StaticMethod <strong>view</strong> ($session)"> StaticMethod view <tt>($session)</tt></a></li>
         <li><a href="#StaticMethod <strong>viewfile</strong> ($sessio"> StaticMethod viewfile <tt>($session,$web,$topic,$query)</tt></a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="StaticMethod &lt;strong&gt;view&lt;/strong&gt; ($session,$w"></a> [[StaticMethod]] **view** `($session,$web,$topic,$scruptUrl,$query)`
+## <a name="StaticMethod &lt;strong&gt;view&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **view** `($session)`
 
 `view` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
 
@@ -22,6 +22,10 @@ Generate a complete HTML page that represents the viewed topics. The view is con
   <tr>
     <td><code>rev</code></td>
     <td> topic revision to view </td>
+  </tr>
+  <tr>
+    <td><code>section</code></td>
+    <td> restrict view to a named section </td>
   </tr>
   <tr>
     <td><code>raw</code></td>

@@ -5,7 +5,7 @@ Object representing a single form definition.
 <div>
   <ul>
     <li><a href="#Package =TWiki::Form="> Package TWiki::Form</a><ul>
-        <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$form)</tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$form,$def)</tt></a></li>
         <li><a href="#ObjectMethod <strong>render_ForEdit</strong> ($"> ObjectMethod renderForEdit <tt>($web,$topic,$meta) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod *render_FieldForEdi"> ObjectMethod renderFieldForEdit <tt>($fieldDef,$web,$topic,$value) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderHidden</strong> ($me"> ObjectMethod renderHidden <tt>($meta) -&gt; $html</tt></a></li>
@@ -20,10 +20,11 @@ Object representing a single form definition.
   </ul>
 </div>
 
-## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$web"></a> [[ClassMethod]] **new** `($session,$web,$form)`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$web"></a> [[ClassMethod]] **new** `($session,$web,$form,$def)`
 
 - $web - default web to recover form from, if $form doesn't specify a web
 - `$form` - topic name to read form definition from
+- `$def` - optional. a reference to a list of field definitions. if present, these definitions will be used, rather than those in `$form`.
 
 May throw TWiki::OopsException
 
@@ -44,7 +45,7 @@ Render the form fields for entry during an edit session, using data values from 
 
 Render a single form field for entry during an edit session, using data values from $meta. Plugins can provide a handler that extends the set of supported types
 
-SMELL: this should be a method on a field class SMELL: [[JSCalendarContrib]] ought to provide a 'date' handler.
+SMELL: this should be a method on a field class
 
 ## <a name="ObjectMethod &lt;strong&gt;renderHidden&lt;/strong&gt; ($me"></a> [[ObjectMethod]] **renderHidden** `($meta) -> $html`
 

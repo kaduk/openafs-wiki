@@ -8,7 +8,7 @@ Exception used to raise a request to redirect to an Oops URL. An [[OopsException
   <ul>
     <li><a href="#Package =TWiki::_OopsException="> Package TWiki::OopsException</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($template,..."> ClassMethod new <tt>($template,...)</tt></a></li>
-        <li><a href="#ObjectMethod <strong>stringify</strong> () -> $"> ObjectMethod stringify <tt>() -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod <strong>stringify</strong> ([$sess"> ObjectMethod stringify <tt>([$session]) -&gt; $string</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -26,6 +26,6 @@ The remaining parameters are interpreted as key-value pairs. The following keys 
 - `keep` - if set, the exception handler should try it's damndest to retain parameter values from the query.
 - `params` is a reference to an array of parameters. These will be substituted for %PARAM1%, %PARAM2% ... %PARAMn% in the template.
 
-## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; () - $s"></a> [[ObjectMethod]] **stringify** `() -> $string`
+## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; ([$sess"></a> [[ObjectMethod]] **stringify** `([$session]) -> $string`
 
-Generates a string representation for the object, mainly for debugging.
+Generates a string representation for the object. if a session is passed in, and the excpetion specifies a def, then that def is expanded. This is to allow internal expansion of oops exceptions for example when performing bulk operations.

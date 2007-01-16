@@ -60,7 +60,8 @@ To check for the most recently edited topics while on-site, use the [[WebChanges
 
 This is simply a preset `SEARCH`. The number of topics listed by the `limit` parameter.:
 
-> %SEARCH{ ".*" web="%INCLUDINGWEB%" regex="on" nosearch="on" order="modified"%BR% reverse="on" limit="50" }%
+> %SEARCH{ ".*" web="%INCLUDINGWEB%" type="regex" nosearch="on" order="modified"%BR% reverse="on"
+>     limit="50" }%
 
 <a name="WebIndex"></a>
 
@@ -68,7 +69,7 @@ This is simply a preset `SEARCH`. The number of topics listed by the `limit` par
 
 [[WebIndex]] lists all web topics in alphabetical order, with the first couple of lines of text. This is simply a preset `SEARCH`:
 
-> %SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" }%
+> %SEARCH{ "\.*" scope="topic" type="regex" nosearch="on" }%
 
 <a name="WebStatistics"></a>
 
@@ -85,7 +86,7 @@ You can generate a listing manually, or on an automated schedule, of visits to i
   - The [[WebStatistics]] topic must be present in all webs where you want to have statistics. You can use the topic in the Main web as a template.
   - Call the `twiki/bin/statistics` script from a cron job, once a day is recommended. This will update the [[WebStatistics]] topics in all webs.
   - **_Attention:_** The script must run as the same user as the CGI scripts are running, which is user `nobody` on many systems. Example crontab entry: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./statistics >/dev/null 2>&1)`
-  - There is a workaround in case you can't run the script as user `nobody` : Run the utility `twiki/bin/geturl` in your cron job and specify the URL of the `twiki/bin/statistics` script as a parameter. Example: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./geturl mydomain.com /urlpath/to/twiki/bin/statistics >/dev/null 2>&1)`
+  - There is a workaround in case you can't run the script as user `nobody` : Run the utility `twiki/tools/geturl.pl` in your cron job and specify the URL of the `twiki/bin/statistics` script as a parameter. Example: %BR% `0 0 * * * (cd /path/to/twiki/tools; ./geturl.pl mydomain.com /urlpath/to/twiki/bin/statistics >/dev/null 2>&1)`
 
 When running from the command line or a cron job, you can pass parameters to the script like this:
 
@@ -109,7 +110,7 @@ TWiki generates monthly log files which are used by the statistics script
 - The file name is `log<year><month>.txt`
 - Example path name: `twiki/logs/log201006.txt`
 - Each access gets logged as: %BR% `| <time> | <wikiusername> | <action> | <web>.<topic> | <extra info> | <IP address> |`
-- Example log entry: %BR% <code>| 29 Jun 2010 - 12:00 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
+- Example log entry: %BR% <code>| 29 Jun 2010 - 12:02 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
 - Actions are logged if enabled in [configure](http://www.dementia.org/twiki/configure) by the **\{Log\}\{_action_\}** flags
 - Logged actions: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -175,7 +176,12 @@ TWiki generates monthly log files which are used by the statistics script
   <tr>
     <td> save </td>
     <td><code>save</code></td>
-    <td> when replacing existing revision: <code>repRev 3</code> %BR% when user checks the minor changes box: <code>dontNotify</code></td>
+    <td> when replacing existing revision: <code>repRev 3</code> %BR% when user checks the minor changes box: <code>dontNotify</code> %BR% when user changes attributes to an exising attachment: <code>filename.ext</code></td>
+  </tr>
+  <tr>
+    <td> save </td>
+    <td><code>cmd</code></td>
+    <td> special admin parameter used when saving </td>
   </tr>
   <tr>
     <td> search </td>

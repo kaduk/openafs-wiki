@@ -1,4 +1,4 @@
-## <a name="TWiki Editing Shorthand&#39;"></a> TWiki Editing Shorthand'
+## <a name="TWiki Editing Shorthand"></a> TWiki Editing Shorthand
 
 <table bgcolor="#ffffff" border="1" cellpadding="3">
   <tr bgcolor="#ffffff">
@@ -221,6 +221,7 @@ class CatAnimal {
         <li><code>|^|</code> cell with caret indicating follow-up row of multi-span rows </li>
         <li> You can split rows over multiple lines by putting a backslash <code>'\'</code> at the end of each line </li>
         <li> Contents of table cells wrap automatically as determined by the browser </li>
+        <li> Use <code>&amp;#124;</code> or <code>%VBAR%</code> to add <code>|</code> characters in tables. </li>
       </ul> %T% The [[TWiki/TablePlugin]] provides the <code>|^|</code> multiple-span row functionality and additional rendering features </td>
     <td><pre>
 | *L* | *C* | *R* |

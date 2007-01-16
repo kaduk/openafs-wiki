@@ -52,16 +52,6 @@
     <td><code>5</code></td>
   </tr>
   <tr>
-    <td><code>$date</code></td>
-    <td> Revision date </td>
-    <td><code>11 Jul 2004</code></td>
-  </tr>
-  <tr>
-    <td><code>$time</code></td>
-    <td> Revision time </td>
-    <td><code>23:24:25</code></td>
-  </tr>
-  <tr>
     <td><code>$username</code></td>
     <td> Login username of revision </td>
     <td><code>jsmith</code></td>
@@ -76,6 +66,26 @@
     <td> WikiName with Main web prefix </td>
     <td><code>Main.JohnSmith</code></td>
   </tr>
+  <tr>
+    <td><code>$date</code></td>
+    <td> Revision date </td>
+    <td><code>21 Sep 2006</code></td>
+  </tr>
+  <tr>
+    <td><code>$time</code></td>
+    <td> Revision time </td>
+    <td><code>23:24:25</code></td>
+  </tr>
+  <tr>
+    <td><code>$iso</code></td>
+    <td> Revision date in ISO date format </td>
+    <td><code>2006-09-22T06:24:25Z</code></td>
+  </tr>
+  <tr>
+    <td><code>$min</code>, <code>$sec</code>, etc. </td>
+    <td> Same date format qualifiers as [[Main/WebHome#VarGMTIME2]]</td>
+    <td>   </td>
+  </tr>
 </table>
 - Example: `%REVINFO{"$date - $wikiusername" rev="1.1"}%` returns revision info of first revision
-- Related: [[REVINFO|Main/WebHome#VarREVINFO]]
+- Related: [[GMTIME{"format"}|Main/WebHome#VarGMTIME2]], [[REVINFO|Main/WebHome#VarREVINFO]]

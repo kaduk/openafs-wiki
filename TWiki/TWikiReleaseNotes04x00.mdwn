@@ -516,7 +516,7 @@ The new user registration process has been extensively reworked to improve usabi
 
 E-mail addresses for new users are no longer stored in home topics. Instead, the password manager API has been extended to support storing e-mails.
 
-The default password manager stores e-mails in the `.htpasswd` file - you can safely edit this file with a text editor to modify the info field that contains the e-mail addresses (the format of each line in this file is <code>username&gt;::</code>, and TWiki expects the info field to be a ;-separated list of e-mail addresses). Password managers for other systems e.g. LDAP can esily be extended to support the new API. If the password manager does not have an e-mail address for a user, then TWiki will still look in the users' personal topic.
+The default password manager stores e-mails in the `.htpasswd` file - you can safely edit this file with a text editor to modify the info field that contains the e-mail addresses (the format of each line in this file is `<username>:<password>:<info>`, and TWiki expects the info field to be a ;-separated list of e-mail addresses). Password managers for other systems e.g. LDAP can esily be extended to support the new API. If the password manager does not have an e-mail address for a user, then TWiki will still look in the users' personal topic.
 
 The script `tools/upgrade_emails.pl` can be used to extract e-mail addresses for existing TWiki users from personal topics, and add them to the password manager.
 

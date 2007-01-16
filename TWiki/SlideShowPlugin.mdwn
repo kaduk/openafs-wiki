@@ -169,11 +169,11 @@ The part between the rulers defines the default format of a slide:
 
 ----
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
   <tr bgcolor="#003399">
-    <td valign="middle" width="2%"><img alt="TWiki Slide Show" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SlideShowPlugin/logo.gif" /> </td>
+    <td valign="middle" width="2%"><img alt="TWiki Slide Show" border="0" src="http://www.dementia.org/twiki//view/%WEB%/SlideShowPlugin/logo.gif" /></td>
     <td valign="middle"><font color="#FFFFFF" size="+3">%SLIDETITLE%</font></td>
-    <td align="right" valign="middle"> %SLIDENAVNEXT% </td>
+    <td align="right" valign="middle"> %SLIDENAVNEXT%</td>
   </tr>
 </table>
 <table border="0" cellpadding="3" cellspacing="0" width="100%">
@@ -207,11 +207,11 @@ The part between the rulers defines the default format of a slide:
     <td> Plugin topic </td>
   </tr>
   <tr>
-    <td><code><b>data/TWiki/%TOPIC%.txt,v</b></code></td>
-    <td> Plugin topic repository </td>
+    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td> Plugin Perl module </td>
   </tr>
   <tr>
-    <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td><code><b>lib/TWiki/Plugins/%TOPIC%/SlideShow.pm</b></code></td>
     <td> Plugin Perl module </td>
   </tr>
   <tr>
@@ -219,7 +219,7 @@ The part between the rulers defines the default format of a slide:
     <td> Various button image files </td>
   </tr>
 </table>
-- (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
+- TWiki 4.0 and up: Run the [configure](http://www.dementia.org/twiki//configure) script, and enable the plugin in the \{Plugins\} section.
 - Test above example if the installation was successful.
 
 ## <a name="Plugin Info"></a> Plugin Info
@@ -230,12 +230,24 @@ The part between the rulers defines the default format of a slide:
     <td> TWiki:Main/PeterThoeny </td>
   </tr>
   <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2006, <a href="http://www.structuredwikis.com/peter/" target="_top">Peter Thoeny</a></td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 1.005 </td>
+    <td> 12011 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 19 Nov 2006: </td>
+    <td> 12011: Preserve URL parameters in slideshow (suggested by TWiki:Main/ThomasWeigert); changed logo in default template to T-logo; fixed warning errors introduced by 1.005 </td>
   </tr>
   <tr>
     <td align="right"> 16 Mar 2005: </td>

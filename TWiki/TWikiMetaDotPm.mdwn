@@ -106,7 +106,7 @@ If $type is undef, will copy ALL TYPES.
 
 If $nameFilter is defined (an RE), it will copy only data where \{name\} matches $nameFilter.
 
-SMELL: That spec absolutely _STINKS_ !! SMELL: this is a shallow copy
+SMELL: This is a shallow copy
 
 ## <a name="ObjectMethod &lt;strong&gt;count&lt;/strong&gt; ($type) - $"></a> [[ObjectMethod]] **count** `($type) -> $integer`
 

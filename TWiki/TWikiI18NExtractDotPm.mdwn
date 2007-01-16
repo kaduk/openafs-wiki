@@ -6,7 +6,7 @@ Support translatable strings extraction from TWiki topics and templates. Depends
   <ul>
     <li><a href="#Package =TWiki::_I18N::Extract="> Package TWiki::I18N::Extract</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session) ->"> ClassMethod new <tt>($session) -&gt; $extract</tt></a></li>
-        <li><a href="#ObjectMethod <strong>extract</strong> ($msgid)"> ObjectMethod extract <tt>($msgid) -&gt; $formated</tt></a></li>
+        <li><a href="#ObjectMethod <strong>extract</strong> ($file,$t"> ObjectMethod extract <tt>($file,$text)</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -16,14 +16,8 @@ Support translatable strings extraction from TWiki topics and templates. Depends
 
 Constructor. Creates a fresh new Extract object. A $session object, instance of the TWiki class, is optional: if it's available, it'll be used for printing warnings.
 
-## <a name="ObjectMethod &lt;strong&gt;extract&lt;/strong&gt; ($msgid)"></a><a name="ObjectMethod &lt;strong&gt;extract&lt;/strong&gt; ($msgid) "></a> [[ObjectMethod]] **extract** `($msgid) -> $formated`
+## <a name="ObjectMethod &lt;strong&gt;extract&lt;/strong&gt; ($file,$t"></a> [[ObjectMethod]] **extract** `($file,$text)`
 
-This method overrides the one with same name in `Locale::Maketext::Extract`, as a workaround for [a bug](http://rt.cpan.org/Public/Bug/Display.html?id=14629) in the `Locale::Maketext::Lexicon` Perl package, and was not fixed up to the 0.53 release.
+Extract the strings from `$text`,m using `$file` as the name of the current file being read (for comments in PO file, for example). Overrides the base class method but calls it so the base behavior is preserved.
 
-What it does is to call an alternative version of the \_format function, which avoids [double-escaping](http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1500) the extracted strings.
-
-This method was tested only under the circumstances of TWiki's needs, i.e., extracting strings from source and topics and generating a brand new POT file. Merging with previous PO files is done with GNU gettext tools, so maybe if it's used for merging it can
-
-Once that bug is fixed, in future TWiki versions this method may be removed.
-
-!!!extract!!!
+As in base class, extracted strings are just stored in the =$self='s internal table for further use (e.g. creating/updating a PO file). Nothing is returned.

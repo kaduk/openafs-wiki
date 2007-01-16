@@ -38,7 +38,7 @@ If you can enter text, you're ready for TWiki. With a few simple, intuitive [[Te
 
 - Use <code>**&lt;verbatim&gt;**</code> to enclose code excerpts, filenames, and other unformatted text:%BR% <code>**&lt;verbatim&gt;**</code> %BR% `unformatted text!` %BR% <code>**&lt;/verbatim&gt;**</code> %BR%%BR% **_%X% NOTE:_** VARIABLES can be set within verbatim tags, that is, they are not disabled
 
-- Three (or more) consecutive **hyphens** expand into a horizontal rule:%BR% `---`
+- Use <code>**&lt;literal&gt;**</code> to enclose anything that TWiki must not touch under any circumstances, such as in-line HTML code.
 
 - Follow [[GoodStyle]] recommendations when editing topics.
 

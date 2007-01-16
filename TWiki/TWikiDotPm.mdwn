@@ -11,7 +11,8 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
         <li><a href="#ObjectMethod *_UTF82SiteCharSet*"> ObjectMethod UTF82SiteCharSet <tt>($utf8) -&gt; $ascii</tt></a></li>
         <li><a href="#ObjectMethod *write_CompletePage"> ObjectMethod writeCompletePage <tt>($text,$pageType,$contentType)</tt></a></li>
         <li><a href="#ObjectMethod *write_PageHeader*"> ObjectMethod writePageHeader <tt>($query,$pageType,$contentType,$contentLength)</tt></a></li>
-        <li><a href="#ObjectMethod <strong>redirect</strong> ($url,.."> ObjectMethod redirect <tt>($url,...)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>redirect</strong> ($url,$p"> ObjectMethod redirect <tt>($url,$passthrough)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>cacheQuery</strong> () ->"> ObjectMethod cacheQuery <tt>() -&gt; $queryString</tt></a></li>
         <li><a href="#StaticMethod *is_ValidWikiWord*"> StaticMethod isValidWikiWord <tt>($name) -&gt; $boolean</tt></a></li>
         <li><a href="#StaticMethod *is_ValidTopicName*"> StaticMethod isValidTopicName <tt>($name) -&gt; $boolean</tt></a></li>
         <li><a href="#StaticMethod <strong>is_ValidAbbrev</strong> ($"> StaticMethod isValidAbbrev <tt>($name) -&gt; $boolean</tt></a></li>
@@ -24,13 +25,14 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
         <li><a href="#ObjectMethod *map_ToIconFileName"> ObjectMethod mapToIconFileName <tt>($fileName,$default) -&gt; $fileName</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_OopsUrl</strong> ($tem"> ObjectMethod getOopsUrl <tt>($template,@options) -&gt; $absoluteOopsURL</tt></a></li>
         <li><a href="#ObjectMethod *normalize_WebTopic"> ObjectMethod normalizeWebTopicName <tt>($theWeb,$theTopic) -&gt; ($theWeb,$theTopic)</tt></a></li>
-        <li><a href="#ClassMethod <strong>new</strong> ($remoteUser,$"> ClassMethod new <tt>($remoteUser,$query)</tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($loginName,$q"> ClassMethod new <tt>($loginName,$query,\%initialContext)</tt></a></li>
         <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
         <li><a href="#ObjectMethod <strong>writeLog</strong> ($action"> ObjectMethod writeLog <tt>($action,$webTopic,$extra,$user)</tt></a></li>
         <li><a href="#ObjectMethod <strong>writeWarning</strong> ($te"> ObjectMethod writeWarning <tt>($text)</tt></a></li>
         <li><a href="#ObjectMethod <strong>writeDebug</strong> ($text"> ObjectMethod writeDebug <tt>($text)</tt></a></li>
         <li><a href="#StaticMethod *apply_PatternToInc"> StaticMethod applyPatternToIncludedText <tt>($text,$pattern) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>inlineAlert</strong> ($tem"> ObjectMethod inlineAlert <tt>($template,$def,...) -&gt; $string</tt></a></li>
+        <li><a href="#StaticMethod <strong>parseSections</strong> ($t"> StaticMethod parseSections <tt>($text) -&gt; ($string,$sectionlistref)</tt></a></li>
         <li><a href="#ObjectMethod *expand_VariablesOn"> ObjectMethod expandVariablesOnTopicCreation <tt>($text,$user) -&gt; $text</tt></a></li>
         <li><a href="#StaticMethod <strong>entityEncode</strong> ($te"> StaticMethod entityEncode <tt>($text,$extras) -&gt; $encodedText</tt></a></li>
         <li><a href="#StaticMethod <strong>entityDecode</strong> ($en"> StaticMethod entityDecode <tt>($encodedText) -&gt; $text</tt></a></li>
@@ -41,15 +43,14 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
         <li><a href="#ObjectMethod <strong>enterContext</strong> ($id"> ObjectMethod enterContext <tt>($id,$val)</tt></a></li>
         <li><a href="#ObjectMethod <strong>leaveContext</strong> ($id"> ObjectMethod leaveContext <tt>($id)</tt></a></li>
         <li><a href="#ObjectMethod <strong>inContext</strong> ($id)"> ObjectMethod inContext <tt>($id)</tt></a></li>
-        <li><a href="#StaticMethod *register_TagHandle"> StaticMethod registerTagHandler <tt>($tag,$fnref)</tt></a><ul>
-            <li><a href="#registerRESTHandler( $subject, $"> registerRESTHandler( $subject, $verb, \&amp;fn )</a></li>
-            <li><a href="#restDispatch( $subject, $verb) ="> restDispatch( $subject, $verb) =&gt; \&amp;fn</a></li>
-          </ul>
-        </li>
+        <li><a href="#StaticMethod *register_TagHandle"> StaticMethod registerTagHandler <tt>($tag,$fnref)</tt></a></li>
+        <li><a href="#StaticMethod *registerRESTHandle"> StaticMethod registerRESTHandler <tt>($subject,$verb,\&amp;fn)</tt></a></li>
+        <li><a href="#StaticMethod <strong>restDispatch</strong> ($su"> StaticMethod restDispatch <tt>($subject,$verb)=&gt;\&amp;fn</tt></a></li>
         <li><a href="#ObjectMethod *handle_CommonTags*"> ObjectMethod handleCommonTags <tt>($text,$web,$topic) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>add_ToHEAD</strong> ($id,$"> ObjectMethod addToHEAD <tt>($id,$html)</tt></a></li>
         <li><a href="#StaticMethod <strong>initialize</strong> ($path"> StaticMethod initialize <tt>($pathInfo,$remoteUser,$topic,$url,$query) -&gt; ($topicName,$webName,$scriptUrlPath,$userName,$dataDir)</tt></a></li>
         <li><a href="#StaticMethod <strong>readFile</strong> ($filena"> StaticMethod readFile <tt>($filename) -&gt; $text</tt></a></li>
+        <li><a href="#StaticMethod *expand_StandardEsc"> StaticMethod expandStandardEscapes <tt>($str) -&gt; $unescapedStr</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -67,9 +68,13 @@ Auto-detect UTF-8 vs. site charset in string, and convert UTF-8 into site charse
 
 ## <a name="ObjectMethod &lt;strong&gt;write_CompletePage"></a> [[ObjectMethod]] \*writeCompletePage `($text,$pageType,$contentType)`
 
-Write a complete HTML page with basic header to the browser. $text is the HTML of the page body (&lt;html&gt; to &lt;/html&gt;)
+Write a complete HTML page with basic header to the browser.
 
-This method removes noautolink and nop tags before outputting the page.
+- `$text` is the text of the page body (&lt;html&gt; to &lt;/html&gt; if it's HTML)
+- `$pageType` - May be "edit", which will cause headers to be generated that force caching for 24 hours, to prevent [[BackFromPreviewLosesText]] bug, which caused data loss with IE5 and IE6.
+- `$contentType` - page content type | text/html
+
+This method removes noautolink and nop tags before outputting the page unless $contentType is text/plain.
 
 ## <a name="ObjectMethod &lt;strong&gt;write_PageHeader*"></a><a name="ObjectMethod *write_PageHeader&lt;/strong&gt; "></a> [[ObjectMethod]] **writePageHeader** `($query,$pageType,$contentType,$contentLength)`
 
@@ -82,13 +87,25 @@ All parameters are optional.
 
 Implements the post-Dec2001 release plugin API, which requires the writeHeaderHandler in plugin to return a string of HTTP headers, CR/LF delimited. Filters any illegal headers. Plugin headers will override core settings.
 
-## <a name="ObjectMethod &lt;strong&gt;redirect&lt;/strong&gt; ($url,.."></a> [[ObjectMethod]] **redirect** `($url,...)`
+## <a name="ObjectMethod &lt;strong&gt;redirect&lt;/strong&gt; ($url,$p"></a> [[ObjectMethod]] **redirect** `($url,$passthrough)`
 
-Generate a CGI redirect to $url unless (1) $session-&gt;\{cgiQuery\} is undef or (2) $query-&gt;param('noredirect') is set to a true value. Thus a redirect is only generated when in a CGI context.
+Redirects the request to `$url`, **unless**
 
-The ... parameters are concatenated to the message written when printing to STDOUT, and are ignored for a redirect.
+1. It is overridden by a plugin declaring a `redirectCgiQueryHandler`.
+2. `$session->{cgiQuery}` is `undef` or
+3. $query-&gt;param('noredirect') is set to a true value.
 
-Redirects the request to $url, via the CGI module object $query unless overridden by a plugin declaring a `redirectCgiQueryHandler`.
+Thus a redirect is only generated when in a CGI context.
+
+Normally this method will ignore parameters to the current query. If $passthrough is set, then it will pass all parameters that were passed to the current query on to the redirect target. If the request\_method was GET, then all parameters can be passed in the URL. If the request\_method was POST then it caches the form data and passes over a cache reference in the redirect GET.
+
+Passthrough is only meaningful if the redirect target is on the same server.
+
+## <a name="ObjectMethod &lt;strong&gt;cacheQuery&lt;/strong&gt; () - $"></a> [[ObjectMethod]] **cacheQuery** `() -> $queryString`
+
+Caches the current query in the params cache, and returns a rewritten query string for the cache to be picked up again on the other side of a redirect.
+
+We can't encode post params into a redirect, because they may exceed the size of the GET request. So we cache the params, and reload them when the redirect target is reached.
 
 ## <a name="StaticMethod &lt;strong&gt;is_ValidWikiWord*"></a><a name="StaticMethod *is_ValidWikiWord&lt;/strong&gt; "></a> [[StaticMethod]] **isValidWikiWord** `($name) -> $boolean`
 
@@ -127,7 +144,7 @@ Get the currently requested skin path
 
 Returns the URL to a TWiki script, providing the web and topic as "path info" parameters. The result looks something like this: "http://host/twiki/bin/$script/$web/$topic".
 
-- `...` - an arbitrary number of name,value parameter pairs that will be url-encoded and added to the url. The special parameter name '#' is reserved for specifying an anchor. e.g. `getScriptUrl('x','y','view','#'=>'XXX',a=>1,b=>2)` will give `.../view/x/y#XXX?a=1&b=2`
+- `...` - an arbitrary number of name,value parameter pairs that will be url-encoded and added to the url. The special parameter name '#' is reserved for specifying an anchor. e.g. `getScriptUrl('x','y','view','#'=>'XXX',a=>1,b=>2)` will give `.../view/x/y?a=1&b=2#XXX`
 
 If $absolute is set, generates an absolute URL. $absolute is advisory only; TWiki can decide to generate absolute URLs (for example when run from the command-line) even when relative URLs have been requested.
 
@@ -164,30 +181,23 @@ Alternatively you can pass a reference to an [[OopsException]] in place of the t
 
 The returned URL ends up looking something like this: "http://host/twiki/bin/oops/$web/$topic?template=$template&amp;param1=$scriptParams[0]..."
 
+Note: if \{keep\} is true in the params, then they will also be pushed into the current query.
+
 ## <a name="ObjectMethod &lt;strong&gt;normalize_WebTopic"></a> [[ObjectMethod]] \*normalizeWebTopicName `($theWeb,$theTopic) -> ($theWeb,$theTopic)`
 
 Normalize a Web.TopicName
 
-    Input:                      Return:
-      ( 'Web',  'Topic' )         ( 'Web',  'Topic' )
-      ( '',     'Topic' )         ( 'Main', 'Topic' )
-      ( '',     '' )              ( 'Main', 'WebHome' )
-      ( '',     'Web/Topic' )     ( 'Web',  'Topic' )
-      ( '',     'Web.Topic' )     ( 'Web',  'Topic' )
-      ( 'Web1', 'Web2.Topic' )    ( 'Web2', 'Topic' )
-      ( 'Main', 'Web2.Topic' ) ( 'Main', 'Topic' )
-      ( 'TWiki', 'Web2.Topic' ) ( 'TWiki', 'Topic' )
+See [[TWikiFuncDotPm]] for a full specification of the expansion (not duplicated here)
 
-Note: Function renamed from getWebTopic
+**WARNING** if there is no web specification (in the web or topic parameters) the web defaults to $TWiki::cfg\{UsersWebName\}. If there is no topic specification, or the topic is '0', the topic defaults to the web home topic name.
 
-SMELL: WARNING: this function defaults the web and topic names. Be very careful where you use it!
-
-## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($remoteUser,$"></a> [[ClassMethod]] **new** `($remoteUser,$query)`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($loginName,$q"></a> [[ClassMethod]] **new** `($loginName,$query,\%initialContext)`
 
 Constructs a new TWiki object. Parameters are taken from the query object.
 
-- `$remoteUser` the logged-in user (login name)
-- `$query` the query
+- `$loginName` is the username of the user you want to be logged-in if none is available from a session or browser. Used mainly for side scripts and debugging.
+- `$query` the CGI query (may be undef, in which case an empty query is used)
+- `\%initialContext` - reference to a hash containing context name=value pairs to be pre-installed in the context hash
 
 ## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
 
@@ -220,6 +230,14 @@ Apply a pattern on included text to extract a subset
 ## <a name="ObjectMethod &lt;strong&gt;inlineAlert&lt;/strong&gt; ($tem"></a> [[ObjectMethod]] **inlineAlert** `($template,$def,...) -> $string`
 
 Format an error for inline inclusion in rendered output. The message string is obtained from the template 'oops'.$template, and the DEF $def is selected. The parameters (...) are used to populate %PARAM1%..%PARAMn%
+
+## <a name="StaticMethod &lt;strong&gt;parseSections&lt;/strong&gt; ($t"></a> [[StaticMethod]] **parseSections** `($text) -> ($string,$sectionlistref)`
+
+Generic parser for sections within a topic. Sections are delimited by STARTSECTION and ENDSECTION, which may be nested, overlapped or otherwise abused. The parser builds an array of sections, which is ordered by the order of the STARTSECTION within the topic. It also removes all the SECTION tags from the text, and returns the text and the array of sections.
+
+Each section is a `TWiki::Attrs` object, which contains the attributes \{type, name, start, end\} where start and end are character offsets in the string **after all section tags have been removed**. All sections are required to be uniquely named; if a section is unnamed, it will be given a generated name. Sections may overlap or nest.
+
+See test/unit/Fn\_SECTION.pm for detailed testcases that round out the spec.
 
 ## <a name="ObjectMethod &lt;strong&gt;expand_VariablesOn"></a> [[ObjectMethod]] \*expandVariablesOnTopicCreation `($text,$user) -> $text`
 
@@ -302,7 +320,7 @@ STATIC Add a tag handler to the function tag handlers.
 - `$tag` name of the tag e.g. MYTAG
 - `$fnref` Function to execute. Will be passed ($session, \\%params, $web, $topic )
 
-### <a name="registerRESTHandler( $subject, $"></a> registerRESTHandler( $subject, $verb, \\&amp;fn )
+## <a name="StaticMethod &lt;strong&gt;registerRESTHandle"></a> [[StaticMethod]] \*registerRESTHandler `($subject,$verb,\&fn)`
 
 Adds a function to the dispatch table of the REST interface for a given subject. See [[TWikiScripts#rest]] for more info.
 
@@ -322,7 +340,7 @@ where:
 
 **Since:** TWiki::Plugins::VERSION 1.1
 
-### <a name="restDispatch( $subject, $verb) ="></a> restDispatch( $subject, $verb) =&gt; \\&amp;fn
+## <a name="StaticMethod &lt;strong&gt;restDispatch&lt;/strong&gt; ($su"></a> [[StaticMethod]] **restDispatch** `($subject,$verb)=>\&fn`
 
 Returns the handler function associated to the given $subject and $werb, or undef if none is found.
 
@@ -357,3 +375,34 @@ Note that $theUrl, if specified, must be identical to $query-&gt;url()
 Returns the entire contents of the given file, which can be specified in any format acceptable to the Perl open() function. Fast, but inherently unsafe.
 
 WARNING: Never, ever use this for accessing topics or attachments! Use the Store API for that. This is for global control files only, and should be used **only** if there is **absolutely no alternative**.
+
+## <a name="StaticMethod &lt;strong&gt;expand_StandardEsc"></a> [[StaticMethod]] \*expandStandardEscapes `($str) -> $unescapedStr`
+
+Expands standard escapes used in parameter values to block evaluation. The following escapes are handled:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Escape: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>

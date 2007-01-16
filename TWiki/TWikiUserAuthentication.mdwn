@@ -3,7 +3,8 @@
     <li><a href="#TWiki User Authentication"> TWiki User Authentication</a><ul>
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Password Management"> Password Management</a></li>
-        <li><a href="#New User Registration"> New User Registration</a></li>
+        <li><a href="#User Mapping"> User Mapping</a></li>
+        <li><a href="#User Registration"> User Registration</a></li>
         <li><a href="#Login Management"> Login Management</a><ul>
             <li><a href="#No Login (select <code>none</code> in confi"> No Login (select none in configure)</a></li>
             <li><a href="#Template Login (select =TWiki::C"> Template Login (select TWiki::Client::TemplateLogin in configure)</a><ul>
@@ -44,13 +45,15 @@ Authentication isn't just to do with access control. TWiki uses authentication t
 
 TWiki authentication is very flexible, and can either stand alone or integrate with existing authentication schemes. You can set up TWiki to require authentication for every access, or only for changes. Authentication is also essential for access control.
 
-**Quick Authentication Test** - Use the %WIKIUSERNAME% variable to return your current identity:
+**Quick Authentication Test** - Use the %USERINFO% variable to return your current identity:
 
-- You are Main.admin
+- You are admin, Main.admin,
 
-TWiki user authentication is split into three sections; password management, user registration, and login management. Password management deals with how users are recognised (authenticated). Registration deals with how new users are added to the wiki. Login management deals with how users log in.
+TWiki user authentication is split into four sections; password management, user mapping, user registration, and login management. Password management deals with how users personal data is stored. Registration deals with how new users are added to the wiki. Login management deals with how users log in.
 
-Once a user is logged on, they are remembered using a "session id" stored in a cookie in the browser (or by other less elegant means if the user has disabled cookies). This avoids them having to log on again and again.
+Once a user is logged on, they can be remembered using a _Client Session_ stored in a cookie in the browser (or by other less elegant means if the user has disabled cookies). This avoids them having to log on again and again.
+
+TWiki user authentication is configured through the Security Settings pane in the [configure](http://www.dementia.org/twiki/configure) interface.
 
 Please note [[FileAttachments]] are not protected by TWiki User Authentication.
 
@@ -58,33 +61,39 @@ Please note [[FileAttachments]] are not protected by TWiki User Authentication.
 
 ## <a name="Password Management"></a> Password Management
 
-As shipped, TWiki supports the Apache 'htpasswd' password manager. This manager supports the use of `.htpasswd` files on the server. These files can be unique to TWiki, or can be shared with other applications (such as an Apache webserver). A variety of password encodings are supported for flexibility when re-using existing files. See the descriptive comments in the Security Settings section of the [ `configure` ](http://www.dementia.org/twiki/configure) interface for more details.
+As shipped, TWiki supports the Apache 'htpasswd' password manager. This manager supports the use of `.htpasswd` files on the server. These files can be unique to TWiki, or can be shared with other applications (such as an Apache webserver). A variety of password encodings are supported for flexibility when re-using existing files. See the descriptive comments in the Security Settings section of the \[[http://www.dementia.org/twiki/configure]\[configure] interface for more details.
 
-## <a name="New User Registration"></a> New User Registration
+You can easily plug in alternate password management modules to support interfaces to other third-party authentication databases.
 
-New user registration uses the password manager to set and change passwords. It is also responsible for the new user verification process. the registration process supports **single user registration** via the [[TWikiRegistration]] page, and **bulk user registration** via the [[BulkRegistration]] page (for admins only).
+## <a name="User Mapping"></a> User Mapping
 
-The registration process is responsible for creating user topics.
+Often when you are using an external authentication method, you want to map from an unfriendly "login name" to a more friendly [[WikiName]]. Also, an external authentication database may well have user information you want to import to TWiki, such as user groups.
+
+By default, TWiki supports mapping of usernames to wikinames, and supports TWiki groups internal to TWiki. If you want, you can plug in an alternate user mapping module to support import of groups etc.
+
+## <a name="User Registration"></a> User Registration
+
+New user registration uses the password manager to set and change passwords and store email addresses. It is also responsible for the new user verification process. the registration process supports **single user registration** via the [[TWikiRegistration]] page, and **bulk user registration** via the [[BulkRegistration]] page (for admins only).
+
+The registration process is also responsible for creating user topics, and setting up the mapping information used by the User Mapping support.
 
 ## <a name="Login Management"></a> Login Management
 
 Login management controls the way users have to log in. There are three basic options; no login, login via a TWiki login page, and login using the webserver authentication support.
 
-You can select your chosen login through the Security Settings pane in the `configure` interface.
-
 ### <a name="No Login (select &lt;code&gt;none&lt;/code&gt; in confi"></a> No Login (select `none` in configure)
 
 Does exactly what it says on the tin. Forget about authentication to make your site completely public - anyone can browse and edit freely, in classic Wiki style. All visitors are given the [[TWikiGuest]] default identity, so you can't track individual user activity.
 
-**_%X% Note:_** This setup is not recommended on public websites for security reasons; anyone would be able to change system settings and perform tasks usually restricted to the [[TWikiAdminGroup]].
+**_%X% Note:_** This setup is **not** recommended on public websites for security reasons; anyone would be able to change system settings and perform tasks usually restricted to the [[TWikiAdminGroup]].
 
 ### <a name="Template Login (select &lt;code&gt;TWiki::C"></a> Template Login (select =TWiki::Client::TemplateLogin in configure)
 
-Template Login asks for a username and password in a web page, and processes them using whatever Password Manager you choose. Users can log in and log out.
+Template Login asks for a username and password in a web page, and processes them using whatever Password Manager you choose. Users can log in and log out. Client Sessions are used to remember users.
 
 #### <a name="Enabling Template Login"></a> Enabling Template Login
 
-1. Use the [ `configure` ](http://www.dementia.org/twiki/configure) interface to
+1. Use the [configure](http://www.dementia.org/twiki/configure) interface to
   1. select the `TWiki::Client::TemplateLogin` login manager (on the Security Settings pane).
   2. select the appropriate password manager for your system, or provide your own.
 2. Register yourself in the [[TWikiRegistration]] topic. <br /> %H% Check that the password manager recognises the new user. If you are using `.htpasswd` files, check that a new line with the username and encrypted password is added to the `.htpasswd` file. If not, you probably got a path wrong, or the permissions may not allow the webserver user to write to that file.
@@ -109,7 +118,7 @@ The disadvantage is that because the user identity is cached in the browser, you
 
 TWiki maps the `REMOTE_USER` that was used to log in to the webserver to a [[WikiName]] using the table in [[TWikiUsers]]. This table is updated whenever a user registers, so users can choose not to register (in which case their webserver login name is used for their signature) or register (in which case that login name is mapped to their [[WikiName]]).
 
-The same private `.htpasswd` file used in TWiki Template Login can be used to authenticate Apache users, using the Apache Basic Authentication support. This allows the TWiki registration support to maintain usernames and passwords.
+The same private `.htpasswd` file used in TWiki Template Login can be used to authenticate Apache users, using the Apache Basic Authentication support.
 
 **Warning:** Do **not** use the Apache `htpasswd` program with `.htpasswd` files generated by TWiki! `htpasswd` wipes out email addresses that TWiki plants in the info fields of this file.
 
@@ -135,7 +144,9 @@ The <code>**bin/logon**</code> script accomplishes this. The <code>**bin/logon**
 
 ## <a name="Sessions"></a> Sessions
 
-TWiki uses the CPAN:CGI::Session and CPAN:CGI::Cookie modules to track sessions using cookies. These modules are de facto standards for session management among Perl programmers. If you can't use Cookies for any reason, CPAN:CGI::Session also supports session tracking using the client IP address. See [[How to choose an authentication method|Main/WebHome#HowTo]] for a discussion of the pros and cons of the various authentication methods.
+TWiki uses the CPAN:CGI::Session and CPAN:CGI::Cookie modules to track sessions. These modules are de facto standards for session management among Perl programmers. If you can't use Cookies for any reason, CPAN:CGI::Session also supports session tracking using the client IP address.
+
+You don't _have_ to enable sessions to support logins in TWiki. However it is **strongly** recommended. TWiki needs some way to remember the fact that you logged in from a particular browser, and it uses sessions to do this. If you don;t enable sessions, TWiki will try hard to remember you, but due to limitations in the browsers it may also forget you (and then suddenly remember you again later!). So for the best user experience, you should enable sessions.
 
 There are a number of [[TWikiVariables]] available that you can use to interrogate your current session. You can even add your own session variables to the TWiki cookie. Session variables are referred to as "sticky" variables.
 
@@ -167,7 +178,7 @@ This section applies only if you are using authentication with existing login na
 
 - **TWiki Username:** Your name in [[WikiNotation]], ex: <code>**PeterThoeny**</code>, is recorded when you register using [[TWikiRegistration]]; doing so also generates a personal home page in the Main web.
 
-TWiki can automatically map an Intranet (Login) Username to a TWiki Username if the \{AllowLoginName\} is enabled in `configure`. The default is to use your [[WikiName]] as a login name.
+TWiki can automatically map an Intranet (Login) Username to a TWiki Username if the \{AllowLoginName\} is enabled in [configure](http://www.dementia.org/twiki/configure). The default is to use your [[WikiName]] as a login name.
 
 > **_NOTE:_**
 >
@@ -214,7 +225,7 @@ If the active \{PasswordManager\} supports storage and retrieval of user e-mail 
 
 You may want to add or remove scripts from the list of scripts that require authentication. The method for doing this is different for each of Template Login and Apache Login.
 
-- For Template Login, update the \{AuthScripts\} list using `configure`
+- For Template Login, update the \{AuthScripts\} list using [configure](http://www.dementia.org/twiki/configure)
 - For Apache Login, add/remove the script from `.htaccess`
 
 <a name="HowTo"></a>
@@ -225,21 +236,27 @@ One of the key features of TWiki is that it is possible to add HTML to topics. N
 
 This section discusses some of the known risks. You can be sure that any potential hackers have read this section as well!
 
-Firstly, the **most secure** method is without doubt to use the webserver authentication support, with Sessions turned **off**.
+At one extreme, the most secure method is to use TWiki via SSL (Secure Sockets Layer), with a login manager installed and Client Sessions turned **off**.
 
-The **second most secure method** is to use TWiki's internal authentication with Sessions turned **off**. This method is less secure than using the webserver because passwords are sent in **plain text** and can therefore be intercepted in transit.
+Using TWiki with sessions turned off is a pain, though, as with all the login managers there are occasions where TWiki will forget who you are. The best user experience is achieved with sessions turned **on**.
 
 As soon as you allow the server to maintain information about a logged-in user, you open a door to potential attacks. There are a variety of ways a malicious user can pervert TWiki to obtain another users session ID, the most common of which is known as a [cross-site scripting](http://www.perl.com/pub/a/2002/02/20/css.html) attack. Once a hacker has an SID they can pretend to be that user.
 
 To help prevent these sorts of attacks, TWiki supports **IP matching**, which ensures that the IP address of the user requesting a specific session is the same as the IP address of the user who created the session. This works well as long as IP addresses are unique to each client, and as long as the IP address of the client can't be faked.
 
-The **third most secure** method is to use sessions with IP matching (\{UseIPMatching\} switched on). Shorter session expiry times are more secure (\{Sessions\}\{ExpireAfter\}). The default session lifetime is 6 hours, which is quite a long lifetime for a session.
-
 Session IDs are usually stored by TWiki in cookies, which are stored in the client browser. Cookies work well, but not all environments or users permit cookies to be stored in browsers. So TWiki also supports two other methods of determining the session ID. The first method uses the client IP address to determine the session ID. The second uses a rewriting method that rewrites local URLs in TWiki pages to include the session ID in the URL.
 
 The first method works well as long as IP addresses are **unique** to each individual client, and client IP addresses can't be faked by a hacker. If IP addresses are unique and can't be faked, it is almost as secure as cookies + IP matching, so it ranks as the **fourth most secure method**.
 
-If you have to turn IP matching off, and cookies can't be relied on, then you may have to rely on the second method, URL rewriting. This method exposes the session IDs very publicly, so should be regarded as the **least secure method**.
+If you have to turn IP matching off, and cookies can't be relied on, then you may have to rely on the second method, URL rewriting. This method exposes the session IDs very publicly, so should be regarded as "rather dodgy".
+
+Most TWiki sites don't use SSL, so, as is the case with **most** sites that don't use SSL, there is always a possibility that a password could be picked out of the aether. Browsers do not encrypt passwords sent over non-SSL links, so using Apache Login is no more secure than Template Login.
+
+Of the two shipped login managers, Apache Login is probably the most useful. It lets you do this sort of thing: `wget --http-user=RogerRabbit --http-password=i'mnottelling http://www.example.com/bin/save/Sandbox/StuffAUTOINC0?text=hohoho,%20this%20is%20interesting` i.e. pass in a user and password to a request from the command-line. However it doesn't let you log out.
+
+Template Login degrades to url re-writing when you use a client like dillo that does not support cookies. However, you can log out and back in as a different user.
+
+Finally, it would be really neat if someone was to work out how to use certificates to identify users.....
 
 See TWiki:TWiki.SecuringTWikiSite for more information.
 

@@ -11,9 +11,9 @@ The module also maintains a separate of the preferences found in every topic and
     <li><a href="#Package =TWiki::Prefs="> Package TWiki::Prefs</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session[,$ca"> ClassMethod new <tt>($session[,$cache])</tt></a></li>
         <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
-        <li><a href="#ObjectMethod *push_GlobalPrefere"> ObjectMethod pushGlobalPreferences <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>pushPreferences</strong> ("> ObjectMethod pushPreferences <tt>($web,$topic,$type)</tt></a></li>
         <li><a href="#ObjectMethod *push_WebPreference"> ObjectMethod pushWebPreferences <tt>($web)</tt></a></li>
+        <li><a href="#ObjectMethod *push_GlobalPrefere"> ObjectMethod pushGlobalPreferences <tt>()</tt></a></li>
         <li><a href="#ObjectMethod *push_PreferencesVa"> ObjectMethod pushPreferencesValues <tt>($type,\%values)</tt></a></li>
         <li><a href="#ObjectMethod <strong>mark</strong> ()"> ObjectMethod mark <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>resetTo</strong> ($mark)"> ObjectMethod resetTo <tt>($mark)</tt></a></li>
@@ -38,10 +38,6 @@ Complete processing after the client's HTTP request has been responded to.
 
 1. breaking circular references to allow garbage collection in persistent environments
 
-## <a name="ObjectMethod &lt;strong&gt;push_GlobalPrefere"></a> [[ObjectMethod]] \*pushGlobalPreferences `()`
-
-Add global preferences to this preferences stack.
-
 ## <a name="ObjectMethod &lt;strong&gt;pushPreferences&lt;/strong&gt; ("></a> [[ObjectMethod]] **pushPreferences** `($web,$topic,$type)`
 
 - `$web` - web to read from
@@ -54,6 +50,10 @@ Reads preferences from the given topic, and pushes them onto the preferences sta
 ## <a name="ObjectMethod &lt;strong&gt;push_WebPreference"></a> [[ObjectMethod]] \*pushWebPreferences `($web)`
 
 Pushes web preferences. Web preferences for a particular web depend on the preferences of all containing webs.
+
+## <a name="ObjectMethod &lt;strong&gt;push_GlobalPrefere"></a> [[ObjectMethod]] \*pushGlobalPreferences `()`
+
+Add global preferences to this preferences stack.
 
 ## <a name="ObjectMethod &lt;strong&gt;push_PreferencesVa"></a> [[ObjectMethod]] \*pushPreferencesValues `($type,\%values)`
 

@@ -5,6 +5,7 @@
         <li><a href="#The TWiki Template System"> The TWiki Template System</a><ul>
             <li><a href="#How Template Directives Work"> How Template Directives Work</a></li>
             <li><a href="#Finding Templates"> Finding Templates</a></li>
+            <li><a href="#TMPL:INCLUDE recusion for piecew"> TMPL:INCLUDE recusion for piecewise customisation, or mixing in new features</a></li>
           </ul>
         </li>
         <li><a href="#Master Templates"> Master Templates</a></li>
@@ -40,6 +41,8 @@ There are three types of template:
 
 All three types of template use the TWiki template system.
 
+**_%T% Tip:_** TWiki:TWiki.TWikiTemplatesSupplement on TWiki.org has supplemental documentation on TWiki templates.
+
 ## <a name="The TWiki Template System"></a> The TWiki Template System
 
 _Templates_ are plain text with embedded _template directives_ that tell TWiki how to compose blocks of text together to create something new.
@@ -52,7 +55,7 @@ _Templates_ are plain text with embedded _template directives_ that tell TWiki h
 - Directives are of the form <code>**%TMPL:&lt;key&gt;%**</code> and <code>**%TMPL:&lt;key&gt;\{"attr"\}%**</code>.
 - Directives:
   - <code>**%TMPL:INCLUDE\{"file"\}%**</code>: Includes a template file. The file is found as described [[below|Main/WebHome#FindingTemplates]].
-  - <code>**%TMPL:DEF\{"block"\}%**</code>: Define a block. Text between this and the `%TMPL:END%` directive is not used in-place, but is saved for later use with `%TMPL:P`. Leading and trailing whitespace is ignored.
+  - <code>**%TMPL:DEF\{"block"\}%**</code>: Define a block. **All** text between this and the next `%TMPL:END%` directive is removed and saved for later use with `%TMPL:P`.
   - <code>**%TMPL:END%**</code>: Ends a block definition.
   - <code>**%TMPL:P\{"var"\}%**</code>: Includes a previously defined block.
   - <code>**%\{...\}%**</code>: is a comment.
@@ -89,11 +92,11 @@ TWiki uses the following search order to determine which template file or topic 
 > 3. templates/%RED%web%ENDCOLOR%/%RED%script%ENDCOLOR%.tmpl
 >   - %X% this usage is supported **for compatibility only** and is **deprecated**. Store web-specific templates in TWiki topics instead.
 > 4. templates/%RED%script%ENDCOLOR%.tmpl
-> 5. The TWiki topic %RED%web%ENDCOLOR%.%RED%topic%ENDCOLOR% if the template name can be parsed into %RED%web%ENDCOLOR%.%RED%topic%ENDCOLOR%
+> 5. The TWiki topic aweb.atopic if the template name can be parsed into aweb.atopic
 > 6. The TWiki topic %RED%web%ENDCOLOR%.%RED%Skin%ENDCOLOR%Skin%RED%Script%ENDCOLOR%Template for each %RED%skin%ENDCOLOR% on the skin path
 > 7. The TWiki topic %RED%web%ENDCOLOR%.%RED%Script%ENDCOLOR%Template
-> 8. The TWiki topic TWiki.%RED%Skin%ENDCOLOR%Skin%RED%Script%ENDCOLOR%Template for each %RED%skin%ENDCOLOR% on the skin path
-> 9. The TWiki topic TWiki.%RED%Script%ENDCOLOR%Template
+> 8. The TWiki topic %TWIKIWEB%.%RED%Skin%ENDCOLOR%Skin%RED%Script%ENDCOLOR%Template for each %RED%skin%ENDCOLOR% on the skin path
+> 9. The TWiki topic %TWIKIWEB%.%RED%Script%ENDCOLOR%Template
 >
 > **Legend:**
 >
@@ -124,6 +127,15 @@ Template names are usually derived from the name of the currently executing scri
 - `EDIT_TEMPLATE` sets the template for editing a topic.
 
 If these preferences are set locally (using _Local_ instead of _Set_) for a topic, in [[WebPreferences]], in [[Main.TWikiPreferences|Main/TWikiPreferences]], or [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] (using _Set_), the indicated templates will be chosen for `view` and `edit` respectively. The template search order is as specified above.
+
+### <a name="TMPL:INCLUDE recusion for piecew"></a> TMPL:INCLUDE recusion for piecewise customisation, or mixing in new features
+
+If there is recusion in the TMPL:INCLUDE chain (eg twiki.classic.tmpl contains `%TMPL:INCLUDE{"twiki"}%`, the templating system will include the next twiki.SKIN in the skin path. For example, to create a customisation of pattern skin, where you _only_ want to over-ride the breadcrumbs for the view script, you can create only a view.yourlocal.tmpl:
+
+    %TMPL:INCLUDE{"view"}%
+    %TMPL:DEF{"breadcrumb"}% We don't want any crumbs %TMPL:END%
+
+and then set SKIN=yourlocal,pattern
 
 ## <a name="Master Templates"></a> Master Templates
 
@@ -227,7 +239,7 @@ The following variables get expanded when a user creates a new topic based on a 
 >   </tr>
 >   <tr>
 >     <td><code>%NOP%</code></td>
->     <td> A no-operation variable that gets removed. Useful to prevent a SEARCH from hitting an edit template topic; also useful to escape a variable like <code>%URLPARAM%NOP%{...}%</code></td>
+>     <td> A no-operation variable that gets removed. Useful to prevent a SEARCH from hitting an edit template topic; also useful to escape a variable, such as <code>%URLPA%NOP%RAM{...}%</code> escaping URLPARAM </td>
 >   </tr>
 >   <tr>
 >     <td><code>%STARTSECTION{type="templateonly"}%%BR%...%BR%%ENDSECTION{type="templateonly"}%</code></td>
@@ -303,11 +315,17 @@ See [[TWikiScripts]] for details of the parameters that the `edit` script unders
 
 ### <a name="Automatically Generated Topicnam"></a> Automatically Generated Topicname
 
-If you want to make a TWiki application where you need automatically generated unique topicnames, you can use 10 X's in the edit / save URL, and they will be replaced on topic save with a count value. For example, BugIDXXXXXXXXXX will result in topics named BugID0, BugID1, BugID2 etc.
+For TWiki application it is useful to automatically generate unique topicnames, such as BugID0001, BugID0002, etc. You can add `AUTOINC<n>` to the topic name in the edit and save scripts, it gets replaced with an auto-incremented number on topic save. `<n>` is a number starting from 0, and may include leading zeros. Leading zeros are used to zero-pad numbers so that auto-incremented topic names can sort properly. Deleted topics are not re-used to ensure uniqueness of topic names. That is, the auto-incremented number is always higher than the existing ones, even if there are gaps in the number sequence.
+
+**Examples:**
+
+- `BugAUTOINC0` - creates topic names `Bug0`, `Bug1`, `Bug2`, ... (does not sort properly)
+- `ItemAUTOINC0000` - creates topic names `Item0000`, `Item0001`, `Item0002`, ... (sorts properly up to 9999)
+- `DocIDAUTOINC10001` - start with `DocID10001`, `DocID10002`, ... (sorts properly up to 99999; auto-links)
 
 Example link to create a new topic:%BR%
 
-    [[%SCRIPTURLPATH{"edit"}%/%WEB%/BugIDXXXXXXXXXX?templatetopic=BugTemplate&amp;topicparent=%TOPIC%&amp;t=%SERVERTIME{"$day$hour$min$sec"}%][Create new item]]=
+    [[%SCRIPTURLPATH{"edit"}%/%WEB%/BugIDAUTOINC00000?templatetopic=BugTemplate&amp;topicparent=%TOPIC%&amp;t=%SERVERTIME{"$day$hour$min$sec"}%][Create new item]]=
 
 ## <a name="Master Templates by Example"></a> Master Templates by Example
 
@@ -317,87 +335,71 @@ Attached is an example of an oops based template `oopsbase.tmpl` and an example 
 
 The first line declares a delimiter variable called "sep", used to separate multiple link items. The variable can be called anywhere by writing `%TMPL:P{"sep"}%`
 
-> <table bgcolor="#f5f5f5" border="1" cellpadding="1" cellspacing="0">
->   <tr>
->     <td><pre>
 > %TMPL:DEF{"sep"}% | %TMPL:END%
-> &lt;html&gt;
-> &lt;head&gt;
->   &lt;title&gt; %WIKITOOLNAME% . %WEB% . %TOPIC% %.TMPL:P{"titleaction"}%&lt;/title&gt;
->   &lt;base href="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%"&gt;
->   &lt;meta name="robots" content="noindex"&gt;
-> &lt;/head&gt;
-> &lt;body bgcolor="#FFFFFF"&gt;
-> &lt;table width="100%" border="0" cellpadding="3" cellspacing="0"&gt;
->   &lt;tr&gt;
->     &lt;td bgcolor="%WEBBGCOLOR%" rowspan="2" valign="top" width="1%"&gt;
->       &lt;a href="%WIKIHOMEURL%"&gt;
->       &lt;img src="%PUBURLPATH%/wikiHome.gif" border="0"&gt;&lt;/a&gt;
->     &lt;/td&gt;
->     &lt;td&gt;
->       &lt;b&gt;%WIKITOOLNAME% . %WEB% . &lt;/b&gt;&lt;font size="+2"&gt;
->       &lt;B&gt;%TOPIC%&lt;/b&gt; %TMPL:P{"titleaction"}%&lt;/font&gt;
->     &lt;/td&gt;
->   &lt;/tr&gt;
->   &lt;tr bgcolor="%WEBBGCOLOR%"&gt;
->     &lt;td colspan="2"&gt;
->       %TMPL:P{"webaction"}%
->     &lt;/td&gt;
->   &lt;/tr&gt;
-> &lt;/table&gt;
-> --- ++ %TMPL:P{"heading"}%
-> %TMPL:P{"message"}%
-> &lt;table width="100%" border="0" cellpadding="3" cellspacing="0"&gt;
->   &lt;tr bgcolor="%WEBBGCOLOR%"&gt;
->     &lt;td valign="top"&gt;
->       Topic &lt;b&gt;%TOPIC%&lt;/b&gt; . {
->         %TMPL:P{"topicaction"}%
->       }
->     &lt;/td&gt;
->   &lt;/tr&gt;
-> &lt;/table&gt;
-> &lt;/body&gt;
-> </pre></td>
->   </tr>
-> </table>
+>     <html>
+>     <head>
+>       <title> %WIKITOOLNAME% . %WEB% . %TOPIC% %.TMPL:P{"titleaction"}%</title>
+>       <base href="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">
+>       <meta name="robots" content="noindex">
+>     </head>
+>     <body bgcolor="#FFFFFF">
+>     <table width="100%" border="0" cellpadding="3" cellspacing="0">
+>       <tr>
+>         <td bgcolor="%WEBBGCOLOR%" rowspan="2" valign="top" width="1%">
+>           <a href="%WIKIHOMEURL%">
+>           <img src="%PUBURLPATH%/wikiHome.gif" border="0"></a>
+>         </td>
+>         <td>
+>           <b>%WIKITOOLNAME% . %WEB% . </b><font size="+2">
+>           <B>%TOPIC%</b> %TMPL:P{"titleaction"}%</font>
+>         </td>
+>       </tr>
+>       <tr bgcolor="%WEBBGCOLOR%">
+>         <td colspan="2">
+>           %TMPL:P{"webaction"}%
+>         </td>
+>       </tr>
+>     </table>
+>     --- ++ %TMPL:P{"heading"}%
+>     %TMPL:P{"message"}%
+>     <table width="100%" border="0" cellpadding="3" cellspacing="0">
+>       <tr bgcolor="%WEBBGCOLOR%">
+>         <td valign="top">
+>           Topic <b>%TOPIC%</b> . {
+>             %TMPL:P{"topicaction"}%
+>           }
+>         </td>
+>       </tr>
+>     </table>
+>     </body>
 
 ### <a name="Test template oopstest.tmpl"></a> Test template oopstest.tmpl
 
 Each oops template basically just defines some variables and includes the base template that does the layout work.
 
-> <table bgcolor="#f5f5f5" border="1" cellpadding="1" cellspacing="0">
->   <tr>
->     <td><pre>
 > %TMPL:DEF{"titleaction"}% (test =titleaction=) %TMPL:END%
-> %TMPL:DEF{"webaction"}% test =webaction= %TMPL:END%
-> %TMPL:DEF{"heading"}%
-> Test heading %TMPL:END%
-> %TMPL:DEF{"message"}%
-> Test =message=. Blah blah blah blah blah blah blah blah blah blah blah...
+>     %TMPL:DEF{"webaction"}% test =webaction= %TMPL:END%
+>     %TMPL:DEF{"heading"}%
+>     Test heading %TMPL:END%
+>     %TMPL:DEF{"message"}%
+>     Test =message=. Blah blah blah blah blah blah blah blah blah blah blah...
 >
->    * Some more blah blah blah blah blah blah blah blah blah blah...
->    * Param1: %PARAM1%
->    * Param2: %PARAM2%
->    * Param3: %PARAM3%
->    * Param4: %PARAM4%
-> %TMPL:END%
-> %TMPL:DEF{"topicaction"}%
-> Test =topicaction=:
-> [[%WEB%.%TOPIC%][OK]] %TMPL:P{"sep"}%
-> [[%TWIKIWEB%.TWikiRegistration][Register]] %TMPL:END%
-> %TMPL:INCLUDE{"oopsbase"}%
-> </pre></td>
->   </tr>
-> </table>
+>        * Some more blah blah blah blah blah blah blah blah blah blah...
+>        * Param1: %PARAM1%
+>        * Param2: %PARAM2%
+>        * Param3: %PARAM3%
+>        * Param4: %PARAM4%
+>     %TMPL:END%
+>     %TMPL:DEF{"topicaction"}%
+>     Test =topicaction=:
+>     [[%WEB%.%TOPIC%][OK]] %TMPL:P{"sep"}%
+>     [[%TWIKIWEB%.TWikiRegistration][Register]] %TMPL:END%
+>     %TMPL:INCLUDE{"oopsbase"}%
 
 ### <a name="Sample screen shot of oopstest.t"></a> Sample screen shot of oopstest.tmpl
 
 With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=WebHome&amp;param2=WebNotify**</code>
 
-> <table border="1" cellpadding="0" cellspacing="0">
->   <tr>
->     <td><img alt="testscreen.gif" height="304" src="http://www.dementia.org/twiki//view/testscreen.gif" width="589" /></td>
->   </tr>
-> </table>
+<img src="http://www.dementia.org/twiki//view/testscreen.gif" width="589" height="304" alt="testscreen.gif" style="border: 1px solid #ddd" />
 
 **_Related Topics:_** [[TWikiSkins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]]

@@ -31,9 +31,9 @@ If `_callback` is set, the result is always undef. Otherwise the result is a str
 
 If `inline` is set, then the results are **not** decorated with the search template head and tail blocks.
 
-SMELL: If `format` is set, `template` will be ignored.
+Note: If `format` is set, `template` will be ignored.
 
-SMELL: If `regex` is defined, it will force type='regex'
+Note: For legacy, if `regex` is defined, it will force type='regex'
 
 SMELL: If `template` is defined `bookview` will not work
 

@@ -26,7 +26,7 @@
   </tr>
   <tr>
     <td><code>pattern="..."</code></td>
-    <td> A [[Main/RegularExpression]] pattern to include a subset of a topic or page </td>
+    <td> Include a subset of a topic or a web page. Specify a [[Main/RegularExpression]] that scans from start (<code>'^'</code>) to end and contains the text you want to keep in parenthesis, e.g., <code>pattern="^.*?(from here.*?to here).*"</code>. [[Main/IncludeTopicsAndWebPages]] has more. </td>
     <td> none </td>
   </tr>
   <tr>
@@ -36,7 +36,37 @@
   </tr>
   <tr>
     <td><code>raw="on"</code></td>
-    <td> When a page is included, normally %WIKITOOLNAME% will process it, doing the following: 1) Alter relative links to point back to originating host, 2) Remove some basic HTML tags (html, head, body, script) and finally 3) Remove newlines from tags spanning multiple lines. If you prefer to include <em>exactly</em> what is in the source of the originating page set this to <code>on</code>. </td>
+    <td> When a page is included, normally %WIKITOOLNAME% will process it, doing the following: 1) Alter relative links to point back to originating host, 2) Remove some basic HTML tags (html, head, body, script) and finally 3) Remove newlines from HTML tags spanning multiple lines. If you prefer to include <em>exactly</em> what is in the source of the originating page set this to <code>on</code>. %BR% <code>raw="on"</code> is short for <code>disableremoveheaders="on"</code>, <code>disableremovescript="on"</code>, <code>disableremovebody="on"</code>, <code>disablecompresstags="on"</code> and <code>disablerewriteurls="on"</code>. </td>
+    <td> disabled </td>
+  </tr>
+  <tr>
+    <td><code>literal="on"</code></td>
+    <td> While using the <code>raw</code> option will indeed include the raw content, the included content will still be processed and rendered like regular topic content. To disable parsing of the included content, set the <code>literal</code> option to <code>"on"</code>. </td>
+    <td> disabled </td>
+  </tr>
+  <tr>
+    <td><code>disableremoveheaders="on"</code></td>
+    <td> Bypass stripping headers from included HTML (everything until first <code>&lt;/head&gt;</code> tag) </td>
+    <td> disabled </td>
+  </tr>
+  <tr>
+    <td><code>disableremovescript="on"</code></td>
+    <td> Bypass stripping all <code>&lt;script&gt;</code> tags from included HTML </td>
+    <td> disabled </td>
+  </tr>
+  <tr>
+    <td><code>disableremovebody="on"</code></td>
+    <td> Bypass stripping the <code>&lt;/body&gt;</code> tag and everything around over and below it </td>
+    <td> disabled </td>
+  </tr>
+  <tr>
+    <td><code>disablecompresstags="on"</code></td>
+    <td> Bypass replacing newlines in HTML tags with spaces. This compression step rewrites unmatched &lt;'s into <code>&amp;lt;</code> entities unless bypassed </td>
+    <td> disabled </td>
+  </tr>
+  <tr>
+    <td><code>disablerewriteurls="on"</code></td>
+    <td> Bypass rewriting relative URLs into absolute ones </td>
     <td> disabled </td>
   </tr>
   <tr>
@@ -46,7 +76,7 @@
   </tr>
   <tr>
     <td><code>section="name"</code></td>
-    <td> Includes only the specified named section, as defined in the included topic by the [[Main/WebHome#VarSTARTSECTION]] and [[Main/WebHome#VarENDSECTION]] variables </td>
+    <td> Includes only the specified named section, as defined in the included topic by the [[Main/WebHome#VarSTARTSECTION]] and [[Main/WebHome#VarENDSECTION]] variables. Nothing is shown if the named section does not exists. </td>
     <td>   </td>
   </tr>
   <tr>
@@ -55,6 +85,6 @@
     <td>   </td>
   </tr>
 </table>
-- **_Note:_** JavaScript in included webpages is filtered out as a security precaution per default (disable filter with `raw` parameter)
+- **_Note:_** JavaScript in included webpages is filtered out as a security precaution per default (disable filter with `disableremovescript` parameter)
 - Examples: See [[IncludeTopicsAndWebPages]]
 - Related: [[BASETOPIC|Main/WebHome#VarBASETOPIC]], [[BASEWEB|Main/WebHome#VarBASEWEB]], [[INCLUDINGTOPIC|Main/WebHome#VarINCLUDINGTOPIC]], [[INCLUDINGWEB|Main/WebHome#VarINCLUDINGWEB]], [[STARTINCLUDE|Main/WebHome#VarSTARTINCLUDE]], [[STOPINCLUDE|Main/WebHome#VarSTOPINCLUDE]], [[STARTSECTION|Main/WebHome#VarSTARTSECTION]], [[ENDSECTION|Main/WebHome#VarENDSECTION]]

@@ -37,7 +37,7 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
   </tr>
   <tr>
     <td><code>format</code></td>
-    <td> The format of one column when editing the table. A cell can be a text input field, or any of these edit field types:%BR% • Text input field (1 line):%BR%   <code>| text, &lt;size&gt;, &lt;initial value&gt; |</code> %BR% • Textarea input field:%BR%   <code>| textarea, &lt;rows&gt;x&lt;columns&gt;, &lt;initial value&gt; |</code> %BR% • Drop down box: %BR%   <code>| select, &lt;size&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR% • Radio buttons: %BR%   <code>| radio, &lt;size*&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR%   <code>*</code> size indicates the number of buttons per line in edit mode %BR% • Checkboxes: %BR%   <code>| checkbox, &lt;size*&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR%   <code>*</code> size indicates the number of checkboxes per line in edit mode %BR% • Fixed label: %BR%   <code>| label, 0, &lt;label text&gt; |</code> %BR% • Row number: %BR%   <code>| row, &lt;offset&gt; |</code> %BR% • Date: %BR%   <code>| date, &lt;size&gt;, &lt;initial value&gt;, &lt;DHTML date format&gt; |</code> %BR%   <code>*</code> see <a href="http://www.dementia.org/twiki//view/TWiki/JSCalendarContrib/doc/html/reference.html" target="_top">Mishoo documentation</a> for more infos about the DHTML date format </td>
+    <td> The format of one column when editing the table. A cell can be a text input field, or any of these edit field types:%BR% • Text input field (1 line):%BR%   <code>| text, &lt;size&gt;, &lt;initial value&gt; |</code> %BR% • Textarea input field:%BR%   <code>| textarea, &lt;rows&gt;x&lt;columns&gt;, &lt;initial value&gt; |</code> %BR% • Drop down box: %BR%   <code>| select, &lt;size&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc* |</code> %BR%   <code>*</code> only one item can be selected %BR% • Radio buttons: %BR%   <code>| radio, &lt;size*&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR%   <code>*</code> size indicates the number of buttons per line in edit mode %BR% • Checkboxes: %BR%   <code>| checkbox, &lt;size*&gt;, &lt;option 1&gt;, &lt;option 2&gt;, etc |</code> %BR%   <code>*</code> size indicates the number of checkboxes per line in edit mode %BR% • Fixed label: %BR%   <code>| label, 0, &lt;label text&gt; |</code> %BR% • Row number: %BR%   <code>| row, &lt;offset&gt; |</code> %BR% • Date: %BR%   <code>| date, &lt;size&gt;, &lt;initial value&gt;, &lt;DHTML date format&gt; |</code> %BR%   <code>*</code> see <a href="http://www.dementia.org/twiki//view/TWiki/JSCalendarContrib/doc/html/reference.html" target="_top">Mishoo documentation</a> for more infos about the DHTML date format </td>
     <td><code>"text, 16"</code> %BR% for all cells </td>
   </tr>
   <tr>
@@ -318,7 +318,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 11706 </td>
+    <td> 12327 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>

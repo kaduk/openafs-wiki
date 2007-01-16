@@ -72,7 +72,7 @@ will work happily.
             <li><a href="#moveWeb( $oldName, $newName )"> moveWeb( $oldName, $newName )</a></li>
             <li><a href="#get_TopicList( $web ) -> @topics"> getTopicList( $web ) -&gt; @topics</a></li>
             <li><a href="#topicExists( $web, $topic ) -> $"> topicExists( $web, $topic ) -&gt; $boolean</a></li>
-            <li><a href="#check_TopicEditLock( $web, $topi"> checkTopicEditLock( $web, $topic ) -&gt; ( $oopsUrl, $loginName, $unlockTime )</a></li>
+            <li><a href="#check_TopicEditLock( $web, $topi"> checkTopicEditLock( $web, $topic, $script ) -&gt; ( $oopsUrl, $loginName, $unlockTime )</a></li>
             <li><a href="#set_TopicEditLock( $web, $topic,"> setTopicEditLock( $web, $topic, $lock )</a></li>
             <li><a href="#saveTopic( $web, $topic, $meta,"> saveTopic( $web, $topic, $meta, $text, $options ) -&gt; $error</a></li>
             <li><a href="#save_TopicText( $web, $topic, $t"> saveTopicText( $web, $topic, $text, $ignorePermissions, $dontNotify ) -&gt; $oopsUrl</a></li>
@@ -92,7 +92,7 @@ will work happily.
             <li><a href="#loadTemplate ( $name, $skin, $we"> loadTemplate ( $name, $skin, $web ) -&gt; $text</a></li>
             <li><a href="#expandTemplate( $def  ) -> $stri"> expandTemplate( $def ) -&gt; $string</a></li>
             <li><a href="#writeHeader( $query, $contentLen"> writeHeader( $query, $contentLength )</a></li>
-            <li><a href="#redirect_CgiQuery( $query, $url"> redirectCgiQuery( $query, $url )</a></li>
+            <li><a href="#redirect_CgiQuery( $query, $url,"> redirectCgiQuery( $query, $url, $passthru )</a></li>
             <li><a href="#add_ToHEAD( $id, $header )"> addToHEAD( $id, $header )</a></li>
             <li><a href="#expand_CommonVariables( $text, $"> expandCommonVariables( $text, $topic, $web ) -&gt; $text</a></li>
             <li><a href="#renderText( $text, $web ) -> $te"> renderText( $text, $web ) -&gt; $text</a></li>
@@ -173,6 +173,7 @@ Compose fully qualified URL
 - `$web` - Web name, e.g. `'Main'`
 - `$topic` - Topic name, e.g. `'WebNotify'`
 - `$script` - Script name, e.g. `'view'`
+- `...` - an arbitrary number of name,value parameter pairs that will be url-encoded and added to the url. The special parameter name '#' is reserved for specifying an anchor. e.g. `getScriptUrl('x','y','view','#'=>'XXX',a=>1,b=>2)` will give `.../view/x/y?a=1&b=2#XXX`
 
 Return: `$url` URL, e.g. `"http://example.com:80/cgi-bin/view.pl/Main/WebNotify"`
 
@@ -244,7 +245,7 @@ Return: `$value` Value associated with key; empty string if not set
 
 ### <a name="set_SessionValue( $key, $value )"></a> setSessionValue( $key, $value ) -&gt; $boolean
 
-Set a session value via the client session module
+Set a session value.
 
 - `$key` - Session key
 - `$value` - Value associated with key
@@ -255,11 +256,11 @@ Return: true if function succeeded
 
 ### <a name="clear_SessionValue( $key ) - $bo"></a> clearSessionValue( $key ) -&gt; $boolean
 
-Clear a session value via the client session module
+Clear a session value that was set using `setSessionValue`.
 
-- `$key` - Session key
+- `$key` - name of value stored in session to be cleared. Note that you **cannot** clear `AUTHUSER`.
 
-Return: true if function succeeded
+Return: true if the session value was cleared
 
 **Since:** TWiki::Plugins::VERSION 1.1
 
@@ -319,6 +320,8 @@ Return: `$value` Preferences value; empty string if not set
   - [[WebPreferences]] topic has: `* Set WEBBGCOLOR = #FFFFC0`
   - `my $webColor = TWiki::Func::getPreferencesValue( 'WEBBGCOLOR', 'Sandbox' );`
 
+**NOTE:** As of TWiki4.1, if `$NO_PREFS_IN_TOPIC` is enabled in the plugin, then preferences set in the plugin topic will be ignored.
+
 ### <a name="get_PluginPreferencesValue( $key"></a> getPluginPreferencesValue( $key ) -&gt; $value
 
 Get a preferences value from your Plugin
@@ -330,6 +333,8 @@ Return: `$value` Preferences value; empty string if not set
 **_Note_**: This function will will **only** work when called from the Plugin.pm file itself. it **will not work** if called from a sub-package (e.g. TWiki::Plugins::MyPlugin::MyModule)
 
 **Since:** TWiki::Plugins::VERSION 1.021 (27 Mar 2004)
+
+**NOTE:** As of TWiki4.1, if `$NO_PREFS_IN_TOPIC` is enabled in the plugin, then preferences set in the plugin topic will be ignored.
 
 ### <a name="get_PreferencesFlag( $key, $web"></a><a name="get_PreferencesFlag( $key, $web "></a> getPreferencesFlag( $key, $web ) -&gt; $value
 
@@ -347,6 +352,8 @@ Return: `$value` Preferences flag `'1'` (if set), or `"0"` (for preferences valu
   - Use `"MYPLUGIN_SHOWHELP"` for `$key`
   - `my $showHelp = TWiki::Func::getPreferencesFlag( "MYPLUGIN_SHOWHELP" );`
 
+**NOTE:** As of TWiki4.1, if `$NO_PREFS_IN_TOPIC` is enabled in the plugin, then preferences set in the plugin topic will be ignored.
+
 ### <a name="get_PluginPreferencesFlag( $key"></a><a name="get_PluginPreferencesFlag( $key "></a> getPluginPreferencesFlag( $key ) -&gt; $boolean
 
 Get a preferences flag from your Plugin
@@ -358,6 +365,8 @@ Return: false for preferences values `"off"`, `"no"` and `"0"`, or values not se
 **_Note_**: This function will will **only** work when called from the Plugin.pm file itself. it **will not work** if called from a sub-package (e.g. TWiki::Plugins::MyPlugin::MyModule)
 
 **Since:** TWiki::Plugins::VERSION 1.021 (27 Mar 2004)
+
+**NOTE:** As of TWiki4.1, if `$NO_PREFS_IN_TOPIC` is enabled in the plugin, then preferences set in the plugin topic will be ignored.
 
 ### <a name="get_WikiToolName( ) - $name"></a> getWikiToolName( ) -&gt; $name
 
@@ -556,7 +565,7 @@ $web and $topic are parsed as described in the documentation for `normalizeWebTo
 
 **Since:** TWiki::Plugins::VERSION 1.000 (14 Jul 2001)
 
-### <a name="check_TopicEditLock( $web, $topi"></a> checkTopicEditLock( $web, $topic ) -&gt; ( $oopsUrl, $loginName, $unlockTime )
+### <a name="check_TopicEditLock( $web, $topi"></a> checkTopicEditLock( $web, $topic, $script ) -&gt; ( $oopsUrl, $loginName, $unlockTime )
 
 Check if a lease has been taken by some other user.
 
@@ -564,6 +573,8 @@ Check if a lease has been taken by some other user.
 - `$topic` Topic name, e.g. `"MyTopic"`, or `"Main.MyTopic"`
 
 Return: `( $oopsUrl, $loginName, $unlockTime )` - The `$oopsUrl` for calling redirectCgiQuery(), user's `$loginName`, and estimated `$unlockTime` in minutes, or ( '', '', 0 ) if no lease exists.
+
+- `$script` The script to invoke when continuing with the edit
 
 **Since:** TWiki::Plugins::VERSION 1.010 (31 Dec 2002)
 
@@ -927,14 +938,28 @@ Return: none
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
-### <a name="redirect_CgiQuery( $query, $url"></a><a name="redirect_CgiQuery( $query, $url "></a> redirectCgiQuery( $query, $url )
+### <a name="redirect_CgiQuery( $query, $url,"></a> redirectCgiQuery( $query, $url, $passthru )
 
 Redirect to URL
 
 - `$query` - CGI query object. Ignored, only there for compatibility. The session CGI query object is used instead.
 - `$url` - URL to redirect to
+- `$passthru` - enable passthrough.
 
-Return: none, never returns
+Return: none
+
+Print output to STDOUT that will cause a 302 redirect to a new URL. Nothing more should be printed to STDOUT after this method has been called.
+
+The `$passthru` parameter allows you to pass the parameters that were passed to the current query on to the target URL, as long as it is another URL on the same TWiki installation. If `$passthru` is set to a true value, then TWiki will save the current URL parameters, and then try to restore them on the other side of the redirect. Parameters are stored on the server in a cache file (see `{PassthroughDir} in =configure`).
+
+Note that if `$passthru` is set, then any parameters in `$url` will be lost when the old parameters are restored. if you want to change any parameter values, you will need to do that in the current CGI query before redirecting e.g.
+
+    my $query = TWiki::Func::getCgiQuery();
+    $query->param(-name => 'text', -value => 'Different text');
+    TWiki::Func::redirectCgiQuery(
+      undef, TWiki::Func::getScriptUrl($web, $topic, 'edit'), 1);
+
+`$passthru` does nothing if `$url` does not point to a script in the current TWiki installation.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
@@ -1107,6 +1132,13 @@ for example, to execute an arbitrary command on the server, you might do this:
     }
 
 would let you do this: `%EXEC{"ps -Af" silent="on"}%`
+
+Registered tags differ from tags implemented using the old TWiki approach (text substitution in `commonTagsHandler`) in the following ways:
+
+- registered tags are evaluated at the same time as system tags, such as %SERVERTIME. `commonTagsHandler` is only called later, when all system tags have already been expanded (though they are expanded _again_ after `commonTagsHandler` returns).
+- registered tag names can only contain alphanumerics and \_ (underscore)
+- registering a tag `FRED` defines both `%FRED{...}%` **and also** `%FRED%`.
+- registered tag handlers **cannot** return another tag as their only result (e.g. `return '%SERVERTIME%';`). It won't work.
 
 ### <a name="registerRESTHandler( $alias, \fn"></a> registerRESTHandler( $alias, \\&amp;fn, )
 
@@ -1318,7 +1350,7 @@ Parse a web and topic name, supplying defaults as appropriate.
 - `$web` - Web name, identifying variable, or empty string
 - `$topic` - Topic name, may be a web.topic string, required.
 
-Return: the parsed Web/Topic pai
+Return: the parsed Web/Topic pair
 
 **Since:** TWiki::Plugins::VERSION 1.1
 
@@ -1344,24 +1376,45 @@ Return: the parsed Web/Topic pai
     <td><tt>( 'Web', 'Topic' ) </tt></td>
   </tr>
   <tr>
+    <td><tt>( '', 'Web/Subweb/Topic' ) </tt></td>
+    <td><tt>( 'Web/Subweb', 'Topic' ) </tt></td>
+  </tr>
+  <tr>
     <td><tt>( '', 'Web.Topic' ) </tt></td>
     <td><tt>( 'Web', 'Topic' ) </tt></td>
+  </tr>
+  <tr>
+    <td><tt>( '', 'Web.Subweb.Topic' ) </tt></td>
+    <td><tt>( 'Web/Subweb', 'Topic' ) </tt></td>
   </tr>
   <tr>
     <td><tt>( 'Web1', 'Web2.Topic' )</tt></td>
     <td><tt>( 'Web2', 'Topic' ) </tt></td>
   </tr>
+</table>
+
+Note that hierarchical web names ([[SubWeb]]) are only available if hierarchical webs are enabled in `configure`.
+
+The symbols %USERSWEB%, %SYSTEMWEB%, %DOCWEB%, %MAINWEB% and %TWIKIWEB% can be used in the input to represent the web names set in $cfg\{UsersWebName\} and $cfg\{SystemWebName\}. For example:
+
+<table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <td><tt>( 'Main', 'Topic' )</tt></td>
+    <th bgcolor="#99CCCC"><strong> Input </strong></th>
+    <th bgcolor="#99CCCC"><strong> Return </strong></th>
+  </tr>
+  <tr>
+    <td><tt>( '%USERSWEB%', 'Topic' )</tt></td>
     <td><tt>( 'Main', 'Topic' ) </tt></td>
   </tr>
   <tr>
-    <td><tt>( 'TWiki', 'Topic' )</tt></td>
+    <td><tt>( '%SYSTEMWEB%', 'Topic' )</tt></td>
+    <td><tt>( 'TWiki', 'Topic' ) </tt></td>
+  </tr>
+  <tr>
+    <td><tt>( '', '%DOCWEB%.Topic' )</tt></td>
     <td><tt>( 'TWiki', 'Topic' ) </tt></td>
   </tr>
 </table>
-
-where `Main` and `TWiki` are the web names set in $cfg\{UsersWebName\} and $cfg\{SystemWebName\} respectively.
 
 ### <a name="writeWarning( $text )"></a> writeWarning( $text )
 
@@ -1496,7 +1549,7 @@ Return: `$text` Formatted time string
 
 ### <a name="get_DataDir( ) - $dir"></a> getDataDir( ) -&gt; $dir
 
-**DEPRECATED** since 1.1 - use the [[content handling functions|Main/WebHome#Functions_Content_Handling]] to manipulate topics instead
+**DEPRECATED** since 1.1 - use the "Webs, Topics and Attachments" functions to manipulate topics instead
 
 Get data directory (topic file root)
 
@@ -1508,7 +1561,7 @@ This function violates store encapsulation and is therefore **deprecated**.
 
 ### <a name="get_PubDir( ) - $dir"></a> getPubDir( ) -&gt; $dir
 
-**DEPRECATED** since 1.1 - use the [[content handling functions|Main/WebHome#Functions_Content_Handling]] to manipulateattachments instead
+**DEPRECATED** since 1.1 - use the "Webs, Topics and Attachments" functions to manipulateattachments instead
 
 Get pub directory (file attachment root). Attachments are in `$dir/Web/TopicName`
 

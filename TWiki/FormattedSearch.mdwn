@@ -1,7 +1,11 @@
 <div>
   <ul>
     <li><a href="#TWiki Formatted Search"> TWiki Formatted Search</a><ul>
-        <li><a href="#Syntax"> Syntax</a></li>
+        <li><a href="#Syntax"> Syntax</a><ul>
+            <li><a href="#1. <code>header="..."</code> parameter"> 1. header="..." parameter</a></li>
+            <li><a href="#2. <code>format="..."</code> parameter"> 2. format="..." parameter</a></li>
+          </ul>
+        </li>
         <li><a href="#Examples"> Examples</a><ul>
             <li><a href="#Bullet list showing topic name a"> Bullet list showing topic name and summary</a></li>
           </ul>
@@ -63,11 +67,44 @@ The default output format of a <code>[[%SEARCH{...}%|Main/VarSEARCH]]</code> is 
 
 Two parameters can be used to specify a customized search result:
 
-1. `header="..."` parameter
+### <a name="1. &lt;code&gt;header=&quot;...&quot;&lt;/code&gt; parameter"></a> 1. `header="..."` parameter
 
 Use the header parameter to specify the header of a search result. It should correspond to the format of the format parameter. This parameter is optional. <br /> Example: `header="| *Topic:* | *Summary:* |"`
 
-2. `format="..."` parameter
+Variables that can be used in the header string:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Name: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$web</code></td>
+    <td> Name of the web </td>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". This variable gets removed; useful for nested search </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>). Alternatively write <code>\"</code> to escape it </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>
+
+### <a name="2. &lt;code&gt;format=&quot;...&quot;&lt;/code&gt; parameter"></a> 2. `format="..."` parameter
 
 Use the format parameter to specify the format of one search hit. <br /> Example: `format="| $topic | $summary |"`
 
@@ -116,11 +153,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 15:58</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:02</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T15:58Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:02Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -230,6 +267,8 @@ Variables that can be used in the format string:
 
 ## <a name="Examples"></a> Examples
 
+Here are some samples of formatted searches. The [[SearchPatternCookbook]] has other examples, such as [[creating a picklist of usernames|Main/SearchPatternCookbook#SearchUsernames]], [[searching for topic children|Main/SearchPatternCookbook#SearchTopicChildren]] and more.
+
 <a name="SearchBulletList"></a>
 
 ### <a name="Bullet list showing topic name a"></a> Bullet list showing topic name and summary
@@ -248,7 +287,7 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 In a web where there is a form that contains a `TopicClassification` field, an `OperatingSystem` field and an `OsVersion` field we could write:
 
-`| *Topic:* | *OperatingSystem:* | *OsVersion:* |`<br />`%SEARCH{ "[T]opicClassification.*?value=\"[P]ublicFAQ\"" scope="text" regex="on" nosearch="on" nototal="on" format="| [[$topic]] | $formfield(OperatingSystem) | $formfield(OsVersion) |" }%`
+`| *Topic:* | *OperatingSystem:* | *OsVersion:* |`<br />`%SEARCH{ "[T]opicClassification.*?value=\"[P]ublicFAQ\"" scope="text" type="regex" nosearch="on" nototal="on" format="| [[$topic]] | $formfield(OperatingSystem) | $formfield(OsVersion) |" }%`
 
 To get this:
 
@@ -274,7 +313,7 @@ To get this:
 
 **Write this:**
 
-`%SEARCH{ "__Back to\:__ TWikiFAQ" scope="text" regex="on" nosearch="on" nototal="on" header="TWiki FAQs:" format="   * $pattern(.*?FAQ\:[\n\r]*([^\n\r]+).*) [[$topic][Answer...]]" }%`
+`%SEARCH{ "__Back to\:__ TWikiFAQ" scope="text" type="regex" nosearch="on" nototal="on" header="TWiki FAQs:" format="   * $pattern(.*?FAQ\:[\n\r]*([^\n\r]+).*) [[$topic][Answer...]]" }%`
 
 **To get this:**
 
@@ -314,7 +353,7 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 **Write this:**
 
-`%SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="| [[$topic]] | $wikiusername  | $date |" limit="7" }%`
+`%SEARCH{ "\.*" scope="topic" type="regex" nosearch="on" nototal="on" order="modified" reverse="on"  format="| [[$topic]] | $wikiusername  | $date |" limit="7" }%`
 
 **To get this:**
 
@@ -335,7 +374,7 @@ This requires the TWiki:Plugins.SpreadSheetPlugin. The following example shows a
 
 **Write this:**
 
-`%CALC{$SET(weekold, $TIMEADD($TIME(), -7, day))}%` %BR% `%SEARCH{ "." scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on" format="$percntCALC{$IF($TIME($date) < $GET(weekold), <nop>, | [[$topic]] | $wikiusername | $date | $rev |)}$percnt" limit="100" }%`
+`%CALC{$SET(weekold, $TIMEADD($TIME(), -7, day))}%` %BR% `%SEARCH{ "." scope="topic" type="regex" nosearch="on" nototal="on" order="modified" reverse="on" format="$percntCALC{$IF($TIME($date) < $GET(weekold), <nop>, | [[$topic]] | $wikiusername | $date | $rev |)}$percnt" limit="100" }%`
 
 - The first line sets the `weekold` variable to the serialized date of exactly one week ago
 - The SEARCH has a deferred CALC. The `$percnt` makes sure that the CALC gets executed once for each search hit
@@ -372,4 +411,6 @@ Result:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
-**_Related Topics:_** [[UserDocumentationCategory]]
+**_Related Topics:_** [[UserDocumentationCategory]], [[SearchHelp]], [[TWikiVariables#VarSEARCH]], [[SearchPatternCookbook]], [[RegularExpression]]
+
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie

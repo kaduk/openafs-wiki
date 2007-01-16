@@ -12,19 +12,6 @@ To create your own Plugin:
 
 (none)
 
-## <a name="Plugin Settings"></a> Plugin Settings
-
-Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%EMPTYPLUGIN\_SHORTDESCRIPTION%**</code>
-
-- One line description, is shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Empty Plugin used as a template for new Plugins
-
-- Your own setting, for example:
-  - Set EXAMPLE = got it!
-
-- Debug plugin: (See output in `data/debug.txt`)
-  - Set DEBUG = 0
-
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
 - This plugin is preinstalled, you do not need to install it.

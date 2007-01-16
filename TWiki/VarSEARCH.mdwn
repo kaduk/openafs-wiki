@@ -92,8 +92,8 @@
   </tr>
   <tr>
     <td><code>noheader="on"</code></td>
-    <td> Suppress search header <br /><span style="background: #FFB0B0"> <strong>Topics: Changed: By:</strong> </span></td>
-    <td> Show search header, unless seach is inline and a format is specified (Cairo compatibility) </td>
+    <td> Suppress default search header <br /><span style="background: #FFB0B0"> <strong>Topics: Changed: By:</strong> </span>, unless a <code>header</code> is explicitly specified </td>
+    <td> Show default search header, unless search is inline and a format is specified (Cairo compatibility) </td>
   </tr>
   <tr>
     <td><code>nototal="on"</code></td>
@@ -149,4 +149,4 @@
 - Example: `%SEARCH{"wiki" web="Main" scope="topic"}%`
 - Example with format: `%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%` _(displays results in a table with header - [[details|Main/FormattedSearch]])_
 - %H% Hint: If the TWiki:Plugins.TablePlugin is installed, you may set a `%TABLE{}%` variable just before the `%SEARCH{}%` to alter the output of a search. Example: `%TABLE{ tablewidth="90%" }%`
-- Related: [[METASEARCH|Main/WebHome#VarMETASEARCH]], [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[WEBLIST|Main/WebHome#VarWEBLIST]], [[FormattedSearch]]
+- Related: [[METASEARCH|Main/WebHome#VarMETASEARCH]], [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[WEBLIST|Main/WebHome#VarWEBLIST]], [[FormattedSearch]], [[SearchHelp]], [[SearchPatternCookbook]], [[RegularExpression]]

@@ -1,0 +1,14 @@
+# <a name="Package &lt;code&gt;="></a> Package =
+
+<div>
+  <ul>
+    <li><a href="#Package =="> Package ==</a><ul>
+        <li><a href="#StaticMethod <strong>_unpackArchive</strong> ($"> StaticMethod _unpackArchive <tt>($archive[,$dir])</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="StaticMethod &lt;strong&gt;_unpackArchive&lt;/strong&gt; ($"></a> [[StaticMethod]] **\_unpackArchive** `($archive[,$dir])`
+
+Unpack an archive. The unpacking method is determined from the file extension e.g. .zip, .tgz. .tar, etc. If $dir is not given, unpack to a temporary directory, the name of which is returned.

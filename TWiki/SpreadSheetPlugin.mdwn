@@ -85,9 +85,12 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#LISTITEM( index, list ) -- get o"> LISTITEM( index, list ) -- get one element of a list</a></li>
         <li><a href="#LISTJOIN( separator, list ) -- c"> LISTJOIN( separator, list ) -- convert a list into a string</a></li>
         <li><a href="#LISTMAP( formula, list ) -- eval"> LISTMAP( formula, list ) -- evaluate and update each element of a list</a></li>
+        <li><a href="#LISTRAND( list ) -- get one rand"> LISTRAND( list ) -- get one random element of a list</a></li>
         <li><a href="#LISTREVERSE( list ) -- opposite"> LISTREVERSE( list ) -- opposite order of a list</a></li>
         <li><a href="#LISTSIZE( list ) -- number of el"> LISTSIZE( list ) -- number of elements in a list</a></li>
+        <li><a href="#LISTSHUFFLE( list ) -- shuffle e"> LISTSHUFFLE( list ) -- shuffle element of a list in random order</a></li>
         <li><a href="#LISTSORT( list ) -- sort a list"> LISTSORT( list ) -- sort a list</a></li>
+        <li><a href="#LISTTRUNCATE( size, list ) -- tr"> LISTTRUNCATE( size, list ) -- truncate list to size</a></li>
         <li><a href="#LISTUNIQUE( list ) -- remove all"> LISTUNIQUE( list ) -- remove all duplicates from a list</a></li>
         <li><a href="#LOWER( text ) -- lower case stri"> LOWER( text ) -- lower case string of a text</a></li>
         <li><a href="#MAX( list ) - biggest value of a"> MAX( list ) - biggest value of a list or range of cells</a></li>
@@ -104,7 +107,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#PROPER( text ) -- properly capit"> PROPER( text ) -- properly capitalize text</a></li>
         <li><a href="#PROPERSPACE( text ) -- properly"> PROPERSPACE( text ) -- properly space out WikiWords</a></li>
         <li><a href="#RAND( max ) -- random number"> RAND( max ) -- random number</a></li>
-        <li><a href="#REPEAT(text) -- repeat text a nu"> REPEAT(text) -- repeat text a number of times</a></li>
+        <li><a href="#REPEAT( text, num ) -- repeat te"> REPEAT( text, num ) -- repeat text a number of times</a></li>
         <li><a href="#REPLACE( text, start, num, new )"> REPLACE( text, start, num, new ) -- replace part of a text string</a></li>
         <li><a href="#RIGHT( ) -- address range of cel"> RIGHT( ) -- address range of cells to the right of the current cell</a></li>
         <li><a href="#ROUND( formula, digits ) -- roun"> ROUND( formula, digits ) -- round a number</a></li>
@@ -128,6 +131,11 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#UPPER( text ) -- upper case stri"> UPPER( text ) -- upper case string of a text</a></li>
         <li><a href="#VALUE( text ) -- convert text to"> VALUE( text ) -- convert text to number</a></li>
         <li><a href="#WORKINGDAYS( serial_1, serial_2"> WORKINGDAYS( serial_1, serial_2 ) -- working days between two serialized dates</a></li>
+      </ul>
+    </li>
+    <li><a href="#FAQ"> FAQ</a><ul>
+        <li><a href="#Can I use CALC in a formatted se"> Can I use CALC in a formatted search?</a></li>
+        <li><a href="#How can I easily repeat a formul"> How can I easily repeat a formula in a table?</a></li>
       </ul>
     </li>
     <li><a href="#Bug Tracking Example"> Bug Tracking Example</a></li>
@@ -401,7 +409,7 @@ Conventions for Syntax:
 - Convert the content of a range of cells into a flat list, delimited by comma. Cells containing commas are merged into the list
 - Syntax: <code>**$LIST( range )**</code>
 - Example: <code>**%CALC\{"$LIST($LEFT())"\}%**</code> returns <code>**Apples, Lemons, Oranges, Kiwis**</code> assuming the cells to the left contain <code>**| Apples | Lemons, Oranges | Kiwis |**</code>
-- Related: <code>[[$AVERAGE()|Main/WebHome#FuncAVERAGE]]</code>, <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$DEF()|Main/WebHome#FuncDEF]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTJOIN()|Main/WebHome#FuncLISTJOIN]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
+- Related: <code>[[$AVERAGE()|Main/WebHome#FuncAVERAGE]]</code>, <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$DEF()|Main/WebHome#FuncDEF]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTJOIN()|Main/WebHome#FuncLISTJOIN]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTRAND()|Main/WebHome#FuncLISTRAND]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSHUFFLE()|Main/WebHome#FuncLISTSHUFFLE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTTRUNCATE()|Main/WebHome#FuncLISTTRUNCATE]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>, <code>[[$PRODUCT()|Main/WebHome#FuncPRODUCT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>, <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$SUMPRODUCT()|Main/WebHome#FuncSUMPRODUCT]]</code>
 
 <a name="FuncLISTIF"></a>
 
@@ -422,7 +430,7 @@ Conventions for Syntax:
 - Syntax: <code>**$LISTITEM( index, list )**</code>
 - Example: <code>**%CALC\{"$LISTITEM(2, Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Orange**</code>
 - Example: <code>**%CALC\{"$LISTITEM(-1, Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Kiwi**</code>
-- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTRAND()|Main/WebHome#FuncLISTRAND]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncLISTJOIN"></a>
 
@@ -442,6 +450,14 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$LISTMAP($index: $EVAL(2 \* $item), 3, 5, 7, 11)"\}%**</code> returns <code>**1: 6, 2: 10, 3: 14, 4: 22**</code>
 - Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
+<a name="FuncLISTRAND"></a>
+
+### <a name="LISTRAND( list ) -- get one rand"></a> LISTRAND( list ) -- get one random element of a list
+
+- Syntax: <code>**$LISTRAND( list )**</code>
+- Example: <code>**%CALC\{"$LISTRRAND(Apple, Orange, Apple, Kiwi)"\}%**</code> returns one of the four elements
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTSHUFFLE()|Main/WebHome#FuncLISTSHUFFLE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$RAND()|Main/WebHome#FuncRAND]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
 <a name="FuncLISTREVERSE"></a>
 
 ### <a name="LISTREVERSE( list ) -- opposite"></a><a name="LISTREVERSE( list ) -- opposite "></a> LISTREVERSE( list ) -- opposite order of a list
@@ -456,7 +472,15 @@ Conventions for Syntax:
 
 - Syntax: <code>**$LISTSIZE( list )**</code>
 - Example: <code>**%CALC\{"$LISTSIZE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**4**</code>
-- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTJOIN()|Main/WebHome#FuncLISTJOIN]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTJOIN()|Main/WebHome#FuncLISTJOIN]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTTRUNCATE()|Main/WebHome#FuncLISTTRUNCATE]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTSHUFFLE"></a>
+
+### <a name="LISTSHUFFLE( list ) -- shuffle e"></a> LISTSHUFFLE( list ) -- shuffle element of a list in random order
+
+- Syntax: <code>**$LISTSHUFFLE( list )**</code>
+- Example: <code>**%CALC\{"$LISTSHUFFLE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns the four elements in random order
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTRAND()|Main/WebHome#FuncLISTRAND]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$RAND()|Main/WebHome#FuncRAND]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncLISTSORT"></a>
 
@@ -465,7 +489,16 @@ Conventions for Syntax:
 - Sorts a list in ASCII order, or numerically if all elements are numeric
 - Syntax: <code>**$LISTSORT( list )**</code>
 - Example: <code>**%CALC\{"$LISTSORT(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Apple, Apple, Kiwi, Orange**</code>
-- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSHUFFLE()|Main/WebHome#FuncLISTSHUFFLE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+
+<a name="FuncLISTTRUNCATE"></a>
+
+### <a name="LISTTRUNCATE( size, list ) -- tr"></a> LISTTRUNCATE( size, list ) -- truncate list to size
+
+- Specify the desired size of the list; use a negative number to count from the end of the list
+- Syntax: <code>**$LISTTRUNCATE( size, list )**</code>
+- Example: <code>**%CALC\{"$LISTTRUNCATE(2, Apple, Orange, Kiwi)"\}%**</code> returns <code>**Apple, Orange**</code>
+- Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncLISTUNIQUE"></a>
 
@@ -598,13 +631,13 @@ Conventions for Syntax:
 
 - Random number, evenly distributed between 0 and <code>**max**</code>, or 0 and 1 if max is not specified
 - Syntax: <code>**$RAND( max )**</code>
-- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>
+- Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$LISTRAND()|Main/WebHome#FuncLISTRAND]]</code>, <code>[[$LISTSHUFFLE()|Main/WebHome#FuncLISTSHUFFLE]]</code>
 
 <a name="FuncREPEAT"></a>
 
-### <a name="REPEAT(text) -- repeat text a nu"></a> REPEAT(text) -- repeat text a number of times
+### <a name="REPEAT( text, num ) -- repeat te"></a> REPEAT( text, num ) -- repeat text a number of times
 
-- Syntax: <code>**$REPEAT( text )**</code>
+- Syntax: <code>**$REPEAT( text, num )**</code>
 - Example: <code>**%CALC\{"$REPEAT(/\\, 5)"\}%**</code> returns <code>**/\\/\\/\\/\\/\\**</code>
 
 <a name="FuncREPLACE"></a>
@@ -820,6 +853,27 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$WORKINGDAYS($TIME(2004/07/15), $TIME(2004/08/03))"\}%**</code> returns <code>**13**</code>
 - Related: <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>
 
+## <a name="FAQ"></a> FAQ
+
+### <a name="Can I use CALC in a formatted se"></a> Can I use CALC in a formatted search?
+
+Specifically, how can I output some conditional text in a [[FormattedSearch]]?
+
+You need to escape the CALC so that it executes once per search hit. This can be done by escaping the `%` signs of `%CALC{...}%` with `$percnt`. For example, to execute `$IF($EXACT($formfield(Tested), Yes), %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-yes.gif, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-no.gif)` in the `format=""` parameter, write this:
+
+`%SEARCH{ .... format="| $topic | $percntCALC{$IF($EXACT($formfield(Tested), Yes), %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-yes.gif, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-no.gif)}$percnt |" }%`
+
+### <a name="How can I easily repeat a formul"></a> How can I easily repeat a formula in a table?
+
+To repeat the same formula in all cells of a table row define the formula once in a preferences setting and use that in the CALC. The preferences setting can be hidden in HTML comments. Example:
+
+    <!--
+       * Set MYFORMULA = $EVAL($SUBSTITUTE(...etc...))
+    -->
+    | A | 1 | %CALC{%MYFORMULA%}% |
+    | B | 2 | %CALC{%MYFORMULA%}% |
+    | C | 3 | %CALC{%MYFORMULA%}% |
+
 ## <a name="Bug Tracking Example"></a> Bug Tracking Example
 
 <table border="1" cellpadding="0" cellspacing="0">
@@ -881,7 +935,7 @@ Above table is created manually. Another Plugin could build the table dynamicall
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%SPREADSHEETPLUGIN\_SHORTDESCRIPTION%**</code>
 
 - One line description, is shown in the [[TextFormattingRules]] topic:
-  - Set SHORTDESCRIPTION = Add spreadsheet calculation like `"$SUM( $ABOVE() )"` to tables located in %WIKITOOLNAME% topics.
+  - Set SHORTDESCRIPTION = Add spreadsheet calculation like `"$SUM( $ABOVE() )"` to TWiki tables and other topic text
 
 - Debug plugin: (See output in `data/debug.txt`)
   - Set DEBUG = 0
@@ -935,11 +989,19 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 13 May 2006 (10197) </td>
+    <td> 18 Dec 2006 (r12315) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 18 Dec 2006: </td>
+    <td> Added $LISTRAND(), $LISTSHUFFLE(), $LISTTRUNCATE(); fixed spurious newline at end of topic, contributed by TWiki:Main/MichaelDaum </td>
+  </tr>
+  <tr>
+    <td align="right"> 10 Oct 2006: </td>
+    <td> Enhanced documentation </td>
   </tr>
   <tr>
     <td align="right"> 13 May 2006: </td>
@@ -1097,4 +1159,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 13 May 2006
+-- TWiki:Main/PeterThoeny - 18 Dec 2006

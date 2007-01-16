@@ -4,7 +4,7 @@
   <h1><a name="%WIKITOOLNAME% Site-Level Prefer"></a><a name=" %WIKITOOLNAME% Site-Level Prefe"></a> %WIKITOOLNAME% Site-Level Preferences </h1>
   <p> This topic defines <strong><em>site-level</em></strong> settings that apply to all users and webs on this [[Main/TWikiSite]]. </p>
   <p><strong><em>%X% Note:</em></strong> This topic should be regarded as read-only, so that upgrades can safely overwrite it without risk to your customizations. </p>
-  <p> Preference settings local to your site should be set in [[Main/TWikiPreferences]] (this topic is pointed to by {LocalSitePreferences}, which is set by the admin in the <code>configure</code> interface). Settings in [[Main/TWikiPreferences]] will override settings in this topic, and should be used for defining custom settings and variables. </p>
+  <p> Preference settings local to your site should be set in [[Main/TWikiPreferences]] (this topic is pointed to by {LocalSitePreferences}, which is set by the admin in the <a href="http://www.dementia.org/twiki/configure" target="_top">configure</a> interface). Settings in [[Main/TWikiPreferences]] will override settings in this topic, and should be used for defining custom settings and variables. </p>
   <p>[[Main/TWikiVariables#PreferencesVariables]] on how to set Preferences Variables. </p>
   <p>
   </p><input name="prefsaction" type="submit" value="Edit" /> <em>(Click for form-based editing of existing preferences.)</em><div>
@@ -134,6 +134,10 @@
   <ul>
     <li> Some skins have two editors available; the default editor, and a second editor which is usually a WYSIWYG editor (the second editor is used by hitting the WYSIWYG link in <code>pattern</code> or <code>classic</code> skins). If COMPOSER is not set, the second editor will work the same as the <em>default</em> editor. If the WysiwygPlugin is installed and it is set to 'kupu' (the default), then the <strong>Kupu</strong> WYSIWYG editor will be enabled. You can change the setting to use any editor that is enabled by setting the <code>cover</code> parameter on the edit URL. <ul>
         <li> Set COMPOSER = kupu </li>
+        <li> Enable content checks before editing </li>
+        <li> Set WYSWIYGPLUGIN_WYSIWYGSKIN = kupu </li>
+        <li> Disable WYSIWYG on pages that contain complex TML. On pages that have complex TML, WYSIWYG will fall back to the default text editor. </li>
+        <li> Set WYSIWYG_EXCLUDE = calls </li>
       </ul>
     </li>
   </ul>
@@ -199,11 +203,11 @@
   <ul>
     <li> Format of images when the <strong><em>link</em></strong> check box is checked: (can be overwritten by user preferences) <ul>
         <li> %H% <strong>NOTE:</strong> Keyword <code><b>$name</b></code> gets expanded to filename; <code><b>$comment</b></code> to comment; <code><b>$size</b></code> to <code><b>width="..." height="..."</b></code> attribute of <code><b>img</b></code> tag; <code><b>\t</b></code> to tab and <code><b>\n</b></code> to linefeed (3 spaces for bullets). </li>
-        <li> Set ATTACHEDIMAGEFORMAT = \n * $comment: <br />\n <img $size="$size" alt="$name" src="http://www.dementia.org/twiki//view/$name" /></li>
       </ul>
     </li>
-  </ul>
-  <p>
+  </ul><pre>
+      * Set ATTACHEDIMAGEFORMAT = \n   * $comment: &lt;br /&gt;\n     &lt;img src="%ATTACHURLPATH%/$name" alt="$name" $size /&gt;
+</pre><p>
   </p>
   <h2><a name="TWiki Platform Settings"></a> TWiki Platform Settings </h2>
   <p>
@@ -303,22 +307,6 @@
   <p>
   </p>
   <ul>
-    <li> TWiki administrator e-mail address: <ul>
-        <li> Set WIKIWEBMASTER = <a href="mailto:webmaster@example.com">webmaster@example.com</a></li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> TWiki administrator name (first name and last name, e.g. <code>Fred Smith</code>): <ul>
-        <li> Set WIKIWEBMASTERNAME = TWiki Administrator </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
     <li> 'Mail this topic' mailto: link - can be included in topics, templates or skins <ul>
         <li> Set MAILTHISTOPIC = <a href="mailto:?subject=WebHome&body=%TOPICURL%">%MAILTHISTOPICTEXT%</a></li>
       </ul>
@@ -399,18 +387,23 @@
 ### <a name="Legacy support"></a> Legacy support
 
 - Support for legacy "EDITTOPIC", used to be hard-coded, now replaced by TMPL:P conditional instantiation
-  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827220>
+  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827363>
   - Set EDITTOPIC = [Edit](%EDITURL% Edit Topic - deprecated usage - please see release notes)
 
 ## <a name="Plugins Settings"></a> Plugins Settings
 
 - You can enable/disable Plugins using the [configure](http://www.dementia.org/twiki/configure) interface.
+- You can also disable installed plugins in individual webs/topics by defining the %DISABLEDPLUGINS% TWiki variable to be a list of plugins to disable e.g.
+  - Set DISABLEDPLUGINS = [[SpreadSheetPlugin]],EditTablePlugin
+  - Currently, %DISABLEDPLUGINS% is set to "%DISABLEDPLUGINS%"
 - Currently activated Plugins: [[SpreadSheetPlugin]], [[CommentPlugin]], [[EditTablePlugin]], [[InterwikiPlugin]], [[PreferencesPlugin]], [[SlideShowPlugin]], [[SmiliesPlugin]], [[TablePlugin]], [[TwistyPlugin]]
+
 - %T% **NOTE:** You can enable/disable Plugins by passing a comma-separated list of Plugin names in the `debugenableplugins` url parameter; for example, [[http://www.dementia.org/twiki/view/%WEB%/%TOPIC%?debugenableplugins=SmiliesPlugin|%WEB%/%TOPIC%?debugenableplugins=SmiliesPlugin]] will display this topic with all Plugins disabled except the [[SmiliesPlugin]].
 - Detailed diagnostics can be found in [[InstalledPlugins]]
 - Legacy settings:
-  - Set DISABLEDPLUGINS = The DISABLEDPLUGINS variable is no longer supported
   - Set INSTALLEDPLUGINS = The INSTALLEDPLUGINS variable is no longer supported. You can set the Plugins execution order using the [configure](http://www.dementia.org/twiki/configure) interface.
+
+<a name="RenderingShortcuts"></a>
 
 ## <a name="Rendering Shortcuts Settings"></a> Rendering Shortcuts Settings
 
@@ -420,11 +413,31 @@
 - Bullet sign:
   - Set BULLET = •
 
+- Vertical bar / pipe symbol:
+  - Set VBAR = |
+
 - Line break and bullet with different levels of indentation:
   - Set BB = <br />•
   - Set BB2 = <br />  •
   - Set BB3 = <br />    •
   - Set BB4 = <br />      •
+
+- **_Hint:_** Above shortcuts are useful in TWiki tables where you cannot use newlines
+
+<a name="DocGraphics"></a>
+
+- Graphics used in TWiki documentation - view all images in %ICONTOPIC%. _(There are various ways to set up common icons as text variables. This is simply one quick approach.)_:
+  - Set H = <img src="http://www.dementia.org/twiki//view/Main/WebHome/help.gif" width="16" height="16" alt="HELP" title="HELP" />
+  - Set I = <img src="http://www.dementia.org/twiki//view/Main/WebHome/tip.gif" width="16" height="16" alt="IDEA!" title="IDEA!" />
+  - Set M = <img src="http://www.dementia.org/twiki//view/Main/WebHome/arrowright.gif" width="16" height="16" alt="MOVED TO..." title="MOVED TO..." />
+  - Set N = <img src="http://www.dementia.org/twiki//view/Main/WebHome/new.gif" width="30" height="16" alt="NEW" title="NEW" />
+  - Set P = <img src="http://www.dementia.org/twiki//view/Main/WebHome/pencil.gif" width="16" height="16" alt="REFACTOR" title="REFACTOR" />
+  - Set Q = <img src="http://www.dementia.org/twiki//view/Main/WebHome/help.gif" width="16" height="16" alt="QUESTION?" title="QUESTION?" />
+  - Set S = <img src="http://www.dementia.org/twiki//view/Main/WebHome/starred.gif" width="16" height="16" alt="PICK" title="PICK" />
+  - Set T = <img src="http://www.dementia.org/twiki//view/Main/WebHome/tip.gif" width="16" height="16" alt="TIP" title="TIP" />
+  - Set U = <img src="http://www.dementia.org/twiki//view/Main/WebHome/updated.gif" width="55" height="16" alt="UPDATED" title="UPDATED" />
+  - Set X = <img src="http://www.dementia.org/twiki//view/Main/WebHome/warning.gif" width="16" height="16" alt="ALERT!" title="ALERT!" />
+  - Set Y = <img src="http://www.dementia.org/twiki//view/Main/WebHome/choice-yes.gif" width="16" height="16" alt="DONE" title="DONE" />
 
 - Colored text: (see more [[StandardColors]]) <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -477,37 +490,28 @@
           * Set WHITE = <font color="#ffffff">
           * Set ENDCOLOR = </font>
 
-<a name="DocGraphics"></a>
-
-- Graphics used in TWiki documentation - view all images in %ICONTOPIC%. _(There are various ways to set up common icons as text variables. This is simply one quick approach.)_:
-  - Set H = <img src="http://www.dementia.org/twiki//view/Main/WebHome/help.gif" width="16" height="16" alt="HELP" title="HELP" />
-  - Set I = <img src="http://www.dementia.org/twiki//view/Main/WebHome/tip.gif" width="16" height="16" alt="IDEA!" title="IDEA!" />
-  - Set M = <img src="http://www.dementia.org/twiki//view/Main/WebHome/arrowright.gif" width="16" height="16" alt="MOVED TO..." title="MOVED TO..." />
-  - Set N = <img src="http://www.dementia.org/twiki//view/Main/WebHome/new.gif" width="30" height="16" alt="NEW" title="NEW" />
-  - Set P = <img src="http://www.dementia.org/twiki//view/Main/WebHome/pencil.gif" width="16" height="16" alt="REFACTOR" title="REFACTOR" />
-  - Set Q = <img src="http://www.dementia.org/twiki//view/Main/WebHome/help.gif" width="16" height="16" alt="QUESTION?" title="QUESTION?" />
-  - Set S = <img src="http://www.dementia.org/twiki//view/Main/WebHome/starred.gif" width="16" height="16" alt="PICK" title="PICK" />
-  - Set T = <img src="http://www.dementia.org/twiki//view/Main/WebHome/tip.gif" width="16" height="16" alt="TIP" title="TIP" />
-  - Set U = <img src="http://www.dementia.org/twiki//view/Main/WebHome/updated.gif" width="55" height="16" alt="UPDATED" title="UPDATED" />
-  - Set X = <img src="http://www.dementia.org/twiki//view/Main/WebHome/warning.gif" width="16" height="16" alt="ALERT!" title="ALERT!" />
-  - Set Y = <img src="http://www.dementia.org/twiki//view/Main/WebHome/choice-yes.gif" width="16" height="16" alt="DONE" title="DONE" />
-
 ## <a name="Miscellaneous Settings"></a> Miscellaneous Settings
 
-- Background color of non existing topic: ( default `cornsilk` or `#FFFFCE` )
-  - Set NEWTOPICBGCOLOR = #FFFFCE
-
-- Font color of non existing topic: ( default `#0000FF` )
-  - Set NEWTOPICFONTCOLOR = #0000FF
+- Format of a [[NewWikiWord]] link: %BR%
+  - default setting:
+    - Set NEWLINKFORMAT = <span>$text[?](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% Create this topic)</span>
+  - alternative setting:
+    - #Set NEWLINKFORMAT = [$text](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% Create this topic)
 
 - [[PreviewBackground]] image:
   - Set PREVIEWBGIMAGE = ![preview2bg.gif](http://www.dementia.org/twiki//view/TWiki/PreviewBackground/preview2bg.gif)
+
+- User-friendly synonyms for MAINWEB and TWIKIWEB
+  - Set USERSWEB = Main
+  - Set SYSTEMWEB = TWiki
+  - Set DOCWEB = TWiki
 
 ## <a name="Access Control Settings"></a> Access Control Settings
 
 - Users or groups allowed to change or rename this %TOPIC% topic:
   - Set ALLOWTOPICCHANGE = [[TWikiAdminGroup]]
-  - Set ALLOWTOPICRENAME = [[TWikiAdminGroup]]
+- By default, only admins can create webs in the root
+  - Set ALLOWROOTCHANGE = [[TWikiAdminGroup]]
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 

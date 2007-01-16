@@ -1,11 +1,10 @@
 # <a name="Create New Topic in Main Web"></a> Create New Topic in Main Web
 
-<form action="http://www.dementia.org/twiki/edit/Main/" id="newtopic" name="newtopic" onsubmit="return canSubmit(this,true);">
-  <div>
+<form action="http://www.dementia.org/twiki/edit/Main/" id="newtopic" name="newtopic" onsubmit="return canSubmit(this,true);"><input name="onlywikiname" type="hidden" /><input name="onlynewtopic" type="hidden" value="on" /><div>
     <div>
       <h3><a name="Topic name:"></a> Topic name: </h3>
       <p>
-      </p><input id="topic" name="topic" onblur="canSubmit(this.form,true);" onchange="canSubmit(this.form,false);" onkeyup="canSubmit(this.form,false);" size="40" tabindex="10" type="text" value="" /> <span id="webTopicCreatorFeedback"></span><p>
+      </p><input id="topic" name="topic" onblur="canSubmit(this.form,true);" onchange="canSubmit(this.form,false);" onkeyup="canSubmit(this.form,false);" size="40" tabindex="10" type="text" /> <span id="webTopicCreatorFeedback"></span><p>
       </p><input id="nonwikiword" name="nonwikiword" onchange="canSubmit(this.form,false);" onmouseup="canSubmit(this.form,false);" tabindex="11" type="checkbox" /><label for="nonwikiword">Allow non WikiWord for the new topic name</label>
       <br /><span>It's usually best to choose a <a href="TWiki" onclick="return launchWindow('TWiki','WikiWord')" rel="nofollow" target="WikiWord">WikiWord</a> for the new topic name, otherwise automatic linking may not work. Characters not allowed in topic names, such as spaces will automatically be removed.</span></div>
     <div>
@@ -15,9 +14,17 @@
         </p>
         <option value="">(no parent, orphaned topic)</option></select></div>
     <div>
+      <h3><a name="Use template:"></a> Use template: </h3>
+      <p>
+      </p><select name="templatetopic"><option value="TWiki.WebTopicEditTemplate">Default template</option>
+        <h1>TWiki Installation Error</h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)</select> [[TWiki/WebTemplateTopics?web=Main]]</div>
+    <div>
       <p>
       </p><input id="submit" tabindex="13" type="submit" value="Create this topic" /></div>
-  </div><input name="onlywikiname" type="hidden" /> <input name="onlynewtopic" type="hidden" value="on" /></form>
+  </div>
+  <p>
+  </p>
+</form>
 
 %BR%
 

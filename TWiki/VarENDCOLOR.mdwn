@@ -1,0 +1,9 @@
+<a name="VarENDCOLOR"></a>
+
+### <a name="ENDCOLOR -- end colored text"></a> ENDCOLOR -- end colored text
+
+- `ENDCOLOR` is a rendering shortcut settings predefined in [[TWikiPreferences]]. See the section [[rendering shortcut settings|Main/TWikiPreferences#RenderingShortcuts]] in that topic for a complete list of colors.
+- Syntax: `%RED% red text %ENDCOLOR%`
+- Expands to: %RED% red text %ENDCOLOR%
+- **_Note:_** `%<color>%` text must end with `%ENDCOLOR%`. If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
+- Related: [[VarAQUA|Main/TWikiVariables#VarAQUA]], [[VarBLACK|Main/TWikiVariables#VarBLACK]], [[VarBLUE|Main/TWikiVariables#VarBLUE]], [[VarBROWN|Main/TWikiVariables#VarBROWN]], [[VarGRAY|Main/TWikiVariables#VarGRAY]], [[VarGREEN|Main/TWikiVariables#VarGREEN]], [[VarLIME|Main/TWikiVariables#VarLIME]], [[VarMAROON|Main/TWikiVariables#VarMAROON]], [[VarNAVY|Main/TWikiVariables#VarNAVY]], [[VarOLIVE|Main/TWikiVariables#VarOLIVE]], [[VarORANGE|Main/TWikiVariables#VarORANGE]], [[VarPINK|Main/TWikiVariables#VarPINK]], [[VarPURPLE|Main/TWikiVariables#VarPURPLE]], [[VarRED|Main/TWikiVariables#VarRED]], [[VarSILVER|Main/TWikiVariables#VarSILVER]], [[VarTEAL|Main/TWikiVariables#VarTEAL]], [[VarWHITE|Main/TWikiVariables#VarWHITE]], [[VarYELLOW|Main/TWikiVariables#VarYELLOW]], [[TWikiPreferences|Main/TWikiPreferences#RenderingShortcuts]], [[StandardColors]]

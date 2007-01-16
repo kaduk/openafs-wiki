@@ -8,6 +8,7 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
 
 - Inter-Site links are defined in the tables below.
 - Each entry must be of format: <br /><code>**| External site alias | URL | Tooltip help text |**</code>.
+- The Alias must start with an upper case letter and may contain alphanumeric letters.
 - The URL and Tooltip Text may contain optional <code>**$page**</code> variables; the variable gets expanded to the page name.
 - **_Note:_** The Tooltip Text must not contain any HTML tags (including <code>**&lt;nop&gt;**</code> escape code), no internal [[WikiWord]] links, and no external links. Hint: Escape <code>**'WikiWords'**</code> and <code>**'$page'**</code>.
 

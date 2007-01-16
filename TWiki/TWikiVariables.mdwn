@@ -57,11 +57,11 @@ Unlike predefined variables, preferences variables can be defined by the user in
 You can set variables in all the following places:
 
 1. local site level in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]]
-2. local site level in [[Main.TWikiPreferences|Main/TWikiPreferences]]
-3. user level in individual user topics in Main web
-4. web level in [[WebPreferences]] of each web
-5. topic level in topics in webs
-6. plugin topics (see [[TWikiPlugins]])
+2. plugin topics (see [[TWikiPlugins]])
+3. local site level in [[Main.TWikiPreferences|Main/TWikiPreferences]]
+4. user level in individual user topics in Main web
+5. web level in [[WebPreferences]] of each web
+6. topic level in topics in webs
 7. session variables (if sessions are enabled)
 
 Settings at higher-numbered levels override settings of the same variable at lower numbered levels, unless the variable was included in the setting of FINALPREFERENCES at a lower-numbered level, in which case it is locked at the value it has at that level.

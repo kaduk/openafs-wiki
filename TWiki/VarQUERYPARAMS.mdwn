@@ -1,0 +1,46 @@
+<a name="VarINCLUDE"></a>
+
+### <a name="QUERYPARAMS -- show paramaters t"></a> QUERYPARAMS -- show paramaters to the query
+
+- Expands the parameters to the query that was used to display the page.
+- Syntax: `%QUERYPARAMS{...}%`
+- Parameters:
+  - `format="..."` format string for each entry, default `$name=$value`
+  - `separator="..."` separator string, default `separator="$n"` (newline)
+- The following escape sequences are expanded in the format string: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Sequence: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$name</code></td>
+    <td> Name of the parameter </td>
+  </tr>
+  <tr>
+    <td><code>$value</code></td>
+    <td> String value of the parameter. Multi-valued parameters will have a "row" for each value. </td>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>
+- Example:
+  - `%QUERYPARAMS{format="<input type='hidden' name='$name' value='$percntENCODE{$quot()$value$quot type=$quot()html$quot}$percnt' />"}%`
+- See also [[QUERYSTRING|Main/VarQUERYSTRING]], [[URLPARAM|Main/WebHome#VarURLPARAM]]

@@ -22,6 +22,8 @@ This module packages the [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.
 
 Read [the Mishoo documentation](http://www.dementia.org/twiki//view/doc/html/reference.html) or [visit the demo page](http://www.dementia.org/twiki//view).
 
+This package provides a `renderFormFieldForEditHandler` that could be invoked by a plugin to ensure that forms use the [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl) for editing.
+
 This package also includes a small Perl module to make using the calendar easier from TWiki plugins. This module includes the function:
 
     addHEAD( $setup )
@@ -445,6 +447,24 @@ Note that the header will only be added once, regardless of the number of times 
 </table>
 
 - Make sure that all files are readable by the web server user
+- An administrator can customize the appearance of the calendar by setting the following in `LocalSite.cfg`<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Setting </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default </strong></th>
+  </tr>
+  <tr>
+    <td><code>$TWiki::cfg{JSCalendarContrib}{style}</code></td>
+    <td><code>'blue'</code></td>
+  </tr>
+  <tr>
+    <td><code>$TWiki::cfg{JSCalendarContrib}{lang}</code></td>
+    <td><code>'en'</code></td>
+  </tr>
+  <tr>
+    <td><code>$TWiki::cfg{JSCalendarContrib}{format}</code></td>
+    <td><code>'%e %b %Y'</code></td>
+  </tr>
+</table>
 
 ### <a name="Contrib Info"></a> Contrib Info
 
@@ -455,7 +475,7 @@ Note that the header will only be added once, regardless of the number of times 
   </tr>
   <tr>
     <td align="right"> Version: </td>
-    <td> 10613 of the Mishoo calendar </td>
+    <td> 11704 of the Mishoo calendar </td>
   </tr>
   <tr>
     <td align="right"> Copyright ©: </td>
@@ -465,11 +485,6 @@ Note that the header will only be added once, regardless of the number of times 
     <td align="right"> License: </td>
     <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
   </tr>
-</table>
-
-|
-
-<table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Dependencies: </td>
     <td> None </td>
@@ -477,6 +492,14 @@ Note that the header will only be added once, regardless of the number of times 
   <tr>
     <td> Change History: </td>
     <td>   </td>
+  </tr>
+  <tr>
+    <td> 11594 </td>
+    <td> Allow format to be configured. </td>
+  </tr>
+  <tr>
+    <td> 11415 </td>
+    <td> Add a <code>renderFormFieldForEditHandler</code> so other plugins can forward to this handler to add the date field to the [[Main/TWikiForms]]. (TWiki:Main.ThomasWeigert) </td>
   </tr>
   <tr>
     <td> 10247 </td>

@@ -2,22 +2,6 @@
 
 Support for compatibility with old TWiki versions. Packaged separately because 99.999999% of the time this won't be needed.
 
-=end
-
-sub \_upgradeCategoryItem \{ my ( $catitems, $ctext ) = @\_; my $catname = ''; my $scatname = ''; my $catmodifier = ''; my $catvalue = ''; my @cmd = split( /\\|/, $catitems ); my $src = ''; my $len = @cmd; if( $len &lt; '2' ) \{ # FIXME return ( $catname, $catmodifier, $catvalue ) \} my $svalue = '';
-
-my $i; my $itemsPerLine;
-
-# check for [[CategoryName]]=CategoryValue parameter my $paramCmd = ''; my $cvalue = ''; # was$query-&gt;param( $cmd[1] ); if( $cvalue ) \{ $src = "$cvalue"; \} elsif( $ctext ) \{ foreach( split( /\\r?\\n/, $ctext ) ) \{ if( /$cmd[1]/ ) \{ $src = $\_; last; \} \} \}
-
-if( $cmd[0] eq 'select' || $cmd[0] eq 'radio') \{ $catname = $cmd[1]; $scatname = $catname; #$scatname =~ s/[^a-zA-Z0-9]//g; my $size = $cmd[2]; for( $i = 3; $i &lt; $len; $i++ ) \{ my $value = $cmd[$i]; $svalue = $value; if( $src =~ /$value/ ) \{ $catvalue = $svalue; \} \}
-
-\} elsif( $cmd[0] eq 'checkbox' ) \{ $catname = $cmd[1]; $scatname = $catname; #$scatname =~ s/[^a-zA-Z0-9]//g; if( $cmd[2] eq 'true' || $cmd[2] eq '1' ) \{ $i = $len - 4; $catmodifier = 1; \} $itemsPerLine = $cmd[3]; for( $i = 4; $i &lt; $len; $i++ ) \{ my $value = $cmd[$i]; $svalue = $value; # [[I18N]]: FIXME - need to look at this, but since it's upgrading # old forms that probably didn't use [[I18N]], it's not a high # priority. if( $src =~ /$value[^a-zA-Z0-9\\.]/ ) \{ $catvalue .= ", " if( $catvalue ); $catvalue .= $svalue; \} \}
-
-\} elsif( $cmd[0] eq 'text' ) \{ $catname = $cmd[1]; $scatname = $catname; #$scatname =~ s/[^a-zA-Z0-9]//g; $src =~ /(.\*)/; if( $1 ) \{ $src = $1; \} else \{ $src = ''; \} $catvalue = $src; \}
-
-return ( $catname, $catmodifier, $catvalue ) \}
-
 <div>
   <ul>
     <li><a href="#Package =TWiki::Compatibility="> Package TWiki::Compatibility</a><ul>

@@ -168,7 +168,7 @@ The SEARCH variable has many more formatting options, see [[TWikiVariables]].
 Here are the last 15 changed pages, formatted into a neat table.
 
     <table>
-    %SEARCH{ "\.*" scope="topic" regex="on" nosearch="on" nototal="on" order="modified" reverse="on"  format="<tr><td>  [[$topic][$topic]] </td><td>  $wikiusername  </td><td> $date  </td></tr>" limit="15" }%
+    %SEARCH{ "\.*" scope="topic" type="regex" nosearch="on" nototal="on" order="modified" reverse="on"  format="<tr><td>  [[$topic][$topic]] </td><td>  $wikiusername  </td><td> $date  </td></tr>" limit="15" }%
     </table>
 
 ----

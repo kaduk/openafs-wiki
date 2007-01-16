@@ -1,0 +1,9 @@
+<a name="VarOLIVE"></a>
+
+### <a name="OLIVE -- start olive green color"></a> OLIVE -- start olive green colored text
+
+- `OLIVE` is one of the rendering shortcut settings predefined in [[TWikiPreferences]]. See the section [[rendering shortcut settings|Main/TWikiPreferences#RenderingShortcuts]] in that topic for a complete list of colors.
+- Syntax: `%OLIVE% olive text %ENDCOLOR%`
+- Expands to: %OLIVE% olive text %ENDCOLOR%
+- **_Note:_** `%<color>%` text must end with `%ENDCOLOR%`. If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
+- Related: [[ENDCOLOR|Main/TWikiVariables#VarENDCOLOR]], [[TWikiPreferences|Main/TWikiPreferences#RenderingShortcuts]], [[StandardColors]]

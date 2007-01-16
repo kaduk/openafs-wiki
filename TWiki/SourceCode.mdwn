@@ -13,6 +13,9 @@
     <li><a href="#ObjectData =twiki="> ObjectData twiki</a></li>
     <li><a href="#TWiki::Client::_TemplateLogin"> TWiki::Client::TemplateLogin </a></li>
     <li><a href="#TWiki::Compatibility"> TWiki::Compatibility </a></li>
+    <li><a href="#TWiki::Configure::Load"> TWiki::Configure::Load </a></li>
+    <li><a href="#Purpose"> Purpose</a></li>
+    <li><a href="#"> </a></li>
     <li><a href="#TWiki"> TWiki </a></li>
     <li><a href="#TWiki::Form"> TWiki::Form </a></li>
     <li><a href="#TWiki::Func"> TWiki::Func </a></li>
@@ -46,7 +49,6 @@
     <li><a href="#TWiki::UI::Oops"> TWiki::UI::Oops </a></li>
     <li><a href="#TWiki::UI::RDiff"> TWiki::UI::RDiff </a></li>
     <li><a href="#TWiki::UI::Register"> TWiki::UI::Register </a></li>
-    <li><a href="#TWiki::UI::Rest"> TWiki::UI::Rest </a></li>
     <li><a href="#TWiki::UI::Save"> TWiki::UI::Save </a></li>
     <li><a href="#TWiki::UI::Search"> TWiki::UI::Search </a></li>
     <li><a href="#TWiki::UI::Statistics"> TWiki::UI::Statistics </a></li>
@@ -76,7 +78,7 @@ This package doesn't smell
 
 A singleton object of this class is used to deal with attachments to topics.
 
-This package has smell factor of **2**
+This package has smell factor of **1**
 
 ## <a name="TWiki::Attrs"></a> [[TWiki::Attrs|Main/TWikiAttrsDotPm]]
 
@@ -94,7 +96,7 @@ This package doesn't smell
 
 ## <a name="TWiki::Client::_ApacheLogin"></a> [[TWiki::Client::ApacheLogin|Main/TWikiClientApacheLoginDotPm]]
 
-This is login manager that you can specify in the security setup section of [configure](http://www.dementia.org/twiki//configure). It instructs TWiki to cooperate with your web server (typically Apache) to require authentication information (username &amp; password) from users. It requires that you configure your web server to demand authentication for scripts named "login" and anything ending in "auth". The latter should be symlinks to existing scripts; e.g., `viewauth -> view`, `editauth -> edit`, and so on.
+This is login manager that you can specify in the security setup section of [configure](http://www.dementia.org/twiki/configure). It instructs TWiki to cooperate with your web server (typically Apache) to require authentication information (username &amp; password) from users. It requires that you configure your web server to demand authentication for scripts named "login" and anything ending in "auth". The latter should be symlinks to existing scripts; e.g., `viewauth -> view`, `editauth -> edit`, and so on.
 
 See also [[TWikiUserAuthentication]].
 
@@ -106,11 +108,31 @@ This package doesn't smell
 
 The package is also a Factory for login managers and also the base class for all login managers.
 
-On it's own, an object of this class is used when you specify 'none' in the security setup section of [configure](http://www.dementia.org/twiki//configure). When it is used, logins are not supported. If you want to authenticate users then you should consider [[TemplateLogin]] or [[ApacheLogin]], which are subclasses of this class.
+On it's own, an object of this class is used when you specify 'none' in the security setup section of [configure](http://www.dementia.org/twiki/configure). When it is used, logins are not supported. If you want to authenticate users then you should consider [[TemplateLogin]] or [[ApacheLogin]], which are subclasses of this class.
 
 If you are building a new login manager, then you should write a new subclass of this class, implementing the methods marked as **VIRTUAL**. There are already examples in the `lib/TWiki/Client` directory.
 
 The class has extensive tracing, which is enabled by $TWiki::cfg\{Trace\}\{Client.pm\}. The tracing is done in such a way as to let the perl optimiser optimise out the trace function as a no-op if tracing is disabled.
+
+Here's an overview of how it works:
+
+Early in TWiki::new, the login manager is created. The creation of the login manager does two things:
+
+1. If sessions are in use, it loads CGI::Session but doesn't initialise the session yet.
+2. Creates the login manager object
+
+Slightly later in TWiki::new, loginManager-&gt;loadSession is called.
+
+1. Calls loginManager-&gt;getUser to get the username **before** the session is created
+  - TWiki::Client::ApacheLogin looks at REMOTE\_USER
+  - TWiki::Client::TemplateLogin just returns undef
+2. reads the TWIKISID cookie to get the SID (or the TWIKISID parameters in the CGI query if cookies aren't available, or [[IP2SID]] mapping if that's enabled).
+3. Creates the CGI::Session object, and the session is thereby read.
+4. If the username still isn't known, reads it from the cookie. Thus TWiki::Client::ApacheLogin overrides the cookie using REMOTE\_USER, and TWiki::Client::TemplateLogin **always** uses the session.
+
+Later again in TWiki::new, plugins are given a chance to **override** the username found from the loginManager.
+
+The last step in TWiki::new is to find the user, using whatever user mapping manager is in place.
 
 ## <a name="ObjectData &lt;code&gt;twiki="></a> [[ObjectData]] =twiki
 
@@ -120,33 +142,29 @@ This package has smell factor of **3**
 
 ## <a name="TWiki::Client::_TemplateLogin"></a> [[TWiki::Client::TemplateLogin|Main/TWikiClientTemplateLoginDotPm]]
 
-This is a login manager that you can specify in the security setup section of [configure](http://www.dementia.org/twiki//configure). It provides users with a template-based form to enter usernames and passwords, and works with the [[PasswordManager]] that you specify to verify those passwords.
+This is a login manager that you can specify in the security setup section of [configure](http://www.dementia.org/twiki/configure). It provides users with a template-based form to enter usernames and passwords, and works with the [[PasswordManager]] that you specify to verify those passwords.
 
 Subclass of TWiki::Client; see that class for documentation of the methods of this class.
 
-This package has smell factor of **2**
+This package has smell factor of **1**
 
 ## <a name="TWiki::Compatibility"></a> [[TWiki::Compatibility|Main/TWikiCompatibilityDotPm]]
 
 Support for compatibility with old TWiki versions. Packaged separately because 99.999999% of the time this won't be needed.
 
-=end
-
-sub \_upgradeCategoryItem \{ my ( $catitems, $ctext ) = @\_; my $catname = ''; my $scatname = ''; my $catmodifier = ''; my $catvalue = ''; my @cmd = split( /\\|/, $catitems ); my $src = ''; my $len = @cmd; if( $len &lt; '2' ) \{ # FIXME return ( $catname, $catmodifier, $catvalue ) \} my $svalue = '';
-
-my $i; my $itemsPerLine;
-
-# check for [[CategoryName]]=CategoryValue parameter my $paramCmd = ''; my $cvalue = ''; # was$query-&gt;param( $cmd[1] ); if( $cvalue ) \{ $src = "$cvalue"; \} elsif( $ctext ) \{ foreach( split( /\\r?\\n/, $ctext ) ) \{ if( /$cmd[1]/ ) \{ $src = $\_; last; \} \} \}
-
-if( $cmd[0] eq 'select' || $cmd[0] eq 'radio') \{ $catname = $cmd[1]; $scatname = $catname; #$scatname =~ s/[^a-zA-Z0-9]//g; my $size = $cmd[2]; for( $i = 3; $i &lt; $len; $i++ ) \{ my $value = $cmd[$i]; $svalue = $value; if( $src =~ /$value/ ) \{ $catvalue = $svalue; \} \}
-
-\} elsif( $cmd[0] eq 'checkbox' ) \{ $catname = $cmd[1]; $scatname = $catname; #$scatname =~ s/[^a-zA-Z0-9]//g; if( $cmd[2] eq 'true' || $cmd[2] eq '1' ) \{ $i = $len - 4; $catmodifier = 1; \} $itemsPerLine = $cmd[3]; for( $i = 4; $i &lt; $len; $i++ ) \{ my $value = $cmd[$i]; $svalue = $value; # [[I18N]]: FIXME - need to look at this, but since it's upgrading # old forms that probably didn't use [[I18N]], it's not a high # priority. if( $src =~ /$value[^a-zA-Z0-9\\.]/ ) \{ $catvalue .= ", " if( $catvalue ); $catvalue .= $svalue; \} \}
-
-\} elsif( $cmd[0] eq 'text' ) \{ $catname = $cmd[1]; $scatname = $catname; #$scatname =~ s/[^a-zA-Z0-9]//g; $src =~ /(.\*)/; if( $1 ) \{ $src = $1; \} else \{ $src = ''; \} $catvalue = $src; \}
-
-return ( $catname, $catmodifier, $catvalue ) \}
-
 This package has smell factor of **2**
+
+## <a name="TWiki::Configure::Load"></a> [[TWiki::Configure::Load|Main/TWikiConfigureLoadDotPm]]
+
+## <a name="Purpose"></a> Purpose
+
+This module consists of just a single subroutine `readConfig`. It allows to safely modify configuration variables _for one single run_ without affecting normal TWiki operation.
+
+This package doesn't smell
+
+## <> \[[TWikiConfigureUIsEXTENDDotPm]\[]]
+
+This package has smell factor of **1**
 
 ## <a name="TWiki"></a> [[TWiki|Main/TWikiDotPm]]
 
@@ -154,13 +172,13 @@ TWiki operates by creating a singleton object (known as the Session object) that
 
 Global variables are avoided wherever possible to avoid problems with CGI accelerators such as mod\_perl.
 
-This package has smell factor of **29**
+This package has smell factor of **25**
 
 ## <a name="TWiki::Form"></a> [[TWiki::Form|Main/TWikiFormDotPm]]
 
 Object representing a single form definition.
 
-This package has smell factor of **10**
+This package has smell factor of **9**
 
 ## <a name="TWiki::Func"></a> [[TWiki::Func|Main/TWikiFuncDotPm]]
 
@@ -233,7 +251,7 @@ The module knows nothing about how meta-data is stored. That is entirely the res
 
 Meta-data objects are created by the Store engine when topics are read. They are populated using the `put` method.
 
-This package has smell factor of **6**
+This package has smell factor of **3**
 
 ## <a name="TWiki::Net"></a> [[TWiki::Net|Main/TWikiNetDotPm]]
 
@@ -281,7 +299,7 @@ This Prefs-internal class is used to parse \* Set and \* Local statements from a
 
 This class does no validation or duplicate-checking on the settings; it simply returns the recognized settings in the order it sees them in.
 
-This package has smell factor of **2**
+This package has smell factor of **1**
 
 ## <a name="TWiki::Prefs::_PrefsCache"></a> [[TWiki::Prefs::PrefsCache|Main/TWikiPrefsPrefsCacheDotPm]]
 
@@ -294,13 +312,13 @@ We maintain 2 hashes of values:
 
 As each cache level is built, the values are copied down from the parent cache level. This sounds monstrously inefficient, but in fact perl does this a lot better than doing a multi-level lookup when a value is referenced. This is especially important when many prefs lookups may be done in a session, for example when searching.
 
-This package has smell factor of **1**
+This package doesn't smell
 
 ## <a name="TWiki::Render"></a> [[TWiki::Render|Main/TWikiRenderDotPm]]
 
 This module provides most of the actual HTML rendering code in TWiki.
 
-This package has smell factor of **22**
+This package has smell factor of **19**
 
 ## <a name="TWiki::Sandbox"></a> [[TWiki::Sandbox|Main/TWikiSandboxDotPm]]
 
@@ -312,7 +330,7 @@ This package has smell factor of **3**
 
 This module implements all the search functionality.
 
-This package has smell factor of **22**
+This package has smell factor of **20**
 
 ## <a name="TWiki::Store"></a> [[TWiki::Store|Main/TWikiStoreDotPm]]
 
@@ -419,7 +437,7 @@ This package has smell factor of **2**
 
 Time handling functions.
 
-This package has smell factor of **10**
+This package has smell factor of **7**
 
 ## <a name="TWiki::UI::_ChangeForm"></a> [[TWiki::UI::ChangeForm|Main/TWikiUIChangeFormDotPm]]
 
@@ -449,7 +467,7 @@ This package has smell factor of **5**
 
 UI delegate for oops function
 
-This package has smell factor of **1**
+This package doesn't smell
 
 ## <a name="TWiki::UI::RDiff"></a> [[TWiki::UI::RDiff|Main/TWikiUIRDiffDotPm]]
 
@@ -461,19 +479,13 @@ This package has smell factor of **12**
 
 User registration handling.
 
-This package has smell factor of **20**
-
-## <a name="TWiki::UI::Rest"></a> [[TWiki::UI::Rest|Main/TWikiUIRestDotPm]]
-
-Rest delegate for view function
-
-This package doesn't smell
+This package has smell factor of **19**
 
 ## <a name="TWiki::UI::Save"></a> [[TWiki::UI::Save|Main/TWikiUISaveDotPm]]
 
 UI delegate for save function
 
-This package doesn't smell
+This package has smell factor of **1**
 
 ## <a name="TWiki::UI::Search"></a> [[TWiki::UI::Search|Main/TWikiUISearchDotPm]]
 
@@ -497,7 +509,7 @@ This package has smell factor of **3**
 
 UI delegate for view function
 
-This package has smell factor of **1**
+This package has smell factor of **2**
 
 ## <a name="TWiki::User"></a> [[TWiki::User|Main/TWikiUserDotPm]]
 
@@ -549,4 +561,4 @@ Subclasses should be named 'XxxxUserMapping' so that configure can find them.
 
 This package has smell factor of **3**
 
-There were a total of **220** smells
+There were a total of **201** smells

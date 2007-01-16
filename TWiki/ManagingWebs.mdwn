@@ -79,6 +79,7 @@ In either case you will want to be sure to verify that your new web has all the 
 
 **_Notes:_**
 
+- You have to have `ROOTCHANGE` access to create a top-level web (one with no parent)
 - Attachments will NOT get copied over along with their topics
 - While creating the new web, TWiki will update the following variables in the [[WebPreferences]]: `WEBBGCOLOR`, `SITEMAPLIST`, `SITEMAPWHAT`, `SITEMAPUSETO` and `NOSEARCHALL`. These variables are used to dynamically generate the [[SiteMap]]
 - TWiki does not edit the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to update the `WIKIWEBLIST`. This must be done by hand
@@ -101,11 +102,11 @@ If anyone is editing a topic which requires updating, or which lives in the web 
 
 If you plan to rename the Main web, remember that TWiki stores user and group topics in this web. That means that every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout). This potentially large change can be performed automatically if you rename the web from the Tools section of [[WebPreferences]], as described above.
 
-%X% If you want to rename the TWiki or Main webs, remember they are referred to in the TWiki configuration. You will need to change the relevant settings in the configuration using the [configure](http://www.dementia.org/twiki/configure) interface.
+%X% If you want to rename the TWiki or Main webs, remember they are referred to in the TWiki configuration. You will need to change the `{SystemWebName}`, `{UsersWebName}` and/or `{LocalSitePreferences}` settings in the configuration using the [configure](http://www.dementia.org/twiki/configure) interface.
 
 ## <a name="Hierarchical Webs"></a> Hierarchical Webs
 
-Hierarchical web support is enabled by turning on the `{EnableHierarchicalWebs}` setting in `configure`. Without this setting, TWiki will only allow a single level of hierarchy (webs). If you set this, you can use multiple levels, like a directory tree, i.e. webs within webs.
+Hierarchical web support is enabled by turning on the `{EnableHierarchicalWebs}` setting in [configure](http://www.dementia.org/twiki/configure). Without this setting, TWiki will only allow a single level of hierarchy (webs). If you set this, you can use multiple levels, like a directory tree, i.e. webs within webs.
 
 **_%T% Note:_** You might not need hierarchical webs. TWiki topics already have a parent/child relationship within a web, which is shown in the breadcrumb. Try to keep the number of webs to a minimum in order to keep search and cross-referencing simple.
 

@@ -1,0 +1,1160 @@
+# <a name="TWiki Release 4.1 (Edinburgh), 1"></a><a name=" TWiki Release 4.1 (Edinburgh), "></a> TWiki Release 4.1 (Edinburgh), 17 Jan 2007
+
+<div>
+  <ul>
+    <li><a href="#Introduction"> Introduction</a></li>
+    <li><a href="#New Features Highlights"> New Features Highlights</a></li>
+    <li><a href="#Deprecation Notice"> Deprecation Notice</a></li>
+    <li><a href="#Bug Fix Highlights"> Bug Fix Highlights</a></li>
+    <li><a href="#TWiki 4.1.0 Minor Release - Deta"> TWiki 4.1.0 Minor Release - Details</a><ul>
+        <li><a href="#TWiki 4.1.0 Fixes"> TWiki 4.1.0 Fixes</a></li>
+        <li><a href="#TWiki 4.1.0 Enhancements"> TWiki 4.1.0 Enhancements</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Introduction"></a> Introduction
+
+TWiki Release 4.1 is a minor release. TWiki releases are either major (major new features and changes in architecture), minor (enhancements and bug fixes), or patch releases (bug fixes only) which can be installed as upgrades on production installations.
+
+TWiki Release 4.1 introduces some good enhancements and quite many bug fixes since 4.0.5. It requires some manual work to upgrade from TWiki 4.0.5 to 4.1.0. Depending on the tailoring you have made it may take between 10 minutes to two hours to do an upgrade. If you have not made any changes to the skins the upgrade is for sure an effort that takes less than 30 minutes.
+
+The development team has done everything to maintain full compatibility with topics generated in TWiki-4.0 and there are no changes to the topic format.
+
+## <a name="New Features Highlights"></a> New Features Highlights
+
+- **Easier Installation and Upgrade**
+  - Plugins can now be installed from the configure script.
+  - The loading of plugin preferences settings has been moved earlier in the preferences evaluation order so that plugin settings can be redefined in [[Main.TWikiPreferences|Main/TWikiPreferences]], WebPreferences and in topics. To make TWiki upgrades easier, it is recommended to set the plugin settings in Main.TWikiPreferences, and not to customize the settings in the plugin topic. For example, to change the TEMPLATES setting of the [[CommentPlugin]], create a new COMMENTPLUGIN\_TEMPLATES setting in Main.TWikiPreferences.
+  - Plugin settings can now be defined in configure instead of in the plugin topic (requires that the individual plugin has implemented this). TWiki performs slightly better by not looking for preferences settings in plugin topics.
+  - Configure no longer shows many unnecessary errors when run first time.
+  - The webmaster email address is now defined in configure instead of TWikiPreferences.
+  - Default file access rights in the distribution package have been changed to be more universally defined and in line with the default access rights for new topics.
+
+- **Usability Enhancements**
+  - Redesigned result page when typing incomplete topic name into the Jump box, so that it is possible to quickly navigate to a topic, also in a very large TWiki installation. For example, "I know there is a topic about Ajax somewhere in the Eng web. OK, let my type `Eng.ajax` into the Jump box... Here we go, the third link is the AjaxCookbook I was looking for."
+  - Many user documentation improvements.
+  - URL parameters maintained in Table of Contents links so you can stay in a temporary skin (e.g. print) and keep URLPARAM values when you click the TOC links
+  - Attachment tables now sorted alphabetically.
+  - Better printing of tables and verbatim text in [[PatternSkin]].
+
+- **Application Platform Enhancements**
+  - Auto-incremented topic name on save with AUTOINC&lt;n&gt; in topic name; used by TWiki applications to create topic based database records.
+  - The edit and save scripts support a `redirectto` parameter to redirect to a topic or a URL; for security, redirect to URL needs to be enabled with a `{AllowRedirectUrl}` configure flag.
+  - [[CommentPlugin]] supports the `redirectto` parameter to redirect to a URL or link to TWiki topic after submitting comment.
+  - The `topic` URL parameter also respects the `{AllowRedirectUrl}` configure flag so redirects to URLs can be disabled which could be abused for phishing attacks.
+  - The view script supports a `section` URL parameter to view just a named section within a topic. Useful for simple AJAX type applications.
+  - New plugin handler for content move.
+  - Enhancements for Ajax based applications with TWiki:Plugins/YahooUserInterfaceContrib and TWiki:Plugins.TWikiAjaxContrib (available at twiki.org).
+
+- **Search Enhancements**
+  - METASEARCH handles a format parameter like SEARCH.
+  - Topic not found / [[WebTopicViewTemplate]] search now case insensitive.
+  - [[FormattedSearch]] header supporting `$nop`, `$quot`, `$percnt`, `$dollar`.
+  - Add search by createdate option to SEARCH.
+  - New newline option for SEARCH to protect e.g. formfields from being altered during rendering in SEARCH.
+
+- **Skins and Templates Enhancements**
+  - Support for templates to have text rendering affecting aspect outside of textarea.
+  - Pattern skin dependence on [[TwistyPlugin]] instead of [[TwistyContrib]] (performance improvement.)
+  - Don't strip newlines from the front of TMPL:DEFs.
+
+- **Miscellaneous Feature Enhancements**
+  - Change in [[WikiWord]] definition: Numbers are treated as lower case letters, e.g. Y2K is now a WikiWord.
+  - Configurable template load path. Advanced feature for those that work with customized templates.
+  - Added %VBAR% to [[TWikiPreferences]] for vertical bar symbol.
+  - On topic creation, force initial letter of topic name to be upper case.
+  - Allow date format in form fields.
+  - Enhance REVINFO\{\} variable with same date qualifiers as GMTIME\{\}.
+  - [[WebTopicCreator]] - adding ability to select a template from any topic name ending in ...Template
+  - Functionality of DateFieldPlugin merged into core
+
+- **Enhancements of Pre-installed Plugins**
+  - [[CommentPlugin]]: Supports removal of comment prompt after a comment is made.
+  - [[EditTablePlugin]]: Default date format based on [[JSCalendarContrib]] instead of plugin topic.
+  - [[InterwikiPlugin]]: Supports custom link formats.
+  - [[SlideShowPlugin]]: Preserves URL parameters in slideshow
+  - [[SpreadSheetPlugin]]: New functions `$LISTRAND()`, `$LISTSHUFFLE()`, `$LISTTRUNCATE()`.
+  - [[TablePlugin]]: New attribute `cellborder`.
+  - [[TablePlugin]]: Highlight the sorted column with custom colors; includes also a general cosmetic update of default colors.
+  - [[TablePlugin]]: Support for initsort on more than one table. A table with the initsort option is initsorted UNLESS it is sorted by clicking on a column header. If you click on a header of another table all other tables goes back to the default sort defined by initsort or not sorted if no initsort, and the new table is sorted based on the user clicking on a table header.
+
+## <a name="Deprecation Notice"></a> Deprecation Notice
+
+- Usage of [[TWikiForms]] for setting preferences has been deprecated in favor of TWiki:Plugins.PreferencesPlugin. PreferencesPlugin has been included since TWiki 4.0.0 to allow more convenient editing of preferences. This plugin provides input controls, such as menus, radio buttons, and checkboxes to select preference settings.
+
+## <a name="Bug Fix Highlights"></a> Bug Fix Highlights
+
+- **User Topics**
+  - Unused settings on users home topic removed. (no need to update existing user topics - they are still compatible with all features.)
+  - An attribute column has been added to the UserForm used on users home topic. If you tailored this form just continue using your existing form.
+
+- **Security**
+  - The `topic=""` parameter to the view script now respects the `{AllowRedirectUrl}` configure flag so you can disable redirecting to URLs which could be abused for phishing attacks.
+  - More robust authentication denial when redirected after failed authentication (follow up from TWiki:Codev.SecurityAlert-CVE-2006-6071.)
+  - More robust [[TablePlugin]], guarding against a sort with very high non-existing column numbers, which may result in a high server load.
+
+- **User Interface**
+  - Left Bar should not show logout when using ApacheLogin because you cannot in reality log out.
+  - Can't de-select all options in a checkbox.
+  - Duplicate values in checkbox and select when creating a new topic.
+  - Form initialization with defaults not working.
+  - Multiselect for forms does not work.
+  - Size of attachment should only be shown for the most recent version.
+  - [[JSCalendarContrib]] only works with IE in [[PatternSkin]].
+
+- **API, Skins and Templates**
+  - The print view handled is updated to allow custom templates that can be printed. Note that the viewprint template is subject to additional changes in next releases.
+  - The Kupu WYSIWYG editor has been split out of [[WysiwygPlugin]] into [[KupuContrib]] to allow other editors to be integrated with TWiki.
+
+- **Printing**
+  - Verbatim Text not completly printing with IE6.0.
+  - Printable loses URL parameters.
+  - Printing in Firefox truncates tables.
+
+- **Miscellaneous Bug Fixes**
+  - Don't include anything when trying to include a non existing section.
+  - Turn off `{AutoAttachPubFiles}` in default distribution.
+  - The edit url parameters are not properly passed through change form screen and checkpoint save.
+  - Formfield not correctly rendered when type is textarea.
+  - IF cannot check for existence of INCLUDE parameter.
+  - Firefox downloads attachments as the topic name and not the real file name.
+  - Edit and [[FormattedSearch]] expands `$nop`, `$quot`, `$percnt`, `$dollar` in `$formfield()`
+  - Scripts hang in `TWiki::UI:run` at drain STDIN logic (this is now configurable - whether you need it depends on OS and webserver.)
+  - Non-graceful error handling on mail issue during registration.
+  - Include of external doc set wrong url in relative links.
+  - In INCLUDE, warn parameter does not work when including a URL.
+  - `WEBMANAGE` permission no longer required (removed.)
+  - Context not authenticated despite Apache Require valid-user Login.
+  - INCLUDE of URL on subdomain returns wrong pages.
+
+The full list of bug fixes can be seen below
+
+## <a name="TWiki 4.1.0 Minor Release - Deta"></a> TWiki 4.1.0 Minor Release - Details
+
+The 4.1.0 release was built from SVN <http://svn.twiki.org/svn/twiki/tags/TWikiRelease04x01x00> revision 12567.
+
+### <a name="TWiki 4.1.0 Fixes"></a> TWiki 4.1.0 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item3442]]</td>
+    <td> PatternSkin: Make file upload input field larger </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3430]]</td>
+    <td> Email addresses not always padded and encoded. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3422]]</td>
+    <td> Bulk registation data fails validation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3418]]</td>
+    <td> Make it more obvious how to enable ASSERTS </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3416]]</td>
+    <td> Bad pod =end causes TWiki::Compatibility to fail hard </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3415]]</td>
+    <td> mailnotify does not send notifications to intranet users </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3412]]</td>
+    <td> Default and classic skins have oops template errors </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3409]]</td>
+    <td> Do not refer to non-default plugins in the documentation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3408]]</td>
+    <td> Sidebar weblist needs wordwrap turned off </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3407]]</td>
+    <td> Usability: Remove PLEASENOSPAM spam padding in registration confirmation screen </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3405]]</td>
+    <td> Minor stylistic improvement in TWiki.TWikiTemplates </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3402]]</td>
+    <td> Form select/checkbox/radio values containing "Name" not displayed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3401]]</td>
+    <td> Base tag refers to topic view, irrespective of what the current base url actually is </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3399]]</td>
+    <td> Template system recursion prevention too agressive, prevents skin specialisation, or mixins </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3397]]</td>
+    <td> Enhance documentation of impact of including text on plugin handlers </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3395]]</td>
+    <td> Typo in TWiki.TWikiEditingShorthand </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3394]]</td>
+    <td> Remove UpgradeTwiki script, or put prominent warning on issues </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3392]]</td>
+    <td> TipsContrib: Performance improvement </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3384]]</td>
+    <td> Search with zeroresults="on" does not search all webs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3383]]</td>
+    <td> Quotes in FormattedSearch not escaped </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3381]]</td>
+    <td> For admins, a SEARCH all webs does not ignore the NOSEARCHALL flag </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3378]]</td>
+    <td> Default templates cause invalid HTML </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3364]]</td>
+    <td> Force-update of Main web statistics updates all webs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3359]]</td>
+    <td> Adding .ico to mime.types file </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3357]]</td>
+    <td> Remove obsolete user settings from TWiki.NewUserTemplate </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3356]]</td>
+    <td> Incorrect color sequence in list of similar topics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3353]]</td>
+    <td> PatternSkin: updating attachment properties produces an "undefined value in split" warning in TWiki::mapToIconFileName </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3320]]</td>
+    <td> UserForm does not have Attribute column </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3318]]</td>
+    <td> SpreadSheetPlugin: Remove spurious newline appended to result </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3315]]</td>
+    <td> Security: Make topic="" parameter aware of {AllowRedirectUrl} configure flag </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3312]]</td>
+    <td> Attachment table cannot be overridden in view template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3310]]</td>
+    <td> Support web.topics in redirectto parameter </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3309]]</td>
+    <td> CommentPlugin: Crash when invoked with an empty comment_index when used with TemplateLogin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3308]]</td>
+    <td> CommentPlugin: Updating with redirectto using web.topic instead of URL </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3307]]</td>
+    <td> Make display of current TWiki version in configure more prominent </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3304]]</td>
+    <td> EditTablePlugin doc fixes for 4.1 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3302]]</td>
+    <td> PatternSkin: Search result count "Number of topics:" only shows results from last listed web </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3300]]</td>
+    <td> CommentPlugin: Resolve uninitialized values </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3296]]</td>
+    <td> TWikiTip013 has reference to outdated user preferences variables </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3293]]</td>
+    <td> PatternSkin: Double space in pattern breadcrumb </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3290]]</td>
+    <td> The topic creator in Sandbox.WebHome allows to "create" existing topics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3280]]</td>
+    <td> File permissions should be more universally applicable. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3278]]</td>
+    <td> WebTopicCreator missing in Main web </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3275]]</td>
+    <td> More robust authentication denial when redirected after failed authentication </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3274]]</td>
+    <td> PatternSkin: Left Bar should not show logout when using ApacheLogin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3272]]</td>
+    <td> Template <code>view.*.classic.tmpl</code> not used </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3269]]</td>
+    <td> PatternSkin: Formtable headers not clickable </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3268]]</td>
+    <td> TablePlugin: Sorting non-existing column numbers causes major problems </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3266]]</td>
+    <td> Configure installer should be aware of proxy settings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3264]]</td>
+    <td> PatternSkin: Fixes to view topic action links </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3263]]</td>
+    <td> PatternSkin: oopsleaseconflict.pattern.tmpl out of sync with oopsleaseconflict.tmpl </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3261]]</td>
+    <td> Literal search on all webs does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3260]]</td>
+    <td> PatternSkin: Javascript bug with quote in translation text </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3259]]</td>
+    <td> Logging of saving a topic within the same revision timeout is confusing </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3258]]</td>
+    <td> Add note to TWiki.TWikiSkins that the viewprint template is subject to change in next release </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3240]]</td>
+    <td> Documentation change from "statii" to "statuses" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3237]]</td>
+    <td> WebTopicCreator Javascript bugs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3224]]</td>
+    <td> Split Kupu editor out of WysiwygPlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3214]]</td>
+    <td> space in WikiName in UnprocessedRegistrations results in bad .htpasswd entry </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3210]]</td>
+    <td> mp4 filetype erroneously linked to sound ICON </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3207]]</td>
+    <td> SEARCH on META:TOPICPARENT not documented </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3201]]</td>
+    <td> Remove exclamation mark from welcoming "Hello XXX!" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3200]]</td>
+    <td> TablePlugin: Support for initsort of multiple tables in same topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3199]]</td>
+    <td> TipsContrib: Maintenance for TWiki 4.1 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3193]]</td>
+    <td> TablePlugin: Table colors shifted by one </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3192]]</td>
+    <td> Document limitations on registered tags </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3187]]</td>
+    <td> Document how to get plugin settings into and from configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3167]]</td>
+    <td> TWiki.TWikiSkins documentation and templates don't match with respect to printing </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3165]]</td>
+    <td> PatternSkin: Using incorrect template names in include </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3163]]</td>
+    <td> I18N: Strip uploaded filenames for 8-bit characters (Allow only US-ASCII) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3161]]</td>
+    <td> Usability: Attachment table default sort order </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3158]]</td>
+    <td> Don't include anything when trying to include a non existing section </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3153]]</td>
+    <td> INSTALL.html need to document new configure features </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3146]]</td>
+    <td> Turn off {AutoAttachPubFiles} in default distribution </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3145]]</td>
+    <td> Rename topic does not find links for a word in all caps </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3143]]</td>
+    <td> MailerContrib: Syntax error in mailnotify template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3142]]</td>
+    <td> Documentation in code for TWiki::Func::getScriptUrl incorrect </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3140]]</td>
+    <td> Cannot turn on or off plugins on a per-web basis </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3130]]</td>
+    <td> edit url parameters not properly passed through change form screen and checkpoint </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3129]]</td>
+    <td> Documentation of pattern parameter to %INCLUDE% incomprehensible </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3123]]</td>
+    <td> New litteral option for %INCLUDE% (was: including external web page creates unwanted list items) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3122]]</td>
+    <td> RcsLite error when saving revision from text </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3119]]</td>
+    <td> Remove edit.iejs.tmpl </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3093]]</td>
+    <td> Spurious ?-xism: in LocalSite.cfg </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3091]]</td>
+    <td> Attachment changes create bad log entries </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3089]]</td>
+    <td> Statistics creates lots of "bad log line... " errors </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3075]]</td>
+    <td> Document deprecation of settings in forms </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3073]]</td>
+    <td> Document local settings in TWiki.TWikiAccessControl </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3072]]</td>
+    <td> Time::parseInterval passes local TZ to Time::parseTime, which expects GMT </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3071]]</td>
+    <td> Typo in Time::parseInterval affects creation of "$now" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3070]]</td>
+    <td> Formfield not correctly rendered when type is textarea </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3066]]</td>
+    <td> Missing parameter in <code>TWiki::Func::redirectCgiQuery</code></td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3063]]</td>
+    <td> External square bracket type links break if there's another anchor in the link text </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3062]]</td>
+    <td> Css based solution to prevent links to oneself </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3061]]</td>
+    <td> duplicate values in checkbox and select when creating a new topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3060]]</td>
+    <td> oopsleaseconflict does not work right </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3059]]</td>
+    <td> tick_twiki.pl script does not correctly remove leases </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3054]]</td>
+    <td> PatternSkin: Make attachment template more flexible </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3053]]</td>
+    <td> ChangePassword mistakenly says you need to close the browser </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3052]]</td>
+    <td> ResetPassword and ChangePassword should pass login name </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3049]]</td>
+    <td> form elements not fully classified </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3046]]</td>
+    <td> Merge DateFieldPlugin functionality into TWiki core </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3042]]</td>
+    <td> Improvements to visual design for configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3040]]</td>
+    <td> cookie prefs are web-specific </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3039]]</td>
+    <td> Better printing of tables and verbatim text in PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3036]]</td>
+    <td> TablePlugin does not render <code>code</code> text when datacolor is defined </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3033]]</td>
+    <td> TablePlugin does not add the CSS class "twikiFirstCol" when the table is sorted on the first col </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3027]]</td>
+    <td> ClassicSkin: Attachment tables in classic skin broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3026]]</td>
+    <td> Improve error handling in login screen </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3023]]</td>
+    <td> Configure shows unnecessary errors when run first time </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3018]]</td>
+    <td> PatternSkin: Improvements of table cosmetics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3014]]</td>
+    <td> Unified colors and buttons </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3013]]</td>
+    <td> Uniform style for blockquotes </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3008]]</td>
+    <td> Need clear documentation of the impact of spaces in form definitions </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2998]]</td>
+    <td> can't create a topic of the same name as an already existing subweb </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2985]]</td>
+    <td> SEARCH summary eats escaped [[...]] links </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2981]]</td>
+    <td> Sandbox aggressively filters all but single-character strings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2979]]</td>
+    <td> PatternSkin: Verbatim Text not completly printing with IE6.0 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2967]]</td>
+    <td> %SEARCH does not work with + in topic="" parameter </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2965]]</td>
+    <td> Performance: Eliminate <code>$&amp;</code>, <code>$`</code>, and <code>$'</code> from TWiki sources </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2963]]</td>
+    <td> UTF-8 conversion fails with IE when both webname and topicname contains international characters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2958]]</td>
+    <td> TWikiUpgradeGuide is missing configure instructions </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2957]]</td>
+    <td> RcsLite deep recursion on subroutine errors </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2951]]</td>
+    <td> MailerContrib: Doc Updates </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2948]]</td>
+    <td> Nested anchor tag in TOC with Interwiki link </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2947]]</td>
+    <td> EDIT_TEMPLATE topic preference can't be overriden using url params </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2938]]</td>
+    <td> TwistyPlugin needs to be enabled per default (PatternSkin dependency) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2930]]</td>
+    <td> PatternSkin: Printing in Firefox truncates tables </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2926]]</td>
+    <td> TWikiUpgradeGuide documentation fix for rcs parameters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2923]]</td>
+    <td> includeWarnings broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2922]]</td>
+    <td> missleading topic_not_found warning </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2918]]</td>
+    <td> Default text colors for user black backgrounds fixed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2917]]</td>
+    <td> Main/UserList error in Organization </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2905]]</td>
+    <td> Form initialization with defaults not working. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2900]]</td>
+    <td> Refactor TWiki::UI::Edit::edit </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2896]]</td>
+    <td> More flexible Form creator </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2890]]</td>
+    <td> TwistyPlugin and TwistyContrib: Merge enhancements from DEVELOP to TWIKI4 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2886]]</td>
+    <td> twiki cgi: the name of the config option 'Schedule' is a bit off </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2885]]</td>
+    <td> bin/twiki fails badly if the Scheduler is not configured </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2880]]</td>
+    <td> IF cannot check for existence of INCLUDE parameter </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2879]]</td>
+    <td> Firefox downloads attachments as the topic name and not the real file name </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2873]]</td>
+    <td> VIEW_TEMPLATEs can't be defined in subwebs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2841]]</td>
+    <td> Squabs don't find local topic before web </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2837]]</td>
+    <td> Edit and FormattedSearch expands $nop, $quot, $percnt, $dollar in $formfield() </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2820]]</td>
+    <td> InterwikiPlugin does not link when $page is a single character </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2811]]</td>
+    <td> The viewfile script should use oopsattention instead of oopsaccessdenied </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2788]]</td>
+    <td> Provide generic <code>oopsgeneric.tmpl</code> template for skins </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2781]]</td>
+    <td> $cfg{RCS}{ciDateCmd} statement ends in comma instead of semicolon </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2776]]</td>
+    <td> ICON variable shows eml.gif icon instead of mail.gif </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2774]]</td>
+    <td> MailerContrib: Notification fails if there is whitespace before topic name list </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2771]]</td>
+    <td> PatternSkin: Print view changed in backwards incompatible way </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2759]]</td>
+    <td> Multiselect for forms does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2757]]</td>
+    <td> Precedence of preferences does not allow site, webs or topics to redefine plugin preferences </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2753]]</td>
+    <td> Scripts hang in TWiki::UI:run at drain STDIN logic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2750]]</td>
+    <td> "oops" pages/messages must not rely on NOAUTOLINK </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2745]]</td>
+    <td> Non-graceful error handling on mail issue during registration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2724]]</td>
+    <td> Include of external doc set wrong url in relative links </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2720]]</td>
+    <td> Old url construction mechanism (SCRIPTSUFFIX etc) still used </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2713]]</td>
+    <td> Documentation for format in META{"parent" format=...} improved </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2712]]</td>
+    <td> In INCLUDE, warn parameter does not work when including a URL </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2698]]</td>
+    <td> MailerContrib: Mail sending errors are ignored and cause misleading output </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2692]]</td>
+    <td> In FormattedSearch, <code>nonoise="on" header="fred"</code> counter-intuitively suppresses the header </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2671]]</td>
+    <td> Don't need to set ALLOWTOPICHANGE in Main.TWikiPreferences and TWiki.TWikiPreferences because it's already done </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2660]]</td>
+    <td> Added %VBAR% to TWikiPreferences for vertical bar symbol </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2659]]</td>
+    <td> Extra CPAN dir needed in setlib.cfg @localPerlLibpath </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2656]]</td>
+    <td> Configure script <strong>still</strong> corrupts {NameFilter} with <code>(?-xism:</code></td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2655]]</td>
+    <td> Better documentation for TWikiRegistrationAgent </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2650]]</td>
+    <td> TWikiForms checkbox values not stored in proper order </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2639]]</td>
+    <td> SpreadSheetPlugin: Fix in SHORTDESCRIPTION </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2628]]</td>
+    <td> USERINFO incorrectly creates nonexistent user </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2624]]</td>
+    <td> InterwikiPlugin: Doc enhancements </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2620]]</td>
+    <td> Doc fix: Change %W% to %X% in TWikiDocGraphics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2614]]</td>
+    <td> checkTopicEditLock does not work for anything but Edit the main screen </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2613]]</td>
+    <td> Spec for normalizeWebTopicName is inconsistent </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2605]]</td>
+    <td><code>WEBMANAGE</code> permission no longer required (removed) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2601]]</td>
+    <td> EmptyPlugin: Debug flag init is missing </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2596]]</td>
+    <td> Context <strong>not</strong> authenticated despite Apache Require valid-user Login </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2592]]</td>
+    <td> misc. typos in HTML source pages </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2588]]</td>
+    <td> Typo in 'UpgradeTwiki': esiting - existing </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2584]]</td>
+    <td> PatternSkin: Remove blockquotes from templates </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2575]]</td>
+    <td> Need the ability to protect formfields from being altered during rendering in SEARCH (added NL definition option) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2572]]</td>
+    <td> Printable looses URL parameters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2571]]</td>
+    <td> If you press CANCEL the .lease file under data/ won't be deleted </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2544]]</td>
+    <td> %INCLUDE of URL on subdomain returns wrong pages </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2543]]</td>
+    <td> configure shows none twice in the pulldown of Password Manager field </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2537]]</td>
+    <td> Putting in minimal support for separating webs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item252]]</td>
+    <td> topic preferences not inheritted from topic template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2511]]</td>
+    <td> Size of attachment should only be shown for the most recent version. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2496]]</td>
+    <td> FormattedSearch $summary has newlines </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2495]]</td>
+    <td> rdiff expands REVINFO incorrectly </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2490]]</td>
+    <td> oops link broken if scripts reside in top-level directory </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2477]]</td>
+    <td> Move attachment log entry has HASH in extra info </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2460]]</td>
+    <td> REST handler does not set context before initPlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2458]]</td>
+    <td> REST handlers have bad security implications </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2453]]</td>
+    <td> TOC does not work correctly when page is generated using url parameters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2410]]</td>
+    <td> Can't de-select all options in a checkbox </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2396]]</td>
+    <td> Need to distinguish between follow-up save and admin repRev </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2363]]</td>
+    <td> perl accelerators closing STDERR will inhibit any further error log </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2295]]</td>
+    <td> TemplateLogin login screen eats POST parameters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2168]]</td>
+    <td> I18N: Allow international characters in form field names </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2156]]</td>
+    <td> PatternSkin: SCRIPTURL{"script"} and SCRIPTURLPATH{"script"} are not implemented everywhere </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2153]]</td>
+    <td> MailerContrib: Mailnotify not running from tools directory &amp; docs need updating </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2054]]</td>
+    <td> JSCalendarContrib only works with IE in PatternSkin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1992]]</td>
+    <td> MailerContrib: Mailnotify generates bogus links with {IDsInURLs} configure option </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1705]]</td>
+    <td> PatternSkin: Topic action buttons have hard coded access keys </td>
+  </tr>
+</table>
+
+### <a name="TWiki 4.1.0 Enhancements"></a> TWiki 4.1.0 Enhancements
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item3428]]</td>
+    <td> TablePlugin: taking out <nobr> before parsing date fields </nobr></td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3380]]</td>
+    <td> Support Javascript variables for content </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3331]]</td>
+    <td> SpreadSheetPlugin: Add new functions $LISTRAND(), $LISTSHUFFLE(), $LISTTRUNCATE() </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3316]]</td>
+    <td> Support redirectto parameter in edit </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3291]]</td>
+    <td> PatternSkin: Overview documentation of pattern skin elements </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3270]]</td>
+    <td> Prevent creation of all lowercase topic names. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3239]]</td>
+    <td> Putting links to configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3230]]</td>
+    <td> Topic not found / WebTopicViewTemplate search does not search case insensitive </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3228]]</td>
+    <td> CSS classes documentation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3191]]</td>
+    <td> HierarchicalNavigation </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3189]]</td>
+    <td> TablePlugin: New attribute <code>cellborder</code></td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3171]]</td>
+    <td> SlideShowPlugin: Preserve URL parameters in slideshow, use T-logo </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3170]]</td>
+    <td> Don't show anything when trying to display a non existing section with section param </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3157]]</td>
+    <td> New plugin handler for content move </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3144]]</td>
+    <td> Make test/unit/InitFormTests more resilient to HTML changes </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3141]]</td>
+    <td> Need to enable plugins on a per-topic basis </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3115]]</td>
+    <td> InterwikiPlugin with link format </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3096]]</td>
+    <td> Enable selecting to view named section given by URL when viewing topic. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3092]]</td>
+    <td> Views of WebRss &amp; WebAtom should be ignored by Statistics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3064]]</td>
+    <td> Development of twikiLib.js as part of a major Java Script refactoring </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3058]]</td>
+    <td> TwistyPlugin and TwistyContrib: Enhancements version 1.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3037]]</td>
+    <td> Customizable style of new WikiWord links </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3034]]</td>
+    <td> TablePlugin: give all TDs in sorted column a "sorted" CSS class </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3017]]</td>
+    <td> Improve Jump Box speed in large webs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3016]]</td>
+    <td> Make "jump to similar topic" more obvious </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2984]]</td>
+    <td> EditTablePlugin Date Format using JSCalendarContrib defined format instead of hard coded. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2936]]</td>
+    <td> Auto-incremented topic name on save with AUTOINC<n> </n></td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2915]]</td>
+    <td> Allow date format in form fields </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2914]]</td>
+    <td> Support templates to have text rendering affecting aspect outside of textarea </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2908]]</td>
+    <td> Allow Plugin config variables to be set in bin/configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2907]]</td>
+    <td> Configurable template load path </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2902]]</td>
+    <td> RenderListPlugin: Support for image URL and TWiki.TWikiDocGraphics icons (version 22 Sep 2006 - V1.034) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2897]]</td>
+    <td> Enhance REVINFO{} with same date qualifiers as GMTIME{} </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2836]]</td>
+    <td> FormattedSearch header supporting $nop, $quot, $percnt, $dollar </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2805]]</td>
+    <td> CommentPlugin: Support removal of comment prompt after a comment is made </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2802]]</td>
+    <td> Allow plugin prefs to be defined in configure and save time not looking for prefs in plugin topic. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2770]]</td>
+    <td> TablePlugin: Add css support for even/odd row distinction </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2629]]</td>
+    <td> Add search query javascript </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2604]]</td>
+    <td> It's too easy to edit EXPERT options in configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2590]]</td>
+    <td> Configure option to replace WIKIWEBMASTER for user registration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2582]]</td>
+    <td> Add VarXXX topics for TWiki preferences </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2556]]</td>
+    <td> TWiki's definition of a wikiword now see numbers as lower case letters </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2508]]</td>
+    <td> WebTopicCreator - adding ability to select a template from any topic matching .*Template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2362]]</td>
+    <td> REST always tries to return text/html </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2063]]</td>
+    <td> METASEARCH to take a format parameter like SEARCH </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2000]]</td>
+    <td> Add search by createdate option to SEARCH </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1704]]</td>
+    <td> PatternSkin: Dependence on TwistyPlugin instead of TwistyContrib (performance improvement) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1640]]</td>
+    <td> Don't strip newlines from the front of TMPL:DEFs </td>
+  </tr>
+</table>
+
+**_Related Topic:_** [[TWikiHistory]]

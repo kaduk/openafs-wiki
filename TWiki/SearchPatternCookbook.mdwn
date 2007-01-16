@@ -8,85 +8,39 @@ Most people not familiar (enough) with Regular Expressions mostly cut and paste 
   <ul>
     <li>
       <ul>
-        <li><a href="#Pattern 1: Extract values from a"> Pattern 1: Extract values from a table</a><ul>
-            <li><a href="#Problem definition"> Problem definition</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-          </ul>
-        </li>
+        <li><a href="#Pattern 1: Extract values from a"> Pattern 1: Extract values from a table</a></li>
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li><a href="#Pattern 2: List generated from f"> Pattern 2: List generated from form classification</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Test case"> Test case</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-          </ul>
-        </li>
-        <li><a href="#Pattern 3: Creating lists of TWi"> Pattern 3: Creating lists of TWiki usernames</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution 1: Appropriate for Sep"> Solution 1: Appropriate for Sep 2004 TWiki (Cairo)</a></li>
-          </ul>
-        </li>
+        <li><a href="#Pattern 2: List generated from f"> Pattern 2: List generated from form classification</a></li>
+        <li><a href="#Pattern 3: Creating lists of TWi"> Pattern 3: Creating lists of TWiki usernames</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li><a href="#Pattern 4: Extract the parent of"> Pattern 4: Extract the parent of a given topic</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li><a href="#Pattern 5: Show all Children of"> Pattern 5: Show all Children of a given topic</a></li>
+        <li><a href="#Pattern 6: Search and display th"> Pattern 6: Search and display the home topics of public webs in a list</a></li>
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li>
-          <ul>
-            <li><a href="#Solution 2: As Solution 1, but w"> Solution 2: As Solution 1, but with possibility for multi-selecting usernames</a></li>
-          </ul>
-        </li>
+        <li><a href="#Pattern 7: Create a select box w"> Pattern 7: Create a select box with values from a bullet list</a></li>
+        <li><a href="#Pattern 8: Extract a value from"> Pattern 8: Extract a value from a named bullet list item</a></li>
       </ul>
     </li>
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li>
-          <ul>
-            <li><a href="#Solution 3: Appropriate for TWik"> Solution 3: Appropriate for TWiki 4 (Dakar)</a></li>
-          </ul>
-        </li>
-        <li><a href="#Pattern 4: Extract the parent of"> Pattern 4: Extract the parent of a given topic</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-            <li><a href="#Test Case"> Test Case</a></li>
-          </ul>
-        </li>
-        <li><a href="#Pattern 5: Search and display th"> Pattern 5: Search and display the home topics of public webs in a list</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-            <li><a href="#Test case"> Test case</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li>
-          <ul>
-            <li><a href="#Alternative solution"> Alternative solution</a></li>
-          </ul>
-        </li>
-        <li><a href="#Pattern 6: Extract a value from"> Pattern 6: Extract a value from a bullet list</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-            <li><a href="#Test case"> Test case</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
-        <li><a href="#Pattern 7: Search for Form and M"> Pattern 7: Search for Form and Meta data: explained</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-          </ul>
-        </li>
-        <li><a href="#Pattern 8: Search all topics tha"> Pattern 8: Search all topics that have been moved</a><ul>
-            <li><a href="#Problem"> Problem</a></li>
-            <li><a href="#Solution"> Solution</a></li>
-          </ul>
-        </li>
-        <li><a href="#Contributors"> Contributors</a></li>
+        <li><a href="#Pattern 9: Search for Form and M"> Pattern 9: Search for Form and Meta data: explained</a></li>
+        <li><a href="#Pattern 10: Search all topics th"> Pattern 10: Search all topics that have been moved</a></li>
       </ul>
     </li>
   </ul>
 </div>
+
+<a name="SearchTables"></a>
 
 ## <a name="Pattern 1: Extract values from a"></a> Pattern 1: Extract values from a table
 
@@ -107,7 +61,7 @@ The following search pattern can be employed:
 
     <form>
     <select>
-    %SEARCH{ "^\|[^\|]*\| *option *\|" topic="%TOPIC%" regex="on" multiple="on" nosearch="on" nototal="on" format="<option>$pattern(^\| *(.*?) *\|.*)</option>" }%
+    %SEARCH{ "^\|[^\|]*\| *option *\|" topic="%TOPIC%" type="regex" multiple="on" nosearch="on" nototal="on" format="<option>$pattern(^\| *(.*?) *\|.*)</option>" }%
     </select>
     </form>
 
@@ -115,7 +69,7 @@ which is, in effect:
 
 <form><select><h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) </select></form>
 
-%BR%
+<a name="SearchFormClassification"></a>
 
 ## <a name="Pattern 2: List generated from f"></a> Pattern 2: List generated from form classification
 
@@ -141,7 +95,7 @@ We will:
 ### <a name="Solution"></a> Solution
 
     %SEARCH{"[T]opicClassification.*value\=.*Two;[T]opicStatus.*value\=.*%URLPARAM{type}%"
-    regex="on" casesensitive="on" nosearch="on"
+    type="regex" casesensitive="on" nosearch="on"
     format="   * $topic - <font face=\"arial,helvetica\" size=\"1\">
     _last modified by_ $wikiusername _on_ $date </font> %BR% &nbsp;&nbsp;&nbsp;
     <font face=\"arial,helvetica\" size=\"1\"> $formfield(TopicStatus) </font>"
@@ -153,13 +107,15 @@ The filtering select dialogue is created as in Pattern 1:
     *Filter:* %BR%
     <form name="selectType" action="%SCRIPTURLPATH{"view"}%/%WEB%/" >
     <select name="type" size="1" onchange="document.location=this.value;">
-    %SEARCH{ "^\|[^\|]*\| *option *\|" topic="TopicClassification" web="%WEB%" regex="on"
+    %SEARCH{ "^\|[^\|]*\| *option *\|" topic="TopicClassification" web="%WEB%" type="regex"
     multiple="on" nosearch="on" nototal="on" format="<option value=%INCLUDINGTOPIC%?type=$pattern(^\| *(.*?) *\|.*)>$pattern(^\| *(.*?) *\|.*)</option>" }%
     <option value=%INCLUDINGTOPIC%>All pages</option> </select>
     </form>
     %STOPSIDEBAR%
 
-This will create similar functionality as TWiki:Plugins.TopicClassificationAddOn %BR%
+This will create similar functionality as TWiki:Plugins.TopicClassificationAddOn
+
+<a name="SearchUsernames"></a>
 
 ## <a name="Pattern 3: Creating lists of TWi"></a> Pattern 3: Creating lists of TWiki usernames
 
@@ -204,7 +160,7 @@ When the User information is stored in a [[UserForm]] (as is default in Dakar) t
     <form name="testing" action="%SCRIPTURLPATH{"view"}%/%MAINWEB%" method="get">
     <select name="topic">
     <option>Select user...</option>
-    %SEARCH{"%META:FORM.*[U]serForm" web="%MAINWEB%" regex="on" casesensitive="on" nosearch="on" format="<option>$topic</option>" sort="topic" excludetopic="Test*, TWiki*"}%
+    %SEARCH{"%META:FORM.*[U]serForm" web="%MAINWEB%" type="regex" casesensitive="on" nosearch="on" format="<option>$topic</option>" sort="topic" excludetopic="Test*, TWiki*"}%
     </select>
     <input type="submit" value="Go" />
     </form>
@@ -214,33 +170,76 @@ In the above example:
 - <code>**META:FORM.\*[U]serForm**</code> will search for all topics with a [[UserForm]] attached - change this if you have a different form where userdata is stored. Please note that this search does not actually extract anything from the form - it just uses it to identify the appropriate pages
 - <code>**excludetopic="Test\*, TWiki\*"**</code> allows to skip all topics starting with Test and TWiki, such as TestUser or TWikiAdmin. Use this if you have any special users who you do not want appearing in this list
 
+<a name="SearchTopicParent"></a>
+
 ## <a name="Pattern 4: Extract the parent of"></a> Pattern 4: Extract the parent of a given topic
 
 ### <a name="Problem"></a> Problem
 
 How to get to the parent of the current topic to display on the page?
 
-### <a name="Solution"></a> Solution
+### <a name="Solution 1: Using META"></a> Solution 1: Using META
+
+Since TWiki 4.0 you can now use the META variable:
+
+`%META{ "parent" dontrecurse="on" }%`
+
+### <a name="Solution 2: Using _SpreadSheetPl"></a> Solution 2: Using SpreadSheetPlugin
 
 You might think that the following Search would do the trick:
 
-    %SEARCH{ "^%BASETOPIC%$" scope="topic" nosearch="on" type="regex" nototal="on" format="[[$parent][parent_link]]" }%
+    %SEARCH{ "^%BASETOPIC%$" scope="topic" nosearch="on" type="regex" nonoise="on" format="   * $parent" }%
 
-However, the `[[$parent][parent_link]]` link fails if the topic has no parent set (`$parent` will be empty). You can use some [[SpreadSheetPlugin]] magic to conditionally link to the parent or to `WebHome`: `[[$percntCALC{$IF($EXACT($parent,), %HOMETOPIC%, $parent)}$percnt][parent_link]]`
+However, the `$parent` link fails if the topic has no parent set (`$parent` will be empty). You can use some TWiki:Plugins/SpreadSheetPlugin magic to conditionally link to the parent or to `WebHome`:
+
+    $percntCALC{$IF($EXACT($parent,),<nop>,$NOP(   * $parent))}$percnt
 
 So the total Search query to find a topic's parent topic is:
 
-    %SEARCH{ "^%BASETOPIC%$" scope="topic" nosearch="on" type="regex" nototal="on" format="[<nop>[$percntCALC{$IF($EXACT($parent,), <nop>%HOMETOPIC%, $parent)}$percnt][parent_link]]" }%
+    %SEARCH{ "^%BASETOPIC%$" scope="topic" type="regex" nonoise="on" format="$percntCALC{$IF($EXACT($parent,),<nop>,$NOP(   * $parent))}$percnt" }%
 
-### <a name="Test Case"></a> Test Case
+#### <a name="Test Case"></a> Test Case
 
 The parent topic of this topic is:
 
-# TWiki Installation Error
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
-## <a name="Pattern 5: Search and display th"></a> Pattern 5: Search and display the home topics of public webs in a list
+### <a name="Solution 3: Using IF statement"></a> Solution 3: Using IF statement
+
+This pattern can be rewritten using `%IF%`, removing the dependency on SpreadSheetPlugin:
+
+    %SEARCH{ "^%BASETOPIC%$" web="%BASEWEB%" scope="topic" type="regex" nonoise="on" format="$percntIF{$quot$parent$quot then=$quot   * $parent$quot else=$quot<nop>$quot}$percnt" }%
+
+#### <a name="Test Case"></a> Test Case
+
+The parent topic of this topic is: %BR%
+
+# <a name="TWiki Installation Error"></a> TWiki Installation Error
+
+Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
+
+<a name="SearchTopicChildren"></a>
+
+## <a name="Pattern 5: Show all Children of"></a><a name="Pattern 5: Show all Children of "></a> Pattern 5: Show all Children of a given topic
+
+### <a name="Problem"></a> Problem
+
+How to get to the list of all children of the current topic to display on the page?
+
+### <a name="Solution"></a> Solution
+
+The parent information is stored in the META:TOPICPARENT meta data. Do a SEARCH to find all topic parent meta data pointing to the current topic:
+
+    Children:
+    %SEARCH{ "META\:TOPICPARENT.*\"%TOPIC%\"" type="regex" nonoise="on" format="[[$topic]]" separator=", " }%
+
+**_Note:_** Replace `%TOPIC%` with `%BASETOPIC%` if you put this SEARCH into the skin or a sidebar.
+
+<a name="SearchPublicWebsList"></a>
+
+## <a name="Pattern 6: Search and display th"></a> Pattern 6: Search and display the home topics of public webs in a list
 
 ### <a name="Problem"></a> Problem
 
@@ -275,7 +274,37 @@ This result can also be accomplished with the %WEBLIST% variable.
     <p>
     </p></select> <input type="submit" value="Go" /></form>
 
-## <a name="Pattern 6: Extract a value from"></a><a name="Pattern 6: Extract a value from "></a> Pattern 6: Extract a value from a bullet list
+<a name="SearchBulletList"></a>
+
+## <a name="Pattern 7: Create a select box w"></a> Pattern 7: Create a select box with values from a bullet list
+
+### <a name="Problem"></a> Problem
+
+We have a topic with a bullet list with category names. In another topic we want to offer these values in a select box dropdown.
+
+For example, CategoryList has:
+
+- Clients
+- People
+- Rooms
+- Buildings
+
+### <a name="Solution"></a> Solution
+
+The following search pattern can be employed:
+
+    <select name="type">
+    <option>Select category...</option>
+    %SEARCH{"   *\s*.*?" topic="CategoryList" type="regex" multiple="on" casesensitive="on" nosummary="on" nosearch="on" noheader="on" nototal="on" format="<option>$pattern(.*   \*\s*([^\n]*).*)</option>"}%
+    </select>
+
+To render the bullet list as a comma-separated list, use the `separator` parameter:
+
+    %SEARCH{"   *\s*.*?" topic="CategoryList" type="regex" multiple="on" casesensitive="on" nosummary="on" nosearch="on" noheader="on" nototal="on" separator="," format="$pattern(.*   \*\s*([^\n]*).*)"}%
+
+<a name="SearchNamedBulletList"></a>
+
+## <a name="Pattern 8: Extract a value from"></a><a name="Pattern 8: Extract a value from "></a> Pattern 8: Extract a value from a named bullet list item
 
 ### <a name="Problem"></a> Problem
 
@@ -285,7 +314,7 @@ Display the user name in the user's topic title
 
 Search for the `Name:` entry.
 
-    %SEARCH{"   * [N]ame: " topic="%TOPIC%" regex="on" casesensitive="on" nosummary="on" nosearch="on" noheader="on" nototal="on" format="---+!! $pattern(.*   \* Name: ([^\n]*).*)"}%
+    %SEARCH{"   * [N]ame: " topic="%TOPIC%" type="regex" casesensitive="on" nosummary="on" nosearch="on" noheader="on" nototal="on" format="---+!! $pattern(.*   \* Name: ([^\n]*).*)"}%
 
 ### <a name="Test case"></a> Test case
 
@@ -299,7 +328,9 @@ Search result:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
-## <a name="Pattern 7: Search for Form and M"></a> Pattern 7: Search for Form and Meta data: explained
+<a name="SearchMetaData"></a>
+
+## <a name="Pattern 9: Search for Form and M"></a> Pattern 9: Search for Form and Meta data: explained
 
 ### <a name="Problem"></a> Problem
 
@@ -308,7 +339,7 @@ Below is an example of a search that searches form data. The questions are:
 - why is this searching the metadata, shouldn't it just search the text?
 - what is the meaning of the `td..td` in the search expression?
 
-    %SEARCH{ "[S]tatus.*(td..td|value\=).*[W]aiting" casesensitive="on" regex="on"
+    %SEARCH{ "[S]tatus.*(td..td|value\=).*[W]aiting" casesensitive="on" type="regex"
     nosearch="on" nototal="on" format="| [[$topic]]<br /> ($date - $rev -
     [[%SCRIPTURLPATH{rdiff}%/$web/$topic][Diffs]]) |"}%
 
@@ -322,7 +353,7 @@ An example meta data form field is:
 
 So a search for a form field could look like:
 
-    %SEARCH{ "[O]peratingSystem.*value\=.*[O]sWin" regex="on" ... }%
+    %SEARCH{ "[O]peratingSystem.*value\=.*[O]sWin" type="regex" ... }%
 
 - Using square brackets is a trick to avoid a hit on the topic doing the search.
 - The `.*` indicate that there can be any number of any character between `OperatingSystem` and `value` in the (whole) file
@@ -333,13 +364,15 @@ Now the original file format of the category table (the predecessor of the TWiki
 
 The following search finds topics in the old and new format:
 
-    %SEARCH{ "[O]peratingSystem.*(td..td|value\=).*[O]sWin" regex="on" ... }%
+    %SEARCH{ "[O]peratingSystem.*(td..td|value\=).*[O]sWin" type="regex" ... }%
 
 The `td..td` matches `td<>td`; a simple search on `"[O]peratingSystem.*[O]sWin"` could find a hit in the topic text by coincidence.
 
 A simple `%SEARCH{ "[O]peratingSystem.*value\=.*[O]sWin" ...}%` search is sufficient if you do not have topics in the old format.
 
-## <a name="Pattern 8: Search all topics tha"></a> Pattern 8: Search all topics that have been moved
+<a name="MovedTopics"></a>
+
+## <a name="Pattern 10: Search all topics th"></a> Pattern 10: Search all topics that have been moved
 
 ### <a name="Problem"></a> Problem
 
@@ -349,7 +382,7 @@ How would I go about listing all moved topics ?
 
 Search for the META:TOPICMOVED meta data. Type this:
 
-`Moved topics: %SEARCH{ "%META\:TOPICMOVED" regex="on" format="$topic, " nosearch="on" noheader="on" nosummary="on" }%`
+`Moved topics: %SEARCH{ "%META\:TOPICMOVED" type="regex" format="$topic, " nosearch="on" noheader="on" nosummary="on" }%`
 
 to get this (limited to 10 results):
 
@@ -359,8 +392,6 @@ Moved topics:
 
 Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)
 
-## <a name="Contributors"></a> Contributors
+**_Related Topics:_** [[UserDocumentationCategory]], [[SearchHelp]], [[TWikiVariables#VarSEARCH]], [[FormattedSearch]], [[RegularExpression]]
 
-TWiki:Main.AntonAylward, TWiki:Main.ArthurClemens, TWiki:Main.JosMaccabiani, TWiki:Main.PeterThoeny, TWiki:Main.SueLocke
-
-**_Related Topics:_** [[UserDocumentationCategory]]
+-- **_Contributors:_** TWiki:Main.AntonAylward, TWiki:Main.ArthurClemens, TWiki:Main.JosMaccabiani, TWiki:Main.PeterThoeny, TWiki:Main.SueLocke

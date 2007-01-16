@@ -34,6 +34,7 @@ Refer to Store.pm for models of usage.
         <li><a href="#ObjectMethod <strong>isLocked</strong> () -> ($"> ObjectMethod isLocked <tt>() -&gt; ($user,$time)</tt></a></li>
         <li><a href="#ObjectMethod <strong>setLease</strong> ($lease)"> ObjectMethod setLease <tt>($lease)</tt></a></li>
         <li><a href="#ObjectMethod <strong>getLease</strong> () -> $l"> ObjectMethod getLease <tt>() -&gt; $lease</tt></a></li>
+        <li><a href="#ObjectMethod *remove_SpuriousLea"> ObjectMethod removeSpuriousLeases <tt>($web)</tt></a></li>
         <li><a href="#ObjectMethod <strong>getStream</strong> () -> \"> ObjectMethod getStream <tt>() -&gt; \*STREAM</tt></a></li>
         <li><a href="#ObjectMethod <strong>numRevisions</strong> () -"> ObjectMethod numRevisions <tt>() -&gt; $integer</tt></a></li>
         <li><a href="#ObjectMethod <strong>initBinary</strong> ()"> ObjectMethod initBinary <tt>()</tt></a></li>
@@ -186,6 +187,10 @@ Set an lease on the topic.
 ## <a name="ObjectMethod &lt;strong&gt;getLease&lt;/strong&gt; () - $le"></a> [[ObjectMethod]] **getLease** `() -> $lease`
 
 Get the current lease on the topic.
+
+## <a name="ObjectMethod &lt;strong&gt;remove_SpuriousLea"></a> [[ObjectMethod]] \*removeSpuriousLeases `($web)`
+
+Remove leases that are not related to a topic. These can get left behind in some store implementations when a topic is created, but never saved.
 
 ## <a name="ObjectMethod &lt;strong&gt;getStream&lt;/strong&gt; () - \*"></a> [[ObjectMethod]] **getStream** `() -> \*STREAM`
 

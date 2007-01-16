@@ -5,7 +5,7 @@ Service functions used by the UI packages
 <div>
   <ul>
     <li><a href="#Package =TWiki::UI="> Package TWiki::UI</a><ul>
-        <li><a href="#StaticMethod <strong>run</strong> (\method)"> StaticMethod run <tt>(\&amp;method)</tt></a></li>
+        <li><a href="#StaticMethod <strong>run</strong> (\method,...)"> StaticMethod run <tt>(\&amp;method,...)</tt></a></li>
         <li><a href="#StaticMethod <strong>check_WebExists</strong> ("> StaticMethod checkWebExists <tt>($session,$web,$topic,$op)</tt></a></li>
         <li><a href="#StaticMethod <strong>topicExists</strong> ($ses"> StaticMethod topicExists <tt>($session,$web,$topic,$op)=&gt;boolean</tt></a></li>
         <li><a href="#StaticMethod <strong>checkMirror</strong> ($ses"> StaticMethod checkMirror <tt>($session,$web,$topic)</tt></a></li>
@@ -16,9 +16,11 @@ Service functions used by the UI packages
   </ul>
 </div>
 
-## <a name="StaticMethod &lt;strong&gt;run&lt;/strong&gt; (\method)"></a> [[StaticMethod]] **run** `(\&method)`
+## <a name="StaticMethod &lt;strong&gt;run&lt;/strong&gt; (\method,...)"></a> [[StaticMethod]] **run** `(\&method,...)`
 
 Entry point for execution of a UI function. The parameter is a reference to the method.
+
+... is a list of name-value pairs that define initial context identifiers that must be set during initPlugin. This set will be extended to include command\_line if the script is detected as being run outside the browser.
 
 ## <a name="StaticMethod &lt;strong&gt;check_WebExists&lt;/strong&gt; ("></a> [[StaticMethod]] **checkWebExists** `($session,$web,$topic,$op)`
 

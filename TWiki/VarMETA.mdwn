@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <td><code>"formfield"</code></td>
-    <td><code>name="..."</code> - name of the field. The field value can be shortened as described in [[TWiki/FormattedSearch]] for <code>$formfield</code></td>
+    <td><code>name="..."</code>: name of the field. The field value can be shortened as described in [[TWiki/FormattedSearch]] for <code>$formfield</code> %BR% <code>newline="..."</code>: by default, each newline character will be rewritten to <code>&lt;br /&gt;</code> to allow metadata that contains newlines to be used in tables, etc. <code>$n</code> indicates a newline character. %BR% <code>bar="..."</code>: by default, each vertical bar is rewritten to an HTML entity so as to not be mistaken for a table separator. </td>
     <td> Show a single form field </td>
   </tr>
   <tr>
@@ -22,8 +22,8 @@
   </tr>
   <tr>
     <td><code>"attachments"</code></td>
-    <td><code>all="on"</code> to show hidden attachments </td>
-    <td> Generates the table showing the attachments </td>
+    <td><code>all="on"</code> to show hidden attachments. %BR% <code>title="..."</code> to show a title - only if attachments are displayed. %BR% <code>template="..."</code> to use a custom template for the rendering of attachments; default <code>attachtables</code> is used. </td>
+    <td> Generates the list of attachments </td>
   </tr>
   <tr>
     <td><code>"moved"</code></td>
@@ -32,7 +32,7 @@
   </tr>
   <tr>
     <td><code>"parent"</code></td>
-    <td><code><b>dontrecurse="on"</b></code>: By default recurses up tree, this has some cost. %BR% <code><b>nowebhome="on"</b></code>: Suppress WebHome. %BR% <code><b>prefix="..."</b></code>: Prefix that goes before parents, but only if there are parents, default <code>""</code>. %BR% <code><b>format="..."</b></code>: format string used to display each partent topic, default <code>"[[$web.$topic][$topic]]"</code> %BR% <code><b>suffix="..."</b></code>: Suffix, only appears if there are parents, default <code>""</code>. %BR% <code><b>separator="..."</b></code>: Separator between parents, default <code>" &gt; "</code>. </td>
+    <td><code>dontrecurse="on"</code>: By default recurses up tree, this has some cost. %BR% <code>nowebhome="on"</code>: Suppress WebHome. %BR% <code>prefix="..."</code>: Prefix that goes before parents, but only if there are parents, default <code>""</code>. %BR% <code>format="..."</code>: Format string used to display each parent topic where <code>$web</code> expands to the web name, and <code>$topic</code> expands to the topic name; default: <code>"[[$web.$topic][$topic]]"</code> %BR% <code>suffix="..."</code>: Suffix, only appears if there are parents; default <code>""</code>. %BR% <code>separator="..."</code>: Separator between parents; default <code>" &gt; "</code>. </td>
     <td> Generates the parent link </td>
   </tr>
 </table>
