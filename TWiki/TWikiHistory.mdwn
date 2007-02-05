@@ -1,7 +1,7 @@
 <div>
   <ul>
     <li><a href="#Appendix A: TWiki Development Ti"> Appendix A: TWiki Development Timeline</a><ul>
-        <li><a href="#TWiki Release 4.1 (Edinburgh), 1"> TWiki Release 4.1 (Edinburgh), 17 Jan 2007</a></li>
+        <li><a href="#TWiki Release 4.1 (Edinburgh), 1"> TWiki Release 4.1 (Edinburgh), 16 Jan 2007</a></li>
         <li><a href="#TWiki Release 4.0.0 (Dakar), 01"> TWiki Release 4.0.0 (Dakar), 01 Feb 2006</a></li>
         <li><a href="#01-Sep-2004 Release (Cairo)"> 01-Sep-2004 Release (Cairo)</a></li>
         <li><a href="#01-Feb-2003 Release (Beijing)"> 01-Feb-2003 Release (Beijing)</a></li>
@@ -22,7 +22,7 @@
 
 <a name="EdinburghRelease"></a>
 
-## <a name="TWiki Release 4.1 (Edinburgh), 1"></a> TWiki Release 4.1 (Edinburgh), 17 Jan 2007
+## <a name="TWiki Release 4.1 (Edinburgh), 1"></a> TWiki Release 4.1 (Edinburgh), 16 Jan 2007
 
 **_New Features and Enhancements of TWiki Release 4.1_**
 
@@ -70,7 +70,7 @@
   - Allow date format in form fields.
   - Enhance REVINFO\{\} variable with same date qualifiers as GMTIME\{\}.
   - [[WebTopicCreator]] - adding ability to select a template from any topic name ending in ...Template
-  - Functionality of DateFieldPlugin merged into core
+  - Functionality of TWiki:Plugins.DateFieldPlugin merged into core
 
 - **Enhancements of Pre-installed Plugins**
   - [[CommentPlugin]]: Supports removal of comment prompt after a comment is made.
@@ -85,7 +85,7 @@
 - **Bugfixes**
   - More than 200 bugs fixed since 4.0.5
 
-**_Hall of Fame of TWiki Release 4.1_**
+<a name="EdinburghHallOfFame"></a> **_Hall of Fame of TWiki Release 4.1_**
 
 Although many more people have been involved in creating TWiki-4.1, special thanks go to the most active contributors in the following areas:
 
@@ -114,6 +114,8 @@ Although many more people have been involved in creating TWiki-4.1, special than
 - **System administration:** TWiki:Main.SvenDowideit, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie
 
 If you find an omission please fix it at TWiki:TWiki.TWikiHistory. For the full list of contributors see [[TWikiContributor]].
+
+**_Note:_** Sequence of contributors under "Spec, code, testing", "Templates and skins" and "Documentation" is based on number of SVN check-ins for core and default extensions from 2006-02 to 2006-12. Sequence of contributors under "TWiki.org wiki champions" and "Customer support" is based on TWiki.org web statistics from 2006-02 to 2006-12.
 
 See more details on the TWiki 4.1 release at [[TWikiReleaseNotes04x01]].
 
@@ -407,7 +409,7 @@ See more details at [[TWikiReleaseNotes04x00]]
     <td bgcolor="#ecf2f8" style="width: 10%" width="10%"> TWiki:Main.PeterThoeny </td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Internationalization: Support use of UTF-8 URLs for [[Main/I18N]] characters in TWiki page and attachment names. <a href="http://TWiki.org/cgi-bin/view/Codev/EncodeURLsWithUTF8" target="_top">Details</a></td>
+    <td bgcolor="#ffffff" style="width: 90%" width="90%"> Internationalization: Support use of UTF-8 URLs for I18N characters in TWiki page and attachment names. <a href="http://TWiki.org/cgi-bin/view/Codev/EncodeURLsWithUTF8" target="_top">Details</a></td>
     <td bgcolor="#ffffff" style="width: 10%" width="10%"> TWiki:Main.RichardDonkin </td>
   </tr>
   <tr>

@@ -445,7 +445,7 @@ Conventions for Syntax:
 
 ### <a name="LISTMAP( formula, list ) -- eval"></a> LISTMAP( formula, list ) -- evaluate and update each element of a list
 
-- In the formula you can use <code>**$item**</code> to indicate the element; <code>**$index**</code> to show the index of the list, starting at 1
+- In the formula you can use <code>**$item**</code> to indicate the element; <code>**$index**</code> to show the index of the list, starting at 1. If <code>**$item**</code> is omitted, the item is appended to the formula.
 - Syntax: <code>**$LISTMAP( formula, list )**</code>
 - Example: <code>**%CALC\{"$LISTMAP($index: $EVAL(2 \* $item), 3, 5, 7, 11)"\}%**</code> returns <code>**1: 6, 2: 10, 3: 14, 4: 22**</code>
 - Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
@@ -455,7 +455,7 @@ Conventions for Syntax:
 ### <a name="LISTRAND( list ) -- get one rand"></a> LISTRAND( list ) -- get one random element of a list
 
 - Syntax: <code>**$LISTRAND( list )**</code>
-- Example: <code>**%CALC\{"$LISTRRAND(Apple, Orange, Apple, Kiwi)"\}%**</code> returns one of the four elements
+- Example: <code>**%CALC\{"$LISTRAND(Apple, Orange, Apple, Kiwi)"\}%**</code> returns one of the four elements
 - Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTSHUFFLE()|Main/WebHome#FuncLISTSHUFFLE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$RAND()|Main/WebHome#FuncRAND]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncLISTREVERSE"></a>
@@ -981,7 +981,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2001-2006, <a href="mailto:Peter@Thoeny.org">Peter@Thoeny.org</a>, <a href="http://www.structuredwikis.com/" target="_top">StructuredWikis LLC</a></td>
+    <td> © 2001-2007, <a href="mailto:Peter@Thoeny.org">Peter@Thoeny.org</a>, <a href="http://www.structuredwikis.com/" target="_top">StructuredWikis LLC</a></td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -989,11 +989,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 18 Dec 2006 (r12315) </td>
+    <td> 23 Jan 2007 (r12607) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 23 Jan 2007: </td>
+    <td> Enhanced documentation </td>
   </tr>
   <tr>
     <td align="right"> 18 Dec 2006: </td>
@@ -1159,4 +1163,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/PeterThoeny - 18 Dec 2006
+-- TWiki:Main/PeterThoeny - 23 Jan 2007

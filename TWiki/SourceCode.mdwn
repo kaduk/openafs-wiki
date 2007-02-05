@@ -138,7 +138,7 @@ The last step in TWiki::new is to find the user, using whatever user mapping man
 
 The TWiki object this login manager is attached to.
 
-This package has smell factor of **3**
+This package has smell factor of **2**
 
 ## <a name="TWiki::Client::_TemplateLogin"></a> [[TWiki::Client::TemplateLogin|Main/TWikiClientTemplateLoginDotPm]]
 
@@ -340,7 +340,7 @@ This module knows nothing about how the data is actually _stored_ - that knowled
 
 The general contract for methods in the class requires that errors are signalled using exceptions. TWiki::AccessControlException is used for access control exceptions, and Error::Simple for all other types of error.
 
-This package has smell factor of **18**
+This package has smell factor of **17**
 
 ## <a name="TWiki::Store::_RcsFile"></a> [[TWiki::Store::RcsFile|Main/TWikiStoreRcsFileDotPm]]
 
@@ -561,4 +561,4 @@ Subclasses should be named 'XxxxUserMapping' so that configure can find them.
 
 This package has smell factor of **3**
 
-There were a total of **201** smells
+There were a total of **199** smells

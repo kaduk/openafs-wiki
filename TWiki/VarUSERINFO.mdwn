@@ -1,20 +1,14 @@
 <a name="VarUSERINFO"></a>
 
-### <a name="USERINFO - retrieve details abou"></a> USERINFO - retrieve details about a user (by default the logged-in user)
+### <a name="USERINFO{&quot;_WikiName&quot;} -- retriev"></a> USERINFO\{"WikiName"\} -- retrieve details about a user
 
 - Syntax: `%USERINFO%`
-- Expands to: =admin, Main.admin, =
-
-**To format that information differently:**
-
-- Syntax: `%USERINFO{format="$username is really $wikiname"}%`
-- Expands to: `admin is really admin`.
-  - The tokens `$emails`, `$username`, `$wikiname`, `$wikiusername`, and `$groups` are available for use in the format string .By default, the info will be formatted as a comma-separated list of the username, wikiusername, and emails.
-
-**To get information about another user:**
-
-- Syntax: `%USERINFO{"TWikiGuest" format="$username is really $wikiname"}%`
-- Expands to: ``
-  - The parameter should be the wikiname of a user. You can only get information about another user if the `{AntiSpam}{HideUserDetails}` configuration option is not enabled, or if you are an admin. _(User details are hidden in this TWiki)_
-
+- Expands to: `admin, Main.admin, ` (comma-separated list of the username, wikiusername, and emails)
+- With formatted output, using tokens `$emails`, `$username`, `$wikiname`, `$wikiusername`, and `$groups`:
+  - Example: `%USERINFO{ format="$username is really $wikiname" }%`
+  - Expands to: `admin is really admin`
+- Retrieve information about another user:
+  - Example: `%USERINFO{ "TWikiGuest" format="$username is really $wikiname" }%`
+  - Expands to: ``
+  - **_Note:_** The parameter should be the wikiname of a user. You can only get information about another user if the `{AntiSpam}{HideUserDetails}` configuration option is not enabled, or if you are an admin. _(User details are hidden in this TWiki)_
 - Related: [[USERNAME|Main/WebHome#VarUSERNAME]], [[WIKINAME|Main/WebHome#VarWIKINAME]], [[WIKIUSERNAME|Main/WebHome#VarWIKIUSERNAME]], [[TWikiUserAuthentication]], [[ChangeEmailAddress]]

@@ -18,6 +18,15 @@
             <li><a href="#!_TWikiUsers topic in Main web"> TWikiUsers topic in Main web</a></li>
           </ul>
         </li>
+        <li><a href="#Important Changes since 4.0.5"> Important Changes since 4.0.5</a><ul>
+            <li><a href="#Supported Perl version"> Supported Perl version</a></li>
+            <li><a href="#Template spec changed"> Template spec changed</a></li>
+          </ul>
+        </li>
+        <li><a href="#Important Changes since 4.1.0"> Important Changes since 4.1.0</a><ul>
+            <li><a href="#New location for session files"> New location for session files</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -145,5 +154,54 @@ Your Cairo [[Main.TWikiUsers|Main/TWikiUsers]] topic will work in TWiki4 but you
 - **UnknownUser** - used where the author of a previously stored piece of data can't be determined
 
 You additionally need to ensure that TWikiUsers has the `Set ALLOWTOPICCHANGE = TWikiAdminGroup, TWikiRegistrationAgent`. Otherwise people will not be able to register.
+
+## <a name="Important Changes since 4.0.5"></a> Important Changes since 4.0.5
+
+### <a name="Supported Perl version"></a> Supported Perl version
+
+TWiki 4.0.5 worked on Perl version 5.6.X. Reports from users has shown that unfortunately TWiki 4.1.0 does not support Perl versions older then 5.8.0. It is the goal that TWiki should work on at least Perl version 5.6.X but none of the developers have had access to Perl installations older than 5.8.0.
+
+Since TWiki 4.1.0 has some urgent bugs the development team decided to release TWiki 4.1.1 without resolving the issue with Perl 5.6.X. We will however address this and try and resolve it for a planned 4.1.2 release. The TWiki community is very interested in contributions from users that have fixes for the code which will enable TWiki to run on older versions of Perl.
+
+See the [WhatVersionsOfPerlAreSupported](http://twiki.org/cgi-bin/view/Codev/WhatVersionsOfPerlAreSupported) topic to keep up to date with the discussion how to get back support for earlier Perl versions.
+
+### <a name="Template spec changed"></a> Template spec changed
+
+Until TWiki 4.0.5 [[TWikiTemplates]] the text inside template definition blocks (anything between %TMPL:DEF\{"block"\}% and %TMPL:END% was stripped of leading and trailing white space incl new lines.
+
+This caused a lot of problems for skin developers when you wanted a newline before or after the block text.
+
+From TWiki 4.1.0 this has changed so that white space is no longer stripped. Skins like PatternSkin and NatSkin have been updated so that they work with the new behavior. But if you use an older skin or have written your own you will most likely need to make some adjustments.
+
+It is not difficult. The general rule is - if you get mysterious blank lines in your skin, the newline after the %TMPL:DEF\{"block"\}% needs to be removed. Ie. the content of the block must follow on the same line as the TMPL:DEF.
+
+The spec change have the same impact on [[CommentPlugin]] templates where you may have to remove the first line break after the TMPL:DEF. See the [[CommentPluginTemplate]] for examples of how comment template definitions should look like in TWiki-4.1.X
+
+An example: A CommentPlugin template that adds a comment as appending a row to a table. Before the spec change this would work.
+
+    <verbatim>
+    %TMPL:DEF{OUTPUT:tabletest}%%POS:BEFORE%
+    |%URLPARAM{"comment"}%| -- %WIKIUSERNAME% - %DATE% |
+    %TMPL:END%
+    </verbatim>
+
+From Twiki 4.1.0 the old template definition will add an empty line before the new table row. To fix it simply remove the new line before the table.
+
+    <verbatim>
+    %TMPL:DEF{OUTPUT:tabletest}%%POS:BEFORE%|%URLPARAM{"comment"}%| -- %WIKIUSERNAME% - %DATE% |
+    %TMPL:END%
+    </verbatim>
+
+The advantage of the spec change is that now you can add leading and trailing white space including new lines. This was not possible before.
+
+## <a name="Important Changes since 4.1.0"></a> Important Changes since 4.1.0
+
+### <a name="New location for session files"></a> New location for session files
+
+An upgrader upgrading to 4.1.1 should note the following important change
+
+The directory for passthrough files and session files have been replaced by a common directory for temporary files used by TWiki. Previously the two configure settings `{PassthroughDir}` and `{Sessions}{Dir}` were by default set to `/tmp`. These config settings have been replaced by `{TempfileDir}` with the default setting value `/tmp/twiki`. If the `twiki` directory does not exist twiki will create it first time it needs it.
+
+It is highly recommended no longer to use the tmp directory common to other web applications and the new default will work fine for most. You may want to delete all the old session files in /tmp after the upgrade to 4.1.1. They all start with cgisess\_. It is additionally highly recommended to limit write access to the `{TempfileDir}` for security reasons if you have non-admin users with login access to the webserver just like you would do with the other webserver directories.
 
 **_Related Topics:_** [[AdminDocumentationCategory]], TWiki:TWiki.UpgradingTWiki, TWiki:TWiki.UpgradingTWiki04x00PatchReleases, TWiki:TWiki.InstallingTWiki#OtherPlatforms, TWiki:TWiki.ApacheConfigGenerator, TWiki:TWiki.SettingFileAccessRightsLinuxUnix

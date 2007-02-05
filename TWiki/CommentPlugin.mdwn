@@ -199,6 +199,8 @@ This allows for several levels of customisation:
 
 %X% Templates are picked up by following the [[standard TWiki rules|Main/TWikiTemplates#Finding_Templates]] for locating template files. Note that you can use `%TMPL:INCLUDE` to include other files of templates.
 
+%X% Note that from TWiki release 4.1.0 leading and trailing whitespace is no longer stripped. This means that when you upgrade to TWiki 4.1.X you may need to remove the first line break in your custom comment templates. See [[TWikiReleaseNotes04x01]] for more information.
+
 ### <a name="Customisation example"></a> Customisation example
 
 Provide both a `PROMPT` and an `OUTPUT` definition:
@@ -374,40 +376,56 @@ These can be set in TWikiPreferences, in WebPreferences or in individual topics.
     <td> TWiki:Main.DavidWeller, TWiki:Main.PeterMasiar, TWiki:Main.CrawfordCurrie <a href="http://www.c-dot.co.uk" target="_top">http://www.c-dot.co.uk</a></td>
   </tr>
   <tr>
-    <td> Change History: </td>
-    <td>   </td>
+    <td align="right"> Copyright: </td>
+    <td> © 2004, TWiki:Main.CrawfordCurrie<br />© 2004-2007 TWiki:TWiki.TWikiContributor </td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Version: </td>
+    <td> 12750 (04 Feb 2007) </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 12750 </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item3510" rel="nofollow">Item3510</a> added a note about the changed template spec in TWiki 4.1.0. Code remains unchanged </td>
   </tr>
   <tr>
     <td align="right"> 11358 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2802" rel="nofollow">Item2802</a> moved SHORTDESCRIPTION to .pm. Coded up TWiki:main.PankajPant's suggestions as <code>nopost</code> and <code>remove</code>. Added default text for the %COMMENT as requested by TWiki:Main.AndyGlew </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item2802" rel="nofollow">Item2802</a> moved SHORTDESCRIPTION to .pm. Coded up TWiki:main.PankajPant's suggestions as <code>nopost</code> and <code>remove</code>. Added default text for the %COMMENT as requested by TWiki:Main.AndyGlew </td>
   </tr>
   <tr>
     <td align="right"> 11118 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2322" rel="nofollow">Item2322</a> removed span tag around oneliner bullet output </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item2322" rel="nofollow">Item2322</a> removed span tag around oneliner bullet output </td>
   </tr>
   <tr>
     <td align="right"> 8788 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Item1577: reverted 8433 to fix inclusion of correct user templates </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Item1577: reverted 8433 to fix inclusion of correct user templates </td>
   </tr>
   <tr>
     <td align="right"> 8787 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1573" rel="nofollow">Item1573</a> renamed standard templates topic to avoid naming clash on Windows, where filenames are case-insensitive </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1573" rel="nofollow">Item1573</a> renamed standard templates topic to avoid naming clash on Windows, where filenames are case-insensitive </td>
   </tr>
   <tr>
     <td align="right"> 8433 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Fix 'TWiki.' to 'TWiki.'; also fixed include 'UserComments' to 'UserCommentsTemplate' (at least that is what the doc suggests) </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Fix 'TWiki.' to 'TWiki.'; also fixed include 'UserComments' to 'UserCommentsTemplate' (at least that is what the doc suggests) </td>
   </tr>
   <tr>
     <td align="right"> 7427 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item845" rel="nofollow">Item845</a> removed duplicate date in default comments; stick with server time </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item845" rel="nofollow">Item845</a> removed duplicate date in default comments; stick with server time </td>
   </tr>
   <tr>
     <td align="right"> 7251 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item810" rel="nofollow">Item810</a> fix for user template inclusion; reorganised templates to make customisation easier </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item810" rel="nofollow">Item810</a> fix for user template inclusion; reorganised templates to make customisation easier </td>
   </tr>
   <tr>
     <td align="right"> 5906 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item143" rel="nofollow">Item143</a> apache warning from comment plugin when CommentsTmpl.txt not found </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item143" rel="nofollow">Item143</a> apache warning from comment plugin when CommentsTmpl.txt not found </td>
   </tr>
   <tr>
     <td align="right"> 5519 </td>
@@ -469,4 +487,4 @@ These can be set in TWikiPreferences, in WebPreferences or in individual topics.
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
 
--- TWiki:Main/CrawfordCurrie - 05:07:17 16 January 2007
+-- TWiki:Main/CrawfordCurrie - 01:11:36 05 February 2007

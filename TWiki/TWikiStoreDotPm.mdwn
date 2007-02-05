@@ -12,6 +12,7 @@ The general contract for methods in the class requires that errors are signalled
         <li><a href="#ClassMethod <strong>new</strong> ()"> ClassMethod new <tt>()</tt></a></li>
         <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
         <li><a href="#ObjectMethod <strong>readTopic</strong> ($user,"> ObjectMethod readTopic <tt>($user,$web,$topic,$version) -&gt; ($metaObject,$text)</tt></a></li>
+        <li><a href="#ObjectMethod *_findAttachments*"> ObjectMethod _findAttachments <tt>($session,$web,$topic,$knownAttachments) -&gt; @attachmentsFoundInPub</tt></a></li>
         <li><a href="#ObjectMethod <strong>read_TopicRaw</strong> ($u"> ObjectMethod readTopicRaw <tt>($user,$web,$topic,$version) -&gt; $topicText</tt></a></li>
         <li><a href="#ObjectMethod <strong>moveAttachment</strong> ($"> ObjectMethod moveAttachment <tt>($oldWeb,$oldTopic,$oldAttachment,$newWeb,$newTopic,$newAttachment,$user)</tt></a></li>
         <li><a href="#ObjectMethod *get_AttachmentStre"> ObjectMethod getAttachmentStream <tt>($user,$web,$topic,$attName) -&gt; \*STREAM</tt></a></li>
@@ -77,6 +78,16 @@ if $user is defined, view permission will be required for the topic read to be s
 If the topic contains a web specification (is of the form Web.Topic) the web specification will override whatever is passed in $web.
 
 The metadata and topic text are returned separately, with the metadata in a TWiki::Meta object. (The topic text is, as usual, just a string.)
+
+## <a name="ObjectMethod &lt;strong&gt;_findAttachments*"></a><a name="ObjectMethod *_findAttachments&lt;/strong&gt; "></a> [[ObjectMethod]] **\_findAttachments** `($session,$web,$topic,$knownAttachments) -> @attachmentsFoundInPub`
+
+Synchronise the attachment list with what's actually on disk Returns an ARRAY of FILEATTACHMENTs. These can be put in the new meta using meta-&gt;put('FILEATTACHMENTS', $tree)
+
+This function is only called when the [[AutoAttachPubFiles]] configuration option is set.
+
+IDEA On Windows machines where the underlying filesystem can store arbitary meta data against files, this might replace/fulfil the COMMENT purpose
+
+TODO consider logging when things are added to metadata
 
 ## <a name="ObjectMethod &lt;strong&gt;read_TopicRaw&lt;/strong&gt; ($u"></a> [[ObjectMethod]] **readTopicRaw** `($user,$web,$topic,$version) -> $topicText`
 

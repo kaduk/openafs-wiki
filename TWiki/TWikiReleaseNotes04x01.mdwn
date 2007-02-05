@@ -1,13 +1,24 @@
-# <a name="TWiki Release 4.1 (Edinburgh), 1"></a><a name=" TWiki Release 4.1 (Edinburgh), "></a> TWiki Release 4.1 (Edinburgh), 17 Jan 2007
+# <a name="TWiki Release 4.1.1 (Edinburgh),"></a><a name=" TWiki Release 4.1.1 (Edinburgh)"></a> TWiki Release 4.1.1 (Edinburgh), 05 Feb 2007
 
 <div>
   <ul>
     <li><a href="#Introduction"> Introduction</a></li>
     <li><a href="#New Features Highlights"> New Features Highlights</a></li>
+    <li><a href="#Important Changes since 4.0.5"> Important Changes since 4.0.5</a><ul>
+        <li><a href="#Supported Perl version"> Supported Perl version</a></li>
+        <li><a href="#Template spec changed"> Template spec changed</a></li>
+      </ul>
+    </li>
+    <li><a href="#Important Changes since 4.1.0"> Important Changes since 4.1.0</a></li>
     <li><a href="#Deprecation Notice"> Deprecation Notice</a></li>
     <li><a href="#Bug Fix Highlights"> Bug Fix Highlights</a></li>
     <li><a href="#TWiki 4.1.0 Minor Release - Deta"> TWiki 4.1.0 Minor Release - Details</a><ul>
         <li><a href="#TWiki 4.1.0 Fixes"> TWiki 4.1.0 Fixes</a></li>
+        <li><a href="#TWiki 4.1.0 Enhancements"> TWiki 4.1.0 Enhancements</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki 4.1.1 Patch Release - Deta"> TWiki 4.1.1 Patch Release - Details</a><ul>
+        <li><a href="#TWiki 4.1.1 Fixes"> TWiki 4.1.1 Fixes</a></li>
         <li><a href="#TWiki 4.1.0 Enhancements"> TWiki 4.1.0 Enhancements</a></li>
       </ul>
     </li>
@@ -16,11 +27,13 @@
 
 ## <a name="Introduction"></a> Introduction
 
-TWiki Release 4.1 is a minor release. TWiki releases are either major (major new features and changes in architecture), minor (enhancements and bug fixes), or patch releases (bug fixes only) which can be installed as upgrades on production installations.
+TWiki Release 4.1.0 is a minor release. TWiki releases are either major (major new features and changes in architecture), minor (enhancements and bug fixes), or patch releases (bug fixes only) which can be installed as upgrades on production installations.
 
-TWiki Release 4.1 introduces some good enhancements and quite many bug fixes since 4.0.5. It requires some manual work to upgrade from TWiki 4.0.5 to 4.1.0. Depending on the tailoring you have made it may take between 10 minutes to two hours to do an upgrade. If you have not made any changes to the skins the upgrade is for sure an effort that takes less than 30 minutes.
+TWiki Release 4.1.0 introduces some good enhancements and quite many bug fixes since 4.0.5. It requires some manual work to upgrade from TWiki 4.0.5 to 4.1.0. Depending on the tailoring you have made it may take between 10 minutes to two hours to do an upgrade. If you have not made any changes to the skins the upgrade is for sure an effort that takes less than 30 minutes.
 
 The development team has done everything to maintain full compatibility with topics generated in TWiki-4.0 and there are no changes to the topic format.
+
+TWiki 4.1.1 addresses a series of bugs found in the first 4 weeks after the release of TWiki 4.1.0.
 
 ## <a name="New Features Highlights"></a> New Features Highlights
 
@@ -68,7 +81,7 @@ The development team has done everything to maintain full compatibility with top
   - Allow date format in form fields.
   - Enhance REVINFO\{\} variable with same date qualifiers as GMTIME\{\}.
   - [[WebTopicCreator]] - adding ability to select a template from any topic name ending in ...Template
-  - Functionality of DateFieldPlugin merged into core
+  - Functionality of TWiki:Plugins.DateFieldPlugin merged into core
 
 - **Enhancements of Pre-installed Plugins**
   - [[CommentPlugin]]: Supports removal of comment prompt after a comment is made.
@@ -79,6 +92,52 @@ The development team has done everything to maintain full compatibility with top
   - [[TablePlugin]]: New attribute `cellborder`.
   - [[TablePlugin]]: Highlight the sorted column with custom colors; includes also a general cosmetic update of default colors.
   - [[TablePlugin]]: Support for initsort on more than one table. A table with the initsort option is initsorted UNLESS it is sorted by clicking on a column header. If you click on a header of another table all other tables goes back to the default sort defined by initsort or not sorted if no initsort, and the new table is sorted based on the user clicking on a table header.
+
+## <a name="Important Changes since 4.0.5"></a> Important Changes since 4.0.5
+
+### <a name="Supported Perl version"></a> Supported Perl version
+
+TWiki 4.0.5 worked on Perl version 5.6.X. Reports from users has shown that unfortunately TWiki 4.1.0 does not support Perl versions older then 5.8.0. It is the goal that TWiki should work on at least Perl version 5.6.X but none of the developers have had access to Perl installations older than 5.8.0.
+
+Since TWiki 4.1.0 has some urgent bugs the development team decided to release TWiki 4.1.1 without resolving the issue with Perl 5.6.X. We will however address this and try and resolve it for a planned 4.1.2 release. The TWiki community is very interested in contributions from users that have fixes for the code which will enable TWiki to run on older versions of Perl.
+
+See the [WhatVersionsOfPerlAreSupported](http://twiki.org/cgi-bin/view/Codev/WhatVersionsOfPerlAreSupported) topic to keep up to date with the discussion how to get back support for earlier Perl versions.
+
+### <a name="Template spec changed"></a> Template spec changed
+
+Until TWiki 4.0.5 [[TWikiTemplates]] the text inside template definition blocks (anything between %TMPL:DEF\{"block"\}% and %TMPL:END% was stripped of leading and trailing white space incl new lines.
+
+This caused a lot of problems for skin developers when you wanted a newline before or after the block text.
+
+From TWiki 4.1.0 this has changed so that white space is no longer stripped. Skins like PatternSkin and NatSkin have been updated so that they work with the new behavior. But if you use an older skin or have written your own you will most likely need to make some adjustments.
+
+It is not difficult. The general rule is - if you get mysterious blank lines in your skin, the newline after the %TMPL:DEF\{"block"\}% needs to be removed. Ie. the content of the block must follow on the same line as the TMPL:DEF.
+
+The spec change have the same impact on [[CommentPlugin]] templates where you may have to remove the first line break after the TMPL:DEF. See the [[CommentPluginTemplate]] for examples of how comment template definitions should look like in TWiki-4.1.X
+
+An example: A CommentPlugin template that adds a comment as appending a row to a table. Before the spec change this would work.
+
+    <verbatim>
+    %TMPL:DEF{OUTPUT:tabletest}%%POS:BEFORE%
+    |%URLPARAM{"comment"}%| -- %WIKIUSERNAME% - %DATE% |
+    %TMPL:END%
+    </verbatim>
+
+From Twiki 4.1.0 the old template definition will add an empty line before the new table row. To fix it simply remove the new line before the table.
+
+    <verbatim>
+    %TMPL:DEF{OUTPUT:tabletest}%%POS:BEFORE%|%URLPARAM{"comment"}%| -- %WIKIUSERNAME% - %DATE% |
+    %TMPL:END%
+    </verbatim>
+
+The advantage of the spec change is that now you can add leading and trailing white space including new lines. This was not possible before.
+
+## <a name="Important Changes since 4.1.0"></a> Important Changes since 4.1.0
+
+An upgrader should note the following important changes.
+
+- The directory for passthrough files and session files have been replaced by a common directory for temporary files used by TWiki. Previously the two configure settings `{PassthroughDir}` and `{Sessions}{Dir}` were by default set to `/tmp`. These config settings have been replaced by `{TempfileDir}` with the default setting value `/tmp/twiki`. If the `twiki` directory does not exist twiki will create it first time it needs it. It is highly recommended no longer to use the tmp directory common to other web applications and the new default will work fine for most. You may want to delete all the old session files in /tmp after the upgrade to 4.1.1. They all start with cgisess\_. It is additionally highly recommended to limit write access to the `{TempfileDir}` for security reasons if you have non-admin users with login access to the webserver just like you would do with the other webserver directories.
+- Many bugs fixed. If you had to implement work arounds to make things work chances are that they are fixed now. See the detailed bugfix list below.
 
 ## <a name="Deprecation Notice"></a> Deprecation Notice
 
@@ -1156,5 +1215,158 @@ The 4.1.0 release was built from SVN <http://svn.twiki.org/svn/twiki/tags/TWikiR
     <td> Don't strip newlines from the front of TMPL:DEFs </td>
   </tr>
 </table>
+
+## <a name="TWiki 4.1.1 Patch Release - Deta"></a> TWiki 4.1.1 Patch Release - Details
+
+The 4.1.1 release was built from SVN <http://svn.twiki.org/svn/twiki/Patch04x01> revision 12768 (05 Feb 2007).
+
+### <a name="TWiki 4.1.1 Fixes"></a> TWiki 4.1.1 Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item3561]]</td>
+    <td> Missing js and template files in MANIFEST </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3547]]</td>
+    <td> Passthrough files not cleaned up if not stored in same directory as session files </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3546]]</td>
+    <td> Session files should not be mixed with normal tmp files from other applications </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3545]]</td>
+    <td> Configure dies with: Not an ARRAY reference at Checker.pm line 191 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3544]]</td>
+    <td> Deleting an attachment can cause TWiki to hang almost forever </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3543]]</td>
+    <td> Some TWikiFAQs don't the have correct TOPICPARENT </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3534]]</td>
+    <td> In INSTALL.html, add link to InstallingTWiki supplemental docs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3533]]</td>
+    <td> Redirect to viewauth broken when using script suffix and apache login </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3529]]</td>
+    <td> configure stores access octals as string </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3528]]</td>
+    <td> BlackListPlugin: Redirects to an empty classic style screen when you get caught </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3523]]</td>
+    <td> CGI session files may contain newlines </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3520]]</td>
+    <td> TWiki.spec has wrong default for directory access rights. Is 775. Must be 755. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3517]]</td>
+    <td> configure no longer warns against non-existing store settings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3513]]</td>
+    <td> AUTOINCn produces unwanted lease file, breaking the workflow </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3511]]</td>
+    <td> Can't go to "next" screen in configure, using Win XP </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3510]]</td>
+    <td> CommentPlugin templates newline issue - doc updates needed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3508]]</td>
+    <td> The mailnotify script has too restrictive access permission </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3507]]</td>
+    <td> In formatted search $web is not expanded in header </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3500]]</td>
+    <td> Several attachments missing in TWikiDocGraphics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3496]]</td>
+    <td> SpreadSheetPlugin doc work for 4.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3489]]</td>
+    <td> Formatted search breaks with formfield variables and when using nested search </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3488]]</td>
+    <td> Autoattaching a single file does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3483]]</td>
+    <td> Error logging in when there is apache login and DENYWEBVIEW </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3478]]</td>
+    <td> Move DEPENDENCIES file from tools to lib </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3477]]</td>
+    <td> Erroneous display of Perl version in configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3476]]</td>
+    <td> Configure should warn instead of dying when perl is older then v5.8.0 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3473]]</td>
+    <td> RCS error when running configure </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3472]]</td>
+    <td> WebLeftBar in PatternSkin does not display first bullet correctly if first line </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3471]]</td>
+    <td> Jump feature broken when a web does not have the WebTopicCreator topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3461]]</td>
+    <td> Make sure that the latest release notes are distinguished from old ones </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3452]]</td>
+    <td> Merge messes up complex form fields </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3352]]</td>
+    <td> Wrong title text for button in PatternSkin (patch candidate) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3303]]</td>
+    <td> Multiple addresses in WIKIWEBMASTER causes email send fail </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3201]]</td>
+    <td> Remove exclamation mark from welcoming "Hello XXX!" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item2838]]</td>
+    <td> Documentation on %WEB% is ambiguous </td>
+  </tr>
+</table>
+
+### <a name="TWiki 4.1.0 Enhancements"></a> TWiki 4.1.0 Enhancements
+
+None
 
 **_Related Topic:_** [[TWikiHistory]]
