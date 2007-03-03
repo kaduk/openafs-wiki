@@ -40,6 +40,12 @@
     <li><a href="#TWiki::Store::_RcsLite"> TWiki::Store::RcsLite </a></li>
     <li><a href="#File format"> File format</a></li>
     <li><a href="#TWiki::Store::_RcsWrap"> TWiki::Store::RcsWrap </a></li>
+    <li><a href="#TWiki::Store::_SearchAlgorithms:"> TWiki::Store::SearchAlgorithms::Forking </a></li>
+    <li><a href="#search($searchString, $topics, $"> search($searchString, $topics, $options, $sDir) -&gt; \%seen</a></li>
+    <li><a href="#TWiki::Store::_SearchAlgorithms:"> TWiki::Store::SearchAlgorithms::Native </a></li>
+    <li><a href="#search($searchString, $topics, $"> search($searchString, $topics, $options, $sDir) -&gt; \%seen</a></li>
+    <li><a href="#TWiki::Store::_SearchAlgorithms:"> TWiki::Store::SearchAlgorithms::PurePerl </a></li>
+    <li><a href="#search($searchString, $topics, $"> search($searchString, $topics, $options, $sDir) -&gt; \%seen</a></li>
     <li><a href="#TWiki::Templates"> TWiki::Templates </a></li>
     <li><a href="#TWiki::Time"> TWiki::Time </a></li>
     <li><a href="#TWiki::UI::_ChangeForm"> TWiki::UI::ChangeForm </a></li>
@@ -350,7 +356,7 @@ The general contract of the methods on this class and its subclasses calls for e
 
 Refer to Store.pm for models of usage.
 
-This package has smell factor of **10**
+This package has smell factor of **9**
 
 ## <a name="TWiki::Store::_RcsLite"></a> [[TWiki::Store::RcsLite|Main/TWikiStoreRcsLiteDotPm]]
 
@@ -426,6 +432,38 @@ This package does not publish any methods. It implements the virtual methods of 
 Wrapper around the RCS commands required by TWiki. There is one of these object for each file stored under RCS.
 
 This package has smell factor of **2**
+
+## <a name="TWiki::Store::_SearchAlgorithms:"></a> [[TWiki::Store::SearchAlgorithms::Forking|Main/TWikiStoreSearchAlgorithmsForkingDotPm]]
+
+Forking implementation of the RCS cache search.
+
+## <a name="search($searchString, $topics, $"></a> search($searchString, $topics, $options, $sDir) -&gt; \\%seen
+
+Search .txt files in $dir for $string. See [[RcsFile]]::searchInWebContent for details.
+
+This package has smell factor of **2**
+
+## <a name="TWiki::Store::_SearchAlgorithms:"></a> [[TWiki::Store::SearchAlgorithms::Native|Main/TWikiStoreSearchAlgorithmsNativeDotPm]]
+
+Native implementation of the RCS cache search. Requires tools/native\_search to be built and installed.
+
+## <a name="search($searchString, $topics, $"></a> search($searchString, $topics, $options, $sDir) -&gt; \\%seen
+
+Search .txt files in $dir for $string. See [[RcsFile]]::searchInWebContent for details.
+
+Rude and crude, this makes no attempt to handle UTF-8.
+
+This package doesn't smell
+
+## <a name="TWiki::Store::_SearchAlgorithms:"></a> [[TWiki::Store::SearchAlgorithms::PurePerl|Main/TWikiStoreSearchAlgorithmsPurePerlDotPm]]
+
+Pure perl implementation of the RCS cache search.
+
+## <a name="search($searchString, $topics, $"></a> search($searchString, $topics, $options, $sDir) -&gt; \\%seen
+
+Search .txt files in $dir for $string. See [[RcsFile]]::searchInWebContent for details.
+
+This package doesn't smell
 
 ## <a name="TWiki::Templates"></a> [[TWiki::Templates|Main/TWikiTemplatesDotPm]]
 
@@ -561,4 +599,4 @@ Subclasses should be named 'XxxxUserMapping' so that configure can find them.
 
 This package has smell factor of **3**
 
-There were a total of **199** smells
+There were a total of **200** smells

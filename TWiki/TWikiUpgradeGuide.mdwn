@@ -1,40 +1,37 @@
+# <a name="TWiki Upgrade Guide"></a><a name=" TWiki Upgrade Guide"></a> TWiki Upgrade Guide
+
+_This guide covers upgrading from a previous version of TWiki (such as Cairo or TWiki4.0) to TWiki 4.1\__
+
 <div>
   <ul>
-    <li><a href="#TWiki Upgrade Guide"> TWiki Upgrade Guide</a><ul>
-        <li><a href="#Overview"> Overview</a></li>
-        <li><a href="#Upgrade Requirements"> Upgrade Requirements</a></li>
-        <li><a href="#Major Changes Compared to TWiki"> Major Changes Compared to TWiki Release 01-Sep-2004 and TWiki Release 4.0.0</a></li>
-        <li><a href="#Upgrade Procedure"> Upgrade Procedure</a><ul>
-            <li><a href="#Installation"> Installation</a></li>
-            <li><a href="#Install Extensions"> Install Extensions</a></li>
-            <li><a href="#Copy your old webs to new TWiki"> Copy your old webs to new TWiki</a></li>
-            <li><a href="#Copy Users And Their Topics From"> Copy Users And Their Topics From Main Web</a></li>
-            <li><a href="#Apply Customizations To The Skin"> Apply Customizations To The Skin</a></li>
-            <li><a href="#Apply Preferences From Old Insta"> Apply Preferences From Old Installation</a></li>
-          </ul>
-        </li>
-        <li><a href="#Upgrading from Cairo to TWiki4 ("> Upgrading from Cairo to TWiki4 (additional advice)</a><ul>
-            <li><a href="#Favicon"> Favicon</a></li>
-            <li><a href="#!_TWikiUsers topic in Main web"> TWikiUsers topic in Main web</a></li>
-          </ul>
-        </li>
-        <li><a href="#Important Changes since 4.0.5"> Important Changes since 4.0.5</a><ul>
-            <li><a href="#Supported Perl version"> Supported Perl version</a></li>
-            <li><a href="#Template spec changed"> Template spec changed</a></li>
-          </ul>
-        </li>
-        <li><a href="#Important Changes since 4.1.0"> Important Changes since 4.1.0</a><ul>
-            <li><a href="#New location for session files"> New location for session files</a></li>
-          </ul>
-        </li>
+    <li><a href="#Overview"> Overview</a></li>
+    <li><a href="#Upgrade Requirements"> Upgrade Requirements</a></li>
+    <li><a href="#Major Changes Compared to TWiki"> Major Changes Compared to TWiki Release 01-Sep-2004 and TWiki Release 4.0.0</a></li>
+    <li><a href="#Upgrade Procedure"> Upgrade Procedure</a><ul>
+        <li><a href="#Installation"> Installation</a></li>
+        <li><a href="#Install Extensions"> Install Extensions</a></li>
+        <li><a href="#Copy your old webs to new TWiki"> Copy your old webs to new TWiki</a></li>
+        <li><a href="#Copy Users And Their Topics From"> Copy Users And Their Topics From Main Web</a></li>
+        <li><a href="#Apply Customizations To The Skin"> Apply Customizations To The Skin</a></li>
+        <li><a href="#Apply Preferences From Old Insta"> Apply Preferences From Old Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#Upgrading from Cairo to TWiki4 ("> Upgrading from Cairo to TWiki4 (additional advice)</a><ul>
+        <li><a href="#Favicon"> Favicon</a></li>
+        <li><a href="#!_TWikiUsers topic in Main web"> TWikiUsers topic in Main web</a></li>
+      </ul>
+    </li>
+    <li><a href="#Important Changes since 4.0.5"> Important Changes since 4.0.5</a><ul>
+        <li><a href="#Supported Perl version"> Supported Perl version</a></li>
+        <li><a href="#Template spec changed"> Template spec changed</a></li>
+      </ul>
+    </li>
+    <li><a href="#Important Changes since 4.1.0"> Important Changes since 4.1.0</a><ul>
+        <li><a href="#New location for session files"> New location for session files</a></li>
       </ul>
     </li>
   </ul>
 </div>
-
-# <a name="TWiki Upgrade Guide"></a> TWiki Upgrade Guide
-
-_Upgrade from the previous TWiki 01-Sep-2004 Production Release to TWiki-4.X_
 
 ## <a name="Overview"></a> Overview
 

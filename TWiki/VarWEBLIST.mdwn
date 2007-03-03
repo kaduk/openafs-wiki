@@ -41,6 +41,6 @@
     <td><code>section="%WEB%"</code></td>
   </tr>
 </table>
-- Example: `%WEBLIST{"   * [[$name.WebHome]]"}%` creates a bullet list of all webs.
-- Example: `%WEBLIST{"<option $marker value=$qname>$name</option>" webs="Trash, public" selection="%WEB%" separator=" "}%` creates a dropdown of all public webs + Trash web, with the current web highlighted.
+- Example: `%WEBLIST{"   * [[$name.WebHome]]"}%` - creates a bullet list of all webs.
+- Example: `<form><select name="web"> %WEBLIST{"<option $marker value=$qname>$name</option>" webs="Trash, public" selection="%WEB%" separator=" "}% </select></form>` - creates a dropdown of all public webs + Trash web, with the current web highlighted.
 - Related: [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[SEARCH|Main/WebHome#VarSEARCH]]

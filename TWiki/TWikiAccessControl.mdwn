@@ -14,7 +14,7 @@
             <li><a href="#Controlling access to a Web"> Controlling access to a Web</a></li>
             <li><a href="#Controlling access to a Topic"> Controlling access to a Topic</a></li>
             <li><a href="#Controlling access to Attachment"> Controlling access to Attachments</a></li>
-            <li><a href="#Controlling who can create top-l"> Controlling who can create top-level webs</a></li>
+            <li><a href="#Controlling who can manage top-l"> Controlling who can manage top-level webs</a></li>
             <li><a href="#How TWiki evaluates ALLOW/DENY s"> How TWiki evaluates ALLOW/DENY settings</a></li>
           </ul>
         </li>
@@ -47,7 +47,7 @@ Open, freeform editing is the essence of [[WikiCulture]] - what makes TWiki diff
 - **Peer influence** is enough to ensure that only relevant content is posted.
 - **Peer editing** - the ability for anyone to rearrange all content on a page - keeps topics focused.
 - In TWiki, content is transparently preserved under **revision control**:
-  - Edits can be undone by the [[TWikiAdminGroup]] (the default administrators group; see [[#ManagingGroups|Main/WebHome#ManagingGroups]]).
+  - Edits can be undone by the administrator (per default a member of [[TWikiAdminGroup]]; see [[#ManagingGroups|Main/WebHome#ManagingGroups]]).
   - Users are encouraged to edit and refactor (condense a long topic), since there's a safety net.
 
 As a **collaboration guideline**:
@@ -84,7 +84,9 @@ The default visitor name is [[TWikiGuest]]. This is the non-authenticated user.
 
 ### <a name="Managing Groups"></a> Managing Groups
 
-Groups are defined by group topics located in the <code>**Main**</code> web, such as the [[TWikiAdminGroup]]. To create a new group, visit [[TWikiGroups]] and enter the name of the new group ending in <code>**Group**</code> into the "new group" form field. This will create a new group topic with two important settings:
+The following describes the standard TWiki support for groups. Your local TWiki may have an alternate group mapping manager installed. Check with your TWiki administrator if you are in doubt.
+
+Groups are defined by group topics located in the <code>**Main**</code> web. To create a new group, visit [[TWikiGroups]] and enter the name of the new group ending in <code>**Group**</code> into the "new group" form field. This will create a new group topic with two important settings:
 
 - <code>**Set GROUP = &lt; list of Users and/or Groups &gt;**</code>
 - <code>**Set ALLOWTOPICCHANGE = &lt; list of Users and/or Groups &gt;**</code>
@@ -93,9 +95,9 @@ The GROUP setting is a comma-separated list of users and/or other groups. Exampl
 
 - <code>**Set GROUP = Main.SomeUser, Main.OtherUser, Main.SomeGroup**</code>
 
-The ALLOWTOPICCHANGE setting defines who is allowed to change the group topic; it is a comma delimited list of users and groups. You typically want to restrict that to the members of the group itself, so it should contain the name of the topic. This prevents users not in the group from editing the topic to give themselves or others access. For example, for the TWikiAdminGroup topic write:
+The ALLOWTOPICCHANGE setting defines who is allowed to change the group topic; it is a comma delimited list of users and groups. You typically want to restrict that to the members of the group itself, so it should contain the name of the topic. This prevents users not in the group from editing the topic to give themselves or others access. For example, for the KasabianGroup topic write:
 
-- <code>**Set ALLOWTOPICCHANGE = Main.TWikiAdminGroup**</code>
+- <code>**Set ALLOWTOPICCHANGE = Main.KasabianGroup**</code>
 
 **_%X% Note:_** TWiki has strict formatting rules. Make sure you have three spaces, an asterisk, and an extra space in front of any access control rule.
 
@@ -103,9 +105,13 @@ The ALLOWTOPICCHANGE setting defines who is allowed to change the group topic; i
 
 ### <a name="The Super Admin Group"></a> The Super Admin Group
 
-By mistyping a user or group name in the settings, it's possible to lock a topic so that no-one can edit it from a browser. To avoid this, add the [[WikiNames]] of registered administrators to the super admin group topic called <code>**TWikiAdminGroup**</code>. The name of this topic is defined by the \{SuperAdminGroup\} [configure](http://www.dementia.org/twiki/configure) setting. Example group setting:
+A number of TWiki functions (for example, renaming webs) are only available to administrators. Administrators are simply users who belong to the **SuperAdminGroup**. This is a standard user group, the name of which is defined by \{SuperAdminGroup\} setting in [configure](http://www.dementia.org/twiki/configure). The default name of this group is the `TWikiAdminGroup`. The system administrator may have chosen a different name for this group if your local TWiki uses an alternate group mapping manager but for simplicity we will use the default name TWikiAdminGroup in the rest of this topic.
+
+You can create new administrators simply by adding them to the [[TWikiAdminGroup]] topic. For example,
 
 - <code>**Set GROUP= Main.ElizabethWindsor, Main.TonyBlair**</code>
+
+A member of the Super Admin Group has unrestricted access throughout the TWiki, so only trusted staff should be added to this group.
 
 ## <a name="Restricting Access"></a> Restricting Access
 
@@ -113,6 +119,9 @@ You can define who is allowed to read or write to a web or a topic. Note that so
 
 - Restricting VIEW blocks viewing and searching of content.
 - Restricting CHANGE blocks creating new topics, changing topics or attaching files.
+- Restricting RENAME prevents renaming of topics within a web.
+
+Note that there is an important distinction between CHANGE access and RENAME access. A user can CHANGE a topic, but thanks to version control their changes cannot be lost (the history of the topic before the change is recorded). However if a topic or web is renamed, that history may be lost. Typically a site will only give RENAME access to administrators and content owners.
 
 ### <a name="Controlling access to a Web"></a> Controlling access to a Web
 
@@ -126,16 +135,14 @@ You can define restrictions on who is allowed to view a %WIKITOOLNAME% web. You 
   - <code>**Set ALLOWWEBVIEW = &lt; comma-delimited list of Users and Groups &gt;**</code>
   - <code>**Set DENYWEBCHANGE = &lt; comma-delimited list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWWEBCHANGE = &lt; comma-delimited list of Users and Groups &gt;**</code>
+  - <code>**Set DENYWEBRENAME = &lt; comma-delimited list of Users and Groups &gt;**</code>
+  - <code>**Set ALLOWWEBRENAME = &lt; comma-delimited list of Users and Groups &gt;**</code>
 
-**Be careful** with empty values for any of these. In older versions of TWiki,
+If your site allows hierarchical webs, then access to sub-webs is determined from the access controls of the parent web, plus the access controls in the sub-web. So, if the parent web has <code>**ALLOWWEBVIEW**</code> set, this will also apply to the subweb.
 
-- <code>**Set ALLOWWEBVIEW = **</code>
+Creation and renaming of sub-webs is controlled by the WEBCHANGE setting on the parent web (or ROOTCHANGE for [[root webs|Main/WebHome#RootWebs]]). Renaming is additionally restricted by the setting of WEBRENAME in the web itself.
 
-meant the same as not setting it at all. However since TWiki Dakar release, it means _allow noone access_ i.e. prevent anyone from viewing the web. Similarly
-
-- <code>**Set DENYWEBVIEW = **</code>
-
-now means _do not deny anyone the right to view this web_. See "How TWiki evaluates ALLOW/DENY settings" below for more on this.
+**_Note:_** For Web level access rights Setting any of these settings to an empty value has the same effect as not setting them at all. Please note that the documentation of TWiki 4.0 and earlier versions of TWiki 4.1 did not reflect the actual implementation, e.g. an empty ALLOWWEBVIEW does _not_ prevent anyone from viewing the web, and an an empty DENYWEBVIEW does _not_ allow all to view the web.
 
 ### <a name="Controlling access to a Topic"></a> Controlling access to a Topic
 
@@ -144,18 +151,22 @@ now means _do not deny anyone the right to view this web_. See "How TWiki evalua
   - <code>**Set ALLOWTOPICVIEW = &lt; comma-delimited list of Users and Groups &gt;**</code>
   - <code>**Set DENYTOPICCHANGE = &lt; comma-delimited list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWTOPICCHANGE = &lt; comma-delimited list of Users and Groups &gt;**</code>
+  - <code>**Set DENYTOPICRENAME = &lt; comma-delimited list of Users and Groups &gt;**</code>
+  - <code>**Set ALLOWTOPICRENAME = &lt; comma-delimited list of Users and Groups &gt;**</code>
 
 Remember when opening up access to specific topics within a restricted web that other topics in the web - for example, the [[WebLeftBar]] - may also be accessed when viewing the topics. The message you get when you are denied access should tell you what topic you were not permitted to access.
 
-**Be careful** with empty values for any of these. In older versions of TWiki,
+**Be careful** with empty values for any of these.
 
-- <code>**Set ALLOWTOPICVIEW = **</code>
+- <code>**Set ALLOWTOPICVIEW = **</code><br />This means the same as not setting it at all. (This was documented wrong in versions 4.0.X, 4.1.0 and 4.1.1)
 
-meant the same as not setting it at all. However since TWiki Dakar release, it means _allow no-one access_ i.e. prevent anyone from viewing the topic. Similarly
+- <code>**Set DENYTOPICVIEW = **</code><br />Since TWiki 4.0 this means _do not deny anyone the right to view this topic_. If DENYTOPICVIEW is set to an empty value anyone has access even if ALLOWTOPICVIEW or ALLOWWEBVIEW is defined. This allows to have very restrictive default access rights to an entire web and still allow individual topics to have more open access.
 
-- <code>**Set DENYTOPICVIEW = **</code>
+The same rules apply to ALLOWTOPICCHANGE/DENYTOPICCHANGE and APPLYTOPICRENAME/DENYTOPICRENAME. Setting ALLOWTOPICCHANGE or ALLOWTOPICRENAME to en empty value means the same as not defining it. Setting DENYTOPICCHANGE or DENYTOPICRENAME to an empty value means that anyone can edit or rename the topic.
 
-now means _do not deny anyone the right to view this topic_. See "How TWiki evaluates ALLOW/DENY settings" below for more on this.
+%X% _The setting to an empty has caused confusion and great debate and it has been decided that the empty setting syntax will be replaced by something which is easier to understand in the 4.2 version of TWiki. A method to upgrade will be provided. Please read the release notes carefully when you upgrade._
+
+See "How TWiki evaluates ALLOW/DENY settings" below for more on how ALLOW and DENY interacts.
 
 ### <a name="Controlling access to Attachment"></a> Controlling access to Attachments
 
@@ -174,7 +185,9 @@ That way all the controls that apply to the topic also apply to attachments to t
 
 **_Note:_** Images embedded in topics will load much slower since each image will be delivered by the `viewfile` script.
 
-### <a name="Controlling who can create top-l"></a> Controlling who can create top-level webs
+<a name="RootWebs"></a>
+
+### <a name="Controlling who can manage top-l"></a> Controlling who can manage top-level webs
 
 Top level webs are a special case, because they don't have a parent web with a [[WebPreferences]]. So there has to be a special control just for the root level.
 
@@ -186,24 +199,22 @@ Note that you do **not** require `ROOTCHANGE` access to rename an existing top-l
 
 ### <a name="How TWiki evaluates ALLOW/DENY s"></a> How TWiki evaluates ALLOW/DENY settings
 
-When deciding whether to grant access, TWiki evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW and CHANGE access may be granted/denied separately.
+When deciding whether to grant access, TWiki evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW, CHANGE and RENAME access may be granted/denied separately.
 
-1. If the user is a [[super-user|Main/WebHome#SuperAdminGroup]]
+1. If the user is an [[administrator|Main/WebHome#SuperAdminGroup]]
   - access is **PERMITTED**.
 2. If DENYTOPIC is set to a list of wikinames
   - people in the list will be **DENIED**.
 3. If DENYTOPIC is set to _empty_ ( i.e. `Set DENYTOPIC =` )
-  - access is **PERMITTED** _i.e_ no-one is denied access to this topic
+  - access is **PERMITTED** _i.e_ no-one is denied access to this topic.%BR% %X% **_Attention:_** Use this with caution. This is **_deprecated_** and will likely change in the next release.
 4. If ALLOWTOPIC is set
   1. people in the list are **PERMITTED**
   2. everyone else is **DENIED**
-    - Note that this means that setting ALLOWTOPIC to empty _denies access to everyone except admins_ (unless DENYTOPIC is also set to empty, as described above)
-5. If DENYWEB is set to a list of wikiname
+5. If DENYWEB is set to a list of wikinames
   - people in the list are **DENIED** access
 6. If ALLOWWEB is set to a list of wikinames
   - people in the list will be **PERMITTED**
   - everyone else will be **DENIED**
-    - Note that setting ALLOWWEB to empty _denies access to everyone except admins_
 7. If you got this far, access is **PERMITTED**
 
 ## <a name="Access Control quick recipes"></a> Access Control quick recipes

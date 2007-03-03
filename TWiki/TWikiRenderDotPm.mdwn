@@ -18,7 +18,7 @@ This module provides most of the actual HTML rendering code in TWiki.
         <li><a href="#ObjectMethod *protect_PlainText*"> ObjectMethod protectPlainText <tt>($text) -&gt; $tml</tt></a></li>
         <li><a href="#ObjectMethod *make_TopicSummary*"> ObjectMethod makeTopicSummary <tt>($theText,$theTopic,$theWeb,$theFlags) -&gt; $tml</tt></a></li>
         <li><a href="#ObjectMethod *take_OutProtected*"> ObjectMethod takeOutProtected <tt>(\$text,$re,\%map) -&gt; $text</tt></a></li>
-        <li><a href="#ObjectMethod *put_BackProtected*"> ObjectMethod putBackProtected <tt>(\$text,\%map,$tag,$newtag,$callBack) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *put_BackProtected*"> ObjectMethod putBackProtected <tt>(\$text,\%map,$callback) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>take_OutBlocks</strong> (\"> ObjectMethod takeOutBlocks <tt>(\$text,$tag,\%map) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>put_BackBlocks</strong> (\"> ObjectMethod putBackBlocks <tt>(\$text,\%map,$tag,$newtag,$callBack) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *render_RevisionInf"> ObjectMethod renderRevisionInfo <tt>($web,$topic,$meta,$rev,$format) -&gt; $string</tt></a></li>
@@ -121,12 +121,13 @@ used to extract from $text comment type tags like &lt;!DOCTYPE blah&gt;
 
 WARNING: if you want to take out &lt;!-- comments --&gt; you _will_ need to re-write all the takeOuts to use a different placeholder
 
-## <a name="ObjectMethod &lt;strong&gt;put_BackProtected*"></a> [[ObjectMethod]] \*putBackProtected `(\$text,\%map,$tag,$newtag,$callBack) -> $text`
+## <a name="ObjectMethod &lt;strong&gt;put_BackProtected*"></a> [[ObjectMethod]] \*putBackProtected `(\$text,\%map,$callback) -> $text`
 
 Return value: $text with blocks added back
 
 - `\$text` - reference to text to process
 - `\%map` - map placeholders to blocks removed by takeOutBlocks
+- `$callback` - Reference to function to call on each block being inserted (optional)
 
 Reverses the actions of takeOutProtected.
 

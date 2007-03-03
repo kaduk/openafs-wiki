@@ -147,27 +147,27 @@ Master templates use the block definition directives (`%TMPL:DEF` and `%TMPL:END
 >     <th bgcolor="#99CCCC"><strong> Defines: </strong></th>
 >   </tr>
 >   <tr>
->     <td> %TMPL:DEF{"sep"}% </td>
+>     <td><code>%TMPL:DEF{"sep"}%</code></td>
 >     <td> "|" separator </td>
 >   </tr>
 >   <tr>
->     <td> %TMPL:DEF{"htmldoctype"}% </td>
+>     <td><code>%TMPL:DEF{"htmldoctype"}%</code></td>
 >     <td> Start of all HTML pages </td>
 >   </tr>
 >   <tr>
->     <td> %TMPL:DEF{"standardheader"}% </td>
+>     <td><code>%TMPL:DEF{"standardheader"}%</code></td>
 >     <td> Standard header (ex: view, index, search) </td>
 >   </tr>
 >   <tr>
->     <td> %TMPL:DEF{"simpleheader"}% </td>
+>     <td><code>%TMPL:DEF{"simpleheader"}%</code></td>
 >     <td> Simple header with reduced links (ex: edit, attach, oops) </td>
 >   </tr>
 >   <tr>
->     <td> %TMPL:DEF{"standardfooter"}% </td>
+>     <td><code>%TMPL:DEF{"standardfooter"}%</code></td>
 >     <td> Footer, excluding revision and copyright parts </td>
 >   </tr>
 >   <tr>
->     <td> %TMPL:DEF{"oops"}% </td>
+>     <td><code>%TMPL:DEF{"oops"}%</code></td>
 >     <td> Skeleton of oops dialog </td>
 >   </tr>
 > </table>
@@ -307,7 +307,7 @@ The above form asks for a topic name. A hidden input tag named <code>**templatet
          (date format is <nop>YYYYxMMxDD)
     </form>
 
-See [[TWikiScripts]] for details of the parameters that the `edit` script understands.
+See [[TWikiScripts#edit]] for details of the parameters that the `edit` script understands.
 
 %T% **TIP:** You can use the `%WIKIUSERNAME%` and `%DATE%` variables in your topic templates to include the signature of the person creating a new topic. The variables are expanded into fixed text when a new topic is created. The standard signature is: <br /><code>**-- %WIKIUSERNAME% - %DATE%**</code>
 
@@ -403,3 +403,5 @@ With URL: <code>**.../bin/oops/Sandbox/TestTopic2?template=oopstest&amp;param1=W
 <img src="http://www.dementia.org/twiki//view/testscreen.gif" width="589" height="304" alt="testscreen.gif" style="border: 1px solid #ddd" />
 
 **_Related Topics:_** [[TWikiSkins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]]
+
+-- **_Contributors:_** TWiki:Main.CrawfordCurrie, TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.DavidLeBlanc

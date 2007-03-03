@@ -62,7 +62,7 @@ will work happily.
             <li><a href="#user_ToWikiName( $loginName, $do"> userToWikiName( $loginName, $dontAddWeb ) -&gt; $wikiName</a></li>
             <li><a href="#isGuest( ) -> $boolean"> isGuest( ) -&gt; $boolean</a></li>
             <li><a href="#permissionsSet( $web ) -> $boole"> permissionsSet( $web ) -&gt; $boolean</a></li>
-            <li><a href="#check_AccessPermission( $type, $"> checkAccessPermission( $type, $wikiName, $text, $topic, $web ) -&gt; $boolean</a></li>
+            <li><a href="#check_AccessPermission( $type, $"> checkAccessPermission( $type, $wikiName, $text, $topic, $web, $meta ) -&gt; $boolean</a></li>
           </ul>
         </li>
         <li><a href="#Webs, Topics and Attachments"> Webs, Topics and Attachments</a><ul>
@@ -453,17 +453,29 @@ Test if any access restrictions are set for this web, ignoring settings on indiv
 
 **Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
 
-### <a name="check_AccessPermission( $type, $"></a> checkAccessPermission( $type, $wikiName, $text, $topic, $web ) -&gt; $boolean
+### <a name="check_AccessPermission( $type, $"></a> checkAccessPermission( $type, $wikiName, $text, $topic, $web, $meta ) -&gt; $boolean
 
 Check access permission for a topic based on the [[TWiki.TWikiAccessControl|TWiki/TWikiAccessControl]] rules
 
-- `$type` - Access type, e.g. `'VIEW'`, `'CHANGE'`, `'CREATE'`
-- `$wikiName` - [[WikiName]] of remote user, e.g. `"PeterThoeny"`. If `$wikiName` is '', 0 or undef then access is always **permitted**.
-- `$text` - Topic text, optional. If 'perl false' (undef, 0 or ''), topic `$web.$topic` is consulted
+- `$type` - Access type, required, e.g. `'VIEW'`, `'CHANGE'`.
+- `$wikiName` - [[WikiName]] of remote user, required, e.g. `"PeterThoeny"`. If `$wikiName` is '', 0 or `undef` then access is **always permitted**.
+- `$text` - Topic text, optional. If 'perl false' (undef, 0 or ''), topic `$web.$topic` is consulted. `$text` may optionally contain embedded `%META:PREFERENCE` tags. Provide this parameter if:
+  1. You are setting different access controls in the text to those defined in the stored topic,
+  2. You already have the topic text in hand, and want to help TWiki avoid having to read it again,
+  3. You are providing a `$meta` parameter.
 - `$topic` - Topic name, required, e.g. `'PrivateStuff'`
 - `$web` - Web name, required, e.g. `'Sandbox'`
+- `$meta` - Meta-data object, as returned by `readTopic`. Optional. If `undef`, but `$text` is defined, then access controls will be parsed from `$text`. If defined, then metadata embedded in `$text` will be ignored. This parameter is always ignored if `$text` is undefined. Settings in `$meta` override `Set` settings in $text.
 
 A perl true result indicates that access is permitted.
+
+**Note** the wierd parameter order is due to compatibility constraints with earlier TWiki releases.
+
+**Tip** if you want, you can use this method to check your own access control types. For example, if you:
+
+- Set ALLOWTOPICSPIN = [[IncyWincy]]
+
+in `ThatWeb.ThisTopic`, then a call to `checkAccessPermissions('SPIN', 'IncyWincy', undef, 'ThisTopic', 'ThatWeb', undef)` will return `true`.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
 
