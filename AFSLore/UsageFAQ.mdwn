@@ -466,15 +466,25 @@ See [[IPAccessControl]].
 
 In order to appear more like a local filesystem, AFS will faithfully store the numeric UID (owner), GID (group), and permission bits (read, write, and execute for user, group, and other), as well as the setuid, setgid, and sticky bits. For the most part, these values are simply recorded and reported back when requested. However, in some instances the fileserver and/or cache manager will make access control decisions based in part on these values.
 
-The following is believed to be a complete list of those circumstances.
+The following is believed to be a complete list of those circumstances. Below, "owner" refers to the user whose numeric pts identity is equal to the "UNIX UID" of the file or directory.
 
 - fileserver
-  - the fileserver will not allow a file to be read unless the u+r (user read) bit is set
-  - the fileserver will not allow a file to be written to unless the u+w (user write) bit is set
-  - if the user's numeric pts identity is equal to the numeric UNIX owner of the root directory of a volume, then the fileserver will act as if that user had implicit "a" rights on every directory in the volume.
-  - the fileserver will only allow the mode bits on a file (ugo+rwx) to be changed if the user has write (w) and lookup (l) rights on the directory containing the file.
-  - the fileserver will only allow the mode bits on a directory to be changed if the user has delete (d) insert (i) and lookup (l) rights on the directory.
-  - only members of system:administrators can change the user or group of a file.
+  - the fileserver will not allow a file to be read unless at least one of these is true:
+    - the u+r (user read) bit is set
+    - the user owns the file
+    - the user is a member of system:administrators
+  - the fileserver will not allow a file to be written to unless at least one of these is true:
+    - the u+w (user write) bit is set
+    - the user owns the file
+    - the user is a member of system:administrators
+  - implicit permissions:
+    - the owner of the root directory of a volume has implicit "a" rights on all directories in the volume
+    - the owner of a file has implicit "r" and "w" rights on a file if that user has "i" rights on its parent directory
+  - changing mode bits and owner/group:
+    - the fileserver will only allow the mode bits on a file (ugo+rwx) to be changed if the user has write (w) and lookup (l) rights on file's parent directory.
+    - the fileserver will only allow the mode bits on a directory to be changed if the user has delete (d) insert (i) and lookup (l) rights on the directory.
+    - only members of system:administrators can change the user or group of a file.
+    - only members of system:administrators can change the setuid and setgid bits on a file.
 
 - client (cache manager)
   - if enabled for a cell, the setuid and setgid bits will be treated according to their usual UNIX semantics
