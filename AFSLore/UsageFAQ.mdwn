@@ -28,7 +28,7 @@ The Usage Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#2.18  Can I klog as two users on"> 2.18 Can I klog as two users on a machine in the same cell?</a></li>
         <li><a href="#2.19  What are the ~/._afsXXXX f"> 2.19 What are the ~/.__afsXXXX files?</a></li>
         <li><a href="#2.20  How do you set up IP-based"> 2.20 How do you set up IP-based ACLs?</a></li>
-        <li><a href="#2.21 What meaning do the UNIX ow"> 2.21 What meaning do the UNIX owner, group, and mode bits have in AFS?</a></li>
+        <li><a href="#2.21 What meaning do the owner,"> 2.21 What meaning do the owner, group, and mode bits have in AFS?</a></li>
       </ul>
     </li>
   </ul>
@@ -462,34 +462,30 @@ Newer versions of AFS rename such files to .\_\_afsXXXX, thus making sure that t
 
 See [[IPAccessControl]].
 
-### <a name="2.21 What meaning do the UNIX ow"></a> 2.21 What meaning do the UNIX owner, group, and mode bits have in AFS?
+### <a name="2.21 What meaning do the owner,"></a><a name="2.21 What meaning do the owner, "></a> 2.21 What meaning do the owner, group, and mode bits have in AFS?
 
 In order to appear more like a local filesystem, AFS will faithfully store the numeric UID (owner), GID (group), and permission bits (read, write, and execute for user, group, and other), as well as the setuid, setgid, and sticky bits. For the most part, these values are simply recorded and reported back when requested. However, in some instances the fileserver and/or cache manager will make access control decisions based in part on these values.
 
-The following is believed to be a complete list of those circumstances. Below, "owner" refers to the user whose numeric pts identity is equal to the "UNIX UID" of the file or directory.
+The following is believed to be a complete list of those circumstances. Below, "owner" refers to the user whose numeric pts identity is equal to the owner of the file or directory.
 
-- fileserver
-  - the fileserver will not allow a file to be read unless at least one of these is true:
-    - the u+r (user read) bit is set
-    - the user owns the file
-    - the user is a member of system:administrators
-  - the fileserver will not allow a file to be written to unless at least one of these is true:
-    - the u+w (user write) bit is set
-    - the user owns the file
-    - the user is a member of system:administrators
-  - implicit permissions:
-    - the owner of the root directory of a volume has implicit "a" rights on all directories in the volume
-    - the owner of a file has implicit "r" and "w" rights on a file if that user has "i" rights on its parent directory
-  - changing mode bits and owner/group:
-    - the fileserver will only allow the mode bits on a file (ugo+rwx) to be changed if the user has write (w) and lookup (l) rights on file's parent directory.
-    - the fileserver will only allow the mode bits on a directory to be changed if the user has delete (d) insert (i) and lookup (l) rights on the directory.
-    - only members of system:administrators can change the user or group of a file.
-    - only members of system:administrators can change the setuid and setgid bits on a file.
+- implicit ACLs
+  - the owner of the root directory of a volume has implicit administer (a) rights on all directories in the volume
+  - the owner of a file has implicit read (r) and write (w) rights on a file if that user has insert (i) rights on its parent directory
+- to **read** from a file you must have read (r) rights _and_ at least one of the following must be true:
+  - the file's u+r (user read) bit is set
+  - you are the owner of the file
+  - you are a member of system:administrators
+- to **write** to a file you must have write (w) rights _and_ at least one of the following must be true:
+  - the file's u+w (user write) bit is set
+  - you are the owner of the file
+  - you are a member of system:administrators
 
-- client (cache manager)
-  - if enabled for a cell, the setuid and setgid bits will be treated according to their usual UNIX semantics
-  - the client will refuse to execute a file unless the u+rx (user read and execute) bits are set
+- changing mode bits and owner/group:
+  - the fileserver will only allow the mode bits on a file (ugo+rwx) to be changed if the user has write (w) and lookup (l) rights on file's parent directory.
+  - the fileserver will only allow the mode bits on a directory to be changed if the user has delete (d) insert (i) and lookup (l) rights on the directory.
+  - only members of system:administrators can change the owner or group of a file.
+  - only members of system:administrators can change the setuid and setgid bits on a file.
 
-In particular, the sticky bit, group of a file, g+rwx, and o+rwx bits are completely ignored by all AFS components. Additionally, the u+rwx bits are ignored on directories.
+The sticky bit, group of a file, g+rwx, and o+rwx bits are completely ignored by all AFS components. Additionally, the u+rwx bits are ignored on directories.
 
-Newly created files and directories are given a UNIX user numerically equal to the pts identity of the user who created the file or directory. Initial mode bits are assigned based on the creating user's umask.
+Newly created files and directories are given an owner numerically equal to the pts identity of the user who created the file or directory. Initial mode bits are assigned by the AFS cilent, typically based on the creating user's umask.
