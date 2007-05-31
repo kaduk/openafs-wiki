@@ -29,6 +29,7 @@ The Usage Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#2.19  What are the ~/._afsXXXX f"> 2.19 What are the ~/.__afsXXXX files?</a></li>
         <li><a href="#2.20  How do you set up IP-based"> 2.20 How do you set up IP-based ACLs?</a></li>
         <li><a href="#2.21 What meaning do the owner,"> 2.21 What meaning do the owner, group, and mode bits have in AFS?</a></li>
+        <li><a href="#2.22 What are "dropboxes"?"> 2.22 What are "dropboxes"?</a></li>
       </ul>
     </li>
   </ul>
@@ -489,3 +490,11 @@ The following is believed to be a complete list of those circumstances. Below, "
 The sticky bit, group of a file, g+rwx, and o+rwx bits are completely ignored by all AFS components. Additionally, the u+rwx bits are ignored on directories.
 
 Newly created files and directories are given an owner numerically equal to the pts identity of the user who created the file or directory. Initial mode bits are assigned by the AFS cilent, typically based on the creating user's umask.
+
+### <a name="2.22 What are &quot;dropboxes&quot;?"></a> 2.22 What are "dropboxes"?
+
+When the ACL on a directory is set to "irl", this creates what is called a "dropbox". In theory, users should be able to deposit files in the directory, but not modify them once deposited.
+
+In practice, the "not modify them once deposited" part is not enforced by the fileserver; only the [[OpenAFS]] client enforces this restriction. Thus, you should not depend on this for security.
+
+Also, note that system:anyuser=irl has additional problems: because dropbox semantics are based on pts identities (see question 2.21), the fileserver cannot distinguish between two unauthenticated users. So, not only can a user come back days later and modify the "dropped" file, but **any** user can modify a file dropped by an unauthenticated user, at any time.
