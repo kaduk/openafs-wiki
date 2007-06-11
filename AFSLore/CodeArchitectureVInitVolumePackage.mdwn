@@ -1,4 +1,4 @@
--- [[StevenJenkins]] - 11 Jun 2007 [[VInitVolumePackage]] is the main setup program for the fileserver, salvageserver, and volserver (and something else '' the 'volumeUtility &amp;&amp; connect'). It initializes the data structures need by each to do their operations. Synchronization is done via `vol_glock_mutex`, `vol_trans_mutex`, `vol_put_volume_cond`, and `vol_sleep_cond`.
+-- [[StevenJenkins]] - 11 Jun 2007 [[VInitVolumePackage]] is the main setup program for the fileserver, salvageserver, and volserver (and some utilities). It initializes the data structures need by each to do their operations. Synchronization is done via `vol_glock_mutex`, `vol_trans_mutex`, `vol_put_volume_cond`, and `vol_sleep_cond`.
 
 - Called by:
 
@@ -10,8 +10,16 @@
 6. vol-bless utility (unsupported)
 
 - Does: (among other operations)
-  1. [[VInitPartitionPackage]]
-  2. [[VInitVolumeHash]]
-  3. [[VInitVnodes]] (for small &amp; large vnodes)
-  4. [[VInitVolumePackage]]
-  5. [[VAttachVolumesByPartition]]
+
+1. [[VInitPartitionPackage]]
+2. [[VInitVolumeHash]]
+3. [[VInitVnodes]] (for small &amp; large vnodes)
+4. [[VAttachVolumesByPartition]]
+
+[[VInitPartitionPackage]] simply allocates memory for use by the caller (for DAFs -- for non-DAFS, it's a no-op)
+
+[[VInitVolumeHash]] allocates memory and sets up [[VolumeHashTable]].Table; also does queue\_Init for reach entry in the Table.
+
+[[VInitVnodes]] allocates memory for the Vnode hash, and initializes all values in the entries (to 0 or NULL), or the nextpointer.
+
+[[VInitVolumesByPartition]] reads the disk and calls [[VAttachVolumeByName]] ([[VPreAttachVolumeByName]] for DAFS) for each volume on the disk.
