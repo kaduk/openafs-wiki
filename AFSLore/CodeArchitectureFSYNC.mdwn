@@ -1,4 +1,4 @@
-FSYNC
+FSYNC sits on top of SYNC.
 
 Server:
 
@@ -22,3 +22,13 @@ Server:
 - FSYNC\_com\_StatsOpHdr(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
 - FSYNC\_com\_StatsOpVLRU(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
 - FSYNC\_com\_to\_info(FSSYNC\_VolOp\_command \* vcom, FSSYNC\_VolOp\_info \* info)
+
+Client:
+
+- FSYNC\_clientInit(void)
+- FSYNC\_clientFinis(void)
+- FSYNC\_clientChildProcReconnect(void)
+- FSYNC\_askfs(SYNC\_command \* com, SYNC\_response \* res)
+- FSYNC\_GenericOp(void \* ext\_hdr, size\_t ext\_len,
+- FSYNC\_VolOp([[VolumeId]] volume, char \* partition,
+- FSYNC\_StatsOp(FSSYNC\_StatsOp\_hdr \* scom, int command, int reason,
