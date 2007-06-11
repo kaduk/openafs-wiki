@@ -1,0 +1,24 @@
+FSYNC
+
+Server:
+
+- FSYNC\_fsInit(void)
+- FSYNC\_sync()
+- FSYNC\_newconnection(int afd)
+- FSYNC\_com(int fd)
+- FSYNC\_com\_VolOp(int fd, SYNC\_command \* com, SYNC\_response \* res)
+- FSYNC\_com\_VolOn(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolOff(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolMove(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolDone(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolBreakCBKs(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolQuery(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolHdrQuery(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_VolOpQuery(FSSYNC\_VolOp\_command \* vcom, SYNC\_response \* res)
+- FSYNC\_com\_StatsOp(int fd, SYNC\_command \* com, SYNC\_response \* res)
+- FSYNC\_com\_StatsOpGeneral(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
+- FSYNC\_com\_StatsOpViceP(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
+- FSYNC\_com\_StatsOpHash(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
+- FSYNC\_com\_StatsOpHdr(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
+- FSYNC\_com\_StatsOpVLRU(FSSYNC\_StatsOp\_command \* scom, SYNC\_response \* res)
+- FSYNC\_com\_to\_info(FSSYNC\_VolOp\_command \* vcom, FSSYNC\_VolOp\_info \* info)
