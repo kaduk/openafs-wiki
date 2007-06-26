@@ -1137,14 +1137,16 @@ Clone volumes must belong to the same volume group (see previous question) as th
 
 In addition to backup and readonly clones, you may create up to three additional clones of a volume. To do this, use "vos clone".
 
-When you "vos remove" a volume, its "backup" clone will also be removed automatically. However, clones created with "vos clone" are **not** removed automatically. Unfortunately, these "dangling clones" will no longer be in the VLDB (see question 3.47).
+When you "vos remove" a volume, its "backup" clone will also be removed automatically. However, clones created with "vos clone" are **not** removed automatically. Unfortunately, these "dangling clones" will no longer be in the VLDB (see question 3.47). They belong to a volume group whose leader (rw volume) no longer exists, which is a somewhat undefined state for AFS. Such volumes should be manually deleted as soon as possible.
 
 ### <a name="3.50 What is a Shadow?"></a> 3.50 What is a Shadow?
 
 A shadow of a volume is a duplicate of that volume which resides on a different partition. Shadow volumes do not share storage with their original volumes (unlike clones). A readonly volume on a **different** partition than its readwrite volume could be considered one particular example of a shadow volume; however, in practice the term "shadow volume" is used to refer to volumes created with "vos shadow" and not to refer to readonly volumes.
 
-A shadow of any readwrite volume may be created using the "vos shadow" command. This will create a new volume which is a shadow of the original volume, and will copy the contents of the old volume to the new volume. This will also set a bit in the header of the new shadow volume that identifies it as a shadow volume. Shadow volumes do not appear in the VLDB (see question 3.47)
+A shadow of any readwrite volume may be created using the "vos shadow" command. This will create a new volume which is a shadow of the original volume, and will copy the contents of the old volume to the new volume. This will also set a bit in the header of the new shadow volume that identifies it as a shadow volume. Shadow volumes do not appear in the VLDB (see question 3.47) -- "vos shadow" does not create a VLDB entry and "vos syncvldb" ignores shadow volumes.
 
 You can "refresh" a shadow volume from its original with "vos shadow -incremental". This operation will first check to make sure that the target of the operation is a shadow volume, to prevent the administrator from accidentally corrupting a non-shadow volume. However, if you shadow from a readwrite volume to some shadow of **another** volume, the shadow will be corrupted and will have to be deleted. Vos shadow will only copy data which has changed, so it is very efficient.
 
-You can remove the shadow bit from a volume's header with "vos shadow -live". This will remove the shadow bit and create a VLDB entry for the volume.
+You can remove the shadow bit from a volume's header with "vos shadow -live". This will remove the shadow bit and create a VLDB entry for the volume, deleting any previous entry for the rw volume. However, the rw volume itself will not be deleted; it will simply exist without a VLDB entry.
+
+Attempting to create shadows of two different rw volumes on the same partition with the same name is prohibited by the volserver. Technically it is possible to create two shadow volumes with the same name on different partitions; however, this is not advisable.
