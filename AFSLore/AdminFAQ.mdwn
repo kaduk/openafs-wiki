@@ -1147,6 +1147,6 @@ A shadow of any readwrite volume may be created using the "vos shadow" command. 
 
 You can "refresh" a shadow volume from its original with "vos shadow -incremental". This operation will first check to make sure that the target of the operation is a shadow volume, to prevent the administrator from accidentally corrupting a non-shadow volume. However, if you shadow from a readwrite volume to some shadow of **another** volume, the shadow will be corrupted and will have to be deleted. Vos shadow will only copy data which has changed, so it is very efficient.
 
-You can remove the shadow bit from a volume's header with "vos shadow -force". This will remove the shadow bit and create a VLDB entry for the volume, deleting any previous entry for the rw volume. However, the rw volume itself will not be deleted; it will simply exist without a VLDB entry.
+You can remove the shadow bit from a volume's header with "vos syncvldb -force". This will remove the shadow bit and create a VLDB entry for the volume, deleting any previous entry for the rw volume. However, the rw volume itself will not be deleted; it will simply exist without a VLDB entry.
 
 Attempting to create shadows of two different rw volumes on the same partition with the same name is prohibited by the volserver. Technically it is possible to create two shadow volumes with the same name on different partitions; however, this is not advisable.
