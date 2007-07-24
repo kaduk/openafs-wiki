@@ -140,9 +140,11 @@ You can use the "bos listkey" command to read the key you just imported into the
     Keys last changed on Mon Jul 23 15:13:04 2007.
     All done.
 
-After you import the key into the [[KeyFile]] you need to restart the AFS db servers which will read the new key. You need to put the name of the Windows AD Kerberos REALM you are using in the /usr/afs/etc/krb.conf file. I believe the realm will default to your DNS domain if you do not do this.
+#### <a name="Step 4) Configure REALM name and"></a> Step 4) Configure REALM name and Reboot AFS db servers
 
-Also MAKE SURE YOU ARE NOT specifying any REALM name options to the afs fileserver daemon as an option in your /usr/afs/local/Bosconfig file! It is best to do this in the /usr/afs/etc/krb.conf file unless you know what you are doing. Else you may get bitten hard like I have. I believe if you specify a "-realm REALM" option to your afs fileserver command it will override the one in the krb.conf file.
+After you import the key into the [[KeyFile]] you need to restart the AFS db servers which will read the new key. You should put the name of the Windows AD Kerberos REALM you are using in the /usr/afs/etc/krb.conf file. I believe the realm will default to your DNS domain if you do not do this. So if your REALM name is different then your DNS domain you must put the REALM name in the krb.conf file. I would enter the REALM to be safe.
+
+Also be aware that you can specify a K5 REALM name option to the afs fileserver daemon as an option in your /usr/afs/local/Bosconfig file! I believe if you specify a "-realm REALM" option to your afs fileserver command it will override the one in the krb.conf file and the dns name. I would recommend putting the REALM in /usr/afs/etc/krb.conf file to lessen the confusion. Make sure you get the REALM settings correct!
 
 From the [[OpenAFS]] Administrators manual section Managing Server Encryption Keys:
 
