@@ -160,7 +160,7 @@ The "Managing Server Encryption Keys" in the [[OpenAFS]] Administrator documenta
 
 I have found that I can run the kaserver and a K5 authentication server in parallel. It does not matter if it is a Windows or MIT K5 server.
 
-If you are currently running a kaserver to do authentication then you have an afs [[KeyFile]] with your kaserver user principal in the [[KeyFile]]. If you add the K5 service pricipal with the asetkey command to the [[KeyFile]] just make sure the key version numbers are different. Leave the kaserver afs principal key in the [[KeyFile]]!
+If you are currently running a kaserver to do authentication then you have an afs [[KeyFile]] with your kaserver afs service principal in the [[KeyFile]]. If you add the K5 afs/cell.name service pricipal with the asetkey command to the [[KeyFile]] just make sure the key version numbers are different. Leave the kaserver afs principal key in the [[KeyFile]]!
 
 If your pts protection server user names in afs and the users names you create in Windows or Mit kerberos are the same, you can continue to use "klog" style authentication from [[OpenAFS]] clients not yet configured to get tokens.
 
