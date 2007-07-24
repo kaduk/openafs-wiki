@@ -140,7 +140,7 @@ You can use the "bos listkey" command to read the key you just imported into the
     Keys last changed on Mon Jul 23 15:13:04 2007.
     All done.
 
-#### <a name="Step 4) Configure REALM name and"></a> Step 4) Configure REALM name and Reboot AFS db servers
+#### <a name="Step 4) Configure REALM name and"></a> Step 4) Configure REALM name and restart AFS db servers
 
 After you import the key into the [[KeyFile]] you need to restart the AFS db servers which will read the new key. You should put the name of the Windows AD Kerberos REALM you are using in the /usr/afs/etc/krb.conf file. I believe the realm will default to your DNS domain if you do not do this. So if your REALM name is different then your DNS domain you must put the REALM name in the krb.conf file. I would enter the REALM to be safe.
 
