@@ -1,0 +1,129 @@
+Here are the instructions I used for creating a working afs/cell.name service principal on Windows 2003 SP2 AD/Kerberos server.
+
+These instructions require the Windows "ktpass.exe" command that comes with Windows Server 2003 support tools. There is a problem with the ktpass command that comes with SP1 support tools, see the following:
+
+<http://support.microsoft.com/kb/919557>
+
+The instructions below were tested with the ktpass command that comes with SP2. Production environments should be running SP2. I originally configured with SP1 and the ktpass fix mentioned above. Microsoft may not be giving out the ktpass fix anymore and tell you to upgrade to SP2. A few options have changed in the SP2 ktpass command and I would recommend using this one.
+
+I originally got a working afs cell in Windows 2003 SP1 using the SP1 patch for ktpass. We since upgraded to SP2. Things continued to run fine, that is the SP2 patch did not break anything. I then configured again using the ktpass command that comes with SP2 as shown below.
+
+Windows does not have service principals like MIT Kerberos. You create a regular Windows domain account, (User Principal Name or UPN), and turn the account into an afs/your.cell service principal.
+
+You then use the windows "ktpass" command to generate a Kerberos style keytab that is then imported into the afs [[KeyFile]] on the afs servers located in the /usr/afs/etc/KeyFile file.
+
+Step 1)
+
+First create a new UPN account name using Active Directory Users and Computers. You can use any valid Windows UPN name. The commands below use the account name "afscs". Note the afs cell name is csw.unc.edu and the Windows AD REALM is CSW.UNC.EDU in this example.
+
+Once the account is created edit the properties for the user.
+
+In the Account tab:
+
+X = checked \_ = not checked
+
+\_ User must change password at next logon \_ User cannot change password X Password never expires \_ Store password using reversible encryption \_ Acount is disabled \_ Smart card is required for interactive logon \_ Account is trusted for delegation \_ Account is sensitive and cnnot be delegated X Use DES encryption types for this account \_ Do not require Kerberos preauthentication
+
+After creating the "afscs" account you can use the Active Directory ADSI, (Active Directory Service Interface tool) Edit snapin tool from the mmc editor to look at the values for the account name if you are interested in watching what happens:
+
+sAMAccountName = afscs userPrincipalName = <afscs@csw.unc.edu> servicePrincipalName =
+
+Note the userPrincipalName value has a lower case realm/AD domain. This is standard for Windows. The sAMAccountName is used for pre-windows 2000 clients that do not use Kerberos. Note the servicePrincipalName is not set yet. This is done below with the Windows ktpass command.
+
+There are 2 commands for dealing with service principals in Windows 2003. They are not documented very well.
+
+setspn - set service principal for a user account. This command will add service/hostname type service principals to the "servicePrincipalName" directory entry.
+
+ktpass - Key tab password. This command has many options, use "ktpass /?" to see them. Its primary purpose is to export a Kerberos complient keytab file for service principals to use. Like the afs/cell.name service principal.
+
+This procedure does not use the setspn command. I could not find any good info on how to use this command and it was not necessary to get the afs/cell.name service principal to work.
+
+Step 2)
+
+Run the ktpass command to map the UPN name to the afs/cell.name service principal.
+
+ktpass -princ afs/csw.unc.edu@CSW.UNC.EDU -mapuser <afscs@CSW.UNC.EDU> -mapOp add -out keytab.afs +rndPass -crypto DES-CBC-CRC +DesOnly -ptype KRB5\_NT\_PRINCIPAL +DumpSalt
+
+The ktpass command maps the -mapuser UPN you created in step 1 to the afs principal name, -princ afs/your.cell@REALM. A random password is assigned to the account using DES encryption. The +DesOnly option sets the "Use DES encryption types for this account" if it was not done so in the Account tab in step 1. The -out options specifies the file to place the kerberos principal keytab information in that you will use to import into the [[OpenAFS]] [[KeyFile]] on your afs servers. I do not know what the -ptype is for but the one that is shown will not produce and error and is the recommended type. The +DumpSalt option is for informational purposes and shows the salt that is appended to the password.
+
+Here is the output from the ktpass command:
+
+ktpass -princ afs/csw.unc.edu@CSW.UNC.EDU -mapuser <afscs@CSW.UNC.EDU> -mapOp add -out keytab.afs +rndPass -crypto DES-CBC-CRC +DesOnly -ptype KRB5\_NT\_SRV\_INST +DumpSalt
+
+C:\\Documents and Settings\\Administrator&gt;ktpass -princ afs/csw.unc.edu@CSW.UNC.ED U -mapuser <afscs@CSW.UNC.EDU> -mapOp add -out keytab.afs +rndPass -crypto DES -CBC-CRC +DesOnly -ptype KRB5\_NT\_PRINCIPAL +DumpSalt Targeting domain controller: eleanor.csw.unc.edu Using legacy password setting method Successfully mapped afs/csw.unc.edu to afscs. Building salt with principalname afs/csw.unc.edu and domain CSW.UNC.EDU... Hashing password with salt "CSW.UNC.EDUafscsw.unc.edu". Key created. Output keytab to keytab.afs: Keytab version: 0x502 keysize 54 afs/csw.unc.edu@CSW.UNC.EDU ptype 1 (KRB5\_NT\_PRINCIPAL) vno 3 etype 0 x1 (DES-CBC-CRC) keylength 8 (0xcdecc7381adf6407) Account afscs has been set for DES-only encryption.
+
+Using ADSI edit shows the servicePrincipalName got updated:
+
+sAMAccountName = afscs userPrincipalName = <afscs@csw.unc.edu> servicePrincipalName = afs/csw.unc.edu
+
+Step 3)
+
+The next step is to copy the keytab.afs file that was generated and import into the afs [[KeyFile]]. Note the "vno 3 etype" output. This is the kerberos key version number. You can verify the key number using the kerberos kvno command to your windows AD REALM. Use the linux/unix kvno command or the kvno command on Windows that comes with KFW (Kerberos For Windows). You will need the kvno when importing the keytab.afs to your afs [[KeyFile]]. This is an optional step for verifying the kvno set in Windows Active Directory:
+
+First you need to get a regular ticket granting ticket from your Windows REALM:
+
+% kinit Password for <sopko@CSW.UNC.EDU>:
+
+Then query for the afs service principal:
+
+% kvno afs/csw.unc.edu@CSW.UNC.EDU afs/csw.unc.edu@CSW.UNC.EDU: kvno = 3
+
+Next you import the keytab.afs to your /usr/afs/etc/KeyFile. You should securely copy the keytab.afs file that was created on your Windows server using the ktpass command over to your afs server that runs the afs upsever for distributing files. If you do not have an upserver then you will have to generate one [[KeyFile]] and copy as you normally would.
+
+If this is NOT a new installation make sure the existing key numbers in your [[KeyFile]] is different from the one that was generated with ktpass. If you have one or more keys in your [[KeyFile]] make sure they are different! Each time you run the Windows ktpass command it will increment the key. Do NOT use the ktpass -kvno option for configuring a key version number. It only seems to set the key number in the output keytab file not Active Directory, this will break things! It is simple to use the dos window and re-run the ktpass command until you get a key number you are happy with.
+
+You can use the "asetkey list" command to list the keys that are currently in the [[KeyFile]]. Or you can run the "bos listkeys" command to get this information. You can run the ktpass command until the key number that is generated is different then the one currently in the [[KeyFile]].
+
+You use the "asetkey" utility command that comes with [[OpenAFS]] to read the ketyab.afs file and import into the [[KeyFile]]. You specify the key version number when doing this:
+
+/usr/sbin/asetkey add 3 keytab.afs afs/csw.unc.edu@CSW.UNC.EDU
+
+You must specify the proper key number! You can use the kerberos ktutil command to read the keytab.afs file to verify the kvno. You can also use the keytab.afs keytab to obtain a K5 tgt as the user who is acting as the service principal. This can help you debug any issues. For example:
+
+# ktutil ktutil: read\_kt keytab.afs ktutil: list slot KVNO Principal
+
+----
+
+----
+
+----
+
+1. 3 afs/csw.unc.edu@CSW.UNC.EDU
+
+# kinit -kt keytab.afs afs/csw.unc.edu afsk5/root [/usr/afs/etc] # klist Ticket cache: FILE:/tmp/krb5cc\_3903\_GAwMFc Default principal: afs/csw.unc.edu@CSW.UNC.EDU
+
+Valid starting Expires Service principal 07/23/07 13:46:34 07/23/07 23:46:34 krbtgt/CSW.UNC.EDU@CSW.UNC.EDU renew until 07/30/07 13:46:34
+
+If the kinit command fails then the keytab does not work with the service principal user you created with ktpass and you will have to try again.
+
+You can use the "bos listkey" command to read the key you just imported into the [[KeyFile]] with asetkey. The ktutil takes a kerberos style keytab and the bos listkey takes an afs style [[KeyFile]]:
+
+# bos listkeys afsk5.csw.unc.edu -localauth key 3 has cksum 999999999 Keys last changed on Mon Jul 23 15:13:04 2007. All done.
+
+After you import the key into the [[KeyFile]] you need to restart the AFS db servers which will read the new key. You need to put the name of the Windows AD Kerberos REALM you are using in the /usr/afs/etc/krb.conf file. I believe the realm will default to your DNS domain if you do not do this.
+
+Also MAKE SURE YOU ARE NOT specifying any REALM name options to the afs fileserver daemon as an option in your /usr/afs/local/Bosconfig file! It is best to do this in the /usr/afs/etc/krb.conf file unless you know what you are doing. Else you may get bitten hard like I have. I believe if you specify a "-realm REALM" option to your afs fileserver command it will override the one in the krb.conf file.
+
+From the [[OpenAFS]] Administrators manual section Managing Server Encryption Keys:
+
+Issue the bos restart command to restart the database server processes on all database server machines. This forces them to start using the key in the [[KeyFile]] file that currently has the highest key version number.
+
+Repeat this command in quick succession for each database server machine, starting with the machine that has the lowest IP address.
+
+bos restart  buserver ptserver vlserver
+
+The "Managing Server Encryption Keys" in the [[OpenAFS]] Administrator documentation explains how to delete your old keys if you wish. You can use the "bos removekey" or "asetkey delete" command to remove old key version numbers from the [[KeyFile]] after your maximum token lifetime for users has passed.
+
+Migrating kaserver to K5 Tip
+
+----
+
+I have found that I can run the kaserver and a K5 authentication server in parallel. It does not matter if it is a Windows, MIT or probably Heimdal server. I have tested on MIT and Windows K5.
+
+If you are currently running a kaserver to do authentication then you have an afs [[KeyFile]] with your kaserver user principal in the [[KeyFile]]. If you add the K5 service pricipal with the asetkey command to the [[KeyFile]] just make sure the key version numbers are different. Leave the kaserver afs principal key in the [[KeyFile]]!
+
+If your pts protection server user names in afs and the users names you create in Windows or Mit kerberos are the same, you can use "klog" or Windows machines not configured to get tokens from a K5 server to get tokens via either the kaserver or the kinit/aklog method ,(or KFW pam etc.), to get K5 tickets from the k5 server and get an afs token.
+
+The reason one would do this is during the transition to K5. Once you have your K5 servers and your [[KeyFile]] configured to contain the old afs kaserver principal and the new K5 service principal you can continue to run the kaserver until your afs clients are configured to use K5 only and wean yourself off the kaserver. The downside of this is having 2 password, one kaserver and one K5 server and not confusing the users.
+
+-- [[JohnSopko]] - 24 Jul 2007
