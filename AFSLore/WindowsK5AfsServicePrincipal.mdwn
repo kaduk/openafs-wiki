@@ -162,7 +162,7 @@ I have found that I can run the kaserver and a K5 authentication server in paral
 
 If you are currently running a kaserver to do authentication then you have an afs [[KeyFile]] with your kaserver afs service principal in the [[KeyFile]]. If you add the K5 afs/cell.name service pricipal with the asetkey command to the [[KeyFile]] just make sure the key version numbers are different. Leave the kaserver afs principal key in the [[KeyFile]]!
 
-If your pts protection server user names in afs and the users names you create in Windows or Mit kerberos are the same, you can continue to use "klog" style authentication from [[OpenAFS]] clients not yet configured to get tokens.
+If your pts protection server user names in afs and the users names you create in Windows or Mit kerberos are the same, you can continue to use "klog" style authentication from [[OpenAFS]] clients not yet configured to get tokens from the K5 server.
 
 The reason one would do this is during the transition to K5. Once you have your K5 servers and your [[KeyFile]] configured to contain the old afs kaserver principal and the new K5 service principal you can continue to run the kaserver until your afs clients are configured to use K5 only and wean yourself off the kaserver. The downside of this is having 2 passwords, one in the kaserver and one in the K5 server and not confusing the users.
 
