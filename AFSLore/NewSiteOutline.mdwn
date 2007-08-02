@@ -1,0 +1,107 @@
+Russ Allbery
+
+&gt;<cite> The next step would be to determine the set of questions that we believe</cite><br /> &gt;<cite> should be answered by each class of visitor.</cite><br />
+
+Here's a first cut at that. This is somewhat off the top of my head, but I'll throw it out so that Jeff can comment on whether it's what he has in mind and so that you can get an idea of what we're thinking of.
+
+This is **very** rough, just a seed for thought. I wouldn't necessarily organize a sitemap around exactly this outline, but it's sort of the concept flow that I envision for different users.
+
+## <a name="For Users"></a> For Users
+
+- What is [[OpenAFS]] from a user's perspective?
+- Do you want to download the client?
+  - For what platform?
+  - Here's the recommended version for that platform.
+  - Here are the release notes.
+  - Here are older versions or other versions that may be appropriate in particular situations with their release notes.
+- What else do I need?
+  - Network Identity Manager
+- How do I configure [[OpenAFS]] to work with my local site?
+  - What questions do I need to ask my local support people if I can't find a local configuration page?
+  - Some pointer to Kerberos configuration
+- Where's the manual?
+- Where can I get help?
+  - Bug tracker
+  - Mailing list archives
+  - Mailing list subscription
+
+## <a name="For Admins"></a> For Admins
+
+- Why, as a sysadmin, do I care about [[OpenAFS]]?
+- Do you want to download the latest server?
+  - For what platform?
+    - What's your recommended platform for a server if I don't care?
+  - Here's the recommended version for that platform
+    - Here are instructions for how to use the [[OpenAFS]] shipped with it
+    - Here's the source
+    - Here are distribution packages
+    - Here are binary Transarc-style packages
+  - Here are the release notes.
+  - Here are older versions or other versions that may be appropriate in particular situations with their release notes.
+- What does [[OpenAFS]] look like when it's running at my site? How does it fit in with the rest of what I'm doing?
+  - What is AFS good at?
+  - What is AFS not good at?
+  - How are those problems going to be fixed, if they are?
+  - Where is AFS going in the medium and long term?
+- What else do I need?
+  - Kerberos
+  - Storage hardware and file system requirements
+- Where's the documentation?
+  - Installation
+  - Administrator's guide
+  - Command reference manual
+- Where can I get help?
+  - Bug tracker
+  - Mailing list archives
+  - Mailing list subscription
+- Where can I buy help?
+- How can I help?
+  - Donations
+  - Link to the site for managers as noted below
+- What's happening?
+  - [[OpenAFS]] newsletter
+  - Gatekeeper reports
+  - Workshop conference papers
+
+## <a name="For managers:"></a> For managers:
+
+- What is AFS as a strategic file system choice?
+  - How does it relate to other file systems?
+  - What features does it have that are interesting, at a high level?
+  - How can I be confident I can rely on it?
+  - How does it integrate with the rest of my technical strategy?
+- Is AFS supported?
+  - Where can I get support?
+  - How active is the community?
+  - What is the funding model? How does work get done?
+  - If I need something specific done, how can I get that to happen?
+- Who is using AFS?
+  - Success stories
+- What is AFS's future direction?
+  - Development roadmap
+  - Estimates of major projects
+  - Projects in search of funding
+- What progress is being made towards those goals?
+  - [[OpenAFS]] newsletter
+  - Gatekeeper reports
+  - Workshop conference papers
+  - High-level release notes
+- What is the project governance?
+  - AFS Gatekeepers and Elders
+  - History of the project
+
+## <a name="For Developers"></a> For Developers
+
+- How do I get started helping with AFS?
+  - Where is the source?
+  - How do I get a CVS checkout?
+    - What does the revision management system look like?
+    - What do the CVS branches look like?
+    - How do I find deltas and patches?
+  - Where are the snapshots of the current development?
+  - Where do I talk about what I'm doing?
+    - Develoment mailing lists
+- What needs to be done? \* Bug tracker \* Project list and development roadmap \* Beginner project list \* Documentation to-do lists
+- What are the requirements for contribution? \* Coding style \* Documentation style \* Review and approval process, role of gatekeepers
+
+-- [[WarrenYenson]] - 02 Aug 2007
