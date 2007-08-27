@@ -157,7 +157,7 @@ Next we need to set up all the other servers that make up an AFS system. These i
 
 At this point we need our /vicepa partition set up. You should have done this when installing Fedora/RHEL, but if you have not, do it now. We will create a root volume on /vicepa.
 
-    vos create -server <server> -partition /vicepa -name root.afs cell <cell> -noauth
+    vos create -server <server> -partition /vicepa -name root.afs -cell <cell> -noauth
 
 The servers are setup, so now remove the -noauth flag from /etc/sysconfig/openafs. After restarting the server we will need to authenticate to get anything done. While you are editing /etc/sysconfig/openafs take a look at the client flags. You'll likely see a dynroot flag there. Remove that. This flag allows you to list all of the cells under /afs without really connecting to them. You only connect to them once you have entered that directory. Unfortunately it will prevent us from setting up our cell volumes correctly.
 
