@@ -59,6 +59,7 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.48 What is a Volume Group?"> 3.48 What is a Volume Group?</a></li>
         <li><a href="#3.49 What is a Clone?"> 3.49 What is a Clone?</a></li>
         <li><a href="#3.50 What is a Shadow?"> 3.50 What is a Shadow?</a></li>
+        <li><a href="#3.51 Can I authenticate to my af"> 3.51 Can I authenticate to my afs cell using multiple kerberos Realms?</a></li>
       </ul>
     </li>
   </ul>
@@ -1150,3 +1151,42 @@ You can "refresh" a shadow volume from its original with "vos shadow -incrementa
 You can remove the shadow bit from a volume's header with "vos syncvldb -force". This will remove the shadow bit and create a VLDB entry for the volume, deleting any previous entry for the rw volume. However, the rw volume itself will not be deleted; it will simply exist without a VLDB entry.
 
 Attempting to create shadows of two different rw volumes on the same partition with the same name is prohibited by the volserver. Technically it is possible to create two shadow volumes with the same name on different partitions; however, this is not advisable.
+
+### <a name="3.51 Can I authenticate to my af"></a> 3.51 Can I authenticate to my afs cell using multiple kerberos Realms?
+
+Yes. This can be usefull if your organization has multiple kerberos Realms with identical user entries: For example you might have an MIT Kerberos realm for Unix-like systems, and an Active Directory domain for windows with synchronized accounts.
+
+As long as you only need to support 2 realms, and one of them has the same name as the afs cell(or the uppercase of the name of the afs cell) you can do this without upgrading to a new version of AFS. If you need more Realms, or if neither Realm name matches your cell name, there is work to support this in the development tree.
+
+In order to make this work, you need to do 4 things.
+
+1) add a key for the afs service to the additional realm and store it in a keytab:
+
+    $ kadmin -q ank -e des-cbc-crc:v4 -kvno <new kvno> afs/your.cell.name@YOUR.SECOND.REALM.NAME
+    $ kadmin -q ktadd -e des-cbc-crc:v4 -k /path/to/afs.keytab afs/your.cell.name@YOUR.SECOND.REALM.NAME
+
+Note that a kvno must be specified for the key that is different than the kvno for your existing key(s) in the original realm. you can check on the kvno of the existing keys by running "asetkey list" on one of your servers. since keys must be in ascending order in the AFS [[KeyFile]] it will be easiest if you make the new kvno higher than any existing key's kvno.
+
+It's also worth noting that the process of adding the key to a keytab(at least with MIT krb5) actually creates a new key first, so your kvno will end up being higher than what you specified when you added the principal. you can check on the current kvno by using the "kadmin -q getprinc afs/your.cell.name@YOUR.SECOND.REALM.NAME" command.
+
+2) add the new key to the afs [[KeyFile]] on your afs servers:
+
+    $ asetkey add <kvno> /path/to/afs.keytab afs/your.cell.name@YOUR.SECOND.REALM.NAME
+
+note that the kvno here needs to be the same one as is reported by the kadmin getprinc command.
+
+3) create an afs krb.conf with your additional Realm's name in it, and place it on all of your AFS servers:
+
+    echo "YOUR.SECOND.REALM.NAME" > /usr/afs/etc/krb.conf
+
+4) restart you afs servers.
+
+at this point you should be able to run:
+
+    kinit you@YOUR.SECOND.REALM.NAME
+    aklog
+
+and recieve the same privileges as if you had run:
+
+    kinit you@YOUR.CELL.NAME
+    aklog
