@@ -2,13 +2,27 @@ This is a guide on how to build [[OpenAFS]] from source code. Note that [[OpenAF
 
 ### <a name="Requirements"></a> Requirements
 
+Tools
+
+- cvs client
 - autoconf
 - automake
 - perl 5.6
-
-One of the following compiliers:
-
 - gcc (versions?)
+- GNU make
+- lex/yacc (flex/bison)
+
+Libraries
+
+- libc
+- kerberos, optional, but recommended
+- ncurses
+- kernel headers
+
+If you are building on Debian, you can get the required software with the following apt-get commands.
+
+      apt-get install cvs autoconf automake make gcc flex bison
+      apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
 ### <a name="Getting the Source Code from CVS"></a> Getting the Source Code from CVS
 
