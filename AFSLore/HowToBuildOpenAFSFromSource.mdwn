@@ -49,6 +49,11 @@ To check out the development branch:
 
 This will create a source tree in a directory named openafs.
 
+Run the regen.sh script to create the configure script.
+
+       cd openafs
+       ./regen.sh
+
 ### <a name="Building the Binaries"></a> Building the Binaries
 
 #### <a name="Transarc Paths"></a> Transarc Paths
@@ -57,8 +62,6 @@ By convention, [[OpenAFS]] server binaries and related files are located in /usr
 
 To build [[OpenAFS]] with Kerberos 5 support and the traditional, Transarc paths:
 
-       cd openafs
-       ./regen.sh
        ./configure  --enable-transarc-paths --with-krb5-conf=(full path to krb5-config script)
        make
        make dest
@@ -79,8 +82,6 @@ The 'make install' command does not work with Transarc paths. You will have to m
 
 To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path,
 
-       cd openafs
-       ./regen.sh
        ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script)
        make
        sudo make install
