@@ -58,11 +58,16 @@ Run the regen.sh script to create the configure script.
 
 #### <a name="Transarc Paths"></a> Transarc Paths
 
-By convention, [[OpenAFS]] server binaries and related files are located in /usr/afs, and client binaries and related files are located in /usr/vice. These are known as Transarc paths, so called because that is is the convention used by Transarc, the company that first commercialized AFS.
+By convention, [[OpenAFS]] server binaries and related files are located in /usr/afs, and client binaries and related files are located in /usr/vice. These are known as Transarc paths, so called because that is is the convention used by Transarc, the company that first commercialized AFS. To build with the Transarc paths, specify --enable-transarc-paths as a configure option.
 
-To build [[OpenAFS]] with Kerberos 5 support and the traditional, Transarc paths:
+To build with Keberos support (recommended), you'll need to have the Keberos development libraries, and if available for your platform, the krb5-config. You will need the full path the the krb5-config script. For example
 
-       ./configure  --enable-transarc-paths --with-krb5-conf=(full path to krb5-config script)
+       which krb5-config
+       /user/bin/krb5-config
+
+To build [[OpenAFS]] with Kerberos 5 support and the Transarc path conventions:
+
+       ./configure  --enable-transarc-paths --with-krb5-conf=/usr/bin/krb5-config
        make
        make dest
 
