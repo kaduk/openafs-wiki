@@ -60,6 +60,8 @@ Run the regen.sh script to create the configure script.
 
 By convention, [[OpenAFS]] server binaries and related files are located in /usr/afs, and client binaries and related files are located in /usr/vice. These are known as Transarc paths, so called because that is is the convention used by Transarc, the company that first commercialized AFS. To build with the Transarc paths, specify --enable-transarc-paths as a configure option.
 
+There are a couple of side effects that you need need to be aware of when building with the --enable-transarc-paths mode. First of all, the typical make install target does not work in this mode. Instead the 'make dest' target is used to build a directory of the binaries to be copied to the target system. Secondly, the packaging targets are not executed, so for example the redhat spec file is not generated to build the rpms.
+
 To build with Keberos support (recommended), you'll need to have the Keberos development libraries, and if available for your platform, the krb5-config. You will need the full path the the krb5-config script. For example
 
        which krb5-config
@@ -83,7 +85,7 @@ The 'make install' command does not work with Transarc paths. You will have to m
       # cp -r i386_linux26/dest/lib /usr/afsws
       # cp -r i386_linux26/dest/root.server/usr/afs/* /usr/afs
 
-#### <a name="Custom Paths"></a> Custom Paths
+#### <a name="Stardard Paths"></a> Stardard Paths
 
 To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path,
 
