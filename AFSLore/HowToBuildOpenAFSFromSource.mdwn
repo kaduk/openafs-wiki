@@ -64,8 +64,8 @@ There are a couple of side effects that you need need to be aware of when buildi
 
 To build with Keberos support (recommended), you'll need to have the Keberos development libraries, and if available for your platform, the krb5-config. You will need the full path the the krb5-config script. For example
 
-       which krb5-config
-       /user/bin/krb5-config
+       $ which krb5-config
+       /usr/bin/krb5-config
 
 To build [[OpenAFS]] with Kerberos 5 support and the Transarc path conventions:
 
