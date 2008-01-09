@@ -1,0 +1,15 @@
+This page will have gatekeeping policy/information.
+
+Commit any patches to the head with a delta name that describes what they are
+
+Using ~shadow/pullup-15 (for openafs-devel-1\_5\_x branch) or ~shadow/pullup (for openafs-stable-1\_4\_x branch) scripts, pull your patches up to relevant branches. You will need to do the pullups, at least, on grand, or rework the scripts to access the delta files some other way.
+
+if you need to hand edit or apply the patches for the branches, please use delta names on the branches which are the same **except** prefix with the branch name tag
+
+e.g.
+
+aix-fixes-20080101 becomes DEVEL15-aix-fixes-20080101 on openafs-devel-1\_5\_x and STABLE14-aix-fixes-20080101 on openafs-stable-1\_4\_x
+
+if you look at /data/delta/OpenAFS-(branchname) on grand.central.org you can see what other branch prefix is used, for each branch. i promise to start keeping track of this in a file.
+
+-- [[DerrickBrashear]] - 09 Jan 2008
