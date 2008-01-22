@@ -63,12 +63,12 @@
   </tr>
   <tr>
     <td><code>$wikiusername</code></td>
-    <td> WikiName with Main web prefix </td>
-    <td><code>Main.JohnSmith</code></td>
+    <td> WikiName with %USERSWEB% web prefix </td>
+    <td><code>%USERSWEB%.JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Revision date </td>
+    <td> Revision date. Actual date format defined as {DefaultDateFormat} in <a href="http://www.dementia.org/twiki/configure" target="_top">configure</a></td>
     <td><code>21 Sep 2006</code></td>
   </tr>
   <tr>
@@ -83,9 +83,9 @@
   </tr>
   <tr>
     <td><code>$min</code>, <code>$sec</code>, etc. </td>
-    <td> Same date format qualifiers as [[Main/WebHome#VarGMTIME2]]</td>
+    <td> Same date format qualifiers as [[Main/VarGMTIME2]]</td>
     <td>   </td>
   </tr>
 </table>
 - Example: `%REVINFO{"$date - $wikiusername" rev="1.1"}%` returns revision info of first revision
-- Related: [[GMTIME{"format"}|Main/WebHome#VarGMTIME2]], [[REVINFO|Main/WebHome#VarREVINFO]]
+- Related: [[GMTIME{"format"}|Main/VarGMTIME2]], [[REVINFO|Main/VarREVINFO]]

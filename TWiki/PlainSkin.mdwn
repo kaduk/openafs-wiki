@@ -1,8 +1,10 @@
 # <a name="Plain Skin"></a> Plain Skin
 
-The plain skin is used to get the rendered topic text without any page decoration such as side, top or bottom bars. For example, TWiki uses this skin for pop-up help windows. It also can be used to display topic content inside an [IFRAME](http://www.htmlhelp.com/reference/html40/special/iframe.html).
+The plain skin is used to get the rendered topic text without any page decoration such as side, top or bottom bars. The text is shown without any markup styles. It can be used to display topic content inside an [IFRAME](http://www.htmlhelp.com/reference/html40/special/iframe.html).
 
 This skin is part of every TWiki distribution.
+
+This skin has been used to show topics in a pop-up window; this has been replaced with template `viewplain`.
 
 ## <a name="Skin Info"></a> Skin Info
 
@@ -61,6 +63,6 @@ This skin is part of every TWiki distribution.
   </tr>
 </table>
 
-**_Note:_** The Description, Screenshot and Base Name rows are needed by the [[TWikiSkinBrowser]]
+**_Note:_** The Description, Screenshot and Base Name rows are needed by the %SYSTEMWEB%.TWikiSkinBrowser
 
-**_Related topic:_** [[TWikiSkins]], [[TWikiSkinBrowser]], [[UserDocumentationCategory]], [[AdminDocumentationCategory]]
+**_Related topic:_** %SYSTEMWEB%.TWikiSkins, %SYSTEMWEB%.TWikiSkinBrowser, %SYSTEMWEB%.UserDocumentationCategory, %SYSTEMWEB%.AdminDocumentationCategory

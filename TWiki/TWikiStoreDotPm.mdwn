@@ -9,8 +9,8 @@ The general contract for methods in the class requires that errors are signalled
 <div>
   <ul>
     <li><a href="#Package =TWiki::Store="> Package TWiki::Store</a><ul>
-        <li><a href="#ClassMethod <strong>new</strong> ()"> ClassMethod new <tt>()</tt></a></li>
-        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>readTopic</strong> ($user,"> ObjectMethod readTopic <tt>($user,$web,$topic,$version) -&gt; ($metaObject,$text)</tt></a></li>
         <li><a href="#ObjectMethod *_findAttachments*"> ObjectMethod _findAttachments <tt>($session,$web,$topic,$knownAttachments) -&gt; @attachmentsFoundInPub</tt></a></li>
         <li><a href="#ObjectMethod <strong>read_TopicRaw</strong> ($u"> ObjectMethod readTopicRaw <tt>($user,$web,$topic,$version) -&gt; $topicText</tt></a></li>
@@ -38,8 +38,7 @@ The general contract for methods in the class requires that errors are signalled
         <li><a href="#ObjectMethod <strong>topicExists</strong> ($web"> ObjectMethod topicExists <tt>($web,$topic) -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_TopicParent</strong> ("> ObjectMethod getTopicParent <tt>($web,$topic) -&gt; $string</tt></a></li>
         <li><a href="#ObjectMethod *get_TopicLatestRev"> ObjectMethod getTopicLatestRevTime <tt>($web,$topic) -&gt; $epochSecs</tt></a></li>
-        <li><a href="#ObjectMethod <strong>read_MetaData</strong> ($w"> ObjectMethod readMetaData <tt>($web,$name) -&gt; $text</tt></a></li>
-        <li><a href="#ObjectMethod <strong>save_MetaData</strong> ($w"> ObjectMethod saveMetaData <tt>($web,$name) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachChange</strong> ($web,"> ObjectMethod eachChange <tt>($web,$time) -&gt; $iterator</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_TopicNames</strong> ($"> ObjectMethod getTopicNames <tt>($web) -&gt; @topics</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_ListOfWebs</strong> ($"> ObjectMethod getListOfWebs <tt>($filter) -&gt; @webNames</tt></a></li>
         <li><a href="#ObjectMethod <strong>createWeb</strong> ($user,"> ObjectMethod createWeb <tt>($user,$newWeb,$baseWeb,$opts)</tt></a></li>
@@ -48,6 +47,7 @@ The general contract for methods in the class requires that errors are signalled
         <li><a href="#ObjectMethod <strong>clean_UpRevID</strong> ($r"> ObjectMethod cleanUpRevID <tt>($rev) -&gt; $integer</tt></a></li>
         <li><a href="#ObjectMethod <strong>copyTopic</strong> ($user,"> ObjectMethod copyTopic <tt>($user,$fromweb,$fromtopic,$toweb,$totopic)</tt></a></li>
         <li><a href="#ObjectMethod <strong>search_MetaData</strong> ("> ObjectMethod searchMetaData <tt>($params) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *search_InWebMetaDa"> ObjectMethod searchInWebMetaData <tt>($query,$web,\@topics) -&gt; \%matches</tt></a></li>
         <li><a href="#ObjectMethod *search_InWebConten"> ObjectMethod searchInWebContent <tt>($searchString,$web,\@topics,\%options) -&gt; \%map</tt></a></li>
         <li><a href="#ObjectMethod *get_RevisionAtTime"> ObjectMethod getRevisionAtTime <tt>($web,$topic,$time) -&gt; $rev</tt></a></li>
         <li><a href="#ObjectMethod <strong>getLease</strong> ($web,$t"> ObjectMethod getLease <tt>($web,$topic) -&gt; $lease</tt></a></li>
@@ -59,15 +59,13 @@ The general contract for methods in the class requires that errors are signalled
   </ul>
 </div>
 
-## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ()"></a> [[ClassMethod]] **new** `()`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
 
 Construct a Store module, linking in the chosen sub-implementation.
 
-## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
 
-Complete processing after the client's HTTP request has been responded to.
-
-1. breaking circular references to allow garbage collection in persistent environments
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;readTopic&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **readTopic** `($user,$web,$topic,$version) -> ($metaObject,$text)`
 
@@ -166,7 +164,7 @@ Gets a private directory uniquely identified by $key. The directory is intended 
 
 Return reference to an array of [ diffType, $right, $left ]
 
-- `$user` - the user object, or undef to suppress access control checks
+- `$user` - the user id, or undef to suppress access control checks
 - `$web` - the web
 - `$topic` - the topic
 - `$rev1` Integer revision number
@@ -182,7 +180,7 @@ Get revision info of a topic.
 - `$rev` revision number. If 0, undef, or out-of-range, will get info about the most recent revision.
 - `$attachment` attachment filename; undef for a topic
 
-Return list with: ( last update date, last user object, =
+Return list with: ( last update date, last user id, =
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -310,6 +308,10 @@ Save a new revision of the topic, calling plugins handlers as appropriate.
     <td><code>filedate</code></td>
     <td> Date </td>
   </tr>
+  <tr>
+    <td><code>tmpFilename</code></td>
+    <td> Pathname of the server file the stream is attached to. Required if stream is set. </td>
+  </tr>
 </table>
 
 Saves a new revision of the attachment, invoking plugin handlers as appropriate.
@@ -360,7 +362,7 @@ Test if web exists
 
 - `$web` - Web name, required, e.g. `'Sandbox'`
 
-A web _has_ to have a home topic to be a web.
+A web _has_ to have a preferences topic to be a web.
 
 ## <a name="ObjectMethod &lt;strong&gt;topicExists&lt;/strong&gt; ($web"></a> [[ObjectMethod]] **topicExists** `($web,$topic) -> $boolean`
 
@@ -377,13 +379,9 @@ Get the name of the topic parent. Needs to be fast because of use by Render.pm.
 
 Get an approximate rev time for the latest rev of the topic. This method is used to optimise searching. Needs to be as fast as possible.
 
-## <a name="ObjectMethod &lt;strong&gt;read_MetaData&lt;/strong&gt; ($w"></a> [[ObjectMethod]] **readMetaData** `($web,$name) -> $text`
+## <a name="ObjectMethod &lt;strong&gt;eachChange&lt;/strong&gt; ($web,"></a> [[ObjectMethod]] **eachChange** `($web,$time) -> $iterator`
 
-Read a named meta-data string. If web is given the meta-data is stored alongside a web.
-
-## <a name="ObjectMethod &lt;strong&gt;save_MetaData&lt;/strong&gt; ($w"></a> [[ObjectMethod]] **saveMetaData** `($web,$name) -> $text`
-
-Write a named meta-data string. If web is given the meta-data is stored alongside a web.
+Get an iterator over the list of all the changes in the given web between `$time` and now. $time is a time in seconds since 1st Jan 1970, and is not guaranteed to return any changes that occurred before (now - \{Store\}\{RememberChangesFor\}). Changes are returned in most-recent-first order.
 
 ## <a name="ObjectMethod &lt;strong&gt;get_TopicNames&lt;/strong&gt; ($"></a> [[ObjectMethod]] **getTopicNames** `($web) -> @topics`
 
@@ -472,11 +470,21 @@ Search meta-data associated with topics. Parameters are passed in the $params ha
     <td><code>web</code></td>
     <td> web to search in, default is all webs </td>
   </tr>
+  <tr>
+    <td><code>format</code></td>
+    <td> string for custom formatting results </td>
+  </tr>
 </table>
 
 The idea is that people can search for meta-data values without having to be aware of how or where meta-data is stored.
 
 SMELL: should be replaced with a proper SQL-like search, c.f. [[DBCacheContrib]].
+
+## <a name="ObjectMethod &lt;strong&gt;search_InWebMetaDa"></a> [[ObjectMethod]] \*searchInWebMetaData `($query,$web,\@topics) -> \%matches`
+
+Search for a meta-data expression in the content of a web. `$query` must be a `TWiki::Query` object.
+
+Returns a reference to a hash that maps the names of topics that all matched to the result of the query expression (e.g. if the query expression is 'TOPICPARENT.name' then you will get back a hash that maps topic names to their parent.
 
 ## <a name="ObjectMethod &lt;strong&gt;search_InWebConten"></a> [[ObjectMethod]] \*searchInWebContent `($searchString,$web,\@topics,\%options) -> \%map`
 

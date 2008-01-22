@@ -1,3 +1,7 @@
+# <a name="Managing Topics"></a> Managing Topics
+
+_Browser-based rename, move, and delete for individual topics_
+
 <div>
   <ul>
     <li><a href="#Managing Topics"> Managing Topics</a><ul>
@@ -16,10 +20,6 @@
     </li>
   </ul>
 </div>
-
-# <a name="Managing Topics"></a> Managing Topics
-
-_Browser-based rename, move, and delete for individual topics_
 
 ## <a name="Overview"></a> Overview
 
@@ -48,7 +48,7 @@ The `Trash` web should be be cleared periodically, by archiving (saving) the tex
 
 ## <a name="Redirecting from an Old Topic"></a> Redirecting from an Old Topic
 
-You can use [[TWikiMetaData]] to place a command in the [[WebTopicViewTemplate]] and [[WebTopicNonWikiTemplate]] that will indicate that a topic has been moved by searching for the tag %META:TOPICMOVED\{...\}%. Customize something like this:
+You can use [[TWikiMetaData]] to place a command in the %SYSTEMWEB%.WebTopicViewTemplate and %SYSTEMWEB%.WebTopicNonWikiTemplate that will indicate that a topic has been moved by searching for the tag %META:TOPICMOVED\{...\}%. Customize something like this:
 
 > %<nop>METASEARCH{type="topicmoved" web="%WEB%" topic="%TOPIC%"
 >     title="This topic used to exist and was moved to: "}%
@@ -70,7 +70,7 @@ Changed references are kept are as short as possible, ex: `topic` is used in pre
 
 ### <a name="Effect of User Access Settings"></a> Effect of User Access Settings
 
-User permissions affect the Rename function in various ways. To rename a topic, you need both <code>**ALLOWTOPICVIEW**</code> and <code>**ALLOWTOPICCHANGE**</code> permission for that topic. To alter referring topics, you need change permission. See [[TWikiAccessControl]] for information on setting up access permissions.
+User permissions affect the 'rename' functions in various ways. To rename a topic, you need all of <code>**VIEW**</code>, <code>**CHANGE**</code> and <code>**RENAME**</code> access to that topic. To alter referring topics, you need <code>**CHANGE**</code> access. See [[TWikiAccessControl]] for information on setting up access permissions.
 
 ## <a name="Special Considerations"></a> Special Considerations
 

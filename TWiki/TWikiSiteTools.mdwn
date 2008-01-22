@@ -1,9 +1,16 @@
+# <a name="TWiki Site Tools"></a> TWiki Site Tools
+
+_Utilities for searching, navigation, and monitoring site activity_
+
+TWiki Site Tools include utilities for navigating, searching and keeping up with site activity. Preferences can be configured by web or site-wide. You are currently in the **%SYSTEMWEB%** web. In particular, TWiki provides two highly configurable, automated site monitoring tools, **WebNotify**, to e-mail alerts when topics are edited, and **WebStatistics**, to generate detailed activity reports.
+
 <div>
   <ul>
     <li><a href="#TWiki Site Tools"> TWiki Site Tools</a><ul>
         <li><a href="#WebNotify - recent changes alert"> WebNotify - recent changes alert</a></li>
         <li><a href="#WebSearch - search TWiki site"> WebSearch - search TWiki site</a></li>
         <li><a href="#WebChanges - what's new"> WebChanges - what's new</a></li>
+        <li><a href="#WebRss and _WebAtom - news feeds"> WebRss and WebAtom - news feeds on recent changes</a></li>
         <li><a href="#WebIndex - list of topics"> WebIndex - list of topics</a></li>
         <li><a href="#WebStatistics - site statistics"> WebStatistics - site statistics</a><ul>
             <li><a href="#Configuring for automatic operat"> Configuring for automatic operation</a></li>
@@ -17,16 +24,11 @@
           </ul>
         </li>
         <li><a href="#Site Permissions"> Site Permissions</a></li>
+        <li><a href="#Help with crontab"> Help with crontab</a></li>
       </ul>
     </li>
   </ul>
 </div>
-
-# <a name="TWiki Site Tools"></a> TWiki Site Tools
-
-_Utilities for searching, navigation, and monitoring site activity_
-
-TWiki Site Tools include utilities for navigating, searching and keeping up with site activity. Preferences can be configured by web or site-wide. You are currently in the **TWiki** web. In particular, TWiki provides two highly configurable, automated site monitoring tools, **WebNotify**, to e-mail alerts when topics are edited, and **WebStatistics**, to generate detailed activity reports.
 
 <a name="WebNotify"></a>
 
@@ -36,7 +38,7 @@ Each TWiki web has an automatic e-mail alert service that sends a list of recent
 
 - You can create a [[WebNotify]] link using [[TWikiVariables]] with <code>**%NOTIFYTOPIC%**</code>
 
-You can also use `%MAINWEB%` instead of `Main`, but this is not necessary even if you have renamed the main web by configuring `{MainWebName}` in [configure](http://www.dementia.org/twiki/configure).
+You can also use `%USERSWEB%` instead of `Main`, but this is not necessary even if you have renamed the main web by configuring `{MainWebName}` in [configure](http://www.dementia.org/twiki/configure).
 
 <a name="WebSearch"></a>
 
@@ -63,6 +65,12 @@ This is simply a preset `SEARCH`. The number of topics listed by the `limit` par
 > %SEARCH{ ".*" web="%INCLUDINGWEB%" type="regex" nosearch="on" order="modified"%BR% reverse="on"
 >     limit="50" }%
 
+<a name="WebRssAndAtom"></a>
+
+## <a name="WebRss and _WebAtom - news feeds"></a><a name="_WebRss and _WebAtom - news feed"></a> WebRss and WebAtom - news feeds on recent changes
+
+You can point your news reader at [[WebRss]] and [[WebAtom]] to find out what is new in a TWiki web. [[WebRssBase]] and [[WebAtomBase]] have the details. Like [[WebChanges]], this is based on a `%SEARCH{}%`.
+
 <a name="WebIndex"></a>
 
 ## <a name="WebIndex - list of topics"></a><a name="_WebIndex - list of topics"></a> WebIndex - list of topics
@@ -87,6 +95,7 @@ You can generate a listing manually, or on an automated schedule, of visits to i
   - Call the `twiki/bin/statistics` script from a cron job, once a day is recommended. This will update the [[WebStatistics]] topics in all webs.
   - **_Attention:_** The script must run as the same user as the CGI scripts are running, which is user `nobody` on many systems. Example crontab entry: %BR% `0 0 * * * (cd /path/to/twiki/bin; ./statistics >/dev/null 2>&1)`
   - There is a workaround in case you can't run the script as user `nobody` : Run the utility `twiki/tools/geturl.pl` in your cron job and specify the URL of the `twiki/bin/statistics` script as a parameter. Example: %BR% `0 0 * * * (cd /path/to/twiki/tools; ./geturl.pl mydomain.com /urlpath/to/twiki/bin/statistics >/dev/null 2>&1)`
+  - **_NOTE:_** `geturl.pl` will do a TWiki CGI request as the TWikiGuest user, so if you use this workaround, the WebStatistics topics you are updating will have to be writable by TWikiGuest.
 
 When running from the command line or a cron job, you can pass parameters to the script like this:
 
@@ -96,8 +105,8 @@ When running from the command line or a cron job, you can pass parameters to the
 
 - The `twiki/bin/statistics` script can also be executed as a CGI script, just enter the URL in your browser. Examples:
   - Update current month for all webs you have access to: %BR% `http://www.dementia.org/twiki/statistics`
-  - Update current month for Main web only: %BR% `http://www.dementia.org/twiki/statistics/Main`
-  - Update Jun 2010 for Main web: %BR% `http://www.dementia.org/twiki/statistics/Main?logdate=201006`
+  - Update current month for %USERSWEB% web only: %BR% `http://www.dementia.org/twiki/statistics/%USERSWEB%`
+  - Update Jun 2010 for %USERSWEB% web: %BR% `http://www.dementia.org/twiki/statistics/%USERSWEB%?logdate=201006`
   - Update Jun 2010 for the ProjectX, ProjectY and ProjectZ webs: %BR% `http://www.dementia.org/twiki/statistics?logdate=201006;webs=ProjectX,ProjectY,ProjectZ`
 
 <a name="LogFiles"></a>
@@ -110,7 +119,7 @@ TWiki generates monthly log files which are used by the statistics script
 - The file name is `log<year><month>.txt`
 - Example path name: `twiki/logs/log201006.txt`
 - Each access gets logged as: %BR% `| <time> | <wikiusername> | <action> | <web>.<topic> | <extra info> | <IP address> |`
-- Example log entry: %BR% <code>| 29 Jun 2010 - 12:02 | [[TWikiGuest]] | view | [[WebRss]] |  | 66.124.232.02 |</code>
+- Example log entry: %BR% `| 29 Jun 2010 - 12:08 | %USERSWEB%.TWikiGuest | view | %SYSTEMWEB%.WebRss |  | 66.124.232.02 |`
 - Actions are logged if enabled in [configure](http://www.dementia.org/twiki/configure) by the **\{Log\}\{_action_\}** flags
 - Logged actions: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -164,16 +173,6 @@ TWiki generates monthly log files which are used by the statistics script
     <td> when moving attachment: <code>Attachment filename moved to Newweb.NewTopic</code></td>
   </tr>
   <tr>
-    <td> passwd </td>
-    <td><code>resetpasswd</code></td>
-    <td>[[Main/LoginName]], [[Main/WikiName]], E-mail address, success code from addUserPassword </td>
-  </tr>
-  <tr>
-    <td> passwd </td>
-    <td><code>changepasswd</code></td>
-    <td>[[Main/LoginName]], [[Main/WikiName]]</td>
-  </tr>
-  <tr>
     <td> save </td>
     <td><code>save</code></td>
     <td> when replacing existing revision: <code>repRev 3</code> %BR% when user checks the minor changes box: <code>dontNotify</code> %BR% when user changes attributes to an exising attachment: <code>filename.ext</code></td>
@@ -225,9 +224,9 @@ You can use an external mail program, such as <code>**sendmail**</code>, if the 
 **For Unix platforms:** Edit the `cron` table so that `mailnotify` is called in an interval of your choice. Please consult `man crontab` of how to modify the table that schedules program execution at certain intervals. Example:
 
     % crontab -e
-    0 2 * * * (cd /path/to/twiki/bin; ./mailnotify -q)
+    0 1 * * * (cd /path/to/twiki/bin; ./mailnotify -q)
 
-The above line will run mailnotify nightly at 02:00. The `-q` switch suppresses all normal output.
+The above line will run mailnotify nightly at 01:00. The `-q` switch suppresses all normal output.
 
 **For ISP installations:** Many ISPs don't allow hosted accounts direct cron access, as it's often used for things that can heavily load the server. Workaround scripts are available.
 
@@ -238,4 +237,13 @@ The above line will run mailnotify nightly at 02:00. The `-q` switch suppresses 
 - [[TWikiAccessControl]] describes how to restrict read and write access to topics and webs, by users and groups
 - [[SitePermissions]] lists the permissions settings of the webs on this TWiki site
 
+## <a name="Help with crontab"></a> Help with crontab
+
+The crontab command is used to schedule commands to be executed periodically.
+
+- Wikipedia.org:Crontab - crontab documentation
+- [pycron](http://www.kalab.com/freeware/pycron/pycron.htm) - crontab for Windows
+
 **_Related Topics:_** [[AdminDocumentationCategory]], [[AdminToolsCategory]]
+
+-- **_Contributors:_** TWiki:Main.MikeMannix, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie, TWiki:Main.KennethLavrsen, TWiki:Main.SvenDowideit

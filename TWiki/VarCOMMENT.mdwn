@@ -1,0 +1,64 @@
+<a name="VarCOMMENT"></a>
+
+### <a name="COMMENT{ &lt;em&gt;attributes&lt;/em&gt; } -- inser"></a> COMMENT\{ _attributes_ \} -- insert an edit box into the topic to easily add comments.
+
+- A `%COMMENT%` without parameters shows a simple text box.
+- The following standard attributes are recognized <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Name </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default </strong></th>
+  </tr>
+  <tr>
+    <td><code>type</code></td>
+    <td> This is the name of the template to use for this comment. Comment templates are defined in a TWiki template - see [[Main/CommentPlugin#TemPlates]], below. If this attribute is not defined, the type is whatever is defined by COMMENTPLUGIN_DEFAULT_TYPE, either in this topic or in your [[Main/WebPreferences]]. </td>
+    <td><code>below</code></td>
+  </tr>
+  <tr>
+    <td><code>default</code></td>
+    <td> Default text to put into the textarea of the prompt. </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>target</code></td>
+    <td> Name of the topic to add the comment to </td>
+    <td> the current topic </td>
+  </tr>
+  <tr>
+    <td><code>location</code></td>
+    <td> Regular expression specifying the comment location in the target topic. Read <em>carefully</em> the [[Main/CommentPlugin]] documentation! </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>mode</code></td>
+    <td> For compatibility with older versions only, synonymous with <code>type</code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>nonotify</code></td>
+    <td> Set to "on" to disable change notification for target topics </td>
+    <td><code>off</code></td>
+  </tr>
+  <tr>
+    <td><code>noform</code></td>
+    <td> Set to "on" to disable the automatic form that encloses your comment block - <em>remember</em> to insert <code>&lt;form&gt;</code> tags yourself! See [[Main/CommentPluginExamples#noform]] for an example. </td>
+    <td><code>off</code></td>
+  </tr>
+  <tr>
+    <td><code>nopost</code></td>
+    <td> Set to "on" to disable insertion of the posted text into the topic. </td>
+    <td><code>off</code></td>
+  </tr>
+  <tr>
+    <td><code>remove</code></td>
+    <td> Set to "on" to remove the comment prompt after the first time it is clicked. </td>
+    <td><code>off</code></td>
+  </tr>
+  <tr>
+    <td><code>button</code></td>
+    <td> Button label text </td>
+    <td><code>Add comment</code></td>
+  </tr>
+</table>
+
+- See [[CommentPlugin]] for more information

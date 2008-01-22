@@ -10,45 +10,39 @@ If your user topic is not protected from changes by other people, and you don't 
 
 If your old e-mail addresses are all invalid (you can't receive mail there any more) and you have forgotten your password, please contact 0 for help.
 
-<form action="http://www.dementia.org/twiki/passwd/%WEB%/%TOPIC%" method="post" name="passwd">
+<form action="http://www.dementia.org/twiki/manage/%WEB%/%TOPIC%" method="post" name="manage">
   <div>
-    <div><strong>After submitting this form your e-mail will be changed, and you will be returned to this form.</strong></div>
+    <div><strong>Sorry, the password system is currently read only, please contact 0</strong></div>
     <div> Registered e-mail addresses for currently logged in user (<code>admin</code>): </div>
     <div>
-      <table border="0" cellpadding="0" cellspacing="0" style="border-width: 0px">
+      <table border="0" cellpadding="0" cellspacing="0" rules="none" style="border-width: 0px">
         <tr>
-          <td style="border-width: 0px">   </td>
-          <td style="border-width: 0px"> Fields marked <code><font color="red">**</font></code> are required </td>
+          <td bgcolor="transparent" style="">   </td>
+          <td bgcolor="transparent" style=""> Fields marked <code><font color="red">**</font></code> are required </td>
         </tr>
         <tr>
-          <td align="right" style="border-width: 0px"> Your [[TWiki/LoginName]]: </td>
-          <td style="border-width: 0px"><input name="username" size="40" type="text" value="admin" /> <code><font color="red">**</font></code></td>
+          <td align="right" bgcolor="transparent" style=""> Your [[TWiki/LoginName]]: </td>
+          <td bgcolor="transparent" style=""><input %notmodifyable%="%NOTMODIFYABLE%" name="username" size="40" type="text" value="admin" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
-          <td align="right" style="border-width: 0px"> Password: </td>
-          <td style="border-width: 0px"><input name="oldpassword" size="40" type="password" value="" /> <code><font color="red">**</font></code></td>
+          <td align="right" bgcolor="transparent" style=""> Password: </td>
+          <td bgcolor="transparent" style=""><input %notmodifyable%="%NOTMODIFYABLE%" name="oldpassword" size="40" type="password" value="" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
-          <td align="right" style="border-width: 0px"> New e-mails (space-separated list): </td>
-          <td style="border-width: 0px"><input name="email" size="40" type="text" /> <code><font color="red">**</font></code></td>
+          <td align="right" bgcolor="transparent" style=""> New e-mails (space-separated list): </td>
+          <td bgcolor="transparent" style=""><input %notmodifyable%="%NOTMODIFYABLE%" name="email" size="40" type="text" /> <code><font color="red">**</font></code></td>
         </tr>
       </table>
     </div>
-    <div><input name="TopicName" type="hidden" value="%TOPIC%" /> <input name="action" type="hidden" value="changePassword" /> <input type="submit" value="Change e-mail address" /></div>
+    <div><input name="TopicName" type="hidden" value="%TOPIC%" /> <input name="action" type="hidden" value="changePassword" /> <input %notmodifyable%="%NOTMODIFYABLE%" type="submit" value="Change e-mail address" /></div>
   </div>
 </form>
 
 <div>
   <ul>
-    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you have any questions, please contact 0. </li>
-    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> [[Main/TWikiUsers]] has a list of other TWiki users. </li>
+    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you have any questions, please contact 0 </li>
+    <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> [[Main/TWikiUsers]] has a list of other TWiki users </li>
   </ul>
 </div>
 
 **_Related topics:_** [[ChangePassword]], [[ResetPassword]], [[UserToolsCategory]], [[AdminToolsCategory]]
-
-<table bgcolor="yellow">
-  <tr>
-    <td><strong><em>Note to administrator:</em></strong> This form applies only if TWiki uses a {PasswordManager} that supports storing e-mails (e.g. TWiki::Users::HtPasswdUser). Otherwise replace this topic with a note describing how to change registered e-mail in your organization). </td>
-  </tr>
-</table>

@@ -5,4 +5,5 @@
 - As `%SCRIPTURL%`, but doesn't include the protocol and host part of the URL
 - Syntax: `%SCRIPTURLPATH%`
 - Expands to: `http://www.dementia.org/twiki/`
-- Related: [[PUBURLPATH|Main/WebHome#VarPUBURLPATH]], [[SCRIPTNAME|Main/WebHome#VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/WebHome#VarSCRIPTSUFFIX]], [[SCRIPTURL|Main/WebHome#VarSCRIPTURL]], [[SCRIPTURLPATH{"script"}|Main/WebHome#VarSCRIPTURLPATH2]]
+- **_Note:_** The `edit` script should always be used in conjunction with `?t=%GMTIME{"$epoch"}%` to ensure pages about to be edited are not cached in the browser
+- Related: [[PUBURLPATH|Main/VarPUBURLPATH]], [[SCRIPTNAME|Main/VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/VarSCRIPTSUFFIX]], [[SCRIPTURL|Main/VarSCRIPTURL]], [[SCRIPTURLPATH{"script"}|Main/VarSCRIPTURLPATH2]]

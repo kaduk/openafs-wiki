@@ -26,6 +26,11 @@
     <td><code>"$n"</code> (new line) </td>
   </tr>
   <tr>
+    <td><code>web=""</code></td>
+    <td> if you specify <code>$web</code> in format, it will be replaced with this </td>
+    <td><code>""</code></td>
+  </tr>
+  <tr>
     <td><code>webs="public"</code></td>
     <td> Comma separated list of webs, <code>public</code> expands to all non-hidden.%BR% <strong><em>NOTE:</em></strong> Administrators will see all webs, not just the public ones </td>
     <td><code>"public"</code></td>
@@ -38,9 +43,14 @@
   <tr>
     <td><code>selection="%WEB%"</code></td>
     <td> Current value to be selected in list </td>
-    <td><code>section="%WEB%"</code></td>
+    <td><code>selection="%WEB%"</code></td>
+  </tr>
+  <tr>
+    <td><code>subwebs="Sandbox"</code></td>
+    <td> show webs that are a sub-web of this one (recursivly) </td>
+    <td><code>""</code></td>
   </tr>
 </table>
 - Example: `%WEBLIST{"   * [[$name.WebHome]]"}%` - creates a bullet list of all webs.
 - Example: `<form><select name="web"> %WEBLIST{"<option $marker value=$qname>$name</option>" webs="Trash, public" selection="%WEB%" separator=" "}% </select></form>` - creates a dropdown of all public webs + Trash web, with the current web highlighted.
-- Related: [[TOPICLIST|Main/WebHome#VarTOPICLIST]], [[SEARCH|Main/WebHome#VarSEARCH]]
+- Related: [[TOPICLIST|Main/VarTOPICLIST]], [[SEARCH|Main/VarSEARCH]]

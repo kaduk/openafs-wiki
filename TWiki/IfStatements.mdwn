@@ -1,4 +1,4 @@
-# <a name="=IF= Statements"></a> `IF` Statements
+# <a name="IF Statements"></a> IF Statements
 
 The `%IF%` construct gives TWiki the power to include content in topics based on the value of simple expressions.
 
@@ -6,45 +6,30 @@ The `%IF%` construct gives TWiki the power to include content in topics based on
 
 In the example above, if CONDITION evaluates to TRUE, then THEN will be included in the topic; otherwise ELSE will be included.
 
-What can be included in the THEN and ELSE parameters is obviously limited by standard TWiki syntax for parameters.
+Note that because of the way TWiki evaluates, then whatever is in the THEN and ELSE parameters will already have been expanded by the time the condition is actually evaluated. The standard [[FormatTokens]] can be used in the THEN and ELSE parameters when you need to delay evaluation of (for example) a TWiki variable.
 
-The basic syntax of a condition is as follows:
+The basic syntax of a condition is the same as [[the syntax used for queries|Main/QuerySearch]], with the addition of the following special operators:
 
-    expr ::= '(' expr ')' ;
-    expr ::= andexpr | andexpr 'or' expr ;
-    andexpr ::= notexpr | notexpr 'and' andexpr ;
-    notexpr ::= basexpr | 'not' baseexpr ;
-    basexpr ::= atom | uop atom | atom bop basexpr ;
-    uop ::= 'context' | 'defined' | '$' ;
-    bop ::= '=' | '!=' | '>' | '<' | '>=' | '<=' ;
-    atom ::= context identifier, TWiki variable name, single-quoted string, or configuration item
 <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC" colspan="2"><strong> Operators </strong></th>
-  </tr>
-  <tr>
-    <td> and </td>
-    <td> True if both sides are true </td>
-  </tr>
-  <tr>
-    <td> or </td>
-    <td> True if one or other side is true </td>
-  </tr>
-  <tr>
-    <td> not </td>
-    <td> negate the following expression </td>
-  </tr>
-  <tr>
-    <td> =, != </td>
-    <td> String comparison </td>
-  </tr>
-  <tr>
-    <td> &lt;, &gt;, &lt;=, &gt;= </td>
-    <td> Number comparison (there is no explicit numeric =) </td>
-  </tr>
   <tr>
     <td> context </td>
     <td> True if the current context is set (see below) </td>
+  </tr>
+  <tr>
+    <td> allows </td>
+    <td><code>'X' allows 'Y'</code> is true if web/topic 'X' exists and allows access mode 'Y' for the current user. Web access rights are only checked if there is no topic called 'X'. </td>
+  </tr>
+  <tr>
+    <td> istopic </td>
+    <td><code>istopic 'X'</code> is true if topic 'X' exists </td>
+  </tr>
+  <tr>
+    <td> isweb </td>
+    <td><code>isweb 'X'</code> is true if web 'X' exists </td>
+  </tr>
+  <tr>
+    <td> ingroup </td>
+    <td><code>'X' ingroup 'Y'</code> is true if user 'X' is in group 'Y' </td>
   </tr>
   <tr>
     <td> defined </td>
@@ -52,28 +37,67 @@ The basic syntax of a condition is as follows:
   </tr>
   <tr>
     <td> $ </td>
-    <td> expands a URL parameter or [[Main/TWikiVariables]]. Plugin handlers <strong>are not called</strong>. Built-in variables and user-defined preferences are supported. You can pass a limited subset of parameters to TWiki variables by enclosing the variable name in single quotes; for example, <code>$ 'VARIABLE{value}'</code>. The <code>'VARIABLE{value}'</code> string may <strong>not</strong> contain quotes (' or "). </td>
+    <td> expands a URL parameter or [[Main/TWikiVariables]] name. Plugin handlers <strong>are not called</strong>. Built-in variables and user-defined preferences are supported. You can pass a limited subset of parameters to TWiki variables by enclosing the variable name in single quotes; for example, <code>$ 'VARIABLE{value}'</code>. The <code>'VARIABLE{value}'</code> string may <strong>not</strong> contain quotes (' or "). </td>
+  </tr>
+  <tr>
+    <td> {X} </td>
+    <td> expands to the value of the configuration variable {X} - for example, <code>{ScriptUrlPath}</code></td>
   </tr>
 </table>
 
-examples:
+**_Examples:_**
 
-    TWiki variable defined or not
+1. TWiki variable defined or not
+
     %IF{"defined WIKINAME" then="WIKINAME is defined" else="WIKINAME is not defined"}%
+
+2. Compare TWiki variable
 
     You are %IF{ "$ WIKINAME='TWikiGuest' and not defined OPEN_DAY" then="not" }% allowed to
     %IF{ "context view" then="view" else="edit"}% this TWiki today.
 
-    URL parameter
-    %IF{ "defined search" then="Search: %URLPARAM{search}%" else="No search passed in"}%
+3. URL parameter
 
-    Configuration item set or not
-    %IF{ "{AntiSpam}{HideUserDetails}" then="User details are hidden" }%
+    %IF{ "defined search" then="Search: $percntURLPARAM{search}$percnt" else="No search passed in"}%
+
+4. Range test on URL parameter
 
     url param t is %IF{ "0 < $ t and $ t < 1000" then="in" else="out of"}% range.
 
-    Text comparison
+5. Text comparison of URL parameter
+
     %IF{ "$'URLPARAM{scope}'='text'" then="Plain text search" }%
+
+6. Configuration item set or not
+
+    %IF{ "{AntiSpam}{HideUserDetails}" then="User details are hidden" }%
+
+7. Plugin enabled test
+
+    TablePlugin is %IF{ "context TablePluginEnabled" then="enabled" else="disabled" }%.
+
+expands to: %BR% [[TablePlugin]] is enabled.
+
+8. Check access permissions
+
+    You %IF{"'%TOPIC%' allows 'change'" then="can" else="cannot"}% change this topic.
+    You %IF{"'Sandbox.TestTopic' allows 'change'" then="can" else="cannot"}% change Sandbox.TestTopic.
+    You %IF{"'Sandbox' allows 'change'" then="can" else="cannot"}% change Sandbox web
+
+expands to: %BR% You can change this topic. You can change [[TestTopic]]. You can change Sandbox web
+
+9. Check topic existance
+
+    Topic Sandbox.TestTopic %IF{"istopic 'Sandbox.TestTopic'" then="exists" else="does not exist"}%
+    Web Sandbox.TestTopic %IF{"isweb 'Sandbox'" then="exists" else="does not exist"}%
+
+expands to: %BR% Topic [[TestTopic]] exists Web [[TestTopic]] exists
+
+10. Group membership
+
+    You %IF{"'%USERNAME%' ingroup 'TWikiAdminGroup'" then="are an admin" else="are a normal user"}%
+
+expands to: %BR% You are an admin
 
 **Configuration items** are defined in [configure](http://www.dementia.org/twiki/configure). You cannot see the value of a configuration item, you can only see if the item is set or not.
 
@@ -161,6 +185,10 @@ examples:
     <td> in search script (see [[Main/TWikiScripts]]) </td>
   </tr>
   <tr>
+    <td> textareas_hijacked </td>
+    <td> provided for use by editors that highjack textareas, and want to signal this fact. This is used by skins, for example, so they can suppress extra controls when textareas have been hijacked. </td>
+  </tr>
+  <tr>
     <td> view </td>
     <td> in view script (see [[Main/TWikiScripts]]) </td>
   </tr>
@@ -168,8 +196,22 @@ examples:
     <td> rest </td>
     <td> in rest script (see [[Main/TWikiScripts]]) </td>
   </tr>
+  <tr>
+    <td> registration_supported </td>
+    <td> registration is supported by the current [[Main/UserMapper]]</td>
+  </tr>
+  <tr>
+    <td> registration_enabled </td>
+    <td> set if <code>{Register}{EnableNewUserRegistration}</code> is on, and registrationis supported </td>
+  </tr>
+  <tr>
+    <td> passwords_modifyable </td>
+    <td> set if the password manager support changing the password / email </td>
+  </tr>
 </table>
 
 In addition there is a context identifier for each enabled plugin; for example, if `GallousBreeksPlugin` is installed **and enabled**, then the context ID `GallousBreeksPluginEnabled` will be set. Other extensions may set additional context identifiers.
 
 The `%IF%` statement is deliberately kept simple. In particular, note that there is no way to conditionally execute a Set statement. If you need more sophisticated control over formatting, then consider using the [[SpreadSheetPlugin]].
+
+Note also that while the [[query syntax|Main/QuerySearch]] can be used to access form fields, there are some contexts in which an IF statement may be used where there is no topic context, or the topic context is not what you expected.

@@ -2,10 +2,10 @@
 
 ### <a name="ICONURL{&quot;name&quot;} -- URL of small"></a><a name="ICONURL{&quot;name&quot;} -- URL of small "></a> ICONURL\{"name"\} -- URL of small documentation graphic or icon
 
-- Generates the full URL of a [[TWikiDocGraphics]] image, which TWiki renders as an image. The related `%ICON{"name"}%` generates the full HTML img tag. Specify image name or full filename (see [[ICON|Main/WebHome#VarICON]] for details on filenames.)
+- Generates the full URL of a [[TWikiDocGraphics]] image, which TWiki renders as an image. The related `%ICON{"name"}%` generates the full HTML img tag. Specify image name or full filename (see [[ICON|Main/VarICON]] for details on filenames.)
 - Syntax: `%ICONURL{"name"}%`
 - Examples:
   - `%ICONURL{"arrowbright"}%` returns http://www.dementia.org/twiki//view/Main/WebHome/arrowbright.gif
   - `%ICONURL{"novel.pdf"}%` returns http://www.dementia.org/twiki//view/Main/WebHome/pdf.gif
   - `%ICONURL{"/queen/boheme.mp3"}%` returns http://www.dementia.org/twiki//view/Main/WebHome/mp3.gif
-- Related: [[ICONURLPATH|Main/WebHome#VarICONURLPATH]], [[ICON|Main/WebHome#VarICON]], [[TWikiPreferences]], [[FileAttachments]], [[TWikiDocGraphics]]
+- Related: [[ICONURLPATH|Main/VarICONURLPATH]], [[ICON|Main/VarICON]], [[TWikiPreferences]], [[FileAttachments]], [[TWikiDocGraphics]]

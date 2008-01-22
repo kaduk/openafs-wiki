@@ -1,0 +1,37 @@
+# <a name="Package &lt;code&gt;TWiki::_AggregateIterat"></a> Package =TWiki::AggregateIterator
+
+combine multiple iterators
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::_AggregateIterat"> Package TWiki::AggregateIterator</a><ul>
+        <li><a href="#new(\@list, $unique)"> new(\@list, $unique)</a></li>
+        <li><a href="#hasNext() -> $boolean"> hasNext() -&gt; $boolean</a></li>
+        <li><a href="#next() -> $data"> next() -&gt; $data</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="new(\@list, $unique)"></a> new(\\@list, $unique)
+
+Create a new iterator over the given list of iterators. The list is not damaged in any way.
+
+if $unique is set, we try to not repeat values. Warning: $unique assumes that the values are strings (so works for cUID's )
+
+## <a name="hasNext() - $boolean"></a> hasNext() -&gt; $boolean
+
+Returns false when the iterator is exhausted.
+
+    my $it = new TWiki::ListIterator(\@list);
+    while ($it->hasNext()) {
+       ...
+
+## <a name="next() - $data"></a> next() -&gt; $data
+
+Return the next entry in the list.
+
+The iterator object can be customised to pre- and post-process entries from the list before returning them. This is done by setting two fields in the iterator object:
+
+- `{filter}` can be defined to be a sub that filters each entry. The entry will be ignored (next() will not return it) if the filter returns false.
+- `{process}` can be defined to be a sub to process each entry before it is returned by next. The value returned from next is the value returned by the process function.

@@ -16,7 +16,7 @@
   </tr>
   <tr>
     <td><code>"Web.Topic"</code></td>
-    <td> A topic in another web, i.e. <code>%INCLUDE{"TWiki.SiteMap"}%</code></td>
+    <td> A topic in another web, i.e. <code>%INCLUDE{"%SYSTEMWEB%.SiteMap"}%</code></td>
     <td>   </td>
   </tr>
   <tr>
@@ -76,7 +76,7 @@
   </tr>
   <tr>
     <td><code>section="name"</code></td>
-    <td> Includes only the specified named section, as defined in the included topic by the [[Main/WebHome#VarSTARTSECTION]] and [[Main/WebHome#VarENDSECTION]] variables. Nothing is shown if the named section does not exists. </td>
+    <td> Includes only the specified named section, as defined in the included topic by the [[Main/VarSTARTSECTION]] and [[Main/VarENDSECTION]] variables. Nothing is shown if the named section does not exists. </td>
     <td>   </td>
   </tr>
   <tr>
@@ -87,4 +87,4 @@
 </table>
 - **_Note:_** JavaScript in included webpages is filtered out as a security precaution per default (disable filter with `disableremovescript` parameter)
 - Examples: See [[IncludeTopicsAndWebPages]]
-- Related: [[BASETOPIC|Main/WebHome#VarBASETOPIC]], [[BASEWEB|Main/WebHome#VarBASEWEB]], [[INCLUDINGTOPIC|Main/WebHome#VarINCLUDINGTOPIC]], [[INCLUDINGWEB|Main/WebHome#VarINCLUDINGWEB]], [[STARTINCLUDE|Main/WebHome#VarSTARTINCLUDE]], [[STOPINCLUDE|Main/WebHome#VarSTOPINCLUDE]], [[STARTSECTION|Main/WebHome#VarSTARTSECTION]], [[ENDSECTION|Main/WebHome#VarENDSECTION]]
+- Related: [[BASETOPIC|Main/VarBASETOPIC]], [[BASEWEB|Main/VarBASEWEB]], [[INCLUDINGTOPIC|Main/VarINCLUDINGTOPIC]], [[INCLUDINGWEB|Main/VarINCLUDINGWEB]], [[STARTINCLUDE|Main/VarSTARTINCLUDE]], [[STOPINCLUDE|Main/VarSTOPINCLUDE]], [[STARTSECTION|Main/VarSTARTSECTION]], [[ENDSECTION|Main/VarENDSECTION]]

@@ -1,7 +1,5 @@
 # <a name="Package &lt;code&gt;TWiki::Store::_RcsLite="></a> Package =TWiki::Store::RcsLite
 
-**extends** <tt>[[TWiki::Store::RcsFile|Main/TWikiStoreRcsFileDotPm]]</tt>
-
 This package does not publish any methods. It implements the virtual methods of the [[TWiki::Store::RcsFile|Main/TWikiStoreRcsFileDotPm]] superclass.
 
 Simple replacement for RCS. Doesn't support:
@@ -69,14 +67,12 @@ d1 3 means "delete three lines starting with line 1 a4 2 means "insert two lines
   <ul>
     <li><a href="#Package =TWiki::Store::_RcsLite="> Package TWiki::Store::RcsLite</a><ul>
         <li><a href="#File format"> File format</a></li>
-        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
 
-Complete processing after the client's HTTP request has been responded to.
-
-1. breaking circular references to allow garbage collection in persistent environments
+Break circular references.

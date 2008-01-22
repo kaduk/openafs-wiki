@@ -13,7 +13,9 @@
 
 2nd paragraph
 </pre></td>
-    <td> 1st paragraph <p> 2nd paragraph </p>
+    <td>
+      <p> 1st paragraph </p>
+      <p> 2nd paragraph </p>
     </td>
   </tr>
   <tr valign="top">
@@ -26,6 +28,8 @@
 ---+++!! Not in TOC
 </pre></td>
     <td>
+      <p>
+      </p>
       <h2>Sushi</h2>
       <h3>Maguro</h3>
       <h3>Not in TOC</h3>
@@ -36,28 +40,36 @@
     <td><pre>
 *Bold*
 </pre></td>
-    <td><strong>Bold</strong></td>
+    <td>
+      <p><strong>Bold</strong></p>
+    </td>
   </tr>
   <tr valign="top">
     <td><strong>Italic Text:</strong> %BR% Words get shown in <em>italic</em> by enclosing them in <code>_</code> underscores. </td>
     <td><pre>
 _Italic_
 </pre></td>
-    <td><em>Italic</em></td>
+    <td>
+      <p><em>Italic</em></p>
+    </td>
   </tr>
   <tr valign="top">
     <td><strong>Bold Italic:</strong> %BR% Words get shown in <strong><em>bold italic</em></strong> by enclosing them in <code>__</code> double-underscores. </td>
     <td><pre>
 __Bold italic__
 </pre></td>
-    <td><strong><em>Bold italic</em></strong></td>
+    <td>
+      <p><strong><em>Bold italic</em></strong></p>
+    </td>
   </tr>
   <tr valign="top">
     <td><strong>Fixed Font:</strong> %BR% Words get shown in <code>fixed font</code> by enclosing them in <code>=</code> equal signs. </td>
     <td><pre>
 =Fixed font=
 </pre></td>
-    <td><code>Fixed font</code><p>
+    <td>
+      <p><code>Fixed font</code></p>
+      <p>
       </p>
     </td>
   </tr>
@@ -66,7 +78,9 @@ __Bold italic__
     <td><pre>
 ==Bold fixed==
 </pre></td>
-    <td><code><b>Bold fixed</b></code></td>
+    <td>
+      <p><code><b>Bold fixed</b></code></p>
+    </td>
   </tr>
   <tr valign="top">
     <td> %T% You can follow the closing bold, italic, or other (<code>* _ __ = ==</code>) indicator with normal punctuation, such as commas and full stops. <p> %X% Make sure there is no space between the text and the indicators. </p>
@@ -75,10 +89,12 @@ __Bold italic__
 _This works_,
 _this does not _
 </pre></td>
-    <td><em>This works</em>,%BR% _this does not _ </td>
+    <td>
+      <p><em>This works</em>,%BR% _this does not _ </p>
+    </td>
   </tr>
   <tr valign="top">
-    <td><strong>Verbatim (Literal) Text:</strong> %BR% Surround code excerpts and other formatted text with <code>&lt;verbatim&gt;</code> and <code>&lt;/verbatim&gt;</code> tags.%BR% %T% <code>verbatim</code> tags disable HTML code. Use <code>&lt;pre&gt;</code> and <code>&lt;/pre&gt;</code> tags instead if you want the HTML code within the tags to be interpreted.%BR% <strong><em>%X% NOTE:</em></strong> Preferences variables (* Set NAME = value) are set within verbatim tags. </td>
+    <td><strong>Verbatim Text:</strong> %BR% Surround code excerpts and other formatted text with <code>&lt;verbatim&gt;</code> and <code>&lt;/verbatim&gt;</code> tags.%BR% %T% <code>verbatim</code> tags disable HTML code. Use <code>&lt;pre&gt;</code> and <code>&lt;/pre&gt;</code> tags instead if you want the HTML code within the tags to be interpreted.%BR% <strong><em>%X% NOTE:</em></strong> Preferences variables (* Set NAME = value) are set within verbatim tags. </td>
     <td><pre>
 &lt;verbatim&gt;
 class CatAnimal {
@@ -102,6 +118,8 @@ class CatAnimal {
 -------
 </pre></td>
     <td>
+      <p>
+      </p>
       <hr />
     </td>
   </tr>
@@ -117,6 +135,8 @@ class CatAnimal {
    * last bullet
 </pre></td>
     <td>
+      <p>
+      </p>
       <ul>
         <li> level 1 <ul>
             <li> level 2 </li>
@@ -176,6 +196,8 @@ class CatAnimal {
    i. Fondue
 </pre></td>
     <td>
+      <p>
+      </p>
       <ol>
         <li> Sushi </li>
         <li> Dim Sum </li>
@@ -198,12 +220,15 @@ class CatAnimal {
     </td>
   </tr>
   <tr valign="top">
-    <td><strong>Definition List:</strong> %BR% Three spaces, a dollar sign, the term, a colon, a space, followed by the definition. </td>
+    <td><strong>Definition List:</strong> %BR% Three spaces, a dollar sign, the term, a colon, a space, followed by the definition. <p> Deprecated syntax: Three spaces, the term with no spaces, a colon, a space, followed by the definition. </p>
+    </td>
     <td><pre>
    $ Sushi: Japan
    $ Dim Sum: S.F.
 </pre></td>
     <td>
+      <p>
+      </p>
       <dl>
         <dt> Sushi </dt>
         <dd> Japan </dd>
@@ -221,8 +246,9 @@ class CatAnimal {
         <li><code>|^|</code> cell with caret indicating follow-up row of multi-span rows </li>
         <li> You can split rows over multiple lines by putting a backslash <code>'\'</code> at the end of each line </li>
         <li> Contents of table cells wrap automatically as determined by the browser </li>
-        <li> Use <code>&amp;#124;</code> or <code>%VBAR%</code> to add <code>|</code> characters in tables. </li>
-      </ul> %T% The [[TWiki/TablePlugin]] provides the <code>|^|</code> multiple-span row functionality and additional rendering features </td>
+        <li> Use <code>%VBAR%</code> or <code>&amp;#124;</code> to add <code>|</code> characters in tables. </li>
+        <li> Use <code>%CARET%</code> or <code>&amp;#94;</code> to add <code>^</code> characters in tables. </li>
+      </ul> %T% The %SYSTEMWEB%.TablePlugin provides the <code>|^|</code> multiple-span row functionality and additional rendering features </td>
     <td><pre>
 | *L* | *C* | *R* |
 | A2 |  B2  |  C2 |
@@ -237,6 +263,8 @@ class CatAnimal {
 | A9 |  B9  |  C9 |
 </pre></td>
     <td>
+      <p>
+      </p>
       <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
         <tr>
           <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">L</font></a></th>
@@ -283,7 +311,7 @@ class CatAnimal {
     </td>
   </tr>
   <tr valign="top">
-    <td><strong>WikiWord Links:</strong> %BR% CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically if preceded by whitespace or parenthesis. %BR% %T% If you want to link to a topic in a different web write <code>Otherweb.TopicName</code>. %BR% %H% The link label excludes the name of the web, e.g. only the topic name is shown. As an exception, the name of the web is shown for the WebHome topic. <p> It's generally a good idea to use the [[Main/TWikiVariables]] %TWIKIWEB% and %MAINWEB% instead of TWiki and Main. </p>
+    <td><strong>WikiWord Links:</strong> %BR% CapitalizedWordsStuckTogether (or [[Main/WikiWords]]) will produce a link automatically if preceded by whitespace or parenthesis. %BR% %T% If you want to link to a topic in a different web write <code>Otherweb.TopicName</code>. %BR% To link to a topic in a subweb write <code>Otherweb.Subweb.TopicName</code>.%BR% %H% The link label excludes the name of the web, e.g. only the topic name is shown. As an exception, the name of the web is shown for the WebHome topic. %BR% %X% Dots <code>'.'</code> are used to separate webs and subwebs from topic names and therefore cannot be used in topic names. <p> It's generally a good idea to use the [[Main/TWikiVariables]] %SYSTEMWEB% and %USERSWEB% instead of TWiki and Main. </p>
     </td>
     <td><pre>
 WebStatistics
@@ -291,13 +319,18 @@ WebStatistics
 Sandbox.WebNotify
 
 Sandbox.WebHome
+
+Sandbox.Subweb.TopicName
 </pre></td>
-    <td>[[Main/WebStatistics]]<p>[[Sandbox/WebNotify]]</p>
+    <td>
+      <p>[[Main/WebStatistics]]</p>
+      <p>[[Sandbox/WebNotify]]</p>
       <p>[[Sandbox/WebHome]]</p>
+      <p><a href="#MyAnchor" title="simulated link">TopicName</a></p>
     </td>
   </tr>
   <tr valign="top">
-    <td><strong>Anchors:</strong> %BR% You can define a reference inside a TWiki topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]]. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
+    <td><strong>Anchors:</strong> %BR% You can define a reference inside a TWiki topic (called an anchor name) and link to that. To <strong><em>define</em></strong> an anchor write <code>#AnchorName</code> at the beginning of a line. The anchor name must be a [[Main/WikiWord]] of no more than 32 characters. To <strong><em>link to</em></strong> an anchor name use the <code>[[MyTopic#MyAnchor]]</code> syntax. You can omit the topic name if you want to link within the same topic. </td>
     <td><pre>
 [[WikiWord#NotThere]]
 
@@ -305,7 +338,9 @@ Sandbox.WebHome
 
 #MyAnchor To here
 </pre></td>
-    <td>[[Main/WikiWord#NotThere]]<p>[[Main/WebHome#MyAnchor]]</p>
+    <td>
+      <p>[[Main/WikiWord#NotThere]]</p>
+      <p>[[Main/WebHome#MyAnchor]]</p>
       <p><a name="MyAnchor"></a> To here </p>
     </td>
   </tr>
@@ -314,12 +349,14 @@ Sandbox.WebHome
     <td><pre>
 [[wiki syntax]]
 
-[[Main.TWiki users]]
+[[Main.TWiki groups]]
 
 escaped:
 ![[wiki syntax]]
 </pre></td>
-    <td>[[Main/WikiSyntax]]<p>[[Main/TWikiUsers]]</p>
+    <td>
+      <p>[[Main/WikiSyntax]]</p>
+      <p>[[USERSWEB/TWikiGroups]]</p>
       <p> escaped: [[wiki syntax]] </p>
     </td>
   </tr>
@@ -330,7 +367,9 @@ escaped:
 
 [[http://gnu.org][GNU]]
 </pre></td>
-    <td>[[Main/WikiSyntax]]<p><a href="http://gnu.org" target="_top">GNU</a></p>
+    <td>
+      <p>[[Main/WikiSyntax]]</p>
+      <p><a href="http://gnu.org" target="_top">GNU</a></p>
     </td>
   </tr>
   <tr valign="top">
@@ -344,11 +383,12 @@ escaped:
     <td><strong>Disable Links:</strong> %BR% You can disable automatic linking of [[Main/WikiWords]] by surrounding text with <code>&lt;noautolink&gt;</code> and <code>&lt;/noautolink&gt;</code> tags.%BR% %H% It is possible to turn off all auto-linking with a NOAUTOLINK preferences setting. </td>
     <td><pre>
  &lt;noautolink&gt;
- RedHat &amp;
- SuSE
+ RedHat &amp; SuSE
  &lt;/noautolink&gt;
 </pre></td>
-    <td> RedHat &amp; SuSE </td>
+    <td>
+      <p> RedHat &amp; SuSE </p>
+    </td>
   </tr>
   <tr valign="top">
     <td><strong>Mailto Links:</strong> %BR% E-mail addresses are linked automatically. To create e-mail links that have more descriptive link text, specify subject lines or message bodies, or omit the e-mail address, you can write <code>[[mailto:user@domain][descriptive text]]</code>. </td>
@@ -361,8 +401,28 @@ a@b.com
 [[mailto:?subject=\
 Hi][Hi]]
 </pre></td>
-    <td><a href="mailto:a@b.com">a@b.com</a><p><a href="mailto:a@b.com">Mail</a></p>
+    <td>
+      <p><a href="mailto:a@b.com">a@b.com</a></p>
+      <p><a href="mailto:a@b.com">Mail</a></p>
       <p><a href="mailto:?subject=Hi">Hi</a></p>
     </td>
+  </tr>
+  <tr>
+    <td><strong>Literal content:</strong> %BR% TWiki generates HTML code from TWiki shorthand. <strong>Experts</strong> surround anything that must be output literally in the HTML code, without the application of TWiki shorthand rules, with <code>&lt;literal&gt;..&lt;/literal&gt;</code> tags. %X% any HTML within literal tags <strong>must</strong> be well formed i.e. all tags must be properly closed before the end of the literal block. %I% TWiki Variables are expanded within literal blocks. </td>
+    <td><pre>
+&lt;literal&gt;
+| Not | A | Table |
+&lt;literal&gt;
+</pre></td>
+    <td> | Not | A | Table | </td>
+  </tr>
+  <tr>
+    <td><strong>Protected content:</strong> %BR% <strong>Experts</strong> protect text from mangling by WYSIWYG editors using <code>&lt;sticky&gt;..&lt;/sticky&gt;</code> tags. Sticky tags don't have any effect on normal topic display; they are only relevant when content has to be protected from a WYSIWYG editor (usually because it isn't well-formed HTML, or because it is HTML that WYSIWYG would normally filter out or modify). Protected content appears as plain text in the WYSIWYG editor. </td>
+    <td><code>&lt;sticky&gt;</code> <pre>
+&lt;div&gt;
+This div is required
+&lt;/div&gt;
+</pre> <code>&lt;sticky&gt;</code></td>
+    <td><sticky><div> This div is required </div></sticky></td>
   </tr>
 </table>

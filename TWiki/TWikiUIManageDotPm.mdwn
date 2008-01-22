@@ -16,11 +16,11 @@ UI functions for web, topic and user management
 
 ## <a name="StaticMethod &lt;strong&gt;manage&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **manage** `($session)`
 
-`manage` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+`manage` command handler. This method is designed to be invoked via the `UI::run` method.
 
 ## <a name="StaticMethod &lt;strong&gt;rename&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **rename** `($session)`
 
-`rename` command handler. This method is designed to be invoked via the `TWiki::UI::run` method. Rename the given topic. Details of the new topic name are passed in CGI parameters:
+`rename` command handler. This method is designed to be invoked via the `UI::run` method. Rename the given topic. Details of the new topic name are passed in CGI parameters:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>

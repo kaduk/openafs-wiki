@@ -31,6 +31,7 @@
         <li><a href="#=bookmark="> bookmark</a></li>
         <li><a href="#=return="> return</a></li>
         <li><a href="#=noform="> noform</a></li>
+        <li><a href="#=templatetopic="> templatetopic</a></li>
       </ul>
     </li>
   </ul>
@@ -215,6 +216,22 @@ Example of a custom form to save a comment to a new topic. When the topic is cre
     <div><strong>Topic text:</strong> %BR% <input name="comment_action" type="hidden" value="save" /><input name="comment_type" type="hidden" value="above" /><input name="comment_index" type="hidden" value="16" /></div>
   </div>
 </form>
+
+<a name="TemplateTopic"></a>
+
+### <a name="=templatetopic="></a> `templatetopic`
+
+Example of a form definition in a topic. The comment template is located in [[CommentPluginTemplateExample]].
+
+<a name="CommentDate1176024819"></a> [[TWikiContributor]] - 08 Apr 2007:
+
+templatetopic example comment output 1
+
+----
+
+<input name="comment_action" type="hidden" value="save" />
+<input name="comment_type" type="hidden" value="example" />
+<input name="comment_index" type="hidden" value="17" />
 
 ----
 

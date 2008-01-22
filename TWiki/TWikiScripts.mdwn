@@ -1,3 +1,9 @@
+# <a name="TWiki CGI and Command Line Scrip"></a> TWiki CGI and Command Line Scripts
+
+_Programs on the TWiki server performing actions such as rendering, saving and renaming topics._
+
+The TWiki scripts are located in the `twiki/bin` and `twiki/tools` directories. This topic describes the interfaces to some of those scripts. All scripts in the `twiki/bin` directory can be called from the CGI ([Common Gateway Interface](http://en.wikipedia.org/wiki/Common_Gateway_Interface)) environment or from the command line. The scripts in the `twiki/tools` directory can only be called from the command line.
+
 <div>
   <ul>
     <li><a href="#TWiki CGI and Command Line Scrip"> TWiki CGI and Command Line Scripts</a><ul>
@@ -16,22 +22,19 @@
             <li><a href="#=logon="> logon</a></li>
             <li><a href="#=manage="> manage</a><ul>
                 <li><a href="#=action=createweb="> action=createweb</a></li>
-                <li><a href="#=action=delete_UserAccount="> action=deleteUserAccount</a></li>
                 <li><a href="#=action=editSettings="> action=editSettings</a></li>
-                <li><a href="#=action=bulkRegister="> action=bulkRegister</a></li>
                 <li><a href="#=action=saveSettings="> action=saveSettings</a></li>
+                <li><a href="#=action=bulkRegister="> action=bulkRegister</a></li>
+                <li><a href="#=action=changePassword="> action=changePassword</a></li>
+                <li><a href="#=action=resetPassword="> action=resetPassword</a></li>
+                <li><a href="#=action=delete_UserAccount="> action=deleteUserAccount</a></li>
               </ul>
             </li>
             <li><a href="#=oops="> oops</a></li>
-            <li><a href="#=passwd="> passwd</a><ul>
-                <li><a href="#=action=changePassword="> action=changePassword</a></li>
-              </ul>
-            </li>
             <li><a href="#=preview="> preview</a></li>
             <li><a href="#=rdiff="> rdiff</a></li>
             <li><a href="#=register="> register</a></li>
             <li><a href="#=rename="> rename</a></li>
-            <li><a href="#=resetpasswd="> resetpasswd</a></li>
             <li><a href="#=rest="> rest</a><ul>
                 <li><a href="#Invocation Examples"> Invocation Examples</a></li>
               </ul>
@@ -39,7 +42,6 @@
             <li><a href="#=save="> save</a></li>
             <li><a href="#=search="> search</a></li>
             <li><a href="#=statistics="> statistics</a></li>
-            <li><a href="#=twiki="> twiki</a></li>
             <li><a href="#=upload="> upload</a></li>
             <li><a href="#=view="> view</a></li>
             <li><a href="#=viewfile="> viewfile</a></li>
@@ -55,12 +57,6 @@
     </li>
   </ul>
 </div>
-
-# <a name="TWiki CGI and Command Line Scrip"></a> TWiki CGI and Command Line Scripts
-
-_Programs on the TWiki server performing actions such as rendering, saving and renaming topics._
-
-The TWiki scripts are located in the `twiki/bin` and `twiki/tools` directories. This topic describes the interfaces to some of those scripts. All scripts in the `twiki/bin` directory can be called from the CGI ([Common Gateway Interface](http://en.wikipedia.org/wiki/Common_Gateway_Interface)) environment or from the command line. The scripts in the `twiki/tools` directory can only be called from the command line.
 
 ## <a name="CGI Scripts"></a> CGI Scripts
 
@@ -221,7 +217,7 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
   </tr>
   <tr>
     <td><code>redirectto</code></td>
-    <td> If the user continues from edit to save, and if the save process is successful, save will redirect to this topic or URL. The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL.%BR% <strong><em>Note:</em></strong> Redirect to a URL only works if it is enabled in <code>configure</code> (Miscellaneous <code>{AllowRedirectUrl}</code>). </td>
+    <td> If the user continues from edit to save, and if the save (or cancels the edit) process is successful, save will redirect to this topic or URL. The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL.%BR% <strong><em>Note:</em></strong> Redirect to a URL only works if it is enabled in <code>configure</code> (Miscellaneous <code>{AllowRedirectUrl}</code>). </td>
     <td>   </td>
   </tr>
 </table>
@@ -320,9 +316,11 @@ Performs a range of management functions.
   </tr>
 </table>
 
-#### <a name="=action=delete_UserAccount="></a> `action=deleteUserAccount`
+#### <a name="=action=editSettings="></a> `action=editSettings`
 
-Unregisters (removes) the currently logged-in user.
+No parameters
+
+#### <a name="=action=saveSettings="></a> `action=saveSettings`
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -331,15 +329,22 @@ Unregisters (removes) the currently logged-in user.
     <th bgcolor="#99CCCC"><strong> Default </strong></th>
   </tr>
   <tr>
-    <td><code>password</code></td>
-    <td> Users' password </td>
-    <td> none </td>
+    <td><code>text</code></td>
+    <td> Text of the topic </td>
+    <td> '' </td>
+  </tr>
+  <tr>
+    <td><code>originalrev</code></td>
+    <td> Revision that the edit started on </td>
+    <td> Most recent revision </td>
+  </tr>
+  <tr>
+    <td><code>redirectto</code></td>
+    <td> If the savesettings process is successful, save will redirect to this topic or URL. The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL.%BR% <strong><em>Note:</em></strong> Redirect to a URL only works if it is enabled in <code>configure</code> (Miscellaneous <code>{AllowRedirectUrl}</code>). </td>
   </tr>
 </table>
 
-#### <a name="=action=editSettings="></a> `action=editSettings`
-
-No parameters
+All other parameters may be interpreted as form fields, depending on the current form definition in the topic.
 
 #### <a name="=action=bulkRegister="></a> `action=bulkRegister`
 
@@ -368,7 +373,9 @@ See [[BulkRegistration]].
   </tr>
 </table>
 
-#### <a name="=action=saveSettings="></a> `action=saveSettings`
+#### <a name="=action=changePassword="></a> `action=changePassword`
+
+Change password, email address, or both, of a user.
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -377,18 +384,76 @@ See [[BulkRegistration]].
     <th bgcolor="#99CCCC"><strong> Default </strong></th>
   </tr>
   <tr>
-    <td><code>text</code></td>
-    <td> Text of the topic </td>
-    <td> '' </td>
+    <td><code>username</code></td>
+    <td> god alone knows </td>
+    <td><em>none</em></td>
   </tr>
   <tr>
-    <td><code>originalrev</code></td>
-    <td> Revision that the edit started on </td>
-    <td> Most recent revision </td>
+    <td><code>oldpassword</code></td>
+    <td> current password </td>
+    <td><em>none</em></td>
+  </tr>
+  <tr>
+    <td><code>password</code></td>
+    <td> new password </td>
+    <td><em>none</em></td>
+  </tr>
+  <tr>
+    <td><code>passwordA</code></td>
+    <td> new password confirmation </td>
+    <td><em>none</em></td>
+  </tr>
+  <tr>
+    <td><code>email</code></td>
+    <td> new email address </td>
+    <td><em>none</em></td>
   </tr>
 </table>
 
-All other parameters may be interpreted as form fields, depending on the current form definition in the topic.
+`password, =passwordA` and `email` are optional. If neither or `password` and `passwordA` is set, then the user password is left unchanged. If `email` is unset, their email is left unchanged.
+
+#### <a name="=action=resetPassword="></a> `action=resetPassword`
+
+Reset the password for a single or multiple users
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default </strong></th>
+  </tr>
+  <tr>
+    <td><code>LoginName</code></td>
+    <td><strong>list</strong> of usernames to reset </td>
+    <td> none - error if not set </td>
+  </tr>
+  <tr>
+    <td><code>Introduction</code></td>
+    <td> message to be sent alongside the reset, most often used to announce to the user that they have been given an account. </td>
+    <td> '' </td>
+  </tr>
+</table>
+
+This is used by [[BulkResetPassword]] and [[ResetPassword]]. Only administrators can provide a list of [[LoginNames]], non-admins can only provide a single [[LoginName]].
+
+[[BulkRegistration]] provides the means to create multiple accounts but it does not announce those accounts to the users who own them. [[BulkResetPassword]] is used to assign the passwords, the Introduction is used to explain why they are receiving the mail.
+
+#### <a name="=action=delete_UserAccount="></a> `action=deleteUserAccount`
+
+Unregisters (removes) the currently logged-in user.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Parameter </strong></th>
+    <th bgcolor="#99CCCC"><strong> Description </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default </strong></th>
+  </tr>
+  <tr>
+    <td><code>password</code></td>
+    <td> Users' password </td>
+    <td> none </td>
+  </tr>
+</table>
 
 ### <a name="=oops="></a> `oops`
 
@@ -417,58 +482,6 @@ The `oops` script supports the following parameters:
   <tr>
     <td><code>paramN</code></td>
     <td> Where N is an integer from 1 upwards. These values will be substituted into <code>template</code> for <code>%PARAM1%</code> etc. </td>
-    <td>   </td>
-  </tr>
-</table>
-
-### <a name="=passwd="></a> `passwd`
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default </strong></th>
-  </tr>
-  <tr>
-    <td><code>action</code></td>
-    <td> one of <code>changePassword</code> or <code>resetPassword</code></td>
-    <td> none </td>
-  </tr>
-</table>
-
-Other parameters as described under `manage`, `action=changePassword`.
-
-#### <a name="=action=changePassword="></a> `action=changePassword`
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default </strong></th>
-  </tr>
-  <tr>
-    <td><code>username</code></td>
-    <td> Username </td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>oldpassword</code></td>
-    <td> Existing password (plain text) </td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>password</code></td>
-    <td> New password (plain text) </td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>passwordA</code></td>
-    <td> New password confirmation (plain text) </td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code>TopicName</code></td>
-    <td> ? </td>
     <td>   </td>
   </tr>
 </table>
@@ -583,33 +596,12 @@ Used for renaming topics.
     <td> if defined, a non-wikiword is acceptable for the new topic name </td>
     <td>   </td>
   </tr>
-</table>
-
-### <a name="=resetpasswd="></a> `resetpasswd`
-
-Reset the password for a single or multiple users
-
-<table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <th bgcolor="#99CCCC"><strong> Parameter </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description </strong></th>
-    <th bgcolor="#99CCCC"><strong> Default </strong></th>
-  </tr>
-  <tr>
-    <td><code>LoginName</code></td>
-    <td><strong>list</strong> of usernames to reset </td>
-    <td> none - error if not set </td>
-  </tr>
-  <tr>
-    <td><code>Introduction</code></td>
-    <td> message to be sent alongside the reset, most often used to announce to the user that they have been given an account. </td>
-    <td> '' </td>
+    <td><code>redirectto</code></td>
+    <td> If the rename process is successful, rename will redirect to this topic or URL. The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL.%BR% <strong><em>Note:</em></strong> Redirect to a URL only works if it is enabled in <code>configure</code> (Miscellaneous <code>{AllowRedirectUrl}</code>). </td>
+    <td>   </td>
   </tr>
 </table>
-
-This is used by [[BulkResetPassword]] and [[ResetPassword]]. Only users belonging to the [[TWikiAdminGroup]] can provide a list of [[LoginNames]], non-admins can only provide a single [[LoginName]].
-
-[[BulkRegistration]] provides the means to create multiple accounts but it does not announce those accounts to the users who own them. [[BulkResetPassword]] is used to assign the passwords, the Introduction is used to explain why they are receiving the mail.
 
 ### <a name="=rest="></a> `rest`
 
@@ -703,12 +695,12 @@ The `save` script performs a range of save-related functions, as selected by the
   </tr>
   <tr>
     <td><code>action_delRev</code></td>
-    <td><strong>Administrators only</strong> delete the most recent revision of the topic - all other parameters are ignored. You have to be a member of [[Main/TWikiAdminGroup]] to use this, and not all store implementations will support it. </td>
+    <td><strong>Administrators only</strong> delete the most recent revision of the topic - all other parameters are ignored. You have to be an administrator to use this, and not all store implementations will support it. </td>
     <td>   </td>
   </tr>
   <tr>
     <td><code>action_repRev</code></td>
-    <td><strong>Administrators only</strong> replace the text of the most recent revision of the topic with the text in the <code>text</code> parameter. <code>text</code> must included embedded meta-data tags. All other parameters are ignored. You have to be a member of [[Main/TWikiAdminGroup]] to use this, and not all store implementations will support it. </td>
+    <td><strong>Administrators only</strong> replace the text of the most recent revision of the topic with the text in the <code>text</code> parameter. <code>text</code> must included embedded meta-data tags. All other parameters are ignored. You have to be an administrator to use this, and not all store implementations will support it. </td>
     <td>   </td>
   </tr>
   <tr>
@@ -821,7 +813,7 @@ CGI gateway to the `%SEARCH%` functionality driven by the following CGI paramete
     <td> N/A </td>
   </tr>
   <tr>
-    <td><code>web="Name"</code><br /><code>web="Main, Know"</code><br /><code>web="all"</code></td>
+    <td><code>web="Name"</code><br /><code>web="%USERSWEB%, Know"</code><br /><code>web="all"</code></td>
     <td> Comma-separated list of webs to search. See [[Main/TWikiVariables#VarSEARCH]] for more details. </td>
     <td> Current web </td>
   </tr>
@@ -857,7 +849,7 @@ CGI gateway to the `%SEARCH%` functionality driven by the following CGI paramete
   </tr>
   <tr>
     <td><code>date="..."</code></td>
-    <td> limits the results to those pages with latest edit time in the given [[Main/TimeInterval]]. </td>
+    <td> limits the results to those pages with latest edit time in the given [[Main/TimeSpecifications#TimeIntervals]]. </td>
     <td> All results </td>
   </tr>
   <tr>
@@ -970,10 +962,6 @@ for example:
 
 see [[TWikiSiteTools#WebStatistics_site_statistics]] for updating statistics using cron.
 
-### <a name="=twiki="></a> `twiki`
-
-Single-script interface to the functionality of all the other scripts. Experimental, not for production use. Read the code if you want to know more.
-
 ### <a name="=upload="></a> `upload`
 
 Uploads an attachment to a topic. The HTTP request is expected to be in `multipart/form-data` format.
@@ -1049,7 +1037,7 @@ Used for viewing topics.
   </tr>
   <tr>
     <td><code>section</code></td>
-    <td> Allows to view only a part of the topic delimited by a named section (see [[TWiki/VarSTARTSECTION]]). If the given section is not present, no topic content is displayed. </td>
+    <td> Allows to view only a part of the topic delimited by a named section (see %SYSTEMWEB%.VarSTARTSECTION). If the given section is not present, no topic content is displayed. </td>
     <td>   </td>
   </tr>
   <tr>
@@ -1065,6 +1053,11 @@ Used for viewing topics.
   <tr>
     <td><code>template</code></td>
     <td> Allows you to specify a different skin template, overriding the 'view' template the view script would normally use. The default template is <code>view</code>. For example, you could specify [[%WEB%/%TOPIC%?template=edit]]. This is mainly useful when you have specialised templates for a TWiki Application. </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code>topic</code></td>
+    <td> redirects (at the beging of the cgi script running) to show the spcified Web.Topic, or, redirects to a URL, if allowed by {AllowRedirectUrl} and {PermittedRedirectHostUrls} </td>
     <td>   </td>
   </tr>
 </table>
@@ -1092,6 +1085,8 @@ Used for viewing attachments. Normally, a site will publish the attachments (`pu
     <td>   </td>
   </tr>
 </table>
+
+Instead of using the `filename` parameter, you can append the attachment name to the end of the URL path (after the topic) e.g. `http://www.dementia.org/twiki/viewfile/Webname/TopicName/Attachment.gif`
 
 ## <a name="Command Line Scripts"></a> Command Line Scripts
 

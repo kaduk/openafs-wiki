@@ -71,10 +71,12 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#EXACT( text1, text2 ) -- compare"> EXACT( text1, text2 ) -- compare two text strings</a></li>
         <li><a href="#EXEC( formula ) -- execute a spr"> EXEC( formula ) -- execute a spreadsheet formula</a></li>
         <li><a href="#EXISTS( topic ) -- check if topi"> EXISTS( topic ) -- check if topic exists</a></li>
+        <li><a href="#EXP( num ) -- exponent (e) raise"> EXP( num ) -- exponent (e) raised to the power of a number</a></li>
         <li><a href="#FIND( string, text, start ) -- f"> FIND( string, text, start ) -- find one string within another string</a></li>
-        <li><a href="#FORMAT( type, prec, number ) --"> FORMAT( type, prec, number ) -- format a number to a certain type and precision</a></li>
-        <li><a href="#FORMATTIME( serial, text ) -- co"> FORMATTIME( serial, text ) -- convert a serialized date into a date string</a></li>
+        <li><a href="#FORMAT( type, precision, number"> FORMAT( type, precision, number ) -- format a number to a certain type and precision</a></li>
         <li><a href="#FORMATGMTIME( serial, text ) --"> FORMATGMTIME( serial, text ) -- convert a serialized date into a GMT date string</a></li>
+        <li><a href="#FORMATTIME( serial, text ) -- co"> FORMATTIME( serial, text ) -- convert a serialized date into a date string</a></li>
+        <li><a href="#FORMATTIMEDIFF( unit, precision,"> FORMATTIMEDIFF( unit, precision, time ) -- convert elapsed time to a string</a></li>
         <li><a href="#GET( name ) -- get the value of"> GET( name ) -- get the value of a previously set variable</a></li>
         <li><a href="#IF( condition, value if true, va"> IF( condition, value if true, value if 0 ) -- return a value based on a condition</a></li>
         <li><a href="#INT( formula ) -- evaluate formu"> INT( formula ) -- evaluate formula and round down to nearest integer</a></li>
@@ -92,6 +94,8 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#LISTSORT( list ) -- sort a list"> LISTSORT( list ) -- sort a list</a></li>
         <li><a href="#LISTTRUNCATE( size, list ) -- tr"> LISTTRUNCATE( size, list ) -- truncate list to size</a></li>
         <li><a href="#LISTUNIQUE( list ) -- remove all"> LISTUNIQUE( list ) -- remove all duplicates from a list</a></li>
+        <li><a href="#LN( num ) -- natural logarithm o"> LN( num ) -- natural logarithm of a number</a></li>
+        <li><a href="#LOG( num, base ) -- logarithm of"> LOG( num, base ) -- logarithm of a number to a given base</a></li>
         <li><a href="#LOWER( text ) -- lower case stri"> LOWER( text ) -- lower case string of a text</a></li>
         <li><a href="#MAX( list ) - biggest value of a"> MAX( list ) - biggest value of a list or range of cells</a></li>
         <li><a href="#MEDIAN( list ) -- median of a li"> MEDIAN( list ) -- median of a list or range of cells</a></li>
@@ -103,6 +107,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#ODD( num ) -- test for odd numbe"> ODD( num ) -- test for odd number</a></li>
         <li><a href="#OR( list ) -- logical OR of a li"> OR( list ) -- logical OR of a list</a></li>
         <li><a href="#PERCENTILE( num, list ) -- perce"> PERCENTILE( num, list ) -- percentile of a list or range of cells</a></li>
+        <li><a href="#PI( ) -- mathematical constant P"> PI( ) -- mathematical constant Pi, 3.14159265358979</a></li>
         <li><a href="#PRODUCT( list ) -- product of a"> PRODUCT( list ) -- product of a list or range of cells</a></li>
         <li><a href="#PROPER( text ) -- properly capit"> PROPER( text ) -- properly capitalize text</a></li>
         <li><a href="#PROPERSPACE( text ) -- properly"> PROPERSPACE( text ) -- properly space out WikiWords</a></li>
@@ -117,6 +122,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#SETIFEMPTY( name, value ) -- set"> SETIFEMPTY( name, value ) -- set a variable only if empty</a></li>
         <li><a href="#SETM( name, formula ) -- update"> SETM( name, formula ) -- update an existing variable based on a formula</a></li>
         <li><a href="#SIGN( num ) -- sign of a number"> SIGN( num ) -- sign of a number</a></li>
+        <li><a href="#SQRT( num ) -- square root of a"> SQRT( num ) -- square root of a number</a></li>
         <li><a href="#SUBSTITUTE( text, old, new, inst"> SUBSTITUTE( text, old, new, instance, option ) -- substitute text</a></li>
         <li><a href="#SUM( list ) -- sum of a list or"> SUM( list ) -- sum of a list or range of cells</a></li>
         <li><a href="#SUMDAYS( list ) -- sum the days"> SUMDAYS( list ) -- sum the days in a list or range of cells</a></li>
@@ -270,6 +276,7 @@ Conventions for Syntax:
 ### <a name="EVAL( formula ) -- evaluate a si"></a> EVAL( formula ) -- evaluate a simple mathematical formula
 
 - Addition, substraction, multiplication, division and modulus of numbers are supported. Any nesting is permitted
+- Numbers may be decimal integers (`1234`), binary integers (`0b1110011`), octal integers (`01234`), hexadecimal integers (`0x1234`) or of exponential notation (`12.34e-56`)
 - Syntax: <code>**$EVAL( formula )**</code>
 - Example: <code>**%CALC\{"$EVAL( (5 \* 3) / 2 + 1.1 )"\}%**</code> returns <code>**8\.6**</code>
 - Related: <code>[[$EXEC()|Main/WebHome#FuncEXEC]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$MOD()|Main/WebHome#FuncMOD]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>, <code>[[$VALUE()|Main/WebHome#FuncVALUE]]</code>
@@ -307,10 +314,19 @@ Conventions for Syntax:
 
 ### <a name="EXISTS( topic ) -- check if topi"></a> EXISTS( topic ) -- check if topic exists
 
-- Topic can be `TopicName` or a `Web.TopicName`
+- Topic can be `TopicName` or a `Web.TopicName`. Current web is used if web is not specified.
 - Syntax: <code>**$EXISTS( topic )**</code>
 - Example: <code>**%CALC\{"$EXISTS(WebHome)"\}%**</code> returns <code>**1**</code>
 - Example: <code>**%CALC\{"$EXISTS(ThisDoesNotExist)"\}%**</code> returns <code>****</code>
+
+<a name="FuncEXP"></a>
+
+### <a name="EXP( num ) -- exponent (e) raise"></a> EXP( num ) -- exponent (e) raised to the power of a number
+
+- EXP is the inverse of the LN function
+- Syntax: <code>**$EXP( num )**</code>
+- Example: <code>**%CALC\{"$EXP(1)"\}%**</code> returns <code>**2\.71828182845905**</code>
+- Related: <code>[[$LN()|Main/WebHome#FuncLN]]</code>, <code>[[$LOG()|Main/WebHome#FuncLOG]]</code>
 
 <a name="FuncFIND"></a>
 
@@ -325,9 +341,17 @@ Conventions for Syntax:
 
 <a name="FuncFORMAT"></a>
 
-### <a name="FORMAT( type, prec, number ) --"></a><a name="FORMAT( type, prec, number ) -- "></a> FORMAT( type, prec, number ) -- format a number to a certain type and precision
+### <a name="FORMAT( type, precision, number"></a><a name="FORMAT( type, precision, number "></a> FORMAT( type, precision, number ) -- format a number to a certain type and precision
 
-- Type can be COMMA for comma format, DOLLAR for Dollar format, KB for Kilo Byte format, MB for Mega Byte format, KBMB for Kilo/Mega/Giga/Tera Byte auto-adjust format, NUMBER for number, and PERCENT for percent format
+- Supported `type`:
+  - `COMMA` for comma format, such as `12,345.68`
+  - `DOLLAR` for Dollar format, such as `$12,345.68`
+  - `KB` for Kilo Byte format, such as `1205.63 KB`
+  - `MB` for Mega Byte format, such as `1.18 MB`
+  - `KBMB` for Kilo/Mega/Giga/Tera Byte auto-adjust format
+  - `NUMBER` for number, such as `12345.7`
+  - `PERCENT` for percent format, such as `12.3%`
+- The `precision` indicates the the number of digits after the dot
 - Syntax: <code>**$FORMAT( type, prec, number )**</code>
 - Example: <code>**%CALC\{"$FORMAT(COMMA, 2, 12345.6789)"\}%**</code> returns <code>**12,345.68**</code>
 - Example: <code>**%CALC\{"$FORMAT(DOLLAR, 2, 12345.67)"\}%**</code> returns <code>**$12,345.68**</code>
@@ -337,16 +361,7 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$FORMAT(KBMB, 2, 1234567890)"\}%**</code> returns <code>**1\.15 GB**</code>
 - Example: <code>**%CALC\{"$FORMAT(NUMBER, 1, 12345.67)"\}%**</code> returns <code>**12345\.7**</code>
 - Example: <code>**%CALC\{"$FORMAT(PERCENT, 1, 0.1234567)"\}%**</code> returns <code>**12\.3%**</code>
-- Related: <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>
-
-<a name="FuncFORMATTIME"></a>
-
-### <a name="FORMATTIME( serial, text ) -- co"></a> FORMATTIME( serial, text ) -- convert a serialized date into a date string
-
-- The following variables in `text` are expanded: `$second` (seconds, 00..59); `$minute` (minutes, 00..59); `$hour` (hours, 00..23); `$day` (day of month, 01..31); `$month` (month, 01..12); `$mon` (month in text format, Jan..Dec); `$year` (4 digit year, 1999); `$ye` (2 digit year, 99), `$wd` (day number of the week, 1 for Sunday, 2 for Monday, etc), `$wday` (day of the week, Sun..Sat), `$weekday` (day of the week, Sunday..Saturday), `$yearday` (day of the year, 1..365, or 1..366 in leap years). Date is assumed to be server time; add `GMT` to indicate Greenwich time zone.
-- Syntax: <code>**$FORMATTIME( serial, text )**</code>
-- Example: <code>**%CALC\{"$FORMATTIME(0, $year/$month/$day GMT)"\}%**</code> returns <code>**1970/01/01 GMT**</code>
-- Related: <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATTIMEDIFF()|Main/WebHome#FuncFORMATTIMEDIFF]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>
 
 <a name="FuncFORMATGMTIME"></a>
 
@@ -355,7 +370,31 @@ Conventions for Syntax:
 - The date string represents the time in Greenwich time zone. Same variable expansion as in `$FORMATTIME()`.
 - Syntax: <code>**$FORMATGMTIME( serial, text )**</code>
 - Example: <code>**%CALC\{"$FORMATGMTIME(1041379200, $day $mon $year)"\}%**</code> returns <code>**01 Jan 2003**</code>
-- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATTIMEDIFF()|Main/WebHome#FuncFORMATTIMEDIFF]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncFORMATTIME"></a>
+
+### <a name="FORMATTIME( serial, text ) -- co"></a> FORMATTIME( serial, text ) -- convert a serialized date into a date string
+
+- The following variables in `text` are expanded: `$second` (seconds, 00..59); `$minute` (minutes, 00..59); `$hour` (hours, 00..23); `$day` (day of month, 01..31); `$month` (month, 01..12); `$mon` (month in text format, Jan..Dec); `$year` (4 digit year, 1999); `$ye` (2 digit year, 99), `$wd` (day number of the week, 1 for Sunday, 2 for Monday, etc), `$wday` (day of the week, Sun..Sat), `$weekday` (day of the week, Sunday..Saturday), `$yearday` (day of the year, 1..365, or 1..366 in leap years). Date is assumed to be server time; add `GMT` to indicate Greenwich time zone.
+- Syntax: <code>**$FORMATTIME( serial, text )**</code>
+- Example: <code>**%CALC\{"$FORMATTIME(0, $year/$month/$day GMT)"\}%**</code> returns <code>**1970/01/01 GMT**</code>
+- Related: <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$FORMATTIMEDIFF()|Main/WebHome#FuncFORMATTIMEDIFF]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
+
+<a name="FuncFORMATTIMEDIFF"></a>
+
+### <a name="FORMATTIMEDIFF( unit, precision,"></a> FORMATTIMEDIFF( unit, precision, time ) -- convert elapsed time to a string
+
+- Convert elapsed `time` to a human readable format, such as: `12 hours and 3 minutes`
+- The input `unit` can be `second`, `minute`, `hour`, `day`, `month`, `year`. Note: An approximation is used for month and year calculations.
+- The `precision` indicates the number of output units to use
+- Syntax: <code>**$FORMATTIMEDIFF( unit, precision, time )**</code>
+- Example: <code>**%CALC\{"$FORMATTIMEDIFF(min, 1, 200)"\}%**</code> returns <code>**3 hours**</code>
+- Example: <code>**%CALC\{"$FORMATTIMEDIFF(min, 2, 200)"\}%**</code> returns <code>**3 hours and 20 minutes**</code>
+- Example: <code>**%CALC\{"$FORMATTIMEDIFF(min, 1, 1640)"\}%**</code> returns <code>**1 day**</code>
+- Example: <code>**%CALC\{"$FORMATTIMEDIFF(min, 2, 1640)"\}%**</code> returns <code>**1 day and 3 hours**</code>
+- Example: <code>**%CALC\{"$FORMATTIMEDIFF(min, 3, 1640)"\}%**</code> returns <code>**1 day, 3 hours and 20 minutes**</code>
+- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>
 
 <a name="FuncGET"></a>
 
@@ -382,8 +421,11 @@ Conventions for Syntax:
 ### <a name="INT( formula ) -- evaluate formu"></a> INT( formula ) -- evaluate formula and round down to nearest integer
 
 - Addition, substraction, multiplication, division and modulus of numbers are supported. Any nesting is permitted
+- Numbers may be decimal integers (`1234`), binary integers (`0b1110011`), octal integers (`01234`), hexadecimal integers (`0x1234`) or of exponential notation (`12.34e-56`)
+- If you expect a single decimal integer value with leading zeros, use <code>**$INT( $VALUE( number ) )**</code>
 - Syntax: <code>**$INT( formula )**</code>
 - Example: <code>**%CALC\{"$INT(10 / 4)"\}%**</code> returns <code>**2**</code>
+- Example: <code>**%CALC\{"$INT($VALUE(09))"\}%**</code> returns <code>**9**</code>
 - Related: <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$ROUND()|Main/WebHome#FuncROUND]]</code>, <code>[[$VALUE()|Main/WebHome#FuncVALUE]]</code>
 
 <a name="FuncLEFT"></a>
@@ -508,6 +550,25 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$LISTUNIQUE(Apple, Orange, Apple, Kiwi)"\}%**</code> returns <code>**Apple, Orange, Kiwi**</code>
 - Related: <code>[[$COUNTITEMS()|Main/WebHome#FuncCOUNTITEMS]]</code>, <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
+<a name="FuncLN"></a>
+
+### <a name="LN( num ) -- natural logarithm o"></a> LN( num ) -- natural logarithm of a number
+
+- LN is the inverse of the EXP function
+- Syntax: <code>**$LN( num )**</code>
+- Example: <code>**%CALC\{"$LN(10)"\}%**</code> returns <code>**2\.30258509299405**</code>
+- Related: <code>[[$EXP()|Main/WebHome#FuncEXP]]</code>, <code>[[$LOG()|Main/WebHome#FuncLOG]]</code>
+
+<a name="FuncLOG"></a>
+
+### <a name="LOG( num, base ) -- logarithm of"></a> LOG( num, base ) -- logarithm of a number to a given base
+
+- base-10 logarithm of a number (if base is 0 or not specified), else logarithm of a number to the given base
+- Syntax: <code>**$LOG( num, _base_ )**</code>
+- Example: <code>**%CALC\{"$LOG(1000)"\}%**</code> returns <code>**3**</code>
+- Example: <code>**%CALC\{"$LOG(16, 2)"\}%**</code> returns <code>**4**</code>
+- Related: <code>[[$EXP()|Main/WebHome#FuncEXP]]</code>, <code>[[$LN()|Main/WebHome#FuncLN]]</code>
+
 <a name="FuncLOWER"></a>
 
 ### <a name="LOWER( text ) -- lower case stri"></a> LOWER( text ) -- lower case string of a text
@@ -598,6 +659,13 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$PERCENTILE(75, 400, 200, 500, 100, 300)"\}%**</code> returns <code>**450**</code>
 - Related: <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$MAX()|Main/WebHome#FuncMAX]]</code>, <code>[[$MEDIAN()|Main/WebHome#FuncMEDIAN]]</code>, <code>[[$MIN()|Main/WebHome#FuncMIN]]</code>
 
+<a name="FuncPI"></a>
+
+### <a name="PI( ) -- mathematical constant P"></a> PI( ) -- mathematical constant Pi, 3.14159265358979
+
+- Syntax: <code>**$PI( )**</code>
+- Example: <code>**%CALC\{"$PI()"\}%**</code> returns <code>**3\.14159265358979**</code>
+
 <a name="FuncPRODUCT"></a>
 
 ### <a name="PRODUCT( list ) -- product of a"></a><a name="PRODUCT( list ) -- product of a "></a> PRODUCT( list ) -- product of a list or range of cells
@@ -612,15 +680,15 @@ Conventions for Syntax:
 
 - Capitalize letters that follow any character other than a letter; convert all other letters to lowercase letters
 - Syntax: <code>**$PROPER( text )**</code>
-- Example: <code>**%CALC\{"PROPER(a small STEP)"\}%**</code> returns <code>**A Small Step**</code>
-- Example: <code>**%CALC\{"PROPER(f1 (formula-1))"\}%**</code> returns <code>**F1 (Formula-1)**</code>
+- Example: <code>**%CALC\{"$PROPER(a small STEP)"\}%**</code> returns <code>**A Small Step**</code>
+- Example: <code>**%CALC\{"$PROPER(f1 (formula-1))"\}%**</code> returns <code>**F1 (Formula-1)**</code>
 - Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
 
 <a name="FuncPROPERSPACE"></a>
 
 ### <a name="PROPERSPACE( text ) -- properly"></a><a name="PROPERSPACE( text ) -- properly "></a> PROPERSPACE( text ) -- properly space out WikiWords
 
-- Properly spaces out [[WikiWords]] preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE [[TWikiPreferences]] variable or DONTSPACE Plugins setting are excluded
+- Properly spaces out %SYSTEMWEB%.WikiWords preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE %SYSTEMWEB%.TWikiPreferences variable or DONTSPACE Plugins setting are excluded
 - Syntax: <code>**$PROPERSPACE( text )**</code>
 - Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"$PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh)"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
 - Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
@@ -682,7 +750,7 @@ Conventions for Syntax:
 
 ### <a name="SEARCH( string, text, start ) --"></a> SEARCH( string, text, start ) -- search a string within a text
 
-- Finds one text `string`, within another `text`, and returns the number of the starting position of `string`, from the first character of `text`. This search is a [[RegularExpression]] search; use `$FIND()` for non-regular expression searching. Starting position is 1; a 0 is returned if nothing is matched
+- Finds one text `string`, within another `text`, and returns the number of the starting position of `string`, from the first character of `text`. This search is a %SYSTEMWEB%.RegularExpression search; use `$FIND()` for non-regular expression searching. Starting position is 1; a 0 is returned if nothing is matched
 - Syntax: <code>**$SEARCH( string, text, _start_ )**</code>
 - Example: <code>**%CALC\{"$SEARCH([uy], fluffy)"\}%**</code> returns <code>**3**</code>
 - Example: <code>**%CALC\{"$SEARCH([uy], fluffy, 3)"\}%**</code> returns <code>**6**</code>
@@ -725,11 +793,18 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$SIGN(-12.5)"\}%**</code> returns <code>**-1**</code>
 - Related: <code>[[$ABS()|Main/WebHome#FuncABS]]</code>, <code>[[$EVAL()|Main/WebHome#FuncEVAL]]</code>, <code>[[$EVEN()|Main/WebHome#FuncEVEN]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>, <code>[[$ODD()|Main/WebHome#FuncODD]]</code>
 
+<a name="FuncSQRT"></a>
+
+### <a name="SQRT( num ) -- square root of a"></a><a name="SQRT( num ) -- square root of a "></a> SQRT( num ) -- square root of a number
+
+- Syntax: <code>**$SQRT( num )**</code>
+- Example: <code>**%CALC\{"$SQRT(16)"\}%**</code> returns <code>**4**</code>
+
 <a name="FuncSUBSTITUTE"></a>
 
 ### <a name="SUBSTITUTE( text, old, new, inst"></a> SUBSTITUTE( text, old, new, instance, option ) -- substitute text
 
-- Substitutes `new` text for `old` text in a `text` string. `instance` specifies which occurance of `old` you want to replace. If you specify `instance`, only that instance is replaced. Otherwise, every occurance is changed to the new text. A literal search is performed by default; a [[RegularExpression]] search if the `option` is set to <code>**r**</code>
+- Substitutes `new` text for `old` text in a `text` string. `instance` specifies which occurance of `old` you want to replace. If you specify `instance`, only that instance is replaced. Otherwise, every occurance is changed to the new text. A literal search is performed by default; a %SYSTEMWEB%.RegularExpression search if the `option` is set to <code>**r**</code>
 - Syntax: <code>**$SUBSTITUTE( text, old, _new_, _instance_, _option_ )**</code>
 - Example: <code>**%CALC\{"$SUBSTITUTE(Good morning, morning, day)"\}%**</code> returns <code>**Good day**</code>
 - Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002,2,3)"\}%**</code> returns <code>**Q3-3003**</code>
@@ -787,13 +862,13 @@ Conventions for Syntax:
 - Serialized date is seconds since the Epoch, e.g. midnight, 01 Jan 1970. Current time is taken if the date string is empty. Supported date formats: `31 Dec 2009`; `31 Dec 2009 GMT`; `31 Dec 09`; `31-Dec-2009`; `31/Dec/2009`; `2009/12/31`; `2009-12-31`; `2009/12/31`; `2009/12/31 23:59`; `2009/12/31 - 23:59`; `2009-12-31-23-59`; `2009/12/31 - 23:59:59`; `2009.12.31.23.59.59`. Date is assumed to be server time; add `GMT` to indicate Greenwich time zone
 - Syntax: <code>**$TIME( _text_ )**</code>
 - Example: <code>**%CALC\{"$TIME(2003/10/14 GMT)"\}%**</code> returns <code>**1066089600**</code>
-- Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
+- Related: <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATTIMEDIFF()|Main/WebHome#FuncFORMATTIMEDIFF]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
 
 <a name="FuncTIMEADD"></a>
 
 ### <a name="TIMEADD( serial, value, unit ) -"></a> TIMEADD( serial, value, unit ) -- add a value to a serialized date
 
-- The unit is seconds if not specified; unit can be `second`, `minute`, `hour`, `day`, `week`, `month`, `year`. Note: An approximation is used for month and year calculations
+- The `unit` is seconds if not specified; unit can be `second`, `minute`, `hour`, `day`, `week`, `month`, `year`. Note: An approximation is used for month and year calculations
 - Syntax: <code>**$TIMEADD( serial, value, _unit_ )**</code>
 - Example: <code>**%CALC\{"$TIMEADD($TIME(), 2, week)"\}%**</code> returns the serialized date two weeks from now
 - Related: <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>
@@ -802,10 +877,10 @@ Conventions for Syntax:
 
 ### <a name="TIMEDIFF( serial_1, serial_2, un"></a> TIMEDIFF( serial\_1, serial\_2, unit ) -- time difference between two serialized dates
 
-- The unit is seconds if not specified; unit can be specified as in `$TIMEADD()`. Note: An approximation is used for month and year calculations. Use `$FORMAT()` or `$INT()` to format real numbers
+- The `unit` is seconds if not specified; unit can be specified as in `$TIMEADD()`. Note: An approximation is used for month and year calculations. Use `$FORMAT()`, `$FORMATTIMEDIFF()` or `$INT()` to format real numbers
 - Syntax: <code>**$TIMEDIFF( serial\_1, serial\_2, _unit_ )**</code>
 - Example: <code>**%CALC\{"$TIMEDIFF($TIME(), $EVAL($TIME()+90), minute)"\}%**</code> returns <code>**1\.5**</code>
-- Related: <code>[[$FORMAT()|Main/WebHome#FuncFORMAT]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
+- Related: <code>[[$FORMAT()|Main/WebHome#FuncFORMAT]]</code>, <code>[[$FORMATGMTIME()|Main/WebHome#FuncFORMATGMTIME]]</code>, <code>[[$FORMATTIME()|Main/WebHome#FuncFORMATTIME]]</code>, <code>[[$FORMATTIMEDIFF()|Main/WebHome#FuncFORMATTIMEDIFF]]</code>, <code>[[$INT()|Main/WebHome#FuncINT]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEADD()|Main/WebHome#FuncTIMEADD]]</code>, <code>[[$TODAY()|Main/WebHome#FuncTODAY]]</code>, <code>[[$WORKINGDAYS()|Main/WebHome#FuncWORKINGDAYS]]</code>
 
 <a name="FuncTODAY"></a>
 
@@ -857,11 +932,11 @@ Conventions for Syntax:
 
 ### <a name="Can I use CALC in a formatted se"></a> Can I use CALC in a formatted search?
 
-Specifically, how can I output some conditional text in a [[FormattedSearch]]?
+Specifically, how can I output some conditional text in a %SYSTEMWEB%.FormattedSearch?
 
-You need to escape the CALC so that it executes once per search hit. This can be done by escaping the `%` signs of `%CALC{...}%` with `$percnt`. For example, to execute `$IF($EXACT($formfield(Tested), Yes), %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-yes.gif, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-no.gif)` in the `format=""` parameter, write this:
+You need to escape the CALC so that it executes once per search hit. This can be done by escaping the `%` signs of `%CALC{...}%` with `$percnt`. For example, to execute `$IF($EXACT($formfield(Tested), Yes), %PUBURL%/%SYSTEMWEB%/TWikiDocGraphics/choice-yes.gif, %PUBURL%/%SYSTEMWEB%/TWikiDocGraphics/choice-no.gif)` in the `format=""` parameter, write this:
 
-`%SEARCH{ .... format="| $topic | $percntCALC{$IF($EXACT($formfield(Tested), Yes), %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-yes.gif, %PUBURL%/%TWIKIWEB%/TWikiDocGraphics/choice-no.gif)}$percnt |" }%`
+`%SEARCH{ .... format="| $topic | $percntCALC{$IF($EXACT($formfield(Tested), Yes), %PUBURL%/%SYSTEMWEB%/TWikiDocGraphics/choice-yes.gif, %PUBURL%/%SYSTEMWEB%/TWikiDocGraphics/choice-no.gif)}$percnt |" }%`
 
 ### <a name="How can I easily repeat a formul"></a> How can I easily repeat a formula in a table?
 
@@ -934,7 +1009,7 @@ Above table is created manually. Another Plugin could build the table dynamicall
 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%SPREADSHEETPLUGIN\_SHORTDESCRIPTION%**</code>
 
-- One line description, is shown in the [[TextFormattingRules]] topic:
+- One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
   - Set SHORTDESCRIPTION = Add spreadsheet calculation like `"$SUM( $ABOVE() )"` to TWiki tables and other topic text
 
 - Debug plugin: (See output in `data/debug.txt`)
@@ -943,7 +1018,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Do not handle `%CALC{}%` variable in included topic while including topic: (default: 1)
   - Set SKIPINCLUDE = 1
 
-- [[WikiWords|TWiki/WikiWord]] to exclude from being spaced out by the <code>**$PROPERSPACE(text)**</code> function. This comma delimited list can be overloaded by a DONTSPACE preferences variable:
+- [[WikiWords|SYSTEMWEB/WikiWord]] to exclude from being spaced out by the <code>**$PROPERSPACE(text)**</code> function. This comma delimited list can be overloaded by a DONTSPACE preferences variable:
   - Set DONTSPACE = CodeWarrior, MacDonald, McIntosh, RedHat, SuSE
 
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
@@ -981,7 +1056,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2001-2007, <a href="mailto:Peter@Thoeny.org">Peter@Thoeny.org</a>, <a href="http://www.structuredwikis.com/" target="_top">StructuredWikis LLC</a></td>
+    <td> © 2001-2007, Peter Thoeny, <a href="http://www.twiki.net/" target="_top">TWIKI.NET</a></td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -989,11 +1064,35 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 23 Jan 2007 (r12607) </td>
+    <td> 13 Oct 2007 (15270) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 13 Oct 2007: </td>
+    <td> Added $FORMATTIMEDIFF() </td>
+  </tr>
+  <tr>
+    <td align="right"> 09 Sep 2007: </td>
+    <td> Enhanced documentation for $EVAL() and $INT() </td>
+  </tr>
+  <tr>
+    <td align="right"> 02 Jun 2007: </td>
+    <td> Added [[TWiki/VarCALC]] to have <code>%CALC{}%</code> listed in [[TWiki/TWikiVariables]]</td>
+  </tr>
+  <tr>
+    <td align="right"> 14 Apr 2007: </td>
+    <td> Fixing bug in $EXISTS() that required full <code>web.topic</code> instead of just <code>topic</code></td>
+  </tr>
+  <tr>
+    <td align="right"> 11 Mar 2007: </td>
+    <td> Fixing bug in $VALUE() and $INT(), introduced by version 09 Mar 2007 </td>
+  </tr>
+  <tr>
+    <td align="right"> 09 Mar 2007: </td>
+    <td> Added $EXP(), $LN(), $LOG(), $PI(), $SQRT(); fixed $ROUND() bug, contributed by TWiki:Main/SergejZnamenskij </td>
   </tr>
   <tr>
     <td align="right"> 23 Jan 2007: </td>
@@ -1137,7 +1236,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> TWiki:Plugins/Benchmark: </td>
-    <td>[[TWiki/GoodStyle]] 99%, [[TWiki/FormattedSearch]] 99%, %TOPIC% 95% </td>
+    <td> %SYSTEMWEB%.GoodStyle 99%, %SYSTEMWEB%.FormattedSearch 99%, %TOPIC% 95% </td>
   </tr>
   <tr>
     <td align="right"> Other Dependencies: </td>
@@ -1161,6 +1260,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
 </table>
 
-**_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
+**_Related Topics:_** %SYSTEMWEB%.TWikiPreferences, %SYSTEMWEB%.TWikiPlugins, %SYSTEMWEB%.VarCALC
 
--- TWiki:Main/PeterThoeny - 23 Jan 2007
+-- TWiki:Main/PeterThoeny - 13 Oct 2007

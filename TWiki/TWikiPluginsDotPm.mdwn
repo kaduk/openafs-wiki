@@ -10,6 +10,7 @@ This class uses Chain of Responsibility (GOF) pattern to dispatch handler calls 
         <li><a href="#PUBLIC constant $VERSION"> PUBLIC constant $VERSION</a></li>
         <li><a href="#PUBLIC $SESSION"> PUBLIC $SESSION</a></li>
         <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>load</strong> ($allDisable"> ObjectMethod load <tt>($allDisabled) -&gt; $loginName</tt></a></li>
         <li><a href="#ObjectMethod <strong>settings</strong> ()"> ObjectMethod settings <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>enable</strong> ()"> ObjectMethod enable <tt>()</tt></a></li>
@@ -36,6 +37,7 @@ This class uses Chain of Responsibility (GOF) pattern to dispatch handler calls 
         <li><a href="#ObjectMethod *after_AttachmentSa"> ObjectMethod afterAttachmentSaveHandler <tt>($attachmentAttrHash,$topic,$web,$error)</tt></a></li>
         <li><a href="#ObjectMethod *write_HeaderHandle"> ObjectMethod writeHeaderHandler <tt>() -&gt; $headers</tt></a></li>
         <li><a href="#ObjectMethod *modify_HeaderHandl"> ObjectMethod modifyHeaderHandler <tt>(\@headers,$query)</tt></a></li>
+        <li><a href="#ObjectMethod *complete_PageHandl"> ObjectMethod completePageHandler <tt>($text,$pageType,$contentType)</tt></a></li>
         <li><a href="#ObjectMethod *redirect_CgiQueryH"> ObjectMethod redirectCgiQueryHandler <tt>() -&gt; $result</tt></a></li>
         <li><a href="#ObjectMethod *render_FormFieldFo"> ObjectMethod renderFormFieldForEditHandler <tt>($name,$type,$size,$value,$attributes,$possibleValues) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod *render_WikiWordHan"> ObjectMethod renderWikiWordHandler <tt>() -&gt; $result</tt></a></li>
@@ -86,6 +88,10 @@ You are _highly_ recommended to only use the methods in the [[Func|Main/TWikiFun
 
 Construct new singleton plugins collection object. The object is a container for a list of plugins and the handlers registered by the plugins. The plugins and the handlers are carefully ordered.
 
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
+
 ## <a name="ObjectMethod &lt;strong&gt;load&lt;/strong&gt; ($allDisable"></a> [[ObjectMethod]] **load** `($allDisabled) -> $loginName`
 
 Find all active plugins, and invoke the early initialisation. Has to be done _after_ prefs are read.
@@ -108,7 +114,7 @@ Returns the $TWiki::Plugins::VERSION number if no parameter is specified, else r
 
 ## <a name="ObjectMethod &lt;strong&gt;addListener&lt;/strong&gt; ($com"></a> [[ObjectMethod]] **addListener** `($command,$handler)`
 
-- =$command\* - name of the event
+- `$command` - name of the event
 - `$handler` - the handler object.
 
 Add a listener to the end of the list of registered listeners for this event. The listener must implement `invoke($command,...)`, which will be triggered when the event is to be processed.
@@ -147,15 +153,20 @@ Each removed block is represented by the block text and the parameters passed to
     <pre class='slobadob'>
     XYZ
     </pre>
-    the map will contain:
-    <pre>
+
+the map will contain:
+
     $removed->{'pre1'}{text}:   XYZ
     $removed->{'pre1'}{params}: class="slobadob"
-    </pre>
 
 Iterating over blocks for a single tag is easy. For example, to prepend a line number to every line of a pre block you might use this code:
 
-foreach my $placeholder ( keys %$map ) \{ if( $placeholder =~ /^pre/i ) \{ my $n = 1; $map-&gt;\{$placeholder\}\{text\} =~ s/^/$n++/gem; \} \}
+    foreach my $placeholder ( keys %$map ) {
+        if( $placeholder =~ /^pre/i ) {
+           my $n = 1;
+           $map->{$placeholder}{text} =~ s/^/$n++/gem;
+        }
+    }
 
 ## <a name="ObjectMethod &lt;strong&gt;post_RenderingHand"></a> [[ObjectMethod]] \*postRenderingHandler `(\$text)`
 
@@ -221,8 +232,8 @@ Called to handle text merge.
 This code provides Plugins with the opportunity to alter an uploaded attachment between the upload and save-to-store processes. It is invoked as per other Plugins.
 
 - `$attrHashRef` - Hash reference of attachment attributes (keys are indicated below)
-- `$topic` - | Topic name
-- `$web` - | Web name
+- `$topic` - Topic name
+- `$web` - Web name
 
 Keys in $attrHashRef:
 
@@ -261,9 +272,9 @@ Example usage:
 deal with an uploaded attachment between the upload and save-to-store processes. It is invoked as per other plugins.
 
 - `$attrHashRef` - Hash reference of attachment attributes (keys are indicated below)
-- `$topic` - | Topic name
-- `$web` - | Web name
-- `$error` - | Error string of save action, empty if OK
+- `$topic` - Topic name
+- `$web` - Web name
+- `$error` - Error string of save action, empty if OK
 
 Keys in $attrHashRef:
 
@@ -294,11 +305,11 @@ Note: The hash is **read-only**
 
 ## <a name="ObjectMethod &lt;strong&gt;write_HeaderHandle"></a> [[ObjectMethod]] \*writeHeaderHandler `() -> $headers`
 
-Called by TWiki::writePageHeader. **DEPRECATED** do not use!
-
 **DEPRECATED** Use modifyHeaderHandler instead. it is a lot more flexible, and allows you to modify existing headers as well as add new ones. It also works correctly when multiple plugins want to modify headers.
 
 ## <a name="ObjectMethod &lt;strong&gt;modify_HeaderHandl"></a> [[ObjectMethod]] \*modifyHeaderHandler `(\@headers,$query)`
+
+## <a name="ObjectMethod &lt;strong&gt;complete_PageHandl"></a> [[ObjectMethod]] \*completePageHandler `($text,$pageType,$contentType)`
 
 ## <a name="ObjectMethod &lt;strong&gt;redirect_CgiQueryH"></a> [[ObjectMethod]] \*redirectCgiQueryHandler `() -> $result`
 

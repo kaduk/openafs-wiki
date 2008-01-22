@@ -6,29 +6,28 @@ This module provides most of the actual HTML rendering code in TWiki.
   <ul>
     <li><a href="#Package =TWiki::Render="> Package TWiki::Render</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderParent</strong> ($we"> ObjectMethod renderParent <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderMoved</strong> ($web"> ObjectMethod renderMoved <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
-        <li><a href="#ObjectMethod *render_FormField*"> ObjectMethod renderFormField <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>make_AnchorName</strong> ("> ObjectMethod makeAnchorName <tt>($anchorName,$compatibilityMode) -&gt; $anchorName</tt></a></li>
-        <li><a href="#ObjectMethod <strong>internalLink</strong> ($th"> ObjectMethod internalLink <tt>($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb) -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod <strong>internalLink</strong> ($th"> ObjectMethod internalLink <tt>($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb,$hasExplicitLinkLabel) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderFORMFIELD</strong> ("> ObjectMethod renderFORMFIELD <tt>(%params,$topic,$web) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod *get_RenderedVersio"> ObjectMethod getRenderedVersion <tt>($text,$theWeb,$theTopic) -&gt; $html</tt></a></li>
         <li><a href="#StaticMethod *verbatim_CallBack*"> StaticMethod verbatimCallBack <tt></tt></a></li>
         <li><a href="#ObjectMethod <strong>_TML2PlainText</strong> ($"> ObjectMethod TML2PlainText <tt>($text,$web,$topic,$opts) -&gt; $plainText</tt></a></li>
         <li><a href="#ObjectMethod *protect_PlainText*"> ObjectMethod protectPlainText <tt>($text) -&gt; $tml</tt></a></li>
         <li><a href="#ObjectMethod *make_TopicSummary*"> ObjectMethod makeTopicSummary <tt>($theText,$theTopic,$theWeb,$theFlags) -&gt; $tml</tt></a></li>
-        <li><a href="#ObjectMethod *take_OutProtected*"> ObjectMethod takeOutProtected <tt>(\$text,$re,\%map) -&gt; $text</tt></a></li>
-        <li><a href="#ObjectMethod *put_BackProtected*"> ObjectMethod putBackProtected <tt>(\$text,\%map,$callback) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>take_OutBlocks</strong> (\"> ObjectMethod takeOutBlocks <tt>(\$text,$tag,\%map) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>put_BackBlocks</strong> (\"> ObjectMethod putBackBlocks <tt>(\$text,\%map,$tag,$newtag,$callBack) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *render_RevisionInf"> ObjectMethod renderRevisionInfo <tt>($web,$topic,$meta,$rev,$format) -&gt; $string</tt></a></li>
         <li><a href="#ObjectMethod *summariseChanges*"> ObjectMethod summariseChanges <tt>($user,$web,$topic,$orev,$nrev,$tml) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>for_EachLine</strong> ($te"> ObjectMethod forEachLine <tt>($text,\&amp;fn,\%options) -&gt; $newText</tt></a></li>
+        <li><a href="#StaticMethod <strong>get_ReferenceRE</strong> ("> StaticMethod getReferenceRE <tt>($web,$topic,%options) -&gt; $re</tt></a></li>
         <li><a href="#StaticMethod *replace_TopicRefer"> StaticMethod replaceTopicReferences <tt>($text,\%options) -&gt; $text</tt></a></li>
         <li><a href="#StaticMethod *replace_WebReferen"> StaticMethod replaceWebReferences <tt>($text,\%options) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *replace_WebInterna"> ObjectMethod replaceWebInternalReferences <tt>(\$text,\%meta,$oldWeb,$oldTopic)</tt></a></li>
-        <li><a href="#StaticMethod *render_FormFieldAr"> StaticMethod renderFormFieldArg <tt>($meta,$args) -&gt; $text</tt></a></li>
         <li><a href="#StaticMethod <strong>breakName</strong> ($text,"> StaticMethod breakName <tt>($text,$args) -&gt; $text</tt></a></li>
+        <li><a href="#StaticMethod *protect_FormFieldV"> StaticMethod protectFormFieldValue <tt>($value,$attrs) -&gt; $html</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -36,7 +35,11 @@ This module provides most of the actual HTML rendering code in TWiki.
 
 ## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
 
-Creates a new renderer with initial state from preference values (NEWTOPICBGCOLOR, NEWTOPICFONTCOLOR NEWTOPICLINKSYMBOL LINKTOOLTIPINFO)
+Creates a new renderer
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;renderParent&lt;/strong&gt; ($we"></a> [[ObjectMethod]] **renderParent** `($web,$topic,$meta,$params) -> $text`
 
@@ -46,29 +49,26 @@ Render parent meta-data
 
 Render moved meta-data
 
-## <a name="ObjectMethod &lt;strong&gt;render_FormField*"></a><a name="ObjectMethod *render_FormField&lt;/strong&gt; "></a> [[ObjectMethod]] **renderFormField** `($web,$topic,$meta,$params) -> $text`
-
-Render meta-data for a single formfield
-
 ## <a name="ObjectMethod &lt;strong&gt;make_AnchorName&lt;/strong&gt; ("></a> [[ObjectMethod]] **makeAnchorName** `($anchorName,$compatibilityMode) -> $anchorName`
 
-- `$anchorName` -
-- `$compatibilityMode` -
+- `$anchorName` - the unprocessed anchor name
+- `$compatibilityMode` - SMELL: compatibility with **what**?? Who knows. :-(
 
 Build a valid HTML anchor name
 
-## <a name="ObjectMethod &lt;strong&gt;internalLink&lt;/strong&gt; ($th"></a> [[ObjectMethod]] **internalLink** `($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb) -> $html`
+## <a name="ObjectMethod &lt;strong&gt;internalLink&lt;/strong&gt; ($th"></a> [[ObjectMethod]] **internalLink** `($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb,$hasExplicitLinkLabel) -> $html`
 
 Generate a link.
 
 Note: Topic names may be spaced out. Spaced out names are converted to WikWords, for example, "spaced topic name" points to "SpacedTopicName".
 
 - `$theWeb` - the web containing the topic
-- `$theTopic` - the topic to be lunk
+- `$theTopic` - the topic to be link
 - `$theLinkText` - text to use for the link
 - `$theAnchor` - the link anchor, if any
 - `$doLinkToMissingPages` - boolean: false means suppress link for non-existing pages
 - `$doKeepWeb` - boolean: true to keep web prefix (for non existing Web.TOPIC)
+- `$hasExplicitLinkLabel` - boolean: true in case of [[explicit link label|Main/TopicName]]
 
 Called by \_handleWikiWord and \_handleSquareBracketedLink and by Func::internalLink
 
@@ -109,28 +109,6 @@ Protect plain text from expansions that would normally be done duing rendering, 
 
 Makes a plain text summary of the given topic by simply trimming a bit off the top. Truncates to $TMTRUNC chars or, if a number is specified in $theFlags, to that length.
 
-## <a name="ObjectMethod &lt;strong&gt;take_OutProtected*"></a> [[ObjectMethod]] \*takeOutProtected `(\$text,$re,\%map) -> $text`
-
-- `$text` - Text to process
-- `$re` - Regular expression that matches tag expressions to remove
-- `\%map` - Reference to a hash to contain the removed blocks
-
-Return value: $text with blocks removed
-
-used to extract from $text comment type tags like &lt;!DOCTYPE blah&gt;
-
-WARNING: if you want to take out &lt;!-- comments --&gt; you _will_ need to re-write all the takeOuts to use a different placeholder
-
-## <a name="ObjectMethod &lt;strong&gt;put_BackProtected*"></a> [[ObjectMethod]] \*putBackProtected `(\$text,\%map,$callback) -> $text`
-
-Return value: $text with blocks added back
-
-- `\$text` - reference to text to process
-- `\%map` - map placeholders to blocks removed by takeOutBlocks
-- `$callback` - Reference to function to call on each block being inserted (optional)
-
-Reverses the actions of takeOutProtected.
-
 ## <a name="ObjectMethod &lt;strong&gt;take_OutBlocks&lt;/strong&gt; (\"></a> [[ObjectMethod]] **takeOutBlocks** `(\$text,$tag,\%map) -> $text`
 
 - `$text` - Text to process
@@ -165,4 +143,4 @@ Cool, eh what? Jolly good show.
 
 And if you set $newtag to '', we replace the taken out block with the valuse itself
 
-- which i'm using to stop the rendering process, but then at the end put in the html directly (for tag. ---++ ObjectMethod \*renderRevisionInfo\* `($web,$topic,$meta,$rev,$format) -> $string` Obtain and render revision info for a topic. \* =$web= - the web of the topic \* =$topic= - the topic \* =$meta= if specified, get rev info from here. If not specified, or meta contains rev info for a different version than the one requested, will reload the topic \* =$rev= - the rev number, defaults to latest rev \* =$format= - the render format, defaults to =$rev - $time - $wikiusername= =$format= can contain the following keys for expansion: | =$web= | the web name | | =$topic= | the topic name | | =$rev= | the rev number | | =$comment= | the comment | | =$username= | the login of the saving user | | =$wikiname= | the wikiname of the saving user | | =$wikiusername= | the web.wikiname of the saving user | | =$date= | the date of the rev (no time) | | =$time= | the time of the rev | | =$min=, =$sec=, etc. | Same date format qualifiers as GMTIME | ---++ ObjectMethod \*summariseChanges\* `($user,$web,$topic,$orev,$nrev,$tml) -> $text` \* =$user= - user (null to ignore permissions) \* =$web= - web \* =$topic= - topic \* =$orev= - older rev \* =$nrev= - later rev \* =$tml= - if true will generate renderable TML (i.e. HTML with NOPs. if false will generate a summary suitable for use in plain text (mail, for example) Generate a (max 3 line) summary of the differences between the revs. If there is only one rev, a topic summary will be returned. If =$tml= is not set, all HTML will be removed. In non-tml, lines are truncated to 70 characters. Differences are shown using + and - to indicate added and removed text. ---++ ObjectMethod \*forEachLine\* `($text,\&fn,\%options) -> $newText` Iterate over each line, calling =\\&amp;fn= on each. \\%options may contain: \* =pre= =&gt; true, will call fn for each line in pre blocks \* =verbatim= =&gt; true, will call fn for each line in verbatim blocks \* =noautolink= =&gt; true, will call fn for each line in =noautolink= blocks The spec of \\&amp;fn is sub fn( \\$line, \\%options ) -&gt; $newLine; the %options hash passed into this function is passed down to the sub, and the keys =in\_pre=, =in\_verbatim= and =in\_noautolink= are set boolean TRUE if the line is from one (or more) of those block types. The return result replaces $line in $newText. ---++ StaticMethod \*replaceTopicReferences\* `($text,\%options) -> $text` Callback designed for use with forEachLine, to replace topic references. \\%options contains: \* =oldWeb= =&gt; Web of reference to replace \* =oldTopic= =&gt; Topic of reference to replace \* =spacedTopic= =&gt; RE matching spaced out oldTopic \* =newWeb= =&gt; Web of new reference \* =newTopic= =&gt; Topic of new reference \* =inWeb= =&gt; the web which the text we are presently processing resides in \* =fullPaths= =&gt; optional, if set forces all links to full web.topic form For a usage example see TWiki::UI::Manage.pm ---++ StaticMethod \*replaceWebReferences\* `($text,\%options) -> $text` Callback designed for use with forEachLine, to replace web references. \\%options contains: \* =oldWeb= =&gt; Web of reference to replace \* =newWeb= =&gt; Web of new reference For a usage example see TWiki::UI::Manage.pm ---++ ObjectMethod \*replaceWebInternalReferences\* `(\$text,\%meta,$oldWeb,$oldTopic)` Change within-web wikiwords in $$text and $meta to full web.topic syntax. \\%options must include topics =&gt; list of topics that must have references to them changed to include the web specifier. ---++ StaticMethod \*renderFormFieldArg\* `($meta,$args) -> $text` Parse the arguments to a $formfield specification and extract the relevant formfield from the given meta data. \* =args= string containing name of form field In addition to the name of a field =args= can be appended with a commas followed by a string format (\\d+)([,\\s\*]\\.\\.\\.)?). This supports the formatted search function $formfield and is used to shorten the returned string or a hyphenated string. ---++ StaticMethod \*breakName\* `($text,$args) -> $text` \* =$text= - text to "break" \* =$args= - string of format (\\d+)([,\\s\*]\\.\\.\\.)?) Hyphenates $text every $1 characters, or if $2 is "..." then shortens to $1 characters and appends "..." (making the final string $1+3 characters long) \_Moved from Search.pm because it was obviously unhappy there, as it is a rendering function\_
+- which i'm using to stop the rendering process, but then at the end put in the html directly (for tag. ---++ ObjectMethod \*renderRevisionInfo\* `($web,$topic,$meta,$rev,$format) -> $string` Obtain and render revision info for a topic. \* =$web= - the web of the topic \* =$topic= - the topic \* =$meta= if specified, get rev info from here. If not specified, or meta contains rev info for a different version than the one requested, will reload the topic \* =$rev= - the rev number, defaults to latest rev \* =$format= - the render format, defaults to =$rev - $time - $wikiusername= =$format= can contain the following keys for expansion: | =$web= | the web name | | =$topic= | the topic name | | =$rev= | the rev number | | =$comment= | the comment | | =$username= | the login of the saving user | | =$wikiname= | the wikiname of the saving user | | =$wikiusername= | the web.wikiname of the saving user | | =$date= | the date of the rev (no time) | | =$time= | the time of the rev | | =$min=, =$sec=, etc. | Same date format qualifiers as GMTIME | ---++ ObjectMethod \*summariseChanges\* `($user,$web,$topic,$orev,$nrev,$tml) -> $text` \* =$user= - user (null to ignore permissions) \* =$web= - web \* =$topic= - topic \* =$orev= - older rev \* =$nrev= - later rev \* =$tml= - if true will generate renderable TML (i.e. HTML with NOPs. if false will generate a summary suitable for use in plain text (mail, for example) Generate a (max 3 line) summary of the differences between the revs. If there is only one rev, a topic summary will be returned. If =$tml= is not set, all HTML will be removed. In non-tml, lines are truncated to 70 characters. Differences are shown using + and - to indicate added and removed text. ---++ ObjectMethod \*forEachLine\* `($text,\&fn,\%options) -> $newText` Iterate over each line, calling =\\&amp;fn= on each. \\%options may contain: \* =pre= =&gt; true, will call fn for each line in pre blocks \* =verbatim= =&gt; true, will call fn for each line in verbatim blocks \* =literal= =&gt; true, will call fn for each line in literal blocks \* =noautolink= =&gt; true, will call fn for each line in =noautolink= blocks The spec of \\&amp;fn is =sub fn( $line, \\%options ) -&gt; $newLine=. The %options hash passed into this function is passed down to the sub, and the keys =in\_literal=, =in\_pre=, =in\_verbatim= and =in\_noautolink= are set boolean TRUE if the line is from one (or more) of those block types. The return result replaces $line in $newText. ---++ StaticMethod \*getReferenceRE\* `($web,$topic,%options) -> $re` \* $web, $topic - specify the topic being referred to, or web if $topic is undef. \* %options - the following options are available \* =interweb= - if true, then fully web-qualified references are required. \* =grep= - if true, generate a GNU-grep compatible RE instead of the default Perl RE. \* =url= - if set, generates an expression that will match a TWiki URL that points to the web/topic, instead of the default which matches topic links in plain text. Generate a regular expression that can be used to match references to the specified web/topic. Note that the resultant RE will only match fully qualified (i.e. with web specifier) topic names and topic names that are wikiwords in text. Works for spaced-out wikiwords for topic names. The RE returned is designed to be used with =s///= ---++ StaticMethod \*replaceTopicReferences\* `($text,\%options) -> $text` Callback designed for use with forEachLine, to replace topic references. \\%options contains: \* =oldWeb= =&gt; Web of reference to replace \* =oldTopic= =&gt; Topic of reference to replace \* =newWeb= =&gt; Web of new reference \* =newTopic= =&gt; Topic of new reference \* =inWeb= =&gt; the web which the text we are presently processing resides in \* =fullPaths= =&gt; optional, if set forces all links to full web.topic form For a usage example see TWiki::UI::Manage.pm ---++ StaticMethod \*replaceWebReferences\* `($text,\%options) -> $text` Callback designed for use with forEachLine, to replace web references. \\%options contains: \* =oldWeb= =&gt; Web of reference to replace \* =newWeb= =&gt; Web of new reference For a usage example see TWiki::UI::Manage.pm ---++ ObjectMethod \*replaceWebInternalReferences\* `(\$text,\%meta,$oldWeb,$oldTopic)` Change within-web wikiwords in $$text and $meta to full web.topic syntax. \\%options must include topics =&gt; list of topics that must have references to them changed to include the web specifier. ---++ StaticMethod \*breakName\* `($text,$args) -> $text` \* =$text= - text to "break" \* =$args= - string of format (\\d+)([,\\s\*]\\.\\.\\.)?) Hyphenates $text every $1 characters, or if $2 is "..." then shortens to $1 characters and appends "..." (making the final string $1+3 characters long) \_Moved from Search.pm because it was obviously unhappy there, as it is a rendering function\_ ---++ StaticMethod \*protectFormFieldValue\* `($value,$attrs) -> $html` Given the value of a form field, and a set of attributes that control how to display that value, protect the value from further processing. The protected value is determined from the value of the field after: \* newlines are replaced with &lt;br&gt; or the value of $attrs-&gt;\{newline\} \* processing through breakName if $attrs-&gt;\{break\} is defined \* escaping of $vars if $attrs-&gt;\{protectdollar\} is defined \* | is replaced with &amp;#124; or the value of $attrs-&gt;\{bar\} if defined

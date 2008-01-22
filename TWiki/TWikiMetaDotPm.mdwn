@@ -1,31 +1,44 @@
 # <a name="Package &lt;code&gt;TWiki::Meta="></a> Package =TWiki::Meta
 
-Meta-data handling.
+All TWiki topics have **data** (text) and **meta-data** (information about the topic). Meta-data includes information such as file attachments, form fields, topic parentage etc. When TWiki loads a topic from the store, it represents the meta-data in the topic using an object of this class.
 
 A meta-data object is a hash of different types of meta-data (keyed on the type, such as 'FIELD' and 'TOPICINFO').
 
 Each entry in the hash is an array, where each entry in the array contains another hash of the key=value pairs, corresponding to a single meta-datum.
 
-If there may be multiple entries of the same top-level type (i.e. for FIELD and FILEATTACHMENT) then the array hash multiple entries. These types are referred to as "keyed" types. The array entries are keyed with the attribute 'name' which must be in each entry in the array.
+If there may be multiple entries of the same top-level type (i.e. for FIELD and FILEATTACHMENT) then the array has multiple entries. These types are referred to as "keyed" types. The array entries are keyed with the attribute 'name' which must be in each entry in the array.
 
 For unkeyed types, the array has only one entry.
 
-The module knows nothing about how meta-data is stored. That is entirely the responsibility of the Store module.
+Pictorially,
 
-Meta-data objects are created by the Store engine when topics are read. They are populated using the `put` method.
+- TOPICINFO
+  - author =&gt; '...'
+  - date =&gt; '...'
+  - ...
+- FILEATTACHMENT
+  - [0] -&gt; \{ name =&gt; '...' ... \}
+  - [1] -&gt; \{ name =&gt; '...' ... \}
+- FIELD
+  - [0] -&gt; \{ name =&gt; '...' ... \}
+  - [1] -&gt; \{ name =&gt; '...' ... \}
+
+As well as the meta-data, the object also stores the web name, topic name and remaining text after meta-data extraction.
 
 <div>
   <ul>
     <li><a href="#Package =TWiki::Meta="> Package TWiki::Meta</a><ul>
-        <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$topic)</tt></a></li>
-        <li><a href="#ClassMethod <strong>web</strong> ()"> ClassMethod web <tt>()</tt></a></li>
-        <li><a href="#ClassMethod <strong>topic</strong> ()"> ClassMethod topic <tt>()</tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$topic,$text)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>session</strong> ()"> ObjectMethod session <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>web</strong> ()"> ObjectMethod web <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>topic</strong> ()"> ObjectMethod topic <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>text</strong> ([$text]) ->"> ObjectMethod text <tt>([$text]) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>put</strong> ($type,\%args"> ObjectMethod put <tt>($type,\%args)</tt></a></li>
         <li><a href="#ObjectMethod <strong>putKeyed</strong> ($type,\"> ObjectMethod putKeyed <tt>($type,\%args)</tt></a></li>
         <li><a href="#ObjectMethod *putAll*"> ObjectMethod putAll <tt></tt></a></li>
         <li><a href="#ObjectMethod <strong>get</strong> ($type,$key)"> ObjectMethod get <tt>($type,$key) -&gt; \%hash</tt></a></li>
         <li><a href="#ObjectMethod <strong>find</strong> ($type) -> @"> ObjectMethod find <tt>($type) -&gt; @values</tt></a></li>
-        <li><a href="#StaticMethod *index_ByKey*"> StaticMethod indexByKey <tt></tt></a></li>
         <li><a href="#ObjectMethod <strong>remove</strong> ($type,$ke"> ObjectMethod remove <tt>($type,$key)</tt></a></li>
         <li><a href="#ObjectMethod <strong>copyFrom</strong> ($otherM"> ObjectMethod copyFrom <tt>($otherMeta,$type,$nameFilter)</tt></a></li>
         <li><a href="#ObjectMethod <strong>count</strong> ($type) ->"> ObjectMethod count <tt>($type) -&gt; $integer</tt></a></li>
@@ -35,60 +48,92 @@ Meta-data objects are created by the Store engine when topics are read. They are
         <li><a href="#ObjectMethod *for_EachSelectedVa"> ObjectMethod forEachSelectedValue <tt>($types,$keys,\&amp;fn,\%options)</tt></a></li>
         <li><a href="#ObjectMethod <strong>getParent</strong> () -> $"> ObjectMethod getParent <tt>() -&gt; $parent</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_FormName</strong> () -"> ObjectMethod getFormName <tt>() -&gt; $formname</tt></a></li>
+        <li><a href="#ObjectMethod *render_FormForDisp"> ObjectMethod renderFormForDisplay <tt>() -&gt; $html</tt></a></li>
+        <li><a href="#ObjectMethod *render_FormFieldFo"> ObjectMethod renderFormFieldForDisplay <tt>($name,$format,$attrs) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *get_EmbeddedStoreF"> ObjectMethod getEmbeddedStoreForm <tt>() -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_MetaFor</strong> () ->"> ObjectMethod getMetaFor <tt>() -&gt; $meta</tt></a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$web"></a> [[ClassMethod]] **new** `($session,$web,$topic)`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$web"></a> [[ClassMethod]] **new** `($session,$web,$topic,$text)`
 
-Construct a new, empty Meta collection.
+- `$session` - a TWiki object (e.g. =$TWiki::Plugins::SESSION)
+- `$web`, `$topic` - the topic that the metadata relates to
 
-## <a name="ClassMethod &lt;strong&gt;web&lt;/strong&gt; ()"></a> [[ClassMethod]] **web** `()`
+Construct a new, empty object to contain meta-data for the given topic.
+
+- $text - optional raw text to convert to meta-data form
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
+
+## <a name="ObjectMethod &lt;strong&gt;session&lt;/strong&gt; ()"></a> [[ObjectMethod]] **session** `()`
+
+Get the session
+
+## <a name="ObjectMethod &lt;strong&gt;web&lt;/strong&gt; ()"></a> [[ObjectMethod]] **web** `()`
 
 Get the web name
 
-## <a name="ClassMethod &lt;strong&gt;topic&lt;/strong&gt; ()"></a> [[ClassMethod]] **topic** `()`
+## <a name="ObjectMethod &lt;strong&gt;topic&lt;/strong&gt; ()"></a> [[ObjectMethod]] **topic** `()`
 
 Get the topic name
 
+## <a name="ObjectMethod &lt;strong&gt;text&lt;/strong&gt; ([$text]) -"></a><a name="ObjectMethod &lt;strong&gt;text&lt;/strong&gt; ([$text]) - "></a> [[ObjectMethod]] **text** `([$text]) -> $text`
+
+Get/set the topic body text. If $text is undef, gets the value, if it is defined, sets the value to that and returns the new text.
+
 ## <a name="ObjectMethod &lt;strong&gt;put&lt;/strong&gt; ($type,\%args"></a> [[ObjectMethod]] **put** `($type,\%args)`
 
-Put a hash of key=value pairs into the given type set in this meta.
+Put a hash of key=value pairs into the given type set in this meta. This will **not** replace another value with the same name (for that see `putKeyed`)
 
-See the main comment for this package to understand how meta-data is represented.
+For example,
+
+    $meta->put( 'FIELD', { name => 'MaxAge', title => 'Max Age', value =>'103' } );
 
 ## <a name="ObjectMethod &lt;strong&gt;putKeyed&lt;/strong&gt; ($type,\"></a> [[ObjectMethod]] **putKeyed** `($type,\%args)`
 
-Put a hash of key=value pairs into the given type set in this meta. The entries are keyed by 'name'.
+Put a hash of key=value pairs into the given type set in this meta, replacing any existing value with the same key.
 
-See the main comment for this package to understand how meta-data is represented.
+For example,
+
+    $meta->putKeyed( 'FIELD', { name => 'MaxAge', title => 'Max Age', value =>'103' } );
 
 ## <a name="ObjectMethod &lt;strong&gt;putAll*"></a><a name="ObjectMethod *putAll&lt;/strong&gt; "></a> [[ObjectMethod]] **putAll** ``
 
-Replaces all the items of a given key with a new array This is the logical inverse of the find method
+Replaces all the items of a given key with a new array.
+
+For example,
+
+    $meta->putAll( 'FIELD',
+         { name => 'MinAge', title => 'Min Age', value =>'50' },
+         { name => 'MaxAge', title => 'Max Age', value =>'103' },
+         { name => 'HairColour', title => 'Hair Colour', value =>'white' }
+     );
 
 ## <a name="ObjectMethod &lt;strong&gt;get&lt;/strong&gt; ($type,$key)"></a><a name="ObjectMethod &lt;strong&gt;get&lt;/strong&gt; ($type,$key) "></a> [[ObjectMethod]] **get** `($type,$key) -> \%hash`
 
-Find the value of a meta-datum in the map. If the type is keyed, the $key parameter is required to say _which_ entry you want. Otherwise it can be undef.
+Find the value of a meta-datum in the map. If the type is keyed (idenitifed by a `name`), the `$key` parameter is required to say _which_ entry you want. Otherwise you will just get the first value.
 
-WARNING SMELL If key is undef but the type is keyed you get the FIRST entry If you want all the keys of a given type use the 'find' method.
+If you want all the keys of a given type use the 'find' method.
 
 The result is a reference to the hash for the item.
 
+For example,
+
+    my $ma = $meta->get( 'FIELD', 'MinAge' );
+    my $topicinfo = $meta->get( 'TOPICINFO' ); # get the TOPICINFO hash
+
 ## <a name="ObjectMethod &lt;strong&gt;find&lt;/strong&gt; ($type) - @v"></a> [[ObjectMethod]] **find** `($type) -> @values`
 
-Get all meta data for a specific type Returns the array stored for the type. This will be zero length if there are no entries.
+Get all meta data for a specific type. Returns the array stored for the type. This will be zero length if there are no entries.
 
-## <a name="StaticMethod &lt;strong&gt;index_ByKey*"></a><a name="StaticMethod *index_ByKey&lt;/strong&gt; "></a> [[StaticMethod]] **indexByKey** ``
+For example,
 
-See tests/unit/MetaTests.pm for an example
-
-The result is a hash the same as the array provided by find but keyed by the keyName. NB. results are indeterminate if the key you choose is not unique in the find.
-
-Flattens a keyed hash structure, taking only the values. Returns a hash.
-
-See tests/unit/MetaTests.pm for an example
+    my $attachments = $meta->find( 'FILEATTACHMENT' );
 
 ## <a name="ObjectMethod &lt;strong&gt;remove&lt;/strong&gt; ($type,$ke"></a> [[ObjectMethod]] **remove** `($type,$key)`
 
@@ -104,13 +149,13 @@ Copy all entries of a type from another meta data set. This will destroy the old
 
 If $type is undef, will copy ALL TYPES.
 
-If $nameFilter is defined (an RE), it will copy only data where \{name\} matches $nameFilter.
+If $nameFilter is defined (a perl refular expression), it will copy only data where `{name}` matches $nameFilter.
 
-SMELL: This is a shallow copy
+Does **not** copy web, topic or text.
 
 ## <a name="ObjectMethod &lt;strong&gt;count&lt;/strong&gt; ($type) - $"></a> [[ObjectMethod]] **count** `($type) -> $integer`
 
-Return the number of entries of the given type that are in this meta set
+Return the number of entries of the given type
 
 ## <a name="ObjectMethod &lt;strong&gt;get_RevisionInfo*"></a><a name="ObjectMethod *get_RevisionInfo&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionInfo** `($fromrev) -> ($date,$author,$rev,$comment)`
 
@@ -136,7 +181,7 @@ Merge the data in the other meta block.
 
 ## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; ($types"></a> [[ObjectMethod]] **stringify** `($types) -> $string`
 
-Return a string version of the meta object. Uses \\n to separate lines. If $types is specified, return only types specified by that RE.
+Return a string version of the meta object. Uses \\n to separate lines. If `$types` is specified, return only types that match it. Types should be a perl regular expression.
 
 ## <a name="ObjectMethod &lt;strong&gt;for_EachSelectedVa"></a> [[ObjectMethod]] \*forEachSelectedValue `($types,$keys,\&fn,\%options)`
 
@@ -159,3 +204,21 @@ Gets the TOPICPARENT name.
 ## <a name="ObjectMethod &lt;strong&gt;get_FormName&lt;/strong&gt; () -"></a> [[ObjectMethod]] **getFormName** `() -> $formname`
 
 Returns the name of the FORM, or '' if none.
+
+## <a name="ObjectMethod &lt;strong&gt;render_FormForDisp"></a> [[ObjectMethod]] \*renderFormForDisplay `() -> $html`
+
+Render the form contained in the meta for display.
+
+## <a name="ObjectMethod &lt;strong&gt;render_FormFieldFo"></a> [[ObjectMethod]] \*renderFormFieldForDisplay `($name,$format,$attrs) -> $text`
+
+Render a single formfield, using the $format. See TWiki::Form::FormField::renderForDisplay for a description of how the value is rendered.
+
+## <a name="ObjectMethod &lt;strong&gt;get_EmbeddedStoreF"></a> [[ObjectMethod]] \*getEmbeddedStoreForm `() -> $text`
+
+Generate the embedded store form of the topic. The embedded store form has meta-data values embedded using %META: lines. The text stored in the meta is taken as the topic text.
+
+## <a name="ObjectMethod &lt;strong&gt;get_MetaFor&lt;/strong&gt; () -"></a><a name="ObjectMethod &lt;strong&gt;get_MetaFor&lt;/strong&gt; () - "></a> [[ObjectMethod]] **getMetaFor** `() -> $meta`
+
+This method will load (or otherwise fetch) the meta-data for a named web/topic. The request might be satisfied by a read from the store, or it might be satisfied from a cache. The caller doesn't care.
+
+This is an object method rather than a static method because it depends on the implementation of Meta - it might be this base class, or it might be a caching subclass, for example.

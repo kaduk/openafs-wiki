@@ -1,0 +1,11 @@
+<a name="VarCALC"></a>
+
+### <a name="CALC{&quot;formula&quot;} -- add spreadshe"></a> CALC\{"formula"\} -- add spreadsheet calculations to tables and outside tables
+
+- The `%CALC{"formula"}%` variable is handled by the [[SpreadSheetPlugin]]. There are around 80 formulae, such as `$ABS()`, `$EXACT()`, `$EXISTS()`, `$GET()/$SET()`, `$IF()`, `$LOG()`, `$LOWER()`, `$PERCENTILE()`, `$TIME()`, `$VALUE()`.
+- Syntax: `%CALC{"formula"}%`
+- Examples:
+  - `%CALC{"$SUM($ABOVE())"}%` returns the sum of all cells above the current cell
+  - `%CALC{"$EXISTS(Web.SomeTopic)"}%` returns `1` if the topic exists
+  - `%CALC{"$UPPER(Collaboration)"}%` returns `COLLABORATION`
+- Related: [[IF|Main/WebHome#VarIF]], [[SpreadSheetPlugin]]

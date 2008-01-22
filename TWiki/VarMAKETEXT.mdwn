@@ -2,7 +2,7 @@
 
 ### <a name="MAKETEXT -- creates text using T"></a> MAKETEXT -- creates text using TWiki's I18N infrastructure
 
-- Syntax: `%MAKETEXT{"string" args="..."}`
+- Syntax: `%MAKETEXT{"string" args="..."}%`
 - Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> Parameter </strong></th>
@@ -23,7 +23,7 @@
 - Examples:
   - `%MAKETEXT{string="Notes:"}%` %BR% expands to %BR% _ Notes: _
   - `%MAKETEXT{"If you have any questions, please contact [_1]." args="%WIKIWEBMASTER%"}%` %BR% expands to %BR% _ If you have any questions, please contact 0. _
-  - `%MAKETEXT{"Did you want to [[[_1]][reset [_2]'s password]]?" args="%TWIKIWEB%.ResetPassword,%WIKIUSERNAME%"}%` %BR% expands to %BR% _ Did you want to [[reset Main.admin's password|TWiki/ResetPassword]]? _
+  - `%MAKETEXT{"Did you want to [[[_1]][reset [_2]'s password]]?" args="%SYSTEMWEB%.ResetPassword,%WIKIUSERNAME%"}%` %BR% expands to %BR% _ Did you want to [[reset Main.admin's password|TWiki/ResetPassword]]? _
 - **_Notes:_**
   - TWiki will translate the `string` to the current user's language _only_ if it has such string in its translation table for that language.
   - Amperstands (`&`) followed by one letter (one of a...z, A...Z) (say, `X`) in the translatable string will be translated to `<span class='twikiAccessKey'>X</span>`. This is used to implement access keys. If you want to write an actual amperstand that stays just before a letter, write two consecutive amperstands (`&&`): they will be transformed in just one.

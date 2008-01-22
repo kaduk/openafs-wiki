@@ -1,0 +1,28 @@
+## <a name="Formatting Tokens"></a> Formatting Tokens
+
+TWiki defines some standard special tokens that can be used to replace characters in some parameters - notably those to [[FormattedSearch]] and [[IfStatements]] - to defer evaluation of the parameter until later. These special tokens are often called "escapes", because they allow the character to "escape" from its normal meaning.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". This variable gets removed; useful for nested search </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>) (\" also works) </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>
+
+If you ever find yourself needing to escape an escape, you can use `$dollar` to escape the leading dollar, thus: `$dollarpercnt`.

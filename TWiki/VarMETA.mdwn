@@ -12,7 +12,7 @@
   </tr>
   <tr>
     <td><code>"formfield"</code></td>
-    <td><code>name="..."</code>: name of the field. The field value can be shortened as described in [[TWiki/FormattedSearch]] for <code>$formfield</code> %BR% <code>newline="..."</code>: by default, each newline character will be rewritten to <code>&lt;br /&gt;</code> to allow metadata that contains newlines to be used in tables, etc. <code>$n</code> indicates a newline character. %BR% <code>bar="..."</code>: by default, each vertical bar is rewritten to an HTML entity so as to not be mistaken for a table separator. </td>
+    <td><code>name="..."</code>: name of the field. The field value can be shortened as described in %SYSTEMWEB%.FormattedSearch for <code>$formfield</code> %BR% <code>newline="..."</code>: by default, each newline character will be rewritten to <code>&lt;br /&gt;</code> to allow metadata that contains newlines to be used in tables, etc. <code>$n</code> indicates a newline character. %BR% <code>bar="..."</code>: by default, each vertical bar is rewritten to an HTML entity so as to not be mistaken for a table separator. </td>
     <td> Show a single form field </td>
   </tr>
   <tr>
@@ -36,4 +36,4 @@
     <td> Generates the parent link </td>
   </tr>
 </table>
-- Related: [[METASEARCH|Main/WebHome#VarMETASEARCH]]
+- Related: [[METASEARCH|Main/VarMETASEARCH]]

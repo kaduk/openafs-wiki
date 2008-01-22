@@ -1,161 +1,144 @@
-<form action="http://www.dementia.org/twiki/viewauth/Main/WebHome" enctype="multipart/form-data" method="post" name="editpreferences">
-  <p>
-  </p>
-  <h1><a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC% </h1>
-  <p> Allows editing of preferences using fields predefined in a [[TWiki/TWikiForms]]. However, the edit fields are inlined in the text, similar to how tables are edited in TWiki:Plugins/EditTablePlugin. </p>
-  <p>
-  </p>
-  <div>
-    <ul>
-      <li><a href="#Syntax Rules"> Syntax Rules</a></li>
-      <li><a href="#Examples"> Examples</a></li>
-      <li><a href="#Plugin Settings"> Plugin Settings</a></li>
-      <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
-      <li><a href="#Plugin Info"> Plugin Info</a></li>
-    </ul>
-  </div>
-  <p> Insert the <code>%EDITPREFERENCES%</code> variable (see below) anywhere in your topic. It will be replaced by a button that allows editing each preference in its predefined input format (or a text box, when no format is defined for this preference). </p>
-  <p> In edit mode, the edit button is replaced by save and cancel buttons, with their obvious meanings. </p>
-  <p>
-  </p>
-  <h2><a name="Syntax Rules"></a> Syntax Rules </h2>
-  <p>
-  </p>
+# <a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC%
+
+Allows editing of preferences using fields predefined in a %SYSTEMWEB%.TWikiForms. However, the edit fields are inlined in the text, similar to how tables are edited in TWiki:Plugins/EditTablePlugin.
+
+<div>
   <ul>
-    <li><code>%EDITPREFERENCES{ "</code> <em>topic</em> <code>" }%</code><ul>
-        <li><em>topic</em> references a [[TWiki/TWikiForms]] defining the format of the edit fields for preferences. It may be prefixed by a web. </li>
-        <li> If a preference setting is not mentioned in the form referenced by <em>topic</em>, a text input box of the specified length is provided. </li>
-        <li> Otherwise, the input can be through textareas, select, radio, checkbox, date, or text, as provided by [[TWiki/TWikiForms]]. </li>
-      </ul>
-    </li>
+    <li><a href="#Syntax Rules"> Syntax Rules</a></li>
+    <li><a href="#Examples"> Examples</a></li>
+    <li><a href="#Plugin Settings"> Plugin Settings</a></li>
+    <li><a href="#Plugin Installation Instructions"> Plugin Installation Instructions</a></li>
+    <li><a href="#Plugin Info"> Plugin Info</a></li>
   </ul>
-  <p>
-  </p>
-  <h2><a name="Examples"></a> Examples </h2>
-  <p>
-  </p>
-  <ul>
-    <li><code>%EDITPREFERENCES{ "%TWIKIWEB%.TWikiPreferencesForm" }%</code></li>
-  </ul>
-  <p>
-  </p>
-  <h2><a name="Plugin Settings"></a> Plugin Settings </h2>
-  <p> Plugin settings are stored as preferences variables. To reference a plugin setting write <code><b>%&lt;plugin&gt;_&lt;setting&gt;%</b></code>, i.e. <code><b>%PREFERENCESPLUGIN_SHORTDESCRIPTION%</b></code></p>
-  <p>
-  </p>
-  <ul>
-    <li> One line description, is shown in the [[TWiki/TextFormattingRules]] topic: <ul>
-        <li> Set SHORTDESCRIPTION = Allows editing of preferences using fields predefined in a form </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <h2><a name="Plugin Installation Instructions"></a> Plugin Installation Instructions </h2>
-  <p><strong><em>Note:</em></strong> You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the server where TWiki is running. </p>
-  <p>
-  </p>
-  <ul>
-    <li> Download the ZIP file from the Plugin web (see below) </li>
-    <li> Unzip <code><b>%TOPIC%.zip</b></code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
-        <tr>
-          <th bgcolor="#99CCCC"><strong> File: </strong></th>
-          <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-        </tr>
-        <tr>
-          <td><code><b>data/TWiki/%TOPIC%.txt</b></code></td>
-          <td> Plugin topic </td>
-        </tr>
-        <tr>
-          <td><code><b>data/TWiki/%TOPIC%.txt,v</b></code></td>
-          <td> Plugin topic repository </td>
-        </tr>
-        <tr>
-          <td><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
-          <td> Plugin Perl module </td>
-        </tr>
-        <tr>
-          <td><code><b>data/TWiki/TWikiPreferencesForm.txt</b></code></td>
-          <td> Example form </td>
-        </tr>
-      </table>
-    </li>
-    <li> (Dakar) Visit <code>configure</code> in your TWiki installation, and enable the plugin in the {Plugins} section. </li>
-    <li> If the installation was successful, an edit button should appear below: <input name="prefsaction" type="submit" value="Edit" /></li>
-  </ul>
-  <p>
-  </p>
-  <h2><a name="Plugin Info"></a> Plugin Info </h2>
-  <p>
-  </p>
-  <table border="1" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="right"> Plugin Author: </td>
-      <td> TWiki:Main.ThomasWeigert </td>
-    </tr>
-    <tr>
-      <td align="right"> Plugin Version: </td>
-      <td> 15 Apr 2006 </td>
-    </tr>
-    <tr>
-      <td align="right"> Change History: </td>
-      <td>  </td>
-    </tr>
-    <tr>
-      <td align="right"> 15 Apr 2006: </td>
-      <td> Adding css classes to buttons. Removed debug print statement causing 500s on SunOne. Prevent extra space in settings on saves. Switched to earlier handler. Converted all SCRIPTURL to SCRIPTURLPATH, and added support. The only SCRIPTURLs should be the one in the BASE tag and those in mail notification templates. Because the forms package was throwing an exception when it failed to create a form, the edit preferences plugin was aborting the whole of the session whenever the form specified in EDITPREFERENCES didn't exist. Changed it so that the Form constructor does not throw, but returns undef on a non-existant form, and changed preferences plugin to be tolerant of missing forms (ie defaults all fields to text if the form is missing, of is a Set exists which is not in the form). </td>
-    </tr>
-    <tr>
-      <td align="right"> 26 May 2005: </td>
-      <td> Crawford Currie recoded to use code from Form.pm to render form fields. </td>
-    </tr>
-    <tr>
-      <td align="right"> 08 May 2005: </td>
-      <td> Add plugin preference to define default input length </td>
-    </tr>
-    <tr>
-      <td align="right"> 07 May 2005: </td>
-      <td> Initial version </td>
-    </tr>
-    <tr>
-      <td align="right"> TWiki Dependency: </td>
-      <td> $TWiki::Plugins::VERSION 1.026 </td>
-    </tr>
-    <tr>
-      <td align="right"> CPAN Dependencies: </td>
-      <td> none </td>
-    </tr>
-    <tr>
-      <td align="right"> Other Dependencies: </td>
-      <td> none </td>
-    </tr>
-    <tr>
-      <td align="right"> Perl Version: </td>
-      <td> 5.005 </td>
-    </tr>
-    <tr>
-      <td align="right"> License: </td>
-      <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
-    </tr>
-    <tr>
-      <td align="right"> TWiki:Plugins/Benchmark: </td>
-      <td>[[TWiki/GoodStyle]] nn%, [[TWiki/FormattedSearch]] nn%, %TOPIC% nn% </td>
-    </tr>
-    <tr>
-      <td align="right"> Plugin Home: </td>
-      <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
-    </tr>
-    <tr>
-      <td align="right"> Feedback: </td>
-      <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
-    </tr>
-    <tr>
-      <td align="right"> Appraisal: </td>
-      <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
-    </tr>
-  </table>
-  <p><strong><em>Related Topics:</em></strong> [[TWiki/TWikiPreferences]], [[TWiki/TWikiForms]]</p>
-  <p> -- TWiki:Main.ThomasWeigert - 08 May 2005 </p>
-  <p>
-  </p>
-</form>
+</div>
+
+Insert the `%EDITPREFERENCES%` variable (see below) anywhere in your topic. It will be replaced by a button that allows editing each preference in its predefined input format (or a text box, when no format is defined for this preference).
+
+In edit mode, the edit button is replaced by Save and Cancel buttons, with their obvious meanings.
+
+## <a name="Syntax Rules"></a> Syntax Rules
+
+- `%EDITPREFERENCES{ "` _topic_ `" }%`
+  - _topic_ references a [[TWikiForm|SYSTEMWEB/TWikiForms]] defining the format of the edit fields for preferences. It may be prefixed by a web.
+  - If a preference setting is not mentioned in the form referenced by _topic_, a text input box of the specified length is provided.
+  - Otherwise, the input can be through textareas, select, radio, checkbox, date, or text, as provided by %SYSTEMWEB%.TWikiForms.
+- `%EDITPREFERENCES%`
+  - Edit existing preferences in the topic using a simple text field.
+
+## <a name="Examples"></a> Examples
+
+- `%EDITPREFERENCES%`
+- `%EDITPREFERENCES{ "%SYSTEMWEB%.TWikiPreferencesForm" }%`
+
+## <a name="Plugin Settings"></a> Plugin Settings
+
+- One line description, shown in the %SYSTEMWEB%.TextFormattingRules topic:
+  - Set SHORTDESCRIPTION = Allows editing of preferences using fields predefined in a form
+
+## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
+
+You do not need to install anything in the browser to use this extension. The following instructions are for the administrator who installs the extension on the server where TWiki is running.
+
+Like many other TWiki extensions, this module is shipped with a fully automatic installer script written using the BuildContrib.
+
+- If you have TWiki 4.2 or later, you can install from the `configure` interface (Go to Plugins-&gt;Find More Extensions)
+  - See the [installation supplement](http://twiki.org/cgi-bin/view/Plugins/BuildContribInstallationSupplement) on TWiki.org for more information.
+- If you have any problems, then you can still install manually from the command-line:
+  1. Download one of the `.zip` or `.tgz` archives
+  2. Unpack the archive in the root directory of your TWiki installation.
+  3. Run the installer script ( `perl <module>_installer` )
+  4. Run `configure` and enable the module, if it is a plugin.
+  5. Repeat for any missing dependencies.
+- If you are **still** having problems, then instead of running the installer script:
+  1. Make sure that the file permissions allow the webserver user to access all files.
+  2. Check in any installed files that have existing `,v` files in your existing install (take care **not** to lock the files when you check in)
+  3. Manually edit LocalSite.cfg to set any configuration variables.
+
+<div class="twikiAlert">%X% WARNING: SYSTEMWEB is not defined in this TWiki. Please add these definitions to your [[Main/TWikiPreferences]], if they are not already there:<br /><pre>   * Set SYSTEMWEB = %TWIKIWEB%<br />   * Set USERSWEB = %MAINWEB%</pre></div>
+
+- If the installation was successful, an edit button should appear below:
+
+%EDITPREFERENCES%
+
+## <a name="Plugin Info"></a> Plugin Info
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"> Plugin Author: </td>
+    <td> TWiki:Main.ThomasWeigert </td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Version: </td>
+    <td> 15487 (22 Jan 2008) </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 05 Nov 2007: </td>
+    <td> Kenneth Lavrsen fixed problem when settings are hidden in html comments. These settings are now ignored. </td>
+  </tr>
+  <tr>
+    <td align="right"> 23 Jun 2007: </td>
+    <td> Crawford Currie added testcases, recoded to work without a form definition, fixed for TWiki 4.2 </td>
+  </tr>
+  <tr>
+    <td align="right"> 08 Feb 2007: </td>
+    <td> Arthur Clemens added access keys for Save and Cancel, bold style for editable preference names, and a descriptive Save button label. </td>
+  </tr>
+  <tr>
+    <td align="right"> 15 Apr 2006: </td>
+    <td> Adding css classes to buttons. Removed debug print statement causing 500s on SunOne. Prevent extra space in settings on saves. Switched to earlier handler. Converted all SCRIPTURL to SCRIPTURLPATH, and added support. The only SCRIPTURLs should be the one in the BASE tag and those in mail notification templates. Because the forms package was throwing an exception when it failed to create a form, the edit preferences plugin was aborting the whole of the session whenever the form specified in EDITPREFERENCES didn't exist. Changed it so that the Form constructor does not throw, but returns undef on a non-existant form, and changed preferences plugin to be tolerant of missing forms (ie defaults all fields to text if the form is missing, of is a Set exists which is not in the form). </td>
+  </tr>
+  <tr>
+    <td align="right"> 26 May 2005: </td>
+    <td> Crawford Currie recoded to use code from Form.pm to render form fields. </td>
+  </tr>
+  <tr>
+    <td align="right"> 08 May 2005: </td>
+    <td> Add plugin preference to define default input length </td>
+  </tr>
+  <tr>
+    <td align="right"> 07 May 2005: </td>
+    <td> Initial version </td>
+  </tr>
+  <tr>
+    <td align="right"> TWiki Dependency: </td>
+    <td> $TWiki::Plugins::VERSION 1.026 </td>
+  </tr>
+  <tr>
+    <td align="right"> CPAN Dependencies: </td>
+    <td> none </td>
+  </tr>
+  <tr>
+    <td align="right"> Other Dependencies: </td>
+    <td> none </td>
+  </tr>
+  <tr>
+    <td align="right"> Perl Version: </td>
+    <td> 5.005 </td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
+    <td align="right"> TWiki:Plugins/Benchmark: </td>
+    <td> %SYSTEMWEB%.GoodStyle nn%, %SYSTEMWEB%.FormattedSearch nn%, %TOPIC% nn% </td>
+  </tr>
+  <tr>
+    <td align="right"> Plugin Home: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
+</table>
+
+**_Related Topics:_** %SYSTEMWEB%.TWikiPreferences, %SYSTEMWEB%.TWikiForms

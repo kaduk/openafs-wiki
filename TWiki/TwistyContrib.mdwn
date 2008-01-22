@@ -6,7 +6,7 @@ TwistyContrib is installed by default in TWiki 4 and used by [[Twisty Plugin|TWi
 
 It is recommended to use the TwistyPlugin as it eases the deployment and use of this contrib.
 
-This Contrib should work in all versions of TWiki. It has been tested against [[TWiki 3|TWiki:Codev/CairoRelease]] and [[TWiki 4|TWiki:Codev/DakarRelease]].
+This Contrib should work with [[TWiki 4|TWiki:Codev/DakarRelease]] and newer.
 
 <div><span>On this page:</span><ul>
     <li><a href="#Usage examples"> Usage examples</a><ul>
@@ -138,69 +138,40 @@ When you want to use links, write:
 ## <a name="Settings"></a> Settings
 
 - Set SHORTDESCRIPTION = Twisty section javascript library to open/close content dynamically
-- Set STUB = TWiki::Contrib::TwistyContrib
+
+You can also set the global TWiki variable TWISTYCONTRIB\_DEBUG to 1 to make the contrib use uncompressed javascript sources, in the event of problems.
 
 ## <a name="Installation Instructions"></a> Installation Instructions
 
-- Download the ZIP file from the Plugin web (see below)
-- Unzip <code>**%TOPIC%.zip**</code> in your ($TWIKI\_ROOT) directory. Content: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> File: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-  </tr>
-  <tr>
-    <td><code><b>data/TWiki/TwistyContrib.txt</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>lib/TWiki/Contrib/TwistyContrib.pm</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/TwistyContrib/twist.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/TwistyContrib/twist.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/TwistyContrib/twist.compressed.js</b></code></td>
-    <td>   </td>
-  </tr>
-</table>
+%\*INSTALL\_INSTRUCTIONS%
 
-- Optionally, run <code>**%TOPIC%\_installer**</code> to automatically check and install other TWiki modules that this module depends on. You can also do this step manually.
-- Alternatively, manually make sure the dependencies listed in the table below are resolved. <table border="1">
-  <tr>
-    <th>Name</th>
-    <th>Version</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td align="left">TWiki::Plugins::BehaviourContrib</td>
-    <td align="left">&gt;=1.000</td>
-    <td align="left">Required</td>
-  </tr>
-</table>
+- TwistyContrib uses these header includes:
+    <style type="text/css" media="all">
+    @import url("%PUBURL%/%TWIKIWEB%/TwistyContrib/twist.css");
+    </style>
+    <script type="text/javascript" src="%PUBURL%/%TWIKIWEB%/TWikiJavascripts/twikilib.js"></script>
+    <script type="text/javascript" src="%PUBURL%/%TWIKIWEB%/TWikiJavascripts/twikiPref.js"></script>
+    <script type="text/javascript" src="%PUBURL%/%TWIKIWEB%/TWikiJavascripts/twikiCSS.js"></script>
+    <script type="text/javascript" src="%PUBURL%/%TWIKIWEB%/BehaviourContrib/behaviour.js"></script>
+    <script type="text/javascript" src="%PUBURL%/%TWIKIWEB%/TwistyContrib/twist.js"></script>
 
 ## <a name="Contrib Info"></a> Contrib Info
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <td> Authors: </td>
-    <td> JavaScript created by TWiki:Main.SamHasler, Contrib packaged by TWiki:Main.RafaelAlvarez </td>
+    <td align="right"> Authors: </td>
+    <td> JavaScript written by TWiki:Main.ArthurClemens; Contrib packaged by TWiki:Main.RafaelAlvarez; original JavaScript written by TWiki:Main.SamHasler. </td>
   </tr>
   <tr>
-    <td> Copyright ©: </td>
-    <td> 2005 Sam Hasler and Rafael Alvarez, 2006 Arthur Clemens </td>
+    <td align="right"> Copyright ©: </td>
+    <td> 2005 Sam Hasler and Rafael Alvarez; 2006,2007 Arthur Clemens </td>
   </tr>
   <tr>
-    <td> License: </td>
+    <td align="right"> License: </td>
     <td><a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GPL</a></td>
   </tr>
   <tr>
-    <td> Dependencies: </td>
+    <td align="right"> Dependencies: </td>
     <td>
       <table border="1">
         <tr>
@@ -217,27 +188,47 @@ When you want to use links, write:
     </td>
   </tr>
   <tr>
-    <td> 25 Oct 2006 </td>
+    <td align="right"> Plugin Version: </td>
+    <td> 20 Jun 2007 (version 1.4.1) </td>
+  </tr>
+  <tr>
+    <td align="right"> Version: </td>
+    <td> 15675 (22 Jan 2008) </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 20 Jun 2007 </td>
+    <td> 1.4 Arthur Clemens - Updated script so [[Main/TwistyPlugin]] can work without extra javascript 'init' calls. </td>
+  </tr>
+  <tr>
+    <td align="right"> 18 Jun 2007 </td>
+    <td> 1.3 Arthur Clemens - Updated with TWiki 4 JavaScript files. </td>
+  </tr>
+  <tr>
+    <td align="right"> 25 Oct 2006 </td>
     <td> 1.2 Arthur Clemens - Updated JavaScript to support TwistyPlugin version 1.2 </td>
   </tr>
   <tr>
-    <td> 26 Sep 2006 </td>
+    <td align="right"> 26 Sep 2006 </td>
     <td> 1.010 Arthur Clemens - Complete JavaScript rewrite </td>
   </tr>
   <tr>
-    <td> 12 Sep 2005 </td>
+    <td align="right"> 12 Sep 2005 </td>
     <td> 1.000 First Version </td>
   </tr>
   <tr>
-    <td> Home: </td>
+    <td align="right"> Home: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
   </tr>
   <tr>
-    <td> Feedback: </td>
+    <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
   <tr>
-    <td> Appraisal: </td>
+    <td align="right"> Appraisal: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
   </tr>
 </table>

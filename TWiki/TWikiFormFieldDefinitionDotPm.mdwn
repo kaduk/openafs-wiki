@@ -1,0 +1,81 @@
+# <a name="Package &lt;code&gt;TWiki::Form::_FieldDefi"></a> Package =TWiki::Form::FieldDefinition
+
+Base class of all field definition classes.
+
+Type-specific classes are derived from this class to define specific per-type behaviours. This class also provides default behaviours for when a specific type cannot be loaded.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Form::_FieldDefi"> Package TWiki::Form::FieldDefinition</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> (%...)"> ClassMethod new <tt>(%...)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
+        <li><a href="#isEditable() -> $boolean"> isEditable() -&gt; $boolean</a></li>
+        <li><a href="#is_MultiValued() -> $boolean"> isMultiValued() -&gt; $boolean</a></li>
+        <li><a href="#is_TextMergeable() -> $boolean"> isTextMergeable() -&gt; $boolean</a></li>
+        <li><a href="#isMandatory() -> $boolean"> isMandatory() -&gt; $boolean</a></li>
+        <li><a href="#render_ForEdit( $web, $topic, $v"> renderForEdit( $web, $topic, $value ) -&gt; ($col0html, $col1html)</a></li>
+        <li><a href="#cssClasses(@classes) -> $classes"> cssClasses(@classes) -&gt; $classes</a></li>
+        <li><a href="#get_DefaultValue() -> $value"> getDefaultValue() -&gt; $value</a></li>
+        <li><a href="#renderHidden($meta) -> $html"> renderHidden($meta) -&gt; $html</a></li>
+        <li><a href="#populate_MetaDataFromQuery( $que"> populateMetaDataFromQuery( $query, $meta, $old ) -&gt; ($bValid, $bPresent)</a></li>
+        <li><a href="#ObjectMethod *render_ForDisplay*"> ObjectMethod renderForDisplay <tt>($format,$attrs) -&gt; $html</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; (%...)"></a> [[ClassMethod]] **new** `(%...)`
+
+Construct a new [[FieldDefinition]]. Parameters are passed in a hash. See Form.pm for how it is called. Subclasses should pass @\_ on to this class.
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
+
+## <a name="isEditable() - $boolean"></a> isEditable() -&gt; $boolean
+
+Is the field type editable? Labels aren't, for example. Subclasses may need to redefine this.
+
+## <a name="is_MultiValued() - $boolean"></a> isMultiValued() -&gt; $boolean
+
+Is the field type multi-valued (i.e. does it store multiple values)? Subclasses may need to redefine this.
+
+## <a name="is_TextMergeable() - $boolean"></a> isTextMergeable() -&gt; $boolean
+
+Is this field type mergeable using a conventional text merge?
+
+## <a name="isMandatory() - $boolean"></a> isMandatory() -&gt; $boolean
+
+Is this field mandatory (required)?
+
+## <a name="render_ForEdit( $web, $topic, $v"></a> renderForEdit( $web, $topic, $value ) -&gt; ($col0html, $col1html)
+
+`$web` - the web containing the topic being edited `$topic` - the topic being edited Render the field for editing. Returns two chunks of HTML; the `$col0html` is appended to the HTML for the first column in the form table, and the `$col1html` is used as the content of the second column.
+
+## <a name="cssClasses(@classes) - $classes"></a> cssClasses(@classes) -&gt; $classes
+
+Construct a list of the CSS classes for the form field. Adds additional class specifiers related to the attributes of the field e.g mandatory. Pass it a list of the other classnames you want on the field.
+
+## <a name="get_DefaultValue() - $value"></a> getDefaultValue() -&gt; $value
+
+Try and get a sensible default value for the field from the values stored in the form definition. The result should be a value string.
+
+Some subclasses may not support the definition of defaults in the form definition. In that case this method should return `undef`.
+
+## <a name="renderHidden($meta) - $html"></a> renderHidden($meta) -&gt; $html
+
+Render the form in `$meta` as a set of hidden fields.
+
+## <a name="populate_MetaDataFromQuery( $que"></a> populateMetaDataFromQuery( $query, $meta, $old ) -&gt; ($bValid, $bPresent)
+
+Given a CGI `$query`, a `$meta` object, and an array of `$old` field entries, then populate the $meta with a row for this field definition, taking the content from the query if it's there, otherwise from $old or failing that, from the default defined for the type. Refuses to update mandatory fields that have an empty value.
+
+Return $bValid true if the value in $meta was updated (either from the query or from a default in the form. Return $bPresent true if a value was present in the query (even it was undef)
+
+## <a name="ObjectMethod &lt;strong&gt;render_ForDisplay*"></a> [[ObjectMethod]] \*renderForDisplay `($format,$attrs) -> $html`
+
+Render the field for display, under the control of $attrs.
+
+The following vars in $format are expanded: $title - title of the form field $value - expanded to the **protected** value of the form field
+
+The value is protected by TWiki::Render::protectFormFieldValue.

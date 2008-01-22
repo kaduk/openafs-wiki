@@ -1,57 +1,259 @@
 # <a name="Package &lt;code&gt;TWiki::Users="></a> Package =TWiki::Users
 
-Singleton object that handles mapping of users to wikinames and vice versa, and user authentication checking.
+This package provides services for the lookup and manipulation of login and wiki names of users, and their authentication.
+
+It is a Facade that presents a common interface to the User Mapping and Password modules. The rest of the core should **only** use the methods of this package, and should **never** call the mapping or password managers directly.
+
+TWiki uses the concept of a _login name_ which is used to authenticate a user. A login name maps to a _wiki name_ that is used to identify the user for display. Each login name is unique to a single user, though several login names may map to the same wiki name.
+
+Using this module (and the associated plug-in user mapper) TWiki supports the concept of _groups_. Groups are sets of login names that are treated equally for the purposes of access control. Group names do not have to be wiki names, though it is helpful for display if they are.
+
+Internally in the code TWiki uses something referred to as a \_canonical user id\_ or just _user id_. The user id is also used externally to uniquely identify the user when (for example) recording topic histories. The user id is **usually** just the login name, but it doesn't need to be. It just has to be a unique 7-bit alphanumeric and underscore string that can be mapped to/from login and wiki names by the user mapper.
+
+The canonical user id should **never** be seen by a user. On the other hand, core code should never use anything **but** a canonical user id to refer to a user.
+
+**Terminology**
+
+- A **login name** is the name used to log in to TWiki. Each login name is assumed to be unique to a human. The Password module is responsible for authenticating and manipulating login names.
+- A **canonical user id** is an internal TWiki representation of a user. Each canonical user id maps 1:1 to a login name.
+- A **wikiname** is how a user is displayed. Many user ids may map to a single wikiname. The user mapping module is responsible for mapping the user id to a wikiname.
+- A **group id** represents a group of users and other groups. The user mapping module is responsible for mapping from a group id to a list of canonical user ids for the users in that group.
+- An **email** is an email address asscoiated with a **login name**. A single login name may have many emails.
+
+**NOTE:**
+
+- wherever the code references $user, its a canonical\_id
+- wherever the code references $group, its a group\_name
 
 <div>
   <ul>
     <li><a href="#Package =TWiki::Users="> Package TWiki::Users</a><ul>
-        <li><a href="#ClassMethod <strong>new</strong> ($session,$imp"> ClassMethod new <tt>($session,$impl)</tt></a></li>
-        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
-        <li><a href="#ObjectMethod <strong>findUser</strong> ($name[,"> ObjectMethod findUser <tt>($name[,$wikiname][,$nocreate]) -&gt; $userObject</tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod *login_TemplateName"> ObjectMethod loginTemplateName <tt>() -&gt; templateFile</tt></a></li>
+        <li><a href="#ObjectMethod *supportsRegistrati"> ObjectMethod supportsRegistration <tt>() -&gt; boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>initialiseUser</strong> ($"> ObjectMethod initialiseUser <tt>($login) -&gt; cUID</tt></a></li>
+        <li><a href="#randomPassword()"> randomPassword()</a></li>
+        <li><a href="#ObjectMethod <strong>addUser</strong> ($login,$"> ObjectMethod addUser <tt>($login,$wikiname,$password,$emails) -&gt; $cUID</tt></a></li>
+        <li><a href="#StaticMethod <strong>forceCUID</strong> ($cUID)"> StaticMethod forceCUID <tt>($cUID) -&gt; $cUID</tt></a></li>
+        <li><a href="#ObjectMethod *get_CanonicalUserI"> ObjectMethod getCanonicalUserID <tt>($login) -&gt; $user</tt></a></li>
+        <li><a href="#ObjectMethod *find_UserByWikiNam"> ObjectMethod findUserByWikiName <tt>($wn) -&gt; \@users</tt></a></li>
         <li><a href="#ObjectMethod *find_UserByEmail*"> ObjectMethod findUserByEmail <tt>($email) -&gt; \@users</tt></a></li>
-        <li><a href="#ObjectMethod <strong>createUser</strong> ($logi"> ObjectMethod createUser <tt>($login,$wikiname) -&gt; $userobject</tt></a></li>
-        <li><a href="#ObjectMethod *add_UserToMapping*"> ObjectMethod addUserToMapping <tt>($user) -&gt; $topicName</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getEmails</strong> ($user)"> ObjectMethod getEmails <tt>($user) -&gt; @emailAddress</tt></a></li>
+        <li><a href="#ObjectMethod <strong>setEmails</strong> ($user,"> ObjectMethod setEmails <tt>($user,@emails)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>isAdmin</strong> ($cUID) -"> ObjectMethod isAdmin <tt>($cUID) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>is_InList</strong> ($user,"> ObjectMethod isInList <tt>($user,$list) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_LoginName</strong> ($c"> ObjectMethod getLoginName <tt>($cUID) -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_WikiName</strong> ($cU"> ObjectMethod getWikiName <tt>($cUID) -&gt; $wikiName</tt></a></li>
+        <li><a href="#ObjectMethod <strong>web_DotWikiName</strong> ("> ObjectMethod webDotWikiName <tt>($user) -&gt; $webDotWiki</tt></a></li>
+        <li><a href="#ObjectMethod <strong>userExists</strong> ($cUID"> ObjectMethod userExists <tt>($cUID) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachUser</strong> () -> $i"> ObjectMethod eachUser <tt>() -&gt; $iterator</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachGroup</strong> () -> $"> ObjectMethod eachGroup <tt>() -&gt; $iterator</tt></a></li>
+        <li><a href="#ObjectMethod *each_GroupMember*"> ObjectMethod eachGroupMember <tt>($group) -&gt; $iterator</tt></a></li>
+        <li><a href="#ObjectMethod <strong>isGroup</strong> ($user) -"> ObjectMethod isGroup <tt>($user) -&gt; boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>is_InGroup</strong> ($user"> ObjectMethod isInGroup <tt>($user,$group) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachMembership</strong> ($"> ObjectMethod eachMembership <tt>($cUID) -&gt; $iterator</tt></a></li>
+        <li><a href="#ObjectMethod <strong>checkPassword</strong> ($u"> ObjectMethod checkPassword <tt>($userName,$passwordU) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>setPassword</strong> ($use"> ObjectMethod setPassword <tt>($user,$newPassU,$oldPassU) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>passwordError</strong> ()"> ObjectMethod passwordError <tt>() -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod <strong>removeUser</strong> ($user"> ObjectMethod removeUser <tt>($user) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod *ASSERT_IS_CANONICA"> ObjectMethod ASSERT_IS_CANONICAL_USER_ID <tt>($user_id) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod *ASSERT_IS_USER_LOG"> ObjectMethod ASSERT_IS_USER_LOGIN_ID <tt>($user_login) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod *ASSERT_IS_USER_DIS"> ObjectMethod ASSERT_IS_USER_DISPLAY_NAME <tt>($user_display) -&gt; $boolean</tt></a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session,$imp"></a> [[ClassMethod]] **new** `($session,$impl)`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
 
-Construct the user management object
+Construct the user management object that is the facade to the [[BaseUserMapping]] and the user mapping chosen in the configuration.
 
-## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
 
-Complete processing after the client's HTTP request has been responded to.
+Break circular references.
 
-1. breaking circular references to allow garbage collection in persistent environments
+## <a name="ObjectMethod &lt;strong&gt;login_TemplateName"></a> [[ObjectMethod]] \*loginTemplateName `() -> templateFile`
 
-## <a name="ObjectMethod &lt;strong&gt;findUser&lt;/strong&gt; ($name[,"></a> [[ObjectMethod]] **findUser** `($name[,$wikiname][,$nocreate]) -> $userObject`
+allows [[UserMappings]] to come with customised login screens - that should preffereably only over-ride the UI function
 
-- `$name` - login name or wiki name
-- `$wikiname` - optional, wikiname for created user
-- `$nocreate` - optional, disable creation of user object for user not found
+## <a name="ObjectMethod &lt;strong&gt;supportsRegistrati"></a> [[ObjectMethod]] \*supportsRegistration `() -> boolean`
 
-Find the user object corresponding to `$name`, which may be either a login name or a wiki name. If `$name` is found (either in the list of login names or the list of wiki names) the corresponding user object is returned. In this case `$wikiname` is ignored.
+#return 1 if the main [[UserMapper]] supports registration (ie can create new users)
 
-If they are not found, and `$nocreate` is true, then return undef.
+## <a name="ObjectMethod &lt;strong&gt;initialiseUser&lt;/strong&gt; ($"></a> [[ObjectMethod]] **initialiseUser** `($login) -> cUID`
 
-If `$nocreate` is false, then a user object is returned even if the user is not known.
+## <a name="randomPassword()"></a> randomPassword()
 
-If `$nocreate` is false, and no `$wikiname` is given, then the `$name` is used for both login name and wiki name.
+Static function that returns a random password
 
-If nocreate is off, then a default user will be created with their wikiname set the same as their login name. This user/wiki name pair can be overridden by a later createUser call when the correct wikiname is known, if necessary.
+## <a name="ObjectMethod &lt;strong&gt;addUser&lt;/strong&gt; ($login,$"></a> [[ObjectMethod]] **addUser** `($login,$wikiname,$password,$emails) -> $cUID`
+
+- `$login` - user login name. If `undef`, `$wikiname` will be used as the login name.
+- `$wikiname` - user wikiname. If `undef`, the user mapper will be asked to provide it.
+- `$password` - password. If undef, a password will be generated.
+
+Add a new TWiki user identity, returning the canonical user id for the new user. Used ONLY for user registration.
+
+The user is added to the password system (if there is one, and if it accepts changes). If the user already exists in the password system, then the password is checked and an exception thrown if it doesn't match. If there is no existing user, and no password is given, a random password is generated.
+
+$login can be undef; $wikiname must always have a value.
+
+The return value is the canonical user id that is used by TWiki to identify the user.
+
+## <a name="StaticMethod &lt;strong&gt;forceCUID&lt;/strong&gt; ($cUID)"></a> [[StaticMethod]] **forceCUID** `($cUID) -> $cUID`
+
+This function ensures that any cUID's are able to be used for rcs, and other internals not capable of coping with user identifications that contain more than 7 bit ascii.
+
+repeated calls must result in the same result (sorry, can't spell the word for it)so the '\_' must not be re-encoded
+
+Please, call this function in any custom Usermapper to simplifyyour mapping code.
+
+## <a name="ObjectMethod &lt;strong&gt;get_CanonicalUserI"></a> [[ObjectMethod]] \*getCanonicalUserID `($login) -> $user`
+
+Works out the unique TWiki identifier for the user who logs in with the given login. The canonical user ID is an alphanumeric string that is unique to the login name, and can be mapped back to a login name and the corresponding wiki name using the methods of this class.
+
+returns undef if the user does not exist.
+
+## <a name="ObjectMethod &lt;strong&gt;find_UserByWikiNam"></a> [[ObjectMethod]] \*findUserByWikiName `($wn) -> \@users`
+
+- `$wn` - wikiname to look up
+
+Return a list of canonical user names for the users that have this wikiname. Since a single wikiname might be used by multiple login ids, we need a list.
+
+If $wn is the name of a group, the group will **not** be expanded.
 
 ## <a name="ObjectMethod &lt;strong&gt;find_UserByEmail*"></a><a name="ObjectMethod *find_UserByEmail&lt;/strong&gt; "></a> [[ObjectMethod]] **findUserByEmail** `($email) -> \@users`
 
 - `$email` - email address to look up
 
-Return a list of user objects for the users that have this email registered with the password manager.
+Return a list of canonical user names for the users that have this email registered with the user mapping managers.
 
-## <a name="ObjectMethod &lt;strong&gt;createUser&lt;/strong&gt; ($logi"></a> [[ObjectMethod]] **createUser** `($login,$wikiname) -> $userobject`
+## <a name="ObjectMethod &lt;strong&gt;getEmails&lt;/strong&gt; ($user)"></a> [[ObjectMethod]] **getEmails** `($user) -> @emailAddress`
 
-Create a user, and insert them in the maps (overwriting any current entry). Use this instead of findUser when you want to be sure you are not going to pick up any default user created by findUser. All parameters are required.
+If this is a user, return their email addresses. If it is a group, return the addresses of everyone in the group.
 
-## <a name="ObjectMethod &lt;strong&gt;add_UserToMapping*"></a> [[ObjectMethod]] \*addUserToMapping `($user) -> $topicName`
+The password manager and user mapping manager are both consulted for emails for each user (where they are actually found is implementation defined).
 
-Add a user to the persistant mapping that maps from usernames to wikinames and vice-versa.
+Duplicates are removed from the list.
+
+## <a name="ObjectMethod &lt;strong&gt;setEmails&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **setEmails** `($user,@emails)`
+
+Set the email address(es) for the given user. The password manager is tried first, and if it doesn't want to know the user mapping manager is tried.
+
+## <a name="ObjectMethod &lt;strong&gt;isAdmin&lt;/strong&gt; ($cUID) -"></a> [[ObjectMethod]] **isAdmin** `($cUID) -> $boolean`
+
+True if the user is an admin
+
+- is $TWiki::cfg\{SuperAdminGroup\}
+- is a member of the $TWiki::cfg\{SuperAdminGroup\}
+
+## <a name="ObjectMethod &lt;strong&gt;is_InList&lt;/strong&gt; ($user,"></a> [[ObjectMethod]] **isInList** `($user,$list) -> $boolean`
+
+Return true if $user is in a list of user **wikinames** and group ids.
+
+$list is a comma-separated wikiname and group list. The list may contain the conventional web specifiers (which are ignored).
+
+## <a name="ObjectMethod &lt;strong&gt;get_LoginName&lt;/strong&gt; ($c"></a> [[ObjectMethod]] **getLoginName** `($cUID) -> $string`
+
+Get the login name of a user.
+
+## <a name="ObjectMethod &lt;strong&gt;get_WikiName&lt;/strong&gt; ($cU"></a> [[ObjectMethod]] **getWikiName** `($cUID) -> $wikiName`
+
+Get the wikiname to display for a canonical user identifier.
+
+can return undef if the user is not in the mapping system (or the special case from initialiseUser)
+
+## <a name="ObjectMethod &lt;strong&gt;web_DotWikiName&lt;/strong&gt; ("></a> [[ObjectMethod]] **webDotWikiName** `($user) -> $webDotWiki`
+
+Return the fully qualified wikiname of the user
+
+## <a name="ObjectMethod &lt;strong&gt;userExists&lt;/strong&gt; ($cUID"></a> [[ObjectMethod]] **userExists** `($cUID) -> $boolean`
+
+Determine if the user already exists or not. A user exists if they are known to to the user mapper.
+
+## <a name="ObjectMethod &lt;strong&gt;eachUser&lt;/strong&gt; () - $it"></a> [[ObjectMethod]] **eachUser** `() -> $iterator`
+
+Get an iterator over the list of all the registered users **not** including groups.
+
+list of canonical\_ids ???
+
+Use it as follows:
+
+        my $iterator = $umm->eachUser();
+        while ($iterator->hasNext()) {
+            my $user = $iterator->next();
+            ...
+        }
+
+## <a name="ObjectMethod &lt;strong&gt;eachGroup&lt;/strong&gt; () - $i"></a> [[ObjectMethod]] **eachGroup** `() -> $iterator`
+
+Get an iterator over the list of all the groups.
+
+## <a name="ObjectMethod &lt;strong&gt;each_GroupMember*"></a><a name="ObjectMethod *each_GroupMember&lt;/strong&gt; "></a> [[ObjectMethod]] **eachGroupMember** `($group) -> $iterator`
+
+Return a iterator of user ids that are members of this group. Should only be called on groups.
+
+Note that groups may be defined recursively, so a group may contain other groups. This method should **only** return users i.e. all contained groups should be fully expanded.
+
+## <a name="ObjectMethod &lt;strong&gt;isGroup&lt;/strong&gt; ($user) -"></a> [[ObjectMethod]] **isGroup** `($user) -> boolean`
+
+Establish if a user refers to a group or not.
+
+The default implementation is to check if the wikiname of the user ends with 'Group'. Subclasses may override this behaviour to provide alternative interpretations. The $TWiki::cfg\{SuperAdminGroup\} is recognized as a group no matter what it's name is.
+
+QUESTION: is the $user parameter here a string, or a canonical\_id??
+
+## <a name="ObjectMethod &lt;strong&gt;is_InGroup&lt;/strong&gt; ($user"></a> [[ObjectMethod]] **isInGroup** `($user,$group) -> $boolean`
+
+Test if user is in the given group.
+
+## <a name="ObjectMethod &lt;strong&gt;eachMembership&lt;/strong&gt; ($"></a> [[ObjectMethod]] **eachMembership** `($cUID) -> $iterator`
+
+Return an iterator over the groups that $cUID is a member of.
+
+## <a name="ObjectMethod &lt;strong&gt;checkPassword&lt;/strong&gt; ($u"></a> [[ObjectMethod]] **checkPassword** `($userName,$passwordU) -> $boolean`
+
+Finds if the password is valid for the given user.
+
+Returns 1 on success, undef on failure.
+
+TODO: add special check for [[BaseMapping]] admin user's login, and if its there (and we're in sudo\_context?) use that..
+
+## <a name="ObjectMethod &lt;strong&gt;setPassword&lt;/strong&gt; ($use"></a> [[ObjectMethod]] **setPassword** `($user,$newPassU,$oldPassU) -> $boolean`
+
+If the $oldPassU matches matches the user's password, then it will replace it with $newPassU.
+
+If $oldPassU is not correct and not 1, will return 0.
+
+If $oldPassU is 1, will force the change irrespective of the existing password, adding the user if necessary.
+
+Otherwise returns 1 on success, undef on failure.
+
+## <a name="ObjectMethod &lt;strong&gt;passwordError&lt;/strong&gt; ()"></a><a name="ObjectMethod &lt;strong&gt;passwordError&lt;/strong&gt; () "></a> [[ObjectMethod]] **passwordError** `() -> $string`
+
+returns a string indicating the error that happened in the password handlers TODO: these delayed error's should be replaced with Exceptions.
+
+returns undef if no error
+
+## <a name="ObjectMethod &lt;strong&gt;removeUser&lt;/strong&gt; ($user"></a> [[ObjectMethod]] **removeUser** `($user) -> $boolean`
+
+Delete the users entry. Removes the user from the password manager and user mapping manager. Does **not** remove their personal topics, which may still be linked.
+
+## <a name="ObjectMethod &lt;strong&gt;ASSERT_IS_CANONICA"></a> [[ObjectMethod]] \*ASSERT\_IS\_CANONICAL\_USER\_ID `($user_id) -> $boolean`
+
+used for debugging to ensure we are actually passing a canonical\_id
+
+These ASSERTS have been disabled, as they have been made dangerous and misleading due to the legacy cUID code
+
+## <a name="ObjectMethod &lt;strong&gt;ASSERT_IS_USER_LOG"></a> [[ObjectMethod]] \*ASSERT\_IS\_USER\_LOGIN\_ID `($user_login) -> $boolean`
+
+used for debugging to ensure we are actually passing a user login
+
+These ASSERTS have been disabled, as they have been made dangerous and misleading due to the legacy cUID code
+
+## <a name="ObjectMethod &lt;strong&gt;ASSERT_IS_USER_DIS"></a> [[ObjectMethod]] \*ASSERT\_IS\_USER\_DISPLAY\_NAME `($user_display) -> $boolean`
+
+used for debugging to ensure we are actually passing a user display\_name (commonly a [[WikiWord]] Name)
+
+These ASSERTS have been disabled, as they have been made dangerous and misleading due to the legacy cUID code

@@ -1,354 +1,192 @@
-<form action="http://www.dementia.org/twiki/viewauth/Main/WebHome" enctype="multipart/form-data" method="post" name="editpreferences">
-  <p>
-  </p>
-  <h1><a name="%WIKITOOLNAME% Site-Level Prefer"></a><a name=" %WIKITOOLNAME% Site-Level Prefe"></a> %WIKITOOLNAME% Site-Level Preferences </h1>
-  <p> This topic defines <strong><em>site-level</em></strong> settings that apply to all users and webs on this [[Main/TWikiSite]]. </p>
-  <p><strong><em>%X% Note:</em></strong> This topic should be regarded as read-only, so that upgrades can safely overwrite it without risk to your customizations. </p>
-  <p> Preference settings local to your site should be set in [[Main/TWikiPreferences]] (this topic is pointed to by {LocalSitePreferences}, which is set by the admin in the <a href="http://www.dementia.org/twiki/configure" target="_top">configure</a> interface). Settings in [[Main/TWikiPreferences]] will override settings in this topic, and should be used for defining custom settings and variables. </p>
-  <p>[[Main/TWikiVariables#PreferencesVariables]] on how to set Preferences Variables. </p>
-  <p>
-  </p><input name="prefsaction" type="submit" value="Edit" /> <em>(Click for form-based editing of existing preferences.)</em><div>
-    <ul>
-      <li><a href="#Default Web Preferences"> Default Web Preferences</a></li>
-      <li><a href="#Default User Settings"> Default User Settings</a></li>
-      <li><a href="#TWiki Platform Settings"> TWiki Platform Settings</a><ul>
-          <li><a href="#Search Settings"> Search Settings</a></li>
-          <li><a href="#E-mail Settings"> E-mail Settings</a></li>
-          <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
-        </ul>
-      </li>
-      <li><a href="#Skin Settings"> Skin Settings</a><ul>
-          <li><a href="#PatternSkin"> PatternSkin</a></li>
-          <li><a href="#Skin icons"> Skin icons</a></li>
-          <li><a href="#Legacy support"> Legacy support</a></li>
-        </ul>
-      </li>
-      <li><a href="#Plugins Settings"> Plugins Settings</a></li>
-      <li><a href="#Rendering Shortcuts Settings"> Rendering Shortcuts Settings</a></li>
-      <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
-      <li><a href="#Access Control Settings"> Access Control Settings</a></li>
-      <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
-      <li><a href="#Related Topics"> Related Topics</a></li>
-    </ul>
-  </div>
-  <p><a name="DefaultWebPreferences"></a></p>
-  <h2><a name="Default Web Preferences"></a> Default Web Preferences </h2>
-  <p> %X% <strong>NOTE:</strong> These are just defaults; don't change them here. Instead, add them to the WebPreferences topic in each web </p>
-  <p>
-  </p>
+# <a name="%WIKITOOLNAME% Site-Level Prefer"></a><a name=" %WIKITOOLNAME% Site-Level Prefe"></a> %WIKITOOLNAME% Site-Level Preferences
+
+This topic defines **_site-level_** settings that apply to all users and webs on this [[TWikiSite]].
+
+**_%X% Note:_** This topic should be regarded as read-only, so that upgrades can safely overwrite it without risk to your customizations.
+
+Preference settings local to your site should be set in [[Main.TWikiPreferences|Main/TWikiPreferences]] (this topic is pointed to by \{LocalSitePreferences\}, which is set by the admin in the [configure](http://www.dementia.org/twiki/configure) interface). Settings in [[Main.TWikiPreferences|Main/TWikiPreferences]] will override settings in this topic, and should be used for defining custom settings and variables.
+
+[[Read more|Main/TWikiVariables#PreferencesVariables]] on how to set Preferences Variables.
+
+<div>
   <ul>
-    <li> List of selected topics in a web (used in menus) <ul>
-        <li> Set WEBTOPICLIST = [[Main/WebChanges]] | [[Main/WebIndex]] | [[Main/WebSearch]] | Go <input name="topic" size="16" type="text" /></li>
+    <li><a href="#Default Web Preferences"> Default Web Preferences</a></li>
+    <li><a href="#Default User Settings"> Default User Settings</a></li>
+    <li><a href="#TWiki Platform Settings"> TWiki Platform Settings</a><ul>
+        <li><a href="#Search Settings"> Search Settings</a></li>
+        <li><a href="#E-mail Settings"> E-mail Settings</a></li>
+        <li><a href="#HTTP-EQUIV Settings"> HTTP-EQUIV Settings</a></li>
       </ul>
     </li>
+    <li><a href="#Skin Settings"> Skin Settings</a><ul>
+        <li><a href="#PatternSkin"> PatternSkin</a></li>
+        <li><a href="#Skin icons"> Skin icons</a></li>
+        <li><a href="#Legacy support"> Legacy support</a></li>
+      </ul>
+    </li>
+    <li><a href="#Plugins Settings"> Plugins Settings</a></li>
+    <li><a href="#Rendering Shortcuts Settings"> Rendering Shortcuts Settings</a></li>
+    <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
+    <li><a href="#Access Control Settings"> Access Control Settings</a></li>
+    <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
+    <li><a href="#Related Topics"> Related Topics</a></li>
   </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Web-specific background color: (is overwritten by web preferences) <ul>
-        <li> Set WEBBGCOLOR = #FFD8AA </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li><a href="http://en.wikipedia.org/wiki/Favicon" target="_top">favicon</a>: Attach a <code>favicon.ico</code> to a web's [[Main/WebPreferences]] or add a <code>FAVICON</code> setting to [[Main/WebPreferences]]<ul>
-        <li> Set FAVICON = <a href="http://www.dementia.org/twiki//view/Main/WebPreferences/favicon.ico" target="_top">http://www.dementia.org/twiki//view/Main/WebPreferences/favicon.ico</a></li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Image, URL and alternate tooltip text of web's logo. <ul>
-        <li> Set WEBLOGOIMG = %WIKILOGOIMG% </li>
-        <li> Set WEBLOGOURL = %WIKILOGOURL% </li>
-        <li> Set WEBLOGOALT = %WIKILOGOALT% </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> List this web in the [[TWiki/SiteMap]]: <ul>
-        <li> If yes, set SITEMAPLIST to <code>on</code>, do not set NOSEARCHALL, and add the "what" and "use to..." description for the site map. Make sure to list only links that include the name of the web, e.g. %WEB%.Topic links. </li>
-        <li> Set SITEMAPLIST = on </li>
-        <li> Set SITEMAPWHAT = Describe what this web does. </li>
-        <li> Set SITEMAPUSETO = ...to do something. </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Copyright notice: <ul>
-        <li> Set WEBCOPYRIGHT = <span> <a href="http://twiki.org/"><img alt="This site is powered by the TWiki collaboration platform" border="0" height="15" src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-80x15.gif" title="This site is powered by the TWiki collaboration platform" width="80" /></a></span>Copyright © by the contributing authors. All material on this collaboration platform is the property of the contributing authors. <br /> Ideas, requests, problems regarding %WIKITOOLNAME%? <a href="mailto:?subject=%WIKITOOLNAME% Feedback on Main.WebHome">Send feedback</a></li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Simplified Copyright notice for the [[Main/WebRss]] feed (don't use any special characters, html tags, entities, wiki markup or [[Main/WikiWords]]) <ul>
-        <li> Set WEBRSSCOPYRIGHT = Copyright 2010 by contributing authors </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Exclude web from a <code>web="all"</code> search: (Set to <code>on</code> for hidden webs; is overwritten by web preferences) <strong><em>Note</em></strong> it is much better to use [[Main/TWikiAccessControls]] in individual webs to control who can and can't view the contents of a web. NOSEARCHALL is retained for compatibility, but you should avoid using it. <ul>
-        <li> Set NOSEARCHALL = </li>
-      </ul>
-    </li>
-    <li> Prevent automatic linking of [[TWiki/WikiWords]] and acronyms (if set to <code>on</code>); link WikiWords (if empty); can be overwritten by web preferences: <ul>
-        <li> Set NOAUTOLINK = </li>
-        <li><strong><em>Note:</em></strong> Use the <code>[[...][...]]</code> syntax to link topics in case you disabled WikiWord linking. The <code>&lt;noautolink&gt; ... &lt;/noautolink&gt;</code> syntax can be used to prevents links within a block of text. </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Warn if <code>%INCLUDE{}%</code> of topic fails: Fail silently if empty or <code>off</code>. Output warning message (defined in templates/oopsalerts.tmpl) if set to <code>on</code>. Otherwise output specific text (use <code>$topic</code> for topic). You can override this in web preferences, or by using a <code>warn="..."</code> parameter with <code>%INCLUDE{}%</code> : <ul>
-        <li> Set INCLUDEWARNING = on </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <h2><a name="Default User Settings"></a> Default User Settings </h2>
-  <p> %X% <strong>NOTE:</strong> They are typically redefined in topics of individual [[Main/TWikiUsers]]</p>
-  <p>
-  </p>
-  <ul>
-    <li> Show tool-tip topic info on mouse-over of [[Main/WikiWord]] links. Setting can be on, off, or customized. An empty setting or off setting disables the tool-tips (for better performance). The setting can contain $summary to show the topic summary, $date for the last change date, $rev for the revision, $username for the login name of the last editor, $wikiname for the WikiName, $wikiusername for Main.WikiName, $topic for the topic name, and $web for the web name <ul>
-        <li> Set LINKTOOLTIPINFO = off </li>
-        <li> #Set LINKTOOLTIPINFO = $username - $date - $rev: $summary </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Some skins have two editors available; the default editor, and a second editor which is usually a WYSIWYG editor (the second editor is used by hitting the WYSIWYG link in <code>pattern</code> or <code>classic</code> skins). If COMPOSER is not set, the second editor will work the same as the <em>default</em> editor. If the WysiwygPlugin is installed and it is set to 'kupu' (the default), then the <strong>Kupu</strong> WYSIWYG editor will be enabled. You can change the setting to use any editor that is enabled by setting the <code>cover</code> parameter on the edit URL. <ul>
-        <li> Set COMPOSER = kupu </li>
-        <li> Enable content checks before editing </li>
-        <li> Set WYSWIYGPLUGIN_WYSIWYGSKIN = kupu </li>
-        <li> Disable WYSIWYG on pages that contain complex TML. On pages that have complex TML, WYSIWYG will fall back to the default text editor. </li>
-        <li> Set WYSIWYG_EXCLUDE = calls </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Horizontal size of text edit box: (can be overwritten by user preferences) <ul>
-        <li> Set EDITBOXWIDTH = 70 </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Vertical size of text edit box: (can be overwritten by user preferences) <ul>
-        <li> Set EDITBOXHEIGHT = 22 </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Style of text edit box. Set to <code>width: 99%</code> for full window width (default; this will overwrite the EDITBOXWIDTH setting), or <code>width: auto</code> to disable. This setting works for IE and some other recent browsers. (can be overwritten by user preferences) <ul>
-        <li> Set EDITBOXSTYLE = width: 99% </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Default state of the <strong><em>Force New Revision</em></strong> ([[Main/ForceNewRevision]]) check box in preview. Check box is initially checked if <code>Set FORCENEWREVISIONCHECKBOX = checked="checked"</code>, or unchecked if empty: (can be overwritten by user preferences) <ul>
-        <li> Set FORCENEWREVISIONCHECKBOX = </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Default state of the <strong><em>Minor Changes, Don't Notify</em></strong> ([[Main/DontNotify]]) check box in preview. Check box is initially checked if <code>Set DONTNOTIFYCHECKBOX = checked="checked"</code>, or unchecked if empty: (can be overwritten by user preferences) <ul>
-        <li> Set DONTNOTIFYCHECKBOX = </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Default state of the <strong><em>link</em></strong> check box in the attach file page. Checkbox is initially checked if <code>Set ATTACHLINKBOX = checked="checked"</code>, or unchecked if empty (<code>Set ATTACHLINKBOX =</code>). If checked, a link is created to the attached file at the end of the topic: (can be overwritten by user preferences) <ul>
-        <li> Set ATTACHLINKBOX = </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Format of file link when the <strong><em>link</em></strong> check box is checked: (can be overwritten by user preferences) <ul>
-        <li> %H% <strong>NOTE:</strong> Keyword <code><b>$name</b></code> gets expanded to filename; <code><b>$comment</b></code> to comment; <code><b>\t</b></code> to tab (3 spaces for bullets). </li>
-      </ul>
-    </li>
-  </ul><pre>
-      * Set ATTACHEDFILELINKFORMAT = \n   * [[%ATTACHURL%/$name][$name]]: $comment
-</pre><p>
-  </p>
-  <ul>
-    <li> Format of images when the <strong><em>link</em></strong> check box is checked: (can be overwritten by user preferences) <ul>
-        <li> %H% <strong>NOTE:</strong> Keyword <code><b>$name</b></code> gets expanded to filename; <code><b>$comment</b></code> to comment; <code><b>$size</b></code> to <code><b>width="..." height="..."</b></code> attribute of <code><b>img</b></code> tag; <code><b>\t</b></code> to tab and <code><b>\n</b></code> to linefeed (3 spaces for bullets). </li>
-      </ul>
-    </li>
-  </ul><pre>
-      * Set ATTACHEDIMAGEFORMAT = \n   * $comment: &lt;br /&gt;\n     &lt;img src="%ATTACHURLPATH%/$name" alt="$name" $size /&gt;
-</pre><p>
-  </p>
-  <h2><a name="TWiki Platform Settings"></a> TWiki Platform Settings </h2>
-  <p>
-  </p>
-  <ul>
-    <li> TWiki site name: <ul>
-        <li> Set WIKITOOLNAME = TWiki </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Image, URL and alternate tooltip text of the logo <strong>for this installation</strong>: you should change these settings for your site, or they can be overwridden in WebPreferences for individual webs by defining these variables there. <ul>
-        <li> Set WIKILOGOIMG = <img alt="T-logo-140x40-t.gif" src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-140x40-t.gif" /></li>
-        <li> Set WIKILOGOURL = <a href="http://TWiki.org/" target="_top">http://TWiki.org/</a></li>
-        <li> Set WIKILOGOALT = Powered by %WIKITOOLNAME% </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Home page of this site <ul>
-        <li> Set WIKIHOMEURL = <a href="http://www.dementia.org/twiki/view" target="_top">http://www.dementia.org/twiki/view</a></li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> List of %WIKITOOLNAME% webs - on the first line of the upper toolbar (to add a new web, see [[Main/ManagingWebs]] and [[TWiki/SiteMap]]): <ul>
-        <li> Set WIKIWEBLIST = [[Main/WebHome]] | [[TWiki/WebHome]] | [[Sandbox/WebHome]]</li>
-        <li> %T% <strong>NOTE:</strong> To automatically list all non-hidden webs in alphabetical order, use the <code>%WEBLIST{}%</code> variable instead: <br />
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <p>
-  </p>
-  <ul>
-    <li> Maximum size of [[TWiki/FileAttachments]] in KB, 0 for no limit: <ul>
-        <li> Set ATTACHFILESIZELIMIT = 10000 </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Broadcast message for skins supporting a %BROADCASTMESSAGE% at the top of the page: (IMPORTANT: Set to empty message if not used; #Comment out unused messages) <ul>
-        <li> Set BROADCASTMESSAGE = </li>
-        <li> #Set BROADCASTMESSAGE = <table border="0" cellpadding="3" cellspacing="0" width="100%">
-            <tr>
-              <td bgcolor="yellow"><font color="red"><strong>NOTE:</strong></font> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance. </td>
-            </tr>
-          </table>
-        </li>
-        <li> If you use [[Main/PatternSkin]]: </li>
-        <li> #Set BROADCASTMESSAGE = <div><strong>NOTE:</strong> Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance.</div>
-        </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> Users or groups allowed to [[TWiki/ManagingWebs]]: (ex: [[Main/TWikiAdminGroup]]) </li>
-    <li><strong>This has been disabled for the TWiki-4.0.0 release due to a potential security hole - you must be in the [[Main/TWikiAdminGroup]] to create a web</strong><ul>
-        <li> Set ALLOWWEBMANAGE = [[Main/TWikiAdminGroup]]</li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <h3><a name="Search Settings"></a> Search Settings </h3>
-  <p>
-  </p>
-  <ul>
-    <li> Default type for search, one of: keyword (for search engine like syntax), regex (for [[Main/RegularExpression]] search), or literal (for verbatim search) <ul>
-        <li> Set SEARCHDEFAULTTTYPE = keyword </li>
-      </ul>
-    </li>
-    <li> Default for <code>%SEARCH{}%</code> variable, one of: keyword, regex, or literal <ul>
-        <li> Set SEARCHVARDEFAULTTYPE = literal </li>
-      </ul>
-    </li>
-    <li> Stop words, e.g., common words and characters to exclude from a keyword search: <ul>
-        <li> Set SEARCHSTOPWORDS = a, all, am, an, and, any, as, at, b, be, by, c, d, e, for, from, g, h, how, i, i'm, i.e., in, is, isn't, it, it's, its, j, k, l, m, n, o, of, on, or, p, q, r, s, t, that, that's, the, this, to, u, v, w, was, wasn't, what, what's, when, where, who, who's, will, with, x, y, z </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <h3><a name="E-mail Settings"></a> E-mail Settings </h3>
-  <p>
-  </p>
-  <ul>
-    <li> 'Mail this topic' mailto: link - can be included in topics, templates or skins <ul>
-        <li> Set MAILTHISTOPIC = <a href="mailto:?subject=WebHome&body=%TOPICURL%">%MAILTHISTOPICTEXT%</a></li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> 'Mail this topic' link text <ul>
-        <li> Set MAILTHISTOPICTEXT = Send a link to this page </li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li> URL for current topic <ul>
-        <li> Set TOPICURL = [[%WEB%/WebHome]]</li>
-      </ul>
-    </li>
-  </ul>
-  <p>
-  </p>
-  <p>
-  </p>
-  <h3><a name="HTTP-EQUIV Settings"></a> HTTP-EQUIV Settings </h3>
-  <p>
-  </p>
-  <ul>
-    <li> %T% <strong>NOTE:</strong> Changing cache behaviour with these settings should not be necessary and may cause cache-related problems (e.g. TWiki:Codev.BackFromPreviewLosesText or TWiki:Codev.RefreshEditPage). These settings do not affect proxy caches. </li>
-    <li><strong>NOTE:</strong> The current values of these preferences are not displayed in view mode (values are <code>&lt;link&gt;</code>-tags). </li>
-  </ul>
-  <p>
-  </p>
-  <ul>
-    <li><code><b>http-equiv</b></code> meta tags for <code><b>view</b></code>, <code><b>rdiff</b></code>, <code><b>attach</b></code>, <code><b>search*</b></code> scripts: <ul>
-        <li> #Set HTTP_EQUIV_ON_VIEW = </li>
-        <li> Set HTTP_EQUIV_ON_VIEW = </li>
-      </ul>
-    </li>
-  </ul>
-</form>
+</div>
+
+<a name="DefaultWebPreferences"></a>
+
+## <a name="Default Web Preferences"></a> Default Web Preferences
+
+%X% **NOTE:** These are just defaults; don't change them here. Instead, add them to the WebPreferences topic in each web
+
+- List of selected topics in a web (used in menus)
+  - Set WEBTOPICLIST = [[Changes|Main/WebChanges]] | [[Index|Main/WebIndex]] | [[Search|Main/WebSearch]] | Go <input name="topic" size="16" type="text" />
+
+- Web-specific background color: (is overwritten by web preferences)
+  - Set WEBBGCOLOR = #FFD8AA
+
+- [favicon](http://en.wikipedia.org/wiki/Favicon): Attach a `favicon.ico` to a web's [[WebPreferences]] or add a `FAVICON` setting to [[WebPreferences]]
+  - Set FAVICON = <http://www.dementia.org/twiki//view/Main/WebPreferences/favicon.ico>
+
+- Image, URL and alternate tooltip text of web's logo.
+  - Set WEBLOGOIMG = %WIKILOGOIMG%
+  - Set WEBLOGOURL = %WIKILOGOURL%
+  - Set WEBLOGOALT = %WIKILOGOALT%
+
+- List this web in the %SYSTEMWEB%.SiteMap:
+  - If yes, set SITEMAPLIST to `on`, do not set NOSEARCHALL, and add the "what" and "use to..." description for the site map. Make sure to list only links that include the name of the web, e.g. %WEB%.Topic links.
+  - Set SITEMAPLIST = on
+  - Set SITEMAPWHAT = Describe what this web does.
+  - Set SITEMAPUSETO = ...to do something.
+
+- Copyright notice:
+  - Set WEBCOPYRIGHT = <span> [<img src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/TWikiLogos/T-badge-88x31.gif" width="88" height="31" alt="This site is powered by the TWiki collaboration platform" title="This site is powered by the TWiki collaboration platform" />](http://twiki.org/)</span>Copyright © by the contributing authors. All material on this collaboration platform is the property of the contributing authors. <br /> Ideas, requests, problems regarding %WIKITOOLNAME%? [Send feedback](mailto:?subject=%WIKITOOLNAME%%20Feedback%20on%20Main.WebHome)
+
+- Simplified Copyright notice for the [[WebRss]] feed (don't use any special characters, html tags, entities, wiki markup or [[WikiWords]])
+  - Set WEBRSSCOPYRIGHT = Copyright 2010 by contributing authors
+
+- Exclude web from a `web="all"` search: (Set to `on` for hidden webs; is overwritten by web preferences) **_Note_** it is much better to use [[TWikiAccessControls]] in individual webs to control who can and can't view the contents of a web. NOSEARCHALL is retained for compatibility, but you should avoid using it.
+  - Set NOSEARCHALL =
+- Prevent automatic linking of [[WikiWords]] and acronyms (if set to `on`); link WikiWords (if empty); can be overwritten by web preferences:
+  - Set NOAUTOLINK =
+  - **_Note:_** Use the `[[...][...]]` syntax to link topics in case you disabled WikiWord linking. The `<noautolink> ... </noautolink>` syntax can be used to prevents links within a block of text.
+- If you use non WikiWords for topic names (for example "Expenses" or "Mighty1") and if you use bracket notation to link to those topics, it is useful to **turn of all warnings** (like: "WARNING: This topic name is not recommended because it will not be linked automatically") and checkboxes ("Allow non WikiWord for the new topic name"). Can be overwritten by web preferences. Set to `on` to activate:
+  - Set HIDE\_NON\_WIKI\_WORD\_WARNINGS =
+
+- Warn if `%INCLUDE{}%` of topic fails: Fail silently if empty or `off`. Output warning message (defined in templates/oopsalerts.tmpl) if set to `on`. Otherwise output specific text (use `$topic` for topic). You can override this in web preferences, or by using a `warn="..."` parameter with `%INCLUDE{}%` :
+  - Set INCLUDEWARNING = on
+
+- Generated Table of Contents (TOC) settings
+  - The first header level to appear in the TOC:
+    - Set TOC\_MIN\_DEPTH =
+      - If not set: `1`
+      - Possible values: `1` to `6`
+  - The last header level to appear in the TOC:
+    - Set TOC\_MAX\_DEPTH =
+      - If not set: `6`
+      - Possible values: `1` to `6`
+      - Can be overridden by `depth` parameter of [[variable TOC|SYSTEMWEB/VarTOC2]]
+  - The default TOC title:
+    - Set TOC\_TITLE =
+      - If not set: nothing
+      - Possible values: any string, for example `On this page:`
+      - Can be overridden by `title` parameter of [[variable TOC|SYSTEMWEB/VarTOC2]]
+  - Do not show a TOC if the topic it contains is included in another topic:
+    - Set TOC\_HIDE\_IF\_INCLUDED =
+      - If not set: included TOC is shown
+      - Possible values: `on` or nothing
+
+## <a name="Default User Settings"></a> Default User Settings
+
+%X% **NOTE:** They are typically redefined in topics of individual %USERSWEB%.TWikiUsers
+
+- Show tool-tip topic info on mouse-over of [[WikiWord]] links. Setting can be on, off, or customized. An empty setting or off setting disables the tool-tips (for better performance). The setting can contain $summary to show the topic summary, $date for the last change date, $rev for the revision, $username for the login name of the last editor, $wikiname for the WikiName, $wikiusername for %USERSWEB%.WikiName, $topic for the topic name, and $web for the web name
+  - Set LINKTOOLTIPINFO = off
+  - #Set LINKTOOLTIPINFO = $username - $date - $rev: $summary
+
+- Horizontal size of text edit box: (can be overwritten by user preferences)
+  - Set EDITBOXWIDTH = 70
+
+- Vertical size of text edit box: (can be overwritten by user preferences)
+  - Set EDITBOXHEIGHT = 22
+
+- Style of text edit box. Set to `width: 99%` for full window width (default; this will overwrite the EDITBOXWIDTH setting), or `width: auto` to disable. This setting works for IE and some other recent browsers. (can be overwritten by user preferences)
+  - Set EDITBOXSTYLE = width:99%
+
+- Default state of the **_Force New Revision_** ([[ForceNewRevision]]) check box in preview. Check box is initially checked if `Set FORCENEWREVISIONCHECKBOX = checked="checked"`, or unchecked if empty: (can be overwritten by user preferences)
+  - Set FORCENEWREVISIONCHECKBOX =
+
+- Default state of the **_Minor Changes, Don't Notify_** ([[DontNotify]]) check box in preview. Check box is initially checked if `Set DONTNOTIFYCHECKBOX = checked="checked"`, or unchecked if empty: (can be overwritten by user preferences)
+  - Set DONTNOTIFYCHECKBOX =
+
+- Default state of the **_link_** check box in the attach file page. Checkbox is initially checked if `Set ATTACHLINKBOX = checked="checked"`, or unchecked if empty (`Set ATTACHLINKBOX =`). If checked, a link is created to the attached file at the end of the topic: (can be overwritten by user preferences)
+  - Set ATTACHLINKBOX =
+
+- Format of file link when the **_link_** check box is checked: (can be overwritten by user preferences)
+  - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**\\t**</code> to tab (3 spaces for bullets).
+
+          * Set ATTACHEDFILELINKFORMAT = \n   * [[%ATTACHURL%/$name][$name]]: $comment
+
+- Format of images when the **_link_** check box is checked: (can be overwritten by user preferences)
+  - %H% **NOTE:** Keyword <code>**$name**</code> gets expanded to filename; <code>**$comment**</code> to comment; <code>**$size**</code> to <code>**width="..." height="..."**</code> attribute of <code>**img**</code> tag; <code>**\\t**</code> to tab and <code>**\\n**</code> to linefeed (3 spaces for bullets).
+
+          * Set ATTACHEDIMAGEFORMAT = \n   * $comment: <br />\n     <img src="%ATTACHURLPATH%/$name" alt="$name" $size />
+
+## <a name="TWiki Platform Settings"></a> TWiki Platform Settings
+
+- TWiki site name:
+  - Set WIKITOOLNAME = TWiki
+
+- Image, URL and alternate tooltip text of the logo **for this installation**: you should change these settings for your site, or they can be overwridden in WebPreferences for individual webs by defining these variables there.
+  - Set WIKILOGOIMG = ![T-logo-140x40-t.gif](http://www.dementia.org/twiki//view/%SYSTEMWEB%/TWikiLogos/T-logo-140x40-t.gif)
+  - Set WIKILOGOURL = <http://TWiki.org/>
+  - Set WIKILOGOALT = Powered by %WIKITOOLNAME%
+
+- Home page of this site
+  - Set WIKIHOMEURL = <http://www.dementia.org/twiki/view>
+
+- List of %WIKITOOLNAME% webs - on the first line of the upper toolbar (to add a new web, see [[ManagingWebs]] and %SYSTEMWEB%.SiteMap):
+  - Set WIKIWEBLIST = [[%USERSWEB%|USERSWEB/WebHome]] | [[%SYSTEMWEB%|SYSTEMWEB/WebHome]] | [[Sandbox|Sandbox/WebHome]]
+  - %T% **NOTE:** To automatically list all non-hidden webs in alphabetical order, use the `%WEBLIST{}%` variable instead: <br />
+
+- Maximum size of %SYSTEMWEB%.FileAttachments in KB, 0 for no limit:
+  - Set ATTACHFILESIZELIMIT = 10000
+
+- Broadcast message for skins supporting a %BROADCASTMESSAGE% at the top of the page: (IMPORTANT: Set to empty message if not used; #Comment out unused messages)
+  - Set BROADCASTMESSAGE =
+  - #Set BROADCASTMESSAGE = **NOTE:** Edit and Attach will be disabled today between 05:00 PM and 06:00 PM PDT (00:00 to 01:00 GMT) for a scheduled %WIKITOOLNAME% maintenance.
+
+- Users or groups allowed to [[create new top-level webs|SYSTEMWEB/ManagingWebs]]: (ex: %USERSWEB%.WebCreatorsGroup). If set to nothing, only administrators will be able to do this.
+  - Set ALLOWROOTCHANGE = %USERSWEB%.TWikiAdminGroup
+
+### <a name="Search Settings"></a> Search Settings
+
+- Default type for search, one of: keyword (for search engine like syntax), regex (for [[RegularExpression]] search), or literal (for verbatim search)
+  - Set SEARCHDEFAULTTTYPE = keyword
+- Default for `%SEARCH{}%` variable, one of: keyword, regex, or literal
+  - Set SEARCHVARDEFAULTTYPE = literal
+- Stop words, e.g., common words and characters to exclude from a keyword search:
+  - Set SEARCHSTOPWORDS = a, all, am, an, and, any, as, at, b, be, by, c, d, e, for, from, g, h, how, i, i'm, i.e., in, is, isn't, it, it's, its, j, k, l, m, n, o, of, on, or, p, q, r, s, t, that, that's, the, this, to, u, v, w, was, wasn't, what, what's, when, where, who, who's, will, with, x, y, z
+
+### <a name="E-mail Settings"></a> E-mail Settings
+
+- 'Mail this topic' mailto: link - can be included in topics, templates or skins
+  - Set MAILTHISTOPIC = [%MAILTHISTOPICTEXT%](mailto:?subject=WebHome&body=%TOPICURL%)
+
+- 'Mail this topic' link text
+  - Set MAILTHISTOPICTEXT = Send a link to this page
+
+- URL for current topic
+  - Set TOPICURL = [[http://www.dementia.org/twiki/view/%WEB%/WebHome|%WEB%/WebHome]]
+
+### <a name="HTTP-EQUIV Settings"></a> HTTP-EQUIV Settings
+
+- %T% **NOTE:** Changing cache behaviour with these settings should not be necessary and may cause cache-related problems (e.g. TWiki:Codev.BackFromPreviewLosesText or TWiki:Codev.RefreshEditPage). These settings do not affect proxy caches.
+- **NOTE:** The current values of these preferences are not displayed in view mode (values are `<link>`-tags).
+
+- <code>**http-equiv**</code> meta tags for <code>**view**</code>, <code>**rdiff**</code>, <code>**attach**</code>, <code>**search\***</code> scripts:
+  - #Set HTTP\_EQUIV\_ON\_VIEW =
+  - Set HTTP\_EQUIV\_ON\_VIEW =
 
 - <code>**http-equiv**</code> meta tags for <code>**edit**</code> script:
   - Set HTTP\_EQUIV\_ON\_EDIT =
@@ -366,9 +204,9 @@
 ### <a name="PatternSkin"></a> [[PatternSkin]]
 
 - Default TWiki styles
-  - Set TWIKILAYOUTURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css>
-  - Set TWIKISTYLEURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css>
-  - Set TWIKICOLORSURL = <http://www.dementia.org/twiki//view/TWiki/PatternSkin/colors.css>
+  - Set TWIKILAYOUTURL = <http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/layout.css>
+  - Set TWIKISTYLEURL = <http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/style.css>
+  - Set TWIKICOLORSURL = <http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/colors.css>
 
 - Custom overriding styles (enabled pr. default but empty, to prevent browsers from fetching %USERLAYOUTURL%-style URLs)
   - Set USERLAYOUTURL =
@@ -376,18 +214,18 @@
   - Set USERCOLORSURL =
 
 - **PatternSkin header settings**
-  - Set WEBHEADERART = ![TWiki\_header.gif](http://www.dementia.org/twiki//view/TWiki/PatternSkin/TWiki_header.gif)
-  - Set WEBHEADERBGCOLOR = #ffffff
+  - Set WEBHEADERART = ![TWiki\_header.gif](http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/TWiki_header.gif)
+  - #Set WEBHEADERBGCOLOR = #faf8f0
 
 ### <a name="Skin icons"></a> Skin icons
 
 - Topic containing the icon graphics library. Icons can easily be rendered with `%ICON{name}%`.
-  - Set ICONTOPIC = [[TWikiDocGraphics]]
+  - Set ICONTOPIC = %SYSTEMWEB%.TWikiDocGraphics
 
 ### <a name="Legacy support"></a> Legacy support
 
 - Support for legacy "EDITTOPIC", used to be hard-coded, now replaced by TMPL:P conditional instantiation
-  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827363>
+  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827703>
   - Set EDITTOPIC = [Edit](%EDITURL% Edit Topic - deprecated usage - please see release notes)
 
 ## <a name="Plugins Settings"></a> Plugins Settings
@@ -407,7 +245,7 @@
 
 ## <a name="Rendering Shortcuts Settings"></a> Rendering Shortcuts Settings
 
-- Line break:
+- Line break: Note that the setting has an intentional trailing space
   - Set BR = <br />
 
 - Bullet sign:
@@ -415,6 +253,9 @@
 
 - Vertical bar / pipe symbol:
   - Set VBAR = |
+
+- Vertical caret symbol:
+  - Set CARET = ^
 
 - Line break and bullet with different levels of indentation:
   - Set BB = <br />•
@@ -492,26 +333,27 @@
 
 ## <a name="Miscellaneous Settings"></a> Miscellaneous Settings
 
-- Format of a [[NewWikiWord]] link: %BR%
+- Format of a [[NewWikiWord]] link:
+- Note that `$text` is the topic link text, `$topic` is the name of the new topic, and `$web` is the name of the web for the new topic. Values for the 3 are taken from the link syntax `[[$web.$topic][$text]]`. For normal plain WikiWord links `$text` and `$topic` are the same. The value of `$web` is the current web unless the link is in the format `$web.$topic`.
   - default setting:
     - Set NEWLINKFORMAT = <span>$text[?](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% Create this topic)</span>
   - alternative setting:
     - #Set NEWLINKFORMAT = [$text](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% Create this topic)
 
-- [[PreviewBackground]] image:
-  - Set PREVIEWBGIMAGE = ![preview2bg.gif](http://www.dementia.org/twiki//view/TWiki/PreviewBackground/preview2bg.gif)
+- %SYSTEMWEB%.PreviewBackground image:
+  - Set PREVIEWBGIMAGE = ![preview2bg.gif](http://www.dementia.org/twiki//view/%SYSTEMWEB%/PreviewBackground/preview2bg.gif)
 
-- User-friendly synonyms for MAINWEB and TWIKIWEB
-  - Set USERSWEB = Main
-  - Set SYSTEMWEB = TWiki
-  - Set DOCWEB = TWiki
+- User-friendly synonyms for system webs
+  - Set DOCWEB = %SYSTEMWEB%
+
+- show extra help for ApacheLogin users for [[TWikiAdminUser]] login
+  - Set ADMINLOGIN = [internal admin login](http://www.dementia.org/twiki/login?sudo=sudo;origurl=http://www.dementia.org/twiki/view/Main/WebHome) (use the username suggested and the password set in configure).
 
 ## <a name="Access Control Settings"></a> Access Control Settings
 
-- Users or groups allowed to change or rename this %TOPIC% topic:
-  - Set ALLOWTOPICCHANGE = [[TWikiAdminGroup]]
-- By default, only admins can create webs in the root
-  - Set ALLOWROOTCHANGE = [[TWikiAdminGroup]]
+- No-one (except admins) should change this topic
+  - Set ALLOWTOPICCHANGE = %USERSWEB%.TWikiAdminGroup
+  - Set ALLOWTOPICRENAME = %USERSWEB%.TWikiAdminGroup
 
 ## <a name="Creating New Preference Variable"></a> Creating New Preference Variables
 
@@ -519,18 +361,18 @@ You can introduce new VARIABLES and use them in your topics and templates. There
 
 - A preference is defined in a [[TWikiShorthand]] bullet item: <code>**[3 spaces] \* [space] Set NAME = value**</code><br /> Example (as a nested bullet item, indented 6 spaces):
   - Set WEBBGCOLOR = #FFFFC0
-- Preferences are used as [[TWikiVariables]] by enclosing the name in percent signs: <code>**%**</code>. Example:
+- Preferences are used as %SYSTEMWEB%.TWikiVariables by enclosing the name in percent signs: <code>**%**</code>. Example:
   - When you write variable <code>**%WEBBGCOLOR%**</code>, it gets expanded to `%WEBBGCOLOR%` .
 
 - %X% The sequential order of the preference settings is significant. Define preferences that use other preferences FIRST. For example, set <code>**WEBCOPYRIGHT**</code> before <code>**WIKIWEBMASTER**</code> since the copyright notice uses the TWiki administrator e-mail address.
-- %X% In order to protect your custom variables from being overwritten when upgrading the [[TWiki.%TOPIC%|TWiki/TOPIC]] topic, it is recommended that custom variables are defined in [[Main.%TOPIC%|Main/TOPIC]].
+- %X% In order to protect your custom variables from being overwritten when upgrading the [[%SYSTEMWEB%.%TOPIC%|SYSTEMWEB/TOPIC]] topic, it is recommended that custom variables are defined in [[%USERSWEB%.%TOPIC%|USERSWEB/TOPIC]].
 
 ## <a name="Related Topics"></a> Related Topics
 
 - [[WebPreferences]] has preferences of the %WEB% web.
-- [[TWikiUsers]] has a list of user topics. User topics can have optional user preferences.
-- [[TWikiVariables]] has a list of common `%VARIABLES%`.
-- [[TWikiAccessControl]] explains how to restrict access by users or groups.
+- User topics in %USERSWEB% can have optional user preferences.
+- %SYSTEMWEB%.TWikiVariables has a list of common `%VARIABLES%`.
+- %SYSTEMWEB%.TWikiAccessControl explains how to restrict access by users or groups.
 - TWiki:Plugins.PreferencesPlugin makes editing preferences a snap.
 
 **_Note_**: Can't edit? [[View raw topic|%WEB%/%TOPIC%?raw=on]]

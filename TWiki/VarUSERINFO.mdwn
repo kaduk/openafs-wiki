@@ -4,11 +4,11 @@
 
 - Syntax: `%USERINFO%`
 - Expands to: `admin, Main.admin, ` (comma-separated list of the username, wikiusername, and emails)
-- With formatted output, using tokens `$emails`, `$username`, `$wikiname`, `$wikiusername`, and `$groups`:
+- With formatted output, using tokens `$emails`, `$username`, `$wikiname`, `$wikiusername`, `$groups` and `$admin` ($admin returns 'true' or 'false'):
   - Example: `%USERINFO{ format="$username is really $wikiname" }%`
   - Expands to: `admin is really admin`
 - Retrieve information about another user:
   - Example: `%USERINFO{ "TWikiGuest" format="$username is really $wikiname" }%`
   - Expands to: ``
   - **_Note:_** The parameter should be the wikiname of a user. You can only get information about another user if the `{AntiSpam}{HideUserDetails}` configuration option is not enabled, or if you are an admin. _(User details are hidden in this TWiki)_
-- Related: [[USERNAME|Main/WebHome#VarUSERNAME]], [[WIKINAME|Main/WebHome#VarWIKINAME]], [[WIKIUSERNAME|Main/WebHome#VarWIKIUSERNAME]], [[TWikiUserAuthentication]], [[ChangeEmailAddress]]
+- Related: [[USERNAME|Main/VarUSERNAME]], [[WIKINAME|Main/VarWIKINAME]], [[WIKIUSERNAME|Main/VarWIKIUSERNAME]], [[TWikiUserAuthentication]], [[ChangeEmailAddress]]

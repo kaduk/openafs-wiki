@@ -4,14 +4,36 @@ TWiki operates by creating a singleton object (known as the Session object) that
 
 Global variables are avoided wherever possible to avoid problems with CGI accelerators such as mod\_perl.
 
+## <a name="Public Data members"></a> Public Data members
+
+- `cgiQuery` Pointer to the CGI::
+- `context` Hash of context ids
+- moved: `loginManager` TWiki::LoginManager singleton (moved to TWiki::Users)
+- `plugins` TWiki::Plugins singleton
+- `prefs` TWiki::Prefs singleton
+- `remoteUser` Login ID when using [[ApacheLogin]]. Maintained for compatibility only, do not use.
+- `requestedWebName` Name of web found in URL path or `web` URL parameter
+- `sandbox` TWiki::Sandbox singleton
+- `scriptUrlPath` URL path to the current script. May be dynamically extracted from the URL path if \{GetScriptUrlFromCgi\}. Only required to support \{GetScriptUrlFromCgi\} and not consistently used. Avoid.
+- `security` TWiki::Access singleton
+- `SESSION_TAGS` Hash of TWiki variables whose value is specific to the current CGI request.
+- `store` TWiki::Store singleton
+- `topicName` Name of topic found in URL path or `topic` URL parameter
+- `urlHost` Host part of the URL (including the protocol) determined during intialisation and defaulting to \{DefaultUrlHost\}
+- `user` Unique user ID of logged-in user
+- `users` TWiki::Users singleton
+- `webName` Name of web found in URL path, or `web` URL parameter, or \{UsersWebName\}
+
 <div>
   <ul>
     <li><a href="#Package =TWiki="> Package TWiki</a><ul>
+        <li><a href="#Public Data members"> Public Data members</a></li>
         <li><a href="#StaticMethod <strong>get_TWikiLibDir</strong> ("> StaticMethod getTWikiLibDir <tt>() -&gt; $path</tt></a></li>
-        <li><a href="#ObjectMethod *_UTF82SiteCharSet*"> ObjectMethod UTF82SiteCharSet <tt>($utf8) -&gt; $ascii</tt></a></li>
+        <li><a href="#StaticMethod *_UTF82SiteCharSet*"> StaticMethod UTF82SiteCharSet <tt>($utf8) -&gt; $ascii</tt></a></li>
         <li><a href="#ObjectMethod *write_CompletePage"> ObjectMethod writeCompletePage <tt>($text,$pageType,$contentType)</tt></a></li>
-        <li><a href="#ObjectMethod *write_PageHeader*"> ObjectMethod writePageHeader <tt>($query,$pageType,$contentType,$contentLength)</tt></a></li>
-        <li><a href="#ObjectMethod <strong>redirect</strong> ($url,$p"> ObjectMethod redirect <tt>($url,$passthrough)</tt></a></li>
+        <li><a href="#ObjectMethod *generateHTTPHeader"> ObjectMethod generateHTTPHeaders <tt>($query,$pageType,$contentType,$contentLength) -&gt; $header</tt></a></li>
+        <li><a href="#StaticMethod <strong>is_RedirectSafe</strong> ("> StaticMethod isRedirectSafe <tt>($redirect)=&gt;$ok</tt></a></li>
+        <li><a href="#ObjectMethod <strong>redirect</strong> ($url,$p"> ObjectMethod redirect <tt>($url,$passthrough,$action_redirectto)</tt></a></li>
         <li><a href="#ObjectMethod <strong>cacheQuery</strong> () ->"> ObjectMethod cacheQuery <tt>() -&gt; $queryString</tt></a></li>
         <li><a href="#StaticMethod *is_ValidWikiWord*"> StaticMethod isValidWikiWord <tt>($name) -&gt; $boolean</tt></a></li>
         <li><a href="#StaticMethod *is_ValidTopicName*"> StaticMethod isValidTopicName <tt>($name) -&gt; $boolean</tt></a></li>
@@ -23,30 +45,38 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
         <li><a href="#ObjectMethod <strong>get_PubUrl</strong> ($abso"> ObjectMethod getPubUrl <tt>($absolute,$web,$topic,$attachment) -&gt; $url</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_IconUrl</strong> ($abs"> ObjectMethod getIconUrl <tt>($absolute,$iconName) -&gt; $iconURL</tt></a></li>
         <li><a href="#ObjectMethod *map_ToIconFileName"> ObjectMethod mapToIconFileName <tt>($fileName,$default) -&gt; $fileName</tt></a></li>
-        <li><a href="#ObjectMethod <strong>get_OopsUrl</strong> ($tem"> ObjectMethod getOopsUrl <tt>($template,@options) -&gt; $absoluteOopsURL</tt></a></li>
         <li><a href="#ObjectMethod *normalize_WebTopic"> ObjectMethod normalizeWebTopicName <tt>($theWeb,$theTopic) -&gt; ($theWeb,$theTopic)</tt></a></li>
         <li><a href="#ClassMethod <strong>new</strong> ($loginName,$q"> ClassMethod new <tt>($loginName,$query,\%initialContext)</tt></a></li>
-        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>renderer</strong> ()"> ObjectMethod renderer <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>attach</strong> ()"> ObjectMethod attach <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>templates</strong> ()"> ObjectMethod templates <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>i18n</strong> ()"> ObjectMethod i18n <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>search</strong> ()"> ObjectMethod search <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>security</strong> ()"> ObjectMethod security <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>net</strong> ()"> ObjectMethod net <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>writeLog</strong> ($action"> ObjectMethod writeLog <tt>($action,$webTopic,$extra,$user)</tt></a></li>
         <li><a href="#ObjectMethod <strong>writeWarning</strong> ($te"> ObjectMethod writeWarning <tt>($text)</tt></a></li>
         <li><a href="#ObjectMethod <strong>writeDebug</strong> ($text"> ObjectMethod writeDebug <tt>($text)</tt></a></li>
         <li><a href="#StaticMethod *apply_PatternToInc"> StaticMethod applyPatternToIncludedText <tt>($text,$pattern) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>inlineAlert</strong> ($tem"> ObjectMethod inlineAlert <tt>($template,$def,...) -&gt; $string</tt></a></li>
         <li><a href="#StaticMethod <strong>parseSections</strong> ($t"> StaticMethod parseSections <tt>($text) -&gt; ($string,$sectionlistref)</tt></a></li>
-        <li><a href="#ObjectMethod *expand_VariablesOn"> ObjectMethod expandVariablesOnTopicCreation <tt>($text,$user) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *expand_VariablesOn"> ObjectMethod expandVariablesOnTopicCreation <tt>($text,$user,$web,$topic) -&gt; $text</tt></a></li>
         <li><a href="#StaticMethod <strong>entityEncode</strong> ($te"> StaticMethod entityEncode <tt>($text,$extras) -&gt; $encodedText</tt></a></li>
         <li><a href="#StaticMethod <strong>entityDecode</strong> ($en"> StaticMethod entityDecode <tt>($encodedText) -&gt; $text</tt></a></li>
+        <li><a href="#StaticMethod *url_EncodeAttachme"> StaticMethod urlEncodeAttachment <tt>($text)</tt></a></li>
         <li><a href="#StaticMethod <strong>urlEncode</strong> ($strin"> StaticMethod urlEncode <tt>($string) -&gt; encodedstring</tt></a></li>
         <li><a href="#StaticMethod <strong>urlDecode</strong> ($strin"> StaticMethod urlDecode <tt>($string) -&gt; decodedstring</tt></a></li>
         <li><a href="#StaticMethod <strong>isTrue</strong> ($value,$d"> StaticMethod isTrue <tt>($value,$default) -&gt; $boolean</tt></a></li>
         <li><a href="#StaticMethod *space_OutWikiWord*"> StaticMethod spaceOutWikiWord <tt>($word,$sep) -&gt; $string</tt></a></li>
+        <li><a href="#ObjectMethod <strong>expand_AllTags</strong> (\"> ObjectMethod expandAllTags <tt>(\$text,$topic,$web,$meta)</tt></a></li>
         <li><a href="#ObjectMethod <strong>enterContext</strong> ($id"> ObjectMethod enterContext <tt>($id,$val)</tt></a></li>
         <li><a href="#ObjectMethod <strong>leaveContext</strong> ($id"> ObjectMethod leaveContext <tt>($id)</tt></a></li>
         <li><a href="#ObjectMethod <strong>inContext</strong> ($id)"> ObjectMethod inContext <tt>($id)</tt></a></li>
         <li><a href="#StaticMethod *register_TagHandle"> StaticMethod registerTagHandler <tt>($tag,$fnref)</tt></a></li>
         <li><a href="#StaticMethod *registerRESTHandle"> StaticMethod registerRESTHandler <tt>($subject,$verb,\&amp;fn)</tt></a></li>
         <li><a href="#StaticMethod <strong>restDispatch</strong> ($su"> StaticMethod restDispatch <tt>($subject,$verb)=&gt;\&amp;fn</tt></a></li>
-        <li><a href="#ObjectMethod *handle_CommonTags*"> ObjectMethod handleCommonTags <tt>($text,$web,$topic) -&gt; $text</tt></a></li>
+        <li><a href="#ObjectMethod *handle_CommonTags*"> ObjectMethod handleCommonTags <tt>($text,$web,$topic,$meta) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>add_ToHEAD</strong> ($id,$"> ObjectMethod addToHEAD <tt>($id,$html)</tt></a></li>
         <li><a href="#StaticMethod <strong>initialize</strong> ($path"> StaticMethod initialize <tt>($pathInfo,$remoteUser,$topic,$url,$query) -&gt; ($topicName,$webName,$scriptUrlPath,$userName,$dataDir)</tt></a></li>
         <li><a href="#StaticMethod <strong>readFile</strong> ($filena"> StaticMethod readFile <tt>($filename) -&gt; $text</tt></a></li>
@@ -58,11 +88,9 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
 
 ## <a name="StaticMethod &lt;strong&gt;get_TWikiLibDir&lt;/strong&gt; ("></a> [[StaticMethod]] **getTWikiLibDir** `() -> $path`
 
-STATIC method.
-
 Returns the full path of the directory containing TWiki.pm
 
-## <a name="ObjectMethod &lt;strong&gt;_UTF82SiteCharSet*"></a> [[ObjectMethod]] \*UTF82SiteCharSet `($utf8) -> $ascii`
+## <a name="StaticMethod &lt;strong&gt;_UTF82SiteCharSet*"></a> [[StaticMethod]] \*UTF82SiteCharSet `($utf8) -> $ascii`
 
 Auto-detect UTF-8 vs. site charset in string, and convert UTF-8 into site charset.
 
@@ -76,7 +104,7 @@ Write a complete HTML page with basic header to the browser.
 
 This method removes noautolink and nop tags before outputting the page unless $contentType is text/plain.
 
-## <a name="ObjectMethod &lt;strong&gt;write_PageHeader*"></a><a name="ObjectMethod *write_PageHeader&lt;/strong&gt; "></a> [[ObjectMethod]] **writePageHeader** `($query,$pageType,$contentType,$contentLength)`
+## <a name="ObjectMethod &lt;strong&gt;generateHTTPHeader"></a> [[ObjectMethod]] \*generateHTTPHeaders `($query,$pageType,$contentType,$contentLength) -> $header`
 
 All parameters are optional.
 
@@ -87,7 +115,17 @@ All parameters are optional.
 
 Implements the post-Dec2001 release plugin API, which requires the writeHeaderHandler in plugin to return a string of HTTP headers, CR/LF delimited. Filters any illegal headers. Plugin headers will override core settings.
 
-## <a name="ObjectMethod &lt;strong&gt;redirect&lt;/strong&gt; ($url,$p"></a> [[ObjectMethod]] **redirect** `($url,$passthrough)`
+Does **not** add a `Content-length` header.
+
+## <a name="StaticMethod &lt;strong&gt;is_RedirectSafe&lt;/strong&gt; ("></a> [[StaticMethod]] **isRedirectSafe** `($redirect)=>$ok`
+
+tests if the $redirect is an external URL, returning false if [[AllowRedirectUrl]] is denied
+
+## <a name="ObjectMethod &lt;strong&gt;redirect&lt;/strong&gt; ($url,$p"></a> [[ObjectMethod]] **redirect** `($url,$passthrough,$action_redirectto)`
+
+- $url - url or twikitopic to redirect to
+- $passthrough - (optional) parameter to **\*FILLMEIN\***
+- $action\_redirectto - (optional) redirect to where ?redirectto= points to (if it's valid)
 
 Redirects the request to `$url`, **unless**
 
@@ -97,9 +135,9 @@ Redirects the request to `$url`, **unless**
 
 Thus a redirect is only generated when in a CGI context.
 
-Normally this method will ignore parameters to the current query. If $passthrough is set, then it will pass all parameters that were passed to the current query on to the redirect target. If the request\_method was GET, then all parameters can be passed in the URL. If the request\_method was POST then it caches the form data and passes over a cache reference in the redirect GET.
+Normally this method will ignore parameters to the current query. Sometimes, for example when redirecting to a login page during authentication (and then again from the login page to the original requested URL), you want to make sure all parameters are passed on, and for this $passthrough should be set to true. In this case it will pass all parameters that were passed to the current query on to the redirect target. If the request\_method for the current query was GET, then all parameters will be passed by encoding them in the URL (after ?). If the request\_method was POST, then there is a risk the URL would be too big for the receiver, so it caches the form data and passes over a cache reference in the redirect GET.
 
-Passthrough is only meaningful if the redirect target is on the same server.
+NOTE: Passthrough is only meaningful if the redirect target is on the same server.
 
 ## <a name="ObjectMethod &lt;strong&gt;cacheQuery&lt;/strong&gt; () - $"></a> [[ObjectMethod]] **cacheQuery** `() -> $queryString`
 
@@ -122,6 +160,8 @@ Check for a valid ABBREV (acronym)
 ## <a name="StaticMethod &lt;strong&gt;is_ValidWebName&lt;/strong&gt; ("></a> [[StaticMethod]] **isValidWebName** `($name,$system) -> $boolean`
 
 STATIC Check for a valid web name. If $system is true, then system web names are considered valid (names starting with \_) otherwise only user web names are valid
+
+If $TWiki::cfg\{EnableHierarchicalWebs\} is off, it will also return false when a nested web name is passed to it.
 
 ## <a name="ObjectMethod &lt;strong&gt;read_OnlyMirrorWeb"></a> [[ObjectMethod]] \*readOnlyMirrorWeb `($theWeb) -> ($mirrorSiteName,$mirrorViewURL,$mirrorLink,$mirrorNote)`
 
@@ -166,23 +206,6 @@ Map an icon name to a URL path.
 
 Maps from a filename (or just the extension) to the name of the file that contains the image for that file type.
 
-## <a name="ObjectMethod &lt;strong&gt;get_OopsUrl&lt;/strong&gt; ($tem"></a> [[ObjectMethod]] **getOopsUrl** `($template,@options) -> $absoluteOopsURL`
-
-Composes a URL for an "oops" error page. The @options consists of a list of key =&gt; value pairs. The following keys are used:
-
-- `-web` - web name
-- `-topic` - topic name
-- `-def` - optional template def within the main template file
-- `-params` - a single parameter, or a reference to an array of parameters These are passed in the URL as '&amp;param1=' etc.
-
-Do _not_ include the "oops" part in front of the template name.
-
-Alternatively you can pass a reference to an [[OopsException]] in place of the template. All other parameters will be ignored.
-
-The returned URL ends up looking something like this: "http://host/twiki/bin/oops/$web/$topic?template=$template&amp;param1=$scriptParams[0]..."
-
-Note: if \{keep\} is true in the params, then they will also be pushed into the current query.
-
 ## <a name="ObjectMethod &lt;strong&gt;normalize_WebTopic"></a> [[ObjectMethod]] \*normalizeWebTopicName `($theWeb,$theTopic) -> ($theWeb,$theTopic)`
 
 Normalize a Web.TopicName
@@ -195,23 +218,48 @@ See [[TWikiFuncDotPm]] for a full specification of the expansion (not duplicated
 
 Constructs a new TWiki object. Parameters are taken from the query object.
 
-- `$loginName` is the username of the user you want to be logged-in if none is available from a session or browser. Used mainly for side scripts and debugging.
+- `$loginName` is the login username (**not** the wikiname) of the user you want to be logged-in if none is available from a session or browser. Used mainly for side scripts and debugging.
 - `$query` the CGI query (may be undef, in which case an empty query is used)
 - `\%initialContext` - reference to a hash containing context name=value pairs to be pre-installed in the context hash
 
-## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+## <a name="ObjectMethod &lt;strong&gt;renderer&lt;/strong&gt; ()"></a> [[ObjectMethod]] **renderer** `()`
 
-Complete processing after the client's HTTP request has been responded to. Right now this does two things:
+Get a reference to the renderer object. Done lazily because not everyone needs the renderer.
 
-1. calling TWiki::Client to flushing the user's session (if any) to disk,
-2. breaking circular references to allow garbage collection in persistent environments
+## <a name="ObjectMethod &lt;strong&gt;attach&lt;/strong&gt; ()"></a> [[ObjectMethod]] **attach** `()`
+
+Get a reference to the attach object. Done lazily because not everyone needs the attach.
+
+## <a name="ObjectMethod &lt;strong&gt;templates&lt;/strong&gt; ()"></a> [[ObjectMethod]] **templates** `()`
+
+Get a reference to the templates object. Done lazily because not everyone needs the templates.
+
+## <a name="ObjectMethod &lt;strong&gt;i18n&lt;/strong&gt; ()"></a> [[ObjectMethod]] **i18n** `()`
+
+Get a reference to the i18n object. Done lazily because not everyone needs the i18ner.
+
+## <a name="ObjectMethod &lt;strong&gt;search&lt;/strong&gt; ()"></a> [[ObjectMethod]] **search** `()`
+
+Get a reference to the search object. Done lazily because not everyone needs the searcher.
+
+## <a name="ObjectMethod &lt;strong&gt;security&lt;/strong&gt; ()"></a> [[ObjectMethod]] **security** `()`
+
+Get a reference to the security object. Done lazily because not everyone needs the security.
+
+## <a name="ObjectMethod &lt;strong&gt;net&lt;/strong&gt; ()"></a> [[ObjectMethod]] **net** `()`
+
+Get a reference to the net object. Done lazily because not everyone needs the net.
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;writeLog&lt;/strong&gt; ($action"></a> [[ObjectMethod]] **writeLog** `($action,$webTopic,$extra,$user)`
 
 - `$action` - what happened, e.g. view, save, rename
 - `$wbTopic` - what it happened to
 - `$extra` - extra info, such as minor flag
-- `$user` - user who did the saving (user object or string user name)
+- `$user` - user who did the saving (user id)
 
 Write the log for an event to the logfile
 
@@ -239,12 +287,15 @@ Each section is a `TWiki::Attrs` object, which contains the attributes \{type, n
 
 See test/unit/Fn\_SECTION.pm for detailed testcases that round out the spec.
 
-## <a name="ObjectMethod &lt;strong&gt;expand_VariablesOn"></a> [[ObjectMethod]] \*expandVariablesOnTopicCreation `($text,$user) -> $text`
+## <a name="ObjectMethod &lt;strong&gt;expand_VariablesOn"></a> [[ObjectMethod]] \*expandVariablesOnTopicCreation `($text,$user,$web,$topic) -> $text`
 
 - `$text` - text to expand
-- `$user` - reference to user object. This is the user expanded in e.g. %USERNAME. Optional, defaults to logged-in user.
+- `$user` - This is the user expanded in e.g. %USERNAME. Optional, defaults to logged-in user.
 
 Expand limited set of variables during topic creation. These are variables expected in templates that must be statically expanded in new content.
+
+- `$web` - name of web
+- `$topic` - name of topic
 
 # SMELL: no plugin handler
 
@@ -266,20 +317,33 @@ $extras is an optional param that may be used to include **additional** characte
 
 Decodes all numeric entities (e.g. &amp;#123;). _Does not_ decode named entities such as &amp;amp; (use HTML::Entities for that)
 
+## <a name="StaticMethod &lt;strong&gt;url_EncodeAttachme"></a> [[StaticMethod]] \*urlEncodeAttachment `($text)`
+
+For attachments, URL-encode specially to 'freeze' any characters &gt;127 in the site charset (e.g. ISO-8859-1 or KOI8-R), by doing URL encoding into native charset ($siteCharset) - used when generating attachment URLs, to enable the web server to serve attachments, including images, directly.
+
+This encoding is required to handle the cases of:
+
+- browsers that generate UTF-8 URLs automatically from site charset URLs - now quite common - web servers that directly serve attachments, using the site charset for filenames, and cannot convert UTF-8 URLs into site charset filenames
+
+The aim is to prevent the browser from converting a site charset URL in the web page to a UTF-8 URL, which is the default. Hence we 'freeze' the URL into the site character set through URL encoding.
+
+In two cases, no URL encoding is needed: For EBCDIC mainframes, we assume that site charset URLs will be translated (outbound and inbound) by the web server to/from an EBCDIC character set. For sites running in UTF-8, there's no need for TWiki to do anything since all URLs and attachment filenames are already in UTF-8.
+
 ## <a name="StaticMethod &lt;strong&gt;urlEncode&lt;/strong&gt; ($strin"></a> [[StaticMethod]] **urlEncode** `($string) -> encodedstring`
 
 Encode by converting characters that are illegal in URLs to their %NN equivalents. This method is used for encoding strings that must be embedded _verbatim_ in URLs; it cannot be applied to URLs themselves, as it escapes reserved characters such as = and ?.
 
 RFC 1738, Dec. '94:
 
-    >
-    ...Only alphanumerics [0-9a-zA-Z], the special
-    characters $-_.+!*'(), and reserved characters used for their
-    reserved purposes may be used unencoded within a URL.
+        ...Only alphanumerics [0-9a-zA-Z], the special
+        characters $-_.+!*'(), and reserved characters used for their
+        reserved purposes may be used unencoded within a URL.
 
 Reserved characters are $&amp;+,/:;=?@ - these are _also_ encoded by this method.
 
-SMELL: For non-ISO-8859-1 $TWiki::cfg\{Site\}\{CharSet\}, need to convert to UTF-8 before URL encoding. This encoding only supports 8-bit character codes.
+This URL-encoding handles all character encodings including ISO-8859-\*, KOI8-R, EUC-\* and UTF-8.
+
+This may not handle EBCDIC properly, as it generates an EBCDIC URL-encoded URL, but mainframe web servers seem to translate this outbound before it hits browser - see CGI::Util::escape for another approach.
 
 ## <a name="StaticMethod &lt;strong&gt;urlDecode&lt;/strong&gt; ($strin"></a> [[StaticMethod]] **urlDecode** `($string) -> decodedstring`
 
@@ -294,6 +358,15 @@ If the value is undef, then `$default` is returned. If `$default` is not specifi
 ## <a name="StaticMethod &lt;strong&gt;space_OutWikiWord*"></a> [[StaticMethod]] \*spaceOutWikiWord `($word,$sep) -> $string`
 
 Spaces out a wiki word by inserting a string (default: one space) between each word component. With parameter $sep any string may be used as separator between the word components; if $sep is undefined it defaults to a space.
+
+## <a name="ObjectMethod &lt;strong&gt;expand_AllTags&lt;/strong&gt; (\"></a> [[ObjectMethod]] **expandAllTags** `(\$text,$topic,$web,$meta)`
+
+Expands variables by replacing the variables with their values. Some example variables: %TOPIC%, %SCRIPTURL%, %WIKINAME%, etc. $web and $incs are passed in for recursive include expansion. They can safely be undef. The rules for tag expansion are:
+
+1. Tags are expanded left to right, in the order they are encountered.
+2. Tags are recursively expanded as soon as they are encountered - the algorithm is inherently single-pass
+3. A tag is not "encountered" until the matching \}% has been seen, by which time all tags in parameters will have been expanded
+4. Tag expansions that create new tags recursively are limited to a set number of hierarchical levels of expansion
 
 ## <a name="ObjectMethod &lt;strong&gt;enterContext&lt;/strong&gt; ($id"></a> [[ObjectMethod]] **enterContext** `($id,$val)`
 
@@ -346,11 +419,13 @@ Returns the handler function associated to the given $subject and $werb, or unde
 
 **Since:** TWiki::Plugins::VERSION 1.1
 
-## <a name="ObjectMethod &lt;strong&gt;handle_CommonTags*"></a> [[ObjectMethod]] \*handleCommonTags `($text,$web,$topic) -> $text`
+## <a name="ObjectMethod &lt;strong&gt;handle_CommonTags*"></a> [[ObjectMethod]] \*handleCommonTags `($text,$web,$topic,$meta) -> $text`
 
 Processes %VARIABLE%, and %TOC% syntax; also includes 'commonTagsHandler' plugin hook.
 
 Returns the text of the topic, after file inclusion, variable substitution, table-of-contents generation, and any plugin changes from commonTagsHandler.
+
+$meta may be undef when, for example, expanding templates, or one-off strings at a time when meta isn't available.
 
 ## <a name="ObjectMethod &lt;strong&gt;add_ToHEAD&lt;/strong&gt; ($id,$"></a> [[ObjectMethod]] **addToHEAD** `($id,$html)`
 

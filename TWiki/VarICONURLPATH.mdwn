@@ -2,10 +2,10 @@
 
 ### <a name="ICONURLPATH{&quot;name&quot;} -- URL path"></a><a name="ICONURLPATH{&quot;name&quot;} -- URL path "></a> ICONURLPATH\{"name"\} -- URL path of small documentation graphic or icon
 
-- Generates the URL path of a [[TWikiDocGraphics]] image, typically used in an HTML img tag. Specify image name or full filename (see [[ICON|Main/WebHome#VarICON]] for details on filenames.)
+- Generates the URL path of a [[TWikiDocGraphics]] image, typically used in an HTML img tag. Specify image name or full filename (see [[ICON|Main/VarICON]] for details on filenames.)
 - Syntax: `%ICONURLPATH{"name"}%`
 - Examples:
   - `%ICONURLPATH{"locktopic"}%` returns ![locktopic.gif](http://www.dementia.org/twiki//view/Main/WebHome/locktopic.gif)
   - `%ICONURLPATH{"eggysmell.xml"}%` returns ![xml.gif](http://www.dementia.org/twiki//view/Main/WebHome/xml.gif)
   - `%ICONURLPATH{"/doc/xhtml.xsl"}%` returns ![xsl.gif](http://www.dementia.org/twiki//view/Main/WebHome/xsl.gif)
-- Related: [[ICONURL|Main/WebHome#VarICONURL]], [[ICON|Main/WebHome#VarICON]], [[TWikiPreferences]], [[FileAttachments]], [[TWikiDocGraphics]]
+- Related: [[ICONURL|Main/VarICONURL]], [[ICON|Main/VarICON]], [[TWikiPreferences]], [[FileAttachments]], [[TWikiDocGraphics]]

@@ -1,0 +1,23 @@
+# <a name="Package &lt;code&gt;="></a> Package =
+
+<div>
+  <ul>
+    <li><a href="#Package =="> Package ==</a></li>
+  </ul>
+</div>
+
+=head1 NAME
+
+CGI::Session::Serialize::storable - Serializer for CGI::Session
+
+=head1 DESCRIPTION
+
+This library can be used by CGI::Session to serialize session data. Uses L&lt;Storable|Storable&gt;.
+
+=head1 METHODS
+
+=over 4
+
+=item freeze($class, \\%hash)
+
+Receives two arguments. First is the class name, the second is the data to be serialized. Should return serialized string on success, undef on failure. Error message should be set using C&lt;set\_error()|CGI::Session::ErrorHandler/"set\_error()"&gt;

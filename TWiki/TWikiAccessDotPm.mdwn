@@ -5,8 +5,8 @@ A singleton object of this class manages the access control database.
 <div>
   <ul>
     <li><a href="#Package =TWiki::Access="> Package TWiki::Access</a><ul>
-        <li><a href="#ClassMethod <strong>new</strong> ()"> ClassMethod new <tt>()</tt></a></li>
-        <li><a href="#ObjectMethod <strong>permissionsSet</strong> ($"> ObjectMethod permissionsSet <tt>($web) -&gt; $boolean</tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>getReason</strong> () -> $"> ObjectMethod getReason <tt>() -&gt; $string</tt></a></li>
         <li><a href="#ObjectMethod *check_AccessPermis"> ObjectMethod checkAccessPermission <tt>($action,$user,$text,$meta,$topic,$web) -&gt; $boolean</tt></a></li>
       </ul>
@@ -14,13 +14,13 @@ A singleton object of this class manages the access control database.
   </ul>
 </div>
 
-## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ()"></a> [[ClassMethod]] **new** `()`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
 
-Construct a new singleton object to manage the permissions database.
+Constructor.
 
-## <a name="ObjectMethod &lt;strong&gt;permissionsSet&lt;/strong&gt; ($"></a> [[ObjectMethod]] **permissionsSet** `($web) -> $boolean`
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
 
-Are there any security restrictions for this Web (ignoring settings on individual pages).
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;getReason&lt;/strong&gt; () - $s"></a> [[ObjectMethod]] **getReason** `() -> $string`
 
@@ -31,7 +31,7 @@ Return a string describing the reason why the last access control failure occurr
 Check if user is allowed to access topic
 
 - `$action` - 'VIEW', 'CHANGE', 'CREATE', etc.
-- `$user` - User object
+- `$user` - User id (**not** wikiname)
 - `$text` - If undef or '': Read '$theWebName.$theTopicName' to check permissions
 - `$meta` - If undef, but `$text` is defined, then metadata will be parsed from `$text`. If defined, then metadata embedded in `$text` will be ignored. Always ignored if `$text` is undefined. Settings in `$meta` override \* Set settings in plain text.
 - `$topic` - Topic name to check, e.g. 'SomeTopic' \*undef to check web perms only)

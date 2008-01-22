@@ -63,17 +63,17 @@ Render bullet lists in a variety of formats
   <tr>
     <td bgcolor="#EEEEEE" valign="top"><pre>
 %RENDERLIST{"thread"}%
-	* one
-		* one.a
-			* one.a.x
-		* one.b
-			* one.b.x
-			  continue
-			* one.b.y
-				* icon:person Tim
-				* icon:person Mico
-	* two
-	* three
+   * one
+      * one.a
+         * one.a.x
+      * one.b
+         * one.b.x
+           continue
+         * one.b.y
+            * icon:person Tim
+            * icon:person Mico
+   * two
+   * three
 </pre></td>
     <td bgcolor="#EEEEEE" valign="top">
       <p>
@@ -194,17 +194,17 @@ Render bullet lists in a variety of formats
   <tr>
     <td bgcolor="#EEEEEE" valign="top"><pre>
 %RENDERLIST{"org"}%
-	* one
-		* one.a
-			* one.a.x
-		* one.b
-			* one.b.x
-			  continue
-			* one.b.y
-				* icon:person Tim
-				* icon:person Mico
-	* two
-	* three
+   * one
+      * one.a
+         * one.a.x
+      * one.b
+         * one.b.x
+           continue
+         * one.b.y
+            * icon:person Tim
+            * icon:person Mico
+   * two
+   * three
 </pre></td>
     <td bgcolor="#EEEEEE" valign="top">
       <p>
@@ -323,17 +323,17 @@ Render bullet lists in a variety of formats
   <tr>
     <td bgcolor="#EEEEEE" valign="top"><pre>
 %RENDERLIST{ "org" focus="one.b" }%
-	* one
-		* one.a
-			* one.a.x
-		* one.b
-			* one.b.x
-			  continue
-			* one.b.y
-				* icon:person Tim
-				* icon:person Mico
-	* two
-	* three
+   * one
+      * one.a
+         * one.a.x
+      * one.b
+         * one.b.x
+           continue
+         * one.b.y
+            * icon:person Tim
+            * icon:person Mico
+   * two
+   * three
 </pre></td>
     <td bgcolor="#EEEEEE" valign="top">
       <p>
@@ -447,7 +447,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Note:_** You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the TWiki server.
 
-- Download the ZIP file from the Plugin web (see below)
+- Download the ZIP file from the Plugin Home (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> File: </strong></th>
@@ -482,7 +482,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2006, <a href="http://www.structuredwikis.com/peter.html" target="_top">Peter Thoeny</a></td>
+    <td> © 2006-2007, <a href="mailto:Peter@Thoeny.org">Peter@Thoeny.org</a>, <a href="http://www.twiki.net/" target="_top">TWIKI.NET</a></td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -490,11 +490,19 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 23 Sep 2006 (V1.034) </td>
+    <td> 15 Jan 2008 (2.0) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 15 Jan 2008: </td>
+    <td> 2.0: Kenneth Lavrsen. No more reporting warnings in the error log when a render list starts at deeper level than 1 </td>
+  </tr>
+  <tr>
+    <td align="right"> 30 Sep 2007: </td>
+    <td> Added [[TWiki/VarRENDERLIST]] to have it listed in [[TWiki/TWikiVariables]]</td>
   </tr>
   <tr>
     <td align="right"> 23 Sep 2006: </td>
@@ -572,4 +580,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPlugins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]], [[TWikiPreferences]], TWiki:Plugins/TreePlugin
 
--- TWiki:Main/PeterThoeny - 23 Sep 2006
+-- TWiki:Main/PeterThoeny - 30 Sep 2007

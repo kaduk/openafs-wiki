@@ -13,6 +13,6 @@ Statistics extraction and presentation
 
 ## <a name="StaticMethod &lt;strong&gt;statistics&lt;/strong&gt; ($sess"></a> [[StaticMethod]] **statistics** `($session)`
 
-`statistics` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+`statistics` command handler. This method is designed to be invoked via the `UI::run` method.
 
 Generate statistics topic. If a web is specified in the session object, generate [[WebStatistics]] topic update for that web. Otherwise do it for all webs

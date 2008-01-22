@@ -1,7 +1,5 @@
 # <a name="Package &lt;code&gt;TWiki::Store::_RcsWrap="></a> Package =TWiki::Store::RcsWrap
 
-**extends** <tt>[[TWiki::Store::RcsFile|Main/TWikiStoreRcsFileDotPm]]</tt>
-
 This package does not publish any methods. It implements the virtual methods of the [[TWiki::Store::RcsFile|Main/TWikiStoreRcsFileDotPm]] superclass.
 
 Wrapper around the RCS commands required by TWiki. There is one of these object for each file stored under RCS.
@@ -9,18 +7,16 @@ Wrapper around the RCS commands required by TWiki. There is one of these object 
 <div>
   <ul>
     <li><a href="#Package =TWiki::Store::_RcsWrap="> Package TWiki::Store::RcsWrap</a><ul>
-        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#StaticMethod *parse_RevisionDiff"> StaticMethod parseRevisionDiff <tt>($text) -&gt; \@diffArray</tt></a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
 
-Complete processing after the client's HTTP request has been responded to.
-
-1. breaking circular references to allow garbage collection in persistent environments
+Break circular references.
 
 ## <a name="StaticMethod &lt;strong&gt;parse_RevisionDiff"></a> [[StaticMethod]] \*parseRevisionDiff `($text) -> \@diffArray`
 

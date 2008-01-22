@@ -24,22 +24,6 @@
     <td> S </td>
   </tr>
   <tr>
-    <td> NEWTOPICBGCOLOR </td>
-    <td> text </td>
-    <td> 20 </td>
-    <td> #FFFFCE </td>
-    <td> HTML Color </td>
-    <td> S </td>
-  </tr>
-  <tr>
-    <td> NEWTOPICFONTCOLOR </td>
-    <td> text </td>
-    <td> 20 </td>
-    <td> #0000FF </td>
-    <td> HTML Color </td>
-    <td> S </td>
-  </tr>
-  <tr>
     <td> WEBCOPYRIGHT </td>
     <td> textarea </td>
     <td>   </td>
@@ -115,7 +99,7 @@
     <td> PREVIEWBGIMAGE </td>
     <td> text </td>
     <td> 30 </td>
-    <td><img alt="preview2bg.gif" src="http://www.dementia.org/twiki//view/TWiki/PreviewBackground/preview2bg.gif" /></td>
+    <td><img alt="preview2bg.gif" src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/PreviewBackground/preview2bg.gif" /></td>
     <td> Image URL </td>
     <td> S </td>
   </tr>
@@ -203,7 +187,7 @@
     <td> WIKILOGOIMG </td>
     <td> text </td>
     <td> 30 </td>
-    <td><img alt="horzTWiki.gif" src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/horzTWiki.gif" /></td>
+    <td><img alt="horzTWiki.gif" src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/TWikiLogos/horzTWiki.gif" /></td>
     <td> URL of a logo image </td>
     <td> S </td>
   </tr>
@@ -227,8 +211,8 @@
     <td> WIKIWEBLIST </td>
     <td> textarea </td>
     <td>   </td>
-    <td>[[Main/WebHome]]</td>
-    <td align="center">[[TWiki/WebHome]]</td>
+    <td>[[USERSWEB/WebHome]]</td>
+    <td align="center">[[SYSTEMWEB/WebHome]]</td>
     <td align="right">[[Sandbox/WebHome]]</td>
     <td>   </td>
     <td> S </td>
@@ -341,7 +325,7 @@
     <td> TWIKILAYOUTURL </td>
     <td> text </td>
     <td> 30 </td>
-    <td><a href="http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css" target="_top">http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/layout.css" target="_top">http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/layout.css</a></td>
     <td> URL of a CSS </td>
     <td> S </td>
   </tr>
@@ -349,7 +333,7 @@
     <td> TWIKISTYLEURL </td>
     <td> text </td>
     <td> 30 </td>
-    <td><a href="http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css" target="_top">http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css</a></td>
+    <td><a href="http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/style.css" target="_top">http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/style.css</a></td>
     <td> URL of a CSS </td>
     <td> S </td>
   </tr>

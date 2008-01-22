@@ -1,3 +1,11 @@
+# <a name="TWiki Access Control"></a> TWiki Access Control
+
+_Restricting read and write access to topics and webs, by Users and groups_
+
+TWiki Access Control allows you restrict access to single topics and entire webs, by individual user and by user Groups. Access control, combined with [[TWikiUserAuthentication]], lets you easily create and manage an extremely flexible, fine-grained privilege system.
+
+**_%T% Tip:_** TWiki:TWiki.TWikiAccessControlSupplement on TWiki.org has additional documentation on access control.
+
 <div>
   <ul>
     <li><a href="#TWiki Access Control"> TWiki Access Control</a><ul>
@@ -20,6 +28,7 @@
         </li>
         <li><a href="#Access Control quick recipes"> Access Control quick recipes</a><ul>
             <li><a href="#Obfuscating Webs"> Obfuscating Webs</a></li>
+            <li><a href="#Restrict Access to Whole TWiki S"> Restrict Access to Whole TWiki Site</a></li>
             <li><a href="#Authenticate all Webs and Restri"> Authenticate all Webs and Restrict Selected Webs</a></li>
             <li><a href="#Authenticate and Restrict Select"> Authenticate and Restrict Selected Webs Only</a></li>
             <li><a href="#Hide Control Settings"> Hide Control Settings</a></li>
@@ -30,14 +39,6 @@
   </ul>
 </div>
 
-# <a name="TWiki Access Control"></a> TWiki Access Control
-
-_Restricting read and write access to topics and webs, by Users and groups_
-
-TWiki Access Control allows you restrict access to single topics and entire webs, by individual user and by user Groups. Access control, combined with [[TWikiUserAuthentication]], lets you easily create and manage an extremely flexible, fine-grained privilege system.
-
-**_%T% Tip:_** TWiki:TWiki.TWikiAccessControlSupplement on TWiki.org has additional documentation on access control.
-
 <a name="ImportantConsideration"></a>
 
 ## <a name="An Important Control Considerati"></a> An Important Control Consideration
@@ -47,7 +48,7 @@ Open, freeform editing is the essence of [[WikiCulture]] - what makes TWiki diff
 - **Peer influence** is enough to ensure that only relevant content is posted.
 - **Peer editing** - the ability for anyone to rearrange all content on a page - keeps topics focused.
 - In TWiki, content is transparently preserved under **revision control**:
-  - Edits can be undone by the administrator (per default a member of [[TWikiAdminGroup]]; see [[#ManagingGroups|Main/WebHome#ManagingGroups]]).
+  - Edits can be undone by the administrator (per default a member of %USERSWEB%.TWikiAdminGroup; see [[#ManagingGroups|Main/WebHome#ManagingGroups]]).
   - Users are encouraged to edit and refactor (condense a long topic), since there's a safety net.
 
 As a **collaboration guideline**:
@@ -75,10 +76,10 @@ A user can create an account in [[TWikiRegistration]]. The following actions are
 
 - [[WikiName]] and encrypted password are recorded using the password manager if authentication is enabled.
 - A confirmation e-mail is sent to the user.
-- A user home page with the [[WikiName]] of the user is created in the Main web.
-- The user is added to the [[TWikiUsers]] topic.
+- A user home page with the [[WikiName]] of the user is created in the %USERSWEB% web.
+- The user is added to the %USERSWEB%.TWikiUsers topic.
 
-The default visitor name is [[TWikiGuest]]. This is the non-authenticated user.
+The default visitor name is %USERSWEB%.TWikiGuest. This is the non-authenticated user.
 
 <a name="ManagingGroups"></a>
 
@@ -86,18 +87,18 @@ The default visitor name is [[TWikiGuest]]. This is the non-authenticated user.
 
 The following describes the standard TWiki support for groups. Your local TWiki may have an alternate group mapping manager installed. Check with your TWiki administrator if you are in doubt.
 
-Groups are defined by group topics located in the <code>**Main**</code> web. To create a new group, visit [[TWikiGroups]] and enter the name of the new group ending in <code>**Group**</code> into the "new group" form field. This will create a new group topic with two important settings:
+Groups are defined by group topics located in the <code>**%USERSWEB%**</code> web. To create a new group, visit %USERSWEB%.TWikiGroups and enter the name of the new group ending in <code>**Group**</code> into the "new group" form field. This will create a new group topic with two important settings:
 
 - <code>**Set GROUP = &lt; list of Users and/or Groups &gt;**</code>
 - <code>**Set ALLOWTOPICCHANGE = &lt; list of Users and/or Groups &gt;**</code>
 
 The GROUP setting is a comma-separated list of users and/or other groups. Example:
 
-- <code>**Set GROUP = Main.SomeUser, Main.OtherUser, Main.SomeGroup**</code>
+- <code>**Set GROUP = %USERSWEB%.SomeUser, %USERSWEB%.OtherUser, %USERSWEB%.SomeGroup**</code>
 
 The ALLOWTOPICCHANGE setting defines who is allowed to change the group topic; it is a comma delimited list of users and groups. You typically want to restrict that to the members of the group itself, so it should contain the name of the topic. This prevents users not in the group from editing the topic to give themselves or others access. For example, for the KasabianGroup topic write:
 
-- <code>**Set ALLOWTOPICCHANGE = Main.KasabianGroup**</code>
+- <code>**Set ALLOWTOPICCHANGE = %USERSWEB%.KasabianGroup**</code>
 
 **_%X% Note:_** TWiki has strict formatting rules. Make sure you have three spaces, an asterisk, and an extra space in front of any access control rule.
 
@@ -107,9 +108,9 @@ The ALLOWTOPICCHANGE setting defines who is allowed to change the group topic; i
 
 A number of TWiki functions (for example, renaming webs) are only available to administrators. Administrators are simply users who belong to the **SuperAdminGroup**. This is a standard user group, the name of which is defined by \{SuperAdminGroup\} setting in [configure](http://www.dementia.org/twiki/configure). The default name of this group is the `TWikiAdminGroup`. The system administrator may have chosen a different name for this group if your local TWiki uses an alternate group mapping manager but for simplicity we will use the default name TWikiAdminGroup in the rest of this topic.
 
-You can create new administrators simply by adding them to the [[TWikiAdminGroup]] topic. For example,
+You can create new administrators simply by adding them to the %USERSWEB%.TWikiAdminGroup topic. For example,
 
-- <code>**Set GROUP= Main.ElizabethWindsor, Main.TonyBlair**</code>
+- <code>**Set GROUP = %USERSWEB%.ElizabethWindsor, %USERSWEB%.TonyBlair**</code>
 
 A member of the Super Admin Group has unrestricted access throughout the TWiki, so only trusted staff should be added to this group.
 
@@ -117,7 +118,7 @@ A member of the Super Admin Group has unrestricted access throughout the TWiki, 
 
 You can define who is allowed to read or write to a web or a topic. Note that some plugins may not respect access permissions.
 
-- Restricting VIEW blocks viewing and searching of content.
+- Restricting VIEW blocks viewing and searching of content. When you restric VIEW to a topic or web, this also restricts [[INCLUDE|Main/VarINCLUDE]] and [[Formatted SEARCH|Main/FormattedSearch]] from showing the content of the topics.
 - Restricting CHANGE blocks creating new topics, changing topics or attaching files.
 - Restricting RENAME prevents renaming of topics within a web.
 
@@ -138,9 +139,13 @@ You can define restrictions on who is allowed to view a %WIKITOOLNAME% web. You 
   - <code>**Set DENYWEBRENAME = &lt; comma-delimited list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWWEBRENAME = &lt; comma-delimited list of Users and Groups &gt;**</code>
 
-If your site allows hierarchical webs, then access to sub-webs is determined from the access controls of the parent web, plus the access controls in the sub-web. So, if the parent web has <code>**ALLOWWEBVIEW**</code> set, this will also apply to the subweb.
+If your site allows hierarchical webs, then access to sub-webs is determined from the access controls of the parent web, plus the access controls in the sub-web. So, if the parent web has <code>**ALLOWWEBVIEW**</code> set, this will also apply to the subweb. Also note that you will need to ensure that the parent web's <code>**FINALPREFERENCES**</code> does not include the access control settings listed above. Otherwise you will not be able override the parent web's access control settings in sub-webs.
 
 Creation and renaming of sub-webs is controlled by the WEBCHANGE setting on the parent web (or ROOTCHANGE for [[root webs|Main/WebHome#RootWebs]]). Renaming is additionally restricted by the setting of WEBRENAME in the web itself.
+
+**_Note:_** If you restrict access to the %USERSWEB%, make sure to add the `TWikiRegistrationAgent` so that users can register. Example:
+
+- - <code>**Set ALLOWWEBCHANGE = TWikiAdminGroup, TWikiRegistrationAgent**</code>
 
 **_Note:_** For Web level access rights Setting any of these settings to an empty value has the same effect as not setting them at all. Please note that the documentation of TWiki 4.0 and earlier versions of TWiki 4.1 did not reflect the actual implementation, e.g. an empty ALLOWWEBVIEW does _not_ prevent anyone from viewing the web, and an an empty DENYWEBVIEW does _not_ allow all to view the web.
 
@@ -191,7 +196,7 @@ That way all the controls that apply to the topic also apply to attachments to t
 
 Top level webs are a special case, because they don't have a parent web with a [[WebPreferences]]. So there has to be a special control just for the root level.
 
-- You can define these settings in the Main.%TWIKIPREFSTOPIC% topic, preferable towards the end of the topic:
+- You can define these settings in the %USERSWEB%.%TWIKIPREFSTOPIC% topic, preferable towards the end of the topic:
   - <code>**Set DENYROOTCHANGE = &lt; comma-delimited list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWROOTCHANGE = &lt; comma-delimited list of Users and Groups &gt;**</code>
 
@@ -229,14 +234,28 @@ This setup can be useful to hide a new web until content its ready for deploymen
 
 **_%X% Note:_** Obfuscating a web without view access control is **very** insecure, as anyone who knows the URL can access the web.
 
+### <a name="Restrict Access to Whole TWiki S"></a> Restrict Access to Whole TWiki Site
+
+For a firewalled TWiki, e.g. an intranet wiki or extranet wiki, you want to allow only invited people to access your TWiki. In this case, enable [[user authentication with ApacheLogin|Main/TWikiUserAuthentication#ApacheLogin]] and lock down access to the whole `twiki/bin` and `twiki/pub` directories to all but valid users. In the Apache `.htaccess` file or the appropriate `.conf` file, replace the `<FilesMatch "(attach|edit|...` section with this:
+
+    <FilesMatch ".*">
+           require valid-user
+    </FilesMatch>
+
+If needed, you can further restrict access to selected webs with ALLOWWEBVIEW and other access control settings.
+
+**_Note:_** With this configuration, someone with access to the site needs to register new users.
+
 ### <a name="Authenticate all Webs and Restri"></a> Authenticate all Webs and Restrict Selected Webs
 
 Use the following setup to authenticate users for topic viewing in all webs and to restrict access to selected webs. Requires [[TWikiUserAuthentication]] to be enabled.
 
-1. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
+1. Set `require valid-user` on your `view` script in .htaccess or the appropriate Apache .conf file. As of 4.x, this looks like: `FilesMatch "(attach|edit|manage|rename|save|view|upload|mail|logon|.*auth).*"` (normally `view` is not in that list).
+2. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
   - <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
-  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted in case `DENYWEBVIEW` and `ALLOWWEBVIEW` is not defined.
+  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted if `DENYWEBVIEW` and `ALLOWWEBVIEW` are not defined.
+3. If you still want public users to be able to register automatically follow TWiki:TWiki.RegisterOnViewRestrictedSite.
 
 ### <a name="Authenticate and Restrict Select"></a> Authenticate and Restrict Selected Webs Only
 
@@ -245,7 +264,7 @@ Use the following setup to provide unrestricted viewing access to open webs, wit
 1. **Restrict** view access to selected Users and Groups. Set one or both of these variables in its [[WebPreferences]] topic:
   - <code>**Set DENYWEBVIEW = &lt; list of Users and Groups &gt;**</code>
   - <code>**Set ALLOWWEBVIEW = &lt; list of Users and Groups &gt;**</code>
-  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted in case `DENYWEBVIEW` and `ALLOWWEBVIEW` is not defined.
+  - **_Note:_** `DENYWEBVIEW` is evaluated before `ALLOWWEBVIEW`. Access is denied if the authenticated person is in the `DENYWEBVIEW` list, or not in the `ALLOWWEBVIEW` list. Access is granted if `DENYWEBVIEW` and `ALLOWWEBVIEW` are not defined.
 
 ### <a name="Hide Control Settings"></a> Hide Control Settings
 
@@ -257,7 +276,7 @@ Alternatively, place them in HTML comment markers, but this exposes the access s
 >
 > <br />
 >
-> <code>**   \* Set DENYTOPICCHANGE = Main.SomeGroup**</code>
+> <code>**   \* Set DENYTOPICCHANGE = %USERSWEB%.SomeGroup**</code>
 >
 > <br />
 >

@@ -14,13 +14,13 @@ UI delegate for attachment management functions
 
 ## <a name="StaticMethod &lt;strong&gt;attach&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **attach** `($session)`
 
-`upload` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+`attach` command handler. This method is designed to be invoked via the `UI::run` method.
 
-Adds the meta-data for an attachment to a toic. Does **not** upload the attachment itself, just modifies the meta-data.
+Generates a prompt page for adding an attachment.
 
 ## <a name="StaticMethod &lt;strong&gt;upload&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **upload** `($session)`
 
-`upload` command handler. This method is designed to be invoked via the `TWiki::UI::run` method. CGI parameters, passed in $query:
+`upload` command handler. This method is designed to be invoked via the `UI::run` method. CGI parameters, passed in $query:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -37,7 +37,7 @@ Adds the meta-data for an attachment to a toic. Does **not** upload the attachme
   </tr>
   <tr>
     <td><code>filecomment</code></td>
-    <td> Comment to associate with file in attachment table </td>
+    <td> comment to associate with file in attachment table </td>
   </tr>
   <tr>
     <td><code>createlink</code></td>
@@ -47,6 +47,10 @@ Adds the meta-data for an attachment to a toic. Does **not** upload the attachme
     <td><code>changeproperties</code></td>
     <td>   </td>
   </tr>
+  <tr>
+    <td><code>redirectto</code></td>
+    <td> URL to redirect to after upload. <code>{AllowRedirectUrl}</code> must be enabled in <code>configure</code>. The parameter value can be a <code>TopicName</code>, a <code>Web.TopicName</code>, or a URL. Redirect to a URL only works if it is enabled in <code>configure</code>. </td>
+  </tr>
 </table>
 
-Does the work of uploading a file to a topic. Designed to be useable as a REST method (it will redirect to the 'view' script unless the 'noredirect' parameter is specified, in which case it will print a message to STDOUT, starting with 'OK' on success and 'ERROR' on failure.
+Does the work of uploading a file to a topic. Designed to be useable for a crude RPC (it will redirect to the 'view' script unless the 'noredirect' parameter is specified, in which case it will print a message to STDOUT, starting with 'OK' on success and 'ERROR' on failure.

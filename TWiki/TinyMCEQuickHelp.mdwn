@@ -1,0 +1,76 @@
+# <a name="TinyMCE Editor Help Summary"></a><a name=" _TinyMCE Editor Help Summary"></a> TinyMCE Editor Help Summary
+
+<table>
+  <tr>
+    <td rowspan="3" style="vertical-align: top; background-color: #f9f9f9" width="100px">
+      <p>
+      </p><select><option>Normal</option>
+        <option>Heading 1</option>
+        <option>Heading 2</option>
+        <option>Heading 3</option>
+        <option>Heading 4</option>
+        <option>Heading 5</option>
+        <option>Heading 6</option>
+        <option>VERBATIM</option>
+        <option>LITERAL</option>
+        <option>Protect on save</option>
+        <option>Protect forever</option></select></td>
+    <td rowspan="3" style="vertical-align: top">
+      <ul>
+        <li><code><b>Normal</b></code> - Normal text style </li>
+        <li><code><b>Heading 1-6</b></code> - Headings. 1 is largest </li>
+        <li><code><b>VERBATIM</b></code> - Text is shown in monospace with line breaks.%BR% <em>Wraps &lt;verbatim&gt; tags around the selected text. No TWiki Variables are interpreted inside verbatim tags</em></li>
+        <li><code><b>LITERAL</b></code> - Styled content is saved exactly as it appears in the editor.%BR% <em>Saves the selected content as raw HTML and wraps it in &lt;literal&gt; tags</em></li>
+        <li><code><b>Protect on save</b></code> - Prevent any change to the selected text when the edit is saved.%BR% <em>Use this to save advanced TWiki Variables where you do not want the Wysiwyg editor to modify the text during save</em></li>
+        <li><code><b>Protect forever</b></code> - Content is saved exactly as it is typed, and the protection is still there in future edit sessions.%BR% <em>Content is wrapped in &lt;sticky&gt; tags</em></li>
+      </ul>
+    </td>
+    <td style="vertical-align: top; background-color: #f9f9f9"><img alt="indent" src="http://www.dementia.org/twiki//view/%WEB%/TinyMCEPlugin/tinymce/jscripts/tiny_mce/themes/advanced/images/indent.gif" /> <img alt="outdent" src="http://www.dementia.org/twiki//view/%WEB%/TinyMCEPlugin/tinymce/jscripts/tiny_mce/themes/advanced/images/outdent.gif" /></td>
+    <td style="vertical-align: top">
+      <ul>
+        <li> If the cursor is in a list item, change the indent </li>
+        <li> Otherwise mark text with &lt;BLOCKQUOTE&gt; tags (the default TWiki skin shows blockquotes indented with a blue background)</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; background-color: #f9f9f9"><img alt="link" src="http://www.dementia.org/twiki//view/%WEB%/TinyMCEPlugin/tinymce/jscripts/tiny_mce/themes/advanced/images/link.gif" /> <img alt="unlink" src="http://www.dementia.org/twiki//view/%WEB%/TinyMCEPlugin/tinymce/jscripts/tiny_mce/themes/advanced/images/unlink.gif" /></td>
+    <td style="vertical-align: top">
+      <ul>
+        <li> Links can either point to a URL or to the name of a TWiki topic. </li>
+        <li> E.g. <code>http://twiki.org</code>, <code>TopicNames</code>, <code>Webname.TopicNames</code>, or <code>Webname.Subweb.WebName</code>. </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td style="vertical-align: top; background-color: #f9f9f9"><img alt="anchor" src="http://www.dementia.org/twiki//view/%WEB%/TinyMCEPlugin/tinymce/jscripts/tiny_mce/themes/advanced/images/anchor.gif" /></td>
+    <td style="vertical-align: top">
+      <ul>
+        <li> An anchor is a hidden mark you can use to link to a certain part of a topic, e.g a heading or a paragraph. An anchor must be a WikiWord. </li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+    <td colspan="2" width="50%">
+      <h3><a name="Setting a TWiki variable"></a> Setting a TWiki variable </h3>
+      <ol>
+        <li> Create a list item using the toolbar button</li>
+        <li> In the list item, type <code>Set NAME = value</code></li>
+        <li> Select the value, and assign the <code><b>Protect on save</b></code> style to it (only required if the value contains any TWiki Markup Language or if you style it e.g. to add bold, or if it's sensitive to the number of spaces) </li>
+      </ol>
+    </td>
+    <td colspan="2">
+      <h3><a name="Using a TWiki Variable"></a> Using a TWiki Variable </h3>
+      <ul>
+        <li> Just type it in. When the topic is saved, what you type will be saved just as you wrote it. </li>
+        <li> If any part of your variable parameters is sensitive to spacing, then select the entire TWiki variable and assign the <code><b>PROTECTED</b></code> style to it before you save. </li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+### <a name="Editing the raw text instead of"></a><a name="Editing the raw text instead of "></a> Editing the raw text instead of Wysiwyg
+
+- Select ![the pickaxe](http://www.dementia.org/twiki//view/%WEB%/TinyMCEPlugin/tinymce/jscripts/tiny_mce/plugins/twikibuttons/images/hide.gif) , or use the _Raw Edit_ link in the bottom action bar.

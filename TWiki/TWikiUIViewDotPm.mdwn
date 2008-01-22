@@ -14,7 +14,7 @@ UI delegate for view function
 
 ## <a name="StaticMethod &lt;strong&gt;view&lt;/strong&gt; ($session)"></a> [[StaticMethod]] **view** `($session)`
 
-`view` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+`view` command handler. This method is designed to be invoked via the `UI::run` method.
 
 Generate a complete HTML page that represents the viewed topics. The view is controlled by CGI parameters as follows:
 
@@ -43,7 +43,7 @@ Generate a complete HTML page that represents the viewed topics. The view is con
 
 ## <a name="StaticMethod &lt;strong&gt;viewfile&lt;/strong&gt; ($sessio"></a> [[StaticMethod]] **viewfile** `($session,$web,$topic,$query)`
 
-`viewfile` command handler. This method is designed to be invoked via the `TWiki::UI::run` method. Command handler for viewfile. View a file in the browser. Some parameters are passed in CGI query:
+`viewfile` command handler. This method is designed to be invoked via the `UI::run` method. Command handler for viewfile. View a file in the browser. Some parameters are passed in CGI query:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>

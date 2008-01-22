@@ -1,3 +1,12 @@
+# <a name="TWiki Variables"></a> TWiki Variables
+
+_Special text strings expand on the fly to display user data or system info_
+
+TWikiVariables are text strings - `%VARIABLE%` or `%VARIABLE{ parameter="value" }%` - that expand into content whenever a topic is rendered for viewing. There are two types of variables:
+
+1. Preferences variables: Can be defined and changed by the user
+2. Predefined variables: Defined by the TWiki system or by Plugins (for example, the [[SpreadSheetPlugin]] introduces a `%CALC{}%` variable)
+
 <div>
   <ul>
     <li><a href="#TWiki Variables"> TWiki Variables</a><ul>
@@ -16,15 +25,6 @@
     <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
   </ul>
 </div>
-
-# <a name="TWiki Variables"></a> TWiki Variables
-
-_Special text strings expand on the fly to display user data or system info_
-
-TWikiVariables are text strings - `%VARIABLE%` or `%VARIABLE{ parameter="value" }%` - that expand into content whenever a topic is rendered for viewing. There are two types of variables:
-
-1. Preferences variables: Can be defined and changed by the user
-2. Predefined variables: Defined by the TWiki system or by Plugins (for example, the [[SpreadSheetPlugin]] introduces a `%CALC{}%` variable)
 
 ## <a name="Using Variables"></a> Using Variables
 
@@ -56,15 +56,17 @@ Unlike predefined variables, preferences variables can be defined by the user in
 
 You can set variables in all the following places:
 
-1. local site level in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]]
+1. local site level in [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]]
 2. plugin topics (see [[TWikiPlugins]])
 3. local site level in [[Main.TWikiPreferences|Main/TWikiPreferences]]
-4. user level in individual user topics in Main web
+4. user level in individual user topics in %USERSWEB% web
 5. web level in [[WebPreferences]] of each web
 6. topic level in topics in webs
 7. session variables (if sessions are enabled)
 
 Settings at higher-numbered levels override settings of the same variable at lower numbered levels, unless the variable was included in the setting of FINALPREFERENCES at a lower-numbered level, in which case it is locked at the value it has at that level.
+
+If you are setting a variable and using it in the same topic, note that TWiki reads all the variable settings from the saved version of the topic before it displays anything. This means you can use a variable anywhere in the topic, even if you set it somewhere inconspicuous near the end. **But beware:** it also means that if you change the setting of a variable you are using in the same topic, <code>**Preview**</code> will show the wrong thing, and you must <code>**Save**</code> the topic to see it correctly.
 
 The syntax for setting Variables is the same anywhere in TWiki (on its own TWiki bullet line, including nested bullets): <br />`[multiple of 3 spaces] * [space] Set [space] VARIABLENAME [space] = [space] value`
 

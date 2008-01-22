@@ -69,186 +69,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   - Set SORT = all
 
 - Default table attributes:
-  - Set TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="0" valign="top" headeralign="center" headercolor="#ffffff" headerbg="#6b7f93" headerbgsorted="#334455" headercolor="#ffffff" databg="#ffffff,#edf4f9" databgsorted="#f5f5f5,#dce7ee"
-  - Classic skin table attributes:
-    - #Set TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="1" headerbg="#99cccc" databg="#ffffff,#ffffcc"
+  - Set TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="0" valign="top" headercolor="#ffffff" headerbg="#687684" headerbgsorted="#334455" databg="#ffffff,#edf4f9" databgsorted="#f1f7fc,#ddebf6" tablerules="rows"
 
 ## <a name="Table Attributes"></a> Table Attributes
 
 Attributes are defined as a `TABLEATTRIBUTES` Plugin setting in this topic, a `TABLEATTRIBUTES` preferences setting, or on line before the table using `%TABLE{...}%`:
 
-<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
-  <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Argument</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Comment</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Default value</font></a></th>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=3;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">Example</font></a></th>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>sort</code></td>
-    <td bgcolor="#ecf2f8" style=""> Set table sorting <code>"on"</code> or <code>"off"</code>. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>sort="on"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>initsort</code></td>
-    <td bgcolor="#ffffff" style=""> Column to sort initially (<code>"1"</code> to number of columns). </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>initsort="2"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>initdirection</code></td>
-    <td bgcolor="#ecf2f8" style=""> Initial sorting direction for <code>initsort</code>, set to <code>"up"</code> (descending) or <code>"down"</code> (ascending). </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>initdirection="up"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>headerbg</code></td>
-    <td bgcolor="#ffffff" style=""> Header cell background colour. </td>
-    <td bgcolor="#ffffff" style=""><code>"#6b7f93"</code></td>
-    <td bgcolor="#ffffff" style=""><code>headerbg="#999999"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>headerbgsorted</code></td>
-    <td bgcolor="#ecf2f8" style=""> Header cell background colour of a sorted column. </td>
-    <td bgcolor="#ecf2f8" style=""> the value of <code>headerbg</code></td>
-    <td bgcolor="#ecf2f8" style=""><code>headerbgsorted="#32596c"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>headercolor</code></td>
-    <td bgcolor="#ffffff" style=""> Header cell text colour. </td>
-    <td bgcolor="#ffffff" style=""><code>"#ffffff"</code></td>
-    <td bgcolor="#ffffff" style=""><code>headercolor="#0000cc"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>databg</code></td>
-    <td bgcolor="#ecf2f8" style=""> Data cell background colour, a comma separated list. Specify <code>"none"</code> for no colour, that is to use the colour/background of the page the table is on. </td>
-    <td bgcolor="#ecf2f8" style=""><code>"#edf4f9,#ffffff"</code></td>
-    <td bgcolor="#ecf2f8" style=""><code>databg="#f2f2f2,#ffffff"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>databgsorted</code></td>
-    <td bgcolor="#ffffff" style=""> Data cell background colour of a sorted column; see <code>databg</code>. </td>
-    <td bgcolor="#ffffff" style=""> the values of <code>databg</code></td>
-    <td bgcolor="#ffffff" style=""><code>databgsorted="#d4e8e4,#e5f5ea"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>datacolor</code></td>
-    <td bgcolor="#ecf2f8" style=""> Data cell text colour, a comma separated list. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>datacolor="#0000CC, #000000"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>tableborder</code></td>
-    <td bgcolor="#ffffff" style=""> Table border width (pixels). </td>
-    <td bgcolor="#ffffff" style=""><code>"1"</code></td>
-    <td bgcolor="#ffffff" style=""><code>tableborder="2"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>tableframe</code></td>
-    <td bgcolor="#ecf2f8" style=""> Table frame, set to <code>"void"</code> (no sides), <code>"above"</code> (the top side only), <code>"below"</code> (the bottom side only), <code>"hsides"</code> (the top and bottom sides only), <code>"lhs"</code> (the left-hand side only), <code>"rhs"</code> (the right-hand side only), <code>"vsides"</code> (the right and left sides only), <code>"box"</code> (all four sides), <code>"border"</code> (all four sides). </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>tableframe="hsides"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>tablerules</code></td>
-    <td bgcolor="#ffffff" style=""> Table rules, set to <code>"none"</code> (no rules), <code>"groups"</code> (rules will appear between row groups and column groups only), <code>"rows"</code> (rules will appear between rows only), <code>"cols"</code> (rules will appear between columns only), <code>"all"</code> (rules will appear between all rows and columns). </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>tablerules="rows"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>cellpadding</code></td>
-    <td bgcolor="#ecf2f8" style=""> Cell padding (pixels). </td>
-    <td bgcolor="#ecf2f8" style=""><code>"0"</code></td>
-    <td bgcolor="#ecf2f8" style=""><code>cellpadding="0"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>cellspacing</code></td>
-    <td bgcolor="#ffffff" style=""> Cell spacing (pixels). </td>
-    <td bgcolor="#ffffff" style=""><code>"0"</code></td>
-    <td bgcolor="#ffffff" style=""><code>cellspacing="3"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>cellborder</code></td>
-    <td bgcolor="#ecf2f8" style=""> Cell border width (pixels). </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>cellborder="0"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>valign</code></td>
-    <td bgcolor="#ffffff" style=""> Vertical alignment of cells and headers, set to <code>"top"</code>, <code>"middle"</code>, <code>"bottom"</code> or <code>"baseline"</code>. </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>valign="top"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>headervalign</code></td>
-    <td bgcolor="#ecf2f8" style=""> Vertical alignment of header cells; overrides <code>valign</code>. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>headervalign="top"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>datavalign</code></td>
-    <td bgcolor="#ffffff" style=""> Vertical alignment of data cells; overrides <code>valign</code>. </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>datavalign="top"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>headeralign</code></td>
-    <td bgcolor="#ecf2f8" style=""> Header cell alignment, one value for all columns, or a comma separated list for different alignment of individual columns. Set to <code>"left"</code>, <code>"center"</code>, <code>"right"</code> or <code>"justify"</code>. Overrides individual cell settings. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>headeralign="left,right"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>dataalign</code></td>
-    <td bgcolor="#ffffff" style=""> Data cell alignment, one value for all columns, or a comma separated list for different alignment of individual columns. Set to <code>"left"</code>, <code>"center"</code>, <code>"right"</code> or <code>"justify"</code>. Overrides individual cell settings. </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>dataalign="center"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>tablewidth</code></td>
-    <td bgcolor="#ecf2f8" style=""> Table width: Percentage of window width, or absolute pixel value. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>tablewidth="100%"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>columnwidths</code></td>
-    <td bgcolor="#ffffff" style=""> Column widths: Comma delimited list of column widths, percentage or absolute pixel value. </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>columnwidths="80%,20%"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>headerrows</code></td>
-    <td bgcolor="#ecf2f8" style=""> Number of header rows to exclude from sort. </td>
-    <td bgcolor="#ecf2f8" style=""><code>"1"</code></td>
-    <td bgcolor="#ecf2f8" style=""><code>headerrows="1"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>footerrows</code></td>
-    <td bgcolor="#ffffff" style=""> Number of footer rows to exclude from sort. </td>
-    <td bgcolor="#ffffff" style=""><code>"0"</code></td>
-    <td bgcolor="#ffffff" style=""><code>footerrows="1"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>id</code></td>
-    <td bgcolor="#ecf2f8" style=""> Table identifier string. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>id="userTable"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code>summary</code></td>
-    <td bgcolor="#ffffff" style=""> Table summary used by screenreaders: A summary of what the table presents. It should provide an orientation for someone who listens to the table. </td>
-    <td bgcolor="#ffffff" style=""><span>unspecified</span></td>
-    <td bgcolor="#ffffff" style=""><code>summary="List of subscribed users"</code></td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code>caption</code></td>
-    <td bgcolor="#ecf2f8" style=""> Table caption: A title that will be displayed just above the table. </td>
-    <td bgcolor="#ecf2f8" style=""><span>unspecified</span></td>
-    <td bgcolor="#ecf2f8" style=""><code>caption="Users"</code></td>
-  </tr>
-</table>
-
 The `%TABLE{...}%` settings override `TABLEATTRIBUTES` preferences settings, which override the `TABLEATTRIBUTES` Plugin settings.
+
+The setting `disableallsort` is normally not used as a TABLE or TABLEATTRIBUTES setting. Plugins such as [[EditTablePlugin]] dynamically sets `disableallsort` to disable sorting while editing a table. For this to work it is important that [[EditTablePlugin]] runs before [[TablePlugin]], which is the default. The setting `sort` can be overwritten by a URL parameter or hidden formfield of the same name. Plugins such as [[EditTablePlugin]] can use this to disable table header sorting while in edit mode.
 
 ## <a name="Examples"></a> Examples
 
@@ -261,12 +90,12 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="4" cellspacin
     <th bgcolor="#D5CCB1" colspan="6" maxcols="0" style="border-width: 0px"><span><font color="#666666"> <strong> Table with two Header Rows and Footer Row </strong> </font></span></th>
   </tr>
   <tr>
-    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Num</font></a></th>
-    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=1;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Status</font></a></th>
-    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=2;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Action</font></a></th>
-    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=3;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Who</font></a></th>
-    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=4;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">When</font></a></th>
-    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=5;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Progress</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=0;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Num</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=1;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Status</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=2;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Action</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=3;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Who</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=4;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">When</font></a></th>
+    <th bgcolor="#D5CCB1" maxcols="0" style="border-width: 0px"><a href="http://localhost?sortcol=5;table=2;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#666666">Progress</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#FAF0D4" style="border-width: 0px"> 1 </td>
@@ -322,7 +151,7 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="4" cellspacin
 
 <table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
   <tr>
-    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=4;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">When</font></a></th>
+    <th bgcolor="#6b7f93" maxcols="0" style=""><a href="http://localhost?sortcol=0;table=3;up=0#sorted_table" rel="nofollow" title="Sort by this column"><font color="#ffffff">When</font></a></th>
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""> 1-Jan-2004 </td>
@@ -332,6 +161,61 @@ Line before table: `%TABLE{ sort="on" tableborder="0" cellpadding="4" cellspacin
   </tr>
   <tr>
     <td bgcolor="#ecf2f8" style=""> 2-Jan-2005 </td>
+  </tr>
+</table>
+
+## <a name="TablePlugin and CSS"></a><a name="_TablePlugin and CSS"></a> TablePlugin and CSS
+
+Information for programmers.
+
+TablePlugin implements the following precedence:
+
+- the `TABLEATTRIBUTE` settings only write html styling, no CSS
+- the `TABLEATTRIBUTE` settings can be overridden by a skin's CSS
+- the `TABLE` tag attributes are converted to CSS styling, written in the head; these override any skin's CSS
+
+### <a name="CSS written by _TablePlugin"></a> CSS written by TablePlugin
+
+<table border="1" cellpadding="0" cellspacing="0" style="border-width: 1px">
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>.twikiTable</code></td>
+    <td bgcolor="#ecf2f8" style=""> The table </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>.twikiSortedCol</code></td>
+    <td bgcolor="#ffffff" style=""> A sorted column </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>.twikiSortedAscendingCol</code></td>
+    <td bgcolor="#ecf2f8" style=""> Sorted column, ascending </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>.twikiSortedDescendingCol</code></td>
+    <td bgcolor="#ffffff" style=""> Sorted column, descending </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>.tableSortIcon</code></td>
+    <td bgcolor="#ecf2f8" style=""> The sort icon holder (span) </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>.twikiFirstCol</code></td>
+    <td bgcolor="#ffffff" style=""> The first column </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>.twikiTableEven</code></td>
+    <td bgcolor="#ecf2f8" style=""> Even numbered rows </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>.twikiTableOdd</code></td>
+    <td bgcolor="#ffffff" style=""> Odd numbered rows </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ecf2f8" style=""><code>.twikiTableCol</code> + column number </td>
+    <td bgcolor="#ecf2f8" style=""> Unique column identifier, for instance: <code>twikiTableCol0</code></td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style=""><code>.twikiTableRow</code> + type + row number </td>
+    <td bgcolor="#ffffff" style=""> Unique row identifier, for instance: <code>twikiTableRowdataBg0</code></td>
   </tr>
 </table>
 
@@ -350,24 +234,12 @@ This plugin is pre-installed with your TWiki release. You should not have to ins
     <td bgcolor="#ecf2f8" style=""> Plugin topic </td>
   </tr>
   <tr>
-    <td bgcolor="#ffffff" style=""><code><b>data/TWiki/%TOPIC%.txt,v</b></code></td>
-    <td bgcolor="#ffffff" style=""> Plugin topic repository </td>
+    <td bgcolor="#ffffff" style=""><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td bgcolor="#ffffff" style=""> Plugin Perl module </td>
   </tr>
   <tr>
-    <td bgcolor="#ecf2f8" style=""><code><b>lib/TWiki/Plugins/%TOPIC%.pm</b></code></td>
+    <td bgcolor="#ecf2f8" style=""><code><b>lib/TWiki/Plugins/%TOPIC%/Core.pm</b></code></td>
     <td bgcolor="#ecf2f8" style=""> Plugin Perl module </td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code><b>pub/TWiki/%TOPIC%/diamond.gif</b></code></td>
-    <td bgcolor="#ffffff" style=""> Diamond symbol </td>
-  </tr>
-  <tr>
-    <td bgcolor="#ecf2f8" style=""><code><b>pub/TWiki/%TOPIC%/down.gif</b></code></td>
-    <td bgcolor="#ecf2f8" style=""> Down arrow </td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style=""><code><b>pub/TWiki/%TOPIC%/up.gif</b></code></td>
-    <td bgcolor="#ffffff" style=""> Up arrow </td>
   </tr>
 </table>
 - (Dakar) Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
@@ -383,12 +255,52 @@ This plugin is pre-installed with your TWiki release. You should not have to ins
     <td bgcolor="#ecf2f8" style=""> TWiki:Main/JohnTalintyre, TWiki:Main/PeterThoeny </td>
   </tr>
   <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Copyright: </td>
+    <td bgcolor="#ffffff" style=""> © 2001-2007, TWiki:Main/JohnTalintyre, <a href="mailto:Peter@Thoeny.org">Peter@Thoeny.org</a> (<a href="http://www.twiki.net/" target="_top">TWIKI.NET</a>), TWiki Contributors </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> License: </td>
+    <td bgcolor="#ecf2f8" style=""> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
     <td align="right" bgcolor="#ffffff" style=""> Plugin Version: </td>
-    <td bgcolor="#ffffff" style=""> 1.020 </td>
+    <td bgcolor="#ffffff" style=""> 1.032 (22 Dec 2007) </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Change History: </td>
     <td bgcolor="#ecf2f8" style="">  </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 16 Dec 2007 </td>
+    <td bgcolor="#ffffff" style=""> 1.030: Kenneth Lavrsen: Fixed the problem of tables being sorted by by [[Main/TablePlugin]] while the table is being edited by plugins such as [[Main/EditTablePlugin]]. This required adding a new attribute <code>disableallsort</code> so plugins such as [[Main/EditTablePlugin]] can temporarily disable all sorting for a table. Additionally the CGI variable (URL parameter or hidden formfield) <code>sort</code> can be set to "off" which disables all header sorting in the topic. This is used by plugins such as [[Main/EditTablePlugin]] to disable the sorting by clicking header fields during editing of tables. Ref: TWikibug:Item5135 and TWikibug:Item2690. </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 03 Dec 2007 </td>
+    <td bgcolor="#ecf2f8" style=""> Arthur Clemens: Fixed rendering and order of html elements <code>thead</code>, <code>tfoot</code> and <code>tbody</code>; corrected <code>id</code> parameter. </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 24 Nov 2007 </td>
+    <td bgcolor="#ffffff" style=""> Arthur Clemens: Fixed sorting of columns with only icons; also removed TWiki formatting before sorting. </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 06 Oct 2007 </td>
+    <td bgcolor="#ecf2f8" style=""> 15180: PTh: Added [[TWiki/VarTABLE]] to have it listed in [[TWiki/TWikiVariables]]</td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 27 Jun 2007 </td>
+    <td bgcolor="#ffffff" style=""> 1.024 - 1.027 Various small bug fixes. </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 24 Jun 2007 </td>
+    <td bgcolor="#ecf2f8" style=""> 1.023: Arthur Clemens: Inline styles are now written to the head; updated default sort icons (from [[TWiki/TWikiDocGraphics]]). </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> 23 Jun 2007 </td>
+    <td bgcolor="#ffffff" style=""> 1.022: Arthur Clemens: Fixed styling of param <code>tablerules</code> on Internet Explorer. </td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ecf2f8" style=""> 23 May 2007 </td>
+    <td bgcolor="#ecf2f8" style=""> 1.021: Michael Daum: Fixed css attribute priority to cooperate nicely with skin themes. </td>
   </tr>
   <tr>
     <td align="right" bgcolor="#ffffff" style=""> 27 Dec 2006 </td>
@@ -509,6 +421,10 @@ This plugin is pre-installed with your TWiki release. You should not have to ins
   <tr>
     <td align="right" bgcolor="#ecf2f8" style=""> Feedback: </td>
     <td bgcolor="#ecf2f8" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+  <tr>
+    <td align="right" bgcolor="#ffffff" style=""> Appraisal: </td>
+    <td bgcolor="#ffffff" style=""><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
   </tr>
 </table>
 

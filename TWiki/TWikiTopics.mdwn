@@ -10,7 +10,7 @@
   </ul>
 </div>
 
-The basic building block of a TWiki site is called a **_topic_**, identified by a unique, hopefully descriptive, [[WikiWord]] title. It may seem easier just to call them pages, but specifically a topic is the content of a page. The distinction seems small but will become more important as your skill using TWiki increases. [[TWikiSites]] are built using topics.
+The basic building block of a TWiki site is called a **_topic_**, identified by a unique, hopefully descriptive, %SYSTEMWEB%.WikiWord title. It may seem easier just to call them pages, but specifically a topic is the content of a page. The distinction seems small but will become more important as your skill using TWiki increases. [[TWikiSites]] are built using topics.
 
 ## <a name="Characteristics"></a> Characteristics
 
@@ -27,7 +27,7 @@ A TWiki topic is a rich information unit. **Each** topic has:
   - include links to other topics, URLs, Web sites, files, images, sounds, or anything else you can put on a regular Web page
   - handy pop-up quick reference
   - do all of this through whatever web browser you are familiar with
-- [[access control|TWiki/TWikiAccessControl]]
+- [[access control|SYSTEMWEB/TWikiAccessControl]]
   - independently determine who can see, edit, rename, move or delete topics
   - set permissions by individual users and user groups
   - over-ride topic, TWiki web or site
@@ -52,7 +52,7 @@ A TWiki topic is a rich information unit. **Each** topic has:
 
 Features that can be used by topics and sites include:
 
-- [[TWiki Skins|TWiki/TWikiSkins]] to customize the look of headers and footers when topics are converted to Web pages for display:
+- [[TWiki Skins|SYSTEMWEB/TWikiSkins]] to customize the look of headers and footers when topics are converted to Web pages for display:
   - default and user selectable per session
   - fully configurable look and feel
   - apply skins across an entire TWiki web, or to a single displayed page
@@ -73,7 +73,7 @@ Features that can be used by topics and sites include:
 - variables
   - similar to a command line context with site wide and locally defined variables
   - over-ride topic, TWiki web or site
-- [[forms|TWiki/TWikiForms]]
+- [[forms|SYSTEMWEB/TWikiForms]]
   - store database-style info alongside the free-form topic content
   - accesses meta-data
   - use text fields and boxes, radio buttons, pulldown selector menus, checkboxes
@@ -98,7 +98,7 @@ A primary purpose of TWiki is to make it incredibly easy for you to add and edit
 
 - **To add a new topic**: the simplest way is to type a new [[WikiName]] in an existing topic, while you're in edit mode. When the topic is saved, the new name will appear highlighted, with a **?** at the end: click the **?** and a new edit window appears. Enter, preview and save as usual. The new topic now exists.
   - Go back to the topic where you started, and you'll see the **?** has disappeared, and your [[WikiWord]] name is now a regular link. Type it anywhere on any topic in that web, and it will be turned into a link.
-  - %H% **One little links rule: each topic, and its [[WikiWord]] link, belong to one unique web only.** To link _between_ webs, you must first enter the topic's web name. <br />**_Example:_** This is %TOPIC%, in the <code>**TWiki**</code> web, so that's all you need to type on any topic in this web. But to link to %TOPIC% from a topic in the <code>**Main**</code> web, you have to type <code>**TWiki.%TOPIC%**</code> - <code>**Webname.TopicName**</code>. It's easy.
+  - %H% **One little links rule: each topic, and its [[WikiWord]] link, belong to one unique web only.** To link _between_ webs, you must first enter the topic's web name. <br />**_Example:_** This is %TOPIC%, in the <code>**TWiki**</code> web, so that's all you need to type on any topic in this web. But to link to %TOPIC% from a topic in the <code>**%USERSWEB%**</code> web, you have to type <code>**%SYSTEMWEB%.%TOPIC%**</code> - <code>**Webname.TopicName**</code>. It's easy.
 
 Another way to add a topic is to type a new topic name in the Go box or an unknown topic URL. You can type in either a [[WikiName]] to create the topic in the current web or Web.TopicName to create a topic in a different web than the current page. Topics created with the Go box or URLs do not have parent meta-data defined.
 
@@ -118,7 +118,7 @@ It looks complicated, but the basics you need to begin with are very simple to u
 
 - Some controls are self-explanatory and also include instructions and help links.
 - **Experiment**. You can always <code>**Cancel**</code> an edit or (using revision control) go Back whenever you like.
-- Get **in-depth info** from the [[complete documentation|TWiki/WebHome]], including the User's Guide, Configuration Manual and TWiki Reference.
+- Get **in-depth info** from the [[complete documentation|SYSTEMWEB/WebHome]], including the User's Guide, Configuration Manual and TWiki Reference.
 
 <a name="RenamingTopics"></a>
 

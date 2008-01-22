@@ -1,3 +1,7 @@
+# <a name="TWiki Forms"></a> TWiki Forms
+
+_Add structure to content with forms attached to twiki topics. TWiki forms (with form fields) and formatted search are the base for building database applications._
+
 <div>
   <ul>
     <li><a href="#TWiki Forms"> TWiki Forms</a><ul>
@@ -22,13 +26,9 @@
   </ul>
 </div>
 
-# <a name="TWiki Forms"></a> TWiki Forms
-
-_Add structure to content with forms attached to twiki topics. TWiki forms (with form fields) and formatted search are the base for building database applications._
-
 ## <a name="Overview"></a> Overview
 
-By adding form-based input to freeform content, you can structure topics with unlimited, easily searchable categories. A form is enabled for a web and can be added to a topic. The form data is shown in tabular format when the topic is viewed, and can be changed in edit mode using edit fields, radio buttons, check boxes and list boxes. Many different form types can be defined in a web, though a topic can only have only form attached to it at a time.
+By adding form-based input to freeform content, you can structure topics with unlimited, easily searchable categories. A form is enabled for a web and can be added to a topic. The form data is shown in tabular format when the topic is viewed, and can be changed in edit mode using edit fields, radio buttons, check boxes and list boxes. Many different form types can be defined in a web, though a topic can only have one form attached to it at a time.
 
 Typical steps to build an application based on TWiki forms:
 
@@ -157,11 +157,11 @@ You can also retrieve possible values for `select`, `checkbox` or `radio` types 
 >   </tr>
 > </table>
 
-Field values can also be obtained as the result of a [[FormattedSearch]]. For example,
+Field values can also be set using the result of expanding other TWiki variables. For example,
 
-> `%SEARCH{"Office$" scope="topic" web="%MAINWEB%" nonoise="on" type="regex" format="$web.$topic" separator=", " }%`
+> `%SEARCH{"Office$" scope="topic" web="%USERSWEB%" nonoise="on" type="regex" format="$web.$topic" separator=", " }%`
 
-when used in the value field of the form definition, this will find all topic names in the Main web which end in "Office" and use them as the legal field values.
+When used in the value field of the form definition, this will find all topic names in the Main web which end in "Office" and use them as the legal field values.
 
 <a name="EnablingForms"></a>
 
@@ -191,7 +191,7 @@ Forms have to be enabled for each individual web. The <code>**WEBFORMS**</code> 
         </form>
 - **_%T% Tip:_** For TWiki applications you can [[automatically generate unique topicnames|Main/TWikiTemplates#AutomaticallyGeneratedTopicname]].
 
-- **_%X% Note:_** Initial values will not be submitted to the form of a new topic if you only use the formtemplate parameter.
+- **_%X% Note:_** Initial values will **not** be set in the form of a new topic if you _only_ use the formtemplate parameter.
 
 ## <a name="Changing a form"></a> Changing a form
 
@@ -222,7 +222,7 @@ The <code>**Type**</code>, <code>**Size**</code> and <code>**Value**</code> fiel
 - <code>**Type**</code> `checkbox` specifies one or more checkboxes. The `Size` field specifies how many checkboxes will be displayed on each line. The `Value` field should be a comma-separated list of item labels.
   - <code>**Type**</code> `checkbox+buttons` will add **Set** and **Clear** buttons to the basic `checkbox` type.
 - <code>**Type**</code> `radio` is like `checkbox` except that radio buttons are mutually exclusive; only one can be selected.
-- <code>**Type**</code> `label` specifies read-only label text, The `Value` field should contian the text of the label.
+- <code>**Type**</code> `label` specifies read-only label text. The `Value` field should contain the text of the label.
 - <code>**Type**</code> `select` specifies a select box. The `Value` field should contain a comma-separated list of options for the box. The `Size` field can specify a fixed size for the box (e.g. `1`, or a range e.g. `3..10`. If you specify a range, then the box will never be smaller than 3 items, never larger than 10, and will be 5 high if there are only 5 options.
   - There are two modifiers that can be applied to the `select` type:
     - `select+multi` turns multiselect on for the select, to allow Shift+Click and Ctrl+Click to select (or deselect) multiple items.
@@ -261,8 +261,11 @@ For example, a simple form just supporting entry of a name and a date would look
 
 - The field value will be used to initialize a field when a form is created, unless specific values are given by the topic template or query parameters. The first item in the list for a select or radio type is the default item. For `label`, `text`, and `textarea` fields the value may also contain commas. `checkbox` fields cannot be initialized through the form template.
 - Leading and trailing spaces are _not_ significant.
-- Field values can also be generated through a [[FormattedSearch]], which must yield a suitable table as the result.
-- Variables in the initial values of a form definition get expanded when form values are initialized from the form definition. The escape words `$quot` ("), `$percnt` (%), `$dollar` ($), `$n` (newline), and `$nop` can be used to prevent expansion.
+- Field values can also be generated through a %SYSTEMWEB%.FormattedSearch, which must yield a suitable table as the result.
+- Variables in the initial values of a form definition get expanded when the form definition is loaded.
+  - If you want to use a `|` character in the initial values field, you have to precede it with a backslash, thus: `\|`.
+  - You can use `<nop>` to prevent TWiki variables from being expanded.
+  - The [[FormatTokens]] can be used to prevent expansion of other characters.
 
 **General Notes:**
 
@@ -321,7 +324,7 @@ TWiki Forms accept user-input data, stored as [[TWikiMetaData]]. Meta data also 
 > parameter it is easy to display the value of a classification field next to the topic link:
 >
 >     | *Topic* | *Classification* |
->     %SEARCH{"%MAINWEB%.UserName" scope="text" nosearch="on" nototal="on" order="modified" reverse="on"
+>     %SEARCH{"%USERSWEB%.UserName" scope="text" nosearch="on" nototal="on" order="modified" reverse="on"
 >     format="|<b>[[$web.$topic][$topic]]</b> |<nop>$formfield(TopicClassification) |" web="Sandbox"}%
 
 Searching forms this way is obviously pretty inefficient, but it's easy to do. If you want better performance, take a look at some of the structured wiki extensions that support higher performance searching e.g. TWiki:Plugins.DBCachePlugin.

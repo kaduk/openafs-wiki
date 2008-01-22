@@ -6,6 +6,7 @@ Support for the TWiki template language.
   <ul>
     <li><a href="#Package =TWiki::Templates="> Package TWiki::Templates</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>haveTemplate</strong> ($na"> ObjectMethod haveTemplate <tt>($name) -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>expandTemplate</strong> ($"> ObjectMethod expandTemplate <tt>($params) -&gt; $string</tt></a></li>
       </ul>
@@ -43,6 +44,10 @@ This is to all intents and purposes a singleton object. It could easily be cover
 Constructor. Creates a new template database object.
 
 - $session - session (TWiki) object
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;haveTemplate&lt;/strong&gt; ($na"></a> [[ObjectMethod]] **haveTemplate** `($name) -> $boolean`
 

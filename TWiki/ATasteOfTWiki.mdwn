@@ -147,7 +147,7 @@ You may also see in the header (usually at the top right) a list of the TWiki "w
 
 - For example, we might have a web called "Enemies", where we keep all we know about our enemies, and another called "Friends"
 - There's usually a safe play web called something like "Sandbox" or "Scratch", where you can create pages just to try things out
-- And some admin areas, like "Main" and "TWiki"
+- And some admin areas, like "%USERSWEB%" and "%SYSTEMWEB%"
 
 ## <a name="Slide 10: The Page Footer"></a> Slide 10: The Page Footer
 
@@ -187,7 +187,7 @@ The footer of the page is also highlighted in colour, and is usually where you w
 
 ... and easier to read<br /><br />`_Actually_ it is *perfectly* and __absolutely__ flat`<br /><br /> appears as <br /><br />_Actually_ it is **perfectly** and **_absolutely_** flat
 
-- A full description of all the formatting can be found in the [[TextFormattingRules]] and [[TextFormattingFAQ]]
+- A full description of all the formatting can be found in the %SYSTEMWEB%.TextFormattingRules and %SYSTEMWEB%.TextFormattingFAQ
 - The best thing to do is just to type until you get stuck
   - then follow the link on the edit page to the help.
 
@@ -251,7 +251,7 @@ TWiki understands pages in plain text just fine, but you can %RED% **_jazz_** %E
 
          | Cat | Feline |
          | Bear | Ursine |
-         | Wolf | Vulpine |
+         | Wolf | Lupine |
 
 - appears as <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -264,7 +264,7 @@ TWiki understands pages in plain text just fine, but you can %RED% **_jazz_** %E
   </tr>
   <tr>
     <td><font color="black">Wolf</font></td>
-    <td><font color="black">Vulpine</font></td>
+    <td><font color="black">Lupine</font></td>
   </tr>
 </table>
 - %RED% .... %ENDCOLOR% will change the colour of the enclosed text. Lots of colours are available (%RED%%RED%%ENDCOLOR%, %GREEN%%GREEN%%ENDCOLOR%, %BLUE%%BLUE%%ENDCOLOR% etc)
@@ -288,11 +288,11 @@ TWiki understands pages in plain text just fine, but you can %RED% **_jazz_** %E
 - An ordinary URL pasted into text will appear as a link - <http://www.google.com>
   - You can also prettify URLs using square brackets:
     - `[[http://www.google.com/][Google]]` appears as [Google](http://www.google.com/)
-- Use %SEARCH. This is an interface to a sophisticated search engine that embeds the results of the search in your page. See [[TWikiVariables]] for full details.
+- Use %SEARCH. This is an interface to a sophisticated search engine that embeds the results of the search in your page. See %SYSTEMWEB%.TWikiVariables for full details.
 
 ## <a name="Slide 19: More formatting"></a> Slide 19: More formatting
 
-- There's **lots** more formatting available, see [[TextFormattingRules]] and [[TextFormattingFAQ]]
+- There's **lots** more formatting available, see %SYSTEMWEB%.TextFormattingRules and %SYSTEMWEB%.TextFormattingFAQ
 - _If you are a real masochist, you can even enter raw HTML tags!_
 - **Important** to _disable_ unwanted formatting, use `<nop>`
   - `<nop>_word_` appears as \_word\_

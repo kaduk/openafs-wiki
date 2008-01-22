@@ -1,3 +1,9 @@
+<a name="TWikiMetaData"></a>
+
+# <a name="TWiki Meta Data"></a> TWiki Meta Data
+
+_Additional topic data, program-generated or from [[TWikiForms]], is stored embedded in the topic text using `META:` tags_
+
 <div>
   <ul>
     <li><a href="#TWiki Meta Data"> TWiki Meta Data</a><ul>
@@ -15,21 +21,18 @@
         </li>
         <li><a href="#Viewing Meta Data in Page Source"> Viewing Meta Data in Page Source</a></li>
         <li><a href="#Rendering Meta Data"> Rendering Meta Data</a></li>
-        <li><a href="#Known Issues"> Known Issues</a></li>
       </ul>
     </li>
   </ul>
 </div>
 
-<a name="TWikiMetaData"></a>
-
-# <a name="TWiki Meta Data"></a> TWiki Meta Data
-
-_Additional topic data, program-generated or from [[TWikiForms]], is stored in `META` variable name/value pairs_
-
 ## <a name="Overview"></a> Overview
 
-[[TWikiMetaData]] uses `META` variables to store topic data that's separate from the main free-form content. This includes program-generated info like [[FileAttachment]] and topic movement data, and user-defined [[TWikiForms]] info. Use `META` variables to format and display Meta Data.
+By default, TWiki stores topics in files on disk, in a really simple and obvious directory structure. The big advantage of this approach is that it makes it really easy to manipulate topics from outside TWiki, and is also very safe; there are no complex binary indexes to maintain, and moving a topic from one TWiki to another is as simple as copying a couple of text files.
+
+To keep eveything together in one place, TWiki uses a simple method for embedding additional data (program-generated or from [[TWikiForms]]) in topics. It does this using `META:` tags.
+
+`META:` data includes program-generated info like [[FileAttachment]] and topic movement data, and user-defined [[TWikiForms]] info.
 
 ## <a name="Meta Data Syntax"></a> Meta Data Syntax
 
@@ -40,7 +43,7 @@ _Additional topic data, program-generated or from [[TWikiForms]], is stored in `
 
 - Each meta variable is on one line.
 
-- `\n` (new line) is represented in values by `%_N_` and `"` (double-quotes) by `%_Q_%`.
+- Values in meta-data are URL encoded so that characters such as \\n can be stored.
 
 > **Example of Format**
 >
@@ -293,10 +296,4 @@ Current support covers:
 
 **_Note:_** SEARCH can also be used to render meta data, see examples in [[FormattedSearch]] and [[SearchPatternCookbook]].
 
-## <a name="Known Issues"></a> Known Issues
-
-At present, there is no Meta Data support for Plugins. However, the format is readily extendable and the `Meta.pm` code that supports the format needs only minor alteration.
-
 **_Related Topics:_** [[DeveloperDocumentationCategory]], [[UserDocumentationCategory]]
-
--- **_Contributors:_** TWiki:Main.JohnTalintyre, TWiki:Main.MikeMannix, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie

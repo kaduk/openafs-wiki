@@ -6,11 +6,10 @@ A singleton object of this class is used to deal with attachments to topics.
   <ul>
     <li><a href="#Package =TWiki::Attach="> Package TWiki::Attach</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>render_MetaData</strong> ("> ObjectMethod renderMetaData <tt>($web,$topic,$meta,$args) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>formatVersions</strong> ($"> ObjectMethod formatVersions <tt>($web,$topic,$attrs) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *get_AttachmentLink"> ObjectMethod getAttachmentLink <tt>($user,$web,$topic,$name,$meta) -&gt; $html</tt></a></li>
-        <li><a href="#ObjectMethod *migrate_ToFileAtta"> ObjectMethod migrateToFileAttachmentMacro <tt>($meta,$text) -&gt; $text</tt></a></li>
-        <li><a href="#ObjectMethod *upgradeFrom1v0beta"> ObjectMethod upgradeFrom1v0beta <tt>($meta) -&gt; $text</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -18,7 +17,11 @@ A singleton object of this class is used to deal with attachments to topics.
 
 ## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
 
-Constructor
+Constructor.
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;render_MetaData&lt;/strong&gt; ("></a> [[ObjectMethod]] **renderMetaData** `($web,$topic,$meta,$args) -> $text`
 
@@ -46,11 +49,3 @@ Generate a version history table for a single attachment
 - `$meta` - Meta object that contains the meta info
 
 Build a link to the attachment, suitable for insertion in the topic.
-
-## <a name="ObjectMethod &lt;strong&gt;migrate_ToFileAtta"></a> [[ObjectMethod]] \*migrateToFileAttachmentMacro `($meta,$text) -> $text`
-
-Migrate old HTML format
-
-## <a name="ObjectMethod &lt;strong&gt;upgradeFrom1v0beta"></a> [[ObjectMethod]] \*upgradeFrom1v0beta `($meta) -> $text`
-
-CODE\_SMELL: Is this really necessary? upgradeFrom1v0beta?

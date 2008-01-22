@@ -12,21 +12,12 @@ TwistyPlugin gives you several options to control the appearance of a twisty:
 - use a span or div for the content
 - set a class for the content span or div
 
-Twisty has a fallback mechanism in case JavaScript is not available: all content is displayed and the control buttons are hidden. Unless parameter `noscript="hide"` is used to specifically set the content to hide.
-
-<div><strong>What's new in version 1.2:</strong><ul>
-    <li> New variables to set default values: <code>TWISTYSHOWLINK</code>, <code>TWISTYHIDELINK</code>, <code>TWISTYMODE</code>, <code>TWISTYREMEMBER</code></li>
-    <li> Property <code>id</code> is no longer required as this is automatically set (still recommended in some cases with <code>remember="on"</code>) </li>
-    <li> Property value <code>remember="off"</code> will clear a previously stored setting </li>
-    <li> New properties <code>prefix</code> and <code>suffix</code></li>
-    <li> JavaScript to collapse or expand all Twisties on the page </li>
-  </ul>
-</div>
+Twisty has a fallback mechanism in case JavaScript is not available: all content is displayed and the control buttons are hidden.
 
 <div><span>On this page:</span><ul>
     <li><a href="#Usage examples"> Usage examples</a><ul>
         <li><a href="#Triad"> Triad</a></li>
-        <li><a href="#Working Twisty"> Working Twisty</a></li>
+        <li><a href="#Shorthand"> Shorthand</a></li>
         <li><a href="#Twisty with icons"> Twisty with icons</a></li>
         <li><a href="#Make it remember"> Make it remember</a></li>
         <li><a href="#Make it obey"> Make it obey</a></li>
@@ -37,6 +28,7 @@ Twisty has a fallback mechanism in case JavaScript is not available: all content
         <li><a href="#All on, all off"> All on, all off</a></li>
       </ul>
     </li>
+    <li><a href="#Special syntax: format tokens"> Special syntax: format tokens</a></li>
     <li><a href="#Syntax"> Syntax</a><ul>
         <li><a href="#TWISTY"> TWISTY</a></li>
         <li><a href="#ENDTWISTY"> ENDTWISTY</a></li>
@@ -73,27 +65,33 @@ The typical TwistyPlugin triad will look like this (pseudo code):
     (there may be other things between buttons and content)
     %TWISTYTOGGLE{}% my content %ENDTWISTYTOGGLE%
 
-### <a name="Working Twisty"></a> Working Twisty
+### <a name="Shorthand"></a> Shorthand
 
 The Twisty triad is conveniently packed into shorthand `%TWISTY{some parameters}% Collapsing content %ENDTWISTY%`:
 
-    %TWISTY{showlink="Show..." hidelink="Hide"}%
+    %TWISTY{}%
     my twisty content
     %ENDTWISTY%
 
-It will look like this:
+Will generate:
 
-<span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
+<span><span>[<span></span>](#)</span><span>[<span></span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId1toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId1toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
+
+You may have noticed that no parameters are passed to `%TWISTY{}%` but the show and hide links _do_ have text! The default values are fetched from plugin settings `TWISTYSHOWLINK` and `TWISTYHIDELINK`, see [[Plugin Settings|Main/WebHome#PluginSettings]] below.
 
 ### <a name="Twisty with icons"></a> Twisty with icons
 
-We will use `mode="div"` to put the collapsing content below the button.
+We will use `mode="div"` to put the collapsing content below the button (the default mode is `"span"`).
 
-    %TWISTY{mode="div" showlink="Show..." hidelink="Hide"
+    %TWISTY{
+    mode="div"
+    showlink="Show..."
+    hidelink="Hide"
     showimgleft="%ICONURLPATH{toggleopen-small}%"
-    hideimgleft="%ICONURLPATH{toggleclose-small}%"}%
+    hideimgleft="%ICONURLPATH{toggleclose-small}%"
+    }%
     my twisty content
     %ENDTWISTY%
 
@@ -102,84 +100,117 @@ It will look like this:
 <span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen-small.gif)<span>Show...</span>](#)</span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleclose-small.gif)<span>Hide</span>](#)</span></span>
 
 <div style="display: inline">
-  <div id="twistyId2toggle"> my twisty content </div>
+  <div id="twistyId2toggle"> %GREEN% my twisty content %ENDCOLOR% </div>
 </div>
 
 To put icons at the right side, write
 
-    %TWISTY{mode="div" showlink="Show&nbsp;" hidelink="Hide&nbsp;"
+    %TWISTY{
+    mode="div"
+    showlink="Show&nbsp;"
+    hidelink="Hide&nbsp;"
     showimgright="%ICONURLPATH{toggleopen-small}%"
-    hideimgright="%ICONURLPATH{toggleclose-small}%"}%
+    hideimgright="%ICONURLPATH{toggleclose-small}%"
+    }%
     my twisty content
     %ENDTWISTY%
 
 <span><span>[<span>Show </span>![](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen-small.gif)](#)</span><span>[<span>Hide </span>![](http://www.dementia.org/twiki//view/Main/WebHome/toggleclose-small.gif)](#)</span></span>
 
 <div style="display: inline">
-  <div id="twistyId3toggle"> my twisty content </div>
+  <div id="twistyId3toggle"> %GREEN% my twisty content %ENDCOLOR% </div>
 </div>
 
 ### <a name="Make it remember"></a> Make it remember
 
 To store the last state in a TWIKIPREF cookie, add the parameter `remember="on"`.%BR% To test this, reload the page after toggling.
 
-    %TWISTY{showlink="Show..." hidelink="Hide" remember="on"}%
+    %TWISTY{
+    showlink="Show..."
+    hidelink="Hide"
+    remember="on"
+    }%
     my twisty content
     %ENDTWISTY%
 
 <span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId4toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId4toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
 If a Twisty state has been stored in a TWIKIPREF cookie before, it can be cleared by using `remember="off"`:
 
-    %TWISTY{showlink="Show..." hidelink="Hide" remember="off"}%
+    %TWISTY{
+    showlink="Show..."
+    hidelink="Hide"
+    remember="off"
+    }%
     my twisty content
     %ENDTWISTY%
 
 <span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId5toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId5toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
 **NOTE:** Twisty ids are generated automatically. If you need control over exactly _which_ Twisty should be remembered, add the parameter `id`:
 
-    %TWISTY{id="currentCustomerList" showlink="Show..." hidelink="Hide" remember="on"}%
+    %TWISTY{
+    id="currentCustomerList"
+    showlink="Show..."
+    hidelink="Hide"
+    remember="on"
+    }%
     my customer list
     %ENDTWISTY%
+
+Note that `id` sets a sitewide cookie. To create a unique id, add topic or web variables:
+
+    id="%WEB%_%TOPIC%_currentCustomerList"
 
 ### <a name="Make it obey"></a> Make it obey
 
 To let the Twisty start with its content folded open, add parameter `start="show"`.
 
-    %TWISTY{showlink="Show..." hidelink="Hide" start="show"}%
+    %TWISTY{
+    showlink="Show..."
+    hidelink="Hide"
+    start="show"
+    }%
     my twisty content
     %ENDTWISTY%
 
 <span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId6toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId6toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
 Likewise use `start="hide"` to start with hidden content.
 
-    %TWISTY{showlink="Show..." hidelink="Hide" start="hide"}%
+    %TWISTY{
+    showlink="Show..."
+    hidelink="Hide
+    start="hide"
+    }%
     my twisty content
     %ENDTWISTY%
 
-<span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
+<span><span>[<span>Show...</span>](#)</span><span>[<span>Hide start=</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId7toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId7toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
 ### <a name="Make it obey only the first time"></a> Make it obey only the first time
 
 To let the Twisty start with its content folded open the first time the visitor sees the Twisty, add the parameter `firststart="show"`. If `remember="on"` is used, subsequential visits to the page will display the Twisty according the cookie setting.
 
-    %TWISTY{showlink="Show..." hidelink="Hide" firststart="show"}%
+    %TWISTY{
+    showlink="Show..."
+    hidelink="Hide"
+    firststart="show"
+    }%
     my twisty content
     %ENDTWISTY%
 
 <span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId8toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId8toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
 ### <a name="Other use: hide interface parts"></a><a name="Other use: hide interface parts "></a> Other use: hide interface parts in case of no JavaScript
 
@@ -187,7 +218,11 @@ You can use Twisty to show interface elements that should only be visible with J
 
 Put the "JavaScript content" in an almost bare bones Twisty. Write `showlink="" hidelink=""` to not display any default link texts.
 
-    %TWISTY{link="" noscript="hide" start="show"}%
+    %TWISTY{
+    link=""
+    noscript="hide"
+    start="show"
+    }%
     <input type="submit" class="twikiButton" value="You surely have !JavaScript" />
     %ENDTWISTY%
 
@@ -201,66 +236,138 @@ When JavaScript is off, the button should be invisible.
 
 This code will show the button when JavaScript is off:
 
-    %TWISTY{link="" start="show"}%
-    <input type="submit" class="twikiButton" value="You surely have !JavaScript" />
+    %TWISTY{
+    link=""
+    start="show"
+    }%
+    <input type="submit" class="twikiButton" value="You might have !JavaScript" />
     %ENDTWISTY%
 
 <span><span>[<span></span>](#)</span><span>[<span></span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId10toggle"><input type="submit" value="You surely have JavaScript" /> </span></div>
+<div style="display: inline"><span id="twistyId10toggle"><input type="submit" value="You might have JavaScript" /> </span></div>
 
 ### <a name="Styling the Twisty"></a> Styling the Twisty
 
 Use parameter `class` to style the content div or class:
 
-    %TWISTY{mode="div" showlink="Show..." hidelink="Hide" class="twikiHelp"}%
+    %TWISTY{
+    mode="div"
+    showlink="Show..."
+    hidelink="Hide"
+    class="twikiHelp"
+    }%
     my twisty content
     %ENDTWISTY%
 
 Generates: %BR% <span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
 
 <div style="display: inline">
-  <div id="twistyId11toggle"> my twisty content </div>
+  <div id="twistyId11toggle"> %GREEN% my twisty content %ENDCOLOR% </div>
 </div>
 
 ### <a name="Twisty headers"></a> Twisty headers
 
 To be able to use header tags like `<h2>`, use the properties `prefix` and `suffix`. Because we have identical show and hide links we can use the shorthand property `link`.
 
-    %TWISTY{prefix="<h4>!!" link="Header"
+    %TWISTY{
+    prefix="<h4>!!"
+    mode="div"
+    link="Header"
     showimgleft="%ICONURLPATH{toggleopen}%"
-    hideimgleft="%ICONURLPATH{toggleclose}%" suffix="</h4>"}%
+    hideimgleft="%ICONURLPATH{toggleclose}%"
+    suffix="</h4>"
+    }%
     my twisty content
     %ENDTWISTY%
+
+Add the `!!` to prevent the twisty header appear in the table of contents when you use `%TOC%`.
 
 Will create:
 
 #### <a name="Header%_TWISTYSCRIPT{&quot;TWiki._Twi"></a> <span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen.gif)<span>Header</span>](#)</span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleclose.gif)<span>Header</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId12toggle"> my twisty content </span></div>
+<div style="display: inline"><span id="twistyId12toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
 ### <a name="All on, all off"></a> All on, all off
 
 You can toggle all Twisties on or off at once by putting a link or button on the page with class `twistyExpandAll` or `twistyCollapseAll`.
 
-    <button class="twistyExpandAll twikiButton">Expand all</button>
-    <button class="twistyCollapseAll twikiButton">Collapse all</button>
+    <button class="twistyExpandAll twikiButton">Expand all</button> &nbsp; <button class="twistyCollapseAll twikiButton">Collapse all</button>
 
 Creates these controls:
 
 <button>Expand all</button>
+
 <button>Collapse all</button>
 
 When you want to use links, write:
 
     #VarTOGGLE
 
-    <a href="#TOGGLE" class="twistyExpandAll">Expand all</a>
+    <a href="#TOGGLE" class="twistyExpandAll">Expand all</a> &nbsp;
     <a href="#TOGGLE" class="twistyCollapseAll">Collapse all</a>
 
 <a name="VarTOGGLE"></a>
 
-[Expand all](#TOGGLE) [Collapse all](#TOGGLE)
+[Expand all](#TOGGLE)   [Collapse all](#TOGGLE)
+
+## <a name="Special syntax: format tokens"></a> Special syntax: format tokens
+
+If you use TWiki variables inside TWISTY parameters chances are it will mess up the variable, or the rendered html. Use format tokens to 'delay' rendering of these variables until the Twisty parameters are parsed.
+
+The format tokens are the same as with [[FormattedSearch]]:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Escape: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>
+
+For example, to show an icon inside the link, do not write:
+
+    link="%Y%"
+
+but use format tokens:
+
+    link="$percntY$percnt"
+
+... to get:
+
+<span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen-small.gif)<span>$percntY$percnt</span>](#)</span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleclose-small.gif)<span>$percntY$percnt</span>](#)</span></span>
+
+<div style="display: inline">
+  <div id="twistyId13toggle"> my twisty content </div>
+</div>
+
+Or a more complex example using [[SpreadsheetPlugin]]; do not write:
+
+    link="Count: (%CALC{"$GET(infoCount)"}%)"
+
+but use format tokens:
+
+    link="Count: ($percntCALC{$quot$dollarGET(infoCount)$quot}$percnt)"
 
 ## <a name="Syntax"></a> Syntax
 
@@ -376,31 +483,31 @@ This renders the button as well as the toggled content section contained within 
   <tr>
     <td><code>img</code></td>
     <td> Image url </td>
-    <td> %RED%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
+    <td> %GREEN%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
     <td> optional, defaults to no image </td>
   </tr>
   <tr>
     <td><code>imgleft</code></td>
     <td> Image url </td>
-    <td> %RED%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
+    <td> %GREEN%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
     <td> optional, defaults to no image </td>
   </tr>
   <tr>
     <td><code>imgright</code></td>
     <td> Image url </td>
-    <td> %RED%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
+    <td> %GREEN%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
     <td> optional, defaults to no image </td>
   </tr>
   <tr>
     <td><code>hideimg</code></td>
     <td> Image url </td>
-    <td> %RED%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
+    <td> %GREEN%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
     <td> optional, defaults to no image </td>
   </tr>
   <tr>
     <td><code>showimg</code></td>
     <td> Image url </td>
-    <td> %RED%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
+    <td> %GREEN%Deprecated, use showimgleft, hideimgleft, showimgright or hideimgright.%ENDCOLOR% </td>
     <td> optional, defaults to no image </td>
   </tr>
 </table>
@@ -652,6 +759,8 @@ Major features are:
 - Automatically fills in default values
 - Global preference settings can be set in this topic or locally in individual topics
 
+<a name="PluginSettings"></a>
+
 ## <a name="Plugin Settings"></a> Plugin Settings
 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%TWISTYPLUGIN\_SHORTDESCRIPTION%**</code>
@@ -677,28 +786,113 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <th bgcolor="#99CCCC"><strong> Description: </strong></th>
   </tr>
   <tr>
+    <td><code><b>TwistyBundleTWiki04x02_installer</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>TwistyBundleTWiki04x02_installer.pl</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TwistyBundleTWiki04x02.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/BehaviourContrib.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>data/TWiki/TwistyContrib.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
     <td><code><b>data/TWiki/TwistyPlugin.txt</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Contrib/BehaviourContrib.pm</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Contrib/TwistyBundleTWiki04x02.pm</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>lib/TWiki/Contrib/TwistyContrib.pm</b></code></td>
     <td>   </td>
   </tr>
   <tr>
     <td><code><b>lib/TWiki/Plugins/TwistyPlugin.pm</b></code></td>
     <td>   </td>
   </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/behaviour.compressed.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/behaviour.compressed_src.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/behaviour.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/behaviour_src.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/cssQuery-p.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/src/cssQuery-level2.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/src/cssQuery-level3.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/src/cssQuery-standard.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/src/cssQuery.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/src/test.html</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/BehaviourContrib/cssQuery/test.html</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist.compressed.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist.compressed_src.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist.css</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist.js</b></code></td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td><code><b>pub/TWiki/TwistyContrib/twist_src.js</b></code></td>
+    <td>   </td>
+  </tr>
 </table>
 
 - Optionally, if it exists, run <code>**%TOPIC%\_installer**</code> to automatically check and install other TWiki modules that this module depends on. You can also do this step manually.
-- Alternatively, manually make sure the dependencies listed in the table below are resolved. <table border="1">
-  <tr>
-    <th>Name</th>
-    <th>Version</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td align="left">TWiki::Contrib::TwistyContrib</td>
-    <td align="left">&gt;=1.200</td>
-    <td align="left">Required. Twisty javascript library</td>
-  </tr>
-</table>
+- Alternatively, manually make sure the dependencies listed in the table below are resolved. None
 - Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 
 ## <a name="Plugin Info"></a> Plugin Info
@@ -710,7 +904,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td> Copyright ©: </td>
-    <td> 2005 Rafael Alvarez, 2006 Arthur Clemens </td>
+    <td> 2005 Rafael Alvarez; 2006, 2007 Arthur Clemens </td>
   </tr>
   <tr>
     <td> License: </td>
@@ -718,20 +912,43 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td> Dependencies: </td>
-    <td>
-      <table border="1">
-        <tr>
-          <th>Name</th>
-          <th>Version</th>
-          <th>Description</th>
-        </tr>
-        <tr>
-          <td align="left">TWiki::Contrib::TwistyContrib</td>
-          <td align="left">&gt;=1.200</td>
-          <td align="left">Required. Twisty javascript library</td>
-        </tr>
-      </table>
-    </td>
+    <td> None </td>
+  </tr>
+  <tr>
+    <td> Plugin Version: </td>
+    <td> 24 Nov 2007 (version 1.4.8) </td>
+  </tr>
+  <tr>
+    <td> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td> 24 Nov 2007 </td>
+    <td> 1.4.6 - 1.4.8 Arthur Clemens - Added format tokens. </td>
+  </tr>
+  <tr>
+    <td> 07 Oct 2007 </td>
+    <td> 1.4.5 Arthur Clemens - Fix html tag with show/hide controls. </td>
+  </tr>
+  <tr>
+    <td> 25 Sep 2007 </td>
+    <td> 1.4.4 Arthur Clemens - Fix rendering of headers when <code>prefix</code> is used. </td>
+  </tr>
+  <tr>
+    <td> 11 Jul 2007 </td>
+    <td> 1.4.3 Arthur Clemens - Fix invalid html when <code>prefix</code> and <code>suffix</code> is used. </td>
+  </tr>
+  <tr>
+    <td> 23 Jun 2007 </td>
+    <td> 1.4.2 Arthur Clemens - Fixed bugs with parameters <code>firststart</code> and <code>noscript</code> (since version 1.4). </td>
+  </tr>
+  <tr>
+    <td> 20 Jun 2007 </td>
+    <td> 1.4 Arthur Clemens - Updated to work without ugly inserted javascript 'init' calls. This will change nothing to the functionality, but it will produce cleaner HTML, while at the same time the twisty is still set immediately (not at page onload) and graceful fallback in case of no javascript is maintained. </td>
+  </tr>
+  <tr>
+    <td> 19 Jun 2006 </td>
+    <td> 1.3 Arthur Clemens - Updated with TWiki 4 JavaScript files. </td>
   </tr>
   <tr>
     <td> 25 Oct 2006 </td>

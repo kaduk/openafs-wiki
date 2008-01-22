@@ -125,20 +125,20 @@ How to populate a list box with all usernames of registered TWiki users
 
 ### <a name="Solution 1: Appropriate for Sep"></a><a name="Solution 1: Appropriate for Sep "></a> Solution 1: Appropriate for Sep 2004 TWiki (Cairo)
 
-    <form name="testing" action="%SCRIPTURLPATH{"view"}%/%MAINWEB%" method="get">
+    <form name="testing" action="%SCRIPTURLPATH{"view"}%/%USERSWEB%" method="get">
     <select name="topic">
     <option>Select user...</option>
-    %SEARCH{ "Name:;Email:;Country:" web="%MAINWEB%" type="regex" nosearch="on" nototal="on" format="<option>$topic</option>" }%
+    %SEARCH{ "Name:;Email:;Country:" web="%USERSWEB%" type="regex" nosearch="on" nototal="on" format="<option>$topic</option>" }%
     </select>
     <input type="submit" value="Go" />
     </form>
 
 Which expands to this: (here limited to all Z\* users because TWiki.org has so many)
 
-<form action="http://www.dementia.org/twiki/view/Main" method="get" name="testing"><select name="topic"><option>Select user...</option>
+<form action="http://www.dementia.org/twiki/view/%USERSWEB%" method="get" name="testing"><select name="topic"><option>Select user...</option>
     <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) </select> <input type="submit" value="Go" /></form>
 
-This searches all topics in the Main web that contain "Name", "Email" and "Country" bullets. Alternatively, do a [[FormattedSearch]] with `multiple="on"` on the [[Main.TWikiUsers|Main/TWikiUsers]] topic.
+This searches all topics in the Main web that contain "Name", "Email" and "Country" bullets. Alternatively, do a %SYSTEMWEB%.FormattedSearch with `multiple="on"` on the [[%USERSWEB%.TWikiUsers|USERSWEB/TWikiUsers]] topic.
 
 ### <a name="Solution 2: As Solution 1, but w"></a> Solution 2: As Solution 1, but with possibility for multi-selecting usernames
 
@@ -150,17 +150,17 @@ Please note that the Search pattern is unchanged compared to Solution 1. The cha
 
 The abovementioned modification is, in effect:
 
-<form action="http://www.dementia.org/twiki/view/Main" method="get" name="testing"><select multiple="MULTIPLE" name="topic" size="2"><option>Select user...</option>
+<form action="http://www.dementia.org/twiki/view/%USERSWEB%" method="get" name="testing"><select multiple="MULTIPLE" name="topic" size="2"><option>Select user...</option>
     <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) </select> <input type="submit" value="Go" /></form>
 
 ### <a name="Solution 3: Appropriate for TWik"></a> Solution 3: Appropriate for TWiki 4 (Dakar)
 
 When the User information is stored in a [[UserForm]] (as is default in Dakar) then this list can be generated as follows:
 
-    <form name="testing" action="%SCRIPTURLPATH{"view"}%/%MAINWEB%" method="get">
+    <form name="testing" action="%SCRIPTURLPATH{"view"}%/%USERSWEB%" method="get">
     <select name="topic">
     <option>Select user...</option>
-    %SEARCH{"%META:FORM.*[U]serForm" web="%MAINWEB%" type="regex" casesensitive="on" nosearch="on" format="<option>$topic</option>" sort="topic" excludetopic="Test*, TWiki*"}%
+    %SEARCH{"%META:FORM.*[U]serForm" web="%USERSWEB%" type="regex" casesensitive="on" nosearch="on" format="<option>$topic</option>" sort="topic" excludetopic="Test*, TWiki*"}%
     </select>
     <input type="submit" value="Go" />
     </form>

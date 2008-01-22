@@ -1,6 +1,6 @@
 # <a name="Registration"></a> Registration
 
-**To edit pages on this [[TWikiSite]], you must have a registered user name and password.**
+**This TWiki does _not_ support new User Registration**
 
 %H% **Note:** Registered users can [[change|TWiki/ChangePassword]] and [[reset|TWiki/ResetPassword]] their passwords.
 
@@ -18,15 +18,15 @@
         </tr>
         <tr>
           <td align="right"> First Name: </td>
-          <td><input name="Twk1FirstName" onblur="this.form.Twk1WikiName.value=capitalise(this.value)+capitalise(this.form.Twk1LastName.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+          <td><input %noregistration%="%NOREGISTRATION%" name="Twk1FirstName" onblur="this.form.Twk1WikiName.value=capitalise(this.value)+capitalise(this.form.Twk1LastName.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
           <td align="right"> Last Name: </td>
-          <td><input name="Twk1LastName" onblur="this.form.Twk1WikiName.value=capitalise(this.form.Twk1FirstName.value)+capitalise(this.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+          <td><input %noregistration%="%NOREGISTRATION%" name="Twk1LastName" onblur="this.form.Twk1WikiName.value=capitalise(this.form.Twk1FirstName.value)+capitalise(this.value)" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
           <td align="right"> (identifies you to others) [[Main/WikiName]]: </td>
-          <td><input name="Twk1WikiName" onblur="" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+          <td><input %noregistration%="%NOREGISTRATION%" name="Twk1WikiName" onblur="" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
           <td>
@@ -36,22 +36,22 @@
         </tr>
         <tr>
           <td align="right"> E-mail address: </td>
-          <td><input name="Twk1Email" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
+          <td><input %noregistration%="%NOREGISTRATION%" name="Twk1Email" size="40" type="text" value="" /> <code><font color="red">**</font></code></td>
         </tr>
         <tr>
           <td> %BESPOKE_PASSWORD% </td>
         </tr>
         <tr>
           <td align="right"> Organisation name: </td>
-          <td><input name="Twk0OrganisationName" size="40" type="text" value="" /></td>
+          <td><input %noregistration%="%NOREGISTRATION%" name="Twk0OrganisationName" size="40" type="text" value="" /></td>
         </tr>
         <tr>
           <td align="right"> Organisation URL: </td>
-          <td><input name="Twk0OrganisationURL" onblur="if(this.value=='http://') { this.value='' }" onfocus="if(this.value=='') { this.value='http://' }" size="40" type="text" /></td>
+          <td><input %noregistration%="%NOREGISTRATION%" name="Twk0OrganisationURL" onblur="if(this.value=='http://') { this.value='' }" onfocus="if(this.value=='') { this.value='http://' }" size="40" type="text" /></td>
         </tr>
         <tr>
           <td align="right"> Country: </td>
-          <td><select name="Twk1Country" size="1"><option selected value="">Select...</option>
+          <td><select %noregistration%="%NOREGISTRATION%" name="Twk1Country" size="1"><option selected value="">Select...</option>
               <option>USA</option>
               <option>Albania</option>
               <option>Algeria</option>
@@ -197,7 +197,7 @@
         <tr>
           <td align="right" valign="top"> Comments:<br /> (optional) </td>
           <td>
-            <textarea cols="38" name="Twk0Comment" rows="4" wrap="virtual">
+            <textarea %noregistration%="%NOREGISTRATION%" cols="38" name="Twk0Comment" rows="4" wrap="virtual">
             </textarea>
           </td>
         </tr>
@@ -209,7 +209,7 @@
         <li> Add your name to the list of users in the [[Main/TWikiUsers]] topic in the Main web. </li>
         <li> Send you a confirmation of your registration by e-mail. </li>
       </ul> Once registered you can login using your %LOGIN_METHOD_IN_THIS_SITE% and password. </div>
-    <div><input name="rx" type="hidden" value="%BLACKLISTPLUGIN{ action="magic" }%" /> <input name="topic" type="hidden" value="%TOPIC%" /> <input name="action" type="hidden" value="register" /> <input type="submit" value=" Submit " /></div>
+    <div><input name="rx" type="hidden" value="%BLACKLISTPLUGIN{ action="magic" }%" /> <input name="topic" type="hidden" value="%TOPIC%" /> <input name="action" type="hidden" value="register" /> <input %noregistration%="%NOREGISTRATION%" type="submit" value=" Submit " /></div>
   </div>
 </form>
 
@@ -218,9 +218,3 @@
     <li><img align="top" alt="info" border="0" height="16" src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" /> If you have any questions about registration, send an e-mail to <a href="mailto:?subject=%TOPIC% Question"></a>. </li>
   </ul>
 </div>
-
-<table bgcolor="yellow">
-  <tr>
-    <td><strong><em>Note to administrator:</em></strong> The form fields can be customized to the needs of your organization. See also [[Main/TWikiUserAuthentication]]. In case you are registering users through other means, replace this topic with a note describing how to get registered in TWiki. In any case, remove this note. </td>
-  </tr>
-</table>

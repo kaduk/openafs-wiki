@@ -1,4 +1,4 @@
-# <a name="TWiki._PatternSkin CSS Cookbook"></a><a name=" TWiki._PatternSkin CSS Cookbook"></a> [[PatternSkin]] CSS Cookbook
+# <a name="%SYSTEMWEB%._PatternSkin CSS Coo"></a><a name=" %SYSTEMWEB%._PatternSkin CSS Co"></a> %SYSTEMWEB%.PatternSkin CSS Cookbook
 
 **Questions and answers on how to customize the default look of TWiki for your own needs, using style sheets.** For configuring page elements, see [[PatternSkinCustomization]].
 
@@ -25,11 +25,11 @@
 
 ## <a name="First Read: How to modify _Patte"></a> First Read: How to modify PatternSkin styles
 
-PatternSkin uses 3 style sheets (attached to [[PatternSkin]]):
+PatternSkin uses 3 style sheets (attached to %SYSTEMWEB%.PatternSkin):
 
-- [layout.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/layout.css) - the positioning of main page elements (blocks), widths and heights
-- [style.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/style.css) - fonts, sizes, margins and paddings
-- [colors.css](http://www.dementia.org/twiki//view/TWiki/PatternSkin/colors.css) - border colors, text colors and background colors
+- [layout.css](http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/layout.css) - the positioning of main page elements (blocks), widths and heights
+- [style.css](http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/style.css) - fonts, sizes, margins and paddings
+- [colors.css](http://www.dementia.org/twiki//view/%SYSTEMWEB%/PatternSkin/colors.css) - border colors, text colors and background colors
 
 When customizing your TWiki installation, you can either choose to completely rewrite all css styles, or to selectively override some styles. The latter option is by far less time consuming, but all depends on your graphical wishes.
 
@@ -41,11 +41,11 @@ Have a look at [[PatternSkinColorSettings]].
 
 - Create a new topic that will contain your new CSS files
 - Attach 3 new style sheets to the topic
-- Point the CSS variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to your new files:
+- Point the CSS variables in [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]] to your new files:
 
-          * Set TWIKILAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
-          * Set TWIKISTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
-          * Set TWIKICOLORSURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
+          * Set TWIKILAYOUTURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/layout.css
+          * Set TWIKISTYLEURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/style.css
+          * Set TWIKICOLORSURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/colors.css
 
 ### <a name="When you need to make small adju"></a> When you need to make small adjustments: Adding to existing CSS
 
@@ -53,19 +53,19 @@ With CSS you cannot remove already defined classes, you can only add to it, or o
 
 - Create a new topic that will contain your new CSS files
 - Attach 1, 2 or 3 new style sheets to the topic, dependent on your CSS setup (if you don't change much, you might as well put everything in one CSS file, layout, margins and colors)
-- Point the CSS variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to your new files (below the `TWIKIXXXURL` variables):
+- Point the CSS variables in [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]] to your new files (below the `TWIKIXXXURL` variables):
 
-          * Set USERLAYOUTURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/layout.css
-          * Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
-          * Set USERCOLORSURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/colors.css
+          * Set USERLAYOUTURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/layout.css
+          * Set USERSTYLEURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/style.css
+          * Set USERCOLORSURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/colors.css
 
 - If you use only little CSS and you've only attached one file, write:
 
-          * Set USERSTYLEURL = %PUBURLPATH%/%TWIKIWEB%/YourNewTopic/style.css
+          * Set USERSTYLEURL = %PUBURLPATH%/%SYSTEMWEB%/YourNewTopic/style.css
 
-Instead of setting these variables in [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]], you can set these in your home topic, or in any other topic. Setting style URL variables in:
+Instead of setting these variables in [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]], you can set these in your home topic, or in any other topic. Setting style URL variables in:
 
-- [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]]: the style is visible for all users, site-wide
+- [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]]: the style is visible for all users, site-wide
 - [[WebPreferences]]: the style is visible for all users in one web
 - Home topic: the style is visible for that one user when viewing the site
 - Some other topic: the style is only visible in that one topic
@@ -102,4 +102,4 @@ See example at: [[PatternSkinCssCookbookEditTableStyle]]
 
 ## <a name="Style sheet documentation"></a> Style sheet documentation
 
-See [[PatternSkinCss]] for documentation of PatternSkin CSS classes
+See %SYSTEMWEB%.PatternSkinCss for documentation of PatternSkin CSS classes

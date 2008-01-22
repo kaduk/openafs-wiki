@@ -1,51 +1,10 @@
 ## <a name="TWiki Variables Quickstart"></a> TWiki Variables Quickstart
 
-TWiki Variables are names that are enclosed in percent signs `%` that are expanded on the fly. Some variables take arguments, such as `%INCLUDE%`. For those variables, the arguments are included in curly braces (\{ and \}).
+TWiki Variables are names enclosed in percent signs that are that are expanded to some other text when the topic is displayed. For example, `%TOPIC%` is expanded to %TOPIC%. Some variables can take arguments in curly braces - for example, `%INCLUDE{"OtherTopic" ARG="arg"}%`.
 
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Variable </strong></th>
-    <th bgcolor="#99CCCC"><strong> In brief </strong></th>
-    <th bgcolor="#99CCCC"><strong> Full documentation </strong></th>
-  </tr>
-  <tr>
-    <td><code>%TOC%</code></td>
-    <td> Automatically generates a table of contents based on headings in a topic - see the top of this page for an example. </td>
-    <td>[[Main/VarTOC]]</td>
-  </tr>
-  <tr>
-    <td><code>%WEB%</code></td>
-    <td> The current web, is <b>%WEB%</b>. </td>
-    <td>[[Main/VarWEB]]</td>
-  </tr>
-  <tr>
-    <td><code>%TOPIC%</code></td>
-    <td> The current topic name, is <b>WebHome</b>. </td>
-    <td>[[Main/VarTOPIC]]</td>
-  </tr>
-  <tr>
-    <td><code>%ATTACHURL%</code></td>
-    <td> The attachment URL of the current topic. Example usage: If you attach a file to a topic you can refer to it as <code><b>%ATTACHURL%/image.gif</b></code> to show the URL of the file or the image in your text. </td>
-    <td>[[Main/VarATTACHURL]]</td>
-  </tr>
-  <tr>
-    <td><code>%INCLUDE{"SomeTopic"}%</code></td>
-    <td> Server side include, includes another topic. The current web is the default web. Example: <code><b>%INCLUDE{"TWiki.SiteMap"}%</b></code></td>
-    <td>[[Main/VarINCLUDE]]</td>
-  </tr>
-  <tr>
-    <td><code>%SEARCH{"sushi"}%</code></td>
-    <td> Inline search showing the search result embedded in a topic. [[Main/FormattedSearch]] gives you control over formatting, useful for creating web-based applications. </td>
-    <td>[[Main/VarSEARCH]]</td>
-  </tr>
-</table>
+Many TWiki variables are built-in, and others are predefined for your convenience. You can also define your own TWiki Variables at the entire site, individual web, or individual topic level. For more information, go to **[[TWikiVariables]]**
 
-[[TWikiPreferences]] defines some site-wide variables. Among them are:
-
-- **Line break:** Write `%BR%` to start a new line.
-- **Colored text:** Write: `%RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors` to get: %RED% Red %ENDCOLOR% and %BLUE% blue %ENDCOLOR% colors.
-
-There are many more variables. To see them all, go to **[[TWikiVariables]]**.
+TWiki Variables are fully expanded _before_ any of the TWiki text formatting rules are applied.
 
 **Documentation Graphics:** There are many graphics available to use in your topics. Use `%ICON{"help"}%`, `%ICON{"tip"}%`, and `%ICON{"warning"}%` to get: %H%, %T%, and %X%, respectively. [[TWikiDocGraphics]] lists them all.
 

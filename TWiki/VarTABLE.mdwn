@@ -1,0 +1,186 @@
+<a name="VarTABLE"></a>
+
+### <a name="TABLE{ &lt;em&gt;attributes&lt;/em&gt; } -- control"></a> TABLE\{ _attributes_ \} -- control attributes of tables and sorting of table columns
+
+- The `%TABLE{}%` variable is handled by the [[TablePlugin]]
+- Syntax: <code>%TABLE\{ _attributes_ \}%</code>
+
+- Supported attributes: <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Argument </strong></th>
+    <th bgcolor="#99CCCC"><strong> Comment </strong></th>
+    <th bgcolor="#99CCCC"><strong> Default value </strong></th>
+    <th bgcolor="#99CCCC"><strong> Example </strong></th>
+  </tr>
+  <tr>
+    <td><code>sort</code></td>
+    <td> Set table sorting by clicking headers <code>"on"</code> or <code>"off"</code>. </td>
+    <td><span>unspecified</span></td>
+    <td><code>sort="on"</code></td>
+  </tr>
+  <tr>
+    <td><code>initsort</code></td>
+    <td> Column to sort initially (<code>"1"</code> to number of columns). </td>
+    <td><span>unspecified</span></td>
+    <td><code>initsort="2"</code></td>
+  </tr>
+  <tr>
+    <td><code>initdirection</code></td>
+    <td> Initial sorting direction for <code>initsort</code>, set to <code>"up"</code> (descending) or <code>"down"</code> (ascending). </td>
+    <td><span>unspecified</span></td>
+    <td><code>initdirection="up"</code></td>
+  </tr>
+  <tr>
+    <td><code>disableallsort</code></td>
+    <td> Disable all sorting, both initsort and header sort. This is mainly used by plugins such as the [[Main/EditTablePlugin]] to disable sorting in a table while editing the table. </td>
+    <td><span>unspecified</span></td>
+    <td><code>disableallsort="on"</code></td>
+  </tr>
+  <tr>
+    <td><code>headerbg</code></td>
+    <td> Header cell background colour. </td>
+    <td><code>"#6b7f93"</code></td>
+    <td><code>headerbg="#999999"</code></td>
+  </tr>
+  <tr>
+    <td><code>headerbgsorted</code></td>
+    <td> Header cell background colour of a sorted column. </td>
+    <td> the value of <code>headerbg</code></td>
+    <td><code>headerbgsorted="#32596c"</code></td>
+  </tr>
+  <tr>
+    <td><code>headercolor</code></td>
+    <td> Header cell text colour. </td>
+    <td><code>"#ffffff"</code></td>
+    <td><code>headercolor="#0000cc"</code></td>
+  </tr>
+  <tr>
+    <td><code>databg</code></td>
+    <td> Data cell background colour, a comma separated list. Specify <code>"none"</code> for no colour, that is to use the colour/background of the page the table is on. </td>
+    <td><code>"#edf4f9,#ffffff"</code></td>
+    <td><code>databg="#f2f2f2,#ffffff"</code></td>
+  </tr>
+  <tr>
+    <td><code>databgsorted</code></td>
+    <td> Data cell background colour of a sorted column; see <code>databg</code>. </td>
+    <td> the values of <code>databg</code></td>
+    <td><code>databgsorted="#d4e8e4,#e5f5ea"</code></td>
+  </tr>
+  <tr>
+    <td><code>datacolor</code></td>
+    <td> Data cell text colour, a comma separated list. </td>
+    <td><span>unspecified</span></td>
+    <td><code>datacolor="#0000CC, #000000"</code></td>
+  </tr>
+  <tr>
+    <td><code>tableborder</code></td>
+    <td> Table border width (pixels). </td>
+    <td><code>"1"</code></td>
+    <td><code>tableborder="2"</code></td>
+  </tr>
+  <tr>
+    <td><code>tableframe</code></td>
+    <td> Table frame, set to <code>"void"</code> (no sides), <code>"above"</code> (the top side only), <code>"below"</code> (the bottom side only), <code>"hsides"</code> (the top and bottom sides only), <code>"lhs"</code> (the left-hand side only), <code>"rhs"</code> (the right-hand side only), <code>"vsides"</code> (the right and left sides only), <code>"box"</code> (all four sides), <code>"border"</code> (all four sides). </td>
+    <td><span>unspecified</span></td>
+    <td><code>tableframe="hsides"</code></td>
+  </tr>
+  <tr>
+    <td><code>tablerules</code></td>
+    <td> Table rules, set to <code>"none"</code> (no rules), <code>"groups"</code> (rules will appear between row groups and column groups only), <code>"rows"</code> (rules will appear between rows only), <code>"cols"</code> (rules will appear between columns only), <code>"all"</code> (rules will appear between all rows and columns). </td>
+    <td><span>unspecified</span></td>
+    <td><code>tablerules="rows"</code></td>
+  </tr>
+  <tr>
+    <td><code>cellpadding</code></td>
+    <td> Cell padding (pixels). </td>
+    <td><code>"0"</code></td>
+    <td><code>cellpadding="0"</code></td>
+  </tr>
+  <tr>
+    <td><code>cellspacing</code></td>
+    <td> Cell spacing (pixels). </td>
+    <td><code>"0"</code></td>
+    <td><code>cellspacing="3"</code></td>
+  </tr>
+  <tr>
+    <td><code>cellborder</code></td>
+    <td> Cell border width (pixels). </td>
+    <td><span>unspecified</span></td>
+    <td><code>cellborder="0"</code></td>
+  </tr>
+  <tr>
+    <td><code>valign</code></td>
+    <td> Vertical alignment of cells and headers, set to <code>"top"</code>, <code>"middle"</code>, <code>"bottom"</code> or <code>"baseline"</code>. </td>
+    <td><span>unspecified</span></td>
+    <td><code>valign="top"</code></td>
+  </tr>
+  <tr>
+    <td><code>headervalign</code></td>
+    <td> Vertical alignment of header cells; overrides <code>valign</code>. </td>
+    <td><span>unspecified</span></td>
+    <td><code>headervalign="top"</code></td>
+  </tr>
+  <tr>
+    <td><code>datavalign</code></td>
+    <td> Vertical alignment of data cells; overrides <code>valign</code>. </td>
+    <td><span>unspecified</span></td>
+    <td><code>datavalign="top"</code></td>
+  </tr>
+  <tr>
+    <td><code>headeralign</code></td>
+    <td> Header cell alignment, one value for all columns, or a comma separated list for different alignment of individual columns. Set to <code>"left"</code>, <code>"center"</code>, <code>"right"</code> or <code>"justify"</code>. Overrides individual cell settings. </td>
+    <td><span>unspecified</span></td>
+    <td><code>headeralign="left,right"</code></td>
+  </tr>
+  <tr>
+    <td><code>dataalign</code></td>
+    <td> Data cell alignment, one value for all columns, or a comma separated list for different alignment of individual columns. Set to <code>"left"</code>, <code>"center"</code>, <code>"right"</code> or <code>"justify"</code>. Overrides individual cell settings. </td>
+    <td><span>unspecified</span></td>
+    <td><code>dataalign="center"</code></td>
+  </tr>
+  <tr>
+    <td><code>tablewidth</code></td>
+    <td> Table width: Percentage of window width, or absolute pixel value. </td>
+    <td><span>unspecified</span></td>
+    <td><code>tablewidth="100%"</code></td>
+  </tr>
+  <tr>
+    <td><code>columnwidths</code></td>
+    <td> Column widths: Comma delimited list of column widths, percentage or absolute pixel value. </td>
+    <td><span>unspecified</span></td>
+    <td><code>columnwidths="80%,20%"</code></td>
+  </tr>
+  <tr>
+    <td><code>headerrows</code></td>
+    <td> Number of header rows to exclude from sort. (will be rendered in a HTML <code>thead</code> section) </td>
+    <td><code>"1"</code></td>
+    <td><code>headerrows="1"</code></td>
+  </tr>
+  <tr>
+    <td><code>footerrows</code></td>
+    <td> Number of footer rows to exclude from sort. (will be rendered in a HTML <code>tfoot</code> section) </td>
+    <td><code>"0"</code></td>
+    <td><code>footerrows="1"</code></td>
+  </tr>
+  <tr>
+    <td><code>id</code></td>
+    <td> Unique table identifier string, used for targeting a table with CSS. </td>
+    <td><code>tableN</code> (where N is the table order number on the page) </td>
+    <td><code>id="userTable"</code></td>
+  </tr>
+  <tr>
+    <td><code>summary</code></td>
+    <td> Table summary used by screenreaders: A summary of what the table presents. It should provide an orientation for someone who listens to the table. </td>
+    <td><span>unspecified</span></td>
+    <td><code>summary="List of subscribed users"</code></td>
+  </tr>
+  <tr>
+    <td><code>caption</code></td>
+    <td> Table caption: A title that will be displayed just above the table. </td>
+    <td><span>unspecified</span></td>
+    <td><code>caption="Users"</code></td>
+  </tr>
+</table>
+
+- Example:%BR% `%TABLE{ tableborder="0" cellpadding="4" cellspacing="3" cellborder="0" }%` %BR% `| *A1* | *B1* |` %BR% `| A2 | B2 |`
+- Related: See [[TablePlugin]] for more details

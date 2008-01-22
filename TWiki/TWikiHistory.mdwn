@@ -1,6 +1,9 @@
+# <a name="Appendix A: TWiki Development Ti"></a> Appendix A: TWiki Development Time-line
+
 <div>
   <ul>
-    <li><a href="#Appendix A: TWiki Development Ti"> Appendix A: TWiki Development Timeline</a><ul>
+    <li><a href="#Appendix A: TWiki Development Ti"> Appendix A: TWiki Development Time-line</a><ul>
+        <li><a href="#TWiki Release 4.2 (Freetown), 22"> TWiki Release 4.2 (Freetown), 22 Jan 2008</a></li>
         <li><a href="#TWiki Release 4.1 (Edinburgh), 1"> TWiki Release 4.1 (Edinburgh), 16 Jan 2007</a></li>
         <li><a href="#TWiki Release 4.0.0 (Dakar), 01"> TWiki Release 4.0.0 (Dakar), 01 Feb 2006</a></li>
         <li><a href="#01-Sep-2004 Release (Cairo)"> 01-Sep-2004 Release (Cairo)</a></li>
@@ -18,7 +21,89 @@
   </ul>
 </div>
 
-# <a name="Appendix A: TWiki Development Ti"></a> Appendix A: TWiki Development Timeline
+<a name="FreetownRelease"></a>
+
+## <a name="TWiki Release 4.2 (Freetown), 22"></a> TWiki Release 4.2 (Freetown), 22 Jan 2008
+
+**_New Features and Enhancements of TWiki Release 4.2_**
+
+- **Easier Installation and Upgrade**
+  - New Internal Admin Login feature
+  - The Main.TWikiUsers topic is no longer distributed as a default topic in Main web
+  - A new directory `working` which per default is located in the TWiki root which contains registration\_approvals, tmp, and work\_areas
+  - Configure can now authenticate when connecting to local plugins repository.
+
+- **Usability Enhancements**
+  - New WYSIWYG editor based on TinyMCE replaces the Kupu based editor
+  - New "Restore topic" feature has been added to the _More Topic Actions_ menu to easily restore an older version of a topic
+
+- **Application Platform Enhancements**
+  - Enhancements to IF: allows, ingroup, istopic, and isweb
+
+- **Search Enhancements**
+  - New `query` search mode supports SQL-style queries over form fields and other meta-data
+
+- **Skins and Templates Enhancements**
+  - The PatternSkin which is the default skin for TWiki has got a face lift
+  - The default templates have been heavily refactored to make it easier to create skins reusing the default skin.
+
+- **Miscellaneous Feature Enhancements**
+  - Many new functions in the API for plugin developers
+  - Table of Content (TOC) feature enhanced
+  - re-architected Pluggable user mapping (between login name and WikiName) to integrate with alternative authentication and Management schemes
+  - Topic based User management has been extracted into a separately update-able package (TWikiUsersContrib)
+
+- **Enhancements of Pre-installed Plugins**
+  - [[CommentPlugin]]: New `templatetopic` parameter to point to custom comment template topic
+  - [[EditTablePlugin]]: Move and delete rows
+  - [[MailerContrib]]: Allow Exclusion Of Webs
+  - [[SpreadSheetPlugin]]: 6 new math formulas; formula to format time diff
+
+- **Bug Fixes**
+  - More than 300 bugs fixes since 4.1.2
+
+<a name="FreetownHallOfFame"></a> **_Hall of Fame of TWiki Release 4.2_**
+
+Many people have been involved in creating TWiki 4.2. Special thanks go to the most active contributors in the following areas:
+
+- Release management led by TWiki:Main.KennethLavrsen, ably assisted by TWiki:Main.SvenDowideit
+- Design and development driven by TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, and TWiki:Main.SvenDowideit
+- Testing driven by TWiki:Main.KennethLavrsen
+
+Many thanks also to the contributors in the following areas:
+
+- **Sponsor and facilitator:** TWiki:Main.PeterThoeny
+- **Testing and bug fixing:** TWiki:Main.KennethLavrsen, TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, TWiki:Main.SvenDowideit, TWiki:Main.SteffenPoulsen, TWiki:Main.MichaelDaum, TWiki:Main.PeterThoeny, TWiki:Main.RichardDonkin
+- **Spec and code:** TWiki:Main.CrawfordCurrie (2323), TWiki:Main.ArthurClemens (566), TWiki:Main.SvenDowideit (507), TWiki:Main.PeterThoeny (83), TWiki:Main.KennethLavrsen (73), TWiki:Main.SteffenPoulsen (72), TWiki:Main.AntonioTerceiro (63) - ( 3857 changes by 20 authors )
+- **Templates and skins:** TWiki:Main.ArthurClemens (587), TWiki:Main.CrawfordCurrie (130), TWiki:Main.AndreUlrich (73), TWiki:Main.SvenDowideit (44) - ( 869 changes by 12 authors )
+- **Documentation:** TWiki:Main.ArthurClemens (460), TWiki:Main.CrawfordCurrie (377), TWiki:Main.PeterThoeny (233), TWiki:Main.AndreUlrich (157), TWiki:Main.SvenDowideit (118), TWiki:Main.KennethLavrsen (68) - ( 1450 changes by 14 authors )
+- **Release package builds:** TWiki:Main.SvenDowideit
+- **Usability:** TWiki:Main.CarloSchulz, TWiki:Main.ArthurClemens
+- **Translations:** Coordinated by TWiki:Main.AntonioTerceiro
+  - Bulgarian: TWiki:Main.KrassimirBerov
+  - Danish: TWiki:Main.SteffenPoulsen
+  - Dutch: TWiki:Main.ArthurClemens
+  - Finnish: TWiki:Main.HeikkiToivonen
+  - French: TWiki:Main.BenVoui
+  - German: TWiki:Main.OliverKrueger, TWiki:Main.AndreUlrich
+  - Italian: TWiki:Main.MassimoMancini
+  - Portuguese: TWiki:Main.CarlinhosCecconi
+  - Simplified Chinese: TWiki:Main.CheDong
+  - Swedish: TWiki:Main.ErikAman
+  - Traditional Chinese: TWiki:Main.CheDong
+  - Ukrainian: TWiki:Main.SerhijDubyk
+- **Marketing:** TWiki:Main.RodBeckstrom, TWiki:Main.PeterThoeny, TWiki:Main.MichaelCorbett, TWiki:Main.KoenMartens
+- **Public relations:** TWiki:Main.PeterThoeny, TWiki:Main.MichaelCorbett
+- **Meetups:** TWiki:Main.AmirShobeiri
+- **TWiki.org wiki champions:** TWiki:Main.PeterThoeny, TWiki:Main.ArthurClemens, TWiki:Main.CrawfordCurrie, TWiki:Main.KennethLavrsen, TWiki:Main.SvenDowideit, TWiki:Main.MichaelDaum, TWiki:Main.CarloSchulz, TWiki:Main.StephaneLenclud, TWiki:Main.RichardDonkin, TWiki:Main.KoenMartens
+- **Customer support:** TWiki:Main.PeterThoeny, TWiki:Main.ArthurClemens, TWiki:Main.CrawfordCurrie, TWiki:Main.SvenDowideit, TWiki:Main.HaraldJoerg
+- **System administration:** TWiki:Main.SvenDowideit, TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie
+
+If you find an omission please fix it at TWiki:TWiki.TWikiHistory. For the full list of contributors see [[TWikiContributor]].
+
+**_Note:_** Order of contributors under "Spec and code", "Templates and skins" and "Documentation" is based on number of SVN file changes for core and default extensions from March 2007 (svn rev:13046) to Jan 2008 (svn rev:16210). (Details at TWikibug:TWiki420SvnLog). Order of contributors under "Testing and bug fixing" is based on Bugs web statistics from 2007-03 to 2007-12. Order of contributors under "TWiki.org wiki champions" and "Customer support" is based on TWiki.org web statistics from 2007-02 to 2007-12.
+
+See more details on the TWiki 4.2 release at [[TWikiReleaseNotes04x02]].
 
 <a name="EdinburghRelease"></a>
 

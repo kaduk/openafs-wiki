@@ -1,0 +1,25 @@
+# <a name="Package &lt;code&gt;="></a> Package =
+
+**extends** `CGI::Session::ErrorHandler `
+
+<div>
+  <ul>
+    <li><a href="#Package =="> Package ==</a></li>
+  </ul>
+</div>
+
+=head1 NAME
+
+CGI::Session::ID::md5 - default CGI::Session ID generator
+
+=head1 SYNOPSIS
+
+use CGI::Session; $s = new CGI::Session("id:md5", undef);
+
+=head1 DESCRIPTION
+
+CGI::Session::ID::MD5 is to generate MD5 encoded hexadecimal random ids. The library does not require any arguments.
+
+=head1 LICENSING
+
+For support and licensing see L&lt;CGI::Session|CGI::Session&gt;

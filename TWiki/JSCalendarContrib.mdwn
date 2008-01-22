@@ -1,12 +1,16 @@
 # <a name="%TOPIC%"></a><a name=" %TOPIC%"></a> %TOPIC%
 
-[Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl), packaged for use by plugins, skins and add-ons.
+![](http://www.dementia.org/twiki//view/screenshot.gif)
+
+%SHORTDESCRIPTION%
 
 <div>
   <ul>
     <li><a href="#Summary of Contents"> Summary of Contents</a></li>
     <li><a href="#Detailed Documentation"> Detailed Documentation</a><ul>
-        <li><a href="#Settings"> Settings</a></li>
+        <li><a href="#TWiki::Contrib::_JSCalendarContr"> TWiki::Contrib::JSCalendarContrib::renderDateForEdit($name, $value, $format [, \%cssClass]) -&gt; $html</a></li>
+        <li><a href="#TWiki::Contrib::_JSCalendarContr"> TWiki::Contrib::JSCalendarContrib::addHEAD($setup)</a></li>
+        <li><a href="#Using the Calendar in user forms"> Using the Calendar in user forms</a></li>
         <li><a href="#Installation Instructions"> Installation Instructions</a></li>
         <li><a href="#Contrib Info"> Contrib Info</a></li>
       </ul>
@@ -20,433 +24,96 @@ This module packages the [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.
 
 ## <a name="Detailed Documentation"></a> Detailed Documentation
 
-Read [the Mishoo documentation](http://www.dementia.org/twiki//view/doc/html/reference.html) or [visit the demo page](http://www.dementia.org/twiki//view).
+Read [the Mishoo documentation](http://www.dementia.org/twiki//view/doc/html/reference.html) or [visit the demo page](http://www.dementia.org/twiki//view) for detailed information on using the calendar widget.
 
-This package provides a `renderFormFieldForEditHandler` that could be invoked by a plugin to ensure that forms use the [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl) for editing.
+This package also includes a small Perl module to make using the calendar easier from TWiki plugins. This module includes the functions:
 
-This package also includes a small Perl module to make using the calendar easier from TWiki plugins. This module includes the function:
+### <a name="TWiki::Contrib::_JSCalendarContr"></a> TWiki::Contrib::JSCalendarContrib::renderDateForEdit($name, $value, $format [, \\%cssClass]) -&gt; $html
 
-    addHEAD( $setup )
+This is the simplest way to use calendars from a plugin.
 
-that can automatically add the required headers to the page being rendered. `$setup` is the name of the calendar setup module; it can either be ommitted, in which case the method described in the Mishoo documentation can be used to create calendars, or it can be `'twiki'`, in which case a helper function is added that simplifies using calendars to set a value in a text field. For example,
+- `$name` is the name of the CGI parameter for the calendar (it should be unique),
+- `$value` is the current value of the parameter (may be undef)
+- `$format` is the format to use (optional; the default is set in `configure`). The HTML returned will display a date field and a drop-down calendar.
+- `\%options` is an optional hash containing base options for the textfield.
 
-        # Add styles and javascript for the calendar
-        require TWiki::Contrib::JSCalendarContrib;
-        if( $@ || !$TWiki::Contrib::JSCalendarContrib::VERSION ||
-            $TWiki::Contrib::JSCalendarContrib::VERSION < 0.961 ) {
-            TWiki::Func::writeWarning('JSCalendarContrib >=0.961 not found '.$@);
-        } else {
-            TWiki::Contrib::JSCalendarContrib::addHEAD( 'twiki' );
-        }
+Example:
 
-        $html .= CGI::textfield(
-            { name => 'datefield',
-              id => "id_datefield" });
-        $html .=
-              CGI::image_button(
-                          -name => 'datefield_calendar',
-                          -onclick =>
-                              "return showCalendar('id_datefield','%e %B %Y')",
-                          -src=> TWiki::Func::getPubUrlPath() . '/' .
-                            TWiki::Func::getTwikiWebname() .
-                                '/JSCalendarContrib/img.gif',
-                          -alt => 'Calendar',
-                          -align => 'MIDDLE' );
-                }
-            }
+    use TWiki::Contrib::JSCalendarContrib;
+    ...
+    my $fromDate = TWiki::Contrib::JSCalendarContrib::renderDateForEdit(
+       'from', '1 April 1999');
+    my $toDate = TWiki::Contrib::JSCalendarContrib::renderDateForEdit(
+       'to', undef, '%Y');
 
-The first parameter to showCalendar is the id of the textfield. See the Mishoo documentation for details of the '$e %B %Y' parameter.
+### <a name="TWiki::Contrib::_JSCalendarContr"></a> TWiki::Contrib::JSCalendarContrib::addHEAD($setup)
 
-Note that the header will only be added once, regardless of the number of times that addHEAD is called.
+This function will automatically add the headers for the calendar to the page being rendered. It's intended for use when you want more control over the formatting of your calendars than `renderDateForEdit` affords. `$setup` is the name of the calendar setup module; it can either be omitted, in which case the method described in the Mishoo documentation can be used to create calendars, or it can be `'twiki'`, in which case a Javascript helper function called 'showCalendar' is added that simplifies using calendars to set a value in a text field. For example, say we wanted to display the date with the calendar icon _before_ the text field, using the format `%Y %b %e`
 
-`addHEAD` can be called from `commonTagsHandler` for adding the header to all pages, or to `beforeEditHandler` just for edit pages etc.
+    # Add styles and javascript for the calendar
+    use TWiki::Contrib::JSCalendarContrib;
+    ...
 
-### <a name="Settings"></a> Settings
+    sub commonTagsHandler {
+      ....
+      # Enable 'showCalendar'
+      TWiki::Contrib::JSCalendarContrib::addHEAD( 'twiki' );
 
-- Name of the perl package
-  - Set STUB = TWiki::Contrib::JSCalendarContrib
-- What do I do
-  - Set SHORTDESCRIPTION = [Mishoo JSCalendar](http://dynarch.com/mishoo/calendar.epl), packaged for use by plugins, skins and add-ons.
+      my $cal = CGI::image_button(
+          -name => 'img_datefield',
+          -onclick =>
+           "return showCalendar('id_datefield','%Y %b %e')",
+          -src=> TWiki::Func::getPubUrlPath() . '/' .
+                 TWiki::Func::getTwikiWebname() .
+                 '/JSCalendarContrib/img.gif',
+          -alt => 'Calendar',
+          -align => 'middle' )
+        . CGI::textfield(
+          { name => 'date', id => "id_datefield" });
+      ....
+    }
+
+The first parameter to `showCalendar` is the id of the textfield, and the second parameter is the . See the Mishoo documentation for details of the '$e %B %Y' parameter.
+
+`addHEAD` can be called from `commonTagsHandler` for adding the header to all pages, or from `beforeEditHandler` just for edit pages etc.
+
+### <a name="Using the Calendar in user forms"></a> Using the Calendar in user forms
+
+You can also use the calendar directly in your own hand-built forms, without having to write any code. Just add this inline in the topic text:
+
+    %INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
+
+Then, to display a calendar icon next to a text input field:
+
+    <input type="text" id="cal_val_here" />
+    <input type="image" src="%PUBURL%/%SYSTEMWEB%/JSCalendarContrib/img.gif" onclick="javascript: return showCalendar('cal_val_here','%e %B %Y')" />
+
+If the contrib is installed, you will see such a field here:
+
+<input id="cal_val_here" type="text" />
+ <input onclick="javascript: return showCalendar('cal_val_here','%e %B %Y')" src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/JSCalendarContrib/img.gif" type="image" />
 
 ### <a name="Installation Instructions"></a> Installation Instructions
 
-- Download the archive from the Plugins web (see below)
-- Unpack it in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> File: </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description: </strong></th>
-  </tr>
-  <tr>
-    <td><code><b>data/TWiki/JSCalendarContrib.txt</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>lib/TWiki/Contrib/JSCalendarContrib.pm</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/twiki.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/bugtest-hidden-selects.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-blue2.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-blue.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-brown.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-green.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar.php</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-setup.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-setup_stripped.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar_stripped.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-system.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-tas.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-win2k-1.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-win2k-2.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-win2k-cold-1.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/calendar-win2k-cold-2.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/ChangeLog</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/dayinfo.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/doc/html/field-button.jpg</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/doc/html/reference.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/doc/html/reference.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/doc/html/reference-Z-S.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/doc/reference.pdf</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/img.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/index.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-af.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-al.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-bg.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-big5.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-big5-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-br.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-ca.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-cs-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-cs-win.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-da.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-de.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-du.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-el.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-en.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-es.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-fi.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-fr.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-he-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-hr.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-hr-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-hu.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-it.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-jp.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-ko.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-ko-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-lt.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-lt-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-lv.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-nl.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-no.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-pl.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-pl-utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-pt.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-ro.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-ru_win_.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-ru.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-si.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-sk.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-sp.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-sv.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-tr.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/calendar-zh.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/lang/cn_utf8.js</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/active-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/dark-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/hover-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/menuarrow.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/normal-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/rowhover-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/status-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/theme.css</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/title-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/today-bg.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/skins/aqua/transparent-bg.png</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/menuarrow.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/menuarrow2.gif</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/multiple-dates.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/README</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/release-notes.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/simple-1.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/simple-2.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/simple-3.html</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/test.php</b></code></td>
-    <td>   </td>
-  </tr>
-  <tr>
-    <td><code><b>pub/TWiki/JSCalendarContrib/test-position.html</b></code></td>
-    <td>   </td>
-  </tr>
-</table>
+You do not need to install anything in the browser to use this extension. The following instructions are for the administrator who installs the extension on the server where TWiki is running.
 
-- Make sure that all files are readable by the web server user
+Like many other TWiki extensions, this module is shipped with a fully automatic installer script written using the BuildContrib.
+
+- If you have TWiki 4.2 or later, you can install from the `configure` interface (Go to Plugins-&gt;Find More Extensions)
+  - See the [installation supplement](http://twiki.org/cgi-bin/view/Plugins/BuildContribInstallationSupplement) on TWiki.org for more information.
+- If you have any problems, then you can still install manually from the command-line:
+  1. Download one of the `.zip` or `.tgz` archives
+  2. Unpack the archive in the root directory of your TWiki installation.
+  3. Run the installer script ( `perl <module>_installer` )
+  4. Run `configure` and enable the module, if it is a plugin.
+  5. Repeat for any missing dependencies.
+- If you are **still** having problems, then instead of running the installer script:
+  1. Make sure that the file permissions allow the webserver user to access all files.
+  2. Check in any installed files that have existing `,v` files in your existing install (take care **not** to lock the files when you check in)
+  3. Manually edit LocalSite.cfg to set any configuration variables.
+
+<div class="twikiAlert">%X% WARNING: SYSTEMWEB is not defined in this TWiki. Please add these definitions to your [[Main/TWikiPreferences]], if they are not already there:<br /><pre>   * Set SYSTEMWEB = %TWIKIWEB%<br />   * Set USERSWEB = %MAINWEB%</pre></div>
+
 - An administrator can customize the appearance of the calendar by setting the following in `LocalSite.cfg`<table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> Setting </strong></th>
@@ -468,14 +135,16 @@ Note that the header will only be added once, regardless of the number of times 
 
 ### <a name="Contrib Info"></a> Contrib Info
 
+Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/wikiringlogo20x20.png) **WikiRing** ](http://wikiring.com) - working together to improve your wiki experience!
+
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Author: </td>
-    <td> TWiki:Main/CrawfordCurrie <a href="http://www.c-dot.co.uk" target="_top">http://www.c-dot.co.uk</a></td>
+    <td> TWiki:Main/CrawfordCurrie <a href="http://c-dot.co.uk" target="_top">http://c-dot.co.uk</a></td>
   </tr>
   <tr>
     <td align="right"> Version: </td>
-    <td> 11704 of the Mishoo calendar </td>
+    <td> 16236 (22 Jan 2008) of the Mishoo calendar </td>
   </tr>
   <tr>
     <td align="right"> Copyright ©: </td>
@@ -494,31 +163,39 @@ Note that the header will only be added once, regardless of the number of times 
     <td>   </td>
   </tr>
   <tr>
-    <td> 11594 </td>
+    <td align="right"> 6 Sep 2007 </td>
+    <td> Bugs:Item4030 Added doc for using the calendar in user forms </td>
+  </tr>
+  <tr>
+    <td align="right"> 13603 </td>
+    <td> Bugs:Item2982 cleaned up the interface to the contrib, re-added a date rendering function with a more generic interface </td>
+  </tr>
+  <tr>
+    <td align="right"> 11594 </td>
     <td> Allow format to be configured. </td>
   </tr>
   <tr>
-    <td> 11415 </td>
+    <td align="right"> 11415 </td>
     <td> Add a <code>renderFormFieldForEditHandler</code> so other plugins can forward to this handler to add the date field to the [[Main/TWikiForms]]. (TWiki:Main.ThomasWeigert) </td>
   </tr>
   <tr>
-    <td> 10247 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item2054" rel="nofollow">Item2054</a> put the calendar at z-index 2000, way above pattern skin divs. </td>
+    <td align="right"> 10247 </td>
+    <td> Bugs:Item2054 put the calendar at z-index 2000, way above pattern skin divs. </td>
   </tr>
   <tr>
-    <td> 6634 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item453" rel="nofollow">Item453</a> removed [[Main/EditTablePlugins]] private copy of the Mishoo JS calendar, and made sure it works with [[Main/JSCalendarContrib]]. Improved the documentation of the JSCalendar while I was there. </td>
+    <td align="right"> 6634 </td>
+    <td> Bugs:Item453 removed [[Main/EditTablePlugins]] private copy of the Mishoo JS calendar, and made sure it works with [[Main/JSCalendarContrib]]. Improved the documentation of the JSCalendar while I was there. </td>
   </tr>
   <tr>
-    <td> 6626 </td>
-    <td><a href="http://develop.twiki.org/~develop/cgi-bin/view/Bugs/Item468" rel="nofollow">Item468</a> updated docs for Dakar release </td>
+    <td align="right"> 6626 </td>
+    <td> Bugs:Item468 updated docs for Dakar release </td>
   </tr>
   <tr>
-    <td> 5048 </td>
+    <td align="right"> 5048 </td>
     <td> Cairo readiness </td>
   </tr>
   <tr>
-    <td> 5039 </td>
+    <td align="right"> 5039 </td>
     <td> Split from [[Main/SharedCode]]</td>
   </tr>
   <tr>
@@ -543,4 +220,4 @@ Note that the header will only be added once, regardless of the number of times 
   </tr>
 </table>
 
-**_Related Topics:_** [[TWikiPreferences]]
+**_Related Topics:_** %SYSTEMWEB%.TWikiPreferences

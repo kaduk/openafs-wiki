@@ -1,4 +1,6 @@
-# <a name="TWiki Release 4.1.2 (Edinburgh),"></a><a name=" TWiki Release 4.1.2 (Edinburgh)"></a> TWiki Release 4.1.2 (Edinburgh), 15:45:54 03 March 2007
+# <a name="TWiki Release 4.1.2 (Edinburgh),"></a><a name=" TWiki Release 4.1.2 (Edinburgh)"></a> TWiki Release 4.1.2 (Edinburgh), 04:18:52 22 January 2008
+
+_Note: This is the release note for the previous major release version 4.1.X. This note and the [[TWikiReleaseNotes04x00]] are included with 4.2.X because they contain valuable information for people upgrading from earlier versions. Both for the admin and the users. See [[TWikiReleaseNotes04x02]] for the 4.2.X release notes_
 
 <div>
   <ul>
@@ -162,7 +164,7 @@ TWiki 4.1.2 has been confirmed working on the combination [[RedHat]] 7.3, Apache
 - Users of mod\_perl should notice a new experimental feature that speeds up searching by a large factor. The feature is described in the [NativeSearch](http://twiki.org/cgi-bin/view/Codev/NativeSearch) topic at the TWiki website. In configure look for the \{RCS\}\{SearchAlgorithm\} setting. Normal mode is Forking. The new mode for mod\_perl is Native and is a C program which needs to be compiled with a C-compiler like gcc, and this new mode works faster than forking on mod\_perl. If you do not run mod\_perl stick to the default Forking.
 - /tmp/twiki directory which was introduced with 4.1.1 is now auto created also with older versions of the CGI::Session library. This is important for distributions that cleans out /tmp when rebooting.
 - Configure has gotten much better at installing extensions such as plugins.
-- Configure is now more friendly to a new administator. Configure now only shows the important "General Path Settings" until you have saved and created the [[LocalSite]].cfg file. This prevents a number of false errors from being wrongly fixed by a first time installer.
+- Configure is now more friendly to a new administator. Configure now only shows the important "General Path Settings" until you have saved and created the `LocalSite.cfg` file. This prevents a number of false errors from being wrongly fixed by a first time installer.
 - The documented bahavior of "\* Set ALLOWTOPICCHANGE = (nothing)" does not match the code. Documentation has been updated to match actual behavior in 4.1.2. See also deprecation notice below. You should review your use of access rights settings in topics.
 
 ## <a name="Deprecation Notices"></a> Deprecation Notices
@@ -1399,7 +1401,7 @@ None
 
 ## <a name="TWiki 4.1.2 Patch Release Detail"></a> TWiki 4.1.2 Patch Release Details
 
-The 4.1.2 release was built from SVN <http://svn.twiki.org/svn/twiki/Patch04x01> revision 13046 (15:45:54 03 March 2007).
+The 4.1.2 release was built from SVN <http://svn.twiki.org/svn/twiki/Patch04x01> revision 16278 (22 Jan 2008) (04:18:52 22 January 2008).
 
 TWiki 4.1.1 Fixes
 

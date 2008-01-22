@@ -47,8 +47,8 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
   </tr>
   <tr>
     <td> ISBN </td>
-    <td><a href="http://service.bfast.com/bfast/click?bfmid=2181&sourceid=38704253&bfpid=" target="_top">http://service.bfast.com/bfast/click?bfmid=2181&amp;sourceid=38704253&amp;bfpid=</a></td>
-    <td> Book with ISBN#$page (One click patent? Say no to Amazon!) </td>
+    <td><a href="http://www.bookfinder.com/search/?st=sr;ac=qr;isbn=" target="_top">http://www.bookfinder.com/search/?st=sr;ac=qr;isbn=</a></td>
+    <td> Book with ISBN $page </td>
   </tr>
   <tr>
     <td> News </td>
@@ -159,6 +159,16 @@ Whenever you write <code>**ExternalSite:Page**</code> it will be linked automati
     <td> TWiki </td>
     <td><a href="http://twiki.org/cgi-bin/view/" target="_top">http://twiki.org/cgi-bin/view/</a></td>
     <td> '$page' on TWiki.org </td>
+  </tr>
+  <tr>
+    <td> TWikibug </td>
+    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/" target="_top">http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/</a></td>
+    <td> '$page' on the TWiki issue tracking site </td>
+  </tr>
+  <tr>
+    <td> TWikirev </td>
+    <td><a href="http://develop.twiki.org/trac/changeset/" target="_top">http://develop.twiki.org/trac/changeset/</a></td>
+    <td> revision $page of TWiki svn </td>
   </tr>
   <tr>
     <td> UseMod </td>

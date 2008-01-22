@@ -2,12 +2,9 @@
 
 **Comment Plugin lets users quickly post comments to a page without an edit/preview/save cycle.**
 
-<div style="background-color: #ffc">WARNING: TWiki-4 only. If you want to use this plugin with an earlier version of TWiki, please use <a href="http://twiki.org/cgi-bin/attach/Plugins/CommentPlugin?filename=CommentPlugin.zip&revInfo=1" target="_top">revision 31 of the zip</a>.</div>
-
-<div>
-  <ul>
+<div><span>On this page:</span><ul>
     <li><a href="#Features"> Features</a></li>
-    <li><a href="#Syntax Rules"> Syntax Rules</a><ul>
+    <li><a href="#Syntax"> Syntax</a><ul>
         <li><a href="#Positioning the comment"> Positioning the comment</a><ul>
             <li><a href="#Location relative to %COMMENT ta"> Location relative to <code>%COMMENT</code> tag</a></li>
             <li><a href="#Location relative to a TWiki anc"> Location relative to a TWiki anchor</a></li>
@@ -23,6 +20,7 @@
         <li><a href="#The <code>PROMPT</code> template"> The PROMPT template</a><ul>
             <li><a href="#Providing attribute values"> Providing attribute values</a></li>
             <li><a href="#Special variables"> Special variables</a></li>
+            <li><a href="#Customisation example with custo"> Customisation example with custom form template</a></li>
           </ul>
         </li>
         <li><a href="#The <code>OUTPUT</code> template"> The OUTPUT template</a></li>
@@ -34,6 +32,10 @@
   </ul>
 </div>
 
+Related topics: [[CommentPluginTemplates]], [[CommentPluginExamples]]
+
+<div style="background-color: #ffc">WARNING: TWiki-4 only. If you want to use this plugin with an earlier version of TWiki, please use <a href="http://twiki.org/cgi-bin/attach/Plugins/CommentPlugin?filename=CommentPlugin.zip&revInfo=1" target="_top">revision 31 of the zip</a>.</div>
+
 ## <a name="Features"></a> Features
 
 Inserts an edit box into the page that allows users to type in and save comments. Comments can be made
@@ -43,58 +45,11 @@ Inserts an edit box into the page that allows users to type in and save comments
 - signed or unsigned, dated or undated (as defined by a template),
 - in other topics, or other positions within the current topic.
 
-## <a name="Syntax Rules"></a> Syntax Rules
+## <a name="Syntax"></a> Syntax
 
-Write the command `%COMMENT{` _attributes_ `}%` anywhere in a TWiki topic. `%COMMENT%` is also legal.
+<a name="StandardAttrs"></a> Write <code>%COMMENT\{_attributes_\}%</code> anywhere in a TWiki topic.
 
-<a name="StandardAttrs"></a> The following attributes are recognized (see also [[additional attributes|Main/WebHome#MoreAttrs]]):
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <th bgcolor="#99CCCC"><strong> Name </strong></th>
-    <th bgcolor="#99CCCC"><strong> Description </strong></th>
-  </tr>
-  <tr>
-    <td><code>type</code></td>
-    <td> This is the name of the template to use for this comment. Comment templates are defined in a TWiki template - see [[Main/WebHome#TemPlates]], below. If this attribute is not defined, the type is whatever is defined by COMMENTPLUGIN_DEFAULT_TYPE, either in this topic or in your [[Main/WebPreferences]]. By default this is 'below'. </td>
-  </tr>
-  <tr>
-    <td><code>default</code></td>
-    <td> Default text to put into the textarea of the prompt. </td>
-  </tr>
-  <tr>
-    <td><code>target</code></td>
-    <td> Name of the topic to add the comment to. Defaults to the current topic. </td>
-  </tr>
-  <tr>
-    <td><code>location</code></td>
-    <td> Regular expression specifying the comment location in the target topic. Read <em>carefully</em> below! </td>
-  </tr>
-  <tr>
-    <td><code>mode</code></td>
-    <td> For compatability with older versions only, synonymous with <code>type</code></td>
-  </tr>
-  <tr>
-    <td><code>nonotify</code></td>
-    <td> Set to "on" to disable change notification for target topics </td>
-  </tr>
-  <tr>
-    <td><code>noform</code></td>
-    <td> Set to "on" to disable the automatic form that encloses your comment block - <em>remember</em> to insert <code>&lt;form&gt;</code> tags yourself! See [[Main/CommentPluginExamples#noform]] for an example. </td>
-  </tr>
-  <tr>
-    <td><code>nopost</code></td>
-    <td> Set to "on" to disable insertion of the posted text into the topic. </td>
-  </tr>
-  <tr>
-    <td><code>remove</code></td>
-    <td> Set to "on" to remove the comment prompt after the first time it is clicked. </td>
-  </tr>
-  <tr>
-    <td><code>button</code></td>
-    <td> Button label text; by default <code>Add comment</code>. </td>
-  </tr>
-</table>
+(See also [[additional attributes|Main/WebHome#MoreAttrs]])
 
 ### <a name="Positioning the comment"></a> Positioning the comment
 
@@ -124,7 +79,7 @@ Getting more sophisticated, you can also specify a regular expression for the ta
 
 will place comments above the first occurence of the string `Flights of Fancy` in the current topic.
 
-**Warning** of course, if a user's comment contains the string "Flights of Fancy" they may and up _changing the location_ for the next comment! Also, if you use a tag in the location, then you've just inserted another tag in the page that contains the `%COMMENT`! So be very careful how you specify the RE for `location`. Note that the RE is matched using perl "multiple line" mode, so ^ and $ match the start of a line and the end of a line respectively.
+**Warning** of course, if a user's comment contains the string "Flights of Fancy" they may and up _changing the location_ for the next comment! Also, if you use a tag in the location, then you've just inserted another tag in the page that contains the `%COMMENT`! So be very careful how you specify the RE for `location`. Note that the RE is matched using perl "multiple line" mode, so ^ and $ match the start of a line and the end of a line respectively. %BR% Also note that you cannot have the text `location="` just before the location.
 
 I look forward to someone leveraging this feature to create - for example - threaded conversations using `%COMMENT`.
 
@@ -134,7 +89,7 @@ If you specify an anchor _and_ a `location`, the anchor will be ignored.
 
 Templates are used to define the "comment style" i.e. how comments appear in the page. The default is to add comments in "Blog like" style using bulleted lists, with the most recent comment at the top, but many other styles are available such as tables or Wiki thread mode comments. It is easy to define your own customer styles as well.
 
-A set of default comment templates are shipped with the plugin. These are:
+A set of default comment templates are shipped with the plugin - see also [[CommentPluginTemplates]]:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -158,6 +113,10 @@ A set of default comment templates are shipped with the plugin. These are:
     <td> Comments, signed and dated (server time), added immediately below the target anchor, or the <code>%COMMENT</code> if no anchor is specified </td>
   </tr>
   <tr>
+    <td><code>belowthreadmode</code></td>
+    <td> Comments, signed and dated, added recurse after comment box </td>
+  </tr>
+  <tr>
     <td><code>threadmode</code></td>
     <td> Wiki thread mode comment, signed and dated (server time) </td>
   </tr>
@@ -168,6 +127,26 @@ A set of default comment templates are shipped with the plugin. These are:
   <tr>
     <td><code>tableappend</code></td>
     <td> Comments, signed and dated (server time), formatted as an HTML table row, added above the anchor (which must be in an HTML &lt;table&gt;) </td>
+  </tr>
+  <tr>
+    <td><code>action</code></td>
+    <td> Action added to action table directly above comment box (requires TWiki:Plugins/ActionTrackerPlugin) </td>
+  </tr>
+  <tr>
+    <td><code>table</code></td>
+    <td> Tablerows adding on end </td>
+  </tr>
+  <tr>
+    <td><code>toctalk</code></td>
+    <td> Talk using TOC adding on end </td>
+  </tr>
+  <tr>
+    <td><code>bookmark</code></td>
+    <td> Create a list of annotated bookmarks </td>
+  </tr>
+  <tr>
+    <td><code>return</code></td>
+    <td> Post to a different topic and return </td>
   </tr>
 </table>
 
@@ -197,9 +176,13 @@ This allows for several levels of customisation:
 3. To override templates on a **web-by-web basis**, add a topic `UserCommentsTemplate` to the web (this will replace TWiki.UserCommentsTemplate)
 4. To override templates **for a specific skin**, add them to TWiki.UserComments&lt;Skin&gt;Template (where &lt;Skin&gt; is the name of the skin with the first letter capitalised, e.g. Pattern)
 
-%X% Templates are picked up by following the [[standard TWiki rules|Main/TWikiTemplates#Finding_Templates]] for locating template files. Note that you can use `%TMPL:INCLUDE` to include other files of templates.
+You can also define a **comment template in a topic**, by passing the topic location with `templatetopic`. For example:
 
-%X% Note that from TWiki release 4.1.0 leading and trailing whitespace is no longer stripped. This means that when you upgrade to TWiki 4.1.X you may need to remove the first line break in your custom comment templates. See [[TWikiReleaseNotes04x01]] for more information.
+> %COMMENT{type="blogpost" templatetopic="BlogPostCommentTemplate" target="%TOPIC%" button="Add comment" }%
+>
+> `templatetopic` accepts `topic` or `web.topic` syntax. See an example in [[CommentPluginExamples:templatetopic|Main/CommentPluginExamples#TemplateTopic]].
+
+%X% Templates are picked up by following the [[standard TWiki rules|Main/TWikiTemplates#Finding_Templates]] for locating template files. Note that you can use `%TMPL:INCLUDE` to include other files of templates. %BR% %X% Note that from TWiki release 4.1.0 leading and trailing whitespace is no longer stripped. This means that when you upgrade to TWiki 4.1.X you may need to remove the first line break in your custom comment templates. See [[TWikiReleaseNotes04x01]] for more information.
 
 ### <a name="Customisation example"></a> Customisation example
 
@@ -293,6 +276,10 @@ As well as support for all the usual TWiki variables in templates, the following
     <td><code>comment_nopost</code></td>
     <td> As passed to %COMMENT </td>
   </tr>
+  <tr>
+    <td><code>comment_templatetopic</code></td>
+    <td> As passed to %COMMENT </td>
+  </tr>
 </table>
 
 Note that `comment_location` overrides `comment_anchor`, and both override `comment_index`. Example, shows an "I Approve" button that adds your approval signature to the end of the topic:
@@ -303,6 +290,27 @@ Note that `comment_location` overrides `comment_anchor`, and both override `comm
     <input type="hidden" name="comment_type" value="bottom" />
     <input type="hidden" name="comment" value="I Approve" />
     </form>
+
+#### <a name="Customisation example with custo"></a> Customisation example with custom form template
+
+Write a custom form in a topic.
+
+- In the form set the location of the prompt with `%COMMENTPROMPT%`; the prompt will be positioned here.
+- In %COMMENT use parameter `noform="on"`
+- In %COMMENT use parameter `templatetopic` to point to the topic with the form template
+
+Example form:
+
+    %TMPL:DEF{FORM:example}%
+    <form method="post" action="%SCRIPTURL{save}%/%BASEWEB%/%BASETOPIC%" enctype="application/x-www-form-urlencoded" name="examplecomment" id="examplecomment">
+    <input type="hidden" name="redirectto" value="%BASEWEB%.%BASETOPIC%" />
+    %COMMENTPROMPT%
+    </form>
+    %TMPL:END%
+
+Example comment:
+
+    %COMMENT{noform="on" type="example" templatetopic="Sandbox.CommentPluginTemplateExample" target="%TOPIC%" button="Add comment" }%
 
 ### <a name="The &lt;code&gt;OUTPUT&lt;/code&gt; template"></a> The `OUTPUT` template
 
@@ -330,6 +338,13 @@ There are also four position tags that are used to indicate where the comment sh
 </table>
 
 Note that these position tags are obviously mutually exclusive. If you define more than one, the result is undefined. If none is present, the default is taken from the plugin setting `DEFAULT_TYPE`
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>%COMMENTPROMPT%</code></td>
+    <td> Use with a custom form. If present, the comment prompt will be positioned here. </td>
+  </tr>
+</table>
 
 All the usual [[TWikiVariables]] that can be used in a topic template can also be used in an `OUTPUT` template. See [[TWikiVariables]] for details.
 
@@ -370,62 +385,76 @@ These can be set in TWikiPreferences, in WebPreferences or in individual topics.
 
 ## <a name="Plugin Info"></a> Plugin Info
 
+Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/wikiringlogo20x20.png) **WikiRing** ](http://wikiring.com) - working together to improve your wiki experience!
+
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td align="right"> Plugin Author: </td>
-    <td> TWiki:Main.DavidWeller, TWiki:Main.PeterMasiar, TWiki:Main.CrawfordCurrie <a href="http://www.c-dot.co.uk" target="_top">http://www.c-dot.co.uk</a></td>
-  </tr>
-  <tr>
-    <td align="right"> Copyright: </td>
-    <td> © 2004, TWiki:Main.CrawfordCurrie<br />© 2004-2007 TWiki:TWiki.TWikiContributor </td>
-  </tr>
-  <tr>
-    <td align="right"> License: </td>
-    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+    <td> TWiki:Main.CrawfordCurrie <a href="http://www.c-dot.co.uk" target="_top">http://www.c-dot.co.uk</a> inspired by the work of TWiki:Main.DavidWeller and TWiki:Main.PeterMasiar </td>
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 12750 (04 Feb 2007) </td>
+    <td> 15776 (22 Jan 2008) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
-    <td>  </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td align="right"> 5 Sep 2007 </td>
+    <td> TWikibug:Item3689 corrected <code>location</code> handling TWikibug:Item4181 added [[Main/VarCOMMENT]] TWikibug:Item4402 corrected access check </td>
+  </tr>
+  <tr>
+    <td align="right"> 22 Jun 2007 </td>
+    <td> Removed the long-deprecated <code>%TIME</code> (use %GMTIME instead). Minor doc changes </td>
+  </tr>
+  <tr>
+    <td align="right"> 14021 </td>
+    <td> TWikibug:Item3755 Fixed incorrect handling of line terminators when targeting an anchor </td>
+  </tr>
+  <tr>
+    <td align="right"> 13311 </td>
+    <td> Added option to define a comment template in any topic. Pass the topic location with <code>templatetopic</code> (either <code>topic</code> or <code>web.topic</code>). See an example in [[Main/CommentPluginExamples#TemplateTopic]]. </td>
+  </tr>
+  <tr>
+    <td align="right"> 12822 </td>
+    <td> TWikibug:Item3598 minor doc fixes </td>
   </tr>
   <tr>
     <td align="right"> 12750 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item3510" rel="nofollow">Item3510</a> added a note about the changed template spec in TWiki 4.1.0. Code remains unchanged </td>
+    <td> TWikibug:Item3510 added a note about the changed template spec in TWiki 4.1.0. Code remains unchanged </td>
   </tr>
   <tr>
     <td align="right"> 11358 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item2802" rel="nofollow">Item2802</a> moved SHORTDESCRIPTION to .pm. Coded up TWiki:main.PankajPant's suggestions as <code>nopost</code> and <code>remove</code>. Added default text for the %COMMENT as requested by TWiki:Main.AndyGlew </td>
+    <td> TWikibug:Item2802 moved SHORTDESCRIPTION to .pm. Coded up TWiki:main.PankajPant's suggestions as <code>nopost</code> and <code>remove</code>. Added default text for the %COMMENT as requested by TWiki:Main.AndyGlew </td>
   </tr>
   <tr>
     <td align="right"> 11118 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item2322" rel="nofollow">Item2322</a> removed span tag around oneliner bullet output </td>
+    <td> TWikibug:Item2322 removed span tag around oneliner bullet output </td>
   </tr>
   <tr>
     <td align="right"> 8788 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Item1577: reverted 8433 to fix inclusion of correct user templates </td>
+    <td> TWikibug:Item1465 Item1577: reverted 8433 to fix inclusion of correct user templates </td>
   </tr>
   <tr>
     <td align="right"> 8787 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1573" rel="nofollow">Item1573</a> renamed standard templates topic to avoid naming clash on Windows, where filenames are case-insensitive </td>
+    <td> TWikibug:Item1573 renamed standard templates topic to avoid naming clash on Windows, where filenames are case-insensitive </td>
   </tr>
   <tr>
     <td align="right"> 8433 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Fix 'TWiki.' to 'TWiki.'; also fixed include 'UserComments' to 'UserCommentsTemplate' (at least that is what the doc suggests) </td>
+    <td> TWikibug:Item1465 Fix 'TWiki.' to 'TWiki.'; also fixed include 'UserComments' to 'UserCommentsTemplate' (at least that is what the doc suggests) </td>
   </tr>
   <tr>
     <td align="right"> 7427 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item845" rel="nofollow">Item845</a> removed duplicate date in default comments; stick with server time </td>
+    <td> TWikibug:Item845 removed duplicate date in default comments; stick with server time </td>
   </tr>
   <tr>
     <td align="right"> 7251 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item810" rel="nofollow">Item810</a> fix for user template inclusion; reorganised templates to make customisation easier </td>
+    <td> TWikibug:Item810 fix for user template inclusion; reorganised templates to make customisation easier </td>
   </tr>
   <tr>
     <td align="right"> 5906 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item143" rel="nofollow">Item143</a> apache warning from comment plugin when CommentsTmpl.txt not found </td>
+    <td> TWikibug:Item143 apache warning from comment plugin when CommentsTmpl.txt not found </td>
   </tr>
   <tr>
     <td align="right"> 5519 </td>
@@ -472,8 +501,12 @@ These can be set in TWikiPreferences, in WebPreferences or in individual topics.
     <td> 06 Mar 2002 initial commit </td>
   </tr>
   <tr>
-    <td align="right"> Perl Version: </td>
-    <td> &gt;= 5.6.1 </td>
+    <td align="right"> Copyright: </td>
+    <td> © 2004, TWiki:Main.CrawfordCurrie<br />© 2004-2007 TWiki:TWiki.TWikiContributor </td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
   </tr>
   <tr>
     <td align="right"> Plugin Home: </td>
@@ -486,5 +519,3 @@ These can be set in TWikiPreferences, in WebPreferences or in individual topics.
 </table>
 
 **_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
-
--- TWiki:Main/CrawfordCurrie - 15:45:58 03 March 2007

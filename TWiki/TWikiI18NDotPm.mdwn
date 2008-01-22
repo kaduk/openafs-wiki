@@ -6,7 +6,8 @@ Support for strings translation and language detection.
   <ul>
     <li><a href="#Package =TWiki::_I18N="> Package TWiki::I18N</a><ul>
         <li><a href="#ClassMethod *available_languages"> ClassMethod available_languages <tt></tt></a></li>
-        <li><a href="#ClassMethod <strong>get</strong> ($session)"> ClassMethod get <tt>($session)</tt></a></li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>maketext</strong> ($text)"> ObjectMethod maketext <tt>($text) -&gt; $translation</tt></a></li>
         <li><a href="#ObjectMethod <strong>language</strong> () -> $l"> ObjectMethod language <tt>() -&gt; $language_tag</tt></a></li>
         <li><a href="#ObjectMethod *enabled_languages*"> ObjectMethod enabled_languages <tt>() -&gt; %languages</tt></a></li>
@@ -23,9 +24,13 @@ Lists languages tags for languages available at TWiki installation. Returns a li
 
 **_Note_**: the languages available to users are determined in the `configure` interface.
 
-## <a name="ClassMethod &lt;strong&gt;get&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **get** `($session)`
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
 
-Constructor. Gets the language object corresponding to the current user's language.
+Constructor. Gets the language object corresponding to the current users language. If $session is not a TWiki object reference, just calls Local::Maketext::new (the superclass constructor)
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;maketext&lt;/strong&gt; ($text)"></a><a name="ObjectMethod &lt;strong&gt;maketext&lt;/strong&gt; ($text) "></a> [[ObjectMethod]] **maketext** `($text) -> $translation`
 

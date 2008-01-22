@@ -1,3 +1,9 @@
+# <a name="TWiki Formatted Search"></a> TWiki Formatted Search
+
+_Inline search feature allows flexible formatting of search result_
+
+The default output format of a <code>[[%SEARCH{...}%|Main/VarSEARCH]]</code> is a table consisting of topic names and topic summaries. Use the `format="..."` parameter to customize the search result. The format parameter typically defines a bullet or a table row containing variables, such as `%SEARCH{ "food" format="| $topic | $summary |" }%`. See <code>[[%SEARCH{...}%|Main/VarSEARCH]]</code> for other search parameters, such as `separator=""`.
+
 <div>
   <ul>
     <li><a href="#TWiki Formatted Search"> TWiki Formatted Search</a><ul>
@@ -57,12 +63,6 @@
   </ul>
 </div>
 
-# <a name="TWiki Formatted Search"></a> TWiki Formatted Search
-
-_Inline search feature allows flexible formatting of search result_
-
-The default output format of a <code>[[%SEARCH{...}%|Main/VarSEARCH]]</code> is a table consisting of topic names and topic summaries. Use the `format="..."` parameter to customize the search result. The format parameter typically defines a bullet or a table row containing variables, such as `%SEARCH{ "food" format="| $topic | $summary |" }%`. See <code>[[%SEARCH{...}%|Main/VarSEARCH]]</code> for other search parameters, such as `separator=""`.
-
 ## <a name="Syntax"></a> Syntax
 
 Two parameters can be used to specify a customized search result:
@@ -81,26 +81,6 @@ Variables that can be used in the header string:
   <tr>
     <td><code>$web</code></td>
     <td> Name of the web </td>
-  </tr>
-  <tr>
-    <td><code>$n</code> or <code>$n()</code></td>
-    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
-  </tr>
-  <tr>
-    <td><code>$nop</code> or <code>$nop()</code></td>
-    <td> Is a "no operation". This variable gets removed; useful for nested search </td>
-  </tr>
-  <tr>
-    <td><code>$quot</code></td>
-    <td> Double quote (<code>"</code>). Alternatively write <code>\"</code> to escape it </td>
-  </tr>
-  <tr>
-    <td><code>$percnt</code></td>
-    <td> Percent sign (<code>%</code>) </td>
-  </tr>
-  <tr>
-    <td><code>$dollar</code></td>
-    <td> Dollar sign (<code>$</code>) </td>
   </tr>
 </table>
 
@@ -153,11 +133,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:02</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:07</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:02Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:07Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -173,7 +153,7 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$wikiusername</code></td>
-    <td> Wiki user name of last topic update, like <code>Main.JohnSmith</code></td>
+    <td> Wiki user name of last topic update, like <code>%USERSWEB%.JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$createdate</code></td>
@@ -189,7 +169,7 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$createwikiusername</code></td>
-    <td> Wiki user name of topic revision 1, e.g. <code>Main.JohnSmith</code></td>
+    <td> Wiki user name of topic revision 1, e.g. <code>%USERSWEB%.JohnSmith</code></td>
   </tr>
   <tr>
     <td><code>$summary</code></td>
@@ -242,26 +222,6 @@ Variables that can be used in the format string:
   <tr>
     <td><code>$count(reg-exp)</code></td>
     <td> Count of number of times a regular expression pattern appears in the text of a topic (does not search meta data). Follows guidelines for use and limitations outlined above under <code>$pattern(reg-exp)</code>. Example: <code>$count(.*?(---[+][+][+][+]) .*)</code> counts the number of &lt;H4&gt; headers in a page. </td>
-  </tr>
-  <tr>
-    <td><code>$n</code> or <code>$n()</code></td>
-    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
-  </tr>
-  <tr>
-    <td><code>$nop</code> or <code>$nop()</code></td>
-    <td> Is a "no operation". This variable gets removed; useful for nested search </td>
-  </tr>
-  <tr>
-    <td><code>$quot</code></td>
-    <td> Double quote (<code>"</code>). Alternatively write <code>\"</code> to escape it </td>
-  </tr>
-  <tr>
-    <td><code>$percnt</code></td>
-    <td> Percent sign (<code>%</code>) </td>
-  </tr>
-  <tr>
-    <td><code>$dollar</code></td>
-    <td> Dollar sign (<code>$</code>) </td>
   </tr>
 </table>
 

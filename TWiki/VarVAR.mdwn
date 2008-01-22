@@ -1,7 +1,7 @@
-<a name="VarVAR"></a>
+Status: 500 Content-type: text/html
 
-### <a name="VAR{&quot;NAME&quot; web=&quot;Web&quot;} -- get a p"></a> VAR\{"NAME" web="Web"\} -- get a preference value from another web
+# Software error:
 
-- Syntax: `%VAR{"NAME" web="Web"}%`
-- Example: To get `%WEBBGCOLOR%` of the Main web write `%VAR{"WEBBGCOLOR" web="Main"}%`, which expands to ==
-- Related: [[WEBPREFSTOPIC|Main/WebHome#VarWEBPREFSTOPIC]]
+    Can't use an undefined value as an ARRAY reference at /tmp/TWiki/lib/TWiki/Prefs.pm line 246.
+
+For help, please send mail to this site's webmaster, giving this error message and the time and date of the error.

@@ -1,17 +1,17 @@
 # <a name="Slide Show Plugin"></a><a name=" Slide Show Plugin"></a> Slide Show Plugin
 
-This Plugin converts a topic with headings into a slide show.
+This plugin converts a topic with headings into a slideshow.
 
 <div>
   <ul>
     <li><a href="#Introduction"> Introduction</a></li>
     <li><a href="#Syntax Rules"> Syntax Rules</a><ul>
-        <li><a href="#How to Create a Slide Show"> How to Create a Slide Show</a></li>
+        <li><a href="#How to Create a Slideshow"> How to Create a Slideshow</a></li>
         <li><a href="#How to Create Your own Slide Tem"> How to Create Your own Slide Template</a></li>
       </ul>
     </li>
     <li><a href="#Example"> Example</a><ul>
-        <li><a href="#Slide 1: Silly Sample Slide Show"> Slide 1: Silly Sample Slide Show</a></li>
+        <li><a href="#Slide 1: Silly Sample Slideshow"> Slide 1: Silly Sample Slideshow</a></li>
         <li><a href="#Slide 2: Agenda"> Slide 2: Agenda</a></li>
         <li><a href="#Slide 3: Silly Introduction"> Slide 3: Silly Introduction</a><ul>
             <li><a href="#Comments"> Comments</a></li>
@@ -30,29 +30,29 @@ This Plugin converts a topic with headings into a slide show.
 
 ## <a name="Introduction"></a> Introduction
 
-There is already a defacto standard for presentations, why this Plugin? This Plugin makes sense for organizations that do already have lots of content in TWiki: It is easy to create a web based presentation that contains many links to related content. The Plugin does not try to compete with the bells and whistles of the other presentation program, but the markup of TWiki and other Plugins like TWiki:Plugins/ChartPlugin, TWiki:Plugins/GaugePlugin, TWiki:Plugins/SpreadSheetPlugin, TWiki:Plugins/TWikiDrawPlugin can be used to create an appealing presentation.
+There is already a defacto standard for presentations, why this plugin? This plugin makes sense for organizations that do already have lots of content in TWiki: It is easy to create a web based presentation that contains many links to related content. The plugin does not try to compete with the bells and whistles of the other presentation program, but the markup of TWiki and other plugins like TWiki:Plugins/ChartPlugin, TWiki:Plugins/GaugePlugin, TWiki:Plugins/SpreadSheetPlugin, TWiki:Plugins/TWikiDrawPlugin can be used to create appealing presentations.
 
-Any topic with headings can be converted into a slide show. Each slide starts with a `"---++"` heading. There are two modes to view a topic:
+Any topic with headings can be converted into a slideshow. Each slide starts with a `"---++"` heading. There are two modes to view a topic:
 
-- Normal topic view mode: Headings and text is shown in the usual TWiki rendering, representing the outline of the slide show. This mode is useful to print handouts.
+- Normal topic view mode: Headings and text is shown in the usual TWiki rendering, representing the outline of the slideshow. This mode is useful to print handouts.
 - Presentation mode: Each heading with text is shown as a slide; the format is based on a slide template. Navigation buttons are added to go to the "First", "Previous", and "Next" slide. Slide navigation is quick because it is done with anchor jumps to the same page.
 
 You can start the presentation by clicking on the "Start presentation" button.
 
 ## <a name="Syntax Rules"></a> Syntax Rules
 
-### <a name="How to Create a Slide Show"></a> How to Create a Slide Show
+### <a name="How to Create a Slideshow"></a> How to Create a Slideshow
 
 - Start with `%SLIDESHOWSTART%`
   - Use the optional `template` parameter to specify your own slide template topic, e.g. `%SLIDESHOWSTART{ template="MyOwnSlideTemplate" }%`
 - Create the slides. Start each slide with a `"---++"` heading and add text like paragraphs, bullets, tables and images.
   - **_Hint:_** Make sure to keep each slide short enough so that you do not need to scroll to see all text of a slide during the presentation.
   - **_Note:_** You can use any heading level you like, but use the same for all slides.
-- End your slide show with `%SLIDESHOWEND%`
+- End your slideshow with `%SLIDESHOWEND%`
 
 ### <a name="How to Create Your own Slide Tem"></a> How to Create Your own Slide Template
 
-To create your own template topic, copy the "Default Slide Template" section below into your own slide template topic and customize it to your needs. It can be activated as the default template in the Plugin's `TEMPLATE` setting, or per slide show with the `%SLIDESHOWSTART{ template="MyOwnSlideTemplate" }%` setting.
+To create your own template topic, copy the "Default Slide Template" section below into your own slide template topic and customize it to your needs. It can be activated as the default template in the plugin's `TEMPLATE` setting, or per slideshow with the `%SLIDESHOWSTART{ template="MyOwnSlideTemplate" }%` setting.
 
 - Use an HTML table that defines a slide. For example, create one row for the slide title, another one for the slide text.
 - These keywords can be used: <table border="1" cellpadding="0" cellspacing="0">
@@ -109,15 +109,15 @@ To create your own template topic, copy the "Default Slide Template" section bel
 
 ## <a name="Example"></a> Example
 
-This is a short example of a slide show. You should see a "Start presentation" button if this Plugin is installed:
+This is a short example of a slideshow. You should see a "Start presentation" button if this plugin is installed:
 
 <a name="StartPresentation"></a> <span>[[Main/WebHome?slideshow=on;skin=print#GoSlide1]]</span>
 
-### <a name="Slide 1: Silly Sample Slide Show"></a> Slide 1: Silly Sample Slide Show
+### <a name="Slide 1: Silly Sample Slideshow"></a> Slide 1: Silly Sample Slideshow
 
 %BR%
 
-<center> By TWiki:Main/PeterThoeny <p> San Jose, 17 Nov 2002 </p>
+<center> By TWiki:Main/PeterThoeny <p> San Jose, 29 Sep 2007 </p>
 </center>
 
 ### <a name="Slide 2: Agenda"></a> Slide 2: Agenda
@@ -145,13 +145,13 @@ This is a short example of a slide show. You should see a "Start presentation" b
 - foo is bar
 - bar is foo
 
-This text is not part of the slide show
+This text is not part of the slideshow
 
 ## <a name="%TOPIC% Global Settings"></a> %TOPIC% Global Settings
 
 Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%SLIDESHOWPLUGIN\_SHORTDESCRIPTION%**</code>
 
-- One line description, is shown in the [[TextFormattingRules]] topic:
+- One line description, is shown in the %SYSTEMWEB%.TextFormattingRules topic:
   - Set SHORTDESCRIPTION = Create web based presentations based on topics with headings.
 
 - Debug plugin: (See output in `data/debug.txt`)
@@ -196,7 +196,7 @@ The part between the rulers defines the default format of a slide:
 
 **_Note:_** You do not need to install anything on the browser to use this plugin. The following instructions are for the administrator who installs the plugin on the server where TWiki is running.
 
-- Download the ZIP file from the Plugin web (see below)
+- Download the ZIP file from the Plugin Home (see below)
 - Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory. Content: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> File: </strong></th>
@@ -231,7 +231,7 @@ The part between the rulers defines the default format of a slide:
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2006, <a href="http://www.structuredwikis.com/peter/" target="_top">Peter Thoeny</a></td>
+    <td> © 2006-2007, Peter Thoeny, <a href="http://www.twiki.net/" target="_top">TWIKI.NET</a></td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -239,11 +239,15 @@ The part between the rulers defines the default format of a slide:
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 12011 </td>
+    <td> 29 Sep 2007 (15091) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 29 Sep 2007: </td>
+    <td> Added %SYSTEMWEB%.VarSLIDESHOWSTART and %SYSTEMWEB%.VarSLIDESHOWEND to have them listed in %SYSTEMWEB%.TWikiVariables </td>
   </tr>
   <tr>
     <td align="right"> 12 Feb 2007: </td>
@@ -295,7 +299,7 @@ The part between the rulers defines the default format of a slide:
   </tr>
   <tr>
     <td align="right"> TWiki:Plugins/Benchmark: </td>
-    <td>[[TWiki/GoodStyle]] 98%, [[TWiki/FormattedSearch]] 99%, [[Main/SlideShowPlugin]] 99% </td>
+    <td> %SYSTEMWEB%.GoodStyle 98%, %SYSTEMWEB%.FormattedSearch 99%, [[Main/SlideShowPlugin]] 99% </td>
   </tr>
   <tr>
     <td align="right"> Plugin Home: </td>
@@ -311,4 +315,4 @@ The part between the rulers defines the default format of a slide:
   </tr>
 </table>
 
-**_Related Topics:_** [[TWikiPreferences]], [[TWikiPlugins]]
+**_Related Topics:_** %SYSTEMWEB%.TWikiPreferences, %SYSTEMWEB%.TWikiPlugins

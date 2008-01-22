@@ -1,3 +1,9 @@
+# <a name="TWiki System Requirements"></a> TWiki System Requirements
+
+_Server and client requirements_
+
+Low client and server base requirements are core features that keep TWiki widely deployable, particularly across a range of browser platforms and versions. Many [[Plugins|TWiki:Plugins/PluginPackage]] and [[contrib modules|TWiki:Plugins/ContribPackage]] exist which enhance and expand TWiki's capabilities; they may have additional requirements.
+
 <div>
   <ul>
     <li><a href="#TWiki System Requirements"> TWiki System Requirements</a><ul>
@@ -13,12 +19,6 @@
   </ul>
 </div>
 
-# <a name="TWiki System Requirements"></a> TWiki System Requirements
-
-_Server and client requirements_
-
-Low client and server base requirements are core features that keep TWiki widely deployable, particularly across a range of browser platforms and versions. Many [[Plugins|TWiki:Plugins/PluginPackage]] and [[contrib modules|TWiki:Plugins/ContribPackage]] exist which enhance and expand TWiki's capabilities; they may have additional requirements.
-
 ## <a name="Server Requirements"></a> Server Requirements
 
 TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (Revision Control System)](http://www.gnu.org/software/rcs/rcs.html), a GNU Free Software package. TWiki is developed in a basic Linux/Apache environment. It also works with Microsoft Windows, and should have no problem on any other platform that meets the requirements.
@@ -30,7 +30,7 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   </tr>
   <tr>
     <td> Perl </td>
-    <td> 5.005_03 or higher (5.8.4 or higher is recommended) </td>
+    <td> 5.6.1 or higher (5.8.4 or higher is recommended) </td>
   </tr>
   <tr>
     <td> RCS </td>
@@ -212,11 +212,10 @@ The TWiki [[standard installation|Main/TWikiInstallationGuide]] has relatively l
 
 CSS and Javascript are used in most skins, although there is a low-fat skin (Classic skin) available that minimises these requirements. Some skins will require more recent releases of browsers. The default skin (Pattern) is tested on IE 6, Safari, and Mozilla 5.0 based browsers (such as Firefox).
 
-You can easily select a balance of browser capability versus look and feel. Try the installed skins at [[TWikiSkinBrowser]] and more at TWiki:Plugins.SkinPackage.
+You can easily select a balance of browser capability versus look and feel. Try the installed skins at %SYSTEMWEB%.TWikiSkinBrowser and more at TWiki:Plugins.SkinPackage.
 
 ## <a name="Important note about TWiki Plugi"></a> Important note about TWiki Plugins
 
 - Plugins can require just about anything - browser-specific functions, stylesheets (CSS), Java applets, cookies, specific Perl modules,... - check the individual Plugin specs.
-  - **_%T% Note:_** Plugins included in the TWiki distribution do not add requirements, except for the [[CommentPlugin]] which requires Perl 5.6.1.
 
 **_Related Topics:_** [[AdminDocumentationCategory]]

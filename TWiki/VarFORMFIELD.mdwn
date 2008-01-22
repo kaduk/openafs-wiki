@@ -21,7 +21,7 @@
   </tr>
   <tr>
     <td><code>format="..."</code></td>
-    <td> Format string. <code>$value</code> expands to the field value, and <code>$title</code> expands to the field title </td>
+    <td> Format string. <code>$value</code> expands to the field value, and <code>$title</code> expands to the fieldname </td>
     <td><code>"$value"</code></td>
   </tr>
   <tr>
@@ -36,4 +36,4 @@
   </tr>
 </table>
 - Example: `%FORMFIELD{"ProjectName" topic="Projects.SushiProject" default="(not set)" alttext="ProjectName field found"}%`
-- Related: [[SEARCH|Main/WebHome#VarSEARCH]]
+- Related: [[SEARCH|Main/VarSEARCH]]

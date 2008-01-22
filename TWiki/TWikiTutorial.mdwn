@@ -1,3 +1,7 @@
+# <a name="20-Minute TWiki Tutorial"></a> 20-Minute TWiki Tutorial
+
+This step-by-step, hands-on tutorial gets you up to speed with all the [[TWikiSite]] basics, in _mere minutes_...
+
 <div>
   <ul>
     <li><a href="#20-Minute TWiki Tutorial"> 20-Minute TWiki Tutorial</a><ul>
@@ -13,10 +17,6 @@
     </li>
   </ul>
 </div>
-
-# <a name="20-Minute TWiki Tutorial"></a> 20-Minute TWiki Tutorial
-
-This step-by-step, hands-on tutorial gets you up to speed with all the [[TWikiSite]] basics, in _mere minutes_...
 
 ## <a name="1. Get set..."></a> 1. Get set...
 
@@ -41,8 +41,8 @@ To edit topics, you need to have a TWiki account.
 
 ## <a name="4. Check out TWiki users, groups"></a> 4. Check out TWiki users, groups.
 
-- Go to the [[TWikiUsers]] topic in the TWiki.Main web; it has a list of all users of TWiki. Your [[WikiName]] will be in this list after you register.
-- Go to the [[TWikiGroups]] topic in the Main web; it has a list of groups which can be used to define fine grained [[TWikiAccessControl]] in TWiki.
+- Go to the %USERSWEB%.TWikiUsers topic; it has a list of all users of TWiki. Your [[WikiName]] will be in this list after you register.
+- Go to the %USERSWEB%.TWikiGroups topic in the %USERSWEB% web; it has a list of groups which can be used to define fine grained [[TWikiAccessControl]] in TWiki.
 
 ## <a name="5. Test the page controls..."></a> 5. Test the page controls...
 
@@ -70,7 +70,7 @@ Go to the [[Sandbox|Sandbox/WebHome]]. This is the sandbox web, where you can ma
   2. Preview and save the topic. The name appears, highlighted, with a linked question mark at the end. This means that the topic doesn't exist yet.
   3. Click on the question mark. Now you're in edit mode of the new topic.
   4. Type some text, basically, like you write an e-mail.
-  5. A signature with your name is already entered by default. **_NOTE:_** The `Main.` in front of your name means that you have a link from the current web to your personal topic located in the Main web.
+  5. A signature with your name is already entered by default. **_NOTE:_** The `%USERSWEB%.` in front of your name means that you have a link from the current web to your personal topic located in the %USERSWEB% web.
   6. Preview and save the topic...
 - Learn about text formatting. You can enter text in TWikiShorthand, a very simple markup language. Follow the [[TWikiShorthand]] link to see how, then:
   1. Go back to your sandbox topic end edit it.

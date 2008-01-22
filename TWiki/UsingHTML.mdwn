@@ -1,19 +1,20 @@
 ## <a name="Using HTML"></a> Using HTML
 
-You can use just about any HTML tag without a problem. You can add HTML if there is no TWiki equivalent, for example, write `<strike>deleted text</strike>` to get <strike>deleted text</strike>.
+You can use most HTML tags in TWiki topics without a problem. This is useful where you want to add some content that is formatted in a way that is not supported using [[TWiki shorthand|Main/WebHome#TWikiShorthand]], for example, you can write `<strike>deleted text</strike>` to get <strike>deleted text</strike>.
 
-%X% There are a few usability and technical considerations to keep in mind:
+There are a few usability and technical considerations to keep in mind:
 
-- On collaboration pages, it's better **not** to use HTML, but to use [[TWiki shorthand|Main/WebHome#TWikiShorthand]] instead - this keeps the text uncluttered and easy to edit.
-- If you use HTML use [XHTML 1.0 Transitional](http://www.w3.org/TR/xhtml1/) syntax.
+- On collaboration pages, it's better **not** to use HTML, but to use [[TWiki shorthand|Main/WebHome#TWikiShorthand]] instead - this keeps the text uncluttered and easy to edit using the plaintext editor.
+- If you _must_ use HTML, use [XHTML 1.0 Transitional](http://www.w3.org/TR/xhtml1/) syntax.
+- Use `<literal>..</literal>` tags around blocks of HTML to avoid accidental interpretation of [[TWiki shorthand|Main/WebHome#TWikiShorthand]] within the HTML.
 - %X% Script tags may be filtered out, at the discretion of your TWiki administrator.
 
-Recommendations when pasting HTML from other sources:
+Recommendations when pasting HTML from other sources (using the plain-text editor):
 
 - Copy only text between `<body>` and `</body>` tags.
 - Remove all empty lines. TWiki inserts `<p />` paragraph tags on empty lines, which causes problems if done between HTML tags that do not allow paragraph tags, like for example between table tags.
 - Remove leading spaces. TWiki might interpret some text as lists.
-- Do not span a tag over more than one line. TWiki requires that the opening and closing angle brackets - <code>**&lt;...&gt;**</code> - of an HTML tag are on the same line, or the tag will be broken.
+- Do not span a tag over more than one line. TWiki requires that the opening and closing angle brackets - <code>**&lt;...&gt;**</code> - of a HTML tag are on the same line, or the tag will be broken.
 - In your HTML editing program, save without hard line breaks on text wrap.
 
-%T% TWiki converts shorthand notation to HTML for display. To copy a fully marked-up page, simply view the source in your browser and save the contents. If you need to save HTML frequently, you may want to check out TWiki:Plugins/PublishAddOn.
+When using a WYSIWYG editor, you can just copy-paste directly into the editor, and the content will be converted to [[TWiki shorthand|Main/WebHome#TWikiShorthand]] automatically when you save.

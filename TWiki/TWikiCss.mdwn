@@ -1,14 +1,22 @@
+# <a name="Appendix C: TWiki CSS"></a> Appendix C: TWiki CSS
+
+_Listing of CSS class names emitted from TWiki core code and standard plugins, for the Dakar release._
+
 <div>
   <ul>
     <li><a href="#Appendix C: TWiki CSS"> Appendix C: TWiki CSS</a><ul>
         <li><a href="#Who should read this document?"> Who should read this document?</a></li>
         <li><a href="#Naming conventions"> Naming conventions</a><ul>
             <li><a href="#TWiki styles in core code"> TWiki styles in core code</a></li>
-            <li><a href="#TWiki Styles in Plugins"> TWiki Styles in Plugins</a></li>
+            <li><a href="#TWiki Styles in Plugins"> TWiki Styles in Plugins</a><ul>
+                <li><a href="#TablePlugin"> TablePlugin</a></li>
+              </ul>
+            </li>
             <li><a href="#TWiki Styles in Templates"> TWiki Styles in Templates</a></li>
             <li><a href="#TWiki Styles used in =configure="> TWiki Styles used in configure</a></li>
             <li><a href="#TWiki Styles in topics"> TWiki Styles in topics</a></li>
             <li><a href="#TWiki Styles in Skins"> TWiki Styles in Skins</a></li>
+            <li><a href="#Reserved Styles"> Reserved Styles</a></li>
           </ul>
         </li>
         <li><a href="#Tips"> Tips</a></li>
@@ -16,10 +24,6 @@
     </li>
   </ul>
 </div>
-
-# <a name="Appendix C: TWiki CSS"></a> Appendix C: TWiki CSS
-
-_Listing of CSS class names emitted from TWiki core code and standard plugins, for the Dakar release._
 
 ## <a name="Who should read this document?"></a> Who should read this document?
 
@@ -189,6 +193,18 @@ A wide range of standard styles are used in the TWiki core code and topics, and 
     <td> .twikiDiffLineNumberHeader </td>
     <td> RDiff.pm </td>
   </tr>
+  <tr>
+    <td> .twikiDiffDebug </td>
+    <td> RDiff.pm </td>
+  </tr>
+  <tr>
+    <td> .twikiDiffDebugRight </td>
+    <td> RDiff.pm </td>
+  </tr>
+  <tr>
+    <td> .twikiDiffDebugLeft </td>
+    <td> RDiff.pm </td>
+  </tr>
 </table>
 
 <table border="1" cellpadding="0" cellspacing="0">
@@ -204,36 +220,66 @@ A wide range of standard styles are used in the TWiki core code and topics, and 
 
 ### <a name="TWiki Styles in Plugins"></a> TWiki Styles in Plugins
 
+#### <a name="TablePlugin"></a> [[TablePlugin]]
+
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <td> .twikiTable </td>
-    <td>[[Main/TablePlugin]]</td>
+    <td><code>.twikiTable</code></td>
+    <td> The table </td>
   </tr>
   <tr>
-    <td> .twikiSortedAscendingCol </td>
-    <td>[[Main/TablePlugin]]</td>
+    <td><code>.twikiSortedCol</code></td>
+    <td> A sorted column </td>
   </tr>
   <tr>
-    <td> .twikiSortedDescendingCol </td>
-    <td>[[Main/TablePlugin]]</td>
+    <td><code>.twikiSortedAscendingCol</code></td>
+    <td> Sorted column, ascending </td>
   </tr>
   <tr>
-    <td> .twikiFirstCol </td>
-    <td>[[Main/TablePlugin]]</td>
+    <td><code>.twikiSortedDescendingCol</code></td>
+    <td> Sorted column, descending </td>
   </tr>
   <tr>
-    <td> .twikiTableEven </td>
-    <td>[[Main/TablePlugin]]</td>
+    <td><code>.tableSortIcon</code></td>
+    <td> The sort icon holder (span) </td>
   </tr>
   <tr>
-    <td> .twikiTableOdd </td>
-    <td>[[Main/TablePlugin]]</td>
+    <td><code>.twikiFirstCol</code></td>
+    <td> The first column </td>
+  </tr>
+  <tr>
+    <td><code>.twikiTableEven</code></td>
+    <td> Even numbered rows </td>
+  </tr>
+  <tr>
+    <td><code>.twikiTableOdd</code></td>
+    <td> Odd numbered rows </td>
+  </tr>
+  <tr>
+    <td><code>.twikiTableCol</code> + column number </td>
+    <td> Unique column identifier, for instance: <code>twikiTableCol0</code></td>
+  </tr>
+  <tr>
+    <td><code>.twikiTableRow</code> + type + row number </td>
+    <td> Unique row identifier, for instance: <code>twikiTableRowdataBg0</code></td>
   </tr>
 </table>
 
 ### <a name="TWiki Styles in Templates"></a> TWiki Styles in Templates
 
 <table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> .twikiPage </td>
+    <td> twiki.tmpl </td>
+  </tr>
+  <tr>
+    <td> .twikiMiddleContainer </td>
+    <td> twiki.tmpl </td>
+  </tr>
+  <tr>
+    <td> .twikiMain </td>
+    <td> twiki.tmpl </td>
+  </tr>
   <tr>
     <td> .twikiFormTable </td>
     <td> formtables.tmpl, form.tmpl </td>
@@ -275,8 +321,32 @@ A wide range of standard styles are used in the TWiki core code and topics, and 
     <td>   </td>
   </tr>
   <tr>
+    <td> .twikiInputFieldReadOnly </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> .twikiInputFieldFocus </td>
+    <td> For Internet Explorer that does not recognize the <code>:focus</code> pseudo class selector </td>
+  </tr>
+  <tr>
+    <td> .twikiInputFieldBeforeFocus </td>
+    <td> for use with Javascript: the color of the input text when not clicked in the field </td>
+  </tr>
+  <tr>
+    <td> .twikiTextarea </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> .twikiTextareaRawView </td>
+    <td>   </td>
+  </tr>
+  <tr>
     <td> .twikiButton </td>
     <td>   </td>
+  </tr>
+  <tr>
+    <td> .twikiFocus </td>
+    <td> Behaviour marker so a field can be given input focus </td>
   </tr>
   <tr>
     <td> .twikiLeft </td>
@@ -334,6 +404,34 @@ A wide range of standard styles are used in the TWiki core code and topics, and 
     <td> .twikiFormStep </td>
     <td> form row </td>
   </tr>
+  <tr>
+    <td> .twikiNoBreak </td>
+    <td> no break on whitespace </td>
+  </tr>
+  <tr>
+    <td> .twikiMakeVisible </td>
+    <td> For elements that should only be visible with javascript on: default set to hidden, is made visible by javascript. Defaults to inline. </td>
+  </tr>
+  <tr>
+    <td> .twikiMakeVisibleInline </td>
+    <td> For <code>span</code> elements that should only be visible with javascript on: default set to hidden, is made visible by javascript. </td>
+  </tr>
+  <tr>
+    <td> .twikiMakeVisibleBlock </td>
+    <td> For <code>div</code> elements that should only be visible with javascript on: default set to hidden, is made visible by javascript. </td>
+  </tr>
+  <tr>
+    <td> .twikiMakeHidden </td>
+    <td> For elements that should be <strong>hidden</strong> with javascript on: no default style, is made hidden by javascript. </td>
+  </tr>
+  <tr>
+    <td> .twikiFooterNote </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> .twikiPopUp </td>
+    <td> Behaviour marker so a popup-window can be invoked </td>
+  </tr>
 </table>
 
 ### <a name="TWiki Styles used in &lt;code&gt;configure="></a> TWiki Styles used in =configure
@@ -358,11 +456,11 @@ A wide range of standard styles are used in the TWiki core code and topics, and 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <td> .twikiBroadcastMessage </td>
-    <td>[[TWiki/TWikiPreferences]]</td>
+    <td> %SYSTEMWEB%.TWikiPreferences </td>
   </tr>
   <tr>
     <td> #twikiSearchTable </td>
-    <td>[[TWiki/WebSearch]], [[TWiki/WebSearchAdvanced]]</td>
+    <td> %SYSTEMWEB%.WebSearch, %SYSTEMWEB%.WebSearchAdvanced </td>
   </tr>
 </table>
 
@@ -373,6 +471,26 @@ A wide range of standard styles are used in the TWiki core code and topics, and 
     <td> #twikiLogin </td>
     <td> login.pattern.tmpl </td>
     <td>   </td>
+  </tr>
+</table>
+
+### <a name="Reserved Styles"></a> Reserved Styles
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> .twikiImage </td>
+    <td> defined in [[Main/PatternSkin]]</td>
+    <td> div creates border around enclosed image </td>
+  </tr>
+  <tr>
+    <td> .twikiNotification </td>
+    <td> defined in [[Main/PatternSkin]]</td>
+    <td> temporary alert, lighter than broadcast message </td>
+  </tr>
+  <tr>
+    <td> .twikiUnvisited </td>
+    <td> defined in [[Main/PatternSkin]]</td>
+    <td> link style that ignores the visited link state; useful for form links </td>
   </tr>
 </table>
 

@@ -1,0 +1,9 @@
+<a name="VarRENDERLIST"></a>
+
+### <a name="RENDERLIST -- render bullet list"></a> RENDERLIST -- render bullet lists in a variety of formats
+
+- The `%RENDERLIST%` variable is handled by the [[RenderListPlugin]]
+- Syntax: `%RENDERLIST%`
+- Syntax: `%RENDERLIST{ "org" focus="Sales.WestCoastTeam" }%`
+- Example:%BR% `%RENDERLIST{ "org" }%` %BR% `   * [[Eng.WebHome][Engineering]]` %BR% `      * [[Eng.TechPubs][Tech Pubs]]` %BR% `   * [[Sales.WestCoastTeam][Sales]]` %BR% `      * [[Sales.EastCoastTeam][East Coast]]` %BR% `      * [[Sales.WestCoastTeam][West Coast]]`
+- Related: [[RenderListPlugin]]

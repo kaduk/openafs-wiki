@@ -1,8 +1,14 @@
 # <a name="Package &lt;code&gt;TWiki::_AccessControlEx"></a> Package =TWiki::AccessControlException
 
-**extends** `Error`
+Exception used raise an access control violation. This exception has the following fields:
 
-Exception used raise an access control violation.
+- `web` - the web which was being accessed
+- `topic` - the topic being accessed (if any)
+- `user` - canonical username of the person doing the accessing. Use the methods of the TWiki::Users class to get more information about the user.
+- `mode` - the access mode e.g. CHANGE, VIEW etc
+- `reason` a text string giving the reason for the refusal.
+
+The exception may be thrown by plugins. If a plugin throws the exception, it will normally be caught and the browser redirected to a login screen (if the user is not logged in) or reported (if they are and just don't have access).
 
 <div>
   <ul>
@@ -17,7 +23,7 @@ Exception used raise an access control violation.
 ## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($mode,$user,$"></a> [[ClassMethod]] **new** `($mode,$user,$web,$topic,$reason)`
 
 - `$mode` - mode of access (view, change etc)
-- `$user` - user object doing the accessing
+- `$user` - canonical user name of user doing the accessing
 - `$web` - web being accessed
 - `$topic` - topic being accessed
 - `$reason` - string reason for failure
@@ -26,4 +32,4 @@ All the above fields are accessible from the object in a catch clause in the usu
 
 ## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; () - $s"></a> [[ObjectMethod]] **stringify** `() -> $string`
 
-Generate a summary string
+Generate a summary string. This is mainly for debugging.

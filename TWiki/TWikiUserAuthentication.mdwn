@@ -1,3 +1,7 @@
+# <a name="TWiki User Authentication"></a> TWiki User Authentication
+
+_TWiki site access control and user activity tracking options_
+
 <div>
   <ul>
     <li><a href="#TWiki User Authentication"> TWiki User Authentication</a><ul>
@@ -33,10 +37,6 @@
   </ul>
 </div>
 
-# <a name="TWiki User Authentication"></a> TWiki User Authentication
-
-_TWiki site access control and user activity tracking options_
-
 ## <a name="Overview"></a> Overview
 
 Authentication, or "login", is the process by which a user lets TWiki know who they are.
@@ -59,11 +59,15 @@ Please note [[FileAttachments]] are not protected by TWiki User Authentication.
 
 **_%T% Tip:_** TWiki:TWiki.TWikiUserAuthenticationSupplement on TWiki.org has supplemental documentation on user authentication.
 
+<a name="PasswordManagement"></a>
+
 ## <a name="Password Management"></a> Password Management
 
 As shipped, TWiki supports the Apache 'htpasswd' password manager. This manager supports the use of `.htpasswd` files on the server. These files can be unique to TWiki, or can be shared with other applications (such as an Apache webserver). A variety of password encodings are supported for flexibility when re-using existing files. See the descriptive comments in the Security Settings section of the \[[http://www.dementia.org/twiki/configure]\[configure] interface for more details.
 
 You can easily plug in alternate password management modules to support interfaces to other third-party authentication databases.
+
+<a name="UserMapping"></a>
 
 ## <a name="User Mapping"></a> User Mapping
 
@@ -71,25 +75,33 @@ Often when you are using an external authentication method, you want to map from
 
 By default, TWiki supports mapping of usernames to wikinames, and supports TWiki groups internal to TWiki. If you want, you can plug in an alternate user mapping module to support import of groups etc.
 
+<a name="UserRegistration"></a>
+
 ## <a name="User Registration"></a> User Registration
 
 New user registration uses the password manager to set and change passwords and store email addresses. It is also responsible for the new user verification process. the registration process supports **single user registration** via the [[TWikiRegistration]] page, and **bulk user registration** via the [[BulkRegistration]] page (for admins only).
 
 The registration process is also responsible for creating user topics, and setting up the mapping information used by the User Mapping support.
 
+<a name="LoginManagement"></a>
+
 ## <a name="Login Management"></a> Login Management
 
 Login management controls the way users have to log in. There are three basic options; no login, login via a TWiki login page, and login using the webserver authentication support.
 
+<a name="NoLogin"></a>
+
 ### <a name="No Login (select &lt;code&gt;none&lt;/code&gt; in confi"></a> No Login (select `none` in configure)
 
-Does exactly what it says on the tin. Forget about authentication to make your site completely public - anyone can browse and edit freely, in classic Wiki style. All visitors are given the [[TWikiGuest]] default identity, so you can't track individual user activity.
+Does exactly what it says on the tin. Forget about authentication to make your site completely public - anyone can browse and edit freely, in classic Wiki style. All visitors are given the %USERSWEB%.TWikiGuest default identity, so you can't track individual user activity.
 
-**_%X% Note:_** This setup is **not** recommended on public websites for security reasons; anyone would be able to change system settings and perform tasks usually restricted to the [[TWikiAdminGroup]].
+**_%X% Note:_** This setup is **not** recommended on public websites for security reasons; anyone would be able to change system settings and perform tasks usually restricted to administrators.
+
+<a name="TemplateLogin"></a>
 
 ### <a name="Template Login (select &lt;code&gt;TWiki::C"></a> Template Login (select =TWiki::Client::TemplateLogin in configure)
 
-Template Login asks for a username and password in a web page, and processes them using whatever Password Manager you choose. Users can log in and log out. Client Sessions are used to remember users.
+Template Login asks for a username and password in a web page, and processes them using whatever Password Manager you choose. Users can log in and log out. Client Sessions are used to remember users. Users can choose to have their session remembered so they will automatically be logged in the next time they start their browser.
 
 #### <a name="Enabling Template Login"></a> Enabling Template Login
 
@@ -98,15 +110,17 @@ Template Login asks for a username and password in a web page, and processes the
   2. select the appropriate password manager for your system, or provide your own.
 2. Register yourself in the [[TWikiRegistration]] topic. <br /> %H% Check that the password manager recognises the new user. If you are using `.htpasswd` files, check that a new line with the username and encrypted password is added to the `.htpasswd` file. If not, you probably got a path wrong, or the permissions may not allow the webserver user to write to that file.
 3. Create a new topic to check if authentication works.
-4. **Edit the [[TWikiAdminGroup]] topic in the Main web to include users with system administrator status.**<br /> %X% **This is a very important step**, as users in this group can access _all_ topics, independent of TWiki access controls.
+4. **Edit the %USERSWEB%.TWikiAdminGroup topic in the %USERSWEB% web to include users with system administrator status.**<br /> %X% **This is a very important step**, as users in this group can access _all_ topics, independent of TWiki access controls.
 
 [[TWikiAccessControl]] has more information on setting up access controls.
 
 %X% At this time [[TWikiAccessControls]] cannot control access to files in the `pub` area, unless they are only accessed through the `viewfile` script. If your `pub` directory is set up in the webserver to allow open access you may want to add `.htaccess` files in there to restrict access.
 
-%T% You can create a custom version of the [[TWikiRegistration]] form by deleting or adding input tags. The `name=""` parameter of the input tags must start with: `"Twk0..."` (if this is an optional entry), or `"Twk1..."` (if this is a required entry). This ensures that the fields are carried over into the user home page correctly.
+%T% You can create a custom version of the [[TWikiRegistration]] form by copying the topic, and then deleting or adding input tags in your copy. The `name=""` parameter of the input tags must start with: `"Twk0..."` (if this is an optional entry), or `"Twk1..."` (if this is a required entry). This ensures that the fields are carried over into the user home page correctly. Do **not** modify the version of [[TWikiRegistration]] shipped with TWiki, as your changes will be overwritten next time you upgrade.
 
-%T% You can customize the default user home page in [[NewUserTemplate]]. The same variables get expanded as in the [[template topics|Main/TWikiTemplates#Template_Topics]]
+%T% The default new user template page is in [[%SYSTEMWEB%.NewUserTemplate|SYSTEMWEB/NewUserTemplate]]. The same variables get expanded as in the [[template topics|Main/TWikiTemplates#Template_Topics]]. You can create a custom new user home page by creating the [[%USERSWEB%.NewUserTemplate|USERSWEB/NewUserTemplate]] topic, which will then override the default.
+
+<a name="ApacheLogin"></a>
 
 ### <a name="Apache Login (select &lt;code&gt;TWiki::Cli"></a> Apache Login (select =TWiki::Client::ApacheLogin in configure)
 
@@ -116,7 +130,7 @@ The advantage of this scheme is that if you have an existing website authenticat
 
 The disadvantage is that because the user identity is cached in the browser, you can log in, but you can't log out again unless you restart the browser.
 
-TWiki maps the `REMOTE_USER` that was used to log in to the webserver to a [[WikiName]] using the table in [[TWikiUsers]]. This table is updated whenever a user registers, so users can choose not to register (in which case their webserver login name is used for their signature) or register (in which case that login name is mapped to their [[WikiName]]).
+TWiki maps the `REMOTE_USER` that was used to log in to the webserver to a [[WikiName]] using the table in %USERSWEB%.TWikiUsers. This table is updated whenever a user registers, so users can choose not to register (in which case their webserver login name is used for their signature) or register (in which case that login name is mapped to their [[WikiName]]).
 
 The same private `.htpasswd` file used in TWiki Template Login can be used to authenticate Apache users, using the Apache Basic Authentication support.
 
@@ -129,10 +143,10 @@ You can use any other Apache authentication module that sets REMOTE\_USER.
 1. Use [configure](http://www.dementia.org/twiki/configure#LoginManager) to select the `TWiki::Client::ApacheLogin` login manager.
 2. Use [configure](http://www.dementia.org/twiki/configure#PasswordManager) to set up TWiki to create the right kind of `.htpasswd` entries.
 3. Create a `.htaccess` file in the `twiki/bin` directory.<br />%H% There is an template for this file in `twiki/bin/.htaccess.txt` that you can copy and change. The comments in the file explain what need to be done.<br />%H% If you got it right, the browser should now ask for login name and password when you click on the <u>Edit</u>. If `.htaccess` does not have the desired effect, you may need to "AllowOverride All" for the directory in `httpd.conf` (if you have root access; otherwise, e-mail web server support) <br /> %X% At this time [[TWikiAccessControls]] do not control access to files in the `pub` area, unless they are only accessed through the `viewfile` script. If your `pub` directory is set up to allow open access you may want to add `.htaccess` files in there as well to restrict access
-4. You can create a custom version of [[TWikiRegistration]] by deleting or adding input tags. The `name=""` parameter of the input tags must start with: `"Twk0..."` (if this is an optional entry), or `"Twk1..."` (if this is a required entry). This ensures that the fields are carried over into the user home page correctly. <br />You can customize the default user home page in [[NewUserTemplate]]. The same variables get expanded as in the [[template topics|Main/TWikiTemplates#Template_Topics]]
+4. You can create a custom version of the [[TWikiRegistration]] form by copying the default topic, and then deleting or adding input tags in your copy. The `name=""` parameter of the input tags must start with: `"Twk0..."` (if this is an optional entry), or `"Twk1..."` (if this is a required entry). This ensures that the fields are carried over into the user home page correctly. Do **not** modify the version of [[TWikiRegistration]] shipped with TWiki, as your changes will be overwritten next time you upgrade. <br />The default new user template page is in [[%SYSTEMWEB%.NewUserTemplate|SYSTEMWEB/NewUserTemplate]]. The same variables get expanded as in the [[template topics|Main/TWikiTemplates#Template_Topics]]. You can create a custom new user home page by creating the [[%USERSWEB%.NewUserTemplate|USERSWEB/NewUserTemplate]] topic, which will then override the default.
 5. Register yourself in the [[TWikiRegistration]] topic. <br /> %H% Check that a new line with the username and encrypted password is added to the `.htpasswd` file. If not, you may have got a path wrong, or the permissions may not allow the webserver user to write to that file.
 6. Create a new topic to check if authentication works.
-7. **Edit the [[TWikiAdminGroup]] topic in the Main web to include users with system administrator status.**<br /> %X% **This is a very important step**, as users in this group can access _all_ topics, independent of TWiki access controls.
+7. **Edit the %USERSWEB%.TWikiAdminGroup topic in the %USERSWEB% web to include users with system administrator status.**<br /> %X% **This is a very important step**, as users in this group can access _all_ topics, independent of TWiki access controls.
 
 [[TWikiAccessControl]] has more information on setting up access controls.
 
@@ -141,6 +155,8 @@ You can use any other Apache authentication module that sets REMOTE\_USER.
 Any time a user enters a page that needs authentication, they will be forced to log on. It may be convenient to have a "logon" as well, to give the system a chance to identify the user and retrieve their personal settings. It may be convenient to force them to log on.
 
 The <code>**bin/logon**</code> script accomplishes this. The <code>**bin/logon**</code> script must be setup in the <code>**bin/.htaccess**</code> file to be a script which requires a `valid user`. However, once authenticated, it will simply redirect the user to the view URL for the page from which the `logon` script was linked.
+
+<a name="TrackSessions"></a>
 
 ## <a name="Sessions"></a> Sessions
 
@@ -168,6 +184,8 @@ TWiki normally uses cookies to store session information on a client computer. C
 
 For a number of reasons, it may not be possible to use cookies. In this case, TWiki has a fallback mechanism; it will automatically rewrite every internal URL it sees on pages being generated to one that also passes session information.
 
+<a name="UsernameVsLoginName"></a>
+
 ## <a name="TWiki Username vs. Login Usernam"></a> TWiki Username vs. Login Username
 
 This section applies only if you are using authentication with existing login names (i.e. mapping from login names to [[WikiNames]]).
@@ -176,7 +194,7 @@ This section applies only if you are using authentication with existing login na
 
 - **Login Username:** When you login to the intranet, you use your existing login username, ex: <code>**pthoeny**</code>. This name is normally passed to TWiki by the <code>**REMOTE\_USER**</code> environment variable, and used internally. Login Usernames are maintained by your system administrator.
 
-- **TWiki Username:** Your name in [[WikiNotation]], ex: <code>**PeterThoeny**</code>, is recorded when you register using [[TWikiRegistration]]; doing so also generates a personal home page in the Main web.
+- **TWiki Username:** Your name in [[WikiNotation]], ex: <code>**PeterThoeny**</code>, is recorded when you register using [[TWikiRegistration]]; doing so also generates a personal home page in the %USERSWEB% web.
 
 TWiki can automatically map an Intranet (Login) Username to a TWiki Username if the \{AllowLoginName\} is enabled in [configure](http://www.dementia.org/twiki/configure). The default is to use your [[WikiName]] as a login name.
 
@@ -184,23 +202,23 @@ TWiki can automatically map an Intranet (Login) Username to a TWiki Username if 
 >
 > **To correctly enter a [[WikiName]]**
 >
-> - your own or someone else's - be sure to include the Main web name in front of the Wiki username, followed by a period, and no spaces, for example
+> - your own or someone else's - be sure to include the %USERSWEB% web name in front of the Wiki username, followed by a period, and no spaces, for example
 >
-> <code>**Main.WikiUsername**</code>
+> <code>**%USERSWEB%.WikiUsername**</code>
 >
 > or
 >
-> <code>**%MAINWEB%.WikiUsername**</code>
+> <code>**%USERSWEB%.WikiUsername**</code>
 >
 > . This points
 >
 > <code>**WikiUsername**</code>
 >
-> to the Main web, where user home pages are located, no matter which web it's entered in. Without the web prefix, the name appears as a
+> to the %USERSWEB% web, where user home pages are located, no matter which web it's entered in. Without the web prefix, the name appears as a
 >
 > [[NewTopic]]
 >
-> everywhere but in the Main web.
+> everywhere but in the %USERSWEB% web.
 
 <a name="ChangingPasswords"></a>
 

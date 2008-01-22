@@ -1,0 +1,40 @@
+# <a name="Package &lt;code&gt;TWiki::_LoginManager::"></a><a name="Package =TWiki::_LoginManager::_"></a> Package =TWiki::LoginManager::ApacheLogin
+
+This is login manager that you can specify in the security setup section of [configure](http://www.dementia.org/twiki/configure). It instructs TWiki to cooperate with your web server (typically Apache) to require authentication information (username &amp; password) from users. It requires that you configure your web server to demand authentication for scripts named "login" and anything ending in "auth". The latter should be symlinks to existing scripts; e.g., `viewauth -> view`, `editauth -> edit`, and so on.
+
+See also [[TWikiUserAuthentication]].
+
+Subclass of TWiki::LoginManager; see that class for documentation of the methods of this class.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::_LoginManager::"> Package TWiki::LoginManager::ApacheLogin</a><ul>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod *forceAuthenticatio"> ObjectMethod forceAuthentication <tt>() -&gt; boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>loginUrl</strong> () -> $l"> ObjectMethod loginUrl <tt>() -&gt; $loginUrl</tt></a></li>
+        <li><a href="#ObjectMethod <strong>login</strong> ($query,$tw"> ObjectMethod login <tt>($query,$twiki)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getUser</strong> () -> $au"> ObjectMethod getUser <tt>() -&gt; $authUser</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
+
+Construct the [[ApacheLogin]] object
+
+## <a name="ObjectMethod &lt;strong&gt;forceAuthenticatio"></a> [[ObjectMethod]] \*forceAuthentication `() -> boolean`
+
+method called when authentication is required - redirects to (...|view)auth Triggered on auth fail
+
+## <a name="ObjectMethod &lt;strong&gt;loginUrl&lt;/strong&gt; () - $lo"></a> [[ObjectMethod]] **loginUrl** `() -> $loginUrl`
+
+TODO: why is this not used internally? When is it called, and why Content of a login link
+
+## <a name="ObjectMethod &lt;strong&gt;login&lt;/strong&gt; ($query,$tw"></a> [[ObjectMethod]] **login** `($query,$twiki)`
+
+this allows the login and logon cgi-scripts to use the same code. all a logon does, is re-direct to viewauth, and apache then figures out if it needs to challenge the user
+
+## <a name="ObjectMethod &lt;strong&gt;getUser&lt;/strong&gt; () - $aut"></a> [[ObjectMethod]] **getUser** `() -> $authUser`
+
+returns the userLogin if stored in the apache CGI query (ie session)

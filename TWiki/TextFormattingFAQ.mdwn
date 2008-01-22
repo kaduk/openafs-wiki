@@ -9,6 +9,7 @@ The most frequently asked questions about text formatting are answered. Also, [[
         <li><a href="#How do I create a heading?"> How do I create a heading?</a></li>
         <li><a href="#Text enclosed in angle brackets"> Text enclosed in angle brackets like &lt;filename&gt; is not displayed. How can I show it as it is?</a></li>
         <li><a href="#Some words appear highlighted, w"> Some words appear highlighted, with a "?" link at the end. How can I prevent that?</a></li>
+        <li><a href="#How do I start a word with an ex"> How do I start a word with an exclamation mark?</a></li>
         <li><a href="#How can I write fixed font text?"> How can I write fixed font text?</a></li>
         <li><a href="#Text I enter gets wrapped around"> Text I enter gets wrapped around. How can I keep the formatting as it is?</a></li>
         <li><a href="#How do I create tables?"> How do I create tables?</a></li>
@@ -31,7 +32,7 @@ Create a separator - a horizontal rule - by entering three dashes at the beginni
 
 You can create six sizes of headings - &lt;h1&gt;...&lt;h6&gt; in HTML - by typing, from the beginning of a line, three dashes (-), from one to six plus signs (+), a space, and your heading text. The FAQ questions on this page are created with: `---+++ Have a question?`.
 
-- You can insert a nested table of contents, generated from headings, by placing `%TOC%` wherever you like on a page (see [[TWikiVariables]] for more `%TOC%` options).
+- You can insert a nested table of contents, generated from headings, by placing `%TOC%` wherever you like on a page (see %SYSTEMWEB%.TWikiVariables for more `%TOC%` options).
 
 ----
 
@@ -54,9 +55,17 @@ If you want to display angle brackets, enter them as HTML codes instead of typin
 
 A question mark after a word is a link to a topic that doesn't yet exist - click it to create the new page. This is a TWiki feature - typing a [[MeaningfulTitle]] in a comment is an invitation for someone else to add a new branch to the topic.
 
-To prevent auto-linking - say you want to enter a word like JavaScript (the proper spelling!) - prefix the [[WikiStyleWord]] with an exclamation point:
+To prevent auto-linking - say you want to enter a word like JavaScript - prefix the [[WikiStyleWord]] with an exclamation point:
 
 - `!WikiStyleWord` displays as WikiStyleWord
+
+----
+
+### <a name="How do I start a word with an ex"></a> How do I start a word with an exclamation mark?
+
+A leading exclamation point is used to escape wiki formatting, as we have learned in the previous question. Sometimes it has an unwanted effect, such as when you want to write "!=" (e.g. "not equal"), you will not see the exclamation mark.
+
+To escape the exclamation mark escape, try prefixing a `<nop>`, e.g. write `A <nop>!= B` to get "A != B". Alternatively, use the HTML entity `&#33;`, which renders as an exclamation mark, e.g. write `A &#33;= B` to get "A != B".
 
 ----
 
@@ -84,7 +93,9 @@ TWiki interprets text as HTML, so you can use the `preformatted` HTML option to 
 
 The `pre` tag is standard HTML; `verbatim` is a special TWiki tag that forces text to fixed font mode, and also prevents other tags and TWiki shortcuts from being expanded.
 
-**NOTE:** VARIABLES are still Set within verbatim tags (this is a historical peculiarity)
+**_NOTE:_** VARIABLES are still Set within verbatim tags (this is a historical peculiarity)
+
+**_NOTE:_** The `verbatim` opening and closing tags are converted into `pre` tags; any HTML attributes (e.g., `class`, `id`) in the opening `verbatim` tag are included in the corresponding `pre` tag.
 
 ----
 
@@ -161,7 +172,7 @@ To place an image on any topic, there are two ways of including inline images.
 
 This is a simple and automatic way of including inline images. Simply write the URL of the image file, this will create the inline image for you. **_NOTE:_** The images must be [[accessible|Main/WebHome#ImgUpload]] as a URL.
 
-- **_You enter:_** ` %PUBURL%/TWiki/TWikiLogos/T-logo-80x15.gif logo.`<br />**_Result:_** ![T-logo-80x15.gif](http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-80x15.gif) logo.
+- **_You enter:_** ` %PUBURL%/%SYSTEMWEB%/TWikiLogos/T-logo-80x15.gif logo.`<br />**_Result:_** ![T-logo-80x15.gif](http://www.dementia.org/twiki//view/%SYSTEMWEB%/TWikiLogos/T-logo-80x15.gif) logo.
 
 <a name="ImgUpload"></a> You can upload images directly to your server with FTP access. You can also [[attach|Main/FileAttachment]] image files to a topic - you could even create a dedicated image topic, like `ImageLibrary` - and then link to the images directly:
 
@@ -169,9 +180,9 @@ This is a simple and automatic way of including inline images. Simply write the 
 
 **2\. Using &lt;img&gt; tag**
 
-This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **Note:** The rendering of the topic is faster if you include the `width` and `height` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
+This is a manual process where you have more control over the rendering of the image. Use the &lt;img&gt; tag of HTML to include GIF, JPG and PNG files. **_Note:_** The rendering of the topic is faster if you include the `width` and `height` parameters that have the actual image size. <http://www.htmlhelp.com/reference/wilbur/special/img.html> has more on inline images.
 
-- **_You enter:_** ` <img src="%PUBURLPATH%/TWiki/TWikiLogos/T-logo-80x15.gif" width="80" height="15" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /><img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-80x15.gif" width="80" height="15" alt="logo" /> logo.
+- **_You enter:_** ` <img src="%PUBURLPATH%/%SYSTEMWEB%/TWikiLogos/T-logo-80x15.gif" width="80" height="15" border="0" alt="logo" /> logo.`<br />**_Result:_**<br /><img src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/TWikiLogos/T-logo-80x15.gif" width="80" height="15" alt="logo" /> logo.
 
 ----
 
@@ -189,3 +200,5 @@ If you need more colors you can use HTML, like `<font color="#ff0000"> red text 
 The code is the _hexadecimal RGB color code_, which is simply Red, Green and Blue values in hex notation (base 16, 0-F). For pure red, the RGB components are 255-0-0 - full red (255), no green or blue. That's FF-0-0 in hex, or `"#ff0000"` for Web page purposes. [[StandardColors]] lists basic colors.
 
 ----
+
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix

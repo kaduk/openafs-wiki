@@ -1,18 +1,22 @@
+# <a name="Managing Webs"></a> Managing Webs
+
+_Adding, renaming and deleting webs are all web-based operations._
+
 <div>
   <ul>
     <li><a href="#Managing Webs"> Managing Webs</a><ul>
         <li><a href="#Overview"> Overview</a></li>
         <li><a href="#Choose Web Template"> Choose Web Template</a></li>
         <li><a href="#Adding a New Web"> Adding a New Web</a></li>
+        <li><a href="#Hierarchical Webs"> Hierarchical Webs</a><ul>
+            <li><a href="#Subweb Preferences are Inherited"> Subweb Preferences are Inherited</a></li>
+            <li><a href="#Navigation"> Navigation</a></li>
+          </ul>
+        </li>
         <li><a href="#Renaming or Deleting a Web"> Renaming or Deleting a Web</a><ul>
             <li><a href="#Permissions"> Permissions</a></li>
             <li><a href="#Edit Conflicts"> Edit Conflicts</a></li>
             <li><a href="#Renaming the webs in the distrib"> Renaming the webs in the distribution</a></li>
-          </ul>
-        </li>
-        <li><a href="#Hierarchical Webs"> Hierarchical Webs</a><ul>
-            <li><a href="#Subweb Preferences are Inherited"> Subweb Preferences are Inherited</a></li>
-            <li><a href="#Navigation"> Navigation</a></li>
           </ul>
         </li>
       </ul>
@@ -20,13 +24,9 @@
   </ul>
 </div>
 
-# <a name="Managing Webs"></a> Managing Webs
-
-_Adding, renaming and deleting webs are all web-based operations._
-
 ## <a name="Overview"></a> Overview
 
-A [[TWikiSite]] is divided into webs; each one represents one subject, one area of collaboration. Administrators (in the [[TWikiAdminGroup]]) can add/rename/delete webs.
+A [[TWikiSite]] is divided into webs; each one represents one subject, one area of collaboration. Administrators can add/rename/delete webs.
 
 <a name="WebTemplate"></a>
 
@@ -36,13 +36,13 @@ There are two methods used to create a new web. First you can use a specially de
 
 The second method is to use an existing web as a template web. This may be useful if you already have a web that you would like to use as a starting point. Only topics that have names beginning with **Web...** (like "WebHome", "WebNotify", etc.) are copied.
 
-In either case you will want to be sure to verify that your new web has all the custom modifications that you desire.
+In either case you will want to be sure to verify that your new web has all the custom modifications that you desire. Any [[TWikiVariables]] defined in the form below will automatically be set in the WebPreferences of the new web.
 
 <a name="CreateNewWeb"></a>
 
 ## <a name="Adding a New Web"></a> Adding a New Web
 
-<form action="http://www.dementia.org/twiki/manage/%WEB%/%TOPIC%" method="post" name="admin"> Create a new web by filling out this form.%BR% <strong><em>%X% Note:</em></strong> <strong>Keep the number of webs to a minimum!</strong> It is not recommended to create a new web for each little project. You can organize content within a web using categories, [[Main/TWikiForms]] and [[Main/FormattedSearch]]. Cross-linking topics and search is easier if there are only a few larger webs. <table border="1" cellpadding="0" cellspacing="0">
+<form action="http://www.dementia.org/twiki/manage/%WEB%/%TOPIC%" method="post" name="admin"> Create a new web by filling out this form.%BR% <strong><em>%X% Note:</em></strong> <strong>Keep the number of webs to a minimum!</strong> Don't create a new web for each little project. Cross-linking topics is easier, and searches are faster, if there are only a few larger webs. <table border="1" cellpadding="0" cellspacing="0">
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Name of new web: </strong></th>
       <td><input name="newweb" size="16" type="text" value="" /></td>
@@ -55,20 +55,25 @@ In either case you will want to be sure to verify that your new web has all the 
     </tr>
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Web color: </strong></th>
-      <td><input name="webbgcolor" size="16" type="text" value="#D0D0D0" /></td>
+      <td><input name="WEBBGCOLOR" size="16" type="text" value="#D0D0D0" /></td>
       <td> Enter a [[Main/StandardColors]] code for the web </td>
     </tr>
     <tr>
+      <th align="right" bgcolor="#99CCCC"><strong> Site Map: </strong></th>
+      <td><input checked name="SITEMAPLIST" type="radio" value="on" /> Yes   <input name="SITEMAPLIST" type="radio" value="" /> No </td>
+      <td> Include this web in the site map </td>
+    </tr>
+    <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Description:<br />  <br />   </strong></th>
-      <td colspan="2"><input name="sitemapwhat" size="60" type="text" value="" /><br /> Enter a short description of the web. Write <code>Web.TopicName</code> instead of just <code>TopicName</code> if you include links. This will list the web in the [[TWiki/SiteMap]] (leave field empty if you prefer not to update the directory.) </td>
+      <td colspan="2"><input name="SITEMAPWHAT" size="60" type="text" value="" /><br /> Enter a short description of the web. Write <code>Web.TopicName</code> instead of just <code>TopicName</code> if you include links. This description will be used in the %SYSTEMWEB%.SiteMap </td>
     </tr>
     <tr>
       <th align="right" bgcolor="#99CCCC"><strong> Use to...<br />   </strong></th>
-      <td colspan="2"><input name="sitemapuseto" size="60" type="text" value="...collaborate on" /><br /> Continue the sentence describing the intended use. This is also for the [[TWiki/SiteMap]]</td>
+      <td colspan="2"><input name="SITEMAPUSETO" size="60" type="text" value="...collaborate on" /><br /> Continue the sentence describing the intended use. This is also for the %SYSTEMWEB%.SiteMap </td>
     </tr>
     <tr>
-      <th align="right" bgcolor="#99CCCC"><strong> Set NOSEARCHALL: </strong></th>
-      <td><input checked name="nosearchall" type="radio" value="" /> No   <input name="nosearchall" type="radio" value="on" /> Yes </td>
+      <th align="right" bgcolor="#99CCCC"><strong> Hidden: </strong></th>
+      <td><input name="NOSEARCHALL" type="radio" value="on" /> Yes   <input checked name="NOSEARCHALL" type="radio" value="" /> No </td>
       <td> Specify if you want to exclude the web from a "search all webs" search. <strong>This will not prevent users accessing the web</strong>. It will simply hide it from searches. </td>
     </tr>
     <tr>
@@ -79,34 +84,12 @@ In either case you will want to be sure to verify that your new web has all the 
 
 **_Notes:_**
 
-- You have to have `ROOTCHANGE` access to create a top-level web (one with no parent)
-- Attachments will NOT get copied over along with their topics
-- While creating the new web, TWiki will update the following variables in the [[WebPreferences]]: `WEBBGCOLOR`, `SITEMAPLIST`, `SITEMAPWHAT`, `SITEMAPUSETO` and `NOSEARCHALL`. These variables are used to dynamically generate the [[SiteMap]]
-- TWiki does not edit the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] to update the `WIKIWEBLIST`. This must be done by hand
-
-<a name="RenameWeb"></a>
-
-## <a name="Renaming or Deleting a Web"></a> Renaming or Deleting a Web
-
-Rename a web via the Tools section in each web's [[WebPreferences]] topic. You may delete a web by moving it into a Trash web.
-
-### <a name="Permissions"></a> Permissions
-
-You may only rename a web if you have permissions to rename all the topics within that web, including any topics in that web's subwebs. You will also need permissions to update any topics containing references to that web.
-
-### <a name="Edit Conflicts"></a> Edit Conflicts
-
-If anyone is editing a topic which requires updating, or which lives in the web being renamed, a second confirmation screen will come up which will indicate which topics are still locked for edit. You may continue to hit the refresh button until an edit lease is obtained for each topic which requires updating (the "Refresh" button will change to "Submit"), or hit "Cancel", which will cancel your edit lease on all affected topics.
-
-### <a name="Renaming the webs in the distrib"></a> Renaming the webs in the distribution
-
-If you plan to rename the Main web, remember that TWiki stores user and group topics in this web. That means that every [[WikiName]] signature - `Main.SomeUserName` - points to it and would need updating (unless the variable, `%MAINWEB%.SomeUserName`, is used throughout). This potentially large change can be performed automatically if you rename the web from the Tools section of [[WebPreferences]], as described above.
-
-%X% If you want to rename the TWiki or Main webs, remember they are referred to in the TWiki configuration. You will need to change the `{SystemWebName}`, `{UsersWebName}` and/or `{LocalSitePreferences}` settings in the configuration using the [configure](http://www.dementia.org/twiki/configure) interface.
+- You must have `ROOTCHANGE` access to create a top-level web (one with no parent)
+- Only the person who created it has permission to change the WebPreferences in the new web
 
 ## <a name="Hierarchical Webs"></a> Hierarchical Webs
 
-Hierarchical web support is enabled by turning on the `{EnableHierarchicalWebs}` setting in [configure](http://www.dementia.org/twiki/configure). Without this setting, TWiki will only allow a single level of hierarchy (webs). If you set this, you can use multiple levels, like a directory tree, i.e. webs within webs.
+You can only create hierarchical webs (webs within webs) if the `{EnableHierarchicalWebs}` setting in [configure](http://www.dementia.org/twiki/configure) is enabled. Hierarchical webs are currently enabled.
 
 **_%T% Note:_** You might not need hierarchical webs. TWiki topics already have a parent/child relationship within a web, which is shown in the breadcrumb. Try to keep the number of webs to a minimum in order to keep search and cross-referencing simple.
 
@@ -118,12 +101,12 @@ To create a subweb named `Bar` inside a web named `Foo`, use `Foo/Bar` or `Foo.B
 
 ### <a name="Subweb Preferences are Inherited"></a> Subweb Preferences are Inherited
 
-The preferences of a subweb are inherited from the parent web and overridden locally. Preferences are ultimately inherited from the [[TWiki.TWikiPreferences|TWiki/TWikiPreferences]] topic.
+The preferences of a subweb are inherited from the parent web and overridden locally. Preferences are ultimately inherited from the [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]] topic.
 
 **Example Preference Inheritance for `Sandbox/TestWeb/SubWeb.SubWebTopic` topic:**
 
-1. `TWiki.TWikiPreferences` site-wide preferences
-2. `Sandbox.WebPreferences` inherits from and overrides settings in `TWiki.TWikiPreferences`
+1. `%SYSTEMWEB%.TWikiPreferences` site-wide preferences
+2. `Sandbox.WebPreferences` inherits from and overrides settings in `%SYSTEMWEB%.TWikiPreferences`
 3. `Sandbox/TestWeb.WebPreferences` inherits from and overrides settings in `Sandbox.WebPreferences`
 4. `Sandbox/TestWeb/SubWeb.WebPreferences` inherits from and overrides settings in `Sandbox/TestWeb.WebPreferences`
 5. `Sandbox/TestWeb/SubWeb.SubWebTopic` inherits from and overrides settings in `Sandbox/TestWeb/SubWeb.WebPreferences`
@@ -131,5 +114,29 @@ The preferences of a subweb are inherited from the parent web and overridden loc
 ### <a name="Navigation"></a> Navigation
 
 The Pattern skin (default) indicates Subwebs by indenting them in the sidebar relative to their level in the hierarchy.
+
+<a name="RenameWeb"></a>
+
+## <a name="Renaming or Deleting a Web"></a> Renaming or Deleting a Web
+
+Rename a web via the Tools section in each [[WebPreferences]] topic. You may delete a web by moving it into a Trash web.
+
+### <a name="Permissions"></a> Permissions
+
+You may only rename a web if you have permissions to rename all the topics within that web, including any topics in that web's subwebs. You will also need permissions to update any topics containing references to that web.
+
+### <a name="Edit Conflicts"></a> Edit Conflicts
+
+If anyone is editing a topic which requires updating, or which lives in the web being renamed, a second confirmation screen will come up which will indicate which topics are still locked for edit. You may continue to hit the refresh button until an edit lease is obtained for each topic which requires updating (the "Refresh" button will change to "Submit"), or hit "Cancel", which will cancel your edit lease on all affected topics.
+
+### <a name="Renaming the webs in the distrib"></a> Renaming the webs in the distribution
+
+It is possible, though not recommended, to change the names of the webs in the distribution.
+
+If you plan to rename the %USERSWEB% web, remember that TWiki stores user topics in this web. That means that every [[WikiName]] signature - `%USERSWEB%.SomeUserName` - points to it and would need updating (unless the variable, `%USERSWEB%.SomeUserName`, is used throughout). This potentially large change can be performed automatically if you rename the web from the Tools section of [[WebPreferences]], as described above.
+
+%X% If you want to rename the %SYSTEMWEB% or %USERSWEB% webs, remember they are referred to in the TWiki configuration. You will need to change the `{SystemWebName}`, `{UsersWebName}` and/or `{LocalSitePreferences}` settings in the configuration using the [configure](http://www.dementia.org/twiki/configure) interface.
+
+%X% Renaming the webs in the distribution is not recommended because it makes upgrades much more complicated.
 
 **_Related Topics:_** [[AdminDocumentationCategory]], [[AdminToolsCategory]]

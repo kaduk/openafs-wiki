@@ -1,0 +1,27 @@
+# <a name="Package &lt;code&gt;TWiki::Query="></a> Package =TWiki::Query
+
+A Query object is a representation of a query over the TWiki database.
+
+Fields are given by name, and values by strings or numbers. Strings should always be surrounded by 'single-quotes'. Numbers can be signed integers or decimals. Single quotes in values may be escaped using backslash (\\).
+
+See [[QuerySearch]] for details of the query language. At the time of writing only a subset of the entire query language is supported, for use in searching.
+
+A query object implements the `evaluate` method as its general contract with the rest of the world. This method does a "hard work" evaluation of the parser tree. Of course, smarter Store implementations should be able to do it better....
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Query="> Package TWiki::Query</a><ul>
+        <li><a href="#PUBLIC $aliases"> PUBLIC $aliases</a></li>
+        <li><a href="#PUBLIC %is_ArrayType"> PUBLIC %isArrayType</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="PUBLIC $aliases"></a> PUBLIC $aliases
+
+A hash mapping short aliases for META: entry names. For example, this hash maps 'form' to 'META:FORM'. Published so extensions can extend the range of supported types.
+
+## <a name="PUBLIC %is_ArrayType"></a> PUBLIC %isArrayType
+
+Maps META: entry type names to true if the type is an array type (such as FIELD, ATTACHMENT or PREFERENCE). Published so extensions can extend the range or supported types. The type name should be given without the leading 'META:'

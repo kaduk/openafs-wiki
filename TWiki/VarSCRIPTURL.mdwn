@@ -4,4 +4,5 @@
 
 - Syntax: `%SCRIPTURL%`
 - Expands to: `http://www.dementia.org/twiki/`
-- Related: [[PUBURL|Main/WebHome#VarPUBURL]], [[SCRIPTNAME|Main/WebHome#VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/WebHome#VarSCRIPTSUFFIX]], [[SCRIPTURL{"script"}|Main/WebHome#VarSCRIPTURL2]], [[SCRIPTURLPATH|Main/WebHome#VarSCRIPTURLPATH]]
+- **_Note:_** The `edit` script should always be used in conjunction with `?t=%GMTIME{"$epoch"}%` to ensure pages about to be edited are not cached in the browser
+- Related: [[PUBURL|Main/VarPUBURL]], [[SCRIPTNAME|Main/VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/VarSCRIPTSUFFIX]], [[SCRIPTURL{"script"}|Main/VarSCRIPTURL2]], [[SCRIPTURLPATH|Main/VarSCRIPTURLPATH]]

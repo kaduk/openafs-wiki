@@ -29,7 +29,7 @@
     <td><code>type="url"</code></td>
   </tr>
   <tr>
-    <td><code>type="quote"</code></td>
+    <td><code>type="quotes"</code></td>
     <td> Escape double quotes with backslashes (<code>\"</code>), does not change other characters </td>
     <td><code>type="url"</code></td>
   </tr>
@@ -43,4 +43,4 @@
 - **_%X% Note:_** Values of HTML input fields must be entity encoded.%BR% Example: `<input type="text" name="address" value="%ENCODE{ "any text" type="entity" }%" />`
 - **_%X% Note:_** Double quotes in strings must be escaped when passed into other TWiki variables.%BR% Example: `%SEARCH{ "%ENCODE{ "string with "quotes"" type="quotes" }%" noheader="on" }%`
 
-- Related: [[URLPARAM|Main/WebHome#VarURLPARAM]]
+- Related: [[URLPARAM|Main/VarURLPARAM]]

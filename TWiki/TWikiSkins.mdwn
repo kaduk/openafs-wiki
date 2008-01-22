@@ -1,3 +1,7 @@
+# <a name="TWiki Skins"></a> TWiki Skins
+
+_Skins overlay regular templates to give different looks and feels to TWiki screens._
+
 <div>
   <ul>
     <li><a href="#TWiki Skins"> TWiki Skins</a><ul>
@@ -20,15 +24,11 @@
   </ul>
 </div>
 
-# <a name="TWiki Skins"></a> TWiki Skins
-
-_Skins overlay regular templates to give different looks and feels to TWiki screens._
-
 ## <a name="Overview"></a> Overview
 
 TWiki uses [[TWikiTemplates]] files as the basis of all the screens it uses to interact with users. Each screen has an associated template file that contains the basic layout of the screen. This is then filled in by the code to generate what you see in the browser.
 
-TWiki ships with a default set of template files that give a basic look-and-feel. TWiki also includes support for _skins_ that can be selected to give different, more sophisticated, look and feels. A default TWiki installation will usually start up with the [[PatternSkin]] already selected. Skins may also be defined by third parties and loaded into a TWiki installation to give more options. To see how TWiki looks when **no** skin is selected, [[view this topic with a non-existant skin|%WEB%/%TOPIC%?skin=not_a_skin]].
+TWiki ships with a default set of template files that give a very basic, CSS-themable, look-and-feel. TWiki also includes support for _skins_ that can be selected to give different, more sophisticated, look and feels. A default TWiki installation will usually start up with the [[PatternSkin]] already selected. Skins may also be defined by third parties and loaded into a TWiki installation to give more options. To see how TWiki looks when **no** skin is selected, [[view this topic with a non-existant skin|%WEB%/%TOPIC%?skin=not_a_skin]].
 
 Topic text is not affected by the choice of skin, though a skin can be defined to use a CSS (Cascading Style Sheet), which can sometimes give a radically different appearance to the text.
 
@@ -44,19 +44,21 @@ Topic text is not affected by the choice of skin, though a skin can be defined t
 
 ## <a name="Changing the default TWiki skin"></a> Changing the default TWiki skin
 
-TWiki default ships with the skin [[PatternSkin]] activated. If you want to modify the layout, colors or even the templates to suit your own needs, have a look first at the topics [[PatternSkinCustomization]] and [[PatternSkinCssCookbook]].
+TWiki default ships with the skin [[PatternSkin]] activated. You can set the skin for the whole site, a single web or topic, or for each user individually, by setting the SKIN variable to the name of a skin. If the skin you select doesn't exist, then TWiki will pick up the default templates.
 
 ## <a name="Defining Skins"></a> Defining Skins
 
-You may want to define your own skin, for example to comply with corporate web guidelines, or because you have a aesthetic vision that you want to share.
+You may want to define your own skin, for example to comply with corporate web guidelines, or because you have a aesthetic vision that you want to share. There are a couple of places you an start doing this.
 
 The [[TWikiTemplates]] files used for skins are located in the `twiki/templates` directory and are named according to the skin: <code>**&lt;scriptname&gt;.&lt;skin&gt;.tmpl**</code>. Skin files may also be defined in TWiki topics - see [[TWikiTemplates]] for details.
 
 To start creating a new skin, copy the default [[TWikiTemplates]] (like `view.tmpl`), or copy an existing skin to use as a base for your own skin. You should only need to copy the files you intend to customise, as TWiki can be configured to fall back to another skin if a template is not defined in your skin. Name the files as described above (for example `view.myskin.tmpl`.
 
-For your own TWiki skin you are encouraged to show a small 80x31 pixel [<img src="http://www.dementia.org/twiki//view/TWiki/TWikiLogos/T-logo-80x15.gif" width="80" height="15" alt="This site is powered by the TWiki collaboration platform" title="This site is powered by the TWiki collaboration platform" />](http://twiki.org/) logo at the bottom of your skin:
+If you use [[PatternSkin]] as your starting point, and you want to modify the layout, colors or even the templates to suit your own needs, have a look first at the topics [[PatternSkinCustomization]] and [[PatternSkinCssCookbook]].
 
-`<a href="http://twiki.org/"><img src="%PUBURL%/%TWIKIWEB%/TWikiLogos/T-logo-80x15.gif" alt="This site is powered by the TWiki collaboration platform" width="80" height="15" title="This site is powered by the TWiki collaboration platform" border="0" /></a>`
+For your own TWiki skin you are encouraged to show a small 80x31 pixel [<img src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/TWikiLogos/T-logo-80x15.gif" width="80" height="15" alt="This site is powered by the TWiki collaboration platform" title="This site is powered by the TWiki collaboration platform" />](http://twiki.org/) logo at the bottom of your skin:
+
+`<a href="http://twiki.org/"><img src="%PUBURL%/%SYSTEMWEB%/TWikiLogos/T-logo-80x15.gif" alt="This site is powered by the TWiki collaboration platform" width="80" height="15" title="This site is powered by the TWiki collaboration platform" border="0" /></a>`
 
 The standard TWiki skins show the logo in the `%WEBCOPYRIGHT%` variable.
 
@@ -120,7 +122,7 @@ You can use recusion in the TMPL:INCLUDE chain (eg twiki.classic.tmpl contains `
 
 and then set `SKIN=yourlocal,pattern`.
 
-Because [[ClassicSkin]] and the default templates use the same Template definition names, you can over-ride the edit links in them (or any skin derived from them) using the same `view.yourlocal.tmpl` (just set SKIN=yourlocal,classic either in [[TWikiPreferences]] for globally, or a Web's Webname.WebPreferences for a particular web)
+Because [[ClassicSkin]] and the default templates use the same Template definition names, you can over-ride the edit links in them (or any skin derived from them) using the same `view.yourlocal.tmpl` (just set SKIN=yourlocal,classic either in %USERSWEB%.TWikiPreferences for globally, or a Web's Webname.WebPreferences for a particular web)
 
 ## <a name="Variables in Skins"></a> Variables in Skins
 
@@ -248,9 +250,9 @@ Here is an example form that has a select box and the "Go" box for illustration 
       <td> Navigate: </td>
       <td><select name="sel" onchange="this.form.topic.value=this.options[this.selectedIndex].value; this.form.submit()"><option selected value="">...</option>
           <option value="http://twiki.org/">Intranet home</option>
-          <option value="Main.TWikiUsers">Employee index</option>
-          <option value="Main.WebHome">Main web</option>
-          <option value="TWiki.WebHome">TWiki web</option>
+          <option value="%USERSWEB%.TWikiUsers">Employee index</option>
+          <option value="%USERSWEB%.WebHome">%USERSWEB% web</option>
+          <option value="%SYSTEMWEB%.WebHome">%SYSTEMWEB% web</option>
           <option value="http://www.google.com/">Google</option>
           <option value="http://www.yahoo.com/">Yahoo!</option></select></td>
     </tr>
@@ -270,7 +272,7 @@ CSS files are gererally attachments to the skin topic that are included in the t
 - To see how CSS is used in the default TWiki skin, see: [[PatternSkin]]
 - If you write a complete new skin, this is the syntax to use in a template file:
 
-    <style type='text/css' media='all'>@import url('%PUBURLPATH%/%TWIKIWEB%/MySkin/mystyle.css');</style>
+    <style type='text/css' media='all'>@import url('%PUBURLPATH%/%SYSTEMWEB%/MySkin/mystyle.css');</style>
 
 ## <a name="Attachment Tables"></a> Attachment Tables
 
@@ -339,7 +341,7 @@ The `ATTACH:row` macros are expanded for each file in the attachment table, usin
   </tr>
   <tr>
     <td><code>%A_URL%</code></td>
-    <td> URL that will recover the file </td>
+    <td><code>viewfile</code> URL that will recover the file </td>
   </tr>
   <tr>
     <td><code>%A_REV%</code></td>
@@ -351,7 +353,7 @@ The `ATTACH:row` macros are expanded for each file in the attachment table, usin
   </tr>
   <tr>
     <td><code>%A_FILE%</code></td>
-    <td> The name of the file </td>
+    <td> The name of the file. To get the 'pub' url of the file, use <code>%PUBURL%/%WEB%/%TOPIC%/%A_FILE%</code></td>
   </tr>
   <tr>
     <td><code>%A_SIZE%</code></td>

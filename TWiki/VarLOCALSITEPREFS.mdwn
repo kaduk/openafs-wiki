@@ -2,6 +2,6 @@
 
 ### <a name="LOCALSITEPREFS -- web.topicname"></a><a name="LOCALSITEPREFS -- web.topicname "></a> LOCALSITEPREFS -- web.topicname of site preferences topic
 
-- The full name of the local site preferences topic. This topic is read for preferences before TWiki.%TWIKIPREFSTOPIC% is read.
+- The full name of the local site preferences topic. These local site preferences overload the system level preferences defined in [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]].
 - Syntax: `%LOCALSITEPREFS%`
 - Expands to: `Main.TWikiPreferences`, renders as [[TWikiPreferences]]

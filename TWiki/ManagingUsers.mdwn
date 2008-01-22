@@ -1,3 +1,7 @@
+# <a name="Manage Users"></a> Manage Users
+
+_Register users on your TWiki site; change/reset/install passwords; remove user accounts_
+
 <div>
   <ul>
     <li><a href="#Manage Users"> Manage Users</a><ul>
@@ -11,28 +15,29 @@
   </ul>
 </div>
 
-# <a name="Manage Users"></a> Manage Users
-
-_Register users on your TWiki site; change/reset/install passwords; remove user accounts_
+%X% Some of the features below may be disabled, depending on your TWiki configuration.
 
 ## <a name="Authentication and Access Contro"></a> Authentication and Access Control
 
-- [[TWikiUserAuthentication]] describes options of user authentication
+- [[TWikiUserAuthentication]] describes your options for user authentication
 - [[TWikiAccessControl]] describes how to define groups and how to restrict access to content
 
 ## <a name="Register User"></a> Register User
 
-It is not necessary to have user home pages in the TWiki system for Authentication to work - see [[TWikiUserAuthentication]] for details.
+You don't have to have user home pages in TWiki for Authentication to work - see [[TWikiUserAuthentication]] for details.
 
-- [[TWikiRegistration]] is for users to fill out a form
-- [[NewUserTemplate]] can be changed to customize user home pages, it can optionally use the [[UserForm]] to define user fields as meta data
-- [[BulkRegistration]] is for administrators to use to set up one or more accounts: either from a table or from an external file
+- [[TWikiRegistration]] is used when you want new users to individually register with TWiki by filling out a form
+- You can create a custom versions of [[NewUserTemplate]] and [[UserForm]]
+- [[BulkRegistration]] is used by administrators to register multiple users at the same time
 
 ## <a name="Change, Reset and Install Passwo"></a> Change, Reset and Install Passwords
 
-- [[ChangePassword]] is for users who can remember their password and want to change it
-- [[ResetPassword]] is for users who cannot remember their password; a system generated password is e-mailed to them
+_Note that the below features are only relevant when you use an internal password manager where TWiki can set and reset passwords._
+
+- [[ChangePassword]] is for users who _can_ remember their password and want to change it
+- [[ResetPassword]] is for users who _cannot_ remember their password; a system generated password is e-mailed to them
 - [[BulkResetPassword]] if for administrators who want to reset many passwords at once
+- [[ChangeEmailAddress]] changes the hidden email address stored in the password file
 
 ## <a name="Changing User Account Names"></a> Changing User Account Names
 
@@ -46,8 +51,8 @@ To change the user's [[WikiName]]:
 
 If external authentication is used and you want to change the login name:
 
-- The login name needs to be changed in the directory server, such as AD or LDAP
-- In TWiki's [[Main.TWikiUsers|Main/TWikiUsers]] topic, fix the mapping from login name to [[WikiName]] such as from:%BR% `   * JohnSmith - john - 13 Sep 2006` %BR% to: %BR% `   * JohnSmith - jsmith - 13 Sep 2006`
+- The login name needs to be changed in the authentication server (e.g. Active Directory)
+- In TWiki's [[Main.TWikiUsers|Main/TWikiUsers]] topic, fix the mapping from login name to [[WikiName]]:%BR% `   * JaneSmith - jsmith - 13 Sep 2006` %BR% to: %BR% `   * JaneMiller - jmiller - 13 Sep 2006`
 
 ## <a name="Removing User Accounts"></a> Removing User Accounts
 
@@ -59,6 +64,6 @@ To remove a user account (FredQuimby, who logs in as "fred"):
 3. Remove `FredQuimby` from all groups and from all the `ALLOWWEB/ALLOWTOPIC...` declarations, if any.%BR% **_Note:_** If you fail to do this you risk creating a security hole, as the next user to register with the wikiname FredQuimby will inherit the old FredQuimby's permissions.
 4. _[optional]_ Delete their user topic Main.FredQuimby (including attachments, if any.)
 
-**_Note:_** Consider leaving the user topic file in place so their past signatures and revision author entries don't end up looking like [[AnUncreatedTopic]]. If you want to make it clear the user is no longer with the organization or has been banished, replace the topic content with a note to that effect. The existance of the UserName topic should also prevent that user name from being re-used, sealing the potential security hole regarding inherited permissions..
+**_Note:_** Consider leaving the user topic file in place so their past signatures and revision author entries don't end up looking like [[AnUncreatedTopic]]. If you want to make it clear the user is no longer around, replace the topic content with a note to that effect. The existance of the UserName topic should also prevent that user name from being re-used, sealing the potential security hole regarding inherited permissions..
 
 **_Related Topics:_** [[AdminDocumentationCategory]]

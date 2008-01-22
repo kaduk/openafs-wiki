@@ -1,0 +1,45 @@
+# <a name="Package &lt;code&gt;TWiki::_LineIterator="></a> Package =TWiki::LineIterator
+
+Iterator over the lines in a file
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::_LineIterator="> Package TWiki::LineIterator</a><ul>
+        <li><a href="#new( $file )"> new( $file )</a></li>
+        <li><a href="#hasNext() -> $boolean"> hasNext() -&gt; $boolean</a></li>
+        <li><a href="#next() -> $data"> next() -&gt; $data</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="new( $file )"></a> new( $file )
+
+Create a new iterator over the given file. if the file cannot be opened, then there will be no elements in the iterator.
+
+## <a name="hasNext() - $boolean"></a> hasNext() -&gt; $boolean
+
+Returns false when the iterator is exhausted.
+
+    my $it = new TWiki::ListIterator(\@list);
+    while ($it->hasNext()) {
+       ...
+
+## <a name="next() - $data"></a> next() -&gt; $data
+
+Return the next line in the file.
+
+The iterator object can be customised to pre- and post-process entries from the list before returning them. This is done by setting two fields in the iterator object:
+
+- `{filter}` can be defined to be a sub that filters each entry. The entry will be ignored (next() will not return it) if the filter returns false.
+- `{process}` can be defined to be a sub to process each entry before it is returned by next. The value returned from next is the value returned by the process function.
+
+For example,
+
+    my $it = new TWiki::LineIterator("/etc/passwd");
+    $it->{filter} = sub { $_[0] =~ /^.*?:/; return $1; };
+    $it->{process} = sub { return "User $_[0]"; };
+    while ($it->hasNext()) {
+        my $x = $it->next();
+        print "$x\n";
+    }

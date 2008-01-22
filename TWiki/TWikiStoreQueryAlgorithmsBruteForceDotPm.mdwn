@@ -1,0 +1,13 @@
+# <a name="Package &lt;code&gt;TWiki::Store::_QueryAlg"></a> Package =TWiki::Store::QueryAlgorithms::BruteForce
+
+Default brute-force query algorithm
+
+Has some basic optimisation: it hoists regular expressions out of the query to use with grep, so we can narrow down the set of topics that we have to evaluate the query on.
+
+Not sure exactly where the breakpoint is between the costs of hoisting and the advantages of hoisting. Benchmarks suggest that it's around 6 topics, though this may vary depending on disk speed and memory size. It also depends on the complexity of the query.
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Store::_QueryAlg"> Package TWiki::Store::QueryAlgorithms::BruteForce</a></li>
+  </ul>
+</div>

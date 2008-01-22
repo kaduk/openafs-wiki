@@ -1,0 +1,9 @@
+<a name="VarENV"></a>
+
+### <a name="ENV{&quot;varname&quot;} -- inspect the va"></a> ENV\{"varname"\} -- inspect the value of an environment variable
+
+- Returns the current value of the environment variable in the CGI (Common Gateway Interface) environment. This is the environment that the TWiki scripts run in on the web server.
+- **_Note:_** For security reasons, only those variables whose names match the regular expression in `{AccessibleENV}` in the **Security Settings/Miscellaneous** section of `configure` can be displayed. Any other variable will just be shown as an empty string, irrespective of its real value.
+- Example: `%ENV{MOD_PERL}%` displays as:
+- If a variable is undefined (as against being set to the empty string) it will be returned as `not set`.
+- Related: [[HTTP_HOST|Main/VarHTTPHOST]], [[REMOTE_ADDR|Main/VarREMOTEADDR]], [[REMOTE_PORT|Main/VarREMOTEPORT]], [[REMOTE_USER|Main/VarREMOTEUSER]]

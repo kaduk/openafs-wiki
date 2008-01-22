@@ -1,6 +1,6 @@
 # <a name="Package &lt;code&gt;TWiki::Store::_RcsFile="></a> Package =TWiki::Store::RcsFile
 
-This class is PACKAGE PRIVATE to Store, and should never be used from anywhere else. Base class of implementations of stores that manipulate RCS format files.
+This class is PACKAGE PRIVATE to Store, and should never be used from anywhere else. It is the base class of implementations of stores that manipulate RCS format files.
 
 The general contract of the methods on this class and its subclasses calls for errors to be signalled by Error::Simple exceptions.
 
@@ -10,20 +10,20 @@ Refer to Store.pm for models of usage.
   <ul>
     <li><a href="#Package =TWiki::Store::_RcsFile="> Package TWiki::Store::RcsFile</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session,$web"> ClassMethod new <tt>($session,$web,$topic,$attachment)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod *get_RevisionInfo*"> ObjectMethod getRevisionInfo <tt>($version) -&gt; ($rev,$date,$user,$comment)</tt></a></li>
         <li><a href="#ObjectMethod *get_LatestRevision"> ObjectMethod getLatestRevision <tt>() -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *get_LatestRevision"> ObjectMethod getLatestRevisionTime <tt>() -&gt; $text</tt></a></li>
-        <li><a href="#ObjectMethod <strong>read_MetaData</strong> ($n"> ObjectMethod readMetaData <tt>($name) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_WorkArea</strong> ($ke"> ObjectMethod getWorkArea <tt>($key) -&gt; $directorypath</tt></a></li>
-        <li><a href="#ObjectMethod <strong>save_MetaData</strong> ($w"> ObjectMethod saveMetaData <tt>($web,$name) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_TopicNames</strong> ()"> ObjectMethod getTopicNames <tt>() -&gt; @topics</tt></a></li>
         <li><a href="#ObjectMethod <strong>get_WebNames</strong> () -"> ObjectMethod getWebNames <tt>() -&gt; @webs</tt></a></li>
         <li><a href="#ObjectMethod *search_InWebConten"> ObjectMethod searchInWebContent <tt>($searchString,$web,\@topics,\%options) -&gt; \%map</tt></a></li>
+        <li><a href="#ObjectMethod *search_InWebMetaDa"> ObjectMethod searchInWebMetaData <tt>($query,\@topics) -&gt; \%matches</tt></a></li>
         <li><a href="#ObjectMethod <strong>moveWeb</strong> ($newWeb)"> ObjectMethod moveWeb <tt>($newWeb)</tt></a></li>
         <li><a href="#ObjectMethod <strong>getRevision</strong> ($ver"> ObjectMethod getRevision <tt>($version) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod *stored_DataExists*"> ObjectMethod storedDataExists <tt>() -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>getTimestamp</strong> () -"> ObjectMethod getTimestamp <tt>() -&gt; $integer</tt></a></li>
-        <li><a href="#ObjectMethod *restore_LatestRevi"> ObjectMethod restoreLatestRevision <tt>($wikiname)</tt></a></li>
+        <li><a href="#ObjectMethod *restore_LatestRevi"> ObjectMethod restoreLatestRevision <tt>($user)</tt></a></li>
         <li><a href="#ObjectMethod <strong>removeWeb</strong> ($web)"> ObjectMethod removeWeb <tt>($web)</tt></a></li>
         <li><a href="#ObjectMethod <strong>moveTopic</strong> ($newWe"> ObjectMethod moveTopic <tt>($newWeb,$newTopic)</tt></a></li>
         <li><a href="#ObjectMethod <strong>copyTopic</strong> ($newWe"> ObjectMethod copyTopic <tt>($newWeb,$newTopic)</tt></a></li>
@@ -48,6 +48,8 @@ Refer to Store.pm for models of usage.
         <li><a href="#ObjectMethod *get_AttachmentAttr"> ObjectMethod getAttachmentAttributes <tt>($web,$topic,$attachment)</tt></a></li>
         <li><a href="#ObjectMethod *get_AttachmentList"> ObjectMethod getAttachmentList <tt>($web,$topic)</tt></a></li>
         <li><a href="#ObjectMethod <strong>stringify</strong> ()"> ObjectMethod stringify <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod <strong>recordChange</strong> ($us"> ObjectMethod recordChange <tt>($user,$rev,$more)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachChange</strong> ($sinc"> ObjectMethod eachChange <tt>($since) -&gt; $iterator</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -58,6 +60,10 @@ Refer to Store.pm for models of usage.
 Constructor. There is one object per stored file.
 
 Note that $web, $topic and $attachment must be untainted!
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;get_RevisionInfo*"></a><a name="ObjectMethod *get_RevisionInfo&lt;/strong&gt; "></a> [[ObjectMethod]] **getRevisionInfo** `($version) -> ($rev,$date,$user,$comment)`
 
@@ -75,19 +81,11 @@ Get the text of the most recent revision
 
 Get the time of the most recent revision
 
-## <a name="ObjectMethod &lt;strong&gt;read_MetaData&lt;/strong&gt; ($n"></a> [[ObjectMethod]] **readMetaData** `($name) -> $text`
-
-Get a meta-data block for this web
-
 ## <a name="ObjectMethod &lt;strong&gt;get_WorkArea&lt;/strong&gt; ($ke"></a> [[ObjectMethod]] **getWorkArea** `($key) -> $directorypath`
 
 Gets a private directory uniquely identified by $key. The directory is intended as a work area for plugins.
 
-The standard is a directory named the same as "key" under $TWiki::cfg\{RCS\}\{WorkAreaDir\}
-
-## <a name="ObjectMethod &lt;strong&gt;save_MetaData&lt;/strong&gt; ($w"></a> [[ObjectMethod]] **saveMetaData** `($web,$name) -> $text`
-
-Write a named meta-data string. If web is given the meta-data is stored alongside a web.
+The standard is a directory named the same as "key" under $TWiki::cfg\{WorkingDir\}/work\_areas
 
 ## <a name="ObjectMethod &lt;strong&gt;get_TopicNames&lt;/strong&gt; ()"></a> [[ObjectMethod]] **getTopicNames** `() -> @topics`
 
@@ -118,6 +116,14 @@ The `\%options` hash may contain the following options:
 
 The return value is a reference to a hash which maps each matching topic name to a list of the lines in that topic that matched the search, as would be returned by 'grep'. If `files_without_match` is specified, it will return on the first match in each topic (i.e. it will return only one match per topic, and will not return matching lines).
 
+## <a name="ObjectMethod &lt;strong&gt;search_InWebMetaDa"></a> [[ObjectMethod]] \*searchInWebMetaData `($query,\@topics) -> \%matches`
+
+Search for a meta-data expression in the content of a web. `$query` must be a `TWiki::Query` object.
+
+Returns a reference to a hash that maps the names of topics that all matched to the result of the query expression (e.g. if the query expression is 'TOPICPARENT.name' then you will get back a hash that maps topic names to their parent.
+
+SMELL: this is **really** inefficient!
+
 ## <a name="ObjectMethod &lt;strong&gt;moveWeb&lt;/strong&gt; ($newWeb)"></a> [[ObjectMethod]] **moveWeb** `($newWeb)`
 
 Move a web.
@@ -136,7 +142,7 @@ Establishes if there is stored data associated with this handler.
 
 Get the timestamp of the file Returns 0 if no file, otherwise epoch seconds
 
-## <a name="ObjectMethod &lt;strong&gt;restore_LatestRevi"></a> [[ObjectMethod]] \*restoreLatestRevision `($wikiname)`
+## <a name="ObjectMethod &lt;strong&gt;restore_LatestRevi"></a> [[ObjectMethod]] \*restoreLatestRevision `($user)`
 
 Restore the plaintext file from the revision at the head.
 
@@ -277,8 +283,6 @@ Get a single-digit version number for the rev that was alive at the given epoch-
 
 returns [stat] for any given web, topic, $attachment SMELL - should this return a hash of arbitrary attributes so that SMELL + attributes supported by the underlying filesystem are supported SMELL + (eg: windows directories supporting photo "author", "dimension" fields)
 
-sub \_constructAttributesForAutoAttached as long as stat is defined, return an emulated set of attributes for that attachment.
-
 ## <a name="ObjectMethod &lt;strong&gt;get_AttachmentList"></a> [[ObjectMethod]] \*getAttachmentList `($web,$topic)`
 
 returns \{\} of filename =&gt; \{ key =&gt; value, key2 =&gt; value \} for any given web, topic Ignores files starting with \_ or ending with ,v
@@ -286,3 +290,11 @@ returns \{\} of filename =&gt; \{ key =&gt; value, key2 =&gt; value \} for any g
 ## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; ()"></a> [[ObjectMethod]] **stringify** `()`
 
 Generate string representation for debugging
+
+## <a name="ObjectMethod &lt;strong&gt;recordChange&lt;/strong&gt; ($us"></a> [[ObjectMethod]] **recordChange** `($user,$rev,$more)`
+
+Record that the file changed
+
+## <a name="ObjectMethod &lt;strong&gt;eachChange&lt;/strong&gt; ($sinc"></a> [[ObjectMethod]] **eachChange** `($since) -> $iterator`
+
+Return iterator over changes - see Store for details

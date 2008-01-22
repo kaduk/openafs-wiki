@@ -2,7 +2,7 @@
 
 _Official list of stable TWiki functions for Plugin developers_
 
-This module defines official functions that [[Plugins|TWiki/TWikiPlugins]] can use to interact with the TWiki engine and content.
+This module defines official functions that [[Plugins|SYSTEMWEB/TWikiPlugins]] can use to interact with the TWiki engine and content.
 
 Refer to [[EmptyPlugin]] and lib/TWiki/Plugins/EmptyPlugin.pm for a template Plugin and documentation on how to write a Plugin.
 
@@ -10,22 +10,16 @@ Plugins should **only** use functions published in this module. If you use funct
 
 Deprecated functions will still work in older code, though they should _not_ be called in new Plugins and should be replaced in older Plugins as soon as possible.
 
-The version of the TWiki::Func module is defined by the VERSION number of the TWiki::Plugins module, currently 1.11. This can be shown by the `%PLUGINVERSION%` variable. The 'Since' field in the function documentation refers to the VERSION number and the date that the function was addded.
+The version of the TWiki::Func module is defined by the VERSION number of the TWiki::Plugins module, currently 1.11. This can be shown by the `%PLUGINVERSION%` TWiki variable, and accessed in code using `$TWiki::Plugins::VERSION`. The 'Since' field in the function documentation refers to `$TWiki::Plugins::VERSION`.
 
-**_Note:_** Beware! These methods should only ever be called from the context of a TWiki Plugin. They require a Plugins SESSION context to be established before they are called, and will not work if simply called from another TWiki module. For example,
+Notes on use of `$TWiki::Plugins::VERSION` (from 1.2 forwards):
 
-    use TWiki;
-    print TWiki::Func::getSkin(),"\n";
+- If the **major** version (e.g. `1.`) is the same then any plugin coded to use any **earlier** revision of the `1.` API will still work. No function has been removed from the interface, nor has any API published in that version changed in such a way as to **require** plugins to be recoded.
+- If the **minor** version (e.g. 1.1) is incremented there may be changes in the API that may help improve the coding of some plugins - for example, new interfaces giving access to previously hidden core functions. In addition, **deprecation** of functions in the interface trigger a minor version increment. Note that deprecated functions are not _removed_, they are merely frozen, and plugin authors are recommended to stop using them.
+- Any additional digits in the version number relate to minor changes, such as the addition of parameters to the existing functions, or addition of utility functions that are unlikely to require significant changes to existing plugins.
+- `TWiki::Plugins::VERSION` also applies to the plugin handlers. The handlers are documented in the EmptyPlugin, and that module indicates what version of `TWiki::Plugins::VERSION` it relates to.
 
-will fail with `Can't call method "getSkin" on an undefined value at TWiki/Func.pm line 83`.
-
-If you want to call the methods outside the context of a plugin, you can create a Plugins SESSION object. For example, the script:
-
-    use TWiki:
-    $TWiki::Plugins::SESSION = new TWiki();
-    print TWiki::Func::getSkin(),"\n";
-
-will work happily.
+A full history of the changes to this API can be found at the end of this topic.
 
 <div>
   <ul>
@@ -35,13 +29,16 @@ will work happily.
             <li><a href="#get_UrlHost( ) -> $host"> getUrlHost( ) -&gt; $host</a></li>
             <li><a href="#get_ScriptUrl( $web, $topic, $sc"> getScriptUrl( $web, $topic, $script, ... ) -&gt; $url</a></li>
             <li><a href="#get_ViewUrl( $web, $topic ) -> $"> getViewUrl( $web, $topic ) -&gt; $url</a></li>
-            <li><a href="#get_OopsUrl( $web, $topic, $temp"> getOopsUrl( $web, $topic, $template, $param1, $param2, $param3, $param4 ) -&gt; $url</a></li>
             <li><a href="#get_PubUrlPath( ) -> $path"> getPubUrlPath( ) -&gt; $path</a></li>
+            <li><a href="#get_ExternalResource( $url ) ->"> getExternalResource( $url ) -&gt; $response</a></li>
             <li><a href="#get_CgiQuery( ) -> $query"> getCgiQuery( ) -&gt; $query</a></li>
+            <li><a href="#get_SessionKeys() -> @keys"> getSessionKeys() -&gt; @keys</a></li>
             <li><a href="#get_SessionValue( $key ) -> $val"> getSessionValue( $key ) -&gt; $value</a></li>
             <li><a href="#set_SessionValue( $key, $value )"> setSessionValue( $key, $value ) -&gt; $boolean</a></li>
             <li><a href="#clear_SessionValue( $key ) -> $b"> clearSessionValue( $key ) -&gt; $boolean</a></li>
             <li><a href="#getContext() -> \%hash"> getContext() -&gt; \%hash</a></li>
+            <li><a href="#push_TopicContext($web, $topic)"> pushTopicContext($web, $topic)</a></li>
+            <li><a href="#pop_TopicContext()"> popTopicContext()</a></li>
           </ul>
         </li>
         <li><a href="#Preferences"> Preferences</a><ul>
@@ -49,6 +46,7 @@ will work happily.
             <li><a href="#get_PluginPreferencesValue( $key"> getPluginPreferencesValue( $key ) -&gt; $value</a></li>
             <li><a href="#get_PreferencesFlag( $key, $web"> getPreferencesFlag( $key, $web ) -&gt; $value</a></li>
             <li><a href="#get_PluginPreferencesFlag( $key"> getPluginPreferencesFlag( $key ) -&gt; $boolean</a></li>
+            <li><a href="#set_PreferencesValue($name, $val"> setPreferencesValue($name, $val)</a></li>
             <li><a href="#get_WikiToolName( ) -> $name"> getWikiToolName( ) -&gt; $name</a></li>
             <li><a href="#get_MainWebname( ) -> $name"> getMainWebname( ) -&gt; $name</a></li>
             <li><a href="#get_TwikiWebname( ) -> $name"> getTwikiWebname( ) -&gt; $name</a></li>
@@ -56,12 +54,21 @@ will work happily.
         </li>
         <li><a href="#User Handling and Access Control"> User Handling and Access Control</a><ul>
             <li><a href="#get_DefaultUserName( ) -> $login"> getDefaultUserName( ) -&gt; $loginName</a></li>
-            <li><a href="#get_WikiName( ) -> $wikiName"> getWikiName( ) -&gt; $wikiName</a></li>
-            <li><a href="#get_WikiUserName( ) -> $wikiName"> getWikiUserName( ) -&gt; $wikiName</a></li>
+            <li><a href="#get_CanonicalUserID( $user ) ->"> getCanonicalUserID( $user ) -&gt; $cUID</a></li>
+            <li><a href="#get_WikiName( $user ) -> $wikiNa"> getWikiName( $user ) -&gt; $wikiName</a></li>
+            <li><a href="#get_WikiUserName( $user ) -> $wi"> getWikiUserName( $user ) -&gt; $wikiName</a></li>
             <li><a href="#wiki_ToUserName( $wikiName ) ->"> wikiToUserName( $wikiName ) -&gt; $loginName</a></li>
             <li><a href="#user_ToWikiName( $loginName, $do"> userToWikiName( $loginName, $dontAddWeb ) -&gt; $wikiName</a></li>
+            <li><a href="#email_ToWikiNames( $email, $dont"> emailToWikiNames( $email, $dontAddWeb ) -&gt; @wikiNames</a></li>
+            <li><a href="#wiki_NameToEmails( $wikiname ) -"> wikiNameToEmails( $wikiname ) -&gt; @emails</a></li>
             <li><a href="#isGuest( ) -> $boolean"> isGuest( ) -&gt; $boolean</a></li>
-            <li><a href="#permissionsSet( $web ) -> $boole"> permissionsSet( $web ) -&gt; $boolean</a></li>
+            <li><a href="#is_AnAdmin( $login ) -> $boolean"> isAnAdmin( $login ) -&gt; $boolean</a></li>
+            <li><a href="#is_GroupMember( $group, $login )"> isGroupMember( $group, $login ) -&gt; $boolean</a></li>
+            <li><a href="#eachUser() -> $iterator"> eachUser() -&gt; $iterator</a></li>
+            <li><a href="#eachMembership($wikiname) -> $it"> eachMembership($wikiname) -&gt; $iterator</a></li>
+            <li><a href="#eachGroup() -> $iterator"> eachGroup() -&gt; $iterator</a></li>
+            <li><a href="#isGroup( $group ) -> $boolean"> isGroup( $group ) -&gt; $boolean</a></li>
+            <li><a href="#each_GroupMember($group) -> $ite"> eachGroupMember($group) -&gt; $iterator</a></li>
             <li><a href="#check_AccessPermission( $type, $"> checkAccessPermission( $type, $wikiName, $text, $topic, $web, $meta ) -&gt; $boolean</a></li>
           </ul>
         </li>
@@ -70,6 +77,7 @@ will work happily.
             <li><a href="#webExists( $web ) -> $boolean"> webExists( $web ) -&gt; $boolean</a></li>
             <li><a href="#createWeb( $newWeb, $baseWeb, $o"> createWeb( $newWeb, $baseWeb, $opts )</a></li>
             <li><a href="#moveWeb( $oldName, $newName )"> moveWeb( $oldName, $newName )</a></li>
+            <li><a href="#each_ChangeSince($web, $time) ->"> eachChangeSince($web, $time) -&gt; $iterator</a></li>
             <li><a href="#get_TopicList( $web ) -> @topics"> getTopicList( $web ) -&gt; @topics</a></li>
             <li><a href="#topicExists( $web, $topic ) -> $"> topicExists( $web, $topic ) -&gt; $boolean</a></li>
             <li><a href="#check_TopicEditLock( $web, $topi"> checkTopicEditLock( $web, $topic, $script ) -&gt; ( $oopsUrl, $loginName, $unlockTime )</a></li>
@@ -94,7 +102,7 @@ will work happily.
             <li><a href="#writeHeader( $query, $contentLen"> writeHeader( $query, $contentLength )</a></li>
             <li><a href="#redirect_CgiQuery( $query, $url,"> redirectCgiQuery( $query, $url, $passthru )</a></li>
             <li><a href="#add_ToHEAD( $id, $header )"> addToHEAD( $id, $header )</a></li>
-            <li><a href="#expand_CommonVariables( $text, $"> expandCommonVariables( $text, $topic, $web ) -&gt; $text</a></li>
+            <li><a href="#expand_CommonVariables( $text, $"> expandCommonVariables( $text, $topic, $web, $meta ) -&gt; $text</a></li>
             <li><a href="#renderText( $text, $web ) -> $te"> renderText( $text, $web ) -&gt; $text</a></li>
             <li><a href="#internalLink( $pre, $web, $topic"> internalLink( $pre, $web, $topic, $label, $anchor, $createLink ) -&gt; $text</a></li>
           </ul>
@@ -111,6 +119,7 @@ will work happily.
         <li><a href="#Special handlers"> Special handlers</a><ul>
             <li><a href="#register_TagHandler( $var, \fn,"> registerTagHandler( $var, \&amp;fn, $syntax )</a></li>
             <li><a href="#registerRESTHandler( $alias, \fn"> registerRESTHandler( $alias, \&amp;fn, )</a></li>
+            <li><a href="#decode_FormatTokens($str) -> $un"> decodeFormatTokens($str) -&gt; $unencodedString</a></li>
           </ul>
         </li>
         <li><a href="#Searching"> Searching</a><ul>
@@ -126,9 +135,14 @@ will work happily.
         <li><a href="#General Utilities"> General Utilities</a><ul>
             <li><a href="#get_RegularExpression( $name ) -"> getRegularExpression( $name ) -&gt; $expr</a></li>
             <li><a href="#normalize_WebTopicName($web, $to"> normalizeWebTopicName($web, $topic) -&gt; ($web, $topic)</a></li>
+          </ul>
+        </li>
+        <li><a href="#StaticMethod *sanitize_Attachmen"> StaticMethod sanitizeAttachmentName <tt>($fname) -&gt; ($fileName,$origName)</tt></a><ul>
+            <li><a href="#space_OutWikiWord( $word, $sep )"> spaceOutWikiWord( $word, $sep ) -&gt; $text</a></li>
             <li><a href="#writeWarning( $text )"> writeWarning( $text )</a></li>
             <li><a href="#writeDebug( $text )"> writeDebug( $text )</a></li>
             <li><a href="#formatTime( $time, $format, $tim"> formatTime( $time, $format, $timezone ) -&gt; $text</a></li>
+            <li><a href="#isTrue( $value, $default ) -> $b"> isTrue( $value, $default ) -&gt; $boolean</a></li>
             <li><a href="#is_ValidWikiWord ( $text ) -> $b"> isValidWikiWord ( $text ) -&gt; $boolean</a></li>
             <li><a href="#extractParameters($attr ) -> %pa"> extractParameters($attr ) -&gt; %params</a></li>
             <li><a href="#extract_NameValuePair( $attr, $n"> extractNameValuePair( $attr, $name ) -&gt; $value</a></li>
@@ -136,6 +150,8 @@ will work happily.
         </li>
         <li><a href="#Deprecated functions"> Deprecated functions</a><ul>
             <li><a href="#get_ScriptUrlPath( ) -> $path"> getScriptUrlPath( ) -&gt; $path</a></li>
+            <li><a href="#get_OopsUrl( $web, $topic, $temp"> getOopsUrl( $web, $topic, $template, $param1, $param2, $param3, $param4 ) -&gt; $url</a></li>
+            <li><a href="#permissionsSet( $web ) -> $boole"> permissionsSet( $web ) -&gt; $boolean</a></li>
             <li><a href="#get_PublicWebList( ) -> @webs"> getPublicWebList( ) -&gt; @webs</a></li>
             <li><a href="#format_GmTime( $time, $format )"> formatGmTime( $time, $format ) -&gt; $text</a></li>
             <li><a href="#get_DataDir( ) -> $dir"> getDataDir( ) -&gt; $dir</a></li>
@@ -173,7 +189,7 @@ Compose fully qualified URL
 - `$web` - Web name, e.g. `'Main'`
 - `$topic` - Topic name, e.g. `'WebNotify'`
 - `$script` - Script name, e.g. `'view'`
-- `...` - an arbitrary number of name,value parameter pairs that will be url-encoded and added to the url. The special parameter name '#' is reserved for specifying an anchor. e.g. `getScriptUrl('x','y','view','#'=>'XXX',a=>1,b=>2)` will give `.../view/x/y?a=1&b=2#XXX`
+- `...` - an arbitrary number of name=&gt;value parameter pairs that will be url-encoded and added to the url. The special parameter name '#' is reserved for specifying an anchor. e.g. `getScriptUrl('x','y','view','#'=>'XXX',a=>1,b=>2)` will give `.../view/x/y?a=1&b=2#XXX`
 
 Return: `$url` URL, e.g. `"http://example.com:80/cgi-bin/view.pl/Main/WebNotify"`
 
@@ -190,33 +206,6 @@ Return: `$url` URL, e.g. `"http://example.com:80/cgi-bin/view.pl/Main/WebNotify"
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
-### <a name="get_OopsUrl( $web, $topic, $temp"></a> getOopsUrl( $web, $topic, $template, $param1, $param2, $param3, $param4 ) -&gt; $url
-
-Compose fully qualified 'oops' dialog URL
-
-- `$web` - Web name, e.g. `'Main'`. The current web is taken if empty
-- `$topic` - Topic name, e.g. `'WebNotify'`
-- `$template` - Oops template name, e.g. `'oopsmistake'`. The 'oops' is optional; 'mistake' will translate to 'oopsmistake'.
-- `$param1` ... `$param4` - Parameter values for %PARAM1% ... %PARAMn% variables in template, optional
-
-Return: `$url` URL, e.g. `"http://example.com:80/cgi-bin/oops.pl/ Main/WebNotify?template=oopslocked&param1=joe"`
-
-This might be used like this:
-
-       my $url = TWiki::Func::getOopsUrl($web, $topic, 'oopsmistake', 'I made a boo-boo');
-       TWiki::Func::redirectCgiQuery( undef, $url );
-       return 0;
-
-**Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
-
-Since TWiki::Plugins::VERSION 1.1, the recommended approach is to throw an [[oops exception|Main/TWikiOopsExceptionDotPm]].
-
-       use Error qw( :try );
-
-       throw TWiki::OopsException($web, $topic, undef, 0, [ 'I made a boo-boo' ]);
-
-and let TWiki handle the cleanup.
-
 ### <a name="get_PubUrlPath( ) - $path"></a> getPubUrlPath( ) -&gt; $path
 
 Get pub URL path
@@ -225,6 +214,53 @@ Return: `$path` URL path of pub directory, e.g. `"/pub"`
 
 **Since:** TWiki::Plugins::VERSION 1.000 (14 Jul 2001)
 
+### <a name="get_ExternalResource( $url ) - $"></a> getExternalResource( $url ) -&gt; $response
+
+Get whatever is at the other end of a URL (using an HTTP GET request). Will only work for encrypted protocols such as `https` if the `LWP` CPAN module is installed.
+
+Note that the `$url` may have an optional user and password, as specified by the relevant RFC. Any proxy set in `configure` is honoured.
+
+The `$response` is an object that is known to implement the following subset of the methods of `LWP::Response`. It may in fact be an `LWP::Response` object, but it may also not be if `LWP` is not available, so callers may only assume the following subset of methods is available:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td><code>code()</code></td>
+  </tr>
+  <tr>
+    <td><code>message()</code></td>
+  </tr>
+  <tr>
+    <td><code>header($field)</code></td>
+  </tr>
+  <tr>
+    <td><code>content()</code></td>
+  </tr>
+  <tr>
+    <td><code>is_error()</code></td>
+  </tr>
+  <tr>
+    <td><code>is_redirect()</code></td>
+  </tr>
+</table>
+
+Note that if LWP is **not** available, this function:
+
+1. can only really be trusted for HTTP/1.0 urls. If HTTP/1.1 or another protocol is required, you are **strongly** recommended to `require LWP`.
+2. Will not parse multipart content
+
+In the event of the server returning an error, then `is_error()` will return true, `code()` will return a valid HTTP status code as specified in RFC 2616 and RFC 2518, and `message()` will return the message that was received from the server. In the event of a client-side error (e.g. an unparseable URL) then `is_error()` will return true and `message()` will return an explanatory message. `code()` will return 400 (BAD REQUEST).
+
+Note: Callers can easily check the availability of other HTTP::Response methods as follows:
+
+    my $response = TWiki::Func::getExternalResource($url);
+    if (!$response->is_error() && $response->isa('HTTP::Response')) {
+        ... other methods of HTTP::Response may be called
+    } else {
+        ... only the methods listed above may be called
+    }
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
 ### <a name="get_CgiQuery( ) - $query"></a> getCgiQuery( ) -&gt; $query
 
 Get CGI query object. Important: Plugins cannot assume that scripts run under CGI, Plugins must always test if the CGI query object is set
@@ -232,6 +268,14 @@ Get CGI query object. Important: Plugins cannot assume that scripts run under CG
 Return: `$query` CGI query object; or 0 if script is called as a shell script
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
+
+### <a name="get_SessionKeys() - @keys"></a> getSessionKeys() -&gt; @keys
+
+Get a list of all the names of session variables. The list is unsorted.
+
+Session keys are stored and retrieved using `setSessionValue` and `getSessionValue`.
+
+**Since:** TWiki::Plugins::VERSION 1.2
 
 ### <a name="get_SessionValue( $key ) - $valu"></a> getSessionValue( $key ) -&gt; $value
 
@@ -268,7 +312,7 @@ Return: true if the session value was cleared
 
 Get a hash of context identifiers representing the currently active context.
 
-The context is a set of identifiers that are set during specific phases of TWiki processing. For example, each of the standard scripts in the 'bin' directory each has a context identifier - the view script has 'view', the edit script has 'edit' etc. So you can easily tell what 'type' of script your Plugin is being called within. The core context identifiers are listed in the [[TWikiTemplates]] topic. Please be careful not to overwrite any of these identifiers!
+The context is a set of identifiers that are set during specific phases of TWiki processing. For example, each of the standard scripts in the 'bin' directory each has a context identifier - the view script has 'view', the edit script has 'edit' etc. So you can easily tell what 'type' of script your Plugin is being called within. The core context identifiers are listed in the %SYSTEMWEB%.TWikiTemplates topic. Please be careful not to overwrite any of these identifiers!
 
 Context identifiers can be used to communicate between Plugins, and between Plugins and templates. For example, in [[FirstPlugin]].pm, you might write:
 
@@ -297,6 +341,25 @@ or in a topic:
 **_Note_**: **all** plugins have an **automatically generated** context identifier if they are installed and initialised. For example, if the [[FirstPlugin]] is working, the context ID 'FirstPlugin' will be set.
 
 **Since:** TWiki::Plugins::VERSION 1.1
+
+### <a name="push_TopicContext($web, $topic)"></a> pushTopicContext($web, $topic)
+
+- `$web` - new web
+- `$topic` - new topic
+
+Change the TWiki context so it behaves as if it was processing `$web.$topic` from now on. All the preferences will be reset to those of the new topic. Note that if the new topic is not readable by the logged in user due to access control considerations, there will **not** be an exception. It is the duty of the caller to check access permissions before changing the topic.
+
+It is the duty of the caller to restore the original context by calling `popTopicContext`.
+
+Note that this call does **not** re-initialise plugins, so if you have used global variables to remember the web and topic in `initPlugin`, then those values will be unchanged.
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="pop_TopicContext()"></a> popTopicContext()
+
+Returns the TWiki context to the state it was in before the `pushTopicContext` was called.
+
+**Since:** TWiki::Plugins::VERSION 1.2
 
 ## <a name="Preferences"></a> Preferences
 
@@ -368,6 +431,14 @@ Return: false for preferences values `"off"`, `"no"` and `"0"`, or values not se
 
 **NOTE:** As of TWiki4.1, if `$NO_PREFS_IN_TOPIC` is enabled in the plugin, then preferences set in the plugin topic will be ignored.
 
+### <a name="set_PreferencesValue($name, $val"></a> setPreferencesValue($name, $val)
+
+Set the preferences value so that future calls to getPreferencesValue will return this value, and `%$name%` will expand to the preference when used in future variable expansions.
+
+The preference only persists for the rest of this request. Finalised preferences cannot be redefined using this function.
+
+Returns 1 if the preference was defined, and 0 otherwise.
+
 ### <a name="get_WikiToolName( ) - $name"></a> getWikiToolName( ) -&gt; $name
 
 Get toolname as defined in TWiki.cfg
@@ -402,17 +473,33 @@ Return: `$loginName` Default user name, e.g. `'guest'`
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
-### <a name="get_WikiName( ) - $wikiName"></a> getWikiName( ) -&gt; $wikiName
+### <a name="get_CanonicalUserID( $user ) - $"></a> getCanonicalUserID( $user ) -&gt; $cUID
 
-Get Wiki name of logged in user
+Return the cUID of the specified user. A cUID is a unique identifier which is assigned by TWiki for each user. BEWARE: While the default [[TWikiUserMapping]] uses a cUID that looks like a user's [[LoginName]], some characters are modified to make them compatible with rcs. Additionally, other usermappings will use other conventions - the [[JoomlauserMapping]] for example, has cUIDs like 'JoomlaeUserMapping\_1234'.
+
+If $user is undefined Get the cUID of logged in user, and will generally be 'BaseUserMapping\_666'
+
+- $user can be a cUID, login, wikiname or web.wikiname
+
+Return: `$cUID` an internal unique and transportable escaped identifier for registered users (they can be autogenerated for an authenticated but unregistered user)
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="get_WikiName( $user ) - $wikiNam"></a> getWikiName( $user ) -&gt; $wikiName
+
+return the [[WikiName]] of the specified user if $user is undefined Get Wiki name of logged in user
+
+- $user can be a cUID, login, wikiname or web.wikiname
 
 Return: `$wikiName` Wiki Name, e.g. `'JohnDoe'`
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
-### <a name="get_WikiUserName( ) - $wikiName"></a> getWikiUserName( ) -&gt; $wikiName
+### <a name="get_WikiUserName( $user ) - $wik"></a> getWikiUserName( $user ) -&gt; $wikiName
 
-Get Wiki name of logged in user with web prefix
+return the userWeb.WikiName of the specified user if $user is undefined Get Wiki name of logged in user
+
+- $user can be a cUID, login, wikiname or web.wikiname
 
 Return: `$wikiName` Wiki Name, e.g. `"Main.JohnDoe"`
 
@@ -420,24 +507,47 @@ Return: `$wikiName` Wiki Name, e.g. `"Main.JohnDoe"`
 
 ### <a name="wiki_ToUserName( $wikiName ) - $"></a> wikiToUserName( $wikiName ) -&gt; $loginName
 
-Translate a Wiki name to a login name based on [[Main.TWikiUsers|Main/TWikiUsers]] topic
+Translate a Wiki name (or login name or cUID, if it can) to a login name.
 
 - `$wikiName` - Wiki name, e.g. `'Main.JohnDoe'` or `'JohnDoe'`
 
-Return: `$loginName` Login name of user, e.g. `'jdoe'`
+Return: `$loginName` Login name of user, e.g. `'jdoe'`, or undef if not matched.
+
+Note that it is possible for several login names to map to the same wikiname. This function will only return the **first** login name that maps to the wikiname.
+
+returns undef if the [[WikiName]] is not found.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
 ### <a name="user_ToWikiName( $loginName, $do"></a> userToWikiName( $loginName, $dontAddWeb ) -&gt; $wikiName
 
-Translate a login name to a Wiki name based on [[Main.TWikiUsers|Main/TWikiUsers]] topic
+Translate a login name to a Wiki name
 
 - `$loginName` - Login name, e.g. `'jdoe'`
 - `$dontAddWeb` - Do not add web prefix if `"1"`
 
 Return: `$wikiName` Wiki name of user, e.g. `'Main.JohnDoe'` or `'JohnDoe'`
 
+userToWikiName will always return a name, if the user does not exist in the mapping, the $loginName parameter is returned. (backward compatibility)
+
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
+
+### <a name="email_ToWikiNames( $email, $dont"></a> emailToWikiNames( $email, $dontAddWeb ) -&gt; @wikiNames
+
+- `$email` - email address to look up
+- `$dontAddWeb` - Do not add web prefix if `"1"`
+
+Find the wikinames of all users who have the given email address as their registered address. Since several users could register with the same email address, this returns a list of wikinames rather than a single wikiname.
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="wiki_NameToEmails( $wikiname ) -"></a> wikiNameToEmails( $wikiname ) -&gt; @emails
+
+- `$wikiname` - wikiname of user to look up
+
+Returns the registered email addresses of the named user. If $wikiname is undef, returns the registered email addresses for the logged-in user.
+
+**Since:** TWiki::Plugins::VERSION 1.2
 
 ### <a name="isGuest( ) - $boolean"></a> isGuest( ) -&gt; $boolean
 
@@ -445,17 +555,89 @@ Test if logged in user is a guest ([[TWikiGuest]])
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
 
-### <a name="permissionsSet( $web ) - $boolea"></a> permissionsSet( $web ) -&gt; $boolean
+### <a name="is_AnAdmin( $login ) - $boolean"></a> isAnAdmin( $login ) -&gt; $boolean
 
-Test if any access restrictions are set for this web, ignoring settings on individual pages
+Find out if the user is an admin or not. If the user is not given, the currently logged-in user is assumed.
 
-- `$web` - Web name, required, e.g. `'Sandbox'`
+- $login can be either a login, or a CUID
 
-**Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="is_GroupMember( $group, $login )"></a> isGroupMember( $group, $login ) -&gt; $boolean
+
+Find out if $login is in the named group. e.g.
+
+    if( TWiki::Func::isGroupMember( "HesperionXXGroup", "jordi" )) {
+        ...
+    }
+
+If `$user` is `undef`, it defaults to the currently logged-in user.
+
+- $login can be a login name, or a cUID, or [[WikiName]]
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="eachUser() - $iterator"></a> eachUser() -&gt; $iterator
+
+Get an iterator over the list of all the registered users **not** including groups. The iterator will return each wiki name in turn (e.g. 'FredBloggs').
+
+Use it as follows:
+
+        my $iterator = TWiki::Func::eachUser();
+        while ($it->hasNext()) {
+            my $user = $it->next();
+            # $user is a wikiname
+        }
+
+**WARNING** on large sites, this could be a long list!
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="eachMembership($wikiname) - $ite"></a> eachMembership($wikiname) -&gt; $iterator
+
+Get an iterator over the names of all groups that the user is a member of. If `$wikiname` is `undef`, defaults to the currently logged-in user.
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="eachGroup() - $iterator"></a> eachGroup() -&gt; $iterator
+
+Get an iterator over all groups.
+
+Use it as follows:
+
+        my $iterator = TWiki::Func::eachGroup();
+        while ($it->hasNext()) {
+            my $group = $it->next();
+            # $group is a group name e.g. TWikiAdminGroup
+        }
+
+**WARNING** on large sites, this could be a long list!
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="isGroup( $group ) - $boolean"></a> isGroup( $group ) -&gt; $boolean
+
+Checks if `$group` is the name of a group known to TWiki.
+
+### <a name="each_GroupMember($group) - $iter"></a> eachGroupMember($group) -&gt; $iterator
+
+Get an iterator over all the members of the named group. Returns undef if $group is not a valid group.
+
+Use it as follows:
+
+        my $iterator = TWiki::Func::eachGroupMember('RadioheadGroup');
+        while ($it->hasNext()) {
+            my $user = $it->next();
+            # $user is a wiki name e.g. 'TomYorke', 'PhilSelway'
+        }
+
+**WARNING** on large sites, this could be a long list!
+
+**Since:** TWiki::Plugins::VERSION 1.2
 
 ### <a name="check_AccessPermission( $type, $"></a> checkAccessPermission( $type, $wikiName, $text, $topic, $web, $meta ) -&gt; $boolean
 
-Check access permission for a topic based on the [[TWiki.TWikiAccessControl|TWiki/TWikiAccessControl]] rules
+Check access permission for a topic based on the [[%SYSTEMWEB%.TWikiAccessControl|SYSTEMWEB/TWikiAccessControl]] rules
 
 - `$type` - Access type, required, e.g. `'VIEW'`, `'CHANGE'`.
 - `$wikiName` - [[WikiName]] of remote user, required, e.g. `"PeterThoeny"`. If `$wikiName` is '', 0 or `undef` then access is **always permitted**.
@@ -556,6 +738,24 @@ To delete a web, move it to a subweb of `Trash`
 
 **Since:** TWiki::Plugins::VERSION 1.1
 
+### <a name="each_ChangeSince($web, $time) -"></a><a name="each_ChangeSince($web, $time) - "></a> eachChangeSince($web, $time) -&gt; $iterator
+
+Get an iterator over the list of all the changes in the given web between `$time` and now. $time is a time in seconds since 1st Jan 1970, and is not guaranteed to return any changes that occurred before (now - \{Store\}\{RememberChangesFor\}). \{Store\}\{RememberChangesFor\}) is a setting in `configure`. Changes are returned in **most-recent-first** order.
+
+Use it as follows:
+
+        my $iterator = TWiki::Func::eachChangeSince(
+            $web, time() - 7 * 24 * 60 * 60); # the last 7 days
+        while ($it->hasNext()) {
+            my $change = $it->next();
+            # $change is a perl hash that contains the following fields:
+            # topic => topic name
+            # user => wikiname - wikiname of user who made the change
+            # time => time of the change
+            # revision => revision number *after* the change
+            # more => more info about the change (e.g. 'minor')
+        }
+
 ### <a name="get_TopicList( $web ) - @topics"></a> getTopicList( $web ) -&gt; @topics
 
 Get list of all topics in a web
@@ -573,7 +773,7 @@ Test if topic exists
 - `$web` - Web name, optional, e.g. `'Main'`.
 - `$topic` - Topic name, required, e.g. `'TokyoOffice'`, or `"Main.TokyoOffice"`
 
-$web and $topic are parsed as described in the documentation for `normalizeWebTopicName`.
+$web and $topic are parsed as described in the documentation for `normalizeWebTopicName`. Specifically, the %USERSWEB% is used if $web is not specified and $topic has no web specifier. To get an expected behaviour it is recommened to specify the current web for $web; don't leave it empty.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (14 Jul 2001)
 
@@ -594,7 +794,7 @@ Return: `( $oopsUrl, $loginName, $unlockTime )` - The `$oopsUrl` for calling red
 
 - `$web` Web name, e.g. `"Main"`, or empty
 - `$topic` Topic name, e.g. `"MyTopic"`, or `"Main.MyTopic"`
-- `$lock` 1 to lease the topic, 0 to clear the lease=
+- `$lock` 1 to lease the topic, 0 to clear an existing lease
 
 Takes out a "lease" on the topic. The lease doesn't prevent anyone from editing and changing the topic, but it does redirect them to a warning screen, so this provides some protection. The `edit` script always takes out a lease.
 
@@ -723,9 +923,7 @@ Return: `( $date, $user, $rev, $comment )` List with: ( last update date, login 
   </tr>
 </table>
 
-NOTE: if you are trying to get revision info for a topic, use `$meta->getRevisionInfo` instead if you can - it is significantly more efficient, and returns a user object that contains other user information.
-
-NOTE: prior versions of TWiki may under some circumstances have returned the login name of the user rather than the wiki name; the code documentation was totally unclear, and we have been unable to establish the intent. However the wikiname is obviously more useful, so that is what is returned.
+NOTE: if you are trying to get revision info for a topic, use `$meta->getRevisionInfo` instead if you can - it is significantly more efficient.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (29 Jul 2001)
 
@@ -768,7 +966,7 @@ Read topic text, including meta data
 
 Return: `$text` Topic text with embedded meta data; an oops URL for calling redirectCgiQuery() is returned in case of an error
 
-This method is more efficient than `readTopic`, but returns meta-data embedded in the text. Plugins authors must be very careful to avoid damaging meta-data. You are recommended to use readTopic instead, which is a lot safer..
+This method is more efficient than `readTopic`, but returns meta-data embedded in the text. Plugins authors must be very careful to avoid damaging meta-data. You are recommended to use readTopic instead, which is a lot safer.
 
 **Since:** TWiki::Plugins::VERSION 1.010 (31 Dec 2002)
 
@@ -902,7 +1100,7 @@ Rename an attachment to $TWiki::cfg\{TrashWebName\}.TrashAttament to delete it.
 
 ### <a name="readTemplate( $name, $skin ) - $"></a> readTemplate( $name, $skin ) -&gt; $text
 
-Read a template or skin. Embedded [[template directives|TWiki/TWikiTemplates]] get expanded
+Read a template or skin. Embedded [[template directives|SYSTEMWEB/TWikiTemplates]] get expanded
 
 - `$name` - Template name, e.g. `'view'`
 - `$skin` - Comma-separated list of skin names, optional, e.g. `'print'`
@@ -943,8 +1141,8 @@ A template is defined using a %TMPL:DEF% statement in a template file. See the d
 
 Prints a basic content-type HTML header for text/html to standard out
 
-- `$query` - CGI query object. If not given, the default CGI query will be used. In most cases you should _not_ pass this parameter.
-- `$contentLength` - Length of content
+- `$query` - CGI query object. If not given, the default CGI query will be used (optional, in most cases you should _not_ pass this parameter)
+- `$contentLength` - Length of content (optional, in most cases you should _not_ pass this parameter)
 
 Return: none
 
@@ -962,7 +1160,7 @@ Return: none
 
 Print output to STDOUT that will cause a 302 redirect to a new URL. Nothing more should be printed to STDOUT after this method has been called.
 
-The `$passthru` parameter allows you to pass the parameters that were passed to the current query on to the target URL, as long as it is another URL on the same TWiki installation. If `$passthru` is set to a true value, then TWiki will save the current URL parameters, and then try to restore them on the other side of the redirect. Parameters are stored on the server in a cache file (see `{PassthroughDir} in =configure`).
+The `$passthru` parameter allows you to pass the parameters that were passed to the current query on to the target URL, as long as it is another URL on the same TWiki installation. If `$passthru` is set to a true value, then TWiki will save the current URL parameters, and then try to restore them on the other side of the redirect. Parameters are stored on the server in a cache file.
 
 Note that if `$passthru` is set, then any parameters in `$url` will be lost when the old parameters are restored. if you want to change any parameter values, you will need to do that in the current CGI query before redirecting e.g.
 
@@ -998,13 +1196,14 @@ example:
 
     TWiki::Func::addToHEAD('PATTERN_STYLE','<link id="twikiLayoutCss" rel="stylesheet" type="text/css" href="%PUBURL%/TWiki/PatternSkin/layout.css" media="all" />')
 
-### <a name="expand_CommonVariables( $text, $"></a> expandCommonVariables( $text, $topic, $web ) -&gt; $text
+### <a name="expand_CommonVariables( $text, $"></a> expandCommonVariables( $text, $topic, $web, $meta ) -&gt; $text
 
 Expand all common `%VARIABLES%`
 
 - `$text` - Text with variables to expand, e.g. `'Current user is %WIKIUSER%'`
 - `$topic` - Current topic name, e.g. `'WebNotify'`
 - `$web` - Web name, optional, e.g. `'Main'`. The current web is taken if missing
+- `$meta` - topic meta-data to use while expanding (Since TWiki::Plugins::VERSION 1.2)
 
 Return: `$text` Expanded text, e.g. `'Current user is TWikiGuest'`
 
@@ -1014,7 +1213,7 @@ See also: expandVariablesOnTopicCreation
 
 ### <a name="renderText( $text, $web ) - $tex"></a> renderText( $text, $web ) -&gt; $text
 
-Render text from TWiki markup into XHTML as defined in [[TWiki.TextFormattingRules|TWiki/TextFormattingRules]]
+Render text from TWiki markup into XHTML as defined in [[%SYSTEMWEB%.TextFormattingRules|SYSTEMWEB/TextFormattingRules]]
 
 - `$text` - Text to render, e.g. `'*bold* text and =fixed font='`
 - `$web` - Web name, optional, e.g. `'Main'`. The current web is taken if missing
@@ -1190,6 +1389,49 @@ note that the URL
 `http://server:port/bin/rest/EmptyPlugin/restExample`
 
 (ie, with the name of the function instead of the alias) will not work.
+
+### <a name="decode_FormatTokens($str) - $une"></a> decodeFormatTokens($str) -&gt; $unencodedString
+
+TWiki has an informal standard set of tokens used in `format` parameters that are used to block evaluation of paramater strings. For example, if you were to write
+
+`%MYTAG{format="%WURBLE%"}%`
+
+then %WURBLE would be expanded **before** %MYTAG is evaluated. To avoid this TWiki uses escapes in the format string. For example:
+
+`%MYTAG{format="$percntWURBLE$percnt"}%`
+
+This lets you enter arbitrary strings into parameters without worrying that TWiki will expand them before your plugin gets a chance to deal with them properly. Once you have processed your tag, you will want to expand these tokens to their proper value. That's what this function does.
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Escape: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>
+
+Note thath $quot, $percnt and $dollar all work \*even if they are followed by alphanumeric characters\*. You have been warned!
+
+**Since:** TWiki::Plugins::VERSION 1.2
 
 ## <a name="Searching"></a> Searching
 
@@ -1407,7 +1649,7 @@ Return: the parsed Web/Topic pair
 
 Note that hierarchical web names ([[SubWeb]]) are only available if hierarchical webs are enabled in `configure`.
 
-The symbols %USERSWEB%, %SYSTEMWEB%, %DOCWEB%, %MAINWEB% and %TWIKIWEB% can be used in the input to represent the web names set in $cfg\{UsersWebName\} and $cfg\{SystemWebName\}. For example:
+The symbols %USERSWEB%, %SYSTEMWEB% and %DOCWEB% can be used in the input to represent the web names set in $cfg\{UsersWebName\} and $cfg\{SystemWebName\}. For example:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -1427,6 +1669,20 @@ The symbols %USERSWEB%, %SYSTEMWEB%, %DOCWEB%, %MAINWEB% and %TWIKIWEB% can be u
     <td><tt>( 'TWiki', 'Topic' ) </tt></td>
   </tr>
 </table>
+
+## <a name="StaticMethod &lt;strong&gt;sanitize_Attachmen"></a> [[StaticMethod]] \*sanitizeAttachmentName `($fname) -> ($fileName,$origName)`
+
+Given a file namer, sanitise it according to the rules for transforming attachment names. Returns the sanitised name together with the basename before sanitisation.
+
+Sanitation includes filtering illegal characters and mapping client file names to legal server names.
+
+**Since:** TWiki::Plugins::VERSION 1.2
+
+### <a name="space_OutWikiWord( $word, $sep )"></a> spaceOutWikiWord( $word, $sep ) -&gt; $text
+
+Spaces out a wiki word by inserting a string (default: one space) between each word component. With parameter $sep any string may be used as separator between the word components; if $sep is undefined it defaults to a space.
+
+**Since:** TWiki::Plugins::VERSION 1.2
 
 ### <a name="writeWarning( $text )"></a> writeWarning( $text )
 
@@ -1466,6 +1722,14 @@ Return: `$text` Formatted time string
 </table>
 
 **Since:** TWiki::Plugins::VERSION 1.020 (26 Feb 2004)
+
+### <a name="isTrue( $value, $default ) - $bo"></a> isTrue( $value, $default ) -&gt; $boolean
+
+Returns 1 if `$value` is true, and 0 otherwise. "true" means set to something with a Perl true value, with the special cases that "off", "false" and "no" (case insensitive) are forced to false. Leading and trailing spaces in `$value` are ignored.
+
+If the value is undef, then `$default` is returned. If `$default` is not specified it is taken as 0.
+
+**Since:** $TWiki::Plugins::VERSION 1.2
 
 ### <a name="is_ValidWikiWord ( $text ) - $bo"></a> isValidWikiWord ( $text ) -&gt; $boolean
 
@@ -1535,6 +1799,59 @@ Return: `$path` URL path of TWiki scripts, e.g. `"/cgi-bin"`
 **WARNING:** you are strongly recommended **not** to use this function, as the \{ScriptUrlPaths\} URL rewriting rules will not apply to urls generated using it.
 
 **Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
+
+### <a name="get_OopsUrl( $web, $topic, $temp"></a> getOopsUrl( $web, $topic, $template, $param1, $param2, $param3, $param4 ) -&gt; $url
+
+Compose fully qualified 'oops' dialog URL
+
+- `$web` - Web name, e.g. `'Main'`. The current web is taken if empty
+- `$topic` - Topic name, e.g. `'WebNotify'`
+- `$template` - Oops template name, e.g. `'oopsmistake'`. The 'oops' is optional; 'mistake' will translate to 'oopsmistake'.
+- `$param1` ... `$param4` - Parameter values for %PARAM1% ... %PARAMn% variables in template, optional
+
+Return: `$url` URL, e.g. `"http://example.com:80/cgi-bin/oops.pl/ Main/WebNotify?template=oopslocked&param1=joe"`
+
+**DEPRECATED** since 1.1, the recommended approach is to throw an [[oops exception|Main/TWikiOopsExceptionDotPm]].
+
+       use Error qw( :try );
+
+       throw TWiki::OopsException(
+          'toestuckerror',
+          web => $web,
+          topic => $topic,
+          params => [ 'I got my toe stuck' ]);
+
+(this example will use the `oopstoestuckerror` template.)
+
+If this is not possible (e.g. in a REST handler that does not trap the exception) then you can use `getScriptUrl` instead:
+
+       my $url = TWiki::Func::getScriptUrl($web, $topic, 'oops',
+                template => 'oopstoestuckerror',
+                param1 => 'I got my toe stuck');
+       TWiki::Func::redirectCgiQuery( undef, $url );
+       return 0;
+
+**Since:** TWiki::Plugins::VERSION 1.000 (7 Dec 2002)
+
+### <a name="permissionsSet( $web ) - $boolea"></a> permissionsSet( $web ) -&gt; $boolean
+
+Test if any access restrictions are set for this web, ignoring settings on individual pages
+
+- `$web` - Web name, required, e.g. `'Sandbox'`
+
+**Since:** TWiki::Plugins::VERSION 1.000 (27 Feb 2001)
+
+**DEPRECATED** since 1.2 - use `getPreferencesValue` instead to determine what permissions are set on the web, for example:
+
+    foreach my $type qw( ALLOW DENY ) {
+        foreach my $action qw( CHANGE VIEW ) {
+            my $pref = $type . 'WEB' . $action;
+            my $val = getPreferencesValue( $pref, $web ) || '';
+            if( $val =~ /\S/ ) {
+                print "$pref is set to $val on $web\n";
+            }
+        }
+    }
 
 ### <a name="get_PublicWebList( ) - @webs"></a> getPublicWebList( ) -&gt; @webs
 

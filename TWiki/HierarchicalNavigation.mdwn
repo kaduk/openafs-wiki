@@ -30,7 +30,7 @@ Two sections are defined:
 
 ### <a name="Displaying the Parent - Current"></a><a name="Displaying the Parent - Current "></a> Displaying the Parent - Current - Children block
 
-> %INCLUDE{"%TWIKIWEB%.HierarchicalNavigation" section="all"}%
+> %INCLUDE{"%SYSTEMWEB%.HierarchicalNavigation" section="all"}%
 
 generates:
 
@@ -44,7 +44,7 @@ When included in [[WebLeftBar]] (using default Pattern skin) this is styled to:
 ### <a name="Displaying child topics"></a> Displaying child topics
 
 > *Child topics:*
->     %INCLUDE{"%TWIKIWEB%.HierarchicalNavigation" section="children"}%
+>     %INCLUDE{"%SYSTEMWEB%.HierarchicalNavigation" section="children"}%
 
 generates:
 

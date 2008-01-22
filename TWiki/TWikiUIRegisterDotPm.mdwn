@@ -6,14 +6,12 @@ User registration handling.
   <ul>
     <li><a href="#Package =TWiki::UI::Register="> Package TWiki::UI::Register</a><ul>
         <li><a href="#StaticMethod <strong>register_cgi</strong> ($se"> StaticMethod register_cgi <tt>($session)</tt></a></li>
-        <li><a href="#StaticMethod <strong>passwd_cgi</strong> ($sess"> StaticMethod passwd_cgi <tt>($session)</tt></a></li>
         <li><a href="#StaticMethod <strong>bulkRegister</strong> ($se"> StaticMethod bulkRegister <tt>($session)</tt></a></li>
-        <li><a href="#StaticMethod *register_AndNext*"> StaticMethod registerAndNext <tt>($session,$tempUserDir)</tt></a></li>
+        <li><a href="#StaticMethod *register_AndNext*"> StaticMethod registerAndNext <tt>($session)</tt></a></li>
         <li><a href="#StaticMethod <strong>register</strong> ($sessio"> StaticMethod register <tt>($session)</tt></a></li>
         <li><a href="#StaticMethod <strong>resetPassword</strong> ($s"> StaticMethod resetPassword <tt>($session)</tt></a></li>
         <li><a href="#StaticMethod <strong>changePassword</strong> ($"> StaticMethod changePassword <tt>($session)</tt></a></li>
-        <li><a href="#StaticMethod *verify_EmailAddres"> StaticMethod verifyEmailAddress <tt>($session,$tempUserDir)</tt></a></li>
-        <li><a href="#StaticMethod *finish*"> StaticMethod finish <tt></tt></a></li>
+        <li><a href="#StaticMethod *verify_EmailAddres"> StaticMethod verifyEmailAddress <tt>($session)</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -21,25 +19,13 @@ User registration handling.
 
 ## <a name="StaticMethod &lt;strong&gt;register_cgi&lt;/strong&gt; ($se"></a> [[StaticMethod]] **register\_cgi** `($session)`
 
-`register` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
-
-## <a name="StaticMethod &lt;strong&gt;passwd_cgi&lt;/strong&gt; ($sess"></a> [[StaticMethod]] **passwd\_cgi** `($session)`
-
-`passwd` command handler. This method is designed to be invoked via the `TWiki::UI::run` method.
+`register` command handler. This method is designed to be invoked via the `UI::run` method.
 
 ## <a name="StaticMethod &lt;strong&gt;bulkRegister&lt;/strong&gt; ($se"></a> [[StaticMethod]] **bulkRegister** `($session)`
 
 Called by [[ManageCgiScript]]::bulkRegister (requires authentication) with topic = the page with the entries on it.
 
-1. Makes sure you are an admin user ;)
-2. Calls TWiki::Data::DelimitedFile (delimiter =&gt; '|', content =&gt;textReadFromTopic)
-3. ensures requiredFieldsPresent()
-4. starts a log file
-5. calls registerSingleBulkUser() for each row
-6. writes output to log file, sets [[TWiki.TOPICPARENT|TWiki/TOPICPARENT]] back to page with entries on it.
-7. redirects to log file
-
-## <a name="StaticMethod &lt;strong&gt;register_AndNext*"></a><a name="StaticMethod *register_AndNext&lt;/strong&gt; "></a> [[StaticMethod]] **registerAndNext** `($session,$tempUserDir)`
+## <a name="StaticMethod &lt;strong&gt;register_AndNext*"></a><a name="StaticMethod *register_AndNext&lt;/strong&gt; "></a> [[StaticMethod]] **registerAndNext** `($session)`
 
 This is called when action = register or action = ""
 
@@ -51,12 +37,9 @@ Hopefully we will get workflow integrated and rewrite this to be table driven
 
 This is called through: [[TWikiRegistration]] -&gt; [[RegisterCgiScript]] -&gt; here
 
-1. gets rows and fields from the query
-2. calls \_validateRegistration() to ensure required fields correct, else [[OopsException]]
-
 ## <a name="StaticMethod &lt;strong&gt;resetPassword&lt;/strong&gt; ($s"></a> [[StaticMethod]] **resetPassword** `($session)`
 
-Generates a password. Mails it to them and asks them to change it. Entry point intended to be called from TWiki::UI::run
+Generates a password. Mails it to them and asks them to change it. Entry point intended to be called from UI::run
 
 ## <a name="StaticMethod &lt;strong&gt;changePassword&lt;/strong&gt; ($"></a> [[StaticMethod]] **changePassword** `($session)`
 
@@ -72,25 +55,11 @@ The [[NoPasswdUser]] case is not handled.
 
 An admin user can change other user's passwords.
 
-## <a name="StaticMethod &lt;strong&gt;verify_EmailAddres"></a> [[StaticMethod]] \*verifyEmailAddress `($session,$tempUserDir)`
+## <a name="StaticMethod &lt;strong&gt;verify_EmailAddres"></a> [[StaticMethod]] \*verifyEmailAddress `($session)`
 
 This is called: on receipt of the activation password -&gt; [[RegisterCgiScript]] -&gt; here
 
-1. calls \_reloadUserContext(activation password)
+1. calls \_loadPendingRegistration(activation password)
 2. throws oops if appropriate
 3. calls emailRegistrationConfirmations
 4. still calls 'oopssendmailerr' if a problem, but this is not done uniformly
-
-## <a name="StaticMethod &lt;strong&gt;finish*"></a><a name="StaticMethod *finish&lt;/strong&gt; "></a> [[StaticMethod]] **finish** ``
-
-Presently this is called in [[RegisterCgiScript]] directly after a call to verify. The separation is intended for the [[RegistrationApprovals]] functionality
-
-1. calls \_reloadUserContext (throws oops if appropriate)
-2. calls createUserTopic()
-3. if using the htpasswdFormatFamily, calls \_addUserToPasswordSystem
-4. calls the misnamed [[RegistrationHandler]] to set cookies
-5. calls addUserToMapping
-6. writes the logEntry (if wanted :/)
-7. redirects browser to 'oopsregthanks'
-
-reloads the context by code these two are separate in here to ease the implementation of administrator approval

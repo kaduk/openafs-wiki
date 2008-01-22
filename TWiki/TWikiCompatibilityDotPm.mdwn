@@ -6,6 +6,8 @@ Support for compatibility with old TWiki versions. Packaged separately because 9
   <ul>
     <li><a href="#Package =TWiki::Compatibility="> Package TWiki::Compatibility</a><ul>
         <li><a href="#StaticMethod *upgrade_CategoryTa"> StaticMethod upgradeCategoryTable <tt>($session,$web,$topic,$meta,$text) -&gt; $text</tt></a></li>
+        <li><a href="#migrate_ToFileAttachmentMacro ("> migrateToFileAttachmentMacro ( $session, $meta, $text ) -&gt; $text</a></li>
+        <li><a href="#upgradeFrom1v0beta ( $session, $"> upgradeFrom1v0beta ( $session, $meta ) -&gt; $text</a></li>
       </ul>
     </li>
   </ul>
@@ -16,3 +18,9 @@ Support for compatibility with old TWiki versions. Packaged separately because 9
 Upgrade old style category table
 
 May throw TWiki::OopsException
+
+## <a name="migrate_ToFileAttachmentMacro ("></a><a name="migrate_ToFileAttachmentMacro ( "></a> migrateToFileAttachmentMacro ( $session, $meta, $text ) -&gt; $text
+
+Migrate old HTML format
+
+## <a name="upgradeFrom1v0beta ( $session, $"></a> upgradeFrom1v0beta ( $session, $meta ) -&gt; $text

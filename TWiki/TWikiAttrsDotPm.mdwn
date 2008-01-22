@@ -1,14 +1,12 @@
 # <a name="Package &lt;code&gt;TWiki::Attrs="></a> Package =TWiki::Attrs
 
-Class of attribute sets, designed for parsing and storing attribute values from a TWiki tag e.g. `%TAG{fred='bad' "sad" joe="mad"}%`
+Class of attribute sets, designed for parsing and storing attribute values from a TWiki tag e.g. `%TAG{"joe" fred="bad" joe="mad"}%`
 
-An attribute set is a map containing an entry for each parameter. The default parameter (unnamed quoted string) is named `_DEFAULT` in the map.
+An attribute set is a hash containing an entry for each parameter. The default parameter (unnamed quoted string) is named `_DEFAULT` in the hash.
 
-Attributes declared later in the string will override those of the same name defined earlier. The one exception to this is the \_DEFAULT key, where the _first_ instance of a setting is always taken.
+Attributes declared later in the string will override those of the same name defined earlier. The one exception to this is the \_DEFAULT key, where the _first_ instance is always taken.
 
-As well as standard TWiki syntax (parameter values double-quoted) it also parses single-quoted values, unquoted spaceless values, spaces around the =, and commas as well as spaces separating values, though none of these alternatives is advertised in documentation and the extended syntax can be turned off by passing the 'strict' parameter to `new`.
-
-This class replaces the old TWiki::extractNameValuePair and TWiki::extractParameters.
+As well as the default TWiki syntax (parameter values double-quoted) this class also parses single-quoted values, unquoted spaceless values, spaces around the =, and commas as well as spaces separating values. The extended syntax has to be enabled by passing the `$friendly` parameter to `new`.
 
 <div>
   <ul>
@@ -17,8 +15,6 @@ This class replaces the old TWiki::extractNameValuePair and TWiki::extractParame
         <li><a href="#ObjectMethod <strong>isEmpty</strong> () -> boo"> ObjectMethod isEmpty <tt>() -&gt; boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>remove</strong> ($key) ->"> ObjectMethod remove <tt>($key) -&gt; $value</tt></a></li>
         <li><a href="#ObjectMethod <strong>stringify</strong> () -> $"> ObjectMethod stringify <tt>() -&gt; $string</tt></a></li>
-        <li><a href="#StaticMethod <strong>extractValue</strong> () -"> StaticMethod extractValue <tt>() -&gt; $string</tt></a></li>
-        <li><a href="#ObjectMethod <strong>get</strong> ($key) -> $va"> ObjectMethod get <tt>($key) -&gt; $value</tt></a></li>
       </ul>
     </li>
   </ul>
@@ -53,36 +49,10 @@ Return false if attribute set is not empty.
 
 ## <a name="ObjectMethod &lt;strong&gt;remove&lt;/strong&gt; ($key) - $"></a> [[ObjectMethod]] **remove** `($key) -> $value`
 
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td> $key </td>
-    <td> Attribute to remove </td>
-  </tr>
-</table>
+- `$key` - Attribute to remove
 
 Remove an attr value from the map, return old value. After a call to `remove` the attribute is no longer defined.
 
 ## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; () - $s"></a> [[ObjectMethod]] **stringify** `() -> $string`
 
-Generate a printed form for the map, using standard attribute syntax, with only the single-quote extension syntax observed (no \{\} brackets, though).
-
-## <a name="StaticMethod &lt;strong&gt;extractValue&lt;/strong&gt; () -"></a> [[StaticMethod]] **extractValue** `() -> $string`
-
-Legacy support, formerly known as extractNameValuePair. This static method uses context information to determine how a value string is to be parsed. For example, if you have an attribute string like this:
-
-"abc def="ghi" jkl" def="qqq"
-
-then call extractValue( "def" ), it will return "ghi".
-
-## <a name="ObjectMethod &lt;strong&gt;get&lt;/strong&gt; ($key) - $val"></a> [[ObjectMethod]] **get** `($key) -> $value`
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td> $key </td>
-    <td> Attribute to get </td>
-  </tr>
-</table>
-
-Get an attr value from the map.
-
-Synonymous with $attrs-&gt;\{$key\}. Retained mainly for compatibility with the old [[AttrsContrib]].
+Generate a printed form for the map, using strict attribute syntax, with only the single-quote extension syntax observed (no \{\} brackets, though).

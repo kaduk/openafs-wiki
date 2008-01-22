@@ -12,6 +12,19 @@ To create your own Plugin:
 
 (none)
 
+## <a name="Plugin Settings"></a> Plugin Settings
+
+Plugin settings are stored as preferences variables. To reference a plugin setting write <code>**%&lt;plugin&gt;\_&lt;setting&gt;%**</code>, i.e. <code>**%EMPTYPLUGIN\_SHORTDESCRIPTION%**</code>
+
+- One line description, is shown in the [[TextFormattingRules]] topic:
+  - Set SHORTDESCRIPTION = Empty Plugin used as a template for new Plugins
+
+- Your own setting, for example:
+  - Set EXAMPLE = got it!
+
+- Debug plugin: ( TWiki sets `$debug` in your plugin. See output in `data/debug.txt`.)
+  - Set DEBUG = 0
+
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
 - This plugin is preinstalled, you do not need to install it.
@@ -25,7 +38,7 @@ To create your own Plugin:
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2001-2006, [[TWiki/TWikiContributor]]</td>
+    <td> © 2001-2007, [[TWiki/TWikiContributor]]</td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -33,11 +46,15 @@ To create your own Plugin:
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 01 Feb 2006 </td>
+    <td> 15942 (22 Jan 2008) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 20 May 2007 </td>
+    <td> Added renderWikiWordHandler </td>
   </tr>
   <tr>
     <td align="right"> 01 Feb 2006: </td>
@@ -60,16 +77,8 @@ To create your own Plugin:
     <td> $TWiki::Plugins::VERSION 1.1 </td>
   </tr>
   <tr>
-    <td align="right"> CPAN Dependencies: </td>
-    <td> none </td>
-  </tr>
-  <tr>
-    <td align="right"> Other Dependencies: </td>
-    <td> none </td>
-  </tr>
-  <tr>
-    <td align="right"> Perl Version: </td>
-    <td> 5.005 </td>
+    <td align="right"> Dependencies: </td>
+    <td> %$DEPENDENCIES </td>
   </tr>
   <tr>
     <td align="right"> TWiki:Plugins/Benchmark: </td>

@@ -9,6 +9,7 @@ Use the `%INCLUDE{...}%` variable to embed the content of another topic or web p
         <li><a href="#1. Display regression test resul"> 1. Display regression test results in a TWiki page</a></li>
         <li><a href="#2. Display Google's robot.txt fi"> 2. Display Google's robot.txt file</a></li>
         <li><a href="#3. Display the current time in T"> 3. Display the current time in Tokyo in a TWiki page</a></li>
+        <li><a href="#4. Include a topic _MyTopic wit"> 4. Include a topic MyTopic with two parameters</a></li>
       </ul>
     </li>
   </ul>
@@ -16,9 +17,11 @@ Use the `%INCLUDE{...}%` variable to embed the content of another topic or web p
 
 ## <a name="Syntax Example"></a> Syntax Example
 
-`%INCLUDE{ "page" pattern="reg-exp" rev="2" warn="off" section="clients" }%`
+`%INCLUDE{ "page" pattern="reg-exp" rev="2" warn="off" section="clients" PARAMETER1="value" PARAMETER2="Some value"}%`
 
-The `pattern` parameter is optional and allows you to extract some parts of a web page. Specify a [[RegularExpression]] that scans from start (`'^'`) to end and contains the text you want to keep in parenthesis, e.g., `pattern="^.*?(from here.*?to here).*"`. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table, make sure to include everything including the table end tag.
+The `pattern` parameter is optional and allows you to extract some parts of a web page. Specify a %SYSTEMWEB%.RegularExpression that scans from start (`'^'`) to end and contains the text you want to keep in parenthesis, e.g., `pattern="^.*?(from here.*?to here).*"`. You need to make sure that the integrity of a web page is not compromised; for example, if you include a table, make sure to include everything including the table end tag.
+
+The example parameters PARAMETER1 and PARAMETER2 will be defined as a variable within the scope of the included topic. The example parameters shown will result in %PARAMETER1% and %PARAMETER2% being defined within the included topic.
 
 [[VarINCLUDE]] explains the other parameters.
 
@@ -42,5 +45,19 @@ The `pattern` parameter is optional and allows you to extract some parts of a we
   - <code>**Tokyo: %INCLUDE\{"http://TWiki.org/cgi-bin/xtra/tzdate?tz=Asia/Tokyo" pattern="^.\*&lt;\\!--tzdate:date--&gt;(.\*?)&lt;\\!--/tzdate:date--&gt;.\*"\}%**</code>
 - You get:
   - Tokyo:
+
+### <a name="4. Include a topic _MyTopic with"></a> 4. Include a topic MyTopic with two parameters
+
+You include the topic with this line
+
+      %INCLUDE{ "MyTopic" BETTER="apples" WORSE="Oranges"}%
+
+An example of a very simple MyTopic could contain
+
+       * I like %BETTER% better than %WORSE%.
+
+The result would be
+
+- I like apples better than oranges.
 
 **_Related Topics:_** [[VarINCLUDE]], [[UserDocumentationCategory]]

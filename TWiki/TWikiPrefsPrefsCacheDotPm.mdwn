@@ -13,10 +13,11 @@ As each cache level is built, the values are copied down from the parent cache l
   <ul>
     <li><a href="#Package =TWiki::Prefs::_PrefsCac"> Package TWiki::Prefs::PrefsCache</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($prefs,$paren"> ClassMethod new <tt>($prefs,$parent,$type,$web,$topic,$prefix)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>finalise</strong> ($parent"> ObjectMethod finalise <tt>($parent)</tt></a></li>
         <li><a href="#ObjectMethod *load_PrefsFromTopi"> ObjectMethod loadPrefsFromTopic <tt>($web,$topic,$keyPrefix)</tt></a></li>
         <li><a href="#ObjectMethod *load_PrefsFromText"> ObjectMethod loadPrefsFromText <tt>($text,$meta,$web,$topic)</tt></a></li>
-        <li><a href="#ObjectMethod <strong>insert</strong> ($type,$ke"> ObjectMethod insert <tt>($type,$key,$val)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>insert</strong> ($type,$ke"> ObjectMethod insert <tt>($type,$key,$val) -&gt; $boolean</tt></a></li>
         <li><a href="#ObjectMethod <strong>stringify</strong> ($html,"> ObjectMethod stringify <tt>($html,\%shown) -&gt; $text</tt></a></li>
       </ul>
     </li>
@@ -36,6 +37,10 @@ Creates a new Prefs object.
 
 If the specified topic is not found, returns an empty object.
 
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
+
 ## <a name="ObjectMethod &lt;strong&gt;finalise&lt;/strong&gt; ($parent"></a> [[ObjectMethod]] **finalise** `($parent)`
 
 Finalise preferences in this cache, by freezing any preferences listed in FINALPREFERENCES at their current value.
@@ -50,11 +55,13 @@ Loads preferences from a topic. All settings loaded are prefixed with the key pr
 
 Loads preferences from text and optional metadata. All settings loaded are prefixed with the key prefix (default ''). If `$meta` is defined, then metadata will be taken from that object. Otherwise, `$text` will be parsed to extract meta-data.
 
-## <a name="ObjectMethod &lt;strong&gt;insert&lt;/strong&gt; ($type,$ke"></a> [[ObjectMethod]] **insert** `($type,$key,$val)`
+## <a name="ObjectMethod &lt;strong&gt;insert&lt;/strong&gt; ($type,$ke"></a> [[ObjectMethod]] **insert** `($type,$key,$val) -> $boolean`
 
 Adds a key-value pair of the given type to the object. Type is Set or Local. Callback used for the Prefs::Parser object, or can be used to add arbitrary new entries to a prefs cache.
 
 Note that attempts to redefine final preferences will be ignored.
+
+Returns 1 if the preference was defined, 0 otherwise.
 
 ## <a name="ObjectMethod &lt;strong&gt;stringify&lt;/strong&gt; ($html,"></a> [[ObjectMethod]] **stringify** `($html,\%shown) -> $text`
 

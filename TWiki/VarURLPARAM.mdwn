@@ -27,7 +27,7 @@
   </tr>
   <tr>
     <td><code>encode="entity"</code></td>
-    <td> Encode special characters into HTML entities. See [[Main/WebHome#VarENCODE]] for more details. </td>
+    <td> Encode special characters into HTML entities. See [[Main/VarENCODE]] for more details. </td>
     <td> no encoding </td>
   </tr>
   <tr>
@@ -52,8 +52,10 @@
   </tr>
 </table>
 - Example: `%URLPARAM{"skin"}%` returns `print` for a `.../view/%WEB%/%INCLUDINGTOPIC%?skin=print` URL
-- **_%X% Note:_** URL parameters passed into HTML form fields must be entity [[ENCODEd|Main/WebHome#VarENCODE]].
+- **_%X% Note:_** URL parameters passed into HTML form fields must be entity [[ENCODEd|Main/VarENCODE]].
 - **_%X% Note:_** Double quotes in URL parameters must be escaped when passed into other TWiki variables.%BR% Example: `%SEARCH{ "%URLPARAM{ "search" encode="quotes" }%" noheader="on" }%`
 - **_%X% Note:_** When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
 - **_%X% Note:_** There is a risk that this variable could be misused for cross-site scripting.
-- Related: [[ENCODE|Main/WebHome#VarENCODE]], [[SEARCH|Main/WebHome#VarSEARCH]], [[FormattedSearch]], [[QUERYSTRING|Main/WebHome#VarQUERYSTRING]]
+- Related: [[ENCODE|Main/VarENCODE]], [[SEARCH|Main/VarSEARCH]], [[FormattedSearch]], [[QUERYSTRING|Main/VarQUERYSTRING]]
+
+**_Note_** If you have `%URLPARAM{` in the value of a URL parameter, it will be modified to `%<nop>URLPARAM{`. This is to prevent an infinite loop during expansion.

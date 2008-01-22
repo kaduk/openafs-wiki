@@ -4,7 +4,7 @@
 
 - Section boundaries are defined with `%STARTSECTION{}%` and `%ENDSECTION{}%`.
 - Sections may be given a name to help identify them, and/or a type, which changes how they are used.
-  - `type="section"` - the default, used for a generic section, such as a named section used by [[INCLUDE|Main/WebHome#VarINCLUDE]].
+  - `type="section"` - the default, used for a generic section, such as a named section used by [[INCLUDE|Main/VarINCLUDE]].
   - `type="include"` - like `%STARTINCLUDE%` ... `%STOPINCLUDE%` except that you can have as many include blocks as you want (`%STARTINCLUDE%` is restricted to only one).
   - `type="templateonly"` - start position of text to be removed when a template topic is used. This is used to embed text that you _do not_ want expanded when a new topic based on the template topic is created. See [[TWikiTemplates]] for more information.
 - Syntax: `%STARTSECTION{"name"}% ................ %ENDSECTION{"name"}%`
@@ -29,4 +29,4 @@
 </table>
 - **_%X% Note:_** If a section is not given a name, it will be assigned one. Unnamed sections are assigned names starting with `_SECTION0` for the first unnamed section in the topic, `_SECTION1` for the second, etc..
 - **_%X% Note:_** You can define nested sections. It is not recommended to overlap sections, although it is valid in TWiki. Use named sections to make sure that the correct START and ENDs are matched. Section markers are **not** displayed when a topic is viewed.
-- Related: [[ENDSECTION|Main/WebHome#VarENDSECTION]], [[INCLUDE|Main/WebHome#VarINCLUDE]], [[NOP|Main/WebHome#VarNOP]], [[STARTINCLUDE|Main/WebHome#VarSTARTINCLUDE]], [[STOPINCLUDE|Main/WebHome#VarSTOPINCLUDE]]
+- Related: [[ENDSECTION|Main/VarENDSECTION]], [[INCLUDE|Main/VarINCLUDE]], [[NOP|Main/VarNOP]], [[STARTINCLUDE|Main/VarSTARTINCLUDE]], [[STOPINCLUDE|Main/VarSTOPINCLUDE]]

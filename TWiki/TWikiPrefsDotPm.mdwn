@@ -10,18 +10,21 @@ The module also maintains a separate of the preferences found in every topic and
   <ul>
     <li><a href="#Package =TWiki::Prefs="> Package TWiki::Prefs</a><ul>
         <li><a href="#ClassMethod <strong>new</strong> ($session[,$ca"> ClassMethod new <tt>($session[,$cache])</tt></a></li>
-        <li><a href="#ObjectMethod *finish*"> ObjectMethod finish <tt></tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
         <li><a href="#ObjectMethod <strong>pushPreferences</strong> ("> ObjectMethod pushPreferences <tt>($web,$topic,$type)</tt></a></li>
         <li><a href="#ObjectMethod *push_WebPreference"> ObjectMethod pushWebPreferences <tt>($web)</tt></a></li>
         <li><a href="#ObjectMethod *push_GlobalPrefere"> ObjectMethod pushGlobalPreferences <tt>()</tt></a></li>
         <li><a href="#ObjectMethod *push_PreferencesVa"> ObjectMethod pushPreferencesValues <tt>($type,\%values)</tt></a></li>
         <li><a href="#ObjectMethod <strong>mark</strong> ()"> ObjectMethod mark <tt>()</tt></a></li>
-        <li><a href="#ObjectMethod <strong>resetTo</strong> ($mark)"> ObjectMethod resetTo <tt>($mark)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>restore</strong> ($mark)"> ObjectMethod restore <tt>($mark)</tt></a></li>
         <li><a href="#ObjectMethod *get_PreferencesVal"> ObjectMethod getPreferencesValue <tt>($key) -&gt; $value</tt></a></li>
         <li><a href="#ObjectMethod <strong>isFinalised</strong> ($key"> ObjectMethod isFinalised <tt>($key)</tt></a></li>
         <li><a href="#ObjectMethod *get_TopicPreferenc"> ObjectMethod getTopicPreferencesValue <tt>($key,$web,$topic) -&gt; $value</tt></a></li>
         <li><a href="#get_TextPreferencesValue( $key,"> getTextPreferencesValue( $key, $text, $meta, $web, $topic ) -&gt; $value</a></li>
-        <li><a href="#ObjectMethod *get_WebPreferences"> ObjectMethod getWebPreferencesValue <tt>($key,$web) -&gt; $value</tt></a></li>
+        <li><a href="#ObjectMethod *get_WebPreferences"> ObjectMethod getWebPreferencesValue <tt>($key,$web) -&gt; $value</tt></a><ul>
+            <li><a href="#set_PreferencesValue($name, $val"> setPreferencesValue($name, $val)</a></li>
+          </ul>
+        </li>
         <li><a href="#ObjectMethod stringify() -> $tex">ObjectMethod stringify() -&gt; $text</a></li>
       </ul>
     </li>
@@ -32,11 +35,9 @@ The module also maintains a separate of the preferences found in every topic and
 
 Creates a new Prefs object. If $cache is defined, it will be pushed onto the stack.
 
-## <a name="ObjectMethod &lt;strong&gt;finish*"></a><a name="ObjectMethod *finish&lt;/strong&gt; "></a> [[ObjectMethod]] **finish** ``
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
 
-Complete processing after the client's HTTP request has been responded to.
-
-1. breaking circular references to allow garbage collection in persistent environments
+Break circular references.
 
 ## <a name="ObjectMethod &lt;strong&gt;pushPreferences&lt;/strong&gt; ("></a> [[ObjectMethod]] **pushPreferences** `($web,$topic,$type)`
 
@@ -63,7 +64,7 @@ Push a new preference level using type and values given
 
 Return a marker representing the current top of the preferences stack. Used to remember the stack when new web and topic preferences are pushed during a topic include.
 
-## <a name="ObjectMethod &lt;strong&gt;resetTo&lt;/strong&gt; ($mark)"></a> [[ObjectMethod]] **resetTo** `($mark)`
+## <a name="ObjectMethod &lt;strong&gt;restore&lt;/strong&gt; ($mark)"></a> [[ObjectMethod]] **restore** `($mark)`
 
 Resets the preferences stack to the given mark, to recover after a topic include.
 
@@ -94,6 +95,12 @@ Get a preference value from the settings in the text (and/or optional $meta). Th
 Recover a preferences value that is defined in the webhome topic of a specific web.. Does not recover user or global settings, but does recover settings from containing webs.
 
 Intended for use in protections mechanisms, where the order doesn't match the prefs stack.
+
+### <a name="set_PreferencesValue($name, $val"></a> setPreferencesValue($name, $val)
+
+Set a preferences value. The preference is set in the context at the top of the preference stack, whatever the current state may be.
+
+The preference is not serialised.
 
 ## <a name="ObjectMethod stringify() - $text"></a> [[ObjectMethod]] stringify() -&gt; $text
 

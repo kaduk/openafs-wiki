@@ -4,6 +4,6 @@
 
 - Same format qualifiers as `%GMTIME%`
 - Syntax: `%SERVERTIME{"format"}%`
-- Example: `%SERVERTIME{"$hou:$min"}%` expands to `12:00`
+- Example: `%SERVERTIME{"$hou:$min"}%` expands to `12:09`
 - **_%X% Note:_** When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
-- Related: [[DISPLAYTIME|Main/WebHome#VarDISPLAYTIME]], [[GMTIME|Main/WebHome#VarGMTIME]], [[SERVERTIME|Main/WebHome#VarSERVERTIME]]
+- Related: [[DISPLAYTIME|Main/VarDISPLAYTIME]], [[GMTIME|Main/VarGMTIME]], [[SERVERTIME|Main/VarSERVERTIME]]

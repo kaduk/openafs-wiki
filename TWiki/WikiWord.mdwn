@@ -25,6 +25,21 @@ WikiWords are styled like this because:
 - Uppercase letter(s)
 - Optional lowercase or uppercase letter(s) or number(s)
 
+WikiWord syntax in [[Extended Backus.Naur form|Main/Wikipedia:Extended_Backus_Naur_Form]] (EBNF):
+
+        wikiWord        = upperLetters , lowerNumLetters , upperLetters , { alphaNum } ;
+        upperLetters    = upperCase , { upperCase } ;
+        lowerNumLetters = lowerNum , { lowerNum } ;
+        alphaNum        = upperCase | lowerCase | digit ;
+        lowerNum        = lowerCase | digit ;
+        lowerCase       = "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i"
+                        | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r"
+                        | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
+        upperCase       = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I"
+                        | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R"
+                        | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" ;
+        digit           = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
+
 ## <a name="Good examples of _WikiWords"></a> Good examples of WikiWords
 
 - [[WikiWord]]
@@ -47,10 +62,11 @@ When you write the name of a topic, it becomes a link. There are more ways
 
 - To write a custom **link label**, use bracket notation: `[[TWikiAccessControl][access control]]` - this becomes: [[access control|Main/TWikiAccessControl]]
 - To link to a topic in **another web**, write: `Sandbox.WebSearch` - this becomes: [[WebSearch]]
+- To link to a topic in **another subweb** write: `Sandbox.Subweb.WebSearch`.
 - To show the web name in the link use bracket notation: `[[Sandbox.WebHome]]` - this becomes: [[Sandbox.WebHome|Sandbox/WebHome]]
 - To link to a topic on **another Wiki site**, use: `TWiki:Main/WebHome` - this becomes: TWiki:Main/WebHome (sites are defined in the [[InterwikiPlugin]])
-- To link to a part on the **same page**, write a "#" followed by the name of an anchor. The anchor is a "#" followed by a name which must be a WikiName. Example `#MyAnchor`. You can also link to an anchor on another page: `TWiki.WebHome#MyAnchor`.
-- To link to a header on the **same page**, write a "#" followed by the header text, with spaces replaced by underscores (and `!` removed): `[[#Good_examples_of_WikiWords]]` becomes: [[#Good_examples_of_WikiWords|Main/WebHome#Good_examples_of_WikiWords]]. You can also link to a header on another page: `TWiki.WebHome#Disclaimer` becomes: [[WebHome#Disclaimer]].
+- To link to a part on the **same page**, write a "#" followed by the name of an anchor. The anchor is a "#" followed by a name which must be a WikiName. Example `#MyAnchor`. You can also link to an anchor on another page: `%SYSTEMWEB%.WebHome#MyAnchor`.
+- To link to a header on the **same page**, write a "#" followed by the header text, with spaces replaced by underscores (and `!` removed): `[[#Good_examples_of_WikiWords]]` becomes: [[#Good_examples_of_WikiWords|Main/WebHome#Good_examples_of_WikiWords]]. You can also link to a header on another page: `%SYSTEMWEB%.WebHome#Disclaimer` becomes: %SYSTEMWEB%.WebHome#Disclaimer.
 
 ## <a name="Hints"></a> Hints
 
@@ -64,5 +80,8 @@ When you write the name of a topic, it becomes a link. There are more ways
 - Turn acronyms into WikiWords, i.e. take `FaqIndex` for a "FAQ index" topic.
 - It is possible to turn off the auto-linking of WikiWords and to rely only on the bracket notation. See NOAUTOLINK setting in [[TWikiPreferences#Default_Web_Preferences]].
 - %X% When linking to a WebHome topic _in another web_, the link will be rendered as the name of the web, e.g. `Sandbox.WebHome` becomes [[Sandbox|Sandbox/WebHome]].
+- %X% Dots (.) are used as seperators between webs, subwebs, and topics. It is not possible to use dots in topic names. TWiki does not attempt to guess if a dot could be part of a topic name.
 
 **_Related Topics:_** [[WikiSyntax]], [[TextFormattingRules]]
+
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.ArthurClemens, TWiki:Main.CrawfordCurrie
