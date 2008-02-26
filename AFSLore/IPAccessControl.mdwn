@@ -152,11 +152,13 @@ When I ran into this problem, one suggestion was
 - Wait a while and it'll start working.
 I imagine those folks didn't know about the flag and didn't know how long to wait. I guess most folks would have to wait between 0 and 2 hours, depending on luck. I don't know about you, but I don't like waiting for a bus if I don't know when it's going to show up.
 Another suggestion was
+<br />
 - Restart the appropriate fileserver process.
 I guess those folks don't have any users they have to worry about pissing off, or only have two or three volumes on their file server.
 You can probably tell I didn't like either of the above suggestions.
 At that point I thought, "Gee, I bet if I move a volume onto a different file server with the ACL already in place, the new file server will need to grok all the volume's ACLs right then." And I was right. And the angels started to sing. :)
 So my hurry-up suggestion:
+<br />
 - [vos move](http://www.openafs.org/pages/doc/AdminReference/auarf268.htm#HDRVOS_MOVE) the affected volume to another file server.
 
 You should now be working. That was easy, wasn't it? :)
