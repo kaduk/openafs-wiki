@@ -1,0 +1,30 @@
+-- [[StevenJenkins]] - 10 Mar 2008
+
+The Demand Attach fileserver is a new architecture for the fileserver, volserver, and salvager that brings volumes online as as needed, and takes volumes offline when they have been idle. This greatly speeds up the fileserver startup and shutdown times.
+
+The full presentation on the Demand Attach fileserver was given by Tom Keiser at the 2007 AFS Workshop. This entry is merely a summary of key information.
+
+- The format of the volume and vnode structures did not change; however, the bosserver, fileserver, volserver, salvageserver, salvager, and salvage must be rebuilt (using the --enable-demand\_attach\_fs argument to configure).
+- The fs instance must be removed, and a replacement dafs instance added. See the bos\_create(8) man page for details
+- There are new options to the fileserver. Note in particular that unless -vattachpar is larger than 1, many of the parallel I/O advantages of DAFS will not be enabled (Tom Keiser notes that 1 thread per partition is the logical extreme during startup; however, during shutdown, more threads can be used, so a value of 128 is not unreasonable). However, tuning this value for a given environment will require experimentation.
+
+The key engine for offlining volumes is the VLRU (Volume Least Recently Used) queue. This is a garbage collection facility which automatically offlines unused volumes in the background. The process of offlining a volume from the "attached" state to the"pre-attached" state is called "soft detachment".
+
+VLRU works in a manner similar to a generational garbage collector. There are five queues on which volumes can reside:
+
+1. new
+2. intermediate
+3. old
+4. held: queue for volumes which are administratively barred from VLRU activity
+5. candidate: queue for volumes which have not been accessed recently, and thus are canddidates for soft detachment
+
+The new, intermediate, and old queues are generational queues for active volumes, with the state transitions among them controlled by the following inactivity rules:
+
+- candidate-&gt;new activity present
+- new-&gt;candidate (1\*vlruthresh) minutes since last transition; no activity
+- new-&gt;mid (2\*vlruthresh) minutes since last transition; activity present
+- mid-&gt;old (4\*vlruthresh) minutes since last transition; activity present
+- old-&gt;mid 92\*vlruthresh) minutes since last transition; no activity
+- mid-&gt;new (1\*vlruthresh) minutes since last transition; no activity
+
+Note that the VLRU engine can be controlled and tuned by the vlrudisable, vlruthresh, vlruinterval, and vlrumax parameters to the fileserver.
