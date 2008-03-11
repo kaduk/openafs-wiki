@@ -13,18 +13,20 @@ The key engine for offlining volumes is the VLRU (Volume Least Recently Used) qu
 VLRU works in a manner similar to a generational garbage collector. There are five queues on which volumes can reside:
 
 1. new
-2. intermediate
+2. mid
 3. old
 4. held: queue for volumes which are administratively barred from VLRU activity
 5. candidate: queue for volumes which have not been accessed recently, and thus are canddidates for soft detachment
 
-The new, intermediate, and old queues are generational queues for active volumes, with the state transitions among them controlled by the following inactivity rules:
+The new, mid, and old queues are generational queues for active volumes, with the state transitions among them controlled by the following inactivity rules:
 
 - candidate-&gt;new activity present
 - new-&gt;candidate (1\*vlruthresh) minutes since last transition; no activity
 - new-&gt;mid (2\*vlruthresh) minutes since last transition; activity present
 - mid-&gt;old (4\*vlruthresh) minutes since last transition; activity present
-- old-&gt;mid 92\*vlruthresh) minutes since last transition; no activity
+- old-&gt;mid (2\*vlruthresh) minutes since last transition; no activity
 - mid-&gt;new (1\*vlruthresh) minutes since last transition; no activity
+
+The idea is that as a volume is used, it gets pushed into a 'more used' generation (i.e., 'old' is 'more used' than 'mid', which is 'more used' than 'new'). this provides a weighting so that volumes which are used more will tend to be in the mid and old queues, not in the new or candidate queues, thus staying in online.
 
 Note that the VLRU engine can be controlled and tuned by the vlrudisable, vlruthresh, vlruinterval, and vlrumax parameters to the fileserver.
