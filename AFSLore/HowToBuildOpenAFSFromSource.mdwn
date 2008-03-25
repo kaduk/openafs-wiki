@@ -1,18 +1,18 @@
-This is a guide on how to build [[OpenAFS]] from source code. Note that [[OpenAFS]] pre-built binaries are available on the [[OpenAFS]] site and are available as prebuilt packages for many platforms. These instructions may be useful for you if you need to build [[OpenAFS]] from source.
+These are notes on how to build [[OpenAFS]] from source code. Note that [[OpenAFS]] pre-built binaries are available on the [[OpenAFS]] site and are available as prebuilt packages for many platforms. These instructions may be useful for you if you need to build [[OpenAFS]] from source.
 
 ### <a name="Requirements"></a> Requirements
 
-Tools
+#### <a name="Tools"></a> Tools
 
 - cvs client
 - autoconf
 - automake
 - perl 5.6
-- gcc (versions?)
+- gcc
 - GNU make
 - lex/yacc (flex/bison)
 
-Libraries
+#### <a name="Libraries"></a> Libraries
 
 - libc
 - kerberos, optional, but recommended
@@ -41,20 +41,30 @@ See the CVSWeb interface at <http://www.openafs.org/frameset/cgi-bin/cvsweb.cgi/
 
 To check out the stable branch:
 
-       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs checkout -r openafs-stable-1_4_x openafs
+       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs checkout -r openafs-stable-1_4_x -d openafs-stable-1_4_x openafs
+
+This will create a source tree in a directory named openafs-stable-1\_4\_x.
 
 To check out the development branch:
 
-       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs checkout -r openafs-devel-1_5_x openafs
+       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs checkout -r openafs-devel-1_5_x -d openafs-devel-1_5_x openafs
 
-This will create a source tree in a directory named openafs.
+This will create a source tree in a directory named openafs-devel-1\_5\_x.
 
-Run the regen.sh script to create the configure script.
+Next, step into your sandbox and run the regen.sh script to create the configure script.
 
-       cd openafs
+       cd openafs-stable-1_4_x.
        ./regen.sh
 
 ### <a name="Building the Binaries"></a> Building the Binaries
+
+#### <a name="Modern Paths"></a> Modern Paths
+
+To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path,
+
+       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script)
+       make
+       sudo make install
 
 #### <a name="Transarc Paths"></a> Transarc Paths
 
@@ -85,14 +95,55 @@ The 'make install' command does not work with Transarc paths. You will have to m
       # cp -r i386_linux26/dest/lib /usr/afsws
       # cp -r i386_linux26/dest/root.server/usr/afs/* /usr/afs
 
-#### <a name="Stardard Paths"></a> Stardard Paths
+### <a name="Running the Test Suite"></a> Running the Test Suite
 
-To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path,
+[[OpenAFS]] includes a suite of basic test scripts in the src/tests directory. The tests directory also contains a utility called afs-newcell.pl to create a test cell on a single host. You will need to already have a kerberos server running with an AFS principal and an admin principal. You should also have a separate partition mounted as /vicepa for the test volumes. See the src/tests/afs-newcell.pl for details.
 
-       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script)
-       make
-       sudo make install
+The paths to the binaries and AFS configuration is are written to src/tests/OpenAFS/Dirpaths.pm when the tests are built. This means you must run 'make all' in src/tests before attempting to use afs-newcell.pl. The afs-newcell.pl program must be run as root.
 
-### <a name="Initial testing"></a> Initial testing
+      cd src/tests
+      make all
+      sudo perl afs-newcell.pl
+
+The afs-newcell.pl program will prompt for the required cell configuration unless started with the --batch options. You will need to specify the name of your new cell, the host name of this machine, the target partition id (a for /vicepa), and the username of the AFS administrator (which is admin by default). You will also need to provide the type of Kerberos server to be used, the name of the Kerberos realm (which can be different than the AFS cell name), and the location of the keytab file that contains the AFS server encryption key and the admin's encryption key. Finally, you may provide any server options for the AFS database and fileservers.
+
+    Server options:
+    What server name should be used? [host.domain.com]
+    What cellname should be used? [testcell]
+    What vice partition? [a]
+    What administrator username? [admin]
+
+    Kerberos options:
+    Which Kerberos is to be used? [MIT]
+    What Kerberos realm? [TESTCELL]
+    What keytab file? [/usr/afs/etc/krb5.keytab]
+
+    Database Server options:
+    ptserver options: []
+    vlserver options: []
+
+    Fileserver options:
+    Use DAFS fileserver (requires DAFS build option)? (yes/no) [no]
+    fileserver options: []
+    volserver options: []
+    salvageserver options: []
+    salvager options: []
+
+The parameters are optionally saved to a script called run-afs-newcell.sh, in case you need to re-run the setup. Also, the Kerberos parameters for the new cell are saved in the file run-tests.conf. If all goes well, the servers should be running and the client loaded. You should be able to see your new cell at /afs/testcell (or whatever you called your cell). Your cell will have a few, empty test volumes that you should be able to see with a vos listvldb.
+
+Run the run-tests script to run the AFS test suite. The program can be run as an ordinary user. The keytab file specified when afs-newcell was run will be used to authenticate the admin user for the tests.
+
+      ./run-tests -all
+
+The output will look something like this,
+
+    Authenticating to cell testcell.
+    ...
+    Running creat1
+    Running mkdir1
+    Running mkdir2
+    ....
+    -----------------------------------------------------------
+    Failed test(s) were:  write-large write-ro ...
 
 -- [[MichaelMeffie]] - 09 Oct 2007
