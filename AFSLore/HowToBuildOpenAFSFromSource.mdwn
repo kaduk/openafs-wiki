@@ -97,7 +97,7 @@ The 'make install' command does not work with Transarc paths. You will have to m
 
 ### <a name="Running the Test Suite"></a> Running the Test Suite
 
-[[OpenAFS]] includes a suite of basic test scripts in the src/tests directory. The tests directory also contains a utility called afs-newcell.pl to create a test cell on a single host. You will need to already have a kerberos server running with an AFS principal and an admin principal. You should also have a separate partition mounted as /vicepa for the test volumes. See the src/tests/afs-newcell.pl for details.
+[[OpenAFS]] includes a suite of basic test scripts in the src/tests directory. The tests directory also contains a utility called afs-newcell.pl to create a test cell on a single host. You will need to already have a kerberos server running with an AFS principal and an admin principal. You should also have a partitions mounted as /vicepa and /vicepb for the test volumes. See the src/tests/afs-newcell.pl for details.
 
 The paths to the binaries and AFS configuration is are written to src/tests/OpenAFS/Dirpaths.pm when the tests are built. This means you must run 'make all' in src/tests before attempting to use afs-newcell.pl. The afs-newcell.pl program must be run as root.
 
@@ -105,7 +105,9 @@ The paths to the binaries and AFS configuration is are written to src/tests/Open
       make all
       sudo perl afs-newcell.pl
 
-The afs-newcell.pl program will prompt for the required cell configuration unless started with the --batch options. You will need to specify the name of your new cell, the host name of this machine, the target partition id (a for /vicepa), and the username of the AFS administrator (which is admin by default). You will also need to provide the type of Kerberos server to be used, the name of the Kerberos realm (which can be different than the AFS cell name), and the location of the keytab file that contains the AFS server encryption key and the admin's encryption key. Finally, you may provide any server options for the AFS database and fileservers.
+The afs-newcell.pl program will prompt for the required cell configuration unless started with the --batch options. You will need to specify the name of your new cell, the host name of this machine, the target partition id (a for /vicepa), and the username of the AFS administrator (which must be named 'admin' for the current pts tests).
+
+You will also need to provide the type of Kerberos server, the name of the Kerberos realm (which can be different than the AFS cell name), and the location of the keytab file that contains the AFS server encryption key and the admin's encryption key. Finally, you may provide any server options for the AFS database and fileservers.
 
     Server options:
     What server name should be used? [host.domain.com]
@@ -146,4 +148,4 @@ The output will look something like this,
     -----------------------------------------------------------
     Failed test(s) were:  write-large write-ro ...
 
--- [[MichaelMeffie]] - 09 Oct 2007
+-- [[MichaelMeffie]] - 26 Mar 2008
