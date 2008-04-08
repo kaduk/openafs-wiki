@@ -60,6 +60,7 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.49 What is a Clone?"> 3.49 What is a Clone?</a></li>
         <li><a href="#3.50 What is a Shadow?"> 3.50 What is a Shadow?</a></li>
         <li><a href="#3.51 Can I authenticate to my af"> 3.51 Can I authenticate to my afs cell using multiple kerberos Realms?</a></li>
+        <li><a href="#3.52  Is it a good idea to store"> 3.52 Is it a good idea to store mail in AFS?</a></li>
       </ul>
     </li>
   </ul>
@@ -1190,3 +1191,9 @@ and recieve the same privileges as if you had run:
 
     kinit you@YOUR.CELL.NAME
     aklog
+
+### <a name="3.52  Is it a good idea to store"></a> 3.52 Is it a good idea to store mail in AFS?
+
+Some people have expressed the opinion that this is not a good idea. Assuming that a modern (one-file-per-message) format is being used, the concrete reasons to avoid storing mail in AFS include:
+
+1. AFS is not designed to provide good performance under the sort of concurrent accesses that occur when many mail server machines share a common space in AFS; see <http://www.openafs.org/pipermail/openafs-info/2007-June/026621.html> for more information. This does not apply to situations where there is a single mail server for a particular user.
