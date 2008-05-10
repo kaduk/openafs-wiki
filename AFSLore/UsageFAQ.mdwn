@@ -465,9 +465,9 @@ See [[IPAccessControl]].
 
 ### <a name="2.21 What meaning do the owner,"></a><a name="2.21 What meaning do the owner, "></a> 2.21 What meaning do the owner, group, and mode bits have in AFS?
 
-In order to appear more like a local filesystem, AFS will faithfully store the numeric UID (owner), GID (group), and permission bits (read, write, and execute for user, group, and other), as well as the setuid, setgid, and sticky bits. For the most part, these values are simply recorded and reported back when requested. However, in some instances the fileserver and/or cache manager will make access control decisions based in part on these values.
+In order to appear more like a local filesystem, AFS will faithfully store the numeric UID (owner), GID (group), for both files and directories, as well as the permission bits (read, write, and execute for user, group, and other, plus setuid, setgid, and sticky bits) for files. Note that permission bits for directories are not stored.
 
-The following is believed to be a complete list of those circumstances. Below, "owner" refers to the user whose numeric pts identity is equal to the owner of the file or directory.
+For the most part, these values are simply recorded and reported back when requested. However, in some instances the fileserver and/or cache manager will make access control decisions based in part on these values. The following is believed to be a complete list of those circumstances. Below, "owner" refers to the user whose numeric pts identity is equal to the owner of the file or directory; this might not bear any relationship to the UNIX UID associated with the client process that created the file.
 
 - implicit ACLs
   - the owner of the root directory of a volume has implicit administer (a) rights on all directories in the volume
