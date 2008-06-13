@@ -15,9 +15,11 @@
 
 The following are items known to be in progress, and, where available, a point of contact.
 
-- [[DisconnectedOperation]] provides the ability to use AFS while not connected to a network.
+- [[WindowsIFS]] -- Implement AFS as a Windows installable file system instead of as a virtual SMB server. In Progress. Contact [[JeffreyAltman]]
 
-- [[NestedGroups]] allows PTS groups to have other groups as members. Code available, waiting for [[OpenAFS]] port. In CVS head, not in 1.2 branch.
+- [[WindowsAFSServers]] - Stabilize the AFS Servers running on Microsoft Windows. Contact [[JeffreyAltman]]
+
+- [[DisconnectedOperation]] provides the ability to use AFS while not connected to a network.
 
 - [[FreeBSDPort]] -- Server ported. Cache manager available, not stable yet.
 
@@ -28,10 +30,6 @@ The following are items known to be in progress, and, where available, a point o
 - [[OpenBSDPort]] -- In progress. Cache manager available, not stable yet.
 
 - [[AutoConf]] with automake too. In progress. Contact [[DerrickBrashear]].
-
-- [[DynamicRoot]] (/afs) support utilizing AFSDB DNS resource records is available for all UNIX ports. Windows includes similar [[FreelanceClient]] support.
-
-- [[AtSysConfig]] allows @sys expansion from a list. Substantially complete. Contact [[TedMcCabe]].
 
 - [[AmandaBackup]] -- Support for backup using [Amanda](http://www.amanda.org). In progress. Contact [[MitchCollinsworth]].
 
@@ -45,17 +43,11 @@ The following are items which have been proposed, but which are not yet in progr
 
 - [[SupportIPv6]]
 
-- [[KerberosV]] -- Support Kerberos version 5 and additional encryption type support. Contact [[JeffreyHutzelman]]
-
-- [[LargeFiles]] -- Support for files over 2GB. The concensus seems to be that beyond supporting big files, large volumes already work fine. Actively in progress. R Lindsay Todd, Hartmut Reuter, and Nathan Neulinger working on this.
-
 - [[MultipleClones]] provides support for more than one backup and read-only volume for a single read/write.
 
 - [[SelectableUbikTieBreaker]] -- proposes to change lowest IP metric to something administrator-selectable.
 
 - [[VolumeDumpEditor]] -- Need tool to allow editing volume dumps.
-
-- [[WindowsIFS]] -- Implement AFS as a Windows installable file system instead of as a virtual SMB server.
 
 - [[BetterServerPreferences]] allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact [[DerrickBrashear]]. _Do this for vldb servers too, or is that a separate project? [[TedAnderson]]_
 
@@ -64,6 +56,8 @@ The following are items which have been proposed, but which are not yet in progr
 - [[PartitionUUID]] -- Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact [[DerrickBrashear]].
 
 - [[ByteRangeLocks]] would improve support for applications that use them especially those on Windows platforms.
+
+\* Revamping the Callback mechanism. See discussion on afs3-standardization at openafs.org mailing list.
 
 ----
 
