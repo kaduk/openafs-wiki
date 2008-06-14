@@ -1,0 +1,23 @@
+-- [[JeffreyAltman]] - 14 Jun 2008
+
+This page provides a partial list of the work that must be done to update the AFS Servers on the Microsoft Windows platform.
+
+## <a name="NetRestrict and _NetInfo configu"></a> [[NetRestrict]] and [[NetInfo]] configuration files
+
+The Windows AFS Servers (nor the client) has any support for the AFS [[NetRestrict]] and [[NetInfo]] files. This makes it very difficult to deploy servers on Windows systems which often include a variety of network adapters beyond just the physical adapter.
+
+## <a name="The NT vol back end"></a> The NT vol back end
+
+The NT vol back end (ntops.c) is based upon the Namei back end for UNIX but is designed to work with NTFS. Over the years the UNIX Namei back end has received a number of bug fixes and improvements. We need to verify that none of these changes must also be implemented for the NT back end. [link to namei\_ops.c cvs history](http://www.openafs.org/cgi-bin/cvsweb.cgi/openafs/src/vol/namei_ops.c?only_with_tag=MAIN)
+
+## <a name="Missing command line parameters"></a> Missing command line parameters
+
+The Audit Log functioning as well as many of the Rx configuration options and [[SysLog]] support do not exist on Microsoft Windows. Ignoring [[SysLog]] because we don't have a [[SysLog]] package, the rest of the options should be activated.
+
+## <a name="Miscellaneous"></a> Miscellaneous
+
+There are a number of random comments in the code choosing arbitrary values for Windows. Must replace arbitrary decisions with values based upon the actual capabilities of the system.
+
+## <a name="Ignore kaserver"></a> Ignore kaserver
+
+Assume that kaserver does not exist. Instead, we will count on the presence of either Active Directory or some external krb5 kdc.
