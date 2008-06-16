@@ -1,0 +1,147 @@
+-- [[JeffreyAltman]] - 16 Jun 2008
+
+The AFS File Server request throughput is limited by its current architecture which dedicates one thread per request for the lifetime of the request. Due to the fact that threads may become blocked on disk I/O and (more importantly) on Rx RPCs (VL\_\*, PR\_\*, RXAFSCB\_\*) the dedicated threads are frequently idle when they could be performing real work. The AFS File Server is therefore incapable of taking advantage of the CPU, disk I/O, and network I/O resources available to it.
+
+A more effective architecture is one that is event-driven (or work-flow based). In such an architecture, the File Server would queue requests that are likely to block on I/O or Rx RPCs. The processing thread would then be free to begin processing a new incoming Rx request or continue processing an existing Rx request that has returned to the ready state.
+
+This design is not currently possible because the Rx RPC application programming interfaces only provide for synchronous operations. The following is a proposal to add support for asynchronous requests. This proposal was developed in conjunction with Tom Keiser.
+
+## <a name="Provide an infrastructure for ma"></a> Provide an infrastructure for making Rx event-driven.
+
+Most of Rx is geared towards a procedural paradigm. Extend Rx to provide several new primitives to allow for operations to be performed in an event-driven manner. Rx has a notion of events presently, but it is designed specifically to provide timeout-based event firing.
+
+- Generalize the existing rxevent data structure to support asynchronous events in addition to timeout events.
+
+- Provide a new API to create non-epoch event queues
+
+- Provide a new API to release events blocked on a queue
+
+- Provide a new API to block a call object on an Rx event queue
+
+- Presently, Rx worker threads dispatch [[RxRPC]] call objects as they arrive. Generalize the worker thread dispatch interface to dispatch any arbitrary event when it becomes ready for processing.
+
+- The rx\_call object will now contain a pointer to an event object. This will be used by asynchronous calls to permit rescheduling of long-lived RPCs.
+
+- When designing the new APIs, consider the work that was performed by SNA for the instrumentation framework so that future consolidation efforts require minimal effort.
+
+- New form event objects will have two methods of being processed. First, via a callback function pointer. Secondly, via a synchronous waiter interface.
+
+## <a name="Add Asynchronous RX RPC server i"></a> Add Asynchronous RX RPC server interface.
+
+The present design is completely procedural. When an RPC call is ready to be serviced, a server stub is called. This stub unmarshals the incoming call parameters. Once the parameters are ready, the actual function which services the RPC is called. Upon return of this function, out parameters are marshalled, and the response is sent to the caller. This mode of operation is not generic enough to deal with cases where an in-progress RPC must be suspended pending the result of a long-lived operation (such as an RPC call to the ptserver). This project phase will attempt to decouple these operations so that a server thread may be freed up during the execution of the latent operation.
+
+- When calls are ready to be serviced, an event object will be enqueued. This event object can be dispatched when a worker thread becomes available. Worker threads will use the synchronous waiter interface to block awaiting calls to service. This change in behavior will, in effect, unify the SQE and rxevent mechanisms.
+
+- A new "async" keyword will be added to Rxgen. When present, this will emit a special server-side RPC stub. The asynchronous server stub will not automatically marshal output upon return of the user-provided servicing routine. Instead, it will check the state of the event object bound to the Rx call
+
+object. If the event object is in the blocked state, then the subroutine will return immediately with no action. Otherwise, the the output arguments will be marshalled, and a response packet sent back to the caller.
+
+To do:
+
+- add an async\_done flag and a async\_state integer to rx\_call object; provide getter/setter interfaces
+- modify rxi\_ServerProc() to check call-&gt;done before running after proc and ending call (otherwise assume call has been placed on a blocked queue by user)
+- add new rx interface to allow user to move an unblocked, partially finished call back onto the head of the sqe list
+- modify rxi\_ReceivePacket() to initialize async\_state to zero and async\_done flag to 1 for new server call case (so that legacy synchronous calls continue to work without modification)
+
+## <a name="Add Asynchronous RX RPC client i"></a> Add Asynchronous RX RPC client interface.
+
+The rxgen procedure generator would be modified to optionally produce Asynchronous versions of the existing Synchronous procedure calls. Starting with the RXAFS\_xxxx calls used for file server operations. The asynchronous calls would behave similar to the existing calls with the following changes:
+
+- Provide a non-blocking version of rx\_NewCall() which returns an error code when all channels in a Rx connection object are in use.
+
+- After a message is XDR encoded, instead of calling rxi\_EndCall() an asynchronous rxi\_EndCallAsync() would be called. rxi\_EndCallAsync() would send the message and either immediately return an error or would return a handle to the outstanding call.
+
+- A new rx\_AsyncCallWait() function would be added to the RX library. This function would be passed an existing handle returned by
+
+rxi\_EndCallAsync() and would permit the caller to check the return status and if desired to block on the response. On the backend, this will use the synchronous event waiter interface from Section 1.
+
+- A new rx\_FetchCompletedCall() function would be added to the RX library. This function would be used to retrieve the next completed asynchronous call. This function will be used to feed a task to an idle worker thread. This function can include parameters that can be used to filter the responses based upon the type of call to permit specialized worker threads. A parameter determines whether or not the call should block or not.
+
+- Instead of waking up blocked threads when a response is received from a peer as is done for the existing synchronous call model, RX will queue completed asynchronous calls for later querying by rx\_FetchCompletedCall().
+
+- Implement asynchronous versions of multi\_RXAFS\_xxx calls.
+
+- Develop asynchronous version of pr\_GetCPS() and pr\_GetHostCPS().
+
+To do:
+
+- define an async event handler object and associated getter/setters [1]
+- add async event handler pointer to rx\_call object; provide getter/setter interfaces
+- non-blocking version of rx\_NewCall() and associated changes to rxi\_NewCall()
+- modify rxi\_ServerProc() to run callback function for client call types
+- run a server thread pool, even if we're just a client (as a convenient way to service async event callback functions)
+- make rx\_NewCall take an rs\_async\_event object pointer (NULL value implying synchronous call)
+- modify rxgen to optionally emit async client stubs -- the async start stub will XDR encode and then calls rx\_FlushWrite() [i _think_ we can safely ignore blocking related to TQ\_BUSY]; the async finish stub will XDR decode and [[EndCall]].
+- modify call timeout event handler to call async event handler, if there is one
+
+[1] async event:
+
+rationale: make it future-proof, but only give one generalized option for now.
+
+typedef enum \{ RX\_ASYNC\_EVENT\_DO\_CALLBACK, RX\_ASYNC\_EVENT\_DO\_NIL, \} rx\_async\_event\_action\_t;
+
+typedef enum \{ RX\_ASYNC\_EVENT\_TYPE\_DONE, RX\_ASYNC\_EVENT\_TYPE\_ERROR, RX\_ASYNC\_EVENT\_TYPE\_TIMEOUT \} rx\_async\_event\_type\_t;
+
+typedef int rx\_async\_event\_callback\_func\_t(struct rx\_call \*, rx\_async\_event\_type\_t, void \*);
+
+typedef struct \{ rx\_async\_event\_callback\_func\_t \* fp; void \* rock; \} rx\_async\_event\_callback\_t;
+
+typedef struct \{ rx\_async\_event\_action\_t action; union \{ rx\_async\_event\_callback\_t callback; afs\_uint32 pad[15]; /\* simultaneously pad it on a typical cache line size, and make the struct large so we could extend in future without abi breakage \*/ \} u; \} rx\_async\_event\_t;
+
+#define rx\_async\_event\_SetupNil(event) (event)-&gt;action = RX\_ASYNC\_EVENT\_DO\_NIL
+
+#define rx\_async\_event\_SetupCallback(event, func, rock) do \{ (event)-&gt;action = RX\_ASYNC\_EVENT\_DO\_CALLBACK; (event)-&gt;u.callback.fp = (func); (event)-&gt;u.callback.rock = (rock); while (0)
+
+## <a name="Modify the File Server to use as"></a> Modify the File Server to use asynchronous RPCs.
+
+- Replace h\_GetHost\_r() [[WhoAreYou]] probes with asynchronous version. This requires breaking up h\_GetHost\_r() into pieces that are compatible with the new state machine.
+
+- Re-write [[MultiBreakCallBackAlternateAddress]]\_r() to use asynchronous version of multi\_RXAFSCB\_CallBack()
+
+- Re-write [[MultiProbeAlternateAddress]]\_r() to use asynchronous version of multi\_RXAFSCB\_ProbeUuid()
+
+- Re-write calls to [[GetCPS]] and [[GetHostCPS]] to use asynchronous versions.
+
+- Construct daemon thread that calls rx\_FetchCompletedCall() and thread pool of worker threads to which the tasks can be handed off for completion.
+
+To do:
+
+- rework host holds as an integer refcount
+- decouple ubik client structs from threads; provide a global pool of them
+- modify call stack from service routine through [[CallPreamble]] down to h\_GetHost\_r to allow returning a flag which signifies call should be blocked pending [[TellMeAboutYourself]]/WhoAreYou completion
+- modify call stack from service routine through [[CallPreamble]] down to hpr\_GetCPS to allow returning a flag which signifies call should be blocked pending ubik\_pr\_GetCPS completion
+- modify server stubs to deal with [[CallPreamble]] returning a special "not done" error code, which results in the routine returning immediately with call-&gt;async\_done set to zero
+- modify server stubs, callpreamable, and relevant parts of host package to check async state value, and potentially jump to a specific line in function (probably with a select case type of construct)
+- rework [[MultiBreakCallBack]]\_r use async client. initiate calls as quickly as possible; multi\_error case and putconn can be handled by callback function
+
+## <a name="Modify host/callback package loc"></a> Modify host/callback package locking/threading model.
+
+The existing host/callback package design assumes that a given RPC call will be serviced on the same thread from start to finish. This assumption will no longer be true with asynchronous Rx. We must modify the design to accommodate this new dynamic.
+
+- Replace host holds bit vector with a reference count
+
+- per-thread ubik client object is no longer a feasible solution. Instead, we will provide a pool of ubik client objects. Threads will allocate a new object from the pool whenever a call needs to be made.
+
+## <a name="Provide a high level Rx session"></a><a name="Provide a high level Rx session "></a> Provide a high level Rx session object.
+
+Many parts of AFS are constrained by the lack of call parallelism provided with the Rx connection object (4 simultaneous calls). This proposal will provide a new generalized high-level connection handle (which will be called an Rx session for the purposes of this discussion). A session will be a container which contains: one Rx security object; one UUID to identify the peer; an arbitrary number of protocol addresses for the peer; and an arbitrary number of Rx connection objects.
+
+- design an Rx session data structure
+
+- Write an Rx session object allocator, deallocator, initializer, and finalizer routines
+
+- Use Rx session objects in the host/callback package to allow
+
+## <a name="Provide asynchronous versions of"></a> Provide asynchronous versions of rx\_Read/rx\_Write/rx\_Readv/rx\_Writev.
+
+At present, Rx data streaming operations are synchronous. This means that data read and write RPCs will block a thread from start to finish. Over highly latent links, this could become a performance issue.
+
+## <a name="Add asynchronous support to Ubik"></a> Add asynchronous support to Ubik Client:
+
+To do:
+
+- add async event handler object pointer to ubik\_client structure
+- rework rxgen ubik\_client code to use async client stubs
+- create background thread(s) which handle ubik call timeouts
+- callback func checks return code; success can be processed inline; failures get pushed to ubik client background threads [i'm specifying background threads here in order to remove any danger of deadlock due to the fact that rx would be in the call stack twice]
+- background threads schedule new async calls against a different site, or against sync site depending on diagnosis of last call
