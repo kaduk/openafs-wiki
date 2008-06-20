@@ -1,0 +1,1465 @@
+<div>
+  <ul>
+    <li><a href="#PSetACL">PSetACL</a></li>
+    <li><a href="#PGetACL">PGetACL</a></li>
+    <li><a href="#PSetTokens">PSetTokens</a></li>
+    <li><a href="#PGetVolumeStatus">PGetVolumeStatus</a></li>
+    <li><a href="#PSetVolumeStatus">PSetVolumeStatus</a></li>
+    <li><a href="#PFlush">PFlush</a></li>
+    <li><a href="#PBogus  PNoop">PBogus &amp; PNoop</a></li>
+    <li><a href="#PGetTokens">PGetTokens</a></li>
+    <li><a href="#PUnlog">PUnlog</a></li>
+    <li><a href="#PCheckServers">PCheckServers</a></li>
+    <li><a href="#PCheckVolNames">PCheckVolNames</a></li>
+    <li><a href="#PCheckAuth">PCheckAuth</a></li>
+    <li><a href="#PFindVolume">PFindVolume</a></li>
+    <li><a href="#PViceAccess">PViceAccess</a></li>
+    <li><a href="#PGetFID">PGetFID</a></li>
+    <li><a href="#PSetCacheSize">PSetCacheSize</a></li>
+    <li><a href="#PRemoveCallback">PRemoveCallback</a></li>
+    <li><a href="#PNewCell">PNewCell</a></li>
+    <li><a href="#PListCells">PListCells</a></li>
+    <li><a href="#PRemoveMount">PRemoveMount</a></li>
+    <li><a href="#PNewStatMount">PNewStatMount</a></li>
+    <li><a href="#PGetFileCell">PGetFileCell</a></li>
+    <li><a href="#PGetWSCell">PGetWSCell</a></li>
+    <li><a href="#PMariner">PMariner</a></li>
+    <li><a href="#PGetUserCell">PGetUserCell</a></li>
+    <li><a href="#PVenusLogging">PVenusLogging</a></li>
+    <li><a href="#PGetCellStatus">PGetCellStatus</a></li>
+    <li><a href="#PSetCellStatus">PSetCellStatus</a></li>
+    <li><a href="#PFlushVolumeData">PFlushVolumeData</a></li>
+    <li><a href="#PSetSysName">PSetSysName</a></li>
+    <li><a href="#PExportAfs">PExportAfs</a></li>
+    <li><a href="#PGetCacheSize">PGetCacheSize</a></li>
+    <li><a href="#PGetVnodeXStatus">PGetVnodeXStatus</a></li>
+    <li><a href="#PSetSPrefs33">PSetSPrefs33</a></li>
+    <li><a href="#PGetSPrefs">PGetSPrefs</a></li>
+    <li><a href="#PGag">PGag</a></li>
+    <li><a href="#PTwiddleRx">PTwiddleRx</a></li>
+    <li><a href="#PSetSPrefs">PSetSPrefs</a></li>
+    <li><a href="#PStoreBehind">PStoreBehind</a></li>
+    <li><a href="#PGCPAGs">PGCPAGs</a></li>
+    <li><a href="#PGetInitParams">PGetInitParams</a></li>
+    <li><a href="#PGetCPrefs">PGetCPrefs</a></li>
+    <li><a href="#PSetCPrefs">PSetCPrefs</a></li>
+    <li><a href="#PFlushMount">PFlushMount</a></li>
+    <li><a href="#PRxStatProc">PRxStatProc</a></li>
+    <li><a href="#PRxStatPeer">PRxStatPeer</a></li>
+    <li><a href="#PGetRxkcrypt">PGetRxkcrypt</a></li>
+    <li><a href="#PSetRxkcrypt">PSetRxkcrypt</a></li>
+    <li><a href="#PSetClientContext">PSetClientContext</a></li>
+  </ul>
+</div>
+
+## <a name="PSetACL"></a> [[PSetACL]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCSETAL (1) - Set access control list </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the ACL being set </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Changed ACL, via direct writing to the wire </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the standard arguments aren't set
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetACL"></a> [[PGetACL]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETAL (2) - Get access control list </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Obtain the ACL, based on file ID </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the standard arguments aren't set
+- ERANGE - if the vnode of the file id is too large
+- return -1 - if getting the ACL failed
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed, although there is a hack to tell which type of ACL is being returned, checks the top 2-bytes to judge what type of ACL is it, only for dfs xlator ACLs </dd>
+</dl>
+
+## <a name="PSetTokens"></a> [[PSetTokens]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCSETTOK (3) - Set authentication tokens </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the krb tickets from which to set the afs tokens </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Set the Tokens for a specific cell name, unless there is none set, then default to primary </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if the ticket is either too long or too short
+- EIO - if the AFS initState is below 101
+- ESRCH - if the cell for which the Token is being set can't be found
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetVolumeStatus"></a> [[PGetVolumeStatus]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETVOLSTAT (4) - Get volume status </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> The staus of a volume(based on the FID of the volume), or an offline message/motd </dd>
+</dl>
+
+**Errors**
+
+- EINVAL: if some of the default arguments don't exist
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetVolumeStatus"></a> [[PSetVolumeStatus]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCSETVOLSTAT (5) - Set volume status </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> values to set the status at, offline message, message of the day, volume name, minimum quota, maximum quota </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Set the status of a volume, including any offline messages, a minimum quota, and a maximum quota </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the default arguments don't exist
+- EROFS - if the volume is read only, or a backup volume
+- ENODEV - if the volume can't be accessed
+- [[E2BIG]] - if the volume name, offline message, and motd are too big
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PFlush"></a> PFlush
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCFLUSH (6) - Invalidate cache entry </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Flush any information the cache manager has on an entry </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the initial arguments don't exist
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PBogus  PNoop"></a> PBogus &amp; PNoop
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCSTAT (7) - Get file status </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETTIME (13) - Make gettime call (historic) </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCPREFETCH (15) - Pre-fetch a file </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCNOP (16) - No-op (historic) </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCENGROUP (17) - Enable group access (historic) </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCDISGROUP (18) - Disable group access (historic) </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCLISTGROUPS (19) - List enabled and disabled groups (historic) </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_FPRIOSTATUS (57) - arla: set file 'prio' </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_FHGET (58) - arla: fallback getfh </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_FHOPEN (59) - arla: fallback fhopen </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_XFSDEBUG (60) - arla: controls xfsdebug </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_ARLADEBUG (61) - arla: controls arla debug </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_AVIATOR (62) - arla: debug interfac </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_XFSDEBUG_PRINT (63) - arla: print xfs status </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_CALCULATE_CACHE (64) - arla: force cache check </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_BREAKCELLBACK (65) - arla: break callback </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCWAITFOREVER (23) - Wait for dead servers forever (historic) </dd>
+</dl>
+
+## <a name="PGetTokens"></a> [[PGetTokens]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETTOK (8) - Get authentication tokens </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> An integer that corresponds to a user id, which in turn corresponds to a token </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> If the the input parameter exists, get the token that corresponds to the parameter value, if there is no token at this value, get the token for the first cell </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- EDOM - if the input parameter is out of the bounds of the available tokens
+- ENOTCONN - if there aren't tokens for this cell
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed, although it's a weird interface (from comments in code) </dd>
+</dl>
+
+## <a name="PUnlog"></a> PUnlog
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCUNLOG (9) - Invalidate tokens </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> remove tokens from a user, specified by a user id </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+
+<dl>
+  <dt> $ <strong>Side Effects</strong></dt>
+  <dd> set's the token's time to 0, which then causes it to be removed </dd>
+</dl>
+
+//////////////////////////////////////////
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCUNPAG (21) - Invalidate PAG </dd>
+</dl>
+
+///////////////////////////////////////// Unlog is the same as un-pag in [[OpenAFS]]
+
+## <a name="PCheckServers"></a> [[PCheckServers]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCCKSERV (10) - Check that servers are up </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The name of the cell that the servers will be a part of. </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Either a fast check (where it doesn't contact servers) or a local check (checks local cell only) </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- EACCES - if the user doesn't have super-user credentials
+- ENOENT - if we are unable to obtain the cell
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PCheckVolNames"></a> [[PCheckVolNames]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCCKBACK (11) - Check backup volume mappings </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Check the root volume, and then check the names if the volume check variable is set to force, has expired, is busy, or if the mount points variable is set </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PCheckAuth"></a> [[PCheckAuth]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCCKCONN (12) - Check connections for a user </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> check to see if a user has the correct authentication. If so, allow access </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if no user is specified
+- EACCES - if the user has no tokens set
+- EACCES - if the users tokens are bad
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> check the connections to all the servers specified </dd>
+</dl>
+
+## <a name="PFindVolume"></a> [[PFindVolume]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCWHEREIS (14) - Find out where a volume is located </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> find a volume, based on a volume file id </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the default arguments don't exist
+- ENODEV - if there is no such volume
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> check each of the servers specified </dd>
+</dl>
+
+## <a name="PViceAccess"></a> [[PViceAccess]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCACCESS (20) - Access using PRS_FS bits </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> check to make sure access is allowed </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the initial arguments aren't set
+- EACCES - if access is denied
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetFID"></a> [[PGetFID]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCETFID (22) - Get file ID quickly </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> get the file id of some file </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some fo the initial arguments aren't set
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetCacheSize"></a> [[PSetCacheSize]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCSETCACHESIZE (24) - Set venus cache size in 1000 units </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The size the venus cache should be set to </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Set the cache size based on user intput. If no size is given, set it to the default [[Main/OpenAFS]] cache size </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if the user doen't have super-user credentials
+- EROFS - if the cache is set to be in memory
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> recompute the general cache parameters for every single block allocated </dd>
+</dl>
+
+## <a name="PRemoveCallback"></a> [[PRemoveCallback]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCFLUSHCB (25) - Flush callback only </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Flushes callbacks, by setting the length of callbacks to one, setting the next callback to be sent to the CB_DROPPED value, and then dequeue's everything else </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the initial default arguments aren't set return's 0 - if the volume is set to read-only
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PNewCell"></a> [[PNewCell]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCNEWCELL (26) - Configure new cell </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the name of the cell, the hosts that will be a part of the cell, whether or not it's linked with another cell, the other cel it's linked with, the file server port, and the volume server port </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> creates a new cell </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- EACCES - if the user doesn't have super-user credentials
+- EINVAL - if some 'magic' var doesn't have a certain bit set
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PListCells"></a> [[PListCells]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETCELL (27) - Get cell info </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The cell index of a specific cell </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Lists the cells server names and addresses </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- EDOM - if there is no cell asked about
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PRemoveMount"></a> [[PRemoveMount]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_AFS_DELETE_MT_PT (28) - Delete mount point </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none // I DON'T THINK </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Ensure that everything is ok, before deleting the mountpoint. If not, don't delete. Delete a mount point based on a file id </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of default arguments don't exist
+- ENOTDIR - if the argument to remove is not a directory
+- ENOENT - if there is no cache to remove the mount point from
+- ENOENT - if a vcache doesn't exist
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PNewStatMount"></a> [[PNewStatMount]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_AFS_STAT_MT_PT (29) - Stat mount point </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the last component in a path, related to mountpoint that we're looking for information about </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> get the volume, and cell, as well as the link data for a mount point </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the default initial arguments aren't set
+- ENOTDIR - if the 'mount point' argument isn't a directory
+- EIO - if the link data can't be accessed
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetFileCell"></a> [[PGetFileCell]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_FILE_CELL_NAME (30) - Get cell in which file lives </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Get a cell based on a passed in on a passed in file id </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if someo f the default initial arguments aren't set
+- ESRCH - if the file isn't part of a cell
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetWSCell"></a> [[PGetWSCell]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GET_WS_CELL (31) - Get cell in which workstation lives </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Get the primary cell that the machine is a part of </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- ESRCH - if the machine isn't part of a cell, for whatever reason
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PMariner"></a> PMariner
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_AFS_MARINER_HOST (32) - Get/set mariner (cache manager monitor) host </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> depending on what whether or not a variable is set, either get the host for the cache manager monitor, or set the old address, and give it a new address </dd>
+</dl>
+
+**Errors** turn off mariner
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetUserCell"></a> [[PGetUserCell]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GET_PRIMARY_CELL (33) - Get primary cell for caller </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> get the primary cell for a certain user, based on the user's uid </dd>
+</dl>
+
+**Errors**
+
+- ESRCH - if the user corresponding to the uid doesn't have a primary cell specified
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PVenusLogging"></a> [[PVenusLogging]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_VENUSLOG (34) - Enable/Disable venus logging </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> obsoleted, perhaps should be PBogus </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - this is all the function does, perhaps this pioctl should be PBogus
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> always throws an error </dd>
+</dl>
+
+## <a name="PGetCellStatus"></a> [[PGetCellStatus]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GETCELLSTATUS (35) - Get cell status info </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the cell you want status information on </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> returns the state of the cell as defined in a struct cell </dd>
+</dl>
+
+**Errors**
+
+- EIO - the afs daemon hasn't started yet
+- ENOENT - the cell doesn't exist
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetCellStatus"></a> [[PSetCellStatus]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SETCELLSTATUS (36) - Set corresponding info </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The cell you want to set information about, and the values you want to set </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Set the state of the cell in a defined struct cell, based on whether or not [[Main/SetUID]] is allowed </dd>
+</dl>
+
+**Errors**
+
+- EIO - the afs daemon hasn't started yet
+- EACCES - the user does not have super-user credentials
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PFlushVolumeData"></a> [[PFlushVolumeData]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_FLUSHVOLUME (37) - Flush whole volume's data </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none //ALTHOUGH MAYBE A VCACHE CONTAINING WHICH VOLUME </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Wipe everything on the volume. Dependent on which platform this is is for, as to how it's done </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - some of the initial default arguments aren't set
+- EIO - the afs daemon hasn't started yet
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> Does not flush a file that a user has open and is using, because it will be re-created on next write. Also purges the dnlc, because things are screwed up </dd>
+</dl>
+
+## <a name="PSetSysName"></a> [[PSetSysName]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_AFS_SYSNAME (38) - Change @sys value </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> a new value for @sys </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Set the value of @sys if these things work: if the input isn't too long or if input doesn't start with .0 or ..0 </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if afsd isn't runing
+- EINVAL - if the new sysname is too large
+- EINVAL - if the new sysname causes issues(starts with a .0 or a ..0
+- EINVAL - if there is no PAG set in the credentials
+- EINVAL - if the user of a PAG can't be found
+- EINVAL - if (!(exporter = au-&gt;exporter)) // NOT SURE ON THIS
+- ENODEV - if there isn't already a system named that //I THINK
+- EACCES - if the user doesn't have super-user credentials
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> local user needs root, remote user does not (because remote user ids aren't trusted) </dd>
+</dl>
+
+## <a name="PExportAfs"></a> [[PExportAfs]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_EXPORTAFS (39) - Export afs to nfs clients </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> A struct Vic * EIOctl containing export values needed to change between nfs and afs </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> //REALLY NOT SURE ON THIS... INPUT WOULD BE NICE </dd>
+</dl>
+
+**Errors**
+
+- ENODEV - if the exporter doesn't exist
+- EACCES - if the user doesn't have super-user credentials $ **Side Effects**:none listed
+
+## <a name="PGetCacheSize"></a> [[PGetCacheSize]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETCACHEPARMS (40) - Get cache stats </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Get the cache blocks, and how many of the cache blocks there are </dd>
+</dl>
+
+**Errors**
+
+- none, seemingly
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetVnodeXStatus"></a> [[PGetVnodeXStatus]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOCGETVCXSTATUS (41) - ??? </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> get's the fid, the data version, any lock, the parent vnode, the parent unique identifier, the truncation position, the callback, cbExpires(probably when the callback expires), if any access is being made, if any files are open, any users executing or writing, the 'flock' count, the states, and the move statistic </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the initial default arguments aren't set
+- EACCES - if access to check the mode bits is denied
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetSPrefs33"></a> [[PSetSPrefs33]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SETPREFS33 (42) - Set server ranks (deprecated) </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the server preferences to be set </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set the server preferences, calling a function </dd>
+</dl>
+
+**Errors**
+
+- none
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetSPrefs"></a> [[PGetSPrefs]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GETSPREFS (43) - Get server ranks </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Get the sprefs </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- ENOENT - is the sprefrequest is too large
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGag"></a> PGag
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GAG (44) - Silence Cache Manager </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The flags to either gag or de-gag the cache manager </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set the gag flags, then show these flags </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if the user doesn't have super-user credentials
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PTwiddleRx"></a> [[PTwiddleRx]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_TWIDDLE (45) - Adjust RX knobs </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the previous settings of the 'knobs' </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> build out the struct rxp, from a struct rx </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if the user doesn't have super-user credentials
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetSPrefs"></a> [[PSetSPrefs]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SETPREFS (46) - Set server ranks </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the sprefs value to want the sprefs set to </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set the sprefs using the afs_setsprefs() function </dd>
+</dl>
+
+**Errors**
+
+- EIO - if the afs daemon hasn't started yet
+- EACCES - if the user doesn't have super-user credentials
+- EINVAL - if the struct setsprefs is too large
+- EINVAL - if the struct setsprefs multiplied by the number of servers is too large
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PStoreBehind"></a> [[PStoreBehind]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_STORBEHIND (47) Adjust store asynchrony </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> sets the sbstruct </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set asynchrony based on a file, from a struct sbstruct //I THINK </dd>
+</dl>
+
+**Errors**
+
+- EPERM - if the user doesn't have super-user credentials
+- EACCES - if there isn't enough access to not check the mode bits
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGCPAGs"></a> PGCPAGs
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GCPAGS (48) - Disable automatic PAG gc'ing </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set the gcpags to GCPAGS_USERDISABLED </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if the user doesn't have super-user credentials
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetInitParams"></a> [[PGetInitParams]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GETINITPARAMS (49) - Get initial cache manager parameters </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> return the initial cache manager parameters </dd>
+</dl>
+
+**Errors**
+
+- [[E2BIG]] - if the initial parameters are bigger than some PIGGYSIZE
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetCPrefs"></a> [[PGetCPrefs]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GETCPREFS (50) - Get client interface </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> get the information about the client interface </dd>
+</dl>
+
+**Errors**
+
+- - EIO - the afs daemon hasn't started yet
+  - EINVAL - if the request is too large for the struct that will be holding it
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetCPrefs"></a> [[PSetCPrefs]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SETCPREFS (51) - Set client interface </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The interfaces you want set </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set the callback interfaces addresses to those of the hosts </dd>
+</dl>
+
+**Errors**
+
+- EIO - the afs daemon hasn't started yet
+- EINVAL - the input is too large for the struct
+- ENOMEM - if there are too many servers
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PFlushMount"></a> [[PFlushMount]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_AFS_FLUSHMOUNT (52) - Flush mount symlink data </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The last part of a path to a mount point, which tells us what to flush </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> remove all of the mount data from the dcache regarding a certain mount point </dd>
+</dl>
+
+**Errors**
+
+- EINVAL - if some of the initial arguments aren't set
+- ENOTDIR - if the initial argument for the mount point isn't a directory
+- ENOENT - if the dcache entry isn't set
+
+## <a name="PRxStatProc"></a> [[PRxStatProc]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_RXSTAT_PROC (53) - Control process RX statistics </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The flags that control which statistics to use </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> either enable process RPCStats, disable process RPCStats, or clear the process RPCStats </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if the user doesn't have super-user credentials
+- EINVAL - if the flag input is too long
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PRxStatPeer"></a> [[PRxStatPeer]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_RXSTAT_PEER (54) - Control peer RX statistics </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> The flags that control which statistics to use </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> either enable peer RPCStats, disable peer RPCStats, or clear the peer RPCStats </dd>
+</dl>
+
+**Errors**
+
+- EACCES - if the user doesn't have super-user credentials
+- EINVAL - if the flag input is too long
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PGetRxkcrypt"></a> [[PGetRxkcrypt]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_GETRXKCRYPT (55) - Get rxkad encryption flag </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> get the value of cryptall(presumably whether or not things should be encrypted </dd>
+</dl>
+
+**Errors**
+
+- none
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+## <a name="PSetRxkcrypt"></a> [[PSetRxkcrypt]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SETRXKCRYPT (56) - Set rxkad encryption flag </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> the argument whether or not things should be encrypted </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> set whether or not things should be encrypted </dd>
+</dl>
+
+**Errors**
+
+- EPERM - if the user doesn't have super-user credentials
+- EINVAL - if the input is too big, or if the input is outside the bounds of what it can be set to
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none really, but may need to be modified at a later date to take into account other values for cryptall(beyond true and false) </dd>
+</dl>
+
+## <a name="PSetClientContext"></a> [[PSetClientContext]]
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd>[[Main/PsetClientContext]] (99) - NFS-PAG pioctl (for knfs/rmtsysd) </dd>
+  <dt><strong>Arguments</strong></dt>
+  <dd> none </dd>
+  <dt><strong>Outcome</strong></dt>
+  <dd> Setup caller's credentials, dependent on an AIX 64-bit kernel, HPUX, SUN57 64-bit kernel, SGI 64-mips, or a need for a 32-bit ioctl </dd>
+</dl>
+
+**Errors**
+
+- none
+
+<dl>
+  <dt><strong>Side Effects</strong></dt>
+  <dd> none listed </dd>
+</dl>
+
+//WASN'T SURE WHAT TO DO ABOUT THESE, ALSO NOTE THAT THE ABOVE ARE JUST THE V GROUP PIOCTL()s, I CAN DOCUMENT THE C GROUP, MOST OF WHICH ARE PBogus
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd><strong>*reserved*</strong> (239) - Reserved for code expansion </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE1 (240) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_STIE2 (241) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE3 (242) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE4 (243) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE5 (244) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE6 (245) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE7 (246) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_SITE8 (247) - Reserved for site-specific extensions </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE1 (248) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE2 (249) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE3 (250) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE4 (251) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE5 (252) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE6 (253) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE7 (254) - Reserved for implementation use </dd>
+</dl>
+
+----
+
+<dl>
+  <dt><strong>Group</strong></dt>
+  <dd> V </dd>
+  <dt><strong>Function</strong></dt>
+  <dd> VIOC_PRIVATE8 (255) - Reserved for implementation use </dd>
+</dl>
