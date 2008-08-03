@@ -2,6 +2,7 @@
   <ul>
     <li><a href="#UNIX"> UNIX</a><ul>
         <li><a href="#AFS Backend"> AFS Backend</a></li>
+        <li><a href="#BackupPC4AFS">BackupPC4AFS</a></li>
         <li><a href="#Balancing"> Balancing</a></li>
         <li><a href="#Frak"> Frak</a></li>
         <li><a href="#FSR"> FSR</a></li>
@@ -12,6 +13,7 @@
         <li><a href="#Pam-AFS-Session"> Pam-AFS-Session</a></li>
         <li><a href="#Pam-KRB5"> Pam-KRB5</a></li>
         <li><a href="#Partinfo"> Partinfo</a></li>
+        <li><a href="#PHPafsfree">PHPafsfree</a></li>
         <li><a href="#Reporting DB"> Reporting DB</a></li>
         <li><a href="#VolCreate"> VolCreate</a></li>
         <li><a href="#VolNuke"> VolNuke</a></li>
@@ -39,6 +41,12 @@
 Delegated administration of certain volumes.
 
 Available at <http://www.eyrie.org/~eagle/software/afs-backend/>
+
+## <a name="BackupPC4AFS"></a> [[BackupPC4AFS]]
+
+Backup [[OpenAFS]] volumes to a backup server's local disk or attached RAID. Supports full and multi-level incremental dumps, exponential expiry, and configuration via conf files or a web interface.
+
+Available at <http://backuppc4afs.sourceforge.net/>
 
 ## <a name="Balancing"></a> Balancing
 
@@ -99,6 +107,12 @@ Available at: <http://www.eyrie.org/~eagle/software/pam-krb5/>
 Nicely formatted partition usage report
 
 Available at: <http://www.eyrie.org/~eagle/software/partinfo/>
+
+## <a name="PHPafsfree"></a> PHPafsfree
+
+A PHP/GD AFS fileserver disk utilization grapher inspired by the original tcl/tk afsfree script.
+
+Available at: <http://www.physics.unc.edu/~stephen/phpafsfree/>
 
 ## <a name="Reporting DB"></a> Reporting DB
 
