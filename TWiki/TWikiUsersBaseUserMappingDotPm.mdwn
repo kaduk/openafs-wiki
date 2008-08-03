@@ -1,0 +1,141 @@
+# <a name="Package &lt;code&gt;TWiki::Users::_BaseUser"></a> Package =TWiki::Users::BaseUserMapping
+
+User mapping is the process by which TWiki maps from a username (a login name) to a display name and back. It is also where groups are maintained.
+
+The [[BaseMapper]] provides support for a small number of predefined users. No registration - this is a read only usermapper. It uses the mapper prefix 'BaseUserMapping\_'.
+
+## <a name="Users"></a> Users
+
+- [[TWikiAdmin]] - uses the password that was set in Configure (IF its not null)
+- [[TWikiGuest]]
+- [[UnknownUser]]
+- [[TWikiContributor]] - 1 Jan 2005
+- [[TWikiRegistrationAgent]] - 1 Jan 2005
+
+### <a name="Groups"></a> Groups
+
+- $TWiki::cfg\{SuperAdminGroup\}
+- [[TWikiBaseGroup]]
+
+<div>
+  <ul>
+    <li><a href="#Package =TWiki::Users::_BaseUser"> Package TWiki::Users::BaseUserMapping</a><ul>
+        <li><a href="#Users"> Users</a><ul>
+            <li><a href="#Groups"> Groups</a></li>
+          </ul>
+        </li>
+        <li><a href="#ClassMethod <strong>new</strong> ($session)"> ClassMethod new <tt>($session)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>finish</strong> ()"> ObjectMethod finish <tt>()</tt></a></li>
+        <li><a href="#ObjectMethod *login_TemplateName"> ObjectMethod loginTemplateName <tt>() -&gt; templateFile</tt></a></li>
+        <li><a href="#ObjectMethod <strong>handlesUser</strong> ($cUI"> ObjectMethod handlesUser <tt>($cUID,$login,$wikiname) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>login2cUID</strong> ($logi"> ObjectMethod login2cUID <tt>($login) -&gt; $cUID</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_LoginName</strong> ($c"> ObjectMethod getLoginName <tt>($cUID) -&gt; login</tt></a></li>
+        <li><a href="#ObjectMethod <strong>get_WikiName</strong> ($cU"> ObjectMethod getWikiName <tt>($cUID) -&gt; wikiname</tt></a></li>
+        <li><a href="#ObjectMethod <strong>userExists</strong> ($user"> ObjectMethod userExists <tt>($user) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachUser</strong> () -> li"> ObjectMethod eachUser <tt>() -&gt; listIteratorofcUIDs</tt></a></li>
+        <li><a href="#ObjectMethod *each_GroupMember*"> ObjectMethod eachGroupMember <tt>($group) -&gt; listIteratorofcUIDs</tt></a></li>
+        <li><a href="#ObjectMethod <strong>isGroup</strong> ($name) -"> ObjectMethod isGroup <tt>($name) -&gt; boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachGroup</strong> () ->"> ObjectMethod eachGroup <tt>() -&gt; ListIteratorofgroupnames</tt></a></li>
+        <li><a href="#ObjectMethod <strong>eachMembership</strong> ($"> ObjectMethod eachMembership <tt>($cUID) -&gt; ListIteratorofgroupsthisuserisin</tt></a></li>
+        <li><a href="#ObjectMethod <strong>isAdmin</strong> ($cUID) -"> ObjectMethod isAdmin <tt>($cUID) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>getEmails</strong> ($name)"> ObjectMethod getEmails <tt>($name) -&gt; @emailAddress</tt></a></li>
+        <li><a href="#ObjectMethod *find_UserByWikiNam"> ObjectMethod findUserByWikiName <tt>($wikiname) -&gt; listofcUIDsassociatedwiththatwikiname</tt></a></li>
+        <li><a href="#ObjectMethod <strong>checkPassword</strong> ($l"> ObjectMethod checkPassword <tt>($login,$passwordU) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>setPassword</strong> ($cUI"> ObjectMethod setPassword <tt>($cUID,$newPassU,$oldPassU) -&gt; $boolean</tt></a></li>
+        <li><a href="#ObjectMethod <strong>passwordError</strong> ()"> ObjectMethod passwordError <tt>() -&gt; $string</tt></a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="ClassMethod &lt;strong&gt;new&lt;/strong&gt; ($session)"></a> [[ClassMethod]] **new** `($session)`
+
+Construct the [[BaseUserMapping]] object
+
+## <a name="ObjectMethod &lt;strong&gt;finish&lt;/strong&gt; ()"></a> [[ObjectMethod]] **finish** `()`
+
+Break circular references.
+
+## <a name="ObjectMethod &lt;strong&gt;login_TemplateName"></a> [[ObjectMethod]] \*loginTemplateName `() -> templateFile`
+
+allows [[UserMappings]] to come with customised login screens - that should preffereably only over-ride the UI function
+
+## <a name="ObjectMethod &lt;strong&gt;handlesUser&lt;/strong&gt; ($cUI"></a> [[ObjectMethod]] **handlesUser** `($cUID,$login,$wikiname) -> $boolean`
+
+See baseclass for documentation.
+
+In the [[BaseUserMapping]] case, we know all the details of the users we specialise in.
+
+## <a name="ObjectMethod &lt;strong&gt;login2cUID&lt;/strong&gt; ($logi"></a> [[ObjectMethod]] **login2cUID** `($login) -> $cUID`
+
+Convert a login name to the corresponding canonical user name. The canonical name can be any string of 7-bit alphanumeric and underscore characters, and must correspond 1:1 to the login name. (undef on failure)
+
+## <a name="ObjectMethod &lt;strong&gt;get_LoginName&lt;/strong&gt; ($c"></a> [[ObjectMethod]] **getLoginName** `($cUID) -> login`
+
+converts an internal cUID to that user's login (undef on failure)
+
+## <a name="ObjectMethod &lt;strong&gt;get_WikiName&lt;/strong&gt; ($cU"></a> [[ObjectMethod]] **getWikiName** `($cUID) -> wikiname`
+
+Map a canonical user name to a wikiname
+
+## <a name="ObjectMethod &lt;strong&gt;userExists&lt;/strong&gt; ($user"></a> [[ObjectMethod]] **userExists** `($user) -> $boolean`
+
+Determine if the user already exists or not.
+
+## <a name="ObjectMethod &lt;strong&gt;eachUser&lt;/strong&gt; () - lis"></a> [[ObjectMethod]] **eachUser** `() -> listIteratorofcUIDs`
+
+See baseclass for documentation.
+
+## <a name="ObjectMethod &lt;strong&gt;each_GroupMember*"></a><a name="ObjectMethod *each_GroupMember&lt;/strong&gt; "></a> [[ObjectMethod]] **eachGroupMember** `($group) -> listIteratorofcUIDs`
+
+See baseclass for documentation.
+
+The basemapper implementation assumes that there are no nested groups in the basemapper.
+
+## <a name="ObjectMethod &lt;strong&gt;isGroup&lt;/strong&gt; ($name) -"></a> [[ObjectMethod]] **isGroup** `($name) -> boolean`
+
+See baseclass for documentation.
+
+## <a name="ObjectMethod &lt;strong&gt;eachGroup&lt;/strong&gt; () - _L"></a> [[ObjectMethod]] **eachGroup** <tt>() -&gt; [[ListIteratorofgroupnames]]</tt>
+
+See baseclass for documentation.
+
+## <a name="ObjectMethod &lt;strong&gt;eachMembership&lt;/strong&gt; ($"></a> [[ObjectMethod]] **eachMembership** <tt>($cUID) -&gt; [[ListIteratorofgroupsthisuserisin]]</tt>
+
+See baseclass for documentation.
+
+## <a name="ObjectMethod &lt;strong&gt;isAdmin&lt;/strong&gt; ($cUID) -"></a> [[ObjectMethod]] **isAdmin** `($cUID) -> $boolean`
+
+True if the user is an admin
+
+- is a member of the $TWiki::cfg\{SuperAdminGroup\}
+
+## <a name="ObjectMethod &lt;strong&gt;getEmails&lt;/strong&gt; ($name)"></a> [[ObjectMethod]] **getEmails** `($name) -> @emailAddress`
+
+If $name is a cUID, return their email addresses. If it is a group, return the addresses of everyone in the group.
+
+## <a name="ObjectMethod &lt;strong&gt;find_UserByWikiNam"></a> [[ObjectMethod]] \*findUserByWikiName `($wikiname) -> listofcUIDsassociatedwiththatwikiname`
+
+See baseclass for documentation.
+
+## <a name="ObjectMethod &lt;strong&gt;checkPassword&lt;/strong&gt; ($l"></a> [[ObjectMethod]] **checkPassword** `($login,$passwordU) -> $boolean`
+
+Finds if the password is valid for the given user.
+
+Returns 1 on success, undef on failure.
+
+## <a name="ObjectMethod &lt;strong&gt;setPassword&lt;/strong&gt; ($cUI"></a> [[ObjectMethod]] **setPassword** `($cUID,$newPassU,$oldPassU) -> $boolean`
+
+If the $oldPassU matches matches the user's password, then it will replace it with $newPassU.
+
+If $oldPassU is not correct and not 1, will return 0.
+
+If $oldPassU is 1, will force the change irrespective of the existing password, adding the user if necessary.
+
+Otherwise returns 1 on success, undef on failure.
+
+## <a name="ObjectMethod &lt;strong&gt;passwordError&lt;/strong&gt; ()"></a><a name="ObjectMethod &lt;strong&gt;passwordError&lt;/strong&gt; () "></a> [[ObjectMethod]] **passwordError** `() -> $string`
+
+returns a string indicating the error that happened in the password handlers TODO: these delayed error's should be replaced with Exceptions.
+
+returns undef if no error

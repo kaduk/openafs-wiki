@@ -147,6 +147,6 @@
   </tr>
 </table>
 - Example: `%SEARCH{"wiki" web="%USERSWEB%" scope="topic"}%`
-- Example with format: `%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"%` _(displays results in a table with header - [[details|Main/FormattedSearch]])_
+- Example with format: `%SEARCH{"FAQ" scope="topic" nosearch="on" nototal="on" header="| *Topic: * | *Summary: * |" format="| $topic | $summary |"}%` _(displays results in a table with header - [[details|Main/FormattedSearch]])_
 - %H% Hint: If the TWiki:Plugins.TablePlugin is installed, you may set a `%TABLE{}%` variable just before the `%SEARCH{}%` to alter the output of a search. Example: `%TABLE{ tablewidth="90%" }%`
-- Related: [[METASEARCH|Main/VarMETASEARCH]], [[TOPICLIST|Main/VarTOPICLIST]], [[WEBLIST|Main/VarWEBLIST]], [[FormattedSearch]], [[SearchHelp]], [[SearchPatternCookbook]], [[RegularExpression]]
+- Related: [[METASEARCH|Main/VarMETASEARCH]], [[TOPICLIST|Main/VarTOPICLIST]], [[WEBLIST|Main/VarWEBLIST]], [[FormattedSearch]], [[QuerySearch]], [[SearchHelp]], [[SearchPatternCookbook]], [[RegularExpression]]

@@ -30,7 +30,7 @@ The editor uses a translator module to convert from TWiki markup language (TML) 
 
 **_NOTES:_**
 
-- This plugin comes pre-installed on TWiki 4.2.0. You should only need to re-install if there is an upgrade to the plugin.
+- This plugin comes pre-installed on TWiki 4.2.X. You should only need to re-install if there is an upgrade to the plugin.
 - It requires the very latest revision of [[WysiwygPlugin]]. It will **not** work with the version shipped with TWiki 4.1.2.
 - When installed, it **replaces** the old "textarea" editor. If you want to maintain access to the old editor from the standard screens, follow the instructions under [[Configuring the buttons on TWiki < 4.2.0|Main/WebHome#InstallingOnOldTWikis]].
 
@@ -67,9 +67,9 @@ You can override this setting by defining TINYMCEPLUGIN\_DEBUG to enable some si
 
 This setting contains all the options passed to the [[TinyMCE]] editor on startup. For a full explanation of the available options, and guidance on reconfiguring [[TinyMCE]], see the [Moxicode TinyMCE Wiki](http://wiki.moxiecode.com/index.php/TinyMCE:Configuration). Note the inclusion of the Pattern Skin standard CSS files in the `content_css` setting.
 
-       * Set INIT = mode : "exact",
+       * Set INIT = mode:"textareas",
+       editor_selector : "twikiTextarea",
        save_on_tinymce_forms: true,
-       elements : "text",
        cleanup : true,
        theme : "advanced",
        convert_urls : true,
@@ -145,11 +145,11 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 16268 (22 Jan 2008) </td>
+    <td> 03 Aug 2008 17302 (04 Aug 2008) </td>
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2007 Crawford Currie <a href="http://c-dot.co.uk" target="_top">http://c-dot.co.uk</a></td>
+    <td> © 2007-2008 Crawford Currie <a href="http://c-dot.co.uk" target="_top">http://c-dot.co.uk</a></td>
   </tr>
   <tr>
     <td>   </td>
@@ -164,7 +164,35 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
     <td>  </td>
   </tr>
   <tr>
-    <td> 20 Dec 2007 </td>
+    <td align="right"> 03 Aug 2008 </td>
+    <td> TWiki 4.2.1 release version </td>
+  </tr>
+  <tr>
+    <td align="right"> 04 May 2008 </td>
+    <td> TWikibug:Item5547: Change mechanism by which TMCE recognises textareas to camp on. Use class instead of element name. </td>
+  </tr>
+  <tr>
+    <td align="right"> 12 Apr 2008 </td>
+    <td> TWikibug:Item4946: I think I have finally fixed non-iso-8859-1 character sets. Painful. </td>
+  </tr>
+  <tr>
+    <td align="right"> 31 Mar 2008 </td>
+    <td> TWikibug:Item5314: TWikibug:Item5457: Fixed pickaxe mode for editing UTF-8. Characters above 255 are converted to entitites, which is a bit of a PITA, but at least it no longer corrupts topics. <strong>NOTE: YOU MUST UPGRADE [[Main/WysiwygPlugin]] TO 16600 OR LATER</strong></td>
+  </tr>
+  <tr>
+    <td align="right"> 28 Mar 2008 </td>
+    <td> TWikibug:Item5432: added upper case file extensions for images TWikibug:Item5206: fixed expansion of simple filenames entered in image popup TWikibug:Item5462: fixed hide attachment switch </td>
+  </tr>
+  <tr>
+    <td align="right"> 25 Jan 2008 </td>
+    <td> TWikibug:Item5287: links entered through dialog weren't working </td>
+  </tr>
+  <tr>
+    <td align="right"> 24 Jan 2008 </td>
+    <td> TWikibug:Item4840: TWikibug:Item5138: UTF8 fixes, TWikibug:Item5022: made TT font size same as verbatim. Had to add a new style to do it, as TMCE didn't want to play with TT or CODE tags. TWikibug:Item5138: post-conversion of 8-bit entities to characters to aid searching, TWikibug:Item5254: non-fatal JS error fixed, TWikibug:Item5263: remove preview on WYSIWYG edit, TWikibug:Item5116: added Opera to bad browsers filter </td>
+  </tr>
+  <tr>
+    <td align="right"> 20 Dec 2007 </td>
     <td> TWikibug:Item5047: disable save and preview during page load TWikibug:Item5111: make the entry in the format menu sensitive to where the cursor is TWikibug:Item5022: made TT font size same as verbatim. Had to add a new style to do it, as TMCE didn't want to play with TT or CODE tags. </td>
   </tr>
   <tr>
@@ -231,7 +259,7 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
         </tr>
         <tr>
           <td align="left">TWiki::Plugins::WysiwygPlugin</td>
-          <td align="left">&gt;=14523</td>
+          <td align="left">&gt;=16650</td>
           <td align="left">Translator module</td>
         </tr>
       </table>

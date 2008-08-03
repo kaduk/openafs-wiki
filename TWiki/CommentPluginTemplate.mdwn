@@ -90,7 +90,7 @@ Bullet item added immediately before anchor. The input field width is passed wit
 
 > %COMMENT{type="bulletabove" inputsize="20"}%
 
-    %TMPL:DEF{PROMPT:bulletabove}%<input class="twikiInputField" name="bullet_above_item" id="bullet_above_item" type="text" size="%inputsize|40" value="%URLPARAM{"bullet_above_item"}%" />&nbsp;<input %DISABLED% type="submit" value="%button|Add item%" class="twikiButton" />%TMPL:END%
+    %TMPL:DEF{PROMPT:bulletabove}%<input class="twikiInputField" name="bullet_above_item" id="bullet_above_item" type="text" size="%inputsize|40%" value="%URLPARAM{"bullet_above_item"}%" />&nbsp;<input %DISABLED% type="submit" value="%button|Add item%" class="twikiButton" />%TMPL:END%
 
     %TMPL:DEF{OUTPUT:bulletabove}%   * %URLPARAM{"bullet_above_item"}%%POS:BEFORE%
     %TMPL:END%

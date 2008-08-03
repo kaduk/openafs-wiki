@@ -16,7 +16,7 @@ Incorrect format of search template (missing sections? There should be 4 %SPLIT%
       <tr>
         <th>Search where:</th>
         <td><input id="textbody" name="scope" type="radio" value="text" /><label for="textbody"> Text body</label>   <input id="topictitle" name="scope" type="radio" value="topic" /><label for="topictitle"> Topic title</label>   <input checked id="both" name="scope" type="radio" value="all" /><label for="both"> Both body and title</label>
-          <hr /><input id="web" name="web" type="checkbox" /><label for="web"> All public webs</label><span>(otherwise search %INCLUDINGWEB% Web only)</span></td>
+          <hr /><input id="web" name="web" type="checkbox" value="all" /><label for="web"> All public webs</label><span>(otherwise search %INCLUDINGWEB% Web only)</span></td>
       </tr>
     </table>
   </form>

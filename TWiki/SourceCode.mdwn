@@ -219,7 +219,7 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
 - `users` TWiki::Users singleton
 - `webName` Name of web found in URL path, or `web` URL parameter, or \{UsersWebName\}
 
-This package has smell factor of **32**
+This package has smell factor of **34**
 
 ## <a name="TWiki::Form"></a> [[TWiki::Form|Main/TWikiFormDotPm]]
 
@@ -494,7 +494,7 @@ Plugins may throw TWiki::OopsException. For example:
 
     Handle conversion of plural topic names to singular form.
 
-    This package has smell factor of *3*
+    This package doesn't smell
 
     ---++ [[TWikiPrefsDotPm][TWiki::Prefs]]
 
@@ -602,7 +602,7 @@ Plugins may throw TWiki::OopsException. For example:
 
     This module implements all the search functionality.
 
-    This package has smell factor of *15*
+    This package has smell factor of *14*
 
     ---++ [[TWikiStoreDotPm][TWiki::Store]]
 
@@ -751,7 +751,7 @@ Plugins may throw TWiki::OopsException. For example:
     Search .txt files in $dir for $searchString. See RcsFile::searchInWebContent
     for details.
 
-    This package has smell factor of *1*
+    This package has smell factor of *3*
 
     ---++ [[TWikiStoreSearchAlgorithmsPurePerlDotPm][TWiki::Store::SearchAlgorithms::PurePerl]]
 
@@ -797,7 +797,7 @@ Plugins may throw TWiki::OopsException. For example:
 
     UI functions for web, topic and user management
 
-    This package has smell factor of *5*
+    This package has smell factor of *4*
 
     ---++ [[TWikiUIOopsDotPm][TWiki::UI::Oops]]
 
@@ -870,7 +870,7 @@ Plugins may throw TWiki::OopsException. For example:
     The null prefix is reserver for the TWikiUserMapping for compatibility
     with old TWiki releases.
 
-    __Note:__ in all the following documentation, =$user= refers to a
+    __Note:__ in all the following documentation, =$cUID= refers to a
     *canonical user id*.
 
     This package has smell factor of *1*
@@ -887,6 +887,28 @@ Plugins may throw TWiki::OopsException. For example:
     provided mainly as an example of how to write a new password manager.
 
     This package has smell factor of *1*
+
+    ---++ [[TWikiUsersBaseUserMappingDotPm][TWiki::Users::BaseUserMapping]]
+
+    User mapping is the process by which TWiki maps from a username (a login name)
+    to a display name and back. It is also where groups are maintained.
+
+    The BaseMapper provides support for a small number of predefined users.
+    No registration - this is a read only usermapper. It uses the mapper
+    prefix 'BaseUserMapping_'.
+
+    ---++ Users
+       * TWikiAdmin - uses the password that was set in Configure (IF its not null)
+       * TWikiGuest
+       * UnknownUser
+       * TWikiContributor - 1 Jan 2005
+       * TWikiRegistrationAgent - 1 Jan 2005
+
+    ---+++ Groups
+       * $TWiki::cfg{SuperAdminGroup}
+       * TWikiBaseGroup
+
+    This package has smell factor of *2*
 
     ---++ [[TWikiUsersDotPm][TWiki::Users]]
     This package provides services for the lookup and manipulation of login and
@@ -934,8 +956,9 @@ Plugins may throw TWiki::OopsException. For example:
          login name may have many emails.
 
     *NOTE:*
-       * wherever the code references $user, its a canonical_id
+       * wherever the code references $cUID, its a canonical_id
        * wherever the code references $group, its a group_name
+       * $name may be a group or a cUID
 
     This package has smell factor of *5*
 
@@ -958,4 +981,4 @@ Plugins may throw TWiki::OopsException. For example:
 
     This package doesn't smell
 
-     There were a total of *192* smells
+     There were a total of *193* smells

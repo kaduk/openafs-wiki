@@ -177,7 +177,7 @@ The default `{TemplatePath}` will not give you the desired result if you put the
 
 ## <a name="Template Topics"></a> Template Topics
 
-The second type of template in TWiki are template topics. Template topics define the default text for new topics. There are three types of template topic:
+The second type of template in TWiki are template topics. Template topics define the default text for new topics. There are four types of template topic:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -195,6 +195,10 @@ The second type of template in TWiki are template topics. Template topics define
   <tr>
     <td>[[Main/WebTopicEditTemplate]]</td>
     <td> Default text used in a new topic. </td>
+  </tr>
+  <tr>
+    <td> &lt;MyCustomNamed&gt;Template </td>
+    <td> Whenever you create a topic ending in the word "Template", it is automatically added to the list of available templates in the "Use Template" drop down field on the WebCreateNewTopic page. </td>
   </tr>
 </table>
 

@@ -899,83 +899,91 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <td> Authors: </td>
+    <td align="right"> Authors: </td>
     <td> TWiki:Main.RafaelAlvarez, TWiki:Main.ArthurClemens </td>
   </tr>
   <tr>
-    <td> Copyright ©: </td>
+    <td align="right"> Copyright ©: </td>
     <td> 2005 Rafael Alvarez; 2006, 2007 Arthur Clemens </td>
   </tr>
   <tr>
-    <td> License: </td>
+    <td align="right"> License: </td>
     <td><a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GPL</a></td>
   </tr>
   <tr>
-    <td> Dependencies: </td>
+    <td align="right"> Dependencies: </td>
     <td> None </td>
   </tr>
   <tr>
-    <td> Plugin Version: </td>
-    <td> 24 Nov 2007 (version 1.4.8) </td>
+    <td align="right"> Plugin Version: </td>
+    <td> 03 Aug 2008 (version 1.4.10) </td>
   </tr>
   <tr>
-    <td> Change History: </td>
+    <td align="right"> Change History: </td>
     <td>  </td>
   </tr>
   <tr>
-    <td> 24 Nov 2007 </td>
+    <td align="right"> 03 Aug 2008 </td>
+    <td> 1.4.10 TWiki 4.2.1 release version </td>
+  </tr>
+  <tr>
+    <td align="right"> 13 Dec 2007 </td>
+    <td> 1.4.9 fix to the loading order of javascript files in head </td>
+  </tr>
+  <tr>
+    <td align="right"> 24 Nov 2007 </td>
     <td> 1.4.6 - 1.4.8 Arthur Clemens - Added format tokens. </td>
   </tr>
   <tr>
-    <td> 07 Oct 2007 </td>
+    <td align="right"> 07 Oct 2007 </td>
     <td> 1.4.5 Arthur Clemens - Fix html tag with show/hide controls. </td>
   </tr>
   <tr>
-    <td> 25 Sep 2007 </td>
+    <td align="right"> 25 Sep 2007 </td>
     <td> 1.4.4 Arthur Clemens - Fix rendering of headers when <code>prefix</code> is used. </td>
   </tr>
   <tr>
-    <td> 11 Jul 2007 </td>
+    <td align="right"> 11 Jul 2007 </td>
     <td> 1.4.3 Arthur Clemens - Fix invalid html when <code>prefix</code> and <code>suffix</code> is used. </td>
   </tr>
   <tr>
-    <td> 23 Jun 2007 </td>
+    <td align="right"> 23 Jun 2007 </td>
     <td> 1.4.2 Arthur Clemens - Fixed bugs with parameters <code>firststart</code> and <code>noscript</code> (since version 1.4). </td>
   </tr>
   <tr>
-    <td> 20 Jun 2007 </td>
+    <td align="right"> 20 Jun 2007 </td>
     <td> 1.4 Arthur Clemens - Updated to work without ugly inserted javascript 'init' calls. This will change nothing to the functionality, but it will produce cleaner HTML, while at the same time the twisty is still set immediately (not at page onload) and graceful fallback in case of no javascript is maintained. </td>
   </tr>
   <tr>
-    <td> 19 Jun 2006 </td>
+    <td align="right"> 19 Jun 2006 </td>
     <td> 1.3 Arthur Clemens - Updated with TWiki 4 JavaScript files. </td>
   </tr>
   <tr>
-    <td> 25 Oct 2006 </td>
+    <td align="right"> 25 Oct 2006 </td>
     <td> 1.2 New variables to set default values: <code>TWISTYSHOWLINK</code>, <code>TWISTYHIDELINK</code>, <code>TWISTYMODE</code>, <code>TWISTYREMEMBER</code>; property <code>id</code> is no longer required as this is automatically set (still recommended in some cases with <code>remember="on"</code>); property value <code>remember="off"</code> will clear a previously stored cookie; new properties <code>prefix</code> and <code>suffix</code>; JavaScript to collapse or expand all Twisties on the page. </td>
   </tr>
   <tr>
-    <td> 27 Sep 2006 </td>
+    <td align="right"> 27 Sep 2006 </td>
     <td> 1.101 Fixes JavaScript handling when AllowInlineScript in configure is not set </td>
   </tr>
   <tr>
-    <td> 11 June 2006 </td>
+    <td align="right"> 11 June 2006 </td>
     <td> 1.100 Added parameters <code>start</code>, <code>firststart</code>, <code>noscript</code> and <code>class</code>; complete JavaScript rewrite for speed </td>
   </tr>
   <tr>
-    <td> 12 Sep 2005 </td>
+    <td align="right"> 12 Sep 2005 </td>
     <td> 1.000 First Version </td>
   </tr>
   <tr>
-    <td> Home: </td>
+    <td align="right"> Home: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
   </tr>
   <tr>
-    <td> Feedback: </td>
+    <td align="right"> Feedback: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
   </tr>
   <tr>
-    <td> Appraisal: </td>
+    <td align="right"> Appraisal: </td>
     <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
   </tr>
 </table>

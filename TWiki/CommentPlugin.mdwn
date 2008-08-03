@@ -130,7 +130,7 @@ A set of default comment templates are shipped with the plugin - see also [[Comm
   </tr>
   <tr>
     <td><code>action</code></td>
-    <td> Action added to action table directly above comment box (requires TWiki:Plugins/ActionTrackerPlugin) </td>
+    <td> Action added to action table directly above comment box (see <a href="#Installation">Plugin Installation Instructions</a> below for immportant notes) </td>
   </tr>
   <tr>
     <td><code>table</code></td>
@@ -372,6 +372,8 @@ Two TWiki Preference variables are recognised by the [[CommentPlugin]]:
 
 These can be set in TWikiPreferences, in WebPreferences or in individual topics.
 
+#Installation
+
 ## <a name="Plugin Installation Instructions"></a> Plugin Installation Instructions
 
 - This plugin is pre-installed in most TWiki releases. However if you need to upgrade the plugin for any reason:
@@ -382,6 +384,11 @@ These can be set in TWikiPreferences, in WebPreferences or in individual topics.
 - Alternatively,
   - Manually resolve the dependencies listed below. None
 - Use `configure` to enable the plugin
+
+Note that if you want to use the `action` template then you must also:
+
+1. Install the TWiki:Plugins/ActionTrackerPlugin;
+2. Put the CommentPlugin **before** the ActionTrackerPlugin in the `{PluginsOrder}` configuration option (in `configure`)
 
 ## <a name="Plugin Info"></a> Plugin Info
 
@@ -394,11 +401,19 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 15776 (22 Jan 2008) </td>
+    <td> 03 Aug 2008 17302 (04 Aug 2008) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>   </td>
+  </tr>
+  <tr>
+    <td align="right"> 03 Aug 2008 </td>
+    <td> The TWiki 4.2.1 release version </td>
+  </tr>
+  <tr>
+    <td align="right"> 11 Apr 2008 </td>
+    <td> TWikibug:Item5518 corrected the template definition for bulletabove </td>
   </tr>
   <tr>
     <td align="right"> 5 Sep 2007 </td>

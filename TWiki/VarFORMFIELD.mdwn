@@ -21,7 +21,7 @@
   </tr>
   <tr>
     <td><code>format="..."</code></td>
-    <td> Format string. <code>$value</code> expands to the field value, and <code>$title</code> expands to the fieldname </td>
+    <td> Format string. <code>$value</code> expands to the field value, and <code>$title</code> expands to the fieldname (also expands $name, $attributes, $type, $size and $definingTopic) </td>
     <td><code>"$value"</code></td>
   </tr>
   <tr>

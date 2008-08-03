@@ -29,6 +29,7 @@ Preference settings local to your site should be set in [[Main.TWikiPreferences|
     <li><a href="#Miscellaneous Settings"> Miscellaneous Settings</a></li>
     <li><a href="#Access Control Settings"> Access Control Settings</a></li>
     <li><a href="#Creating New Preference Variable"> Creating New Preference Variables</a></li>
+    <li><a href="#Protected System Settings"> Protected System Settings</a></li>
     <li><a href="#Related Topics"> Related Topics</a></li>
   </ul>
 </div>
@@ -225,7 +226,7 @@ Preference settings local to your site should be set in [[Main.TWikiPreferences|
 ### <a name="Legacy support"></a> Legacy support
 
 - Support for legacy "EDITTOPIC", used to be hard-coded, now replaced by TMPL:P conditional instantiation
-  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827703>
+  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827909>
   - Set EDITTOPIC = [Edit](%EDITURL% Edit Topic - deprecated usage - please see release notes)
 
 ## <a name="Plugins Settings"></a> Plugins Settings
@@ -366,6 +367,12 @@ You can introduce new VARIABLES and use them in your topics and templates. There
 
 - %X% The sequential order of the preference settings is significant. Define preferences that use other preferences FIRST. For example, set <code>**WEBCOPYRIGHT**</code> before <code>**WIKIWEBMASTER**</code> since the copyright notice uses the TWiki administrator e-mail address.
 - %X% In order to protect your custom variables from being overwritten when upgrading the [[%SYSTEMWEB%.%TOPIC%|SYSTEMWEB/TOPIC]] topic, it is recommended that custom variables are defined in [[%USERSWEB%.%TOPIC%|USERSWEB/TOPIC]].
+
+## <a name="Protected System Settings"></a> Protected System Settings
+
+The following settings are declared final to protect them as read only. These are system variables that should never be attempted set or altered in any preference topic or topic settings.
+
+- Set FINALPREFERENCES = WEB, TOPIC
 
 ## <a name="Related Topics"></a> Related Topics
 

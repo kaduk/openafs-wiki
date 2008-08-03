@@ -32,35 +32,38 @@ Add a `%EDITTABLE{...}%` variable just before an existing table to make it edita
 
 ### <a name="Using TWiki Variables in the For"></a> Using TWiki Variables in the Format Parameter
 
-TWiki variables like `%Y%` in `<initial value>` (of text input field) and `<label text>` (of fixed label) will get expanded when a new row is added.
+By default, variables in `<initial value>` (of text input field) and `<label text>` (of fixed label) get expanded when a new row is added. This can be used for example to add a timestamp to a label. You can escape characters with format tokens if you do not want that.
 
-This is useful to write variables like dates into the table.
+Any TWiki variable inside a table cell will be preserved. For instance, `%TOPIC%` will not get expanded to the current topic name.
 
-> For example:
->
->     %EDITTABLE{ format="| label, 0, %SERVERTIME{"$day $mon $year $hour:$min"}% |" }%
->
-> ... will get expanded to
->
-> `29 Jun 2010 12:07`
->
-> when the new row is created.
+The format tokens are the same as with [[FormattedSearch]]:
 
-To prevent variable expansion: escape the format variable with [[formatting tokens|TWiki/FormatTokens]] (particularly `$percnt`).
-
-> For example:
->
->     %EDITTABLE{ format="| text, 20, $percntY$percnt |" }%
->
-> ... will create a new row with
->
-> `$percntY$percnt`
->
-> . In view mode this is temporarily translated to
->
-> `%Y%`
->
-> and subsequent rendered as %Y%.
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Escape: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$n</code> or <code>$n()</code></td>
+    <td> New line. Use <code>$n()</code> if followed by alphanumeric character, e.g. write <code>Foo$n()Bar</code> instead of <code>Foo$nBar</code></td>
+  </tr>
+  <tr>
+    <td><code>$nop</code> or <code>$nop()</code></td>
+    <td> Is a "no operation". </td>
+  </tr>
+  <tr>
+    <td><code>$quot</code></td>
+    <td> Double quote (<code>"</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$percnt</code></td>
+    <td> Percent sign (<code>%</code>) </td>
+  </tr>
+  <tr>
+    <td><code>$dollar</code></td>
+    <td> Dollar sign (<code>$</code>) </td>
+  </tr>
+</table>
 
 <a name="DateField"></a>
 
@@ -181,6 +184,7 @@ The following example shows a simple table with key/value rows. The default edit
   </tr>
   <tr>
     <td valign="top"><pre>
+%TABLE{"headerrows="1"}%
 %EDITTABLE{ format="| label | text, 40 |" changerows="off" }%
 |*Key*|*Value*|
 | Name: | John Smith |
@@ -203,7 +207,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 - Set DEBUG to 1 to get debug messages in `data/debug.txt`. Default: `0`
   - Set DEBUG = 0
 
-- Set JAVASCRIPTINTERFACE to 1 to be able to directly move and delete row without page refresh.
+- Set JAVASCRIPTINTERFACE to 1 to be able to directly move and delete row without page refresh. Can be overridden with parameter `javascriptinterface`.
   - Set JAVASCRIPTINTERFACE = 1
 
 - Default for change rows flag: `on`, `off`, `add`
@@ -230,7 +234,6 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 - This Plugin does not support TWiki table formatting like Multi-span cells (e.g. `| ... ||`) and cell justification (e.g. `|  centered  |   right |`)
 - There is a performance issue when editing a large table, say, with more then 50 rows
-- Variables like `%ATTACHURL%` get expanded unless they are in a label
 - You cannot put two `%EDITTABLE{}%` statements on the same line in the source
 - You can include %-vars now in select values, by quoting them with &lt;nop&gt;, as in %&lt;nop&gt;X% for %X%, say for instance: <br />`select,1,%<nop>X%,%<nop>Y%`
 
@@ -259,7 +262,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2002-2007, TWiki:Main.PeterThoeny (<a href="http://www.twiki.net/" target="_top">TWIKI.NET</a>) and TWiki Contributors </td>
+    <td> © 2002-2008, TWiki:Main.PeterThoeny (<a href="http://www.twiki.net/" target="_top">TWIKI.NET</a>) and TWiki Contributors </td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -267,11 +270,23 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 4.7.10 (08 Jan 2008) </td>
+    <td> 4.8.4 (03 Aug 2008) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 03 Aug 2008: </td>
+    <td> 4.8.4 TWiki 4.2.1 release version </td>
+  </tr>
+  <tr>
+    <td align="right"> 19 Jul 2008: </td>
+    <td> 4.8.3 Bugfix release </td>
+  </tr>
+  <tr>
+    <td align="right"> 20 Mar 2008: </td>
+    <td> 4.8: Arthur Clemens: Code refactoring; disabled table sort when editing; removed usage of <code>$percnt</code> to prevent variable expansion (is now done automatically); made Javascript interface aware of headers and footers, and of <code>changerows="off"</code>; improved feedback on row move. </td>
   </tr>
   <tr>
     <td align="right"> 25 Dec 2007: </td>
@@ -440,5 +455,3 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 </table>
 
 **_Related Topics:_** [[VarEDITTABLE]], [[TWikiPreferences]], [[TWikiPlugins]]
-
--- TWiki:Main/PeterThoeny - 07 Oct 2007

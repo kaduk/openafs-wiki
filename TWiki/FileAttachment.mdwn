@@ -56,7 +56,7 @@ File Attachments can be used to archive data, or to create powerful customized g
     - %X% It's not recommended to upload files greater than a few hundred K through a browser. Large files can be extremely slow-loading, and often time out. Use an FTP site for large file uploads.
 - Automatic attachments:
   - When enabled, all files in a topic's attachment directory are shown as attachments to the topic - even if they were directly copied to the directory and never attached by using an 'Attach' link. This is a convenient way to quickly "attach" files to a topic without uploading them one by one; although at the cost of losing audit trail and version control.
-  - To enable this feature, set the \{AutoAttachPubDir\} configuration option.
+  - To enable this feature, set the \{AutoAttachPubFiles\} configuration option.
   - **_NOTE:_** The automatic attachment feature can only be used by an administrator who has access to the server's file system.
 
 ## <a name="Downloading Files"></a> Downloading Files

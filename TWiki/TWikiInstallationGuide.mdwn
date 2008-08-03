@@ -269,7 +269,7 @@ TWiki is written in Perl 5, uses a number of shell commands, and requires [RCS (
   </tr>
   <tr>
     <td> Perl </td>
-    <td> 5.8.4 or higher is recommended </td>
+    <td> 5.8.4 or higher is recommended. TWiki will run in perl 5.6.1 but only with Wysiwyg editor disabled. Wysiwyg requires unicode support which is provided by perl 5.8.1 and forward. </td>
   </tr>
   <tr>
     <td> RCS </td>
@@ -309,6 +309,10 @@ The following Perl [CPAN](http://cpan.perl.org/) modules are used by TWiki:
   <tr>
     <td> Algorithm::Diff (included) </td>
     <td>   </td>
+  </tr>
+  <tr>
+    <td> CGI </td>
+    <td> Versions 2.89 and 3.37 must be avoided. Most version from 3.15 and onwards should work. </td>
   </tr>
   <tr>
     <td> CGI::Carp </td>

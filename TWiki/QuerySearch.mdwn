@@ -15,6 +15,7 @@ Query searches are defined using a simple SQL-like query language. The language 
         <li><a href="#Constants"> Constants</a></li>
         <li><a href="#Operators"> Operators</a></li>
         <li><a href="#Putting it all together"> Putting it all together</a></li>
+        <li><a href="#Gotcha"> Gotcha</a></li>
         <li><a href="#Examples"> Examples</a><ul>
             <li><a href="#Query examples"> Query examples</a></li>
             <li><a href="#Search examples"> Search examples</a></li>
@@ -50,7 +51,8 @@ All meta-data in a topic is referenced according to a to a simple plan.
   - `author`
   - `date`
   - `format`
-  - `version`
+  - `rev` - topic revision (`12`) to match `%REVINFO{'$rev'}%` and [[FormattedSearch]] `$rev`
+  - `version` - internal Store topic version (`1.12` for rcs based Stores)
 - `META:TOPICMOVED`
   - `by`
   - `date`
@@ -206,6 +208,10 @@ When a query is applied to a topic, the goal is to reduce to a TRUE or FALSE val
 
 A query matches if the query returns one or more values when it is applied to the topic. So if I have a very simple query, such as `"attachments"`, then this will return TRUE for all topics that have one or more attachments. If I write `"attachments[size>1024 AND name ~ '*.gif']"` then it will return TRUE for all topics that have at least one attachment larger than 1024 bytes with a name ending in `.gif`.
 
+## <a name="Gotcha"></a> Gotcha
+
+- Remember that in the query language, TWiki topic names are _constants_. You cannot write `Main.UserTopic/UserForm.firstName` because `Main.UserTopic` will be interpreted as a form field name. If you want to refer to topics you **must** enclose the topic name in quotes i.e. `'Main.UserTopic'/UserForm.firstName`
+
 ## <a name="Examples"></a> Examples
 
 ### <a name="Query examples"></a> Query examples
@@ -215,7 +221,7 @@ A query matches if the query returns one or more values when it is applied to th
 - `(Firstname='Emma' OR Firstname='John') AND Lastname='Peel'` - shortcut form of the previous query
 - `HistoryForm[name='Age'].value>2` - true if the topic has a `HistoryForm`, and the form has a field called `Age` with a value &gt; 2
 - `HistoryForm.Age > 2` - shortcut for the previous query
-- =preferences[name='FaveColour' AND value='Tangerine'] - true if the topic has the given preference setting and value
+- `preferences[name='FaveColour' AND value='Tangerine']` - true if the topic has the given preference setting and value
 - <code>Person/([[ClothesForm]][name='Headgear'].value ~ '\*Bowler\*' AND attachments[name~'\*hat.gif' AND date &lt; d2n('2007-01-01')])</code> - true if the form attached to the topic has a field called `Person` that has a value that is the name of a topic, and that topic contains the form `ClothesForm`, with a field called `Headgear`, and the value of that field contains the string `'Bowler'`, and the topic also has at least one attachment that has a name matching `*hat.gif` and a date before 1st Jan 2007. (Phew!)
 
 ### <a name="Search examples"></a> Search examples

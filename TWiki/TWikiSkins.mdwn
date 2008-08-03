@@ -110,7 +110,7 @@ The following template files are used for TWiki screens, and are referenced in t
 
 `twiki.tmpl` is a master template conventionally used by other templates, but not used directly by code.
 
-**_%X% Note:_** It is best to create these templates for your skin. If you `TMPL:INCLUDE` the default templates, or templates from other skins, when you are defining your own skin, you run the risk that the included file might change and break your skin.
+**_%X% Note:_** Make sure templates do not end with a newline. Any newline will expand to an empty `<p />` in the generated html. It will produce invalid html, and may break the page layout.
 
 ### <a name="Partial customisation, or adding"></a> Partial customisation, or adding in new features to an existing skin
 

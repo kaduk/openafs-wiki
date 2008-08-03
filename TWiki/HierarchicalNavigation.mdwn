@@ -6,18 +6,11 @@ _NOTE: The lookup for parent and children will increase the loading time of your
 
 <div>
   <ul>
-    <li>
-      <ul>
-        <li><a href="#Usage"> Usage</a><ul>
-            <li><a href="#Displaying the Parent - Current"> Displaying the Parent - Current - Children block</a></li>
-            <li><a href="#Displaying child topics"> Displaying child topics</a></li>
-          </ul>
-        </li>
+    <li><a href="#Usage"> Usage</a><ul>
+        <li><a href="#Displaying the Parent - Current"> Displaying the Parent - Current - Children block</a></li>
+        <li><a href="#Displaying child topics"> Displaying child topics</a></li>
       </ul>
     </li>
-    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
-    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
-    <li><a href="#TWiki Installation Error">TWiki Installation Error</a></li>
   </ul>
 </div>
 
@@ -50,24 +43,35 @@ generates:
 
 **Child topics:**
 
-<div style="display: none">
-  <div>
-    <div>
-      <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)</div>
-    <div>
-      <ul>
-        <li> WebHome </li>
-      </ul>
-    </div>
-    <div>
-      <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)</div>
-  </div>
-  <p>
-  </p>
-  <div>
-    <div>
-      <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags)</div>
-  </div>
+When included in [[WebLeftBar]] (using default Pattern skin) this is styled to:
+
+<div id="patternLeftBarContents">
   <p>
   </p>
 </div>
+
+    %STARTSECTION{name="all"}%<div class="twikiHierarchicalNavigation">
+    <ul>
+    %SEARCH{
+    "parent"
+    type="query"
+    topic="%BASETOPIC%"
+    web="%BASEWEB%"
+    nonoise="on"
+    format="<li class='twikiParentTopic'><img src='%ICONURL{parent_gray}%' width='16' height='16' alt='' border='0' /> [[$web.$parent][$parent]]</li>"
+    }%
+    <li class='twikiCurrentTopic' style='font-weight:bold;'><nop>%BASETOPIC%</li>%INCLUDE{"%TOPIC%" section="childlist"}%
+    </ul>
+    </div><!--/twikiHierarchicalNavigation-->%ENDSECTION{name="all"}%
+
+    %STARTSECTION{name="children"}%<div class="twikiHierarchicalNavigation">
+    <ul>%INCLUDE{"%TOPIC%" section="childlist"}%</ul>
+    </div><!--/twikiHierarchicalNavigation-->%ENDSECTION{name="children"}%</div>%ENDSECTION{name="children"}%
+
+    %STARTSECTION{name="childlist"}%%SEARCH{
+    "parent.name='%BASETOPIC%'"
+    web="%BASEWEB%"
+    type="query"
+    nonoise="on"
+    format="<li class='childTopic'><img src='%ICONURL{line_ur_gray}%' width='16' height='16' alt='' border='0' /> [[$web.$topic][$topic]]</li>"
+    }%%ENDSECTION{name="childlist"}%

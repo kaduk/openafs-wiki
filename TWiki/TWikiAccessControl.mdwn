@@ -26,6 +26,7 @@ TWiki Access Control allows you restrict access to single topics and entire webs
             <li><a href="#How TWiki evaluates ALLOW/DENY s"> How TWiki evaluates ALLOW/DENY settings</a></li>
           </ul>
         </li>
+        <li><a href="#Access control and INCLUDE"> Access control and INCLUDE</a></li>
         <li><a href="#Access Control quick recipes"> Access Control quick recipes</a><ul>
             <li><a href="#Obfuscating Webs"> Obfuscating Webs</a></li>
             <li><a href="#Restrict Access to Whole TWiki S"> Restrict Access to Whole TWiki Site</a></li>
@@ -169,7 +170,9 @@ Remember when opening up access to specific topics within a restricted web that 
 
 The same rules apply to ALLOWTOPICCHANGE/DENYTOPICCHANGE and APPLYTOPICRENAME/DENYTOPICRENAME. Setting ALLOWTOPICCHANGE or ALLOWTOPICRENAME to en empty value means the same as not defining it. Setting DENYTOPICCHANGE or DENYTOPICRENAME to an empty value means that anyone can edit or rename the topic.
 
-%X% _The setting to an empty has caused confusion and great debate and it has been decided that the empty setting syntax will be replaced by something which is easier to understand in the 4.2 version of TWiki. A method to upgrade will be provided. Please read the release notes carefully when you upgrade._
+%X% If the same setting is defined multiple times the last one overrides the previous. They are not OR'ed together.
+
+%X% _The setting to an empty has caused confusion and great debate and it has been decided that the empty setting syntax will be replaced by something which is easier to understand in a later version of TWiki. A method to upgrade will be provided. Please read the release notes carefully when you upgrade._
 
 See "How TWiki evaluates ALLOW/DENY settings" below for more on how ALLOW and DENY interacts.
 
@@ -222,6 +225,15 @@ When deciding whether to grant access, TWiki evaluates the following rules in or
   - everyone else will be **DENIED**
 7. If you got this far, access is **PERMITTED**
 
+## <a name="Access control and INCLUDE"></a> Access control and INCLUDE
+
+ALLOWTOPICVIEW and ALLOWTOPICCHANGE only applies to the topic in which the settings are defined. If a topic A includes another topic B, topic A does not inherit the access rights of the included topic B.
+
+Examples: Topic A includes topic B
+
+- If the included topic B has ALLOWTOPICCHANGE set to block editing for a user, it does not prevent editing the including topic A.
+- If the included topic B has ALLOWTOPICVIEW set to block view for a user, the user can still view topic A but he cannot see the included topic B. He will see a message _No permission to view B_
+
 ## <a name="Access Control quick recipes"></a> Access Control quick recipes
 
 ### <a name="Obfuscating Webs"></a> Obfuscating Webs
@@ -268,7 +280,7 @@ Use the following setup to provide unrestricted viewing access to open webs, wit
 
 ### <a name="Hide Control Settings"></a> Hide Control Settings
 
-**_%T% Tip:_** To hide access control settings from normal browser viewing, you can put them into the topic-local settings. You can access those settings via the "More" screen, as explained in [[TWikiVariables|Main/TWikiVariables#Setting_Preferences_Variables]].
+**_%T% Tip:_** To hide access control settings from normal browser viewing, you can put them into the _topic preference settings_ by clicking the link `Edit topic preference settings` under `More topic actions` menu. Preferences set in this manner are not visible in the topic text, but take effect nevertheless. Access control settings added as topic preference settings are stored in the topic meta data and they override settings defined in the topic text.
 
 Alternatively, place them in HTML comment markers, but this exposes the access setting during ordinary editing.
 

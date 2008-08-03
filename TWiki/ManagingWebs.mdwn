@@ -123,7 +123,14 @@ Rename a web via the Tools section in each [[WebPreferences]] topic. You may del
 
 ### <a name="Permissions"></a> Permissions
 
-You may only rename a web if you have permissions to rename all the topics within that web, including any topics in that web's subwebs. You will also need permissions to update any topics containing references to that web.
+You may only rename a web if you have the following permissions
+
+- You must be allowed to rename and changes topics in the web you want to rename
+- You must be allowed to rename topics in the parent web of the web you want to rename
+- If the web is a root web (i.e. it has no parent web) then you must have permission to both create and rename root webs. These permissions are controlled by the ALLOWROOTCHANGE preference, which can be set in [[%USERSWEB%.TWikiPreferences|USERSWEB/TWikiPreferences]].
+- If you move the web to another parent web you must be allowed to create and change topics in the new parent web.
+
+When you rename a web TWiki will try and update all links that refer to the old web. You should note that links only get updated in topics that you are allowed to edit. If you use access rights in the TWiki installation it is generally best to let an administrator rename webs to avoid too many broken links.
 
 ### <a name="Edit Conflicts"></a> Edit Conflicts
 

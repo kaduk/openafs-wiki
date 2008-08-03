@@ -22,4 +22,4 @@ Returns undef if no singular form exists, otherwise returns the singular form of
 
 [[I18N]] - Only apply plural processing if site language is English, or if a built-in English-language web (Main, TWiki or Plugins). Plurals apply to names ending in 's', where topic doesn't exist with plural name.
 
-SMELL: this is highly langauge specific, and shoud be overridable on a per-installation basis.
+Note that this is highly langauge specific, and need to be enabled on a per-installation basis with $TWiki::cfg\{PluralToSingular\}.

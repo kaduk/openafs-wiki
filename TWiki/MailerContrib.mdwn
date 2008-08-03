@@ -39,7 +39,7 @@ The script collates the changes emails so that each subscriber only receives one
 
 Each web can optionally contain a topic called WebNotify.
 
-Users subscribe to email notifications using their [[WikiName]] or an alternative email address, and can specify the webs/topics they wish to track, WWhole groups of users can also be subscribed for notification.
+Users subscribe to email notifications using their [[WikiName]] or an alternative email address, and can specify the webs/topics they wish to track, Whole groups of users can also be subscribed for notification.
 
 The general format of a subscription is:
 
@@ -54,12 +54,12 @@ _topics_ is an optional space-separated list of topics:
 
 Users may further customize the specific content they will receive using the following controls:
 
-- You can use `*` in a topic name, where it is treated as a [wildcard character](http://en.wikipedia.org/wiki/Wildcard_character). A `*` will match zero or more other characters - so, for example, `Fred*` will match all topic names starting with `Fred`, `*Fred` will match all topic names _ending_ with `Fred`, and `*` will match _all_ topic names.
-- Each topic may optionally be preceded by a '+' or '-' sign. The '+' sign means "subscribe to this topic". The '-' sign means "unsubscribe" or "don't send notifications regarding this particular topic". This allows users to elect to filter out certain topics. Topic filters ('-') take precedence over topic includes ('+') i.e. if you unsubscribe from a topic it will cancel out any subscriptions to that topic.
-- Each topic may optionally be followed by an integer in parentheses, indicating the depth of the tree of children below that topic. Changes in all these children will be detected and reported along with changes to the topic itself. _Note_ This uses the TWiki "Topic parent" feature.
-- Each topic may optionally be immediately followed by an exclamation mark ! or a question mark ? with no intervening spaces, indicating that the topic (and children if there is a tree depth specifier as well) should be mailed out as **complete topics** instead of change summaries. ! causes the topic to be mailed every time _even if there have been no changes_, and ? will mail the topic only if there have been changes to it. This only makes sense for subscriptions, and is intended for mailshotting regular newletters.
+- **Using wild-card character in topic names** - You can use `*` in a topic name, where it is treated as a [wildcard character](http://en.wikipedia.org/wiki/Wildcard_character). A `*` will match zero or more other characters - so, for example, `Fred*` will match all topic names starting with `Fred`, `*Fred` will match all topic names _ending_ with `Fred`, and `*` will match _all_ topic names.
+- **Unsubscribing to specific topics** - Each topic may optionally be preceded by a '+' or '-' sign. The '+' sign means "subscribe to this topic". The '-' sign means "unsubscribe" or "don't send notifications regarding this particular topic". This allows users to elect to filter out certain topics. Topic filters ('-') take precedence over topic includes ('+') i.e. if you unsubscribe from a topic it will cancel out any subscriptions to that topic.
+- **Including child-topics in subscription** - Each topic may optionally be followed by an integer in parentheses, indicating the depth of the tree of children below that topic. Changes in all these children will be detected and reported along with changes to the topic itself. _Note_ This uses the TWiki "Topic parent" feature.
+- **Subscribing to entire topic ("news mode")** - Each topic may optionally be immediately followed by an exclamation mark ! or a question mark ? with no intervening spaces, indicating that the topic (and children if there is a tree depth specifier as well) should be mailed out as **complete topics** instead of change summaries. ! causes the topic to be mailed every time _even if there have been no changes_, and ? will mail the topic only if there have been changes to it. One can limit the content of the subscribed topic to send out by inserting %STARTPUBLISH% and %STOPPUBLISH% markers within the topic. Note that "news mode" subscriptions require a corresponding cron job that includes the "-news" option (see [[details|Main/TOPIC#Setting_up_your_cron_job_s]]).
 
-For example: Subscribe Daisy to all changes to topics in this web.
+Examples: Subscribe Daisy to all changes to topics in this web.
 
        * daisy.cutter@flowers.com
 
@@ -154,7 +154,7 @@ The script is used as follows: <code>perl -I _bin_ mailnotify [-q] [-news] [ _we
   </tr>
   <tr>
     <td><code>-news</code></td>
-    <td> Run in news mode (process NewsNotify instead of WebNotify) </td>
+    <td> Run in "news mode" (process subscriptions that include "!" or "?" following the topic) </td>
   </tr>
   <tr>
     <td><code><i>web1 web2 ... webN</i></code></td>
@@ -175,6 +175,8 @@ will generate change notifications for all webs, except the `Sandbox` web.
     0 0 * * 0 cd /usr/local/twiki && perl -I bin tools/mailnotify -news
 
 will generate newsletters from **all** webs every week on midnight Saturday.
+
+%X% Note: Multiple instances of mailnotify script are not allowed to be executed simutaneously. If you need to run the script multiple times with different options, make sure the cron jobs are scheduled so a previous run has finished before the next starts. You can also write a small script that runs mailnotify in sequence as described in TWiki:Support.DuplicateNotificationsFromMailerCon.
 
 ## <a name="Developer Notes"></a> Developer Notes
 
@@ -239,43 +241,59 @@ Many thanks to the following sponsors for supporting this work:
   </tr>
   <tr>
     <td align="right"> Version: </td>
-    <td> 16078 (22 Jan 2008) </td>
+    <td> 03 Aug 2008 </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>   </td>
   </tr>
   <tr>
+    <td align="right"> 03 Aug 2008 </td>
+    <td> TWiki 4.2.1 release version </td>
+  </tr>
+  <tr>
+    <td align="right"> 27 Jul 2008 </td>
+    <td> TWikibug:Item5776: TWiki:Main.KennethLavrsen added note to warn against running multiple instances of mailnotify at the same time. </td>
+  </tr>
+  <tr>
+    <td align="right"> 15 May 2008 </td>
+    <td> TWikibug:Item5232: TWiki:Main.CrawfordCurrie added support for non-ascii alphanumerics in topic names to [[Main/WebNotify]]. TWikibug:Item5630: TWiki:Main.SvenDowideit fixed some spelling errors </td>
+  </tr>
+  <tr>
+    <td align="right"> 25 Jan 2008 </td>
+    <td> TWikibug:Item4812: added TWiki:Main.BobGoldstein's noexpand patch for groups </td>
+  </tr>
+  <tr>
     <td align="right"> 2 Nov 2007 </td>
-    <td> Bugs:Item4818: added quotes to support non-alphabetic and other wierd group names Bugs:Item4887: corrected minor rendering error Bugs:Item4917: removed dependence on symbolic web names </td>
+    <td> TWikibug:Item4818: added quotes to support non-alphabetic and other wierd group names TWikibug:Item4887: corrected minor rendering error TWikibug:Item4917: removed dependence on symbolic web names </td>
   </tr>
   <tr>
     <td align="right"> 9 Sep 2007 </td>
-    <td> Bugs:Item4326 workaround for possible error in WebNotify API in old releases, Should not affect most users. </td>
+    <td> TWikibug:Item4326 workaround for possible error in WebNotify API in old releases, Should not affect most users. </td>
   </tr>
   <tr>
     <td align="right"> 6 Sep 2007 </td>
-    <td> Bugs:Item4488 doc tweaks </td>
+    <td> TWikibug:Item4488 doc tweaks </td>
   </tr>
   <tr>
     <td align="right"> 14550 </td>
-    <td> Bugs:Item4461 - 'Changed' link now points to most recent changes, not the entire history </td>
+    <td> TWikibug:Item4461 - 'Changed' link now points to most recent changes, not the entire history </td>
   </tr>
   <tr>
     <td align="right"> 22 Jun 2007 </td>
-    <td> Bugs:Item4284 - added access control checks and email filter </td>
+    <td> TWikibug:Item4284 - added access control checks and email filter </td>
   </tr>
   <tr>
     <td align="right"> 21 May 2007 </td>
-    <td> Bugs:Item3969 - 8bit email fix (TWiki:Main.WillNorris) </td>
+    <td> TWikibug:Item3969 - 8bit email fix (TWiki:Main.WillNorris) </td>
   </tr>
   <tr>
     <td align="right"> 13623 </td>
-    <td> Bugs:Item4014 no changes was resetting the notify time to 0. Thanks to TWiki:Main.JeffCrawford for nailing this down. </td>
+    <td> TWikibug:Item4014 no changes was resetting the notify time to 0. Thanks to TWiki:Main.JeffCrawford for nailing this down. </td>
   </tr>
   <tr>
     <td align="right"> 12496 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item3415" rel="nofollow">Item3415</a> mailnotify did not send notifications to intranet users because of wrong call to findUser. </td>
+    <td> TWikibug:Item3415 mailnotify did not send notifications to intranet users because of wrong call to findUser. </td>
   </tr>
   <tr>
     <td align="right"> 11672 </td>
@@ -283,71 +301,71 @@ Many thanks to the following sponsors for supporting this work:
   </tr>
   <tr>
     <td align="right"> 11534 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item2153" rel="nofollow">Item2153</a> Clarified docs. <a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item2698" rel="nofollow">Item2698</a> Improved error reporting. </td>
+    <td> TWikibug:Item2153 Clarified docs. TWikibug:Item2698 Improved error reporting. </td>
   </tr>
   <tr>
     <td align="right"> 8808 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1654" rel="nofollow">Item1654</a> mailnotify must enter the command_line context </td>
+    <td> TWikibug:Item1654 mailnotify must enter the command_line context </td>
   </tr>
   <tr>
     <td align="right"> 8625 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1508" rel="nofollow">Item1508</a> Making the dashes in the separatator clearer </td>
+    <td> TWikibug:Item1508 Making the dashes in the separatator clearer </td>
   </tr>
   <tr>
     <td align="right"> 8606 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1508" rel="nofollow">Item1508</a> [[Main/MailerContrib]]: Brushing up HTML mailnotify template </td>
+    <td> TWikibug:Item1508 [[Main/MailerContrib]]: Brushing up HTML mailnotify template </td>
   </tr>
   <tr>
     <td align="right"> 8602 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1508" rel="nofollow">Item1508</a> [[Main/MailerContrib]]: Cleaning up plaintext e-mail template, removing TEXTAREA </td>
+    <td> TWikibug:Item1508 [[Main/MailerContrib]]: Cleaning up plaintext e-mail template, removing TEXTAREA </td>
   </tr>
   <tr>
     <td align="right"> 8522 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1511" rel="nofollow">Item1511</a> arguments to getScriptUrl in wrong order :-( </td>
+    <td> TWikibug:Item1511 arguments to getScriptUrl in wrong order :-( </td>
   </tr>
   <tr>
     <td align="right"> 8434 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1465" rel="nofollow">Item1465</a> Fix 'TWiki.' to '%TWIKIEB%.' </td>
+    <td> TWikibug:Item1465 Fix 'TWiki.' to '%TWIKIEB%.' </td>
   </tr>
   <tr>
     <td align="right"> 8398 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1460" rel="nofollow">Item1460</a> polished up the comment a bit </td>
+    <td> TWikibug:Item1460 polished up the comment a bit </td>
   </tr>
   <tr>
     <td align="right"> 8308 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1362" rel="nofollow">Item1362</a> moving mailnotify cron script </td>
+    <td> TWikibug:Item1362 moving mailnotify cron script </td>
   </tr>
   <tr>
     <td align="right"> 7848 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item1167" rel="nofollow">Item1167</a> forced all mail operations to generate absolute URLs </td>
+    <td> TWikibug:Item1167 forced all mail operations to generate absolute URLs </td>
   </tr>
   <tr>
     <td align="right"> 7568 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item910" rel="nofollow">Item910</a> use SCRIPTURL{view} instead of complex url expr </td>
+    <td> TWikibug:tem910 use SCRIPTURL{view} instead of complex url expr </td>
   </tr>
   <tr>
     <td align="right"> 6864 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item624" rel="nofollow">Item624</a> mailer templates moved the the right places </td>
+    <td> TWikibug:tem624 mailer templates moved the the right places </td>
   </tr>
   <tr>
     <td align="right"> 6861 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item624" rel="nofollow">Item624</a> Added proper templates support for plain text mails </td>
+    <td> TWikibug:tem624 Added proper templates support for plain text mails </td>
   </tr>
   <tr>
     <td align="right"> 6809 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item623" rel="nofollow">Item623</a> don't print anything if verbosity is switched off. </td>
+    <td> TWikibug:tem623 don't print anything if verbosity is switched off. </td>
   </tr>
   <tr>
     <td align="right"> 6659 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item528" rel="nofollow">Item528</a> Updated [[Main/MailerContrib]]. it's working and the sendmail parameter is used. </td>
+    <td> TWikibug:tem528 Updated [[Main/MailerContrib]]. it's working and the sendmail parameter is used. </td>
   </tr>
   <tr>
     <td align="right"> 6474 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item420" rel="nofollow">Item420</a> removed spurious remove_obsolete_locks from [[Main/MailerContrib]]</td>
+    <td> TWikibug:tem420 removed spurious remove_obsolete_locks from [[Main/MailerContrib]]</td>
   </tr>
   <tr>
     <td align="right"> 5924 </td>
-    <td><a href="http://develop.twiki.org/~twiki4/cgi-bin/view/Bugs/Item153" rel="nofollow">Item153</a> fix mail URL-fixing scheme </td>
+    <td> TWikibug:tem153 fix mail URL-fixing scheme </td>
   </tr>
   <tr>
     <td align="right"> 5269 </td>

@@ -483,7 +483,8 @@ Do not change the text below this line unless you know what you are doing!
     }
     blockquote {
        background-color:%ACTIVE_FORM_BACKGROUND%;
-       border-color:%NEUTRAL_BORDER%;
+       border-color:%ACTIVE_FORM_BACKGROUND% %ACTIVE_FORM_BACKGROUND% %ACTIVE_FORM_BACKGROUND% %NEUTRAL_BORDER%;
+
     }
     blockquote h2 {
        background:none;
@@ -892,8 +893,6 @@ Do not change the text below this line unless you know what you are doing!
     }
     .patternSigLine {
        color:%MUTED_TEXT%;
-       background-color:%ATTACHMENT_AND_FORM_BACKGROUND%;
-       border-color:%SEPARATOR_BORDER%;
     }
     .patternToolBar a:link .twikiAccessKey,
     .patternToolBar a:visited .twikiAccessKey {

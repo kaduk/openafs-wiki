@@ -157,7 +157,7 @@ The main difference between invoking this script and using [[WebChanges]] is tha
 
 ### <a name="=edit="></a> `edit`
 
-The `edit` scipt understands the following parameters, typically supplied by HTML input fields:
+The `edit` script understands the following parameters, typically supplied by HTML input fields:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -167,7 +167,7 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
   </tr>
   <tr>
     <td><code>action</code></td>
-    <td> Optional. Use the editaction template instead of the standard edit. If action=text, then hide the form. If action=form hide the normal text area and only edit the form. </td>
+    <td> Optional. Use the editaction template instead of the standard edit. If action=text, then hide the form. If action=form hide the normal text area and only edit the form. You can change the Edit/Edit Raw buttons to always append the action parameter in skins like Pattern and Classic by setting the topic or preference variable [[Main/VarEDITACTION]] to the value <code>text</code> or <code>form</code>. To edit the topic once the EDITACTION is defined as form simply remove the action=form from the browser URL of the edit script and reload the edit window </td>
     <td>   </td>
   </tr>
   <tr>
@@ -182,7 +182,7 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
   </tr>
   <tr>
     <td><code>templatetopic</code></td>
-    <td> The name of the template topic, copied to get the initial content </td>
+    <td> The name of the template topic, copied to get the initial content (new topic <em>only</em>) </td>
     <td>   </td>
   </tr>
   <tr>
@@ -197,7 +197,7 @@ The `edit` scipt understands the following parameters, typically supplied by HTM
   </tr>
   <tr>
     <td><code>formtemplate</code></td>
-    <td> Name of the form to instantiate in the topic. Overrides the form set in the <code>templatetopic</code> if defined. </td>
+    <td> Name of the form to instantiate in the topic. Overrides the form set in the <code>templatetopic</code> if defined. (will remove the form is set to 'none') </td>
     <td>   </td>
   </tr>
   <tr>
@@ -720,7 +720,7 @@ The `save` script performs a range of save-related functions, as selected by the
   </tr>
   <tr>
     <td><code>templatetopic</code></td>
-    <td> Name of a topic to use as a template for the text and form </td>
+    <td> Name of a topic to use as a template for the text and form (new topic <em>only</em>) </td>
     <td>   </td>
   </tr>
   <tr>
@@ -740,7 +740,7 @@ The `save` script performs a range of save-related functions, as selected by the
   </tr>
   <tr>
     <td><code>formtemplate</code></td>
-    <td> if defined, use the named template for the form </td>
+    <td> if defined, use the named template for the form (will remove the form is set to 'none') </td>
     <td>   </td>
   </tr>
   <tr>
@@ -777,14 +777,14 @@ The parameters are interpreted in according to the following rules.
 1. The first sequence of ten or more `X` characters in the topic name will be converted to a number such that the resulting topic name is unique in the target web.
 2. When the action is `save`, `checkpoint`, `quietsave`, or `preview`:
   1. The new text is taken from the `text` parameter, if it is defined,
-    - otherwise it is taken from the `templatetopic`, if it is defined,
+    - otherwise it is taken from the `templatetopic`, if it is defined, (new topic _only_)
     - otherwise it is taken from the previous version of the topic, if any,
   2. The name of the new form is taken from the `formtemplate`, if defined
-    - otherwise it is taken from the `templatetopic`, if defined,
+    - otherwise it is taken from the `templatetopic`, if defined, (new topic _only_)
     - otherwise it is taken from the previous version of the topic, if any,
     - otherwise no form is attached.
   3. The value for each field in the form is taken from the query, if it is defined
-    - otherwise it is taken from the `templatetopic`, if defined,
+    - otherwise it is taken from the `templatetopic`, if defined, (new topic _only_)
     - otherwise it is taken from the previous version of the topic, if any,
     - otherwise it defaults to the empty string.
 

@@ -1,10 +1,18 @@
-# <a name="TWiki Release 4.2.0 (Freetown),"></a><a name=" TWiki Release 4.2.0 (Freetown),"></a> TWiki Release 4.2.0 (Freetown), 04:18:52 22 January 2008
+# <a name="TWiki Release 4.2.1 (Freetown),"></a><a name=" TWiki Release 4.2.1 (Freetown),"></a> TWiki Release 4.2.1 (Freetown), 00:13:28 04 August 2008
 
 <div>
   <ul>
     <li><a href="#Introduction"> Introduction</a></li>
     <li><a href="#Pre-installed Extensions"> Pre-installed Extensions</a></li>
     <li><a href="#New Features Highlights"> New Features Highlights</a></li>
+    <li><a href="#Important Changes since 4.2.0"> Important Changes since 4.2.0</a><ul>
+        <li><a href="#Perl 5.8 is now minimum requirem"> Perl 5.8 is now minimum requirement with Wysiwyg</a></li>
+        <li><a href="#TWiki now installs and works wit"> TWiki now installs and works with Perl 5.10.0.</a></li>
+        <li><a href="#The RCS files in subdirectories"> The RCS files in subdirectories feature removed</a></li>
+        <li><a href="#The Japanese language file has b"> The Japanese language file has been renamed</a></li>
+        <li><a href="#Highlights of bug fixes since 4."> Highlights of bug fixes since 4.2.0</a></li>
+      </ul>
+    </li>
     <li><a href="#Important Changes since 4.1.2"> Important Changes since 4.1.2</a><ul>
         <li><a href="#New WYSIWYG Editor"> New WYSIWYG Editor</a></li>
         <li><a href="#NEWTOPICLINKSYMBOL removed"> NEWTOPICLINKSYMBOL removed</a></li>
@@ -20,20 +28,23 @@
     <li><a href="#TWiki 4.2.0 Minor Release - Deta"> TWiki 4.2.0 Minor Release - Details</a></li>
     <li><a href="#Fixes"> Fixes</a></li>
     <li><a href="#Enhancements"> Enhancements</a></li>
+    <li><a href="#TWiki 4.2.1 Minor Release - Deta"> TWiki 4.2.1 Minor Release - Details</a></li>
+    <li><a href="#Fixes"> Fixes</a></li>
+    <li><a href="#Enhancements"> Enhancements</a></li>
   </ul>
 </div>
 
 ## <a name="Introduction"></a> Introduction
 
-TWiki Release 4.2.0 is a minor release. TWiki releases are either major (major new features and changes in architecture), minor (enhancements and bug fixes), or patch releases (bug fixes only) which can be installed as upgrades on production installations.
+TWiki 4.2.0 was released 22 Jan 2008 and introduced some hot new features that make TWiki a better user experience for both beginners and experienced application developers. It also contained quite a number of bugfixes since 4.1.2.
 
-TWiki Release 4.2.0 introduces some good enhancements and quite many bug fixes since 4.1.2.
+TWiki 4.2.1 is a patch release which only contains bug fixes. More than 150 bugs have been fixed since the release of 4.2.1 in all areas of TWiki.
 
-The development team has done everything to maintain full compatibility with topics generated in TWiki-4.0 and there are no changes to the topic format when using normal TWikiUserMapping
+It is highly recommended to upgrade TWiki 4.2.0 to 4.2.1. Users will find the 4.2.1 much more stable in daily use.
 
 ## <a name="Pre-installed Extensions"></a> Pre-installed Extensions
 
-TWiki 4.2.0 is shipped with
+TWiki 4.2.1 is shipped with
 
 - **Plugins:** CommentPlugin, EditTablePlugin, EmptyPlugin, InterwikiPlugin, PreferencesPlugin, RenderListPlugin, SlideShowPlugin, SmiliesPlugin, SpreadSheetPlugin, TablePlugin, TinyMCEPlugin, TwistyPlugin, WysiwygPlugin
 - **Contribs:** BehaviourContrib, JSCalendarContrib, MailerContrib, TipsContrib, TWikiUserMappingContrib, TwistyContrib
@@ -68,6 +79,60 @@ TWiki 4.2.0 is shipped with
   - Many new functions in the API for plugin developers.
   - Table of Content (TOC) feature enhanced
   - User Mapping (mapping between login name and WikiName) code has been extended to allow pluggable modules to integrate with all sorts of alternative authentication and Management schemes. For normal cases you use the default TWikiUserMapping which is using the Main.TWikiUsers topic to map between login and WikiName. A new BaseUserMapping is provided for TWikis where you only have guests and an administrator. In this case you use the login and password given in configure to login as an admin.
+
+## <a name="Important Changes since 4.2.0"></a> Important Changes since 4.2.0
+
+### <a name="Perl 5.8 is now minimum requirem"></a> Perl 5.8 is now minimum requirement with Wysiwyg
+
+In TWiki 4.2.1 the support of international characters has been improved. Especially when using the Wysiwyg editor. This requires that perl internally works with unicode and that the Encode CPAN lib is installed. For this reason Perl 5.8.X is required for Wysiwyg support. TWiki will run with perl 5.6.1 if WysiwygPlugin is disabled.
+
+### <a name="TWiki now installs and works wit"></a> TWiki now installs and works with Perl 5.10.0.
+
+Newer distributions of Linux now ships with Perl 5.10.0. TWiki has been tested with Perl 5.10.0 and it should work fine. If the CGI library is version 3.37 you will need to update it to a newer version as the 3.37 contains some fatal bugs. Simply updating your perl using the standard update feature in your distribution may be enough to cure this problem.
+
+### <a name="The RCS files in subdirectories"></a><a name="The RCS files in subdirectories "></a> The RCS files in subdirectories feature removed
+
+The feature related to the config option TWiki::cfg\{RCS\}\{useSubDir\} has been removed. It never really worked and there are all sorts of issues related to it with respect to distribution of extensions and packaged applications, and it does not really add any performance advantages. So instead of trying to repair a bad feature that never really worked it was decided to remove it.
+
+The removal was announced in a news letter and in a proposal topic, and discussed at several release meetings, and noone objected against its removal.
+
+If you have run TWiki with this feature (maybe with a self implemented fix of the code) you will need to simply copy all the ,v files in all RCS directories to the directory above (where you find the .txt file or the attached filed) when you upgrade to 4.2.1.
+
+### <a name="The Japanese language file has b"></a> The Japanese language file has been renamed
+
+We decided to rename the locale/jp.po to locale/ja.po to match the rule that the file has the same name as the code for the locale.
+
+For those using the Japanese language file you need to do the following if you upgrade TWiki
+
+- Delete the old jp.po file
+- Delete the locale/languages.cache file (it gets recreated by TWiki first time it runs with language files)
+- Rename the entry `$TWiki::cfg{Languages}{jp}{Enabled} = 1;` in the lib/LocalSite.cfg to `$TWiki::cfg{Languages}{ja}{Enabled} = 1;`
+
+### <a name="Highlights of bug fixes since 4."></a> Highlights of bug fixes since 4.2.0
+
+- Much more stable Wysiwyg editor
+  - Better support for non-English characters
+  - Better handling of bullet points
+  - Pickaxe feature which enables quick swap between Wysiwyg and raw edit is more stable
+  - Attachment of files within Wysiwyg editor working better
+  - Linking feature fixed
+- More stable EditTablePlugin
+- Better support for UTF8 though UTF8 is still regarded as experimental and features such as wiki words do not work with non-english characters. UTF8 will be a good choice for languages such as Chinese, Japanese and Korean
+- Better support for non English charsets
+- Easier configuration of language settings in configure
+- Renaming of webs much improved
+- Compatibility with perl 5.10
+- Fixes related to mandatory fields in forms
+- Universal edit button with Firefox extension
+- Access controls using login ID instead of wikiname which was broken in 4.2.0 works again
+- Search features have had a few bugs fixed
+- Several bugs related to attaching files have been fixed
+- Some cross site scripting possibilities have been eliminated
+- Plugins that uses beforeAttachmentSaveHandler now works stable (e.g. BlackListPlugin)
+- The feature of having RCS files (the ,v file) in a separate directory never worked. Feature has now been removed as it really does not give any advantages.
+- User mapping feature improved to ensure 1:1 mapping between canonical user ID and login ID which is important for security
+
+See the full list of bug fixes at the bottom of this topic.
 
 ## <a name="Important Changes since 4.1.2"></a> Important Changes since 4.1.2
 
@@ -157,7 +222,7 @@ In Func getOopsUrl and permissionsSet have been declared deprecated. There is no
 
 ## <a name="TWiki 4.2.0 Minor Release - Deta"></a> TWiki 4.2.0 Minor Release - Details
 
-The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x02> revision 16278 (22 Jan 2008).
+The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x02> revision 17311 (04 Aug 2008).
 
 ## <a name="Fixes"></a> Fixes
 
@@ -180,7 +245,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item5210]]</td>
-    <td> EDITTABLE with a simple text input in which the user has put %BR% gets trunkated at the first BR </td>
+    <td> EDITTABLE with a simple text input in which the user has put %BR gets trunkated at the first BR </td>
   </tr>
   <tr>
     <td>[[BUGS/Item5123]]</td>
@@ -296,7 +361,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item4848]]</td>
-    <td> TWiki:Plugins.EditTablePlugin textarea bug! </td>
+    <td> EditTablePlugin textarea bug! </td>
   </tr>
   <tr>
     <td>[[BUGS/Item4846]]</td>
@@ -520,7 +585,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item4432]]</td>
-    <td align="right"> causes an internal server error </td>
+    <td> %VAR causes an internal server error </td>
   </tr>
   <tr>
     <td>[[BUGS/Item4426]]</td>
@@ -528,7 +593,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item4425]]</td>
-    <td> Empty bullets get a <code><br /></code> tag. </td>
+    <td> Empty bullets get a br tag. </td>
   </tr>
   <tr>
     <td>[[BUGS/Item4403]]</td>
@@ -924,7 +989,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item3832]]</td>
-    <td>[[Main/BracketLinks]] are not updated during page renames </td>
+    <td> bracket links are not updated during page renames </td>
   </tr>
   <tr>
     <td>[[BUGS/Item3829]]</td>
@@ -1072,7 +1137,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item3703]]</td>
-    <td>   in the size field of a form will crash the forms code </td>
+    <td> &amp; nbsp; in the size field of a form will crash the forms code </td>
   </tr>
   <tr>
     <td>[[BUGS/Item3690]]</td>
@@ -1604,5 +1669,650 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
     <td> configure needs a backlink to the TWiki/WebHome </td>
   </tr>
 </table>
+
+## <a name="TWiki 4.2.1 Minor Release - Deta"></a> TWiki 4.2.1 Minor Release - Details
+
+The 4.2.1 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x02> revision 17311 (04 Aug 2008).
+
+## <a name="Fixes"></a> Fixes
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td>[[BUGS/Item5876]]</td>
+    <td> Make query search ref more clear in VarSEARCH. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5873]]</td>
+    <td> REVINFO shows unknown user instead of the author value when it cannot map. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5868]]</td>
+    <td> ApacheHtpasswdUser compile error </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5866]]</td>
+    <td> shortcircuit TWiki::_processTags shortpath for 10-30% TWiki render speed improvement </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5854]]</td>
+    <td> Forking search result collation regex can cause many spurious log entries </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5850]]</td>
+    <td> ResetPassword/ChangePassword combo "Oops: we could not recognize you" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5849]]</td>
+    <td> regex SEARCH on Native Windows crashes when there are [^] chars or mismatched "s in the regex. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5844]]</td>
+    <td> Automatic statistics denied by default server configuration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5834]]</td>
+    <td> Edit in ClassicSkin with action=form still displays the text field for the topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5833]]</td>
+    <td> Double header in Classic skin when editing with action=text </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5832]]</td>
+    <td> EDITACTION only works on Edit but not Edit Raw </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5831]]</td>
+    <td> EDITACTION parameter does get replaced properly in the changeform templates if combined with setting EDITACTION </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5826]]</td>
+    <td> improved the security of the password generated for resetPassword </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5823]]</td>
+    <td> Adding MD5 Password Feature </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5819]]</td>
+    <td> Document that 4.2.1 with Wysiwyg will no longer work with Perl 5.6 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5810]]</td>
+    <td> %IF in a set statement fails </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5808]]</td>
+    <td> TWiki.InstalledPlugins lists Contribs and AddOns but no Skins </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5798]]</td>
+    <td> urlHost field initialized too late in TWiki::new </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5796]]</td>
+    <td> SubscribePlugin and perl 5.8.4 exposes a taint issue in the latest MailerContrib </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5794]]</td>
+    <td> potential dataloss bug in EditTablePlugin 4.8.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5790]]</td>
+    <td> LOCAL_SEARCH does expand nop'ed TML </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5789]]</td>
+    <td> don't rely on the author info being present in attachment meta data </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5787]]</td>
+    <td> square bracket url links don't escape their contents well enough </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5786]]</td>
+    <td> improve TemplateOopsAttentionNotFound message </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5776]]</td>
+    <td> MailerContrib cannot run multiple instances at the same time (document this fact) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5772]]</td>
+    <td> base and current revisions reversed in diff URL of MailerContrib notify message </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5744]]</td>
+    <td> When renaming webs you get a File does not exist .. twiki_renamedelete.js </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5743]]</td>
+    <td> Easy to goof up web renaming because the default new webname includes subweb. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5741]]</td>
+    <td> REVTITLE isn't rendered except on rdiff </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5739]]</td>
+    <td> twiki_httpd_conf.txt is inconsistent in the paths it has as default. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5727]]</td>
+    <td> configure and perl 5.10 dies with Use of uninitialized value $filename in substitution (s///) at (eval 41) line 23 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5726]]</td>
+    <td> Changing a form when the old form has mandatory fields which are empty causes bogus error </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5725]]</td>
+    <td> Editing in Classic skin gives missing Save and Cancel buttons </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5724]]</td>
+    <td> When you Edit Raw and then add form you end up in Wysiwyg edit mode </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5721]]</td>
+    <td> TinyMCE not honouring Template Topic in special cases. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5716]]</td>
+    <td> universal edit button work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5711]]</td>
+    <td> Registration of Zyc ends in the end of TWiki users instead of the last entry in list of users </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5703]]</td>
+    <td> Putting setting with empty value in 'Topic Preference' interface does not work. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5701]]</td>
+    <td> tempatetopic not implemented as per the docco in TWikiScripts </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5690]]</td>
+    <td> Chinese is fail on newest TinyMCEPlugin / WysiwygPlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5688]]</td>
+    <td> Documentation of eachChangeSince uses $iterator and $it </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5687]]</td>
+    <td> TWikiScripts docco for formtemplate is missing details. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5677]]</td>
+    <td> META tag does not show form field data in 4.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5674]]</td>
+    <td> IF and Query have problems if some part of an evaluated statement is undef </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5668]]</td>
+    <td> twiki form Hidden Labels aren't being hidden in view mode. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5667]]</td>
+    <td> Named jp.po to ja.po to match locale. Fixed the translation of the word Japanese </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5656]]</td>
+    <td> CGI::charset called in BEGIN{} breaks mod_perl preloading of TWiki.pm </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5655]]</td>
+    <td> Query and IF info.version value is not compatible with the common external representation of topic revision </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5649]]</td>
+    <td> INCLUDE{"WebHome" section=""} returns nothing. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5648]]</td>
+    <td> LINKTOOLTIPINFO format cannot be changed </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5643]]</td>
+    <td> REVINFO with topic= set to a non-existant topic returns stupid values. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5638]]</td>
+    <td> readdir/closedir attempted on invalid dirhandle on perl-5.10 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5636]]</td>
+    <td> Main Web preferences lists nonexistant topic in WEBFORM </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5633]]</td>
+    <td> Documentation mistakes in TWikiFuncDotPm/saveTopic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5632]]</td>
+    <td> moveAttachment creates duplicates when topic/web are the same as the source </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5631]]</td>
+    <td> WebStatistics topic was linking to the massive TWikiDocumentation topic </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5630]]</td>
+    <td> spooling erra's in the WebNotify topics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5629]]</td>
+    <td> registration email does not explicitly tell the user what their login is. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5627]]</td>
+    <td> Image and Attachment references are trashed when using short URLs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5626]]</td>
+    <td> Encoding problem with iso-8859 and umlauts </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5622]]</td>
+    <td> Jumping text with blockindent on IE </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5620]]</td>
+    <td> Core: edit window no longer has focus on load </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5615]]</td>
+    <td> ActionTracker with CommentPlugin order Dependencies </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5612]]</td>
+    <td> Selecting "All Public Webs" option not sticking in UI </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5609]]</td>
+    <td> Bug in lib/TWiki/Prefs/PrefsCache.pm (CGI::H3 should be CGI::h3) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5602]]</td>
+    <td> Web Rename not following ALLOWWEBRENAME Preference </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5601]]</td>
+    <td> registerHandler should be called once per registration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5597]]</td>
+    <td> default skin search template is broken for webchanges </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5593]]</td>
+    <td> raw=on broken on topics with a view_template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5588]]</td>
+    <td> INCLUDE of attached HTML files fails in subwebs </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5562]]</td>
+    <td> Query type Search does not report with large number of topics </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5559]]</td>
+    <td> TWikiJavascript does not enable partial js usage. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5556]]</td>
+    <td> it appears that BuildContrib defaults all unspecified permissions to 664? </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5554]]</td>
+    <td> Missuse of sort and loops </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5547]]</td>
+    <td> "action" parameter for "edit" script fail in 4.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5542]]</td>
+    <td> After you enable {UserInterfaceInternationalisation} first view shows an error </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5540]]</td>
+    <td> TWikiUserMapping: single character erroneously reported as a group </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5536]]</td>
+    <td> robots.txt is missing some obvious scripts - like login </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5535]]</td>
+    <td> IF{"$BANNER" does not really work. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5534]]</td>
+    <td> missing contexts for several bin scripts </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5533]]</td>
+    <td> tmpl login script does not do writeCompletePage, so it does not get addToHEAD bits. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5529]]</td>
+    <td> SEARCHes of type word do not work if word is non-English and with TWiki running utf-8 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5526]]</td>
+    <td> WebSearch link "Get notified on changes on this search" breaks when search string contains quote </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5518]]</td>
+    <td> "URLPARAM{" in Comment Box when type="bulletabove" </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5517]]</td>
+    <td> Wrong call $session-&gt;{i18n} </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5516]]</td>
+    <td> LanguageSelector javascript breaks on topic names with underscores </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5514]]</td>
+    <td> suppressTWikiSaveValidation and validateTWikiMandatoryFields Javascript errors in IE and Firefox </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5509]]</td>
+    <td> IF &amp; query String matching may be incorrectly greedy. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5501]]</td>
+    <td> IF allows does not work correctly if the topic does not exist. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5499]]</td>
+    <td> TWiki::UI::Resister::changePassword sends login, not cUID to TWiki::Users::setPassword </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5495]]</td>
+    <td> add twikiBroadcastMessage class div to default &amp; classic skins </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5491]]</td>
+    <td> FileAttachment documentation fix - {AutoAttachPubDir} should read {AutoAttachPubFiles} </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5490]]</td>
+    <td> %REVTITLE2% not substituted in RDiff.pm </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5478]]</td>
+    <td> Personal left bar is potentially buggy in layout </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5467]]</td>
+    <td> Pickaxe saves absolute URL instead of ATTACHURL </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5466]]</td>
+    <td> default and classic search.tmpl's have one table per topic result </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5462]]</td>
+    <td> Hide Attachment option does not work </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5461]]</td>
+    <td> default skin does not show the form attached to the topic. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5458]]</td>
+    <td> Rename web drop all link refer to the web </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5457]]</td>
+    <td> TinyMCE breaks Cyrillic Encoding (cp1251 or KOI8-R) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5451]]</td>
+    <td> MailInContrib reveals error in Password.pm, that has been carried over to LdapContrib </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5450]]</td>
+    <td> MailInContrib docs refer to bin/mailincron but actually its in tools </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5449]]</td>
+    <td> TWiki::Sandbox::sysCommand leaves an extra process if command fails </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5447]]</td>
+    <td> If <code>manage</code> requires login, impossible to change password </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5443]]</td>
+    <td> Searches order="editby" are sorted by login ID (cUID) instead of WikiName making result look random </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5432]]</td>
+    <td> Image links inserted with Manage Attachment only work with lower case file extension </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5431]]</td>
+    <td> Register.pm redirects to TWikiUsers topic on error, even though that topic may not exist </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5430]]</td>
+    <td> reset password message has some errors </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5428]]</td>
+    <td> Topic save error with form does not remove nop </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5426]]</td>
+    <td> RSS feeds failing due to newlines at top of page. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5418]]</td>
+    <td> readme.txt refers to missing 'install instructions' TWikiDocumentation.html </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5412]]</td>
+    <td> "You are trying to templatetopic a topic that does not exist" makes no sense </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5410]]</td>
+    <td> WebSearchAdvanced does not regex search when you select that it should </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5405]]</td>
+    <td> TWikiHierarchicalNavigation seach broken </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5399]]</td>
+    <td> DISPLAYTIME documentation improved </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5393]]</td>
+    <td> Adding bullet right after a heading adds annoying html paragraph tags </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5387]]</td>
+    <td> Issue with multi-span rows and the EditRowPlugin / TablePlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5382]]</td>
+    <td> TWiki.pm sets wrong urlHost if https protocol and ShorterUrlCookbook is used </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5348]]</td>
+    <td> Comment regarding FINALPREFERENCES should also mention subwebs. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5345]]</td>
+    <td> Logging in as admin still redirects to main home </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5344]]</td>
+    <td> PatternSkin small bug fixes and enhancements after 4.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5343]]</td>
+    <td> Can't set parent to none anymore </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5339]]</td>
+    <td> Attachment uploaded by name not shown as TWiki link in 4.2 for attachments uploaded by TWiki 4.1.2 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5324]]</td>
+    <td> Oops allows the template url parameter to pass through without filtering. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5316]]</td>
+    <td> PHP flag in pub-htaccess.txt is not working with PHP running as CGI </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5314]]</td>
+    <td> TinyMCE breaks Chinese, Japanese, Korean Unicode Encoding upon entering "Edit Twiki Markup" from WYSIWYG </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5311]]</td>
+    <td> deep recursion in getEmails() </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5307]]</td>
+    <td> Plugins with beforeAttachmentSaveHandler break file attachments with TWiki 4.2.0 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5294]]</td>
+    <td> Wysywig &amp; TinyMCE corrupt some topics. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5293]]</td>
+    <td> DATE in TWiki.pm to follow configured displaytime </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5288]]</td>
+    <td> META tag doesn't call expandStandardEscapes() and crashes (trunk only does not affect 4.2.1) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5287]]</td>
+    <td> Linking is totally broken - in 4.2 WikiWord links do not work - in 4.1.2 buttons are disabled </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5284]]</td>
+    <td> You cannot paste into Wysiwyg in IE unless you are in Intranet security zone (documentation issue) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5283]]</td>
+    <td> EditTablePlugin dollar percent expansion does not work well together with SpreadSheetPlugin </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5276]]</td>
+    <td> Link to Release Notes 4.1 in distribution documentation of 4.2.0 </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5258]]</td>
+    <td> Preview does not set ORIGINALREV and other values in edit.tmpl, so continuing from there has problems </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5257]]</td>
+    <td> TinyMCE pads bullets incl. "set" variables with trailing spaces breaking some plugins and TWiki apps. </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5232]]</td>
+    <td> Locales problem in WebNotify.pm and Subscibe.pmI </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5206]]</td>
+    <td> Image not shown , when inserting image with Image button and not using any path </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5182]]</td>
+    <td> "save" does not treat bad templatetopic as an error </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5176]]</td>
+    <td> %SCRIPTSUFFIX is added twice in TOC links </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5124]]</td>
+    <td> Registration confirmation should contain name, not WikiName </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5118]]</td>
+    <td> Difference from 4.1.2 - 4.2: Apache loginname no longer works with access control lists </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5116]]</td>
+    <td> WYSIWYG Line Returns Removed In Opera </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item5053]]</td>
+    <td> Dropdown in TinyMCE help text is confusing </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4946]]</td>
+    <td> urlDecode() not working for characters represented by Unicode code points </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4922]]</td>
+    <td> add the other meta field infos to the output of FORMFIELD{format=""} </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4863]]</td>
+    <td> Removal of RcsDirs feature (was RcsWrap does not support RcsDirs) </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4824]]</td>
+    <td> Security bug: TWiki's user management code needs rework again </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4780]]</td>
+    <td> Twisty addToHEAD does not work in login template </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4741]]</td>
+    <td> %META{"formfield" ....} does not expand </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4289]]</td>
+    <td> Document effect if INCLUDE on access control settings </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item4288]]</td>
+    <td> Document what happens if access control set more than once </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3824]]</td>
+    <td> Possible to hijack TOPIC or WEB variable making editing a topic with one of these defined impossible </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3715]]</td>
+    <td> Simplify I18N configuration </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3502]]</td>
+    <td> preview of a slideshow is corrupted </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item3048]]</td>
+    <td> Documented that CGI version 2.89 causes character entities to not be escaped in Raw View </td>
+  </tr>
+  <tr>
+    <td>[[BUGS/Item1861]]</td>
+    <td> Document EDITACTION </td>
+  </tr>
+</table>
+
+## <a name="Enhancements"></a> Enhancements
+
+None!
 
 **_Related Topic:_** [[TWikiHistory]]
