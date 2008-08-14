@@ -5,7 +5,6 @@ This is an entry point into the code architecture. As always, the source for you
 -- Starting Point --
 
 - <http://www.openafs.org/cgi-bin/cvsweb.cgi/openafs/doc/pdf/> Early architectural documents. Out of date, but still important. You should especially read the Architectural Overview document (archov-doc.pdf)
-- <http://www.eyrie.org/~eagle/tmp/openafs/1/rxgen.html> for more rxgen documentation
 - To understand the source layout, consult src/SOURCE-MAP -- this is a good place to go after reading the Architectural Overview
 - Need to document the build environment issues -- README, README.DEVEL, README.CVS
 - src/BUILDNOTES (at least in the 1.4 tree) is not very helpful
@@ -58,7 +57,6 @@ In addition to the package name, also note that only rxstat uses an M prefix; al
 
 - cscope: a source code browser, linked to your editor. Setup is simple: cd to your source tree and run:
 
-    find . -name \*.[ch] > namelist
     cscope -R -b
 
 Then run
