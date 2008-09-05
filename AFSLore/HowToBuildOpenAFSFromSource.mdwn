@@ -51,17 +51,14 @@ To check out the development branch:
 
 This will create a source tree in a directory named openafs-devel-1\_5\_x.
 
-Next, step into your sandbox and run the regen.sh script to create the configure script.
-
-       cd openafs-stable-1_4_x.
-       ./regen.sh
-
 ### <a name="Building the Binaries"></a> Building the Binaries
 
 #### <a name="Modern Paths"></a> Modern Paths
 
-To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path,
+To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path. Be sure to run ./regen.sh to generate the configure script.
 
+       cd openafs-stable-1_4_x.
+       ./regen.sh
        ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script)
        make
        sudo make install
