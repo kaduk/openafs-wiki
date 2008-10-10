@@ -1,0 +1,27 @@
+NOTE: This is a work in progress.
+
+An example doxygen comment,
+
+    /*!
+     * find the first occurrence of a volume header file and return the path.
+     *
+     * \param[out] ec          outbound error code
+     * \param[in]  volumeId    volume id to find
+     * \param[out] partitionp  pointer to disk partition path string
+     * \param[out] namep       pointer to volume header file name string
+     *
+     * \post path to first occurrence of volume header is returned in partitionp
+     *       and namep, or ec is set accordingly.
+     *
+     * \warning this function is NOT re-entrant -- partitionp and namep point to
+     *          static data segments
+     *
+     * \note if a volume utility inadvertently leaves behind a stale volume header
+     *       on a vice partition, it is possible for callers to get the wrong one,
+     *       depending on the order of the disk partition linked list.
+     *
+     */
+    void
+    VGetVolumePath(Error * ec, VolId volumeId, char **partitionp, char **namep)
+
+-- [[MichaelMeffie]] - 10 Oct 2008
