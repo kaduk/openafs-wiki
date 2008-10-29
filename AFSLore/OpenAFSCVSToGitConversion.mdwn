@@ -1,5 +1,18 @@
 # <a name="Git Plan:"></a> Git Plan:
 
+This is the procedure used to convert the [[OpenAFS]] CVS version control into a git repository. This work was done by Maximilian Cohan and Michael Meffie at the [[OpenAFS]] hackaton 2008 at Google, based of the work already done by Derrick Brashear.
+
+## <a name="Background"></a> Background
+
+The [[OpenAFS]] cvs repository poses several unique and interesting challenges in the git conversion. A custom tool called wdelta, combined with a custom set of commit scripts, has been used since the projects inception. The deltas are effectively patch sets made up of rcs revisions. We need to preserve these deltas and all the history associated with the deltas. Unfortuntunately, the not all deltas were created automically. This leads to some issues,
+
+- There are cases where the same file has been changed more than once in a given delta.
+- In those cases, the revisions of a given file in a given delta is not always consective.
+- In the cases where there are revision gaps, there could be conflicts when trying to collapse the changes into a single patch for the file.
+- Also in the cases where there are gaps, it is possible that cvs tags could interleave the revisions of a delta, although it is unknown at this time if such a case exists.
+
+## <a name="Overview of the process"></a> Overview of the process
+
 ## <a name="Set up base Repo"></a> Set up base Repo
 
 ### <a name="Prep:"></a> Prep:
