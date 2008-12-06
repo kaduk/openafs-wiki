@@ -82,7 +82,7 @@ The plugin can be used to integrate an HTML editor in a number of different ways
 1. The HTML for the content-to-be-edited can be generated directly in the standard edit template.
 2. The HTML for the content-to-be-edited can be generated directly in a specialised edit template.
 3. A URL can be used to fetch the content-to-be-edited from the server, for use in an IFRAME.
-4. REST handlers can be called from Javacript to convert content.
+4. REST handlers can be called from Javascript to convert content.
 
 #### <a name="Generating content directly in t"></a> Generating content directly in the standard edit template
 
@@ -224,7 +224,7 @@ Many thanks to the following sponsors for supporting this work:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
-    <td align="right"> Plugin Authors: </td>
+    <td align="right"> Plugin Author(s): </td>
     <td> TWiki:Main.CrawfordCurrie <a href="http://www.c-dot.co.uk" target="_top">http://www.c-dot.co.uk</a></td>
   </tr>
   <tr>
@@ -237,14 +237,22 @@ Many thanks to the following sponsors for supporting this work:
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 03 Aug 2008 17302 (04 Aug 2008) </td>
+    <td> 17680 (06 Dec 2008) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>   </td>
   </tr>
   <tr>
-    <td align="right"> 03 Aug 2008 </td>
+    <td align="right"> 22 Oct 2008 </td>
+    <td> Fixed TWikibug:Item5961 (emphasis), TWikibug:Item6089 (backslash in verbatim) </td>
+  </tr>
+  <tr>
+    <td align="right"> 7 Aug 2008 </td>
+    <td> Fixed TWikibug:Item5707 (mod_perl) </td>
+  </tr>
+  <tr>
+    <td align="right"> 3 Aug 2008 </td>
     <td> TWiki 4.2.1 release version </td>
   </tr>
   <tr>
@@ -336,6 +344,11 @@ Many thanks to the following sponsors for supporting this work:
           <td align="left">HTML::Entities</td>
           <td align="left">&gt;=1.25</td>
           <td align="left">Required. Available from <a href="http://cpan.uwinnipeg.ca/search?query=HTML%3A%3AEntities&mode=dist" target="_top">CPAN</a>.</td>
+        </tr>
+        <tr>
+          <td align="left">Encode</td>
+          <td align="left">&gt;=2.01</td>
+          <td align="left">Required.</td>
         </tr>
       </table>
     </td>

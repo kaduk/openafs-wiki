@@ -11,11 +11,11 @@ _TWiki site access control and user activity tracking options_
         <li><a href="#User Registration"> User Registration</a></li>
         <li><a href="#Login Management"> Login Management</a><ul>
             <li><a href="#No Login (select <code>none</code> in confi"> No Login (select none in configure)</a></li>
-            <li><a href="#Template Login (select =TWiki::C"> Template Login (select TWiki::Client::TemplateLogin in configure)</a><ul>
+            <li><a href="#Template Login (select =TWiki::"> Template Login (select TWiki::LoginManager::TemplateLogin in configure)</a><ul>
                 <li><a href="#Enabling Template Login"> Enabling Template Login</a></li>
               </ul>
             </li>
-            <li><a href="#Apache Login (select =TWiki::Cli"> Apache Login (select TWiki::Client::ApacheLogin in configure)</a><ul>
+            <li><a href="#Apache Login (select =TWiki::_Lo"> Apache Login (select TWiki::LoginManager::ApacheLogin in configure)</a><ul>
                 <li><a href="#Enabling Apache Login using =mod"> Enabling Apache Login using mod_auth</a></li>
                 <li><a href="#Logons via bin/logon"> Logons via bin/logon</a></li>
               </ul>
@@ -63,7 +63,7 @@ Please note [[FileAttachments]] are not protected by TWiki User Authentication.
 
 ## <a name="Password Management"></a> Password Management
 
-As shipped, TWiki supports the Apache 'htpasswd' password manager. This manager supports the use of `.htpasswd` files on the server. These files can be unique to TWiki, or can be shared with other applications (such as an Apache webserver). A variety of password encodings are supported for flexibility when re-using existing files. See the descriptive comments in the Security Settings section of the \[[http://www.dementia.org/twiki/configure]\[configure] interface for more details.
+As shipped, TWiki supports the Apache 'htpasswd' password manager. This manager supports the use of `.htpasswd` files on the server. These files can be unique to TWiki, or can be shared with other applications (such as an Apache webserver). A variety of password encodings are supported for flexibility when re-using existing files. See the descriptive comments in the Security Settings section of the [configure](http://www.dementia.org/twiki/configure) interface for more details.
 
 You can easily plug in alternate password management modules to support interfaces to other third-party authentication databases.
 
@@ -83,6 +83,8 @@ New user registration uses the password manager to set and change passwords and 
 
 The registration process is also responsible for creating user topics, and setting up the mapping information used by the User Mapping support.
 
+**_%X% Note:_** If you are restricting the entire %USERSWEB% web to TWikiGuest, you are required to add TWikiRegistrationAgent to ALLOWWEBCHANGE in your `%USERSWEB%/WebPreferences`. By doing so, new users are able to register without any errors.
+
 <a name="LoginManagement"></a>
 
 ## <a name="Login Management"></a> Login Management
@@ -99,15 +101,16 @@ Does exactly what it says on the tin. Forget about authentication to make your s
 
 <a name="TemplateLogin"></a>
 
-### <a name="Template Login (select &lt;code&gt;TWiki::C"></a> Template Login (select =TWiki::Client::TemplateLogin in configure)
+### <a name="Template Login (select &lt;code&gt;TWiki::"></a><a name="Template Login (select =TWiki::_"></a> Template Login (select =TWiki::LoginManager::TemplateLogin in configure)
 
 Template Login asks for a username and password in a web page, and processes them using whatever Password Manager you choose. Users can log in and log out. Client Sessions are used to remember users. Users can choose to have their session remembered so they will automatically be logged in the next time they start their browser.
 
 #### <a name="Enabling Template Login"></a> Enabling Template Login
 
 1. Use the [configure](http://www.dementia.org/twiki/configure) interface to
-  1. select the `TWiki::Client::TemplateLogin` login manager (on the Security Settings pane).
+  1. select the `TWiki::LoginManager::TemplateLogin` login manager (on the Security Settings pane).
   2. select the appropriate password manager for your system, or provide your own.
+  3. %H% there is also an EXPERT configure setting `{TemplateLogin}{PreventBrowserRememberingPassword}` that you can set to prevent Browsers from remembering username and passwords if you are concerned about public terminal usage.
 2. Register yourself in the [[TWikiRegistration]] topic. <br /> %H% Check that the password manager recognises the new user. If you are using `.htpasswd` files, check that a new line with the username and encrypted password is added to the `.htpasswd` file. If not, you probably got a path wrong, or the permissions may not allow the webserver user to write to that file.
 3. Create a new topic to check if authentication works.
 4. **Edit the %USERSWEB%.TWikiAdminGroup topic in the %USERSWEB% web to include users with system administrator status.**<br /> %X% **This is a very important step**, as users in this group can access _all_ topics, independent of TWiki access controls.
@@ -122,7 +125,7 @@ Template Login asks for a username and password in a web page, and processes the
 
 <a name="ApacheLogin"></a>
 
-### <a name="Apache Login (select &lt;code&gt;TWiki::Cli"></a> Apache Login (select =TWiki::Client::ApacheLogin in configure)
+### <a name="Apache Login (select &lt;code&gt;TWiki::_Lo"></a> Apache Login (select =TWiki::LoginManager::ApacheLogin in configure)
 
 Using this method TWiki does not authenticate users internally. Instead it depends on the `REMOTE_USER` environment variable, which is set when you enable authentication in the webserver.
 
@@ -140,7 +143,7 @@ The same private `.htpasswd` file used in TWiki Template Login can be used to au
 
 You can use any other Apache authentication module that sets REMOTE\_USER.
 
-1. Use [configure](http://www.dementia.org/twiki/configure#LoginManager) to select the `TWiki::Client::ApacheLogin` login manager.
+1. Use [configure](http://www.dementia.org/twiki/configure#LoginManager) to select the `TWiki::LoginManager::ApacheLogin` login manager.
 2. Use [configure](http://www.dementia.org/twiki/configure#PasswordManager) to set up TWiki to create the right kind of `.htpasswd` entries.
 3. Create a `.htaccess` file in the `twiki/bin` directory.<br />%H% There is an template for this file in `twiki/bin/.htaccess.txt` that you can copy and change. The comments in the file explain what need to be done.<br />%H% If you got it right, the browser should now ask for login name and password when you click on the <u>Edit</u>. If `.htaccess` does not have the desired effect, you may need to "AllowOverride All" for the directory in `httpd.conf` (if you have root access; otherwise, e-mail web server support) <br /> %X% At this time [[TWikiAccessControls]] do not control access to files in the `pub` area, unless they are only accessed through the `viewfile` script. If your `pub` directory is set up to allow open access you may want to add `.htaccess` files in there as well to restrict access
 4. You can create a custom version of the [[TWikiRegistration]] form by copying the default topic, and then deleting or adding input tags in your copy. The `name=""` parameter of the input tags must start with: `"Twk0..."` (if this is an optional entry), or `"Twk1..."` (if this is a required entry). This ensures that the fields are carried over into the user home page correctly. Do **not** modify the version of [[TWikiRegistration]] shipped with TWiki, as your changes will be overwritten next time you upgrade. <br />The default new user template page is in [[%SYSTEMWEB%.NewUserTemplate|SYSTEMWEB/NewUserTemplate]]. The same variables get expanded as in the [[template topics|Main/TWikiTemplates#Template_Topics]]. You can create a custom new user home page by creating the [[%USERSWEB%.NewUserTemplate|USERSWEB/NewUserTemplate]] topic, which will then override the default.
@@ -152,9 +155,9 @@ You can use any other Apache authentication module that sets REMOTE\_USER.
 
 #### <a name="Logons via bin/logon"></a> Logons via bin/logon
 
-Any time a user enters a page that needs authentication, they will be forced to log on. It may be convenient to have a "logon" as well, to give the system a chance to identify the user and retrieve their personal settings. It may be convenient to force them to log on.
+Any time a user requests a page that needs authentication, they will be forced to log on. It may be convenient to have a "logon" link as well, to give the system a chance to identify the user and retrieve their personal settings. It may be convenient to force them to log on.
 
-The <code>**bin/logon**</code> script accomplishes this. The <code>**bin/logon**</code> script must be setup in the <code>**bin/.htaccess**</code> file to be a script which requires a `valid user`. However, once authenticated, it will simply redirect the user to the view URL for the page from which the `logon` script was linked.
+The <code>**bin/logon**</code> script enables this. If you are using Apache Login, the <code>**bin/logon**</code> script must be setup in the <code>**bin/.htaccess**</code> file to be a script which requires a `valid user`. Once authenticated, it will redirect the user to the view URL for the page from which the `logon` script was linked.
 
 <a name="TrackSessions"></a>
 
@@ -280,4 +283,4 @@ See TWiki:TWiki.SecuringTWikiSite for more information.
 
 **_Related Topics:_** [[AdminDocumentationCategory]], [[TWikiAccessControl]], TWiki:TWiki.TWikiUserAuthenticationSupplement, TWiki:TWiki.SecuringTWikiSite
 
--- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.CrawfordCurrie
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.CrawfordCurrie, TWiki:Main.SvenDowideit

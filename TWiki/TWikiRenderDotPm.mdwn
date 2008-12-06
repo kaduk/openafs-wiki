@@ -10,6 +10,7 @@ This module provides most of the actual HTML rendering code in TWiki.
         <li><a href="#ObjectMethod <strong>renderParent</strong> ($we"> ObjectMethod renderParent <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderMoved</strong> ($web"> ObjectMethod renderMoved <tt>($web,$topic,$meta,$params) -&gt; $text</tt></a></li>
         <li><a href="#ObjectMethod <strong>make_AnchorName</strong> ("> ObjectMethod makeAnchorName <tt>($anchorName,$compatibilityMode) -&gt; $anchorName</tt></a></li>
+        <li><a href="#ObjectMethod *make_UniqueAnchorN"> ObjectMethod makeUniqueAnchorName <tt>($web,$topic,$anchorName,$compatibility) -&gt; $anchorName</tt></a></li>
         <li><a href="#ObjectMethod <strong>internalLink</strong> ($th"> ObjectMethod internalLink <tt>($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb,$hasExplicitLinkLabel) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod <strong>renderFORMFIELD</strong> ("> ObjectMethod renderFORMFIELD <tt>(%params,$topic,$web) -&gt; $html</tt></a></li>
         <li><a href="#ObjectMethod *get_RenderedVersio"> ObjectMethod getRenderedVersion <tt>($text,$theWeb,$theTopic) -&gt; $html</tt></a></li>
@@ -55,6 +56,13 @@ Render moved meta-data
 - `$compatibilityMode` - SMELL: compatibility with **what**?? Who knows. :-(
 
 Build a valid HTML anchor name
+
+## <a name="ObjectMethod &lt;strong&gt;make_UniqueAnchorN"></a> [[ObjectMethod]] \*makeUniqueAnchorName `($web,$topic,$anchorName,$compatibility) -> $anchorName`
+
+- `$anchorName` - the unprocessed anchor name
+- `$compatibilityMode` - SMELL: compatibility with **what**?? Who knows. :-(
+
+Build a valid HTML anchor name (unique w.r.t. the list stored in %anchornames)
 
 ## <a name="ObjectMethod &lt;strong&gt;internalLink&lt;/strong&gt; ($th"></a> [[ObjectMethod]] **internalLink** `($theWeb,$theTopic,$theLinkText,$theAnchor,$doLink,$doKeepWeb,$hasExplicitLinkLabel) -> $html`
 

@@ -186,13 +186,13 @@ Likewise use `start="hide"` to start with hidden content.
 
     %TWISTY{
     showlink="Show..."
-    hidelink="Hide
+    hidelink="Hide"
     start="hide"
     }%
     my twisty content
     %ENDTWISTY%
 
-<span><span>[<span>Show...</span>](#)</span><span>[<span>Hide start=</span>](#)</span></span>
+<span><span>[<span>Show...</span>](#)</span><span>[<span>Hide</span>](#)</span></span>
 
 <div style="display: inline"><span id="twistyId7toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
 
@@ -287,7 +287,9 @@ Will create:
 
 #### <a name="Header%_TWISTYSCRIPT{&quot;TWiki._Twi"></a> <span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleopen.gif)<span>Header</span>](#)</span><span>[![](http://www.dementia.org/twiki//view/Main/WebHome/toggleclose.gif)<span>Header</span>](#)</span></span>
 
-<div style="display: inline"><span id="twistyId12toggle"> %GREEN% my twisty content %ENDCOLOR% </span></div>
+<div style="display: inline">
+  <div id="twistyId12toggle"> %GREEN% my twisty content %ENDCOLOR% </div>
+</div>
 
 ### <a name="All on, all off"></a> All on, all off
 
@@ -411,7 +413,7 @@ This renders the button as well as the toggled content section contained within 
   <tr>
     <td><code>mode</code></td>
     <td><code>"div"</code> or <code>"span"</code></td>
-    <td> Specify if the Twisty Toggle section will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. </td>
+    <td> Specify if the Twisty Toggle section will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. Note that if the contents contains block elements such as <code>div</code>, <code>mode</code> should be <code>div</code> as well to create valid HTML markup. </td>
     <td> optional, defaults to <code>&lt;span&gt;</code></td>
   </tr>
   <tr>
@@ -546,11 +548,12 @@ See [[ENDTWISTYTOGGLE|Main/WebHome#VarENDTWISTYTOGGLE]].
         <tr>
           <td><code>mode</code></td>
           <td><code>"div"</code> or <code>"span"</code></td>
-          <td> Specify if the <strong>Twisty button</strong> will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag </td>
+          <td> Specify if the <strong>Twisty button</strong> will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. Note that if the contents contains block elements such as <code>div</code>, <code>mode</code> should be <code>div</code> as well to create valid HTML markup. </td>
           <td> optional, defaults to <code>&lt;span&gt;</code></td>
         </tr>
       </table>
     </li>
+    <li> Example: <code>%TWISTYBUTTON{id="myid" link="more"}%%TWISTYTOGGLE{id="myid"}%content%ENDTWISTYTOGGLE%</code></li>
     <li> Related: [[Main/WebHome#VarTWISTYSHOW]] and [[Main/WebHome#VarTWISTYHIDE]]</li>
   </ul>
   <p><a name="VarTWISTYSHOW"></a></p>
@@ -578,7 +581,7 @@ See [[ENDTWISTYTOGGLE|Main/WebHome#VarENDTWISTYTOGGLE]].
         <tr>
           <td><code>mode</code></td>
           <td><code>"div"</code> or <code>"span"</code></td>
-          <td> Specify if the Twisty Show link will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag </td>
+          <td> Specify if the Twisty Show link will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. Note that if the contents contains block elements such as <code>div</code>, <code>mode</code> should be <code>div</code> as well to create valid HTML markup. </td>
           <td> optional, defaults to <code>&lt;span&gt;</code></td>
         </tr>
         <tr>
@@ -647,7 +650,7 @@ See [[ENDTWISTYTOGGLE|Main/WebHome#VarENDTWISTYTOGGLE]].
         <tr>
           <td><code>mode</code></td>
           <td><code>"div"</code> or <code>"span"</code></td>
-          <td> Specify if the Twisty Hide link will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag </td>
+          <td> Specify if the Twisty Hide link will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. Note that if the contents contains block elements such as <code>div</code>, <code>mode</code> should be <code>div</code> as well to create valid HTML markup. </td>
           <td> optional, defaults to <code>&lt;span&gt;</code></td>
         </tr>
         <tr>
@@ -698,7 +701,7 @@ See [[ENDTWISTYTOGGLE|Main/WebHome#VarENDTWISTYTOGGLE]].
         <tr>
           <td><code>mode</code></td>
           <td><code>"div"</code> or <code>"span"</code></td>
-          <td> Specify if the Twisty Toggle section will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. </td>
+          <td> Specify if the Twisty Toggle section will use a <code>&lt;div&gt;</code> or a <code>&lt;span&gt;</code> tag. Note that if the contents contains block elements such as <code>div</code>, <code>mode</code> should be <code>div</code> as well to create valid HTML markup. </td>
           <td> optional, defaults to <code>&lt;span&gt;</code></td>
         </tr>
         <tr>
@@ -904,7 +907,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright ©: </td>
-    <td> 2005 Rafael Alvarez; 2006, 2007 Arthur Clemens </td>
+    <td> 2005 Rafael Alvarez; 2006-2008 Arthur Clemens </td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -916,11 +919,15 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 03 Aug 2008 (version 1.4.10) </td>
+    <td> 10 Oct 2008 (version 1.4.12) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 08 Oct 2008 </td>
+    <td> 1.4.11, 1.4.12 It is now possible to have a twisty on the same line without a linebreak. </td>
   </tr>
   <tr>
     <td align="right"> 03 Aug 2008 </td>

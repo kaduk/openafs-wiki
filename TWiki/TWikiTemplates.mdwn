@@ -83,7 +83,7 @@ The master templates shipped with a twiki release are stored in the twiki/templa
 
 You can save templates in other directories as long as they are listed in the `{TemplatePath}` configuration setting. The `{TemplatePath}` is defined in the Miscellaneous section of the [configure](http://www.dementia.org/twiki/configure) page.
 
-You can also save templates in user topics. The `{TemplatePath}` configuration setting defines which topics will be accepted as templates.
+You can also save templates in user topics (_IF_ there is no possible template match in the `templates` directory). The `{TemplatePath}` configuration setting defines which topics will be accepted as templates.
 
 Templates that are included with an explicit `'.tmpl'` extension are looked for only in the `templates/` directory. For instance `%TMPL:INCLUDE{"example.tmpl"}%` will only return `templates/example.tmpl`, regardless of `{TemplatePath}` and SKIN settings.
 

@@ -1,6 +1,6 @@
-# <a name="%SYSTEMWEB%._PatternSkin Customi"></a><a name=" %SYSTEMWEB%._PatternSkin Custom"></a> %SYSTEMWEB%.PatternSkin Customization
+# <a name="TWiki._PatternSkin Customization"></a><a name=" TWiki._PatternSkin Customizatio"></a> [[PatternSkin]] Customization
 
-**Questions and answers on configuring page elements.** For styling your TWiki, see [[PatternSkinCssCookbook]].
+**Guidelines how to create and customize page templates.** For styling your TWiki using stylesheets, see [[PatternSkinCssCookbook]].
 
 <div>
   <ul>
@@ -31,12 +31,16 @@
         <li><a href="#I want to make the left bar wide"> I want to make the left bar wider</a></li>
       </ul>
     </li>
-    <li><a href="#Other page parts"> Other page parts</a><ul>
+    <li><a href="#Buttons"> Buttons</a><ul>
         <li><a href="#I want to hide the edit buttons"> I want to hide the edit buttons from certain users</a></li>
         <li><a href="#I want to remove the History but"> I want to remove the History button from the bottom</a></li>
+        <li><a href="#I want to put the bottom links a"> I want to put the bottom links as buttons at the top</a></li>
+      </ul>
+    </li>
+    <li><a href="#Other page parts"> Other page parts</a><ul>
         <li><a href="#I want to insert text outside of"> I want to insert text outside of the topic content</a></li>
         <li><a href="#I want to place the form at the"> I want to place the form at the top</a></li>
-        <li><a href="#I only want to show the WYSIWYG"> I only want to show the WYSIWYG button on explicit pages</a></li>
+        <li><a href="#I want to put the topic form in"> I want to put the topic form in a twisty</a></li>
       </ul>
     </li>
   </ul>
@@ -70,7 +74,7 @@ The quickest way to change the view template would be to simply change the text 
 2. Create a new (empty) view template file in `/templates` called `view.myskin.tmpl`.
 3. In `view.myskin.tmpl` you write:
 > %TMPL:INCLUDE{"view"}%
->        %TMPL:DEF{"topicactionbuttons"}%%TMPL:P{"activatable_more"}%%TMPL:END%
+>        %TMPL:DEF{"top:toolbarbuttons"}%%TMPL:P{"more_link"}%%TMPL:END%
 4. For testing, view any topic and append to the topic name: `?cover=myskin`. You should see an effect now.
 5. To make the changes visible on all pages, go to [[Main.TWikiPreferences|Main/TWikiPreferences]] (to keep [[TWikiPreferences]] intact) and write:
 
@@ -100,27 +104,24 @@ Call this template by setting `VIEW_TEMPLATE`:
 We can use the same example as above. In a topic write:
 
 > %TMPL:INCLUDE{"view"}%
->     %TMPL:DEF{"topicactionbuttons"}%%TMPL:P{"activatable_more"}%%TMPL:END%
+>     %TMPL:DEF{"top:toolbarbuttons"}%%TMPL:P{"more_link"}%%TMPL:END%
 
 You can also test this by appending `?template=PersonalInfoView` to the url.
 
 ## <a name="Reference: pattern skin template"></a> Reference: pattern skin template INCLUDE tree
 
+The `view` script invokes the `view` template:
+
     view
-        page
-            constants
-            javascript
-            styles
-                stylesdynamic
-            body
-                viewtopbar
-                    %SYSTEMWEB%.WebTopBar
-                viewtoolbar
-                viewleftbar
-                    %WEB%.WebLeftBar
-                viewtopicactionbuttons
-                viewbottombar
-                    %SYSTEMWEB%.WebBottomBar
+        twiki
+            css
+            viewtopbar
+                %TWIKIWEB%.WebTopBar
+            viewleftbar
+                %WEB%.WebLeftBar
+            viewtopicactionbuttons
+            viewbottombar
+                %TWIKIWEB%.WebBottomBar
 
 ## <a name="Logo"></a> Logo
 
@@ -139,7 +140,7 @@ There are 2 ways to change the logo in a web:
 
 **Using logo.gif:**
 
-> - Create a new image named `logo.gif` and attach it to the web's [[WebPreferences]] topic. %SYSTEMWEB%.PatternSkin's stylesheet assumes the logo is 40px high. More about that later.
+> - Create a new image named `logo.gif` and attach it to the web's [[WebPreferences]] topic. [[PatternSkin]]'s stylesheet assumes the logo is 40px high. More about that later.
 > - You can also upload the image with FTP to `/pub/YourWeb/WebPreferences/`.
 > - Copy the above instructions ("Redefine your custom variables") and insert your logo name.
 
@@ -163,7 +164,7 @@ See [[I want to change the height of the top bar|Main/WebHome#TopBarChangeHeight
 
 ### <a name="I want to change the white space"></a> I want to change the white space above and below the logo
 
-Change the table style in topic %SYSTEMWEB%.WebTopBar. The default top padding is 11px.
+Change the table style in topic [[WebTopBar]]. The default top padding is 11px.
 
 ## <a name="Top bar"></a> Top bar
 
@@ -210,7 +211,11 @@ The top bar is 64 pixels high by default.
 >
 > `USERLAYOUTURL`
 >
-> to that topic attachment. See %SYSTEMWEB%.PatternSkinCssCookbook about creating custom styles.
+> to that topic attachment. See
+>
+> [[PatternSkinCssCookbook]]
+>
+> about creating custom styles.
 
 ### <a name="I want to set or change the top"></a><a name="I want to set or change the top "></a> I want to set or change the top background image
 
@@ -218,7 +223,7 @@ The image at the top is called "header art" - commonly the top image found on bl
 
 Redefine your custom variables in [[Main.TWikiPreferences|Main/TWikiPreferences]] (to keep [[TWikiPreferences]] intact):
 
-> * Set WEBHEADERART = %PUBURLPATH%/%SYSTEMWEB%/PatternSkin/TWiki_header.gif
+> * Set WEBHEADERART = %PUBURLPATH%/%TWIKIWEB%/PatternSkin/TWiki_header.gif
 >        * Set WEBHEADERBGCOLOR = somehexcolor (no quotes, for example: #ffffff)
 
 You can also set `WEBHEADERART` per web, by defining the variable in the Web's WebPreferences.
@@ -233,7 +238,7 @@ Redefine `WEBHEADERBGCOLOR` in [[Main.TWikiPreferences|Main/TWikiPreferences]] (
 
 If you have localization enabled, you will also see a language dropdown box at the far right.
 
-You can remove these items from %SYSTEMWEB%.WebTopBar.
+You can remove these items from [[WebTopBar]].
 
 ### <a name="I want to hide the top bar"></a> I want to hide the top bar
 
@@ -251,10 +256,10 @@ The view template is populated with page elements using template inclusions:
 
 Each included template draws a part of the screen.%BR% Omit `%TMPL:INCLUDE{"viewtopbar"}%` to hide the top bar.
 
-Another approach is to clear the contents of module `topbar`. Using either a template or a topic template, write in your custom template:
+Another approach is to clear the contents of module `topbar` with an empty definition. Using either a template or a topic template, write in your custom template:
 
 > %TMPL:INCLUDE{"view"}%
->     %TMPL:INCLUDE{"topbar"}%%TMPL:END%
+>     %TMPL:DEF{"topbar"}%%TMPL:END%
 >
 > and add:
 >
@@ -274,7 +279,8 @@ Another approach is to clear the contents of module `topbar`. Using either a tem
 
 **Using templates:** %BR% Omit `%TMPL:INCLUDE{"viewleftbar"}%` to hide the left bar, or in a custom template clear it using
 
-> %TMPL:DEF{"viewleftbar"}%%TMPL:END%
+> %TMPL:DEF{"leftbar"}%%TMPL:END%
+>     %TMPL:DEF{"leftbardimensions"}%%TMPL:END%
 
 **Using style sheets:** %BR% See [[PatternSkinCssCookbookNoLeftBar]]
 
@@ -296,19 +302,19 @@ The left bar is 12 em wide by default.
 >
 > And change the number from 12em to a different value (3 occurrences).
 
-## <a name="Other page parts"></a> Other page parts
+## <a name="Buttons"></a> Buttons
 
 ### <a name="I want to hide the edit buttons"></a><a name="I want to hide the edit buttons "></a> I want to hide the edit buttons from certain users
 
 It may defy the wiki-ness of your TWiki installation, but in certain circumstances it could be useful to hide the edit buttons from users that are not logged in, for instance for clients that have gotten viewing rights only.
 
-Using either a template or a topic template, 'empty' `topicaction` and `toolbar` by writing:
+Using either a template or a topic template, 'empty' `top:toolbarbuttons` and `topicaction` by writing:
 
 > %TMPL:INCLUDE{"view"}%
+>     %TMPL:DEF{"top:toolbarbuttons"}%%TMPL:END%
 >     %TMPL:DEF{"topicaction"}%%TMPL:END%
->     %TMPL:DEF{"toolbar"}%%TMPL:END%
 
-In the user page of %USERSWEB%.TWikiGuest, set the cover to
+In the user page of [[TWikiGuest]], set the cover to
 
 > * Set COVER = customer
 
@@ -316,63 +322,122 @@ By default this topic is editable only by TWiki admins.
 
 ### <a name="I want to remove the History but"></a> I want to remove the History button from the bottom
 
-All action buttons are defined in `viewtopicactionbuttons.pattern.tmpl`. The history buttons or in module `revisions`:
+All action links and buttons are defined in `viewtopicactionbuttons.tmpl`. The bottom history link is defined in DEF `action_revisions`
 
-> <code> %TMPL:DEF\{"topicactionbuttons"\}%%TMPL:P\{"activatable\_raw\_edit"\}%%TMPL:P\{"sep"\}% %TMPL:P\{context="WysiwygPluginEnabled" then="activatable\_edit\_wysiwyg"\}% %TMPL:P\{context="WysiwygPluginEnabled" then="sep"\}% %TMPL:P\{"activatable\_attach"\}%%TMPL:P\{"sep"\}% %TMPL:P\{"printable"\}%%TMPL:P\{"sep"\}% %TMPL:P\{"raw"\}%%TMPL:P\{"sep"\}% %TMPL:P\{"backlinks"\}%%TMPL:P\{"sep"\}% %TMPL:P\{"revisions"\}%%TMPL:P\{"sep"\}% <span><font>&lt; HERE</font></span> %TMPL:P\{"activatable\_more"\}%%TMPL:END% </code>
+> %TMPL:DEF{"topicactionbuttons"}%
+>     %TMPL:P{"action_activatable_edit_or_create"}%
+>     %TMPL:P{"action_activatable_attach"}%
+>     %TMPL:P{"action_printable"}%
+>     %TMPL:P{"action_revisions"}%
+>     %TMPL:P{"action_backlinks_simple"}%
+>     %TMPL:P{"action_raw_or_view"}%
+>     %TMPL:P{"action_activatable_raw_edit"}%
+>     %TMPL:P{"activatable_more"}%
+>     %TMPL:END%
 
-If we emptied module `revisions` we would end up with 2 separators, so we need to remove the line altogether. We do this by copying the block and omitting the line. %BR% Using either a template or a topic template, to remove the history buttons write in your custom template:
+To hide that link, In a custom skin view template `view.myskin.tmpl` empty `action_revisions` by replacing it with an empty string:
 
 > %TMPL:INCLUDE{"view"}%
->
->     %TMPL:DEF{"topicactionbuttons"}%%TMPL:P{"activatable_raw_edit"}%%TMPL:P{"sep"}%
->     %TMPL:P{context="WysiwygPluginEnabled" then="activatable_edit_wysiwyg"}%
->     %TMPL:P{context="WysiwygPluginEnabled" then="sep"}%
->     %TMPL:P{"activatable_attach"}%%TMPL:P{"sep"}%
->     %TMPL:P{"printable"}%%TMPL:P{"sep"}%
->     %TMPL:P{"raw"}%%TMPL:P{"sep"}%
->     %TMPL:P{"backlinks"}%%TMPL:P{"sep"}%
->     %TMPL:P{"activatable_more"}%%TMPL:END%
->
-> Remove all newlines if you copy-paste above text.
+>     %TMPL:DEF{"action_revisions"}%%TMPL:END%
+
+### <a name="I want to put the bottom links a"></a> I want to put the bottom links as buttons at the top
+
+The default definition in `view.pattern.tmpl` is:
+
+    %TMPL:DEF{"top:toolbarbuttons"}%%TMPL:P{"activatable_edit_or_create"}%%TMPL:P{"activatable_attach"}%%TMPL:END%
+
+Create a new skin by creating a file `view.myskin.tmpl` in the `templates` directory. Write in it:
+
+> %TMPL:INCLUDE{"view"}%
+>     %TMPL:DEF{"top:toolbarbuttons"}%%TMPL:P{"history_history_link"}%%TMPL:END%
+
+View any topic with `?skin=myskin,pattern`, or set the `SKIN` variable to `myskin,pattern`.
+
+This will remove the Edit and Attach buttons, and place a History button at the top.
+
+You will probably not just want to have the History button there. Other button include names are:
+
+> create_topic_link
+>     raw_edit_link
+>     view_topic_link
+>     activatable_attach
+>     activatable_edit_or_create
+>     more_link
+>     activatable_printable
+>     backlinks_web_link
+>     backlinks_all_link
+>     backlinks_link
+>     history_rdiff_link
+>     history_history_link
+>     raw_link
+
+## <a name="Other page parts"></a> Other page parts
 
 ### <a name="I want to insert text outside of"></a> I want to insert text outside of the topic content
 
-PatternSkin has 2 'buckets' to write additional content to: `beforetextcontents` and `aftertextcontents`, both defined in `view.pattern.tmpl`. These containers can contain text or html and are placed directly before and after the topic text.
+PatternSkin has 2 'buckets' to write additional content to: `contentheader` and `contentfooter`, both defined in `view.pattern.tmpl`. These containers can contain text or html and are placed directly before and after the topic text.
 
 Both modules are wrapped in CSS containers:
 
-- `beforetextcontents` - wrapped in `div` of class `twikiBeforeText`
-- `aftertextcontents` - wrapped in `div` of class `twikiAfterText`
+- `contentheader` - wrapped in `div` of class `twikiContentHeader`
+- `contentfooter` - wrapped in `div` of class `twikiContentFooter`
 
 To put contents **before** the main text, use the custom skin approach as described above.%BR% So our custom template contains:
 
 > %TMPL:INCLUDE{"view"}%
->     %TMPL:DEF{"beforetextcontents"}%This is the text before%TMPL:END%
+>     %TMPL:DEF{"contentheader"}%This is the text before%TMPL:END%
 
 Use the same procedure for contents to be put **after** the topic text:
 
 > %TMPL:INCLUDE{"view"}%
->     %TMPL:DEF{"aftertextcontents"}%This is the text after%TMPL:END%
+>     %TMPL:DEF{"contentfooter"}%This is the text after%TMPL:END%
 
 ### <a name="I want to place the form at the"></a><a name="I want to place the form at the "></a> I want to place the form at the top
 
-Pattern skin has 2 buckets for the form: `formattop` (form-at-the-top) and `formatbottom` (form-at-the-bottom):
+Pattern skin has 2 buckets for the form: `formtop` (form at the top) and `formbottom` (form at the bottom). The default definition is:
 
-> %TMPL:DEF{"formattop"}%%TMPL:END%
->     %TMPL:DEF{"formatbottom"}%%TMPL:P{"form"}%%TMPL:END%
+> %TMPL:DEF{"formtop"}%%TMPL:END%
+>     %TMPL:DEF{"formbottom"}%%TMPL:P{"form"}%%TMPL:END%
 
 You simply swap the bucket contents. Using either a template or a topic template, write in your custom template:
 
 > %TMPL:INCLUDE{"view"}%
->     %TMPL:DEF{"formattop"}%%TMPL:P{"form"}%%TMPL:END%
->     %TMPL:DEF{"formatbottom"}%%TMPL:END%
+>     %TMPL:DEF{"formtop"}%%TMPL:P{"form"}%%TMPL:END%
+>     %TMPL:DEF{"formbottom"}%%TMPL:END%
 
-### <a name="I only want to show the WYSIWYG"></a><a name="I only want to show the WYSIWYG "></a> I only want to show the WYSIWYG button on explicit pages
+### <a name="I want to put the topic form in"></a><a name="I want to put the topic form in "></a> I want to put the topic form in a twisty
 
-In [[Main.TWikiPreferences|Main/TWikiPreferences]], set `COMPOSER` to a blank value:
+The attachment tables are placed in a open/close twisty. You can do the same for the topic form.
 
-> * Set COMPOSER =
+Edit `templates/formtables.pattern.tmpl` to have this code:
 
-In the topic, set the `COMPOSER` variable to `kupu`:
+    %{ These templates define the form attached at the bottom of viewed page. }%
 
-> * Set COMPOSER = kupu
+    %TMPL:DEF{"starttopicformwisty"}%%TWISTY{id="topicformlist" mode="div" remember="on" link="%MAKETEXT{"Form"}%" showimgleft="%ICONURLPATH{toggleopen}%" hideimgleft="%ICONURLPATH{toggleclose}%"}%%TMPL:END%
+
+    %TMPL:DEF{"endtopicformwisty"}%%ENDTWISTY%%TMPL:END%
+
+    %{ Start of form table }%
+    %TMPL:DEF{FORM:display:header}%<div class="twikiForm">%TMPL:P{"starttopicformwisty"}%
+    <table class='twikiFormTable' border='1'>%TMPL:P{FORM:display:header:headerrow}%%TMPL:END%
+
+    %{ Header }%
+    %TMPL:DEF{FORM:display:header:headerrow}%<tr><th class='twikiFormTableHRow twikiFirstCol' colspan='2'>
+    [[%A_TITLE%]]
+    </th></tr>%TMPL:END%
+
+    %{ Each row }%
+    %TMPL:DEF{FORM:display:row}%<tr valign='top'><td class='twikiFormTableRow twikiFirstCol' align='right'> %A_TITLE% </td><td>
+    %A_VALUE%
+    </td></tr>%TMPL:END%
+
+    %{ Footer }%
+    %TMPL:DEF{FORM:display:footer}%</table>%TMPL:P{FORM:display:footer:editlink}%
+    %TMPL:P{"endtopicformwisty"}%</div><!-- /twikiForm -->%TMPL:END%
+
+To give the twisty toggle link the same style as the attachment twisty link, add this to pattern skin's `style.css`:
+
+    .twikiForm .twistyTrigger .twikiLinkLabel {
+       font-size:122%; /* h4 size */
+       font-weight:bold;
+    }

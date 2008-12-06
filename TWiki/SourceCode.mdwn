@@ -41,6 +41,7 @@
     <li><a href="#TWiki::_I18N"> TWiki::I18N </a></li>
     <li><a href="#TWiki::_I18N::Extract"> TWiki::I18N::Extract </a></li>
     <li><a href="#TWiki::If::Node"> TWiki::If::Node </a></li>
+    <li><a href="#TWiki::If::OP_isweb"> TWiki::If::OP_isweb </a></li>
     <li><a href="#TWiki::If::Parser"> TWiki::If::Parser </a></li>
     <li><a href="#TWiki::Infix::Error"> TWiki::Infix::Error </a></li>
     <li><a href="#TWiki::Infix::Node"> TWiki::Infix::Node </a></li>
@@ -191,7 +192,7 @@ This package doesn't smell
 
 ## <> \[[TWikiConfigureUIsEXTENDDotPm]\[]]
 
-This package has smell factor of **1**
+This package has smell factor of **2**
 
 ## <a name="TWiki"></a> [[TWiki|Main/TWikiDotPm]]
 
@@ -219,7 +220,7 @@ Global variables are avoided wherever possible to avoid problems with CGI accele
 - `users` TWiki::Users singleton
 - `webName` Name of web found in URL path, or `web` URL parameter, or \{UsersWebName\}
 
-This package has smell factor of **34**
+This package has smell factor of **35**
 
 ## <a name="TWiki::Form"></a> [[TWiki::Form|Main/TWikiFormDotPm]]
 
@@ -291,6 +292,10 @@ This package has smell factor of **1**
 ## <a name="TWiki::If::Node"></a> [[TWiki::If::Node|Main/TWikiIfNodeDotPm]]
 
 Node class for the result of an If statement parse
+
+This package doesn't smell
+
+## <a name="TWiki::If::OP_isweb"></a> [[TWiki::If::OP_isweb|Main/TWikiIfOP_iswebDotPm]]
 
 This package doesn't smell
 
@@ -583,7 +588,7 @@ Plugins may throw TWiki::OopsException. For example:
 
     This module provides most of the actual HTML rendering code in TWiki.
 
-    This package has smell factor of *20*
+    This package has smell factor of *22*
 
     ---++ [[TWikiSandboxDotPm][TWiki::Sandbox]]
 
@@ -815,7 +820,7 @@ Plugins may throw TWiki::OopsException. For example:
 
     User registration handling.
 
-    This package has smell factor of *5*
+    This package has smell factor of *8*
 
     ---++ [[TWikiUISaveDotPm][TWiki::UI::Save]]
 
@@ -981,4 +986,4 @@ Plugins may throw TWiki::OopsException. For example:
 
     This package doesn't smell
 
-     There were a total of *193* smells
+     There were a total of *200* smells

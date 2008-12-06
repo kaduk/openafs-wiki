@@ -10,7 +10,7 @@ Incorrect format of search template (missing sections? There should be 4 %SPLIT%
   <form action="http://www.dementia.org/twiki/view/%INCLUDINGWEB%/%INCLUDINGTOPIC%" id="twikiWebSearchForm">
     <table border="0" cellpadding="0" cellspacing="0" id="twikiSearchTable">
       <tr>
-        <td colspan="2"><input name="search" size="40" type="text" value="" /> <input type="submit" value="Search" /><span>  [[%INCLUDINGWEB%/WebSearchAdvanced?search=;type=word;scope=;web=;nosearch=]] | [[SYSTEMWEB/SearchHelp]]</span><div style="padding: 1em 0 0 0">TIP: to search for all topics that contain <code>"SOAP"</code>, <code>"WSDL"</code>, a literal <code>"web service"</code>, but not <code>"shampoo"</code>, write: <code>soap wsdl "web service" -shampoo</code></div>
+        <td colspan="2"><input name="search" size="40" type="text" value="" /> <input type="submit" value="Search" /><span>  [[%INCLUDINGWEB%/WebSearch?search=;type=word;scope=;web=;nosearch=]] | [[SYSTEMWEB/SearchHelp]]</span><div style="padding: 1em 0 0 0">TIP: to search for all topics that contain <code>"SOAP"</code>, <code>"WSDL"</code>, a literal <code>"web service"</code>, but not <code>"shampoo"</code>, write: <code>soap wsdl "web service" -shampoo</code></div>
         </td>
       </tr>
       <tr>

@@ -53,10 +53,10 @@
 </table>
 - Example: `%URLPARAM{"skin"}%` returns `print` for a `.../view/%WEB%/%INCLUDINGTOPIC%?skin=print` URL
 - **_%X% Notes:_**
-  - URL parameters passed into HTML form fields must be entity [[ENCODEd|Main/VarENCODE]].
+  - **IMPORTANT:** There is a risk that this variable could be misused for [cross-site scripting](http://en.wikipedia.org/wiki/Cross-site_scripting) (XSS).
+  - URL parameters passed into HTML form fields **_must be_** entity [[ENCODEd|Main/VarENCODE]].%BR% Example: `<input type="text" name="address" value="%URLPARAM{ "address" encode="entity" }%" />`
   - Double quotes in URL parameters must be escaped when passed into other TWiki variables.%BR% Example: `%SEARCH{ "%URLPARAM{ "search" encode="quotes" }%" noheader="on" }%`
   - When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
   - Watch out for TWiki internal parameters, such as `rev`, `skin`, `template`, `topic`, `web`; they have a special meaning in TWiki. Common parameters and view script specific parameters are documented at [[TWikiScripts]].
   - If you have `%URLPARAM{` in the value of a URL parameter, it will be modified to `%<nop>URLPARAM{`. This is to prevent an infinite loop during expansion.
-  - There is a risk that this variable could be misused for cross-site scripting.
 - Related: [[ENCODE|Main/VarENCODE]], [[SEARCH|Main/VarSEARCH]], [[FormattedSearch]], [[QUERYSTRING|Main/VarQUERYSTRING]]

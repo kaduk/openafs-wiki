@@ -133,11 +133,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:07</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:13</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:07Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:13Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -356,10 +356,10 @@ Use an HTML form and an embedded formatted search on the same topic. You can lin
 
     <form action="%SCRIPTURLPATH{"view"}%/%WEB%/%TOPIC%">
     Find Topics:
-    <input type="text" name="q" size="32" value="%URLPARAM{"q"}%" />&nbsp;<input type="submit" class="twikiSubmit" value="Search" />
+    <input type="text" name="q" size="32" value="%URLPARAM{"q" encode="entity"}%" />&nbsp;<input type="submit" class="twikiSubmit" value="Search" />
     </form>
     Result:
-    %SEARCH{ search="%URLPARAM{"q"}%" format="   * $web.$topic: %BR% $summary" nosearch="on" }%
+    %SEARCH{ search="%URLPARAM{"q" encode="quote"}%" type="keyword" format="   * $web.$topic: %BR% $summary" nosearch="on" }%
 
 **To get this:**
 

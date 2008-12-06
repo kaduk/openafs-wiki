@@ -113,17 +113,17 @@ All available date specifiers:
 
 You can also use the calendar directly in your own hand-built forms, without having to write any code. Just add this inline in the topic text:
 
-    %INCLUDE{"%SYSTEMWEB%/JSCalendarContribInline"}%
+    %INCLUDE{"%TWIKIWEB%/JSCalendarContribInline"}%
 
 Then, to display a calendar icon next to a text input field:
 
     <input type="text" id="cal_val_here" />
-    <input type="image" src="%PUBURL%/%SYSTEMWEB%/JSCalendarContrib/img.gif" onclick="javascript: return showCalendar('cal_val_here','%e %B %Y')" />
+    <input type="image" src="%PUBURL%/%TWIKIWEB%/JSCalendarContrib/img.gif" onclick="javascript: return showCalendar('cal_val_here','%e %B %Y')" />
 
 If the contrib is installed, you will see such a field here:
 
 <input id="cal_val_here" type="text" />
- <input onclick="javascript: return showCalendar('cal_val_here','%e %B %Y')" src="http://www.dementia.org/twiki//view/%SYSTEMWEB%/JSCalendarContrib/img.gif" type="image" />
+ <input onclick="javascript: return showCalendar('cal_val_here','%e %B %Y')" src="http://www.dementia.org/twiki//view/TWiki/JSCalendarContrib/img.gif" type="image" />
 
 ### <a name="Installation Instructions"></a> Installation Instructions
 
@@ -176,7 +176,7 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
   </tr>
   <tr>
     <td align="right"> Version: </td>
-    <td> 03 Aug 2008 </td>
+    <td> 17492 (06 Dec 2008) of the Mishoo calendar </td>
   </tr>
   <tr>
     <td align="right"> Copyright ©: </td>
@@ -191,15 +191,15 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
     <td> None </td>
   </tr>
   <tr>
-    <td align="right"> Change History: </td>
+    <td> Change History: </td>
     <td>   </td>
   </tr>
   <tr>
-    <td align="right"> 03 Aug 2008 </td>
-    <td> TWiki 4.2.1 release version incl new calendar icon </td>
+    <td align="right"> 10 Sep 2008 </td>
+    <td> Bugs:Item5991 Applied patch to fix rendering on IE7 . </td>
   </tr>
   <tr>
-    <td align="right"> 6 Sep 2007 </td>
+    <td align="right"> 06 Sep 2007 </td>
     <td> Bugs:Item4030 Added doc for using the calendar in user forms </td>
   </tr>
   <tr>
@@ -232,7 +232,7 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
   </tr>
   <tr>
     <td align="right"> 5039 </td>
-    <td> Split from [[Main/SharedCode]]</td>
+    <td> Split from SharedCode </td>
   </tr>
   <tr>
     <td align="right"> 27 Dec 2005 </td>
@@ -240,7 +240,7 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
   </tr>
   <tr>
     <td align="right"> 14 Aug 2004 </td>
-    <td> Separated out from [[Main/SharedCode]] module </td>
+    <td> Separated out from SharedCode module </td>
   </tr>
   <tr>
     <td align="right"> Home: </td>
@@ -256,4 +256,4 @@ Another great TWiki extension from the [![](http://www.dementia.org/twiki//view/
   </tr>
 </table>
 
-**_Related Topics:_** %SYSTEMWEB%.TWikiPreferences
+**_Related Topics:_** [[TWikiPreferences]]

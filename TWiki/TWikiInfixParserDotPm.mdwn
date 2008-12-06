@@ -8,7 +8,7 @@ Escapes are supported in strings, using backslash.
   <ul>
     <li><a href="#Package =TWiki::Infix::Parser="> Package TWiki::Infix::Parser</a><ul>
         <li><a href="#new($client_class, \%options) ->"> new($client_class, \%options) -&gt; parser object</a></li>
-        <li><a href="#ObjectMethod <strong>addOperator</strong> (%ope"> ObjectMethod addOperator <tt>(%oper)</tt></a></li>
+        <li><a href="#ObjectMethod <strong>addOperator</strong> (\%op"> ObjectMethod addOperator <tt>(\%oper)</tt></a></li>
         <li><a href="#ObjectMethod <strong>parse</strong> ($string) -"> ObjectMethod parse <tt>($string) -&gt; $parseTree</tt></a></li>
       </ul>
     </li>
@@ -36,11 +36,11 @@ The remaining parameters are named, and specify options that affect the behaviou
 1. `words=>qr//` - should be an RE specifying legal words (unquoted terminals that are not operators i.e. names and numbers). By default this is `\w+`. It's ok if operator names match this RE; operators always have precedence over atoms.
 2. `numbers=>qr//` - should be an RE specifying legal numbers (unquoted terminals that are not operators or words). By default this is `qr/[+-]?(?:\d+\.\d+|\d+\.|\.\d+|\d+)(?:[eE][+-]?\d+)?/`, which matches integers and floating-point numbers. Number matching always takes precedence over word matching (i.e. "1xy" will be parsed as a number followed by a word. A typical usage of this option is when you only want to recognise integers, in which case you would set this to `numbers => qr/\d+/`.
 
-## <a name="ObjectMethod &lt;strong&gt;addOperator&lt;/strong&gt; (%ope"></a> [[ObjectMethod]] **addOperator** `(%oper)`
+## <a name="ObjectMethod &lt;strong&gt;addOperator&lt;/strong&gt; (\%op"></a> [[ObjectMethod]] **addOperator** `(\%oper)`
 
 Add an operator to the parser.
 
-`%oper` is a hash, containing the following fields:
+`\%oper` is a hash (or an object), containing the following fields:
 
 - `name` - operator string
 - `prec` - operator precedence, positive non-zero integer. Larger number =&gt; higher precedence.
