@@ -91,7 +91,7 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2001-2007, Andrea Sterbini, Peter Thoeny (<a href="http://www.twiki.net/" target="_top">TWIKI.NET</a>), [[TWiki/TWikiContributor]]</td>
+    <td> © 2001-2009, Andrea Sterbini, Peter Thoeny (<a href="http://www.twiki.net/" target="_top">TWIKI.NET</a>), [[TWiki/TWikiContributor]]</td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -99,11 +99,15 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 03 Aug 2008 17387 (06 Dec 2008) </td>
+    <td> 28 Feb 2009 17852 (30 Mar 2009) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 28 Feb 2009: </td>
+    <td> 17851 - TWikibug:Item5025 - Added <code>=</code> and <code>&amp;</code> to page regex, allowing links such as <code>Site:ID=1234&amp;sel=56</code></td>
   </tr>
   <tr>
     <td align="right"> 03 Aug 2008: </td>
@@ -217,4 +221,4 @@ Plugin settings are stored as Preferences variables. To reference a plugin setti
 
 **_Related Topics:_** [[TWikiPlugins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]], [[TWikiPreferences]], [[InterWikis]]
 
--- TWiki:Main.PeterThoeny - 25 Nov 2007
+-- TWiki:Main.PeterThoeny - 28 Feb 2009

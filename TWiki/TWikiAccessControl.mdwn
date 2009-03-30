@@ -67,9 +67,13 @@ As a **collaboration guideline**:
 
 **Access control:** Restrict access to content based on users and groups once a user is identified.
 
+<a name="UsersAndGroups"></a>
+
 ## <a name="Users and Groups"></a> Users and Groups
 
 Access control is based on the familiar concept of Users and Groups. Users are defined by their [[WikiNames]]. They can then be organized in unlimited combinations by inclusion in one or more user Groups. For convenience, Groups can also be included in other Groups.
+
+<a name="ManagingUsers"></a>
 
 ### <a name="Managing Users"></a> Managing Users
 
@@ -115,6 +119,8 @@ You can create new administrators simply by adding them to the %USERSWEB%.TWikiA
 
 A member of the Super Admin Group has unrestricted access throughout the TWiki, so only trusted staff should be added to this group.
 
+<a name="RestrictingAccess"></a>
+
 ## <a name="Restricting Access"></a> Restricting Access
 
 You can define who is allowed to read or write to a web or a topic. Note that some plugins may not respect access permissions.
@@ -124,6 +130,8 @@ You can define who is allowed to read or write to a web or a topic. Note that so
 - Restricting RENAME prevents renaming of topics within a web.
 
 Note that there is an important distinction between CHANGE access and RENAME access. A user can CHANGE a topic, but thanks to version control their changes cannot be lost (the history of the topic before the change is recorded). However if a topic or web is renamed, that history may be lost. Typically a site will only give RENAME access to administrators and content owners.
+
+<a name="ControllingWeb"></a>
 
 ### <a name="Controlling access to a Web"></a> Controlling access to a Web
 
@@ -150,6 +158,8 @@ Creation and renaming of sub-webs is controlled by the WEBCHANGE setting on the 
 
 **_Note:_** For Web level access rights Setting any of these settings to an empty value has the same effect as not setting them at all. Please note that the documentation of TWiki 4.0 and earlier versions of TWiki 4.1 did not reflect the actual implementation, e.g. an empty ALLOWWEBVIEW does _not_ prevent anyone from viewing the web, and an an empty DENYWEBVIEW does _not_ allow all to view the web.
 
+<a name="ControllingTopic"></a>
+
 ### <a name="Controlling access to a Topic"></a> Controlling access to a Topic
 
 - You can define these settings in any topic, preferable towards the end of the topic:
@@ -175,6 +185,8 @@ The same rules apply to ALLOWTOPICCHANGE/DENYTOPICCHANGE and APPLYTOPICRENAME/DE
 %X% _The setting to an empty has caused confusion and great debate and it has been decided that the empty setting syntax will be replaced by something which is easier to understand in a later version of TWiki. A method to upgrade will be provided. Please read the release notes carefully when you upgrade._
 
 See "How TWiki evaluates ALLOW/DENY settings" below for more on how ALLOW and DENY interacts.
+
+<a name="ControllingAttachments"></a>
 
 ### <a name="Controlling access to Attachment"></a> Controlling access to Attachments
 
@@ -205,6 +217,8 @@ Top level webs are a special case, because they don't have a parent web with a [
 
 Note that you do **not** require `ROOTCHANGE` access to rename an existing top-level web. You just need `WEBCHANGE` in the web itself.
 
+<a name="EvaluatingAllowDeny"></a>
+
 ### <a name="How TWiki evaluates ALLOW/DENY s"></a> How TWiki evaluates ALLOW/DENY settings
 
 When deciding whether to grant access, TWiki evaluates the following rules in order (read from the top of the list; if the logic arrives at **PERMITTED** or **DENIED** that applies immediately and no more rules are applied). You need to read the rules bearing in mind that VIEW, CHANGE and RENAME access may be granted/denied separately.
@@ -233,6 +247,8 @@ Examples: Topic A includes topic B
 
 - If the included topic B has ALLOWTOPICCHANGE set to block editing for a user, it does not prevent editing the including topic A.
 - If the included topic B has ALLOWTOPICVIEW set to block view for a user, the user can still view topic A but he cannot see the included topic B. He will see a message _No permission to view B_
+
+<a name="QuickRecipes"></a>
 
 ## <a name="Access Control quick recipes"></a> Access Control quick recipes
 

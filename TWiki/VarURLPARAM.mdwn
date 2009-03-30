@@ -26,19 +26,29 @@
     <td> no conversion </td>
   </tr>
   <tr>
+    <td><code>encode="off"</code></td>
+    <td> Turn off encoding. See important security note below </td>
+    <td> encode="safe" </td>
+  </tr>
+  <tr>
+    <td><code>encode="safe"</code></td>
+    <td> Encode special characters into HTML entities to avoid XSS exploits: <code>"&lt;"</code>, <code>"&gt;"</code>, <code>"%"</code>, single quote (<code>'</code>) and double quote (<code>"</code>) </td>
+    <td> (this is the default) </td>
+  </tr>
+  <tr>
     <td><code>encode="entity"</code></td>
     <td> Encode special characters into HTML entities. See [[Main/VarENCODE]] for more details. </td>
-    <td> no encoding </td>
+    <td> encode="safe" </td>
   </tr>
   <tr>
     <td><code>encode="url"</code></td>
     <td> Encode special characters for URL parameter use, like a double quote into <code>%22</code></td>
-    <td> no encoding </td>
+    <td> encode="safe" </td>
   </tr>
   <tr>
     <td><code>encode="quote"</code></td>
     <td> Escape double quotes with backslashes (<code>\"</code>), does not change other characters; required when feeding URL parameters into other TWiki variables </td>
-    <td> no encoding </td>
+    <td> encode="safe" </td>
   </tr>
   <tr>
     <td><code>multiple="on"</code> %BR% <code>multiple="[[$item]]"</code></td>
@@ -53,8 +63,8 @@
 </table>
 - Example: `%URLPARAM{"skin"}%` returns `print` for a `.../view/%WEB%/%INCLUDINGTOPIC%?skin=print` URL
 - **_%X% Notes:_**
-  - **IMPORTANT:** There is a risk that this variable could be misused for [cross-site scripting](http://en.wikipedia.org/wiki/Cross-site_scripting) (XSS).
-  - URL parameters passed into HTML form fields **_must be_** entity [[ENCODEd|Main/VarENCODE]].%BR% Example: `<input type="text" name="address" value="%URLPARAM{ "address" encode="entity" }%" />`
+  - **IMPORTANT:** There is a risk that this variable can be misused for [cross-site scripting](http://en.wikipedia.org/wiki/Cross-site_scripting) (XSS) if the encoding is turned off. The `encode="safe"` is the default, it provides a safe middle ground. The `encode="entity"` is more aggressive, but some TWiki applications might not work.
+  - URL parameters passed into HTML form fields must be entity [[ENCODEd|Main/VarENCODE]].%BR% Example: `<input type="text" name="address" value="%URLPARAM{ "address" encode="entity" }%" />`
   - Double quotes in URL parameters must be escaped when passed into other TWiki variables.%BR% Example: `%SEARCH{ "%URLPARAM{ "search" encode="quotes" }%" noheader="on" }%`
   - When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
   - Watch out for TWiki internal parameters, such as `rev`, `skin`, `template`, `topic`, `web`; they have a special meaning in TWiki. Common parameters and view script specific parameters are documented at [[TWikiScripts]].

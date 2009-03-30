@@ -6,10 +6,12 @@
 - Sections may be given a name to help identify them, and/or a type, which changes how they are used.
   - `type="section"` - the default, used for a generic section, such as a named section used by [[INCLUDE|Main/VarINCLUDE]].
   - `type="include"` - like `%STARTINCLUDE%` ... `%STOPINCLUDE%` except that you can have as many include blocks as you want (`%STARTINCLUDE%` is restricted to only one).
-  - `type="templateonly"` - start position of text to be removed when a template topic is used. This is used to embed text that you _do not_ want expanded when a new topic based on the template topic is created. See [[TWikiTemplates]] for more information.
-- Syntax: `%STARTSECTION{"name"}% ................ %ENDSECTION{"name"}%`
-- Syntax: `%STARTSECTION{type="include"}% ........ %ENDSECTION{type="include"}%`
-- Syntax: `%STARTSECTION{type="templateonly"}% ... %ENDSECTION{type="templateonly"}%`
+  - `type="templateonly"` - start position of text to be removed when a template topic is used. Use this to embed text that you _do not_ want expanded when a new topic based on the template topic is created. [[TWikiTemplates]] has more.
+  - `type="expandvariables"` - start position where [[TWikiVariables]] get expanded when a new topic is created. Normally only certain variables get expanded when a new topic based on the template topic is created. All variables get expanded within a `"expandvariables"` section. [[TWikiTemplates]] has more.
+- Syntax: `%STARTSECTION{"name"}% ................... %ENDSECTION{"name"}%`
+- Syntax: `%STARTSECTION{type="include"}% ........... %ENDSECTION{type="include"}%`
+- Syntax: `%STARTSECTION{type="templateonly"}% ...... %ENDSECTION{type="templateonly"}%`
+- Syntax: `%STARTSECTION{type="expandvariables"}% ... %ENDSECTION{type="expandvariables"}%`
 - Supported parameters: <table border="1" cellpadding="0" cellspacing="0">
   <tr>
     <th bgcolor="#99CCCC"><strong> Parameter: </strong></th>
@@ -23,10 +25,10 @@
   </tr>
   <tr>
     <td><code>type="..."</code></td>
-    <td> Type of the section; type <code>"section"</code>, <code>"include"</code> or <code>"templateonly"</code></td>
+    <td> Type of the section; type <code>"section"</code>, <code>"include"</code>, <code>"templateonly"</code>, or <code>"expandvariables"</code></td>
     <td><code>"section"</code></td>
   </tr>
 </table>
 - **_%X% Note:_** If a section is not given a name, it will be assigned one. Unnamed sections are assigned names starting with `_SECTION0` for the first unnamed section in the topic, `_SECTION1` for the second, etc..
-- **_%X% Note:_** You can define nested sections. It is not recommended to overlap sections, although it is valid in TWiki. Use named sections to make sure that the correct START and ENDs are matched. Section markers are **not** displayed when a topic is viewed.
+- **_%X% Note:_** You can define nested sections. Do not overlap sections. Use named sections to make sure that the correct START and ENDs are matched. Section markers are **not** displayed when a topic is viewed.
 - Related: [[ENDSECTION|Main/VarENDSECTION]], [[INCLUDE|Main/VarINCLUDE]], [[NOP|Main/VarNOP]], [[STARTINCLUDE|Main/VarSTARTINCLUDE]], [[STOPINCLUDE|Main/VarSTOPINCLUDE]]

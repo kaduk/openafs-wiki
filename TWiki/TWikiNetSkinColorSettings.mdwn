@@ -1,0 +1,1604 @@
+# <a name="Color scheme settings for _TWiki"></a> Color scheme settings for [[TWikiNetSkin]]
+
+- Set SKIN = twikinet,pattern
+
+## <a name="Usage"></a><a name=" Usage"></a> Usage
+
+### <a name="Step 1"></a><a name=" Step 1"></a> Step 1
+
+Let [[TWikiNetSkin]] point to the custom-made colors style sheet. In [[Main.TWikiPreferences|Main/TWikiPreferences]] put:
+
+       * Set USERCOLORSURL = %PUBURLPATH%/%TWIKIWEB%/TWikiNetSkin/theme-colors.css
+
+### <a name="Step 2"></a><a name=" Step 2"></a> Step 2
+
+Edit this topic, and change the color variables as you like.
+
+### <a name="Step 3"></a><a name=" Step 3"></a> Step 3
+
+Save the topic. This will generate an [attachment](http://www.dementia.org/twiki//view/TWiki/TWikiNetSkin/theme-colors.css) to topic [[TWikiNetSkin]].
+
+<img src="http://www.dementia.org/twiki//view/Main/WebHome/info.gif" width="16" height="16" alt="info" /> For more help on customizing styles, see [[PatternSkinCustomization]].
+
+## <a name="Color variables"></a><a name=" Color variables"></a> Color variables
+
+<div>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#TWikiNetSkin specific"> TWikiNetSkin specific</a><ul>
+            <li><a href="#SHADE_TOPTOOLBAR_BORDER"> SHADE_TOPTOOLBAR_BORDER</a></li>
+            <li><a href="#SHADE_TOPTOOLBAR_BACKGROUND"> SHADE_TOPTOOLBAR_BACKGROUND</a></li>
+            <li><a href="#SHADE_SIDE_BAR_STRONG_TEXT"> SHADE_SIDE_BAR_STRONG_TEXT</a></li>
+            <li><a href="#SHADE_BLOCKQUOTE_BACKGROUND"> SHADE_BLOCKQUOTE_BACKGROUND</a></li>
+            <li><a href="#SHADE_TWIKIFORM_TABLECELL_BORDER"> SHADE_TWIKIFORM_TABLECELL_BORDER</a></li>
+            <li><a href="#SHADE_TWIKITABLE_HEADER_BACKGROU"> SHADE_TWIKITABLE_HEADER_BACKGROUND</a></li>
+            <li><a href="#SHADE_TWIKIFORM_FIRSTCOL_BACKGRO"> SHADE_TWIKIFORM_FIRSTCOL_BACKGROUND</a></li>
+            <li><a href="#SHADE_TWIKIFORM_HEADER_BACKGROUN"> SHADE_TWIKIFORM_HEADER_BACKGROUND</a></li>
+            <li><a href="#SHADE_BOTTOM_BAR_BACKGROUND"> SHADE_BOTTOM_BAR_BACKGROUND</a></li>
+            <li><a href="#SHADE_BOTTOM_BAR_TEXT"> SHADE_BOTTOM_BAR_TEXT</a></li>
+            <li><a href="#SHADE_ALERT_TEXT"> SHADE_ALERT_TEXT</a></li>
+            <li><a href="#SHADE_BLUEISH_TEXT"> SHADE_BLUEISH_TEXT</a></li>
+            <li><a href="#SHADE_DARKISH_TEXT"> SHADE_DARKISH_TEXT</a></li>
+            <li><a href="#SHADE_TOPTOOLBAR_WEBNAME_TEXT"> SHADE_TOPTOOLBAR_WEBNAME_TEXT</a></li>
+            <li><a href="#SHADE_BROADCASTMESSAGE_BACKGROUN"> SHADE_BROADCASTMESSAGE_BACKGROUND</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#Logical groupings"> Logical groupings</a><ul>
+        <li><a href="#Text"> Text</a><ul>
+            <li><a href="#MAIN_TEXT_COLOR Main text color"> MAIN_TEXT_COLOR Main text color</a></li>
+            <li><a href="#MAIN_BACKGROUND_COLOR Main backg"> MAIN_BACKGROUND_COLOR Main background color</a></li>
+            <li><a href="#LIGHT_ON_DARK_TEXT_COLOR Light o"> LIGHT_ON_DARK_TEXT_COLOR Light on dark text color</a></li>
+            <li><a href="#GRAYED_TEXT_COLOR"> GRAYED_TEXT_COLOR</a></li>
+            <li><a href="#GENERAL_TEXT General text (if no"> GENERAL_TEXT General text (if not set in MAIN_BACKGROUND_COLOR) (black)</a></li>
+            <li><a href="#HEADER_TEXT Header text"> HEADER_TEXT Header text</a></li>
+            <li><a href="#CODE_TEXT Code text, left bar te"> CODE_TEXT Code text, left bar text and links</a></li>
+            <li><a href="#MUTED_TEXT Muted text"> MUTED_TEXT Muted text</a></li>
+            <li><a href="#GRAYED_OUT_TEXT Grayed out text"> GRAYED_OUT_TEXT Grayed out text</a></li>
+            <li><a href="#TOPIC_ACTION_TEXT"> TOPIC_ACTION_TEXT</a></li>
+          </ul>
+        </li>
+        <li><a href="#Links"> Links</a><ul>
+            <li><a href="#LINK_TEXT_NORMAL Link normal tex"> LINK_TEXT_NORMAL Link normal text</a></li>
+            <li><a href="#LINK_BACKGROUND_NORMAL Link norm"> LINK_BACKGROUND_NORMAL Link normal background</a></li>
+            <li><a href="#LINK_TEXT_NORMAL_VISITED Link no"> LINK_TEXT_NORMAL_VISITED Link normal text visited</a></li>
+            <li><a href="#LINK_TEXT_ACTION_BUTTON Link tex"> LINK_TEXT_ACTION_BUTTON Link text</a></li>
+            <li><a href="#LINK_TEXT_HOVER Link hover text"> LINK_TEXT_HOVER Link hover text</a></li>
+            <li><a href="#SIDE_BAR_LINK_TEXT Side bar link"> SIDE_BAR_LINK_TEXT Side bar link text</a></li>
+          </ul>
+        </li>
+        <li><a href="#Disabled"> Disabled</a><ul>
+            <li><a href="#DISABLED_BORDER Disabled border"> DISABLED_BORDER Disabled border</a></li>
+            <li><a href="#DISABLED_TEXT Disabled text"> DISABLED_TEXT Disabled text</a></li>
+            <li><a href="#DISABLED_BACKGROUND Disabled bac"> DISABLED_BACKGROUND Disabled background</a></li>
+            <li><a href="#BUTTON_BORDERS_DISABLED Disabled"> BUTTON_BORDERS_DISABLED Disabled button borders</a></li>
+          </ul>
+        </li>
+        <li><a href="#'New'"> 'New'</a><ul>
+            <li><a href="#NEW_TEXT New text (green)"> NEW_TEXT New text (green) </a></li>
+            <li><a href="#NEW_BACKGROUND New background (l"> NEW_BACKGROUND New background (light green) </a></li>
+          </ul>
+        </li>
+        <li><a href="#Alert"> Alert</a><ul>
+            <li><a href="#ALERT_TEXT Alert text (red)"> ALERT_TEXT Alert text (red)</a></li>
+            <li><a href="#ALERT_TEXT_MUTED Muted alert tex"> ALERT_TEXT_MUTED Muted alert text (dark red)</a></li>
+            <li><a href="#ALERT_BORDER Alert border"> ALERT_BORDER Alert border</a></li>
+          </ul>
+        </li>
+        <li><a href="#Buttons"> Buttons</a><ul>
+            <li><a href="#BUTTON_TEXT Button text color (d"> BUTTON_TEXT Button text color (dark gray)</a></li>
+            <li><a href="#BUTTON_BORDERS Button borders"> BUTTON_BORDERS Button borders</a></li>
+            <li><a href="#BUTTON_BACKGROUND Button backgro"> BUTTON_BACKGROUND Button background</a></li>
+            <li><a href="#BUTTON_CANCEL_BACKGROUND Cancel"> BUTTON_CANCEL_BACKGROUND Cancel button background</a></li>
+            <li><a href="#SUBMIT_BUTTON_BACKGROUND Submit"> SUBMIT_BUTTON_BACKGROUND Submit button background</a></li>
+            <li><a href="#SUBMIT_BUTTON_BORDER_TEXT Submit"> SUBMIT_BUTTON_BORDER_TEXT Submit button text color</a></li>
+            <li><a href="#SELECT_BORDER Select border"> SELECT_BORDER Select border</a></li>
+          </ul>
+        </li>
+        <li><a href="#Background colors"> Background colors</a><ul>
+            <li><a href="#GENERAL_BACKGROUND General backg"> GENERAL_BACKGROUND General background color (if not set in MAIN_BACKGROUND_COLOR) (white)</a></li>
+            <li><a href="#SIDE_BAR_BACKGROUND Side bar bac"> SIDE_BAR_BACKGROUND Side bar background</a></li>
+            <li><a href="#NEUTRAL_BACKGROUND"> NEUTRAL_BACKGROUND</a></li>
+            <li><a href="#TOP_BAR_BACKGROUND Top bar backg"> TOP_BAR_BACKGROUND Top bar background</a></li>
+            <li><a href="#TOPIC_ACTION_BACKGROUND Topic ac"> TOPIC_ACTION_BACKGROUND Topic action row</a></li>
+            <li><a href="#HEADER_BACKGROUND h2"> HEADER_BACKGROUND h2</a></li>
+            <li><a href="#ATTACHMENT_AND_FORM_BACKGROUND A"> ATTACHMENT_AND_FORM_BACKGROUND Attachment, form</a></li>
+            <li><a href="#DIFF_HEADER_BACKGROUND Diff head"> DIFF_HEADER_BACKGROUND Diff header </a></li>
+            <li><a href="#NOTIFICATION_BACKGROUND Info and"> NOTIFICATION_BACKGROUND Info and notifications</a></li>
+            <li><a href="#INFO_BACKGROUND"> INFO_BACKGROUND</a></li>
+          </ul>
+        </li>
+        <li><a href="#Border colors"> Border colors</a><ul>
+            <li><a href="#NEUTRAL_BORDER Info (light gray)"> NEUTRAL_BORDER Info (light gray)</a></li>
+            <li><a href="#SEPARATOR_BORDER"> SEPARATOR_BORDER </a></li>
+            <li><a href="#MINOR_SEPARATOR_BORDER Header H3"> MINOR_SEPARATOR_BORDER Header H3..H6 bottom</a></li>
+            <li><a href="#LAYOUT_ELEMENT_BORDER Main layou"> LAYOUT_ELEMENT_BORDER Main layout elements (neutral tone) </a></li>
+            <li><a href="#IMAGE_BORDER Image border"> IMAGE_BORDER Image border</a></li>
+            <li><a href="#NOTIFICATION_BORDER Broadcast me"> NOTIFICATION_BORDER Broadcast message</a></li>
+            <li><a href="#TOPIC_ACTION_BORDER"> TOPIC_ACTION_BORDER</a></li>
+            <li><a href="#Table colors"> Table colors</a><ul>
+                <li><a href="#TABLE_DATA_BACKGROUND Table data"> TABLE_DATA_BACKGROUND Table data background</a></li>
+                <li><a href="#TABLE_HEADER_BACKGROUND Table he"> TABLE_HEADER_BACKGROUND Table header background</a></li>
+                <li><a href="#TABLE_SELECTED_COLUMN_HEADER_BAC"> TABLE_SELECTED_COLUMN_HEADER_BACKGROUND Sorted table column accent background </a></li>
+                <li><a href="#TABLE_DATA_ODD_BACKGROUND Table"> TABLE_DATA_ODD_BACKGROUND Table data background (odd row)</a></li>
+                <li><a href="#TABLE_DATA_EVEN_BACKGROUND Table"> TABLE_DATA_EVEN_BACKGROUND Table data background (even row)</a></li>
+                <li><a href="#TABLE_DATA_ODD_SELECTED_BACKGROU"> TABLE_DATA_ODD_SELECTED_BACKGROUND Table data background (odd row, selected column)</a></li>
+                <li><a href="#TABLE_DATA_EVEN_SELECTED_BACKGRO"> TABLE_DATA_EVEN_SELECTED_BACKGROUND Table data background (even row, selected column)</a></li>
+                <li><a href="#TABLE_DATA_MIX_BACKGROUND Table"> TABLE_DATA_MIX_BACKGROUND Table data background (mix between even and odd)</a></li>
+              </ul>
+            </li>
+            <li><a href="#TABLE_BORDER Table border, sup ("> TABLE_BORDER Table border, sup (light neutral tone)</a></li>
+            <li><a href="#LINK_TEXT_NORMAL_TABLE_HEADER Ta"> LINK_TEXT_NORMAL_TABLE_HEADER Table header link text</a></li>
+            <li><a href="#LINK_TEXT_NORMAL_UNDERLINE_TABLE"> LINK_TEXT_NORMAL_UNDERLINE_TABLE_HEADER Table header link border</a></li>
+            <li><a href="#LINK_TEXT_SORTED_TABLE_HEADER So"> LINK_TEXT_SORTED_TABLE_HEADER Sorted table header link text</a></li>
+            <li><a href="#LINK_TEXT_HOVER_TABLE_HEADER Tab"> LINK_TEXT_HOVER_TABLE_HEADER Table header link hover text</a></li>
+            <li><a href="#LINK_BORDER_TABLE_SELECTED_COLUM"> LINK_BORDER_TABLE_SELECTED_COLUMN_HEADER Link border in selected column header</a></li>
+          </ul>
+        </li>
+        <li><a href="#Forms"> Forms</a><ul>
+            <li><a href="#INPUT_FIELD_BORDERS Input field"> INPUT_FIELD_BORDERS Input field borders</a></li>
+            <li><a href="#FORM_INPUT_BORDER Textarea, inpu"> FORM_INPUT_BORDER Textarea, input and select (darker gray)</a></li>
+            <li><a href="#FORM_BORDER Form"> FORM_BORDER Form</a></li>
+            <li><a href="#ACTIVE_FORM_BACKGROUND Edit form"> ACTIVE_FORM_BACKGROUND Edit form, form steps</a></li>
+            <li><a href="#FORM_STEP_BORDER Form step borde"> FORM_STEP_BORDER Form step border</a></li>
+            <li><a href="#FORMFIELD_ACTIVE Active form fie"> FORMFIELD_ACTIVE Active form field</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+### <a name="TWikiNetSkin specific"></a> [[TWikiNetSkin]] specific
+
+#### <a name="SHADE_TOPTOOLBAR_BORDER"></a> SHADE\_TOPTOOLBAR\_BORDER
+
+- Set SHADE\_TOPTOOLBAR\_BORDER = #c4cbd6
+
+#### <a name="SHADE_TOPTOOLBAR_BACKGROUND"></a> SHADE\_TOPTOOLBAR\_BACKGROUND
+
+- Set SHADE\_TOPTOOLBAR\_BACKGROUND = #e9ecf2
+
+#### <a name="SHADE_SIDE_BAR_STRONG_TEXT"></a> SHADE\_SIDE\_BAR\_STRONG\_TEXT
+
+- Set SHADE\_SIDE\_BAR\_STRONG\_TEXT = #252b37
+
+#### <a name="SHADE_BLOCKQUOTE_BACKGROUND"></a> SHADE\_BLOCKQUOTE\_BACKGROUND
+
+- Set SHADE\_BLOCKQUOTE\_BACKGROUND = #edeff4
+
+#### <a name="SHADE_TWIKIFORM_TABLECELL_BORDER"></a> SHADE\_TWIKIFORM\_TABLECELL\_BORDER
+
+- Set SHADE\_TWIKIFORM\_TABLECELL\_BORDER = #e6e8ee
+
+#### <a name="SHADE_TWIKITABLE_HEADER_BACKGROU"></a> SHADE\_TWIKITABLE\_HEADER\_BACKGROUND
+
+- Set SHADE\_TWIKITABLE\_HEADER\_BACKGROUND = #f4f5f9
+
+#### <a name="SHADE_TWIKIFORM_FIRSTCOL_BACKGRO"></a> SHADE\_TWIKIFORM\_FIRSTCOL\_BACKGROUND
+
+- Set SHADE\_TWIKIFORM\_FIRSTCOL\_BACKGROUND = #f9f9fb
+
+#### <a name="SHADE_TWIKIFORM_HEADER_BACKGROUN"></a> SHADE\_TWIKIFORM\_HEADER\_BACKGROUND
+
+- Set SHADE\_TWIKIFORM\_HEADER\_BACKGROUND = #eceef2
+
+#### <a name="SHADE_BOTTOM_BAR_BACKGROUND"></a> SHADE\_BOTTOM\_BAR\_BACKGROUND
+
+- Set SHADE\_BOTTOM\_BAR\_BACKGROUND = #7d8ca5
+
+#### <a name="SHADE_BOTTOM_BAR_TEXT"></a> SHADE\_BOTTOM\_BAR\_TEXT
+
+- Set SHADE\_BOTTOM\_BAR\_TEXT = #d8dde4
+
+#### <a name="SHADE_ALERT_TEXT"></a> SHADE\_ALERT\_TEXT
+
+- Set SHADE\_ALERT\_TEXT = #f60
+
+#### <a name="SHADE_BLUEISH_TEXT"></a> SHADE\_BLUEISH\_TEXT
+
+- Set SHADE\_BLUEISH\_TEXT = #3f4e67
+
+#### <a name="SHADE_DARKISH_TEXT"></a> SHADE\_DARKISH\_TEXT
+
+- Set SHADE\_DARKISH\_TEXT = #333
+
+#### <a name="SHADE_TOPTOOLBAR_WEBNAME_TEXT"></a> SHADE\_TOPTOOLBAR\_WEBNAME\_TEXT
+
+- Set SHADE\_TOPTOOLBAR\_WEBNAME\_TEXT = %SHADE\_BLUEISH\_TEXT%
+
+#### <a name="SHADE_BROADCASTMESSAGE_BACKGROUN"></a> SHADE\_BROADCASTMESSAGE\_BACKGROUND
+
+- Set SHADE\_BROADCASTMESSAGE\_BACKGROUND = #fff765
+
+## <a name="Logical groupings"></a> Logical groupings
+
+### <a name="Text"></a> Text
+
+#### <a name="MAIN_TEXT_COLOR Main text color"></a> MAIN\_TEXT\_COLOR Main text color
+
+- Set MAIN\_TEXT\_COLOR = #252b37
+
+#### <a name="MAIN_BACKGROUND_COLOR Main backg"></a> MAIN\_BACKGROUND\_COLOR Main background color
+
+- Set MAIN\_BACKGROUND\_COLOR = #fff
+
+#### <a name="LIGHT_ON_DARK_TEXT_COLOR Light o"></a> LIGHT\_ON\_DARK\_TEXT\_COLOR Light on dark text color
+
+- Set LIGHT\_ON\_DARK\_TEXT\_COLOR = #fff
+
+#### <a name="GRAYED_TEXT_COLOR"></a> GRAYED\_TEXT\_COLOR
+
+- Set GRAYED\_TEXT\_COLOR = #7d8ca5
+
+#### <a name="GENERAL_TEXT General text (if no"></a> GENERAL\_TEXT General text (if not set in MAIN\_BACKGROUND\_COLOR) (black)
+
+- Set GENERAL\_TEXT = #000
+
+#### <a name="HEADER_TEXT Header text"></a> HEADER\_TEXT Header text
+
+- Set HEADER\_TEXT = %SHADE\_ALERT\_TEXT%
+
+#### <a name="CODE_TEXT Code text, left bar te"></a> CODE\_TEXT Code text, left bar text and links
+
+- Set CODE\_TEXT = #669
+
+#### <a name="MUTED_TEXT Muted text"></a> MUTED\_TEXT Muted text
+
+- Set MUTED\_TEXT = %GRAYED\_TEXT\_COLOR%
+
+#### <a name="GRAYED_OUT_TEXT Grayed out text"></a> GRAYED\_OUT\_TEXT Grayed out text
+
+- Set GRAYED\_OUT\_TEXT = #999
+
+#### <a name="TOPIC_ACTION_TEXT"></a> TOPIC\_ACTION\_TEXT
+
+- Set TOPIC\_ACTION\_TEXT = #97a3b7
+
+### <a name="Links"></a> Links
+
+#### <a name="LINK_TEXT_NORMAL Link normal tex"></a> LINK\_TEXT\_NORMAL Link normal text
+
+- Set LINK\_TEXT\_NORMAL = #36c
+
+#### <a name="LINK_BACKGROUND_NORMAL Link norm"></a> LINK\_BACKGROUND\_NORMAL Link normal background
+
+- Set LINK\_BACKGROUND\_NORMAL =
+
+#### <a name="LINK_TEXT_NORMAL_VISITED Link no"></a> LINK\_TEXT\_NORMAL\_VISITED Link normal text visited
+
+- Set LINK\_TEXT\_NORMAL\_VISITED = #707f99
+
+#### <a name="LINK_TEXT_ACTION_BUTTON Link tex"></a> LINK\_TEXT\_ACTION\_BUTTON Link text
+
+- Set LINK\_TEXT\_ACTION\_BUTTON = %LINK\_TEXT\_NORMAL%
+
+#### <a name="LINK_TEXT_HOVER Link hover text"></a> LINK\_TEXT\_HOVER Link hover text
+
+- Set LINK\_TEXT\_HOVER = #036
+
+#### <a name="SIDE_BAR_LINK_TEXT Side bar link"></a> SIDE\_BAR\_LINK\_TEXT Side bar link text
+
+- Set SIDE\_BAR\_LINK\_TEXT = %SHADE\_BLUEISH\_TEXT%
+
+### <a name="Disabled"></a> Disabled
+
+#### <a name="DISABLED_BORDER Disabled border"></a> DISABLED\_BORDER Disabled border
+
+- Set DISABLED\_BORDER = #e0e0e0
+
+#### <a name="DISABLED_TEXT Disabled text"></a> DISABLED\_TEXT Disabled text
+
+- Set DISABLED\_TEXT = #aaa
+
+#### <a name="DISABLED_BACKGROUND Disabled bac"></a> DISABLED\_BACKGROUND Disabled background
+
+- Set DISABLED\_BACKGROUND = #f8f8f8
+
+#### <a name="BUTTON_BORDERS_DISABLED Disabled"></a> BUTTON\_BORDERS\_DISABLED Disabled button borders
+
+- Set BUTTON\_BORDERS\_DISABLED = #fff #ccc #ccc #fff
+
+### <a name="&#39;New&#39;"></a> 'New'
+
+#### <a name="NEW_TEXT New text (green)"></a> NEW\_TEXT New text (green)
+
+- Set NEW\_TEXT = #049804
+
+#### <a name="NEW_BACKGROUND New background (l"></a> NEW\_BACKGROUND New background (light green)
+
+- Set NEW\_BACKGROUND = #ECFADC
+
+### <a name="Alert"></a> Alert
+
+#### <a name="ALERT_TEXT Alert text (red)"></a> ALERT\_TEXT Alert text (red)
+
+- Set ALERT\_TEXT = #f00
+
+#### <a name="ALERT_TEXT_MUTED Muted alert tex"></a> ALERT\_TEXT\_MUTED Muted alert text (dark red)
+
+- Set ALERT\_TEXT\_MUTED = #900
+
+#### <a name="ALERT_BORDER Alert border"></a> ALERT\_BORDER Alert border
+
+- Set ALERT\_BORDER = #f00
+
+### <a name="Buttons"></a> Buttons
+
+#### <a name="BUTTON_TEXT Button text color (d"></a> BUTTON\_TEXT Button text color (dark gray)
+
+- Set BUTTON\_TEXT = #000
+
+#### <a name="BUTTON_BORDERS Button borders"></a> BUTTON\_BORDERS Button borders
+
+- Set BUTTON\_BORDERS = #fff #888 #888 #fff
+
+#### <a name="BUTTON_BACKGROUND Button backgro"></a> BUTTON\_BACKGROUND Button background
+
+- Set BUTTON\_BACKGROUND = #e2e3e3
+
+#### <a name="BUTTON_CANCEL_BACKGROUND Cancel"></a><a name="BUTTON_CANCEL_BACKGROUND Cancel "></a> BUTTON\_CANCEL\_BACKGROUND Cancel button background
+
+- Set BUTTON\_CANCEL\_BACKGROUND = #f2d5d0
+
+#### <a name="SUBMIT_BUTTON_BACKGROUND Submit"></a><a name="SUBMIT_BUTTON_BACKGROUND Submit "></a> SUBMIT\_BUTTON\_BACKGROUND Submit button background
+
+- Set SUBMIT\_BUTTON\_BACKGROUND = #06c
+
+#### <a name="SUBMIT_BUTTON_BORDER_TEXT Submit"></a> SUBMIT\_BUTTON\_BORDER\_TEXT Submit button text color
+
+- Set SUBMIT\_BUTTON\_BORDER\_TEXT = #fff
+
+#### <a name="SELECT_BORDER Select border"></a> SELECT\_BORDER Select border
+
+- Set SELECT\_BORDER = #888
+
+### <a name="Background colors"></a> Background colors
+
+#### <a name="GENERAL_BACKGROUND General backg"></a> GENERAL\_BACKGROUND General background color (if not set in MAIN\_BACKGROUND\_COLOR) (white)
+
+- Set GENERAL\_BACKGROUND = #fff
+
+#### <a name="SIDE_BAR_BACKGROUND Side bar bac"></a> SIDE\_BAR\_BACKGROUND Side bar background
+
+- Set SIDE\_BAR\_BACKGROUND = #f4f5f8
+
+#### <a name="NEUTRAL_BACKGROUND"></a> NEUTRAL\_BACKGROUND
+
+- Set NEUTRAL\_BACKGROUND = #fdfaf1
+
+#### <a name="TOP_BAR_BACKGROUND Top bar backg"></a> TOP\_BAR\_BACKGROUND Top bar background
+
+- Set TOP\_BAR\_BACKGROUND = #dfe3ec
+
+#### <a name="TOPIC_ACTION_BACKGROUND Topic ac"></a> TOPIC\_ACTION\_BACKGROUND Topic action row
+
+- Set TOPIC\_ACTION\_BACKGROUND = #f8f9fa
+
+#### <a name="HEADER_BACKGROUND h2"></a> HEADER\_BACKGROUND h2
+
+- Set HEADER\_BACKGROUND = #f8f9fb
+
+#### <a name="ATTACHMENT_AND_FORM_BACKGROUND A"></a> ATTACHMENT\_AND\_FORM\_BACKGROUND Attachment, form
+
+- Set ATTACHMENT\_AND\_FORM\_BACKGROUND = #f2f3f6
+
+#### <a name="DIFF_HEADER_BACKGROUND Diff head"></a> DIFF\_HEADER\_BACKGROUND Diff header
+
+- Set DIFF\_HEADER\_BACKGROUND = #ccc
+
+#### <a name="NOTIFICATION_BACKGROUND Info and"></a> NOTIFICATION\_BACKGROUND Info and notifications
+
+- Set NOTIFICATION\_BACKGROUND = #fff9d1
+
+#### <a name="INFO_BACKGROUND"></a> INFO\_BACKGROUND
+
+- Set INFO\_BACKGROUND = #f4f5f8
+
+### <a name="Border colors"></a> Border colors
+
+#### <a name="NEUTRAL_BORDER Info (light gray)"></a> NEUTRAL\_BORDER Info (light gray)
+
+- Set NEUTRAL\_BORDER = #d7dbe4
+
+#### <a name="SEPARATOR_BORDER"></a> SEPARATOR\_BORDER
+
+- Set SEPARATOR\_BORDER = #e5e8ed
+
+#### <a name="MINOR_SEPARATOR_BORDER Header H3"></a> MINOR\_SEPARATOR\_BORDER Header H3..H6 bottom
+
+- Set MINOR\_SEPARATOR\_BORDER = %SEPARATOR\_BORDER%
+
+#### <a name="LAYOUT_ELEMENT_BORDER Main layou"></a> LAYOUT\_ELEMENT\_BORDER Main layout elements (neutral tone)
+
+- Set LAYOUT\_ELEMENT\_BORDER = #cfcfcf
+
+#### <a name="IMAGE_BORDER Image border"></a> IMAGE\_BORDER Image border
+
+- Set IMAGE\_BORDER = #eee
+
+#### <a name="NOTIFICATION_BORDER Broadcast me"></a> NOTIFICATION\_BORDER Broadcast message
+
+- Set NOTIFICATION\_BORDER = #fc0
+
+#### <a name="TOPIC_ACTION_BORDER"></a> TOPIC\_ACTION\_BORDER
+
+- Set TOPIC\_ACTION\_BORDER = #dee2e8
+
+#### <a name="Table colors"></a> Table colors
+
+##### <a name="TABLE_DATA_BACKGROUND Table data"></a> TABLE\_DATA\_BACKGROUND Table data background
+
+- Set TABLE\_DATA\_BACKGROUND = #f2f3f6
+
+##### <a name="TABLE_HEADER_BACKGROUND Table he"></a> TABLE\_HEADER\_BACKGROUND Table header background
+
+- Set TABLE\_HEADER\_BACKGROUND = #d8dde4
+
+##### <a name="TABLE_SELECTED_COLUMN_HEADER_BAC"></a> TABLE\_SELECTED\_COLUMN\_HEADER\_BACKGROUND Sorted table column accent background
+
+- Set TABLE\_SELECTED\_COLUMN\_HEADER\_BACKGROUND = #ced4dd
+
+##### <a name="TABLE_DATA_ODD_BACKGROUND Table"></a><a name="TABLE_DATA_ODD_BACKGROUND Table "></a> TABLE\_DATA\_ODD\_BACKGROUND Table data background (odd row)
+
+- Set TABLE\_DATA\_ODD\_BACKGROUND = #f2f3f6
+
+##### <a name="TABLE_DATA_EVEN_BACKGROUND Table"></a> TABLE\_DATA\_EVEN\_BACKGROUND Table data background (even row)
+
+- Set TABLE\_DATA\_EVEN\_BACKGROUND = #ffffff
+
+##### <a name="TABLE_DATA_ODD_SELECTED_BACKGROU"></a> TABLE\_DATA\_ODD\_SELECTED\_BACKGROUND Table data background (odd row, selected column)
+
+- Set TABLE\_DATA\_ODD\_SELECTED\_BACKGROUND = #e7e9ee
+
+##### <a name="TABLE_DATA_EVEN_SELECTED_BACKGRO"></a> TABLE\_DATA\_EVEN\_SELECTED\_BACKGROUND Table data background (even row, selected column)
+
+- Set TABLE\_DATA\_EVEN\_SELECTED\_BACKGROUND = #f3f5f7
+
+##### <a name="TABLE_DATA_MIX_BACKGROUND Table"></a><a name="TABLE_DATA_MIX_BACKGROUND Table "></a> TABLE\_DATA\_MIX\_BACKGROUND Table data background (mix between even and odd)
+
+- Set TABLE\_DATA\_MIX\_BACKGROUND = #e7e9ee
+
+#### <a name="TABLE_BORDER Table border, sup ("></a> TABLE\_BORDER Table border, sup (light neutral tone)
+
+- Set TABLE\_BORDER = #e7e9ef
+
+#### <a name="LINK_TEXT_NORMAL_TABLE_HEADER Ta"></a> LINK\_TEXT\_NORMAL\_TABLE\_HEADER Table header link text
+
+- Set LINK\_TEXT\_NORMAL\_TABLE\_HEADER = #252b37
+
+#### <a name="LINK_TEXT_NORMAL_UNDERLINE_TABLE"></a> LINK\_TEXT\_NORMAL\_UNDERLINE\_TABLE\_HEADER Table header link border
+
+- Set LINK\_TEXT\_NORMAL\_UNDERLINE\_TABLE\_HEADER = #252b37
+
+#### <a name="LINK_TEXT_SORTED_TABLE_HEADER So"></a> LINK\_TEXT\_SORTED\_TABLE\_HEADER Sorted table header link text
+
+- Set LINK\_TEXT\_SORTED\_TABLE\_HEADER = %LINK\_TEXT\_NORMAL\_TABLE\_HEADER%
+
+#### <a name="LINK_TEXT_HOVER_TABLE_HEADER Tab"></a> LINK\_TEXT\_HOVER\_TABLE\_HEADER Table header link hover text
+
+- Set LINK\_TEXT\_HOVER\_TABLE\_HEADER = %LINK\_TEXT\_NORMAL\_TABLE\_HEADER%
+
+#### <a name="LINK_BORDER_TABLE_SELECTED_COLUM"></a> LINK\_BORDER\_TABLE\_SELECTED\_COLUMN\_HEADER Link border in selected column header
+
+- Set LINK\_BORDER\_TABLE\_SELECTED\_COLUMN\_HEADER = %LINK\_TEXT\_NORMAL\_TABLE\_HEADER%
+
+### <a name="Forms"></a> Forms
+
+#### <a name="INPUT_FIELD_BORDERS Input field"></a><a name="INPUT_FIELD_BORDERS Input field "></a> INPUT\_FIELD\_BORDERS Input field borders
+
+- Set INPUT\_FIELD\_BORDERS = #bbc3d1 #c3cad7 #c3cad7 #bbc3d1
+
+#### <a name="FORM_INPUT_BORDER Textarea, inpu"></a> FORM\_INPUT\_BORDER Textarea, input and select (darker gray)
+
+- Set FORM\_INPUT\_BORDER = #aaa
+
+#### <a name="FORM_BORDER Form"></a> FORM\_BORDER Form
+
+- Set FORM\_BORDER = #dee2e8
+
+#### <a name="ACTIVE_FORM_BACKGROUND Edit form"></a> ACTIVE\_FORM\_BACKGROUND Edit form, form steps
+
+- Set ACTIVE\_FORM\_BACKGROUND = #f4f5f8
+
+#### <a name="FORM_STEP_BORDER Form step borde"></a> FORM\_STEP\_BORDER Form step border
+
+- Set FORM\_STEP\_BORDER = %FORM\_BORDER%
+
+#### <a name="FORMFIELD_ACTIVE Active form fie"></a> FORMFIELD\_ACTIVE Active form field
+
+- Set FORMFIELD\_ACTIVE = %NOTIFICATION\_BACKGROUND%
+
+Do not change the text below this line unless you know what you are doing!
+
+----
+
+    %STARTATTACH{"theme-colors.css" web="%TWIKIWEB%" topic="TWikiNetSkin"}%
+    /* PatternSkin colors */
+    /* Generated by AttachContentPlugin from %WEB%.%TOPIC% */
+
+    /* LAYOUT ELEMENTS */
+
+    #patternTopBar {
+       background-color:%TOP_BAR_BACKGROUND%;
+    }
+    #patternMain { /* don't set a background here; use patternOuter */ }
+    #patternOuter {
+       background-color:%MAIN_BACKGROUND_COLOR%; /* Sets background of center col */
+       border-color:%LAYOUT_ELEMENT_BORDER%;
+    }
+    #patternLeftBar,
+    #patternWrapper {
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+    #patternBottomBar {
+       background-color:%SHADE_BOTTOM_BAR_BACKGROUND%;
+    }
+    #patternBottomBarContents,
+    #patternBottomBarContents a:link,
+    #patternBottomBarContents a:visited {
+       color:%SHADE_BOTTOM_BAR_TEXT%;
+    }
+    #patternBottomBarContents a:hover {
+       color:%LIGHT_ON_DARK_TEXT_COLOR%;
+    }
+
+    /* GENERAL HTML ELEMENTS */
+
+    html body {
+       background-color:%SHADE_BOTTOM_BAR_BACKGROUND%;
+       color:%MAIN_TEXT_COLOR%;
+    }
+    /* be kind to netscape 4 that doesn't understand inheritance */
+    body, p, li, ul, ol, dl, dt, dd, acronym, h1, h2, h3, h4, h5, h6 {
+       background-color:transparent;
+    }
+    hr {
+       color:%SEPARATOR_BORDER%;
+       background-color:%SEPARATOR_BORDER%;
+    }
+    pre, code, tt {
+       color:%CODE_TEXT%;
+    }
+    blockquote {
+       background-color:%SHADE_BLOCKQUOTE_BACKGROUND%;
+       border-color:%NEUTRAL_BORDER%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+       color:%HEADER_TEXT%;
+    }
+    /* to override old Render.pm coded font color style */
+    .twikiNewLink font {
+       color:inherit;
+    }
+    .twikiNewLink a:link sup,
+    .twikiNewLink a:visited sup {
+       color:%MUTED_TEXT%;
+       border-color:%NEUTRAL_BORDER%;
+    }
+    .twikiNewLink a:hover sup {
+       color:%LINK_TEXT_HOVER%;
+       border-color:%LINK_TEXT_HOVER%;
+    }
+    .twikiNewLink {
+       border-color:%NEUTRAL_BORDER%;
+    }
+    :link:focus,
+    :visited:focus,
+    :link,
+    :visited,
+    :link:active,
+    :visited:active {
+       color:%LINK_TEXT_NORMAL%;
+       background-color:transparent;
+    }
+    :link:hover,
+    :visited:hover {
+       color:%LINK_TEXT_HOVER%;
+       background-color:transparent;
+       background-image:none;
+       text-decoration:underline;
+    }
+    :link:hover img,
+    :visited:hover img {
+       background-color:transparent;
+    }
+    .patternTopic a:visited {
+       color:%LINK_TEXT_NORMAL_VISITED%;
+    }
+    .patternTopic a:hover {
+       color:%LINK_TEXT_HOVER%;
+    }
+    #patternMainContents h1 a:link, #patternMainContents h1 a:visited,
+    #patternMainContents h2 a:link, #patternMainContents h2 a:visited,
+    #patternMainContents h3 a:link, #patternMainContents h3 a:visited,
+    #patternMainContents h4 a:link, #patternMainContents h4 a:visited,
+    #patternMainContents h5 a:link, #patternMainContents h5 a:visited,
+    #patternMainContents h6 a:link, #patternMainContents h6 a:visited {
+       color:%HEADER_TEXT%;
+    }
+    #patternMainContents h1 a:hover,
+    #patternMainContents h2 a:hover,
+    #patternMainContents h3 a:hover,
+    #patternMainContents h4 a:hover,
+    #patternMainContents h5 a:hover,
+    #patternMainContents h6 a:hover {
+       color:%LINK_TEXT_HOVER%;
+    }
+    .patternTopic .twikiUnvisited a:visited {
+       color:%LINK_TEXT_NORMAL%;
+    }
+    .patternTopic .twikiUnvisited a:hover {
+       color:%LINK_TEXT_HOVER%;
+    }
+    .patternTop a:hover {
+       border:none;
+       color:%LINK_TEXT_HOVER%;
+    }
+
+    /* Form elements */
+
+    textarea,
+    input,
+    select {
+       border-color:%FORM_INPUT_BORDER%;
+       color:%SHADE_BLUEISH_TEXT%;
+       background-color:%GENERAL_BACKGROUND%;
+    }
+    .twikiSubmit,
+    .twikiButton {
+       border-color:%BUTTON_BORDERS%;
+    }
+    .twikiSubmit {
+       color:%SUBMIT_BUTTON_BORDER_TEXT%;
+       background-color:%SUBMIT_BUTTON_BACKGROUND%;
+    }
+    .twikiButton {
+       color:%BUTTON_TEXT%;
+       background-color:%BUTTON_BACKGROUND%;
+    }
+    .twikiButtonCancel {
+       color:%BUTTON_TEXT%;
+       background-color:%BUTTON_CANCEL_BACKGROUND%;
+    }
+    .twikiSubmitDisabled,
+    .twikiSubmitDisabled:active {
+       border-color:%BUTTON_BORDERS_DISABLED%;
+       color:%DISABLED_TEXT%;
+       background-color:%ACTIVE_FORM_BACKGROUND%;
+    }
+    .twikiTextarea,
+    .twikiInputField,
+    .twikiInputFieldDisabled,
+    .twikiInputFieldReadOnly,
+    .twikiSelect {
+       border-color:%INPUT_FIELD_BORDERS%;
+    }
+    .twikiTextarea,
+    .twikiInputField,
+    .twikiSelect {
+       color:%MAIN_TEXT_COLOR%;
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+    .twikiInputField:active,
+    .twikiInputField:focus {
+       background-color:%FORMFIELD_ACTIVE%;
+    }
+    .twikiTextareaRawView {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiInputFieldDisabled {
+       color:%DISABLED_TEXT%;
+       background-color:%DISABLED_BACKGROUND%;
+    }
+    .twikiInputFieldReadOnly {
+       color:%GRAYED_TEXT_COLOR%;
+    }
+    .twikiSelect {
+       border-color:%INPUT_FIELD_BORDERS%;
+       color:%SHADE_BLUEISH_TEXT%;
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+    .twikiInputFieldDisabled,
+    .twikiSelectDisabled {
+       color:%DISABLED_TEXT%;
+       border-color:%INPUT_FIELD_BORDERS%;
+       background-color:%DISABLED_BACKGROUND%;
+    }
+    .twikiInputFieldBeforeFocus {
+       color:%MUTED_TEXT%;
+    }
+
+    /*   -----------------------------------------------------------
+       Plugin elements
+       -----------------------------------------------------------   */
+
+    /* TablePlugin */
+
+    .twikiTable,
+    .twikiTable td {
+       border-color:%TABLE_BORDER%;
+    }
+    .twikiTable th {
+       border-color:%LIGHT_ON_DARK_TEXT_COLOR%;
+    }
+    .twikiTable th.twikiFirstCol {
+       border-left-color:%SHADE_TWIKITABLE_HEADER_BACKGROUND%;
+    }
+    .twikiTable th.twikiLastCol {
+       border-right-color:%SHADE_TWIKITABLE_HEADER_BACKGROUND%;
+    }
+    .twikiTable th a:link,
+    .twikiTable th a:visited,
+    .twikiTable th a font {
+       color:%LINK_TEXT_NORMAL_TABLE_HEADER%;
+    }
+
+    /* TwistyContrib */
+    .twistyPlaceholder {
+       color:%GRAYED_OUT_TEXT%;
+    }
+    a:hover.twistyTrigger {
+       color:%LINK_TEXT_HOVER%;
+    }
+
+    /* RevCommentPlugin */
+    .revComment .patternTopicAction {
+       background-color:%ATTACHMENT_AND_FORM_BACKGROUND%;
+    }
+
+    /*   -----------------------------------------------------------
+       TWiki styles
+       -----------------------------------------------------------   */
+
+    .twikiGrayText {
+       color:%GRAYED_OUT_TEXT%;
+    }
+    .twikiGrayText a:link,
+    .twikiGrayText a:visited {
+       color:%GRAYED_OUT_TEXT%;
+    }
+    .twikiGrayText a:hover {
+       color:%LINK_TEXT_HOVER%;
+    }
+
+    .twikiAttachments .twikiTable th {
+       border-top-color:%ATTACHMENT_AND_FORM_BACKGROUND%;
+    }
+    .twikiAttachments .twikiTable th,
+    .twikiForm th {
+       background-color:%SHADE_TWIKIFORM_HEADER_BACKGROUND%;
+    }
+    .twikiAttachments .twikiTable th.twikiFirstCol {
+       border-left-color:%SHADE_TWIKITABLE_HEADER_BACKGROUND%;
+    }
+    .twikiAttachments .twikiTable th.twikiLastCol {
+       border-right-color:%SHADE_TWIKITABLE_HEADER_BACKGROUND%;
+    }
+    .twikiFormTable td,
+    .twikiFormTable th {
+       border-color:%SHADE_TWIKIFORM_TABLECELL_BORDER%;
+    }
+    .patternContent .twikiForm td.twikiFirstCol,
+    .patternEditPage .twikiFormTable th {
+       background-color:%SHADE_TWIKIFORM_FIRSTCOL_BACKGROUND%;
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .patternContent .twikiForm td,
+    .patternEditPage .twikiFormTable td {
+       background-color:%TABLE_DATA_EVEN_BACKGROUND%;
+       color:%LINK_TEXT_NORMAL_TABLE_HEADER%;
+    }
+    .twikiEditForm {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+
+    .twikiFormStep {
+       border-top-color:%TOPIC_ACTION_BACKGROUND%;
+       border-bottom-color:%FORM_STEP_BORDER%;
+    }
+    .twikiFormStep h3,
+    .twikiFormStep h4 {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiFormStep h2,
+    .twikiFormStep h3,
+    .twikiFormStep h4 {
+       background-color:transparent;
+       background-image:none;
+    }
+    .twikiActionFormStepSign {
+       color:%NEUTRAL_BORDER%;
+    }
+    .twikiToc .twikiTocTitle {
+       color:%MUTED_TEXT%;
+    }
+    .twikiBroadcastMessage {
+       background-color:%SHADE_BROADCASTMESSAGE_BACKGROUND%;
+       border-color:%NOTIFICATION_BORDER%;
+       color:%SHADE_DARKISH_TEXT%;
+    }
+    .twikiNotification {
+       background-color:%NOTIFICATION_BACKGROUND%;
+    }
+    .twikiHelp {
+       background-color:%ATTACHMENT_AND_FORM_BACKGROUND%;
+       color:%SHADE_DARKISH_TEXT%;
+       border-color:%SEPARATOR_BORDER%;
+    }
+    .twikiHelp b,
+    .twikiHelp strong,
+    .twikiHelp h1,
+    .twikiHelp h2,
+    .twikiHelp h3,
+    .twikiHelp h4,
+    .twikiHelp h5,
+    .twikiHelp h6 {
+       color:%SHADE_ALERT_TEXT%;
+    }
+    .twikiBroadcastMessage b,
+    .twikiBroadcastMessage strong {
+       color:%ALERT_TEXT%;
+    }
+    .twikiAlert,
+    .twikiAlert code {
+       color:%ALERT_TEXT%;
+    }
+    .twikiEmulatedLink {
+       color:%LINK_TEXT_NORMAL%;
+    }
+    .twikiPageForm table {
+       border-color:%TABLE_BORDER%;
+       background:%MAIN_BACKGROUND_COLOR%;
+    }
+    .twikiPageForm hr {
+       border-color:%FORM_BORDER%;
+       background-color:%FORM_BORDER%;
+       color:%FORM_BORDER%;
+    }
+    .twikiAccessKey {
+       color:inherit;
+       border-color:%GRAYED_OUT_TEXT%;
+    }
+    a:link .twikiAccessKey,
+    a:visited .twikiAccessKey {
+       color:inherit;
+    }
+    a:hover .twikiAccessKey {
+       color:inherit;
+    }
+    .twikiImage img {
+       border-color:%IMAGE_BORDER%;
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+    #patternTopBar .twikiImage img {
+       background-color:transparent;
+    }
+    .twikiImage a:hover img {
+       border-color:%LINK_TEXT_HOVER%;
+    }
+
+    /*   -----------------------------------------------------------
+       Pattern skin specific elements
+       -----------------------------------------------------------   */
+    #patternPage {
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+    .patternTop,
+    .patternHomePath .patternRevInfo,
+    .patternRevInfo {
+       color:%GRAYED_TEXT_COLOR%;
+    }
+    .patternRevInfo a:link,
+    .patternRevInfo a:visited {
+       color:%GRAYED_TEXT_COLOR%;
+    }
+    .patternRevInfo a:hover {
+       color:%LINK_TEXT_HOVER%;
+    }
+    .patternHomePath .patternRevInfo a:link,
+    .patternHomePath .patternRevInfo a:visited {
+       color:%LINK_TEXT_NORMAL%;
+    }
+    .patternHomePath {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .patternHomePath a:link,
+    .patternHomePath a:visited {
+       color:%LINK_TEXT_NORMAL%;
+    }
+    .patternHomePath a:hover {
+       color:%LINK_TEXT_HOVER%;
+       text-decoration:underline;
+    }
+    .patternHomePath .twikiSeparator {
+       color:%GRAYED_TEXT_COLOR%;
+    }
+
+    /* Left bar */
+    #patternLeftBarContents,
+    #patternLeftBarContents .patternLeftBarPersonal {
+       background:none;
+       background-image:none;
+    }
+
+    #patternLeftBarContents,
+    #patternLeftBarContents a:link,
+    #patternLeftBarContents a:visited,
+    #patternLeftBarContents .patternLeftBarPersonal a:link,
+    #patternLeftBarContents .patternLeftBarPersonal a:visited {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    #patternLeftBarContents strong,
+    #patternLeftBarContents b {
+       color:%SHADE_SIDE_BAR_STRONG_TEXT%;
+       text-decoration:none;
+    }
+    #patternLeftBarContents a:hover,
+    #patternLeftBarContents .patternLeftBarPersonal a:hover,
+    #patternLeftBarContents strong a:hover,
+    #patternLeftBarContents strong .patternLeftBarPersonal a:hover,
+    #patternLeftBarContents b a:hover,
+    #patternLeftBarContents b .patternLeftBarPersonal a:hover {
+       color:%LINK_TEXT_HOVER%;
+       text-decoration:underline;
+    }
+
+    #patternLeftBarContents hr {
+       color:%SEPARATOR_BORDER%;
+       background-color:%SEPARATOR_BORDER%;
+    }
+    .patternTopicActions {
+       border-color:%MINOR_SEPARATOR_BORDER%;
+       background-color:%TOPIC_ACTION_BACKGROUND%;
+       color:%TOPIC_ACTION_TEXT%;
+    }
+    .patternTopicAction s,
+    .patternTopicAction strike {
+       color:%DISABLED_TEXT%;
+    }
+    .patternTopicAction .twikiSeparator {
+       color:#bec5d2;
+    }
+    .patternActionButtons a:link,
+    .patternActionButtons a:visited {
+       color:%LINK_TEXT_ACTION_BUTTON%;
+    }
+    .patternActionButtons a:hover {
+       color:%LINK_TEXT_HOVER%;
+    }
+    .patternTopicAction .twikiAccessKey {
+       color:%LINK_TEXT_ACTION_BUTTON%;
+       border-color:%LINK_TEXT_ACTION_BUTTON%;
+    }
+    .patternTopicAction a:hover .twikiAccessKey {
+       color:%LINK_TEXT_HOVER%;
+    }
+    .patternTopicAction label {
+       color:%GENERAL_TEXT%;
+    }
+    .patternHelpCol {
+       color:%GRAYED_OUT_TEXT%;
+    }
+    .patternSigLine {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .patternToolBar a:link .twikiAccessKey,
+    .patternToolBar a:visited .twikiAccessKey {
+       color:inherit;
+       border-color:#333;
+    }
+    .patternToolBar a:hover .twikiAccessKey {
+       background-color:transparent;
+       color:inherit;
+       border-color:#333;
+    }
+    .patternSaveHelp {
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+
+    /* WebSearch, WebSearchAdvanced */
+    table#twikiSearchTable {
+       border-color:%FORM_STEP_BORDER%;
+    }
+    table#twikiSearchTable th,
+    table#twikiSearchTable td {
+       background-color:%GENERAL_BACKGROUND%;
+       border-color:%FORM_STEP_BORDER%;
+    }
+    table#twikiSearchTable hr {
+       border-color:%FORM_STEP_BORDER%;
+       background-color:%FORM_STEP_BORDER%;
+    }
+    table#twikiSearchTable th {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+
+    /*   -----------------------------------------------------------
+       Search results
+       styles and overridden styles used in search.pattern.tmpl
+       -----------------------------------------------------------   */
+
+    h3.patternSearchResultsHeader,
+    h4.patternSearchResultsHeader {
+       background-color:%ATTACHMENT_AND_FORM_BACKGROUND%;
+       border-color:%SEPARATOR_BORDER%;
+    }
+    h4.patternSearchResultsHeader {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .patternNoViewPage h4.patternSearchResultsHeader {
+       color:%HEADER_TEXT%;
+    }
+    .patternSearchResult .twikiBottomRow {
+       border-color:%MINOR_SEPARATOR_BORDER%;
+    }
+    .patternSearchResult .twikiAlert {
+       color:%ALERT_TEXT%;
+    }
+    .patternSearchResult .twikiSummary .twikiAlert {
+       color:%ALERT_TEXT_MUTED%;
+    }
+    .patternSearchResult .twikiNew {
+       background-color:%NEW_BACKGROUND%;
+       border-color:%NEW_TEXT%;
+       color:%NEW_TEXT%;
+    }
+    .patternViewPage .patternSearchResultsBegin {
+       border-color:%TABLE_BORDER%;
+    }
+
+    /* Search results in book view format */
+
+    .patternBookView .twikiTopRow {
+       background-color:transparent; /* set to WEBBGCOLOR in css.pattern.tmpl */
+       color:%MUTED_TEXT%;
+    }
+    .patternBookView .twikiBottomRow {
+       border-color:%TABLE_BORDER%;
+    }
+    .patternBookView .patternSearchResultCount {
+       color:%GRAYED_OUT_TEXT%;
+    }
+
+    /* preview.pattern.tmpl */
+
+    .twikiPreviewArea {
+       border-color:%ALERT_BORDER%;
+       background-color:%MAIN_BACKGROUND_COLOR%;
+    }
+
+    /* rdiff.pattern.tmpl */
+
+    .patternDiff {
+       border-color:%TABLE_HEADER_BACKGROUND%;
+    }
+    .patternDiff h4.patternSearchResultsHeader {
+       background-color:%TABLE_HEADER_BACKGROUND%;
+       color:%LIGHT_ON_DARK_TEXT_COLOR%;
+    }
+    .patternDiff h4.patternSearchResultsHeader a:link,
+    .patternDiff h4.patternSearchResultsHeader a:visited {
+       color:%LIGHT_ON_DARK_TEXT_COLOR%;
+    }
+    tr.twikiDiffDebug td {
+       border-color:%TABLE_BORDER%;
+    }
+    .patternDiffPage .twikiDiffTable th {
+       background-color:%DIFF_HEADER_BACKGROUND%;
+    }
+    /* Changed */
+    .twikiDiffChangedHeader,
+    tr.twikiDiffDebug .twikiDiffChangedText,
+    tr.twikiDiffDebug .twikiDiffChangedText {
+       background:#9f9; /* green - do not change */
+    }
+    /* Deleted */
+    .twikiDiffDeletedHeader,
+    tr.twikiDiffDebug .twikiDiffDeletedMarker,
+    tr.twikiDiffDebug .twikiDiffDeletedText {
+       background-color:#f99; /* red - do not change */
+    }
+    /* Added */
+    .twikiDiffAddedHeader,
+    tr.twikiDiffDebug .twikiDiffAddedMarker,
+    tr.twikiDiffDebug .twikiDiffAddedText {
+       background-color:#ccf; /* violet - do not change */
+    }
+    /* Unchanged */
+    tr.twikiDiffDebug .twikiDiffUnchangedText {
+       color:%GRAYED_OUT_TEXT%;
+    }
+    .twikiDiffUnchangedTextContents { }
+    .twikiDiffLineNumberHeader {
+       background-color:%DIFF_HEADER_BACKGROUND%;
+    }
+
+    /* IMAGES */
+    /* image positions are set here as well as these are dependent on the image */
+
+    .patternTopic h2.twikinetRoundedAttachments {
+       padding-top:0;
+       padding-right:11px;
+       background:url(bg_header_right.gif) top right no-repeat;
+    }
+    .patternTopic h2.twikinetRoundedAttachments .twikinetHeader {
+       display:block;
+       padding-top:.4em; /* same as h2 */
+       padding-left:11px;
+       padding-right:11px;
+       margin-left:-11px;
+       background:url(bg_header.gif) top left no-repeat;
+    }
+    .patternTopic .twikiFormSteps h2.twikinetRoundedAttachments,
+    .patternTopic .twikiFormSteps h2.twikinetRoundedAttachments .twikinetHeader,
+    .patternTopic blockquote h2.twikinetRoundedAttachments,
+    .patternTopic blockquote h2.twikinetRoundedAttachments .twikinetHeader {
+       background:none;
+    }
+    .twikiToc li {
+       background-image:url(bullet-toc.gif);
+       background-repeat:no-repeat;
+       background-position:0 .4em;
+    }
+    #patternTopBar {
+       background-image:url(bg_topbar_gradient.gif);
+       background-repeat:repeat-x;
+    }
+    #twikinetLogo {
+       background-image:url(logo_twiki_net_faded.gif);
+       background-repeat:no-repeat;
+    }
+    #patternLeftBar,
+    #patternWrapper {
+       background-image:url(bg_leftbar_gradient.gif);
+       background-repeat:repeat-y;
+    }
+    .patternPrintPage #patternOuter {
+       background:#fff; /* white - do not change */
+    }
+
+    /* start buttons */
+    .twikiSubmit,
+    .twikiSubmitDisabled {
+       background-image:url(bg_button_submit.gif);
+       background-repeat:repeat-x;
+    }
+    .twikiSubmit,
+    a.twikiSubmit:link,
+    a.twikiSubmit:visited {
+       background-position:0px 0px;
+       background-color:#9eafd0;
+       border-color:#dee4f0 #96a3bc #96a3bc #dee4f0;
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiSubmit:hover,
+    a.twikiSubmit:hover {
+       background-position:0px -80px;
+       background-color:#7589b2;
+       border-color:#cbd3e4 #8391af #8391af #cbd3e4;
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiSubmit:active,
+    a.twikiSubmit:active {
+       background-position:0px -160px;
+       background-color:#fff;
+       border-color:#96a3bc #dee4f0 #dee4f0 #96a3bc;
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiButton,
+    a.twikiButton:link,
+    a.twikiButton:visited {
+       background-image:url(bg_button.gif);
+       background-repeat:repeat-x;
+       background-position:0px 0px;
+       border-color:#e9ebf1 #a2adbf #a2adbf #e9ebf1;
+       background-color:#d9dee7;
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiButton:hover,
+    .twikiChangeFormButtonHolder .twikiButton:hover,
+    a.twikiButton:hover {
+       background-position:0px -80px;
+       border-color:#e9ebf1 #a2adbf #a2adbf #e9ebf1;
+       background-color:#fff;
+       color:%SHADE_DARKISH_TEXT%;
+    }
+    .twikiButton:active,
+    .twikiChangeFormButtonHolder .twikiButton:active,
+    a.twikiButton:active {
+       background-position:0px -160px;
+       border-color:#a2adbf #e9ebf1 #e9ebf1 #a2adbf;
+       background-color:#fff;
+       color:%SHADE_DARKISH_TEXT%;
+    }
+    .twikiSubmitDisabled,
+    .twikiSubmitDisabled:hover,
+    .twikiSubmitDisabled:active,
+    .twikiButtonDisabled,
+    .twikiButtonDisabled:hover,
+    .twikiButtonDisabled:active {
+       background-image:url(bg_button.gif);
+       background-repeat:repeat-x;
+       background-position:0px -240px;
+       border-color:#dce0e7;
+       background-color:#e1e5ed;
+       color:#ccc;
+    }
+    .twikiButtonCancel {
+       background-image:url(bg_button_cancel.gif);
+       background-repeat:repeat-x;
+       background-position:0px 0px;
+       border-color:#fcdfe0 #cca6ae #cca6ae #fcdfe0;
+       background-color:#c6afb6;
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikiButtonCancel:hover {
+       background-position:0px -80px;
+       border-color:#fcdfe0 #cca6ae #cca6ae #fcdfe0;
+       background-color:#b19aa0;
+       color:%SHADE_DARKISH_TEXT%;
+    }
+    .twikiButtonCancel:active {
+       background-position:0px -160px;
+       border-color:#cca6ae #fcdfe0 #fcdfe0 #cca6ae;
+       background-color:#fce2e2;
+       color:%SHADE_DARKISH_TEXT%;
+    }
+    /* end buttons */
+
+    .patternToolBar .patternButton a:link,
+    .patternToolBar .patternButton a:visited,
+    .patternToolBar .patternButton s,
+    .patternToolBar .patternButton strike {
+       background-image:url(bg_button.gif);
+       background-repeat:repeat-x;
+    }
+    .patternToolBar .patternButton a:link,
+    .patternToolBar .patternButton a:visited {
+       background-position:0px 0px;
+       border-color:#f8f6ec #b8b6ad #b8b6ad #f8f6ec;
+       background-color:#dbd9cf;
+       color:#333;
+    }
+    .patternToolBar .patternButton a:hover {
+       background-position:0px -80px;
+       border-color:#f4f2eb #a3a092 #a3a092 #f4f2eb;
+       background-color:#c2bfae;
+       color:#222;
+    }
+    .patternToolBar .patternButton a:active {
+       background-position:0px -160px;
+       border-color:#a3a092 #f4f2eb #f4f2eb #a3a092;
+       background-color:#e8e5d7;
+       color:#222;
+    }
+    .patternToolBar .patternButton s,
+    .patternToolBar .patternButton strike {
+       background-position:0px -240px;
+       border-color:#fcfbf9 #e3e2dd #e3e2dd #fcfbf9;
+       background-color:#edece6;
+       color:%DISABLED_TEXT%;
+    }
+    .patternTextareaButton {
+       border-color:#e9ebf1 #a2adbf #a2adbf #e9ebf1;
+       overflow:hidden;
+    }
+    .patternButtonFontSelector {
+       background-image:url(button_font_selector.gif);
+       width:33px;
+       height:16px;
+    }
+    .patternButtonFontSelectorProportional {
+       background-position:0 0;
+    }
+    .patternButtonFontSelectorMonospace {
+       background-position:0 -16px;
+    }
+    .patternButtonEnlarge,
+    .patternButtonShrink {
+       background-image:url(button_arrow.gif);
+       width:16px;
+       height:16px;
+    }
+    .patternButtonEnlarge {
+       background-position:0 0;
+    }
+    .patternButtonEnlarge:hover {
+       background-position:0 -42px;
+    }
+    .patternButtonEnlarge:active {
+       background-position:0 -84px;
+    }
+    .patternButtonShrink {
+       background-position:16px 0;
+    }
+    .patternButtonShrink:hover {
+       background-position:16px -42px;
+    }
+    .patternButtonShrink:active {
+       background-position:16px -84px;
+    }
+
+    /* common settings */
+    .patternLeftBarPersonal li,
+    li.patternLogOut,
+    li.patternLogIn {
+       padding-left:13px;
+       background-position:0 .4em;
+       background-repeat:no-repeat;
+    }
+    .patternLeftBarPersonal li {
+       background-image:url(bullet-personal_sidebar.gif);
+    }
+    .patternLeftBarPersonal li.patternLogOut {
+       background-image:url(bullet-lock.gif);
+    }
+    .patternLeftBarPersonal li.patternLogIn {
+       background-image:url(bullet-lock.gif);
+    }
+
+    /* TWikiNetSkin colors */
+
+    #twikinetTopToolBar {
+       border-color:%SHADE_TOPTOOLBAR_BORDER%;
+       background-color:%SHADE_TOPTOOLBAR_BACKGROUND%;
+    }
+    .twikinetWebName h2,
+    .twikinetWebName a:link,
+    .twikinetWebName a:visited {
+       background:none;
+       color:%SHADE_TOPTOOLBAR_WEBNAME_TEXT%;
+    }
+
+    /* TWikiNetSkin images */
+
+    #twikinetTopToolBar {
+       background-image:url(bg_toptoolbar_gradient.gif);
+       background-repeat:repeat-x;
+    }
+
+    /* background behind search and jump */
+    .twikinetSearchJumpLeft {
+       background-image:url(bg_search_jump.gif);
+       background-repeat:no-repeat;
+    }
+    .twikinetSearchJumpRight {
+       background-image:url(bg_search_jump.gif);
+       background-repeat:no-repeat;
+       background-position:top right;
+       width:5px;
+    }
+    .twikiInputField,
+    .twikiInputFieldReadOnly,
+    .twikiSelect {
+       background-image:url(bg_inputfield.gif);
+    }
+    .twikiInputField:active,
+    .twikiInputField:focus {
+       background-image:url(bg_inputfield_active.gif);
+    }
+    .twikinetJumpButton {
+       background-image:url(button_jump.gif);
+    }
+    .twikinetJumpButton:hover,
+    .twikinetJumpButton:active {
+       background-image:url(button_jump_hover.gif);
+    }
+    .twikinetSearchButton {
+       background-image:url(button_search.gif);
+    }
+    .twikinetSearchButton:hover,
+    .twikinetSearchButton:active {
+       background-image:url(button_search_hover.gif);
+    }
+    .twikinetToolBar a:link .rCRounded .rCTR,
+    .twikinetToolBar a:link .rCRounded .rCTL,
+    .twikinetToolBar a:link .rCRounded .rCBR,
+    .twikinetToolBar a:link .rCRounded .rCBL,
+    .twikinetToolBar a:visited .rCRounded .rCTR,
+    .twikinetToolBar a:visited .rCRounded .rCTL,
+    .twikinetToolBar a:visited .rCRounded .rCBR,
+    .twikinetToolBar a:visited .rCRounded .rCBL {
+       background-image:url(button_action.gif);
+    }
+    .twikinetToolBar a:hover .rCRounded .rCTR,
+    .twikinetToolBar a:hover .rCRounded .rCTL,
+    .twikinetToolBar a:hover .rCRounded .rCBR,
+    .twikinetToolBar a:hover .rCRounded .rCBL {
+       background-image:url(button_action_hover.gif);
+    }
+    .twikinetToolBar strike .rCRounded .rCTR,
+    .twikinetToolBar strike .rCRounded .rCTL,
+    .twikinetToolBar strike .rCRounded .rCBR,
+    .twikinetToolBar strike .rCRounded .rCBL {
+       background-image:url(button_action_disabled.gif);
+    }
+    .twikinetToolBar a .twikiLinkLabel {
+       color:%SHADE_BLUEISH_TEXT%;
+    }
+    .twikinetToolBar strike .twikiLinkLabel {
+       color:#cfd3d9;
+    }
+    .twikinetToolBar .twikinetEditIcon {
+       background-image:url(button_edit_icon.gif);
+       background-repeat:no-repeat;
+       background-position:2px 1px;
+       padding-left:25px;
+    }
+    .twikiTable th {
+       background-image:url(bg_table_header_gradient.gif);
+       background-repeat:repeat-x;
+    }
+    .twikiTable th.twikiSortedCol {
+       background-image:url(bg_table_header_sorted_gradient.gif);
+       background-repeat:repeat-x;
+    }
+
+    /* Rounded table */
+
+    .twikinetWrapperTableT {
+       background-color:%SHADE_TWIKITABLE_HEADER_BACKGROUND%;
+    }
+    .twikinetWrapperTable table.twikiTable th {
+       border-top-color:%SHADE_TWIKITABLE_HEADER_BACKGROUND%;
+    }
+    .twikinetWrapperTableTL {
+       background-image:url(table_corner_TL.gif);
+       background-repeat:no-repeat;
+    }
+    .twikinetWrapperTableTR {
+       background-image:url(table_corner_TR.gif);
+       background-repeat:no-repeat;
+       background-position:100% 0;
+    }
+    .twikinetWrapperTableB {
+       background-color:%NEUTRAL_BORDER%;
+    }
+    .twikinetWrapperTableBL {
+       background-image:url(table_corner_BL.gif);
+       background-repeat:no-repeat;
+       background-position:0 100%;
+       height:10px;
+    }
+    .twikinetWrapperTableBR {
+       background-image:url(table_corner_BR.gif);
+       background-repeat:no-repeat;
+       background-position:100% 100%;
+       height:10px;
+    }
+    .twikiAttachments .twikiTable th,
+    .twikiForm th.twikiFormTableHRow {
+       background-image:url(bg_attachments_header_gradient.gif);
+       background-repeat:repeat-x;
+    }
+    .twikiAttachments .twikiTable th.twikiFirstCol,
+    .twikiForm th.twikiFormTableHRow {
+       /* hide left line */
+       background-position:-1px 0;
+    }
+    .twikiAttachments .twikiTable th.twikiSortedCol,
+    .twikiForm th.twikiSortedCol {
+       background-image:url(bg_attachments_header_sorted_gradient.gif);
+    }
+    .twikiAttachments .twikiTable td.twikiSortedCol,
+    .twikiForm td.twikiSortedCol {
+       border-color:#dbdee7;
+    }
+
+    /* Generic rounded objects, for twikiAttachments, twikiForm and twikiHelp */
+    .twikinetRounded,
+    .twikiFormSteps {
+       background-color:%ATTACHMENT_AND_FORM_BACKGROUND%;
+       background-image:url(bg_form_bottom_gradient.gif);
+       background-repeat:repeat-x;
+       background-position:0 100%;
+    }
+    .twikinetRounded .rCRounded .rCTL {
+       background-image:url(rounded_TL.gif);
+    }
+    .twikinetRounded .rCRounded .rCTR {
+       background-image:url(rounded_TR.gif);
+    }
+    .twikinetRounded .rCRounded .rCBL {
+       background-image:url(rounded_BL.gif);
+    }
+    .twikinetRounded .rCRounded .rCBR {
+       background-image:url(rounded_BR.gif);
+    }
+
+    .twikinetRoundedTopicActions {
+       background:none;
+    }
+    .twikinetRoundedTopicActions .rCRounded .rCTL,
+    .twikinetRoundedTopicActions .rCRounded .rCTR,
+    .twikinetRoundedTopicActions .rCRounded .rCBL,
+    .twikinetRoundedTopicActions .rCRounded .rCBR {
+       background-image:url(bg_topicactions.gif);
+    }
+
+    .twikinetRoundedBroadcastMessage .rCRounded .rCTL,
+    .twikinetRoundedBroadcastMessage .rCRounded .rCTR,
+    .twikinetRoundedBroadcastMessage .rCRounded .rCBL,
+    .twikinetRoundedBroadcastMessage .rCRounded .rCBR {
+       background-image:url(bg_broadcastmessage.gif);
+    }
+    .twikinetRoundedBroadcastMessage .twikiBroadcastMessage {
+       background-image:url(icon_alert.gif);
+       background-repeat:no-repeat;
+       background-position:9px 12px;
+       padding-left:64px;
+       min-height:33px; /* at least height of icon */
+    }
+    .twikinetRoundedHelp {
+       background:none;
+    }
+    .twikinetRoundedHelp .rCRounded .rCTL,
+    .twikinetRoundedHelp .rCRounded .rCTR,
+    .twikinetRoundedHelp .rCRounded .rCBL,
+    .twikinetRoundedHelp .rCRounded .rCBR {
+       background-image:url(bg_help.gif);
+    }
+
+    #patternBottomBar {
+       background-image:url(bg_bottom_gradient.gif);
+       background-repeat:repeat-x;
+    }
+    #patternBottomBarContents #twikinetBadge {
+       float:right;
+       margin-left:10px;
+    }
+
+    #attachhelpshow img,
+    #attachhelphide img,
+    #topicattachmentslistshow img,
+    #topicattachmentslisthide img,
+    #edithelpshow img,
+    #edithelphide img,
+    #renamehelpshow img,
+    #renamehelphide img{
+       visibility:hidden;
+    }
+    #attachhelpshow,
+    #attachhelphide,
+    #topicattachmentslistshow,
+    #topicattachmentslisthide,
+    #edithelpshow,
+    #edithelphide,
+    #renamehelphide,
+    #renamehelpshow {
+       padding:0 0 0 7px;
+       margin:0 0 0 3px;
+    }
+    #attachhelpshow,
+    #topicattachmentslistshow,
+    #edithelpshow,
+    #renamehelpshow {
+       background:url(twisty_in.gif) no-repeat;
+       background-position:0 .1em;
+       background-position:0 50%;
+    }
+    #attachhelphide,
+    #topicattachmentslisthide,
+    #edithelphide,
+    #renamehelphide {
+       background:url(twisty_out.gif) no-repeat;
+       background-position:0 .1em;
+       background-position:0 50%;
+    }
+
+    /* Preloads button hover images */
+    .twikinetImageLoader {
+       background:url(button_action.gif);
+       background:url(button_action_hover.gif);
+       background:url(button_action_disabled.gif);
+       background:url(twisty_in.gif);
+       background:url(twisty_out.gif);
+       background:url(button_search_hover.gif);
+       background:url(button_jump_hover.gif);
+       visibility:hidden;
+       height:1px;
+    }
+    %ENDATTACH%

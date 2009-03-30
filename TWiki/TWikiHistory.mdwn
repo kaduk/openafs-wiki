@@ -3,9 +3,10 @@
 <div>
   <ul>
     <li><a href="#Appendix A: TWiki Development Ti"> Appendix A: TWiki Development Time-line</a><ul>
-        <li><a href="#TWiki Release 4.2.4 (Georgeown)"> TWiki Release 4.2.4 (Georgeown) released 00:35:32 06 December 2008</a></li>
-        <li><a href="#TWiki Release 4.1 (Edinburgh), 1"> TWiki Release 4.1 (Edinburgh), 16 Jan 2007</a></li>
-        <li><a href="#TWiki Release 4.0.0 (Dakar), 01"> TWiki Release 4.0.0 (Dakar), 01 Feb 2006</a></li>
+        <li><a href="#TWiki Release 4.3 (Georgetown) r"> TWiki Release 4.3 (Georgetown) released 2009-03-30</a></li>
+        <li><a href="#TWiki Release 4.2 (Freetown), 20"> TWiki Release 4.2 (Freetown), 2008-01-22</a></li>
+        <li><a href="#TWiki Release 4.1 (Edinburgh), 2"> TWiki Release 4.1 (Edinburgh), 2007-01-16</a></li>
+        <li><a href="#TWiki Release 4.0 (Dakar), 2006-"> TWiki Release 4.0 (Dakar), 2006-02-01</a></li>
         <li><a href="#01-Sep-2004 Release (Cairo)"> 01-Sep-2004 Release (Cairo)</a></li>
         <li><a href="#01-Feb-2003 Release (Beijing)"> 01-Feb-2003 Release (Beijing)</a></li>
         <li><a href="#01-Dec-2001 Release (Athens)"> 01-Dec-2001 Release (Athens)</a></li>
@@ -21,11 +22,81 @@
   </ul>
 </div>
 
+<a name="GeorgetownRelease"></a>
+
+## <a name="TWiki Release 4.3 (Georgetown) r"></a> TWiki Release 4.3 (Georgetown) released 2009-03-30
+
+**_New Features and Enhancements of TWiki Release 4.3_**
+
+- **Security Enhancements**
+  - Reduced risk of XSS ([cross-site scripting](http://en.wikipedia.org/wiki/Cross-site_scripting))
+  - S/MIME support to sign administrative e-mails
+
+- **Usability Enhancements**
+  - Replace question mark links with red-links to point to non-existing topics
+
+- **Enterprise Collaboration Enhancements**
+  - Pre-installed [[HeadlinesPlugin]] to show headline newsfeeds in TWiki topics
+  - Pre-installed [[TWikiNetSkin]], [[TWikiNetSkinPlugin]] for corporate look and feel
+
+- **Search Enhancements**
+  - Add footer parameter to Formatted Search
+  - Add number of topics to Formatted Search
+
+- **Miscellaneous Feature Enhancements**
+  - Control over variable expansion at topic creation time
+  - 17 new [[TWikiDocGraphics]] images
+  - Include URL supports list of domains to exclude from proxy
+  - Adding Korean language
+
+- **Plugin Enhancements**
+  - [[SpreadSheetPlugin]]: 5 new functions
+
+- **Bug Fixes**
+  - More than 30 bug fixes since 4.2.4
+
+<a name="GeorgetownHallOfFame"></a> **_Hall of Fame of TWiki Release 4.3_**
+
+Many people have been involved in creating TWiki 4.3. Special thanks go to the most active contributors in the following areas:
+
+- **Sponsor and facilitator:** TWiki:Main.PeterThoeny
+- **Testing and bug fixing:** TWiki:Main.SopanShewale, TWiki:Main.PeterThoeny, TWiki:Main.FengZhaolin, TWiki:Main.TimotheLitt, TWiki:Main.SteveMilner
+- **Spec and code:** TWiki:Main.PeterThoeny, TWiki:Main.SopanShewale, TWiki:Main.TimotheLitt
+- **Documentation:** TWiki:Main.PeterThoeny, TWiki:Main.SopanShewale, TWiki:Main.TimotheLitt, TWiki:Main.StephenHallett, TWiki:Main.JefferyMartin, TWiki:Main.ThomasErskine
+- **Release package builds:** TWiki:Main.SopanShewale
+- **Usability:** TWiki:Main.PeterThoeny
+- **Translations:** Coordinated by TWiki:Main.SteffenPoulsen
+  - Bulgarian: TWiki:Main.KrassimirBerov
+  - Chinese (simplified and traditional): TWiki:Main.CheDong
+  - Czech: TWiki:Main.IvanKuncl
+  - Danish: TWiki:Main.SteffenPoulsen
+  - Dutch: TWiki:Main.WoutMertens
+  - Finnish: TWiki:Main.HeikkiToivonen
+  - French: TWiki:Main.BenVoui
+  - German: TWiki:Main.MartinRaabe
+  - Italian: TWiki:Main.MassimoMancini
+  - Japanese: TWiki:Main.KenYuminaga
+  - Korean: TWiki:Main.JustinKim
+  - Polish: TWiki:Main.ZbigniewKulesza
+  - Portuguese: TWiki:Main.CarlinhosCecconi
+  - Russian: TWiki:Main.AndreyTkachenko, TWiki:Main.SergejZnamenskij, TWiki:Main.SergeyJSinx, TWiki:Main.AlexTananaev
+  - Spanish: TWiki:Main.SebastianKlus, TWiki:Main.MiguelABayona
+  - Swedish: TWiki:Main.ErikAman
+  - Ukrainian: TWiki:Main.SerhijDubyk
+- **Marketing:** TWiki:Main.PeterThoeny, TWiki:Main.WillThomas, TWiki:Main.VickiBrown
+- **Public relations:** TWiki:Main.PeterThoeny, TWiki:Main.WillThomas
+- **Meetups:** TWiki:Main.PeterThoeny
+- **TWiki.org wiki champions:** TWiki:Main.SopanShewale, TWiki:Main.PeterThoeny, TWiki:Main.FengZhaolin, TWiki:Main.AndrewRJones, TWiki:Main.DanielRohde
+- **Customer support:** TWiki:Main.PeterThoeny, TWiki:Main.SeanCMorgan, TWiki:Main.EnriqueCadalso, TWiki:Main.ScottFreeman, TWiki:Main.SopanShewale
+- **System administration:** TWiki:Main.ChrisLahti, TWiki:Main.PeterThoeny, TWiki:Main.SopanShewale
+
+If you find an omission please fix it at TWiki:TWiki.TWikiHistory. For the full list of contributors see [[TWikiContributor]].
+
+See more details on the TWiki 4.3 release at [[TWikiReleaseNotes04x03]].
+
 <a name="FreetownRelease"></a>
 
-## <a name="TWiki Release 4.2.4 (Georgeown)"></a><a name="TWiki Release 4.2.4 (Georgeown) "></a> TWiki Release 4.2.4 (Georgeown) released 00:35:32 06 December 2008
-
-Patch release following the 4.2.0 released 22 Jan 2008
+## <a name="TWiki Release 4.2 (Freetown), 20"></a> TWiki Release 4.2 (Freetown), 2008-01-22
 
 **_New Features and Enhancements of TWiki Release 4.2_**
 
@@ -69,7 +140,7 @@ Patch release following the 4.2.0 released 22 Jan 2008
 Many people have been involved in creating TWiki 4.2. Special thanks go to the most active contributors in the following areas:
 
 - Release management led by TWiki:Main.KennethLavrsen, ably assisted by TWiki:Main.SvenDowideit
-- Design and development driven by TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, TWiki:Main.KennethLavrsen and TWiki:Main.SvenDowideit
+- Design and development driven by TWiki:Main.CrawfordCurrie, TWiki:Main.ArthurClemens, [[KennethLavrsen]] and TWiki:Main.SvenDowideit
 - Testing driven by TWiki:Main.KennethLavrsen
 
 Many thanks also to the contributors in the following areas:
@@ -109,7 +180,7 @@ See more details on the TWiki 4.2 release at [[TWikiReleaseNotes04x02]].
 
 <a name="EdinburghRelease"></a>
 
-## <a name="TWiki Release 4.1 (Edinburgh), 1"></a> TWiki Release 4.1 (Edinburgh), 16 Jan 2007
+## <a name="TWiki Release 4.1 (Edinburgh), 2"></a> TWiki Release 4.1 (Edinburgh), 2007-01-16
 
 **_New Features and Enhancements of TWiki Release 4.1_**
 
@@ -208,7 +279,7 @@ See more details on the TWiki 4.1 release at [[TWikiReleaseNotes04x01]].
 
 <a name="DakarRelease"></a>
 
-## <a name="TWiki Release 4.0.0 (Dakar), 01"></a><a name="TWiki Release 4.0.0 (Dakar), 01 "></a> TWiki Release 4.0.0 (Dakar), 01 Feb 2006
+## <a name="TWiki Release 4.0 (Dakar), 2006-"></a> TWiki Release 4.0 (Dakar), 2006-02-01
 
 **_Major New Features_**
 

@@ -1,0 +1,125 @@
+# <a name="TWikiNetSkin"></a><a name=" _TWikiNetSkin"></a> TWikiNetSkin
+
+This is the default skin provided with [Certified TWiki](http://www.twiki.net/), designed by [Paul van Berkel](http://www.linkedin.com/in/paulvanberkel).
+
+<div>
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#Screen Shot"> Screen Shot</a></li>
+      </ul>
+    </li>
+    <li><a href="#TWiki Installation Error">TWiki Installation Error</a><ul>
+        <li><a href="#Installation"> Installation</a><ul>
+            <li><a href="#Additional installation steps"> Additional installation steps</a></li>
+            <li><a href="#Enhanced look"> Enhanced look</a></li>
+          </ul>
+        </li>
+        <li><a href="#Creating your own look"> Creating your own look</a></li>
+        <li><a href="#Skin Info"> Skin Info</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+## <a name="Screen Shot"></a> Screen Shot
+
+<div style="margin: 2em 0">
+  <h1><a name="TWiki Installation Error"></a> TWiki Installation Error </h1>Incorrect format of searchformat template (missing sections? There should be 4 %SPLIT% tags) </div>
+
+## <a name="Installation"></a> Installation
+
+**Note:** You do not need to install anything on the browser to use this skin. The following instructions are for the administrator who installs the skin on the server where TWiki is running.
+
+This skin needs TWiki 4.2 or newer.
+
+- Download the ZIP file from the Skin Home page (see below)
+- Unzip <code>**%TOPIC%.zip**</code> in your twiki installation directory
+
+### <a name="Additional installation steps"></a> Additional installation steps
+
+- Modify [[TablePlugin]] settings: copy the `TABLEATTRIBUTES` below to Main.TWikiPreferences: %BR%
+       * TWikiNetSkin table attributes:
+          * Set TABLEPLUGIN_TABLEATTRIBUTES = tableborder="1" cellpadding="0" cellspacing="0" valign="top" headercolor="#252b37" headerbg="#d8dde4" headerbgsorted="#ced4dd" headercolor="#252b37" databg="#ffffff,#f2f3f6" databgsorted="#f3f5f7,#e7e9ee" tablerules="cols"
+- In TWiki.TWikiPreferences, remove the `<div ></div>` tags (if any) from `BROADCASTMESSAGE`
+
+- To turn on the skin, write in Main.TWikiPreferences: %BR%
+          * Set SKIN = twikinet,pattern
+- [[Test if installed|%WEB%/%TOPIC%?skin=twikinet,pattern]]
+
+### <a name="Enhanced look"></a> Enhanced look
+
+Part of the design is done by TWiki:Plugins/TWikiNetSkinPlugin. Install this plugin for rounded tables and h2 headers.
+
+Example when installed:
+
+<div><img alt="twikiNetSkinPlugin_example.png" src="http://www.dementia.org/twiki//view/twikiNetSkinPlugin_example.png" /></div>
+
+## <a name="Creating your own look"></a> Creating your own look
+
+This skin is based on TWiki:Plugins/PatternSkin, and the same rules for customization apply.
+
+## <a name="Skin Info"></a> Skin Info
+
+- Set SHORTDESCRIPTION = Certified TWiki skin
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="right"> Skin Author: </td>
+    <td> TWiki:Main/ArthurClemens </td>
+  </tr>
+  <tr>
+    <td align="right"> Copyright: </td>
+    <td> © 2007, 2008, <a href="http://twiki.net" target="_top">TWIKI.NET</a>; © design 2007: <a href="http://www.linkedin.com/in/paulvanberkel" target="_top">Paul van Berkel</a></td>
+  </tr>
+  <tr>
+    <td align="right"> License: </td>
+    <td> GPL (<a href="http://www.gnu.org/copyleft/gpl.html" target="_top">GNU General Public License</a>) </td>
+  </tr>
+  <tr>
+    <td align="right"> Description: </td>
+    <td> Certified TWiki skin </td>
+  </tr>
+  <tr>
+    <td align="right"> Screenshot: </td>
+    <td><a href="http://www.dementia.org/twiki//view/fullscreen.png"><img alt="Click for full screen image" height="130" src="http://www.dementia.org/twiki//view/screenshot.png" width="600" /></a></td>
+  </tr>
+  <tr>
+    <td align="right"> Preview: </td>
+    <td><a href="http://www.dementia.org/twiki//view/%WEB%/%TOPIC%?skin=twikinet,pattern" target="_top">Preview with this topic</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Base Name: </td>
+    <td> twikinet,pattern </td>
+  </tr>
+  <tr>
+    <td align="right"> Skin Version: </td>
+    <td> 16 Mar 2008 (v1.0.1) </td>
+  </tr>
+  <tr>
+    <td align="right"> Change History: </td>
+    <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 16 Mar 2008: </td>
+    <td> Public release (v1.000) </td>
+  </tr>
+  <tr>
+    <td align="right"> Dependencies: </td>
+    <td> TWiki 4.2; TWiki:Plugins/PatternSkin (automatically provided by TWiki); TWiki:Plugins/TWikiNetSkinPlugin </td>
+  </tr>
+  <tr>
+    <td align="right"> Skin Home: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Feedback: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Dev</a></td>
+  </tr>
+  <tr>
+    <td align="right"> Appraisal: </td>
+    <td><a href="http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal" target="_top">http://TWiki.org/cgi-bin/view/Plugins/%TOPIC%Appraisal</a></td>
+  </tr>
+</table>
+
+**_Related topic:_** [[TWikiSkins]], [[TWikiSkinBrowser]], [[UserDocumentationCategory]], [[AdminDocumentationCategory]]

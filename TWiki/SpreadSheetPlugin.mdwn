@@ -1,6 +1,6 @@
 # <a name="TWiki Spreadsheet Plugin"></a><a name=" TWiki Spreadsheet Plugin"></a> TWiki Spreadsheet Plugin
 
-This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this Plugin provides general formula evaluation capability, not just classic spreadsheet functions.
+This plugin adds spreadsheet capabilities to TWiki topics. Formulae like <code>**%CALC\{"$INT(7/3)"\}%**</code> are evaluated at page view time. They can be placed in table cells and outside of tables. In other words, this plugin provides general formula evaluation capability, not just classic spreadsheet functions.
 
 <table>
   <tr>
@@ -48,7 +48,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
     </td>
   </tr>
   <tr>
-    <td colspan="3"> The formula next to "Total" is <code><b>%CALC{"$SUM( $ABOVE() )"}%</b></code>. <br /> (you see the formula instead of the sum in case the Plugin is not installed or not enabled.) </td>
+    <td colspan="3"> The formula next to "Total" is <code><b>%CALC{"$SUM( $ABOVE() )"}%</b></code>. <br /> (you see the formula instead of the sum in case the plugin is not installed or not enabled.) </td>
   </tr>
 </table>
 
@@ -66,6 +66,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#COUNTITEMS( list ) -- count indi"> COUNTITEMS( list ) -- count individual items in a list</a></li>
         <li><a href="#COUNTSTR( list, str ) -- count t"> COUNTSTR( list, str ) -- count the number of cells in a list equal to a given string</a></li>
         <li><a href="#DEF( list ) -- find first non-em"> DEF( list ) -- find first non-empty list item or cell</a></li>
+        <li><a href="#EMPTY( text ) -- test for empty"> EMPTY( text ) -- test for empty text</a></li>
         <li><a href="#EVAL( formula ) -- evaluate a si"> EVAL( formula ) -- evaluate a simple mathematical formula</a></li>
         <li><a href="#EVEN( num ) -- test for even num"> EVEN( num ) -- test for even number</a></li>
         <li><a href="#EXACT( text1, text2 ) -- compare"> EXACT( text1, text2 ) -- compare two text strings</a></li>
@@ -79,8 +80,10 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#FORMATTIMEDIFF( unit, precision,"> FORMATTIMEDIFF( unit, precision, time ) -- convert elapsed time to a string</a></li>
         <li><a href="#GET( name ) -- get the value of"> GET( name ) -- get the value of a previously set variable</a></li>
         <li><a href="#IF( condition, value if true, va"> IF( condition, value if true, value if 0 ) -- return a value based on a condition</a></li>
+        <li><a href="#INSERTSTRING( text, start, new )"> INSERTSTRING( text, start, new ) -- insert a string into a text string</a></li>
         <li><a href="#INT( formula ) -- evaluate formu"> INT( formula ) -- evaluate formula and round down to nearest integer</a></li>
         <li><a href="#LEFT( ) -- address range of cell"> LEFT( ) -- address range of cells to the left of the current cell</a></li>
+        <li><a href="#LEFTSTRING( text, num ) -- extra"> LEFTSTRING( text, num ) -- extract characters at the beginning of a text string</a></li>
         <li><a href="#LENGTH( text ) -- length of text"> LENGTH( text ) -- length of text in bytes</a></li>
         <li><a href="#LIST( range ) -- convert content"> LIST( range ) -- convert content of a cell range into a list</a></li>
         <li><a href="#LISTIF( condition, list ) -- rem"> LISTIF( condition, list ) -- remove elements from a list that do not meet a condition</a></li>
@@ -115,6 +118,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#REPEAT( text, num ) -- repeat te"> REPEAT( text, num ) -- repeat text a number of times</a></li>
         <li><a href="#REPLACE( text, start, num, new )"> REPLACE( text, start, num, new ) -- replace part of a text string</a></li>
         <li><a href="#RIGHT( ) -- address range of cel"> RIGHT( ) -- address range of cells to the right of the current cell</a></li>
+        <li><a href="#RIGHTSTRING( text, num ) -- extr"> RIGHTSTRING( text, num ) -- extract characters at the end of a text string</a></li>
         <li><a href="#ROUND( formula, digits ) -- roun"> ROUND( formula, digits ) -- round a number</a></li>
         <li><a href="#ROW( offset ) -- current row num"> ROW( offset ) -- current row number</a></li>
         <li><a href="#SEARCH( string, text, start ) --"> SEARCH( string, text, start ) -- search a string within a text</a></li>
@@ -124,6 +128,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
         <li><a href="#SIGN( num ) -- sign of a number"> SIGN( num ) -- sign of a number</a></li>
         <li><a href="#SQRT( num ) -- square root of a"> SQRT( num ) -- square root of a number</a></li>
         <li><a href="#SUBSTITUTE( text, old, new, inst"> SUBSTITUTE( text, old, new, instance, option ) -- substitute text</a></li>
+        <li><a href="#SUBSTRING( text, start, num ) --"> SUBSTRING( text, start, num ) -- extract a substring out of a text string</a></li>
         <li><a href="#SUM( list ) -- sum of a list or"> SUM( list ) -- sum of a list or range of cells</a></li>
         <li><a href="#SUMDAYS( list ) -- sum the days"> SUMDAYS( list ) -- sum the days in a list or range of cells</a></li>
         <li><a href="#SUMPRODUCT( list, list ) -- scal"> SUMPRODUCT( list, list ) -- scalar product on ranges of cells</a></li>
@@ -153,7 +158,7 @@ This Plugin adds spreadsheet capabilities to %WIKITOOLNAME% topics. Formulae lik
 
 ## <a name="Syntax Rules"></a> Syntax Rules
 
-The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> variable, which gets rendered according to the built-in function(s) found between the quotes.
+The action of this plugin is triggered by the <code>**%CALC\{"..."\}%**</code> variable, which gets rendered according to the built-in function(s) found between the quotes.
 
 - Built-in function are of format <code>**$FUNCNAME(parameter)**</code>
 - Functions may be nested, e.g. <code>**%CALC\{"$SUM( R2:C$COLUMN(0)..R$ROW(-1):C$COLUMN(0) )"\}%**</code>
@@ -178,6 +183,7 @@ The action of this Plugin is triggered by the <code>**%CALC\{"..."\}%**</code> v
 - Lists can refer to values and/or table cell ranges, e.g. <code>**%CALC\{"$SUM( 3, 5, $T(R1:C7), R1:C11..R1:C15 )"\}%**</code>
 - Formulae can only reference cells in the current or preceeding row of the current table; they may not reference cells below the current table row
 - Formulae can also be placed outside of tables; they can reference cells in the preceeding table
+- Formulae can be placed in a [[FormattedSearch]], but the CALC needs to be escaped. Learn how to [[use a CALC in a formatted search|Main/WebHome#CalcInFormattedSearch]]
 
 ## <a name="Built-in Functions"></a> Built-in Functions
 
@@ -271,6 +277,17 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$DEF(R1:C1..R1:C3)"\}%**</code>
 - Related: <code>[[$COUNTSTR()|Main/WebHome#FuncCOUNTSTR]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>
 
+<a name="FuncEMPTY"></a>
+
+### <a name="EMPTY( text ) -- test for empty"></a><a name="EMPTY( text ) -- test for empty "></a> EMPTY( text ) -- test for empty text
+
+- Returns <code>**1**</code> if `text` is empty, or <code>****</code> if not
+- Syntax: <code>**$EMPTY( _text_ )**</code>
+- Example: <code>**%CALC\{"$EMPTY(foo)"\}%**</code> returns <code>****</code>
+- Example: <code>**%CALC\{"$EMPTY()"\}%**</code> returns <code>**1**</code>
+- Example: <code>**%CALC\{"$EMPTY($TRIM( ))"\}%**</code> returns <code>**1**</code>
+- Related: <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
+
 <a name="FuncEVAL"></a>
 
 ### <a name="EVAL( formula ) -- evaluate a si"></a> EVAL( formula ) -- evaluate a simple mathematical formula
@@ -297,7 +314,7 @@ Conventions for Syntax:
 - Syntax: <code>**$EXACT( text1, _text2_ )**</code>
 - Example: <code>**%CALC\{"$EXACT(foo, Foo)"\}%**</code> returns <code>****</code>
 - Example: <code>**%CALC\{"$EXACT(foo, $LOWER(Foo))"\}%**</code> returns <code>**1**</code>
-- Related: <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
+- Related: <code>[[$EMPTY()|Main/WebHome#FuncEMPTY]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
 
 <a name="FuncEXEC"></a>
 
@@ -318,6 +335,7 @@ Conventions for Syntax:
 - Syntax: <code>**$EXISTS( topic )**</code>
 - Example: <code>**%CALC\{"$EXISTS(WebHome)"\}%**</code> returns <code>**1**</code>
 - Example: <code>**%CALC\{"$EXISTS(ThisDoesNotExist)"\}%**</code> returns <code>****</code>
+- Related: <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>
 
 <a name="FuncEXP"></a>
 
@@ -337,7 +355,7 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$FIND(f, fluffy)"\}%**</code> returns <code>**1**</code>
 - Example: <code>**%CALC\{"$FIND(f, fluffy, 2)"\}%**</code> returns <code>**4**</code>
 - Example: <code>**%CALC\{"$FIND(@, fluffy, 1)"\}%**</code> returns <code>****</code>
-- Related: <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>
+- Related: <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>
 
 <a name="FuncFORMAT"></a>
 
@@ -414,7 +432,17 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$IF($T(R1:C5) &gt; 1000, Over Budget, OK)"\}%**</code> returns <code>**Over Budget**</code> if value in R1:C5 is over 1000, <code>**OK**</code> if not
 - Example: <code>**%CALC\{"$IF($EXACT($T(R1:C2),), empty, $T(R1:C2))"\}%**</code> returns the content of R1:C2 or <code>**empty**</code> if empty
 - Example: <code>**%CALC\{"$SET(val, $IF($T(R1:C2) == 0, zero, $T(R1:C2)))"\}%**</code> sets a variable conditionally
-- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
+- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$EMPTY()|Main/WebHome#FuncEMPTY]]</code>, <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$LISTIF()|Main/WebHome#FuncLISTIF]]</code>, <code>[[$NOT()|Main/WebHome#FuncNOT]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
+
+<a name="FuncINSERTSTRING"></a>
+
+### <a name="INSERTSTRING( text, start, new )"></a> INSERTSTRING( text, start, new ) -- insert a string into a text string
+
+- Insert `new` string into text string `text` to the right of `start` position. Position starts at 1; use a negative `start` to count from the end of the text
+- Syntax: <code>**$INSERTSTRING( text, start, new )**</code>
+- Example: <code>**%CALC\{"$INSERTSTRING(abcdefg, 2, XYZ)"\}%**</code> returns <code>**abXYZcdefg**</code>
+- Example: <code>**%CALC\{"$INSERTSTRING(abcdefg, -2, XYZ)"\}%**</code> returns <code>**abcdeXYZfg**</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
 
 <a name="FuncINT"></a>
 
@@ -435,6 +463,16 @@ Conventions for Syntax:
 - Syntax: <code>**$LEFT( )**</code>
 - Example: <code>**%CALC\{"$SUM($LEFT())"\}%**</code> returns the sum of cells to the left of the current cell
 - Related: <code>[[$ABOVE()|Main/WebHome#FuncABOVE]]</code>, <code>[[$RIGHT()|Main/WebHome#FuncRIGHT]]</code>
+
+<a name="FuncLEFTSTRING"></a>
+
+### <a name="LEFTSTRING( text, num ) -- extra"></a> LEFTSTRING( text, num ) -- extract characters at the beginning of a text string
+
+- Retrieve the `num` of characters from the left end of `text`; the leftmost character is returned if `num` is missing
+- Syntax: <code>**$LEFTSTRING( text, _num_ )**</code>
+- Example: <code>**%CALC\{"$LEFTSTRING(abcdefg)"\}%**</code> returns <code>**a**</code>
+- Example: <code>**%CALC\{"$LEFTSTRING(abcdefg, 5)"\}%**</code> returns <code>**abcde**</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
 
 <a name="FuncLENGTH"></a>
 
@@ -462,7 +500,7 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$LISTIF($item &gt; 12, 14, 7, 25)"\}%**</code> returns <code>**14, 25**</code>
 - Example: <code>**%CALC\{"$LISTIF($NOT($EXACT($item,)), A, B, , E)"\}%**</code> returns non-empty elements <code>**A, B, E**</code>
 - Example: <code>**%CALC\{"$LISTIF($index &gt; 2, A, B, C, D)"\}%**</code> returns <code>**C, D**</code>
-- Related: <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
+- Related: <code>[[$EMPTY()|Main/WebHome#FuncEMPTY]]</code>, <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$LIST()|Main/WebHome#FuncLIST]]</code>, <code>[[$LISTITEM()|Main/WebHome#FuncLISTITEM]]</code>, <code>[[$LISTMAP()|Main/WebHome#FuncLISTMAP]]</code>, <code>[[$LISTREVERSE()|Main/WebHome#FuncLISTREVERSE]]</code>, <code>[[$LISTSIZE()|Main/WebHome#FuncLISTSIZE]]</code>, <code>[[$LISTSORT()|Main/WebHome#FuncLISTSORT]]</code>, <code>[[$LISTUNIQUE()|Main/WebHome#FuncLISTUNIQUE]]</code>, <code>[[$SUM()|Main/WebHome#FuncSUM]]</code>
 
 <a name="FuncLISTITEM"></a>
 
@@ -622,7 +660,7 @@ Conventions for Syntax:
 
 ### <a name="NOP( text ) -- no-operation"></a> NOP( text ) -- no-operation
 
-- Useful to change the order of Plugin execution. For example, it allows preprossing to be done before `%SEARCH{}%` is evaluated. The percent character '%' can be escaped with `$per`
+- Useful to change the order of plugin execution. For example, it allows preprossing to be done before `%SEARCH{}%` is evaluated. The percent character '%' can be escaped with `$per`
 - Syntax: <code>**$NOP( text )**</code>
 
 <a name="FuncNOT"></a>
@@ -632,7 +670,7 @@ Conventions for Syntax:
 - Returns 0 if <code>**num**</code> is not zero, 1 if zero
 - Syntax: <code>**$NOT( num )**</code>
 - Example: <code>**%CALC\{"$NOT(0)"\}%**</code> returns <code>**1**</code>
-- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
+- Related: <code>[[$AND()|Main/WebHome#FuncAND]]</code>, <code>[[$EMPTY()|Main/WebHome#FuncEMPTY]]</code>, <code>[[$IF()|Main/WebHome#FuncIF]]</code>, <code>[[$OR()|Main/WebHome#FuncOR]]</code>
 
 <a name="FuncODD"></a>
 
@@ -688,7 +726,7 @@ Conventions for Syntax:
 
 ### <a name="PROPERSPACE( text ) -- properly"></a><a name="PROPERSPACE( text ) -- properly "></a> PROPERSPACE( text ) -- properly space out WikiWords
 
-- Properly spaces out %SYSTEMWEB%.WikiWords preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE %SYSTEMWEB%.TWikiPreferences variable or DONTSPACE Plugins setting are excluded
+- Properly spaces out %SYSTEMWEB%.WikiWords preceeded by white space, parenthesis, or <code>**]\[**</code>. Words listed in the DONTSPACE %SYSTEMWEB%.TWikiPreferences variable or DONTSPACE plugins setting are excluded
 - Syntax: <code>**$PROPERSPACE( text )**</code>
 - Example: Assuming DONTSPACE contains MacDonald: <code>**%CALC\{"$PROPERSPACE(Old MacDonald had a ServerFarm, EeEyeEeEyeOh)"\}%**</code> returns <code>**Old MacDonald had a Server Farm, Ee Eye Ee Eye Oh**</code>
 - Related: <code>[[$LOWER()|Main/WebHome#FuncLOWER]]</code>, <code>[[$PROPER()|Main/WebHome#FuncPROPER]]</code>, <code>[[$TRIM()|Main/WebHome#FuncTRIM]]</code>, <code>[[$UPPER()|Main/WebHome#FuncUPPER]]</code>
@@ -714,8 +752,8 @@ Conventions for Syntax:
 
 - Replace `num` number of characters of text string `text`, starting at `start`, with new text `new`. Starting position is 1; use a negative `start` to count from the end of the text
 - Syntax: <code>**$REPLACE( text, start, num, new )**</code>
-- Example: <code>**%CALC\{"$REPLACE(abcdefghijk,6,5,\*)"\}%**</code> returns <code>**abcde\*k**</code>
-- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
+- Example: <code>**%CALC\{"$REPLACE(abcdefghijk, 6, 5, \*)"\}%**</code> returns <code>**abcde\*k**</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
 
 <a name="FuncRIGHT"></a>
 
@@ -724,6 +762,16 @@ Conventions for Syntax:
 - Syntax: <code>**$RIGHT( )**</code>
 - Example: <code>**%CALC\{"$SUM($RIGHT())"\}%**</code> returns the sum of cells to the right of the current cell
 - Related: <code>[[$ABOVE()|Main/WebHome#FuncABOVE]]</code>, <code>[[$LEFT()|Main/WebHome#FuncLEFT]]</code>
+
+<a name="FuncRIGHTSTRING"></a>
+
+### <a name="RIGHTSTRING( text, num ) -- extr"></a> RIGHTSTRING( text, num ) -- extract characters at the end of a text string
+
+- Retrieve the `num` of characters from the right end of `text`; the rightmost character is returned if `num` is missing
+- Syntax: <code>**$RIGHTSTRING( text, _num_ )**</code>
+- Example: <code>**%CALC\{"$RIGHTSTRING(abcdefg)"\}%**</code> returns <code>**g**</code>
+- Example: <code>**%CALC\{"$RIGHTSTRING(abcdefg, 5)"\}%**</code> returns <code>**cdefg**</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
 
 <a name="FuncROUND"></a>
 
@@ -755,7 +803,7 @@ Conventions for Syntax:
 - Example: <code>**%CALC\{"$SEARCH([uy], fluffy)"\}%**</code> returns <code>**3**</code>
 - Example: <code>**%CALC\{"$SEARCH([uy], fluffy, 3)"\}%**</code> returns <code>**6**</code>
 - Example: <code>**%CALC\{"$SEARCH([abc], fluffy,)"\}%**</code> returns <code>****</code>
-- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>
 
 <a name="FuncSET"></a>
 
@@ -807,10 +855,19 @@ Conventions for Syntax:
 - Substitutes `new` text for `old` text in a `text` string. `instance` specifies which occurance of `old` you want to replace. If you specify `instance`, only that instance is replaced. Otherwise, every occurance is changed to the new text. A literal search is performed by default; a %SYSTEMWEB%.RegularExpression search if the `option` is set to <code>**r**</code>
 - Syntax: <code>**$SUBSTITUTE( text, old, _new_, _instance_, _option_ )**</code>
 - Example: <code>**%CALC\{"$SUBSTITUTE(Good morning, morning, day)"\}%**</code> returns <code>**Good day**</code>
-- Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002,2,3)"\}%**</code> returns <code>**Q3-3003**</code>
-- Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002,2,3,3)"\}%**</code> returns <code>**Q2-2003**</code>
-- Example: <code>**%CALC\{"$SUBSTITUTE(abc123def,[0-9],9,,r)"\}%**</code> returns <code>**abc999def**</code>
-- Related: <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002, 2, 3)"\}%**</code> returns <code>**Q3-3003**</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(Q2-2002,2, 3, 3)"\}%**</code> returns <code>**Q2-2003**</code>
+- Example: <code>**%CALC\{"$SUBSTITUTE(abc123def, [0-9], 9, , r)"\}%**</code> returns <code>**abc999def**</code>
+- Related: <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
+
+<a name="FuncSUBSTRING"></a>
+
+### <a name="SUBSTRING( text, start, num ) --"></a> SUBSTRING( text, start, num ) -- extract a substring out of a text string
+
+- Extract `num` number of characters of text string `text`, starting at `start`. Starting position is 1; use a negative `start` to count from the end of the text
+- Syntax: <code>**$SUBSTRING( text, start, num )**</code>
+- Example: <code>**%CALC\{"$SUBSTRING(abcdefghijk, 3, 5)"\}%**</code> returns <code>**cdefg**</code>
+- Related: <code>[[$FIND()|Main/WebHome#FuncFIND]]</code>, <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SEARCH()|Main/WebHome#FuncSEARCH]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>, <code>[[$TRANSLATE()|Main/WebHome#FuncTRANSLATE]]</code>
 
 <a name="FuncSUM"></a>
 
@@ -853,7 +910,7 @@ Conventions for Syntax:
 - Syntax: <code>**$TRANSLATE( text, from, to )**</code>
 - Example: <code>**%CALC\{"$TRANSLATE(boom,bm,cl)"\}%**</code> returns <code>**cool**</code>
 - Example: <code>**%CALC\{"$TRANSLATE(one, two,$comma,;)"\}%**</code> returns <code>**one; two**</code>
-- Related: <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>
+- Related: <code>[[$INSERTSTRING()|Main/WebHome#FuncINSERTSTRING]]</code>, <code>[[$LEFTSTRING()|Main/WebHome#FuncLEFTSTRING]]</code>, <code>[[$REPLACE()|Main/WebHome#FuncREPLACE]]</code>, <code>[[$RIGHTSTRING()|Main/WebHome#FuncRIGHTSTRING]]</code>, <code>[[$SUBSTRING()|Main/WebHome#FuncSUBSTRING]]</code>, <code>[[$SUBSTITUTE()|Main/WebHome#FuncSUBSTITUTE]]</code>
 
 <a name="FuncTIME"></a>
 
@@ -898,7 +955,7 @@ Conventions for Syntax:
 - Removes all spaces from text except for single spaces between words
 - Syntax: <code>**$TRIM( text )**</code>
 - Example: <code>**%CALC\{"$TRIM( eat  spaces  )"\}%**</code> returns <code>**eat spaces**</code>
-- Related: <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>
+- Related: <code>[[$EMPTY()|Main/WebHome#FuncEMPTY]]</code>, <code>[[$EXACT()|Main/WebHome#FuncEXACT]]</code>, <code>[[$PROPERSPACE()|Main/WebHome#FuncPROPERSPACE]]</code>
 
 <a name="FuncUPPER"></a>
 
@@ -929,6 +986,8 @@ Conventions for Syntax:
 - Related: <code>[[$SUMDAYS()|Main/WebHome#FuncSUMDAYS]]</code>, <code>[[$TIME()|Main/WebHome#FuncTIME]]</code>, <code>[[$TIMEDIFF()|Main/WebHome#FuncTIMEDIFF]]</code>
 
 ## <a name="FAQ"></a> FAQ
+
+<a name="CalcInFormattedSearch"></a>
 
 ### <a name="Can I use CALC in a formatted se"></a> Can I use CALC in a formatted search?
 
@@ -1003,7 +1062,7 @@ The last row is defined as:
       | %CALC{"$COUNTITEMS( R2:C$COLUMN()..R$ROW(-1):C$COLUMN() )"}% \
       |  Total: %CALC{"$SUM( R2:C$COLUMN()..R$ROW(-1):C$COLUMN() )"}% |
 
-Above table is created manually. Another Plugin could build the table dynamically, e.g. by pulling data out of a bug tracking system. The Spreadsheet Plugin can be used to display table data statistics.
+Above table is created manually. Another plugin could build the table dynamically, e.g. by pulling data out of a bug tracking system. The Spreadsheet plugin can be used to display table data statistics.
 
 ## <a name="Plugin Settings"></a> Plugin Settings
 
@@ -1044,7 +1103,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
     <td> Plugin Perl module </td>
   </tr>
 </table>
-- TWiki 4 and up: Visit `configure` in your TWiki installation, and enable the Plugin in the \{Plugins\} section.
+- TWiki 4 and up: Visit `configure` in your TWiki installation, and enable the plugin in the \{Plugins\} section.
 - Test if the "Total" in the first table in this topic is correct.
 
 ## <a name="Plugin Info"></a> Plugin Info
@@ -1056,7 +1115,7 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Copyright: </td>
-    <td> © 2001-2007, Peter Thoeny, <a href="http://www.twiki.net/" target="_top">TWIKI.NET</a></td>
+    <td> © 2001-2009, Peter Thoeny, <a href="http://www.twiki.net/" target="_top">TWIKI.NET</a></td>
   </tr>
   <tr>
     <td align="right"> License: </td>
@@ -1064,11 +1123,23 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
   </tr>
   <tr>
     <td align="right"> Plugin Version: </td>
-    <td> 13 Oct 2007 (15270) </td>
+    <td> 26 Mar 2009 (17910) </td>
   </tr>
   <tr>
     <td align="right"> Change History: </td>
     <td>  </td>
+  </tr>
+  <tr>
+    <td align="right"> 26 Mar 2009: </td>
+    <td> Added $INSERTSTRING() </td>
+  </tr>
+  <tr>
+    <td align="right"> 25 Mar 2009: </td>
+    <td> Added $EMPTY(), $LEFTSTRING(), $RIGHTSTRING(), $SUBSTRING() </td>
+  </tr>
+  <tr>
+    <td align="right"> 24 Mar 2009: </td>
+    <td> Fixed bug in $REPLACE() if to-be-replaced string is "0"; fixed bug in $SUBSTITUTE() if replace string is empty; improved docs </td>
   </tr>
   <tr>
     <td align="right"> 13 Oct 2007: </td>
@@ -1262,4 +1333,4 @@ Plugin settings are stored as preferences variables. To reference a plugin setti
 
 **_Related Topics:_** %SYSTEMWEB%.TWikiPreferences, %SYSTEMWEB%.TWikiPlugins, %SYSTEMWEB%.VarCALC
 
--- TWiki:Main/PeterThoeny - 13 Oct 2007
+-- TWiki:Main/PeterThoeny - 26 Mar 2009

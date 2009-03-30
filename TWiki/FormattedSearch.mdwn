@@ -9,7 +9,8 @@ The default output format of a <code>[[%SEARCH{...}%|Main/VarSEARCH]]</code> is 
     <li><a href="#TWiki Formatted Search"> TWiki Formatted Search</a><ul>
         <li><a href="#Syntax"> Syntax</a><ul>
             <li><a href="#1. <code>header="..."</code> parameter"> 1. header="..." parameter</a></li>
-            <li><a href="#2. <code>format="..."</code> parameter"> 2. format="..." parameter</a></li>
+            <li><a href="#2. <code>footer="..."</code> parameter"> 2. footer="..." parameter</a></li>
+            <li><a href="#3. <code>format="..."</code> parameter"> 3. format="..." parameter</a></li>
           </ul>
         </li>
         <li><a href="#Examples"> Examples</a><ul>
@@ -84,7 +85,32 @@ Variables that can be used in the header string:
   </tr>
 </table>
 
-### <a name="2. &lt;code&gt;format=&quot;...&quot;&lt;/code&gt; parameter"></a> 2. `format="..."` parameter
+### <a name="2. &lt;code&gt;footer=&quot;...&quot;&lt;/code&gt; parameter"></a> 2. `footer="..."` parameter
+
+Use the footer parameter to specify the footer of a search result. It should correspond to the format of the format parameter. This parameter is optional. <br /> Example: `footer="| *Topic* | *Summary* |"`
+
+Variables that can be used in the footer string:
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <th bgcolor="#99CCCC"><strong> Name: </strong></th>
+    <th bgcolor="#99CCCC"><strong> Expands To: </strong></th>
+  </tr>
+  <tr>
+    <td><code>$web</code></td>
+    <td> Name of the web </td>
+  </tr>
+  <tr>
+    <td><code>$ntopics</code></td>
+    <td> Number of topics found in current web </td>
+  </tr>
+  <tr>
+    <td><code>$nhits</code></td>
+    <td> Number of hits if <code>multiple="on"</code>. Cumulative across all topics in current web. Identical to <code>$ntopics</code> unless <code>multiple="on"</code></td>
+  </tr>
+</table>
+
+### <a name="3. &lt;code&gt;format=&quot;...&quot;&lt;/code&gt; parameter"></a> 3. `format="..."` parameter
 
 Use the format parameter to specify the format of one search hit. <br /> Example: `format="| $topic | $summary |"`
 
@@ -133,11 +159,11 @@ Variables that can be used in the format string:
   </tr>
   <tr>
     <td><code>$date</code></td>
-    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:13</code></td>
+    <td> Time stamp of last topic update, e.g. <code>29 Jun 2010 - 16:14</code></td>
   </tr>
   <tr>
     <td><code>$isodate</code></td>
-    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:13Z</code></td>
+    <td> Time stamp of last topic update, e.g. <code>2010-06-29T16:14Z</code></td>
   </tr>
   <tr>
     <td><code>$rev</code></td>
@@ -223,6 +249,14 @@ Variables that can be used in the format string:
     <td><code>$count(reg-exp)</code></td>
     <td> Count of number of times a regular expression pattern appears in the text of a topic (does not search meta data). Follows guidelines for use and limitations outlined above under <code>$pattern(reg-exp)</code>. Example: <code>$count(.*?(---[+][+][+][+]) .*)</code> counts the number of &lt;H4&gt; headers in a page. </td>
   </tr>
+  <tr>
+    <td><code>$ntopics</code></td>
+    <td> Number of topics found in current web. This is the current topic count, not the total number of topics </td>
+  </tr>
+  <tr>
+    <td><code>$nhits</code></td>
+    <td> Number of hits if <code>multiple="on"</code>. Cumulative across all topics in current web. Identical to <code>$ntopics</code> unless <code>multiple="on"</code></td>
+  </tr>
 </table>
 
 ## <a name="Examples"></a> Examples
@@ -235,7 +269,7 @@ Here are some samples of formatted searches. The [[SearchPatternCookbook]] has o
 
 **Write this:**
 
-`%SEARCH{ "FAQ" scope="topic" nosearch="on" nototal="on" header="   * *Topic: Summary:*" format="   * [[$topic]]: $summary" }%`
+`%SEARCH{ "FAQ" scope="topic" nosearch="on" nototal="on" header="   * *Topic: Summary:*" format="   * [[$topic]]: $summary"  footer="   * *Topic: Summary*"  }%`
 
 **To get this:**
 
@@ -373,4 +407,4 @@ Incorrect format of searchformat template (missing sections? There should be 4 %
 
 **_Related Topics:_** [[UserDocumentationCategory]], [[SearchHelp]], [[TWikiVariables#VarSEARCH]], [[SearchPatternCookbook]], [[RegularExpression]]
 
--- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.CrawfordCurrie, TWiki:Main.SopanShewale

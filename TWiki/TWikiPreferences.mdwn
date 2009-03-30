@@ -163,7 +163,7 @@ Preference settings local to your site should be set in [[Main.TWikiPreferences|
 ### <a name="Search Settings"></a> Search Settings
 
 - Default type for search, one of: keyword (for search engine like syntax), regex (for [[RegularExpression]] search), or literal (for verbatim search)
-  - Set SEARCHDEFAULTTTYPE = keyword
+  - Set SEARCHDEFAULTTYPE = keyword
 - Default for `%SEARCH{}%` variable, one of: keyword, regex, or literal
   - Set SEARCHVARDEFAULTTYPE = literal
 - Stop words, e.g., common words and characters to exclude from a keyword search:
@@ -226,7 +226,7 @@ Preference settings local to your site should be set in [[Main.TWikiPreferences|
 ### <a name="Legacy support"></a> Legacy support
 
 - Support for legacy "EDITTOPIC", used to be hard-coded, now replaced by TMPL:P conditional instantiation
-  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277827909>
+  - Set EDITURL = <http://www.dementia.org/twiki/edit/%WEB%/%TOPIC%?t=1277828060>
   - Set EDITTOPIC = [Edit](%EDITURL% Edit Topic - deprecated usage - please see release notes)
 
 ## <a name="Plugins Settings"></a> Plugins Settings
@@ -337,7 +337,7 @@ Preference settings local to your site should be set in [[Main.TWikiPreferences|
 - Format of a [[NewWikiWord]] link:
 - Note that `$text` is the topic link text, `$topic` is the name of the new topic, and `$web` is the name of the web for the new topic. Values for the 3 are taken from the link syntax `[[$web.$topic][$text]]`. For normal plain WikiWord links `$text` and `$topic` are the same. The value of `$web` is the current web unless the link is in the format `$web.$topic`.
   - default setting:
-    - Set NEWLINKFORMAT = <span>$text[?](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% Create this topic)</span>
+    - Set NEWLINKFORMAT = <span>[$text](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% $text (this topic does not yet exist; you can create it))</span>
   - alternative setting:
     - #Set NEWLINKFORMAT = [$text](http://www.dementia.org/twiki/edit/$web/$topic?topicparent=%WEB%.%TOPIC% Create this topic)
 

@@ -14,7 +14,12 @@ _Definition of the templates used to render all HTML pages displayed in TWiki_
           </ul>
         </li>
         <li><a href="#Template Topics"> Template Topics</a><ul>
-            <li><a href="#Variable Expansion"> Variable Expansion</a></li>
+            <li><a href="#Variable Expansion"> Variable Expansion</a><ul>
+                <li><a href="#1. Default variable expansion"> 1. Default variable expansion</a></li>
+                <li><a href="#2. Preventing variable expansion"> 2. Preventing variable expansion</a></li>
+                <li><a href="#3. Control over variable expansi"> 3. Control over variable expansion</a></li>
+              </ul>
+            </li>
             <li><a href="#Specifying a Form"> Specifying a Form</a></li>
             <li><a href="#Automatically Generated Topic Na"> Automatically Generated Topic Names</a></li>
             <li><a href="#Template Topics in Action"> Template Topics in Action</a></li>
@@ -213,7 +218,13 @@ When you create a new topic using the `edit` script, TWiki locates a topic to us
 
 ### <a name="Variable Expansion"></a> Variable Expansion
 
-When the following variables are used in a template topic, they automatically get expanded when new topic is created based on it:
+[[TWikiVariables]] located in template topics get expanded as follows when a new topic is created.
+
+<a name="DefaultVariableExpansion"></a>
+
+#### <a name="1. Default variable expansion"></a> 1. Default variable expansion
+
+The following variables used in a template topic automatically get expanded when new topic is created based on it:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -254,7 +265,7 @@ When the following variables are used in a template topic, they automatically ge
   </tr>
   <tr>
     <td><code>%URLPARAM{"name"}%</code></td>
-    <td> Value of a named URL parameter </td>
+    <td> Value of a named URL parameter. See [[Main/VarURLPARAM]]. </td>
   </tr>
   <tr>
     <td><code>%WIKINAME%</code></td>
@@ -266,18 +277,50 @@ When the following variables are used in a template topic, they automatically ge
   </tr>
 </table>
 
-`%STARTSECTION{type="templateonly"}%%BR%...%BR%%ENDSECTION{type="templateonly"}%` markers are used to embed text that you _do not_ want expanded when a new topic based on the template topic is created. For example, you might want to write in the template topic:
+<a name="PreventingVariableExpansion"></a>
+
+#### <a name="2. Preventing variable expansion"></a> 2. Preventing variable expansion
+
+In a template topic, embed text that you _do not_ want expanded inside a `%STARTSECTION{type="templateonly"}% ... %ENDSECTION{type="templateonly"}%` section. For example, you might want to write this in the template topic:
 
     %STARTSECTION{type="templateonly"}%
     This template can only be changed by:
        * Set ALLOWTOPICCHANGE = %USERSWEB%.TWikiAdminGroup
     %ENDSECTION{type="templateonly"}%
 
-This will restrict who can edit the template topic, but will get removed when a new topic based on that template topic is created.
+This will restrict who can edit the template topic, but will be removed when a new topic based on that template topic is created.
 
-`%NOP%` can be used to prevent expansion of TWiki variables that would otherwise be expanded during topic creation e.g.i escape `%SERVERTIME%` with `%SER%NOP%VERTIME%`.
+`%NOP%` can be used to prevent expansion of TWiki variables that would otherwise be expanded during topic creation. For example, escape `%SERVERTIME%` with `%SER%NOP%VERTIME%`.
 
-All other variables are unchanged, e.g. are carried over "as is" into the new topic.
+<a name="ControlOverVariableExpansion"></a>
+
+#### <a name="3. Control over variable expansi"></a> 3. Control over variable expansion
+
+You can forcefully expand [[TWikiVariables]] by placing them inside a `type="expandvariables"` section in the template topic, such as:
+
+    %STARTSECTION{ type="expandvariables" }% ... %ENDSECTION{ type="expandvariables" }%
+
+Example:
+
+If you have the following content in a template topic:
+
+    %STARTSECTION{ type="expandvariables" }%
+       * %TWIKIWEB%.ATasteOfTWiki - view a short introductory presentation on TWiki for beginners
+       * %TWIKIWEB%.WelcomeGuest - starting points on TWiki
+       * %TWIKIWEB%.TWikiUsersGuide - complete TWiki documentation
+       * Sandbox.%HOMETOPIC% - try out TWiki on your own
+       * Sandbox.%TOPIC%Sandbox - just for me
+    %ENDSECTION{ type="expandvariables" }%
+
+you will get this raw text in new topics based on that template topic:
+
+       * TWiki.ATasteOfTWiki - view a short introductory presentation on TWiki for beginners
+       * TWiki.WelcomeGuest - starting points on TWiki
+       * TWiki.TWikiUsersGuide - complete TWiki documentation
+       * Sandbox.WebHome - try out TWiki on your own
+       * Sandbox.JimmyNeutronSandbox - just for me
+
+<a name="SpecifyingForm"></a>
 
 ### <a name="Specifying a Form"></a> Specifying a Form
 
@@ -335,4 +378,4 @@ When you use [[TWikiVariables]] such as %PUBURL% and %PUBURLPATH% in templates y
 
 **_Related Topics:_** [[TWikiSkins]], [[DeveloperDocumentationCategory]], [[AdminDocumentationCategory]]
 
--- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.DavidLeBlanc, TWiki:Main.CrawfordCurrie
+-- **_Contributors:_** TWiki:Main.PeterThoeny, TWiki:Main.MikeMannix, TWiki:Main.DavidLeBlanc, TWiki:Main.CrawfordCurrie, TWiki:Main.SopanShewale

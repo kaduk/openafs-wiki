@@ -1,11 +1,10 @@
-# <a name="TWiki Release 4.2.4 (Georgetown)"></a><a name=" TWiki Release 4.2.4 (Georgetown"></a> TWiki Release 4.2.4 (Georgetown), 00:35:32 06 December 2008
+# <a name="TWiki Release 4.2.2 (Freetown),"></a><a name=" TWiki Release 4.2.2 (Freetown),"></a> TWiki Release 4.2.2 (Freetown), 02:05:01 30 March 2009
 
 <div>
   <ul>
     <li><a href="#Introduction"> Introduction</a></li>
     <li><a href="#Pre-installed Extensions"> Pre-installed Extensions</a></li>
     <li><a href="#New Features Highlights"> New Features Highlights</a></li>
-    <li><a href="#Important Changes since 4.2.4"> Important Changes since 4.2.4 </a></li>
     <li><a href="#Important Changes since 4.2.3"> Important Changes since 4.2.3</a></li>
     <li><a href="#Important Changes since 4.2.2"> Important Changes since 4.2.2</a></li>
     <li><a href="#Important Changes since 4.2.1"> Important Changes since 4.2.1</a><ul>
@@ -32,31 +31,15 @@
     </li>
     <li><a href="#API Enhancements (Func)"> API Enhancements (Func)</a></li>
     <li><a href="#Deprecation Notices"> Deprecation Notices</a></li>
-    <li><a href="#TWiki 4.2.0 Minor Release - Deta"> TWiki 4.2.0 Minor Release - Details</a><ul>
-        <li><a href="#Fixes"> Fixes</a></li>
-        <li><a href="#Enhancements"> Enhancements</a></li>
-      </ul>
-    </li>
-    <li><a href="#TWiki 4.2.1 Patch Release - Deta"> TWiki 4.2.1 Patch Release - Details</a><ul>
-        <li><a href="#Fixes"> Fixes</a></li>
-        <li><a href="#Enhancements"> Enhancements</a></li>
-      </ul>
-    </li>
-    <li><a href="#TWiki 4.2.2 Patch Release - Deta"> TWiki 4.2.2 Patch Release - Details</a><ul>
-        <li><a href="#Fixes"> Fixes</a></li>
-        <li><a href="#Enhancements"> Enhancements</a></li>
-      </ul>
-    </li>
-    <li><a href="#TWiki 4.2.3 Patch Release - Deta"> TWiki 4.2.3 Patch Release - Details</a><ul>
-        <li><a href="#Fixes"> Fixes</a></li>
-        <li><a href="#Enhancements"> Enhancements</a></li>
-      </ul>
-    </li>
-    <li><a href="#TWiki 4.2.4 Patch Release - Deta"> TWiki 4.2.4 Patch Release - Details</a><ul>
-        <li><a href="#Fixes"> Fixes</a></li>
-        <li><a href="#Enhancements"> Enhancements</a></li>
-      </ul>
-    </li>
+    <li><a href="#TWiki 4.2.0 Minor Release - Deta"> TWiki 4.2.0 Minor Release - Details</a></li>
+    <li><a href="#Fixes"> Fixes</a></li>
+    <li><a href="#Enhancements"> Enhancements</a></li>
+    <li><a href="#TWiki 4.2.1 Patch Release - Deta"> TWiki 4.2.1 Patch Release - Details</a></li>
+    <li><a href="#Fixes"> Fixes</a></li>
+    <li><a href="#Enhancements"> Enhancements</a></li>
+    <li><a href="#TWiki 4.2.2 Patch Release - Deta"> TWiki 4.2.2 Patch Release - Details</a></li>
+    <li><a href="#Fixes"> Fixes</a></li>
+    <li><a href="#Enhancements"> Enhancements</a></li>
   </ul>
 </div>
 
@@ -70,7 +53,7 @@ TWiki 4.2.2 is a patch release which only contains bug fixes. The major issues f
 
 TWiki 4.2.3 is a patch release containing only the configure script as a security fix for TWiki:Codev.SecurityAlert-CVE-2008-3195.
 
-TWiki 4.2.4 is a patch release which only contains over 30 bug fixes. This release also has a security fix for TWiki:Codev.SecurityAlert-CVE-2008-5304 and TWiki:Codev.SecurityAlert-CVE-2008-5305
+TWiki 4.2.4 is a patch release which only contains bug fixes.
 
 It is highly recommended to upgrade TWiki 4.2.x to 4.2.4. Users will find the 4.2.4 much more stable in daily use.
 
@@ -112,13 +95,7 @@ TWiki 4.2.4 is shipped with
   - Table of Content (TOC) feature enhanced
   - User Mapping (mapping between login name and WikiName) code has been extended to allow pluggable modules to integrate with all sorts of alternative authentication and Management schemes. For normal cases you use the default TWikiUserMapping which is using the Main.TWikiUsers topic to map between login and WikiName. A new BaseUserMapping is provided for TWikis where you only have guests and an administrator. In this case you use the login and password given in configure to login as an admin.
 
-## <a name="Important Changes since 4.2.4"></a> Important Changes since 4.2.4
-
-This release was targeted for fixing maximum number of bugs. We have also fixed security issues listed at TWiki:Codev.SecurityAlert-CVE-2008-5304 and TWiki:Codev.SecurityAlert-CVE-2008-5305
-
 ## <a name="Important Changes since 4.2.3"></a> Important Changes since 4.2.3
-
-This release was targeted to fix the configure script as described security issue in TWiki:Codev.SecurityAlert-CVE-2008-3195.
 
 ## <a name="Important Changes since 4.2.2"></a> Important Changes since 4.2.2
 
@@ -280,7 +257,7 @@ In Func getOopsUrl and permissionsSet have been declared deprecated. There is no
 
 The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x02> revision 16277 (22 Jan 2008)
 
-### <a name="Fixes"></a> Fixes
+## <a name="Fixes"></a> Fixes
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -1081,7 +1058,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item3803]]</td>
-    <td> %USERINFO{format="$groups"}% crashes </td>
+    <td> %!USERINFO{format="$groups"}% crashes </td>
   </tr>
   <tr>
     <td>[[BUGS/Item3796]]</td>
@@ -1193,7 +1170,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item3703]]</td>
-    <td> &amp;nbsp; in the size field of a form will crash the forms code </td>
+    <td> &amp; nbsp; in the size field of a form will crash the forms code </td>
   </tr>
   <tr>
     <td>[[BUGS/Item3690]]</td>
@@ -1201,7 +1178,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item3689]]</td>
-    <td> CommentPlugin location only works if it is above the %COMMENT... variable </td>
+    <td> CommentPlugin location only works if it is above the %COMMENT... tag </td>
   </tr>
   <tr>
     <td>[[BUGS/Item3688]]</td>
@@ -1385,7 +1362,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
   <tr>
     <td>[[BUGS/Item2772]]</td>
-    <td> Mailto link should use %20 instead of &amp;#32; for spaces </td>
+    <td> Mailto link should use %20 instead of for spaces </td>
   </tr>
   <tr>
     <td>[[BUGS/Item2690]]</td>
@@ -1469,7 +1446,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
 </table>
 
-### <a name="Enhancements"></a> Enhancements
+## <a name="Enhancements"></a> Enhancements
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -1730,7 +1707,7 @@ The 4.2.0 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
 
 The 4.2.1 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x02> revision 17311 (03 Aug 2008)
 
-### <a name="Fixes"></a> Fixes
+## <a name="Fixes"></a> Fixes
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -2367,7 +2344,7 @@ The 4.2.1 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
 </table>
 
-### <a name="Enhancements"></a> Enhancements
+## <a name="Enhancements"></a> Enhancements
 
 None!
 
@@ -2375,7 +2352,7 @@ None!
 
 The 4.2.2 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TWikiRelease04x02> revision 17396 (10 Aug 2008).
 
-### <a name="Fixes"></a> Fixes
+## <a name="Fixes"></a> Fixes
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -2420,166 +2397,8 @@ The 4.2.2 release was built from SVN <http://svn.twiki.org/svn/twiki/branches/TW
   </tr>
 </table>
 
-### <a name="Enhancements"></a> Enhancements
+## <a name="Enhancements"></a> Enhancements
 
 None!
-
-## <a name="TWiki 4.2.3 Patch Release - Deta"></a> TWiki 4.2.3 Patch Release - Details
-
-### <a name="Fixes"></a> Fixes
-
-Only security issue from "configure" script as described in TWiki:Codev.SecurityAlert-CVE-2008-3195. was fixed in this release.
-
-### <a name="Enhancements"></a> Enhancements
-
-None!
-
-## <a name="TWiki 4.2.4 Patch Release - Deta"></a> TWiki 4.2.4 Patch Release - Details
-
-### <a name="Fixes"></a> Fixes
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td>[[BUGS/Item5967]]</td>
-    <td> viewfile partly broken </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6136]]</td>
-    <td> User input is passed to the perl "eval" command without first being sanitized. </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5937]]</td>
-    <td> move initialization of SwitchBoard to TWiki.spec </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6089]]</td>
-    <td> backslash at end of line inside verbatim and pre being used as line continuation </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6135]]</td>
-    <td> changes required in TWikiUserMappings.pm required to support registration in case PasswordManager is LdapUser </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5961]]</td>
-    <td> WysiwygPlugin and TWiki's odd idea of needing a space before *'s causes user surprise. </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5865]]</td>
-    <td> TablePlugin should support rowspan from header row </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6082]]</td>
-    <td> deep recursion bug in query search </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5979]]</td>
-    <td> add non-alarmist PerlOnRedHatIsSlow detection to configure </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6005]]</td>
-    <td> EditTable changes "label"-formatted cell in unexpected way </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6061]]</td>
-    <td> TWiki::Func::getContext documentation </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5939]]</td>
-    <td> Rogue &lt;p /&gt; below &lt;/html&gt; on every topic in every web </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6108]]</td>
-    <td> Add documentation for customising the registration emails </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6054]]</td>
-    <td> No longer possible to have a twisty on one line without linebreak </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5176]]</td>
-    <td> %SCRIPTSUFFIX is added twice in TOC links </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6060]]</td>
-    <td> configure's get more extensions seems to require LWP </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6043]]</td>
-    <td> TWiki::Sandbox::sysCommand leads to errors with Plugins.FastCGIEngineContrib </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5991]]</td>
-    <td> JSCalendarContrib does not work correctly in IE7 </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6026]]</td>
-    <td> With header format emtpy table is initialized with one column only </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6050]]</td>
-    <td> statistics script fails when cuid is not equal login name (as login is whats in the log files...) </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6095]]</td>
-    <td> Registration confirmation page fails to display when user confirmation e-mail can't be sent </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5914]]</td>
-    <td> TWiki::Request::url() must support -rewrite, -absolute and -relative </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5852]]</td>
-    <td> Split out operators into seperate modules, so that extensions can plug in new operators </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5994]]</td>
-    <td> Turn on taint mode in configure and fix the problems </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5943]]</td>
-    <td> TWikiRegistrationAgent should be in Main's ALLOWWEBCHANGE by default </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6031]]</td>
-    <td> TablePlugin date sorting is broken. </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item2525]]</td>
-    <td> TablePlugin produces bad links for sorting when using "short" URLs </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5957]]</td>
-    <td> htdigest format password file gets stomped on password or email change/reset </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6066]]</td>
-    <td> MailerContrib makes an assumption that cuid equal loginname </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5910]]</td>
-    <td> %TOC% variable creates links with unecessary query string </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item5922]]</td>
-    <td> $formfield data not being displayed in formatted searches </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6022]]</td>
-    <td> %ENCODE{}% treats % as safe character </td>
-  </tr>
-  <tr>
-    <td>[[BUGS/Item6062]]</td>
-    <td> EditTablePlugin destroys verbatim-tags </td>
-  </tr>
-</table>
-
-### <a name="Enhancements"></a> Enhancements
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td>[[BUGS/Item4875]]</td>
-    <td> Add javascript function 'makeSafeForTableEntry' </td>
-  </tr>
-</table>
 
 **_Related Topic:_** [[TWikiHistory]]

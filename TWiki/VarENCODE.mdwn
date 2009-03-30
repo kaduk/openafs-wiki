@@ -19,6 +19,11 @@
     <td> required (can be empty) </td>
   </tr>
   <tr>
+    <td><code>type="safe"</code></td>
+    <td> Encode special characters into HTML entities to avoid XSS exploits: <code>"&lt;"</code>, <code>"&gt;"</code>, <code>"%"</code>, single quote (<code>'</code>) and double quote (<code>"</code>) </td>
+    <td><code>type="url"</code></td>
+  </tr>
+  <tr>
     <td><code>type="entity"</code></td>
     <td> Encode special characters into HTML entities, like a double quote into <code>&amp;#034;</code>. Does <strong>not</strong> encode <code>\n</code> or <code>\r</code>. </td>
     <td><code>type="url"</code></td>
@@ -40,7 +45,9 @@
   </tr>
 </table>
 - Example: `%ENCODE{"spaced name"}%` expands to `spaced%20name`
-- **_%X% Note:_** Values of HTML input fields must be entity encoded.%BR% Example: `<input type="text" name="address" value="%ENCODE{ "any text" type="entity" }%" />`
-- **_%X% Note:_** Double quotes in strings must be escaped when passed into other TWiki variables.%BR% Example: `%SEARCH{ "%ENCODE{ "string with "quotes"" type="quotes" }%" noheader="on" }%`
+- **_%X% Notes:_**
+  - Values of HTML input fields must be entity encoded.%BR% Example: `<input type="text" name="address" value="%ENCODE{ "any text" type="entity" }%" />`
+  - Double quotes in strings must be escaped when passed into other TWiki variables.%BR% Example: `%SEARCH{ "%ENCODE{ "string with "quotes"" type="quotes" }%" noheader="on" }%`
+  - Use `type="entity"` or `type="safe"` to protect user input from URL parameters and external sources against cross-site scripting (XSS). `type="entity"` is more aggressive, but some TWiki applications might not work. `type="safe"` provides a safe middle ground.
 
 - Related: [[URLPARAM|Main/VarURLPARAM]]
