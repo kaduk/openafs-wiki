@@ -1,20 +1,39 @@
-Tooling required for git Release building script Required for our first release (not switchover)
+# <a name="Tooling required for git"></a> Tooling required for git
 
-� Take SHA1 of tag point � Need to tag tree � But, need to have option to run without tagging � Need to preserve difference between doc and source tree (generate tarballs for both) � Generate diff between two tags. � Generates changelog from complete commit log on every patch
+## <a name="Release building script"></a> Release building script
 
-cvs commit emails Required for switchover
+Required for our first release (not switchover)
+
+- Take SHA1 of tag point
+- Need to tag tree
+- But, need to have option to run without tagging
+- Need to preserve difference between doc and source tree (generate tarballs for both)
+- Generate diff between two tags
+- Generates changelog from complete commit log on every patch
+
+## <a name="cvs commit emails"></a> cvs commit emails
+
+Required for switchover
 
 We need to preserve the existing cvs commits mailing list. A couple of ways of doing this have been proposed. Either get gerrit to CC the commit list with every "Change submitted" email that it sends, or set up a clone of the gerrit repository which has a commit hook that sends email. That clone would then be pushed to whenever gerrit makes a change, and would handle the sending of emails (and be the repo that end users pull from)
 
-deltas Initial Hack required for switchover
+## <a name="deltas"></a> deltas
 
-Initial hack: Build a web page which takes the SHA1 of the commit, and the delta name to be applied, and runs git update-refs on the server. Ideal solution: Add support to gerrit to prompt for the delta name as part of the submit action.
+Initial Hack required for switchover
 
-persistent repository clone in afs Not required for the switch
+Initial hack: Build a web page which takes the SHA1 of the commit, and the delta name to be applied, and runs git update-refs on the server.
+
+Ideal solution: Add support to gerrit to prompt for the delta name as part of the submit action.
+
+## <a name="persistent repository clone in a"></a> persistent repository clone in afs
+
+Not required for the switch
 
 Build a persistent clone &amp; checkout of the master in AFS. Get gerrit and/or cron to keep this constantly up to date.
 
-pullups Required for the switch
+## <a name="pullups"></a> pullups
+
+Required for the switch
 
 Write a script which takes the master delta name, the branch target, and cherrypicks the change to the branch. This should bypass gerrit if the cherrypick succeeds (This should probably use a different SSH key than the one normally used for head commits). For commits which require manual changes, there should be a choice between directly applying the massaged change to the branch, and submitting it via gerrit.
 
