@@ -1,8 +1,47 @@
-# <a name="Tooling required for git"></a> Tooling required for git
+# <a name="Git to do list"></a> Git to do list
 
-## <a name="Release building script"></a> Release building script
+This was originally just a list of the tools that needed to be written before we could make the switch to git. I'm now turning it into a more general to do list
 
-Required for our first release (not switchover)
+## <a name="Before"></a> Before
+
+The following are the tasks which needed to be completed before (or at the same time as) the switch being thrown.
+
+### <a name="Repository Conversion"></a> Repository Conversion
+
+- <strike>Make IBM the author of the initial revision</strike>
+- <strike>Add a line to the comments of branch commits, indicating the SHA1 of the corresponding HEAD commit (this requires more reordering logic, so that the HEAD commit always lands first)</strike>
+- <strike>Tidy up the remaining FIXES that have no associated bug IDs</strike>
+- <strike>Remove the branch signifier from the delta reference (as it has no significance)</strike>
+- Reach a decision about tag and branch name formats (underscores or dots) and implement it
+
+### <a name="Gerrit"></a> Gerrit
+
+- Install gerrit on the Stanford machine
+- Make arrangements for database backups
+- Make arrangements for Jetty starting at machine boot
+- Stop gerrit from forging email
+
+### <a name="cvs commit emails"></a> cvs commit emails
+
+We need to preserve the existing cvs commits mailing list. A couple of ways of doing this have been proposed. Either get gerrit to CC the commit list with every "Change submitted" email that it sends, or set up a clone of the gerrit repository which has a commit hook that sends email. That clone would then be pushed to whenever gerrit makes a change, and would handle the sending of emails (and be the repo that end users pull from)
+
+### <a name="Delta creation web page"></a> Delta creation web page
+
+We need a mechanism for keeping the delta name information up to date, as gerrit won't be (directly) tracking it. The proposal is to have a protected web page which takes a git SHA1, and a delta name, and creates the necessary reference to associate the two together.
+
+### <a name="Pullup script"></a> Pullup script
+
+Write a script which takes the master delta name, the branch target, and cherrypicks the change to the branch. This should bypass gerrit if the cherrypick succeeds (This should probably use a different SSH key than the one normally used for head commits). For commits which require manual changes, there should be a choice between directly applying the massaged change to the branch, and submitting it via gerrit.
+
+## <a name="Shortly after"></a> Shortly after
+
+These items will be required shortly after we complete the switchover
+
+### <a name="Release Building Script"></a> Release Building Script
+
+(we can't release with out it!)
+
+A script is required to produce the basics of a release. It should do something like the following:
 
 - Take SHA1 of tag point
 - Need to tag tree
@@ -11,30 +50,16 @@ Required for our first release (not switchover)
 - Generate diff between two tags
 - Generates changelog from complete commit log on every patch
 
-## <a name="cvs commit emails"></a> cvs commit emails
+## <a name="After"></a> After
 
-Required for switchover
+These are things that we believe it would be nice to have, but that we're not going to delay flipping the switch for ...
 
-We need to preserve the existing cvs commits mailing list. A couple of ways of doing this have been proposed. Either get gerrit to CC the commit list with every "Change submitted" email that it sends, or set up a clone of the gerrit repository which has a commit hook that sends email. That clone would then be pushed to whenever gerrit makes a change, and would handle the sending of emails (and be the repo that end users pull from)
+### <a name="Gerrit changes"></a> Gerrit changes
 
-## <a name="deltas"></a> deltas
+- Support for naming deltas within Gerrit, as part of the 'submit' action.
 
-Initial Hack required for switchover
-
-Initial hack: Build a web page which takes the SHA1 of the commit, and the delta name to be applied, and runs git update-refs on the server.
-
-Ideal solution: Add support to gerrit to prompt for the delta name as part of the submit action.
-
-## <a name="persistent repository clone in a"></a> persistent repository clone in afs
-
-Not required for the switch
+### <a name="persistent repository clone in a"></a> persistent repository clone in afs
 
 Build a persistent clone &amp; checkout of the master in AFS. Get gerrit and/or cron to keep this constantly up to date.
-
-## <a name="pullups"></a> pullups
-
-Required for the switch
-
-Write a script which takes the master delta name, the branch target, and cherrypicks the change to the branch. This should bypass gerrit if the cherrypick succeeds (This should probably use a different SSH key than the one normally used for head commits). For commits which require manual changes, there should be a choice between directly applying the massaged change to the branch, and submitting it via gerrit.
 
 -- [[SimonWilkinson]] - 06 Jun 2009
