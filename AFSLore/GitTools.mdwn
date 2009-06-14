@@ -33,13 +33,21 @@ We need a mechanism for keeping the delta name information up to date, as gerrit
 
 Write a script which takes the master delta name, the branch target, and cherrypicks the change to the branch. This should bypass gerrit if the cherrypick succeeds (This should probably use a different SSH key than the one normally used for head commits). For commits which require manual changes, there should be a choice between directly applying the massaged change to the branch, and submitting it via gerrit.
 
+### <a name="Wdelta"></a> Wdelta
+
+Write a replacement for wdelta that understands how to reassemble the disjoint patchsets that are used to represent deltas in git
+
+### <a name=".gitignore files"></a> .gitignore files
+
+Generate .gitignore files, based on the existing .cvsignore files and some common sense
+
 ## <a name="Shortly after"></a> Shortly after
 
 These items will be required shortly after we complete the switchover
 
 ### <a name="Release Building Script"></a> Release Building Script
 
-(we can't release with out it!)
+(we can't release without it!)
 
 A script is required to produce the basics of a release. It should do something like the following:
 
@@ -49,6 +57,10 @@ A script is required to produce the basics of a release. It should do something 
 - Need to preserve difference between doc and source tree (generate tarballs for both)
 - Generate diff between two tags
 - Generates changelog from complete commit log on every patch
+
+### <a name="Delete all RCSID(&quot;&quot;) markers"></a> Delete all RCSID("") markers
+
+Git doesn't give us RCSIDs, so we should delete all of the places in the code where these occur.
 
 ## <a name="After"></a> After
 
