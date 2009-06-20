@@ -1,0 +1,418 @@
+The table below summarises the current state of play with the RPC refresh which is currently being thrashed out on the AFS standardisation group. Please make your proposals and comments there, rather than editing this document.
+
+Currently, the following proposals have been made
+
+1. 64-bit unsigned values for Volume IDs (Andrew Deason)
+2. 64-bit unsigned values for volume quotas (Andrew Deason)
+3. 64-bit unsigned values for volume blocks in use, partition blocks in use, and maximum partition blocks (Andrew Deason)
+
+<table border="1" cellpadding="0" cellspacing="0">
+  <tr>
+    <td> Package/RPC </td>
+    <td> [1] </td>
+    <td> [2] </td>
+    <td> [3] </td>
+  </tr>
+  <tr>
+    <th bgcolor="#99CCCC" colspan="4"><strong> RXAFS </strong></th>
+  </tr>
+  <tr>
+    <td> BulkStatus </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> CreateFile </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> DFSSymlink </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ExtendLock </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> FetchACL </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> FetchData </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> FetchStatus </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> FsCmd </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetVolumeInfo </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetVolumeStatus </td>
+    <td> x </td>
+    <td> x </td>
+    <td> x </td>
+  </tr>
+  <tr>
+    <td> GiveUpCallBacks </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Link </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Lookup </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> MakeDir </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ReleaseLock </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> RemoveDir </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> RemoveFile </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Rename </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SetLock </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SetVolumeStatus </td>
+    <td> x </td>
+    <td> x </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> StoreACL </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> StoreData </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> StoreStatus </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Symlink </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> RXAFSCB </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Callback </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetCE </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <th bgcolor="#99CCCC"><strong> VL </strong></th>
+    <td>   </td>
+    <td colspan="2">   </td>
+  </tr>
+  <tr>
+    <td> CreateEntry </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> DeleteEntry </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetEntryByID </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetEntryByName </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetNewVolumeId </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetStats </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> LinkedList </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ListAttributes </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ListEntry </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ReleaseLock </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ReplaceEntry </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SetLock </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> UpdateEntry </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> UpdateEntryByName </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <th bgcolor="#99CCCC"><strong> AFSVol </strong></th>
+    <td>   </td>
+    <td colspan="2">   </td>
+  </tr>
+  <tr>
+    <td> ConvertROtoRWvolume </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Clone </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> CreateVolume </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Forward </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ForwardMultiple </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetNthVolume </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> GetStatus </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ListOneVolume </td>
+    <td> x </td>
+    <td> x </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ListVolumes </td>
+    <td> x </td>
+    <td> x </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Monitor </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> NukeVolume </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> ReClone </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> Restore </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SetIdsTypes </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SetInfo </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SignalRestore </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> SplitVolume </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> TransCreate </td>
+    <td>   </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> XListOneVolume </td>
+    <td> x </td>
+    <td> x </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> XListVolumes </td>
+    <td> x </td>
+    <td> x </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <th bgcolor="#99CCCC"><strong> TC </strong></th>
+    <td>   </td>
+    <td colspan="2">   </td>
+  </tr>
+  <tr>
+    <td> PerformDump </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+  <tr>
+    <td> PerformRestore </td>
+    <td> x </td>
+    <td>   </td>
+    <td>   </td>
+  </tr>
+</table>
+
+## <a name="Changes"></a> Changes
+
+The following message IDs are represented in this table:
+
+- <span><font><font>20090619164915\.4e8e9cf0.adeason@sinenomine.net</font></font></span>
