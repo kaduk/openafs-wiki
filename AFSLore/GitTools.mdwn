@@ -23,7 +23,7 @@ The following are the tasks which needed to be completed before (or at the same 
 
 ### <a name="cvs commit emails"></a> cvs commit emails
 
-We need to preserve the existing cvs commits mailing list. A couple of ways of doing this have been proposed. Either get gerrit to CC the commit list with every "Change submitted" email that it sends, or set up a clone of the gerrit repository which has a commit hook that sends email. That clone would then be pushed to whenever gerrit makes a change, and would handle the sending of emails (and be the repo that end users pull from)
+We need to preserve the existing cvs commits mailing list. Russ has a plan to do this by using a second git repository, into which gerrit will automatically push all of the changes it receives. A post-receive hook script can then be used on this repository to generate commit emails. Russ is going to set this up once the final repository is in place, so this is fundamentally done.
 
 ### <a name="Delta creation web page"></a> Delta creation web page
 
