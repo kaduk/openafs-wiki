@@ -1,32 +1,88 @@
--- [[StevenJenkins]] - 10 Mar 2008
+---++ Demand-Attach File-Server (DAFS)<br /><br /> The first production release of OpenAFS containing the Demand-Attach File-Server (DAFS) code was \[[ReleaseInformation#
 
-The Demand Attach fileserver is a new architecture for the fileserver, volserver, and salvager that brings volumes online as as needed, and takes volumes offline when they have been idle. This greatly speeds up the fileserver startup and shutdown times.
-
-The full presentation on the Demand Attach fileserver was given by Tom Keiser at the 2007 AFS Workshop. This entry is merely a summary of key information.
-
-- The format of the volume and vnode structures did not change; however, the bosserver, fileserver, volserver, salvageserver, salvager, and salvage must be rebuilt (using the --enable-demand\_attach\_fs argument to configure).
-- The fs instance must be removed, and a replacement dafs instance added. See the bos\_create(8) man page for details
-- There are new options to the fileserver. Note in particular that unless -vattachpar is larger than 1, many of the parallel I/O advantages of DAFS will not be enabled (Tom Keiser notes that 1 thread per partition is the logical extreme during startup; however, during shutdown, more threads can be used, so a value of 128 is not unreasonable). However, tuning this value for a given environment will require experimentation.
-
-The key engine for offlining volumes is the VLRU (Volume Least Recently Used) queue. This is a garbage collection facility which automatically offlines unused volumes in the background. The process of offlining a volume from the "attached" state to the"pre-attached" state is called "soft detachment".
-
-VLRU works in a manner similar to a generational garbage collector. There are five queues on which volumes can reside:
-
-1. new
-2. mid
-3. old
-4. held: queue for volumes which are administratively barred from VLRU activity
-5. candidate: queue for volumes which have not been accessed recently, and thus are canddidates for soft detachment
-
-The new, mid, and old queues are generational queues for active volumes, with the state transitions among them controlled by the following inactivity rules:
-
-- candidate-&gt;new activity present
-- new-&gt;candidate (1\*vlruthresh) minutes since last transition; no activity
-- new-&gt;mid (2\*vlruthresh) minutes since last transition; activity present
-- mid-&gt;old (4\*vlruthresh) minutes since last transition; activity present
-- old-&gt;mid (2\*vlruthresh) minutes since last transition; no activity
-- mid-&gt;new (1\*vlruthresh) minutes since last transition; no activity
-
-The idea is that as a volume is used, it gets pushed into a 'more used' generation (i.e., 'old' is 'more used' than 'mid', which is 'more used' than 'new'). this provides a weighting so that volumes which are used more will tend to be in the mid and old queues, not in the new or candidate queues, thus staying in online.
-
-Note that the VLRU engine can be controlled and tuned by the vlrudisable, vlruthresh, vlruinterval, and vlrumax parameters to the fileserver.
+<div id=":175">RelOneFourFiveTwo][1.4.5-2]]. DAFS is a significant departure from the more <em>traditional</em> AFS file-server and this document details those changes.<br />
+  <br />
+  <br />
+  <br /> ---++ Why Demand-Attach File-Server (DAFS) ?<br />
+  <br /> On a traditional file-server, volumes are attached at start-up and detached only at shutdown. Any attached volume can be modified and changes are periodically flushed to disk or on shutdown. When a file-server isn't shutdown cleanly, the integrity of every attached volume has to be verified by the salvager, whether the volume had been modified or not. As file-servers grow larger (and the number of volumes increase), the length of time required to salvage and attach volumes increases, e.g. it takes around two hours for a file-server housing 512GB data to salvage and attach volumes !<br />
+  <br /> On a Demand-Attach File-Server (DAFS), volumes are attached only when accessed by clients. On start-up, the file-server reads only the volume headers to determine what volumes reside on what partitions. When accessed by clients, the volumes are attached. After some period of inactivity, volumes are automatically detached. This dramatically improves start-up and shutdown times. A demand-attach file-server can be restarted in seconds compared to hours for the same traditional file-server.<br />
+  <br /> The primary objective of the demand-attach file-server was to dramatically reduce the amount of time required to restart an AFS file-server.<br />
+  <br /> Large portions of this document were taken / influenced by the presentation entitled [[ATarget%3d_blankHref%3dHttp://workshop/openafs/org/afsbpw06/talks/tkeiser-dafs/pdf5D5BDemandHttp://workshop/openafs/org/afsbpw06/talks/tkeiser-dafs/Pdf]] Attach / Fast-Restart Fileserver given by Tom Keiser at the [[ATarget%3d_blankHref%3dHttp://workshop/openafs/org/5D5BAFSHttp://workshop/openafs/org/WebHome]] and Kerberos Best Practices Workshop in [[<a href="http://workshop.openafs.org/afsbpw06/%5D%5B2006%5D" target="_blank">http://workshop.openafs.org/afsbpw06/][2006]</a>].<br />
+  <br />
+  <br /> ---++ An Overview of Demand-Attach File-Server<br />
+  <br /> Demand-attach necessitated a significant re-design of certain aspects of the AFS code, including:<br /> * volume package has a number of severe limitations<br /> * single global lock, leading to poor scaling<br /> * lock is held across high latency operations, e.g. disk I/O<br /> * no notion of state for concurrently accessed objects<br /> * the vnode package suffers from the same limitations<br /> * breaking callbacks is time consuming<br /> * salvaging does not have to be done with the file-server offline<br />
+  <br /> The changes implemented for demand-attach include:<br /> * [[Main/DemandAttachFileServer#Volume_Finite_State_Automata]]<br /> * volumes are attached on demand<br /> * volume <em>garbage collector</em> to detach unused volumes<br /> * notion of volume state means read-only volumes aren't salvaged<br /> * [[Main/DemandAttachFileServer#Vnode_Finite_State_Automata]]<br /> * global lock is only held when required and never held across high-latency operations<br /> * automatic salvaging of volumes<br /> * shutdown is done in parallel (maximum number of threads utilized)<br /> * callbacks are no longer broken on shutdown<br /> * instead, host / callback state is preserved across restarts<br />
+  <br />
+  <br /> ---++ The Gory Details of the Demand-Attach File-Server<br />
+  <br /> ---+++ File-server Start-up / Shutdown Sequence<br />
+  <br /> The table below compares the start-up sequence for a traditional file-server and a demand-attach file-server.<br />
+  <br /> | <strong>Traditional</strong> | <strong>Demand-Attach</strong> |<br /> || %BULLET% host / callback state restored |<br /> || %BULLET% host / callback state consistency verified |<br /> | %BULLET% build vice partition list | %BULLET% build vice partition list |<br /> | %BULLET% volumes are attached | %BULLET% volume headers read |<br /> || %BULLET% volumes placed into <em>pre-attached</em> state |<br />
+  <br /> The [[Main/FSStateDat]] is covered later. The <em>pre-attached</em> state indicates that the file-server has read the volume headers and is aware that the volume exists, but that it has not been attached (and hence is not on-line).<br />
+  <br /> The shutdown sequence for both file-server types is:<br /> | <strong>Traditional</strong> | <strong>Demand-Attach</strong> |<br /> | %BULLET% break callbacks | %BULLET% quiesce host / callback state |<br /> | %BULLET% shutdown volumes | %BULLET% shutdown on-line volumes |<br /> || %BULLET% verify host / callback state consistency |<br /> || %BULLET% save host / callback state |<br />
+  <br /> On a traditional file-server, volumes are off-lined (detached) serially. In demand-attach, as many threads as possible are used to detach volumes, which is possible due to the notion of a volume has an associated state.<br />
+  <br />
+  <br /> ---+++ Volume Finite-State Automata<br /> The volume finite-state automata is available in the source under doc/arch/dafs-fsa.dot.</div>
+<div id=":175">
+  <br /> #VolumeLeastRecentlyUsed<br /> ---+++ Volume Least Recently Used (VLRU) Queues<br />
+  <br /> The Volume Least Recently Used (VLRU) is a garbage collection facility which automatically off-lines volumes in the background. The purpose of this facility is to pro-actively off-line infrequently used volumes to improve shutdown and<br /> salvage times. The process of off-lining a volume from the "attached" state to the "pre-attached" state is called soft detachment.<br />
+  <br /> VLRU works in a manner similar to a generational garbage collector. There are five queues on which volumes can reside.<br />
+  <br /> | <strong>Queue</strong> | <strong>Meaning</strong> |<br /> | candidate | Volumes which have not been accessed recently and hence are candidates for soft detachment. |<br /> | held | Volumes which are administratively prevented from VLRU activity, i.e. will never be detached. |<br /> | intermediate (mid) | Volumes transitioning from new -&gt; old (see [[DemandAttachFileServer#VLRUStateTransitions][state transitions] for details). |<br /> | new | Volumes which have been accessed. See [[DemandAttachFileServer#VLRUStateTransitions][state transitions] for details. |<br /> | old | Volumes which are continually accessed. See [[DemandAttachFileServer#VLRUStateTransitions][state transitions] for details. |<br />
+  <br /> The state of the various VLRU queues is dumped with the file-server state and at shutdown.<br />
+  <br /> #VLRUStateTransitions<br /> The VLRU queues new, mid (intermediate) and old are generational queues for active volumes. State transitions are controlled by inactivity timers and are<br />
+  <br /> | <strong>Transition</strong> | <strong>Timeout (minutes)</strong> | <strong>Actual Timeout (in MS)</strong> | <strong>Reason (since last transition)</strong> |<br /> | candidate-&gt;new | - | - | new activity |<br /> | new-&gt;candidate | 1 * vlruthresh | 24 hrs | no activity |<br /> | new-&gt;mid | 2 * vlruthresh | 48 hrs | activity |<br /> | mid-&gt;old | 4 * vlruthresh | 96 hrs | activity |<br /> | old-&gt;mid | 2 * vlruthresh | 48 hrs | no activity |<br /> | mid-&gt;new | 1 * vlruthresh | 24 hrs | no activity |<br />
+  <br /><code>vlruthresh</code> has been optimized for RO file-servers, where volumes are frequently accessed once a day and soft-detaching has little effect (RO volumes are not salvaged; one of the main reasons for soft detaching).<br />
+  <br />
+  <br /> ---+++ Vnode Finite-State Automata<br /> The <a href="http://www.dementia.org/twiki//view/dafs-vnode-fsa.jpg" target="_top">vnode finite-state automata</a> was documented by Steven Jenkins.<br />
+  <br /><code>/usr/afs/bin/fssync-debug</code> provides low-level inspection and control of the file-server volume package. <strong>Indiscriminate use of <code><b>fsync-debug</b></code> can lead to extremely bad things occurring. Use with care. %ENDCOLOR%<br />
+    <br />
+    <br /> #SalvageServer<br /> ---+++ Demand Salvaging<br />
+    <br /> Demand salvaging is implemented by the <code>salvageserver</code>. The actual code for salvaging a volume remains largely unchanged. However, the method for invoking salvaging with demand-attach has changed:<br /> * file-server automatically requests volumes be salvaged as required, i.e. they are marked as requiring salvaging when attached.<br /> * manual initiation of salvaging may be required when access is through the <code>volserver</code> (may be addressed at some later date).<br /> * <code>bos salvage</code> requires the <code>-forceDAFS</code> flag to initiate salvaging wit DAFS. However, %RED% *salvaging should not be initiated using this method</strong>. %ENDCOLOR%<br /> * infinite salvage, attach, salvage, ... loops are possible. There is therefore a hard-limit on the number of times a volume will be salvaged which is reset when the volume is removed or the file-server is restarted.<br /> * volumes are salvaged in parallel and is controlled by the <code>-Parallel</code> argument to the <code>salvageserver</code>. Defaults to 4.<br /> * the <code>salvageserver</code> and the <code>inode</code> file-server are incompatible:<br /> * because volumes are inter-mingled on a partition (rather than being separated), a lock for the entire partition on which the volume is located is held throughout. Both the <code>fileserver</code> and <code>volserver</code> will block if they require this lock, e.g. to restore / dump a volume located on the partition.<br /> * inodes for a particular volume can be located anywhere on a partition. Salvaging therefore results in <strong>every</strong> inode on a partition having to be read to determine whether it belongs to the volume. This is extremely I/O intensive and leads to horrendous salvaging performance.<br /> * <code>/usr/afs/bin/salvsync-debug</code> provides low-level inspection and control over the <code>salvageserver</code>. %RED% <strong>Indiscriminate use of <code><b>salvsync-debug</b></code> can lead to extremely bad things occurring. Use with care.</strong> %ENDCOLOR%<br />
+  <br />
+  <br />
+  <br /> #FSStateDat<br /> ---+++ File-Server Host / Callback State<br /> Host / callback information is persistent across restarts with demand-attach. On shutdown, the file-server writes the data to <code>/usr/afs/local/fsstate.dat</code>. The contents of this file are read and verified at start-up and hence it is unnecessary to break callbacks on shutdown with demand-attach.<br />
+  <br /> The contents of <code>fsstate.dat</code> can be inspected using <code>/usr/afs/bin/state_analyzer</code>.<br />
+  <br />
+  <br /> ---++ File-Server Arguments (relating to Demand-Attach)<br />
+  <br /> These are available in the man-pages (section 8) for the fileserve; some details are provided here for convenience.<br />
+  <br /> Arguments controlling the host / callback state:<br /> | <strong>Parameter</strong> | <strong>Options</strong> | <strong>Default</strong> | <strong>Modified Default</strong> | <strong>Meaning</strong> |<br /> | <code>fs-state-dont-save</code> | n/a | state saved | - | <code>fileserver</code> state will not be saved during shutdown |<br /> | <code>fs-state-dont-restore</code> | n/a | state restored | - | <code>fileserver</code> state will not be restored during startup |<br /> | <code>fs-state-verify</code> | &lt;none %VBAR% save %VBAR^% restore %VBAR% both&gt; | both | - | Controls the behavior of the state verification mechanism. Before saving or restoring the <code>fileserver</code> state information, the internal host and callback data structures are verified. A value of 'none' turns off all verification. A value of 'save' only performs the verification steps prior to saving state to disk. A value of 'restore' only performs the verification steps after restoring state from disk. A value of 'both' performs all verification steps both prior to saving and after restoring state. |<br />
+  <br /> Arguments controlling the [[Main/WebHome#VolumeLeastRecentlyUsed]]<br /> | <strong>Parameter</strong> | <strong>Options</strong> | <strong>Default</strong> | <strong>Modified Default</strong> | <strong>Meaning</strong> |<br /> | <code>vattachpar</code> | +int | 1 | 128 | Controls the parallelism of the volume package start-up and shutdown routines. On start-up, vice partitions are scanned for volumes to pre-attach using a number of worker threads, the number of which is the minimum of <code>vattachpar</code> or the number of vice partitions. On shutdown, <code>vattachpar</code> worker threads are used to detach volumes. The shutdown code is mp-scaleable well beyond the number of vice partitions. Tom Keiser (from SNA) found 128 threads for a single vice partition had a statistically significant performance improvement over 64 threads. |<br /> | <code>vhashsize</code> | +int | 8 | 11 | This parameter controls the size of the volume hash table. The table will contain 2^(<code>vhashsize</code>) entries. Hash bucket utilization statistics are given in the <code>fileserver</code> state information as well as on shutdown. |<br /> | <code>vlrudisable</code> | n/a | enabled | - | Disables the Volume Least Recently Used (VLRU) cache. |<br /> | <code>vlruthresh</code> | +int | 120 minutes | 1440 (24 hrs) | Minutes of inactivity before a volume is eligible for soft detachment. |<br /> | <code>vlruinterval</code> | +int | 120 seconds | - | Number of seconds between VLRU candidate queue scans |<br /> | <code>vlrumax</code> | +int | 8 | 8 | Max number of volumes which will be soft detached in a single pass of the scanner |</div>
+<div id=":175">
+</div>
+<div id=":175">
+  <p> -- [[Main/StevenJenkins]] - 10 Mar 2008 </p>
+  <p> The Demand Attach fileserver is a new architecture for the fileserver, volserver, and salvager that brings volumes online as as needed, and takes volumes offline when they have been idle. This greatly speeds up the fileserver startup and shutdown times. </p>
+  <p> The full presentation on the Demand Attach fileserver was given by Tom Keiser at the 2007 AFS Workshop. This entry is merely a summary of key information. </p>
+  <p>
+  </p>
+  <ul>
+    <li> The format of the volume and vnode structures did not change; however, the bosserver, fileserver, volserver, salvageserver, salvager, and salvage must be rebuilt (using the --enable-demand_attach_fs argument to configure). </li>
+    <li> The fs instance must be removed, and a replacement dafs instance added. See the bos_create(8) man page for details </li>
+    <li> There are new options to the fileserver. Note in particular that unless -vattachpar is larger than 1, many of the parallel I/O advantages of DAFS will not be enabled (Tom Keiser notes that 1 thread per partition is the logical extreme during startup; however, during shutdown, more threads can be used, so a value of 128 is not unreasonable). However, tuning this value for a given environment will require experimentation. </li>
+  </ul>
+  <p> The key engine for offlining volumes is the VLRU (Volume Least Recently Used) queue. This is a garbage collection facility which automatically offlines unused volumes in the background. The process of offlining a volume from the "attached" state to the"pre-attached" state is called "soft detachment". </p>
+  <p> VLRU works in a manner similar to a generational garbage collector. There are five queues on which volumes can reside: </p>
+  <p>
+  </p>
+  <ol>
+    <li> new </li>
+    <li> mid </li>
+    <li> old </li>
+    <li> held: queue for volumes which are administratively barred from VLRU activity </li>
+    <li> candidate: queue for volumes which have not been accessed recently, and thus are canddidates for soft detachment </li>
+  </ol>
+  <p> The new, mid, and old queues are generational queues for active volumes, with the state transitions among them controlled by the following inactivity rules: </p>
+  <p>
+  </p>
+  <ul>
+    <li> candidate-&gt;new activity present </li>
+    <li> new-&gt;candidate (1*vlruthresh) minutes since last transition; no activity </li>
+    <li> new-&gt;mid (2*vlruthresh) minutes since last transition; activity present </li>
+    <li> mid-&gt;old (4*vlruthresh) minutes since last transition; activity present </li>
+    <li> old-&gt;mid (2*vlruthresh) minutes since last transition; no activity </li>
+    <li> mid-&gt;new (1*vlruthresh) minutes since last transition; no activity </li>
+  </ul>
+  <p> The idea is that as a volume is used, it gets pushed into a 'more used' generation (i.e., 'old' is 'more used' than 'mid', which is 'more used' than 'new'). this provides a weighting so that volumes which are used more will tend to be in the mid and old queues, not in the new or candidate queues, thus staying in online. </p>
+  <p> Note that the VLRU engine can be controlled and tuned by the vlrudisable, vlruthresh, vlruinterval, and vlrumax parameters to the fileserver. </p>
+  <p>
+  </p>
+</div>
