@@ -8,6 +8,7 @@ OpenAFS 1.5 contains Demand-Attach File-Server (DAFS). DAFS is a significant dep
     <li><a href="#Why Demand-Attach File-Server (D"> Why Demand-Attach File-Server (DAFS) ?</a></li>
     <li><a href="#An Overview of Demand-Attach Fil"> An Overview of Demand-Attach File-Server</a></li>
     <li><a href="#The Gory Details of the Demand-A"> The Gory Details of the Demand-Attach File-Server</a><ul>
+        <li><a href="#Bos Configuration"> Bos Configuration</a></li>
         <li><a href="#File-server Start-up / Shutdown"> File-server Start-up / Shutdown Sequence</a></li>
         <li><a href="#Volume Finite-State Automata"> Volume Finite-State Automata</a></li>
         <li><a href="#Volume Least Recently Used (VLRU"> Volume Least Recently Used (VLRU) Queues</a></li>
@@ -17,6 +18,17 @@ OpenAFS 1.5 contains Demand-Attach File-Server (DAFS). DAFS is a significant dep
       </ul>
     </li>
     <li><a href="#File-Server Arguments (relating"> File-Server Arguments (relating to Demand-Attach)</a></li>
+    <li><a href="#Tools for Debugging Demand-Attac"> Tools for Debugging Demand-Attach File-Server</a><ul>
+        <li><a href="#==fssync-debug=="> fssync-debug</a></li>
+        <li><a href="#==salvsync-debug=="> salvsync-debug</a></li>
+        <li><a href="#==state_analyzer=="> state_analyzer</a><ul>
+            <li><a href="#Header Information"> Header Information</a></li>
+            <li><a href="#Host Information"> Host Information</a></li>
+            <li><a href="#Callback Information"> Callback Information</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </div>
 
@@ -56,6 +68,27 @@ The changes implemented for demand-attach include:
 - instead, host / callback state is preserved across restarts
 
 ## <a name="The Gory Details of the Demand-A"></a> The Gory Details of the Demand-Attach File-Server
+
+### <a name="Bos Configuration"></a> Bos Configuration
+
+A traditional file-server uses the `bnode` type `fs` and has a definition similar to
+
+    bnode fs fs 1
+    parm /usr/afs/bin/fileserver -p 123 -pctspare 20 -L -busyat 200 -rxpck 2000 -rxbind
+    parm /usr/afs/bin/volserver -p 127 -log -rxbind
+    parm /usr/afs/bin/salvager -parallel all32
+    end
+
+Since an additional component was required for the demand-attach file-server, a new `bnode` type ( `dafs`) is required. The definition should be similar to
+
+    bnode dafs dafs 1
+    parm /usr/afs/bin/fileserver -p 123 -pctspare 20 -L -busyat 50 -rxpck 2000 -rxbind -cb 4000000 -vattachpar 128 -vlruthresh 1440 -vlrumax 8 -vhashsize 11
+    parm /usr/afs/bin/volserver -p 64 -log -rxbind
+    parm /usr/afs/bin/salvageserver
+    parm /usr/afs/bin/salvager -parallel all32
+    end
+
+The instance for a demand-attach file-server is therefore `dafs` instead of `fs`.
 
 ### <a name="File-server Start-up / Shutdown"></a><a name="File-server Start-up / Shutdown "></a> File-server Start-up / Shutdown Sequence
 
@@ -119,7 +152,7 @@ On a traditional file-server, volumes are off-lined (detached) serially. In dema
 
 ### <a name="Volume Finite-State Automata"></a> Volume Finite-State Automata
 
-The volume finite-state automata is available in the source tree under `doc/arch/dafs-fsa.dot`
+The volume finite-state automata is available in the source tree under `doc/arch/dafs-fsa.dot`. See [[=fssync-debug=|AFSLore/DemandAttach#fssync_debug]] for information on debugging the volume package.
 
 <a name="VolumeLeastRecentlyUsed"></a>
 
@@ -228,6 +261,7 @@ Demand salvaging is implemented by the `salvageserver`. The actual code for salv
   - because volumes are inter-mingled on a partition (rather than being separated), a lock for the entire partition on which the volume is located is held throughout. Both the `fileserver` and `volserver` will block if they require this lock, e.g. to restore / dump a volume located on the partition.
   - inodes for a particular volume can be located anywhere on a partition. Salvaging therefore results in **every** inode on a partition having to be read to determine whether it belongs to the volume. This is extremely I/O intensive and leads to horrendous salvaging performance.
 - `/usr/afs/bin/salvsync-debug` provides low-level inspection and control over the `salvageserver`. %RED% **Indiscriminate use of `salvsync-debug` can lead to extremely bad things occurring. Use with care.** %ENDCOLOR%
+- See [[=salvsync-debug=|AFSLore/DemandAttach#salvsync_debug]] for information on debugging problems with the salvageserver.
 
 <a name="FSStateDat"></a>
 
@@ -327,3 +361,358 @@ Arguments controlling the [[VLRU:|Main/WebHome#VolumeLeastRecentlyUsed]]
     <td> Max number of volumes which will be soft detached in a single pass of the scanner </td>
   </tr>
 </table>
+
+## <a name="Tools for Debugging Demand-Attac"></a> Tools for Debugging Demand-Attach File-Server
+
+Several tools aid debugging problems with demand-attach file-servers. They operate at an extremely low-level and hence require a detailed knowledge of the architecture / code.
+
+### <a name="==fssync-debug=="></a> <code>**fssync-debug**</code>
+
+%RED% **Indiscriminate use of `fssync-debug` can have extremely dire consequences. Use with care** %ENDCOLOR%
+
+`fssync-debug` provides low-level inspection and control over the volume package of the file-server. It can be used to display the file-server information associated with a volume, e.g.
+
+    ozsaw7 2# vos exam user.af -cell w.ln
+    user.af                           537119916 RW    2123478 K  On-line
+      ln1qaf01 /vicepb
+      RWrite  537119916 ROnly          0 Backup  537119917
+      MaxQuota    3200000 K
+      Creation    Wed Sep 17 17:48:17 2003
+      Copy        Thu Dec 11 18:01:37 2008
+      Backup      Thu Jun 25 01:49:20 2009
+      Last Update Thu Jun 25 16:17:35 2009
+      85271 accesses in the past day (i.e., vnode references)
+
+      RWrite: 537119916     Backup: 537119917
+      number of sites -> 1
+         server ln1qaf01 partition /vicepb RW Site
+    ozsaw7 3# /usr/afs/bin/fssync-debug query -vol 537119916 -part /vicepb
+    calling FSYNC_VolOp with command code 65543 (FSYNC_VOL_QUERY)
+    FSYNC_VolOp returned 0 (SYNC_OK)
+    protocol response code was 0 (SYNC_OK)
+    protocol reason code was 0 (0)
+    volume = {
+          hashid          = 537119916
+          header          = 0xf93f160
+          device          = 1
+          partition       = 0xf90dfb8
+          linkHandle      = 0x10478400
+          nextVnodeUnique = 2259017
+          diskDataHandle  = 0x104783d0
+          vnodeHashOffset = 14
+          shuttingDown    = 0
+          goingOffline    = 0
+          cacheCheck      = 49167
+          nUsers          = 0
+          needsPutBack    = 0
+          specialStatus   = 0
+          updateTime      = 1245943107
+          vnodeIndex[vSmall] = {
+                  handle       = 0x104783a0
+                  bitmap       = 0x13f44df0
+                  bitmapSize   = 2792
+                  bitmapOffset = 64
+          }
+          vnodeIndex[vLarge] = {
+                  handle       = 0x10478370
+                  bitmap       = 0x13c96040
+                  bitmapSize   = 296
+                  bitmapOffset = 252
+          }
+          updateTime      = 1245943107
+          attach_state    = VOL_STATE_ATTACHED
+          attach_flags    = VOL_HDR_ATTACHED | VOL_HDR_LOADED | VOL_HDR_IN_LRU | VOL_IN_HASH | VOL_ON_VBYP_LIST | VOL_ON_VLRU
+          nWaiters        = 0
+          chainCacheCheck = 14
+          salvage = {
+                  prio      = 0
+                  reason    = 0
+                  requested = 0
+                  scheduled = 0
+          }
+          stats = {
+                  hash_lookups = {
+                          hi = 0
+                          lo = 459560
+                  }
+                  hash_short_circuits = {
+                          hi = 0
+                          lo = 30
+                  }
+                  hdr_loads = {
+                          hi = 0
+                          lo = 32
+                  }
+                  hdr_gets = {
+                          hi = 0
+                          lo = 456011
+                  }
+                  attaches         = 32
+                  soft_detaches    = 0
+                  salvages         = 1
+                  vol_ops          = 32
+                  last_attach      = 1245891030
+                  last_get         = 1245943107
+                  last_promote     = 1245891030
+                  last_hdr_get     = 1245943107
+                  last_hdr_load    = 1245891030
+                  last_salvage     = 1242508846
+                  last_salvage_req = 1242508846
+                  last_vol_op      = 1245890958
+          }
+          vlru = {
+                  idx = 0 (VLRU_QUEUE_NEW)
+          }
+          pending_vol_op  = 0x0
+    }
+
+Note that the `volumeid` argument must be the numeric ID and the `partition` argument must be the **exact** partition name (and not an abbreviation). An explanation of all these values is beyond the scope of this document. The important fields are:
+
+- `attach_state`, which is usually
+  - `VOL_STATE_PREATTACHED` which means the volume headers have been read, but the volume is not attached
+  - `VOL_STATE_ATTACHED` which means the volume is fully attached
+  - `VOL_STATE_ERROR` which indicates that the volume cannot be attached
+- `attach_flags`
+  - `VOL_HDR_ATTACHED` means the volume headers have been read (and hence the file-server is aware of the volumes existence)
+  - `VOL_HDR_LOADED` means the volume headers are resident in memory
+  - `VOL_HDR_IN_LRU` means the volume headers are on the least-recently used queue
+  - `VOL_IN_HASH` indicates that the volume has been added to the volume linked-list
+  - `VOL_ON_VBYP_LIST` indicates that the volume is linked off the partition list
+  - `VOL_ON_VLRU` means the volume is on a VLRU queue
+- the `salvage` structure (detailed [[here|AFSLore/DemandAttach#salvsync_debug]])
+- the `stats` structure, particularly the volume operation times ( `last_*`).
+- the `vlru` structure, particularly the VLRU queue
+
+An understanding of the [volume finite-state machine](http://www.dementia.org/twiki//view/dafs-fsa.png) is required before the state of a volume should be manipulated.
+
+### <a name="==salvsync-debug=="></a> <code>**salvsync-debug**</code>
+
+%RED% **Indiscriminate use of `salvsync-debug` can have extremely dire consequences. Use with care** %ENDCOLOR%
+
+`salvsync-debug` provides low-level inspection and control of the salvageserver process, including the scheduling order of volumes.
+
+`salvsync-debug` can be used to query the current salvage status of a volume, e,g,
+
+    ozsaw7 4# /usr/afs/bin/salvsync-debug query -vol 537119916 -part /vicepb
+    calling SALVSYNC_SalvageVolume with command code 65540 (SALVSYNC_QUERY)
+    SALVSYNC_SalvageVolume returned 0 (SYNC_OK)
+    protocol response code was 0 (SYNC_OK)
+    protocol reason code was 0 (**UNKNOWN**)
+    state = {
+          state = 4 (SALVSYNC_STATE_DONE)
+          prio = 0
+          sq_len = 0
+          pq_len = 0
+    }
+
+To initiate the salvaging of a volume
+
+    ozsaw7 5# /usr/afs/bin/salvsync-debug salvage -vol 537119916 -part /vicepb
+    calling SALVSYNC_SalvageVolume with command code 65537 (SALVSYNC_SALVAGE)
+    SALVSYNC_SalvageVolume returned 0 (SYNC_OK)
+    protocol response code was 0 (SYNC_OK)
+    protocol reason code was 0 (**UNKNOWN**)
+    state = {
+          state = 1 (SALVSYNC_STATE_QUEUED)
+          prio = 0
+          sq_len = 1
+          pq_len = 0
+    }
+    ozsaw7 6# /usr/afs/bin/salvsync-debug query -vol 537119916 -part /vicepb calling SALVSYNC_SalvageVolume with command code 65540 (SALVSYNC_QUERY)
+    SALVSYNC_SalvageVolume returned 0 (SYNC_OK)
+    protocol response code was 0 (SYNC_OK)
+    protocol reason code was 0 (**UNKNOWN**)
+    state = {
+          state = 2 (SALVSYNC_STATE_SALVAGING)
+          prio = 0
+          sq_len = 0
+          pq_len = 1
+    }
+
+This is the method that should be used on demand-attach file-servers to initiate the manual salvage of volumes. It should be used with care.
+
+Under normal circumstances, the priority ( `prio`) of a salvage request is the number of times the volume has been requested by clients. %RED% Modifying the priority (and hence the order volumes are salvaged) under heavy demand-salvaging usually leads to extremely bad things happening. %ENDCOLOR% To modify the priority of a request, use
+
+    salvsync-debug priority -vol 537119916 -part /vicepb -priority 999999
+
+(where `priority` is a 32-bit integer).
+
+### <a name="==state_analyzer=="></a> <code>**state\_analyzer**</code>
+
+`state_analyzer` allows the contents of the host / callback state file ( `/usr/afs/local/fsstate.dat`) to be inspected.
+
+#### <a name="Header Information"></a> Header Information
+
+Header information is gleaned through the `hdr` command
+
+    fs state analyzer> hdr
+    loading structure from address 0xfed80000 (offset 0)
+          fs_state_header = {
+                  stamp = {
+                          magic = 0x62fa841c
+                          version = 2
+                  }
+                  timestamp = "Tue Jun 23 11:51:49 2009"
+                  sys_name = 941
+                  server_uuid = "002e9712-ae67-1a2e-8a-42-900e866eaa77"
+                  valid = 0
+                  endianness = 1
+                  stats_detailed = 1
+                  h_offset = {
+                          hi = 0
+                          lo = 1024
+                  }
+                  cb_offset = {
+                          hi = 0
+                          lo = 93928
+                  }
+                  server_version_string = "@(#) OpenAFS 1.4.6-22 built  2009-04-18 "
+          }
+    fs state analyzer>
+
+#### <a name="Host Information"></a> Host Information
+
+Host information can be gleaned through the `h` command, e.g.
+
+    fs state analyzer> h
+    fs state analyzer: h(0)> this
+    loading structure from address 0xfed80500 (offset 1280)
+          host_state_entry_header = {
+                  magic = 0xa8b9cadb
+                  len = 104
+                  interfaces = 2
+                  hcps = 0
+          }
+          hostDiskEntry = {
+                  host = "161.144.167.187"
+                  port = 7001
+                  hostFlags = 0x144
+                  Console = 0
+                  hcpsfailed = 0
+                  hcps_valid = 0
+                  InSameNetwork = 0
+                  hcps_len = 0
+                  LastCall = "Tue Jun 23 11:51:45 2009"
+                  ActiveCall = "Tue Jun 23 11:51:45 2009"
+                  cpsCall = "Tue Jun 23 11:51:45 2009"
+                  cblist = 21133
+                  index = 373
+          }
+          Interface = {
+                  numberOfInterfaces = 2
+                  uuid = "aae8a851-1d54-4b83-ad-17-db967bd89e1b"
+                  interface[0] = {
+                          addr = "161.144.167.187"
+                          port = 7001
+                  }
+                  interface[1] = {
+                          addr = "192.168.8.4"
+                          port = 7001
+                  }
+          }
+    fs state analyzer: h(0)> next
+    loading structure from address 0xfed80568 (offset 1384)
+          host_state_entry_header = {
+                  magic = 0xa8b9cadb
+                  len = 120
+                  interfaces = 4
+                  hcps = 0
+          }
+          hostDiskEntry = {
+                  host = "10.181.34.134"
+                  port = 7001
+                  hostFlags = 0x144
+                  Console = 0
+                  hcpsfailed = 0
+                  hcps_valid = 0
+                  InSameNetwork = 0
+                  hcps_len = 0
+                  LastCall = "Tue Jun 23 11:51:08 2009"
+                  ActiveCall = "Tue Jun 23 11:51:08 2009"
+                  cpsCall = "Tue Jun 23 11:51:08 2009"
+                  cblist = 8422
+                  index = 369
+          }
+          Interface = {
+                  numberOfInterfaces = 4
+                  uuid = "00107e94-794d-1a3d-ae-e2-0ab52421aa77"
+                  interface[0] = {
+                          addr = "10.181.36.33"
+                          port = 7001
+                  }
+                  interface[1] = {
+                          addr = "10.181.36.31"
+                          port = 7001
+                  }
+                  interface[2] = {
+                          addr = "10.181.32.134"
+                          port = 7001
+                  }
+                  interface[3] = {
+                          addr = "10.181.34.134"
+                          port = 7001
+                  }
+          }
+    fs state analyzer: h(1)>
+
+#### <a name="Callback Information"></a> Callback Information
+
+Callback information is available through the `cb` command, e.g.
+
+    fs state analyzer> cb
+    fs state analyzer: fe(0):cb(0)> dump
+    loading structure from address 0xfed97b6c (offset 97132)
+          CBDiskEntry = {
+                  cb = {
+                          cnext = 0
+                          fhead = 19989
+                          thead = 103
+                          status = 1
+                          hhead = 224
+                          tprev = 12276
+                          tnext = 22836
+                          hprev = 12276
+                          hnext = 22836
+                  }
+                  index = 6774
+          }
+
+The `dump` command (as opposed to `this`) displays all call-backs for the current file-entry. Moving to the next file-entry can be achieved by
+
+    fs state analyzer: fe(0):cb(0)> quit
+    fs state analyzer: fe(0)> next
+    loading structure from address 0xfed97b90 (offset 97168)
+          callback_state_entry_header = {
+                  magic = 0x54637281
+                  len = 104
+                  nCBs = 1
+          }
+          FEDiskEntry = {
+                  fe = {
+                          vnode = 46426
+                          unique = 125874
+                          volid = 537156174
+                          fnext = 8880
+                          ncbs = 1
+                          firstcb = 23232
+                          status = 0
+                  }
+                  index = 21352
+          }
+    fs state analyzer: fe(1)> cb
+    fs state analyzer: fe(1):cb(0)> dump
+    loading structure from address 0xfed97bd4 (offset 97236)
+          CBDiskEntry = {
+                  cb = {
+                          cnext = 0
+                          fhead = 21352
+                          thead = 103
+                          status = 1
+                          hhead = 382
+                          tprev = 23751
+                          tnext = 22772
+                          hprev = 23751
+                          hnext = 7824
+                  }
+                  index = 23232
+          }
