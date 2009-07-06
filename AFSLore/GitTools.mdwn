@@ -12,18 +12,18 @@ The following are the tasks which needed to be completed before (or at the same 
 - <strike>Add a line to the comments of branch commits, indicating the SHA1 of the corresponding HEAD commit (this requires more reordering logic, so that the HEAD commit always lands first)</strike>
 - <strike>Tidy up the remaining FIXES that have no associated bug IDs</strike>
 - <strike>Remove the branch signifier from the delta reference (as it has no significance)</strike>
-- Reach a decision about tag and branch name formats (underscores or dots) and implement it
+- <strike>Reach a decision about tag and branch name formats (underscores or dots) and implement it</strike>
 
 ### <a name="Gerrit"></a> Gerrit
 
-- Install gerrit on the Stanford machine
+- <strike>Install gerrit on the Stanford machine</strike>
 - Make arrangements for database backups
 - Make arrangements for Jetty starting at machine boot
 - Stop gerrit from forging email
 
 ### <a name="cvs commit emails"></a> cvs commit emails
 
-We need to preserve the existing cvs commits mailing list. Russ has a plan to do this by using a second git repository, into which gerrit will automatically push all of the changes it receives. A post-receive hook script can then be used on this repository to generate commit emails. Russ is going to set this up once the final repository is in place, so this is fundamentally done.
+<strike>We need to preserve the existing cvs commits mailing list. Russ has a plan to do this by using a second git repository, into which gerrit will automatically push all of the changes it receives. A post-receive hook script can then be used on this repository to generate commit emails. Russ is going to set this up once the final repository is in place, so this is fundamentally done.</strike>
 
 ### <a name="Delta creation web page"></a> Delta creation web page
 
