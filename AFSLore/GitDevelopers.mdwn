@@ -1,0 +1,263 @@
+# <a name="Git and gerrit for developers"></a> Git and gerrit for developers
+
+Git opens up a number of new options for contributing to OpenAFS. For the first time, it is easy to review code that is pending addition to the OpenAFS tree. In fact, reviewing code is one of the best ways to ensure that the releases that OpenAFS ships remain stable and functional. If you are interested purely in reviewing, then please skip to that section towards the end of this document.
+
+Git also changes the way that developers interact with the OpenAFS tree. Instead of just having a single version of the tree on your local machine, you have a compressed copy of the entire repository. Additionaly, you no longer have to produce patches to send code upstream - any developer can push into the OpenAFS repository directly, through gerrit, our code review tool.
+
+Whilst git is a far more powerful tool than CVS it is also, inevitably, more complex. This document can only scratch the surface of what's possible with git - there are many, many, documents available that describe git in greater detail, and references to some of them are provided at the end.
+
+## <a name="Getting git"></a> Getting git
+
+Firstly, if your machine doesn't already have it installed, get a copy of the 'git' version control system. This is available for many platforms from their upstream package repositories or, failing that, can be downloaded in both source and binary form from <http://git-scm.com/download>
+
+## <a name="Getting the _OpenAFS repository"></a> Getting the OpenAFS repository
+
+You can download the entire OpenAFS repository by running
+
+git clone git://git.openafs.org/openafs.git openafs
+
+This will give you a complete copy of the [[OpenAFS]] repository and unless you are exceptionally short of either disk space, or time, is the approach we recommend. Unlike CVS, you are not just checking out a particular branch, but making a local copy of the project's whole revision history, across all of it's branches. This does make the download pretty large - around 150Mbytes at the time of writing.
+
+## <a name="Updating the local copy"></a> Updating the local copy
+
+When you want to update the local repository with the central [[OpenAFS]] one, running
+
+git pull
+
+will pull all of the new changes into your local repository, and merge those changes into your correct working tree. Note that whilst this is fine when you are browsing the repository, you may want to exercise more control over how upstream changes are merged into your development code.
+
+Checkout a particular branch **<span>========================</span>**
+
+The [[OpenAFS]] repository contains many branches, most of which are historical and should not be used for new development. Current development should be targetted at 'master' (for feature work, and general bugfixing), or at 'openafs-stable-1\_4\_x' (bug fixes specific to the current stable release). Note that the openafs-devel-1\_5\_x branch is now effectively dead - future 1.5 releases will occur from the 'master' branch.
+
+A complete list of all branches can be obtained by running
+
+git branch -r
+
+If all you wish to do is browse code, then you can directly check out these remote branches, using
+
+git checkout origin/
+
+For example, to checkout the 'openafs-stable-1\_4\_x' branch:
+
+git checkout origin/openafs-stable-1\_4\_x
+
+Note that if you wish to do development, you should either make a local branch which tracks the remote one, using something like
+
+git checkout -b openafs-stable-1\_4\_x openafs-stable-1\_4\_x
+
+or by creating a topic branch as discussed below.
+
+Checkout a particular release **<span>=========================</span>**
+
+Every release version of [[OpenAFS]] is marked in the repository by means of a tag.
+
+A complete list of all tags can be obtained by running
+
+git tag
+
+To checkout a particular tag
+
+git checkout openafs-stable-1\_4\_10
+
+Again, whilst a direct checkout of a remote tag is fine for code browsing, it should not be used as a place to start development. If you must do development against a tag, then create a local topic branch with it as a starting point, as is discussed below. However, in general, please don't develop from a particular tag, but instead work from a branch tip. It makes it much easier to integrate your changes!
+
+Viewing deltas **<span>==========</span>**
+
+In git, a delta should be simply a single changeset. Deltas are represented by means of a special form of git tag, allowing you to locally view the change, and commit message, that corresponds to each one. In order to keep down the transfer size, deltas are not included in the repository you get when you do a git clone - there are over 10,000 delta references, and having them in your locally can cause performance issues. If you really wish to be able to locally browse deltas, then run the following
+
+git config remote.origin.fetch '+refs/deltas/\*:refs/remotes/deltas/\*' git fetch origin
+
+You can then view a specific delta by doing
+
+git show refs/remotes/deltas//
+
+Sadly, historical accidents mean that not all of our deltas can be represented by means of single commit. Where this is the case, a delta-name will have a trailing -part-, where each of these numbers must be used to form the complete delta. This only applies to some deltas created before the git conversion - all deltas created from now on will be a single changeset.
+
+Introducing yourself to git **<span>=======================</span>**
+
+Before you begin development, you should let git know who you are. This provides it with a name, and email address, that is used to attribute all commits in your repository, and in any that you share code with.
+
+git config user.name "Joe Bloggs" git config user.email "joe.bloggs@example.org"
+
+If you want to make this settings for all of your repositories, then add the --global switch.
+
+git config --global user.name "Joe Bloggs" git config --global user.email "joe.bloggs@example.org"
+
+Note that this email address is the address by which you will be identified in [[OpenAFS]]'s revision history - it is also the address to which the gerrit code review tool will send all email related to the review of your code.
+
+Starting development **<span>================</span>**
+
+We strongly recommend that you do all of your development upon 'topic branches' This allows you to isolate multiple unrelated changes, and makes it easier to keep your tree in sync with the upstream [[OpenAFS]] one.
+
+Before creating a new topic branch, running
+
+git fetch
+
+will make sure that your repository is up to date (unlike git pull, this will not update any files that you may have checked out)
+
+To create a new topic branch:
+
+git checkout -b
+
+For example, to work on a patch to fix printf warnings, based on the current development code, I would do:
+
+git checkout -b fix-printf-warnings origin/master
+
+This puts me on a new branch, ready to start writing code. We'd strongly recommend that all new development is based upon the origin/master branch, submissions based upon other branches are unlikely to be accepted.
+
+'git add' is used to tell git about any new files you create as part of your patch. If your patch results in any new compilation products (object files, new executables, etc) that git should not be tracking, please make sure that they're caught by the .gitignore mechanism. You can do this by checking that they don't appear in the output from 'git status'
+
+'git mv' and 'git rm' are used to move and delete files respectively. The move command preserves history, and is infinitely preferable to deleting, then adding the file.
+
+git commit is used to commit code. If you don't want to have to remember to 'git add' every time you change a file, then 'git commit -a' can be used to commit all changes to files that git knows about.
+
+When you can't see the wood for the trees **<span>=====================================</span>**
+
+If, in the middle of development, you discover that you've gone down a blind alley, and wish to go back to the state of your last commit
+
+git reset --hard
+
+will discard all of the changes you have made since the last commit, or
+
+git checkout -f
+
+will restore  to the state it was in at the last commit.
+
+Keeping up with the Jones' **<span>======================</span>**
+
+If you're working on a long running development project, you will find that the point your created your topic branch rapidly recedes into history. At some point (and at least before you share your code with us), you'll probably want to update your tree. There are a number of ways of doing this.
+
+If you haven't shared you tree with anyone else, then you can use
+
+git rebase
+
+(Where  is the name of the upstream branch - for example origin/master, and  is the name of the topic branch you are currently working on)
+
+Note that git rebase changes your local history (it moves the branch point of your topic branch to the tip of the upstream branch), and is a bad idea if others have cloned your repository. See 'man git-rebase' for more details.
+
+If you can't rebase, then consider either merging the changes onto your local branch, or creating a new topic branch and cherry picking your changes onto it. The man pages for 'git merge' and 'git cherry-pick' provide more detail on these.
+
+Sharing your code with us **<span>=====================</span>**
+
+How you work from this point onwards depends on how you intend making your code available to [[OpenAFS]]. We're still happy to receive submission by patch (by sending your changes to <openafs-bugs@openafs.org>), but it makes it much easier for us if you push directly from your git tree to our code review system, gerrit.
+
+Registering with gerrit **<span>===================</span>**
+
+To register with gerrit, visit <http://gerrit.openafs.org/> and log in using any [[OpenID]]. [[OpenIDs]] are available from a large number of internet services, including Google Accounts. If you don't have one, <http://myid.net> is an [[OpenID]] provider that we know works with Gerrit, and that don't require much in the way of personal details to obtain an account. Note that we're aware of problems using [[LiveJournal]] [[OpenIDs]] to access the service.
+
+If, when you introduced yourself to git, you gave it a different email address than the one gerrit currently has listed for you, you need to introduce yourself to gerrit under that name, too. Click on 'Contact Information', and select "Register New Email...". If gerrit thinks you are an "Anonymous Coward" then you can fix that on this page as well.
+
+In order to be able to upload code, you now need to create a ssh key that gerrit can use to identify you, or tell gerrit about one that already exists.
+
+To create a new ssh key, if you don't already have one, run
+
+ssh-keygen -t rsa -f ~/.ssh/id\_rsa
+
+The public key for this is now stored in ~/.ssh/id\_rsa.pub.
+
+To tell gerrit about your key, log in, and go to 'Settings'. Select 'SSH Keys', and paste your _public_ key into the "Add SSH Public Key" box, or click on the 'Open Key...' option to load it from the filesystem. Click on 'Add' to add the new public key. While you are on this page, make a note of your 'SSH Username', because you'll need to for the next step.
+
+To make things easier, set up [[OpenSSH]] so that it knows about the defaults for the gerrit server. Edit ~/.ssh/config, and add a section like:
+
+Host gerrit.openafs.org User  [[IdentityFile]] ~/.ssh/id\_rsa Port 29418
+
+(where SSH Username is what you were told on the the 'SSH Keys' page)
+
+Uploading to gerrit **<span>===============</span>**
+
+When submitting to gerrit, it's important to realise that each commit in your branch will become a changeset in the upstream [[OpenAFS]], typically with no modification at our end. It is therefore important that these commits follow some simple rules...
+
+First, each commit should be complete. The maxim "one change per commit, one commit per change" applies here. Each commit should build and test in its own right. Typically, this means that a change will be in a small number of commits. If, during development, you have created many more than this (for example, you've created a large number of bug fix commits), please use 'git rebase', or cherry pick these commits into a separate tree before uploading them.
+
+Secondly, each commit should have a meaningful revision log. The internals of git means that we can't easily edit these before pushing them into the tree, so we'd like you to get them right for us! A commit message should be comprised of a single 'subject' line (which must **not** end with a full stop), followed by a blank line, followed by one or more paragraphs explaining the purpose of the patch. If it is intended to fix a bug in [[OpenAFS]] RT, then the word 'FIXES' followed by the bug number should be included on a line of its own. The 'LICENSE' keyword can be used to indicate code which is covered under a license other than the IPL, although please speak to a gatekeeper if you intend using this. An example commit message would be
+
+Add option to disable syscall probing
+
+This adds the --disable-linux-syscall-probing to allow the probing of kernel memory for the syscall table to be disable at compile time. This helps with Linux architectures which have compile, run or load time issues with syscall probing by providing a band-aid fix until we can improve the configuration logic in this area.
+
+FIXES 123456
+
+Once you have commits in this form, use
+
+git log -p ..HEAD
+
+(where &lt;branch is the upstream branch upon which you are basing this patch)
+
+to check that what you're giving us makes sense. Then, upload them to gerrit using
+
+git push ssh://gerrit.openafs.org/openafs.git HEAD:refs/for/
+
+(again branch is the name of the upstrem branch that you are pushing the changes into, not the name of any local branch you may have been developing on)
+
+In this case, refs/for is a literal string. So, if you had been developing against master, you can upload your changes with:
+
+git push ssh://gerrit.openafs.org/openafs.git HEAD:refs/for/master
+
+This relies upon the ssh configuration you performed earlier. If it fails to work, please consult the troubleshooting notes at <http://gerrit.googlecode.com/svn/documentation/2.0/user-upload.html>
+
+Assuming all has gone well, this will have added the entry to the code review queue. The output from git review will give you a change number - this is a unique reference for this particular set of changes. During review you'll be emailed with any comments anyone makes, and can respond to those comments using the gerrit web interface (see the section on reviewing, below). It's possible that issues with your change may be noticed during the review process, and you may be asked to revise it, or update changes to the tip of the tree.
+
+Revising your change **<span>================</span>**
+
+It's possible that your modifications won't be accepted first time. In this case, you need to revise your changes, and resubmit them to gerrit. Please note that this should always be done by modifying your original changeset, _not_ by submitting a new change that makes the required fixes. Either git commit --ammend, or git rebase should be used to combine your changes with the original changeset, and then you should push this to gerrit with
+
+git push ssh://gerrit.openafs.org/openafs.git :refs/changes/
+
+(where is the hash of the revised change, and  is the change number you received when you originally submitted the patch)
+
+You can obtain the sha1 of a commit by using 'git show' (if it is on the tip of your current branch), or 'git log' (if it is in your history)
+
+Other mechanisms of listing the change to push are available - see <http://gerrit.googlecode.com/svn/documentation/2.0/user-upload.html> for full details.
+
+Updating your change **<span>================</span>**
+
+It's possible that your change may have been made against a tree which is too old for it to apply to the tip. In this case, gerrit will let you know that there is a collision, and request that you update the change to the tip.
+
+You can do this with
+
+git rebase origin/master
+
+(assuming your patch is against the 'master' git branch, and lives on the  branch)
+
+And then simply resubmit your change in the same way as if you had been asked to revise it (see notes above)
+
+Submitting by patch **<span>===============</span>**
+
+If all of this seems too daunting (and please don't let it put you off) you can still, of course, submit patches by email.
+
+git diff HEAD
+
+will give you the set of changes if you don't do local commits. If you make topic branches, and commit things locally, but don't want to go through the whole gerrit process,
+
+git diff master..
+
+will give all of the changes between the branch point of you topic branch (assuming you branched from 'master') and the last commit.
+
+You can send those into <openafs-bugs@openafs.org> as before. Note, however, by doing this you're making someone else take the patch, create a topic branch in their local tree, apply the patch, and push it into gerrit. Things would be much more efficient if you pushed into gerrit yourself. Please?
+
+Reviewing changes **<span>=============</span>**
+
+Okay, so that's how you get a patch into gerrit. Once it's there, then what happens to it. All code review happens via the <http://gerrit.openafs.org> interface. You should log in there as detailed above (using any [[OpenID]]), and make sure that the email address points to somewhere you'll read regularly.
+
+You'll be presented with a list of patches requiring review or, if someone has asked, patches you've been explicitly requested to review. There are two types of review - Code Review and Verification. Code Review means that you have read through the code, and are satisified that it works properly, follows the tree's style, and generally doesn't suck. Verification means that you have taken a copy of the patch and tested it. We hope to eventually automate the verification step, but for now both must be perfomed by hand.
+
+To perform a code review, go through each of the diffs in the current changeset for the code you have decided to review. You can double click on a line to leave a comment. Once you have completed commenting, click on the 'Publish Comments' button on the page containing the list of patch sets. You will then be asked to score the patch, with a range from -1 to +1. -1 means that you don't think the code should be applied, +1 means that it is good to apply. You can also leave further, general, comments for the patch submitter.
+
+Note that no matter how many +1 or -1 comments a patch receives, the gatekeepers can override these to either permit or forbid submission. Also, at least one gatekeeper must approve a patch before it can be submitted to the tree.
+
+To verify the code, pull the git copy into your local tree, using the git command listed as part of the patch details. For sanity's sake, we'd strongly recommend you do this pull into a branch you've created for the purpose. Build it, test it, and report your results. Note that a single -1 to verification can block patch submission, so please use these options wisely. If in doubt, score 0 and leave your comments. Please indicate when verifying which platforms you have tested on, and what testing you performed.
+
+And that's pretty much it. All of this is very new. If you encounter any problems at all, please ask for help on IRC in #openafs, Jabber in <openafs@conference.openafs.org> or on <openafs-devel@openafs.org>. Private pleas may be addressed to <simon@sxw.org.uk>
+
+Further Reading **<span>===========</span>**
+
+Git Magic <http://www-cs-students.stanford.edu/~blynn/gitmagic/>
+
+Git User's Manual <http://www.kernel.org/pub/software/scm/git/docs/user-manual.html>
+
+Git Community Book <http://book.git-scm.com/>
+
+Gerrit Documentation <http://gerrit.googlecode.com/svn/documentation/2.0/index.html> (only the first 'User Guide' section of this document is relevant)
+
+-- [[SimonWilkinson]] - 07 Jul 2009
