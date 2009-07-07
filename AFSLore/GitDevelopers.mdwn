@@ -14,13 +14,19 @@ Firstly, if your machine doesn't already have it installed, get a copy of the 'g
 
 You can download the entire OpenAFS repository by running
 
-    git clone git://git.openafs.org/openafs.git openafs
+    git clone git://git.openafs.org/openafs.git
 
-This will give you a complete copy of the [[OpenAFS]] repository and unless you are exceptionally short of either disk space, or time, is the approach we recommend. Unlike CVS, you are not just checking out a particular branch, but making a local copy of the project's whole revision history, across all of it's branches. This does make the download pretty large - around 150Mbytes at the time of writing.
+to place the clone in a directory called 'openafs' or
+
+    git clone git://git.openafs.org/openafs.git <name-of-directory>
+
+to place your clone in a specific directory
+
+This will give you a complete copy of the OpenAFS repository and unless you are exceptionally short of either disk space, or time, is the approach we recommend. Unlike CVS, you are not just checking out a particular branch, but making a local copy of the project's whole revision history, across all of it's branches. This does make the download pretty large - around 150Mbytes at the time of writing.
 
 ## <a name="Updating the local copy"></a> Updating the local copy
 
-When you want to update the local repository with the central [[OpenAFS]] one, running
+When you want to update the local repository with the central OpenAFS one, running
 
     git pull
 
@@ -28,7 +34,7 @@ will pull all of the new changes into your local repository, and merge those cha
 
 ## <a name="Checkout a particular branch"></a> Checkout a particular branch
 
-The [[OpenAFS]] repository contains many branches, most of which are historical and should not be used for new development. Current development should be targetted at 'master' (for feature work, and general bugfixing), or at 'openafs-stable-1\_4\_x' (bug fixes specific to the current stable release). Note that the openafs-devel-1\_5\_x branch is now effectively dead - future 1.5 releases will occur from the 'master' branch.
+The OpenAFS repository contains many branches, most of which are historical and should not be used for new development. Current development should be targetted at 'master' (for feature work, and general bugfixing), or at 'openafs-stable-1\_4\_x' (bug fixes specific to the current stable release). Note that the openafs-devel-1\_5\_x branch is now effectively dead - future 1.5 releases will occur from the 'master' branch.
 
 A complete list of all branches can be obtained by running
 
@@ -44,7 +50,11 @@ For example, to checkout the 'openafs-stable-1\_4\_x' branch:
 
 Note that if you wish to do development, you should either make a local branch which tracks the remote one, using something like
 
-    git checkout -b openafs-stable-1_4_x openafs-stable-1_4_x
+    git checkout -b openafs-stable-1_4_x origin/openafs-stable-1_4_x
+
+or, more simply
+
+    git checkout --track origin/openafs-stable-1_4_x
 
 or by creating a topic branch as discussed below.
 
@@ -66,11 +76,12 @@ Again, whilst a direct checkout of a remote tag is fine for code browsing, it sh
 
 In git, a delta should be simply a single changeset. Deltas are represented by means of a special form of git tag, allowing you to locally view the change, and commit message, that corresponds to each one. In order to keep down the transfer size, deltas are not included in the repository you get when you do a git clone - there are over 10,000 delta references, and having them in your local repository can cause performance issues. If you really wish to be able to locally browse deltas, then run the following
 
-    git config remote.origin.fetch '+refs/deltas/*:refs/remotes/deltas/*' git fetch origin
+    git config --add remote.origin.fetch '+refs/deltas/*:refs/remotes/deltas/*'
+    git fetch origin
 
 You can then view a specific delta by doing
 
-    git show refs/remotes/deltas/<branch>/
+    git show refs/remotes/deltas/<branch>/<delta>
 
 Sadly, historical accidents mean that not all of our deltas can be represented by means of single commit. Where this is the case, a delta-name will have a trailing -part-, where each of these numbers must be used to form the complete delta. This only applies to some deltas created before the git conversion - all deltas created from now on will be a single changeset.
 
@@ -110,7 +121,7 @@ This puts me on a new branch, ready to start writing code. We'd strongly recomme
 
 'git add' is used to tell git about any new files you create as part of your patch. If your patch results in any new compilation products (object files, new executables, etc) that git should not be tracking, please make sure that they're caught by the .gitignore mechanism. You can do this by checking that they don't appear in the output from 'git status'
 
-'git mv' and 'git rm' are used to move and delete files respectively. The move command preserves history, and is infinitely preferable to deleting, then adding the file.
+'git mv' and 'git rm' are used to move and delete files respectively.
 
 git commit is used to commit code. If you don't want to have to remember to 'git add' every time you change a file, then 'git commit -a' can be used to commit all changes to files that git knows about.
 
@@ -142,11 +153,11 @@ If you can't rebase, then consider either merging the changes onto your local br
 
 ## <a name="Sharing your code with us"></a> Sharing your code with us
 
-How you work from this point onwards depends on how you intend making your code available to [[OpenAFS]]. We're still happy to receive submission by patch (by sending your changes to <openafs-bugs@openafs.org>), but it makes it much easier for us if you push directly from your git tree to our code review system, gerrit.
+How you work from this point onwards depends on how you intend making your code available to OpenAFS. We're still happy to receive submission by patch (by sending your changes to <openafs-bugs@openafs.org>), but it makes it much easier for us if you push directly from your git tree to our code review system, gerrit.
 
 ## <a name="Registering with gerrit"></a> Registering with gerrit
 
-To register with gerrit, visit <http://gerrit.openafs.org/> and log in using any [[OpenID]]. [[OpenIDs]] are available from a large number of internet services, including Google Accounts. If you don't have one, <http://myid.net> is an [[OpenID]] provider that we know works with Gerrit, and that don't require much in the way of personal details to obtain an account. Note that we're aware of problems using [[LiveJournal]] [[OpenIDs]] to access the service.
+To register with gerrit, visit <http://gerrit.openafs.org/> and log in using any OpenID. OpenIDs are available from a large number of internet services, including Google Accounts. If you don't have one, <http://myid.net> is an OpenID provider that we know works with Gerrit, and that don't require much in the way of personal details to obtain an account. Note that we're aware of problems using LiveJournal OpenIDs to access the service.
 
 If, when you introduced yourself to git, you gave it a different email address than the one gerrit currently has listed for you, you need to introduce yourself to gerrit under that name, too. Click on 'Contact Information', and select "Register New Email...". If gerrit thinks you are an "Anonymous Coward" then you can fix that on this page as well.
 
@@ -160,7 +171,7 @@ The public key for this is now stored in ~/.ssh/id\_rsa.pub.
 
 To tell gerrit about your key, log in, and go to 'Settings'. Select 'SSH Keys', and paste your _public_ key into the "Add SSH Public Key" box, or click on the 'Open Key...' option to load it from the filesystem. Click on 'Add' to add the new public key. While you are on this page, make a note of your 'SSH Username', because you'll need to for the next step.
 
-To make things easier, set up [[OpenSSH]] so that it knows about the defaults for the gerrit server. Edit ~/.ssh/config, and add a section like:
+To make things easier, set up OpenSSH so that it knows about the defaults for the gerrit server. Edit ~/.ssh/config, and add a section like:
 
     Host gerrit.openafs.org
     User <SSH Username>
@@ -177,11 +188,15 @@ First, each commit should be complete. The maxim "one change per commit, one com
 
 Secondly, each commit should have a meaningful revision log. The internals of git means that we can't easily edit these before pushing them into the tree, so we'd like you to get them right for us! A commit message should be comprised of a single 'subject' line (which must **not** end with a full stop), followed by a blank line, followed by one or more paragraphs explaining the purpose of the patch. If it is intended to fix a bug in [[OpenAFS]] RT, then the word 'FIXES' followed by the bug number or comma-separated list of bug numbers should be included on a line of its own. The 'LICENSE' keyword can be used to indicate code which is covered under a license other than the IPL, although please speak to a gatekeeper if you intend using this. An example commit message would be
 
-Add option to disable syscall probing
+      Add option to disable syscall probing
 
-This adds the --disable-linux-syscall-probing to allow the probing of kernel memory for the syscall table to be disable at compile time. This helps with Linux architectures which have compile, run or load time issues with syscall probing by providing a band-aid fix until we can improve the configuration logic in this area.
+      This adds the --disable-linux-syscall-probing to allow the probing of
+      kernel memory for the syscall table to be disable at compile time. This
+      helps with Linux architectures which have compile, run or load time
+      issues with syscall probing by providing a band-aid fix until we can
+      improve the configuration logic in this area.
 
-FIXES 123456
+      FIXES 123456
 
 Once you have commits in this form, use
 
@@ -243,7 +258,7 @@ You can send those into <openafs-bugs@openafs.org> as before. Note, however, by 
 
 ## <a name="Reviewing changes"></a> Reviewing changes
 
-Okay, so that's how you get a patch into gerrit. Once it's there, then what happens to it. All code review happens via the <http://gerrit.openafs.org> interface. You should log in there as detailed above (using any [[OpenID]]), and make sure that the email address points to somewhere you'll read regularly.
+Okay, so that's how you get a patch into gerrit. Once it's there, then what happens to it? All code review happens via the <http://gerrit.openafs.org> interface. You should log in there as detailed above (using any OpenID), and make sure that the email address points to somewhere you'll read regularly.
 
 You'll be presented with a list of patches requiring review or, if someone has asked, patches you've been explicitly requested to review. There are two types of review - Code Review and Verification. Code Review means that you have read through the code, and are satisified that it works properly, follows the tree's style, and generally doesn't suck. Verification means that you have taken a copy of the patch and tested it. We hope to eventually automate the verification step, but for now both must be perfomed by hand.
 
