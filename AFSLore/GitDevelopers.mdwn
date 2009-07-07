@@ -207,11 +207,11 @@ Assuming all has gone well, this will have added the entry to the code review qu
 
 It's possible that your modifications won't be accepted first time. In this case, you need to revise your changes, and resubmit them to gerrit. Please note that this should always be done by modifying your original changeset, _not_ by submitting a new change that makes the required fixes. Either git commit --amend, or git rebase should be used to combine your changes with the original changeset, and then you should push this to gerrit with
 
-    git push ssh://gerrit.openafs.org/openafs.git :refs/changes/<number>
+    git push ssh://gerrit.openafs.org/openafs.git <hash>:refs/changes/<number>
 
-(where is the hash of the revised change, and &lt;number&gt; is the change number you received when you originally submitted the patch)
+(where &lt;hash&gt; is the sha1 hash of the revised change, and &lt;number&gt; is the change number you received when you originally submitted the patch)
 
-You can obtain the sha1 of a commit by using 'git show' (if it is on the tip of your current branch), or 'git log' (if it is in your history)
+You can obtain the sha1 hash of a commit by using 'git show' (if it is on the tip of your current branch), or 'git log' (if it is in your history)
 
 Other mechanisms of listing the change to push are available - see <http://gerrit.googlecode.com/svn/documentation/2.0/user-upload.html> for full details.
 
