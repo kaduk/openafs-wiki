@@ -182,11 +182,11 @@ To make things easier, set up OpenSSH so that it knows about the defaults for th
 
 ## <a name="Uploading to gerrit"></a> Uploading to gerrit
 
-When submitting to gerrit, it's important to realise that each commit in your branch will become a changeset in the upstream [[OpenAFS]], typically with no modification at our end. It is therefore important that these commits follow some simple rules...
+When submitting to gerrit, it's important to realise that each commit in your branch will become a changeset in the upstream OpenAFS, typically with no modification at our end. It is therefore important that these commits follow some simple rules...
 
 First, each commit should be complete. The maxim "one change per commit, one commit per change" applies here. Each commit should build and test in its own right. Typically, this means that a change will be in a small number of commits. If, during development, you have created many more than this (for example, you've created a large number of bug fix commits), please use 'git rebase', or cherry pick these commits into a separate tree before uploading them.
 
-Secondly, each commit should have a meaningful revision log. The internals of git means that we can't easily edit these before pushing them into the tree, so we'd like you to get them right for us! A commit message should be comprised of a single 'subject' line (which must **not** end with a full stop), followed by a blank line, followed by one or more paragraphs explaining the purpose of the patch. If it is intended to fix a bug in [[OpenAFS]] RT, then the word 'FIXES' followed by the bug number or comma-separated list of bug numbers should be included on a line of its own. The 'LICENSE' keyword can be used to indicate code which is covered under a license other than the IPL, although please speak to a gatekeeper if you intend using this. An example commit message would be
+Secondly, each commit should have a meaningful revision log. The internals of git means that we can't easily edit these before pushing them into the tree, so we'd like you to get them right for us! A commit message should be comprised of a single 'subject' line (which must **not** end with a full stop), followed by a blank line, followed by one or more paragraphs explaining the purpose of the patch. If it is intended to fix a bug in OpenAFS RT, then the word 'FIXES' followed by the bug number or comma-separated list of bug numbers should be included on a line of its own. The 'LICENSE' keyword can be used to indicate code which is covered under a license other than the IPL, although please speak to a gatekeeper if you intend using this. An example commit message would be
 
       Add option to disable syscall probing
 
