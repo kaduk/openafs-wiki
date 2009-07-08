@@ -2,7 +2,7 @@
 
 Git opens up a number of new options for contributing to OpenAFS. For the first time, it is easy to review code that is pending addition to the OpenAFS tree. In fact, reviewing code is one of the best ways to ensure that the releases that OpenAFS ships remain stable and functional. If you are interested purely in reviewing, then please skip to that section towards the end of this document.
 
-Git also changes the way that developers interact with the OpenAFS tree. Instead of just having a single version of the tree on your local machine, you have a compressed copy of the entire repository. Additionaly, you no longer have to produce patches to send code upstream - any developer can push into the OpenAFS repository directly, through gerrit, our code review tool.
+Git also changes the way that developers interact with the OpenAFS tree. Instead of just having a single version of the tree on your local machine, you have a compressed copy of the entire repository. Additionally, you no longer have to produce patches to send code upstream - any developer can push into the OpenAFS repository directly, through gerrit, our code review tool.
 
 Whilst git is a far more powerful tool than CVS it is also, inevitably, more complex. This document can only scratch the surface of what's possible with git - there are many, many, documents available that describe git in greater detail, and references to some of them are provided at the end.
 
@@ -123,7 +123,7 @@ This puts me on a new branch, ready to start writing code. We'd strongly recomme
 
 'git mv' and 'git rm' are used to move and delete files respectively.
 
-git commit is used to commit code. If you don't want to have to remember to 'git add' every time you change a file, then 'git commit -a' can be used to commit all changes to files that git knows about.
+'git commit -a' is used to commit code to all of the files that git is currently tracking (that is, all of the files that you have checked out from the repository, and all those which you have run git add on)
 
 ## <a name="When you can&#39;t see the wood for"></a><a name="When you can&#39;t see the wood for "></a> When you can't see the wood for the trees
 
@@ -149,7 +149,7 @@ If you haven't shared you tree with anyone else, then you can use
 
 Note that git rebase changes your local history (it moves the branch point of your topic branch to the tip of the upstream branch), and is a bad idea if others have cloned your repository. See 'man git-rebase' for more details.
 
-If you can't rebase, then consider either merging the changes onto your local branch, or creating a new topic branch and cherry picking your changes onto it. The man pages for 'git merge' and 'git cherry-pick' provide more detail on these.
+If you can't rebase, then consider either merging the changes onto your local branch, or creating a new topic branch and cherry picking your changes onto it. The man pages for 'git merge' and 'git cherry-pick' provide more detail on these options.
 
 ## <a name="Sharing your code with us"></a> Sharing your code with us
 
@@ -191,7 +191,7 @@ Secondly, each commit should have a meaningful revision log. The internals of gi
       Add option to disable syscall probing
 
       This adds the --disable-linux-syscall-probing to allow the probing of
-      kernel memory for the syscall table to be disable at compile time. This
+      kernel memory for the syscall table to be disabled at compile time. This
       helps with Linux architectures which have compile, run or load time
       issues with syscall probing by providing a band-aid fix until we can
       improve the configuration logic in this area.
@@ -258,7 +258,7 @@ You can send those into <openafs-bugs@openafs.org> as before. Note, however, by 
 
 ## <a name="Reviewing changes"></a> Reviewing changes
 
-Okay, so that's how you get a patch into gerrit. Once it's there, then what happens to it? All code review happens via the <http://gerrit.openafs.org> interface. You should log in there as detailed above (using any OpenID), and make sure that the email address points to somewhere you'll read regularly.
+We'll now look at how changes that have made it into gerrit can be reviewed. All code review now happens via the <http://gerrit.openafs.org> interface. You should log in there as detailed above (using any OpenID), and make sure that the email address points to somewhere you'll read regularly.
 
 You'll be presented with a list of patches requiring review or, if someone has asked, patches you've been explicitly requested to review. There are two types of review - Code Review and Verification. Code Review means that you have read through the code, and are satisified that it works properly, follows the tree's style, and generally doesn't suck. Verification means that you have taken a copy of the patch and tested it. We hope to eventually automate the verification step, but for now both must be perfomed by hand.
 
@@ -266,7 +266,7 @@ To perform a code review, go through each of the diffs in the current changeset 
 
 Note that no matter how many +1 or -1 comments a patch receives, the gatekeepers can override these to either permit or forbid submission. Also, at least one gatekeeper must approve a patch before it can be submitted to the tree.
 
-To verify the code, pull the git copy into your local tree, using the git command listed as part of the patch details. For sanity's sake, we'd strongly recommend you do this pull into a branch you've created for the purpose. Build it, test it, and report your results. Note that a single -1 to verification can block patch submission, so please use these options wisely. If in doubt, score 0 and leave your comments. Please indicate when verifying which platforms you have tested on, and what testing you performed.
+To verify the code, pull the git copy into your local tree, using the git command listed as part of the patch details. For sanity's sake, we'd strongly recommend you do this pull into a topic branch you've created for the purpose. Build it, test it, and report your results. Note that a single -1 to verification can block patch submission, so please use these options wisely. If in doubt, score 0 and leave your comments. Please indicate when verifying which platforms you have tested on, and what testing you performed.
 
 And that's pretty much it. All of this is very new. If you encounter any problems at all, please ask for help on IRC in #openafs, Jabber in <openafs@conference.openafs.org> or on <openafs-devel@openafs.org>. Private pleas may be addressed to <simon@sxw.org.uk>
 
@@ -279,5 +279,9 @@ Git User's Manual <http://www.kernel.org/pub/software/scm/git/docs/user-manual.h
 Git Community Book <http://book.git-scm.com/>
 
 Gerrit Documentation <http://gerrit.googlecode.com/svn/documentation/2.0/index.html> (only the first 'User Guide' section of this document is relevant)
+
+## <a name="Acknowledgments"></a> Acknowledgments
+
+Thanks to everyone who has reviewed this document, and offered corrections and contributions.
 
 -- [[SimonWilkinson]] - 07 Jul 2009
