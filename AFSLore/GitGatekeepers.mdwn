@@ -1,0 +1,72 @@
+# <a name="Git and gerrit for gatekeepers"></a> Git and gerrit for gatekeepers
+
+Firstly, please read the [[Git and gerrit for developers|Main/GitDevelopers]] document. This document only details gatekeeper specific workflow - it's worth reading the git basics first!
+
+## <a name="Getting started"></a> Getting started
+
+Log in to gerrit, create yourself a ssh key, set up your preferred email addresses, clone a local tree, and tell git who you are as detailed in the developers document. Email Simon (or a gatekeeper who's already got an account) the [[OpenID]] you created your account with, and they'll grant gatekeeper permissions.
+
+## <a name="Commiting patches from RT (or el"></a> Commiting patches from RT (or elsewhere)
+
+To commit a patch from RT, or elsewhere, make a new topic branch, and apply the patch to that branch.
+
+When committing, use
+
+    git commit --author="A.N. Author <an.author@example.org>"
+
+to acknowledge the patch author (your name will still be there as the committer of the patch). Push the patch into gerrit as usual, and wait for reviews ...
+
+## <a name="Perfoming Reviews"></a> Perfoming Reviews
+
+Because gatekeepers are special, you have a wider range of review options. In addition to scoring +1 to -1, you can also score +2 and -2. A +2 means that the patch can be submitted. A -2 means that the patch is rejected. Note that these scores are not additive (2 +1s do not make a +2, 4 +1s don't cancel out a -2). This means that gatekeeper's scores are definitive - it doesn't matter what others may score, although that should probably be used as a guide.
+
+## <a name="Submitting the patch"></a> Submitting the patch
+
+Once a patch has both a +2 code review, and has verified OK, it may be submitted (note that you can apply these to your own patch, so gatekeepers can bypass code review with a few clicks). A Submit button will appear on the patch's gerrit page - when clicked, the patch will be pushed into the git tree.
+
+## <a name="Creating a delta name"></a> Creating a delta name
+
+Eventually, we hope that gerrit will support prompting for a delta name as part of the patch submission process. Sadly, we're not there yet, so there is a separate web interface to use for this.
+
+If you're scared of web interfaces, you can also do this by hand. Log in to openafs.stanford.edu and do
+
+    cd /srv/git/openafs.git
+    git update-ref refs/deltas/<branch>/<delta-name> <sha1>
+
+Where &lt;branch&gt; is the branch of the commit you wish to name, &lt;delta-name&gt; is the name you wish to give it, and &lt;sha1&gt; is the hash gerrit gave to the commit, as reported in the gerrit submit message ( **NB** This will be different from the sha1 of the commit in your local tree, or in the refs/changes entry, as we current cherry-pick commits upon submission)
+
+## <a name="Performing pullups"></a> Performing pullups
+
+A patch can be pulled up (in a tree which contains deltas - see the developers guide) by simply checking out the destination branch, and running
+
+    git cherry-pick -x deltas/<branch>/<delta-name>
+
+If the cherry pick fails for some reason, you may need to extract the patch
+
+    git show deltas/<branch>/<delta-name>
+
+and apply it by hand, commiting it as you would for a normal change.
+
+You can then push this patch to gerrit as normal, if you wish. However, note that this push will simply put the patch in the review queue again. Another way in which gatekeepers are special is that you can bypass gerrit...
+
+## <a name="Bypassing Gerrit"></a> Bypassing Gerrit
+
+Should you wish to push a patch directly into the git tree, without having that patch reviewed, you can do so. By pushing your changes to refs/heads/&lt;branch&gt;, rather than refs/for/&lt;branch&gt;, gerrit will simply apply them directly to the tree.
+
+Note that having done a pullup, or a direct commit, you will need to visit the web page to tag it as a delta. Sorry. I'll make this better soon, honest.
+
+## <a name="Modifying a change in gerrit"></a> Modifying a change in gerrit
+
+The typical gerrit workflow expects that instead of gatekeepers modifying changes in gerrit, they will simply leave review comments and expect the committer to fix their patch to address those comments themselves (the theory being that this educates the committers, and thus reduces the load on the gatekeepers in the long term). However, if you want to modify someone's change, you can do so.
+
+Simply fetch the change from gerrit as if you were going to verify it (as documented in the developers guide), making sure that you do that fetch into a topic branch. Then, make your modifications and run
+
+    git commit --amend --author "A.N. Author <a.n.author@example.org>"
+
+Then push this commit into gerrit as a replacement from the original change (again, see the developers guide for details of exactly how to do this)
+
+## <a name="Making a release"></a> Making a release
+
+I'll document this when the release tool is done. Should be sometime before the next release ...
+
+-- [[SimonWilkinson]] - 08 Jul 2009
