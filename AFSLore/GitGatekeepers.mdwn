@@ -49,6 +49,33 @@ and apply it by hand, commiting it as you would for a normal change.
 
 You can then push this patch to gerrit as normal, if you wish. However, note that this push will simply put the patch in the review queue again. Another way in which gatekeepers are special is that you can bypass gerrit...
 
+## <a name="Dealing with conflicts"></a> Dealing with conflicts
+
+You may find that attempting to cherry-pick a patch via gerrit results in a conflict. One way to address this is to modify the commit. Start with a current repository, cherry-pick the commit, fix it, and push back to gerrit.
+
+    git fetch
+    git checkout -b <new-topic-branch>
+    git cherry-pick <sha1 of contribution>
+
+The cherry-pick will give you a warning like
+
+    Automatic cherry-pick failed.  After resolving the conflicts,
+    mark the corrected paths with 'git add <paths>' or 'git rm <paths>' and commit the result.
+    When commiting, use the option '-c 822e735' to retain authorship and message.
+
+if it fails. At this point, resolve the conflict. You can use git diff to determine what it is. Then, continue:
+
+    git add <file with resolved conflict> [<next file with resolved conflict>]
+    git commit -c <commit hash from cherry pick>
+
+Confirm you will push the right thing:
+
+    git log -p origin/master..HEAD
+
+Then, push the change back to the open issue in gerrit.
+
+    git push ssh://gerrit.openafs.org/openafs <hash>:refs/changes/<gerrit change number>
+
 ## <a name="Bypassing Gerrit"></a> Bypassing Gerrit
 
 Should you wish to push a patch directly into the git tree, without having that patch reviewed, you can do so. By pushing your changes to refs/heads/&lt;branch&gt;, rather than refs/for/&lt;branch&gt;, gerrit will simply apply them directly to the tree.
