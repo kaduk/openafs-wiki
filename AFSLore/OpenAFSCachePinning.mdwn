@@ -1,0 +1,59 @@
+## <a name="Cache pinning info and design."></a> Cache pinning info and design.
+
+### <a name="Interface"></a> Interface
+
+- Cache pinning is supposed to provide the user with a way of selecting some files from the cache to be permanently updated. This will work very well with disconnected mode because the pinned files will be fresh on disconnection.
+
+- The interface will look like this:
+
+<code>fs pin </code>
+
+<code>fs unpin </code>
+
+- Several options will be available, the most important being the type of pin:
+
+\* Normal pin (can be recursive).
+
+\* Viral pin (for dirs): Files created in that directory will get pinned as well.
+
+### <a name="Design"></a> Design
+
+- Pinned vcaches are inserted in a queue when they expire (they receive a callback break). The same for dcaches?
+
+- Both vcaches and dcaches will get updated in a separate thread (_or_ within the administrative thread). Every _X_ minutes the thread will wake up and do it's job. The expired queue will be emptied by doing `FetchStatus` on vcaches and `FetchData` if needed (for the dcaches). Files get updated in the order that they expire (_like queues usually do :)_).
+
+- Vcaches will get an extra CPinned flag.
+
+- For dcaches we can use the existing bucket code. We can create a new pinned bucket and add a new differentiator function.
+
+- When doing recursive pinning, `fs` will walk the directories in user space, calling the pin pioctl for each pinned file.
+
+- A total size of the pinned files will be kept. So that users don't exceed their quota. Users can select size of quota or percent from total cache size.
+
+- When pinning path /afs/a/b/c/d, /afs, /afs/a, /afs/a/b, /afs/a/b/c, must be pinned as well (non virally).
+
+- A list of pinned files has to be kept somehow, somewhere. This will come later on.
+
+### <a name="Further observations"></a> Further observations
+
+- Questions from me and observations collected from IRC/Jabber:
+
+- What will we do about symlinks? Especially in the context of viral pins. Loops could occur if symlinks are followed.
+
+- I could use some tips about the bucket differentiator function.
+
+- Some ideas about keeping the pinned files list would be useful.
+
+- _sxw_ : avoid callback storms: The simplest version of the callback storm issue is where you have more files pinned in a volume, than the server will grant callbacks. So, every time you get a callback on a new file, a callback on a pinned file is expired. If you aggressively renew callbacks for pinned files, your server loses.
+
+- _sxw_ : The critical thing is moving the queue when you start working on it, so any vcaches which are added whilst an update run is in progress get handled in the next run, rather than in the current one. recursion across volume boundaries?
+
+- _sxw_ : Add CStatd to all pinned vnodes when going disconnected. Not all pinned vnodes are able to be Statd forever.
+
+- _sxw_ : With extended callbacks we'll be able to tell better whether we've lost a callback because the server won't let us have that many, or if something has really changed. But for now, I think converting pinned -&gt; statd is the best we can do.
+
+- _dbrashear_ : Change policy engine for buckets for pinning (differentiator function). _I could use a hint about that one._
+
+- _dbrashear_ : Keep size of pinned data and don't let it exceed cache size (or percentage of it).
+
+-- [[DragosTatulea]] - 09 Feb 2009
