@@ -102,7 +102,9 @@ Functions should be written with the type information on the first line, followe
 For example:
 
     static int
-    ValueOfNothing(afs_int32 nothing) {  ... }
+    ValueOfNothing(afs_int32 nothing) {
+    ...
+     }
 
 Prototypes for functions which are shared within a module should go into the a header file named _module_ \_internal.h
 
