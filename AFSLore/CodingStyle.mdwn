@@ -1,0 +1,191 @@
+# <a name="OpenAFS Coding Style"></a> [[OpenAFS]] Coding Style
+
+This document is an attempt to codify a coding style for [[OpenAFS]]. It's currently the opinions of the author, however. Not all of this is current practice for the tree. If you would like information about our style, as currently used, see README.DEVEL
+
+**Note for commentors**: Please feel free to update this guide with your views. However, if you disagree with the content, rather than deleting it, please add your suggested ammendments alongside - that way we can hopefully produce a consensus document.
+
+## <a name="Comments"></a> Comments
+
+C++ style comments ( ones beginning //) should be avoided in cross-platform C code
+
+Single line comments:
+
+    /* This is a one line comment about something or other */
+
+Mutli line comments should be structured as
+
+    /*
+     * A multi line comment, which should be written as real sentences,
+     * and continue to have a leading star if they span multiple lines
+     */
+
+Where comments are documenting the behaviour of a piece of code, they should be written in Doxygen. We have adopted the Qt format of that style.
+
+    /*!
+     * A function to compute the cost of everything
+     *
+     * \param currency The currency to perform the calculation in
+     * \param fudge A fudge factor to apply
+     */
+
+Many more options are possible for doxygen. See their documentation for details.
+
+## <a name="Include files"></a> Include files
+
+All C files should start by including
+
+    #include <afsconfig.h>
+    #include <afs/param.h>
+
+Following this, all of the necessary system includes should be listed. The following headers may be included without guards
+
+- ctype.h
+- errno.h
+- stdarg.h
+- stddef.h
+- stdio.h
+- stdlib.h
+- string.h
+- sys/types.h
+- sys/stat.h
+- time.h
+- fcntl.h
+
+The following headers may be included for all Unix platforms, but must be protected by #ifndef AFS\_NT40\_ENV
+
+- syslog.h
+- sys/param.h
+- sys/time.h
+- sys/file.h
+- sys/ioctl.h
+- sys/socket.h
+- sys/uio.h
+- netinet/in.h
+- arpa/inet.h
+- netdb.h
+- unistd.h
+
+netinet/in.h should be included before arpa/inet.h
+
+All other system headers should be protected, either by autoconf checks, or by the relevant platform definitions
+
+Next, should come all of the AFS headers from the src/include/ directoy. Do not reference headers which occur within other packages by using relative paths - use only the public interfaces in src/include/. Public headers should be referenced using the &lt;&gt; notation.
+
+Finally come the header files from this module, which should be referenced using " ".
+
+## <a name="Preprocessor directives"></a> Preprocessor directives
+
+Where #if statements are nested, attempt to keep that nesting to a minimum. For example, do
+
+    #if defined(FOO)
+    #elif defined(BAR)
+    #elif defined(BLOB)
+    #endif
+
+not
+
+    #if defined(FOO)
+    #else
+    # if defined(BAR)
+    # else
+    #  if defined(BLOB)
+    #  endif /* BLOB */
+    # endif /* BAR */
+    #endif /* FOO */
+
+Where nested #ifs are unavoidable, please indent all preprocessor directives inside the #if or #ifdef by adding on space after the # and before the directive name per nesting level, and annotate #endifs to indicate the statement they refer to.
+
+## <a name="Functions"></a> Functions
+
+Functions should be written with the type information on the first line, followed by the function name on the next, followed by the parameter list, in ANSI C format. Function names are typically StudlyCaps, but the code isn't currently consistent in this regard. Functions which are not being used outside of the source file they are in should be declared static, and prototyped at the start of that file.
+
+For example:
+
+    static int
+    ValueOfNothing(afs_int32 nothing) {  ... }
+
+Prototypes for functions which are shared within a module should go into the a header file named _module_ \_internal.h
+
+Prototypes for public functions should go either into _module_ \_prototypes.h_ or module_.h
+
+Public functions should be prefixed with the name of the module they are in. For example
+
+    witty_CostOfEverything(...)
+
+Prototypes should not have variable names included within them.
+
+## <a name="Headers"></a> Headers
+
+Header files should be protected against multiple inclusion. Use
+
+    #ifndef AFS_SRC_MODULE_FILENAME_H
+    #define AFS_SRC_MODULE_FILENAME_H
+
+    #endif
+
+All routines should have a return type specified, void if nothing returned, and should have (void) if no arguments are taken.
+
+Header files should not contain macros or other definitions unless they are used across multiple source files.
+
+## <a name="Formatting"></a> Formatting
+
+- Indentation is in 4 character spaces, with 8 characters being replaced by a tab.
+- Always use spaces around operators (+, -, &gt;, &lt;, &amp;&amp;, || and so on)
+- Don't put a space between the function name and the opening parentheses of its arguments
+- Always put a space after, but not before a comma in an argument list
+- Always put a space after a conditional statement (if, while, for, etc) and the opening parentheses, and a space between the ) and the \{
+- Use braces where it aids readability.
+- Closing and opening braces go on the same line as the control statement
+
+    if (foo) {
+    ...
+    } else {
+    ...
+    }
+
+- Code surrounded by brackets should have its continuation lines lined up with the relevant opening brace
+
+    value = CostOfEverything(ValueOfNothing(0),
+                             fudge);
+
+- Loops with an empty body should have their trailing semicolon on the following line, to make the empty body explicit, and suppress a compiler warning
+
+    for (...; ...; ...)
+        ;
+
+- Lines should be wrapped within 80 characters
+
+## <a name="Warnings"></a> Warnings
+
+All new code must compile cleanly when configured with --enable-warnings
+
+## <a name="Build system"></a> Build system
+
+- Do not use $&lt; for non-pattern rules in any cross-platform directory
+- Do not have build rules that build multiple targets
+- Ensure that make clean really does
+- Add new header files as dependencies for files that consume them
+- Test parallel makes after any build system changes
+- Test out-of-tree builds after any build system changes
+
+## <a name="Coding practices"></a> Coding practices
+
+- Try to use inline functions, rather than casts, when converting from one type to another, except when removing const
+- Use inline functions, rather than macros wherever possible (as they preserve type checking)
+- Only use if (var) when var is a boolean. Use if (p != NULL) instead of if (p), and if (\*p!='\\0') rather than if (\*p)
+- Don't use unsafe string functions. No new code should be using strcpy, or strcat. Use strlcpy, strlcat, or afs\_snprintf() as appropriate.
+- if (!strcmp(foo,bar)) is really hard to read. Use if (strcmp(foo,bar) == 0) instead
+- Don't use strncpy unless you explicitly need the special strncpy semantics, and if you don't know what those are, never use it. Use strlcpy or memcpy instead.
+- Always use size\_t for sizes of objects, not int or unsigned long, even if they're small objects. Exception: wire protocol objects should instead use types with explicit sizes, such as afs\_int32.
+- Always use either size\_t or ptrdiff\_t for offsets into data structures or memory blocks, not int or long.
+- All new APIs that take buffers should also take the length of the buffer as an additional parameter.
+- Where possible, move assignments outside of conditionals. In general, write code = function(); if (code = 0) not if ((code = function()) = 0).
+- Don't write new functions which take arrays as arguments
+
+## <a name="Unix kernel module"></a> Unix kernel module
+
+- The kernel module has a documented lock hierarchy in src/afs/DOC/afs\_rwlocks
+- All calls to obtain a write lock have a unique reference number. This must be unique across the cache manager (lock numbers that are in a particular OS directory may be shared, but only between OS directories), and src/afs/lock.h must be updated with the highest number in use
+- New locks should be registered in the list in afs\_callback.c, so their contents can be viewed via cmdebug
+
+-- [[SimonWilkinson]] - 27 Jul 2009
