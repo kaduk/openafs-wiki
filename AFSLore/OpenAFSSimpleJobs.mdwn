@@ -1,0 +1,15 @@
+# <a name="Simple Jobs"></a> Simple Jobs
+
+There are a large number of things that "it would be good to have" in the [[OpenAFS]] code base, that no one has had enough time to actually do. All of the tasks on this list should be relatively straightforward - and not require a significant amount of time to actually acheive. They should make a great starting point for people wanting to get more involved in [[OpenAFS]] development.
+
+If you're thinking of working on one of these, please email the contact just to let them know you're doing so, and to avoid duplication of effort!
+
+## <a name="The List"></a> The List
+
+###### <a name="Implement silly rename for afs r"></a> Implement silly rename for afs renames
+
+We have silly rename support for situations where an file which is open is removed by another process. However, we do not have similar support for where an open file has another file renamed on top of it. This breaks the 'blogbench' benchmarking suite, as well as being a generally bad thing. Fixing this is basically a case of replicating the code in afs\_remove that handles silly renames. This is also a bug in RT - see <http://grand.central.org/rt/Ticket/Display.html?id=124973>, and the mailing list thread at <https://lists.openafs.org/pipermail/openafs-info/2009-February/030928.html>
+
+Contact: Simon Wilkinson &lt;simon@sxw.org.uk&gt;
+
+-- [[SimonWilkinson]] - 22 Oct 2009
