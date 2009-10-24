@@ -12,4 +12,10 @@ We have silly rename support for situations where an file which is open is remov
 
 Contact: Simon Wilkinson &lt;simon@sxw.org.uk&gt;
 
+###### <a name="Use native Linux credentials"></a> Use native Linux credentials
+
+The Linux CM currently uses its own 'struct cred' because, until recently, there was no native structure for managing credentials available in the Linux cache manager. Now that there is one available, we should use (by pointer and reference count) this structure, rather than maintaining our own.
+
+Contact: Simon Wilkinson &lt;simon@sxw.org.uk&gt;
+
 -- [[SimonWilkinson]] - 22 Oct 2009
