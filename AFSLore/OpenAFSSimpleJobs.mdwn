@@ -18,4 +18,16 @@ The Linux CM currently uses its own 'struct cred' because, until recently, there
 
 Contact: Simon Wilkinson &lt;simon@sxw.org.uk&gt;
 
--- [[SimonWilkinson]] - 22 Oct 2009
+###### <a name="Reuse mini-cache-manager from af"></a> Reuse mini-cache-manager from afscp in afsio
+
+"afsio", a simple command line AFS client useful for administration and testing from Hartmut Reuter, is now included in src/venus. Previous, similar work from Chaskiel Grundman on a program called afscp produced a minimal cache manager, which allowed walking a tree without use of pioctls into a cache manager running on the "host" system. The code should be reused here.
+
+Contact: Derrick Brashear &lt;shadow@dementia.org&gt;
+
+###### <a name="Implement Finder cross-volume dr"></a> Implement Finder cross-volume drag for [[MacOS]]
+
+In versions of OSX through 10.5, attempting to drag objects across volumes in Finder produces error -36, as EXDEV is not properly handled. A userspace helper, similar to the afsdb helper, could be used to do this; All code needed can be patterned on existing code.
+
+Contact: Derrick Brashear &lt;shadow@dementia.org&gt;
+
+-- [[DerrickBrashear]] - 09 Nov 2009
