@@ -180,6 +180,14 @@ To make things easier, set up OpenSSH so that it knows about the defaults for th
 
 (where SSH Username is what you were told on the the 'SSH Keys' page)
 
+### <a name="The change id hook"></a> The change id hook
+
+Gerrit introduces the concept of "change IDs". This is a unique reference for a particular change, which remains constant regardless of any changes that are made to the implementation. This allows a single reference to be attached to a given modification, irrespective of any rewrites that may occur as a result of review comments. Manually maintaining change Ids is a pain, so gerrit provides a git hook which can be used to automatically add a change Id to any new modifications you create.
+
+The hook can be downloaded from the [[OpenAFS]] gerrit server by running the following, in the top level of your git tree
+
+    scp -p -P 29418 gerrit.openafs.org:hooks/commit-msg .git/hooks/
+
 ## <a name="Uploading to gerrit"></a> Uploading to gerrit
 
 When submitting to gerrit, it's important to realise that each commit in your branch will become a changeset in the upstream OpenAFS, typically with no modification at our end. It is therefore important that these commits follow some simple rules...
@@ -197,6 +205,8 @@ Secondly, each commit should have a meaningful revision log. The internals of gi
       improve the configuration logic in this area.
 
       FIXES 123456
+
+Thirdly, each commit should have a valid changeID. Manually maintaining these is difficult and error prone, so we would strong advise that you install the changeID hook detailed earlier. This will automatically add a [[ChangeId]] line to your commit message if it doesn't already contain one.
 
 Once you have commits in this form, use
 
