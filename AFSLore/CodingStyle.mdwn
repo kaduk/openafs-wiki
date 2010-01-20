@@ -170,6 +170,10 @@ All new code must compile cleanly when configured with --enable-warnings
 - Test parallel makes after any build system changes
 - Test out-of-tree builds after any build system changes
 
+## <a name="Cross platform compatibility"></a> Cross platform compatibility
+
+- Use static\_inline (and hdr\_static\_inline), rather than "static inline" in cross platform code (not all of our platforms support inline functions, and those that do generally specify them differently. The static\_inline macro knows how to do the necessary magic to make them work everywhere.)
+
 ## <a name="Coding practices"></a> Coding practices
 
 - Try to use inline functions, rather than casts, when converting from one type to another, except when removing const
