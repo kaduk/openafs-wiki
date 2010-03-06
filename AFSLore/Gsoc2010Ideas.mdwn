@@ -1,0 +1,25 @@
+# <a name="Introduction"></a> Introduction
+
+[[OpenAFS]] is a distributed filesystem. It runs on many platforms, including Windows, Mac OS X, Linux, Solaris, AIX, IRIX and assorted BSDs. It has been an open source project for the last 10 years, although the original development (and code) dates back to Carnegie Mellon University's Project Andrew in the 1980s. [[OpenAFS]] has a large, mature codebase of over 800,000 lines of code. It is used by large enterprises, universities, and research establishments worldwide, and plays a part in fields from finance through space exploration to quantum physics. Developing code for [[OpenAFS]] gives you the opportunity to make a significant difference to a product that is in real-world large scale production use, and to learn key development skills. We have a large, supportive, community of developers who are keen to see new developers enter our project, and happy to help out as you get up to speed.
+
+However, [[OpenAFS]] is a challenging project to develop for. It is a large and complex project that has developed over nearly 3 decades. The code must work across a wide variety of different operating systems, and is heavily multi-threaded in places. On Unix, the [[OpenAFS]] client runs within the machine's kernel, which can significantly complicate the development process. As an enterprise product, [[OpenAFS]] relies upon significant underlying infrastructure, which a developer needs to get running before they can test any [[OpenAFS]] code. In addition, [[OpenAFS]] is primarily written in C, with all of the attendant issues of memory management and pointer manipulation.
+
+Those challenges also mean that students who successfully complete a Summer of Code are likely to leave with significant new skills. Real world experience of developing for distributed systems, kernel programming, building test infrastructures and developing thread safe code are core skills to develop, and we're happy to help you to learn them. Please join us on #openafs on freenode, in the Jabber conference <openafs@conference.openafs.org>, or on the <openafs-devel@openafs.org> mailing list.
+
+# <a name="Projects"></a> Projects
+
+The following projects have been suggested as ideas for this year's summer of code. We're happy, however to accept your own projects, or to tailor any of the following projects to your interests. In our experience, the projects which are the most successful are the ones which the student is actively interested in.
+
+## <a name="Userspace NFS-AFS translator"></a> Userspace NFS-&gt;AFS translator
+
+AFS has, for years, had an NFS to AFS translator which loads into the Solaris kernel. This project would build a new translator for all Unix operating systems, building on top of the existing userspace AFS cache manager. It offers the prospective student the opportunity to learn about the internals of both the AFS and NFS distributed filesystem protocols. An existing knowledge of the C programming language is required.
+
+## <a name="Encrypted storage"></a> Encrypted storage
+
+The AFS protocol offers encryption for data transport from client to server. However, that data is stored on the server in cleartext, where it can potentially be read by the administrators of that server. This poses a real world problem for organisations who wish to outsource the provision of their file storage, whilst keeping their data confidential. This project would augment the existing AFS client to support encrypting data blocks before sending them to the file server. Additional enhancements would manage user and data keys in such a way that a user can share encrypted files with other AFS users of their choosing, and protect the names of files, in addition to their contents. This is a challenging project, during which the student will gain an in depth knowledge of kernel programming, distributed systems, and cryptography.
+
+## <a name="An AFS search service"></a> An AFS search service
+
+Desktop search clients such as Beagle are now widely available. However they do not work well with network filesystems, and the vast amount of data that may be remotely stored upon them. This project would develop an AFS search service which indexes all of the data available on an AFS fileserver, and permits clients to query that data. Files may be indexed using existing metadata, or through agents which index objects of particular types. Students will learn how to specify and extend an existing distributed system, and of data search, indexing and retrieval.
+
+-- [[SimonWilkinson]] - 06 Mar 2010
