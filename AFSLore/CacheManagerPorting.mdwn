@@ -1,0 +1,24 @@
+-- [[MattBenjamin]] - 05 Apr 2010
+
+The following notes were directed to a potential GSOC participant interested in porting the [[OpenAFS]] cache manager to [[NetBSD]]. There are some remarks specific to [[NetBSD]], and there's a lack of a high-level view of the ancestry of different ports and phases of work, that I think might be useful, among other things.
+
+1. yes, I do have a partial port to [[NetBSD]], based on the [[OpenBSD]] port. It turns out that the [[NetBSD]] port was the original ancestor port of [[OpenBSD]] and possibly influenced our [[FreeBSD]] port, too. Hence it has a good deal in common with several other ports, but may agree more closely in some areas, such as VM integtration.
+
+2. My port isn't fully viable. Where it might be useful is as a fairly large bucket of copy-paste first-cut solutions to many issues.<br /><br />Specifically, an [[OpenAFS]] cache manager can be thought of as a collection of cooperating subsystems and internal interface mappings covering a finite set of features. The main body of that platform-specific mapping glue is localized in the various port-specific osi\_\* files (e.g., OBSD/osi\_\*), especially osi\_machdep.h, osi\_vnodeops.c, and osi\_file.c. Of course, there are parts scattered around, including under rx/&lt;PLATFORM&gt;, rx\_knet.\{h,c\}, in VNOPS, in afs\_pioctl.c, and elsewhere.<br /><br />One way I would talk about milestones would be to talk about different levels:<br /><br />1\. complete and reviewed candidate implementations of all the applicable subsystem mappings for a port, taken to a state of compilation but not yet integration tested. Here, you have "solutions" for a bunch of point problems, including (I'm certainly leaving out some):
+
+1. internal locking (how glock and subsystem/object locks are implemented)
+2. memory allocation (the local KMALLOC often)
+3. UDP socket communications
+4. a UFS-cognate cache (dcache), if present
+5. syscall interface conventions
+6. kernel-to-user memory space issues (UIO\_SYSSPACE, etc, or similar, on a BSD, etc)
+7. implementing the local kernel file system interface, e.g., VFS
+8. platform-specific credential handling, where applicable--here, it's [[NetBSD]]'s kauth system
+9. module conventions--I used lkms, and that's probably desireable, but for [[NetBSD]], we might have a cognate build that uses RUMP--creating a userland cache manager that might be easier to debug
+10. miscellaneous bits, such as as processes/threads/time
+
+If I were planning formally to complete a project from this point, I might start with the following:<br /><br />1\. plan for integrating or re designing all the mappings already supplied in my candidate port<br />2\. review of module build, possible plan and build RUMP port<br />3\. milestone to load and mount /afs for the first time in a workstation cell<br />4\. milestone to perform a sequence of point operations successfully, in some sequence:<br />4\.a. access file and directory metadata in a local cell for simple cases (ignore some VFS locking cases, ignore potential issues with vnode recycling)<br />4\.b. execute a suite of read-write operations on files, simple cases, without credentials (system:anyuser perms)<br />4\.c. milestone to execute through 4.b. with successful unmount of /afs<br />4\.d. implement/test token setting operations and repeat 4.b.<br />4\.e. milestone to implement PAG (process-authentication group) support--raw group manipulation -should- work, but on [[NetBSD]] a kauth listener could be implemented (or deferred for later)<br />4\.f. milestone to successfully execute a richer suite of filesystem tests (probably fsx) and collect meaningful benchmarks
+
+4.g dynroot
+
+I'm pretty certain that this is a lot to do in a GSOC project, and I may have left things out . However, some work has been done, and, a viable project might be to do a significant subset.
