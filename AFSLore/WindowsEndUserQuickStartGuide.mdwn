@@ -116,15 +116,15 @@ To have the program start when you login, leave the checkbox filled. If you inte
 
 The rest of the checkboxes are (from the Microsoft Installer):
 
-- **Auto initialize AFS Credentials** If you are not able to use the Integrated Logon feature (because the usernames do not match, for instance), you can use this feature instead. Whenever the Credentials Manager is started, or a new network address is found (see below), you will be asked to get new tokens. (This is equivalent to the "-A" parameter to `afscreds.exe`.)
+- **Auto initialize AFS Credentials** If you are not able to use the Integrated Logon feature (because the usernames do not match, for instance), you can use this feature instead. Whenever the Credentials Manager is started, or a new network address is found (see below), you will be asked to get new tokens. (This is equivalent to the "-A" parameter to afscreds.exe.)
 
-- **Renew drive maps** This option ensures all drives you have chosen to map to AFS are mapped. (This is equivalent to the "-M" parameter to `afscreds.exe`.)
+- **Renew drive maps** This option ensures all drives you have chosen to map to AFS are mapped. (This is equivalent to the "-M" parameter to afscreds.exe.)
 
-- **Detect IP address changes** If used together with the automatic initialization, new tokens will be asked for when the computer receives a new network address. This may be due to a modem connection, an ISP with DHCP, or just plug-and-play computing. (This is equivalent to the "-N" parameter to `afscreds.exe`.)
+- **Detect IP address changes** If used together with the automatic initialization, new tokens will be asked for when the computer receives a new network address. This may be due to a modem connection, an ISP with DHCP, or just plug-and-play computing. (This is equivalent to the "-N" parameter to afscreds.exe.)
 
-- **Quiet mode** Normally, if the [[OpenAFS]] service is not started before the Credential Manager starts, the Manager will display a little guide to help you start it. Enabling this option makes the Credentials Manager silently ignore a stopped service. (This is equivalent to the "-Q" parameter to `afscreds.exe`.)
+- **Quiet mode** Normally, if the [[OpenAFS]] service is not started before the Credential Manager starts, the Manager will display a little guide to help you start it. Enabling this option makes the Credentials Manager silently ignore a stopped service. (This is equivalent to the "-Q" parameter to afscreds.exe.)
 
-- **Show credentials window on startup** The Credentials Manager usually resides in the system tray (lower-right corner). It shows a locked padlock if you have valid tokens, and a padlock with a red cross if not. If you enable this option, [[OpenAFS]] will automatically show you a screen with information about your current tokens. This can be achieved later by clicking on the lock icon in the system tray. (This is equivalent to the "-S" parameter to `afscreds.exe`.)
+- **Show credentials window on startup** The Credentials Manager usually resides in the system tray (lower-right corner). It shows a locked padlock if you have valid tokens, and a padlock with a red cross if not. If you enable this option, [[OpenAFS]] will automatically show you a screen with information about your current tokens. This can be achieved later by clicking on the lock icon in the system tray. (This is equivalent to the "-S" parameter to afscreds.exe.)
 
 Default is enabled for all options except the last. The install program only appends the parameters to the shortcuts of the Start Menu (under [[OpenAFS]] and under Autostart, if you choose to start the Manager at startup). You may alter these parameters at any time by right-clicking the menu item and choose "Properties".
 
@@ -144,9 +144,11 @@ When you logged in, you may have encountered an error message from "AFS Integrat
 
 Browse to "Control Panel" of your computer. You should have a new alternative called "AFS Client Configuration". Double-clicking this, you should see (something like) the screen below.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/general.png" width="356" height="495" /> Please note that this is only a starting point. If you are looking for a complete configuration reference to [[OpenAFS]] for Windows, you should read the [[WindowsConfigurationReferenceGuide]].
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/general.png" width="356" height="495" />
 
-According to the Client Status, the service is started, as it should. If you used the Typical Installation mode, you will now have to change the cell name into something more appropriate. (Few people can authenticate to openafs.org, really.) Change it to whatever your network administrator told you. It is usually simply the domain name of the organization.
+Please note that this is only a starting point. If you are looking for a complete configuration reference to [[OpenAFS]] for Windows, you should read the [[WindowsConfigurationReferenceGuide]].
+
+According to the Client Status, the service is started, as it should. If you used the Typical Installation mode, you will now have to change the cell name into something more appropriate. (No one can authenticate to openafs.org, really.) Change it to whatever your network administrator told you. It is usually simply the domain name of the organization.
 
 ### <a name="Silencing the Intergrated Login"></a> Silencing the Intergrated Login
 
@@ -158,11 +160,15 @@ If everything is well, you should now be able to obtain AFS tokens for your defa
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/windows/taskbar.png" width="135" height="26" /> If you get nothing, you have started the Credentials Manager in the system tray. Is the padlock locked? Then you do not need [[KerberosV]]. Otherwise, if there is a small red cross over it, try clicking the padlock.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" /> If you get a screen like the one above, you can skip [[KerberosV]]. If it says "You do not have tokens within any AFS cell", you press "Obtain New Tokens...".
+<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" />
+
+If you get a screen like the one above, you can skip [[KerberosV]]. If it says "You do not have tokens within any AFS cell", you press "Obtain New Tokens...".
 
 Finally, if you get a password prompt, enter your AFS username and password. Confirm the AFS Cell name to be your default cell. Press "OK".
 
 If you get an error at this time, you (probably) need to have [[KerberosV]] installed. Often, the Credentials Manager complains the "Authentication Server was unavailable", or something similar.
+
+[This image above is from 1.3.70. The "Drive Letters" and "Advanced" tabs were removed in 1.5.66]
 
 ### <a name="Optional: Kerberos for Windows"></a> Optional: Kerberos for Windows
 
@@ -172,11 +178,11 @@ To be able to use [[KerberosV]] authentication servers, install MIT Kerberos for
 
 Start the Credentials Manager and try to obtain new tokens. This should work. You should be able to browse the lands of **_\\\\AFS\\all_** like you were on a Unix computer. Do you have write permissions in the right directories?
 
-## <a name="Mapping Drives"></a> Mapping Drives
+## <a name="Mapping Network Drives"></a> Mapping Network Drives
 
-To be able to use [[OpenAFS]] for Windows fully, one last thing is missing: you should make AFS space available as a drive. Open the information window of Credentials Manager. Go to the Drive Letters tab, and press "Add...".
+Many Windows users are more comfortable using drive letters instead of UNC path notation such as \\\\AFS\\openafs.org\\software\\openafs\\1.5.73\\. Windows permits any UNC path to be mapped to a drive. On Windows 7 this can be done from the Start Menu. Right Click on "Computer" and select "Map Network Drive". Select a drive letter to map, enter the \\\\AFS UNC path to map, and select "Reconnect at logon". To map the AFS root volume, use the UNC path \\\\AFS\\all.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/drive_map.png" width="452" height="279" /> On your screen should be a window like this one. Choose drive "X:", leave AFS Path as "\\afs", and leave Description empty. If you would like this mapping to be re-established with each login (of the current user), check "Restore this mapping whenever I logon". As soon as you press "OK", the new X: drive should pop up in Windows.
+Drive mapping can also be performed using the "NET USE" command line tool.
 
 ## <a name="From here to eternity"></a> From here to eternity
 
