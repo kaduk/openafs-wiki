@@ -160,7 +160,7 @@ If everything is well, you should now be able to obtain AFS tokens for your defa
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/windows/taskbar.png" width="135" height="26" /> If you get nothing, you have started the Credentials Manager in the system tray. Is the padlock locked? Then you do not need [[KerberosV]]. Otherwise, if there is a small red cross over it, try clicking the padlock.
 
-<img src="http://www.e.kth.se/~tommie/openafs/screens/afscreds/tokens.png" width="467" height="238" />
+<img src="http://lh3.ggpht.com/_v_0hCq1skrw/S89dFHP3_hI/AAAAAAAACFE/dMQfa_ERaH0/s800/afscreds-sc.png" width="467" height="238" alt="Screenshot of AFSCreds.exe" title="AFS Creds" />
 
 If you get a screen like the one above, you can skip [[KerberosV]]. If it says "You do not have tokens within any AFS cell", you press "Obtain New Tokens...".
 
@@ -168,11 +168,7 @@ Finally, if you get a password prompt, enter your AFS username and password. Con
 
 If you get an error at this time, you (probably) need to have [[KerberosV]] installed. Often, the Credentials Manager complains the "Authentication Server was unavailable", or something similar.
 
-[This image above is from 1.3.70. The "Drive Letters" and "Advanced" tabs were removed in 1.5.66]
-
-### <a name="Optional: Kerberos for Windows"></a> Optional: Kerberos for Windows
-
-To be able to use [[KerberosV]] authentication servers, install MIT Kerberos for Windows. A description of how to install this is outside the scope of this guide.
+Optional: Kerberos for Windows To be able to use [[KerberosV]] authentication servers, install MIT Kerberos for Windows. A description of how to install this is outside the scope of this guide.
 
 ## <a name="Trying It Out"></a> Trying It Out
 
