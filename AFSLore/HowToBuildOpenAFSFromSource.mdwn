@@ -19,37 +19,21 @@ These are notes on how to build [[OpenAFS]] from source code. Note that [[OpenAF
 - ncurses
 - kernel headers
 
-The Kerberos development libraries are required if you are going to build with Kerberos 5 support. The [[OpenAFS]] legacy kaserver is deprecated.
-
-If you are building on Debian, you can get the required software with the following apt-get commands.
+The required packages to build [[OpenAFS]] on Debian-based linux distributions can be installed with,
 
       apt-get install cvs autoconf automake make gcc flex bison
       apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
-### <a name="Getting the Source Code from CVS"></a> Getting the Source Code from CVS
+On RPM based linux distributions, the packages required are,
 
-You can get development snapshots from the [[OpenAFS]] CVS repository . The CVS tree may not always have code which can currently be built. While every effort is made to keep the head of the tree buildable, you may at any time find yourself between commits and hence have a tree which does not build, or worse, causes more serious problems.
+     yum install gcc autoconf automake make flex bison rpm-build
+     yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel
 
-First you need to run cvs login. This step is normally only done once. A ~/.cvspass file will be created for additional checkouts.
+### <a name="Getting the Source Code"></a> Getting the Source Code
 
-       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs  login
-       password is anonymous
+Snapshots of the [[OpenAFS]] source code is made available for each stable and each development release at <http://openafs.org>.
 
-Before doing a CVS check out, you'll need to decide which branch you want to check out. The trunk is for bleeding edge development and may not even build. The current stable series is openafs-stable-1\_4\_x and the current development work is going on the openafs-devel-1\_5\_x branch.
-
-See the CVSWeb interface at <http://www.openafs.org/frameset/cgi-bin/cvsweb.cgi/openafs/> for the full list of available branches and tags.
-
-To check out the stable branch:
-
-       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs checkout -r openafs-stable-1_4_x -d openafs-stable-1_4_x openafs
-
-This will create a source tree in a directory named openafs-stable-1\_4\_x.
-
-To check out the development branch:
-
-       cvs -d :pserver:anonymous@cvs.openafs.org:/cvs checkout -r openafs-devel-1_5_x -d openafs-devel-1_5_x openafs
-
-This will create a source tree in a directory named openafs-devel-1\_5\_x.
+The [[OpenAFS]] code base is now available from a Git repository. See [[GitDevelopers]] for more information.
 
 ### <a name="Building the Binaries"></a> Building the Binaries
 
@@ -91,6 +75,16 @@ The 'make install' command does not work with Transarc paths. You will have to m
       # cp -r i386_linux26/dest/include /usr/afsws
       # cp -r i386_linux26/dest/lib /usr/afsws
       # cp -r i386_linux26/dest/root.server/usr/afs/* /usr/afs
+
+#### <a name="Building RPMs"></a> Building RPMs
+
+The makesrpm.pl script, available in the directory src/packaging/RedHat, is used to build [[OpenAFS]] rpm packages. First build a srpm file using makesrpm.pl, then run rpmbuild to build and package the binaries. makesrpm.pl builds a srpm from the source and document tar files,
+
+    makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
+
+This will create the srpm file openafs-.src.rpm. Use rpmbuld with the --rebuild option, which will run configure and then make to build the binaries, and create the rpm files. The rpm files will be placed into /usr/src/redhat/
+
+    rpmbuild --rebuild openafs-<version>.src.rpm
 
 ### <a name="Running the Test Suite"></a> Running the Test Suite
 
