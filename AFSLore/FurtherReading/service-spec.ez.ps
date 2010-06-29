@@ -1,0 +1,4329 @@
+%!PS-Adobe-3.0
+%%Creator: psdit
+%%For: unix6.andrew.cmu.edu:cfe (Craig F. Everhart)
+%%Title: stdin (ditroff)
+%%CreationDate: Wed Aug  9 11:23:55 1995
+%%DocumentNeededResources: (atend)
+%%DocumentSuppliedResources: DIThacks
+%%Pages: (atend)
+%%EndComments
+% psdit.pro -- prolog for ditroff translator
+% Copyright (c) 1985,1987,1992 Adobe Systems Incorporated. All Rights
+% Reserved.  
+% GOVERNMENT END USERS: See Notice file in TranScript library directory
+% -- probably /usr/lib/ps/Notice
+% RCS: $Header: /disks/hobo/vp6/snichols/rel4.0/src/transcript/lib/RCS/psdit.pro,v 4.0 1992/08/21 15:38:20 snichols Exp $
+/$DITroff 180 dict def $DITroff begin
+
+% Psfig additions
+/DocumentInitState [ matrix currentmatrix currentlinewidth currentlinecap
+currentlinejoin currentdash currentgray currentmiterlimit ] cvx def
+
+/startFig {
+	/SavedState save def
+	userdict maxlength dict begin
+	currentpoint transform
+
+	DocumentInitState setmiterlimit setgray setdash setlinejoin setlinecap
+		setlinewidth setmatrix
+
+	itransform moveto
+
+	/ury exch def
+	/urx exch def
+	/lly exch def
+	/llx exch def
+	/y exch 72 mul resolution div def
+	/x exch 72 mul resolution div def
+	
+	currentpoint /cy exch def /cx exch def
+
+	/sx x urx llx sub div def 	% scaling for x
+	/sy y ury lly sub div def	% scaling for y
+
+	sx sy scale			% scale by (sx,sy)
+
+	cx sx div llx sub
+	cy sy div ury sub translate
+	
+	/DefFigCTM matrix currentmatrix def
+
+	/initmatrix {
+		DefFigCTM setmatrix
+	} def
+	/defaultmatrix {
+		DefFigCTM exch copy
+	} def
+
+	/initgraphics {
+		DocumentInitState setmiterlimit setgray setdash 
+			setlinejoin setlinecap setlinewidth setmatrix
+		DefFigCTM setmatrix
+	} def
+
+	/showpage {
+		initgraphics
+	} def
+
+} def
+% Args are llx lly urx ury (in figure coordinates)
+/clipFig {
+	currentpoint 6 2 roll
+	newpath 4 copy
+	4 2 roll moveto
+	6 -1 roll exch lineto
+	exch lineto
+	exch lineto
+	closepath clip
+	newpath
+	moveto
+} def
+% doclip, if called, will always be just after a `startfig'
+/doclip { llx lly urx ury clipFig } def
+/endFig {
+	end SavedState restore
+} def
+/globalstart {
+	% Push details about the enviornment on the stack.
+	fontnum fontsize fontslant fontheight firstpage 
+	mh my resolution slotno currentpoint 
+	pagesave restore gsave 
+} def
+/globalend {
+	grestore moveto
+	/slotno exch def /resolution exch def /my exch def
+	/mh exch def /firstpage exch def /fontheight exch def
+	/fontslant exch def /fontsize exch def /fontnum exch def
+	F
+	/pagesave save def
+} def
+
+%% end XMOD additions
+/fontnum 1 def /fontsize 10 def /fontheight 10 def /fontslant 0 def
+/xi {/fontnum 1 def /fontsize 10 def /fontheight 10 def /fontslant 0 def F
+  }def
+/ps {/pagesave save def 72 mul 0 exch translate 72 resolution div dup neg
+      scale 0 0 moveto } def
+/PB{save /psv exch def currentpoint translate
+  resolution 72 div dup neg scale 0 0 moveto}def
+/PE{psv restore}def
+/m1 matrix def /m2 matrix def /m3 matrix def /oldmat matrix def
+/tan{dup sin exch cos div}bind def
+/point{resolution 72 div mul}bind def
+/dround	{transform round exch round exch itransform}bind def
+/xT{/devname exch def}def
+/xr{/mh exch def /my exch def /resolution exch def}def
+/xp{}def
+/xs{docsave restore end}def
+/xt{}def
+/xf{/fontname exch def /slotno exch def fontnames slotno get fontname eq not
+ {fonts slotno fontname findfont put fontnames slotno fontname put}if}def
+/xH{/fontheight exch def F}bind def
+/xS{/fontslant exch def F}bind def
+/s{/fontsize exch def /fontheight fontsize def F}bind def
+/f{/fontnum exch def F}bind def
+/F{fontheight 0 le {/fontheight fontsize def}if
+   fonts fontnum get fontsize point 0 0 fontheight point neg 0 0 m1 astore
+   fontslant 0 ne{1 0 fontslant neg tan 1 0 0 m2 astore m3 concatmatrix}if
+   makefont setfont .04 fontsize point mul 0 dround pop setlinewidth}bind def
+/X{exch currentpoint exch pop moveto show}bind def
+/N{3 1 roll moveto show}bind def
+/Y{exch currentpoint pop exch moveto show}bind def
+/S /show load def
+/ditpush{}def/ditpop{}def
+/AX{3 -1 roll currentpoint exch pop moveto 0 exch ashow}bind def
+/AN{4 2 roll moveto 0 exch ashow}bind def
+/AY{3 -1 roll currentpoint pop exch moveto 0 exch ashow}bind def
+/AS{0 exch ashow}bind def
+/MX{currentpoint exch pop moveto}bind def
+/MY{currentpoint pop exch moveto}bind def
+/MXY /moveto load def
+/cb{pop}def	% action on unknown char -- nothing for now
+/n{}def/w{}def
+/p{pop pagesave restore showpage}def
+/abspoint{currentpoint exch pop add exch currentpoint pop add exch}def
+/dstroke{currentpoint stroke moveto}bind def
+/Dl{2 copy gsave rlineto stroke grestore rmoveto}bind def
+/arcellipse{oldmat currentmatrix pop
+ currentpoint translate 1 diamv diamh div scale /rad diamh 2 div def
+ rad 0 rad -180 180 arc oldmat setmatrix}def
+/Dc{gsave dup /diamv exch def /diamh exch def arcellipse dstroke 
+    grestore diamh 0 rmoveto}def
+/De{gsave /diamv exch def /diamh exch def arcellipse dstroke
+    grestore diamh 0 rmoveto}def
+/Da{currentpoint /by exch def /bx exch def /fy exch def /fx exch def
+   /cy exch def /cx exch def /rad cx cx mul cy cy mul add sqrt def
+   /ang1 cy neg cx neg atan def /ang2 fy fx atan def cx bx add cy by add
+   2 copy rad ang1 ang2 arcn stroke exch fx add exch fy add moveto}def
+/Barray 200 array def % 200 values in a wiggle
+/D~{mark}def
+/D~~{counttomark Barray exch 0 exch getinterval astore /Bcontrol exch def pop
+ /Blen Bcontrol length def Blen 4 ge Blen 2 mod 0 eq and
+ {Bcontrol 0 get Bcontrol 1 get abspoint /Ycont exch def /Xcont exch def
+  Bcontrol 0 2 copy get 2 mul put Bcontrol 1 2 copy get 2 mul put
+  Bcontrol Blen 2 sub 2 copy get 2 mul put
+  Bcontrol Blen 1 sub 2 copy get 2 mul put
+  /Ybi /Xbi currentpoint 3 1 roll def def 0 2 Blen 4 sub
+  {/i exch def
+   Bcontrol i get 3 div Bcontrol i 1 add get 3 div
+   Bcontrol i get 3 mul Bcontrol i 2 add get add 6 div
+   Bcontrol i 1 add get 3 mul Bcontrol i 3 add get add 6 div
+   /Xbi Xcont Bcontrol i 2 add get 2 div add def
+   /Ybi Ycont Bcontrol i 3 add get 2 div add def
+   /Xcont Xcont Bcontrol i 2 add get add def
+   /Ycont Ycont Bcontrol i 3 add get add def
+   Xbi currentpoint pop sub Ybi currentpoint exch pop sub rcurveto
+  }for dstroke}if}def
+end
+/ditstart{$DITroff begin
+ /nfonts 60 def			% NFONTS makedev/ditroff dependent!
+ /fonts[nfonts{0}repeat]def
+ /fontnames[nfonts{()}repeat]def
+/docsave save def
+}def
+
+% character outcalls
+/oc {/pswid exch def /cc exch def /name exch def
+   /ditwid pswid fontsize mul resolution mul 72000 div def
+   /ditsiz fontsize resolution mul 72 div def
+   ocprocs name known{ocprocs name get exec}{name cb}
+   ifelse}def
+/fractm [.65 0 0 .6 0 0] def
+/fraction
+ {/fden exch def /fnum exch def gsave /cf currentfont def
+  cf fractm makefont setfont 0 .3 dm 2 copy neg rmoveto
+  fnum show rmoveto currentfont cf setfont(\244)show setfont fden show 
+  grestore ditwid 0 rmoveto} def
+/oce {grestore ditwid 0 rmoveto}def
+/dm {ditsiz mul}def
+/ocprocs 50 dict def ocprocs begin
+(14){(1)(4)fraction}def
+(12){(1)(2)fraction}def
+(34){(3)(4)fraction}def
+(13){(1)(3)fraction}def
+(23){(2)(3)fraction}def
+(18){(1)(8)fraction}def
+(38){(3)(8)fraction}def
+(58){(5)(8)fraction}def
+(78){(7)(8)fraction}def
+(sr){gsave .05 dm .16 dm rmoveto(\326)show oce}def
+(is){gsave 0 .15 dm rmoveto(\362)show oce}def
+(->){gsave 0 .02 dm rmoveto(\256)show oce}def
+(<-){gsave 0 .02 dm rmoveto(\254)show oce}def
+(==){gsave 0 .05 dm rmoveto(\272)show oce}def
+end
+%%BeginResource: font DIThacks
+% DIThacks fonts for some special chars
+50 dict dup begin
+/FontType 3 def
+/FontName /DIThacks def
+/FontMatrix [.001 0.0 0.0 .001 0.0 0.0] def
+/FontBBox [-220 -280 900 900] def% a lie but ...
+/Encoding 256 array def
+0 1 255{Encoding exch /.notdef put}for
+Encoding
+ dup 8#040/space put %space
+ dup 8#110/rc put %right ceil
+ dup 8#111/lt put %left  top curl
+ dup 8#112/bv put %bold vert
+ dup 8#113/lk put %left  mid curl
+ dup 8#114/lb put %left  bot curl
+ dup 8#115/rt put %right top curl
+ dup 8#116/rk put %right mid curl
+ dup 8#117/rb put %right bot curl
+ dup 8#120/rf put %right floor
+ dup 8#121/lf put %left  floor
+ dup 8#122/lc put %left  ceil
+ dup 8#140/sq put %square
+ dup 8#141/bx put %box
+ dup 8#142/ci put %circle
+ dup 8#143/br put %box rule
+ dup 8#144/rn put %root extender
+ dup 8#145/vr put %vertical rule
+ dup 8#146/ob put %outline bullet
+ dup 8#147/bu put %bullet
+ dup 8#150/ru put %rule
+ dup 8#151/ul put %underline
+ pop
+/DITfd 100 dict def
+/BuildChar{0 begin
+ /cc exch def /fd exch def
+ /charname fd /Encoding get cc get def
+ /charwid fd /Metrics get charname get def
+ /charproc fd /CharProcs get charname get def
+ charwid 0 fd /FontBBox get aload pop setcachedevice
+ 40 setlinewidth
+ newpath 0 0 moveto gsave charproc grestore
+ end}def
+/BuildChar load 0 DITfd put
+%/UniqueID 5 def
+/CharProcs 50 dict def
+CharProcs begin
+/space{}def
+/.notdef{}def
+/ru{500 0 rls}def
+/rn{0 750 moveto 500 0 rls}def
+/vr{20 800 moveto 0 -770 rls}def
+/bv{20 800 moveto 0 -1000 rls}def
+/br{20 770 moveto 0 -1040 rls}def
+/ul{0 -250 moveto 500 0 rls}def
+/ob{200 250 rmoveto currentpoint newpath 200 0 360 arc closepath stroke}def
+/bu{200 250 rmoveto currentpoint newpath 200 0 360 arc closepath fill}def
+/sq{80 0 rmoveto currentpoint dround newpath moveto
+    640 0 rlineto 0 640 rlineto -640 0 rlineto closepath stroke}def
+/bx{80 0 rmoveto currentpoint dround newpath moveto
+    640 0 rlineto 0 640 rlineto -640 0 rlineto closepath fill}def
+/ci{355 333 rmoveto currentpoint newpath 333 0 360 arc
+    50 setlinewidth stroke}def
+
+/lt{20 -200 moveto 0 550 rlineto currx 800 2cx s4 add exch s4 a4p stroke}def
+/lb{20 800 moveto 0 -550 rlineto currx -200 2cx s4 add exch s4 a4p stroke}def
+/rt{20 -200 moveto 0 550 rlineto currx 800 2cx s4 sub exch s4 a4p stroke}def
+/rb{20 800 moveto 0 -500 rlineto currx -200 2cx s4 sub exch s4 a4p stroke}def
+/lk{20 800 moveto 20 300 -280 300 s4 arcto pop pop 1000 sub
+    currentpoint stroke moveto
+    20 300 4 2 roll s4 a4p 20 -200 lineto stroke}def
+/rk{20 800 moveto 20 300 320 300 s4 arcto pop pop 1000 sub
+    currentpoint stroke moveto
+    20 300 4 2 roll s4 a4p 20 -200 lineto stroke}def
+/lf{20 800 moveto 0 -1000 rlineto s4 0 rls}def
+/rf{20 800 moveto 0 -1000 rlineto s4 neg 0 rls}def
+/lc{20 -200 moveto 0 1000 rlineto s4 0 rls}def
+/rc{20 -200 moveto 0 1000 rlineto s4 neg 0 rls}def
+end
+
+/Metrics 50 dict def Metrics begin
+/.notdef 0 def
+/space 500 def
+/ru 500 def
+/br 0 def
+/lt 250 def
+/lb 250 def
+/rt 250 def
+/rb 250 def
+/lk 250 def
+/rk 250 def
+/rc 250 def
+/lc 250 def
+/rf 250 def
+/lf 250 def
+/bv 250 def
+/ob 350 def
+/bu 350 def
+/ci 750 def
+/bx 750 def
+/sq 750 def
+/rn 500 def
+/ul 500 def
+/vr 0 def
+end
+
+DITfd begin
+/s2 500 def /s4 250 def /s3 333 def
+/a4p{arcto pop pop pop pop}def
+/2cx{2 copy exch}def
+/rls{rlineto stroke}def
+/currx{currentpoint pop}def
+/dround{transform round exch round exch itransform} def
+end
+end
+/DIThacks exch definefont pop
+%%EndResource 
+%%EndProlog
+%%BeginSetup
+ditstart
+(psc)xT
+576 1 1 xr
+%%IncludeResource: font Times-Roman
+1(Times-Roman)xf 1 f
+%%IncludeResource: font Times-Italic
+2(Times-Italic)xf 2 f
+%%IncludeResource: font Times-Bold
+3(Times-Bold)xf 3 f
+%%IncludeResource: font Times-BoldItalic
+4(Times-BoldItalic)xf 4 f
+%%IncludeResource: font Helvetica
+5(Helvetica)xf 5 f
+%%IncludeResource: font Helvetica-Oblique
+6(Helvetica-Oblique)xf 6 f
+%%IncludeResource: font Helvetica-Bold
+7(Helvetica-Bold)xf 7 f
+%%IncludeResource: font Helvetica-BoldOblique
+8(Helvetica-BoldOblique)xf 8 f
+%%IncludeResource: font Courier
+9(Courier)xf 9 f
+%%IncludeResource: font Courier-Oblique
+10(Courier-Oblique)xf 10 f
+%%IncludeResource: font Courier-Bold
+11(Courier-Bold)xf 11 f
+%%IncludeResource: font Courier-BoldOblique
+12(Courier-BoldOblique)xf 12 f
+%%IncludeResource: font Symbol
+13(Symbol)xf 13 f
+14(DIThacks)xf 14 f
+%%IncludeResource: font Courier
+15(Courier)xf 15 f
+10 s
+1 f
+%%IncludeFeature: *PageSize Letter
+xi
+%%EndSetup
+
+%%Page: 1 1
+11.00 ps
+10 s 10 xH 0 xS 1 f
+12 s
+720 688(AFS)N
+919(Cell)X
+1104(Administrators)X
+2736(C.)X
+2848(Everhart)X
+720 800(Request)N
+1054(For)X
+1211(Comments:)X
+1679(XXX)X
+2736(Transarc)X
+2448 912(March)N
+2723(1990)X
+16 s
+1208 1248(Conventions)N
+1888(for)X
+2070(Nam)X
+2319(es)X
+2458(in)X
+2590(the)X
+2779(Service)X
+3196(Directory)X
+1544 1392(in)N
+1676(the)X
+1865(AFS)X
+2131(Distributed)X
+2741(File)X
+2973(System)X
+3 f
+12 s
+600 1824(Status)N
+879(of)X
+983(This)X
+1188(Memo)X
+1 f
+720 2048(This)N
+915(memo)X
+1180(proposes)X
+1545(a)X
+1612(standard)X
+1962(for)X
+2098(the)X
+2240(Internet)X
+2564(community.)X
+720 2160(Distribution)N
+1209(of)X
+1313(this)X
+1476(memo)X
+1741(is)X
+1829(unlimited.)X
+3 f
+600 2384(Summary)N
+1 f
+720 2608(File)N
+951(systems)X
+1336(today)X
+1631(allow)X
+1926(\256le)X
+2130(and)X
+2350(name)X
+2641(space)X
+2937(sharing)X
+3302(between)X
+3705(independent)X
+720 2720(administrations.)N
+1397(Because)X
+1753(applications)X
+2253(may)X
+2453(wish)X
+2668(to)X
+2777(collaborate)X
+3240(in)X
+3349(providing)X
+3757(services)X
+4101(to)X
+720 2832(the)N
+870(aggregate)X
+1277(users)X
+1506(of)X
+1618(those)X
+1853(\256le)X
+2008(systems,)X
+2368(conventions)X
+2866(for)X
+3011(such)X
+3220(collaboration)X
+3762(need)X
+3977(to)X
+4085(be)X
+720 2944(speci\256ed.)N
+1135(In)X
+1239(particular,)X
+1657(applications)X
+2147(may)X
+2337(wish)X
+2542(to)X
+2641(communicate)X
+3185(by)X
+3305(performing)X
+3762(\256le)X
+3909(system)X
+720 3056(operations)N
+1154(between)X
+1508(\256le)X
+1664(system)X
+1964(installations)X
+2463(in)X
+2571(addition)X
+2920(to,)X
+3052(or)X
+3165(instead)X
+3471(of,)X
+3608(other)X
+3839(forms)X
+4096(of)X
+720 3168(network-based)N
+1311(communication)X
+1936(such)X
+2136(as)X
+2240(datagram)X
+2623(exchange)X
+3011(or)X
+3115(RPC.)X
+3368(The)X
+3542(conventions)X
+4031(that)X
+720 3280(allow)N
+970(this)X
+1145(sort)X
+1325(of)X
+1441(communication)X
+2077(therefore)X
+2462(take)X
+2660(the)X
+2815(form)X
+3039(of)X
+3156(speci\256cations)X
+3717(of)X
+3834(\256les)X
+4031(that)X
+720 3392(exist)N
+938(in)X
+1049(well-known)X
+1545(locations)X
+1930(in)X
+2042(a)X
+2122(given)X
+2373(\256le)X
+2533(system.)X
+2885(In)X
+3002(AFS)X
+9 s
+3177 3359(1)N
+12 s
+3250 3392(,)N
+3311(a)X
+3391(product)X
+3722(of)X
+3839(Transarc)X
+720 3504(Corporation,)N
+1244(these)X
+1477(conventions)X
+1977(specify)X
+2290(the)X
+2443(\256les)X
+2638(that)X
+2818(exist)X
+3035(under)X
+3289(the)X
+3441(reserved)X
+3801(pathname)X
+3 f
+720 3616(/afs/)N
+4 f
+891(cellname)X
+3 f
+1250(/service)X
+1 f
+1585(.)X
+3 f
+600 3840(1.)N
+720(Introduction)X
+1 f
+720 4064(This)N
+937(memo)X
+1224(proposes)X
+1612(conventions)X
+2124(by)X
+2267(which)X
+2549(processes)X
+2964(may)X
+3177(communicate)X
+3744(with)X
+3962(many)X
+720 4176(independent)N
+1215(\256le)X
+1362(system)X
+1653(installations)X
+2143(via)X
+2285(a)X
+2352(protected)X
+2735(name)X
+2968(space.)X
+720 4400(In)N
+830(order)X
+1063(for)X
+1205(computer-based)X
+1850(processes)X
+2248(to)X
+2354(communicate,)X
+2929(they)X
+3126(must)X
+3344(agree)X
+3584(on)X
+3711(conventions)X
+720 4512(on)N
+852(which)X
+1123(their)X
+1336(communication)X
+1971(can)X
+2140(be)X
+2266(based.)X
+2568(Such)X
+2795(conventions)X
+3295(already)X
+3614(exist)X
+3831(on)X
+3962(many)X
+720 4624(levels,)N
+1001(many)X
+1247(of)X
+1359(which)X
+1626(are)X
+1776(mentioned)X
+2215(in)X
+2322(the)X
+2472(OSI)X
+2658(layer)X
+2883(model)X
+3156([ISO-7498])X
+3630(or)X
+3742(the)X
+3893(various)X
+720 4736(adaptations)N
+1205(to)X
+1326(that)X
+1517(model)X
+1804(such)X
+2026(as)X
+2151(the)X
+2314(DoD)X
+2545(Internet)X
+2890(adaptation)X
+3337([RFC-905,)X
+3795(RFC-982,)X
+720 4848(RFC-994,)N
+1151(RFC-1006,)X
+1631(RFC-1085,)X
+2111(RFC-1138].)X
+2647(This)X
+2869(memo)X
+3161(proposes)X
+3553(fully)X
+3786(analogous)X
+720 4960(conventions)N
+1221(for)X
+1369(applications)X
+1871(that)X
+2052(wish)X
+2269(to)X
+2380(run)X
+2543(above)X
+2808(the)X
+2961(distributed)X
+3408(\256le)X
+3566(system)X
+3868(layer)X
+4096(as)X
+720 5072(provided)N
+1086(by)X
+1206(AFS)X
+1405(\(a)X
+1504(product)X
+1822(of)X
+1926(Transarc)X
+2287(Corporation\))X
+2808([JHH88a,)X
+3202(JHH88b,)X
+3569(MLK88].)X
+720 5296(Such)N
+954(conventions)X
+1461(are)X
+1621(unusual,)X
+1986(for)X
+2140(distributed)X
+2594(\256le)X
+2759(systems)X
+3106(historically)X
+3583(do)X
+3722(not)X
+3888(address)X
+720 5408(problems)N
+1103(beyond)X
+1411(those)X
+1639(of)X
+1743(a)X
+1810(single)X
+2064(installation.)X
+2565(Rather,)X
+2870(they)X
+3060(are)X
+3202(generally)X
+3585(concerned)X
+4005(with)X
+720 5520(improving)N
+1145(computer-based)X
+1784(sharing)X
+2091(within)X
+2361(a)X
+2428(given)X
+2666(site.)X
+10 s
+14 f
+720 5620(h)N
+736(hhhhhhhhhhhhhh)X
+7 s
+1 f
+720 5716(1)N
+10 s
+761 5744(AFS)N
+927(is)X
+1000(a)X
+1056(trademark)X
+1402(of)X
+1489(Transarc)X
+1791(Corporation.)X
+
+2 p
+%%Page: 2 2
+11.00 ps
+10 s 10 xH 0 xS 1 f
+12 s
+2368 400(-)N
+2424(2)X
+2496(-)X
+720 688(AFS)N
+919(has)X
+1071(two)X
+1239(properties)X
+1648(that)X
+1817(are)X
+1959(particularly)X
+2428(helpful)X
+2725(in)X
+2824(establishing)X
+3308(these)X
+3530(conventions:)X
+1008 912(\(1\))N
+1153(any)X
+1325(cache)X
+1578(manager)X
+1943(\(on)X
+2104(a)X
+2180(client)X
+2429(machine\))X
+2822(may)X
+3022(in)X
+3131(principle)X
+3508(interact)X
+3832(with)X
+4037(any)X
+1008 1024(server,)N
+1312(whether)X
+1667(the)X
+1830(cache)X
+2095(manager)X
+2472(and)X
+2656(server)X
+2936(are)X
+3099(in)X
+3219(the)X
+3382(same)X
+3624(administrative)X
+1008 1136(domain)N
+1321(or)X
+1425(not;)X
+1599(and)X
+1008 1360(\(2\))N
+1148(every)X
+1390(\256le)X
+1541(has)X
+1697(a)X
+1769(distinguished,)X
+2335(global)X
+2605(name,)X
+2867(in)X
+2971(which)X
+3235(a)X
+3307(fully-quali\256ed)X
+3887(domain)X
+1008 1472(name)N
+1241(locates)X
+1533(the)X
+1675(administrative)X
+2251(domain)X
+2564(in)X
+2663(which)X
+2922(that)X
+3091(name)X
+3324(is)X
+3412(to)X
+3511(be)X
+3626(interpreted.)X
+720 1696(These)N
+996(conventions)X
+1507(are)X
+1671(descendants)X
+2182(of)X
+2309(those)X
+2559(outlined)X
+2922(in)X
+3044(the)X
+3209(ITC's)X
+3480(original)X
+3827(technical)X
+720 1808(report)N
+997([ERZ88].)X
+1434(That)X
+1658(document)X
+2085(gives)X
+2335(additional)X
+2767(information)X
+3268(about)X
+3528(other)X
+3772(aspects)X
+4096(of)X
+720 1920(inter-domain)N
+1245(communication;)X
+1899(this)X
+2065(document)X
+2472(concentrates)X
+2981(on)X
+3104(the)X
+3249(conventions)X
+3742(for)X
+3882(speci\256c)X
+720 2032(\256les)N
+904(in)X
+1003(the)X
+1145(service)X
+1442(directory.)X
+3 f
+600 2256(2.)N
+720(File)X
+900(name)X
+1148(space)X
+1396(conventions)X
+720 2480(2.1.)N
+912(Ground)X
+1261(rules)X
+1 f
+720 2704(All)N
+870(names)X
+1143(in)X
+1245(this)X
+1411(document)X
+1818(will)X
+1995(be)X
+2114(the)X
+2260(fully-quali\256ed)X
+2839(global)X
+3108(names.)X
+3430(Shortcut)X
+3784(names)X
+4058(are)X
+720 2816(usually)N
+1032(available,)X
+1439(but)X
+1595(must)X
+1815(not)X
+1971(be)X
+2095(used)X
+2304(for)X
+2449(inter-cell)X
+2831(communication,)X
+3488(and)X
+3660(are)X
+3811(explicitly)X
+720 2928(not)N
+867(part)X
+1041(of)X
+1145(these)X
+1367(conventions.)X
+720 3152(Every)N
+991(\256le)X
+1155(name)X
+1405(in)X
+1521(AFS)X
+1737(begins)X
+2029(with)X
+2241(the)X
+2400(string)X
+2660(``/afs/'',)X
+3019(followed)X
+3402(by)X
+3540(a)X
+3625(fully-quali\256ed)X
+720 3264(domain)N
+1092(name)X
+1384(that)X
+1612(has)X
+1823(been)X
+2088(mapped)X
+2476(to)X
+2633(lower-case)X
+3132(alphabetics.)X
+3696(Thus,)X
+3994(even)X
+720 3376(administrations)N
+1395(that)X
+1621(ordinarily)X
+2082(spell)X
+2345(their)X
+2603(domain)X
+2973(names)X
+3300(in)X
+3456(upper)X
+3757(case)X
+4005(\(e.g.)X
+720 3488(``CS.CMU.EDU''\))N
+1494(or)X
+1608(mixed)X
+1883(case)X
+2083(\(e.g.)X
+2288(``Stanford.EDU''\))X
+3033(have)X
+3248(\256le)X
+3404(names)X
+3683(starting)X
+4005(with)X
+720 3600(the)N
+889(lower-cased)X
+1405(versions)X
+1776(of)X
+1907(those)X
+2161(names)X
+2459(\(``/afs/cs.cmu.edu/'',)X
+3321(``/afs/stanford.edu/''\).)X
+720 3712(Within)N
+1014(this)X
+1179(document,)X
+1609(this)X
+1774(pre\256x)X
+2024(will)X
+2199(be)X
+2315(referred)X
+2645(to)X
+2745(as)X
+2850(``/afs/)X
+2 f
+3080(cellname)X
+1 f
+3428(/'',)X
+3568(where)X
+2 f
+3828(cellname)X
+1 f
+720 3824(is)N
+808(the)X
+950(lower-cased)X
+1439(name)X
+1672(of)X
+1776(the)X
+1918(AFS)X
+2117 0.1914(installation--the)AX
+2752(cell)X
+2916(name)X
+3149(for)X
+3285(the)X
+3427(AFS)X
+3626(installation.)X
+720 4048(Cell)N
+929(administrators)X
+1528(are)X
+1694(generally)X
+2102(free)X
+2301(to)X
+2425(structure)X
+2811(their)X
+3037(individual)X
+3477(\256le)X
+3649(systems)X
+4002(\(i.e.,)X
+720 4160(everything)N
+1165(below)X
+1432(``/afs/)X
+2 f
+1662(cellname/'')X
+1 f
+2101(\))X
+2165(as)X
+2277(they)X
+2475(see)X
+2630(\256t.)X
+2790(However,)X
+3198(there)X
+3423(is)X
+3519(one)X
+3690(name)X
+3931(whose)X
+720 4272(use)N
+874(is)X
+964(reserved:)X
+1343(the)X
+3 f
+1487(service)X
+1 f
+1797(directory,)X
+2195(named)X
+2479(``/afs/)X
+2 f
+2709(cellname/)X
+1 f
+3084(service/''.)X
+3523(If)X
+3614(a)X
+3684(site)X
+3845(provides)X
+720 4384(such)N
+929(a)X
+1005(directory,)X
+1409(it)X
+1495(is)X
+1591(promising)X
+2013(to)X
+2120(export)X
+2398(certain)X
+2693(internal)X
+3020(information)X
+3507(in)X
+3614(a)X
+3689(standardized)X
+720 4496(fashion.)N
+1080(Furthermore,)X
+1614(all)X
+1740(directories)X
+2176(and)X
+2344(\256les)X
+2533(within)X
+2808(a)X
+2880(cell's)X
+2 f
+3118(service)X
+1 f
+3421(subtree)X
+3729(must)X
+3946(reside)X
+720 4608(within)N
+990(that)X
+1159(cell.)X
+720 4832(All)N
+900(names)X
+1203(under)X
+1479(the)X
+1654(/afs/)X
+2 f
+1820(cellname)X
+1 f
+2168(/service)X
+2525(directory)X
+2930(are)X
+3105(to)X
+3237(be)X
+3385(seen)X
+3613(as)X
+3750(targets)X
+4064(for)X
+720 4944(conventions,)N
+1235(even)X
+1443(names)X
+1715(in)X
+1816(subdirectories.)X
+2430(That)X
+2633(is,)X
+2747(names)X
+3019(in)X
+3119(subdirectories)X
+3684(\(recursively\))X
+720 5056(of)N
+836(the)X
+991(service)X
+1301(directory)X
+1686(are)X
+1841(subject)X
+2151(to)X
+2263(convention)X
+2728(just)X
+2904(as)X
+3021(are)X
+3176(the)X
+3331(names)X
+3614(directly)X
+3946(in)X
+4058(the)X
+720 5168(service)N
+1065(directory)X
+1485(itself:)X
+1777(the)X
+1967(name)X
+2248(/afs/)X
+2 f
+2414(cellname)X
+1 f
+2762 0.2148(/service/etc/thud)AX
+3471(is)X
+3606(as)X
+3757(subject)X
+4101(to)X
+720 5280(convention)N
+1202(as)X
+1336(is)X
+1454(the)X
+1626(name)X
+1890(/afs/)X
+2 f
+2056(cellname)X
+1 f
+2404(/service/thud.)X
+3005(The)X
+3210(\256le)X
+3388(name)X
+3652(README)X
+4112(is)X
+720 5392(reserved)N
+1078(at)X
+1180(all)X
+1309(levels)X
+1566(of)X
+1678(the)X
+1828(hierarchy)X
+2224(to)X
+2331(be)X
+2454(a)X
+2529(human-readable)X
+3182(\256le)X
+3337(containing,)X
+3800(usually,)X
+4133(a)X
+720 5504(table)N
+934(of)X
+1040(contents)X
+1387(for)X
+1525(the)X
+1669(rest)X
+1834(of)X
+1940(the)X
+2084(information)X
+2565(in)X
+2666(that)X
+2837(subtree)X
+3142(and)X
+3308(pointers)X
+3645(to)X
+3747(any)X
+3913(related)X
+720 5616(important)N
+1124(information)X
+1608(stored)X
+1872(elsewhere)X
+2286(in)X
+2390(a)X
+2462(site's)X
+2693(AFS)X
+2896(tree.)X
+3117(Generally,)X
+3549(a)X
+3620(README)X
+4053(\256le)X
+720 5728(in)N
+827(the)X
+977(directory)X
+1357(is)X
+1453(viewed)X
+1764(as)X
+1877(containing)X
+2317(the)X
+2468(information)X
+2956(about)X
+3203(a)X
+3279(directory)X
+3660(that)X
+3838(a)X
+3914(human)X
+720 5840(browser)N
+1053(should)X
+1333(understand)X
+1779(\256rst)X
+1952(about)X
+2190(that)X
+2359(directory.)X
+
+3 p
+%%Page: 3 3
+11.00 ps
+12 s 12 xH 0 xS 1 f
+2368 400(-)N
+2424(3)X
+2496(-)X
+720 688(The)N
+899(conventions)X
+1393(for)X
+1534(names)X
+1809(within)X
+2084(a)X
+2156(cell's)X
+2395(service)X
+2698(directory)X
+3076(are)X
+3224(exactly)X
+3533(analogous)X
+3953(to)X
+4058(the)X
+720 800(conventions)N
+1223(for)X
+1373(other)X
+1609(protocols:)X
+2032(the)X
+2188(meanings)X
+2594(of)X
+2711(the)X
+2866(telnet)X
+3118(IAC)X
+3320(codes)X
+3576([RFC-854],)X
+4058(the)X
+720 912(commands)N
+1176(used)X
+1391(for)X
+1542(\256le)X
+1704(transfer)X
+2037([RFC-959])X
+2497(or)X
+2617(SMTP)X
+2907(mail)X
+3119(transfer)X
+3453([RFC-821],)X
+3938(or)X
+4058(the)X
+720 1024(names)N
+1019(of)X
+1152(header)X
+1462(\256elds)X
+1723(in)X
+1851(Internet)X
+2204(text)X
+2402(messages)X
+2818([RFC-822].)X
+3339(The)X
+3541(conventions)X
+4058(are)X
+720 1136(necessary)N
+1130(for)X
+1278(an)X
+1405(exactly)X
+1721(analogous)X
+2148(reason:)X
+2463(so)X
+2585(that)X
+2767(independent)X
+3275(AFS)X
+3487(cells)X
+3701(that)X
+3883(wish)X
+4101(to)X
+720 1248(cooperate)N
+1119(may)X
+1309(do)X
+1429(so.)X
+3 f
+720 1472(2.2.)N
+912(Extensibility)X
+1 f
+720 1696(Section)N
+1042(3)X
+1123(below)X
+1391(enumerates)X
+1863(a)X
+1939(limited)X
+2246(set)X
+2386(of)X
+2499(known)X
+2793(names)X
+3072(that)X
+3250(may)X
+3449(be)X
+3573(used)X
+3782(in)X
+3890(a)X
+3967(cell's)X
+720 1808(service)N
+1026(directory)X
+1407(or)X
+1520(subdirectories.)X
+2141(As)X
+2280(the)X
+2431(requirements)X
+2967(for)X
+3112(further)X
+3407(cooperation)X
+3894(dictate,)X
+720 1920(additional)N
+1136(names)X
+1412(may)X
+1608(be)X
+1729(standardized.)X
+2294(To)X
+2431(provide)X
+2755(some)X
+2988(measure)X
+3340(of)X
+3451(safety)X
+3712(to)X
+3818(the)X
+3967(name)X
+720 2032(selections)N
+1135(made)X
+1379(by)X
+1510(private)X
+1813(agreement,)X
+2274(standard)X
+2635(names)X
+2916(will)X
+3101(never)X
+3350(begin)X
+3599(with)X
+3805(the)X
+3957(string)X
+720 2144(``x-''.)N
+720 2368(Private)N
+1023(agreements)X
+1492(may)X
+1688(be)X
+1809(made)X
+2048(from)X
+2265(time)X
+2467(to)X
+2572(time)X
+2774(between)X
+3125(sets)X
+3300(of)X
+3411(cell)X
+3582(administrations)X
+720 2480(as)N
+831(to)X
+937(new)X
+1128(names)X
+1405(to)X
+1511(use)X
+1670(in)X
+1776(a)X
+1850(cell's)X
+2089(service)X
+2392(directory.)X
+2818(Such)X
+3040(names)X
+3316(must)X
+3533(not)X
+3686(con\257ict)X
+4005(with)X
+720 2592(the)N
+866(uses)X
+1060(of)X
+1169(standardized)X
+1685(names.)X
+2008(Because)X
+2358(additional)X
+2773(service)X
+3075(names)X
+3350(may)X
+3545(be)X
+3665(standardized,)X
+720 2704(a)N
+797(standardized)X
+1318(name)X
+1561(use)X
+1723(may)X
+1922(preempt)X
+2271(the)X
+2422(use)X
+2583(of)X
+2696(the)X
+2847(same)X
+3078(name)X
+3320(by)X
+3449(private)X
+3750(agreement.)X
+720 2816(However,)N
+1131(names)X
+1412(beginning)X
+1832(with)X
+2038(``x-'')X
+2281(will)X
+2466(never)X
+2715(be)X
+2841(standardized,)X
+3387(so)X
+3508(cooperating)X
+3999(cells)X
+720 2928(may)N
+932(wish)X
+1159(to)X
+1280(use)X
+1454(such)X
+1676(names)X
+1968(in)X
+2089(private)X
+2403(agreements)X
+2888(without)X
+3228(the)X
+3391(possibility)X
+3837(of)X
+3962(being)X
+720 3040(preempted)N
+1151(by)X
+1271(a)X
+1338(new)X
+1522(standard.)X
+3 f
+720 3264(2.3)N
+888(Security)X
+1 f
+720 3488(Directories)N
+1177(under)X
+1425(a)X
+1497(cell's)X
+1735(service)X
+2037(directory)X
+2414(may)X
+2610(have)X
+2822(arbitrary)X
+3184(AFS)X
+3389(access)X
+3665(lists)X
+3850(imposed)X
+720 3600(on)N
+841(them,)X
+1083(which)X
+1343(may)X
+1534(or)X
+1639(may)X
+1830(not)X
+1978(include)X
+2287(``System:AnyUser''.)X
+3144(These)X
+3398(naming)X
+3711(conventions)X
+720 3712(apply)N
+963(to)X
+1067(\256les)X
+1256(not)X
+1408(visible)X
+1694(to)X
+1798(the)X
+1945(general)X
+2258(public,)X
+2552(as)X
+2661(well)X
+2856(as)X
+2966(to)X
+3071(those)X
+3304(\256les)X
+3494(that)X
+3669(are)X
+3817(generally)X
+720 3824(made)N
+974(available.)X
+1416(\(Without)X
+1809(this)X
+1993(provision,)X
+2425(violations)X
+2849(of)X
+2973(the)X
+3135(conventions)X
+3644(might)X
+3913(violate)X
+720 3936(intra-cell)N
+1093(operations.\))X
+720 4160(If)N
+852(a)X
+963(\256le)X
+1154(or)X
+1303(directory)X
+1720(under)X
+2008(a)X
+2120(given)X
+2403(cell's)X
+2681(service)X
+3023(directory)X
+3440(is)X
+3573(not)X
+3765(usable)X
+4080(by)X
+720 4272(System:AnyUser,)N
+1427(it)X
+1508(will)X
+1685(appear)X
+1969(to)X
+2071(applications)X
+2564 0.2604(authenticated)AX
+3106(in)X
+3208(a)X
+3278(different)X
+3637(cell)X
+3803(as)X
+3909(though)X
+720 4384(the)N
+899(given)X
+1174(cell's)X
+1444(service)X
+1778(is)X
+1903(simply)X
+2226(not)X
+2410(exported.)X
+2857(For)X
+3052(example,)X
+3465(if)X
+3586(a)X
+3691(given)X
+3967(cell's)X
+720 4496(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234(/service/etc)X
+1750(directory)X
+2174(does)X
+2426(not)X
+2624(allow)X
+2913(``System:AnyUser)X
+3708(rl'')X
+3906(access,)X
+720 4608(applications)N
+1210(not)X
+1357 0.2604(authenticated)AX
+1896(in)X
+1995(that)X
+2164(cell)X
+2328(will)X
+2502(be)X
+2617(unable)X
+2898(to)X
+2997(use)X
+3149(any)X
+3312(\256les)X
+3496(or)X
+3600(directories)X
+4031(that)X
+720 4720(the)N
+862(administration)X
+1443(for)X
+2 f
+1579(cellname)X
+1 f
+1951(happens)X
+2290(to)X
+2389(have)X
+2595(placed)X
+2871(there.)X
+3 f
+600 4944(3.)N
+720(Contents)X
+1111(of)X
+1215(the)X
+1367(service)X
+1675(directory)X
+1 f
+720 5168(The)N
+914(following)X
+1332(directories)X
+1784(and)X
+1968(\256les)X
+2173(under)X
+2437(a)X
+2525(cell's)X
+2779(/afs/)X
+2 f
+2945(cellname)X
+1 f
+3293(/service/)X
+3665(directory)X
+4058(are)X
+720 5280(reserved)N
+1076(for)X
+1218(the)X
+1366(uses)X
+1561(stated.)X
+1864(These)X
+2124(directories)X
+2561(are)X
+2709(not)X
+2862(required)X
+3213(to)X
+3318(be)X
+3439(present,)X
+3770(but)X
+3922(if)X
+4010(they)X
+720 5392(are)N
+862(present,)X
+1188(they)X
+1378(indicate)X
+1708(that)X
+1877(the)X
+2019(cell)X
+2183(is)X
+2271(providing)X
+2669(the)X
+2811(corresponding)X
+3385(service)X
+3682(or)X
+3786(services.)X
+3 f
+720 5616(3.1.)N
+912(Table)X
+1171(of)X
+1275(Contents)X
+1666(for)X
+1813(the)X
+1965(service)X
+2273(directory)X
+
+4 p
+%%Page: 4 4
+11.00 ps
+12 s 12 xH 0 xS 3 f
+1 f
+2368 400(-)N
+2424(4)X
+2496(-)X
+720 688(The)N
+918(following)X
+1340(names)X
+1635(are)X
+1802(speci\256ed,)X
+2217(and)X
+2405(are)X
+2572(described)X
+2990(in)X
+3114(more)X
+3361(detail)X
+3625(in)X
+3749(subsequent)X
+720 800(sections)N
+1054(of)X
+1158(this)X
+1321(document.)X
+3 f
+1008 1024(README)N
+1 f
+1872(Human-readable)X
+2538(directory)X
+2910(description)X
+3 f
+1008 1136(etc)N
+1 f
+1584(Publish)X
+1896(simple,)X
+2201(pre-existing)X
+2685(con\256guration)X
+3222(\256les)X
+3406(simply)X
+3 f
+1008 1248(mailqs)N
+1 f
+1584(AMDS)X
+1884(queue)X
+2138(location)X
+3 f
+1008 1360(con\256guration)N
+1 f
+1584(Con\256guration)X
+2142 0.2455(attribute/value)AX
+2724(information)X
+3 f
+1008 1472(printing)N
+1 f
+1872(Printing)X
+2206(services)X
+3 f
+1008 1584(wp)N
+1 f
+1584(White)X
+1844(Pages)X
+2092(listing)X
+2357(all)X
+2478(accounts)X
+3 f
+720 1808(3.2.)N
+912(The)X
+1096(/afs/)X
+4 f
+1267(cellname)X
+3 f
+1626(/service/README)X
+2414(\256le)X
+1 f
+720 2032(This)N
+917(is)X
+1007(a)X
+1076(plain)X
+1295(ASCII,)X
+1595(human-readable)X
+2242(\256le)X
+2391(containing)X
+2825(a)X
+2895(guide)X
+3136(to)X
+3238(the)X
+3383(interesting)X
+3817(attributes)X
+720 2144(of)N
+837(the)X
+992(given)X
+1243(cell.)X
+1467(Since)X
+1717(it)X
+1807(is)X
+1907(an)X
+2034(instance)X
+2386(of)X
+2502(a)X
+2581(README)X
+3022(\256le)X
+3181(\(as)X
+3329(described)X
+3734(earlier)X
+4017(as)X
+4133(a)X
+720 2256(name)N
+978(reserved)X
+1353(at)X
+1473(all)X
+1620(directory)X
+2018(levels)X
+2293(under)X
+2562(/afs/)X
+2 f
+2728(cellname)X
+1 f
+3076(/service\),)X
+3482(it)X
+3586(should)X
+3892(contain)X
+720 2368(information)N
+1202(that)X
+1374(should)X
+1657(be)X
+1775(understood)X
+2229(by)X
+2352(a)X
+2422(human)X
+2711(browsing)X
+3094(through)X
+3419(a)X
+3488(\256le)X
+3637(system)X
+3930(before)X
+720 2480(attempting)N
+1170(to)X
+1282(understand)X
+1742(further)X
+2042(information)X
+2535(in)X
+2648(this)X
+2825(directory)X
+3211(and)X
+3388(child)X
+3619(directories.)X
+4112(If)X
+720 2592(this)N
+903(\256le)X
+1070(exists,)X
+1357(it)X
+1455(could)X
+1712(contain)X
+2039(a)X
+2125(guide)X
+2382(to)X
+2500(what)X
+2730(is)X
+2837(in)X
+2955(the)X
+3116(site's)X
+3362(/afs/)X
+2 f
+3528(cellname)X
+1 f
+3876(/service)X
+720 2704(directory,)N
+1118(as)X
+1224(well)X
+1416(as)X
+1522(mentioning)X
+1987(\256le)X
+2136(names)X
+2408(of)X
+2515(other)X
+2740(important)X
+3142(information)X
+3624(within)X
+3897(a)X
+3967(cell's)X
+720 2816(\256le)N
+867(space)X
+1105(that)X
+1274(may)X
+1464(not)X
+1611(actually)X
+1941(be)X
+2056(housed)X
+2352(under)X
+2595(the)X
+2737(/afs/)X
+2 f
+2903(cellname)X
+1 f
+3251(/service)X
+3575(directory.)X
+720 3040(This)N
+929(\256le)X
+1090(replaces)X
+1444(and)X
+1621(generalizes)X
+2093(the)X
+2249(former)X
+2550(/afs/)X
+2 f
+2716(cellname)X
+1 f
+3064(/service/systypes)X
+3755(\256le,)X
+3941(which)X
+720 3152(listed)N
+953(the)X
+1095(legal)X
+1307(values)X
+1577(for)X
+1713(the)X
+1855(special)X
+2 f
+2147(@sys)X
+1 f
+2376(\256lename)X
+2732(token.)X
+3 f
+720 3376(3.3.)N
+912(The)X
+1096(/afs/)X
+4 f
+1267(cellname)X
+3 f
+1626(/service/etc)X
+2106(directory)X
+1 f
+720 3600(This)N
+944(directory)X
+1346(provides)X
+1731(a)X
+1828(simple)X
+2139(mechanism)X
+2632(by)X
+2782(which)X
+3071(a)X
+3168(cell)X
+3362(may)X
+3582(publish)X
+3919(easily-)X
+720 3712(determined)N
+1214(information)X
+1728(about)X
+2001(itself.)X
+2301(At)X
+2456(present,)X
+2817(four)X
+3036(names)X
+3341(are)X
+3518(reserved)X
+3903(in)X
+4037(this)X
+720 3824(directory:)N
+3 f
+1119(passwd,)X
+1464(group)X
+1 f
+1709(,)X
+3 f
+1757(CellServDB.export)X
+1 f
+2534(,)X
+2582(and)X
+3 f
+2745(CellServDB.local)X
+1 f
+3448(.)X
+3 f
+720 4048(3.3.1.)N
+984(The)X
+1168(\256les)X
+1352(/afs/)X
+4 f
+1523(cellname)X
+3 f
+1882(/service/etc/passwd)X
+2686(and)X
+2864(/afs/)X
+4 f
+3035(cellname)X
+3 f
+3394(/service/etc/group)X
+1 f
+720 4272(The)N
+899(\256le)X
+1051(/afs/)X
+2 f
+1217(cellname)X
+1 f
+1565(/service/etc/passwd,)X
+2367(if)X
+2455(it)X
+2539(exists,)X
+2812(is)X
+2906(a)X
+2979(copy)X
+3196(of)X
+3306(the)X
+3454(ordinary)X
+3810(Unix)X
+10 s
+4224(TM)Y
+7 s
+4191(2)Y
+12 s
+720 4384(passwd\(5\))N
+1142(\256le)X
+1293(listing)X
+1562(the)X
+1708(accounts)X
+2072(in)X
+2174(the)X
+2319(cell.)X
+2534(The)X
+2711(\256le)X
+2861(/afs/)X
+2 f
+3027(cellname)X
+1 f
+3375 0.1771(/service/etc/group,)AX
+4117(if)X
+720 4496(it)N
+802(exists,)X
+1074(is)X
+1167(a)X
+1239(copy)X
+1455(of)X
+1564(the)X
+1711(Unix)X
+10 s
+4448(TM)Y
+12 s
+2052 4496(group\(5\))N
+2417(\256le)X
+2569(listing)X
+2839(the)X
+2986(group)X
+3239(names)X
+3514(and)X
+3682(members)X
+4064(for)X
+720 4608(that)N
+889(cell.)X
+720 4832(Programs)N
+1130(such)X
+1348(as)X
+1470(ls\(1\))X
+1688(may)X
+1896(look)X
+2109(at)X
+2221(these)X
+2461(\256les)X
+2663(to)X
+2780(perform)X
+3133(translations)X
+3620(of)X
+3743(\256le)X
+3909(system)X
+720 4944(attributes.)N
+1161(Thus,)X
+1411(if)X
+1504(the)X
+1656(string)X
+1909(name)X
+2152(associated)X
+2582(with)X
+2787(gid)X
+2944(4)X
+3026(has)X
+3188(to)X
+3297(be)X
+3422(determined)X
+3890(for)X
+4036(cell)X
+2 f
+720 5056(cellname)N
+1 f
+1068(,)X
+1167(the)X
+1361(answer)X
+1709(may)X
+1951(be)X
+2118(found)X
+2418(in)X
+2569(``/afs/)X
+2 f
+2799(cellname)X
+1 f
+3147 0.1656(/service/etc/group''.)AX
+4026(The)X
+720 5168(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234(/service/etc/passwd)X
+2011(\256le)X
+2162(is)X
+2254(referenced)X
+2689(only)X
+2888(if)X
+2975(the)X
+3121(given)X
+3362(cell)X
+3529(does)X
+3732(not)X
+3882(provide)X
+720 5280(a)N
+787(White)X
+1047(Pages)X
+1295(service.)X
+10 s
+14 f
+720 5620(h)N
+736(hhhhhhhhhhhhhh)X
+7 s
+1 f
+720 5716(2)N
+10 s
+761 5744(Unix)N
+941(is)X
+1014(a)X
+1070(registered)X
+1407(trademark)X
+1753(of)X
+1840(AT&T.)X
+
+5 p
+%%Page: 5 5
+11.00 ps
+10 s 10 xH 0 xS 1 f
+12 s
+2368 400(-)N
+2424(5)X
+2496(-)X
+720 688(Administrators)N
+1352(are)X
+1525(free)X
+1730(to)X
+1860(clear)X
+2103(or)X
+2238(overwrite)X
+2662(the)X
+2835(\256eld)X
+3061(carrying)X
+3437(encoded)X
+3814(password)X
+720 800(information)N
+1232(in)X
+1363(this)X
+1558(passwd\(5\))X
+2008(\256le,)X
+2211(since)X
+2465(this)X
+2660(\256le)X
+2839(is)X
+2959(never)X
+3229(used)X
+3461(for)X
+3629 0.2356(authentication)AX
+720 912(purposes.)N
+3 f
+720 1136(3.3.2.)N
+984(The)X
+1168(\256le)X
+1315(/afs/)X
+4 f
+1486(cellname)X
+3 f
+1845 0.1487(/service/etc/CellServDB.export)AX
+1 f
+720 1360(The)N
+934(\256le)X
+1121(/afs/)X
+2 f
+1287(cellname)X
+1 f
+1635 0.1552(/service/etc/CellServDB.export)AX
+2906(allows)X
+2 f
+3221(cellname)X
+1 f
+3634(to)X
+3774(export)X
+4085(its)X
+720 1472(knowledge)N
+1172(of)X
+1282(other)X
+1510(operational,)X
+1998(public)X
+2269(AFS)X
+2474(cells.)X
+2729(In)X
+2839(general,)X
+3177(this)X
+3346(\256le)X
+3499(may)X
+3695(be)X
+3815(copied)X
+4101(to)X
+720 1584 0.1603(/usr/vice/etc/CellServDB)AN
+1753(on)X
+1913(each)X
+2154(workstation)X
+2672(connected)X
+3127(to)X
+3266(a)X
+3373(given)X
+3652(cell,)X
+3881(so)X
+4031(that)X
+720 1696(workstations)N
+1235(may)X
+1425(connect)X
+1749(to)X
+1848(any)X
+2011(available)X
+2384(AFS)X
+2583(cell.)X
+9 s
+2747 1663(3)N
+12 s
+720 1920(In)N
+827(the)X
+3 f
+972(transarc.com)X
+1 f
+1541(cell,)X
+1732(a)X
+1802(reasonably)X
+2246(central)X
+2536(facility)X
+2838(operated)X
+3198(by)X
+3322(Transarc)X
+3687(Corporation,)X
+720 2032(the)N
+881(published)X
+1297(CellServDB.export)X
+2079(\256le)X
+2244 0.1497(\(/afs/transarc.com/service/etc/CellServDB.export\))AX
+720 2144(contains)N
+1076(information)X
+1566(about)X
+1815(all)X
+1947(public)X
+2223(cells)X
+2435(known)X
+2731(by)X
+2862(Transarc)X
+3234(Corporation.)X
+3782(Other)X
+4036(cell)X
+720 2256(administrations)N
+1338(may)X
+1528(wish)X
+1733(periodically)X
+2218(to)X
+2317(monitor)X
+2646(this)X
+2809(\256le)X
+2956(for)X
+3092(updates.)X
+3 f
+720 2480(3.3.3.)N
+984(The)X
+1168(\256le)X
+1315(/afs/)X
+4 f
+1486(cellname)X
+3 f
+1845 0.1741(/service/etc/CellServDB.local)AX
+1 f
+720 2704(This)N
+926(\256le)X
+1084(allows)X
+2 f
+1370(cellname)X
+1 f
+1753(to)X
+1864(export)X
+2146(up-to-date)X
+2578(VLDB-location)X
+3218(information)X
+3709(about)X
+3959(itself.)X
+720 2816(That)N
+921(is,)X
+1033(cells)X
+1234(may)X
+1424(publish)X
+1731(their)X
+1932(up-to-date)X
+2352(VLDB-location)X
+2980(information)X
+3459(via)X
+3601(this)X
+3764(\256le.)X
+3 f
+720 3040(3.4.)N
+912(The)X
+1096(/afs/)X
+4 f
+1267(cellname)X
+3 f
+1626(/service/mailqs)X
+2260(directory)X
+1 f
+720 3264(This)N
+917(directory)X
+1291(is)X
+1381(tightly)X
+1659(coupled)X
+1990(to)X
+2091(the)X
+2235(Andrew)X
+2571(Message)X
+2934(Delivery)X
+3298(System)X
+3608(installation)X
+4064(for)X
+720 3376(a)N
+811(given)X
+1073(cell.)X
+1308(If)X
+1419(this)X
+1605(directory)X
+2000(exists,)X
+2290(it)X
+2391(implies)X
+2722(that)X
+2 f
+2914(cellname)X
+1 f
+3309(runs)X
+3521(the)X
+3686(full)X
+3867(Andrew)X
+720 3488(Message)N
+1099(Delivery)X
+1480(System)X
+1807(\(AMDS\))X
+2191(and)X
+2374(obeys)X
+2642(all)X
+2783(the)X
+2945(AMDS)X
+3265(conventions.)X
+3822(Sites)X
+4053(not)X
+720 3600(running)N
+1061(AMDS)X
+1379(must)X
+1608(not)X
+1773(have)X
+1997(a)X
+2082(directory)X
+2472(named)X
+2771 0.2112(/afs/cellname/service/mailqs/,)AX
+3963(as)X
+4085(its)X
+720 3712(existence)N
+1110(implies)X
+1425(\(to)X
+1564(software)X
+1927(running)X
+2258(even)X
+2472(in)X
+2579(other)X
+2809(cells\))X
+3050(a)X
+3125(promise)X
+3467(to)X
+3574(provide)X
+3900(AMDS)X
+720 3824(service.)N
+1082(More)X
+1331(information)X
+1827(about)X
+2082(AMDS)X
+2399(may)X
+2606(be)X
+2738(found)X
+3003(in)X
+3119(the)X
+3277(corresponding)X
+3867(Andrew)X
+720 3936(documentation,)N
+1342(published)X
+1741(via)X
+1884(the)X
+2027(MIT)X
+2228(X)X
+2322(Consortium's)X
+2871(X.V11R4)X
+3267(release)X
+3561([X90].)X
+3864(In)X
+3970(brief,)X
+720 4048(the)N
+892(promise)X
+1256(to)X
+1384(provide)X
+1731(AMDS)X
+2060(service)X
+2386(means)X
+2685(that)X
+2883(mail)X
+3108(that)X
+3306(uses)X
+2 f
+3524(cellname)X
+1 f
+3925(as)X
+4058(the)X
+720 4160(destination)N
+1168(mail)X
+1365(domain)X
+1680(name--e.g.)X
+2 f
+2118(localname)X
+1 f
+2519(@)X
+2 f
+2607(cellname)X
+1 f
+2955(--may)X
+3211(be)X
+3328(handled)X
+3659(via)X
+3803(AFS;)X
+4031(that)X
+2 f
+720 4272(localname)N
+1 f
+1154(may)X
+1353(be)X
+1477(interpreted)X
+1928(via)X
+2078(the)X
+2228(White)X
+2496(Pages)X
+2752(exported)X
+3121(by)X
+2 f
+3249(cellname)X
+1 f
+3597(;)X
+3656(and)X
+3827(that)X
+4004(mail)X
+720 4384(delivery)N
+1060(may)X
+1250(be)X
+1366(accomplished)X
+1921(by)X
+2042(storing)X
+2334(\256les)X
+2519(as)X
+2624(the)X
+2767(resultant)X
+3124(White)X
+3385(Pages)X
+3634(entry)X
+3857(dictates,)X
+720 4496(either)N
+967(by)X
+1090(storing)X
+1384(a)X
+1454(new)X
+1641(\256le)X
+1791(in)X
+1893(a)X
+1963(user's)X
+2218(mailbox)X
+2560(directory)X
+2934(or)X
+3040(by)X
+3162(enqueueing)X
+3632(mail)X
+3830(in)X
+3931(one)X
+4096(of)X
+720 4608(the)N
+862(global)X
+1127(mail)X
+1323(delivery)X
+1663(queues)X
+1954(for)X
+2 f
+2090(cellname)X
+1 f
+2438(.)X
+720 4832(Not)N
+896(only)X
+1099(does)X
+1307(this)X
+1478(directory,)X
+1882(by)X
+2010(its)X
+2133(existence,)X
+2549(signal)X
+2812(that)X
+2 f
+2990(cellname)X
+1 f
+3371(runs)X
+3569(AMDS,)X
+3902(but)X
+4058(the)X
+720 4944(directory)N
+1104(houses)X
+1401(the)X
+1555(global)X
+1831(mail)X
+2038(delivery)X
+2389(queues)X
+2691(for)X
+2838(the)X
+2991(given)X
+3240(cell.)X
+3463(These)X
+3728(global)X
+4004(mail)X
+720 5056(queues)N
+1025(may)X
+1229(be)X
+1358(any)X
+1535(name)X
+1783(starting)X
+2111(with)X
+2321(either)X
+2580(the)X
+2737(string)X
+2995(``q'')X
+3210(\(for)X
+3393(ordinary)X
+3758(queues\))X
+4096(or)X
+720 5168(``sq'')N
+957(\(for)X
+1125(slow-service,)X
+1659(back-burner)X
+2148(queues\).)X
+10 s
+14 f
+720 5428(h)N
+736(hhhhhhhhhhhhhh)X
+7 s
+1 f
+720 5524(3)N
+10 s
+761 5552(If)N
+841(a)X
+903(cell)X
+1045(administration)X
+1533(wishes)X
+1777(to)X
+1865(maintain)X
+2171(private)X
+2421(cells)X
+2595(that)X
+2742(its)X
+2844(users)X
+3036(should)X
+3276(be)X
+3379(able)X
+3540(to)X
+3629(reach,)X
+3851(but)X
+3980(which)X
+720 5648(should)N
+961(not)X
+1091(be)X
+1195(generally)X
+1522(advertised,)X
+1899(the)X
+2024(VLDB-location)X
+2554(information)X
+2959(about)X
+3164(those)X
+3360(cells)X
+3534(should)X
+3774(be)X
+3877(placed)X
+4114(in)X
+720 5744(/usr/vice/etc/CellServDB)N
+1545(on)X
+1645(its)X
+1740(workstations)X
+2169(but)X
+2291(not)X
+2413(published)X
+2744(in)X
+2826(service/etc/CellServDB.export.)X
+
+6 p
+%%Page: 6 6
+11.00 ps
+10 s 10 xH 0 xS 1 f
+12 s
+3 f
+1 f
+2368 400(-)N
+2424(6)X
+2496(-)X
+3 f
+720 688(3.5.)N
+912(The)X
+1096(/afs/)X
+4 f
+1267(cellname)X
+3 f
+1626(/service/con\256guration)X
+2537(directory)X
+1 f
+720 912(This)N
+937(directory)X
+1331(allows)X
+2 f
+1628(cellname)X
+1 f
+2022(to)X
+2143(export)X
+2435(various)X
+2764(facts)X
+2992(about)X
+3252(itself.)X
+3540(At)X
+3683(present,)X
+4032(two)X
+720 1024(names)N
+990(are)X
+1132(reserved)X
+1482(in)X
+1581(this)X
+1744(directory:)X
+3 f
+2143(AMS-Server)X
+1 f
+2685(and)X
+3 f
+2848(Postmaster)X
+1 f
+3307(.)X
+720 1248(The)N
+926(/afs/)X
+2 f
+1092(cellname)X
+1 f
+1440(/service/con\256guration/AMS-Server)X
+2853(\256le,)X
+3057(if)X
+3173(it)X
+3284(exists,)X
+3584(contains)X
+3962(many)X
+720 1360 0.2455(attribute/value)AN
+1316(pairs)X
+1541(specifying,)X
+2004(for)X
+2154(example,)X
+2543(the)X
+2699(roots)X
+2929(of)X
+3047(the)X
+3203(``public)X
+3546(folder)X
+3813(trees'')X
+4096(as)X
+720 1472(de\256ned)N
+1062(with)X
+1292(the)X
+1469(Andrew)X
+1837(Message)X
+2232(System)X
+2574(\(AMS\))X
+2904([AMS90,)X
+3323(JR87,)X
+3604(NSB88].)X
+4026(The)X
+720 1584(presence)N
+1109(of)X
+1241(this)X
+1432(\256le)X
+1607(is)X
+1723(a)X
+1818(promise)X
+2180(that)X
+2377(the)X
+2547(\256eld)X
+2770(values)X
+3068(that)X
+3265(it)X
+3370(gives)X
+3624(are)X
+3793(a)X
+3887(truthful)X
+720 1696(representation)N
+1298(of)X
+1410(the)X
+1560(attributes)X
+1951(of)X
+2 f
+2063(cellname)X
+1 f
+2411(.)X
+2491(Names)X
+2790(for)X
+2934(these)X
+3164(attributes)X
+3555(are)X
+3705(given)X
+3951(in)X
+4058(the)X
+720 1808(AMS)N
+951(documentation;)X
+1575(in)X
+1674(brief,)X
+1904(they)X
+2094(are)X
+2236(tabulated)X
+2614(here:)X
+1008 1920(LocalBboardRoot)N
+2012(ExternalBboardRoot)X
+3124(Of\256cialBboardRoot)X
+1008 2032(OldLocalBboardRoot)N
+1941(OldExternalBboardRoot)X
+2980(OldOf\256cialBboardRoot)X
+1008 2144(DefaultMSPath)N
+2063(RequiredSubsFile)X
+3210(ChangedSubsFile)X
+1008 2256(MessagesBugAddress)N
+1909 0.2411(WelcomeMailFile)AX
+2665(EliStartupFile)X
+3259(AMS_OnlyMail)X
+1008 2368(AMS_ValidateDestHosts)N
+2613(AMS_HardHostValidationErrors)X
+1008 2480(AMS_DeliveryViaDomainMXAddress)N
+1008 2592(AMS_DeliveryViaDomainAddress)N
+2553(AMS_DeliveryViaGethostbyname)X
+1008 2704(AMS_DeliveryViaHostTable)N
+2194(AMS_UUCPSupported)X
+3153(AMS_GecosHacks)X
+1008 2816(AMS_UsersAreGrownups)N
+2709(AMS_UsersHandleFormatting)X
+1008 2928(AMS_WPValidation)N
+1904(AMS_PasswdValidation)X
+2943(AMS_AliasesValidation)X
+1008 3040 0.1226(AMS_LocalDatabaseValidation)AN
+3034(AMS_NameSeparator)X
+1008 3152(AMS_UseridPlusWorks)N
+2795(AMS_ValidDomainSuf\256xes)X
+1008 3264(AMS_ValidDomainRelays)N
+2372(AMS_PrinterNamesInSpoolDirectories)X
+1008 3376(AMS_PrintSpoolDirectories)N
+2703(AMS_PrinterNamesInPrintcap)X
+1008 3488(AMS_NamedValidPrinters)N
+2080(OutgoingName)X
+2700(PostmasterTitle)X
+3332(MailboxName)X
+1008 3600(PostmasterName)N
+1717(PostmasterMailbox)X
+2522(WPIUpdateReqAddr)X
+3385(Organization)X
+1008 3712(NNTPhost)N
+1937(NNTPuser)X
+2867(AMS_ViceQueueLifetime)X
+1008 3824 0.1475(AMS_ExtraViceQueueLifetime)AN
+2712(AMS_ViceQueueLifetimeCap)X
+1008 3936(PostmasterAddress)N
+720 4160(The)N
+903(/afs/)X
+2 f
+1069(cellname)X
+1 f
+1417 0.1210(/service/con\256guration/Postmaster)AX
+2739(\256le,)X
+2919(if)X
+3011(it)X
+3098(exists,)X
+3374(contains)X
+3729(the)X
+3881(mailing)X
+720 4272(address)N
+1032(that)X
+1201(can)X
+1359(be)X
+1474(used)X
+1674(in)X
+1773(reaching)X
+2129(somebody)X
+2548(responsible)X
+3010(for)X
+2 f
+3146(cellname)X
+1 f
+3518(as)X
+3622(an)X
+3737(AFS)X
+3936(cell.)X
+3 f
+720 4496(3.6.)N
+912(The)X
+1096(/afs/)X
+4 f
+1267(cellname)X
+3 f
+1626(/service/printing)X
+2324(directory)X
+1 f
+720 4720(It)N
+810(is)X
+905(planned)X
+1241(that)X
+1417(this)X
+1587(directory)X
+1966(act)X
+2110(as)X
+2221(an)X
+2343(interface)X
+2712(to)X
+2818(the)X
+2967(printing)X
+3303(services)X
+3645(available)X
+4026(in)X
+4133(a)X
+720 4832(given)N
+959(cell.)X
+1172(This)X
+1368(name)X
+1602(is)X
+1691(currently)X
+2063(reserved)X
+2413(by)X
+2533(a)X
+2600(project)X
+2892(currently)X
+3264(under)X
+3507(way)X
+3691(at)X
+3785(Academic)X
+720 4944(Services)N
+1071(at)X
+1166(Carnegie)X
+1539(Mellon)X
+1842(for)X
+1979(their)X
+2181(development)X
+2705(of)X
+2811(such)X
+3013(services;)X
+3376(the)X
+3520(contact)X
+3825(is)X
+3915(Joseph)X
+720 5056(Jackson,)N
+1072(jj1h+@andrew.cmu.edu)X
+2024(.)X
+3 f
+720 5280(3.7.)N
+912(The)X
+1096(/afs/)X
+4 f
+1267(cellname)X
+3 f
+1626(/service/wp)X
+2110(directory)X
+1 f
+720 5504(This)N
+919(directory)X
+1295(is)X
+1387(the)X
+1533(home)X
+1775(for)X
+1915(the)X
+2061(given)X
+2303(cell's)X
+2540(White)X
+2804(Pages)X
+3056(database)X
+3416(\256les,)X
+3628(should)X
+3912(it)X
+3995(wish)X
+720 5616(to)N
+864(support)X
+1221(this)X
+1429(facility.)X
+1820(The)X
+2038(root)X
+2261(\256le)X
+2452(of)X
+2600(the)X
+2786(White)X
+3090(Pages)X
+3382(structure)X
+3787(is)X
+3919(named)X
+720 5728(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234(/service/wp/wp)X
+1860(.)X
+1946(Considerable)X
+2492(further)X
+2792(information)X
+3285(on)X
+3419(the)X
+3575(White)X
+3849(Pages)X
+4112(is)X
+720 5840(published)N
+1118(with)X
+1313(the)X
+1455(X.V11R4)X
+1849(release)X
+2141(of)X
+2245(the)X
+2387(X)X
+2480(tape)X
+2665([WP90a,)X
+3028(WP90b].)X
+
+7 p
+%%Page: 7 7
+11.00 ps
+12 s 12 xH 0 xS 1 f
+2368 400(-)N
+2424(7)X
+2496(-)X
+3 f
+600 688(4.)N
+720(Current)X
+1080(status)X
+1 f
+720 912(\(This)N
+973(section)X
+1296(would)X
+1586(be)X
+1727(deleted)X
+2056(from)X
+2294(a)X
+2388(real,)X
+2608(recommended)X
+3205(document.)X
+3684(It)X
+3794(exists)X
+4064(for)X
+720 1024(informational)N
+1269(purposes)X
+1634(here.\))X
+720 1248(At)N
+844(present)X
+1150(\(27)X
+1306(February)X
+1681(1990\),)X
+1957(not)X
+2108(all)X
+2233(cells)X
+2438(adhere)X
+2723(to)X
+2826(these)X
+3052(conventions,)X
+3570(but)X
+3722(some)X
+3954(are)X
+4101(in)X
+720 1360(use)N
+890(by)X
+1028(programs)X
+1433(that)X
+1620(can)X
+1795(in)X
+1911(principle)X
+2295(run)X
+2464(anywhere.)X
+2927(This)X
+3139(section)X
+3453(describes)X
+3852(some)X
+4096(of)X
+720 1472(those)N
+947(variances)X
+1335(and)X
+1498(some)X
+1725(of)X
+1829(those)X
+2056(uses.)X
+3 f
+720 1696(4.1.)N
+912(Pre-existing)X
+1428(commitments)X
+1 f
+720 1920(Transarc)N
+1091(Corporation)X
+1590(has)X
+1752(agreed)X
+2043(to)X
+2153(provide,)X
+2506(in)X
+2616 0.1372(/afs/transarc.com/service/CellServDB,)AX
+4133(a)X
+720 2032(\256le)N
+867(on)X
+987(which)X
+1246(sites)X
+1441(may)X
+1631(base)X
+1826(their)X
+2027(own)X
+2216 0.1603(/usr/vice/etc/CellServDB)AX
+3209(\256les.)X
+720 2256(Currently,)N
+1137(much)X
+1375(of)X
+1479(AMS)X
+1710 0.2812(automatically)AX
+2260(uses)X
+2449(the)X
+2591(following)X
+2989(\256les)X
+3173(in)X
+3272 0.2321(/afs/cellname/service:)AX
+1008 2368(wp)N
+1008 2480(mailqs)N
+1008 2592(con\256guration/AMS-Server)N
+720 2704(in)N
+825(the)X
+973(way)X
+1163(described)X
+1562(in)X
+1668(Section)X
+1988(3.)X
+2115(AMS)X
+2353(is)X
+2448(currently)X
+2827(widely)X
+3120(deployed;)X
+3531(changes)X
+3872(to)X
+3978(these)X
+720 2816(conventions)N
+1209(would)X
+1473(have)X
+1679(to)X
+1778(be)X
+1893(phased)X
+2184(in)X
+2283(over)X
+2478(a)X
+2545(very)X
+2740(long)X
+2935(period.)X
+3 f
+720 3040(4.2.)N
+912(Changes)X
+1287(to)X
+1391(prior)X
+1629(conventions)X
+1 f
+720 3264(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234(/service/CellServDB)X
+2584(was)X
+3286(moved)X
+4101(to)X
+720 3376(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234 0.1500(/service/etc/CellServDB.export.)AX
+720 3600(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234 0.1562(/service/CellServDB.local)AX
+2725(was)X
+3356(moved)X
+4101(to)X
+720 3712(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234 0.1830(/service/etc/CellServDB.local)AX
+720 3936(/afs/)N
+2 f
+886(cellname)X
+1 f
+1234(/service/CellServDBs,)X
+2120(the)X
+2266(directory)X
+2642(containing)X
+3077(CellServDB)X
+3575(\256les)X
+3763(from)X
+3978(other)X
+720 4048(cells,)N
+945(was)X
+1118(deleted)X
+1421(before)X
+1691(being)X
+1929(implemented.)X
+3 f
+720 4272(4.3.)N
+912(Extra)X
+1171(things)X
+1445(currently)X
+1854(kept)X
+2059(by)X
+2184(various)X
+2512(cells)X
+1 f
+720 4496(service/CellServDB)N
+1533(currently)X
+1924(exists)X
+2186(\(not)X
+2384(moved)X
+2689(to)X
+2808 0.1466(service/etc/CellServDB.export\))AX
+4064(for)X
+720 4608(cells)N
+944(andrew.cmu.edu,)X
+1651(athena.mit.edu,)X
+2290(ece.cmu.edu,)X
+2843(ri.osf.org,)X
+3266(transarc.com.)X
+3855(Because)X
+720 4720(Transarc)N
+1094(has)X
+1259(announced)X
+1713(that)X
+1895 0.1411(/afs/transarc.com/service/CellServDB)AX
+3390(is)X
+3491(a)X
+3571(path)X
+3774(name)X
+4020(to)X
+4133(a)X
+720 4832(global)N
+987(list)X
+1131(of)X
+1237 0.1736(publicly-accessible)AX
+2002(cells,)X
+2229(Transarc)X
+2592(will)X
+2767(probably)X
+3134(make)X
+3368(a)X
+3436(symbolic)X
+3814(link)X
+3989(from)X
+720 4944(that)N
+889(name)X
+1122(to)X
+1221 0.1535(/afs/transarc.com/service/etc/CellServDB.export)AX
+3113(.)X
+720 5168 0.1495(service/CellServDB.local)AN
+1745(currently)X
+2136(exists)X
+2398(\(not)X
+2597(moved)X
+2903(to)X
+3022 0.1741(service/etc/CellServDB.local\))AX
+720 5280(for)N
+885(cells)X
+1115(andrew.cmu.edu,)X
+1828(cs.cmu.edu,)X
+2338(and)X
+2530(ece.cmu.edu.)X
+3113(\(Other)X
+3417(cells)X
+3647(have)X
+3882(not)X
+4058(yet)X
+720 5392(created)N
+1023(a)X
+1090(CellServDB.local)X
+1796(\256le)X
+1943(at)X
+2037(all.\))X
+720 5616(andrew.cmu.edu)N
+1421(keeps)X
+1705(extra)X
+1963(directories)X
+2435(``admin'',)X
+2893(``butler'',)X
+3335(``mnt'',)X
+3702(``net'',)X
+4037(and)X
+720 5728(``motd''.)N
+1121(Its)X
+1244(printing)X
+1576(directory)X
+1951(contains)X
+2299(directories)X
+2733(adm)X
+2926(and)X
+3092(fonts)X
+3311(in)X
+3413(addition)X
+3755(to)X
+3856(the)X
+4000(ones)X
+720 5840(mentioned,)N
+1175(but)X
+1322(cross-cell)X
+1715(printing)X
+2044(support)X
+2356(is)X
+2444(not)X
+2591(well)X
+2781(developed)X
+3201(yet.)X
+
+8 p
+%%Page: 8 8
+11.00 ps
+12 s 12 xH 0 xS 1 f
+2368 400(-)N
+2424(8)X
+2496(-)X
+720 688(athena.mit.edu)N
+1337(keeps)X
+1605(many)X
+1868(BACKUP_LIST*)X
+2604(\256les,)X
+2837(many)X
+3101(CellServDB*)X
+3669(\256les,)X
+3903(several)X
+720 800(sys-type)N
+1070(directories)X
+1507(decmips_30,)X
+2026(rt_r3,)X
+2267(and)X
+2436(vax_43,)X
+2772(two)X
+2945(binary-program)X
+3578(links)X
+3794(aklog)X
+4037(and)X
+720 912(reconcile,)N
+1122(directories)X
+1553(``attic'')X
+1872(and)X
+2035(``partitions'',)X
+2575(and)X
+2738(a)X
+2805(\256le)X
+2952(``owl.xbm''.)X
+720 1136(cs.cmu.edu)N
+1196(keeps)X
+1458(extra)X
+1694(directories)X
+2144(``ams_test'')X
+2652(and)X
+2834(``wp_old'';)X
+3320(it)X
+3418(keeps)X
+3681(an)X
+3816(extra)X
+4053(\256le)X
+720 1248(etc/groups-afs)N
+1289(.)X
+720 1472(net.mit.edu)N
+1183(keeps)X
+1431(sys-type)X
+1780(directories)X
+2216(rt_r3)X
+2433(and)X
+2602(vax_43,)X
+2939(as)X
+3049(well)X
+3245(as)X
+3355(binary-program)X
+3989(links)X
+720 1584(aklog)N
+958(and)X
+1121(klog.)X
+720 1808(psy.cmu.edu)N
+1235(keeps)X
+1483(etc/groups-afs,)X
+2082(etc/groups-afs.BAK,)X
+2907(etc/passwd.BAK.)X
+3633(Its)X
+3759(service/wp)X
+720 1920(directory)N
+1183(has)X
+1426(more)X
+1739(\256les)X
+2014(than)X
+2295(simply)X
+2671(a)X
+2828(B-tree)X
+3183(\(service/wp/wp.old)X
+4037(and)X
+720 2032(service/wp/wp.saved\),)N
+1614(and)X
+1787(somebody)X
+2216(is)X
+2315(going)X
+2569(to)X
+2679(be)X
+2805(surprised)X
+3192(when)X
+3435(its)X
+3561(root)X
+3751(node)X
+3973(splits)X
+720 2144(when)N
+952(it)X
+1030(reaches)X
+1343(40,000)X
+1631(bytes.)X
+720 2368(ri.osf.org)N
+1096(keeps)X
+1339(service/#CellServDB.osf.org#)X
+2522(and)X
+2685(service/CellServDB.osf.org)X
+3772(.)X
+720 2592(sipb.mit.edu)N
+1245(keeps)X
+1513(sys-type)X
+1882(directories)X
+2338(decmips_30,)X
+2876(rt_r3,)X
+3136(and)X
+3324(vax_43;)X
+3683(old)X
+3856(versions)X
+720 2704(decmips_30.old,)N
+1385(rt_r3.old,)X
+1772(and)X
+1939(vax_43.old;)X
+2424(a)X
+2495(binary-program)X
+3127(link)X
+3305(aklog;)X
+3574(and)X
+3741(a)X
+3812(partitions)X
+720 2816(directory.)N
+720 3040 0.1637(testers.athena.mit.edu)AN
+1582(keeps)X
+1825(a)X
+1892(``partitions'')X
+2408(directory.)X
+720 3264(transarc.com)N
+1251(keeps)X
+1506(all)X
+1639(sorts)X
+1856(of)X
+1972(CellServDB.)X
+2 f
+2466(cellname)X
+1 f
+2850(\256les)X
+3046(that)X
+3227(CFE)X
+3439(believes)X
+3792(should)X
+4085(be)X
+720 3376(moved)N
+1009(into)X
+1186(a)X
+1256(CellServDBs)X
+1790(directory;)X
+2192(it)X
+2273(also)X
+2455(keeps)X
+2701(a)X
+2770(CellServDB\304)X
+3298(backup)X
+3602(\256le,)X
+3775(a)X
+3844(ThisCell)X
+720 3488(\256le,)N
+891(and)X
+1054(a)X
+1121(wt.con\256g)X
+1505(\256le.)X
+720 3712(Nobody)N
+1053(currently)X
+1425(provides)X
+1780(a)X
+1847(``service/servers'')X
+2571(directory.)X
+2991(Perhaps)X
+3319(it)X
+3397(should)X
+3677(be)X
+3792(nuked.)X
+720 3936(Apparently)N
+1193(MIT)X
+1409(has)X
+1577(come)X
+1826(up)X
+1962(with)X
+2173(its)X
+2304(own)X
+2509(local)X
+2737(conventions)X
+3242(about)X
+3497(what)X
+3725(goes)X
+3942(in)X
+4058(the)X
+720 4048(service)N
+1017(directory;)X
+1416(we'll)X
+1638(have)X
+1844(to)X
+1943(accommodate)X
+2503(them)X
+2720(somehow.)X
+3 f
+600 4272(5.)N
+720(Review)X
+1043(Process)X
+1 f
+720 4496(This)N
+917(document)X
+1323(assumes)X
+1669(the)X
+1813(existence)X
+2198(of)X
+2304(a)X
+2373(body)X
+2591(that)X
+2762(may)X
+2954(approve)X
+3290(both)X
+3487(these)X
+3711(conventions)X
+720 4608(and)N
+886(subsequent)X
+1340(amendments.)X
+1902(For)X
+2062(the)X
+2207(time)X
+2406(being,)X
+2671(I)X
+2730(believe)X
+3035(that)X
+3206(the)X
+3350(entire)X
+3596(set)X
+3729(of)X
+3835(AFS)X
+4036(cell)X
+720 4720(administrators)N
+1308(should)X
+1602(collaborate)X
+2069(in)X
+2182(providing)X
+2594(recommendations)X
+3317(on)X
+3451(these)X
+3687(conventions,)X
+720 4832(but)N
+870(that)X
+1042(it)X
+1123(will)X
+1300(be)X
+1418(the)X
+1563(responsibility)X
+2114(of)X
+2221(Transarc)X
+2585(Corporation)X
+3077(to)X
+3178(approve)X
+3514(both)X
+3711(conventions)X
+720 4944(and)N
+884(their)X
+1086(amendments)X
+1598(and)X
+1762(extensions)X
+2193(in)X
+2293(a)X
+2362(timely)X
+2635(fashion.)X
+2992(\(Of)X
+3151(course,)X
+3452(private)X
+3746(extensions,)X
+720 5056(such)N
+922(as)X
+1028(are)X
+1172(described)X
+1566(in)X
+1666(Section)X
+1980(2.2,)X
+2149(need)X
+2356(not)X
+2504(obtain)X
+2770(any)X
+2934(of\256cial)X
+3232(approval.\))X
+3674(In)X
+3779(the)X
+3922(future,)X
+720 5168(Transarc)N
+1093(Corporation)X
+1594(may)X
+1796(assign)X
+2072(its)X
+2200(responsibility)X
+2761(for)X
+2910(monitoring)X
+3375(and)X
+3551(approving)X
+3978(these)X
+720 5280(conventions)N
+1209(to)X
+1308(the)X
+1450(Internet)X
+1774(Activity)X
+2114(Board)X
+2373(or)X
+2477(to)X
+2576(some)X
+2803(other)X
+3025(appropriate)X
+3488(agency.)X
+3 f
+600 5504(6.)N
+720(Summary)X
+
+9 p
+%%Page: 9 9
+11.00 ps
+12 s 12 xH 0 xS 3 f
+1 f
+2368 400(-)N
+2424(9)X
+2496(-)X
+720 688(This)N
+926(document)X
+1341(motivates)X
+1751(and)X
+1925(describes)X
+2318(a)X
+2396(set)X
+2538(of)X
+2653(\256le-naming)X
+3132(conventions)X
+3632(to)X
+3742(be)X
+3868(used)X
+4080(by)X
+720 800(cooperating)N
+1199(AFS)X
+1398(cell)X
+1562(administrations.)X
+3 f
+600 1024(7.)N
+720(References)X
+1 f
+720 1248([AMDS90])N
+720 1360(The)N
+894(Information)X
+1378(Technology)X
+1862(Center.)X
+2 f
+720 1472(An)N
+851(Overview)X
+1244(of)X
+1343(the)X
+1485(Andrew)X
+1808(Message)X
+2168(Delivery)X
+2524(System)X
+1 f
+2791(.)X
+720 1584(Installed)N
+1094(as)X
+1216(DEST/doc/ams/AMDS.ovr)X
+2301(from)X
+2530(directory)X
+2920 0.1619(andrew/ams/delivery/doc)AX
+3936(of)X
+4058(the)X
+720 1696(Andrew)N
+1053(contribution)X
+1548(to)X
+1647(X.V11R4)X
+2041([X90],)X
+2318(January)X
+2641(1990.)X
+720 1920([AMS90])N
+720 2032(Nathaniel)N
+1119(Borenstein,)X
+1584(Craig)X
+1822(Everhart,)X
+2202(and)X
+2365(Jonathan)X
+2731(Rosenberg.)X
+2 f
+720 2144(The)N
+889(Andrew)X
+1213(Message)X
+1574(System:)X
+1898(A)X
+1982(Portable,)X
+2368(Distributed)X
+2831(System)X
+3123(for)X
+3261(Multi-Media)X
+3774(Electronic)X
+720 2256(Communication)N
+1 f
+1334(.)X
+720 2368(Installed)N
+1101(as)X
+1230(DEST/doc/ams/AMS.ovr)X
+2253(from)X
+2490(directory)X
+2888(andrew/ams/doc)X
+3569(of)X
+3699(the)X
+3867(Andrew)X
+720 2480(contribution)N
+1215(to)X
+1314(X.V11R4)X
+1708([X90],)X
+1985(January)X
+2308(1990.)X
+720 2704([ERZ88])N
+720 2816(Edward)N
+1043(R.)X
+1155(Zayas)X
+1409(and)X
+1572(Craig)X
+1810(F.)X
+1911(Everhart.)X
+2 f
+720 2928(Design)N
+1016(and)X
+1184(Speci\256cation)X
+1706(of)X
+1805(the)X
+1947(Cellular)X
+2292(Andrew)X
+2615(Environment)X
+1 f
+3112(.)X
+720 3040(Technical)N
+1139(Report)X
+1439(CMU-ITC-080,)X
+2083(Carnegie)X
+2470(Mellon)X
+2787(University,)X
+3256(Pittsburgh,)X
+3714(PA,)X
+3899(August)X
+720 3152(1988.)N
+720 3376([ISO-7498])N
+720 3488(International)N
+1237(Organization)X
+1764(For)X
+1921(Standardization.)X
+2 f
+720 3600(Reference)N
+1130(Model)X
+1400(for)X
+1536(Open)X
+1768(Systems)X
+2096(Interconnection)X
+1 f
+2706(.)X
+720 3712(ISO)N
+902(7498)X
+1146(Information)X
+1682(processing)X
+2169(systems)X
+2549(-)X
+2657(Open)X
+2941(systems)X
+3273(interconnection)X
+3901(-)X
+3962(Basic)X
+720 3824(Reference)N
+1135(Model.)X
+720 4048([JHH88a])N
+720 4160(John)N
+925(Howard,)X
+1282(David)X
+1541(Nichols,)X
+1888(M.)X
+2021(Satyanarayanan,)X
+2679(Bob)X
+2863(Sidebotham,)X
+3371(and)X
+3534(Mike)X
+3761(West.)X
+720 4272(Scale)N
+953(and)X
+1116(Performance)X
+1632(in)X
+1731(a)X
+1798(Distributed)X
+2255(File)X
+2429(System.)X
+2 f
+720 4384(ACM)N
+947(Transactions)X
+1472(on)X
+1592(Computer)X
+2000(Systems)X
+3 f
+2328(6)X
+1 f
+(\(1\),)S
+2536(February)X
+2907(1988,)X
+3147(pp.)X
+3291(51-81.)X
+720 4608([JHH88b])N
+720 4720(John)N
+925(H.)X
+1042(Howard.)X
+720 4832(An)N
+861(Overview)X
+1264(of)X
+1368(the)X
+1510(Andrew)X
+1843(File)X
+2017(System.)X
+720 4944(In)N
+2 f
+824(Proceedings)X
+1329(of)X
+1428(the)X
+1570(Spring)X
+1850(1988)X
+2066(Usenix)X
+2357(Conference)X
+1 f
+2801(,)X
+2849(Dallas.)X
+720 5056(Also)N
+976(available)X
+1400(as)X
+1556(technical)X
+1981(report)X
+2287(CMU-ITC-062,)X
+2968(Carnegie)X
+3392(Mellon)X
+3746(University,)X
+720 5168(Pittsburgh,)N
+1163(PA.)X
+720 5392([JR87])N
+720 5504(An)N
+861(Overview)X
+1264(of)X
+1368(the)X
+1510(Andrew)X
+1843(Message)X
+2203(System.)X
+
+10 p
+%%Page: 10 10
+11.00 ps
+12 s 12 xH 0 xS 1 f
+2344 400(-)N
+2400(10)X
+2520(-)X
+720 688(Jonathan)N
+1086(Rosenberg,)X
+1545(Craig)X
+1783(F.)X
+1884(Everhart)X
+2240(and)X
+2403(Nathaniel)X
+2802(S.)X
+2903(Borenstein.)X
+720 800(In)N
+2 f
+898(Proceedings)X
+1477(of)X
+1651(the)X
+1868(SIGCOMM)X
+2409('87)X
+2636(Workshop:)X
+3156(Frontiers)X
+3618(in)X
+3792(Computer)X
+720 912(Communications)N
+1395(Technology)X
+1 f
+1844(,)X
+1892(Stowe,)X
+2180(VT,)X
+2356(11-13)X
+2604(August)X
+2905(1987.)X
+720 1136([MLK88])N
+720 1248(Michael)N
+1060(Leon)X
+1282(Kazar.)X
+720 1360(Synchronization)N
+1375(and)X
+1538(Caching)X
+1883(Issues)X
+2141(in)X
+2240(the)X
+2382(Andrew)X
+2715(File)X
+2889(System.)X
+720 1472(In)N
+2 f
+824(Proceedings)X
+1329(of)X
+1428(the)X
+1570(Spring)X
+1850(1988)X
+2066(Usenix)X
+2357(Conference)X
+1 f
+2801(,)X
+2849(Dallas.)X
+720 1584(Also)N
+976(available)X
+1400(as)X
+1556(technical)X
+1981(report)X
+2287(CMU-ITC-063,)X
+2968(Carnegie)X
+3392(Mellon)X
+3746(University,)X
+720 1696(Pittsburgh,)N
+1163(PA.)X
+720 1920([NSB88])N
+720 2032(Nathaniel)N
+1119(Borenstein,)X
+1584(Craig)X
+1822(Everhart,)X
+2202(Jonathan)X
+2568(Rosenberg)X
+3003(and)X
+3166(Adam)X
+3425(Stoller.)X
+720 2144(A)N
+813(Multi-Media)X
+1329(Message)X
+1689(System)X
+1996(for)X
+2132(Andrew.)X
+720 2256(In)N
+2 f
+824(Proceedings)X
+1329(of)X
+1428(the)X
+1570(Spring)X
+1850(1988)X
+2066(Usenix)X
+2357(Conference)X
+1 f
+2801(,)X
+2849(Dallas.)X
+720 2368(Also)N
+968(available)X
+1384(as)X
+1532(Technical)X
+1981(Report)X
+2311(CMU-ITC-064,)X
+2984(Carnegie)X
+3400(Mellon)X
+3746(University,)X
+720 2480(Pittsburgh,)N
+1163(PA.)X
+720 2704([RFC-821])N
+720 2816(Jonathan)N
+1086(B.)X
+1198(Postel.)X
+2 f
+720 2928(Simple)N
+1006(Mail)X
+1212(Transfer)X
+1566(Protocol)X
+1 f
+1903(.)X
+720 3040(RFC)N
+925(821,)X
+1117(IETF)X
+1344(Network)X
+1704(Working)X
+2070(Group,)X
+2363(August)X
+2664(1982.)X
+720 3264([RFC-822])N
+720 3376(David)N
+979(H.)X
+1096(Crocker,)X
+1454(editor.)X
+2 f
+720 3488(Standard)N
+1096(for)X
+1232(the)X
+1374(Format)X
+1686(of)X
+1785(ARPA)X
+2045(Internet)X
+2374(Text)X
+2564(Messages)X
+1 f
+2937(.)X
+720 3600(RFC)N
+925(822,)X
+1117(IETF)X
+1344(Network)X
+1704(Working)X
+2070(Group,)X
+2363(August)X
+2664(1982.)X
+720 3824([RFC-854])N
+720 3936(J.)N
+805(Postel)X
+1064(and)X
+1227(J.)X
+1312(Reynolds.)X
+2 f
+720 4048(Telnet)N
+985(Protocol)X
+1346(Speci\256cation)X
+1 f
+1844(.)X
+720 4160(RFC)N
+925(854,)X
+1117(IETF)X
+1344(Network)X
+1704(Working)X
+2070(Group,)X
+2363(May)X
+2563(1983.)X
+720 4384([RFC-905])N
+720 4496(Alex)N
+931(McKenzie.)X
+2 f
+720 4608(ISO)N
+893(Transport)X
+1300(Protocol)X
+1661(Speci\256cation)X
+1 f
+2159(,)X
+2207(ISO)X
+2385(DP)X
+2531(8073.)X
+720 4720(RFC)N
+925(905,)X
+1117(IETF)X
+1344(Network)X
+1704(Working)X
+2070(Group,)X
+2363(April)X
+2590(1984.)X
+720 4944([RFC-959])N
+720 5056(J.)N
+805(Postel)X
+1064(and)X
+1227(J.)X
+1312(Reynolds.)X
+2 f
+720 5168(File)N
+900(Transfer)X
+1254(Protocol)X
+1615(\(FTP\))X
+1 f
+1850(.)X
+720 5280(RFC)N
+925(959,)X
+1117(IETF)X
+1344(Network)X
+1704(Working)X
+2070(Group,)X
+2363(October)X
+2697(1985.)X
+720 5504([RFC-973])N
+
+11 p
+%%Page: 11 11
+11.00 ps
+12 s 12 xH 0 xS 1 f
+2344 400(-)N
+2400(11)X
+2520(-)X
+720 688(Paul)N
+915(Mockapetris.)X
+2 f
+720 800(Domain)N
+1053(System)X
+1344(Changes)X
+1704(and)X
+1872(Observations)X
+1 f
+2384(.)X
+720 912(RFC)N
+925(973,)X
+1117(IETF)X
+1344(Network)X
+1704(Working)X
+2070(Group,)X
+2363(January)X
+2686(1986.)X
+720 1136([RFC-982])N
+720 1248(American)N
+1124(National)X
+1480(Standards)X
+1883(Institute.)X
+2 f
+720 1360(Guidelines)N
+1163(for)X
+1301(the)X
+1446(speci\256cation)X
+1960(of)X
+2062(the)X
+2207(structure)X
+2581(of)X
+2683(the)X
+2828(Domain)X
+3164(Speci\256c)X
+3491(Part)X
+3689(\(DSP\))X
+3956(of)X
+4058(the)X
+720 1472(ISO)N
+893(standard)X
+1258(NSAP)X
+1512(address)X
+1 f
+1810(.)X
+720 1584(ANSI)N
+967(Working)X
+1333(Document)X
+1758(X3S3.3/85-258,)X
+2395(published)X
+2793(as)X
+2897(RFC)X
+3102(982,)X
+3294(April)X
+3521(1986.)X
+720 1808([RFC-994])N
+720 1920(International)N
+1237(Organization)X
+1764(For)X
+1921(Standardization.)X
+2 f
+720 2032(DIS)N
+893(8473,)X
+1133(Protocol)X
+1494(for)X
+1630(Providing)X
+2039(the)X
+2181(Connectionless-mode)X
+3033(Network)X
+3383(Service)X
+1 f
+3667(.)X
+720 2144(Final)N
+959(Text)X
+1178(of)X
+1300(DIS)X
+1496(8473,)X
+1754(International)X
+2289(Organization)X
+2834(For)X
+3009(Standardization,)X
+3680(published)X
+4096(as)X
+720 2256(RFC)N
+925(994,)X
+1117(March)X
+1392(1986.)X
+720 2480([RFC-1006])N
+720 2592(Marshall)N
+1086(T.)X
+1193(Rose)X
+1409(and)X
+1572(Dwight)X
+1884(E.)X
+1991(Cass.)X
+2 f
+720 2704(ISO)N
+893(Transport)X
+1300(Services)X
+1645(on)X
+1765(top)X
+1912(of)X
+2011(the)X
+2153(TCP,)X
+2377(Version:)X
+2732(3)X
+1 f
+(.)S
+720 2816(RFC)N
+925(1006,)X
+1165(IETF)X
+1392(Network)X
+1752(Working)X
+2118(Group,)X
+2411(May)X
+2611(1987.)X
+720 3040([RFC-1085])N
+720 3152(M.)N
+853(Rose.)X
+2 f
+720 3264(ISO)N
+893(Presentation)X
+1409(Services)X
+1754(on)X
+1874(top)X
+2021(of)X
+2120(TCP/IP-based)X
+2694(internets)X
+1 f
+3031(.)X
+720 3376(RFC)N
+925(1085,)X
+1165(IETF)X
+1392(Network)X
+1752(Working)X
+2118(Group,)X
+2411(December)X
+2831(1988.)X
+720 3600([RFC-1123])N
+720 3712(R.)N
+832(Braden,)X
+1158(editor.)X
+2 f
+720 3824(Requirements)N
+1273(for)X
+1409(Internet)X
+1738(Hosts)X
+1980(--)X
+2068(Application)X
+2542(and)X
+2710(Support)X
+1 f
+3014(.)X
+720 3936(RFC)N
+925(1123,)X
+1165(IETF)X
+1392(Host)X
+1597(Requirements)X
+2156(Working)X
+2522(Group,)X
+2815(October)X
+3149(1989.)X
+720 4160([RFC-1138])N
+720 4272(S.)N
+821(Kille.)X
+2 f
+720 4384(Mapping)N
+1091(between)X
+1431(X.400\(1988\))X
+1938(/)X
+1989(ISO)X
+2162(10021)X
+2426(and)X
+2594(RFC)X
+2800(822)X
+1 f
+(.)S
+720 4496(RFC)N
+925(1138,)X
+1165(IETF)X
+1392(Network)X
+1752(Working)X
+2118(Group,)X
+2411(December)X
+2831(1989.)X
+720 4720([WP90a])N
+720 4832(The)N
+894(Information)X
+1378(Technology)X
+1862(Center.)X
+2 f
+720 4944(Installing)N
+1113(the)X
+1255(White)X
+1504(Pages)X
+1 f
+1739(.)X
+720 5056(Installed)N
+1118(as)X
+1265(DEST/doc/ams/WP.ins)X
+2227(from)X
+2481(directory)X
+2896 0.1821(andrew/overhead/util/lib)AX
+3911(of)X
+4058(the)X
+720 5168(Andrew)N
+1053(contribution)X
+1548(to)X
+1647(X.V11R4)X
+2041([X90],)X
+2318(January)X
+2641(1990.)X
+720 5392([WP90b])N
+720 5504(The)N
+894(Information)X
+1378(Technology)X
+1862(Center.)X
+
+12 p
+%%Page: 12 12
+11.00 ps
+12 s 12 xH 0 xS 1 f
+2 f
+1 f
+2344 400(-)N
+2400(12)X
+2520(-)X
+2 f
+720 688(Administering)N
+1289(the)X
+1431(White)X
+1680(Pages)X
+1 f
+1915(.)X
+720 800(Installed)N
+1111(as)X
+1250(DEST/doc/ams/WP.adm)X
+2258(from)X
+2504(directory)X
+2911 0.1821(andrew/overhead/util/lib)AX
+3918(of)X
+4058(the)X
+720 912(Andrew)N
+1053(contribution)X
+1548(to)X
+1647(X.V11R4)X
+2041([X90],)X
+2318(January)X
+2641(1990.)X
+720 1136([X90])N
+720 1248(The)N
+894(MIT)X
+1094(X)X
+1187(Consortium.)X
+720 1360(X)N
+813(Version)X
+1141(11,)X
+1285(Release)X
+1609(4.)X
+720 1472(Massachusetts)N
+1299(Institute)X
+1639(of)X
+1743(Technology,)X
+2251(January)X
+2574(1990.)X
+3 f
+600 1696(Security)N
+966(Considerations)X
+1 f
+720 1920(In)N
+827(this)X
+993(memo,)X
+1285(security)X
+1617(issues)X
+1873(have)X
+2082(been)X
+2292(mentioned)X
+2727(only)X
+2926(in)X
+3029(passing.)X
+3393(Cell)X
+3582(administrations)X
+720 2032(must)N
+944(themselves)X
+1409(review)X
+1708(the)X
+1863(security)X
+2205(considerations)X
+2798(involved)X
+3172(in)X
+3284(making)X
+3610(any)X
+3786(given)X
+4036(cell)X
+720 2144(service)N
+1050(available.)X
+1505(For)X
+1696(instance,)X
+2094(cells)X
+2329(may)X
+2553(not)X
+2734(wish)X
+2973(to)X
+3106(install)X
+3400(a)X
+3501 0.2031(publicly-readable)AX
+720 2256(passwd\(5\))N
+1164(\256le)X
+1337(in)X
+1462(/afs/)X
+2 f
+1628(cellname)X
+1 f
+1976(/service/etc/passwd)X
+2775(if)X
+2884(they)X
+3100(do)X
+3246(not)X
+3419(wish)X
+3650(their)X
+3876(account)X
+720 2368(names)N
+996(to)X
+1101(be)X
+1222(known.)X
+1561(Similarly,)X
+1975(cells)X
+2183(may)X
+2380(or)X
+2491(may)X
+2688(not)X
+2842(wish)X
+3054(to)X
+3160(install)X
+3427(a)X
+3501 0.2031(publicly-readable)AX
+720 2480(White)N
+993(Pages)X
+1254(in)X
+1366(/afs/)X
+2 f
+1532(cellname)X
+1 f
+1880(/service/etc/wp)X
+2501(for)X
+2650(similar)X
+2955(reasons,)X
+3304(realizing)X
+3679(the)X
+3834(tradeoffs)X
+720 2592(involved.)N
+720 2816(In)N
+844(general,)X
+1196(cell)X
+1380(administrations)X
+2018(must)X
+2249(review)X
+2555(for)X
+2711(themselves)X
+3183(what)X
+3414(accesses)X
+3784(should)X
+4085(be)X
+720 2928(granted)N
+1052(to)X
+1169(all)X
+1308(\256les)X
+1510(and)X
+1691(directories)X
+2140(maintained)X
+2611(in)X
+2728(their)X
+2947(cell,)X
+3153(not)X
+3318(solely)X
+3590(those)X
+3835(\256les)X
+4037(and)X
+720 3040(directories)N
+1151(maintained)X
+1604(under)X
+1847(the)X
+1989(/afs/)X
+2 f
+2155(cellname)X
+1 f
+2503(/service/)X
+2854(name.)X
+3 f
+600 3264(Author's)N
+991(Address)X
+1 f
+720 3488(Craig)N
+958(Everhart)X
+720 3600(Transarc)N
+1081(Corporation)X
+720 3712(The)N
+894(Gulf)X
+1094(Tower)X
+720 3824(707)N
+888(Grant)X
+1131(Street)X
+720 3936(Pittsburgh,)N
+1163(PA)X
+1333(15219)X
+720 4160(Phone:)N
+1011(+1)X
+1137(412)X
+1305(338)X
+1473(4467)X
+720 4272(FAX:)N
+962(+1)X
+1088(412)X
+1256(338)X
+1424(4404)X
+720 4384(EMail:)N
+1012 0.1418(Craig_Everhart@transarc.com)AX
+
+12 p
+%%Trailer
+xt
+%%Pages: 12
+%%DocumentNeededResources: font Times-Roman Times-Italic Times-Bold 
+%%+ Times-BoldItalic Helvetica Helvetica-Oblique Helvetica-Bold Helvetica-BoldOblique Courier 
+%%+ Courier-Oblique Courier-Bold Courier-BoldOblique Symbol 
+
+xs
