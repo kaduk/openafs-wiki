@@ -1,0 +1,731 @@
+Journal:    LAN Technology  March 1993 v9 n3 p51(9)
+* Full Text COPYRIGHT M&T Publishing Inc. 1993.
+-------------------------------------------------------------------------
+Title:     AFS: NFS on steroids. (Carnegie Mellon University's Andrew
+           File System; Sun Microsystem Inc.'s Network File
+           System)(includes related article about the Open Software
+           Foundation's Distributed File Service implementation of AFS;
+           another related article is about features of the Kerberos
+           security system)
+Author:    Cohen, David L.
+
+
+Abstract:  Some users now favor Carnegie Mellon University's Andrew File
+           Systems (AFS) distributed file system over Sun Microsystems
+           Inc's Network File System (NFS), which has been the
+           predominant system.  NFS is deficient in some areas such as
+           scalability and security.  AFS, which was developed to deal
+           with these problems, can improve a distributed system's
+           performance, reliability, security and management.  AFS is
+           currently distributed exclusively by Transarc, which started
+           shipping Version 3 in 1990 and the current version, 3.2, in
+           Aug 1992.  AFS is available for the following Unix machines:
+           DEC's DECstation and VAXstation; HP's HP 9000 Series 300, 400,
+           700 and 800; IBM's RS/6000 and RT; NeXT's full product line;
+           and Sun's Sun, 3, 4, SPARCstation and 600MP.  A table is
+           provided that compares NFS and AFS features and capabilities.
+-------------------------------------------------------------------------
+Full Text:
+
+For many organizations, a distributed file behind their distributed
+computer systems.  Sun Microsystems Network File System [NFS] is the
+predominant distributed file system in use today.  However, the Andrew
+File System [AFS] developed by Carnegie Mellon University has robust
+features that are winning over NFS users.
+
+For the College of Engineering at North Carolina State University (NCSU),
+moving from NFS to AFS meant a boost in reliability, performance,
+security, and management of its distributed computer system.  With more
+than 8,000 user accounts on 600 Unix workstations, and over 3,000
+original mail messages and 7,000 printed pages generated daily on this
+FDDI backbone with 20 subnetworks, ease of support is critical.  AFS
+provides this, as well as a first step toward the adoption of the Open
+Software Foundation's (OSF) Distributed File Service (DFS), which
+incorporates AFS functionality.
+
+NCSU initially ran NFS with the Kerberos security scheme when it set up a
+network of Unix workstations for engineering students in 1990.  However,
+project leaders quickly decided that students needed more transparent
+distribution of files than NFS offers.  One of the problems was that when
+an NFS server went down, the client machines that depended on that server
+for applications were stranded.  Also, as machines were added to the
+network, NFS had problems keeping up with file access requests and began
+dropping packets. AFS was selected to overcome these problems.
+
+According to Bill Willis, the director of computing operations at NCSU,
+the number of dropped packets decreased by an order of magnitude after
+installing AFS.  Reliability also improved.  Ken Barnhouse, a system
+administrator, reported that an application server crash once went
+undetected for four hours.  Users' application requests were
+automatically rerouted to what is called a replicate server, and network
+administrators only discovered the crash duffting a routine check of
+outputs from management utilities.
+
+The Contenders
+
+Introduced by Sun Microsystems in 1985, NFS has mushroomed in popularity,
+with versions available for most minicomputers, workstations, and
+personal computers.  Digital Equipment, IBM, FTP Software, Novell, and
+others either developed their own version of this open standard or resell
+third-party packages to satisfy user demand for distributed file system
+capabilities.  NFS uses a peer-to-peer networking scheme, in which
+individual workstations access or mount subdirectory trees that are
+exported by other machines, making these directories and files appear
+local to the machine importing or mounting them.
+
+As with many technologies, full-scale implementation of NFS magnifies
+known deficiencies and brings new ones to light.  In the case of NFS,
+scale-ability and security are the major sore points.  With significant
+backing from IBM, CMU developed AFS to address these and other NFS
+shortcomings.  AFS (the commercial name) is now distributed exclusively
+by Transarc, which began shipping Version 3 in 1990 and the current
+revision, 3.2, last August.  AFS is available for the following Unix
+workstations: Digital Equipment's DECstation and VAXstation,
+HewlettPackard's HP 9000 Series 300, 400, 700, and 800, IBM's RS/6000 and
+RT, NeXT's full line, and Sun's Sun 3, 4, SPARCstation, and 600MP.
+
+NFS and AFS differ in their architecture, reliability, performance,
+security, management and administration, backup support, and
+availability.  These differences are summarized in the table and will be
+elaborated throughout this article.  Currently, AFS is only available
+from Transarc.  However, OSF, backed by a consortium that includes IBM,
+is incorporating AFS in the DFS component of the Distributed Computing
+Environment.  DCE is an integrated set of tools and services for
+developing and running distributed applications.  It includes
+machine-independent data representation tools, a remote procedure call
+facility and compiler, an authentication service, a network naming
+service, a network time service, and a distributed file system.  (For
+more on the migration to OSF, see the sidebar "From NFS to OSF via AFS.")
+
+Degrees of Distribution
+
+NCSU opted to move to AFS partly because it is a more truly distributed
+system than NFS.  Architecturally, NFS follows the client-server model
+more closely than the distributed model.  Like a client-server database,
+NFS requires the user to specify what file he or she wants and where that
+file resides.  Client-server databases, like NFS file systems, can reside
+on any node.  However, since each database is completely contained on one
+host, it is said to be location-dependent.  Users can access multiple
+databases and even link them together, but they must still know which
+machines to access.
+
+A true distributed database or file system is accessible from any client
+station.  It is not dependent on any one host, since individual pieces
+can be spread across multiple machines and even replicated in places.  A
+truly distributed file system has location transparency; users don't need
+to know where file systems or directory trees reside.
+
+In contrast to NFS, where users need to know the location of a file
+system before they can mount it, AFS combines all files into a single
+name space, independent of physical location.  A user can log on at any
+station and be presented with the same global view.  It's this use of a
+single name space that makes AFS location-transparent, allowing system
+administrators to move individual file subsystems without disrupting
+users.  Because of NFS' location-dependence, moves cannot be made
+transparently.
+
+In addition, applications and system files on an AFS network can be
+replicated on read-only servers.  When an application is installed or
+upgraded, it can be easily propagated to multiple read-only servers by
+using the AFS vos release command.  If an AFS application server goes
+down, user requests for applications and system software that reside on
+that server are redirected to a replicate server.  NFS does not have
+replication.
+
+To better understand the differences, let's look at how NFS and AFS
+handle file distribution in more detail.  I'll use Unix terminology in
+these examples, but the commands and file names are similar in other
+operating systems.  Note that both file systems employ the User Datagram
+Protocol/Internet Protocol (UDP/IP) as the communications mechanism.
+
+In NFS, a system administrator (or a user) determines which files on a
+server can be exported.  An exported file system includes files in the
+named directory and all subordinate directories and files.  You can only
+export local file systems.  That is, a file system that has been mounted
+from a remote server cannot be re-exported.  The administrator lists the
+exported file systems along with options that govern how the file system
+can be used (such as whether it is mounted as read-write or read only) in
+a file called/etc/exports.
+
+Remote file systems to be mounted locally (which can be thought of as
+file systems that have been "imported") are listed along with local file
+systems in a file called/etc/fstab.  Local file systems are accessed
+using the syntax: device, mount point, and options.  A device refers to
+the disk or disk partition where the file system is located.  A mount
+point is where the file system, which can come from a local device or a
+remote file system, is grafted onto the local file system.  To access a
+remote file system, users must indicate remote-host:exported filesystem
+instead of the device.
+
+The mount command is used to mount either all file systems listed in
+/etc/fstab or a specific file system.  Typical fstab entries look like
+this: /dev/sdOg/usr/local 4.2 rw 13 /dev/sdld/usr/local/bin 4.2 rw 13
+zippy:/home/zippy/home/zippy nfs rw, bg, hard 0 0
+pooh:/home/pooh/home/pooh nfs rw, bg,hard 0 0
+
+As you can see, to mount a remote file system under NFS, a user needs to
+know the name of the specific host.  Throw in all the other files
+containing specific host information, such as /etc/hosts
+and/etc/networks, and you can see that moving a subdirectory tree to a
+different host is not a trivial matter.  Not only does the administrator
+have to change the export files on the machines the files are moved from
+and to, he or she has to modify the fstab file for each workstation that
+had been mounting that file system.
+
+NFS has no restriction on what you use for the specific mount points.
+However, to give users a consistent environment, most NFS administrators
+try to standardize on mount points by setting up the same subdirectory
+structure across workstations and putting the same mount point for that
+file system in each workstation's fstab file.  This lets a user go to
+another machine that has mounted the same file system and see the same
+directory structure as on his or her own machine.
+
+The key processes for NFS are the nfsd and biod daemons or processes.
+The nfsd process runs on a file server and is basically a listener that
+fields client requests for file access.  Multiple copies of nfsd can run
+on a server.  On the client, processes use remote procedure calls (RPCs)
+to access NFS servers.  The biod daemon takes client requests for
+non-local files and puts them on the network.  This daemon interacts with
+the client's buffer cache to achieve adequate throughput via.
+read-aheads and batched writes.  On the management front, NFS sites
+typically manage common configuration files, such as/etc/hosts, with the
+Network Information System (NIS; formerly known as the Yellow Pages).
+NIS centralizes configuration files and eases management, but does not
+help with specific file management.
+
+In contrast to NFS, which has multiple name spaces associated with
+multiple file systems, AFS presents a unified name space or global file
+system.  Thus, a user can sit down at any station on the network and be
+presented with an identical environment.  AFS must be incorporated into
+the kernel of all AFS file server and client machines.
+
+On servers, AFS executables are installed in/usr/afs/bin and server
+configuration files are installed in /usr/afs/etc.  AFS volumes on
+servers must reside on partitions associated with directories
+named/vicep?, where ? can be A through Z. Logical directories are
+associated with physical partitions in the/etc/fstab file.  Since
+the/vicep? directions are not standard Unix directories, Transarc ships
+its own version of the Unix fsck utility.  (This tool checks file system
+consistency.) In the AFS client, executables and configuration files are
+installed in/usr/vice/etc.  Every AFS client must have a cache set up in
+memory or on disk.
+
+In AFS, a volume corresponds to an NFS file system.  A volume is a set of
+related files grouped together based on a disk space unit.  Volumes
+cannot span multiple partitions.  For management purposes, system
+administrators typically use a relatively small volume size to facilitate
+the replication and migration of files to another partition.
+
+In AFS, servers and clients are grouped into administrative domains known
+as cells.  Applications, executable files, and AFS databases are
+replicated on multiple file servers within a cell, and users can easily
+share information both within and between cells.
+
+At the top of the AFS directory structure is a global file system that
+Transarc maintains.  This file system encompasses many of the sites that
+use AFS and lets participants remotely access a file system from another
+site.  NCSU is one of about 60 individual cells that Transarc lists.
+These cells are subordinate to the top-level/afs directory, so cell names
+need to be cleared with Transarc.  Since most AFS sites are on the
+Internet, cell names typically correspond to registered Internet domain
+names to ensure uniqueness.  Transarc's root volume's CellServDB file
+maintains the IP addresses.  Individual client CellServDB files list the
+IP addresses and names of the database server machines in the local and
+foreign cells that a particular AFS client wants to contact.
+
+Various AFS processes work behind the scenes on designated file servers
+to present this distributed environment.  For example, the File Server
+Process handles file requests from clients and maintains the overall
+directory struc-
+
+ture.  The Basic OverSeer Server Process, as its Big Brother-ish name
+implies, monitors server processes and can restart them as necessary.
+Volume
+
+moves, replicates, and backups are managed by the Volume Server Process.
+The Volume Location Server Process is responsible for location
+transparency.  Authentication is the domain of the Authentication Server
+Process.  The Protection Server Process maintains user and group access
+information and authorization, while the propagation of application and
+system software updates to replicate servers is handled by the Update
+Server Process.  Transarc divides files servers within cells into four
+distinct roles.  The System Control Machine maintains information for all
+file servers in a cell.  At least one file server runs the four AFS
+database processes (Authentication, Protection, Volume Location, and
+Backup Server), but Transarc recommends three or more file servers host
+these tasks.  For each different type of computer (such as a SPARCstation
+or a DECstation) in a cell, a Binary Distribution Machine is required to
+distribute software to that specific class of machine.  Finally, Simple
+Server Machines run only the basic File Server and Volume Server
+processes.  At NCSU, file servers are further categorized into those with
+operating system-related files and user-related files.  Of NCSU's 35
+servers, 10 handle user home directories, 18 are used as binary servers
+for operating system files and third-party packages, and the remainder
+serve as department-specific servers.  To simplify file access,
+administrators or users at NCSU use a program called attach, from MIT, to
+map volumes to a shorter name space.  For example, if a user wants to
+access a mathematics package called matlab, typically the user would need
+to provide the path: /afs/eos.  ncsu.  edu/dist/matlab where afs
+represents the Transarc root directory, eos.ncsu.edu is the cell or site,
+dist is a directory within that cell, and matlab is the directory for the
+math application.  Using attach, the path becomes/ncsu/matlab.  Figure 1
+Illustrates the AFS structure implemented at NCSU.
+
+You can use NIS as a name server for AFS but most sites, including NCSU,
+use the Berkeley Internet Name Domain (BIND) server to maintain a
+database of name information.  The BIND tool comes with the standard BSD
+Unix distribution.
+
+A Question of Reliability
+
+AFS is more reliable than NFS because copies of applications and AFS
+databases can be replicated on multiple file servers within a cell.
+These replicates eliminate the single point of failure frequently seen on
+NFS networks.  If an NFS file server containing applications goes down,
+then some block of client workstations is unable to access its
+applications.  In AFS, a problem with a primary application server causes
+attached clients to be switched to a replicate, with only a minor delay.
+
+By using replicates to spread out the load of file system requests, AFS
+also eases the problem of dropped packets.  In NFS, multiple nfsd daemons
+on a machine all retrieve client requests on the same UDP socket, which
+is an access point or a "listener" process.  UDP sockets have limited
+buffer space, so a surge in requests can lead to overflows.  Increasing
+the number of nfsd daemons helps to a point, but running too many
+degrades NFS performance due to context switching and scheduling
+overhead.  AFS replicates lessen the importance of choosing the correct
+number of processes to listen on a UDP socket.
+
+A Better Performer
+
+Although third-party products can enhance the performance of NFS, I have
+concentrated on the base capabilities of NFS and AFS.  Robust caching is
+the key to AFS's superior performance.  When a non-local file is
+accessed, the requested portions of the file are retrieved in 64-Kbyte
+chunks and stored locally (on disk or in memory).  Initial access of
+network applications is slower, but subsequent invocations run at local
+workstation speed.
+
+AFS's callback facility helps reduce LAN traffic as well as maintain
+cache consistency.  With callback, an AFS server notifies clients when a
+file system they're caching has been changed.  The next time a user
+accesses the file on the client, the cache manager knows to refresh its
+cache by reading the most recent copy of the file from the server.
+
+In comparison, NFS caches are similar to traditional Unix buffer caches,
+which are simply portions of memory reserved for recently accessed file
+blocks.  Normally, NFS reads and writes data in 8-Kbyte chunks.  Data
+validity is maintained via the file attributes, such as date of last
+access and file modification time, which are cached on the client and
+generally refreshed from the server every 60 seconds (although this
+refresh time is configurable).  If some file attribute information
+changes, an NFS process knows it needs to refresh the block of data it
+has read.  The file modification time determines if the cache must be
+flushed and the file re-read.
+
+This process causes traffic on the network, since clients must get file
+attribute refreshes at regular intervals.  However, if a user is
+accessing an application, this refresh is unnecessary.  Unlike AFS, the
+NFS process introduces the possibility of a client having out-of-date
+information.  Shorter refresh periods reduce the danger of stale
+information, but dramatically increase the request load on the server,
+which can result in dropped packets.
+
+Both NFS and AFS clients perform asynchronous writes back to the server,
+but the larger buffer size blunts the impact with AFS.  Use of a large
+buffer results in fewer network messages, and thus less network overhead.
+ For example, writing one 32-Kbyte block is faster than writing four
+8Kbyte blocks.  The combination of a small buffer size, limited caching
+capability, and constant attribute cache updates puts a lot of strain on
+an NFS server, making wide area access prohibitively slow.  Conversely,
+large buffers, significant caching capability, and server callbacks make
+life easier for AFS servers, allowing for excellent wide area access over
+T1 lines.
+
+Figure 2 contrasts the AFS and NFS caching approaches.  In this scenario,
+a student first browses, then prints, a file containing class notes.  In
+between the student's browsing and printing, the teacher updates the
+notes on the file server.  With NFS, the student may end up priming the
+older information.  Under AFS, the student prints out the updated class
+notes.
+
+While Transarc recommends 20 Mbytes of disk space per AFS client, NCSU
+uses 25 Mbytes or more.  Transarc recommends 25 Mbytes or more of disk
+space for file servers, depending on their role.  NFS requirements vary
+widely due to the diversity of implementations, but they are much lower
+due to NFS's primitive caching.  AFS and NFS both support diskless
+clients but, since they place large demands on the network, NCSU shuns
+them.
+
+For better performance, NCSU installed AFS database servers on dedicated
+CPUs.  Suddenly users could no longer reach file servers.  Transarc
+helped NCSU administrators determine that the problem was related to
+backward compatibility with previous versions of AFS.  It turned out that
+even though AFS maintained all system information in the databases,
+requesting processes looked for file servers instead of querying the
+Volume Location Process on the database servers.  Until Transarc fixed
+the problem, NCSU worked around it by configuring database servers as
+both database and file servers.
+
+While replicates are mainly an AFS reliability feature, they also aid
+performance by reducing UDP socket activity on a given server.
+Performance can be further improved by configuring clients with server
+preference lists.  NCSU buys applications with network licenses.  Each
+client has a list of application servers it would prefer to access, based
+on where that server is located on the network.  For example, a client
+typically would prefer to access an application server on the same LAN
+segment rather than traverse a router.  AFS originally used random server
+access, but in Version 3.2 Transarc introduced a preference scheme that
+uses network addresses.
+
+Currently, AFS supports up to six read-only replicates of a single
+read-write volume.  Support for more replicates is planned for the next
+release.  In the meantime, NCSU administrators have implemented two
+read-write servers in some instances in order to increase the number of
+replicates to 12.  This requires additional management, since they have
+to update two servers with new software releases.
+
+Security Muscle
+
+AFS gets its security edge through its integration with Kerberos.
+Although NFS can operate with Kerberos, it takes considerable effort to
+integrate.  (For more on Kerberos, see the sidebar "Kerberized
+Services.") Kerberos uses network-wide passwords and requires clients to
+obtain tickets, which are a type of access key conveyed in messages, in
+order to access services.  Typically, NFS systems use NIS to maintain a
+network-wide password file.  However, trusted hosts and users are
+frequently employed by remote users as a means to access servers.  (A
+trusted host has a trustworthy system administrator who won't let his or
+her machine masquerade as another host.) A user from a trusted host can
+access resources on another host, if the user has an account on both
+machines, without entering a user name and password.  While this makes
+casual access easy, you must be able to trust the other systems and take
+steps to prevent one system from masquerading as another.
+
+In NFS, the/etc/hosts.equiv and .  rhosts files in user home directories
+contain hostname or host-user pairs, for example pooh and zippy davec.
+This host trusts all users on host pooh and user davec on host zippy.
+Trusted hosts and users should be used cautiously, as they present large
+security gaps.  For example, by changing the IP address and host name, an
+administrator on a single machine can make that machine look like one
+that has trusted host status.  Similarly, an administrator can "become" a
+user who has trusted user access on another machine.  For this reason,
+many sites have switched to a Kerberized NFS.
+
+AFS's use of protection groups for security is a significant advantage
+over NFS.  A protection group is a set of users with common access rights
+to specific groups of files.  These groups can be set up by anyone.
+While Unix lets you establish groups, you need system administrator
+rights to set them up and maintain them.  In AFS, protection groups are
+generally created and maintained by users.  At NCSU, the faculty sets up
+protection groups based on class members.  To prevent name conflicts, a
+protection group name is prefaced by the creator's user name, such as
+davec:sysadm.  Here, user davec created protection group sysadm.
+
+In AFS, access control lists (ACLs) apply to individuals or groups and
+support the following rights: read, lookup, insert, delete, write, lock,
+and admin.  This is a major improvement over the standard Unix chmod
+command used in NFS, which only offers read, write, and execute.
+Currently, AFS access control is applied by directory only, while Unix
+rights apply to files and directories.
+
+Another security issue arises from the Unix root user and setuid
+programs.  On a Unix system, the root user has access to everything on
+that workstation, since root defines a superuser.  A setuid program can
+change its identity to become anyone else.  Many Unix utilities,
+including mail and the lpd print spooler, require superuser rights to get
+at files they need.  Some of the programs that comprise the standard Unix
+mail processes must run with setuid privileges in order to create files
+accessible by specific users.  The lpd program typically would setuid to
+root to access the files it needs.  On a distributed system, the
+superuser on one machine has no special rights on another machine.  Since
+root does not operate across multiple machines, utilities that rely on
+root and setuid will not work across the network.
+
+NFS gets around this problem with trusted host operation, where root can
+run the printer and mail processes on another machine.  This solution
+poses security risks and isn't possible under AFS and Kerberized NFS
+because Kerberos doesn't allow for the use of trusted hosts.  To get
+around the difficulties posed by root and setuid programs, AFS users need
+to look to third parties.  NCSU administrators tackled the mail problem
+by using a Kerberized post office protocol (pop) mail server from MIT.
+Using a pop mail server, clients access a central mail hub to retrieve
+messages.  This scheme is familiar to those in the personal computer
+world, but most Unix systems use mail facilities that route mail between
+machines.
+
+Management Styles
+
+NFS and AFS have different administration and management tools as well as
+different backup systems.  NFS file servers have several mechanisms for
+tracking mounted file systems.  The exports utility maintains
+the/etc/xtab file, which lists exported file systems.  The mountd daemon
+on the server notes client mount requests in the /etc/rmtab file, and
+administrators can retrieve the information with the show-mount utility.
+
+On clients, the/etc/mtab file lists file systems currently mount request
+in the client.  (/etc/fstab, discussed earlier only lists those file
+systems the system, administrator has specifically indicated can be
+mounted.) Clients can review currently mounted file systems with the df
+utility.  NFS file access statistic are available via nfstat.  For
+clients, this utility shows aggregate server access statistics; for
+servers, it shows aggregate client access statistics.
+
+In AFS, the administration commands most commonly employed by users and
+administrators are:
+
+fs -- for file-related activities such as set access control, check
+quota, and get current server
+
+pts -- for group-related activities such as create groups, set group
+access, and add users to groups
+
+vos -- for volume-related activities such as create/destroy/update
+volumes and mount and examine volumes
+
+bos -- for server-related activities such as bring servers up and down
+and view server status and logs
+
+AFS also includes the following management utilities and tools: Scout,
+the Backup System, uss, Package, and Ubik.  Scout probes AFS file
+servers, collecting load statistics, flagging unresponsive servers, and
+alerting administrators when a server parameter exceeds a predetermined
+threshold.  The Backup System backs up volumes to tape in groups called
+volume sets.  During backup, volume sets are "cloned," then backed up,
+allowing the file system to remain available.  Clones also allow users to
+retrieve files they inadvertently deleted, as the clone of the user's
+volume appears under a .Old subdirectory in the user's home directory.
+The clone contains a reference, like a Unix hard link, to each file in
+the read-write volume.  (With a hard link, a user can create a file
+called X and a link to that file called Y. If the user deletes X, the
+file still exists and can be read through Y.) When a file in an AFS
+read-write volume is deleted, the done volume's reference preserves the
+file until the volume is re-cloned.
+
+The AFS Backup System also has a mechanism for storing and retrieving
+volumes on tape.  This system and its database of tape history were
+recently integrated into the AFS distributed database scheme.  However,
+the AFS backup process requires human interaction, since it cannot be
+pre-scheduled to launch.  This is a disadvantage compared to the standard
+Unix dump and restore scripts, which can be launched by cron, a program
+for scheduling other processes.  To get around this shortcoming of the
+AFS backup scheme, NCSU uses a utility developed by the University of
+California at Berkeley that stores a set of keystrokes, so it can be used
+to launch a backup.
+
+NCSU doesn't use the .Old cloning facility because it can require
+considerable disk space.  Thus, in order to restore one file from tape,
+the entire backup volume must be mounted and the file moved.  To ease
+backups and restores, NCSU administrators limit the size of volumes so
+that the typical user volume is 5 Mbytes.  The only backup advantage NFS
+offers over AFS is its ability to restore individual files; AYS requires
+that a whole volume be mounted.  NFS backup systems are frequently just
+shell scripts cobbled together around the Unix dump and restore commands.
+
+The uss tool lets AFS administrators add users to the system via
+templates they create, and a bulk feature lets administrators create a
+large number of accounts at once.  In contrast, NFS relies on NIS to
+maintain system-wide user name databases.
+
+The AFS Package tool performs client maintenance tasks and installs AFS
+on client machines using predefined configurations that require the
+administrator to change only a few parameters, such as machine-specific
+values.  Finally, Ubik is a library of utilities that AFS database
+servers use to keep the individual copies of their databases
+synchronized.  Ubik is a sub-process within the Authentication,
+Protection, Volume Location, and Backup processes.  Primary copies of the
+four system databases are located on a server designated as the
+synchronization site, and secondary databases are updated when the
+primary is changed.
+
+AFS Strengths
+
+Based on NCSU's experience, Unix networks running AFS require minimal
+support.  Ten people, including a secretary, are responsible for more
+than 8,000 accounts and 40 Gbytes of disk space.  Unlike NFS' inscrutable
+uid-based disk quotas for users, AFS disk quotas are based on volumes and
+are easily reviewed by users.
+
+At NCSU, two support people handle hardware and two others take care of
+the operating system, file system, and security.  Two more manage the
+30plus applications.  The NCSU team can have a workstation up and running
+on the AFS network 20 minutes after the hardware is set up, thanks to
+customized bootstrapping and configuration software engineered by Bobby
+Pham, the principal systems programmer.  Responsibility for printers and
+printing is farmed out to a local service firm.
+
+Although NCSU has deployed mainly DEC workstations, some IBM,
+Hewlett-Packard, and Sun machines also exist on the network.  When
+dealing with a heterogeneous environment, AFS clients use a file to point
+to the machine architecture.  NFS also supports mixed environments, but
+because so many vendors have done their own implementations, you must
+take care when setting up NFS in a heterogenous environment.  An
+important advantage of NFS over AFS is NFS's support for Intel-based and
+Macintosh clients.  To incorporate these NFS clients into an AFS network,
+a Unix machine must be configured as an NFS server and run Transarc's
+NFS/AFS Translator.
+
+The key contribution AFS has made at NCSU is that students can sit down
+at any workstation and be presented with the same environment.  System
+administrator Barnhouse refers to this as "wherever you go, there you
+are." This concept extends into management, as RPC-based administrative
+commands can be issued from any workstation, given appropriate access
+rights.
+
+NFS blazed a trail for distributed file systems, but its age is showing.
+Today's large, interconnected networks are constrained by NFS's
+performance bottlenecks and weak security.  System administrators must
+work magic with piecemeal management tools.
+
+NFS's problems and patches were duly noted by CMU developers as they
+developed the Andrew File System.  With Kerberos security, file location
+transparency, and powerful management tools as integral components, AFS
+represents a clear evolution for distributed file systems.  Transarc's
+commercialization of the CMU offspring spawned wider use of AFS.  Over
+the past three years, AFS has been installed in 250 sites, with 55
+percent of these commercial, 35 percent educational, and 10 percent
+government sites.  Roughly 80 percent of AFS installations are in the
+United States.
+
+OSF's adoption of AFS as the file system component of DCE will spur even
+greater acceptance of this technology.  Although NFS is still the
+overwhelming choice for distributed file systems for Unix networks, look
+for AFS (and its DCE incarnation) to muscle its way into the market.
+
+Acknowledgments
+
+Bill Willis, the director of Computing Operations at NCSU, deserves
+credit for pushing a project with tremendous promise.  He introduced me
+to the project and made personnel available for assistance.  Ken
+Barnhouse gave me an in-depth look at AFS in action, while Bobby Pham,
+the principal systems programmer for the project, clarified technical
+details and took on the proofreading chores.
+
+Elaine Wolfe in marketing services and Kathy Rizzuti in product support
+at Transarc managed to block out the product blitz long enough to feed me
+technical literature and answer questions.
+
+Finally, Hal Stern's book, Managing NS and NIS (O'Reilly and Associates),
+proved to be a comprehensive resource.
+
+From NFS to OSF via AFS
+
+In May of 1990, the OSF selected technology submitted by Transarc for
+inclusion in the DFS component of DCE.  As a result, AFS-based DCE will
+be available from all OSF vendors, with initial implementations due out
+by mid-year.  To help port applications to DCE, Transarc is shipping a
+DCE Developer's Kit.  The company also announced plans to deliver a
+production-quality DCE for Solaris 2.0 on Sun workstations this year,
+
+Transarc is positioning AFS Version 3 as a migration path to DCE.
+Architectural components, tools, and user commands will be similar.  In
+particular, Transarc claims that system managers can make decisions based
+on AFS that apply to DCE in the following areas: hardware and software
+purchases, machine allocation (that is, machines needed for specific
+tasks), user disk quotas, security policies, and system administrative
+staffing.  Once DCE is widely available, Transarc will discontinue
+selling AFS.
+
+The key differences between the stand-alone version of AFS and its DCE
+implementation are that the DCE version will support technologies that
+interoperate with other DCE components.  For example, AFS implementation
+in DCE will support a journaling, high-performance file system called the
+Local File System.  LFS is based on Transarc's Episode product.  Also,
+automatic periodic updates of replicates will be supported in the DCE
+implementation.  In addition, access control will be possible at the file
+level, rather than just the directory level.  The DCE version of AFS will
+also support OSF components such as the Remote Procedure Call (RPC)
+facility, the Global Directory Service (based on X.500), and the
+Distributed Time Service.
+
+Transarc will offer an AFS 3-toDCE DFS Migration Toolkit to help
+customers move to DCE.  The toolkit permits interoperability between AFS
+systems and systems that have been converted to DCE.  It contains three
+primary components: a tool for transferring account and group
+information, a tool for converting files, and a tool for
+interoperability.
+
+On the other end of the spectrum, companies can ease the transition from
+NFS to AFS with Transarc's NFS/AFS Translator.  The translator, installed
+on an AFS client, lets unmodified NFS systems access files stored in the
+AFS name space.  ln effect, the AFS client becomes an NFS server.  The
+translator is particularly valuable for machines such as IBM PCs and
+compatibles and Macintoshes, as these platforms boast numerous NFS
+solutions but are not supported under AFS.
+
+The NFS/AFS Translator thus becomes a key stepping-stone in a company's
+migration to AFS.  However, potholes mar the road to OSF.  The absence of
+a translator between NFS and DFS threatens to leave IBM PCs and
+Macintoshes by the wayside.  Transarc indicated that a translator
+wouldn't lag too far behind early DCE releases.
+
+If you're thinking of skipping the translation stage and migrating your
+personal computers right to DCE, brace yourself for steep CPU, memory,
+and disk space requirements.  (You'll need an 80486-based machine with at
+least 16 Mbytes of RAM and upwards of 100 Mbytes of disk space, depending
+on the number of DCE components installed.) Gradient Technologies has
+announced DCE for PC DOS and Siemens Nixdorf is working on an IBM PC
+version of DCE.  OSF has reportedly had discussions with Apple concerning
+a Macintosh implementation.
+
+Kerberized Services
+
+Part of MIT's Project Athena, Kerberos was named after Cerberus, the
+three-headed dog that guards the entrance to Hades in Greek mythology.
+Like Cerberus, Kerberos' job is to prevent unauthorized access -- in this
+case, to Unix services.  (The goal of Project Athena was to design a
+network that would run local applications while being able to call remote
+services.  In addition to Kerberos, Project Athena spawned the X Window
+System and other Unix systems and tools.)
+
+Kerberos assumes it is operating in a distributed environment
+characterized by unsecured workstations, moderately secure servers, and
+secure Kerberos key distribution machines.  The two mechanisms used to
+ensure security are tickets and authenticators.  A ticket is a message
+used to obtain a temporary session key and to ensure the identity of the
+requester.  An initial ticket is even required to obtain tickets for
+other services.  The authenticator validates the identity of the
+requester.
+
+When a client (user or application) logs on to a system, a ticket request
+is sent to the Kerberos server.  The Kerberos server issues a ticket,
+which the client then presents to the ticketgranting server (TGS) in
+order to obtain tickets for other servers.  This initial ticket, known as
+the ticketgranting ticket, is encrypted with a key known only to the
+Kerberos server and the TGS.  For additional security, the ticket expires
+at the end of a specified time, usually between eight and 24 hours.
+
+A dient must obtain a ticket from the TGS for each service to be used.
+The request to the TGS includes the server required, the ticket-granting
+ticket, and an authenticator.  The authenticator is part of a message
+built by the dient; it contains some client information that is also in
+the ticket-granting ticket and is used to verify that the client is who
+he says he is.  A client must create a new authenticator prior to every
+service request.  The ticket the TGS returns is encrypted with the
+requested server's Kerberos key.
+
+Finally, the ticket and a new authenticator are sent to the server the
+client wants services from.  The server decrypts the ticket, verities the
+ticket information against the authenticator, and, if everything checks
+out, grants the request.
+
+Kerberos plugs a number of security holes, but still requires a secure
+server and private passwords.  In addition, a service's source code must
+be modified to use Kerberos.  Fortunately, more and more network services
+are being Kerberized, giving you the equivalent of a three-headed dog to
+protect your Hades...er, network.
+-------------------------------------------------------------------------
+Company:   Sun Microsystems Inc.
+           Transarc Corp.
+Product:   AFS 3.2
+           Network File System
+Topic:     Carnegie-Mellon University
+           File Management
+           Distributed Processing
+           Network Software
+           Communications Software
+           Comparison
+
+
+Record#:   13 620 603.
+                              *** End ***
