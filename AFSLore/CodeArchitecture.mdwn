@@ -55,13 +55,25 @@ In other words, if something starts with BOZO\_, you know that it is generated b
 
 In addition to the package name, also note that only rxstat uses an M prefix; all others use S.
 
+- Assuming you have a fairly modern grep, you can use its recursive facility:
+
+  $ **grep -r regex .**
+
+and find every time <pattern> appears in a file
+
+- If you're looking for one specific word, the <tt>-w</tt> switch is your friend as well.
+
+  $ **egrep -w -r VFORMAT .**
+
+will find all instances of **VFORMAT** but will not find **ABVFORMAT**
+
 - cscope: a source code browser, linked to your editor. Setup is simple: cd to your source tree and run:
 
-    cscope -R -b
+    $ **cscope -R -b**
 
 Then run
 
-    cscope -d
+    $ **cscope -d**
 
 to start. The interface is simple. I tend to use it for finding things, but not necessarily for editing. When I'm studying the source, trying to understand how components link together, or bug-hunting, I tend to live inside `cscope`.
 
