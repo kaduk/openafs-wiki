@@ -1094,6 +1094,8 @@ Answer:
     grep 19270407 /usr/afsws/include/rx/*
     /usr/afsws/include/rx/rxkad.h:#define RXKADBADTICKET (19270407L)
 
+Note that a common cause of this problem is the use of periods (".") in kerberos principals.  If you have a kerberos principal such as my.name@REALM.COM and create the corresponding pts userid "my.name" you will get the cryptic error above.  So, don't use periods in your principal names if you're using AFS.
+
 ### <a name="3.45 I get tickets and tokens, b"></a> 3.45 I get tickets and tokens, but still get Permission denied.
 
 Answer: /usr/afs/etc/UserList accepts only krb4 syntax. Use `joe.admin` instead of `joe/admin`. See `https://lists.openafs.org/pipermail/openafs-devel/2002-December/008673.html` and the rest of the thread.
