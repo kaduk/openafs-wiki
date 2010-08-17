@@ -1094,7 +1094,7 @@ Answer:
     grep 19270407 /usr/afsws/include/rx/*
     /usr/afsws/include/rx/rxkad.h:#define RXKADBADTICKET (19270407L)
 
-Note that a common cause of this problem is the use of periods (".") in kerberos principals.  If you have a kerberos principal such as my.name@REALM.COM and create the corresponding pts userid "my.name" you will get the cryptic error above.  So, don't use periods in your principal names if you're using AFS.
+Note that a common cause of this problem is the use of periods (".") in kerberos principals.  If you have a kerberos principal such as my.name@REALM.COM and create the corresponding pts userid "my.name" you will get the cryptic error above. If you want to use such principal names and have OpenAFS 1.4.7 or later, you can pass the option -allow-dotted-principals to all server daemons to allow their use. See the -allow-dotted-principals option in the fileserver (or any server daemon) documentation for more information.
 
 ### <a name="3.45 I get tickets and tokens, b"></a> 3.45 I get tickets and tokens, but still get Permission denied.
 
