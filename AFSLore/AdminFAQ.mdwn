@@ -63,10 +63,12 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.52  Is it a good idea to store"> 3.52 Is it a good idea to store mail in AFS?</a></li>
         <li><a href="#3.53  How can I ensure that the"> 3.53 How can I ensure that the userids on client machines match the users' pts ids?</a></li>
         <li><a href="#3.54  What is Fast Restart?"> 3.54 What is Fast Restart?</a></li>
+        <li><a href="#3.55  Reboot ?"> 3.55 Why does AFS reboot itself spontaneously at 4:00am every Sunday?</a></li>
       </ul>
     </li>
   </ul>
 </div>
+
 
 - [[ResourcesFAQ]]
 - [[AboutTheFAQ]]
@@ -1216,3 +1218,10 @@ Disadvantages to Fast Restart, [as noted here](http://lists.openafs.org/pipermai
 
 1. Volumes in need of salvage remain offline until an administrator intervenes manually
 2. On an inode-based fileserver, salvaging a single volume crawls every inode; therefore, salvaging volumes individually (rather than partition-at-a-time) duplicates work.
+
+### <a name="#3.55  Reboot ?"></a> 3.55 Why does AFS reboot itself spontaneously at 4:00am every Sunday?
+
+Nobody's really sure why this behavior is the default, but you can disable it with
+
+  bos setrestart $SERVER_NAME never
+  bos setrestart $SERVER_NAME -newbinary never
