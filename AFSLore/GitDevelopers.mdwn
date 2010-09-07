@@ -99,6 +99,8 @@ If you want to make this settings for all of your repositories, then add the --g
 
 Note that this email address is the address by which you will be identified in [[OpenAFS]]'s revision history - it is also the address to which the gerrit code review tool will send all email related to the review of your code.
 
+If you plan on making changes to OpenAFS (and why else would you be reading this?) you should probably also grab <b>The change id hook</b> described in <b>Registering With gerrit</b> below. You can grab and apply the hook before registering, and it'll make sure your pre-registration development has the appropriate change IDs in the log. The hook only applies to your openafs development, so you're not going to mess up any of your non-OpenAFS work.
+
 ## <a name="Starting development"></a> Starting development
 
 We strongly recommend that you do all of your development upon 'topic branches' This allows you to isolate multiple unrelated changes, and makes it easier to keep your tree in sync with the upstream [[OpenAFS]] one.
