@@ -4,7 +4,7 @@ These are notes on how to build [[OpenAFS]] from source code. Note that [[OpenAF
 
 #### <a name="Tools"></a> Tools
 
-- cvs client
+- Git
 - autoconf
 - automake
 - perl 5.6
@@ -21,7 +21,7 @@ These are notes on how to build [[OpenAFS]] from source code. Note that [[OpenAF
 
 The required packages to build [[OpenAFS]] on Debian-based linux distributions can be installed with,
 
-      apt-get install cvs autoconf automake make gcc flex bison
+      apt-get install git-core autoconf automake make gcc flex bison
       apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
 On RPM based linux distributions, the packages required are,
