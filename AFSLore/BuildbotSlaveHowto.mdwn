@@ -1,0 +1,124 @@
+*How to set up a BuildBot Slave for OpenAFS*
+
+_Rationale_
+
+Why would I want to?  OpenAFS supports multiple platforms, but the strength of support for
+each of those individual platforms is directly proportional to the amount of testing done thereon.
+Although there are many different types of testing that can be done, one of the most basic is
+that of changes to the code base.  A BuildBot slave allows for automated testing of each gerrit
+commit and is therefore a great resource to developers, most of whom do not have the time or
+resources to test their code on every platform prior to submission.  Therefore, we encourage you
+to contribute a system as a build slave for a platform not already covered!  You know you want to!
+
+_Approach_
+
+This is a consumer-oriented, high-level "how-to" to (hopefully) show how simple it is to set up
+your own build slave (and thereby contribute to OpenAFS!).  This document is not intended to be
+platform-specific -- there are just too many different ways of doing things across
+Linux/Windows/SunOS/IRIX/AIX/BSD etc.  There are additional notes elsewhere on this Wiki 
+(see: [[BuildbotMasterNotes]]) about setting up the BuildBot Master, and some of this material
+is covered there as well -- however, this page is an attempt to make the process more understandable
+(specifically the buildslave setup).
+
+_Overview_
+
+A quick overview of the process:
+
+1. Acquire suitable system
+1. Install required software
+1. Create buildbot account and home directory
+1. Contact OpenAFS BuildBot admin for configuration details
+1. Edit configuration files
+1. Start build slave
+1. Set up startup scripts
+1. Optional configuration
+
+*Of note:* since BuildBot slaves pull all their information from the master (rather than having it pushed
+to them by the master), there is no need to open an incoming port on your firewall, etc.  As long as the
+slave can contact the master on the port you're given (which will be explained later), you're good to go!
+
+_Hardware Requirements_
+
+* Any system which OpenAFS currently supports (the greater diversity of build slaves, the better)
+* Enough free disk space to build OpenAFS tree (a couple gigabytes should do)
+
+The machine does not necessarily need to be dedicated entirely to being a buildslave; a build slave
+could run on any lightly-loaded, non-critical system (subject to your security requirements, etc.,
+of course).  Some of the OpenAFS buildslaves are run by volunteers at their own homes, for instance.
+
+If you happen to have an older system with multiple processors, you can run more than one build slave
+instance on the same machine.  The workload will be distributed across them by the master: successive
+gerrit commit builds are started on the next free instance, thus reducing the overall time to
+test multiple commits.
+
+_Software Requirements_
+
+You will need recent versions of the following pieces of software installed:
+
+* Python 
+* Twisted
+* ZopeInterface
+* Git
+
+_Create buildbot account and home directory_
+
+It is recommended that you use a special-purpose non-priviledged user account to run the build slave
+(i.e., "buildbot").  The build master does not need to know the account's password -- in fact, the
+account does not necessarily need remote login priviledges and may be locked or otherwise secured
+as long as your platform still allows you to run commands as that user.
+
+Test that you can run the buildbot command successfully (without error messages that might indicate
+installation issues): /path/to/buildbot
+
+_Contact OpenAFS BuildBot Master admin for configuration details_
+
+Check the openafs-devel list archives (or join and ask) for who to contact regarding the settings you'll
+need to add your machine as an OpenAFS build slave.  These settings will include:
+
+* buildmaster_host: this is the OpenAFS build master
+* port: this is the port on the build master which your slave will talk to
+* slavename: a unique descriptive name for your new build slave, usually representing your operating system and architecture (and not necessarily anything to do with your systems' hostname)
+* passwd: a password assigned to your slave for use in connecting with the master
+
+_Create your build slave configuration_
+
+As your buildbot user:
+
+Inside the user's home directory (say, /home/buildbot), create a subdirectory which will contain all of the buildslave files (say, /home/buildbot/slave1).
+Buildbot will not touch anything outside of this directory.
+
+Substituting the appropriate values from above, the execute:
+
+/path/to/buildbot create-slave /home/buildbot/slave1 buildmaster_host:port slavename passwd
+
+Check the configuration file /home/buildbot/slave1/buildbot.tac to make sure the settings you entered are reflected in it.
+
+*Optional, but recommended:* Edit the /home/buildbot/slave1/info/{admin,host} files to describe the system (in host) and send
+yourself a shout-out (tell who you are in admin).  These show up on the web if you drill down to the build slave information
+on the OpenAFS buildbot web portal, so you may want to obfuscate your contact information.
+
+*Note:* if you are planning on running multiple OpenAFS buildslave instances, you simply repeat this and all later steps,
+specifying a different base directory (i.e., /home/buildbot/slave2, /home/buildbot/slave3, etc.)
+
+_Start build slave_
+
+/path/to/buildbot start
+
+Check the logs to make sure it started properly.  Check the OpenAFS BuildBot web portal to see the build progress presented
+graphically.
+
+There may be some kinks to work out of the system with the first few builds, especially if you are contributing a slave system
+for a less-heavily-used platform whose support might suffer from bit rot between releases (hey, it happens!).
+
+_Set up startup scripts_
+
+Self-explanatory.  Make sure they run /path/to/buildbot start as your buildbot user.
+
+_Set up log rotation and various other useful settings_
+
+The buildbot.tac configuration file can be used to optimize your build slave.  For instance, you may want to change maxRotatedFiles
+so you don't end up with a bunch of logs littered about /home/buildbot/slave1/.  Have a look at the BuildBot documentation if
+you wish, though you can expect to be able to take a fairly hands-off approach to administering your new OpenAFS build slave.
+
+Thanks for your help!
+
