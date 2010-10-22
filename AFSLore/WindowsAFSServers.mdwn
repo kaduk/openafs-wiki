@@ -33,3 +33,18 @@ Assume that kaserver does not exist. Instead, we will count on the presence of e
 - [[ProcessSize]] and STATS64\_PROCESSSIZE should be set to the Private Bytes allocation for the current process. Use [[GetProcessMemoryInfo]]().
 
 - The arbitrary definiton of NT\_OPEN\_MAX should be replaced by an attempt to read the value of HKLM\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Windows\\USERProcessHandleQuota which has a default value of 10,000 if the registry value is not present.
+
+## <a name="FSync Interface"></a> FSync Interface
+
+ - The FSync interface is UNIX optimized.   Replacing FSync with a Windows specific LPC mechanism should be examined.
+
+## <a name="Bos Server"></a> Bos Server
+
+ - The Bos server process is wrapped with an NT Service "BosCtlSvc".  There might be a better way to handle this.
+
+## <a name="Server Configuration"></a> Server Configuration
+
+ - The Windows client now reads all of its data from the registry.  Even the CellServDB has a registry equivalent although it is not required.
+
+ - At present the configuration files match those of the Unix implementation.  Providing a registry based alternate might be desirable in some environments.
+
