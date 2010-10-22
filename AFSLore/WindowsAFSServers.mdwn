@@ -12,6 +12,8 @@ The NT vol back end (ntops.c) is based upon the [[NameI]] back end for UNIX but 
 
 Need to modify the mappings of vice partitions to NTFS disk locations. Would prefer to permit arbitrary paths to the current drive letter mapping.
 
+Now that DAFS has been implemented we may want to restart the NT vol backend from scratch.
+
 ## <a name="Missing command line parameters"></a> Missing command line parameters
 
 - Enable --syslog option for Windows servers. Consider using a project like <http://syslog-win32.sourceforge.net/> for linking to the AFS Services. A syslog daemon product such as <http://www.codeproject.com/KB/IP/Syslogd.aspx> can be used to collect the events.
