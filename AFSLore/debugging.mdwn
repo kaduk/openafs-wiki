@@ -15,7 +15,7 @@ Then we need to attach the gdb and make it display the stack of all threads :
     
     gdb --batch --eval-command="thread apply all where" $SRV_PATH $PID > /tmp/threads.log
 
-After this you might use the attached script "threadLogParser.py" to display the intersting threads.
+After this you might use the attached script [[threadLogParser.py]] to display the intersting threads.
 
 e.g.
 
@@ -30,10 +30,13 @@ Low-level debugging of a client can be done using "fstrace". <br/>
 Unfortunately, this produces a lot of output, so it is not easy 
 to catch an intermittent error-condition with "fstrace".
 
-The attached script "ClientTracing.py" gives you the opportunity to continuously run a fstrace, <br/>
+The attached script [[ClientTracing.py]] gives you the opportunity to continuously run a fstrace, <br/>
 where the output is stored in rotating log-files. 
 
 In case of an external-event (the existence of a predefined file), it saves this log and does not overwrite
 it again.<br/>
 Thus, all you need to do is to write a script which creates this predefined file, when that event happens.
+
+
+
 
