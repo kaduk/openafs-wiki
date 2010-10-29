@@ -27,7 +27,7 @@ The required packages to build [[OpenAFS]] on Debian-based linux distributions c
 On RPM based linux distributions, the packages required are,
 
      yum install gcc autoconf automake make flex bison rpm-build
-     yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel
+     yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
 ### <a name="Getting the Source Code"></a> Getting the Source Code
 
