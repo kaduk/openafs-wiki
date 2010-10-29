@@ -29,6 +29,9 @@ On RPM based linux distributions, the packages required are,
      yum install gcc autoconf automake make flex bison rpm-build
      yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
+(The last time I did this for a 1.4.x build, I also needed to manually create a symlink
+/usr/src/linux to point to the correct path /usr/src/kernel/<version>.)
+
 ### <a name="Getting the Source Code"></a> Getting the Source Code
 
 Snapshots of the [[OpenAFS]] source code is made available for each stable and each development release at <http://openafs.org>.
