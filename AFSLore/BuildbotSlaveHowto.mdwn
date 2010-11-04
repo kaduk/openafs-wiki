@@ -26,6 +26,7 @@ A quick overview of the process:
 
 1. Acquire suitable system
 1. Install required software
+1. Compile OpenAFS from git
 1. Create buildbot account and home directory
 1. Contact OpenAFS BuildBot admin for configuration details
 1. Edit configuration files
@@ -70,6 +71,11 @@ Git 1.6.6, ZopeInterface 3.3.0, Twisted 9.0.0.)
 And, of course, you'll need to install BuildBot itself: [[http://buildbot.net/trac]]
 
 
+_Compile OpenAFS from git_
+
+Use git to clone the openafs repo, then make sure the software will compile successfully. For Unix platforms, the typical build process is 
+"sh regen.sh && ./configure && make && make dest"
+
 _Create buildbot account and home directory_
 
 It is recommended that you use a special-purpose non-priviledged user account to run the build slave
@@ -82,7 +88,7 @@ installation issues): /path/to/buildbot
 
 _Contact OpenAFS BuildBot Master admin for configuration details_
 
-Check the openafs-devel list archives (or join and ask) for who to contact regarding the settings you'll
+Contact jason at rampaginggeek.com regarding the settings you'll
 need to add your machine as an OpenAFS build slave.  These settings will include:
 
 * buildmaster_host: this is the OpenAFS build master
