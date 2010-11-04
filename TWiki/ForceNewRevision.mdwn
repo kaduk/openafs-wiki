@@ -1,9 +1,0 @@
-Normally, if you make subsequent edits within a one hour period (configuration item `ReplaceIfEditedAgainWithin`), %WIKITOOLNAME% will fold together your changes. This is often the "right thing to do", as it can reduce the visual clutter of diffs.
-
-The "Force New Revision" checkbox is a way to force it to create a separate revision each time you save.
-
-The [[%SYSTEMWEB%.TWikiPreferences|SYSTEMWEB/TWikiPreferences]] variable `FORCENEWREVISIONCHECKBOX` controls whether this is checked by default or not.
-
-On a related note, you can force **_every_** save to be a new revision number by setting `ReplaceIfEditedAgainWithin` to 0.
-
-**_Related Topics:_** [[UserDocumentationCategory]], [[AdminDocumentationCategory]]

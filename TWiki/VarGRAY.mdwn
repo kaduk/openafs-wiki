@@ -1,9 +1,0 @@
-<a name="VarGRAY"></a>
-
-### <a name="GRAY -- start gray colored text"></a> GRAY -- start gray colored text
-
-- `GRAY` is one of the rendering shortcut settings predefined in [[TWikiPreferences]]. See the section [[rendering shortcut settings|Main/TWikiPreferences#RenderingShortcuts]] in that topic for a complete list of colors.
-- Syntax: `%GRAY% gray text %ENDCOLOR%`
-- Expands to: %GRAY% gray text %ENDCOLOR%
-- **_Note:_** `%<color>%` text must end with `%ENDCOLOR%`. If you want to switch from one color to another one you first need to end the active color with `%ENDCOLOR%`, e.g. write `%RED% some text %ENDCOLOR% %GREEN% more text %ENDCOLOR%`.
-- Related: [[ENDCOLOR|Main/VarENDCOLOR]], [[TWikiPreferences|Main/TWikiPreferences#RenderingShortcuts]], [[StandardColors]]

@@ -1,9 +1,0 @@
-<a name="VarUSERNAME"></a>
-
-### <a name="USERNAME -- your login username"></a> USERNAME -- your login username
-
-- TWiki makes names available in three formats: USERNAME like `jsmith`, WIKINAME like `JohnSmith` and WIKIUSERNAME like `%USERSWEB%.JohnSmith`. Un-authenticated users are all %USERSWEB%.TWikiGuest.
-- Syntax: `%USERNAME%`
-- Expands to: `admin`
-- **_%X% Note:_** When used in a template topic, this variable will be expanded when the template is used to create a new topic. See [[TWikiTemplates#TemplateTopicsVars]] for details.
-- Related: [[REMOTE_USER|Main/VarREMOTEUSER]], [[USERINFO|Main/VarUSERINFO]], [[WIKINAME|Main/VarWIKINAME]], [[WIKIUSERNAME|Main/VarWIKIUSERNAME]], [[TWikiUserAuthentication]]

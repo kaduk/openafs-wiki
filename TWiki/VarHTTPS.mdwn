@@ -1,8 +1,0 @@
-<a name="VarHTTPS"></a>
-
-### <a name="HTTPS -- get HTTPS headers"></a> HTTPS -- get HTTPS headers
-
-- The same as `%HTTP%` but operates on the HTTPS environment variables present when the SSL protocol is in effect. Can be used to determine whether SSL is turned on.
-- Syntax: `%HTTPS%`
-- Syntax: `%HTTPS{"Header-name"}%`
-- Related: [[HTTP|Main/VarHTTP]], [[REMOTE_ADDR|Main/VarREMOTEADDR]], [[REMOTE_PORT|Main/VarREMOTEPORT]], [[REMOTE_USER|Main/VarREMOTEUSER]]

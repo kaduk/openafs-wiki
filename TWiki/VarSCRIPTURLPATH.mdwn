@@ -1,9 +1,0 @@
-<a name="VarSCRIPTURLPATH"></a>
-
-### <a name="SCRIPTURLPATH -- base URL path o"></a> SCRIPTURLPATH -- base URL path of TWiki scripts
-
-- As `%SCRIPTURL%`, but doesn't include the protocol and host part of the URL
-- Syntax: `%SCRIPTURLPATH%`
-- Expands to: `http://www.dementia.org/twiki/`
-- **_Note:_** The `edit` script should always be used in conjunction with `?t=%GMTIME{"$epoch"}%` to ensure pages about to be edited are not cached in the browser
-- Related: [[PUBURLPATH|Main/VarPUBURLPATH]], [[SCRIPTNAME|Main/VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/VarSCRIPTSUFFIX]], [[SCRIPTURL|Main/VarSCRIPTURL]], [[SCRIPTURLPATH{"script"}|Main/VarSCRIPTURLPATH2]]

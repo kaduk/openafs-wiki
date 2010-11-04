@@ -1,8 +1,0 @@
-<a name="VarSCRIPTURL"></a>
-
-### <a name="SCRIPTURL -- base URL of TWiki s"></a> SCRIPTURL -- base URL of TWiki scripts
-
-- Syntax: `%SCRIPTURL%`
-- Expands to: `http://www.dementia.org/twiki/`
-- **_Note:_** The `edit` script should always be used in conjunction with `?t=%GMTIME{"$epoch"}%` to ensure pages about to be edited are not cached in the browser
-- Related: [[PUBURL|Main/VarPUBURL]], [[SCRIPTNAME|Main/VarSCRIPTNAME]], [[SCRIPTSUFFIX|Main/VarSCRIPTSUFFIX]], [[SCRIPTURL{"script"}|Main/VarSCRIPTURL2]], [[SCRIPTURLPATH|Main/VarSCRIPTURLPATH]]

@@ -1,8 +1,0 @@
-<a name="VarAUTHREALM"></a>
-
-### <a name="AUTHREALM -- authentication real"></a> AUTHREALM -- authentication realm
-
-- String defined as \{AuthRealm\} in [configure](http://www.dementia.org/twiki/configure). This is used in certain password encodings, and in login templates as part of the login prompt.
-- Syntax: `%AUTHREALM%`
-- Expands to: Enter your [[LoginName]]. (Typically First name and last name, no space, no dots, capitalized, e.g. JohnSmith, unless you chose otherwise). Visit [[TWikiRegistration]] if you do not have one.
-- Related: [[TWikiUserAuthentication]], [[SESSIONID|Main/VarSESSIONID]], [[SESSIONVAR|Main/VarSESSIONVAR]], [[LOGIN|Main/VarLOGIN]], [[LOGOUT|Main/VarLOGOUT]], [[SESSION_VARIABLE|Main/VarSESSION_VARIABLE]]

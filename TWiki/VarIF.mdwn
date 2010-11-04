@@ -1,8 +1,0 @@
-<a name="VarIF"></a>
-
-### <a name="IF{&quot;condition&quot; ...} -- simple co"></a> IF\{"condition" ...\} -- simple conditionals
-
-- Evaluate a condition and show one text or another based on the result. See details in [[IfStatements]]
-- Syntax: `%IF{"CONDITION" then="THEN" else="ELSE"}%` shows `"THEN"` if `"CONDITION"` evaluates to `TRUE`, otherwise `"ELSE"` will be shown
-- Example: `%IF{"defined FUNFACTOR" then="FUNFACTOR is defined" else="FUNFACTOR is not defined"}%` renders as `FUNFACTOR is not defined`
-- Related: [[$IF()|Main/SpreadSheetPlugin#FuncIF]] of [[SpreadSheetPlugin]]

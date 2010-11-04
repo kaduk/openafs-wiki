@@ -1,8 +1,0 @@
-<a name="VarSTARTINCLUDE"></a>
-
-### <a name="STARTINCLUDE -- start position o"></a> STARTINCLUDE -- start position of topic text if included
-
-- If present in included topic, start to include text from this location up to the end, or up to the location of the `%STOPINCLUDE%` variable. A normal view of the topic shows everything exept the `%STARTINCLUDE%` variable itself.
-- **_Note:_** If you want more than one part of the topic included, use `%STARTSECTION{type="include"}%` instead
-- Syntax: `%STARTINCLUDE%`
-- Related: [[INCLUDE|Main/VarINCLUDE]], [[STARTSECTION|Main/VarSTARTSECTION]], [[STOPINCLUDE|Main/VarSTOPINCLUDE]]
