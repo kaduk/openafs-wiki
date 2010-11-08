@@ -108,6 +108,7 @@ Substituting the appropriate values from above, the execute:
 /path/to/buildbot create-slave /home/buildbot/slave1 buildmaster_host:port slavename passwd
 
 Check the configuration file /home/buildbot/slave1/buildbot.tac to make sure the settings you entered are reflected in it.
+Make sure that "usepty" is set to "0". "usepty = 1" it is known to fail on at least one architecture.
 
 *Optional, but recommended:* Edit the /home/buildbot/slave1/info/{admin,host} files to describe the system (in host) and send
 yourself a shout-out (tell who you are in admin).  These show up on the web if you drill down to the build slave information
@@ -124,7 +125,7 @@ Check the logs to make sure it started properly.  Check the OpenAFS BuildBot web
 graphically.
 
 There may be some kinks to work out of the system with the first few builds, especially if you are contributing a slave system
-for a less-heavily-used platform whose support might suffer from bit rot between releases (hey, it happens!).
+for a less-heavily-used platform whose support might suffer from bit rot between releases (hey, it happens!).  
 
 _Set up startup scripts_
 
