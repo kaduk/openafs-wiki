@@ -44,7 +44,7 @@ To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path. Be
 
        cd openafs-stable-1_4_x.
        ./regen.sh
-       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script) --with-linux-kernel-headers=/usr/src/(path to desired kernel headers)
+       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script) --with-linux-kernel-headers=(full path to desired kernel headers)
        make
        sudo make install
 
