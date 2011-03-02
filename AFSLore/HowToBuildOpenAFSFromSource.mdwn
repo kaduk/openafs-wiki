@@ -17,6 +17,7 @@ These are notes on how to build [[OpenAFS]] from source code. Note that [[OpenAF
 - libc
 - kerberos, optional, but recommended
 - ncurses
+- pam
 - kernel headers
 
 The required packages to build [[OpenAFS]] on Debian-based linux distributions can be installed with,
@@ -28,9 +29,6 @@ On RPM based linux distributions, the packages required are,
 
      yum install gcc autoconf automake make flex bison rpm-build
      yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
-
-(The last time I did this for a 1.4.x build, I also needed to manually create a symlink
-/usr/src/linux to point to the correct path /usr/src/kernel/<version>.)
 
 ### <a name="Getting the Source Code"></a> Getting the Source Code
 
@@ -46,7 +44,7 @@ To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path. Be
 
        cd openafs-stable-1_4_x.
        ./regen.sh
-       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script)
+       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script) --with-linux-kernel-headers=/usr/src/(path to desired kernel headers)
        make
        sudo make install
 
@@ -85,9 +83,21 @@ The makesrpm.pl script, available in the directory src/packaging/RedHat, is used
 
     makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
 
-This will create the srpm file openafs-.src.rpm. Use rpmbuld with the --rebuild option, which will run configure and then make to build the binaries, and create the rpm files. The rpm files will be placed into /usr/src/redhat/
+This will create the srpm file openafs-<version>.src.rpm. Use rpmbuld with the --rebuild option, which will run configure and then make to build the binaries, and create the rpm files. The rpm files will be placed into /usr/src/redhat/
 
     rpmbuild --rebuild openafs-<version>.src.rpm
+
+#### If You are Working with a Git Clone and Would Like to Make Your Own tar.bz2 Files
+Start by making sure the root directory of your openafs clone is named to match the version you have checked out.  For instance, if you have checked out openafs-stable-1_4_14 from git, then the directory should be named "openafs-1.4.14".
+
+NOTE: If your have checked out a newer version of openafs (1.6), you may want to make sure that a .version file exists in the openafs root directory.  It simply holds a bit of text equivalent to the tag on your checkout.
+
+Now tar and compress <afsroot> and <afsroot>/doc like so.
+
+    tar -cvjf openafs-<version>-src.tar.bz2 <afsroot>
+    tar -cvjf openafs-<version>-doc.tar.bz2 <afsroot>/doc
+
+After that, you can run makesrpm.pl as stated above.
 
 ### <a name="Running the Test Suite"></a> Running the Test Suite
 
