@@ -27,11 +27,11 @@ See the end of this page for instructions on how to build RPM packages.
 
 ## The Longer Story
 
-Building and packaging OpenAFS is not difficult on most modern unix-like
+Building and packaging OpenAFS is not difficult on current unix-like
 systems. A small number of fairly common libraries and tools are required. The
 kernel headers and a compiler capable of building a kernel module is needed to
-build the OpenAFS kernel module needed for the AFS client (and for legacy so
-called inode fileservers.) The gnu autoconf and automake tools are used to
+build the OpenAFS kernel module (used by the cache manager and for
+inode-backend fileservers.) The gnu autoconf and automake tools are used to
 configure the build system, so should be familiar to most people accustomed to
 building binaries on unix-like systems.
 
