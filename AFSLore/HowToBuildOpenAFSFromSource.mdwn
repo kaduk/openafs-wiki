@@ -1,104 +1,357 @@
-These are notes on how to build [[OpenAFS]] from source code. Note that [[OpenAFS]] pre-built binaries are available on the [[OpenAFS]] site and are available as prebuilt packages for many platforms. These instructions may be useful for you if you need to build [[OpenAFS]] from source.
+This page describes how to build OpenAFS binaries from source code.
+The information is specific to unix-like systems. See the
+README-WINDOWS file in the root of the OpenAFS source code tree for
+instructions and software needed to build OpenAFS on Microsoft Windows.
 
-### <a name="Requirements"></a> Requirements
+Unless otherwise noted, the information on this page is for version 1.6.x
+(available as pre-release 3 at the time of this writing).
 
-#### <a name="Tools"></a> Tools
+## The Short Story
+
+Assuming you already have all the required prerequisites on your build host, the
+following commands show how to checkout and build a version OpenAFS,
+
+    $ git clone git://git.openafs.org/openafs.git
+    $ cd openafs
+    $ git checkout openafs-stable-1_6_0pre3
+    $ ./regen.sh
+    $ ./configure
+    $ make
+    $ sudo make install
+
+You will usually want to specify configure options. For example, to enable the
+traditional Transarc/IBM AFS installation paths, run configure with the
+--enable-transarc-paths option.  More about the configure options below.
+
+See the end of this page for instructions on how to build RPM packages.
+
+## The Longer Story
+
+Building and packaging OpenAFS is not difficult on most modern unix-like
+systems. A small number of fairly common libraries and tools are required. The
+kernel headers and a compiler capable of building a kernel module is needed to
+build the OpenAFS kernel module needed for the AFS client (and for legacy so
+called inode fileservers.) The gnu autoconf and automake tools are used to
+configure the build system, so should be familiar to most people accustomed to
+building binaries on unix-like systems.
+
+Begin by verifying you have the prerequisite tools and libraries installed on your
+build host. These are listed in the next section. You will need to obtain the
+OpenAFS source code, either by downloading a release tar file, or by checking
+out a version from the git repository.
+
+See the README file for details on building OpenAFS and platform specific
+notes. See src/SOURCE-MAP for a brief description of each source code component.
+
+A script called regen is used to build the configure script and to
+generate the man page documentation from perl pod formatted files.
+
+The configure sets up the build system for your platform. Configure will
+attempt to detect your platform type and capabilities. Configure will generate
+the makefiles using automake. You may need to specify configure options to
+enable certain compile-time features. Run ./configure --help to see a
+complete list of the available configure options.
+
+After a successful run of configure, run make in the top level directory to
+build all the client and server OpenAFS binaries. The server binaries, user and
+admin tools, and the cache manager can be installed manually if you are not
+using your systems package manager, for example if you are installing OpenAFS
+on solaris, or if the target system is being used for testing and development.
+The installation paths depend on the configure options specified.
+
+The process for building rpm packages is actually a bit different than what was
+just described above.  Packaging scripts in the source tree are used to build
+rpms from a source code tree tar file. You'll need to create two tar files, one
+of the source and one of the documentation. A script is run to build a source
+rpm, which can be used to build the various rpm packages.  Details are given
+below in the section Building RPMs.
+
+## Prerequisites
+
+The following tools are needed to build OpenAFS:
 
 - Git
-- autoconf
+- autoconf, v2.60 or better
 - automake
-- perl 5.6
+- perl, v5.6 or better
 - make
-- compiler/linker (e.g. gcc tool chain)
+- compiler
+-- must be capable of building kernel modules for the target)
+-- if using gcc, version 4.2 or better is recommended
+- assembler (as)
+- linker
+- ranlib
+- install
 - lex/yacc (flex/bison)
+- rpm-build (if building rpms)
 
-#### <a name="Libraries"></a> Libraries
+Strictly speaking, git is not required for the build, but used to fetch source
+code from the OpenAFS git repository. (It is also used to determine the version
+string when building in a local git repo.) You can build release versions of
+OpenAFS without git, by retrieving the source code tree by downloading source
+code and documentation compressed tar files.
+
+You will need to generate a configure script if you checkout the source with
+git. Autoconf version 2.60 is minimum required version to generate the
+configure script.  If your system has an older version, you'll need to upgrade
+m4 and autoconf, or generate the configure script on another system which has a
+suitable version of autoconf and run the configure and build on your build
+host.
+
+> Note for RHEL users: RedHat Enterprise Linux 5.5 and less shipped with a
+> version of autoconf too old to generate the OpenAFS configure script.
+> Fortunately, the recently released RHEL 6.0 shipped with a more up to date
+> version of autoconf which mets the minimum version needed to generate th
+
+The following development libraries are used to build OpenAFS:
 
 - libc
-- kerberos, optional, but recommended
+- kerberos 5
 - ncurses
 - pam
 - kernel headers
 
-The required packages to build [[OpenAFS]] on Debian-based linux distributions can be installed with,
+The ncurses libraries are needed to build the ncurses based admin tools
+scout and afsmonitor. The kerberos 5 libraries are needed to build kerberos 5
+support, which is *strongly* recommended.
 
-      apt-get install git-core autoconf automake make gcc flex bison
-      apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
+### Linux Debian Packages
 
-On RPM based linux distributions, the packages required are,
+On a Debian-based linux distribution, all of the required packages can be
+install with the following commands apt-get commands,
 
-     yum install gcc autoconf automake make flex bison rpm-build
-     yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
+    $ apt-get install git-core autoconf automake make gcc flex bison
+    $ apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
-### <a name="Getting the Source Code"></a> Getting the Source Code
+### Linux RPM Packages
 
-Snapshots of the [[OpenAFS]] source code is made available for each stable and each development release at <http://openafs.org>.
+On a RedHat-based linux distributions, all of the required packages can be
+installed with the following yum commands,
 
-The [[OpenAFS]] code base is now available from a Git repository. See [[GitDevelopers]] for more information.
+     $ yum install gcc autoconf automake make flex bison rpm-build
+     $ yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
-### <a name="Building the Binaries"></a> Building the Binaries
+### Solaris Packages
 
-#### <a name="Modern Paths"></a> Modern Paths
+XXX: Please add the solaris pgk names
 
-To build [[OpenAFS]] with Kerberos 5 support, and with a custom install path. Be sure to run ./regen.sh to generate the configure script.
 
-       cd openafs-stable-1_4_x.
-       ./regen.sh
-       ./configure --prefix=/usr/local/openafs --with-krb5-conf=(full path to krb5-config script) --with-linux-kernel-headers=(full path to desired kernel headers)
-       make
-       sudo make install
+## Getting the Source Code
 
-#### <a name="Transarc Paths"></a> Transarc Paths
+See [[GitDevelopers]] for details on how to use git to fetch OpenAFS source
+code and to submit source code changes to the OpenAFS project. This is the
+preferred method to retrieve the source code.  Briefly, first create a local
+clone of the git repository and then checkout a local branch of the version you
+need to build.  For example,
 
-By convention, [[OpenAFS]] server binaries and related files are located in /usr/afs, and client binaries and related files are located in /usr/vice. These are known as Transarc paths, so called because that is is the convention used by Transarc, the company that first commercialized AFS. To build with the Transarc paths, specify --enable-transarc-paths as a configure option.
+    $ git clone git://git.openafs.org/openafs.git
+    $ cd openafs
+    $ git checkout openafs-stable-<major>-<minor>-<patchlevel>
 
-There are a couple of side effects that you need need to be aware of when building with the --enable-transarc-paths mode. First of all, the typical make install target does not work in this mode. Instead the 'make dest' target is used to build a directory of the binaries to be copied to the target system. Secondly, the packaging targets are not executed, so for example the redhat spec file is not generated to build the rpms.
+Compressed tar files of the source tree are made available for each stable and
+development release. The most recent release is located at
+http://openafs.org/release/latest.html.  Archives for releases are located at
+/afs/openafs.org/software/openafs/ and http://dl.openafs.org/dl. For example,
+to download and uncompress version 1.4.14,
 
-To build with Keberos support (recommended), you'll need to have the Keberos development libraries, and if available for your platform, the krb5-config. You will need the full path the the krb5-config script. For example
+    $ wget http://dl.openafs.org/dl/1.4.14/openafs-1.4.14-src.tar.bz2
+    $ wget http://dl.openafs.org/dl/1.4.14/openafs-1.4.14-doc.tar.bz2
+    $ tar xjf openafs-1.4.14-src.tar.bz2
+    $ tar xjf openafs-1.4.14-doc.tar.bz2
+    $ cd openafs-1.4.14
 
-       $ which krb5-config
-       /usr/bin/krb5-config
+The -src archive contains the source code and the -doc archive contains the
+documentation in xml and pod format. Having a separate archive for
+documentation allows people working on documentation to download just the pod
+and xml portions of the project.
 
-To build [[OpenAFS]] with Kerberos 5 support and the Transarc path conventions:
+### Regen
 
-       ./configure  --enable-transarc-paths --with-krb5-conf=/usr/bin/krb5-config
-       make
-       make dest
+After a git checkout, run the regen.sh shell script to generate a
+configure script (and a configure-libafs script) and to generate
+the man pages. The regen.sh script runs the autoconf tools to
+generate the configure scripts and runs perl to generate the
+man pages.
 
-If all goes well, then the binaries are located in a platform sub-directory, the name of which is platform specific, for example 'i386\_linux26/dest'.
+    ./regen.sh
 
-The 'make install' command does not work with Transarc paths. You will have to manually copy the binaries into place after running make dest. For more information, see the Quick Start Guide for Unix on the [[OpenAFS]] documentation page.
+You can skip the generation of the man pages by specifying the '-q'
+option to regen.sh.
 
-      # cp -r i386_linux26/dest/root.client/usr/vice/etc/modload /usr/vice/etc
-      # cp i386_linux26/dest/root.client/usr/vice/etc/afsd /usr/vice/etc
-      # cp -r i386_linux26/dest/bin /usr/afsws
-      # cp -r i386_linux26/dest/etc /usr/afsws
-      # cp -r i386_linux26/dest/include /usr/afsws
-      # cp -r i386_linux26/dest/lib /usr/afsws
-      # cp -r i386_linux26/dest/root.server/usr/afs/* /usr/afs
+    ./regen.sh -q
 
-#### <a name="Building RPMs"></a> Building RPMs
+Always run regen.sh again (and then configure) if you change any of the OpenAFS
+m4 autoconf macros, such as configure.ac or any of the macros under src/cf.
 
-The makesrpm.pl script, available in the directory src/packaging/RedHat, is used to build [[OpenAFS]] rpm packages. First build a srpm file using makesrpm.pl, then run rpmbuild to build and package the binaries. makesrpm.pl builds a srpm from the source and document tar files,
+## Configure
 
-    makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
+The OpenAFS configure script has many options available. Take some time to read
+the README file and the output of configure --help before running configure the
+first time. The most common options are introduced below.
 
-This will create the srpm file openafs-<version>.src.rpm. Use rpmbuld with the --rebuild option, which will run configure and then make to build the binaries, and create the rpm files. The rpm files will be placed into /usr/src/redhat/
+### AFS sysname
 
-    rpmbuild --rebuild openafs-<version>.src.rpm
+AFS uses an identifier called a *sysname* to distinguish platforms. configure
+will automatically detect the sysname of the build system and by default
+assumes the target system matches. If you are building for a target system
+which is different than the build system, or if for some reason the sysname
+detection fails, you will need to manually specify the sysname with the
+--with-afs-sysname option.  See the README file for a complete list of sysnames.
 
-#### If You are Working with a Git Clone and Would Like to Make Your Own tar.bz2 Files
-Start by making sure the root directory of your openafs clone is named to match the version you have checked out.  For instance, if you have checked out openafs-stable-1_4_14 from git, then the directory should be named "openafs-1.4.14".
+The 'sysname' is also used as the name of the destination sub-directory for the
+binaries created during the build. This sub-directory is automatically created
+during the build.
 
-NOTE: If your have checked out a newer version of openafs (1.6), you may want to make sure that a .version file exists in the openafs root directory.  It simply holds a bit of text equivalent to the tag on your checkout.
+### Installation Directory Path Modes
 
-Now tar and compress <afsroot> and <afsroot>/doc like so.
+There are two modes for directory path handling: *Transarc mode* and *default
+mode*. The mode is selected with the --enable-transarc-paths option.
 
-    tar -cvjf openafs-<version>-src.tar.bz2 <afsroot>
-    tar -cvjf openafs-<version>-doc.tar.bz2 <afsroot>/doc
+Traditionally, AFS server binaries and configuration files are located in the
+directory /usr/afs and client binaries and configuration files are located in
+the directory /usr/vice/etc. This convention is known as *Transarc path mode*
+because it was the convention adopted by Transarc/IBM in the commercial
+predecessor of OpenAFS.  Use the --enable-transarc-paths configure option to
+build binaries compatible with the Transarc installation convention.
 
-After that, you can run makesrpm.pl as stated above.
+When configure is run without the --enable-transarc-paths option, the build
+system is configured to be in the *default mode*. This mode builds OpenAFS with
+installation paths more commonly used in open-source projects, for example
+/usr/local.  The standard configure --prefix option(s) can be used to specify
+non-default directories.  See the README for details on the type of installation
+directories and the configure options to set the paths.
 
-### <a name="Running the Test Suite"></a> [[Running the Test Suite]]
+Installation paths are set at build time. Do not mix binaries for the two modes
+on the same system.
 
--- [[MichaelMeffie]] - 26 Mar 2008
+### Linux Kernel Headers
+
+When building on linux, configure will attempt to detect the path to the linux
+kernel headers.  If this path is not found on the build system, you must
+specify the path with the --with-linux-kernel-headers option. For example,
+
+    --with-linux-kernel-headers=/usr/src/linux
+
+### Kerberos 5 configuration
+
+Recent configure scripts will automatically find the location of the
+krb5-config script to configure kerberos.  If you need to build an
+older version, use the --with-krb5-conf option. 
+
+### Debugging Options
+
+To enable a debugging build, specify the --enable-debug option on the
+./configure command line.  This builds with debugging compiler options and
+disables stripping of binaries.
+
+    --enable-debug                enable compilation of the user space code
+                                     with debugging information
+    --enable-debug-kernel         enable compilation of the kernel module
+                                     with debugging information
+    --enable-checking             Enable compiler warnings when building
+                                    with gcc and treat compiler warnings
+                                    as errors
+
+### Feature Options
+
+There are many configure options for OpenAFS. See the ./configure --help
+for a complete list and README for more details.  Common options are:
+
+    --enable-bos-restricted-mode  enable bosserver restricted mode 
+                                     which disables certain bosserver functionality
+    --enable-bos-new-config       enable bosserver pickup of BosConfig.new on restarts
+    --enable-namei-fileserver     force compilation of namei fileserver
+                                    in preference to inode fileserver
+                                    on systems were inode is the default
+    --enable-supergroups          enable support for nested pts groups
+                                   WARNING: Once you make use of this option
+                                   by nesting one group inside another,
+                                   the resulting PTS database cannot be correctly
+                                   and safely used by a ptserver built 
+                                   without this option. 
+
+## Make
+
+After a successful configure, run make to build OpenAFS. The
+default target will build all.
+
+    $ make
+
+
+## Install
+
+You can install the OpenAFS binaries outside a package system
+by copying the binaries. If you built OpenAFS in the default
+mode (that is without --enable-transarc-paths), run the install
+target as root to install the binaries.
+
+    $ sudo make install
+
+If configure was run with --enable-transarc-paths, then run make to build a
+binary distribution directory, and then manually copy the files as the root
+user. To install the server and client binaries,
+
+    $ make dest
+    $ cd <sysname>/dest
+    $ sudo mkdir /usr/afs
+    $ sudo mkdir /usr/vice
+    $ sudo mkdir /usr/vice/etc
+    $ sudo cp -p -r root.server/usr/afs/* /usr/afs
+    $ sudo cp -p -r root.client/usr/vice/etc/* /usr/vice/etc
+
+See the Quick Start Guide for complete instructions to setup
+the OpenAFS cache manager and servers.
+
+The 'make dest' command places workstation binaries in the sub-directories of
+<sysname>/dest: bin, etc, man, lib, include. Optionally, copy these to you
+local filesystem or install them in an appropriate path in AFS. To install
+these file into your local filesystem:
+
+    $ sudo mkdir /usr/afsws
+    $ sudo cp -p -r bin /usr/afsws
+    $ sudo cp -p -r etc /usr/afsws
+    $ sudo cp -p -r man /usr/afsws
+    $ sudo cp -p -r lib /usr/afsws
+    $ sudo cp -p -r include /usr/afsws
+
+See Storing AFS Binaries in AFS
+http://docs.openafs.org/QuickStartUnix/ch02s29.html for instructions on
+how to store the workstation binaries in AFS.
+
+## Post build
+
+Some make targets of interest
+
+- make clean - remove build artifacts
+- make distclean - remove build and configure artifacts
+- make tests - make the (old) afs test suite
+
+
+### Building RPM packages
+
+To build OpenAFS RPM packages, use the OpenAFS makesrpm.pl script to build a
+source RPM, and then use the rpm tool rpmbuild to build the various packages.
+The makesrpm.pl requires the source and document tar archive files. If you
+are building from a git repository, first create the source and document
+archive files.
+
+    $ git clone git://git.sinenomine.net/openafs.git openafs-<version>
+    $ cd openafs-<version>
+    $ git checkout <tagname>
+    $ git describe >.version
+    $ ./regen.sh
+    $ cd ..
+    $ tar cjf openafs-<version>-src.tar.bz2 openafs-<version> --exclude .git --exclude doc
+    $ tar cjf openafs-<version>-doc.tar.bz2 openafs-<version>/doc
+
+where <version> is the dotted OpenAFS version number, such as 1.6.0,
+and <tagname> is the git tag for the version, such as openafs-stable-1_6_0.
+
+Next run makesrpm.pl to build the source RPM, and then use rpmbuild to
+build the binaries and packages. The resulting packages will be located
+in the $HOME/rpmbuild/RPMS/<arch> directory.
+
+    $ openafs-<version>/src/packaging/RedHat/makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
+    $ rpmbuild --rebuild openafs-<version>-1.0.src.rpm
+    $ cd ~/rpmbuild/RPMS/<arch>
+
