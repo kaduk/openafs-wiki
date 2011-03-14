@@ -76,9 +76,9 @@ The following tools are needed to build OpenAFS:
 - perl, v5.6 or better
 - make
 - compiler
--- must be capable of building kernel modules for the target)
--- if using gcc, version 4.2 or better is recommended
-- assembler (as)
+- must be capable of building kernel modules for the target)
+  * if using gcc, version 4.2 or better is recommended
+  * assembler (as)
 - linker
 - ranlib
 - install
@@ -150,8 +150,8 @@ need to build.  For example,
 
 Compressed tar files of the source tree are made available for each stable and
 development release. The most recent release is located at
-http://openafs.org/release/latest.html.  Archives for releases are located at
-/afs/openafs.org/software/openafs/ and http://dl.openafs.org/dl. For example,
+<http://openafs.org/release/latest.html>.  Archives for releases are located at
+/afs/openafs.org/software/openafs/ and <http://dl.openafs.org/dl>. For example,
 to download and uncompress version 1.4.14,
 
     $ wget http://dl.openafs.org/dl/1.4.14/openafs-1.4.14-src.tar.bz2
@@ -314,8 +314,7 @@ these file into your local filesystem:
     $ sudo cp -p -r lib /usr/afsws
     $ sudo cp -p -r include /usr/afsws
 
-See Storing AFS Binaries in AFS
-http://docs.openafs.org/QuickStartUnix/ch02s29.html for instructions on
+See [Storing AFS Binaries in AFS](http://docs.openafs.org/QuickStartUnix/ch02s29.html) for instructions on
 how to store the workstation binaries in AFS.
 
 ## Post build
@@ -344,12 +343,12 @@ archive files.
     $ tar cjf openafs-<version>-src.tar.bz2 openafs-<version> --exclude .git --exclude doc
     $ tar cjf openafs-<version>-doc.tar.bz2 openafs-<version>/doc
 
-where <version> is the dotted OpenAFS version number, such as 1.6.0,
-and <tagname> is the git tag for the version, such as openafs-stable-1_6_0.
+where _version_ is the dotted OpenAFS version number, such as 1.6.0,
+and _tagname_ is the git tag for the version, such as openafs-stable-1_6_0.
 
 Next run makesrpm.pl to build the source RPM, and then use rpmbuild to
 build the binaries and packages. The resulting packages will be located
-in the $HOME/rpmbuild/RPMS/<arch> directory.
+in the $HOME/rpmbuild/RPMS/_arch_ directory.
 
     $ openafs-<version>/src/packaging/RedHat/makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
     $ rpmbuild --rebuild openafs-<version>-1.0.src.rpm
