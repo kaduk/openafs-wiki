@@ -76,7 +76,7 @@ The following tools are needed to build OpenAFS:
 - perl, v5.6 or better
 - make
 - compiler
-  * must be capable of building kernel modules for the target)
+  * must be capable of building kernel modules for the target
   * if using gcc, version 4.2 or better is recommended
 - assembler (as)
 - linker
@@ -353,7 +353,13 @@ Some make targets of interest
 - make tests - make the (old) afs test suite
 
 
-### Building RPM packages
+## Building RPM packages
+
+A script is provided to build RPM packages. This script will run the
+configure and make as part of the process. You'll need to get source
+and document tar archives of the version you want to build, and then
+use a script to build the source RPM, then use the rpmbuild tool to
+build the packages from that source RPM.
 
 To build OpenAFS RPM packages, use the OpenAFS makesrpm.pl script to build a
 source RPM, and then use the rpm tool rpmbuild to build the various packages.
