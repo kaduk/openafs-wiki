@@ -235,9 +235,15 @@ specify the path with the --with-linux-kernel-headers option. For example,
 
 ### Kerberos 5 configuration
 
-Recent configure scripts will automatically find the location of the
-krb5-config script to configure kerberos.  If you need to build an
-older version, use the --with-krb5-conf option. 
+The 1.6.0 configure scripts should automatically find the kerberos 5
+libraries and headers.
+
+If you need to build 1.4.x, or if the krb5-config file is in a non-standard
+location, use the --with-krb5-conf option to specify the path to the krb5-config
+utility (part of the kerberos 5 development package).
+
+    --with-krb5-conf=/usr/bin/krb5-config
+
 
 ### Debugging Options
 
@@ -270,6 +276,26 @@ for a complete list and README for more details.  Common options are:
                                    the resulting PTS database cannot be correctly
                                    and safely used by a ptserver built 
                                    without this option. 
+
+### Configure changes in 1.6.0
+
+If you have been building the 1.5.0 freatures branch, note the following configure
+options have been removed in 1.6.0. Each feature is now always on, except as noted:
+
+* --disable-afsdb
+* --disable-largefile-fileserver
+* --enable-bos-restricted
+* --enable-fast-restart (off, but the code is still there)
+* --disable-full-vos-listvol
+* --enable-disconnected
+* --enable-icmp-pmtu-discovery
+* --enable-demand-attach-fs (see below)
+
+In 1.5.x, the demand attach fileserver feature was enabld by the a configure
+switch. Starting in 1.6.0, both DAFS and legacy binaries are built. The
+DAFS binaries are prefixed with 'da', expect for the new salvageserver, since
+salvageserver is new with DAFS.
+
 
 ## Make
 
