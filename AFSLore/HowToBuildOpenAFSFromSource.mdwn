@@ -6,26 +6,43 @@ instructions and software needed to build OpenAFS on Microsoft Windows.
 Unless otherwise noted, the information on this page is for version 1.6.x
 (available as pre-release 3 at the time of this writing).
 
-## The Short Story
+## Getting Started
 
-Assuming you already have all the required prerequisites on your build host, the
-following commands show how to checkout and build a version OpenAFS,
+The following shows how to download a source code tarballs and build the
+OpenAFS binaries:
+
+    $ wget http://openafs.org/dl/openafs/<version>/openafs-<version>-src.tar.bz2
+    $ wget http://openafs.org/dl/openafs/<version>/openafs-<version>-doc.tar.bz2
+    $ tar xjf openafs-<version>-src.tar.bz2 
+    $ tar xjf openafs-<version>-doc.tar.bz2 
+    $ cd openafs-<version>
+    $ ./configure
+    $ make
+
+See <http://openafs.org/dl/openafs> for available versions.
+
+The following shows how to do a git checkout and build the OpenAFS binaries,
 
     $ git clone git://git.openafs.org/openafs.git
     $ cd openafs
-    $ git checkout openafs-stable-1_6_0pre3
+    $ git checkout <branch-or-tag>
     $ ./regen.sh
     $ ./configure
     $ make
-    $ sudo make install
+
 
 You will usually want to specify configure options. For example, to enable the
 traditional Transarc/IBM AFS installation paths, run configure with the
---enable-transarc-paths option.  More about the configure options below.
+--enable-transarc-paths option. (Read on for more information about configure
+options.)
+
+    $ ./configure --enable-transarc-paths $ make
+    $ make
+    $ make dest 
 
 See the end of this page for instructions on how to build RPM packages.
 
-## The Longer Story
+## Build OpenAFS 
 
 Building and packaging OpenAFS is not difficult on current unix-like
 systems. A small number of fairly common libraries and tools are required. The
@@ -68,41 +85,44 @@ below in the section Building RPMs.
 
 ## Prerequisites
 
-The following tools are needed to build OpenAFS:
+The following tools are needed to build OpenAFS from source from a tar file:
 
-- Git
-- autoconf, v2.60 or better
-- automake
-- perl, v5.6 or better
 - make
 - compiler
-  * must be capable of building kernel modules for the target
-  * if using gcc, version 4.2 or better is recommended
-- assembler (as)
+- assembler
 - linker
 - ranlib
+- lex/yacc
 - install
-- lex/yacc (flex/bison)
-- rpm-build (if building rpms)
 
-Strictly speaking, git is not required for the build, but used to fetch source
-code from the OpenAFS git repository. (It is also used to determine the version
-string when building in a local git repo.) You can build release versions of
-OpenAFS without git, by retrieving the source code tree by downloading source
-code and documentation compressed tar files.
+The following tools are needed to build OpenAFS from source from a git
+checkout:
 
-You will need to generate a configure script if you checkout the source with
-git. Autoconf version 2.60 is minimum required version to generate the
-configure script.  If your system has an older version, you'll need to upgrade
-m4 and autoconf, or generate the configure script on another system which has a
-suitable version of autoconf and run the configure and build on your build
-host.
+- git
+- autoconf v2.60 or better
+- automake
+- perl v5.6 or better 
+- make
+- compiler
+- assembler
+- linker
+- ranlib
+- lex/yacc
+- install
+
+The compiler used must be capable of building kernel modules for the target
+platform.
 
 > Note for RHEL users: RedHat Enterprise Linux 5.5 and less shipped with a
 > version of autoconf too old to generate the OpenAFS configure script.
 > Fortunately, the recently released RHEL 6.0 shipped with a more up to date
 > version of autoconf which mets the minimum version needed to generate the
 > configure script.
+
+The following tools are needed to build OpenAFS RPMS:
+
+- perl 5.6 or better
+- rpmbuild
 
 The following development libraries are used to build OpenAFS:
 
