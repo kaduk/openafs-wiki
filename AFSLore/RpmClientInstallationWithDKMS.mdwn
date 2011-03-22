@@ -1,0 +1,73 @@
+This page describes how to use the DKMS OpenAFS package to build
+and install an OpenAFS kernel module for your RPM linux based system.
+This may be needed if there is not a pre-build kernel module for your
+platform and/or kernel version. DMKS is a system to used to build
+Linux kernel modules which are not included in the maintained in the
+mainline Linux code.
+
+
+Configure yum for DKMS
+----------------------
+
+yum needs to be configured to install packages from the EPEL (Extra Packages
+for Enterprise Linux) repository so you can install dkms.  You may already have
+yum configured to pull from EPEL. You can check with yum,
+
+     $ yum repolist | grep epel
+     * epel: mirror.cogentco.com
+     epel         Extra Packages for Enterprise Linux 5 - x86_64       enabled: 6,330
+
+If you do not have yum configured to use EPEL, then you can add it with an rpm
+command, for example,
+
+    sudo rpm -Uhv http://download.fedora.redhat.com/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+
+See <http://fedoraproject.org/wiki/EPEL/FAQ#How_can_I_install_the_packages_from_the_EPEL_software_repository>
+
+
+Configure yum for OpenAFS
+-------------------------
+
+yum needs to be configured to install openafs packages.  An openafs repository
+configuration is available on dl.openafs.org:
+
+     $ sudo rpm -Uvh http://dl.openafs.org/dl/openafs/<version>/openafs-repository-rhel-<version>-1.noarch.rpm
+
+
+Kernel Packages
+---------------
+
+You will need to have a kernel-devel package which matches your running kernel
+version.  Assuming you want the most recent kernel, you can do this by doing a
+yum update of the kernel and kernel-devel packages. 
+
+    $ sudo yum update kernel kernel-devel
+
+You will need to restart your system if the kernel was updated.  To verify you
+have a kernel-devel that matches your kernel version, you can run
+
+     $ yum list 'kernel*'
+
+
+Tools
+-----
+
+Install the dkms package and compiler:
+
+     $ sudo yum install dkms gcc
+
+
+OpenAFS Client
+--------------
+
+Install the openafs client packages, including the dkms-openafs package to have
+the kernel module built for your kernel version.
+
+     $ sudo yum install openafs openafs-krb5 dkms-openafs
+
+Startup the client with,
+
+     service openafs-client start
+
+
+At this point you should have a working openafs kernel module.
