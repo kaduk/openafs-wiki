@@ -30,7 +30,6 @@ The following shows how to do a git checkout and build the OpenAFS binaries,
     $ ./configure
     $ make
 
-
 You will usually want to specify configure options. For example, to enable the
 traditional Transarc/IBM AFS installation paths, run configure with the
 --enable-transarc-paths option. (Read on for more information about configure
@@ -94,21 +93,14 @@ The following tools are needed to build OpenAFS from source from a tar file:
 - ranlib
 - lex/yacc
 - install
+- perl 5.6 or better (only to build the documention)
 
-The following tools are needed to build OpenAFS from source from a git
-checkout:
+In addtion to the above, the following tools are needed to build OpenAFS 
+from a git checkout:
 
 - git
-- autoconf v2.60 or better
+- autoconf 2.60 or better
 - automake
-- perl v5.6 or better 
-- make
-- compiler
-- assembler
-- linker
-- ranlib
-- lex/yacc
-- install
 
 The compiler used must be capable of building kernel modules for the target
 platform.
@@ -124,12 +116,12 @@ The following tools are needed to build OpenAFS RPMS:
 - perl 5.6 or better
 - rpmbuild
 
-The following development libraries are used to build OpenAFS:
+The following development libraries are needed:
 
 - libc
 - kerberos 5
-- ncurses
-- pam
+- ncurses (optional, needed to build scout/afsmonitor)
+- pam (optional)
 - kernel headers
 
 The ncurses libraries are needed to build the ncurses based admin tools
