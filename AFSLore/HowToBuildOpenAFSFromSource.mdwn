@@ -146,8 +146,20 @@ installed with the following yum commands,
 
 ### Solaris Packages
 
-XXX: Please add the solaris pgk names
+For Solaris packages, start by installing pkg-get, if you have not already.
 
+     $ wget http://www.opencsw.org/pkg-get
+     $ pkgadd -d /path/to/pkg-get
+     $ wget --output-document=/tmp/gpg.key http://www.opencsw.org/get-it/mirrors/
+     $ gpg --import /tmp/gpg.key
+
+Check to make sure pkg-get is installed properly by doing a pkg-get compare.
+It should output a list of installed packages compared to up-to-date remote packages.
+
+With pkg-get installed, go ahead and begin installing the necessary packages
+
+     $ pkg-get install gcc flex bison automake autoconf gmake
+     $ pkg-get install krb5_kdc ncurses
 
 ## Getting the Source Code
 
