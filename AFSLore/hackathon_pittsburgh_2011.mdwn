@@ -1,1 +1,56 @@
 OpenAFS Hackathon, Pittsburgh, April 2011
+
+
+
+
+
+
+
+
+    [core]
+    thiscell = andrew.cmu.edu
+    use_dns = yes
+    
+    
+    
+    [cells]
+    andrew.edu = {
+        description = "Project Andrew - CMU"
+        vlserver = tcp/128.2.10.2
+        ptserver = udp/128.2.10.11
+        dbserver = 128.1.10.7
+        dbserver = FF00::128.2.10.28
+        dbserver = db3.andrew.cmu.edu
+        use_dns = yes
+    }
+    
+    [ptserver]
+    servers = {
+        vice2 = {
+            address = 128.2.10.2:7002
+            priority = 2
+        }
+    }
+    
+    [fileserver]
+    dbservers = {
+        vlserver = vice7
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    [rank]
+    # syntax for host addresses:
+    # [proto/]host[/mask][:port]
+    128.2.10.2 = 2000
+    tcp/128.2.10.11 = 9000
+    128.2.10.2 = 2000
+    128.2.10.12:7003 = 1500
+    128.2.172/22 = 100
+    
+    
