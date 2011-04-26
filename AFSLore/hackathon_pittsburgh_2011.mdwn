@@ -4,14 +4,13 @@ OpenAFS Hackathon, Pittsburgh, April 2011
 
 
 
-
+Server and client side configuration file will be in krb5 config file syntax.
+Some examples done on the whiteboard
 
 
     [core]
     thiscell = andrew.cmu.edu
-    use_dns = yes
-    
-    
+    use_dns = yes    
     
     [cells]
     andrew.edu = {
@@ -37,13 +36,6 @@ OpenAFS Hackathon, Pittsburgh, April 2011
         vlserver = vice7
     }
     
-    
-    
-    
-    
-    
-    
-    
     [rank]
     # syntax for host addresses:
     # [proto/]host[/mask][:port]
@@ -54,3 +46,4 @@ OpenAFS Hackathon, Pittsburgh, April 2011
     128.2.172/22 = 100
     
     
+
