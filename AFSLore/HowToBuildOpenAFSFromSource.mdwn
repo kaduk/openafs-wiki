@@ -391,7 +391,7 @@ The makesrpm.pl requires the source and document tar archive files. If you
 are building from a git repository, first create the source and document
 archive files.
 
-    $ git clone git://git.sinenomine.net/openafs.git openafs-<version>
+    $ git clone git://git.openafs.org/openafs.git openafs-<version>
     $ cd openafs-<version>
     $ git checkout <tagname>
     $ git describe >.version
