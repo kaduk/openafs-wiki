@@ -402,6 +402,8 @@ archive files.
 
 where _version_ is the dotted OpenAFS version number, such as 1.6.0,
 and _tagname_ is the git tag for the version, such as openafs-stable-1_6_0.
+The _version_ number for pre-releases are suffixed with pre<number>. For example,
+to build 1.6.0pre5, create a directory called openafs-1.6.0pre5.
 
 Next run makesrpm.pl to build the source RPM, and then use rpmbuild to
 build the binaries and packages. The resulting packages will be located
