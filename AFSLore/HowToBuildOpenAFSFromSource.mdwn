@@ -6,7 +6,10 @@ instructions and software needed to build OpenAFS on Microsoft Windows.
 Unless otherwise noted, the information on this page is for version 1.6.x
 (available as pre-release 3 at the time of this writing).
 
-## Getting Started
+## The Short Version
+
+For the impatient, this section describes how to get a code tree and
+build it, assuming you have a development environment already setup.
 
 The following shows how to download source code tarballs and build the
 OpenAFS binaries:
@@ -141,7 +144,7 @@ install with the following commands apt-get commands,
 On a RedHat-based linux distributions, all of the required packages can be
 installed with the following yum commands,
 
-     $ yum install gcc autoconf automake make flex bison rpm-build
+     $ yum install git-core gcc autoconf automake make flex bison rpm-build
      $ yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
 ### Solaris Packages
