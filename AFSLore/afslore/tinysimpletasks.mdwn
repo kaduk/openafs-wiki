@@ -1,7 +1,11 @@
-# Command to Man Page Consistency Checking
-1. Pick a man page below that is currently unassigned and not marked DONE.
-2. Edit this wiki page and mark the man page as ASSIGNED: yourname
-3. Compare the man page to the actual command and submit errors to openafs-bugs@openafs.org.  For example, does the
+## Command to Man Page Consistency Checking
+Pick a man page below that is currently unassigned and not marked DONE.
+
+Edit this wiki page and mark the man page as assigned by simply appending "ASSIGNED: yourname" to the end of the line.  This avoids duplication of work by several people.  For example:
+
+    somecommand.1 ASSIGNED: jblaine
+
+Compare the man page to the actual command's "help" output and either submit errors to openafs-bugs@openafs.org or make a comment here directly underneath the man page name in the list below.  For example:  Does "vos help delentry" reflect the options documented in 'man vos_delentry' ?  Does a quick run through of the man page indicate any typos or formatting problems?
 
 
 afs.1
