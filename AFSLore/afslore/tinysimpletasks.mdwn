@@ -7,12 +7,13 @@ The completion of these are **very valuable when added up**!  We **really need**
 ## Command to Man Page Consistency Checking
 Pick a man page below that is currently unassigned and not marked DONE.
 
-Edit this wiki page and mark the man page as assigned by simply appending "ASSIGNED: yourname" to the end of the line.  This avoids duplication of work by several people.  For example:
+Edit this wiki page and mark the man page as assigned by simply appending "ASSIGNED: yourname YYYYMMDD" to the end of the line.  This avoids duplication of work by several people.  For example:
 
-    vos_delentry.1 ASSIGNED: jblaine
+    vos_delentry.1 ASSIGNED: jblaine 20110616
 
 Compare the man page to the actual command's "help" output and either submit errors to openafs-bugs@openafs.org or make a comment here directly underneath the man page name in the list below.  For example:  Does "vos help delentry" reflect the options documented in 'man vos_delentry' ?  Does a quick run through of the man page indicate any typos or formatting problems?
 
+Once you have reported any issues, please changed "ASSIGNED" to "DONE" for your item.
 
 afs.1
 
