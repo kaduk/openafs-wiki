@@ -139,7 +139,7 @@ will discard all of the changes you have made since the last commit, or
 
 will restore &lt;file&gt; to the state it was in at the last commit.
 
-## <a name="Keeping up with the Jones&#39;"></a> Keeping up with the Jones'
+## <a name="Keeping up with the Jones&#39;"></a> Keeping up with the Joneses
 
 If you're working on a long running development project, you will find that the point your created your topic branch rapidly recedes into history. At some point (and at least before you share your code with us), you'll probably want to update your tree. There are a number of ways of doing this.
 
@@ -234,13 +234,9 @@ Assuming all has gone well, this will have added the entry to the code review qu
 
 It's possible that your modifications won't be accepted first time. In this case, you need to revise your changes, and resubmit them to gerrit. Please note that this should always be done by modifying your original changeset, _not_ by submitting a new change that makes the required fixes. Either git commit --amend, or git rebase should be used to combine your changes with the original changeset, and then you should push this to gerrit with
 
-    git push ssh://gerrit.openafs.org/openafs.git <hash>:refs/changes/<number>
+    git push ssh://gerrit.openafs.org/openafs.git <revision>:refs/for/<branch>
  
-(where &lt;hash&gt; is the sha1 hash of the revised change that follows the word <tt>commit</tt> in the log message, and &lt;number&gt; is the change number you received when you originally submitted the patch)
-
-You can obtain the sha1 hash of a commit by using 'git show' (if it is on the tip of your current branch), or 'git log' (if it is in your history)
-
-Other mechanisms of listing the change to push are available - see <http://gerrit.googlecode.com/svn/documentation/2.0/user-upload.html> for full details.
+where &lt;revision&gt; is the SHA-1 hash of the revised change that follows the word <tt>commit</tt> in the log message, or simply <tt>HEAD</tt> if the revised change is the most recent change on your topic branch.  You can obtain the SHA-1 hash of a commit by using 'git log'.  Note that pushing to <tt>refs/for/...</tt> _requires_ a change-id in your commit message, so that Gerrit can match to the new change with the one you submitted previously.  See <http://gerrit.googlecode.com/svn/documentation/2.0/user-upload.html> for full details.
 
 ## <a name="Updating your change"></a> Updating your change
 
