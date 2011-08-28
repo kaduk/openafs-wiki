@@ -373,6 +373,7 @@ Back to our example. Logging in to domain `OPENAFS.ORG` clearly enables the Inte
 ### <a name="Exceptions To the Resolution Rul"></a> Exceptions To the Resolution Rule
 
 Historically, the 'FailLoginsSilently' value was in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` key and not in the `NetworkProvider` key. Therefore, for backward compatibility, the value in the `Parameters` key will supercede all instances of this value in other keys. In the absence of this value in the `Parameters` key, normal scope rules apply.
+[Mobil Keluarga Terbaik di Indonesia](http://bisnis-inter-net.com/mobil-keluarga-terbaik-di-indonesia/) [TOP 1 Oli Sintetik Mobil-Motor Indonesia](http://bisnis-inter-net.com/top-1-oli-sintetik-mobil-motor-indonesia/) [Bisnis Internet](http://bisnis-inter-net.com/)
 
 The second exception is for the `LogonScript` value. If a `LogonScript` is not specified in the specific domain key nor in the `Domain` key, the value in the `NetworkProvider` key will only be checked if the effective `LogonOptions` specify a high security integrated login. If a logon script is specified in the specific domain key or the domains key, it will be used regardless of the high security setting. Please be aware of this when setting this value.
 
