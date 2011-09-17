@@ -497,5 +497,5 @@ When the ACL on a directory is set to "irl", this creates what is called a "drop
 
 In practice, the "not modify them once deposited" part is not enforced by the fileserver; only the [[OpenAFS]] client enforces this restriction. Thus, you should not depend on this for security.
 
-Also, note that system:anyuser=irl has additional problems: because dropbox semantics are based on pts identities (see question 2.21), the fileserver cannot distinguish between two unauthenticated users. So, not only can a user come back days later and modify the "dropped" file, but **any** user can modify a file dropped by an unauthenticated user, at any time. [Mobil Keluarga Terbaik di Indonesia](http://bisnis-inter-net.com/mobil-keluarga-terbaik-di-indonesia/) [TOP 1 Oli Sintetik Mobil-Motor Indonesia](http://bisnis-inter-net.com/top-1-oli-sintetik-mobil-motor-indonesia/) [Bisnis Internet](http://bisnis-inter-net.com/)
+Also, note that system:anyuser=irl has additional problems: because dropbox semantics are based on pts identities (see question 2.21), the fileserver cannot distinguish between two unauthenticated users. So, not only can a user come back days later and modify the "dropped" file, but **any** user can modify a file dropped by an unauthenticated user, at any time. 
 
