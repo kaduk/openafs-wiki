@@ -90,16 +90,18 @@ Now we are ready to create the database, start the Kerberos servers, and create 
     service kadmin start
     service krb524 start
     service krb5kdc start
-    kadmin.local -q "addprinc -randkey afs"
-    kadmin.local -q "ktadd -e des-cbc-crc:afs3 afs"
+    kadmin.local -q "addprinc -randkey afs/cell.example.com"
+    kadmin.local -q "ktadd -k /etc/afs.keytab -e des-cbc-crc:afs3 afs/cell.example.com"
+    chown root:root /etc/afs.keytab
+    chmod 600 /etc/afs.keytab
 
-The -s option to 'kdb5\_util create' creates a stash file so that you don't need to enter a password every time you start the kdc server. the -q option allows you to give kadmin commands at the normal command line. You could also have issued the command kadmin followed by the commands in quotes.
+The -s option to 'kdb5\_util create' creates a stash file so that you don't need to enter a password every time you start the kdc server. The -q option allows you to give kadmin commands at the normal command line. You can also run kadmin interactively, and enter each quoted command individually at the kadmin prompt.
 
-addprinc creates an afs principal. This is needed so that afs can use Kerberos to authenticate users. The ktadd command adds the key for this principal to the default keytab, located at /etc/krb5.keytab. The ktadd command will give you a kvno ([[KerberosV]] number). Make sure you remember this for the asetkey command later.
+addprinc creates a Kerberos principal for AFS. This is needed so that AFS can use Kerberos to authenticate users. The ktadd command adds the key for this principal to a keytab, located at /etc/afs.keytab. The ktadd command will give you a kvno ([[KerberosV]] number). Make sure you remember this for the asetkey command later. If you forget it, you can read it from the keytab with klist -k /etc/afs.keytab.
 
 ### <a name="Install AFS"></a> Install AFS
 
-First you must obtain the AFS rpms from the [[OpenAFS]] website. I used the following rpms: openafs, openafs-client, openafs-docs, openafs-kernel, openafs-krb5, and openafs-server. Make sure that the kernel module you download matches your kernel. Check with uname -a.
+First you must obtain the AFS rpms from the [[OpenAFS]] website. I used the following rpms: openafs, openafs-client, openafs-docs, openafs-krb5, openafs-server, and kmod-openafs. Make sure that the kernel module you download matches your kernel. Check with uname -a.
 
 Install AFS
 
@@ -115,23 +117,23 @@ The next 2 commands will set up the cell. They will modify /usr/afs/etc/ThisCell
     bos setcellname <server> <cellname> -noauth
     bos addhost <server> <host> -noauth
 
-/usr/afs/etc is the location for the server files. We also need to configure the client. The client files are located in /usr/vice/etc. Fedora's AFS is setup in such a way that there are 2 [[CellServDB]] client files- [[CellServDB]].dist and [[CellServDB]].local. We will copy ours to the local list.
+/usr/afs/etc is the location for the server files. We also need to configure the client. The client files are located in /usr/vice/etc. Fedora's AFS packages are set up in such a way that there are two [[CellServDB]] client files in /usr/vice/etc: [[CellServDB]].dist and [[CellServDB]].local. We will copy ours to the local list.
 
     cd /usr/vice/etc
     cp /usr/afs/etc/CellServDB CellServDB.local
     cp /usr/afs/etc/ThisCell .
 
-We next register our Kerberos afs principal with the AFS server. Use asetkey, which we just installed, to do this. Recall the kvno we obtained from ktadd previously. Use that number here (for me it was 3)
+We next register our Kerberos afs principal with the AFS server. Use asetkey to do this. Recall the kvno we obtained from ktadd previously. Use that number here (for me it was 3)
 
-    asetkey add 3 /etc/krb5.keytab afs
-    openafs-server restart
+    asetkey add 3 /etc/afs.keytab afs/cell.example.com
+    service openafs-server restart
 
-Next create a ptserver. This is the server that stores your users and groups. Any time you create a new user you need to add it to both the kerberos server as well as the ptserver. In case you are curious, bos is the basic-overseer server. It watches over all other servers that make up an AFS system.
+Next create a ptserver. This is the server that stores your users and groups. Any time you create a new user you need to add it to both the Kerberos server as well as the ptserver. In case you are curious, bos is the basic-overseer server. It watches over all other servers that make up an AFS system.
 
     bos create -server <server>  -instance ptserver -type simple -cmd /usr/afs/bin/ptserver -cell <cell> -noauth
     kadmin.local -q "addprinc admin"
 
-The admin principal can really be any name you want, just make sure you set the ACL correctly. I suggest having 2 principals for admins: have one for your normal user, and an additional admin account. For example, I may have 'steve' and 'steve/admin'.
+The admin principal can really be any name you want; just make sure you set the ACL correctly. I suggest having two principals for admins: have one for your normal user, and an additional admin account. For example, I may have 'steve' and 'steve/admin'. Note that for Kerberos 5, the name is "steve/admin@REALM", whereas in AFS, the name is "steve.admin". Use "steve.admin" for all the AFS commands below.
 
 Next we set up the Access Control List for Kerberos. This is just a list of the user rights we want principals to have. It is located at /var/kerberos/krb5kdc/kadm5.acl. It should contain one entry:
 
@@ -141,13 +143,13 @@ This means that any user in your REALM whos name ends with '/admin' will have al
 
     service kadmin restart
 
-Now that we have a kerberos principal to use, we need to make it an AFS user as well. Since this is to be an administrator we will also register it as such with the bos server. We can give it administrator rights by adding it to the group system:administrators. This is an AFS default group. The 'pts membership' command will list all the groups that your user is a member of. Verify that it lists system:administrators. Restart the afs server after this.
+Now that we have a kerberos principal to use, we need to make it an AFS user as well. Since this is to be an administrator we will also register it as such with the bos server. We can give it administrator rights by adding it to the group system:administrators. This is an AFS default group. The 'pts membership' command will list all the groups that your user is a member of. Verify that it lists system:administrators. Restart the AFS server service after this.
 
     bos adduser <server> admin -cell <cell> -noauth
     pts createuser -name admin -cell <cell> -noauth
     pts adduser admin system:administrators -cell <cell> -noauth
     pts membership admin -cell <cell> -noauth
-    service openafs-server restart.
+    service openafs-server restart
 
 Next we need to set up all the other servers that make up an AFS system. These include the fileserver, vlserver, and buserver. Check the IBM documentation for details on these.
 
@@ -155,7 +157,7 @@ Next we need to set up all the other servers that make up an AFS system. These i
     bos create -server <server> -instance vlserver -type simple -cmd /usr/afs/bin/vlserver -cell <cell> -noauth
     bos create -server <server> -instance buserver -type simple -cmd /usr/afs/bin/buserver -cell <cell> -noauth
 
-At this point we need our /vicepa partition set up. You should have done this when installing Fedora/RHEL, but if you have not, do it now. We will create a root volume on /vicepa.
+At this point we need our /vicepa partition set up. You should have done this when installing Fedora/RHEL. If you have not, do it now, or use an "AlwaysAttach" file. We will create a root volume on /vicepa.
 
     vos create -server <server> -partition /vicepa -name root.afs -cell <cell> -noauth
 
@@ -164,14 +166,14 @@ The servers are setup, so now remove the -noauth flag from /etc/sysconfig/openaf
     service openafs-server restart
     service openafs-client start
 
-Try logging in to afs. Kinit logs you into Kerberos (this is the normal Kerberos utility). Aklog gets you an AFS token. The original AFS command was klog. Aklog is modified to work with [[KerberosV]]. The tokens command lists what tokens you have. You should see afs@cell. You can also use klist to list your Kerberos tickets if you run into problems.
+Try logging in to AFS. kinit logs you into Kerberos (this is the normal Kerberos utility). aklog gets you an AFS token. The original AFS command was klog. Aklog is modified to work with [[KerberosV]]. The tokens command lists what tokens you have. You should see afs@cell. If you run into problems, you can use klist to list your Kerberos tickets, or aklog with the -d flag.
 
     kinit admin
     <password>
     aklog
     tokens
 
-Now we will set up our AFS volumes. If the -dynroot flag was set, this will fail. The root volume was called root.afs. The volume for your cell should be called root.cell. You will also need to set the ACL's for these directories. AFS access rights are rather different from those in UNIX. I suggest reading the IBM documentation for this, it still applies.
+Now we will set up our AFS volumes. If the -dynroot flag was set, this will fail. The root volume was called root.afs. The volume for your cell should be called root.cell. You will also need to set the ACLs for these directories. AFS access rights are rather different from those in UNIX. I suggest reading the IBM documentation for this; it still applies.
 
     fs checkvolumes
     fs setacl /afs system:anyuser rl
@@ -179,13 +181,13 @@ Now we will set up our AFS volumes. If the -dynroot flag was set, this will fail
     fs mkmount /afs/<cell> root.cell
     fs setacl /afs/<cell> system:anyuser rl
 
-Next make a read/write mount point for your cell. This is a little tricky for AFS newbies. This has a lot to do with the cache manager and replication. I suggest you read the IBM documentation on this if you have any trouble. It essentially works like this: You will have a read only and a read/write mount point. If you enter the read only mount point everything is read only until you get to a volume that is only read/write- in other words it has no read only replication. If you enter the read/write mount point everything is read/write. If you modify anything with a read only replication you must release it. (Seriously, just read the IBM documentation for this stuff). The links aren't required, but they help a little.
+Next make a read/write mount point for your cell. This is a little tricky for AFS newbies. This has a lot to do with the cache manager and replication. I suggest you read the IBM documentation on this if you have any trouble. It essentially works like this: You will have a read only and a read/write mount point. If you enter the read only mount point everything is read only until you get to a volume that is only read/write- in other words it has no read only replication. If you enter the read/write mount point everything is read/write. If you modify anything, you must release it to update the read-only copies. (Seriously, just read the IBM documentation for this stuff). The symlinks aren't required, but they help a little.
 
     fs mkmount /afs/.<cell> root.cell -rw
     ln -s .<cell> .<short name>
     ln -s .<cell> .<short name>
 
-Replicate your volumes so that you have a read only copy. This means that when you enter the cell via the read only mount point, you will stay read only.
+Replicate your volumes so that you have a read only copy. This means that when you enter the cell via the read-only mount point, you will stay read-only.
 
     vos addsite <server> <partition> root.afs
     vos addsite <server> <partition> root.cell
@@ -205,11 +207,11 @@ Finally, we need to make sure that on a restart everything will come up:
 
 Now that AFS is installed, the environment needs to be set up. Users should be made, along with their home volumes/directories. ACLs for these directories should be established.
 
-Much of what is in this section is very specific to my personal needs. I am migrating a relatively small amount of data from a large AFS cell to a small cell dedicated to this user. There will only be half a dozen users (in fact most people will just be using 1 user). For my migration, I will be setting up volumes for my user, moving the data manually, and retaining the same ACLs. Because security is not a huge concern, I will only set up ACLs for the top few levels. The user accounts will retain the same UNIX and afs uids.
+Much of what is in this section is very specific to my personal needs. I am migrating a relatively small amount of data from a large AFS cell to a small cell dedicated to this user. There will only be half a dozen users (in fact most people will just be using 1 user). For my migration, I will be setting up volumes for my user, moving the data manually, and retaining the same ACLs. Because security is not a huge concern, I will only set up ACLs for the top few levels. The user accounts will retain the same UNIX and AFS UIDs.
 
 ### <a name="Setting up User Volumes"></a> Setting up User Volumes
 
-First we need to make some directories and volumes. The IBM documentation suggests making a directory /afs/cell/usr with volume name user for all of your AFS users. I would probably suggest using home instead of usr and user. Even if you use the old way, I think it makes sense to have them both be called usr or user- the difference in names is unnecessary. If you homes, your users will also feel more comfortable, as this is the convention in Linux and most UNIXes.
+First we need to make some directories and volumes. The IBM documentation suggests making a directory /afs/cell/usr with volume name user for all of your AFS users. I would probably suggest using home instead of usr and user. Even if you use the old way, I think it makes sense to have them both be called usr or user- the difference in names is unnecessary. If you use home, your users will also feel more comfortable, as this is the convention in Linux and most UNIXes.
 
     cd /afs/.<cell>
     vos create <server> /vicepa home
@@ -219,7 +221,7 @@ First we need to make some directories and volumes. The IBM documentation sugges
     vos release home
     cd home
 
-Now you can create directories for any of your users. We will not replicate these volumes. By not replicating them, we force the cache manager to access a read/write volume. This means that even if we access the cell through the read only volume we can still access our read/write user directories (this is what you want). Maxquota 0 means that there is no size restriction to the volume. You can give it a restriction if you like (the default is 5mb). Do these commands for every directory you like.
+Now you can create directories for any of your users. We will not replicate these volumes. By not replicating them, we force the cache manager to access a read/write volume. This means that even if we access the cell through the read-only volume we can still access our read/write user directories (this is what you want). Maxquota 0 means that there is no size restriction to the volume. You can give it a restriction if you like (the default is 5mb). Do these commands for every directory you like.
 
     vos create l<server> /vicepa home.<user> -maxquota 0
     fs mkmount <user> home.slee.<user>
@@ -230,18 +232,17 @@ When done, release the home volume so that these directories can be accessed fro
 
 ### <a name="Create Users"></a> Create Users
 
-We can create a user by registering it to Kerberos and pts. There used to be a script, uss, that would do this and more for you. Unfortunately this script is old and as of this writing won't work with Kerberos. Until someone comes out with a new version or new script, you will have to create a new user by manually creating an entry in each database, creating the user's volume and directory, and setting the ACLs. If you use integrated login , make sure that the users' UNIX ids and pts ids match. You must first authenticate as a Kerberos/AFS admin.
+We can create a user by registering it to Kerberos and pts. There used to be a script, uss, that would do this and more for you. Unfortunately this script is old and as of this writing won't work with Kerberos. Until someone comes out with a new version or new script, you will have to create a new user by manually creating an entry in each database, creating the user's volume and directory, and setting the ACLs. If you use integrated login, make sure that the users' UNIX ids and pts ids match. You must first authenticate as a Kerberos/AFS admin.
 
-    pts createuser <username> [<user id>]
+    pts createuser <username> [<numeric user id>]
     kadmin -q "addprinc <username>"
     <enter password for user>
 
-If you use integrated login, make sure that you add an entry to /etc/password or whatever means you use of distributing user information.
+If you use integrated login, make sure that you add an entry to /etc/passwd or whatever means you use of distributing user information.
 
 ### <a name="Setting ACLs"></a> Setting ACLs
 
-Now that we have volumes, we should set some restrictions on those volumes. You should give the user of the directory full rights. Do this with the fs setacl command. [Mobil Keluarga Terbaik di Indonesia](http://bisnis-inter-net.com/mobil-keluarga-terbaik-di-indonesia/) [TOP 1 Oli Sintetik Mobil-Motor Indonesia](http://bisnis-inter-net.com/top-1-oli-sintetik-mobil-motor-indonesia/) [Bisnis Internet](http://bisnis-inter-net.com/)
-
+Now that we have volumes, we should set some restrictions on those volumes. You should give the user of the directory full rights. Do this with the fs setacl command.
 
     fs setacl -dir <dir> -acl <user> all
 
