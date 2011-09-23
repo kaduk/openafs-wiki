@@ -223,7 +223,7 @@ First we need to make some directories and volumes. The IBM documentation sugges
 
 Now you can create directories for any of your users. We will not replicate these volumes. By not replicating them, we force the cache manager to access a read/write volume. This means that even if we access the cell through the read-only volume we can still access our read/write user directories (this is what you want). Maxquota 0 means that there is no size restriction to the volume. You can give it a restriction if you like (the default is 5mb). Do these commands for every directory you like.
 
-    vos create l<server> /vicepa home.<user> -maxquota 0
+    vos create <server> /vicepa home.<user> -maxquota 0
     fs mkmount <user> home.slee.<user>
 
 When done, release the home volume so that these directories can be accessed from the read only mountpoint.
