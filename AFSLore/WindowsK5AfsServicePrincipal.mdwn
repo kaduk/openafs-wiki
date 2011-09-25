@@ -165,6 +165,5 @@ If you are currently running a kaserver to do authentication then you have an af
 If your pts protection server user names in afs and the users names you create in Windows or Mit kerberos are the same, you can continue to use "klog" style authentication from [[OpenAFS]] clients not yet configured to get tokens from the K5 server.
 
 The reason one would do this is during the transition to K5. Once you have your K5 servers and your [[KeyFile]] configured to contain the old afs kaserver principal and the new K5 service principal you can continue to run the kaserver until your afs clients are configured to use K5 only and wean yourself off the kaserver. The downside of this is having 2 passwords, one in the kaserver and one in the K5 server and not confusing the users.
-[Mobil Keluarga Terbaik di Indonesia](http://bisnis-inter-net.com/mobil-keluarga-terbaik-di-indonesia/) [TOP 1 Oli Sintetik Mobil-Motor Indonesia](http://bisnis-inter-net.com/top-1-oli-sintetik-mobil-motor-indonesia/) [Bisnis Internet](http://bisnis-inter-net.com/)
 
 -- [[JohnSopko]] - 24 Jul 2007
