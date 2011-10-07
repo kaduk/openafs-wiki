@@ -1,22 +1,25 @@
-
-- have a way to recover cell structure for DR
+- have a way to recover cell structure for disaster recovery
 - integration of databases
 - list of files in backup dump to present to users for recovery
-- new more stable incarnation of butc with capability ofplugging in site specific backup systems
-- think f very loose coupling (not t tight integration), so that customizing for site backup system remains manageble
+- new more stable incarnation of butc with capability of plugging in site specific backup systems
+- think of very loose coupling (not too tight integration), so that customizing for site backup system remains mannageble
 - take simplest form of backup (vos dump, full & incremental), extract metadata, use site BS
 - have more snapshots or PIT RO clones 
 - could we have CoW file histories?
 - have -omitdirs for backup/butc
 - vos dump with only diffs per file dumped
-- revisit XBSA API for conecting site BS
+- revisit XBSA API for connecting site BS
 
-- revisit reverse incr backup? not doing 2 consec full backups, but having an incremental
+- revisit reverse incr backup? not doing 2 consecutive full backups, but having an incremental
 
-generaly: 
+generally: 
  - DR capability
  - incidental single file restore
  - file-level differential
  - support for different front ends
  - conserve (at least)) current backup policy
- - not neccesarily need server local disk for backup
+ - not necesarilly need server local disk for backup
+
+Site: please describe your current setup below in separate subpages.
+      (if possible add restore statistics)
+
