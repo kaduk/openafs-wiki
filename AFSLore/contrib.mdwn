@@ -1,0 +1,79 @@
+# Community contributions
+
+Many people have written a lot of scripts to make daily chores easier.<br/>
+Here, we'd like to gather them, so that it is easy to look them up.
+
+## code stored on github 
+
+Instead of having a static collection of links or source-code, we <br/>
+created a repository to github and invite you to use it for your own scripts<br/>
+so that others can reuse them or even improve them.
+
+For this, we created an organizatorial user openafs-contrib on github.com :
+
+<https://github.com/organizations/openafs-contrib>
+
+There, we can host different repositories for different needs.<br/>
+The idea is that each project can have its own repositories.<br/>
+To each repository, there is a team with RW access.
+
+So far there is :
+
+ * afspy (python-bindings to afs as introduced at the EAKC 2011 https://indico.desy.de/getFile.py/access?contribId=10&sessionId=7&resId=0&materialId=slides&confId=4756)
+ * misc (unsorted)
+
+## What can I do ?
+
+Well, if you have some code to share, you could do one of the following :
+
+1. I have some code which would fit in a repo :
+ * ask for membership of a team dedicated to a repo, where your code fits, so you can work directly on it.
+ * fork this repo and send pull-requests so that a member of a team can integrate it
+ 
+2. I have some code which would need its own repo
+ * ask openafs-contrib to setup a repo and team for you
+
+3. I have no clue about git and don't want to learn it.
+ * This is sad, but alas, just send the code to one of the openafs-contrib maintainers and they'll 
+   act as a proxy (hopefully until you learned git).
+
+
+## Communication
+
+We should communicate through a mailing-list, but this has to be setup.
+
+If you have something you like to share, please
+contact any of the four members of the openafs-contrib-team :
+
+* Jakob Haufe  (sur5r)
+* Michael Meffie (mmeffie)
+* Fabrizio Manfredi (thoulen)
+* Christof Hanke (chanke)
+
+
+## first steps
+
+Unlike openafs.org, openafs-contrib is not using gerrit, but git directly.
+Still, many of the documentation at [[GitDevelopers]] still applies.
+
+However, here things are a bit different:
+
+As an example this is what I would do when working for afspy :
+
+1. create your user (here chanke) at github.
+2. Fork the repository (inside github), you want to contribute to.
+3. clone it to your machine:  "git clone git@github.com:chanke/afspy.git afspy"
+4. do some changes
+5. git push it to your own repo: "git push"
+6. Send a pull request towards openafs-contrib.
+
+Of course, when member of a team which owns a repository, you could push
+to that directly, but it is good practice to first commit stuff to your 
+private repo and then request the pull from openafs-contrib.
+
+
+## To-do :
+
+* setup mailing list
+* setup email-notifications
+* make this page more better
