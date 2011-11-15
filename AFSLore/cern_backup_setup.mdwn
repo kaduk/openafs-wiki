@@ -1,0 +1,58 @@
+# CERN backup setup ca. 2011
+
+## Base numbers
+
+ * ~55 file servers
+ * 850 million files (50% yearly growth)
+ * total backup size on tapes: ~ 650TB
+ * total number of objects on tapes: ~5 million
+ * daily transfer to tape: 1-2.5 TB
+ 
+## Requirements
+ * backup dumps: daily
+ * backup retention policy: 6 months
+ * restore directly done by the users  (that is w/o admin intervention)
+ * same backup policy for all volumes: all volumes are equal and no volumes are more equal than others
+
+## Current organization
+
+ * components:
+    * frontend: AFS "native" backup system (butc, backup commands)
+    * tape backend: TSM backup service and tape manager
+ * granularity: 
+    * full backup cycle to tape ~ every 30-50 days
+    * 1 or 2 differential backups to tape per full backup cycle (differential = "diff to the last full")
+    * daily incremental backups to tape ("diff to the last incremental")
+    * "yesterday" also available as “BK” clone on disk
+         * for home directories these clones are already mounted and directly accessible to users
+ * servers are backed-up in parallel by a cronjob every evening (i.e. every 24 hours)
+    * partitions on a server are backup-up in sequence
+ * load-balancing the data flow to the backup service:
+    * avoid all servers doing full backups at the same time
+ 
+## Problems/Issues 
+ * scalability: need 24 hour window to complete a dump of all partitions on a server (may be a problem for increasingly larger servers)
+   * more parallelism in dumping the volumes?
+   * using more features of the TSM (e.g. more accounts) may be required in the future
+ * maintenance: 
+   * current administration layer for backup dump/restore is overly complex and drags a lot of historical/obsolete code
+
+## Detailed details
+
+ * AFS backup system frontend 
+   * backup volsets: one volset per partition
+     * database model: a volset dump contains a list of volume dumps
+   * dump hierarchy:
+      * simply defined as a chain: full-i1-...-i52 (no differentials)
+      * differential backups are determined based on additional state information stored locally via perl Catalog module
+        * once a differential is created, the backup database keeps track of the parentship of subsequent incrementals
+   * several layers of wrappers perl/ksh/arc/... to manage dumps and restores
+      * butc wrapped by expect script and fired on demand (no permanent butc processes), requires locking
+      * end-user backup restore integrated into the afs_admin interface 
+         * restore done in a “synchronous” mode: an authenticated RPC to a restore server (one of afs file server nodes) is made using "arc"
+         * the RPC connection is kept  alive until user leaves a temporary shell which is positioned where recovered volumes are temporarily mounted  
+ * TSM backend
+
+   * TSM server (one TSM account at the moment, using "archive" mode)
+   * butc linked against XBSA/TSM library
+     * each volume dump is stored as a separate object in TSM with the volset dump id prefix ("/{volsetdumpid}/{volname}.backup")
