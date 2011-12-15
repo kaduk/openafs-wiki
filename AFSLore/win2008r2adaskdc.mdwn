@@ -27,7 +27,9 @@ Use ktpass to export the afs keyfile (use your own krb5 REALM instead of mine):
 
 ktpass -out NAME.out.txt -princ afs@CGV.TUGRAZ.AT \
        -crypto DES-CBC-CRC +rndPass -DesOnly /ptype KRB5_NT_SRV_HST
+
 (Or try this (one ob both did work):
+
 ktpass -princ afs/cellname@ADDOMAINNAME -mapuser afscell@ADDOMAINNAME \
        -mapOp add -out afs-keytab +rndPass -crypto DES-CBC-CRC +DesOnly \
        -ptype KRB5_NT_PRINCIPAL +DumpSalt )
@@ -36,14 +38,15 @@ ktpass -princ afs/cellname@ADDOMAINNAME -mapuser afscell@ADDOMAINNAME \
 -crypto ALL option as that creates a keytab with all of the supported
 enctypes for the account.  For a DesOnly account, this should be just
 the DES enctypes.)
-Soory, I am unclear about this one:
+
+Sorry, I am unclear about this one:
+
 (You also want to use the +SetUpn option to set the UPN in addition
 to the principal name for the account.)
 
 ktpass does not set the kvno in AD.  It only sets the kvno in the
 keytab.   You have to use the kvno in the keytab that is used by AD while adding the key to the krb5.keytab of your OpenAFS Servers
-(in my case it was 3). 
-Try to read out the created keytab file and look out for kvno.
+(in my case it was 3).  Try to read out the created keytab file and look out for kvno.
 
 
 OpenAFS Server:
@@ -66,9 +69,12 @@ before the changes didn't work for me. Your mileage may vary.
 
 List of DES.Enctypes:
 Policies/Windows Settings/Security Settings/Local Policies/Security Options 
+
 DES_CBC_CRC enabled
+
 DES_CBC_MD5 enabled
 
 If you want to use roaming profile in OpenAFS, you need to disable check of profile ownership:
 Policies/Administrative/Templates/Sytem/Users Profiles
+
 Do not check for user ownership of roaming profiles Folders 	 enabled
