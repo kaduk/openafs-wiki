@@ -1,0 +1,70 @@
+
+HowTo setup OpenAFS with Windows 2008 R2 AD server as krb5 auth
+
+This is a bit rough and not clean, as I did wrote this out of memory. But it does work fine over here.
+
+Preparation for the AD Server:
+- Set the policy option "Network security: Configure encryption types allowed for Kerberos" and select which enctypes to allow (at least DES-CBC-CRC)
+- In the DC's Local Security Policy, enable all ciphers by checking all 6 boxes at Security Settings \ Local Policies \ Security Options \ "Network security: Configure
+ encryption types allowed for Kerberos"
+- In AD in the Default Domain Controllers Policy, set Computer Configuration \ Policies \ Administrative Templates \ Sytem/Net Logon \ "Allow cryptography algorithms compatible 
+with Windows NT 4.0" to enable (maybe not needed)
+- Add a REG_DWORD (32 bit) named KdcUseRequestedEtypesForTickets with value 1 at HKLM\SYSTEM\CurrentControlSet\services\kdc. Without this, the DC won't talk DES to clients,
+ even if you do extract a DES-only keytab (you'll see "KDC has no support for encryption type" messages).
+- Reboot the DC (at least restart the KDC process is required)
+
+Now to create the AFS principle:
+
+Create a afs user in the AD as a normal user with the login afs,
+set user cannot change passwordd, password never expires. Try to set "Use Kerberos DES encryption types for this account" on the Account tab.
+Afterward in the commandline I issued "setspn -A afs afs/cgv.tugraz.at" to set both the same userID.
+
+Use ktpass to export the afs keyfile (use your own krb5 REALM instead of mine):
+
+ktpass -out NAME.out.txt -princ afs@CGV.TUGRAZ.AT \
+       -crypto DES-CBC-CRC +rndPass -DesOnly /ptype KRB5_NT_SRV_HST
+(Or try this (one ob both did work):
+ktpass -princ afs/cellname@ADDOMAINNAME -mapuser afscell@ADDOMAINNAME \
+       -mapOp add -out afs-keytab +rndPass -crypto DES-CBC-CRC +DesOnly \
+       -ptype KRB5_NT_PRINCIPAL +DumpSalt )
+
+(When using the 2008 R2 version of ktpass, I also recommend using the
+-crypto ALL option as that creates a keytab with all of the supported
+enctypes for the account.  For a DesOnly account, this should be just
+the DES enctypes.)
+Soory, I am unclear about this one:
+(You also want to use the +SetUpn option to set the UPN in addition
+to the principal name for the account.)
+
+ktpass does not set the kvno in AD.  It only sets the kvno in the
+keytab.   You have to use the kvno in the keytab that is used by AD while adding the key to the krb5.keytab of your OpenAFS Servers
+(in my case it was 3). 
+Try to read out the created keytab file and look out for kvno.
+
+
+OpenAFS Server:
+
+Issue this on one of your OpenAFS Server to add the afs-keytab to the OpenAFS keyfiloe and let OpenAFS use krb5:
+
+asetkey add 3 /path/to/afs-keytab afs/cgv.tugraz.at
+
+Done with adding keytab principle to OpenAFS keyfile. Now setup your cell with fileservers and users.
+
+
+Notes from others:
+
+Note that in my experience, your specified kvno must equal or exceed the number of times the user's keytab has been extracted. If you specify a kvno of 3, then go back and ask 
+for a kvno of 1 for the same user account, you won't get it (but you will get a keytab with the next higher kvno). It's recommended to verify the kvno and the etype of the keytab 
+using your favorite method prior to importing into your afs keyfile.
+
+Also, I had to delete and re-create my afscell user's account in AD after making the changes to the DC detailed above to enable DES. Extracting a keytab for an account made 
+before the changes didn't work for me. Your mileage may vary. 
+
+List of DES.Enctypes:
+Policies/Windows Settings/Security Settings/Local Policies/Security Options 
+DES_CBC_CRC enabled
+DES_CBC_MD5 enabled
+
+If you want to use roaming profile in OpenAFS, you need to disable check of profile ownership:
+Policies/Administrative/Templates/Sytem/Users Profiles
+Do not check for user ownership of roaming profiles Folders 	 enabled
