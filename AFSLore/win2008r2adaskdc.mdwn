@@ -3,13 +3,18 @@ HowTo setup OpenAFS with Windows 2008 R2 AD server as krb5 auth
 This is a bit rough and not clean, as I did wrote this out of memory. But it does work fine over here.
 
 Preparation for the AD Server:
+
 * Set the policy option "Network security: Configure encryption types allowed for Kerberos" and select which enctypes to allow (at least DES-CBC-CRC)
+
 * In the DC's Local Security Policy, enable all ciphers by checking all 6 boxes at Security Settings \ Local Policies \ Security Options \ "Network security: Configure
  encryption types allowed for Kerberos"
+
 * In AD in the Default Domain Controllers Policy, set Computer Configuration \ Policies \ Administrative Templates \ Sytem/Net Logon \ "Allow cryptography algorithms compatible 
 with Windows NT 4.0" to enable (maybe not needed)
+
 * Add a REG_DWORD (32 bit) named KdcUseRequestedEtypesForTickets with value 1 at HKLM\SYSTEM\CurrentControlSet\services\kdc. Without this, the DC won't talk DES to clients,
  even if you do extract a DES-only keytab (you'll see "KDC has no support for encryption type" messages).
+
 * Reboot the DC (at least restart the KDC process is required)
 
 Now to create the AFS principle:
