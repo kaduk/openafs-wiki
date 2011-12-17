@@ -4,3 +4,69 @@ At the Institute for ComputerGraphics and KnowledgeVisualisation OpenAFS is used
 This includes users linux home directories, users windows profiles, project data and webservices. Even a complete 4 sided CAVE is
 run out of OpenAFS filespace (under windows and/or linux).
 
+The cell is reachable worldwide and road warriors do use the cell and benefit from the easy reachability of their data independent of their location (as long as network access is available).
+
+Setup
+
+The OpenAFS cell cgv.tugraz.at does have 3 dbservers and 4 fileservers. All 3 DB servers are also fileservers and each is a dedicated
+machine with at least dualcore CPU and 4GB RAM. the 4th fileserver is placed at a remote site (Fraunhofer IGD Darmstadt), is only reachable from within the CGV network, but does only store readonly volumes.
+Each fileserver is attached to a site internal iSCSI network. At CGV place 3 Dell MD3(2/0)00i iSCSI storage units provide storage space for the 
+OpenAFS fileservers, each partiton at 2TB. The remote server has dedicated iSCSI storage of 2 times 2TB.
+
+Two windows 2008R2 servers do run a ActiveDirectory which provides the KDC for the users of CGV cell. Both AD servers are VMs on different VMWare ESX servers (in different buildings).
+
+Volumes are distributed among the three fileservers (and 3 storage units) to do loadbalancing and still be reachable if one server goes out of service. Each RW volume does have 1 backup volume and up to 4 readonly volumes, distributed among the 4 fileservers. Except for CD/DVD images each volume has a RO copy on the remote fileserver. In case of a big catastrophic event in Graz, most important data is still online in Darmstadt.
+
+Each user gets a home, a work and a windows volume. Home is the Linux home, windows is the Windows Roaming Profile, both are private and write/readable only by user itself. the work volume is dedicated work space for member of the group to read users work data.
+Usual quota on these volumes is 2GB, but some users do exceed work quota up to 100GB.
+
+A special project path do exist in our cell, in which all data for projects are located. Each project gets its own groups (at least read and readwrite groups) and its own volumes, depending on filestructure and size. E.g. one project collecting photgrammetric data has currently 30 volumes min. 20GB each. file/volumestructure is coordinated with project users.
+
+A demo path is also created in which users/groups could publish their demo. Mostly world-readable.
+
+Beside a CD/DVD archive a software(installation archive is included, to. Install system from CD/DVD, setup OpenAFS and everything else is installed out of OpenAFS. With current SSD drives a complete windows workstation is setup in quite short time.
+
+As a special for our cell, we do run a DAVE and a HEyeWall out of OpenAFS space. The complete software and data for these installations are saved in our OpenAFS cell and are accessed live. E.g. the DAVE (our modified CAVE) is driven by 10 workstations, each running a client fetching graphics data from OpenAFS.
+
+Backup
+
+Our cell does run a 3-step backup.
+
+Step 1: Readonly volumes. Each RW volume is released in night times. Users can acces last day state with a special .backup path (mounted with the RO volume). very simple and very effective, most restores are handled with this 1-day-goback backup.
+
+Step 2: backup volumes and vos dump. Each night we run a "vos backupsys" to get backup volumes. This backup volumes are dumped upon a big, external RAID6 on a dedicated workstation. We do run 2 classes of backups: weekly and monthly. Users/project data are save weekly FULL, others monthly FULL. In days between, we do use the DIFF features of vos dump.
+Usual 4-6 weeks of data are hold in this big RAID6 for quite fast access. From time to time we need to vos restore out of this RAID6.
+
+Step3: monthly copy each volume upon external harddrive and store in secure place. Keep harddrives for 1 year. 
+Never used in 6.5 years of running cell
+
+Users
+
+We do have only 30 users within our cell, but roughly 10TB RW data. 20 dedicated users workstation in office, 10 general use workstations in terminal room, 20 servers and 20 lab workstations are all connected to the OpenAFS system.
+
+Usual users can login on each of them, except for servers. Due to linux home folder and windows roaming profile accessable on each of this system, users do have their desktop on each of them.
+
+One downside: big profiles. Users tend to have big profiles (1-2Gb) including lots of mails within their thunderbird profile. As OpenAFS does a stat on each file, a lot of time is spent on login to stat all these zillions of small files in users profile. 
+
+It must be stated, not all users are happy with OpenAFS "far to complicated, if network doe snot work, we cannot work", but due to ongoing work of the OpenAFS team, user experience got better and better. 
+
+We are not the usual usage case of OpenAFS, we do have lots of data and less users, and lots of data is accessed on the RW path. But OpenAFS does suite our needs currently quite well. It surely needs some extra work on edge solutions (our DAVE or HEyeWall), but it does its job.
+
+In 6.5 years of lifetime, we never had noticeable file loss due to OpenAFS bugs or big downtimes of the servers. Longest downtimes were due to power loss on our campus.
+
+Servers
+
+A lot of servers do have a OpenAFS client for accessing data, some do even run services out of OpenAFS. E.g. the FTP server or our trac server do run out of OpenAFS. Other servers do backup their data into a special Backup tree in OpenAFS.
+
+
+Needs
+
+Although OpenAFS does work quite well, some options are on the wishlist (yeah, we do know the current dev state and the limits of OpenAFS):
+* RW replication
+* File ACL
+* alternate datastreams
+* Offline functionality
+
+Lars Schimmer
+l.schimmer@cgv.tugraz.at
+http://www.cgv.tugraz.at
