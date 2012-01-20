@@ -30,6 +30,7 @@ The Usage Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#2.20  How do you set up IP-based"> 2.20 How do you set up IP-based ACLs?</a></li>
         <li><a href="#2.21 What meaning do the owner,"> 2.21 What meaning do the owner, group, and mode bits have in AFS?</a></li>
         <li><a href="#2.22 What are "dropboxes"?"> 2.22 What are "dropboxes"?</a></li>
+        <li><a href="#2.23 Can I access a RW-Volume">2.23 Can I access a RW-Volume using the RO-Path ?</a></li>
       </ul>
     </li>
   </ul>
@@ -499,3 +500,21 @@ In practice, the "not modify them once deposited" part is not enforced by the fi
 
 Also, note that system:anyuser=irl has additional problems: because dropbox semantics are based on pts identities (see question 2.21), the fileserver cannot distinguish between two unauthenticated users. So, not only can a user come back days later and modify the "dropped" file, but **any** user can modify a file dropped by an unauthenticated user, at any time. 
 
+### <a name="2.23 Can I access a RW-Volume"></a>2.23 Can I access a RW-Volume using the RO-Path ?
+
+Depends. Once, you have RO-Volumes released, a mountpoint pointing to the RO, will bring you to the RO-Volume.<br/>
+To change that behaviour, you have to change the corresponding mountpoint.<br/>
+However, for some situations, like software installations, it might be useful to
+reach the RW-Volume through the RO-path.<br/>
+
+You can do that for a single client with a special setup. <br/>
+
+The trick is to break the convention described in 2.17 for a single client : <br/>
+You mount the RW volume "root.cell" as /afs/cellname. <br/>
+
+This can be done by creating an alternative "root.afsrw" - Volume ( in contrast to root.afs),
+where you do the RW-mount.<br/>
+Then you must disable on this special client the "dynroot" -option and use this alternative root.afsrw
+as root volume, by adding "-rootvol root.afsrw".
+
+ 
