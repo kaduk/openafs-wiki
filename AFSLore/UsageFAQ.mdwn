@@ -514,7 +514,7 @@ You mount the RW volume "root.cell" as /afs/cellname. <br/>
 
 This can be done by creating an alternative "root.afsrw" - Volume ( in contrast to root.afs),
 where you do the RW-mount.<br/>
-Then you must disable on this special client the "dynroot" -option and use this alternative root.afsrw
-as root volume, by adding "-rootvol root.afsrw".
+Then you must not use on this special client the "dynroot" -option and use this alternative root.afsrw
+as root volume, by adding "-rootvol root.afsrw" to the afsd commandline-options on startup.
 
  
