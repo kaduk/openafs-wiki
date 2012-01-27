@@ -2,7 +2,9 @@
 
 ## <a name="Introduction"></a> Introduction
 
-This guide is a (hopefully) straightforward manual for setting up [[OpenAFS]] for Windows 1.3.70. It was written with the not-so-experienced user in mind and is a step-by-step description of a sample configuration. Changing the settings to your specific needs should pose no problems.
+This guide is a (hopefully) straightforward manual for setting up [[OpenAFS]] for Windows <del>1.3.70</del> <b>1.7.4</b>. It was written with the not-so-experienced user in mind and is a step-by-step description of a sample configuration. Changing the settings to your specific needs should pose no problems.
+
+<i><b>(The changes for 1.7.4 are incomplete; none of the pictures are up to date.  When complete, the markup should be removed --jtb) </b></i>
 
 ### <a name="Before the Installation"></a> Before the Installation
 
@@ -10,9 +12,9 @@ Before we start, let us take a moment and just skim through the installation. Fo
 
 #### <a name="System Requirements"></a> System Requirements
 
-First of all, check that your system and network is capable of using [[OpenAFS]] for Windows. You will need Windows 2000 or later. Support for Windows NT and the Windows 9x (including ME) series has been discontinued. If you succeed with the installation, it is sheer luck!
+First of all, check that your system and network is capable of using [[OpenAFS]] for Windows. You will need <del>Windows 2000 or later. Support for Windows NT and the Windows 9x (including ME) series has been discontinued. If you succeed with the installation, it is sheer luck!</del> <b>Windows Vista, Windows Server 2008 or Windows 7</b>.
 
-The disc usage of [[OpenAFS]] is pretty limited: around 50 MB in the standard installation. You may later increase the cache size, thus using up more.
+The disc usage of [[OpenAFS]] is pretty limited: around <del>50</del><b>??</b> MB in the standard installation. You may later increase the cache size, thus using up more.
 
 To be able to access files, you will need the network up and running. AFS is not very demanding on bandwidth, but realize that every byte of a file is transmitted over the wire (or air) uncompressed. The use of the client cache helps reduce bandwidth requirements.
 
@@ -38,11 +40,11 @@ Both Adam and Eve go about sending in their secret password (known only to the r
 
 In AFS, you (the Windows Client, actually) are Adam, and the AFS server is Eve. They both communicate with a KDC.
 
-However, in the digital reality, things are not quite as easy as borrowing a car: Originally, version four of Kerberos was used in AFS. It turned out this was an insecure concept; many others then moved to [[KerberosV]] (version 5). [[OpenAFS]] followed as soon as possible, without breaking backward compatibility. Unfortunatly, the Windows client was not updated with [[KerberosV]] when the Unix client was, which led Windows developers to create external tools for [[KerberosV]].
+However, in the digital reality, things are not quite as easy as borrowing a car: Originally, version four of Kerberos was used in AFS. It turned out this was an insecure concept; many others then moved to [[KerberosV]] (version 5). [[OpenAFS]] followed as soon as possible, without breaking backward compatibility. <del>Unfortunatly, the Windows client was not updated with [[KerberosV]] when the Unix client was, which led Windows developers to create external tools for [[KerberosV]].</del>
 
-Nowadays, [[OpenAFS]] for Windows does support [[KerberosV]] tickets ("ID cards") directly, but the variety of utilities still exist, creating the problem of choosing which one to use.
+Nowadays, [[OpenAFS]] for Windows does support [[KerberosV]] tickets ("ID cards") directly, <del>but the variety of utilities still exist, creating the problem of choosing which one to use</del> <b>but MIT no longer supports its Kerberos for Windows implementation, requiring a transition to other implementations.  Currently OpenAFS recommends that you use ``Heimdal'' Kerberos.</b>
 
-In order to use [[KerberosV]] (recommended), you will have to use Kerberos for Windows, an MIT product. Of course, this requires that you use [[KerberosV]] servers, which still is not always the case. Small sites may still use [[OpenAFS]]'s own Kerberos server implementation, called the **_kaserver_**.
+In order to use [[KerberosV]] (recommended), you will have to use Kerberos for Windows <del>an MIT product</del>. Of course, this requires that you use [[KerberosV]] servers, which still is not always the case. Small sites may still use [[OpenAFS]]'s own Kerberos IV server implementation, called the **_kaserver_** <b>but since this option is no longer supported, this introduction will no longer discuss it</b>.
 
 ### <a name="A Word of Advice"></a> A Word of Advice
 
@@ -64,11 +66,30 @@ The file you download is either an executable file (Nullsoft Installer), or a Mi
 
 Note that the [[NullSoft]] Installer and the Microsoft Installer look somewhat different on the screen. They will both be shown in the step-by-step guide below.
 
-### <a name="Optionally: Download Kerberos fo"></a> Optionally: Download Kerberos for Windows
+### <a name="Optionally: Download Kerberos fo"></a> <del>Optionally:</del> Download Kerberos for Windows
 
-If you know, or believe, that the AFS cell you will be connecting to uses [[KerberosV]], you should download [MIT Kerberos for Windows](http://web.mit.edu/kerberos/www/). The latest release is available on [this page](http://web.mit.edu/kerberos/www/dist/). The download of interrest is the **Installer** for Windows.
+<del>If you know, or believe, that the AFS cell you will be connecting to uses [[KerberosV]], you should download [MIT Kerberos for Windows](http://web.mit.edu/kerberos/www/). The latest release is available on [this page](http://web.mit.edu/kerberos/www/dist/). The download of interrest is the **Installer** for Windows.</del>
 
-Note that installing MIT Kerberos for Windows will not prevent you from using the old Kerberos 4 protocol. It will, however, setup your computer for [[KerberosV]] as a first choice.
+<b>Download and install Heimdal Kerberos for Windows from <a href="https://www.secure-endpoints.com/heimdal">Secure Endpoints</a>.
+You can choose the "Typical Install'' <i>Maybe there's a way to set flags during installation?</i> <i>(NB: should give picture here)</i>.
+Then download and install Network Identity Manager (v2) also from <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Secure Endpoints</a>.
+The "Typical Install" is all one needs here.</b>
+
+<b>After installing Kerberos, you must edit the file <tt>C:\ProgramData\Kerberos\krb5.conf</tt> in Notepad as Administrator.
+Most of the file is useless but innocous.  But the first lines should say:
+<blockquote>
+<pre>
+[libdefaults]
+    allow_weak_crypto = true
+</pre>
+</blockquote>
+You will need to add the line about weak cryptography.  A later planned release in the 1.7.X branch may avoid the
+need to make this configuration file change.
+</b>
+
+Note that installing <del>MIT</del> Kerberos for Windows will not prevent you from using the old Kerberos 4 protocol. It will, however, set up your computer for [[KerberosV]] as a first choice.
+
+<b><i>(Stopped here with 1.7.4 changes.)</i></b>
 
 ### <a name="Start the Installation"></a> Start the Installation
 
