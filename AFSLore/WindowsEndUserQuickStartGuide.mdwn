@@ -12,9 +12,9 @@ Before we start, let us take a moment and just skim through the installation. Fo
 
 #### <a name="System Requirements"></a> System Requirements
 
-First of all, check that your system and network is capable of using [[OpenAFS]] for Windows. You will need <del>Windows 2000 or later. Support for Windows NT and the Windows 9x (including ME) series has been discontinued. If you succeed with the installation, it is sheer luck!</del> <b>Windows Vista, Windows Server 2008 or Windows 7</b>.
+First of all, check that your system and network is capable of using [[OpenAFS]] for Windows. You will need <del>Windows 2000 or later. Support for Windows NT and the Windows 9x (including ME) series has been discontinued. If you succeed with the installation, it is sheer luck!</del> <b>Windows XP SP3, Windows Server 2003 SP2, Windows Vista SP1, Windows Server 2008, Windows 7, Windows Server 2008 R2</b>.
 
-The disc usage of [[OpenAFS]] is pretty limited: around <del>50</del><b>??</b> MB in the standard installation. You may later increase the cache size, thus using up more.
+The disc usage of [[OpenAFS]] is pretty limited: around <del>50</del><b>100</b> MB in the standard installation. You may later increase the cache size, thus using up more.
 
 To be able to access files, you will need the network up and running. AFS is not very demanding on bandwidth, but realize that every byte of a file is transmitted over the wire (or air) uncompressed. The use of the client cache helps reduce bandwidth requirements.
 
@@ -60,30 +60,30 @@ Now that you know about the existence and uses of Kerberos, we can continue with
 
 ### <a name="Obtaining _OpenAFS for Windows"></a> Obtaining [[OpenAFS]] for Windows
 
-The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/release/latest.html) you will always find the latest releases. The ready-to-install Windows package is usually located at the bottom of the page.
+The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/windows.html) you will always find the latest releases.
 
-The file you download is either an executable file (Nullsoft Installer), or a Microsoft Installer file. Both do the same. The Microsoft Installer file requires the Microsoft Installer (how surprising), but that ships with Windows 2000 and later. The Nullsoft Installer is preferred when installing interactively. The Microsoft Installer package was developed to make it easier for large sites to deploy [[OpenAFS]] without user interaction.
+The file you download is a Microsoft Installer file.  For 64-bit Windows there are two installers.  The first contains the OpenAFS File System components and 64-bit Explorer Shell and Authentication Libraries.  The second contains 32-bit components for the Explorer Shell and Authentication Libraries.
 
-Note that the [[NullSoft]] Installer and the Microsoft Installer look somewhat different on the screen. They will both be shown in the step-by-step guide below.
+The older [[NullSoft]] Installer has been discontinued as of the 1.7.x release series.  
 
 ### <a name="Optionally: Download Kerberos fo"></a> <del>Optionally:</del> Download Kerberos for Windows
 
-<del>If you know, or believe, that the AFS cell you will be connecting to uses [[KerberosV]], you should download [MIT Kerberos for Windows](http://web.mit.edu/kerberos/www/). The latest release is available on [this page](http://web.mit.edu/kerberos/www/dist/). The download of interrest is the **Installer** for Windows.</del>
+<del>If you know, or believe, that the AFS cell you will be connecting to uses [[KerberosV]], you should download [MIT Kerberos for Windows](http://web.mit.edu/kerberos/www/). The latest release is available on [this page](http://web.mit.edu/kerberos/www/dist/). The download of interest is the **Installer** for Windows.</del>  
 
 <b>Download and install Heimdal Kerberos for Windows from <a href="https://www.secure-endpoints.com/heimdal">Secure Endpoints</a>.
 You can choose the "Typical Install'' <i>Maybe there's a way to set flags during installation?</i> <i>(NB: should give picture here)</i>.
 Then download and install Network Identity Manager (v2) also from <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Secure Endpoints</a>.
 The "Typical Install" is all one needs here.</b>
 
-<b>After installing Kerberos, you must edit the file <tt>C:\ProgramData\Kerberos\krb5.conf</tt> in Notepad as Administrator.
-Most of the file is useless but innocous.  But the first lines should say:
+<b>After installing Kerberos, you must edit the file <tt>%SystemRoot%\ProgramData\Kerberos\krb5.conf</tt> in Notepad as Administrator.
+Most of the file is useless but innocuous.  But the first lines should say:
 <blockquote>
 <pre>
 [libdefaults]
     allow_weak_crypto = true
 </pre>
 </blockquote>
-You will need to add the line about weak cryptography.  A later planned release in the 1.7.X branch may avoid the
+You will need to add the line about weak cryptography.  A later planned release in the 1.7.X branch will avoid the
 need to make this configuration file change.
 </b>
 
