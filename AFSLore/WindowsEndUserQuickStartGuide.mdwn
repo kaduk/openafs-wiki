@@ -67,7 +67,7 @@ You can choose the "Typical Install'' <i>Maybe there's a way to set flags during
 Then download and install Network Identity Manager (v2) also from <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Secure Endpoints</a>.
 The "Typical Install" is all one needs here. <i>(NB: shoudl give picture here></i></b>
 
-<b>After installing Kerberos, you must edit the file <tt>%SystemRoot%\ProgramData\Kerberos\krb5.conf</tt> in Notepad as Administrator.
+<b>After installing Kerberos, you must edit the file <tt>%SystemRoot%\ProgramData\Kerberos\krb5.conf</tt> (e.g., Windows: <tt>C:\Documents and Settings\All Users\Application Data\Kerberos\krb5.conf</tt>) in Notepad as Administrator.
 Most of the file is useless but innocuous.  But the first lines should say:
 <blockquote>
 <pre>
