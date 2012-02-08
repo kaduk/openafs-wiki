@@ -64,8 +64,6 @@ Now that you know about the existence and uses of Kerberos, we can continue with
 
 <b>Download and install Heimdal Kerberos for Windows from <a href="https://www.secure-endpoints.com/heimdal">Secure Endpoints</a>.
 You can choose the "Typical Install'' <i>Maybe there's a way to set flags during installation?</i> <i>(NB: should give picture here)</i>.
-Then download and install Network Identity Manager (v2) also from <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Secure Endpoints</a>.
-The "Typical Install" is all one needs here. <i>(NB: shoudl give picture here></i></b>
 
 <b>After installing Kerberos, you must edit the file <tt>%SystemRoot%\ProgramData\Kerberos\krb5.conf</tt> (e.g., Windows: <tt>C:\Documents and Settings\All Users\Application Data\Kerberos\krb5.conf</tt>) in Notepad as Administrator.
 Most of the file is useless but innocuous.  But the first lines should say:
@@ -80,6 +78,12 @@ need to make this configuration file change.
 </b>
 
 Note that installing <del>MIT</del> Kerberos for Windows will not prevent you from using the old Kerberos 4 protocol. It will, however, set up your computer for [[KerberosV]] as a first choice.
+
+### <a name="Install Network Identity Manager (v2)"></a>Download and Install Network Identity Manager (v2)
+
+Download and install Network Identity Manager (v2) also from <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Secure Endpoints</a>.
+The "Typical Install" is all one needs here. <i>(NB: shoudl give picture here></i></b>
+
 
 ### <a name="Obtaining _OpenAFS for Windows"></a> Obtaining [[OpenAFS]] for Windows
 
