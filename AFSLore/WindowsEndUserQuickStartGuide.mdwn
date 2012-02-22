@@ -65,7 +65,7 @@ Now that you know about the existence and uses of Kerberos, we can continue with
 <b>Download and install Heimdal Kerberos for Windows from <a href="https://www.secure-endpoints.com/heimdal">Secure Endpoints</a>.
 You can choose the "Typical Install'' <i>Maybe there's a way to set flags during installation?</i> <i>(NB: should give picture here)</i>.
 
-<b>After installing Kerberos, you must edit the file <tt>%SystemRoot%\ProgramData\Kerberos\krb5.conf</tt> (e.g., Windows: <tt>C:\Documents and Settings\All Users\Application Data\Kerberos\krb5.conf</tt>) in Notepad as Administrator.
+<b>After installing Kerberos, you must edit the file <tt>%SystemDrive%\ProgramData\Kerberos\krb5.conf</tt> (usually equivalent to: <tt>C:\Documents and Settings\All Users\Application Data\Kerberos\krb5.conf</tt>) in Notepad as Administrator.
 Most of the file is useless but innocuous.  But the first lines should say:
 <blockquote>
 <pre>
