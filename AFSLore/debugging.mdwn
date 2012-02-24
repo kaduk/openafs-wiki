@@ -10,6 +10,8 @@ First, we need to get the pid and the full path of the server (e.g. fileserver):
     PID=`ps -eaf | grep fileserver | grep -v grep | awk '{print $2}'`
     SRV_PATH=`ps -eaf | grep fileserver | grep -v grep | awk '{print $9}'`
 
+for other servers, this might be different, so double-check
+
 
 Then we need to attach the gdb and make it display the stack of all threads :
     
