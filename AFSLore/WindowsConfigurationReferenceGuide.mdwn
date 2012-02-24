@@ -319,7 +319,7 @@ You may set `LogonScript` (type string or expandable string) of `HKEY_LOCAL_MACH
 
 ### <a name="Integrated Logon Usage"></a> Integrated Logon Usage
 
-Utilization of the Integrated Logon feature can be set on a per-domain basis. The value is called `LogonOption` (type DWORD) and can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Setting this to zero disables Integrated Logon, and a one enables it. Default is enabled. If you set this to 2, you enable the [[OpenAFS]] High Security mode, and setting it to 3 enables both High Security Mode and Integrated Logon.
+Utilization of the Integrated Logon feature can be set on a per-domain basis. The value is called `LogonOptions` (type DWORD) and can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\NetworkProvider`. Setting this to "0" disables Integrated Logon, and a "1" enables it. Default is enabled. If you set this to "2", you enable the [[OpenAFS]] High Security mode, and setting it to "3" enables both High Security Mode and Integrated Logon.
 
 High Security mode is a deprecated techinque to let several users logon to the same computer at once. Since [[OpenAFS]] now supports authenticated SMB connections, there is really no need for this mode. If you still want to use this mode, you should disable SMB Authentication. See "Tweaking the SMB Connections" on this matter.
 
