@@ -6,10 +6,11 @@ def usage():
     print "Usage : --thread-file=filename --in-function=<function-name>, --exclude-function=<function-name>,<function-name>"
     print "--in-function :  show only threads whose stack has functions of name <function-name> (or part thereof)"
     print "--exclude-function :  do not show threads whose stack has functions of name <function-name> (or part thereof)"
+    print "---gdb-output-file : gdb output file to use"
     sys.exit(2)
 
 try:
-    opts, args = getopt.getopt(sys.argv[1:], "hg:i:e:", ["help", "gdb-output-file","in-function","exclude-function"])
+    opts, args = getopt.getopt(sys.argv[1:], "hg:i:e:", ["help", "gdb-output-file=","in-function=","exclude-function="])
 except getopt.GetoptError, err:
     # print help information and exit:
     print str(err) # will print something like "option -a not recognized"
