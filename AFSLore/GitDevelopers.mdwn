@@ -232,7 +232,7 @@ Assuming all has gone well, this will have added the entry to the code review qu
 
 ## <a name="Revising your change"></a> Revising your change
 
-It's possible that your modifications won't be accepted first time. In this case, you need to revise your changes, and resubmit them to gerrit. Please note that this should always be done by modifying your original changeset, _not_ by submitting a new change that makes the required fixes. Either git commit --amend, or git rebase should be used to combine your changes with the original changeset, and then you should push this to gerrit with
+It's possible that your modifications won't be accepted first time. In this case, you need to revise your changes, and resubmit them to gerrit. Please note that this should always be done by modifying your original changeset, _not_ by submitting a new change that makes the required fixes. Either git commit -a --amend, or git rebase should be used to combine your changes with the original changeset, and then you should push this to gerrit with
 
     git push ssh://gerrit.openafs.org/openafs.git <revision>:refs/for/<branch>
  
