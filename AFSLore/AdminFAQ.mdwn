@@ -64,6 +64,7 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#3.53  How can I ensure that the"> 3.53 How can I ensure that the userids on client machines match the users' pts ids?</a></li>
         <li><a href="#3.54  What is Fast Restart?"> 3.54 What is Fast Restart?</a></li>
         <li><a href="#3.55  Reboot ?"> 3.55 Why does AFS reboot itself spontaneously at 4:00am every Sunday?</a></li>
+        <li><a href="#3.56 weak crypto">3.56 Why do I get an error -1765328370 when authenticating?</a></li>
       </ul>
     </li>
   </ul>
@@ -1225,3 +1226,14 @@ Nobody's really sure why this behavior is the default, but you can disable it wi
 
   bos setrestart $SERVER_NAME never
   bos setrestart $SERVER_NAME -newbinary never
+
+### <a name="#3.56 weak crypto"></a>3.56 Why do I get an error -1765328370 when authenticating?
+
+  -1765328370 KDC has no support for encryption type
+ 
+  In other words, your KDC has support for DES-CBC-CRC turned off.
+  Re-enable support for DES encryption types and you will get further.
+
+  Check /etc/krb5.conf and make sure it has "allow_weak_crypto = true" in the [libdefaults]
+  section.  Also check kdc.conf (possibly located in /var/kerberos/krb5kdc) and make sure
+  that des-cbc-crc:normal is in the supported_enctypes list.
