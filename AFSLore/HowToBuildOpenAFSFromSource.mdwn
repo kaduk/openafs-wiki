@@ -133,10 +133,9 @@ support, which is *strongly* recommended.
 
 ### Linux Debian Packages
 
-On a Debian-based linux distribution, all of the required packages can be
-install with the following commands apt-get commands,
+On a Debian 6, the required packages can be install with the following commands apt-get commands,
 
-    $ apt-get install git-core autoconf automake make gcc flex bison
+    $ apt-get install git autoconf automake make gcc flex bison
     $ apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
 ### Linux RPM Packages
