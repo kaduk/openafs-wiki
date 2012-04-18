@@ -171,22 +171,22 @@ To create a new ssh key, if you don't already have one, run
 
 The public key for this is now stored in ~/.ssh/id\_rsa.pub.
 
-To tell gerrit about your key, log in, and go to 'Settings'. Select 'SSH Keys', and paste your _public_ key into the "Add SSH Public Key" box, or click on the 'Open Key...' option to load it from the filesystem. Click on 'Add' to add the new public key. While you are on this page, make a note of your 'SSH Username', because you'll need to for the next step.
+To tell gerrit about your key, log in, and go to 'Settings'. Select 'SSH Keys', and paste your _public_ key into the "Add SSH Public Key" box. Click on 'Add' to add the new public key. Now go to 'Profile' and make a note of the Username that is listed on that page.
 
 To make things easier, set up OpenSSH so that it knows about the defaults for the gerrit server. Edit ~/.ssh/config, and add a section like:
 
     Host gerrit.openafs.org
-    User <SSH Username>
+    User <Username>
     IdentityFile ~/.ssh/id_rsa
     Port 29418
 
-(where SSH Username is what you were told on the the 'SSH Keys' page)
+(where Username is the username you noted down from the 'Profile' page)
 
 ### <a name="The change id hook"></a> The change id hook
 
 Gerrit introduces the concept of "change IDs". This is a unique reference for a particular change, which remains constant regardless of any changes that are made to the implementation. This allows a single reference to be attached to a given modification, irrespective of any rewrites that may occur as a result of review comments. Manually maintaining change Ids is a pain, so gerrit provides a git hook which can be used to automatically add a change Id to any new modifications you create.
 
-The hook can be downloaded from the [[OpenAFS]] gerrit server by running the following, in the top level of your git tree
+The hook should be downloaded from the [[OpenAFS]] gerrit server by running the following, in the top level of your git tree
 
     scp -p -P 29418 gerrit.openafs.org:hooks/commit-msg .git/hooks/
 
