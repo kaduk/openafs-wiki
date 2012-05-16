@@ -44,6 +44,12 @@ The directory layout (and permissions for the PTS group <code>**system:anyuser**
 
 The remote sshd only needs to read your public keys stored in the <code>**authorized\_keys**</code> file, which it can read without a token. As long as you have a token on the ssh-client side, you can read your private keys (symlinked into the place ssh expects to find them) for the client half of the key-based auth.
 
+The remote sshd doesn’t like it if your home or <code>**~/.ssh**</code> directories have group write permissions. Your home directory should be writable only by you, <code>**~/.ssh**</code> should be 700, and <code>**authorized_keys**</code> should be 600 :
+
+     > chmod g-w /home/your_user
+     > chmod 700 /home/your_user/.ssh
+     > chmod 600 /home/your_user/.ssh/authorized_keys
+
 The glaring drawback to this cheap hack is that your users have to set this up for themselves. However, writing a simple shell script wrapper for **_ssh_** that checks for the existance of this subdirectory and performs the above voodoo if it doesn't would not be too terribly difficult.
 
 ## <a name="Method 2: Patching _OpenSSH"></a> Method 2: Patching OpenSSH
