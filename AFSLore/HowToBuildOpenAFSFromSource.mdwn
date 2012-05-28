@@ -410,7 +410,7 @@ to generate an OpenAFS source RPM.
     $ tar cjf openafs-<version>-doc.tar.bz2 openafs-<version>/doc
     $ openafs-<version>/src/packaging/RedHat/makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
 
-At this point you should have a source RPM called openafs-<version>-1.0.src.rpm. See the makesrpm.pl for additional options.
+At this point you should have a source RPM called `openafs-<version>-1.0.src.rpm`. See the makesrpm.pl for additional options.
 The source tree and tar files are no longer needed.
 
 Finally, run rpmbuild to build the build binary RPM packages. If all goes well, the final
