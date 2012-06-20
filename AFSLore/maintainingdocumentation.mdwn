@@ -1,0 +1,37 @@
+From https://lists.openafs.org/pipermail/openafs-info/2012-June/038270.html
+
+This is the page that you need:
+
+[[GitDevelopers]]
+
+All code and documentation, outside of the wiki, goes through gerrit. 
+<http://gerrit.openafs.org/>
+
+The rough workflow goes as follows:
+
+1. git clone of openafs (with gerrit setup)
+2. create a new branch
+3. edit code/docs  and test
+4. commit
+5. git push to gerrit
+6. ask people to review
+7. fix any issues, jump to 5 if fixes were made.
+8. patch is accepted
+9. delete the topic branch from #2
+10. jump to step 2 and repeat.
+
+The man pages are in the doc/manpages folder
+the guides are under the doc/xml folder. The guides are in docbook 
+format. <http://www.docbook.org/>
+
+You'll need to run a compile and specify your xml processor to compile 
+the docbook files.
+
+For development questions, post messages to openafs-devel@openafs.org
+For documentation questions, post messages to openafs-doc@openafs.org  
+or the openafs-devel list.
+
+Questions about general functionality can be posted to the openafs-info 
+list.
+
+Please contact the lists if you have any more questions.
