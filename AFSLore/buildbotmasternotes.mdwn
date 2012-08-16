@@ -1,6 +1,7 @@
 There are Jason's notes for setting up the buildbot master
 
 The buildbot master was installed in a VM on debian lenny. The VM has the following configuration:
+
 * 10GB disk (partitions: 3GB root, 500MB swap, the rest for /home
 * RAM 384MB
 
@@ -8,216 +9,213 @@ When installing lenny, uncheck desktop system and check web server
 
 edit sources.list and comment out the cdrom source
 
-root# apt-get build-dep buildbot
-root# apt-get install git-core
-root# apt-get install openssh-server
+    root# apt-get build-dep buildbot
+    root# apt-get install git-core
+    root# apt-get install openssh-server
 
-login as buildmaster user
-% git clone git://github.com/jaysoffian/buildbot.git  buildbot-src
-% cd buildbot-src/
-% git checkout -b gerrit e4c0d458374b9a0ce34c
+    login as buildmaster user
+    % git clone git://github.com/jaysoffian/buildbot.git  buildbot-src
+    % cd buildbot-src/
+    % git checkout -b gerrit e4c0d458374b9a0ce34c
 
-// fix a debugclient bug
-% git cherry-pick 9ab140a03378baa5ec98
+    // fix a debugclient bug
+    % git cherry-pick 9ab140a03378baa5ec98
 
-// allow for not clobbering the git tree each build
-% git cherry-pick 7fa5137bbc449144d76334bd366920d8b6a7c2c0
+    // allow for not clobbering the git tree each build
+    % git cherry-pick 7fa5137bbc449144d76334bd366920d8b6a7c2c0
 
-// following 
-http://buildbot.net/buildbot/docs/0.8.1/Installing-the-code.html#Installing-the-code
-// follow 8.1 docs
-% python setup.py build
-root# python setup.py install
-root# apt-get install python-json 
-root# apt-get install python-jinja
+    // following
+    http://buildbot.net/buildbot/docs/0.8.1/Installing-the-code.html#Installing-the-code
+    // follow 8.1 docs
+    % python setup.py build
+    root# python setup.py install
+    root# apt-get install python-json
+    root# apt-get install python-jinja
 
-// cvs is required to make the buildbot test suite go all clear
-root# apt-get install cvs
+    // cvs is required to make the buildbot test suite go all clear
+    root# apt-get install cvs
 
-// run the unit tests
-% PYTHONPATH=. trial buildbot.test
+    // run the unit tests
+    % PYTHONPATH=. trial buildbot.test
 
-% mkdir $HOME/buildbot/master/openafs
-// create the buildbot master
-% buildbot create-master $HOME/buildbot/master/openafs
+    % mkdir $HOME/buildbot/master/openafs
+    // create the buildbot master
+    % buildbot create-master $HOME/buildbot/master/openafs
 
 edit config
-=========================================
-...
-repourl="git://git.openafs.org/openafs.git"
 
-from buildbot.process import factory
-from buildbot.steps.source import Git
-from buildbot.steps.shell import Compile
-from buildbot.steps.shell import Configure
+    ...
+    repourl="git://git.openafs.org/openafs.git"
 
-f1 = factory.BuildFactory()
-f1.addStep(Git(repourl=repourl, mode="clobber"))
-f1.addStep(Configure(command=["sh","regen.sh"]))
-f1.addStep(Configure(command=["./configure","--enable-checking"]))
-f1.addStep(Compile(command=["make"]))
-f1.addStep(Compile(command=["make","dest"]))
+    from buildbot.process import factory
+    from buildbot.steps.source import Git
+    from buildbot.steps.shell import Compile
+    from buildbot.steps.shell import Configure
 
-b1 = {'name': "buildbot-full",
-      'slavename': "debian-i386",
-      'builddir': "full",
-      'factory': f1,
-      }
-c['builders'] = [b1]
-...
-=================================================
+    f1 = factory.BuildFactory()
+    f1.addStep(Git(repourl=repourl, mode="clobber"))
+    f1.addStep(Configure(command=["sh","regen.sh"]))
+    f1.addStep(Configure(command=["./configure","--enable-checking"]))
+    f1.addStep(Compile(command=["make"]))
+    f1.addStep(Compile(command=["make","dest"]))
 
-// test config
-% buildbot checkconfig master.cfg
-// start the buildmaster
-% /usr/bin/buildbot start $HOME/buildbot/master/openafs
+    b1 = {'name': "buildbot-full",
+          'slavename': "debian-i386",
+          'builddir': "full",
+          'factory': f1,
+          }
+    c['builders'] = [b1]
+    ...
+    =================================================
+
+    // test config
+    % buildbot checkconfig master.cfg
+    // start the buildmaster
+    % /usr/bin/buildbot start $HOME/buildbot/master/openafs
 
 check http://localhost:8010 for web output
 
+    //install openafs builddeps
+    root# apt-get build-dep openafs
+    root# apt-get install automake1.9 linux-headers-2.6-686 flex bison dblatex docbook-xsl
 
-//install openafs builddeps
-root# apt-get build-dep openafs
-root# apt-get install automake1.9 linux-headers-2.6-686 flex bison dblatex docbook-xsl
+    root# useradd  -d /home/buildslave -m buildslave
 
-root# useradd  -d /home/buildslave -m buildslave
-
-buildslave% mkdir -p $HOME/buildbot/slave/openafs
-buildslave% buildbot create-slave $HOME/buildbot/slave/openafs localhost:9989 debian-i386 PASSWORD
+    buildslave% mkdir -p $HOME/buildbot/slave/openafs
+    buildslave% buildbot create-slave $HOME/buildbot/slave/openafs localhost:9989 debian-i386 PASSWORD
 
 edit files in /home/buildslave/buildbot/slave/openafs/info
 
-// start the buildslave
-buildslave% buildbot start $HOME/buildbot/slave/openafs  
+    // start the buildslave
+    buildslave% buildbot start $HOME/buildbot/slave/openafs
 
 
 
-/// begin setting up gerrit stuff
-// create ssh key for buildbot
-// sign in to gerrit and add buildbot ssh key
-buildmaster% touch ~buildmaster/buildbot-src/contrib/__init__.py
+    /// begin setting up gerrit stuff
+    // create ssh key for buildbot
+    // sign in to gerrit and add buildbot ssh key
+    buildmaster% touch ~buildmaster/buildbot-src/contrib/__init__.py
 
 Here is a working config snippet (minus the slave passwords) for gerrit+buildbot:
-============================
-import sys
-sys.path.append('/home/buildmaster/buildbot-src/contrib')
 
-from gerrit import GerritChangeSource
-#c['change_source'] = GerritChangeSource()
+    import sys
+    sys.path.append('/home/buildmaster/buildbot-src/contrib')
 
-## configure the Schedulers
+    from gerrit import GerritChangeSource
+    #c['change_source'] = GerritChangeSource()
 
-from buildbot.scheduler import Scheduler, Periodic
+    ## configure the Schedulers
 
-mybuilders = []
-mybuilders.append("debian-linux-i386-builder")
-mybuilders.append("win2008-builder")
+    from buildbot.scheduler import Scheduler, Periodic
 
-stable14_builders = []
-stable14_builders.append("debian-linux-i386-builder")
+    mybuilders = []
+    mybuilders.append("debian-linux-i386-builder")
+    mybuilders.append("win2008-builder")
 
-
-
-c['schedulers'] = []
-c['schedulers'].append(Scheduler(name="all", branch=None,
-                                 treeStableTimer=30,
-                                 builderNames=mybuilders))
+    stable14_builders = []
+    stable14_builders.append("debian-linux-i386-builder")
 
 
-c['schedulers'].append(Periodic("every_4_hours", ["irix-builder"], 4*60*60))
 
-from gerrit import GerritScheduler
-c['schedulers'].append(GerritScheduler("gerrit_scheduler", mybuilders, branches=["master","openafs-devel-1_5_x"]))
-
-c['schedulers'].append(GerritScheduler("gerrit_stable_scheduler", stable14_builders, branches=["openafs-stable-1_4_x"]))
-
-####### BUILDERS
-
-repourl="git://git.openafs.org/openafs.git"
-
-from buildbot.process import factory
-from buildbot.steps.source import Git
-from buildbot.steps.shell import Compile
-from buildbot.steps.shell import Configure
-from buildbot.steps.shell import ShellCommand
-
-f1 = factory.BuildFactory()
-#f1.addStep(ShellCommand(command=["git","clean","-xdf"]))
-#f1.addStep(Git(repourl=repourl, mode="clobber"))
-f1.addStep(ShellCommand(command=["sleep","120"]))
-f1.addStep(Git(repourl=repourl, mode="update", ignore_ignores=True, retry=[120,60]))
-f1.addStep(ShellCommand(command=["sh","regen.sh"]))
-f1.addStep(Configure(command=["./configure","--enable-checking","--enable-supergroups","--enable-namei-fileserver"]))
-f1.addStep(Compile(command=["make"]))
-f1.addStep(ShellCommand(command=["make","dest"]))
-
-b1 = {'name': "debian-linux-i386-builder",
-      'slavename': "debian-i386",
-      'builddir': "full",
-      'factory': f1,
-      }
-
-c['builders'] = [b1]
-
-irix_configure_env={'CC':"cc"}
-
-irixfactory = factory.BuildFactory()
-irixfactory.addStep(ShellCommand(command=["sleep","120"]))
-irixfactory.addStep(Git(repourl=repourl, mode="update", ignore_ignores=True, retry=[120,60]))
-irixfactory.addStep(ShellCommand(command=["sh","regen.sh"]))
-irixfactory.addStep(Configure(command=["./configure","--enable-checking","--enable-supergroups","--enable-namei-fileserver","--with-krb5=/usr/nekoware"],env=irix_configure_env))
-irixfactory.addStep(Compile(command=["gmake"]))
-irixfactory.addStep(ShellCommand(command=["make","dest"]))
+    c['schedulers'] = []
+    c['schedulers'].append(Scheduler(name="all", branch=None,
+                                     treeStableTimer=30,
+                                     builderNames=mybuilders))
 
 
-irixbuilder = {'name': "irix-builder",
-      'slavename': "sgi_irix_65-64bit",
-      'builddir': "irix-65-64bit",
-      'factory': irixfactory,
-      }
+    c['schedulers'].append(Periodic("every_4_hours", ["irix-builder"], 4*60*60))
 
-c['builders'].append(irixbuilder)
+    from gerrit import GerritScheduler
+    c['schedulers'].append(GerritScheduler("gerrit_scheduler", mybuilders, branches=["master","openafs-devel-1_5_x"]))
+
+    c['schedulers'].append(GerritScheduler("gerrit_stable_scheduler", stable14_builders, branches=["openafs-stable-1_4_x"]))
+
+    ####### BUILDERS
+
+    repourl="git://git.openafs.org/openafs.git"
+
+    from buildbot.process import factory
+    from buildbot.steps.source import Git
+    from buildbot.steps.shell import Compile
+    from buildbot.steps.shell import Configure
+    from buildbot.steps.shell import ShellCommand
+
+    f1 = factory.BuildFactory()
+    #f1.addStep(ShellCommand(command=["git","clean","-xdf"]))
+    #f1.addStep(Git(repourl=repourl, mode="clobber"))
+    f1.addStep(ShellCommand(command=["sleep","120"]))
+    f1.addStep(Git(repourl=repourl, mode="update", ignore_ignores=True, retry=[120,60]))
+    f1.addStep(ShellCommand(command=["sh","regen.sh"]))
+    f1.addStep(Configure(command=["./configure","--enable-checking","--enable-supergroups","--enable-namei-fileserver"]))
+    f1.addStep(Compile(command=["make"]))
+    f1.addStep(ShellCommand(command=["make","dest"]))
+
+    b1 = {'name': "debian-linux-i386-builder",
+          'slavename': "debian-i386",
+          'builddir': "full",
+          'factory': f1,
+          }
+
+    c['builders'] = [b1]
+
+    irix_configure_env={'CC':"cc"}
+
+    irixfactory = factory.BuildFactory()
+    irixfactory.addStep(ShellCommand(command=["sleep","120"]))
+    irixfactory.addStep(Git(repourl=repourl, mode="update", ignore_ignores=True, retry=[120,60]))
+    irixfactory.addStep(ShellCommand(command=["sh","regen.sh"]))
+    irixfactory.addStep(Configure(command=["./configure","--enable-checking","--enable-supergroups","--enable-namei-fileserver","--with-krb5=/usr/nekoware"],env=irix_configure_env))
+    irixfactory.addStep(Compile(command=["gmake"]))
+    irixfactory.addStep(ShellCommand(command=["make","dest"]))
 
 
-###### win_amd64 free builder
+    irixbuilder = {'name': "irix-builder",
+          'slavename': "sgi_irix_65-64bit",
+          'builddir': "irix-65-64bit",
+          'factory': irixfactory,
+          }
 
-win_amd64_free_factory = factory.BuildFactory()
-
-# wait for 2 minutes
-win_amd64_free_factory.addStep(ShellCommand(command=["ping","-n","120","localhost"]))
-win_amd64_free_factory.addStep(Git(repourl=repourl, mode="update", ignore_ignores=True, retry=[120,60]))
-win_amd64_free_factory.addStep(Compile(command=["build-openafs.cmd", "amd64", "free"]))
-
-win_amd64_free_builder = {'name': "win2008-builder",
-      'slavename': "win2008-amd64",
-      'builddir': "win-amd64-free",
-      'factory': win_amd64_free_factory,
-      }
-c['builders'].append(win_amd64_free_builder)
-
-####### STATUS TARGETS
-
-# 'status' is a list of Status Targets. The results of each build will be
-# pushed to these targets. buildbot/status/*.py has a variety to choose from,
-# including web pages, email senders, and IRC bots.
-
-c['status'] = []
-
-# Use allowForce=True (boolean, not a string. ie: not 'True') to allow
-# Forcing Builds in the Web User Interface. The default is False.
-from buildbot.status import html
-c['status'].append(html.WebStatus(http_port=8010,allowForce=True))
-
-from gerrit import GerritStatusPush
-c['status'].append(GerritStatusPush('gerrit-prod'))
+    c['builders'].append(irixbuilder)
 
 
-from buildbot.status import client
-c['status'].append(client.PBListener(9988))
+    ###### win_amd64 free builder
+
+    win_amd64_free_factory = factory.BuildFactory()
+
+    # wait for 2 minutes
+    win_amd64_free_factory.addStep(ShellCommand(command=["ping","-n","120","localhost"]))
+    win_amd64_free_factory.addStep(Git(repourl=repourl, mode="update", ignore_ignores=True, retry=[120,60]))
+    win_amd64_free_factory.addStep(Compile(command=["build-openafs.cmd", "amd64", "free"]))
+
+    win_amd64_free_builder = {'name': "win2008-builder",
+          'slavename': "win2008-amd64",
+          'builddir': "win-amd64-free",
+          'factory': win_amd64_free_factory,
+          }
+    c['builders'].append(win_amd64_free_builder)
+
+    ####### STATUS TARGETS
+
+    # 'status' is a list of Status Targets. The results of each build will be
+    # pushed to these targets. buildbot/status/*.py has a variety to choose from,
+    # including web pages, email senders, and IRC bots.
+
+    c['status'] = []
+
+    # Use allowForce=True (boolean, not a string. ie: not 'True') to allow
+    # Forcing Builds in the Web User Interface. The default is False.
+    from buildbot.status import html
+    c['status'].append(html.WebStatus(http_port=8010,allowForce=True))
+
+    from gerrit import GerritStatusPush
+    c['status'].append(GerritStatusPush('gerrit-prod'))
 
 
-####### PROJECT IDENTITY
-c['projectName'] = "OpenAFS"
-c['projectURL'] = "http://www.openafs.org/"
-c['buildbotURL'] = "http://buildbot.openafs.org:8010/"
+    from buildbot.status import client
+    c['status'].append(client.PBListener(9988))
 
-======================================================
+
+    ####### PROJECT IDENTITY
+    c['projectName'] = "OpenAFS"
+    c['projectURL'] = "http://www.openafs.org/"
+    c['buildbotURL'] = "http://buildbot.openafs.org:8010/"
