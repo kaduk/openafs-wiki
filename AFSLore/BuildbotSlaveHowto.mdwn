@@ -66,7 +66,10 @@ convenient method for installing software on your platform than downloading the 
 and installing by hand.  Check public software repositories for your platform first to save yourself some
 effort.  BuildBot is not particularly sensitive to dependency versioning, so you may not need the
 absolute latest version of everything installed.  (For instance, BuildBot 0.7.12 is known to work with Python 2.5.2,
-Git 1.6.6, ZopeInterface 3.3.0, Twisted 9.0.0.)
+Git 1.7.9, ZopeInterface 3.3.0, Twisted 9.0.0.)
+
+Git version 1.7.9 or above is required.   The "git clean -e" option must be present and the
+"git clean -X -e excluded-file" behavior must be correct.
 
 And, of course, you'll need to install BuildBot itself: [[http://buildbot.net/trac]]
 
