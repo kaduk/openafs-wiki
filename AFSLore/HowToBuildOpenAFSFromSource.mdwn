@@ -98,10 +98,11 @@ The following tools are needed to build OpenAFS from source from a tar file:
 - install
 - perl 5.6 or better (only to build the documention)
 
-In addtion to the above, the following tools are needed to build OpenAFS 
+In addition to the above, the following tools are needed to build OpenAFS 
 from a git checkout:
 
 - git
+- libtool
 - autoconf 2.60 or better
 - automake
 
@@ -135,7 +136,7 @@ support, which is *strongly* recommended.
 
 On a Debian 6, the required packages can be install with the following commands apt-get commands,
 
-    $ apt-get install git autoconf automake make gcc flex bison
+    $ apt-get install git libtool autoconf automake make gcc flex bison
     $ apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
 ### Linux RPM Packages
