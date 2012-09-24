@@ -1,0 +1,45 @@
+## Building RPM packages
+ 
+A script called makesrpm.pl is provided to build a source RPM package.  You can
+use the generated source RPM to build the binaries and create the RPM packages
+for your source code tree of OpenAFS.
+
+The first step is to create a source tree of OpenAFS. Run the regen.sh script
+to build the docs and to generate the configure script. Also, use git describe
+to make a version stamp file which will be used by the packaging process. This
+example shows how to get a source tree from a remote git repo.
+
+    $ git clone git://git.openafs.org/openafs.git openafs-<version>
+    $ cd openafs-<version>
+    $ git checkout <tagname>
+    $ git describe >.version
+    $ ./regen.sh
+
+The _version_ is the dotted OpenAFS version number, such as 1.6.0,
+and the _tagname_ is the git tag for the version, such as openafs-stable-1_6_0.
+The _version_ number for pre-releases are suffixed with pre<number>. For example,
+to build 1.6.0pre5, create a directory called openafs-1.6.0pre5.
+
+Next, create a source RPM file. This requires creating a tar file for the
+source files and a tar file for the documents.  Run the makesrpm program
+to generate an OpenAFS source RPM.
+
+    $ cd .. # move out of the source tree
+    $ tar cjf openafs-<version>-src.tar.bz2 openafs-<version> --exclude .git --exclude doc
+    $ tar cjf openafs-<version>-doc.tar.bz2 openafs-<version>/doc
+    $ openafs-<version>/src/packaging/RedHat/makesrpm.pl openafs-<version>-src.tar.bz2 openafs-<version>-doc.tar.bz2
+
+At this point you should have a source RPM called `openafs-<version>-1.0.src.rpm`. See the makesrpm.pl for additional options.
+The source tree and tar files are no longer needed.
+
+Finally, run rpmbuild to build the build binary RPM packages. If all goes well, the final
+output will show the destination directory and an exit code of zero.
+
+    $ rpmbuild --rebuild openafs-<version>-1.0.src.rpm
+    ...
+    + cd /usr/src/redhat/BUILD
+    + rm -rf openafs-<version>
+    + exit 0
+
+Alternatively, the source RPM may be installed, which will place the sources in the
+rpm SOURCE directory and a spec file in the rpm SPEC directory.
