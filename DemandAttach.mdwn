@@ -55,11 +55,11 @@ Demand-attach necessitated a significant re-design of certain aspects of the AFS
 
 The changes implemented for demand-attach include:
 
-- [[volume finite-state automata|AFSLore/DemandAttach#Volume_Finite_State_Automata]]
+- [[volume finite-state automata|DemandAttach#Volume_Finite_State_Automata]]
 - volumes are attached on demand
 - volume _garbage collector_ to detach unused volumes
 - notion of volume state means read-only volumes aren't salvaged
-- [[vnode finite-state automata|AFSLore/DemandAttach#Vnode_Finite_State_Automata]]
+- [[vnode finite-state automata|DemandAttach#Vnode_Finite_State_Automata]]
 - global lock is only held when required and never held across high-latency operations
 - automatic salvaging of volumes
 - shutdown is done in parallel (maximum number of threads utilized)
@@ -119,7 +119,7 @@ The table below compares the start-up sequence for a traditional file-server and
   </tr>
 </table>
 
-The [[host / callback state|AFSLore/DemandAttach#FSStateDat]] is covered later. The _pre-attached_ state indicates that the file-server has read the volume headers and is aware that the volume exists, but that it has not been attached (and hence is not on-line).
+The [[host / callback state|DemandAttach#FSStateDat]] is covered later. The _pre-attached_ state indicates that the file-server has read the volume headers and is aware that the volume exists, but that it has not been attached (and hence is not on-line).
 
 The shutdown sequence for both file-server types is:
 
@@ -150,7 +150,7 @@ On a traditional file-server, volumes are off-lined (detached) serially. In dema
 
 ### <a name="Volume Finite-State Automata"></a> Volume Finite-State Automata
 
-The volume finite-state automata is available in the source tree under `doc/arch/dafs-fsa.dot`. See [[=fssync-debug=|AFSLore/DemandAttach#fssync_debug]] for information on debugging the volume package.
+The volume finite-state automata is available in the source tree under `doc/arch/dafs-fsa.dot`. See [[=fssync-debug=|DemandAttach#fssync_debug]] for information on debugging the volume package.
 
 <a name="VolumeLeastRecentlyUsed"></a>
 
@@ -175,15 +175,15 @@ VLRU works in a manner similar to a generational garbage collector. There are fi
   </tr>
   <tr>
     <td> intermediate (mid) </td>
-    <td> Volumes transitioning from new -&gt; old (see [[AFSLore.DemandAttach#VLRUStateTransitions][state transitions] for details). </td>
+    <td> Volumes transitioning from new -&gt; old (see [[DemandAttach#VLRUStateTransitions][state transitions] for details). </td>
   </tr>
   <tr>
     <td> new </td>
-    <td> Volumes which have been accessed. See [[AFSLore.DemandAttach#VLRUStateTransitions][state transitions] for details. </td>
+    <td> Volumes which have been accessed. See [[DemandAttach#VLRUStateTransitions][state transitions] for details. </td>
   </tr>
   <tr>
     <td> old </td>
-    <td> Volumes which are continually accessed. See [[AFSLore.DemandAttach.#VLRUStateTransitions][state transitions] for details. </td>
+    <td> Volumes which are continually accessed. See [[DemandAttach.#VLRUStateTransitions][state transitions] for details. </td>
   </tr>
 </table>
 
@@ -259,7 +259,7 @@ Demand salvaging is implemented by the `salvageserver`. The actual code for salv
   - because volumes are inter-mingled on a partition (rather than being separated), a lock for the entire partition on which the volume is located is held throughout. Both the `fileserver` and `volserver` will block if they require this lock, e.g. to restore / dump a volume located on the partition.
   - inodes for a particular volume can be located anywhere on a partition. Salvaging therefore results in **every** inode on a partition having to be read to determine whether it belongs to the volume. This is extremely I/O intensive and leads to horrendous salvaging performance.
 - `/usr/afs/bin/salvsync-debug` provides low-level inspection and control over the `salvageserver`. %RED% **Indiscriminate use of `salvsync-debug` can lead to extremely bad things occurring. Use with care.** %ENDCOLOR%
-- See [[=salvsync-debug=|AFSLore/DemandAttach#salvsync_debug]] for information on debugging problems with the salvageserver.
+- See [[=salvsync-debug=|DemandAttach#salvsync_debug]] for information on debugging problems with the salvageserver.
 
 <a name="FSStateDat"></a>
 
@@ -477,7 +477,7 @@ Note that the `volumeid` argument must be the numeric ID and the `partition` arg
   - `VOL_IN_HASH` indicates that the volume has been added to the volume linked-list
   - `VOL_ON_VBYP_LIST` indicates that the volume is linked off the partition list
   - `VOL_ON_VLRU` means the volume is on a VLRU queue
-- the `salvage` structure (detailed [[here|AFSLore/DemandAttach#salvsync_debug]])
+- the `salvage` structure (detailed [[here|DemandAttach#salvsync_debug]])
 - the `stats` structure, particularly the volume operation times ( `last_*`).
 - the `vlru` structure, particularly the VLRU queue
 
