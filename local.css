@@ -14,8 +14,8 @@
  * 0% is opaque, 100% is transparent
  *  */
 .pageheader {
-  padding: 2em 3em 3em 2em;
-  padding-left: 3em;
+  padding: 2em 6em 3em 2em;
+  padding-left: 6em;
   position: relative;
   overflow: hidden;
   background: #edf2f7;
@@ -37,11 +37,19 @@
 
 h1 {
   font-size: 160%;
-  border-top: 5px solid #cccccc; }
+  margin-top: 1.2em;
+  margin-bottom: 0em;
+  padding-top: 8px;
+  border-top: 3px solid #cccccc;
+}
 
 h2 {
   font-size: 130%;
-  border-top: 2px solid #cccccc; }
+  margin-top: 1.2em;
+  margin-bottom: 0em;
+  padding-top: 5px;
+  border-top: 2px solid #cccccc;
+}
 
 h3, h4, h5, h6 {
   font-size: 110%; }
@@ -129,8 +137,12 @@ code, pre {
   color: #1a2e05; }
 
 pre {
-  padding: .5em;
-  margin: 1em;
+  padding: .8em;
+  padding-left: 2em;
+  margin-top: 1em;
+  margin-bottom: 1.1em;
+  margin-left: 3em;
+  margin-right: 12em;
   border-style: solid;
   border-width: 1px;
   border-color: #cccccc;
@@ -142,7 +154,7 @@ pre {
   box-shadow: 0px 0px 2px #1a1a1a; }
 
 #content, #comments, #footer {
-  margin: 1em 3em; }
+  margin: 1em 6em; }
 
 #pageinfo {
   border-color: #cccccc; }
