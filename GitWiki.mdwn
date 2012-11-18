@@ -1,21 +1,21 @@
 # Using git to edit the OpenAFS wiki
 
-This page describes how to use git to create and edit pages on the this
-wiki as an alternative to the online web form. A local wiki setup is
-described to allow you to preview changes before pushing them to the
-public wiki. One advantage to this approach it that you can edit while
-offline, and then submit your work later, as you would for any other git
-based version controlled files. Also, using git for making changes is
-especially handy when making a series of changes which should be
-committed together, such as reorganizing pages and links.
-
 Unlike most wiki engines, which generate html from database records,
 the wiki engine on the OpenAFS wiki site generates static html files
 from a set of source files in markdown format. Revision history of the
 pages is managed with git. The OpenAFS gerrit system has been
 configured to accept git pushes to update the wiki, which means it is
-now possible to update this site using git directly, in addition to the
-wiki web based forms.
+now possible to update this site using git directly.
+
+This page describes how to use git to create and edit pages on this wiki
+as an alternative to the online web form. A local wiki setup is
+described to allow you to preview changes before pushing them to the
+public wiki. One advantage to this approach is that you can edit while
+offline, and then submit your work later, as you would for any other git
+based project. Also, using git for making changes is especially handy
+when making a series of changes which should be committed together, such
+as reorganizing pages and links.
+
 
 Read [[GitDevelopers]] before following the instructions on this page.
 
@@ -32,9 +32,7 @@ OpenAFS wiki. This requires:
 
 * [[ikiwiki|http://ikiwiki.info]] installation
 * a basic ikiwiki setup file (shown below)
-* a basic web server to serve static files
-
-A database server is not required.
+* a browser
 
 ## Getting the wiki source pages
 
@@ -51,17 +49,19 @@ The commit hook which generates a gerrit 'change id' as described in
 ## Setting up ikiwiki to preview your changes
 
 This is an optional but recommended step. The ikiwiki software can be installed
-on your laptop or workstation to allow you to preview your changes before
-committing them and pushing them to the wiki.  The default ikiwiki installation
-is intended for a server setup, so users to create pages using the web-based
-CGI program. In this section, a simplified setup is shown, which avoids some of
-the complexity of the ikiwiki setup but allows you to preview changes made to
-the wiki source files.
+on your laptop or workstation so you can preview your changes before publishing
+them.  The default ikiwiki installation is intended for a server setup, so
+users to create pages using the web-based CGI program. In this section, a
+simplified setup is shown, which avoids some of the complexity of the ikiwiki
+setup but allows you to preview changes made to the wiki source files.
 
-Install the ikiwiki package on your system. For example, to install ikiwiki on
-a recent Debian Linux:
+First, install the ikiwiki package for your system.  Use `apt` to install
+ikiwiki on a Debian or Ubuntu system.
 
     sudo apt-get install ikiwiki
+
+See [[ikiwiki downloads|http://ikiwiki.info/download]] for installation
+instructions for other various platforms.
 
 Create a minimal ikiwiki configuration file by saving the following in
 the file '~/openafs-wiki.setup' (where &lt;username&gt; is your username)
@@ -72,12 +72,14 @@ the file '~/openafs-wiki.setup' (where &lt;username&gt; is your username)
         destdir => '/home/<username>/public_html/openafs-wiki',
         url => 'http://localhost/openafs-wiki/',
         rcs => '',
+        usedirs => 0,
+	    add_plugins => [qw{goodstuff}],
     }
 
-The 'srcdir' should reference your local openafs-wiki git repository,
-created by the git clone. The 'destdir' will be created by ikiwiki when
-the pages are generated for preview. Note the 'rcs' setting is
-intentionally left empty in this setup.
+The 'srcdir' should reference your local openafs-wiki git repository, created
+by the git clone. The 'destdir' will be created by ikiwiki when the pages are
+generated for preview. Note the 'rcs' setting is intentionally left empty in
+this setup.
 
 The html files can now be generated from the openafs-wiki source by 'ikiwiki'.
 Run the following command to create the 'destdir' directory and create the
@@ -85,39 +87,33 @@ static html files in that directory:
 
     ikiwiki --setup ~/openafs-wiki.setup
 
-Configure a web server running on your machine to resolve the 'url' to the
-'destdir'.  An example apache configuration:
+The pages may be previewed locally by pointing your browser at:
 
-    Alias /openafs-wiki /home/<username>/public_html/openafs-wiki
-    <Directory /home/<username>/public_html/openafs-wiki>
-        Order allow,deny
-        allow from 127.0.0.1
-    </Directory>
+    file:///home/<username>/public_html/openafs-wiki/index.html
 
-Be sure to reload apache after changing the configuration. The pages may be
-previewed by pointing a browser on your laptop at:
-
-    http://localhost/openafs-wiki/
-
-Regenerate the html files as changes are made to the source files
-with the 'ikiwiki' command:
-
-    ikiwiki --setup ~/openafs-wiki.setup --refresh
 
 ## Editing pages
 
 You can now use your favorite text editor to change the markdown source and to
 create new markdown files. When creating new files, be sure to create new links
 on existing pages so visitors will be able to navigate to your
-new page. Run the 'ikiwiki' command to refresh the html for preview. Use 'git
-add' and 'git commit' to create commits to be submitted.
+new page. Run the following `ikiwiki` command to regenerate the html files from
+the source files.
 
-To publish your changes on the wiki, push your commits directly to the
-'master' branch of the openafs-wiki.git repository on gerrit.
+    ikiwiki --setup ~/openafs-wiki.setup --refresh
+
+To preview a page, point your browser at:
+
+    file:///home/<username>/public_html/openafs-wiki/<NameOfPage>.html
+
+When you are satified with your changes, use `git add` and `git commit` to
+create a commit to be submitted, then to publish your changes on the wiki, push
+your commits directly to the 'master' branch of the openafs-wiki.git repository
+on gerrit.
 
     git push ssh://gerrit.openafs.org/openafs-wiki.git HEAD:refs/heads/master
 
-The changes will not be held by gerrit for review, rather will be merged
-immediately to the openafs-wiki.git repository. The html on the wiki
-server will be automatically updated after a successful 'git push'.
+The changes will not be held by gerrit for review.  The commit will be merged
+immediately to the openafs-wiki.git repository and the html on the wiki server
+will be automatically updated after a successful 'git push'.
 
