@@ -132,7 +132,7 @@ Firstly, AFS makes use of Kerberos to authenticate users. This improves security
 
 - encrypted passwords no longer need to be visible
   - You don't have to use NIS, aka yellow pages, to distribute /etc/passwd - thus "ypcat passwd" can be eliminated.
-  - If you do choose to use NIS, you can replace the password field with "X" so the encrypted password is not visible. (These issues are discussed in detail in [[[AdminGuide|Main/FurtherReading#AdminGuide]]]).
+  - If you do choose to use NIS, you can replace the password field with "X" so the encrypted password is not visible. (These issues are discussed in detail in [[[AdminGuide|FurtherReading#AdminGuide]]]).
 
 - AFS uses mutual authentication - both the service provider and service requester prove their identities
 
@@ -201,7 +201,7 @@ Once you have wide-area AFS in place, you don't have to keep local copies of fil
 
 #### <a name="1.05.i  Communications protocol"></a> 1.05.i Communications protocol
 
-AFS communications protocol is optimized for Wide Area Networks. Retransmitting only the single bad packet in a batch of packets and allowing the number of unacknowledged packets to be higher (than in other protocols, see [[[Johnson90|Main/FurtherReading#Johnson90]]]).
+AFS communications protocol is optimized for Wide Area Networks. Retransmitting only the single bad packet in a batch of packets and allowing the number of unacknowledged packets to be higher (than in other protocols, see [[[Johnson90|FurtherReading#Johnson90]]]).
 
 #### <a name="1.05.j  Improved system manageme"></a> 1.05.j Improved system management capability
 
@@ -275,7 +275,7 @@ AFS uses Kerberos to do complex mutual authentication which means that both the 
 
 Originally AFS shipped with it's own version of a Kerberos, called "KAS." KAS still ships at this time (1.4.2 release) but is depricated in favor of using a true Kerberos 5 implimentation. [[OpenAFS]] does not currently ship with a K5 install; it is up to the administrator(s) to choose a version (either MIT's or KTH's "Heimdal") and install it. [[OpenAFS]] will happily work with either.
 
-For more detail on this and other Kerberos issues see the faq for Kerberos (posted to news.answers and comp.protocols.kerberos) [[[Jaspan|Main/FurtherReading#Jaspan]]]. (Also, see [[[Miller87|Main/FurtherReading#Miller87]]], [[[Bryant88|Main/FurtherReading#Bryant88]]], [[[Bellovin90|Main/FurtherReading#Bellovin90]]], [[[Steiner88|Main/FurtherReading#Steiner88]]])
+For more detail on this and other Kerberos issues see the faq for Kerberos (posted to news.answers and comp.protocols.kerberos) [[[Jaspan|FurtherReading#Jaspan]]]. (Also, see [[[Miller87|FurtherReading#Miller87]]], [[[Bryant88|FurtherReading#Bryant88]]], [[[Bellovin90|FurtherReading#Bellovin90]]], [[[Steiner88|FurtherReading#Steiner88]]])
 
 ### <a name="1.09  Does AFS work over protoco"></a> 1.09 Does AFS work over protocols other than TCP/IP?
 

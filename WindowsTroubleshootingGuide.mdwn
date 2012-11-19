@@ -96,7 +96,7 @@ If all fails, file a bugreport!
 As with most things on the computer, this error message is not entirely correct. It is not neccessarily the version number of the key that is wrong. Two of the most common reasons are
 
 - Wrong cell. You may have obtained tokens for one cell and are now trying to reach another cell. Try doing `afslog` for the new cell if you know you should have access to it.
-- Old server. Support for [[KerberosV]] tickets is a relatively new feature of [[OpenAFS]]. You will need an [[OpenAFS]] 1.2.8 or later server to use the feature. Either update the server, or disable [[KerberosV]]. Read about the latter in the [[Configuration Reference Guide|Main/WindowsConfigurationReferenceGuide#Disable_Automatic_Use_of_KerberosV]].
+- Old server. Support for [[KerberosV]] tickets is a relatively new feature of [[OpenAFS]]. You will need an [[OpenAFS]] 1.2.8 or later server to use the feature. Either update the server, or disable [[KerberosV]]. Read about the latter in the [[Configuration Reference Guide|WindowsConfigurationReferenceGuide#Disable_Automatic_Use_of_KerberosV]].
 
 ### <a name="Why can&#39;t I use _OpenAFS with an"></a> Why can't I use [[OpenAFS]] with an Active Directory KDC?
 
@@ -168,7 +168,7 @@ AFS was originally intended to be run on stationary office computers. It require
 
 If you have a laptop, or will otherwise be without a connection to the servers of your default cell, you should have this enabled. If your computer can always communicate with the servers of the default cell, this mode is superfluous.
 
-To switch Freelance Mode on and off, please read the [[Configuration Reference|Main/WindowsConfigurationReferenceGuide#Freelance_Client_Support]].
+To switch Freelance Mode on and off, please read the [[Configuration Reference|WindowsConfigurationReferenceGuide#Freelance_Client_Support]].
 
 ### <a name="What is &quot;High Security Mode&quot;?"></a> What is "High Security Mode"?
 

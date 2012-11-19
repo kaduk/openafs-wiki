@@ -222,7 +222,7 @@ Historically, AFS did not support encrypted network traffic. This has changed in
 
 ### <a name="Freelance Client Support"></a> Freelance Client Support
 
-This option can be set during installation. After installation, a registry entry must be edited. It can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` and is called `FreelanceClient` (type DWORD). Set it to 1 to enable Freelance Mode. See the [[Troubleshooting Guide|Main/WindowsTroubleshootingGuide#What_is_Freelance_Mode_]] for more information on Freelance Mode. Default is zero (disabled).
+This option can be set during installation. After installation, a registry entry must be edited. It can be found in `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` and is called `FreelanceClient` (type DWORD). Set it to 1 to enable Freelance Mode. See the [[Troubleshooting Guide|WindowsTroubleshootingGuide#What_is_Freelance_Mode_]] for more information on Freelance Mode. Default is zero (disabled).
 
 #### <a name="Freelance Root Setup"></a> Freelance Root Setup
 

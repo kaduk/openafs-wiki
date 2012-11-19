@@ -173,7 +173,7 @@ For additional information, Section 1.5 of the AFS System Administrator's Guide 
 
 ### <a name="3.07  Which TCP/IP ports and pro"></a> 3.07 Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?
 
-Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [[[NTP|Main/FurtherReading#NTP]]] and the question about [[timed|Main/WebHome#NTP]]:
+Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [[[NTP|FurtherReading#NTP]]] and the question about [[timed|WebHome#NTP]]:
 
 ntp 123/udp
 
@@ -511,7 +511,7 @@ The space needed for the BK volume is directly related to the size of all files 
 
 No.
 
-<a name="NTP"></a> The AFS Servers make use of NTP [[[NTP|Main/FurtherReading#NTP]]] to synchronise time each other and typically with one or more external NTP servers. By default, clients synchronize their time with one of the servers in the local cell. Thus all the machines participating in the AFS cell have an accurate view of the time.
+<a name="NTP"></a> The AFS Servers make use of NTP [[[NTP|FurtherReading#NTP]]] to synchronise time each other and typically with one or more external NTP servers. By default, clients synchronize their time with one of the servers in the local cell. Thus all the machines participating in the AFS cell have an accurate view of the time.
 
 For further details on NTP see: <http://www.eecis.udel.edu/~ntp/>. The latest version is 4.1, dated August 2001, which is **much** more recent that the version packaged with Transarc AFS.
 

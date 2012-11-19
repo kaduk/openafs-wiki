@@ -198,21 +198,21 @@ Begin by running the AFS initialization script to call the AIX kernel extension 
 
 ## <a name="Loading AFS into the AIX Kernel"></a> Loading AFS into the AIX Kernel
 
-[[Loading AFS into the AIX Kernel|Main/LoadingAFSIntoTheAIXKernel]]
+[[Loading AFS into the AIX Kernel|LoadingAFSIntoTheAIXKernel]]
 
 ## <a name="Replacing the fsck Program Helpe"></a> Replacing the fsck Program Helper on AIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Replacing the fsck Program Helper on AIX Systems|Main/ReplacingTheFsckProgramHelperOnAIXSystems]]
+[[Replacing the fsck Program Helper on AIX Systems|ReplacingTheFsckProgramHelperOnAIXSystems]]
 
 ## <a name="Configuring Server Volumes on AI"></a> Configuring Server Volumes on AIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on AIX|Main/ConfiguringServerVolumesOnAIX]]
+[[Configuring Server Volumes on AIX|ConfiguringServerVolumesOnAIX]]
 
-If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on AIX Systems|Main/EnablingAFSLoginOnAIXSystems]]. Otherwise, proceed to Starting the BOS Server.
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on AIX Systems|EnablingAFSLoginOnAIXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
 # <a name="Getting Started on Digital UNIX"></a><a name="Getting Started on Digital UNIX "></a> Getting Started on Digital UNIX Systems
 
@@ -220,21 +220,21 @@ Begin by either building AFS modifications into a new static kernel or by settin
 
 ## <a name="Loading AFS into the Digital UNI"></a> Loading AFS into the Digital UNIX Kernel
 
-[[Building AFS into the Digital UNIX Kernel|Main/BuildingAFSIntoTheDigitalUNIXKernel]]
+[[Building AFS into the Digital UNIX Kernel|BuildingAFSIntoTheDigitalUNIXKernel]]
 
 ## <a name="Replacing the fsck Program on Di"></a> Replacing the fsck Program on Digital UNIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Replacing the fsck Program on Digital UNIX Systems|Main/ReplacingTheFsckProgramOnDigitalUNIXSystems]]
+[[Replacing the fsck Program on Digital UNIX Systems|ReplacingTheFsckProgramOnDigitalUNIXSystems]]
 
 ## <a name="Configuring Server Volumes on Di"></a> Configuring Server Volumes on Digital UNIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on Digital UNIX|Main/ConfiguringServerVolumesOnDigitalUNIX]]
+[[Configuring Server Volumes on Digital UNIX|ConfiguringServerVolumesOnDigitalUNIX]]
 
-If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Digital UNIX Systems|Main/EnablingAFSLoginOnDigitalUNIXSystems]]. Otherwise, proceed to Starting the BOS Server.
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Digital UNIX Systems|EnablingAFSLoginOnDigitalUNIXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
 # <a name="Getting Started on HP-UX Systems"></a> Getting Started on HP-UX Systems
 
@@ -242,21 +242,21 @@ Begin by building AFS modifications into a new kernel; HP-UX does not support dy
 
 ## <a name="Building AFS into the HP-UX Kern"></a> Building AFS into the HP-UX Kernel
 
-[[Building AFS into the HP-UX Kernel|Main/BuildingAFSIntoTheHP-UXKernel]]
+[[Building AFS into the HP-UX Kernel|BuildingAFSIntoTheHP-UXKernel]]
 
 ## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on HP-UX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Configuring the AFS-modified fsck Program on HP-UX Systems|Main/ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
+[[Configuring the AFS-modified fsck Program on HP-UX Systems|ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
 
 ## <a name="Configuring Server Volumes on HP"></a> Configuring Server Volumes on HP-UX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on HP-UX|Main/ConfiguringServerVolumesOnHP-UX]]
+[[Configuring Server Volumes on HP-UX|ConfiguringServerVolumesOnHP-UX]]
 
-If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on HP-UX Systems|Main/EnablingAFSLoginOnHP-UXSystems]]. Otherwise, proceed to Starting the BOS Server.
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on HP-UX Systems|EnablingAFSLoginOnHP-UXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
 # <a name="Getting Started on IRIX Systems"></a> Getting Started on IRIX Systems
 
@@ -266,7 +266,7 @@ You do not need to replace IRIX fsck program, because the version that SGI distr
 
 ## <a name="Loading AFS into the IRIX Kernel"></a> Loading AFS into the IRIX Kernel
 
-[[Loading AFS into the IRIX Kernel|Main/LoadingAFSIntoTheIRIXKernel]]
+[[Loading AFS into the IRIX Kernel|LoadingAFSIntoTheIRIXKernel]]
 
 Proceed to Configuring Server Partitions on IRIX Systems.
 
@@ -274,9 +274,9 @@ Proceed to Configuring Server Partitions on IRIX Systems.
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on IRIX|Main/ConfiguringServerVolumesOnIRIX]]
+[[Configuring Server Volumes on IRIX|ConfiguringServerVolumesOnIRIX]]
 
-If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on IRIX Systems|Main/EnablingAFSLoginOnIRIXSystems]]. Otherwise, proceed to Starting the BOS Server.
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on IRIX Systems|EnablingAFSLoginOnIRIXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
 # <a name="Getting Started on Linux Systems"></a> Getting Started on Linux Systems
 
@@ -284,15 +284,15 @@ Begin by running the AFS initialization script to call the insmod program, which
 
 ## <a name="Loading AFS into the Linux Kerne"></a> Loading AFS into the Linux Kernel
 
-[[Loading AFS into the Linux Kernel|Main/LoadingAFSIntoTheLinuxKernel]]
+[[Loading AFS into the Linux Kernel|LoadingAFSIntoTheLinuxKernel]]
 
 ## <a name="Configuring Server Volumes on Li"></a> Configuring Server Volumes on Linux Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes On Linux|Main/ConfiguringServerVolumesOnLinux]]
+[[Configuring Server Volumes On Linux|ConfiguringServerVolumesOnLinux]]
 
-If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Linux Systems|Main/EnablingAFSLoginOnLinuxSystems]]. Otherwise, proceed to Starting the BOS Server.
+If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Linux Systems|EnablingAFSLoginOnLinuxSystems]]. Otherwise, proceed to Starting the BOS Server.
 
 # <a name="Getting Started on Solaris Syste"></a> Getting Started on Solaris Systems
 
@@ -300,19 +300,19 @@ Begin by running the AFS initialization script to call the modload program distr
 
 ## <a name="Loading AFS into the Solaris Ker"></a> Loading AFS into the Solaris Kernel
 
-[[Loading AFS into the Solaris Kernel|Main/LoadingAFSIntoTheSolarisKernel]]
+[[Loading AFS into the Solaris Kernel|LoadingAFSIntoTheSolarisKernel]]
 
 ## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on Solaris Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Configuring the AFS-modified fsck Program on Solaris Systems|Main/ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
+[[Configuring the AFS-modified fsck Program on Solaris Systems|ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
 
 ## <a name="Configuring Server Partitions on"></a> Configuring Server Partitions on Solaris Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes On Solaris|Main/ConfiguringServerVolumesOnSolaris]]
+[[Configuring Server Volumes On Solaris|ConfiguringServerVolumesOnSolaris]]
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to Enabling AFS Login on Solaris Systems. Otherwise, proceed to Starting the BOS Server.
 
@@ -320,7 +320,7 @@ If you plan to retain client functionality on this machine after completing the 
 
 Note: If you plan to remove client functionality from this machine after completing the installation, skip this section and proceed to Starting the BOS Server.
 
-[[Enabling AFS Login on Solaris Systems|Main/EnablingAFSLoginOnSolarisSystems]]
+[[Enabling AFS Login on Solaris Systems|EnablingAFSLoginOnSolarisSystems]]
 
 Proceed to Starting the BOS Server (or if referring to these instructions while installing an additional file server machine, return to Starting Server Programs).
 
@@ -694,15 +694,15 @@ Among other functions, the [[ThisCell]] file on a client machine determines the 
 
 ## <a name="Creating the Client _CellServDB"></a><a name="Creating the Client _CellServDB "></a> Creating the Client [[CellServDB]] File
 
-[[Creating the Client CellServDB File|Main/CreatingTheClientCellServDBFile]]
+[[Creating the Client CellServDB File|CreatingTheClientCellServDBFile]]
 
 ## <a name="Configuring the Cache"></a> Configuring the Cache
 
-[[Configuring the Cache|Main/ConfiguringTheCache]]
+[[Configuring the Cache|ConfiguringTheCache]]
 
 ## <a name="Configuring the Cache Manager"></a> Configuring the Cache Manager
 
-[[Configuring the Cache Manager|Main/ConfiguringTheCacheManager]]
+[[Configuring the Cache Manager|ConfiguringTheCacheManager]]
 
 # <a name="Overview: Completing the Install"></a> Overview: Completing the Installation of the First AFS Machine
 
@@ -748,37 +748,37 @@ If there are problems during the initialization, attempt to resolve them. The AF
 
 ## <a name="On AIX systems:"></a> On AIX systems:
 
-[[Initialization Script on AIX|Main/InitializationScriptOnAIX]]
+[[Initialization Script on AIX|InitializationScriptOnAIX]]
 
 Proceed to Step 4.
 
 ## <a name="On Digital UNIX systems:"></a> On Digital UNIX systems:
 
-[[Initialization Script on Digital UNIX|Main/InitializationScriptOnDigitalUNIX]]
+[[Initialization Script on Digital UNIX|InitializationScriptOnDigitalUNIX]]
 
 Proceed to Step 4.
 
 ## <a name="On HP-UX systems:"></a> On HP-UX systems:
 
-[[Initialization Script on HP-UX|Main/InitializationScriptOnHP-UX]]
+[[Initialization Script on HP-UX|InitializationScriptOnHP-UX]]
 
 Proceed to Step 4.
 
 ## <a name="On IRIX systems:"></a> On IRIX systems:
 
-[[Initialization Script on IRIX|Main/InitializationScriptOnIRIX]]
+[[Initialization Script on IRIX|InitializationScriptOnIRIX]]
 
 Proceed to Step 4.
 
 ## <a name="On Linux systems:"></a> On Linux systems:
 
-[[Initialization Script on Linux|Main/InitializationScriptOnLinux]]
+[[Initialization Script on Linux|InitializationScriptOnLinux]]
 
 Proceed to Step 4.
 
 ## <a name="On Solaris systems:"></a> On Solaris systems:
 
-[[Initialization Script on Solaris|Main/InitializationScriptOnSolaris]]
+[[Initialization Script on Solaris|InitializationScriptOnSolaris]]
 
 Step 4. Verify that /usr/afs and its subdirectories on the new file server machine meet the ownership and mode bit requirements outlined in Protecting Sensitive AFS Directories. If necessary, use the chmod command to correct the mode bits.
 

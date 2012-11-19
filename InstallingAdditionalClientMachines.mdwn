@@ -54,11 +54,11 @@ In this section you load AFS into the AIX kernel. Then incorporate AFS modificat
 
 ## <a name="Loading AFS into the AIX Kernel"></a> Loading AFS into the AIX Kernel
 
-[[Loading AFS into the AIX Kernel|Main/LoadingAFSIntoTheAIXKernel]]
+[[Loading AFS into the AIX Kernel|LoadingAFSIntoTheAIXKernel]]
 
 ## <a name="Enabling AFS Login on AIX System"></a> Enabling AFS Login on AIX Systems
 
-[[Enabling AFS Login on AIX Systems|Main/EnablingAFSLoginOnAIXSystems]]
+[[Enabling AFS Login on AIX Systems|EnablingAFSLoginOnAIXSystems]]
 
 Proceed to Loading and Creating Client Files.
 
@@ -68,11 +68,11 @@ In this section you build AFS into the Digital UNIX kernel. Then incorporate AFS
 
 ## <a name="Building AFS into the Digital UN"></a> Building AFS into the Digital UNIX Kernel
 
-[[Building AFS into the Digital UNIX Kernel|Main/BuildingAFSIntoTheDigitalUNIXKernel]]
+[[Building AFS into the Digital UNIX Kernel|BuildingAFSIntoTheDigitalUNIXKernel]]
 
 ## <a name="Enabling AFS Login on Digital UN"></a> Enabling AFS Login on Digital UNIX Systems
 
-[[Enabling AFS Login on Digital UNIX Systems|Main/EnablingAFSLoginOnDigitalUNIXSystems]]
+[[Enabling AFS Login on Digital UNIX Systems|EnablingAFSLoginOnDigitalUNIXSystems]]
 
 Proceed to Loading and Creating Client Files.
 
@@ -82,11 +82,11 @@ In this section you build AFS into the HP-UX kernel. Then incorporate AFS modifi
 
 ## <a name="Building AFS into the HP-UX Kern"></a> Building AFS into the HP-UX Kernel
 
-[[Building AFS into the HP-UX Kernel|Main/BuildingAFSIntoTheHP-UXKernel]]
+[[Building AFS into the HP-UX Kernel|BuildingAFSIntoTheHP-UXKernel]]
 
 ## <a name="Enabling AFS Login on HP-UX Syst"></a> Enabling AFS Login on HP-UX Systems
 
-[[Enabling AFS Login on HP-UX Systems|Main/EnablingAFSLoginOnHP-UXSystems]]
+[[Enabling AFS Login on HP-UX Systems|EnablingAFSLoginOnHP-UXSystems]]
 
 Proceed to Loading and Creating Client Files.
 
@@ -94,11 +94,11 @@ Proceed to Loading and Creating Client Files.
 
 ## <a name="Loading AFS Into The IRIX Kernel"></a> Loading AFS Into The IRIX Kernel
 
-[[Loading AFS into the IRIX Kernel|Main/LoadingAFSIntoTheIRIXKernel]]
+[[Loading AFS into the IRIX Kernel|LoadingAFSIntoTheIRIXKernel]]
 
 ## <a name="Enabling AFS Login on IRIX Syste"></a> Enabling AFS Login on IRIX Systems
 
-[[Enabling AFS Login on IRIX Systems|Main/EnablingAFSLoginOnIRIXSystems]].
+[[Enabling AFS Login on IRIX Systems|EnablingAFSLoginOnIRIXSystems]].
 
 After taking any necessary action, proceed to Loading and Creating Client Files.
 
@@ -108,11 +108,11 @@ In this section you load AFS into the Linux kernel. Then incorporate AFS modific
 
 ## <a name="Loading AFS into the Linux Kerne"></a> Loading AFS into the Linux Kernel
 
-[[Loading AFS into the Linux Kernel|Main/LoadingAFSIntoTheLinuxKernel]]
+[[Loading AFS into the Linux Kernel|LoadingAFSIntoTheLinuxKernel]]
 
 ## <a name="Enabling AFS Login on Linux Syst"></a> Enabling AFS Login on Linux Systems
 
-[[Enabling AFS Login on Linux Systems|Main/EnablingAFSLoginOnLinuxSystems]]
+[[Enabling AFS Login on Linux Systems|EnablingAFSLoginOnLinuxSystems]]
 
 Proceed to Loading and Creating Client Files.
 
@@ -122,11 +122,11 @@ In this section you load AFS into the Solaris kernel. Then incorporate AFS modif
 
 ## <a name="Loading AFS into the Solaris Ker"></a> Loading AFS into the Solaris Kernel
 
-[[Loading AFS into the Solaris Kernel|Main/LoadingAFSIntoTheSolarisKernel]]
+[[Loading AFS into the Solaris Kernel|LoadingAFSIntoTheSolarisKernel]]
 
 ## <a name="Enabling AFS Login on Solaris Sy"></a> Enabling AFS Login on Solaris Systems
 
-[[Enabling AFS Login on Solaris Systems|Main/EnablingAFSLoginOnSolarisSystems]]
+[[Enabling AFS Login on Solaris Systems|EnablingAFSLoginOnSolarisSystems]]
 
 Proceed to Loading and Creating Client Files.
 
@@ -172,15 +172,15 @@ On some system types that use a dynamic kernel loader program, you previously co
 
 \* An existing client machine in your cell
 
-\* The [[CellServDB]].sample file included in the sysname/root.client/usr/vice/etc directory of each AFS CD-ROM; add an entry for the local cell by following the instructions in [[Creating the Client CellServDB File|Main/CreatingTheClientCellServDBFile]]
+\* The [[CellServDB]].sample file included in the sysname/root.client/usr/vice/etc directory of each AFS CD-ROM; add an entry for the local cell by following the instructions in [[Creating the Client CellServDB File|CreatingTheClientCellServDBFile]]
 
 ## <a name="Configuring the Cache"></a> Configuring the Cache
 
-[[Configuring the Cache|Main/ConfiguringTheCache]]
+[[Configuring the Cache|ConfiguringTheCache]]
 
 ## <a name="Configuring the Cache Manager"></a> Configuring the Cache Manager
 
-[[Configuring the Cache Manager|Main/ConfiguringTheCacheManager]]
+[[Configuring the Cache Manager|ConfiguringTheCacheManager]]
 
 ## <a name="Starting the Cache Manager and I"></a> Starting the Cache Manager and Installing the AFS Initialization Script
 
@@ -206,37 +206,37 @@ Proceed to the instructions for your system type:
 
 ## <a name="Running the Script on AIX System"></a> Running the Script on AIX Systems
 
-[[Initialization Script on AIX|Main/InitializationScriptOnAIX]]
+[[Initialization Script on AIX|InitializationScriptOnAIX]]
 
 If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
 
 ## <a name="Running the Script on Digital UN"></a> Running the Script on Digital UNIX Systems
 
-[[Initialization Script on Digital UNIX|Main/InitializationScriptOnDigitalUNIX]]
+[[Initialization Script on Digital UNIX|InitializationScriptOnDigitalUNIX]]
 
 If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
 
 ## <a name="Running the Script on HP-UX Syst"></a> Running the Script on HP-UX Systems
 
-[[Initialization Script on HP-UX|Main/InitializationScriptOnHP-UX]]
+[[Initialization Script on HP-UX|InitializationScriptOnHP-UX]]
 
 If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
 
 ## <a name="Running the Script on IRIX Syste"></a> Running the Script on IRIX Systems
 
-[[Initialization Script on IRIX|Main/InitializationScriptOnIRIX]]
+[[Initialization Script on IRIX|InitializationScriptOnIRIX]]
 
 If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
 
 ## <a name="Running the Script on Linux Syst"></a> Running the Script on Linux Systems
 
-[[Initialization Script on Linux|Main/InitializationScriptOnLinux]]
+[[Initialization Script on Linux|InitializationScriptOnLinux]]
 
 If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
 
 ## <a name="Running the Script on Solaris Sy"></a> Running the Script on Solaris Systems
 
-[[Initialization Script on Solaris|Main/InitializationScriptOnSolaris]]
+[[Initialization Script on Solaris|InitializationScriptOnSolaris]]
 
 If a volume for housing AFS binaries for this machine's system type does not already exist, proceed to Setting Up Volumes and Loading Binaries into AFS. Otherwise, the installation is complete.
 

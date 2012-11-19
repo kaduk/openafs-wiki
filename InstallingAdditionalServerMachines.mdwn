@@ -149,21 +149,21 @@ To continue, proceed to the section for this system type:
 
 # <a name="Getting Started on AIX Systems"></a> Getting Started on AIX Systems
 
-[[Loading AFS into the AIX Kernel|Main/LoadingAFSIntoTheAIXKernel]]
+[[Loading AFS into the AIX Kernel|LoadingAFSIntoTheAIXKernel]]
 
 ## <a name="Replacing the fsck Program Helpe"></a> Replacing the fsck Program Helper on AIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Replacing the fsck Program Helper on AIX Systems|Main/ReplacingTheFsckProgramHelperOnAIXSystems]]
+[[Replacing the fsck Program Helper on AIX Systems|ReplacingTheFsckProgramHelperOnAIXSystems]]
 
 ## <a name="Configuring Server Volumes on AI"></a> Configuring Server Volumes on AIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on AIX|Main/ConfiguringServerVolumesOnAIX]]
+[[Configuring Server Volumes on AIX|ConfiguringServerVolumesOnAIX]]
 
-If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on AIX Systems|Main/EnablingAFSLoginOnAIXSystems]].
+If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on AIX Systems|EnablingAFSLoginOnAIXSystems]].
 
 Proceed to Starting Server Programs.
 
@@ -173,21 +173,21 @@ Begin by building AFS modifications into the kernel, then configure server parti
 
 If the machine's hardware and software configuration exactly matches another Digital UNIX machine on which AFS is already built into the kernel, you can copy the kernel from that machine to this one. In general, however, it is better to build AFS modifications into the kernel on each machine according to the following instructions.
 
-[[Building AFS into the Digital UNIX Kernel|Main/BuildingAFSIntoTheDigitalUNIXKernel]]
+[[Building AFS into the Digital UNIX Kernel|BuildingAFSIntoTheDigitalUNIXKernel]]
 
 ## <a name="Replacing the fsck Program on Di"></a> Replacing the fsck Program on Digital UNIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Replacing the fsck Program on Digital UNIX Systems|Main/ReplacingTheFsckProgramOnDigitalUNIXSystems]]
+[[Replacing the fsck Program on Digital UNIX Systems|ReplacingTheFsckProgramOnDigitalUNIXSystems]]
 
 ## <a name="Configuring Server Volumes on Di"></a> Configuring Server Volumes on Digital UNIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on Digital UNIX|Main/ConfiguringServerVolumesOnDigitalUNIX]]
+[[Configuring Server Volumes on Digital UNIX|ConfiguringServerVolumesOnDigitalUNIX]]
 
-If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on Digital UNIX Systems|Main/EnablingAFSLoginOnDigitalUNIXSystems]].
+If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on Digital UNIX Systems|EnablingAFSLoginOnDigitalUNIXSystems]].
 
 Proceed to Starting Server Programs.
 
@@ -195,21 +195,21 @@ Proceed to Starting Server Programs.
 
 Begin by building AFS modifications into the kernel, then configure server partitions and replace the HP-UX fsck program with a version that correctly handles AFS volumes.
 
-[[Building AFS into the HP-UX Kernel|Main/BuildingAFSIntoTheHP-UXKernel]]
+[[Building AFS into the HP-UX Kernel|BuildingAFSIntoTheHP-UXKernel]]
 
 ## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on HP-UX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Configuring the AFS-modified fsck Program on HP-UX Systems|Main/ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
+[[Configuring the AFS-modified fsck Program on HP-UX Systems|ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
 
 ## <a name="Configuring Server Volumes on HP"></a> Configuring Server Volumes on HP-UX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on HP-UX|Main/ConfiguringServerVolumesOnHP-UX]]
+[[Configuring Server Volumes on HP-UX|ConfiguringServerVolumesOnHP-UX]]
 
-If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on HP-UX Systems|Main/EnablingAFSLoginOnHP-UXSystems]].
+If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on HP-UX Systems|EnablingAFSLoginOnHP-UXSystems]].
 
 Proceed to Starting Server Programs.
 
@@ -219,49 +219,49 @@ Begin by incorporating AFS modifications into the kernel. Either use the ml dyna
 
 You do not need to replace IRIX fsck program, because the version that SGI distributes handles AFS volumes properly.
 
-[[Loading AFS into the IRIX Kernel|Main/LoadingAFSIntoTheIRIXKernel]]
+[[Loading AFS into the IRIX Kernel|LoadingAFSIntoTheIRIXKernel]]
 
 ## <a name="Configuring Server Volumes on IR"></a> Configuring Server Volumes on IRIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on IRIX|Main/ConfiguringServerVolumesOnIRIX]]
+[[Configuring Server Volumes on IRIX|ConfiguringServerVolumesOnIRIX]]
 
-1. If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on IRIX Systems|Main/EnablingAFSLoginOnIRIXSystems]].
+1. If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on IRIX Systems|EnablingAFSLoginOnIRIXSystems]].
 
 1. Proceed to Starting Server Programs.
 
 # <a name="Getting Started on Linux Systems"></a> Getting Started on Linux Systems
 
-[[Loading AFS into the Linux Kernel|Main/LoadingAFSIntoTheLinuxKernel]]
+[[Loading AFS into the Linux Kernel|LoadingAFSIntoTheLinuxKernel]]
 
 ## <a name="Configuring Server Volumes on Li"></a> Configuring Server Volumes on Linux Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on Linux|Main/ConfiguringServerVolumesOnLinux]]
+[[Configuring Server Volumes on Linux|ConfiguringServerVolumesOnLinux]]
 
-If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on Linux Systems|Main/EnablingAFSLoginOnLinuxSystems]].
+If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on Linux Systems|EnablingAFSLoginOnLinuxSystems]].
 
 Proceed to Starting Server Programs.
 
 # <a name="Getting Started on Solaris Syste"></a> Getting Started on Solaris Systems
 
-[[Loading AFS into the Solaris Kernel|Main/LoadingAFSIntoTheSolarisKernel]]
+[[Loading AFS into the Solaris Kernel|LoadingAFSIntoTheSolarisKernel]]
 
 ## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on Solaris Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
-[[Configuring the AFS-modified fsck Program on Solaris Systems|Main/ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
+[[Configuring the AFS-modified fsck Program on Solaris Systems|ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
 
 ## <a name="Configuring Server Volumes On So"></a> Configuring Server Volumes On Solaris
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
-[[Configuring Server Volumes on Solaris|Main/ConfiguringServerVolumesOnSolaris]]
+[[Configuring Server Volumes on Solaris|ConfiguringServerVolumesOnSolaris]]
 
-If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on Solaris Systems|Main/EnablingAFSLoginOnSolarisSystems]].
+If the machine is to remain an AFS client, incorporate AFS into its authentication system, following the instructions in [[Enabling AFS Login on Solaris Systems|EnablingAFSLoginOnSolarisSystems]].
 
 Proceed to Starting Server Programs.
 
@@ -386,11 +386,11 @@ On some system types that use a dynamic kernel loader program, you previously co
 
 \* An existing client machine in your cell
 
-\* The [[CellServDB]].sample file included in the sysname/root.client/usr/vice/etc directory of each AFS CD-ROM; add an entry for the local cell by following the instructions in [[Creating the Client CellServDB File|Main/CreatingTheClientCellServDBFile]]
+\* The [[CellServDB]].sample file included in the sysname/root.client/usr/vice/etc directory of each AFS CD-ROM; add an entry for the local cell by following the instructions in [[Creating the Client CellServDB File|CreatingTheClientCellServDBFile]]
 
-1. Create the cacheinfo file for either a disk cache or a memory cache. [[Configuring the Cache|Main/ConfiguringTheCache]]
+1. Create the cacheinfo file for either a disk cache or a memory cache. [[Configuring the Cache|ConfiguringTheCache]]
 
-1. Proceed to [[Configuring the CacheManager|Main/ConfiguringTheCacheManager]]
+1. Proceed to [[Configuring the CacheManager|ConfiguringTheCacheManager]]
 
 1. If appropriate, follow the instructions in Storing AFS Binaries in AFS to copy the AFS binaries for this system type into an AFS volume. See the introduction to this section for further discussion.
 
@@ -414,37 +414,37 @@ If the machine is configured as a client using a disk cache, it can take a while
 
 ## <a name="On AIX systems:"></a> On AIX systems:
 
-[[Initialization Script on AIX|Main/InitializationScriptOnAIX]]
+[[Initialization Script on AIX|InitializationScriptOnAIX]]
 
 Proceed to Step 4.
 
 ## <a name="On Digital UNIX systems:"></a> On Digital UNIX systems:
 
-[[Initialization Script on Digital UNIX|Main/InitializationScriptOnDigitalUNIX]]
+[[Initialization Script on Digital UNIX|InitializationScriptOnDigitalUNIX]]
 
 Proceed to Step 4.
 
 ## <a name="On HP-UX systems:"></a> On HP-UX systems:
 
-[[Initialization Script on HP-UX|Main/InitializationScriptOnHP-UX]]
+[[Initialization Script on HP-UX|InitializationScriptOnHP-UX]]
 
 Proceed to Step 4.
 
 ## <a name="On IRIX systems:"></a> On IRIX systems:
 
-[[Initialization Script on IRIX|Main/InitializationScriptOnIRIX]]
+[[Initialization Script on IRIX|InitializationScriptOnIRIX]]
 
 Proceed to Step 4.
 
 ## <a name="On Linux systems:"></a> On Linux systems:
 
-[[Initialization Script on Linux|Main/InitializationScriptOnLinux]]
+[[Initialization Script on Linux|InitializationScriptOnLinux]]
 
 Proceed to Step 4.
 
 ## <a name="On Solaris systems:"></a> On Solaris systems:
 
-[[Initialization Script on Solaris|Main/InitializationScriptOnSolaris]]
+[[Initialization Script on Solaris|InitializationScriptOnSolaris]]
 
 Step 4. Verify that /usr/afs and its subdirectories on the new file server machine meet the ownership and mode bit requirements outlined in Protecting Sensitive AFS Directories. If necessary, use the chmod command to correct the mode bits.
 
