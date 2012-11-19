@@ -515,7 +515,7 @@ If you run a system control machine, wait for the Update Server to distribute th
   <dd>
     <dl>
       <dt> Note</dt>
-      <dd> It is best to maintain a one-to-one mapping between hostnames and IP addresses on a multihomed database server machine (the conventional configuration for any AFS machine). The BOS Server uses the gethostbyname( ) routine to obtain the IP address associated with the host name argument. If there is more than one address, the BOS Server records in the [[Main/CellServDB]] entry the one that appears first in the list of addresses returned by the routine. The routine possibly returns addresses in a different order on different machines, which can create inconsistency. </dd>
+      <dd> It is best to maintain a one-to-one mapping between hostnames and IP addresses on a multihomed database server machine (the conventional configuration for any AFS machine). The BOS Server uses the gethostbyname( ) routine to obtain the IP address associated with the host name argument. If there is more than one address, the BOS Server records in the [[CellServDB]] entry the one that appears first in the list of addresses returned by the routine. The routine possibly returns addresses in a different order on different machines, which can create inconsistency. </dd>
     </dl>
   </dd>
 </dl>

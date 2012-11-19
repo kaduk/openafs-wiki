@@ -549,7 +549,7 @@
   <dt><strong>Arguments</strong></dt>
   <dd> The size the venus cache should be set to </dd>
   <dt><strong>Outcome</strong></dt>
-  <dd> Set the cache size based on user intput. If no size is given, set it to the default [[Main/OpenAFS]] cache size </dd>
+  <dd> Set the cache size based on user intput. If no size is given, set it to the default [[OpenAFS]] cache size </dd>
 </dl>
 
 **Errors**
@@ -823,7 +823,7 @@
   <dt><strong>Arguments</strong></dt>
   <dd> The cell you want to set information about, and the values you want to set </dd>
   <dt><strong>Outcome</strong></dt>
-  <dd> Set the state of the cell in a defined struct cell, based on whether or not [[Main/SetUID]] is allowed </dd>
+  <dd> Set the state of the cell in a defined struct cell, based on whether or not [[SetUID]] is allowed </dd>
 </dl>
 
 **Errors**
@@ -1295,7 +1295,7 @@
   <dt><strong>Group</strong></dt>
   <dd> V </dd>
   <dt><strong>Function</strong></dt>
-  <dd>[[Main/PsetClientContext]] (99) - NFS-PAG pioctl (for knfs/rmtsysd) </dd>
+  <dd>[[PsetClientContext]] (99) - NFS-PAG pioctl (for knfs/rmtsysd) </dd>
   <dt><strong>Arguments</strong></dt>
   <dd> none </dd>
   <dt><strong>Outcome</strong></dt>
