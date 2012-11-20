@@ -242,7 +242,7 @@ The state of the various VLRU queues is dumped with the file-server state and at
 
 The vnode finite-state automata is available in the source tree under `doc/arch/dafs-vnode-fsa.dot`
 
-`/usr/afs/bin/fssync-debug` provides low-level inspection and control of the file-server volume package. **Indiscriminate use of <code>**fsync-debug**</code> can lead to extremely bad things occurring. Use with care. 
+`/usr/afs/bin/fssync-debug` provides low-level inspection and control of the file-server volume package. **Indiscriminate use of <code>fsync-debug</code>** can lead to extremely bad things occurring. Use with care. 
 
 <a name="SalvageServer"></a>
 
@@ -366,7 +366,7 @@ Several tools aid debugging problems with demand-attach file-servers. They opera
 
 ### <a name="==fssync-debug=="></a> <code>**fssync-debug**</code>
 
-**Indiscriminate use of `fssync-debug` can have extremely dire consequences. Use with care** 
+**Indiscriminate use of `fssync-debug` can have extremely dire consequences. Use with care.** 
 
 `fssync-debug` provides low-level inspection and control over the volume package of the file-server. It can be used to display the file-server information associated with a volume, e.g.
 
