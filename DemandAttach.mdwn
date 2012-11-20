@@ -242,7 +242,7 @@ The state of the various VLRU queues is dumped with the file-server state and at
 
 The vnode finite-state automata is available in the source tree under `doc/arch/dafs-vnode-fsa.dot`
 
-`/usr/afs/bin/fssync-debug` provides low-level inspection and control of the file-server volume package. <span style="color:red"> *Indiscriminate use of <code>**fsync-debug**</code> can lead to extremely bad things occurring. Use with care. </span>
+`/usr/afs/bin/fssync-debug` provides low-level inspection and control of the file-server volume package. **Indiscriminate use of <code>**fsync-debug**</code> can lead to extremely bad things occurring. Use with care. 
 
 <a name="SalvageServer"></a>
 
@@ -252,13 +252,13 @@ Demand salvaging is implemented by the `salvageserver`. The actual code for salv
 
 - file-server automatically requests volumes be salvaged as required, i.e. they are marked as requiring salvaging when attached.
 - manual initiation of salvaging may be required when access is through the `volserver` (may be addressed at some later date).
-- `bos salvage` requires the `-forceDAFS` flag to initiate salvaging wit DAFS. However, <span style="color:red">**salvaging should not be initiated using this method**.</span>
+- `bos salvage` requires the `-forceDAFS` flag to initiate salvaging wit DAFS. However, **salvaging should not be initiated using this method**.
 - infinite salvage, attach, salvage, ... loops are possible. There is therefore a hard-limit on the number of times a volume will be salvaged which is reset when the volume is removed or the file-server is restarted.
 - volumes are salvaged in parallel and is controlled by the `-Parallel` argument to the `salvageserver`. Defaults to 4.
 - the `salvageserver` and the `inode` file-server are incompatible:
   - because volumes are inter-mingled on a partition (rather than being separated), a lock for the entire partition on which the volume is located is held throughout. Both the `fileserver` and `volserver` will block if they require this lock, e.g. to restore / dump a volume located on the partition.
   - inodes for a particular volume can be located anywhere on a partition. Salvaging therefore results in **every** inode on a partition having to be read to determine whether it belongs to the volume. This is extremely I/O intensive and leads to horrendous salvaging performance.
-- `/usr/afs/bin/salvsync-debug` provides low-level inspection and control over the `salvageserver`. <span style="color:red"> **Indiscriminate use of `salvsync-debug` can lead to extremely bad things occurring. Use with care.** </span>
+- `/usr/afs/bin/salvsync-debug` provides low-level inspection and control over the `salvageserver`. **Indiscriminate use of `salvsync-debug` can lead to extremely bad things occurring. Use with care.**
 - See [[=salvsync-debug=|DemandAttach#salvsync_debug]] for information on debugging problems with the salvageserver.
 
 <a name="FSStateDat"></a>
@@ -366,7 +366,7 @@ Several tools aid debugging problems with demand-attach file-servers. They opera
 
 ### <a name="==fssync-debug=="></a> <code>**fssync-debug**</code>
 
-<span style="color:red"> **Indiscriminate use of `fssync-debug` can have extremely dire consequences. Use with care** </span>
+**Indiscriminate use of `fssync-debug` can have extremely dire consequences. Use with care** 
 
 `fssync-debug` provides low-level inspection and control over the volume package of the file-server. It can be used to display the file-server information associated with a volume, e.g.
 
@@ -485,7 +485,7 @@ An understanding of the [volume finite-state machine](http://www.dementia.org/tw
 
 ### <a name="==salvsync-debug=="></a> <code>**salvsync-debug**</code>
 
-<span style="color:red"> **Indiscriminate use of `salvsync-debug` can have extremely dire consequences. Use with care** </span>
+**Indiscriminate use of `salvsync-debug` can have extremely dire consequences. Use with care**
 
 `salvsync-debug` provides low-level inspection and control of the salvageserver process, including the scheduling order of volumes.
 
@@ -529,7 +529,7 @@ To initiate the salvaging of a volume
 
 This is the method that should be used on demand-attach file-servers to initiate the manual salvage of volumes. It should be used with care.
 
-Under normal circumstances, the priority ( `prio`) of a salvage request is the number of times the volume has been requested by clients. <span style="color:red"> Modifying the priority (and hence the order volumes are salvaged) under heavy demand-salvaging usually leads to extremely bad things happening. </span> To modify the priority of a request, use
+Under normal circumstances, the priority ( `prio`) of a salvage request is the number of times the volume has been requested by clients. Modifying the priority (and hence the order volumes are salvaged) under heavy demand-salvaging usually leads to extremely bad things happening.  To modify the priority of a request, use
 
     salvsync-debug priority -vol 537119916 -part /vicepb -priority 999999
 
