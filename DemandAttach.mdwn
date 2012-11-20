@@ -252,7 +252,7 @@ Demand salvaging is implemented by the `salvageserver`. The actual code for salv
 
 - file-server automatically requests volumes be salvaged as required, i.e. they are marked as requiring salvaging when attached.
 - manual initiation of salvaging may be required when access is through the `volserver` (may be addressed at some later date).
-- `bos salvage` requires the `-forceDAFS` flag to initiate salvaging wit DAFS. However, **salvaging should not be initiated using this method**.
+- `bos salvage` requires the `-forceDAFS` flag to initiate salvaging with DAFS. However, **salvaging should not be initiated using this method**.
 - infinite salvage, attach, salvage, ... loops are possible. There is therefore a hard-limit on the number of times a volume will be salvaged which is reset when the volume is removed or the file-server is restarted.
 - volumes are salvaged in parallel and is controlled by the `-Parallel` argument to the `salvageserver`. Defaults to 4.
 - the `salvageserver` and the `inode` file-server are incompatible:
