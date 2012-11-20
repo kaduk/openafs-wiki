@@ -1,15 +1,15 @@
 When [[OpenAFS]] was released, 3 files with HP copyrighted code could not be released. 2, the Rx kernel support, were reimplemented by Derrick Brashear from previously released open source Rx, and other platforms' kernel Rx implementations. The remaining file appears to have been a literal copy of a kernel header from HP-UX for the VM system interface to VFS, and so far despite email and teleconferences nothing has happened. Headers included with HP-UX appear to be insufficient to create a loadable file system driver against, so unless HP decides to co-operate or someone attempts to reverse-engineer some structures, no further progress is possible.
 
--- [[DerrickBrashear]] - 18 Jan 2002
+-- Derrick Brashear - 18 Jan 2002
 
 Thanks to Esther Filderman we found a useful contact within HP, and hopefully results will be forthcoming in the near future.
 
--- [[DerrickBrashear]] - 10 Jul 2002
+-- Derrick Brashear - 10 Jul 2002
 
 HP intends to make this header available to their customers, and provided a copy for porting purposes. Carl Davidson from HP provided further help and guidance and after further communication with IBM and some help from Laura Stentz in obtaining one further file from IBM, we have a working HP-UX11Port though at this point no loadable module support.
 
--- [[DerrickBrashear]] - 30 Sep 2002
+-- Derrick Brashear - 30 Sep 2002
 
 [[OpenAFS]] 1.2.8 included support for 11.0.
 
--- [[DerrickBrashear]] - 18 Dec 2002
+-- Derrick Brashear - 18 Dec 2002

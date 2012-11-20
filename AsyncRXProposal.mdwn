@@ -1,4 +1,4 @@
--- [[JeffreyAltman]] - 16 Jun 2008
+-- Jeffrey Altman - 16 Jun 2008
 
 The AFS File Server request throughput is limited by its current architecture which dedicates one thread per request for the lifetime of the request. Due to the fact that threads may become blocked on disk I/O and (more importantly) on Rx RPCs (VL\_\*, PR\_\*, RXAFSCB\_\*) the dedicated threads are frequently idle when they could be performing real work. The AFS File Server is therefore incapable of taking advantage of the CPU, disk I/O, and network I/O resources available to it.
 

@@ -22,12 +22,12 @@ If you're using [[KerberosVMIT]] versions 1.2.6 or later, you'll need to add a s
 
 Where REALM.NAME and cell.name are the names of your [[KerberosRealm]] and [[AFSCell]] respectively.
 
-If you already have a working AFS cell using [[KaServer]], check out [[DerrickBrashear]]'s document for converting from the [[KaServer]] to [[HeimdalKTH]] [here](http://lost-contact.mit.edu/afs/net/project/afs32/andrew.cmu.edu/usr/shadow/ka2heim.txt): <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
+If you already have a working AFS cell using [[KaServer]], check out Derrick Brashear's document for converting from the [[KaServer]] to [[HeimdalKTH]] [here](http://lost-contact.mit.edu/afs/net/project/afs32/andrew.cmu.edu/usr/shadow/ka2heim.txt): <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
 
 For now a few links... explanations to follow later:
 
 - Setting up [[OpenSSH]] to use [[KerberosV]] authentication: you can either use PAM to authenticate people (boring) or you can add the patches at <http://www.sxw.org.uk/computing/patches/openssh.html> to use existing [[KerberosV]] tickets for single-sign-on and automatic ticket forwarding (interesting). Note that by default this patch won't grab tickets when logging in via password - post small patch to enable this later.
-- If you're having trouble with [[KenHornstein]]'s AFS-Kerberos5 migration kit available at <ftp://ftp.cmf.nrl.navy.mil/pub/kerberos5/>, see <http://www.mathematik.uni-karlsruhe.de/~iwrmm/Persons/Schulz/Unix/afs/afs-krb5.html> for tips. In particular check out the Makefile patches.
+- If you're having trouble with Ken Hornstein's AFS-Kerberos5 migration kit available at <ftp://ftp.cmf.nrl.navy.mil/pub/kerberos5/>, see <http://www.mathematik.uni-karlsruhe.de/~iwrmm/Persons/Schulz/Unix/afs/afs-krb5.html> for tips. In particular check out the Makefile patches.
 - [[DenizKanca]] posted [Kerberos 5 and OpenAFS - Notes available](https://lists.openafs.org/pipermail/openafs-info/2003-January/007799.html) on 19-Jan-2003 saying
 > ... I took some notes on what I did when I set up Kerberos 5 and
 >
@@ -62,7 +62,7 @@ Some other issues to explain:
 
 
 
--- [[TedAnderson]] - 22 Jan 2002 -- [[DerrickBrashear]] - 23 Jan 2002 -- [[TedAnderson]] - 23 Jan 2002 -- [[JasonGarman]] - 30 Jan 2002 -- [[TedAnderson]] - 31 Jan 2002
+-- Ted Anderson - 22 Jan 2002 -- Derrick Brashear - 23 Jan 2002 -- Ted Anderson - 23 Jan 2002 -- Jason Garman - 30 Jan 2002 -- Ted Anderson - 31 Jan 2002
 
 ----
 

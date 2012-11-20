@@ -27,9 +27,9 @@ Note that this document is under development. Also, I don't try to explain the [
 
 Derrick wrote nice pages at: <http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html> <http://www.contrib.andrew.cmu.edu/~shadow/afs/afs-with-kerberos.html>
 
-[[DenizKanca]] [posted](https://lists.openafs.org/pipermail/openafs-info/2003-January/007799.html) her notes at [http://www.arayan.com/da/yazi/OpenAFS\_Kerberos\_5.html](http://www.arayan.com/da/yazi/OpenAFS_Kerberos_5.html).
+Deniz Kanca [posted](https://lists.openafs.org/pipermail/openafs-info/2003-January/007799.html) her notes at [http://www.arayan.com/da/yazi/OpenAFS\_Kerberos\_5.html](http://www.arayan.com/da/yazi/OpenAFS_Kerberos_5.html).
 
-[[JeffreyHutzelman]] posted a good [summary](https://lists.openafs.org/pipermail/openafs-info/2003-July/010159.html) of all these component to [[OpenAFS]]-info on 25-Jul-2003. Be sure to check to follow-ups for some minor clarifications.
+Jeffrey Hutzelman posted a good [summary](https://lists.openafs.org/pipermail/openafs-info/2003-July/010159.html) of all these component to [[OpenAFS]]-info on 25-Jul-2003. Be sure to check to follow-ups for some minor clarifications.
 
 ## <a name="Basics"></a> Basics
 
@@ -232,4 +232,4 @@ Proceed to the [Starting File Server](http://www.openafs.org/pages/doc/QuickStar
 
 In its current state, you have to manually log into your AFS cell through kinit and possibly aklog (explain aklog..., debugging using "tokens" etc). There are several methods to enable transparent login to both local resources (the machine itself) and AFS through a single password. See [[KerberosV]] and [[SettingUpAuthentication]] for some information. The best option if you are using pam is probably the [pam\_krb5 project on sourceforge](http://sourceforge.net/projects/pam-krb5/).
 
--- [[JasonGarman]] - 05 Feb 2002 -- [[DerrickBrashear]] - 26 Nov 2002
+-- Jason Garman - 05 Feb 2002 -- Derrick Brashear - 26 Nov 2002

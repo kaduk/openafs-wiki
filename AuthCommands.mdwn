@@ -32,9 +32,9 @@ The klog command (and kpasswd too) try several [[StringToKey]] functions.
 
 There are more types of [[StringToKey]] functions in V5.
 
-[[CharlesClancy]] posted a Perl [script](http://lists.openafs.org/pipermail/openafs-info/2002-January/003060.html) that provides a kas interface to kadmin, so that existing scripts (and users) that use kas can easily work in a K5 environment.
+Charles Clancy posted a Perl [script](http://lists.openafs.org/pipermail/openafs-info/2002-January/003060.html) that provides a kas interface to kadmin, so that existing scripts (and users) that use kas can easily work in a K5 environment.
 
-[[DerekAtkins]] provides this handy mapping from [[KerberosVMIT]] to [[KaServer]]:
+Derek Atkins provides this handy mapping from [[KerberosVMIT]] to [[KaServer]]:
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -71,7 +71,7 @@ There are more types of [[StringToKey]] functions in V5.
 
 ## <a name="HeimdalKTH -- International vers"></a> [[HeimdalKTH]] -- International version of Kerberos V5
 
-Here's some [mail](http://lists-openafs.central.org/pipermail/openafs-info/2001-April/000591.html) from [[DerrickBrashear]] for using [[HeimdalKTH]] for AFS authentication. An updated version of this document can be found [here](http://lost-contact.mit.edu/afs/net/project/afs32/andrew.cmu.edu/usr/shadow/ka2heim.txt): <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
+Here's some [mail](http://lists-openafs.central.org/pipermail/openafs-info/2001-April/000591.html) from Derrick Brashear for using [[HeimdalKTH]] for AFS authentication. An updated version of this document can be found [here](http://lost-contact.mit.edu/afs/net/project/afs32/andrew.cmu.edu/usr/shadow/ka2heim.txt): <file:/afs/andrew.cmu.edu/usr/shadow/ka2heim.txt>
 
 The kas wrapper mentioned above maybe useful for Heimdal environments too.
 
@@ -96,4 +96,4 @@ The kas wrapper mentioned above maybe useful for Heimdal environments too.
 
 See [[SettingUpAuthentication]]
 
--- [[TedAnderson]] - 23 Jan 2002 -- [[TedAnderson]] - 06 Feb 2002 -- [[TedAnderson]] - 07 Mar 2002
+-- Ted Anderson - 23 Jan 2002 -- Ted Anderson - 06 Feb 2002 -- Ted Anderson - 07 Mar 2002

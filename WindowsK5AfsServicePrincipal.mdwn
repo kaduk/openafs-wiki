@@ -166,4 +166,4 @@ If your pts protection server user names in afs and the users names you create i
 
 The reason one would do this is during the transition to K5. Once you have your K5 servers and your [[KeyFile]] configured to contain the old afs kaserver principal and the new K5 service principal you can continue to run the kaserver until your afs clients are configured to use K5 only and wean yourself off the kaserver. The downside of this is having 2 passwords, one in the kaserver and one in the K5 server and not confusing the users.
 
--- [[JohnSopko]] - 24 Jul 2007
+-- John Sopko - 24 Jul 2007

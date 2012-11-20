@@ -194,4 +194,4 @@ All new code must compile cleanly when configured with --enable-warnings
 - All calls to obtain a write lock have a unique reference number. This must be unique across the cache manager (lock numbers that are in a particular OS directory may be shared, but only between OS directories), and src/afs/lock.h must be updated with the highest number in use
 - New locks should be registered in the list in afs\_callback.c, so their contents can be viewed via cmdebug
 
--- [[SimonWilkinson]] - 27 Jul 2009
+-- Simon Wilkinson - 27 Jul 2009

@@ -2,11 +2,11 @@ Darwin is the core of Apple's [[MacOSX]] product.
 
 The mailing list for this port is <https://lists.openafs.org/mailman/listinfo/port-darwin> and archived at <http://lists.openafs.org/pipermail/port-darwin/>.
 
--- [[TedAnderson]] - 17 Jan 2002
+-- Ted Anderson - 17 Jan 2002
 
 There are issues with the Finder in this port due to its desire to enumerate and traverse all directories to look for metadata and the poor interaction of this with a fully populated directory of mountpoints mounted as /afs.
 
--- [[DerrickBrashear]] - 24 Jan 2002
+-- Derrick Brashear - 24 Jan 2002
 
 Some nice GUI stuff for OS X Jaguar:
 
@@ -20,7 +20,7 @@ The above is available from:
 
 <http://cf.ccmr.cornell.edu/publicdownloads/afs>
 
--- [[DaveBotsch]] - 14 Nov 2003
+-- Dave Botsch - 14 Nov 2003
 
 To get AFS tokens automatically (equivalent of aklog) on kinit or console login, you can use one of three loginLogout Kerberos plugins, which install in /Library/Kerberos Plug-Ins and require a reference in /Library/Preferences/edu.mit.Kerberos:
 

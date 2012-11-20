@@ -14,9 +14,9 @@
 
 The following are items known to be in progress, and, where available, a point of contact.
 
-- [[WindowsIFS]] -- Implement AFS as a Windows installable file system instead of as a virtual SMB server. In Progress. Contact [[JeffreyAltman]]
+- [[WindowsIFS]] -- Implement AFS as a Windows installable file system instead of as a virtual SMB server. In Progress. Contact Jeffrey Altman
 
-- [[WindowsAFSServers]] - Stabilize the AFS Servers running on Microsoft Windows. Contact [[JeffreyAltman]]
+- [[WindowsAFSServers]] - Stabilize the AFS Servers running on Microsoft Windows. Contact Jeffrey Altman
 
 - [[DisconnectedOperation]] provides the ability to use AFS while not connected to a network.
 
@@ -28,13 +28,13 @@ The following are items known to be in progress, and, where available, a point o
 
 - [[OpenBSDPort]] -- In progress. Cache manager available, not stable yet.
 
-- [[AutoConf]] with automake too. In progress. Contact [[DerrickBrashear]].
+- [[AutoConf]] with automake too. In progress. Contact Derrick Brashear.
 
-- [[AmandaBackup]] -- Support for backup using [Amanda](http://www.amanda.org). In progress. Contact [[MitchCollinsworth]].
+- [[AmandaBackup]] -- Support for backup using [Amanda](http://www.amanda.org). In progress. Contact Mitch Collinsworth.
 
-- [[BetterDocumentation]] -- Contact [[RussAllbery]]
+- [[BetterDocumentation]] -- Contact Russ Allbery
 
-- [[MaemoPort]] -- Porting to the Nokia N8x0 Internet Tablet. Contact [[DerrickBrashear]] or [[JasonEdgecombe]]
+- [[MaemoPort]] -- Porting to the Nokia N8x0 Internet Tablet. Contact Derrick Brashear or Jason Edgecombe
 
 ## <a name="Proposed Projects"></a> Proposed Projects
 
@@ -48,21 +48,21 @@ The following are items which have been proposed, but which are not yet in progr
 
 - [[VolumeDumpEditor]] -- Need tool to allow editing volume dumps.
 
-- [[BetterServerPreferences]] allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact [[DerrickBrashear]]. _Do this for vldb servers too, or is that a separate project? [[TedAnderson]]_
+- [[BetterServerPreferences]] allow selectable continuous or on-demand server preferences in clients based on available information about Rx connection round trip times instead of classful networking approach currently used. Contact Derrick Brashear. _Do this for vldb servers too, or is that a separate project? Ted Anderson_
 
-- [[NFSTranslatorServer]] -- Create an AFS/NFS translator for [[OpenAFS]] because there were licensing issues with the code in the IBM/Transarc product. A Solaris-only version will be supported with and after 1.2.8. Another approach is a user-mode implementation. Contact [[JeffreyHutzelman]].
+- [[NFSTranslatorServer]] -- Create an AFS/NFS translator for [[OpenAFS]] because there were licensing issues with the code in the IBM/Transarc product. A Solaris-only version will be supported with and after 1.2.8. Another approach is a user-mode implementation. Contact Jeffrey Hutzelman.
 
-- [[PartitionUUID]] -- Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact [[DerrickBrashear]].
+- [[PartitionUUID]] -- Create partition UUIDs such that the vldb can be rapdily updated if a disk is moved from one machine to another. Contact Derrick Brashear.
 
 - [[ByteRangeLocks]] would improve support for applications that use them especially those on Windows platforms.
 
 \* Revamping the Callback mechanism. See discussion on afs3-standardization at openafs.org mailing list.
 
-- [[AutomatedTests]] - Have buildbot automatically run unit tests on a regular basis. Contact [[JasonEdgecombe]]
+- [[AutomatedTests]] - Have buildbot automatically run unit tests on a regular basis. Contact Jason Edgecombe
 
 ----
 
-Copied by [[TedAnderson]] with some minor edits from <http://www.openafs.org/projects.html> (dated 17-Oct-2001).
+Copied by Ted Anderson with some minor edits from <http://www.openafs.org/projects.html> (dated 17-Oct-2001).
 
 ----
 

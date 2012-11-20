@@ -1,4 +1,4 @@
--- [[StevenJenkins]] - 11 Jun 2007 [[VInitVolumePackage]] is the main setup program for the fileserver, salvageserver, and volserver (and some utilities). It initializes the data structures need by each to do their operations. Synchronization is done via `vol_glock_mutex`, `vol_trans_mutex`, `vol_put_volume_cond`, and `vol_sleep_cond`.
+-- Steven Jenkins - 11 Jun 2007 [[VInitVolumePackage]] is the main setup program for the fileserver, salvageserver, and volserver (and some utilities). It initializes the data structures need by each to do their operations. Synchronization is done via `vol_glock_mutex`, `vol_trans_mutex`, `vol_put_volume_cond`, and `vol_sleep_cond`.
 
 - Called by:
 

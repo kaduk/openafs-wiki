@@ -1,6 +1,6 @@
 Modify AFS clients and servers to support files bigger than 2<sup>31</sup>-1 bytes.
 
-Here is the way [[JeffreyHutzelman]] [described](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002304.html) the project:
+Here is the way Jeffrey Hutzelman [described](http://lists.openafs.org/pipermail/openafs-devel/2002-January/002304.html) the project:
 
 - Add a whole new set of fileserver RPC's that use 64-bit file sizes, offsets, and lengths. This would affect at least [[FetchData]], [[StoreData]], [[FetchStatus]], [[StoreStatus]], [[BulkStatus]], [[InlineBulkStatus]], and possibly some others.
 
@@ -18,15 +18,15 @@ Remember also that AFS is a wire protocol with multiple implementors. Things lik
 
 ----
 
-[[HartmutReuter]] responded in the same thread indicating that much of the client work has been done to support [[MultiResidentAFS]]. Doing the server part of the work is probably not as difficult.
+Hartmut Reuter responded in the same thread indicating that much of the client work has been done to support [[MultiResidentAFS]]. Doing the server part of the work is probably not as difficult.
 
--- [[TedAnderson]] - 17 Jan 2002
+-- Ted Anderson - 17 Jan 2002
 
 This client-side work is available in the [[OpenAFSCVS]] tree and is expected to become available in the next series of stable releases after the 1.2 series.
 
--- [[DerrickBrashear]] - 24 Jan 2002
+-- Derrick Brashear - 24 Jan 2002
 
-I had a student working on this over the summer. [[HartmutReuter]] provided him with some further specifics:
+I had a student working on this over the summer. Hartmut Reuter provided him with some further specifics:
 
 1) The 1st problem is: where to store the high order 32 bits of the file length in the vnode. My suggestion is:
 
@@ -44,4 +44,4 @@ You must be carefull with the type conversion and casting, I had some strange ex
 
 I've picked up where my student left off, since we are very interested in having large file support. Since the CVS tree has been changing quite a bit lately, I've been working against the unstable 1.3.2 release. I've gotten much working, but not quite all the way yet.
 
--- [[LindsayTodd]] - 06 Nov 2002
+-- Lindsay Todd - 06 Nov 2002

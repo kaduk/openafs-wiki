@@ -1,12 +1,12 @@
 It is clear that Wiki vandalizers or spammers have been targetting AFSLore. There has been some discussion on the [[OpenAFSInfo]] mailing list: [wiki docs contain spam](https://lists.openafs.org/pipermail/openafs-devel/2004-October/011121.html), [Wiki SPAM problems](https://lists.openafs.org/pipermail/openafs-info/2005-January/016269.html), [twiki vandalized](https://lists.openafs.org/pipermail/openafs-info/2005-February/016571.html), [Re: twiki vandalized](https://lists.openafs.org/pipermail/openafs-info/2005-February/016786.html) and others. I don't know what the solution is, but perhaps it would be good to collect, discuss and coordinate strategies for short term repair and long term prevention. To that end, I've created this page.
 
-The good news is that TWiki's revision control system makes it fairly easy to undo the bogus changes, but it is certainly tedious. I see that [[JosephHVilas]] has been fixing pages recently and others have done so earlier. Others who have tackled the problem should feel free to add their names here and comment on any techniques they've used to help in the process.
+The good news is that TWiki's revision control system makes it fairly easy to undo the bogus changes, but it is certainly tedious. I see that Joseph H Vilas has been fixing pages recently and others have done so earlier. Others who have tackled the problem should feel free to add their names here and comment on any techniques they've used to help in the process.
 
-- _I had some luck on my last de-spamming pass by searching for <code>**'\\.cn/'**</code> . OTOH, I probably could have done a better job of resurrecting some user pages. OT Third Tentacle, it might be nice were someone to fix TWikiUsers by removing the, uh, spurious entries._ -- [[JosephHVilas]] - 10 Aug 2005
+- _I had some luck on my last de-spamming pass by searching for <code>**'\\.cn/'**</code> . OTOH, I probably could have done a better job of resurrecting some user pages. OT Third Tentacle, it might be nice were someone to fix TWikiUsers by removing the, uh, spurious entries._ -- Joseph H Vilas - 10 Aug 2005
 
 The vandals clearly use automated techniques, we need some repair automation as well. It might be pretty easy to write a Perl script that takes a [[WikiName]] and a revision number and just resets the topic to that contents.
 
-One prevention strategy is to require more checking at registration time. Though this puts more burden on the admins, the pace of new, legitimate registration on AFSLore is probably pretty low. Maybe a volunteer system to monitor new registrations as [[JeffreyHutzelman]] [suggested](https://lists.openafs.org/pipermail/openafs-info/2005-March/016813.html) would be a good idea.
+One prevention strategy is to require more checking at registration time. Though this puts more burden on the admins, the pace of new, legitimate registration on AFSLore is probably pretty low. Maybe a volunteer system to monitor new registrations as Jeffrey Hutzelman [suggested](https://lists.openafs.org/pipermail/openafs-info/2005-March/016813.html) would be a good idea.
 
 Deploying some kind of fuzzy GIF interpretation (sometimes termed a [captcha](http://en.wikipedia.org/wiki/Captcha)) step during registration might also be helpful, but I don't know how hard it would be to find and deploy such a system.
 
@@ -16,8 +16,8 @@ Other relevant discussions:
 
 - [WikiSpam](http://twiki.org/cgi-bin/view/Codev/WikiSpam) on [TWiki.org](http://twiki.org/) has summary of information on this topic. It is particularly relevant since AFSLore runs on (old) TWiki software.
 
--- [[TedAnderson]] - 27 Apr 2005
+-- Ted Anderson - 27 Apr 2005
 
 - _Boy, it sure is nice not to see that spam all over the place any more. Thanks, Derrick_.
 
--- [[JosephHVilas]] - 04 Aug 2006
+-- Joseph H Vilas - 04 Aug 2006

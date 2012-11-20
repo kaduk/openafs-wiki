@@ -6,7 +6,7 @@ The inode-based server needs a file system which supports access by inode and us
 
 You can easily see that you are using an NAMEI file server if there is a directory named `AFSIDat` and with subdirectories like `+` and `+1` in your `/vicep*`.
 
--- [[TinoSchwarze]] - 25 Jul 2003
+-- Tino Schwarze - 25 Jul 2003
 
 ## <a name="Recommended Partition Types for"></a><a name="Recommended Partition Types for "></a> Recommended Partition Types for use with [[OpenAFS]]
 
@@ -83,8 +83,8 @@ Further, [[Tru64Unix]] 5.1 has only server support on ufs. The client is support
 
 - **Question:** Does this table imply that clients can't use the NAMEI backend and still need a specific filesystem? Will this ever change?
 
--- [[ToddLewis]] - 06 Nov 2002
+-- Todd Lewis - 06 Nov 2002
 
 - **Another Question:** Does this mean that you can use an NFS mount point as a /vicexx if you use a NAMEI fileserver?
 
--- [[ChrisMcClimans]] - 25 Jul 2003
+-- Chris McClimans - 25 Jul 2003

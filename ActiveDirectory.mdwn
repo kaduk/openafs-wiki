@@ -2,9 +2,9 @@ As of Windows NT version 5.0, normally known by the name Windows 2000, the domai
 
 The resulting TGT tickets use a proprietary authorization data format. There was a big flamefest on this issue, though [[KerberosDCE]] also uses the V5 ticket's authorization data field to store group membership data, the details of Microsoft's format was murky. It is now documented by a paper which essentially requires you to agree to never use the information if you read it, making it similarly useless.
 
-[[NathanNeulinger]] has used Windows 2000 to provide authentication for AFS. See his [message](http://lists.openafs.org/pipermail/openafs-info/2002-January/002893.html) to [[OpenAFSInfo]] for details.
+Nathan Neulinger has used Windows 2000 to provide authentication for AFS. See his [message](http://lists.openafs.org/pipermail/openafs-info/2002-January/002893.html) to [[OpenAFSInfo]] for details.
 
-[[DouglasEngert]] posted some [details](http://lists.openafs.org/pipermail/openafs-info/2002-March/003836.html) on doing this including a pointer to gsiklog which uses GSSAPI to get an K4/AFS token.
+Douglas Engert posted some [details](http://lists.openafs.org/pipermail/openafs-info/2002-March/003836.html) on doing this including a pointer to gsiklog which uses GSSAPI to get an K4/AFS token.
 
 More from Douglas in the same [thread](http://lists.openafs.org/pipermail/openafs-info/2002-March/003904.html).
 
@@ -14,7 +14,7 @@ More from Douglas in the same [thread](http://lists.openafs.org/pipermail/openaf
 >
 > You can then use the MIT ktutil addent -key to add this to a keytab file.
 
--- [[TedAnderson]] - 23 Jan 2002<br /> -- [[DerrickBrashear]] - 24 Jan 2002 added the information about the paper.<br /> -- [[TedAnderson]] - 18,22 Mar 2002 added Engert pointer.<br />
+-- Ted Anderson - 23 Jan 2002<br /> -- Derrick Brashear - 24 Jan 2002 added the information about the paper.<br /> -- Ted Anderson - 18,22 Mar 2002 added Engert pointer.<br />
 
 ----
 
