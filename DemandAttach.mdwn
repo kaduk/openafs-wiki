@@ -99,23 +99,23 @@ The table below compares the start-up sequence for a traditional file-server and
   </tr>
   <tr>
     <td>   </td>
-    <td> %BULLET% host / callback state restored </td>
+    <td>  host / callback state restored </td>
   </tr>
   <tr>
     <td>   </td>
-    <td> %BULLET% host / callback state consistency verified </td>
+    <td>  host / callback state consistency verified </td>
   </tr>
   <tr>
-    <td> %BULLET% build vice partition list </td>
-    <td> %BULLET% build vice partition list </td>
+    <td>  build vice partition list </td>
+    <td>  build vice partition list </td>
   </tr>
   <tr>
-    <td> %BULLET% volumes are attached </td>
-    <td> %BULLET% volume headers read </td>
+    <td>  volumes are attached </td>
+    <td>  volume headers read </td>
   </tr>
   <tr>
     <td>   </td>
-    <td> %BULLET% volumes placed into <em>pre-attached</em> state </td>
+    <td>  volumes placed into <em>pre-attached</em> state </td>
   </tr>
 </table>
 
@@ -129,20 +129,20 @@ The shutdown sequence for both file-server types is:
     <th bgcolor="#99CCCC"><strong> Demand-Attach </strong></th>
   </tr>
   <tr>
-    <td> %BULLET% break callbacks </td>
-    <td> %BULLET% quiesce host / callback state </td>
+    <td>  break callbacks </td>
+    <td>  quiesce host / callback state </td>
   </tr>
   <tr>
-    <td> %BULLET% shutdown volumes </td>
-    <td> %BULLET% shutdown on-line volumes </td>
-  </tr>
-  <tr>
-    <td>   </td>
-    <td> %BULLET% verify host / callback state consistency </td>
+    <td>  shutdown volumes </td>
+    <td>  shutdown on-line volumes </td>
   </tr>
   <tr>
     <td>   </td>
-    <td> %BULLET% save host / callback state </td>
+    <td>  verify host / callback state consistency </td>
+  </tr>
+  <tr>
+    <td>   </td>
+    <td>  save host / callback state </td>
   </tr>
 </table>
 
