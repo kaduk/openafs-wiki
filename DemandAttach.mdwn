@@ -72,21 +72,23 @@ The changes implemented for demand-attach include:
 A traditional file-server uses the `bnode` type `fs` and has a definition similar to
 
     bnode fs fs 1
-    parm /usr/afs/bin/fileserver -p 123 -pctspare 20 -L -busyat 200 -rxpck 2000 -rxbind
-    parm /usr/afs/bin/volserver -p 127 -log -rxbind
+    parm /usr/afs/bin/fileserver -p 123 -L -busyat 200 -rxpck 2000 -cb 4000000 
+    parm /usr/afs/bin/volserver -p 127 -log 
     parm /usr/afs/bin/salvager -parallel all32
     end
 
 Since an additional component was required for the demand-attach file-server, a new `bnode` type ( `dafs`) is required. The definition should be similar to
 
     bnode dafs dafs 1
-    parm /usr/afs/bin/fileserver -p 123 -pctspare 20 -L -busyat 50 -rxpck 2000 -rxbind -cb 4000000 -vattachpar 128 -vlruthresh 1440 -vlrumax 8 -vhashsize 11
-    parm /usr/afs/bin/volserver -p 64 -log -rxbind
+    parm /usr/afs/bin/dafileserver -p 123 -L -busyat 200 -rxpck 2000 -cb 4000000 -vattachpar 128 -vlruthresh 1440 -vlrumax 8 -vhashsize 11
+    parm /usr/afs/bin/davolserver -p 64 -log 
     parm /usr/afs/bin/salvageserver
-    parm /usr/afs/bin/salvager -parallel all32
+    parm /usr/afs/bin/dasalvager -parallel all32
     end
 
-The instance for a demand-attach file-server is therefore `dafs` instead of `fs`.
+The instance for a demand-attach file-server is therefore `dafs`
+instead of `fs`.  For a complete list of configuration options see the
+[dafileserver man page](http://docs.openafs.org/Reference/8/dafileserver.html).
 
 ### <a name="File-server Start-up / Shutdown"></a><a name="File-server Start-up / Shutdown "></a> File-server Start-up / Shutdown Sequence
 
