@@ -1,19 +1,42 @@
-Welcome to the [[OpenAFS]] wiki. This is a web-based collaboration area for collecting, maintaining, and distributing information about the AFS distributed filesystem and related topics.
 
-* [[About AFS|WhatIsAFS]]
-* [[Getting started|GettingStarted]]
-* [[Frequently asked questions|AFSFrequentlyAskedQuestions]]
-* [[Where to get help|WhereToGetHelp]]
-* [[History|AncientHistory]]
+<img id="andy" src="images/andy_juggles.jpg">
+
+Welcome to the [OpenAFS](http://www.openafs.org) wiki. This is a web-based
+collaboration area for collecting, maintaining, and distributing information
+about OpenAFS, an open-source implementation of the AFS distributed filesystem.
+
+OpenAFS is a caching, distributed, network-based filesystem for securely and
+efficiently sharing files over a private network or over the internet. OpenAFS
+has support for a wide-range of clients, including Windows, MacOS, and Linux
+clients. Unix based file servers are supported, including Linux, Solaris, and
+other unix based servers.
+
+OpenAFS requires a Kerberos 5 realm for mutual authentication of users and
+servers. Supported kerberos 5 implementations include Active Directory, MIT
+Kerberos, or Hiemdal kerberos.
+
+### Features ###
+
+* global namespace
+* location transparency
+* client-side caching
+* read-only replication
+* access control lists
+* kerberos integration
+
 
 ## Guides and information
 
+* [[Getting started|GettingStarted]]
 * [[Creating a new AFS cell|CreatingANewCell]]
 * [[Windows quick start guide|WindowsEndUserQuickStartGuide]]
 * [[How to setup OpenAFS with Windows 2008 R2 AD server|Win2008R2ADasKDC]]
 * [[Windows kerberos 5 AFS service principal|WindowsK5AfsServicePrincipal]]
 * [[OpenAFS use case at CGV|usecase_cgv]]
 * [[Add-on tools and utilities|AddOnsToolsAndUtilities]]
+* [[Where to get help|WhereToGetHelp]]
+* [[Frequently asked questions|AFSFrequentlyAskedQuestions]]
+
 
 ## For the Community
 
