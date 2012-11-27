@@ -6,14 +6,18 @@ collaboration area for collecting, maintaining, and distributing information
 about OpenAFS, an open-source implementation of the AFS distributed filesystem.
 
 OpenAFS is a caching, distributed, network-based filesystem for securely and
-efficiently sharing files over a private network or over the internet. OpenAFS
-has support for a wide-range of clients, including Windows, MacOS, and Linux
-clients. Unix based file servers are supported, including Linux, Solaris, and
-other unix based servers.
+efficiently sharing files over a private network or over the internet.  OpenAFS
+stores files on file server machines. OpenAFS clients read and write data to
+the file servers. Data is cached locally by clients, making subsequent reads
+very fast.  File servers automatically notify clients when when data is
+changed, keeping data in sync.  OpenAFS clients integrate with the client
+operating system to create a seamless network file system.  Client side support
+is provided for wide-range of operating systems, including Windows, MacOS,
+Solaris, and Linux.
 
 OpenAFS requires a Kerberos 5 realm for mutual authentication of users and
-servers. Supported kerberos 5 implementations include Active Directory, MIT
-Kerberos, or Hiemdal kerberos.
+servers. Kerberos implementations include Active Directory, MIT Kerberos, and
+Heimdal kerberos.
 
 ### Features ###
 
