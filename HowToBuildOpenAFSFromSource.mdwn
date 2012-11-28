@@ -3,10 +3,13 @@ The information is specific to unix-like systems. See the
 README-WINDOWS file in the root of the OpenAFS source code tree for
 instructions and software needed to build OpenAFS on Microsoft Windows.
 
-Unless otherwise noted, the information on this page is for version 1.6.x
-(available as pre-release 3 at the time of this writing).
+Unless otherwise noted, the information on this page is for building
+the OpenAFS master branch or the OpenAFS stable releases (currently
+the 1.6.x series).
 
-## The Short Version
+[[!toc levels=3]]
+
+# The Short Version #
 
 For the impatient, this section describes how to get a code tree and
 build it, assuming you have a development environment already setup.
@@ -16,13 +19,13 @@ OpenAFS binaries:
 
     $ wget http://openafs.org/dl/openafs/<version>/openafs-<version>-src.tar.bz2
     $ wget http://openafs.org/dl/openafs/<version>/openafs-<version>-doc.tar.bz2
-    $ tar xjf openafs-<version>-src.tar.bz2 
-    $ tar xjf openafs-<version>-doc.tar.bz2 
+    $ tar xjf openafs-<version>-src.tar.bz2
+    $ tar xjf openafs-<version>-doc.tar.bz2
     $ cd openafs-<version>
     $ ./configure
     $ make
 
-See <http://openafs.org/dl/openafs> for available versions.
+See [openafs downloads](http://openafs.org/dl/openafs) for available versions.
 
 The following shows how to do a git checkout and build the OpenAFS binaries,
 
@@ -40,11 +43,15 @@ options.)
 
     $ ./configure --enable-transarc-paths $ make
     $ make
-    $ make dest 
+    $ make dest
 
-See the end of this page for instructions on how to build RPM packages.
+This will build the binaries and place them in the &lt;platform&gt;/dest
+directories, that is, the Transarc-style binary distribution directory layout.
 
-## Build OpenAFS 
+See [[how to build OpenAFS RPM packages|HowToBuildOpenAFSRpmPackages]] for
+instructions on how to build RPM packages.
+
+# Building OpenAFS #
 
 Building and packaging OpenAFS is not difficult on current unix-like
 systems. A small number of fairly common libraries and tools are required. The
@@ -85,7 +92,7 @@ of the source and one of the documentation. A script is run to build a source
 rpm, which can be used to build the various rpm packages.  Details are given
 on the page [[How to build OpenAFS RPM packages|HowToBuildOpenAFSRpmPackages]].
 
-## Prerequisites
+## Prerequisites ##
 
 The following tools are needed to build OpenAFS from source from a tar file:
 
@@ -98,7 +105,7 @@ The following tools are needed to build OpenAFS from source from a tar file:
 - install
 - perl 5.6 or better (only to build the documention)
 
-In addition to the above, the following tools are needed to build OpenAFS 
+In addition to the above, the following tools are needed to build OpenAFS
 from a git checkout:
 
 - git
@@ -132,14 +139,14 @@ The ncurses libraries are needed to build the ncurses based admin tools
 scout and afsmonitor. The kerberos 5 libraries are needed to build kerberos 5
 support, which is *strongly* recommended.
 
-### Linux Debian Packages
+### Linux Debian Packages ###
 
 On a Debian 6, the required packages can be install with the following commands apt-get commands,
 
     $ apt-get install git libtool autoconf automake make gcc flex bison
     $ apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
-### Linux RPM Packages
+### Linux RPM Packages ###
 
 On a RedHat-based linux distributions, all of the required packages can be
 installed with the following yum commands,
@@ -147,7 +154,7 @@ installed with the following yum commands,
      $ yum install git-core gcc autoconf automake make flex bison rpm-build
      $ yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
-### Solaris Packages
+### Solaris Packages ###
 
 For Solaris packages, start by installing pkg-get, if you have not already.
 
@@ -272,7 +279,7 @@ utility (part of the kerberos 5 development package).
     --with-krb5-conf=/usr/bin/krb5-config
 
 
-### Debugging Options
+### Debugging Options ###
 
 To enable a debugging build, specify the --enable-debug option on the
 ./configure command line.  This builds with debugging compiler options and
@@ -286,12 +293,12 @@ disables stripping of binaries.
                                     with gcc and treat compiler warnings
                                     as errors
 
-### Feature Options
+### Feature Options ###
 
 There are many configure options for OpenAFS. See the ./configure --help
 for a complete list and README for more details.  Common options are:
 
-    --enable-bos-restricted-mode  enable bosserver restricted mode 
+    --enable-bos-restricted-mode  enable bosserver restricted mode
                                      which disables certain bosserver functionality
     --enable-bos-new-config       enable bosserver pickup of BosConfig.new on restarts
     --enable-namei-fileserver     force compilation of namei fileserver
@@ -301,10 +308,10 @@ for a complete list and README for more details.  Common options are:
                                    WARNING: Once you make use of this option
                                    by nesting one group inside another,
                                    the resulting PTS database cannot be correctly
-                                   and safely used by a ptserver built 
-                                   without this option. 
+                                   and safely used by a ptserver built
+                                   without this option.
 
-### Configure changes in 1.6.0
+### Configure changes in 1.6.0 ###
 
 If you have been building the 1.5.0 freatures branch, note the following configure
 options have been removed in 1.6.0. Each feature is now always on, except as noted:
@@ -332,11 +339,11 @@ default target will build all.
     $ make
 
 
-## Install
+## Install ##
 
 You can install the OpenAFS binaries outside a package system
 by copying the binaries. If you built OpenAFS in the default
-mode (that is without --enable-transarc-paths), run the install
+mode (that is, without --enable-transarc-paths), run the install
 target as root to install the binaries.
 
     $ sudo make install
@@ -371,7 +378,7 @@ these file into your local filesystem:
 See [Storing AFS Binaries in AFS](http://docs.openafs.org/QuickStartUnix/ch02s29.html) for instructions on
 how to store the workstation binaries in AFS.
 
-## Post build
+## Post build ##
 
 Some make targets of interest
 
