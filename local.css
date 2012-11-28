@@ -21,6 +21,12 @@
   padding-left: 80px;
 }
 
+/* add a space after the parent links at the top of each page, so the
+ * slash between levels has a space both before and after it */
+span.parentlinks a:after {
+  content: " ";
+}
+
 .pageheader {
   padding: 2em 6em 3em 2em;
   padding-left: 6em;
