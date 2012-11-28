@@ -1,0 +1,13 @@
+See [this link](https://lists.openafs.org/pipermail/port-darwin/2011-August/001373.html) for some history
+
+To build on Mountain Lion, make sure you have Xcode and Packagemaker, and the following configure/build options have been reported to work:
+
+    ARCHFLAGS="-arch i386 -arch x86_64" ./configure --enable-transarc-paths \
+    --with-krb5-conf=/usr/bin/krb5-config --enable-warnings --enable-checking
+    ARCHFLAGS="-arch i386 -arch x86_64" make dest
+
+and then the installer is created, as root:
+
+    ARCHFLAGS="-arch i386 -arch x86_64" make packages
+
+
