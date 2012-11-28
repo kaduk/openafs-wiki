@@ -41,7 +41,7 @@ traditional Transarc/IBM AFS installation paths, run configure with the
 --enable-transarc-paths option. (Read on for more information about configure
 options.)
 
-    $ ./configure --enable-transarc-paths $ make
+    $ ./configure --enable-transarc-paths --enable-checking --enable-debug
     $ make
     $ make dest
 
@@ -156,22 +156,20 @@ installed with the following yum commands,
 
 ### Solaris Packages ###
 
-For Solaris packages, start by installing pkg-get, if you have not already.
+The [OpenCSW](http://www.opencsw.org) project provides software packages for
+solaris which can be easily installed.  Follow the [OpenCSW getting
+started](http://www.opencsw.org/manual/for-administrators/getting-started.html)
+instructions to setup the `pkgutil` package manager tool.
 
-     $ wget http://www.opencsw.org/pkg-get
-     $ pkgadd -d /path/to/pkg-get
-     $ wget --output-document=/tmp/gpg.key http://www.opencsw.org/get-it/mirrors/
-     $ gpg --import /tmp/gpg.key
+Update your path to include `/opt/csw/bin`.
 
-Check to make sure pkg-get is installed properly by doing a pkg-get compare.
-It should output a list of installed packages compared to up-to-date remote packages.
+With `pkgutil` installed, install the necessary packages;
 
-With pkg-get installed, go ahead and begin installing the necessary packages
+     $ sudo pkgutil --install git
+     $ sudo pkgutil --install gmake gcc4core flex bison automake autoconf libtool
+     $ sudo pkgutil --install libkrb5_dev libncurses_dev
 
-     $ pkg-get install gcc flex bison automake autoconf gmake
-     $ pkg-get install krb5_kdc ncurses
-
-## Getting the Source Code
+## Getting the Source Code ##
 
 See [[GitDevelopers]] for details on how to use git to fetch OpenAFS source
 code and to submit source code changes to the OpenAFS project. This is the
