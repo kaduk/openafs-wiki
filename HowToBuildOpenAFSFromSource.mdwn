@@ -156,17 +156,26 @@ installed with the following yum commands,
 
 ### Solaris Packages ###
 
-The [OpenCSW](http://www.opencsw.org) project provides software packages for
-solaris which can be easily installed.  Follow the [OpenCSW getting
-started](http://www.opencsw.org/manual/for-administrators/getting-started.html)
-instructions to setup the `pkgutil` package manager tool.
+[Oracle Solaris Studio][1] can be used to build OpenAFS binaries for the
+solaris platform. Solaris Studio is freely available for the solaris and linux
+platforms with a no-cost Oracle Technology Network (OTN) account. Follow the
+instructions for the package installer for your platform.
+
+[1]: http://www.oracle.com/technetwork/server-storage/solarisstudio
+
+The [OpenCSW][2] project provides software packages for solaris which can be
+easily installed.  Follow the [OpenCSW getting started][3] instructions to
+setup the `pkgutil` package manager tool.
+
+[2]: http://www.opencsw.org
+[3]: http://www.opencsw.org/manual/for-administrators/getting-started.html
 
 Update your path to include `/opt/csw/bin`.
 
 With `pkgutil` installed, install the necessary packages;
 
      $ sudo pkgutil --install git
-     $ sudo pkgutil --install gmake gcc4core flex bison automake autoconf libtool
+     $ sudo pkgutil --install gmake flex bison automake autoconf libtool
      $ sudo pkgutil --install libkrb5_dev libncurses_dev
 
 ## Getting the Source Code ##
