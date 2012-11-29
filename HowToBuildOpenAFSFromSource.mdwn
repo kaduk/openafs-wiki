@@ -163,6 +163,11 @@ package installer instructions for your platform type and version.
 
 [1]: http://www.oracle.com/technetwork/server-storage/solarisstudio
 
+The OpenAFS build process requires the `gencat` program. Verify
+`/usr/bin/gencat` is available, otherwise install the `SUNWloc` package.
+
+     $ sudo pkg install SUNWloc
+
 The [OpenCSW][2] project provides software packages for solaris which can be
 easily installed.  Follow the [OpenCSW getting started][3] instructions to
 setup the `pkgutil` package manager tool.
@@ -175,8 +180,9 @@ Update your path to include `/opt/csw/bin`.
 With `pkgutil` installed, install the necessary packages;
 
      $ sudo pkgutil -y --install git
-     $ sudo pkgutil -y --install gmake flex bison automake autoconf libtool
+     $ sudo pkgutil -y --install gmake flex bison gsed automake autoconf libtool
      $ sudo pkgutil -y --install libkrb5_dev libncurses_dev
+
 
 ## Getting the Source Code ##
 
