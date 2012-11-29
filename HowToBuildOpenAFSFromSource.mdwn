@@ -156,10 +156,10 @@ installed with the following yum commands,
 
 ### Solaris Packages ###
 
-[Oracle Solaris Studio][1] can be used to build OpenAFS binaries for the
+[Oracle Solaris Studio][1] can be used to build OpenAFS binaries on the
 solaris platform. Solaris Studio is freely available for the solaris and linux
 platforms with a no-cost Oracle Technology Network (OTN) account. Follow the
-instructions for the package installer for your platform.
+package installer instructions for your platform type and version.
 
 [1]: http://www.oracle.com/technetwork/server-storage/solarisstudio
 
@@ -174,9 +174,9 @@ Update your path to include `/opt/csw/bin`.
 
 With `pkgutil` installed, install the necessary packages;
 
-     $ sudo pkgutil --install git
-     $ sudo pkgutil --install gmake flex bison automake autoconf libtool
-     $ sudo pkgutil --install libkrb5_dev libncurses_dev
+     $ sudo pkgutil -y --install git
+     $ sudo pkgutil -y --install gmake flex bison automake autoconf libtool
+     $ sudo pkgutil -y --install libkrb5_dev libncurses_dev
 
 ## Getting the Source Code ##
 
