@@ -3,10 +3,13 @@ page.
 
 [[!toc levels=3]]
 
-## Setup ##
+## Installation ##
 
-* [[Creating a new AFS cell|CreatingANewCell]]
-* [[OpenAFS client install|InstallOpenAFSClient]]
+### Linux ###
+
+* [[Server and client installation on Fedora|FedoraAFSInstall]] - step-by-step instructions on installing an AFS server on Fedora 7 with [[kerberos|KerberosV]]
+* [[Client installation notes|InstallOpenAFSClient]]
+* [[Client installation using Linux DKMS|RpmClientInstallationWithDKMS]] - instructions on installing the openafs kernel module with the DKMS RPM package
 
 ### Windows ###
 
@@ -14,13 +17,30 @@ page.
 * [[Windows kerberos 5 AFS service principal|WindowsK5AfsServicePrincipal]]
 * [[How to setup OpenAFS with Windows 2008 R2 AD server|Win2008R2ADasKDC]]
 
-## Administration ##
+## Other tasks ##
 
 * [[Backup methods|BackupMethods]]
 * [[Example USS Templates|ExampleUSSTemplates]]
 
 ## External guides and information ##
 
+These are some links to various documents that exist online that describe
+creating a new AFS cell. The most common problem with a lot of existing
+documentation is that it has you install the kaserver, which is highly
+deprecated. Any new cell installation really should install a conventional
+kerberos server (MIT, Heimdal and the Windows Active Directory server all have
+been used as kerberos servers for various AFS cells).
+
+* [OpenAFS server tutorial for Debian Squeeze](http://openafs.dk/doku.php?id=server:start)
+* The Gentoo [OpenAFS Guide](http://www.gentoo.org/doc/en/openafs.xml) From the
+  Gentoo Linux distribution. Again, takes you through using kaserver, which is
+  highly deprecated.
+* [Using NetBSD to provide AFS and Kerberos
+  services](http://kula.tproa.net/talks/afsbpw2005) Talk from the 2005 AFS &amp;
+  Kerb Workshop, describing how to use [[NetBSD]] to provide AFS and Kerberos
+  services. Some steps are [[NetBSD]] specific, but there are key bits of info in
+  there on using a Heimdal KDC as your kerberos server.
+* [How to use Active Directory as your kerberos server for an AFS cell](http://www.pmw.org/afsbpw06/talks/shadow-AD.pdf) (pdf)
 * [AFS intro doc at Stanford](http://www.stanford.edu/services/afs/intro/)
 * [AFS into at IBM developerworks](http://www.ibm.com/developerworks/opensource/library/os-openafs-kerberos5/index.html)
 
