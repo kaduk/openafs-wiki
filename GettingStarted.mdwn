@@ -16,9 +16,9 @@ may be physical or virtual machines, running a unix-like operating system, such
 as Solaris, Linux, *BSD.  Not all the servers for a site need to be running the
 same architecture and operating system, and it is not uncommon to have a
 mixture of file servers running different operating systems or versions.  Each
-file storage servers should have one or more partitions for storage. The files
-stored on these servers can only be accessed using a machine running the AFS
-client software.
+file storage servers should have one or more unix filesystem partitions for
+data and AFS-metadata storage. The files stored in these partitions can only be
+accessed using a machine running the AFS client software.
 
 The file server machines must support IPv4 and may have multiple interfaces.
 By default, OpenAFS will try to use all the non-loopback interfaces available
