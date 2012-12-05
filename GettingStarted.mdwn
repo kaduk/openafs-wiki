@@ -23,14 +23,17 @@ accessed using a machine running the AFS client software.
 The file server machines must support IPv4 and may have multiple interfaces.
 By default, OpenAFS will try to use all the non-loopback interfaces available
 on a file server machine. A configuration can be used to set which addresses
-are actually reachable by clients.
+are actually reachable by clients. Changing the IP address of a fileserver
+requires a restart of the file service process.
 
 In addition to the file servers, OpenAFS provides a specialized lookup service
 for AFS clients and file servers, the so called AFS database servers. In a
-recommended configuration, a set of three dedicated machines, physical or
-virtual, are setup as AFS database servers. It is important to have good
-availability of the hosts running the database service, and ideally, the IP
-addresses of these hosts should be changed infrequently.
+recommended configuration, a set of three dedicated machines are deployed as
+AFS database servers. These hosts may be physical or virtual machines, running
+a unix-like operating system.  Availability of the hosts running the database
+service is important to the reliability of the AFS cell. Each database host
+must support IPv4 and must have one IPv4 address.  Once deployed, it is best to
+avoid changing the IP address of an AFS database server.
 
 OpenAFS file servers and database servers are administratively grouped into a
 collection called a 'cell'. By convention, a cell name matches an internet
@@ -47,10 +50,10 @@ for user authentication, even if a user is becomes 'root' on a client.
 A Kerberos v5 realm needs to be available before setting up OpenAFS.  An
 existing Kerberos realm can be used or a new realm will need to be setup.
 Kerberos 5 implementations such as Active Directory, MIT Kerberos V, or Heimdal
-are commonly used.  For compatibility with older versions of AFS, OpenAFS
-includes a deprecated, Kerberos 4 implementation called `kaserver`.  You may
-see it mentioned in various older how-to guides, however `kaserver` should not
-be used for new installations of OpenAFS.
+are commonly used.  OpenAFS includes a deprecated, Kerberos 4 implementation
+called `kaserver` for compatibility with older versions of AFS.  You may see it
+mentioned in various older how-to guides, however `kaserver` should not be used
+in new installations of OpenAFS.
 
 ### Time Synchronization ###
 
