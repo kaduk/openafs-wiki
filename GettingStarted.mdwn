@@ -1,8 +1,65 @@
+This page provides information and tips to get started setting up OpenAFS
+clients and servers.  Read the [OpenAFS documentation](http://docs.openafs.org/)
+for detailed instructions for installing and configuring OpenAFS.
+
 [[!toc levels=3]]
 
-(This page will describe how to get started setting up OpenAFS servers and clients.)
+## Planning ##
+
+This section outlines some considerations when planning a new OpenAFS
+installation.
+
+### Servers ###
+
+An OpenAFS installation requires one or more servers for file storage. These
+may be physical or virtual machines, running a unix-like operating system, such
+as Solaris, Linux, *BSD.  Not all the servers for a site need to be running the
+same architecture and operating system, and it is not uncommon to have a
+mixture of file servers running different operating systems or versions.  Each
+file storage servers should have one or more partitions for storage. The files
+stored on these servers can only be accessed using a machine running the AFS
+client software.
+
+The file server machines must support IPv4 and may have multiple interfaces.
+By default, OpenAFS will try to use all the non-loopback interfaces available
+on a file server machine. A configuration can be used to set which addresses
+are actually reachable by clients.
+
+In addition to the file servers, OpenAFS provides a specialized lookup service
+for AFS clients and file servers, the so called AFS database servers. In a
+recommended configuration, a set of three dedicated machines, physical or
+virtual, are setup as AFS database servers. It is important to have good
+availability of the hosts running the database service, and ideally, the IP
+addresses of these hosts should be changed infrequently.
+
+OpenAFS file servers and database servers are administratively grouped into a
+collection called a 'cell'. By convention, a cell name matches an internet
+domain name registered by the organization running the AFS cell. An
+organization may have multiple cells.
+
+### Kerberos ###
+
+OpenAFS uses Kerberos v5 to authenticate users and processes accessing files in
+the AFS filesystem, and to authenticate administrators when running
+administrative commands. This security model avoids trusting the client machines
+for user authentication, even if a user is becomes 'root' on a client.
+
+A Kerberos v5 realm needs to be available before setting up OpenAFS.  An
+existing Kerberos realm can be used or a new realm will need to be setup.
+Kerberos 5 implementations such as Active Directory, MIT Kerberos V, or Heimdal
+are commonly used.  For compatibility with older versions of AFS, OpenAFS
+includes a deprecated, Kerberos 4 implementation called `kaserver`.  You may
+see it mentioned in various older how-to guides, however `kaserver` should not
+be used for new installations of OpenAFS.
+
+### Time Synchronization ###
+
+Kerberos requires servers and clients to have good clock synchronization,
+using `ntp` or some other synchronization mechanism. Be sure ntp is installed
+and working on every machine to be used as an OpenAFS client or server.
 
 
-# See also #
+### Firewalls ###
 
-* [[Creating a new AFS cell|CreatingANewCell]]
+Todo
+
