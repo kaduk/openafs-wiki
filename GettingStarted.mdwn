@@ -9,7 +9,7 @@ for detailed instructions for installing and configuring OpenAFS.
 This section outlines some considerations when planning a new OpenAFS
 installation.
 
-### Servers ###
+### Server planning ###
 
 An OpenAFS installation requires one or more servers for file storage. These
 may be physical or virtual machines, running a unix-like operating system, such
@@ -23,37 +23,45 @@ accessed using a machine running the AFS client software.
 The file server machines must support IPv4 and may have multiple interfaces.
 By default, OpenAFS will try to use all the non-loopback interfaces available
 on a file server machine. A configuration can be used to set which addresses
-are actually reachable by clients. Changing the IP address of a fileserver
+are actually reachable by clients. Changing the IP address of a file server
 requires a restart of the file service process.
 
-In addition to the file servers, OpenAFS provides a specialized lookup service
-for AFS clients and file servers, the so called AFS database servers. In a
-recommended configuration, a set of three dedicated machines are deployed as
-AFS database servers. These hosts may be physical or virtual machines, running
-a unix-like operating system.  Availability of the hosts running the database
-service is important to the reliability of the AFS cell. Each database host
-must support IPv4 and must have one IPv4 address.  Once deployed, it is best to
-avoid changing the IP address of an AFS database server.
+In addition to file servers, OpenAFS provides a specialized lookup service used
+internally by AFS clients and file servers, called the AFS database servers.
+The database server processes may be run on the same as hosts as the file
+servers, however the recommended configuration is to deploy the database
+service on a set of three dedicated machines.  These hosts may be physical or
+virtual machines, running a unix-like operating system.  Database servers keep
+in sync with each other by exchange of network messages, so network reliability
+between database servers is important.  Each database host must support IPv4
+and must have one IPv4 address.  Once deployed, it is best to avoid changing
+the IP address of an AFS database server.
 
-OpenAFS file servers and database servers are administratively grouped into a
-collection called a 'cell'. By convention, a cell name matches an internet
-domain name registered by the organization running the AFS cell. An
-organization may have multiple cells.
+The AFS database service is a relatively light-weight process, however
+availability of the hosts running the database service is important to the
+reliability of the AFS service.
 
-### Kerberos ###
+### Kerberos requirements ###
 
 OpenAFS uses Kerberos v5 to authenticate users and processes accessing files in
 the AFS filesystem, and to authenticate administrators when running
-administrative commands. This security model avoids trusting the client machines
-for user authentication, even if a user is becomes 'root' on a client.
+AFS administrative commands. This security model avoids trusting the client
+machines for user authentication, even if a user is becomes 'root' on a client.
 
 A Kerberos v5 realm needs to be available before setting up OpenAFS.  An
 existing Kerberos realm can be used or a new realm will need to be setup.
 Kerberos 5 implementations such as Active Directory, MIT Kerberos V, or Heimdal
-are commonly used.  OpenAFS includes a deprecated, Kerberos 4 implementation
-called `kaserver` for compatibility with older versions of AFS.  You may see it
-mentioned in various older how-to guides, however `kaserver` should not be used
-in new installations of OpenAFS.
+are commonly used.  A service key will need to be created by the Kerberos
+administrator for the OpenAFS service.
+
+OpenAFS includes a deprecated, Kerberos 4 implementation called `kaserver` for
+compatibility with older versions of AFS.  You may see it mentioned in various
+older documentatin, how-to guides, and mail list archives, however `kaserver`
+should not be used in new installations of OpenAFS.
+
+### DNS ###
+
+todo
 
 ### Time Synchronization ###
 
@@ -62,7 +70,18 @@ using `ntp` or some other synchronization mechanism. Be sure ntp is installed
 and working on every machine to be used as an OpenAFS client or server.
 
 
-### Firewalls ###
+### Naming considerations ###
 
-Todo
+OpenAFS servers are administratively grouped into a collection called a 'cell'.
+By convention, a cell name matches an internet domain name registered by the
+organization running the AFS cell. An organization may have multiple cells.
+
+The naming convention for kerberos realms is to use an internet domain name,
+but in uppercase. The convention for AFS cell names is to match the kerberos
+realm name, but the cell name is lower case.  Extra configuration is required
+if the AFS cell name needs to be different than the kerberos realm name.
+Changing these names can be challenging, so careful consideration is needed
+when selecting the kerberos realm and AFS cell names.
+
+
 
