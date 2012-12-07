@@ -200,7 +200,7 @@ Secondly, each commit should have a meaningful revision log. The internals of gi
 
       Add option to disable syscall probing
 
-      This adds the --disable-linux-syscall-probing to allow the probing of
+      Add a --disable-linux-syscall-probing flag to allow the probing of
       kernel memory for the syscall table to be disabled at compile time. This
       helps with Linux architectures which have compile, run or load time
       issues with syscall probing by providing a band-aid fix until we can
