@@ -17,8 +17,8 @@ as Solaris, Linux, *BSD.  Not all the servers for a site need to be running the
 same architecture and operating system, and it is not uncommon to have a
 mixture of file servers running different operating systems or versions.  Each
 file storage servers should have one or more unix filesystem partitions for
-data and AFS-metadata storage. The files stored in these partitions can only be
-accessed using a machine running the AFS client software.
+data and AFS-metadata storage. The files stored in these partitions are stored
+in a special format and cannot be accessed directly.
 
 The file server machines must support IPv4 and may have multiple interfaces.
 By default, OpenAFS will try to use all the non-loopback interfaces available
@@ -61,14 +61,20 @@ should not be used in new installations of OpenAFS.
 
 ### DNS ###
 
-todo
+You should to DNS A records and PTR for your file and database servers, to
+make adminstration easier.
+
+AFS clients do not lookup servers by name, but need to locate the AFS database
+servers. Modern clients can use DNS service records to locate the AFS database
+servers.  Older clients can use AFSDB DNS records, which predate the support
+of service requires.
+
 
 ### Time Synchronization ###
 
 Kerberos requires servers and clients to have good clock synchronization,
 using `ntp` or some other synchronization mechanism. Be sure ntp is installed
 and working on every machine to be used as an OpenAFS client or server.
-
 
 ### Naming considerations ###
 
