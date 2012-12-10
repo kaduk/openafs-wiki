@@ -59,22 +59,39 @@ compatibility with older versions of AFS.  You may see it mentioned in various
 older documentatin, how-to guides, and mail list archives, however `kaserver`
 should not be used in new installations of OpenAFS.
 
-### DNS ###
-
-You should to DNS A records and PTR for your file and database servers, to
-make adminstration easier.
-
-AFS clients do not lookup servers by name, but need to locate the AFS database
-servers. Modern clients can use DNS service records to locate the AFS database
-servers.  Older clients can use AFSDB DNS records, which predate the support
-of service requires.
-
-
 ### Time Synchronization ###
 
 Kerberos requires servers and clients to have good clock synchronization,
 using `ntp` or some other synchronization mechanism. Be sure ntp is installed
 and working on every machine to be used as an OpenAFS client or server.
+
+### DNS ###
+
+You should create a DNS A record and a PTR record for each file and database
+server.  It is recommended to have the PTR record match the A record, and not
+an alias.
+
+OpenAFS clients need to locate the AFS database servers. Modern clients can use
+DNS SRV (service) records to locate the AFS database servers.  You may also
+which to create DNS AFSDB records for older AFS clients, which do not have
+support for the newer AFS SRV records.  You will need to create SRV records
+for the `vlserver` and the `prserver` services.
+
+The following is an example DNS bind configuration.
+
+    afsdb1                IN A              80.80.0.10
+    afsdb2                IN A              80.80.0.20
+    afsdb3                IN A              80.80.0.30
+    @                     IN AFSDB   1      afsdb1
+                          IN AFSDB   1      afsdb2
+                          IN AFSDB   1      afsdb3
+    _afs3-vlserver._udp   IN SRV 10 10 7003 afsdb1
+    _afs3-vlserver._udp   IN SRV 10 10 7003 afsdb2
+    _afs3-vlserver._udp   IN SRV 10 10 7003 afsdb3
+    _afs3-prserver._udp   IN SRV 10 10 7002 afsdb1
+    _afs3-prserver._udp   IN SRV 10 10 7002 afsdb2
+    _afs3-prserver._udp   IN SRV 10 10 7002 afsdb3
+
 
 ### Naming considerations ###
 
