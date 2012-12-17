@@ -1,4 +1,7 @@
-OpenAFS usage at CGV
+
+[[!meta title="OpenAFS usage at CGV"]]
+
+# OpenAFS usage at CGV #
 
 At the Institute for ComputerGraphics and KnowledgeVisualisation OpenAFS is used as central data storage.
 This includes users linux home directories, users windows profiles, project data and webservices. Even a complete 4 sided CAVE is
@@ -6,7 +9,7 @@ run out of OpenAFS filespace (under windows and/or linux).
 
 The cell is reachable worldwide and road warriors do use the cell and benefit from the easy reachability of their data independent of their location (as long as network access is available).
 
-Setup
+## Setup ##
 
 The OpenAFS cell cgv.tugraz.at does have 3 dbservers and 4 fileservers. All 3 DB servers are also fileservers and each is a dedicated
 machine with at least dualcore CPU and 4GB RAM. the 4th fileserver is placed at a remote site (Fraunhofer IGD Darmstadt), is only reachable from within the CGV network, but does only store readonly volumes.
@@ -28,7 +31,7 @@ Beside a CD/DVD archive a software(installation archive is included, to. Install
 
 As a special for our cell, we do run a DAVE and a HEyeWall out of OpenAFS space. The complete software and data for these installations are saved in our OpenAFS cell and are accessed live. E.g. the DAVE (our modified CAVE) is driven by 10 workstations, each running a client fetching graphics data from OpenAFS.
 
-Backup
+## Backup ##
 
 Our cell does run a 3-step backup.
 
@@ -40,7 +43,7 @@ Usual 4-6 weeks of data are hold in this big RAID6 for quite fast access. From t
 Step3: monthly copy each volume upon external harddrive and store in secure place. Keep harddrives for 1 year. 
 Never used in 6.5 years of running cell
 
-Users
+## Users ##
 
 We do have only 30 users within our cell, but roughly 10TB RW data. 20 dedicated users workstation in office, 10 general use workstations in terminal room, 20 servers and 20 lab workstations are all connected to the OpenAFS system.
 
@@ -54,19 +57,22 @@ We are not the usual usage case of OpenAFS, we do have lots of data and less use
 
 In 6.5 years of lifetime, we never had noticeable file loss due to OpenAFS bugs or big downtimes of the servers. Longest downtimes were due to power loss on our campus.
 
-Servers
+## Servers ##
 
 A lot of servers do have a OpenAFS client for accessing data, some do even run services out of OpenAFS. E.g. the FTP server or our trac server do run out of OpenAFS. Other servers do backup their data into a special Backup tree in OpenAFS.
 
 
-Needs
+## Needs ##
 
 Although OpenAFS does work quite well, some options are on the wishlist (yeah, we do know the current dev state and the limits of OpenAFS):
+
 * RW replication
 * File ACL
 * alternate datastreams
 * Offline functionality
 
-Lars Schimmer
-TU Graz, CGV
-http://www.cgv.tugraz.at
+## Credits ##
+
+* Lars Schimmer
+* TU Graz, CGV
+* [[http://www.cgv.tugraz.at]]
