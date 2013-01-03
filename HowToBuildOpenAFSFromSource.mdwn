@@ -109,9 +109,9 @@ In addition to the above, the following tools are needed to build OpenAFS
 from a git checkout:
 
 - git
-- libtool
 - autoconf 2.60 or better
 - automake
+- libtool
 
 The compiler used must be capable of building kernel modules for the target
 platform.
@@ -143,7 +143,7 @@ support, which is *strongly* recommended.
 
 On a Debian 6, the required packages can be install with the following commands apt-get commands,
 
-    $ apt-get install git libtool autoconf automake make gcc flex bison
+    $ apt-get install git autoconf automake libtool make gcc flex bison
     $ apt-get install libc6-dev libkrb5-dev libncurses5-dev linux-headers-$(uname -r)
 
 ### Linux RPM Packages ###
@@ -151,7 +151,7 @@ On a Debian 6, the required packages can be install with the following commands 
 On a RedHat-based linux distributions, all of the required packages can be
 installed with the following yum commands,
 
-     $ yum install git-core gcc autoconf automake make flex bison rpm-build
+     $ yum install git-core gcc autoconf automake libtool make flex bison rpm-build
      $ yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
 ### Solaris Packages ###
