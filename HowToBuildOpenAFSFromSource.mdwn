@@ -151,7 +151,7 @@ On a Debian 6, the required packages can be install with the following commands 
 On a RedHat-based linux distributions, all of the required packages can be
 installed with the following yum commands,
 
-     $ yum install git-core gcc autoconf automake libtool make flex bison rpm-build
+     $ yum install git-core gcc autoconf automake libtool make flex bison rpm-build wget
      $ yum install glibc-devel krb5-devel ncurses-devel pam-devel kernel-devel-$(uname -r)
 
 ### Solaris Packages ###
