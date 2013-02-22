@@ -54,6 +54,73 @@ Once you've verified that AFS works correctly, you may want to configure AFS to 
 
 -- David Nolan - 29 Jul 2003
 
+#### <a name="Raspberri Pi">Raspberry Pi</a>
+
+You will need at least a 4GB card to download all the necessary software and linux kernel
+
+Much of this is taken from <http://www.raspberrypi.org/phpBB3/viewtopic.php?f=71&t=17666>
+
+A wiki that is kept more up to date at <https://samvinna.ru.is/projects/projects/devnet-documentation/wiki/AFS_Client_Installation>
+
+Other guides:
+rpi-update at <https://github.com/Hexxeh/rpi-update/>
+
+To get started:
+Install the latest dist and necessary tools
+
+    sudo bash
+    apt-get update
+    apt-get -y dist-upgrade
+    apt-get -y install gcc make git build-essential dkms
+
+Install rpi-update and grab the latest firmware
+
+    cd rpi-update
+    apt-get install ca-certificates
+    sudo wget http://goo.gl/1BOfJ -O /usr/bin/rpi-update && sudo chmod +x /usr/bin/rpi-update
+
+Grab latest kernel
+
+    cd /usr/src
+    wget  https://github.com/raspberrypi/linux/tarball/rpi-3.2.27 -O rpi-3.2.27.tgz
+    tar xzf rpi-3.2.27.tgz
+
+Grab the configs from the kernel
+
+    cd raspberrypi-linux-*
+    zcat /proc/config.gz > .config
+    make oldconfig
+    make modules_prepare
+
+Get the module symbol version 
+
+    wget https://github.com/raspberrypi/firmware/raw/master/extra/Module.symvers
+Make symlinks for the build system
+
+    KSRC=`pwd`
+    pushd /lib/modules/`uname -r`
+    ln -s ${KSRC} source
+    ln -s ${KSRC} build
+    popd
+    pushd /usr/src
+    ln -s ${KSRC} linux-`uname -r`
+    ln -s ${KSRC} linux
+    popd
+
+Install kerberos packages
+
+    apt-get install krb5-auth-dialog krb5-user krb5-clients libpam-ccreds libpam-krb5
+
+Install the afs client and related modules
+
+    apt-get install  openafs-modules-dkms openafs-{client,krb5}
+
+if it doesn't go successfuly, you can re-run it with:
+
+    dpkg-reconfigure openafs-modules-dkms
+
+-- Joe Foley 22 Feb 2013 (Created from RU website)
+
 #### <a name="Mac OS X 10.3"></a> Mac OS X 10.3
 
 Some good guides into getting [[OpenAFS]] installed on Mac OS X 10.3 can be found at :
