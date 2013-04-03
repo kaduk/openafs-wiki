@@ -199,7 +199,7 @@ Use the `pkg` tool to install the other necessary tools and libs to build OpenAF
 on Solaris 11.
 
       $ sudo pkg install git
-      $ sudo pkg install make flex bison gnu-m4 gnu-coreutils gnu-binutils gnu-sed 
+      $ sudo pkg install make system/header flex bison gnu-m4 gnu-coreutils gnu-binutils gnu-sed 
       $ sudo pkg install automake            /* this selects automake-111; if dependency errors are indicated, try automake-110 */
       $ sudo pkg install autoconf libtool
       $ sudo pkg install developer/gcc-3
