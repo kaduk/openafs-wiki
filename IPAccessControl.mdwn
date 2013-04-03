@@ -161,7 +161,7 @@ You can probably tell I didn't like either of the above suggestions.
 At that point I thought, "Gee, I bet if I move a volume onto a different file server with the ACL already in place, the new file server will need to grok all the volume's ACLs right then." And I was right. And the angels started to sing. :)
 So my hurry-up suggestion:
 <br />
-- [vos move](http://www.crowleyautotransport.com/phoenixautotransport) the affected volume to another file server.
+- [vos move](http://www.openafs.org/pages/doc/AdminReference/auarf268.htm#HDRVOS_MOVE) the affected volume to another file server.
 
 You should now be working. That was easy, wasn't it? :)
 
@@ -199,7 +199,7 @@ A few caveats:
 >
 >     Update -- it turns out that recent verions of [[OpenAFS]] now have a compile-time option for supergroups (groups that contain group). If I ever get any experience using this, I'll let you know.
     -- End hypothetical portion --
-- There's a newly exposed problem on some platforms with occasional loss of IP-based access. The problem is discussed on the [[OpenAFS]]-Devel mailing list in [this thread](http://www.visiblexposure.com/bocaratonseo/). Please take a look if you're having problems. Derrick Brashear is currently (30 June 2006) testing a patch, which you can find at
+- There's a newly exposed problem on some platforms with occasional loss of IP-based access. The problem is discussed on the [[OpenAFS]]-Devel mailing list in [this thread](https://lists.openafs.org/pipermail/openafs-devel/2006-June/013946.html). Please take a look if you're having problems. Derrick Brashear is currently (30 June 2006) testing a patch, which you can find at
          /afs/andrew.cmu.edu/usr/shadow/ubik-all.diff-2
 
 Was this page useful, or even interesting? Please link to it: it's difficult to find.
