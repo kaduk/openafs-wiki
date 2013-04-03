@@ -193,12 +193,18 @@ Note: Is a perl devel lib needed on solaris?
 
 #### Solaris 11 ####
 
-Use the `pkg` tool to install the neccessary tools and libs to build OpenAFS
+Install SolarisStudio 12.3 via tarball.
+
+Use the `pkg` tool to install the other necessary tools and libs to build OpenAFS
 on Solaris 11.
 
-XXX: need the package list.
+      $ sudo pkg install git
+      $ sudo pkg install make flex bison gnu-m4 gnu-coreutils gnu-binutils gnu-sed 
+      $ sudo pkg install automake            /* this selects automake-111; if dependency errors are indicated, try automake-110 */
+      $ sudo pkg install autoconf libtool
+      $ sudo pkg install developer/gcc-3
 
-The OpenAFS build process requires the `gencat` program. Verify
+The OpenAFS build process also requires the `gencat` program. Verify
 `/usr/bin/gencat` is available, otherwise install the `SUNWloc` package.
 
      $ sudo pkg install SUNWloc
