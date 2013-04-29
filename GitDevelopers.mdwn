@@ -210,19 +210,35 @@ Secondly, each commit should have a meaningful revision log. The internals of gi
 
 Thirdly, each commit should have a valid changeID. Manually maintaining these is difficult and error prone, so we would strong advise that you install the changeID hook detailed earlier. This will automatically add a [[ChangeId]] line to your commit message if it doesn't already contain one.
 
-Once you have commits in this form, use
+Fourthly, each commit must adhere to the OpenAFS whitespace policy whereby new commits will not be accepted if they have trailing spaces, spaces before tabs, or indentation without tabs.  Git can be configured to highlight the whitespace policy violation with the following global setting:
+
+    git config --global core.whitespace trailing-space,space-before-tab,indent-with-non-tab
+
+and 
+
+    git rebase --whitespace=fix
+
+can be used to automatically fix any policy violations on your local branch before pushing the changes to Gerrit.   Finally, Git 1.8.2 and above can be configured to apply this policy to all local commits:
+
+    git config --global config.cleanup whitespace
+
+Once your commits have a proper commit message and have all whitespace errors fixed, use
 
     git log -p origin/<branch>..HEAD
 
 (where &lt;branch&gt; is the upstream branch upon which you are basing this patch).
 
-to check that what you're giving us makes sense. Then, upload them to gerrit using
+to check that what you're giving us makes sense. Then, upload the commits to gerrit using
 
-    git push ssh://gerrit.openafs.org/openafs.git HEAD:refs/for/<branch>
+    git push ssh://gerrit.openafs.org/openafs.git HEAD:refs/for/<branch>/<topic>
 
-(again &lt;branch&gt; is the name of the upstream branch that you are pushing the changes into, not the name of any local branch you may have been developing on)
+(again &lt;branch&gt; is the name of the upstream branch that you are pushing the changes into, not the name of any local branch you may have been developing on and &lt;topic&gt; is an optional name that can be used to group your commits together for easier reviewing.)
 
-In this case, refs/for is a literal string. So, if you had been developing against master, you can upload your changes with:
+In this case, refs/for is a literal string. So, if you had been developing against the "master" branch and the change replaced "strcpy" with "strlcpy", you might upload your changes with:
+
+    git push ssh://gerrit.openafs.org/openafs.git HEAD:refs/for/master/strcpy-to-strlcpy
+
+Although, it would be sufficient to simply issue the command as:
 
     git push ssh://gerrit.openafs.org/openafs.git HEAD:refs/for/master
 
@@ -248,7 +264,11 @@ You can do this with
 
 (assuming your patch is against the 'master' git branch, and lives on the &lt;topic&gt; branch)
 
-And then simply resubmit your change in the same way as if you had been asked to revise it (see notes above)
+When a rebase is performed there may be conflicts that cannot be automatically resolved by git.   The default style of conflict resolution displays the current version of the code on HEAD and the version from the commit that is being rebased.  This level of detail is often insufficient to determine how to resolve the conflict.  Switching to conflict style "diff3" will also show the original version of the code which your commit modified.   Turn on "diff3" by applying the following configuration setting:
+
+    git config --global merge.conflictstyle diff3 
+
+After you have resolved all conflicts and are once again happy with the commit, simply resubmit your change in the same way as if you had been asked to revise it (see notes above)
 
 ## <a name="Submitting by patch"></a> Submitting by patch
 
@@ -262,13 +282,19 @@ will give you the set of changes if you don't do local commits. If you make topi
 
 will give all of the changes between the branch point of you topic branch (assuming you branched from 'master') and the last commit.
 
-You can send those into <openafs-bugs@openafs.org> as before. Note, however, by doing this you're making someone else take the patch, create a topic branch in their local tree, apply the patch, and push it into gerrit. Things would be much more efficient if you pushed into gerrit yourself. Please?
+A better approach is to generate a patch file.  To do so commit your changes to a local branch in your repository as you would if you were submitting to gerrit.  If your changes are against the "master" branch, instead of pushing the patch execute the command:
+
+    git format-patch origin/master..HEAD
+
+For each commit on your local branch after the most recent patch on "master", a separate patch file will be generated.
+
+Regardless of which approach you use, you can e-mail the changes to <openafs-bugs@openafs.org> as before. Note, however, by doing this you're making someone else take the patch, create a topic branch in their local tree, apply the patch, push it into gerrit, and become responsible for managing the review process. Things would be much more efficient if you pushed into gerrit yourself. Please?
 
 ## <a name="Reviewing changes"></a> Reviewing changes
 
 We'll now look at how changes that have made it into gerrit can be reviewed. All code review now happens via the <http://gerrit.openafs.org> interface. You should log in there as detailed above (using any OpenID), and make sure that the email address points to somewhere you'll read regularly.
 
-You'll be presented with a list of patches requiring review or, if someone has asked, patches you've been explicitly requested to review. There are two types of review - Code Review and Verification. Code Review means that you have read through the code, and are satisified that it works properly, follows the tree's style, and generally doesn't suck. Verification means that you have taken a copy of the patch and tested it. We hope to eventually automate the verification step, but for now both must be perfomed by hand.
+You'll be presented with a list of patches requiring review or, if someone has asked, patches you've been explicitly requested to review. There are two types of review - Code Review and Verification. Code Review means that you have read through the code, and are satisfied that it works properly, follows the tree's style, and generally doesn't suck. Verification means that you have taken a copy of the patch and tested it. We hope to eventually automate the verification step, but for now both must be performed by hand.
 
 To perform a code review, go through each of the diffs in the current changeset for the code you have decided to review. You can double click on a line to leave a comment. Once you have completed commenting, click on the 'Review' button that's about 3/4 of the way down the page containing the list of patch sets. You will then be asked to score the patch, with a range from -1 to +1. -1 means that you don't think the code should be applied, +1 means that it is good to apply. You can also leave further, general, comments for the patch submitter.
 
@@ -287,6 +313,8 @@ Git User's Manual <http://www.kernel.org/pub/software/scm/git/docs/user-manual.h
 Git Community Book <http://book.git-scm.com/>
 
 Gerrit Documentation <http://gerrit.googlecode.com/svn/documentation/2.0/index.html> (only the first 'User Guide' section of this document is relevant)
+
+Five advanced Git merge techniques <http://blog.ezyang.com/2010/01/advanced-git-merge/>
 
 ## <a name="Acknowledgments"></a> Acknowledgments
 
