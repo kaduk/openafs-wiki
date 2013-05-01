@@ -501,7 +501,7 @@ The technique used is to create a new volume, where every file in the RW copy is
 
 If the user now starts modifying data, the old copy must not be destroyed.
 
-There is a Copy-On-Write bit in the vnode - if the fileserver writes to a vnode with the bit on it allocates a new vnode for the data and turns off the COW bit. The BK volume hangs onto the old data, and the RW volume slowly splits itself away over time.
+There is a Copy-On-Write bit in the vnode; if the fileserver writes to a vnode with the bit on, it allocates a new vnode for the data and turns off the COW bit. The BK volume hangs onto the old data, and the RW volume slowly splits itself away over time.
 
 The BK volume is re-synchronised with the RW next time a "vos backupsys" is run.
 
