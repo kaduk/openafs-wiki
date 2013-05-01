@@ -1162,7 +1162,7 @@ Attempting to create shadows of two different rw volumes on the same partition w
 
 ### <a name="3.51 Can I authenticate to my af"></a> 3.51 Can I authenticate to my afs cell using multiple kerberos Realms?
 
-Yes. This can be usefull if your organization has multiple kerberos Realms with identical user entries: For example you might have an MIT Kerberos realm for Unix-like systems, and an Active Directory domain for windows with synchronized accounts.
+Yes. This can be useful if your organization has multiple kerberos Realms with identical user entries: For example you might have an MIT Kerberos realm for Unix-like systems, and an Active Directory domain for windows with synchronized accounts.
 
 As long as you only need to support 2 realms, and one of them has the same name as the afs cell(or the uppercase of the name of the afs cell) you can do this without upgrading to a new version of AFS. If you need more Realms, or if neither Realm name matches your cell name, there is work to support this in the development tree.
 
