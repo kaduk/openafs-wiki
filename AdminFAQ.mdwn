@@ -625,7 +625,7 @@ The following file systems have been reported _not_ to work for the AFS client c
 
 - reiserfs
 - vxfs (HP-UX)
-- advfs (Tru64), it works but gives cachecurruption
+- advfs (Tru64), it works but gives cache corruption
 - efs (SGI) - IBM AFS does support efs, but openafs doesn't have a license for that.
 
 - Patch committed to cvs around 6/2003 will now enforce this in some cases and generate a warning to the user if the filesystem type is wrong.
