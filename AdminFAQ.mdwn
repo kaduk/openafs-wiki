@@ -541,7 +541,7 @@ One good master source is the grand.central.org [[CellServDB]], available from <
 
 The client [[CellServDB]] file must not reside under /afs and is best located in local filespace.
 
-Simply updating a client [[CellServDB]] file is not enough. You also need to update the AFS kernel sitelist by either: 1 rebooting the client or 1 running "fs newcell $cell\_name $server\_list" for each site in the [[CellServDB]] file.
+Simply updating a client [[CellServDB]] file is not enough. You also need to update the AFS kernel sitelist by either: 1) rebooting the client or 2) running "fs newcell $cell\_name $server\_list" for each site in the [[CellServDB]] file.
 
 A script to update the AFS kernel sitelist on a running system is newCellServDB.
 
