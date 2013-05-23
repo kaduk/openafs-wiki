@@ -51,7 +51,7 @@ To disable the tracing when you are done:
 
 ### intermittent issues
 
-Unfortunately, "fsrace" produces a lot of output, so it is may not be easy to catch an intermittent error-condition, since fstrace uses a ring buffer.
+Unfortunately, "fstrace" produces a lot of output, so it is may not be easy to catch an intermittent error-condition.
 
 The attached script [[ClientTracing.py]] (presently for Unix only) gives you the opportunity to continuously run a fstrace, <br/>
 where the output is stored in rotating log-files. 
