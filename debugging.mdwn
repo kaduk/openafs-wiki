@@ -25,10 +25,33 @@ displays only threads which are not in this boring rx_GetCall (threads are waiti
 
 ## Debugging Clients
 
+### unix client tracing with fstrace
+
+Low-level debugging of a client can be done using "fstrace".  The analysis of
+the "fstrace" output requires detailed knowledge of cache manager internals.
+"fstrace" logs to an internal memory based ring buffer, which can be dumped to
+a file for analysis.
+
+To capture a trace, set the ring buffer size, enable the tracing to the buffer,
+run your tests, then dump the buffer. The following example creates a 1 Mb buffer:
+
+    fstrace setlog -buffersize 1024
+    fstrace setset -active
+    fstrace clear
+
+    -- do your tests --
+
+    fstrace dump -file /tmp/fstrace.out
+
+
+To disable the tracing when you are done:
+
+    fstrace setset -inactive
+
+
 ### intermittent issues
 
-Low-level debugging of a client can be done using "fstrace". <br/>
-Unfortunately, this produces a lot of output, so it is not easy to catch an intermittent error-condition with "fstrace".
+Unfortunately, "fsrace" produces a lot of output, so it is may not be easy to catch an intermittent error-condition, since fstrace uses a ring buffer.
 
 The attached script [[ClientTracing.py]] (presently for Unix only) gives you the opportunity to continuously run a fstrace, <br/>
 where the output is stored in rotating log-files. 
