@@ -1134,9 +1134,13 @@ If a volume is not in the VLDB, you will be unable to perform operations on it u
 
 ### <a name="3.48 What is a Volume Group?"></a> 3.48 What is a Volume Group?
 
-A volume group is a set of volumes whose volume id numbers differ only in the last three bits. This means that up to eight volumes may belong to a single volume group.
+You can think of a Volume Group as an RW volume, and all of the clones of that RW (its RO clone, BK clone, and any other clones). All of the volumes in a Volume Group can share storage for data that is the same between all of them. This is why, for example, an RO clone usually takes up very little disk space; since an RW and its RO clone are in the same Volume Group, they can share storage for unchanged data.
 
-Volumes which share storage on a partition (for example, a volume and its backup, or the r/w and r/o copy of a volume on the same partition) must be part of the same volume group.
+All of the volumes in a group usually have very similar volume ID numbers. For example, if an RW volume has ID 536870915, its RO clone will typically be 536870916. However, this is not required, as volume ID numbers can be almost anything. You can even manually specify what volume ID number you want for a volume when you create the volume with "vos create".
+
+Currently, you can only have about 8 volumes in a Volume Group. However, this limitation is due to technical details of the fileserver "namei" disk backend. If that backend is improved in the future, or if different backends are developed, the number of volumes in a volume group could be much greater.
+
+Some low-level documentation may refer to a "volume group ID". This is always the same as the RW volume ID.
 
 ### <a name="3.49 What is a Clone?"></a> 3.49 What is a Clone?
 
