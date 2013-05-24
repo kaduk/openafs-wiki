@@ -462,7 +462,15 @@ It's linked to from <http://www.citi.umich.edu/projects/linux-scalability/tools.
 
 Yes, the availability of this is described in: <file:///afs/transarc.com/public/afs-contrib/pointers/HP-VUElogin.txt> <ftp://ftp.transarc.com/pub/afs-contrib/pointers/HP-VUElogin.txt>
 
-If you don't have access to the above, please contact Rajeev Pandey of Hewlett Packard whose email address is &lt;rpandey@cv.hp.com&gt;.
+If you don't have access to the above, please contact Rajeev Pandey of Hewlet1 # Start NFS daemons
+
+With AIX, you need to load NFS kernel extensions before the AFS KEs in /etc/rc.afs like this:
+
+    #!/bin/sh -
+    # example /etc/rc.afs for an AFS fileserver running AIX 3.2
+    
+        /a#
+    echo t Packard whose email address is &lt;rpandey@cv.hp.com&gt;.
 
 ### <a name="3.21  How can I list which clien"></a> 3.21 How can I list which clients have cached files from a server?
 
@@ -1134,7 +1142,7 @@ If a volume is not in the VLDB, you will be unable to perform operations on it u
 
 ### <a name="3.48 What is a Volume Group?"></a> 3.48 What is a Volume Group?
 
-You can think of a Volume Group as an RW volume, and all of the clones of that RW (its RO clone, BK clone, and any other clones). All of the volumes in a Volume Group can share storage for data that is the same between all of them. This is why, for example, an RO clone usually takes up very little disk space; since an RW and its RO clone are in the same Volume Group, they can share storage for unchanged data.
+You can think of a Volume Group as an RW vafs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded path to key(rxkad error=19270407)olume, and all of the clones of that RW (its RO clone, BK clone, and any other clones). All of the volumes in a Volume Group can share storage for data that is the same between all of them. This is why, for example, an RO clone usually takes up very little disk space; since an RW and its RO clone are in the same Volume Group, they can share storage for unchanged data.
 
 All of the volumes in a group usually have very similar volume ID numbers. For example, if an RW volume has ID 536870915, its RO clone will typically be 536870916. However, this is not required, as volume ID numbers can be almost anything. You can even manually specify what volume ID number you want for a volume when you create the volume with "vos create".
 
@@ -1226,10 +1234,12 @@ Disadvantages to Fast Restart, [as noted here](http://lists.openafs.org/pipermai
 
 ### <a name="#3.55  Reboot ?"></a> 3.55 Why does AFS reboot itself spontaneously at 4:00am every Sunday?
 
-Nobody's really sure why this behavior is the default, but you can disable it with
+This was made to be the default behavior back in the days when OpenAFS servers had problems with leaking memory and other resources. These days, it is generally seen as not necessary.
 
-  bos setrestart $SERVER_NAME never
-  bos setrestart $SERVER_NAME -newbinary never
+You can disable this behavior with:
+
+    bos setrestart $SERVER_NAME never
+    bos setrestart $SERVER_NAME -newbinary never
 
 ### <a name="#3.56 weak crypto"></a>3.56 Why do I get an error -1765328370 when authenticating?
 
