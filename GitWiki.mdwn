@@ -38,7 +38,7 @@ OpenAFS wiki. This requires:
 
 Use 'git clone' to get the openafs-wiki source files:
 
-    git clone git://git.openafs.org/openafs-wiki.git
+    git clone ssh://gerrit.openafs.org/openafs-wiki.git
 
 This will clone the wiki git repository to a new directory called
 'openafs-wiki'.
@@ -47,6 +47,10 @@ Set up your OpenSSH configuration to connect to the gerrit server port as
 described in [[GitDevelopers]].  The commit hook which generates a gerrit
 'change id' as described in [[GitDevelopers]] is not required for pushing
 openafs-wiki changes to gerrit.
+
+Note: At this time, the git.openafs.org repo (gitweb) can trail the canonical
+repo on gerrit.openafs.org, since changes made through the web interface are
+not automatically propagated to the openafs gitweb.
 
 ## Setting up ikiwiki to preview your changes
 
