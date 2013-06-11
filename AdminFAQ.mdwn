@@ -77,15 +77,14 @@ The Administration Section of the [[AFSFrequentlyAskedQuestions]].
 
 ### <a name="3.01  Is there a version of xdm"></a><a name="3.01  Is there a version of xdm "></a> 3.01 Is there a version of xdm available with AFS authentication?
 
-Yes, xdm can be found in:
-
-<file:///afs/transarc.com/public/afs-contrib/tools/xdm> <ftp://ftp.transarc.com/pub/afs-contrib/tools/xdm/MANIFEST>
+These days this kind of functionality is provided by something like PAM.
+Acquiring AFS tokens via PAM can be done by a few different PAM modules,
+including Russ Allbery's
+[pam-afs-session](http://www.eyrie.org/~eagle/software/pam-afs-session/).
 
 ### <a name="3.02  Is there a version of xloc"></a> 3.02 Is there a version of xlock available with AFS authentication?
 
-Yes, xlock can be found in:
-
-<file:///afs/transarc.com/public/afs-contrib/tools/xlock> <ftp://ftp.transarc.com/pub/afs-contrib/tools/xlock/MANIFEST>
+See previous question.
 
 ### <a name="3.03  What is /afs/@cell?"></a> 3.03 What is /afs/@cell?
 
@@ -157,7 +156,7 @@ Partially because of the worry factor and largely because of Posix, this will ch
 
 AFS may be thought of as a collection of protocols and software processes, nested one on top of the other. The constant interaction between and within these levels makes AFS a very sophisticated software system.
 
-At the lowest level is the UDP protocol, which is part of TCP/IP. UDP is the connection to the actual network wire. The next protocol level is the remote procedure call (RPC). In general, RPCs allow the developer to build applications using the client/server model, hiding the underlying networking mechanisms. AFS uses Rx, an RPC protocol developed specifically for AFS during its development phase at Carnegie Mellon University.
+At the lowest level is the UDP protocol. UDP is the connection to the actual network wire. The next protocol level is the remote procedure call (RPC). In general, RPCs allow the developer to build applications using the client/server model, hiding the underlying networking mechanisms. AFS uses Rx, an RPC protocol developed specifically for AFS during its development phase at Carnegie Mellon University.
 
 Above the RPC is a series of server processes and interfaces that all use Rx for communication between machines. Fileserver, volserver, upserver, upclient, and bosserver are server processes that export RPC interfaces to allow their user interface commands to request actions and get information. For example, a bos status  command will examine the bos server process on the indicated file server machine.
 
@@ -219,19 +218,11 @@ It is not a good idea to run with tokens that do not expire because this would w
 
 A better approach is to re-authenticate just before the token expires.
 
-There are two examples of this that have been contributed to afs-contrib. The first is "reauth":
-
-- <file:///afs/transarc.com/public/afs-contrib/tools/reauth/>
-- <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth/MANIFEST>
-- <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/reauth-0.0.5.tar.gz>
-
-The second is "lat":
-
-<file:///afs/transarc.com/public/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs> <ftp://ftp.transarc.com/pub/afs-contrib/pointers/UMich-lat-authenticated-batch-jobs>
-
-Another collection of tools was [mentioned](https://lists.openafs.org/pipermail/openafs-info/2002-October/006353.html) by Daniel Clark:
-
-Another option is [OpenPBS](http://www.openpbs.org/) and [Password Storage and Retrieval](http://www.lam-mpi.org/software/psr/) (PSR), where you encrypt your AFS password with a public key and put it in your home directory, and trusted machine(s) which have the private key on local disk then decrypt your password and run your job. MIT uses a variant of this (e.g. [a](http://web.mit.edu/longjobs/www/) &amp; [b](http://mit.edu/longjobs-dev/notebook/)) that uses their own code (see [longjobs documentation](http://web.mit.edu/longjobs-dev/doc/netsec.txt) sections III and IV) instead of PSR.
+The most common way to achieve this these days is to generate a keytab
+containing the credentials you want the daemon to have, and use a program like
+[k5start](http://www.eyrie.org/~eagle/software/kstart/) to run the daemon with
+those credentials. The kstart tools can be compared to the old "reauth"
+program.
 
 ### <a name="3.10  Can I check my user&#39;s pass"></a> 3.10 Can I check my user's passwords for security purposes?
 
