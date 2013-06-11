@@ -51,19 +51,29 @@ Here is a summary of the differences:
 
 **Authentication:** [ User ]
 
-Before a user can access protected AFS files (s)he needs to become authenticated to AFS using the klog command (Kerberos login) to get a Kerberos "ticket granting ticket" (called a token from here on).
+Before a user can access protected AFS files (s)he needs to become
+authenticated to AFS using the klog command (Kerberos login) to get an AFS
+token. Or, a user can run "aklog" to convert existing krb5 tickets into an AFS
+token.
 
 Without a token, an unauthenticated user is given the AFS identity "system:anyuser" and as such is only able to access files in directories that have ACLs granting system:anyuser access.
 
-Many systems have the klog function built into the system login program. So a user would not even have to know they gain a token on logging in. If you use a system where you have to issue the klog command after login then you should run the pagsh command first (see below).
+Many systems have the klog/aklog functionality done automatically when the user
+logs in via PAM or some other login process. If you use a system where you have
+to issue the klog/aklog command after login, then you may want to run the pagsh
+command first (see below).
 
 AFS provides access control lists to give more precise control to users wishing to protect their files (see AFS ACL below).
 
 **File permissions:** [ User ]
 
-Unix mode bits for group and other are ignored. The mode bits for the file owner don't work the way they used to. See also question 2.21.
+Unix mode bits on files are usually ignored. The exception to this are the
+"owner" bits, which can be used to remove access for almost everyone accessing
+the file (that is, if you remove the "w" bit from the owner permissions, almost
+nobody can write to the file).
 
-Users should protect their AFS files with (directory) ACLs only. Just use mode bits to make a file executable.
+Instead of Unix mode bits, you should generally use AFS ACLs to protect your
+data (see below).
 
 **Data protection with AFS ACLs:** [ User ]
 
@@ -116,6 +126,12 @@ AFS does not support byte-range locking within a file, although lockf() and fcnt
 
 "afs: byte-range lock/unlock ignored; make sure no one else else is running this program."
 
+There are a couple of platform-specific exceptions to this behavior. Currently
+(as of 1.6.2), Linux clients will enforce byte-range file locks for processes
+on the local client only. In addition, Windows clients attempt to simulate
+byte-range locks for local processes, and acquire full-file locks on the
+fileserver when a byte-range lock is requested.
+
 **whole file locking:** [ Programmer ]
 
 AFS does support advisory locking an entire file with flock(). Processes on the same client workstation that attempt to lock a file obey the proper locking semantics.
@@ -125,10 +141,6 @@ Processes on different AFS clients requesting a lock on the same file would get 
 **character and block special files:** [ [[SysAdmin]] ]
 
 AFS does not support character and block special files. The mknod command does not create either character or block special files in /afs.
-
-**AFS version of fsck:** [ [[SysAdmin]] ]
-
-On an AFS server, the partitions containing served files are NOT unix filesystems and standard fsck **must** not be used - use the AFS version instead.
 
 ### <a name="2.02  What is an AFS protection"></a><a name="2.02  What is an AFS protection "></a> 2.02 What is an AFS protection group?
 
@@ -254,7 +266,8 @@ There are short-hand forms:
 
 A command to get a new shell with a process authentication group (PAG).
 
-This is normally used if your system does not use the AFS version of login. It is used to get a PAG prior to running klog.
+This is normally used if your system does not get AFS tokens on login. It is
+used to get a PAG prior to running klog/aklog.
 
 The PAG uniquely identifies the user to the Cache Manager. Without a PAG the Cache Manager uses the unix UID to identify a user.
 
@@ -262,24 +275,36 @@ The PAG uniquely identifies the user to the Cache Manager. Without a PAG the Cac
 
 There are two reasons:
 
-1. Child processes inherit the PAG and the Kerberos token so they are AFS authenticated.
+1. Child processes inherit the PAG and the AFS token so they are AFS authenticated.
 
 1. For security: if you don't have a PAG then the Cache Manager identifies you by unix UID. Another user with root access to the client could su to you and therefore use your token.
 
 ### <a name="2.08  How can I tell if I have a"></a> 2.08 How can I tell if I have a PAG?
 
-You can tell if you have a PAG by typing "groups". A PAG is indicated by the appearance of two integers in the list of groups.
+Usually you can tell if you have a PAG by typing "groups". A PAG is indicated
+by the appearance of one or two large integers in the list of groups.
 
 For example:
 
-       sylvester@toontown $ groups
-       33536 32533 staff catz
+    sylvester@toontown $ groups
+    33536 32533 staff catz
+
+On Linux clients, your PAG may not show up as such a group in the group list.
+An alternative way to check on Linux is to look at your kernel keyring with
+"keyctl show":
+
+    $ keyctl show
+    Session Keyring
+           -3 --alswrv   1000  1000  keyring: _ses.32603
+    819041549 ----s--v      0     0   \_ afs_pag: _pag
+
+If you see an afs_pag key in the output, then you are in a PAG.
 
 ### <a name="2.09  Can I still run cron jobs"></a><a name="2.09  Can I still run cron jobs "></a> 2.09 Can I still run cron jobs with AFS?
 
 Yes, but remember that in order to fully access files in AFS you have to be AFS authenticated. If your cron job doesn't klog then it only gets system:anyuser access.
 
-The klog command has a "-pipe" option which will read a password from stdin. IF (yes, that's a big if :-) you are prepared to store your password in a local (non-AFS) file then you might use the following:
+The klog command has a "-pipe" option which will read a password from stdin. IF (yes, that's a big if) you are prepared to store your password in a local (non-AFS) file then you might use the following:
 
 (a) create a "wrapper" script to get a PAG, get your AFS token and execute a command:
 
@@ -349,46 +374,22 @@ Note that you can still run a cron job without getting a token if the task does 
 
 ### <a name="2.10  How much disk space does a"></a> 2.10 How much disk space does a 1 byte file occupy in AFS?
 
-One kilobyte.
-
-Other filesystems allocate different file block sizes. For example, IBM's AIX version 3 journaled file system (JFS) uses 4K blocks (exception: 2K for the 160MB disk drive).
-
-Such blocksize differences lead to variations on the amount of disk space required to store files. Copying a directory from AFS to AIX JFS would require more space in JFS because of the block fragmentation.
-
-Example:
-
-(a) Create a one byte file in AFS and use "ls -s" to show how many kilobytes it occupies:
-
-          ariel@atlantica $ echo z >/afs/dsea/tmp/one_byte_file
-          ariel@atlantica $ ls -s /afs/dsea/tmp/one_byte_file
-             1 /afs/dsea/tmp/one_byte_file
-
-(b) Create same file in local filesystem (AIX JFS):
-
-          ariel@atlantica $ echo z >/tmp/one_byte_file
-          ariel@atlantica $ ls -s /tmp/one_byte_file
-             4 /tmp/one_byte_file
+This varies depending on the filesystem used by the fileserver containing that
+file. Some filesystems may only use up 1024 bytes for such a file, and others
+may use 4096; still others may use more or fewer bytes.
 
 ### <a name="2.11  Is it possible to specify"></a><a name="2.11  Is it possible to specify "></a> 2.11 Is it possible to specify a user who is external to the current AFS cell on an ACL?
 
-No. You cannot reference a particular user from another AFS cell.
-
-You can specify an IP address on the ACL; this means any and all users from the host with that IP address.
-
-Another solution to this problem is to give the external user an "authentication-only" account in your AFS cell. This means that (s)he can klog (but has no home directory) in your cell.
-
-    # Example: AFS administrator creates an authentication-only user
-    $ uss add daffy "Daffy Duck" -t /dev/null
-    $ kas setpassword daffy -admin admin
-
-Cross-realm authentication (where co-operating cells are able to specify remore users as "user@remote.cell" on an ACL) is an **unsupported** feature of AFS 3.3a. That means that Transarc doesn't promise to make it work for you, nor keep it running in future releases.
+Yes. This requires setting up a cross-realm relationship with the Kerberos
+realm on the remote site, but this is possible. Typically you refer to "remote"
+users like "user@remote.cell", and you can use them in ACLs, or add them to pts
+groups.
 
 ### <a name="2.12  Are there any problems pri"></a> 2.12 Are there any problems printing files in /afs?
 
-The issue of printing in AFS is almost always the same: what do you send to the printing daemon? Do you send it the bytes you want to print or do you just send the file name containing those bytes? If you send it a file name, you have to be sure that the printing daemon can read it. Most daemons run with no AFS tokens, so can't access directories unless they are open for system:anyuser read access. Often, printing commands (lpr, lp, enq) have an option that allows for both modes of operation, though the default behavior varies from system to system. If you're interested in making your daemons authenticate to AFS, check out the example scripts in AFS-Contrib:
+The issue of printing in AFS is almost always the same: what do you send to the printing daemon? Do you send it the bytes you want to print or do you just send the file name containing those bytes? If you send it a file name, you have to be sure that the printing daemon can read it. Most daemons run with no AFS tokens, so can't access directories unless they are open for system:anyuser read access. Often, printing commands (lpr, lp, enq) have an option that allows for both modes of operation, though the default behavior varies from system to system. If you're interested in making your daemons authenticate to AFS, check out Russ Allbery's kstart package:
 
-- <file:///afs/transarc.com/public/afs-contrib/tools/reauth-example>
-- <ftp://ftp.transarc.com/pub/afs-contrib/tools/reauth-example/MANIFEST>
+- <http://www.eyrie.org/~eagle/software/kstart/>
 
 Another common problem is setuid printing commands. For instance, the "enq" command runs as root, daemon, or some such user. If you aren't using the AFS login and simply issue "klog" to get tokens, those tokens are associated with your uid. When setuid programs run, they lose access to your token and often can't read the file name given as an argument. The solution in this case is to use "pagsh" before "klog" so that your tokens are transferred to subprocesses automatically by group membership. This works even if the uid changes, as for setuid programs.
 
@@ -420,15 +421,21 @@ You don't need to reboot, and the Cache Manager activity is "invisible" to the u
 
 ### <a name="2.15  Can I use AFS on my diskle"></a> 2.15 Can I use AFS on my diskless workstation?
 
-Yes. The AFS Cache Manager can be configured to work with either a disk based cache or a memory (RAM) based cache. With the latter, you can expect file access from the cache with a whizz!
+Yes. The AFS Cache Manager can be configured to work with either a disk based
+cache or a memory (RAM) based cache.
 
-<http://www.uni-hohenheim.de/~schaefer/afs/info-afs/1306.html>
+Note that using a memory cache may not be as fast as you might think. Modern
+operating systems should cache disk data in memory when accessed, so using a
+disk cache should mean you are hitting RAM most of the time anyway. Disk caches
+are also much more common, and thus much more heavily tested, and so is more
+optimized. If you have the local disk and it's reasonably fast, usually going
+with a disk cache is the better way to go.
 
 ### <a name="2.16  Can I test for AFS tokens"></a><a name="2.16  Can I test for AFS tokens "></a> 2.16 Can I test for AFS tokens from within my program?
 
-Yes. Some sample code showing how to do this can be found in:
-
-<file:///afs/transarc.com/public/afs-contrib/tools/auth-samples/listtokens.c> <ftp://ftp.transarc.com/pub/afs-contrib/tools/auth-samples/listtokens.c>
+Yes. However, the mechanism for doing so varies depending on the platform. To
+see examples of how to do this, you can look at the source of any program that
+deals with AFS tokens. One such example is [pam-afs-session](http://www.eyrie.org/~eagle/software/pam-afs-session/)
 
 ### <a name="2.17  What&#39;s the difference betw"></a> 2.17 What's the difference between /afs/cellname and /afs/.cellname?
 
