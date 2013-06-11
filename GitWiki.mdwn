@@ -50,7 +50,10 @@ openafs-wiki changes to gerrit.
 
 Note: At this time, the git.openafs.org repo (gitweb) can trail the canonical
 repo on gerrit.openafs.org, since changes made through the web interface are
-not automatically propagated to the openafs gitweb.
+not automatically propagated to the openafs gitweb. This means that if you want
+to make changes by pulling and pushing via git, you must pull from the
+gerrit.openafs.org repository above. If you pull from git.openafs.org,
+subsequent pushing may fail.
 
 ## Setting up ikiwiki to preview your changes
 
