@@ -27,7 +27,7 @@ The General Section of the [[AFSFrequentlyAskedQuestions]].
         <li><a href="#1.06  Which systems is AFS avail"> 1.06 Which systems is AFS available for?</a></li>
         <li><a href="#1.07  What does "ls /afs" displa"> 1.07 What does "ls /afs" display in the Internet AFS filetree?</a></li>
         <li><a href="#1.08  Why does AFS use Kerberos"> 1.08 Why does AFS use Kerberos authentication?</a></li>
-        <li><a href="#1.09  Does AFS work over protoco"> 1.09 Does AFS work over protocols other than TCP/IP?</a></li>
+        <li><a href="#1.09  Does AFS work over protoco"> 1.09 Does AFS work over protocols other than UDP/IP?</a></li>
         <li><a href="#1.10  How can I access AFS from"> 1.10 How can I access AFS from my PC?</a></li>
         <li><a href="#1.11  How does AFS compare with"> 1.11 How does AFS compare with NFS?</a></li>
       </ul>
@@ -273,13 +273,18 @@ Kerberos improves security because a users's password need only be entered once 
 
 AFS uses Kerberos to do complex mutual authentication which means that both the service requester and the service provider have to prove their identities before a service is granted.
 
-Originally AFS shipped with it's own version of a Kerberos, called "KAS." KAS still ships at this time (1.4.2 release) but is depricated in favor of using a true Kerberos 5 implimentation. [[OpenAFS]] does not currently ship with a K5 install; it is up to the administrator(s) to choose a version (either MIT's or KTH's "Heimdal") and install it. [[OpenAFS]] will happily work with either.
+Originally AFS shipped with it's own version of a Kerberos, called "KAS." KAS still ships at this time (1.6.2 release) but is deprecated in favor of using a true Kerberos 5 implementation. [[OpenAFS]] does not currently ship with a krb5 install; it is up to the administrator(s) to choose a version (MIT krb5, Heimdal, Active Directory, etc) and install it. [[OpenAFS]] will happily work with any KDC.
 
 For more detail on this and other Kerberos issues see the faq for Kerberos (posted to news.answers and comp.protocols.kerberos) [[[Jaspan|FurtherReading#Jaspan]]]. (Also, see [[[Miller87|FurtherReading#Miller87]]], [[[Bryant88|FurtherReading#Bryant88]]], [[[Bellovin90|FurtherReading#Bellovin90]]], [[[Steiner88|FurtherReading#Steiner88]]])
 
-### <a name="1.09  Does AFS work over protoco"></a> 1.09 Does AFS work over protocols other than TCP/IP?
+### <a name="1.09  Does AFS work over protoco"></a> 1.09 Does AFS work over protocols other than UDP/IP?
 
-No. AFS was designed to work over TCP/IP.
+No. AFS was designed to work over UDP/IP, and does not use TCP/IP.
+
+There is some work being done (see
+[here](http://conferences.inf.ed.ac.uk/eakc2012/slides/201210_eakc_oob.pdf)) to
+allow AFS to make use of other network transports, including TCP, but this is
+still experimental and undergoing development.
 
 ### <a name="1.10  How can I access AFS from"></a><a name="1.10  How can I access AFS from "></a> 1.10 How can I access AFS from my PC?
 
