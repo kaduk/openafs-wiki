@@ -1,0 +1,801 @@
+# Solaris 11 Quick Start
+
+These instructions have been tested on [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+11 and on [[OpenIndiana|http://openindiana.org]] for X86. Aside from
+slight changes to the [[Kerberos|KerberosV]] server appendix (as noted), there
+is no difference between two. With minor changes they should work for SPARC as
+well; mostly, this involves replacing `amd64` with `sparcv9` or the
+appropriate platform.
+
+It is believed that these instructions will work similarly on [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+10 (making sure you use the [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+10 version of the [[OpenAFS]] binary distribution), but this has not been
+tested.
+
+This is divided into tasks; several of these tasks interact with each other
+(for example, if you are setting up a new cell then you are setting up a db
+server and either you will also need to make it a client or you will need a
+client available on some other machine that can authenticate to the new
+cell; likewisem either it will also be a file server, or you will be setting
+up a file server immediately afterward). This also means that the sections in
+this document may appear to be a bit scrambled, because the final client steps
+are embedded in the middle of server setup when a working client is needed
+during cell setup.
+
+[[!toc  startlevel=2]]
+
+## Initial steps
+
+### Choosing a realm and cell name
+
+If you are setting up a new cell, you will need to choose a
+[[Kerberos|KerberosV]] realm and [[OpenAFS]] cell name. By convention, these
+are based on your DNS domain name: if your domain name is `example.com` then
+your cell would be `example.com` and your realm is `EXAMPLE.COM`. Various
+things will default to this if they cannot find any configuration telling them
+otherwise, and in general it makes things easier when the names are related in
+this way.
+
+Some things to watch out for, though:
+
+1. [[Active
+Directory|http://technet.microsoft.com/en-us/library/cc782657(v=ws.10).aspx]]
+domains are [[Kerberos|KerberosV]] realms, and export their
+[[Kerberos|KerberosV]] services via DNS `SRV` records. It is best not to use
+the same realm name as an existing [[Active
+Directory|http://technet.microsoft.com/en-us/library/cc782657(v=ws.10).aspx]]
+domain, as you will not be able to set up any cross-realm trusts with
+it. (Also beware of someone setting up an [[Active
+Directory|http://technet.microsoft.com/en-us/library/cc782657(v=ws.10).aspx]]
+domain afterward that matches your realm.)
+
+2. If your organization is a division of some larger organization, you should
+coordinate with the rest of the organization so that you will be able to set
+up cross-realm trust in the future. Even if the larger organization does not
+use any form of [[Kerberos|KerberosV]] or [[OpenAFS]] as yet, there are both
+technical and political reasons not to usurp the larger organization's
+name. (Yes, this has happened.)
+
+### Fixing `/etc/hosts` on servers
+
+After a default install of [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+or [[OpenIndiana|http://openindiana.org]], `/etc/hosts` contains a
+configuration which is convenient for standalone notebook computers but which
+is questionable for fixed desktops and actively damaging for servers. You
+should edit `/etc/hosts` and remove all mentions of the local host name from
+the loopback addresses (`::1` and `127.0.0.1`). For a server, you should add
+the server's IP address(es) and assign the local host name to those addresses,
+*making sure that the fully qualified domain name is listed first* (the
+installer often lists the short name first, which results in a number of
+network services not finding their proper host names). An [[OpenAFS]] file
+server may also be misled into registering its volumes with the loopback
+address, resulting in their being inaccessible if this is not corrected.
+
+### Configuring [[NTP|FurtherReading#NTP]]
+
+[[OpenAFS]] requires time synchronization between all (server and client)
+machines in a cell, both for [[Kerberos|KerberosV]] authentication and so that
+file timestamps will be consistent. Most commonly, the [[Network Time Protocol
+(NTP)|FurtherReading#NTP]] is used for this purpose, although other
+arrangements are possible. This document describes the use of
+[[NTP|FurtherReading#NTP]]; if you want to use some other mechanism, set that
+up now and continue with the next step.
+
+In many cases, you will want a local time server in your cell; this should
+probably be a separate machine. Ideally, it is *not* a virtual machine,
+because they are at the mercy of their host for their internal timekeeping
+(that is, the VM cannot "see" time passing while another VM on the host or the
+host itself is processing) and therefore do not keep time well enough to
+provide time services for other machines. Additionally, for obvious reasons
+you could not use it to provide time synchronization for its host.) For these
+instructions, we are assuming that a time server has already been created or
+selected for the cell.
+
+    cd /etc/inet
+    cp ntp.client ntp.conf
+    vi ntp.conf
+
+Usually you will want to comment out the `multicastclient` directive (it's
+enabled by default on [[OpenIndiana|http://openindiana.org]] but disabled on [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]])
+and uncomment one or more `server` directives. The `iburst` parameter speeds
+up initial synchronization after system startup and is
+recommended. `multicastclient` is *not* recommended because it takes longer to
+perform initial synchronization; this makes it "good enough" for many
+desktops, but may result in unexpected authentication failures or "odd"
+timestamps when using a network filesystem. (This is equally true when using
+NFS or SMB network filesystems. Note that modern takes on both NFS and SMB
+also use [[Kerberos|KerberosV]] and therefore require time synchronization for
+authentication to work properly.)
+
+    svcadm enable network/ntp
+
+### Configuring [[Kerberos|KerberosV]]
+<a name="krb5">
+
+If you are setting up a new cell, you will want to set up at least one Key
+Distribution Center (KDC); most commonly (and for historical reasons) these
+are often run on the [[OpenAFS]] db server hosts. An
+[[appendix|SolarisQuickStart#krb5kdc]] covers setting up a KDC for a new
+cell using the [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+or [[OpenIndiana|http://openindiana.org]] bundled [[Kerberos|KerberosV]].
+
+Newer [[Kerberos|KerberosV]] installations may use DNS for autoconfiguration,
+in which case a local `krb5.conf` is not needed except to set defaults. This
+is convenient, but may be subject to DNS spoofing attacks.
+
+This document assumes that you are using the [[Kerberos|KerberosV]]
+distributed along with [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+/ [[OpenIndiana|http://openindiana.org]]. It is also possible to use other
+[[Kerberos|KerberosV]] implementations, such as [[MIT
+Kerberos|http://web.mit.edu/kerberos/]] or [[Heimdal|http://h5l.org]].
+
+    cd /etc/krb5
+    ln -s krb5/krb5.conf /etc/krb5.conf # for Solaris bundled Kerberos
+
+The bundled [[Kerberos|KerberosV]] uses `/etc/krb5/krb5.conf` but many
+[[Kerberos|KerberosV]] tools, including the `aklog` shipped with [[OpenAFS]],
+assume that it is `/etc/krb5.conf`. The symlink lets these programs work
+properly with the bundled [[Kerberos|KerberosV]].
+
+    vi krb5.conf
+
+The stock `krb5.conf` has an example configuration which is commented out and
+contains placeholders. You should uncomment the configuration and replace the
+placeholders. In most cases, the [[Kerberos|KerberosV]] realm is the
+[[OpenAFS]] cell name converted to uppercase; for example, for the cell
+`example.com` the corresponding [[Kerberos|KerberosV]] realm is
+`EXAMPLE.COM`. Remember to replace *all* of the placeholders!
+
+Many sites will not need the `domain_realm` entries, as [[Kerberos|KerberosV]]
+will automatically infer a realm from a domain name. This requires properly
+configured DNS and that the domain name matches the realm. There is one
+potential trap, however: if you (as is common) have a server whose name is the
+domain name instead of that of a machine within the domain (compare
+`www.example.com` and `example.com`), you would need to provide a
+`domain_realm` mapping for `example.com` or [[Kerberos|KerberosV]] would infer
+the realm `COM` for it! This is why typically you will see two entries in
+`domain_realm`:
+
+    [domain_realm]
+    example.com = EXAMPLE.COM
+    .example.com = EXAMPLE.COM
+    # the second entry is not actually necessary if the domain and realm match
+    # the first is necessary
+
+**IMPORTANT** One additional change is needed to `krb5.conf` for [[OpenAFS]]
+to work. While work is ongoing on a modern encryption / security protocol
+(`rxgk`), current [[OpenAFS]] versions are limited to an older, weaker
+encryption scheme which modern [[Kerberos|KerberosV]] implementations disable by
+default. You will need to add a line to the `libdefaults` section to re-enable
+this scheme:
+
+    [libdefaults]
+    allow_weak_crypto = true
+
+(We don't like this either, but there isn't anything to be done about it until
+`rxgk` is ready.)
+
+### Adding `/usr/afsws/bin` and `/usr/afs/bin` to the system path
+
+[[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+does not support a directory of profile fragments (such as Linux's
+`/etc/profile.d`), so you will need to edit `/etc/profile` and `/etc/.login`
+to add `/usr/afsws/bin` (and, on servers, `/usr/afs/bin`) to `$PATH`. Note
+that, on servers, you may wish to not place `/usr/afs/bin` on the system path,
+but instead have administrators add it to `$HOME/.profile` or `$HOME/.login`
+as needed.
+
+As a convenience while setting up the server, if you don't want to log out and
+back in to pick up the new path, you can set it directly in your shell.
+
+#### `csh` and `tcsh`
+
+    % set path=(/usr/afs/bin /usr/afsws/bin $path:q)
+
+#### Older Solaris `/bin/sh`
+
+    $ PATH="/usr/afs/bin:/usr/afsws/bin:$PATH"
+    $ export PATH
+
+#### Most other shells
+
+    $ export PATH="/usr/afs/bin:/usr/afsws/bin:$PATH"
+
+(You're on your own if you are using a non-traditional shell such as `rc` or
+`fish`.) These are also the commands you would add to `/etc/profile` and
+`/etc/.login`.
+
+## Unpacking the distribution
+
+Unlike the Linux packages, [[OpenAFS]] for [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+is distributed as a "dest" tree with minimal configuration. (An IPS package is
+planned for the future; this will also use modern paths instead of the old
+Transarc-style paths.)
+
+    cd /usr
+    gzip -dc sunx86_511.tar.gz | tar xf - # on SPARC, replace sunx86 with sun4x
+    # OpenIndiana and newer Solaris allow: tar xfz sunx86_511.tar.gz
+    mv sunx86_511/dest afsws
+    rmdir sunx86_511
+    cd afsws
+    mv root.client/usr/vice /usr/vice
+    rmdir -p root.client/usr
+    ln -s /usr/vice/etc/modload/afs.rc /etc/init.d/afs
+    ln -s ../init.d/afs /etc/rc2.d/S70afs
+    ln -s ../init.d/afs /etc/rc0.d/K66afs
+    cp /usr/vice/etc/modload/libafs64.nonfs.o /kernel/drv/amd64/afs
+
+Two things about the final command:
+
+1. On SPARC, both filenames need to be adjusted.
+
+2. [[OpenAFS]] contains support for an AFS/NFS translator which allows an AFS
+client (*not* server) to re-export part of AFS over NFS and will provide
+limited authentication features and `@sys` translation for NFS clients
+accessing the NFS share. This implementation requires that `libafs64.o` be
+installed instead of `libafs64.nonfs.o`. However, the Translator is known not
+to work properly with current [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+versions, so for practical purposes only the `nonfs` version should be
+installed.
+
+## Setting up a client
+
+The default client configuration assumes a traditional cell with a manually
+populated `root.afs` volume and no need to support file managers. Modern cells
+typically expect clients to use a dynamic root volume instead; additionally, a
+number of file managers (Windows Explorer, Gnome's Nautilus, KDE's Dolphin,
+Thunar, etc.) and various GUI file open/save dialogs have a certain tendency
+to try to enumerate `/afs` as if it were a local filesystem, with unfortunate
+results.
+
+    mkdir /usr/vice/etc/config
+    egrep '^(EXTRAOPTS|MEDIUM)=' /etc/init.d/afs |
+    sed 's/^[A-Z][A-Z]*="\(.*\)"$/\1/' >/usr/vice/etc/config/afsd.options
+
+You may wish to replace `MEDIUM` with `SMALL` or `LARGE`; while the latter
+uses a bit more memory, modern machines should not have an issue with it, and
+client performance will be better.
+
+    echo ' -dynroot -fakestat' >>/usr/vice/etc/config/afsd.options
+
+The quoting and leading space are so that you don't need to care about
+[[which `echo` you're getting|http://everything2.com/title/The+UNIX+and+the+Echo]].
+
+If you are going to make this machine a db or file server, continue with the
+next section. Otherwise, skip ahead to
+[[Basic client functionality|SolarisQuickStart#basicclient]].
+
+## Setting up a server
+
+[[OpenAFS]] requires a number of databases: the Protection (`pt`) Database
+records users and groups, and the Volume Location (`vl`) Database records the
+file servers which hold copies of a volume. An AFS cell requires that at least
+one (and preferably three; you should avoid having only *two* because of a
+shortcoming in the quorum process) db server exist; each db server must
+provide both prdb and vldb services. Most installations also provide KDCs on
+the db hosts, because older versions of AFS included an additional Kerberos
+Authentication (`ka`) database based on an older, now known to be insecure,
+version of the Kerberos protocol. [[OpenAFS]] *does not* require that the
+KDCs be on the db servers, unless for some reason you must use `kaserver`
+instead of [[Kerberos 5|KerberosV]] KDCs.
+
+It is **very strongly** advised that you not use `kaserver` except in existing
+`kaserver`-based installations, and that such installations be upgraded to use
+[[Kerberos 5|KerberosV]] as soon as possible; the older Kerberos 4 protocol
+has severe security issues, which are inherited by `kaserver`. Note that, as
+these are protocol flaws, it is not possible to patch `kaserver` to fix them;
+an (incompatible) new protocol is required.
+
+    cd /usr
+    mv afsws/root.server/usr/afs afs
+    cd afs
+    mkdir etc db local logs
+    chown root . bin
+    chmod 700 local db
+
+At this point, if you are adding a server to an *existing* cell, you should
+copy the `KeyFile` from an existing db server or file server. (This file is
+highly sensitive, as servers use it to authenticate to each other and
+administrators may use it to authenticate to servers; use a secure copying
+protocol such as `scp`.) If this is a *new* cell, you will need to create a
+cell principal: use `kadmin` as a principal with [[Kerberos|KerberosV]]
+administrative rights.
+
+    kadmin: addprinc -randkey -e des-cbc-crc:normal afs/cell
+    kadmin: ktadd -k /usr/afs/etc/afs.keytab -e des-cbc-crc:normal afs/cell
+
+The string `cell` above should be replaced with the name of the cell (note:
+*not* the [[Kerberos|KerberosV]] realm or domain name as with most
+[[Kerberos|KerberosV]] service principals!). It is also possible to use simply
+`afs` as the cell principal, but this is not recommended for new
+installations. Note the key version number reported by `ktadd`; you will
+need this for `asetkey`. You will then need to use this
+principal to create a `KeyFile`:
+
+    /usr/afs/bin/bosserver -noauth
+    /usr/afs/bin/asetkey add vno /usr/afs/etc/afs.keytab afs/cell
+    pkill bosserver
+
+As above, replace `cell` with the cell name; also replace `vno` with the key
+version number. (Again, if this appears to be `1` then you have probably
+confused the `Key` with the `MKey`; use `ktutil`, or `getprinc` inside
+`kadmin`, to get the correct key `vno`.) `bosserver` will create an initial
+`ThisCell` and `CellServDB` (which `asetkey` requires even though it doesn't
+use them).
+
+Once you have a `KeyFile` in place, you are ready to configure a server.
+
+If this is an existing cell, you should copy the *server* `ThisCell`,
+`CellServDB`, and `UserList` to `/usr/afs/etc`. (These will usually be in
+`/usr/afs/etc` or `/etc/openafs/server` depending on how the existing server
+is configured.) Otherwise:
+
+    /usr/afs/bin/bosserver
+    /usr/afs/bin/bos setcellname localhost cell -localauth
+    /usr/afs/bin/bos adduser localhost admin -localauth
+
+As before, replace `cell` with the actual cell name. If this complains about
+authentication, you will need to verify your [[Kerberos|KerberosV]]
+configuration and that your `KeyFile` matches the KDC.
+
+If this machine is only to be a file server and not a db server, skip ahead to
+[[Setting up a file server|SolarisQuickStart#fileserver]].
+
+## Setting up a db server
+
+If you haven't already, start the Basic OverSeer (`bos`) service.
+
+    /usr/afs/bin/bosserver
+
+If you are adding a new machine to an existing cell, register the machine as a
+new db server:
+
+    /usr/afs/bin/bos addhost localhost fqdn -localauth
+
+`fqdn` here is the fully qualified domain name of the local host. Note that
+this will also need to be run (with *this* host's name) on the existing db
+servers so that they will know about the new db server.
+
+    /usr/afs/bin/bos create localhost pt simple /usr/afs/bin/ptserver -localauth
+    /usr/afs/bin/bos create localhost vl simple /usr/afs/bin/vlserver -localauth
+
+If this is an existing cell that uses `kaserver` then you will need to set
+that up as well:
+
+    /usr/afs/bin/bos create localhost ka simple /usr/afs/bin/kaserver -localauth
+
+If this is a *new* cell then you need to initialize the Protection Database
+and create the `UserList`. Note that at this point you need a working client;
+it is somewhat easier if this client is running on the new server, since a
+remote client probably does not have an appropriate `KeyFile` and it cannot
+authenticate as the cell admin until *after* this command is run. If this is a
+new db server in an existing cell, you are done except for doing the `bos
+addhost` above on the existing db servers and waiting for the new server to
+replicate the databases. (If it is a file server, you probably want to
+continue with the next section and then skip ahead to
+[[Setting up a file server|SolarisQuickStart#fileserver]].)
+
+## Basic client functionality
+<a name="basicclient">
+
+Configure the client `ThisCell` and `CellServDB`. If you are using DNS for
+[[OpenAFS]] autoconfiguration, you don't absolutely need the `CellServDB`; if
+you are using dynamic root, you may also want `CellAlias`. If this client is
+in an existing cell, easiest is probably to copy these files from an existing
+client. For a new cell, the cell setup above, as of [[OpenAFS]] 1.6.2, will
+have created the client `ThisCell` from the server `ThisCell` and made
+`CellServDB` a symlink to the server one. (Beware of this; naïvely copying
+another `CellServDB` over this will overwrite the server `CellServDB`!)
+
+    cd /usr/vice/etc
+    mv CellServDB CellServDB.local
+    # copy an existing CellServDB, such as the grand.central.org master, to CellServDB.master
+    cat CellServDB.local CellServDB.master >CellServDB
+
+If this is a server and you do not want to run a full client, this is all you
+need to do; skip to [[Finishing new db server
+configuration#SolarisQuickStart#finishing]] or
+[[Setting up a file server|SolarisQuickStart#fileserver]] as
+appropriate. If you want a full client, continue with the next section.
+
+## Final client configuration
+
+If you are using `-fakestat`, you will want a `CellAlias` for the local cell,
+and possibly sibling or other often used cells, so that they will be usable
+with short names.
+
+    echo cell shortname >/usr/vice/etc/CellAlias
+    echo anothercell shortname >>/usr/vice/etc/CellAlias
+
+`cell` is the full name of the local cell, and `shortname` is the alias
+(e.g. `example.com example`).
+
+Create the AFS mountpoint and cache directory.
+
+    mkdir /afs
+    mkdir -p /var/vice/cache
+
+The cache should be on its own filesystem. Most modern [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+installations use
+[[ZFS|http://www.oracle.com/technetwork/server-storage/solaris11/technologies/zfs-338092.html]]
+"out of the box"; this is both blessing and curse, as
+[[ZFS|http://www.oracle.com/technetwork/server-storage/solaris11/technologies/zfs-338092.html]]
+makes partitioning easy but the current [[OpenAFS]] cache implementation plays
+poorly with a
+[[ZFS|http://www.oracle.com/technetwork/server-storage/solaris11/technologies/zfs-338092.html]]-based
+cache; we therefore use a legacy cache partition:
+
+    zfs create -V size rpool/venus
+
+`size` should be somewhat larger than the expected cache size. `rpool` is the
+name that current [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+and [[OpenIndiana|http://openindiana.org]] use for the automatically created
+initial
+[[ZFS|http://www.oracle.com/technetwork/server-storage/solaris11/technologies/zfs-338092.html]]
+pool; you may have additional, or differently named, pools — use `zpool list`
+to see the available pools. (`venus` can be anything you want that isn't
+already in use; historically, the AFS2 cache manager component was called
+`venus`, so it is used as such here. Compare `vice` for server-related things,
+in particular the server partitions.)
+
+Create the cache filesystem. The example here uses a
+[[ZFS|http://www.oracle.com/technetwork/server-storage/solaris11/technologies/zfs-338092.html]]
+zvolume; if you are using a traditional slice, substitute its raw and block
+device names.
+
+    newfs /dev/zvol/rdsk/rpool/venus # or e.g. /dev/rdsk/c0t0d0s4
+    mount /dev/zvol/dsk/rpool/venus /var/vice/cache # or e.g. /dev/dsk/c0t0d0s4
+
+(You can use the block device for both; you can't mount the raw device, though.)
+
+You will also need to add this to `/etc/vfstab` so that it will be mounted at
+system startup. The entry to add to the end of `vfstab` will look something
+like:
+
+    /dev/zvol/dsk/rpool/venus   /dev/zvol/rdsk/rpool/venus   /var/vice/cache   ufs   2   yes   -
+
+The first entry is the block device; the second should be the raw device, for
+`fsck`.
+
+Create the `cacheinfo` file.
+
+    echo /afs:/var/vice/cache:size >/usr/vice/etc/cacheinfo
+
+`size` is some size which is smaller than the actual cache partition size,
+since the [[OpenAFS]] cache may temporarily grow beyond its defined size under
+some circumstances.
+
+And we should be ready to start the client:
+
+    /etc/init.d/afs start
+
+Note that, in a new cell, `/afs` won't be usable just yet; we haven't set up a
+file server, and there is no `root.cell` volume (or `root.afs` for traditional
+non-dynamic root configurations), and accessing `/afs` or the local cell will
+produce errors.
+
+If this is a client instead of a server, you are now done! If it is a file
+server, skip to [[Setting up a file server|SolarisQuickStart#fileserver]]. If
+it is a database server, continue to the next section.
+
+## Finishing new db server configuration
+<a name="finishing">
+
+Now that we have a client, we can finish setting up the admin account:
+
+    /usr/afsws/bin/pts createuser admin -localauth
+    /usr/afsws/bin/pts adduser admin system:administrators -localauth
+
+(It is somewhat odd that the client is needed here. Note that
+`/usr/afs/bin/pts` also exists, but it is identical to the one in
+`/usr/afsws/bin` and it uses the *client*, not server, configuration. If not
+for this, we would not need to have the client set up yet.)
+
+At this point, it should be possible to switch from using `-localauth` to
+using an actual token.
+
+    kinit admin
+
+Solaris `kinit` will likely pause here and spit out some complaints about
+"`getpwnam failed for name=admin`"; it's trying to do NFSv4 initialization,
+which we do not care about so the necessary NFSv4 configuration has not been
+done.
+
+    aklog
+    pts examine admin
+
+If things are working correctly, there should not be a complaint from
+`libprot` here; if there is, then you should probably check your
+[[Kerberos|KerberosV]] configuration.
+
+At this point, you are done with the db server. If this machine should also be
+a file server, continue with the next section; if not, you are done with this
+server but you will want to set up another machine to be the cell's first file
+server.
+
+## Setting up a file server
+<a name="fileserver">
+
+At this point, you should have at least working db server, and if this is the
+first file server for a new cell then there should be a working client for the
+cell somewhere.
+
+[[OpenAFS]] file servers use dedicated partitions to hold volumes. The
+partitions are *not* intended to be user accessible.
+
+If you are using traditional disk slices, you should arrange for the server
+partitions to be mounted as paths beginning with `/vicep`; in the examples
+below, we use `/vicepa` and `/vicepb` as server partitions. If using
+[[ZFS|http://www.oracle.com/technetwork/server-storage/solaris11/technologies/zfs-338092.html]],
+you may want a separate zpool for server partitions. The examples below use
+the default zpool created by a basic [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+or [[OpenIndiana|http://openindiana.org]] install, which is called `rpool`.
+(Note that ZFS works best with some tuning, which is not covered here.)
+
+    zfs create -o mountpoint=/vicepa rpool/vicepa
+    zfs create -o mountpoint=/vicepb rpool/vicepb
+    # or newfs and mount your traditional slices
+
+### File server tuning
+
+The file server configurations below contain suggested tuning parameters. It is
+not necessary to include these, but performance will generally be better with
+them. You may want to look at
+[[http://conferences.inf.ed.ac.uk/eakc2012/slides/AFS_Performance.pdf]]
+for more information about performance tuning; detailed performance tuning is
+beyond the scope of this document.
+
+### namei and inode file servers
+
+As of [[OpenAFS]] 1.6, the standard binary [[OpenAFS]] distribution for
+[[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+uses the namei file server instead of the old, deprecated inode file
+server. If you are replacing an old file server, be aware that you cannot use
+a namei partition with an inode file server or vice versa. Keep the old file
+server on line and `vos move` partitions to the new file server, instead of
+trying to attach the old partitions directly to the new file server.
+
+To check the format of a file server, look at one of the `/vicepx`
+partitions. An inode server will (or should) appear to be empty. A namei
+fileserver will have, at absolute minimum, a directory named `AFSIDat`.
+
+(It is still possible to build [[OpenAFS]] from source with inode support, but
+there is a bug in current [[OpenAFS]] versions that causes inode file servers
+to not work correctly. As inode file servers have been deprecated for some
+time now, inode file servers should be migrated to namei.)
+
+#### [[Demand attach|DemandAttach]] file server
+
+[[OpenAFS]] 1.6 includes a [[demand attach file server|DemandAttach]]. Initial
+setup is slightly more cumbersome than the old file server, but performance is
+better — especially when restarting a file server, as it does not need to
+break callbacks before shutting down or check all volumes before coming back
+up.
+
+It is entirely possible to have both [[demand attach|DemandAttach]] and
+traditional file servers in a cell, although a particular file server must be
+one or the other.
+
+    bos create localhost fs dafs \
+        '/usr/afs/bin/dafileserver -p 123 -L -busyat 200 -rxpck 2000 -cb 4000000 -vattachpar 128 -vlruthresh 1440 -vlrumax 8 -vhashsize 11' \
+        '/usr/afs/bin/davolserver -p 64 -log' \
+        /usr/afs/bin/salvageserver \
+        '/usr/afs/bin/dasalvager -parallel all32' -localauth
+
+#### Traditional file server
+
+    bos create localhost fs fs \
+        '/usr/afs/bin/fileserver -p 123 -L -busyat 200 -rxpck 2000 -cb 4000000' \
+        '/usr/afs/bin/volserver -p 127 -log' \
+        '/usr/afs/bin/salvager -parallel -all32' -localauth
+
+If this is a new file server for an existing cell, you are done. If this is a
+new cell, you still need to create the initial volumes; continue to the next
+section.
+
+## The first file server
+
+A new cell needs certain volumes to exist. If you will have any clients that
+do not use dynamic root (`-dynroot`), then you will need a `root.afs` volume;
+every cell needs a root volume, conventionally called `root.cell` (you can
+change this, but there is an assumption that the root of remote cells is this
+volume, so your cell will not be directly accessible from foreign cells
+without manual configuration in those cells).
+
+You do not, strictly, need an admin token to create these volumes; you do,
+however, need one to set the initial Access Control List, so a token is used
+below.
+
+### Creating `root.afs`
+
+You need to do this on a client which does *not* have `-dynroot`, or else you
+must arrange to mount `root.afs` somewhere else, as `/afs` cannot be used to
+access the `root.afs` volume when `-dynroot` is in effect. If this is a new
+cell, you won't have anywhere to mount this until after you create
+`root.cell`... although you may be able to use `/afs/.:mount/cell:root.cell`
+(replace the first `cell` with the name of your cell). If you are certain that
+all possible clients will always use `-dynroot`, you can skip this step; this
+is not recommended, however.
+
+#### Without `-dynroot`
+
+    kinit admin
+    aklog
+    vos create localhost a root.afs 500
+    fs checkvolumes
+    # /afs should now be accessible but empty
+    sed -n 's/^>\([^ #]*\).*$/\1/p' /usr/vice/etc/CellservDB |
+    while read cell; do
+    	echo "$cell"
+        fs mkmount "/afs/$cell" "${cell}:root.cell" -fast
+        fs mkmount "/afs/.$cell" "${cell}:root.cell" -rw -fast
+    done
+    # create symlinks to commonly used cells here
+    # one common convention is to make the cell name without any
+    # dots available as a symlink, for example:
+    for cell in ece andrew cs; do
+        ln -s $cell.cmu.edu /afs/$cell
+        ln -s .$cell.cmu.edu /afs/.$cell
+    done
+    fs setacl /afs system:anyuser
+    vos addsite localhost a root.afs
+    vos release root.afs
+    fs checkvolumes
+
+#### With `-dynroot`
+
+    kinit admin
+    aklog
+    vos create localhost a root.afs 500
+    fs checkvolumes
+    sed -n 's/^>\([^ #]*\).*$/\1/p' /usr/vice/etc/CellservDB |
+    while read cell; do
+    	echo "$cell"
+        fs mkmount "/afs/.:mount/thiscell:root.afs/$cell" "${cell}:root.cell" -fast
+        fs mkmount "/afs/.:mount/thiscell:root.afs/.$cell" "${cell}:root.cell" -rw -fast
+    done
+    # create symlinks to commonly used cells here
+    # one common convention is to make the cell name without any
+    # dots available as a symlink, for example:
+    for cell in ece andrew cs; do
+        ln -s "$cell.cmu.edu" "/afs/.:mount/thiscell:root.afs/$cell"
+        ln -s ".$cell.cmu.edu" "/afs/.:mount/thiscell:root.afs/.$cell"
+    done
+    fs setacl /afs/.:mount/thiscell:root.afs" system:anyuser
+    vos addsite localhost a root.afs
+    vos release root.afs
+    fs checkvolumes
+
+Replace `thiscell` with the full name of this cell. Note that the only
+difference is using the `.:mount` mechanism to access the volume, since with
+`-dynroot` `/afs` does not reflect the contents of the `root.afs` volume.
+
+### Creating `root.cell`
+
+    vos create localhost a root.cell 10000
+    fs checkvolumes
+    fs setacl /afs/.cell system:anyuser rl
+    vos addsite localhost a root.cell
+    vos release root.cell
+    fs checkvolumes
+
+### Backup `root.afs` mountpoint
+
+If you are using `-dynroot`, or if you need emergency access to `root.afs`
+from somewhere else (this has happened; ask `geekosaur` about the first time
+he had to add a cell to `ece.cmu.edu`'s `root.afs` sometime), you may want to
+have an emergency mountpoint for `root.afs` in `root.cell`.
+
+    fs mkmount /afs/.cell/.cell cell:root.afs -rw
+    vos release root.cell
+
+Replace *all* occurrences of `cell` in the `fs mkmount` line with the local
+cell name (although you may choose to shorten the second, or if you want you
+can even leave it as literally `cell`).  The command should end up looking
+something like
+
+    fs mkmount /afs/.example.com/.example.com example.com:root.afs -rw
+
+This is not absolutely necessary if there are clients with `-dynroot`, as they
+will survive loss of `root.afs` and they can use the
+`/afs/.:mount/`*cell*`:`*volume* syntax to access the read/write volume; but
+if you are supporting `root.afs` for clients without `-dynroot`, you probably
+also want a way to recover `root.afs` without assuming `-dynroot`.
+
+Congratulations! You now have a working [[OpenAFS]] cell. You may want to
+submit a `CellServDB` entry for inclusion in the master cell database at
+`grand.central.org`.
+
+## Appendix: Boostrapping a KDC
+<a name="krb5kdc">
+
+If you do not have a KDC, you can use the one included with [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+or [[OpenIndiana|http://openindiana.org]]. There are some advantages to using
+a standard [[MIT|http://web.mit.edu/kerberos/]] or [[Heimdal|http://h5l.org]]
+installation instead, notably that there is more widely available
+documentation and a better chance of compatibility with other programs, as
+well as the ability to use LDAP for replication in place of the standard
+replication mechanisms. (Standard [[Kerberos|KerberosV]] replication has a
+number of shortcomings.)
+
+    pkg install pkg:/system/security/kerberos-5
+
+This package is not installed by default. (Note that the client package *is*
+installed; somewhat confusingly, this is `pkg:/service/security/kerberos-5`.)
+
+(Additional note: if you let your fingers run on autopilot, you may
+accidentally type `pkg://...` which will lead to a confusing error that
+implies that the package exists but is prohibited from installation.)
+
+Next you need to edit `/etc/krb5/kdc.conf` and `/etc/krb5/kadm5.acl`. In the
+former you should subtitute the local realm for the placeholder; in the
+latter, change the placeholder for the principal name. In this document, we
+assume that the [[Kerberos|KerberosV]] and [[OpenAFS]] administrative
+principals are the same and use `admin` for both; this is not necessarily the
+best approach, but it is simple and you can introduce better administrative
+identities for both later. (From experience, adding new [[OpenAFS]] users is
+much more annoying if the [[Kerberos|KerberosV]] and [[OpenAFS]]
+administrative principals are different; however, in larger organizations,
+the [[Kerberos|KerberosV]] administrative domain may not be under the
+[[OpenAFS]] administrator's control.)
+
+    /usr/sbin/kdb5_util create -s
+
+This creates the [[Kerberos|KerberosV]] principal database and does basic
+realm setup. It will ask for a realm master key. Write this down and store it
+in a safe place; it is not necessary for normal realm operation (the `-s`
+above creates a stash file that is used for nornal operation), but it may be
+necessary in the case of disaster recovery. Also note that anyone with access
+to this password or the generated key can decrypt the principal database; keep
+it safe and keep it secret!
+
+Next, we generate service keys and the administrative principal.
+
+    /usr/sbin/kadmin.local
+    kadmin.local: ktadd -k /etc/krb5/kadm5.keytab kadmin/hostname changepw/hostname kadmin/changepw
+    kadmin.local: addprinc -randkey host/hostname
+    kadmin.local: ktadd host/hostname
+    kadmin.local: addprinc admin
+
+In the above, replace `hostname` with the fully qualified local host name.
+
+You should now be able to bring up the KDC. There are slight differences
+between [[Oracle
+Solaris|http://www.oracle.com/us/products/servers-storage/solaris/overview/index.html]]
+and [[OpenIndiana|http://openindiana.org]] here:
+
+#### Oracle Solaris
+
+    svcadm enable -r network/security/krb5kdc
+    svcadm enable -r network/security/kadmin
+
+#### OpenIndiana
+
+    svcadm enable -r security/services/krb5kdc
+    svcadm enable -r security/services/kadmin
+
+(As of this writing, `kadmind` on [[OpenIndiana|http://openindiana.org]] will
+not start up; `svcs -x` reports a core dump during initialization. For a
+simple setup, `kadmin.local` can be used in place of `kadmin` for most
+maintenance; diagnosis of the core dump is ongoing, but it does not appear
+that any package updates have been made to
+[[OpenIndiana|http://openindiana.org]] since October 2012 so there is not
+likely to be a fix in the near future.)
+
+Now you're ready to [[go back to the main
+instructions|SolarisQuickStart#krb5]].
