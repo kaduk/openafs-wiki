@@ -49,32 +49,36 @@ AFS is based on a distributed file system originally developed at the Informatio
 
 "Andrew" was the name of the research project at CMU - honouring the founders of the University. A spin-off company, Transarc Corporation (now part of IBM), started producing and marketing a commercial version of AFS in 1989.
 
-In November, 2000, IBM Open-Sourced AFS, creating [[OpenAFS]]. Development continues to this day.
+In November, 2000, IBM Open-Sourced AFS, creating [[OpenAFS]]. [[OpenAFS]] is under active development; as of this writing, the 1.6.4 release is being prepared for Unix-like platforms, and the 1.7 series for Windows is updated regularly.
 
 ### <a name="1.02  Who supplies AFS?"></a> 1.02 Who supplies AFS?
 
-[[OpenAFS]] is available from the [[OpenAFS]] website. Additionally, an independant open source project, Arla, supports some clients that [[OpenAFS]] does not. Arla clients are completely compatible with [[OpenAFS]].
+[[OpenAFS]] is available from the [[OpenAFS]] website. An independent open source project, Arla, supports some clients that [[OpenAFS]] does not, but has not been updated since release 0.90 in early 2007; the release of [[OpenAFS]] largely removed the reasons for the development of Arla and its sister project Milka (an open source AFS server).
+
+There is also an incomplete kernel-based AFS client (only) for Linux, maintained by Red Hat Software.
 
 IBM no longer markets AFS and has declared an end-of-life for support.
 
-<table border="1" cellpadding="0" cellspacing="0">
+<table border="1">
   <tr>
-    <td>   </td>
     <td>[[OpenAFS]]</td>
-    <td> WWW: <a href="http://www.openafs.org/" target="_top">http://www.openafs.org/</a></td>
+    <td>WWW: <a href="http://www.openafs.org/" target="_top">http://www.openafs.org/</a></td>
   </tr>
   <tr>
-    <td>   </td>
-    <td> Arla </td>
-    <td> WWW: <a href="http://www.stacken.kth.se/projekt/arla/" target="_top">http://www.stacken.kth.se/projekt/arla/</a></td>
+    <td>Arla </td>
+    <td>WWW: <a href="http://www.stacken.kth.se/projekt/arla/" target="_top">http://www.stacken.kth.se/projekt/arla/</a></td>
+  </tr>
+  <tr>
+    <td>kAFS </td>
+    <td>see <code>Documentation/filesystems/afs.txt</code> in the Linux kernel source tree</td>
   </tr>
 </table>
 
-### <a name="1.03  What is /afs?"></a> 1.03 What is /afs?
+### <a name="1.03  What is /afs?"></a> 1.03 What is `/afs`?
 
-The root of the AFS filetree is /afs. If you execute "ls /afs" you will see directories that correspond to AFS cells (see below). These cells may be local (on same LAN) or remote (eg halfway around the world).
+The root of the AFS filetree is `/afs`. If you execute `ls /afs`, you will see directories that correspond to AFS cells (see below). These cells may be local (on same LAN) or remote (e.g. halfway around the world).
 
-With AFS you can access all the filesystem space under /afs with commands you already use (eg: cd, cp, rm, and so on) provided you have been granted permission (see AFS ACL below).
+With AFS you can access all the filesystem space under `/afs` with commands you already use (e.g. `cd`, `cp`, `rm`, and so on) provided you have been granted permission (see AFS ACL below).
 
 ### <a name="1.04  What is an AFS cell?"></a> 1.04 What is an AFS cell?
 
@@ -104,25 +108,35 @@ The effect of this is that as soon as a remote file is accessed a chunk of that 
 
 Local caching also significantly reduces the amount of network traffic, improving performance when a cold read is necessary.
 
+Many modern NFS implementations provide metadata caching, but this caching is limited and the protocol support for it is somewhat weak, with the result that cached NFS can get out of sync with the server. NFS does not support file data caching at all, although some operating systems can be configured to make use of a separate cache filesystem module which must be configured separately from NFS on each client workstation and for each NFS mountpoint. As this cache is separate, it can only avoid becoming out of sync with the remote filesystem at the price of extra validation and additional network traffic to detect updates every time the file is accessed (or, if there is a delay set to minimize this traffic, it will "miss" remote changes made within that window); [[OpenAFS]]'s integrated cache, by comparison, will be notified of changes on the fileserver (by means of "callback breaking") and only needs to check explicitly for remote updates if the callback has expired (roughly 2 hours). In addition, for files on a read-only volume, it is sufficient to check for a volume update to revalidate all locally cached files on that volume.
+
 #### <a name="1.05.b  Location independence"></a> 1.05.b Location independence
 
-Unlike NFS, which makes use of /etc/filesystems (on a client) to map (mount) between a local directory name and a remote filesystem, AFS does its mapping (filename to location) at the server. This has the tremendous advantage of making the served filespace location independent.
+Unlike NFS, which makes use of a per-client mount table (such as `/etc/filesystems` on AIX or `/etc/fstab` on Linux) to map (mount) between a local directory name and a remote filesystem, AFS does its mapping (filename to location) at the server. This has the tremendous advantage of making the served filespace location independent.
 
-Location independence means that a user does not need to know which fileserver holds the file, the user only needs to know the pathname of a file. Of course, the user does need to know the name of the AFS cell to which the file belongs. Use of the AFS cellname as the second part of the pathname (eg: /afs/$AFSCELL/somefile) is helpful to distinguish between file namespaces of the local and non-local AFS cells.
+Location independence means that a user does not need to know which fileserver holds the file, the user only needs to know the pathname of a file. Of course, the user does need to know the name of the AFS cell to which the file belongs. Use of the AFS cellname as the second part of the pathname (e.g. `/afs/$AFSCELL/somefile`) is helpful to distinguish between file namespaces of local and non-local AFS cells.
 
-To understand why such location independence is useful, consider having 20 clients and two servers. Let's say you had to move a filesystem "/home" from server a to server b.
+To understand why such location independence is useful, consider having 20 clients and 2 servers. Let's say you had to move a filesystem `/home` from server `a` to server `b`.
 
-Using NFS, you would have to change the /etc/filesystems file on 20 clients and take "/home" off-line while you moved it between servers.
+Using NFS, you would have to change the `/etc/fstab` file on 20 clients and take `/home` off-line while you moved it between servers.
 
-With AFS, you simply move the AFS volume(s) which constitute "/home" between the servers. You do this "on-line" while users are actively using files in "/home" with no disruption to their work.
+With AFS, you simply move the AFS volume(s) which constitute `/home` between the servers. You do this "on-line" while users are actively using files in `/home` with no disruption to their work.
 
-(Actually, the AFS equivalent of "/home" would be /afs/$AFSCELL/home where $AFSCELL is the AFS cellname.)
+(Actually, the AFS equivalent of `/home` would be `/afs/$AFSCELL/home`, where `$AFSCELL` is the AFS cellname.)
 
 #### <a name="1.05.c  Scalability"></a> 1.05.c Scalability
 
-With location independence comes scalability. An architectural goal of the AFS designers was client/server ratios of 200:1 which has been successfully exceeded at some sites. Some sites are exceeding this ratio. Exactly what ratio your cell can use depends on many factors including: number of AFS files, size of AFS files, rate at which changes are made, rate at which file are being accessed, speed of servers processor, I/O rates, and network bandwidth.
+With location independence comes scalability. An architectural goal of the AFS designers was client/server ratios of 200:1; some sites exceed this ratio. Exactly what ratio your cell can use depends on many factors including:
 
-AFS cells can range from the small (1 server/client) to the massive (with tens of servers and thousands of clients). Cells can be dynamic: it is simple to add new fileservers or clients and grow the computing resources to meet new user requirements.
+- number of AFS files
+- size of AFS files
+- rate at which changes are made
+- rate at which file are being accessed
+- speed of server's processor(s)
+- I/O rates
+- network bandwidth
+
+AFS cells can range from the small (1 server/client) to the massive (with hundreds of servers and thousands of clients). Cells can be dynamic: it is simple to add new fileservers or clients and grow the computing resources to meet new user requirements.
 
 #### <a name="1.05.d  Improved security"></a> 1.05.d Improved security
 
@@ -138,46 +152,49 @@ Firstly, AFS makes use of Kerberos to authenticate users. This improves security
 
 Secondly, AFS uses access control lists (ACLs) to enable users to restrict access to their own directories.
 
+Some (not all) implmentations of NFS version 3 can use Kerberos authentication; NFS version 4 adds ACLs, but not all NFS4 implementations interoperate well. Additionally, configuring NFS to use Kerberos, even when it is supported, is often painful and can lead to interoperability problems.
+
 #### <a name="1.05.e  Single systems image (SS"></a> 1.05.e Single systems image (SSI)
 
 Establishing the same view of filestore from each client and server in a network of systems (that comprise an AFS cell) is an order of magnitude simpler with AFS than it is with, say, NFS.
 
 This is useful to do because it enables users to move from workstation to workstation and still have the same view of filestore. It also simplifies part of the systems management workload.
 
-In addition, because AFS works well over wide area networks the SSI is also accessible remotely.
+In addition, because AFS works well over wide area networks, the SSI is also accessible remotely.
 
-As an example, consider a company with two widespread divisions (and two AFS cells): ny.acme.com and sf.acme.com. Mr Fudd, based in the New York office, is visiting the San Francisco office.
+As an example, consider a company with two widespread divisions (and two AFS cells): `ny.acme.com` and `sf.acme.com`. Mr. Fudd, based in the New York office, is visiting the San Francisco office.
 
-Mr. Fudd can then use any AFS client workstation in the San Francisco office that he can log into (a unprivileged guest account would suffice). He could authenticate himself to the ny.acme.com cell and securely access his New York filespace.
+Mr. Fudd can then use any AFS client workstation in the San Francisco office that he can log into (a unprivileged guest account would suffice). He could authenticate himself to the `ny.acme.com` cell and securely access his New York filespace, and he doesn't need to remember a different path even though he's working from a remote cell.
 
 For example:
 
-The following shows a guest in the sf.acme.com AFS cell:
+The following shows a guest in the `sf.acme.com` AFS cell:
 
-1. add AFS executables directory to PATH
-2. obtaining a PAG with pagsh command (see 2.06)
-3. use the klog command to authenticate into the ny.acme.com AFS cell
-4. making a HOME away from home
-5. invoking a homely .profile
+1. add AFS executables directory to `PATH`
+2. obtaining a PAG with `pagsh` command (see 2.06)
+3. use `kinit` and `aklog` to authenticate into the `ny.acme.com` AFS cell
+4. making a `HOME` away from home
+5. invoking a homely `.profile`
 
-           guest@toontown.sf.acme.com $ PATH=/usr/afsws/bin:$PATH       # {1}
-           guest@toontown.sf.acme.com $ pagsh                           # {2}
-           $ klog -cell ny.acme.com -principal elmer                    # {3}
-           Password:
-           $ HOME=/afs/ny.acme.com/user/elmer; export HOME              # {4}
-           $ cd
-           $ .  .profile                                                # {5}
-           you have new mail
-           guest@toontown $
+        guest@toontown.sf.acme.com $ PATH=/usr/afsws/bin:$PATH; export PATH    # {1}
+        guest@toontown.sf.acme.com $ pagsh                                     # {2}
+        $ kinit elmer@NY.ACME.COM                                              # {3}
+        Password for elmer@NY.ACME.COM:
+        $ aklog -cell ny.acme.com
+        $ HOME=/afs/ny.acme.com/user/elmer; export HOME                        # {4}
+        $ cd
+        $ . .profile                                                           # {5}
+        you have new mail
+        guest@toontown $ _
 
-It is not necessary for the San Francisco sys admin to give Mr. Fudd an AFS account in the sf.acme.com cell. Mr. Fudd only needs to be able to log into an AFS client that is:
+It is not necessary for the San Francisco system administrator to give Mr. Fudd an AFS account in the `sf.acme.com` cell. Mr. Fudd only needs to be able to log into an AFS client that is:
 
 1. on the same network as his cell and
-2. his ny.acme.com cell is mounted in the sf.acme.com cell (as would certainly be the case in a company with two cells).
+2. his `ny.acme.com` cell is mounted in the `sf.acme.com` cell (as would certainly be the case in a company with two cells).
 
 #### <a name="1.05.f  Replicated AFS volumes"></a> 1.05.f Replicated AFS volumes
 
-AFS files are stored in structures called Volumes. These volumes reside on the disks of the AFS file server machines. Volumes containing frequently accessed data can be read-only replicated on several servers.
+AFS files are stored in structures called volumes. These volumes reside on the disks of the AFS file server machines. Volumes containing frequently accessed data can be read-only replicated on several servers.
 
 Cache managers (on users client workstations) will make use of replicate volumes to load balance. If accessing data from one replicate copy, and that copy becomes unavailable due to server or network problems, AFS will automatically start accessing the same data from a different replicate copy.
 
@@ -201,7 +218,7 @@ Once you have wide-area AFS in place, you don't have to keep local copies of fil
 
 #### <a name="1.05.i  Communications protocol"></a> 1.05.i Communications protocol
 
-AFS communications protocol is optimized for Wide Area Networks. Retransmitting only the single bad packet in a batch of packets and allowing the number of unacknowledged packets to be higher (than in other protocols, see [[[Johnson90|FurtherReading#Johnson90]]]).
+The AFS communications protocol is optimized for Wide Area Networks. Retransmitting only the single bad packet in a batch of packets and allowing the number of unacknowledged packets to be higher (than in other protocols, see [[[Johnson90|FurtherReading#Johnson90]]]).
 
 #### <a name="1.05.j  Improved system manageme"></a> 1.05.j Improved system management capability
 
@@ -225,23 +242,26 @@ Finally, the AFS clients were moved - this was noticed!
 
 ### <a name="1.06  Which systems is AFS avail"></a> 1.06 Which systems is AFS available for?
 
-[[OpenAFS]] (as of the 1.4.2 release) is currently available in binary releases for: IBM AIX 5.1, 5.2, 5.3 Fedora Core 3, 4, 5 (Intel) [[FreeBSD]] 6.1 (Intel) HP/UX 11i (PA-RISC) SGI Irix 6.5 [[MacOS]] X 10.4 Tiger (Universal) [[OpenBSD]] 3.9 (Intel) RHEL 3, 4 (Intel) RHEL 4 (AMD64) Solaris 7, 8, 9, 10 (Sparc) Solaris 8, 9, 10 (Intel) Windows 2000/XP/2003
+[[OpenAFS]], as of the 1.6.2 release for Unix and 1.7.24 for Windows, is currently available in binary releases for:
 
-The sources are also known to create working binaries for [[NetBSD]] 2.\* and 3.0 (server only).
+- IBM AIX 5.3, 6.1
+- Fedora Core 15, 16, 17, 18 (Intel)
+- [[FreeBSD]] 8.2, 8.3, 9.0, 9.1 (Intel)
+- [[MacOS]] X 10.6-10.8 (Intel) (Snow Leopard, Lion, Mountain Lion)
+- RHEL 5, 6 (Intel)
+- SuSE Enterprise 10, 11 (Intel)
+- Solaris 10, 11 (Sparc and Intel)
+- Windows 2000/XP/2003/Vista/7
 
-Additional platforms may be available in the beta (1.5) tree.
+These are only the platforms for which official binary releases are prepared; it can be built from source for a large number of additional platforms including HP-UX, SGI, OpenBSD, NetBSD, and older releases and other CPU architectures of supported platforms.
 
-Arla (as of the 0.43 release) is currently supporting: [[FreeBSD]] 5.1-5.5 [[NetBSD]] 2.\*, 3.0 Linux 2.4.x and 2.6.x [[MacOSX]] 10.4
-
-Please see the Arla web pages for more details, and remember that Arla is client only.
-
-### <a name="1.07  What does &quot;ls /afs&quot; displa"></a> 1.07 What does "ls /afs" display in the Internet AFS filetree?
+### <a name="1.07  What does &quot;ls /afs&quot; displa"></a> 1.07 What does `ls /afs` display in the Internet AFS filetree?
 
 Essentially this displays the AFS cells that co-operate in the Internet AFS filetree.
 
 Note that the output of this will depend on the cell you do it from; a given cell may not have all the publicly advertised cells available, and it may have some cells that aren't advertised outside of the given site.
 
-The definitive source for this information is <a href="file:///afs/grand.central.org/service/CellServDB">/afs/grand.central.org/service/CellServDB</a>.
+The definitive source for this information is [[/afs/grand.central.org/service/CellServDB|file:///afs/grand.central.org/service/CellServDB]].
 
 Note that it is also possible to use AFS "behind the firewall" within the confines of your organization's network - you don't have to participate in the Internet AFS filetree.
 
@@ -261,25 +281,25 @@ In AFS, it is possible to authenticate into multiple AFS cells. A summary of the
 
 For example:
 
-       elmer@toontown $ tokens
+    elmer@toontown $ tokens
 
-       Tokens held by the Cache Manager:
+    Tokens held by the Cache Manager:
 
-       User's (AFS ID 9997) tokens for afs@ny.acme.com [Expires Sep 15 06:50]
-       User's (AFS ID 5391) tokens for afs@sf.acme.com [Expires Sep 15 06:48]
-          --End of list--
+    User's (AFS ID 9997) tokens for afs@ny.acme.com [Expires Sep 15 06:50]
+    User's (AFS ID 5391) tokens for afs@sf.acme.com [Expires Sep 15 06:48]
+       --End of list--
 
-Kerberos improves security because a users's password need only be entered once (at klog time).
+Kerberos improves security because a users's password need only be entered once (at `kinit` time).
 
 AFS uses Kerberos to do complex mutual authentication which means that both the service requester and the service provider have to prove their identities before a service is granted.
 
-Originally AFS shipped with it's own version of a Kerberos, called "KAS." KAS still ships at this time (1.6.2 release) but is deprecated in favor of using a true Kerberos 5 implementation. [[OpenAFS]] does not currently ship with a krb5 install; it is up to the administrator(s) to choose a version (MIT krb5, Heimdal, Active Directory, etc) and install it. [[OpenAFS]] will happily work with any KDC.
+Originally AFS shipped with its own version of Kerberos 4, called `kaserver`. `kaserver` still ships at this time (1.6.2 release), but is deprecated in favor of using a true Kerberos 5 implementation. [[OpenAFS]] does not currently ship with a Kerberos 5 implementation; it is up to the administrator(s) to choose a version (MIT krb5, Heimdal, Active Directory, etc) and install it. [[OpenAFS]] will happily work with any KDC.
 
-For more detail on this and other Kerberos issues see the faq for Kerberos (posted to news.answers and comp.protocols.kerberos) [[[Jaspan|FurtherReading#Jaspan]]]. (Also, see [[[Miller87|FurtherReading#Miller87]]], [[[Bryant88|FurtherReading#Bryant88]]], [[[Bellovin90|FurtherReading#Bellovin90]]], [[[Steiner88|FurtherReading#Steiner88]]])
+For more detail on this and other Kerberos issues see the faq for Kerberos (posted to `news.answers` and `comp.protocols.kerberos`) [[[Jaspan|FurtherReading#Jaspan]]]. (Also, see [[[Miller87|FurtherReading#Miller87]]], [[[Bryant88|FurtherReading#Bryant88]]], [[[Bellovin90|FurtherReading#Bellovin90]]], [[[Steiner88|FurtherReading#Steiner88]]])
 
-### <a name="1.09  Does AFS work over protoco"></a> 1.09 Does AFS work over protocols other than UDP/IP?
+### <a name="1.09  Does AFS work over protoco"></a> 1.09 Does AFS work over protocols other than UDP?
 
-No. AFS was designed to work over UDP/IP, and does not use TCP/IP.
+No. AFS was designed to work over UDP, and does not use TCP.
 
 There is some work being done (see
 [here](http://conferences.inf.ed.ac.uk/eakc2012/slides/201210_eakc_oob.pdf)) to
@@ -290,13 +310,9 @@ still experimental and undergoing development.
 
 You can use [[OpenAFS]] for Windows client. In the past year it has become very stable and robust. [[OAfW]] works with Kerberos for Windows in much the same way the Unix clients work with Kerberos.
 
-There is also SAMBA (a SMB server for UNIX).
+There is also [[Samba|http://www.samba.org]], an SMB server for UNIX. There are several ways to integrate AFS with Samba. See [[SMBtoAFS]].
 
-- <http://www.samba.org>
-
-There are several ways to integrate AFS with SAMBA. See [[SMBtoAFS]].
-
-MAC OS X and Linux users might find <a href="http://en.wikipedia.org/wiki/SSHFS">SSHFS</a> useful in some circumstances.
+MAC OS X and Linux users might find [[`sshfs`|http://en.wikipedia.org/wiki/SSHFS]] useful in some circumstances.
 
 ### <a name="1.11  How does AFS compare with"></a><a name="1.11  How does AFS compare with "></a> 1.11 How does AFS compare with NFS?
 
@@ -319,7 +335,7 @@ MAC OS X and Linux users might find <a href="http://en.wikipedia.org/wiki/SSHFS"
   <tr>
     <th bgcolor="#99CCCC"><strong> Performance </strong></th>
     <td> Client caching to reduce network load; callbacks to maintain cache consistency </td>
-    <td> No local disk caching; limited cache consistency </td>
+    <td> No local disk caching without local configuration of `cachefs`; limited cache consistency </td>
   </tr>
   <tr>
     <th bgcolor="#99CCCC"><strong> Andrew Benchmark (5 phases, 8 clients) </strong></th>
