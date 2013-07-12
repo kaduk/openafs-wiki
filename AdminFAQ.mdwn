@@ -2,106 +2,86 @@
 
 The Administration Section of the [[AFSFrequentlyAskedQuestions]].
 
-- [[PreambleFAQ]]
-- [[GeneralFAQ]]
-- [[UsageFAQ]]
+[[PreambleFAQ]]
+
+[[GeneralFAQ]]
+
+[[UsageFAQ]]
 
 <div>
+  <p><a href="#3  AFS administration">3 AFS administration</a></p>
   <ul>
-    <li><a href="#3  AFS administration"> 3 AFS administration</a><ul>
-        <li><a href="#3.01  Is there a version of xdm"> 3.01 Is there a version of xdm available with AFS authentication?</a></li>
-        <li><a href="#3.02  Is there a version of xloc"> 3.02 Is there a version of xlock available with AFS authentication?</a></li>
-        <li><a href="#3.03  What is /afs/@cell?"> 3.03 What is /afs/@cell?</a></li>
-        <li><a href="#3.04  Given that AFS data is loc"> 3.04 Given that AFS data is location independent, how does an AFS client determine which server houses the data its user is attempting to access?</a></li>
-        <li><a href="#3.05  How does AFS maintain cons"> 3.05 How does AFS maintain consistency on read-write files?</a></li>
-        <li><a href="#3.06  Which protocols does AFS u"> 3.06 Which protocols does AFS use?</a></li>
-        <li><a href="#3.07  Which TCP/IP ports and pro"> 3.07 Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?</a></li>
-        <li><a href="#3.08  Are setuid programs execut"> 3.08 Are setuid programs executable across AFS cell boundaries?</a></li>
-        <li><a href="#3.09  How can I run daemons with"> 3.09 How can I run daemons with tokens that do not expire?</a></li>
-        <li><a href="#3.10  Can I check my user's pass"> 3.10 Can I check my user's passwords for security purposes?</a></li>
-        <li><a href="#3.11  Is there a way to automati"> 3.11 Is there a way to automatically balance disk usage across fileservers?</a></li>
-        <li><a href="#3.12  Can I shutdown an AFS file"> 3.12 Can I shutdown an AFS fileserver without affecting users?</a></li>
-        <li><a href="#3.13  How can I set up mail deli"> 3.13 How can I set up mail delivery to users with $HOMEs in AFS?</a></li>
-        <li><a href="#3.14  Should I replicate a _Read"> 3.14 Should I replicate a ReadOnly volume on the same partition and server as the ReadWrite volume?</a></li>
-        <li><a href="#3.15  Should I start AFS before"> 3.15 Should I start AFS before NFS in /etc/inittab?</a></li>
-        <li><a href="#3.16  Will AFS run on a multi-ho"> 3.16 Will AFS run on a multi-homed fileserver?</a></li>
-        <li><a href="#3.17  Can I replicate my user's"> 3.17 Can I replicate my user's home directory AFS volumes?</a></li>
-        <li><a href="#3.18  What is the Andrew Benchma"> 3.18 What is the Andrew Benchmark?</a></li>
-        <li><a href="#3.19  Where can I find the Andre"> 3.19 Where can I find the Andrew Benchmark?</a></li>
-        <li><a href="#3.20  Is there a version of HP V"> 3.20 Is there a version of HP VUE login with AFS authentication?</a></li>
-        <li><a href="#3.21  How can I list which clien"> 3.21 How can I list which clients have cached files from a server?</a></li>
-        <li><a href="#3.22  Do Backup volumes require"> 3.22 Do Backup volumes require as much space as ReadWrite volumes?</a></li>
-        <li><a href="#3.23  Should I run timed on my A"> 3.23 Should I run timed on my AFS client?</a></li>
-        <li><a href="#3.24  Why should I keep /usr/vic"> 3.24 Why should I keep /usr/vice/etc/CellServDB current?</a></li>
-        <li><a href="#3.25  How can I keep /usr/vice/e"> 3.25 How can I keep /usr/vice/etc/CellServDB current?</a></li>
-        <li><a href="#3.26  How can I compute a list o"> 3.26 How can I compute a list of AFS fileservers?</a></li>
-        <li><a href="#3.27  How can I set up anonymous"> 3.27 How can I set up anonymous FTP login to access /afs?</a></li>
-        <li><a href="#3.28 Is the data sent over the n"> 3.28 Is the data sent over the network encrypted in AFS ?</a></li>
-        <li><a href="#3.29 What underlying filesystems"> 3.29 What underlying filesystems can I use for AFS ?</a></li>
-        <li><a href="#3.30 Compiling _OpenAFS"> 3.30 Compiling OpenAFS</a></li>
-        <li><a href="#3.31 Upgrading _OpenAFS"> 3.31 Upgrading OpenAFS</a></li>
-        <li><a href="#3.32 Debugging _OpenAFS"> 3.32 Debugging OpenAFS</a></li>
-        <li><a href="#3.33 Tuning client cache for hug"> 3.33 Tuning client cache for huge data</a></li>
-        <li><a href="#3.34 Settting up PAM with AFS"> 3.34 Settting up PAM with AFS</a></li>
-        <li><a href="#3.35 Setting up AFS key in KDC a"> 3.35 Setting up AFS key in KDC and KeyFile</a></li>
-        <li><a href="#3.36 Obtaining and getting asetk"> 3.36 Obtaining and getting asetkey compiled</a></li>
-        <li><a href="#3.37 afs_krb_get_lrealm() using"> 3.37 afs_krb_get_lrealm() using /usr/afs/etc/krb.conf</a></li>
-        <li><a href="#3.38 Moving from kaserver to Hei"> 3.38 Moving from kaserver to Heimdal KDC</a></li>
-        <li><a href="#3.39 Moving from KTH-KRB4 to Hei"> 3.39 Moving from KTH-KRB4 to Heimdal KDC</a></li>
-        <li><a href="#3.40 What are those bos(1) -type"> 3.40 What are those bos(1) -type values simple and cron?</a></li>
-        <li><a href="#3.41 KDC listens on port 88 inst"> 3.41 KDC listens on port 88 instead of 750</a></li>
-        <li><a href="#3.42 afsd gives me "Error -1 in"> 3.42 afsd gives me "Error -1 in basic initialization." on startup</a></li>
-        <li><a href="#3.43 Although I get krb tickets,"> 3.43 Although I get krb tickets, afslog doesn't give me tokens, I see UDP packets to port 4444</a></li>
-        <li><a href="#3.44 I get error message trhough"> 3.44 I get error message trhough syslogd: "afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)"</a></li>
-        <li><a href="#3.45 I get tickets and tokens, b"> 3.45 I get tickets and tokens, but still get Permission denied.</a></li>
-        <li><a href="#3.46 Recovering broken afs cache"> 3.46 Recovering broken afs cache on clients</a></li>
-        <li><a href="#3.47 What does it mean for a vol"> 3.47 What does it mean for a volume to not be in the VLDB?</a></li>
-        <li><a href="#3.48 What is a Volume Group?"> 3.48 What is a Volume Group?</a></li>
-        <li><a href="#3.49 What is a Clone?"> 3.49 What is a Clone?</a></li>
-        <li><a href="#3.50 What is a Shadow?"> 3.50 What is a Shadow?</a></li>
-        <li><a href="#3.51 Can I authenticate to my af"> 3.51 Can I authenticate to my afs cell using multiple kerberos Realms?</a></li>
-        <li><a href="#3.52  Is it a good idea to store"> 3.52 Is it a good idea to store mail in AFS?</a></li>
-        <li><a href="#3.53  How can I ensure that the"> 3.53 How can I ensure that the userids on client machines match the users' pts ids?</a></li>
-        <li><a href="#3.54  What is Fast Restart?"> 3.54 What is Fast Restart?</a></li>
-        <li><a href="#3.55  Reboot ?"> 3.55 Why does AFS reboot itself spontaneously at 4:00am every Sunday?</a></li>
-        <li><a href="#3.56 weak crypto">3.56 Why do I get an error -1765328370 when authenticating?</a></li>
-      </ul>
-    </li>
+    <li><a href="#afsVerOfX"> 3.01  Is there a version of <em>program</em> available with AFS authentication?</a>
+    <li><a href="#afsatcell"> 3.02  What is <code>/afs/@cell</code>?</a>
+    <li><a href="#vldb"> 3.03  Given that AFS data is location independent, how does an AFS client determine which server houses the data its user is attempting to access?</a>
+    <li><a href="#callbacks"> 3.04  How does AFS maintain consistency on read-write files?</a>
+    <li><a href="#protocols"> 3.05  Which protocols does AFS use?</a>
+    <li><a href="#ports"> 3.06  Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?</a>
+    <li><a href="#setuid"> 3.07  Are setuid programs executable across AFS cell boundaries?</a>
+    <li><a href="#kstart"> 3.08  How can I run daemons with tokens that do not expire?</a>
+    <li><a href="#crack"> 3.09  Can I check my users' passwords for security purposes?</a>
+    <li><a href="#balance"> 3.10  Is there a way to automatically balance disk usage across fileservers?</a>
+    <li><a href="#shutdown"> 3.11  Can I shutdown an AFS fileserver without affecting users?</a>
+    <li><a href="#mail"> 3.12  How can I set up mail delivery to users with <code>$HOME</code>s in AFS?</a>
+    <li><a href="#shadowro"> 3.13  Should I replicate a [[ReadOnly]] volume on the same partition and server as the [[ReadWrite]] volume?</a>
+    <li><a href="#multihomed"> 3.14  Will AFS run on a multi-homed fileserver?</a>
+    <li><a href="#replicatehome"> 3.15  Can I replicate my user's home directory AFS volumes?</a>
+    <li><a href="#listclients"> 3.16  How can I list which clients have cached files from a server?</a>
+    <li><a href="#backupvol"> 3.17  Do Backup volumes require as much space as [[ReadWrite]] volumes?</a>
+    <li><a href="#ntp"> 3.18  Should I run <code>ntpd</code> on my AFS client?</a>
+    <li><a href="#cellservdb"> 3.19  Why and how should I keep <code>/usr/vice/etc/CellServDB</code> current?</a>
+    <li><a href="#fileservers"> 3.20  How can I compile a list of AFS fileservers?</a>
+    <li><a href="#anonftp"> 3.21  How can I set up anonymous FTP login to access <code>/afs</code>?</a>
+    <li><a href="#encrypt"> 3.22  Is the data sent over the network encrypted in AFS?</a>
+    <li><a href="#filesystems"> 3.23  What underlying filesystems can I use for AFS?</a>
+    <li><a href="#3.30 Compiling _OpenAFS"> 3.24  Compiling [[OpenAFS]] from source</a>
+    <li><a href="#3.31 Upgrading _OpenAFS"> 3.25  Upgrading [[OpenAFS]]</a>
+    <li><a href="#3.32 Debugging _OpenAFS"> 3.26  Notes on debugging [[OpenAFS]]</a>
+    <li><a href="#3.33 Tuning client cache for hug"> 3.27  Tuning client cache for huge data</a>
+    <li><a href="#3.34 Settting up PAM with AFS"> 3.28  Settting up PAM with AFS</a>
+    <li><a href="#afskrbconf"> 3.29  How can I have a Kerberos realm different from the AFS cell name? How can I use an AFS cell across multiple Kerberos realms?</a>
+    <li><a href="#bosinstances"> 3.30  What are the <code>bos</code> instance types? How do I use them?</a>
+    <li><a href="#syscall"> 3.31  afsd gives me "<code>Error -1 in basic initialization.</code>" on startup</a>
+    <li><a href="#translate_et"> 3.32  Error "<code>afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)</code>"</a>
+    <li><a href="#UserList"> 3.33  I have tickets and tokens, but still get <code>Permission denied</code> for some operations.</a>
+    <li><a href="#flushvol"> 3.34  Recovering broken AFS cache on clients</a>
+    <li><a href="#notinvldb"> 3.35  What does it mean for a volume to not be in the VLDB?</a>
+    <li><a href="#volumegroup"> 3.36  What is a Volume Group?</a>
+    <li><a href="#clone"> 3.37  What is a Clone?</a>
+    <li><a href="#shadow"> 3.38  What is a Shadow?</a>
+    <li><a href="#multirealm"> 3.39  Can I authenticate to my AFS cell using multiple Kerberos realms?</a>
+    <li><a href="#nss"> 3.40  How can I ensure that the userids on client machines match the users' <code>pts</code> ids?</a>
+    <li><a href="#fastrestart"> 3.41  What is Fast Restart?</a>
+    <li><a href="#restart"> 3.42  Why does AFS reboot itself spontaneously at 4:00am every Sunday?</a>
+    <li><a href="#weakcrypto"> 3.43  Why do I get an error -1765328370 when authenticating?</a>
   </ul>
 </div>
 
+[[ResourcesFAQ]]
 
-- [[ResourcesFAQ]]
-- [[AboutTheFAQ]]
-- [[FurtherReading]]
+[[AboutTheFAQ]]
 
-### <a name="3.01  Is there a version of xdm"></a><a name="3.01  Is there a version of xdm "></a> 3.01 Is there a version of xdm available with AFS authentication?
+[[FurtherReading]]
 
-These days this kind of functionality is provided by something like PAM.
-Acquiring AFS tokens via PAM can be done by a few different PAM modules,
-including Russ Allbery's
-[pam-afs-session](http://www.eyrie.org/~eagle/software/pam-afs-session/).
+### <a name="afsVerOfX"></a><a name="3.01  Is there a version of xdm"></a><a name="3.02  Is there a version of xloc"></a> 3.01 Is there a version of _program_ available with AFS authentication?
 
-### <a name="3.02  Is there a version of xloc"></a> 3.02 Is there a version of xlock available with AFS authentication?
+In general, not specifically; modern systems use authentication frameworks, so that an e.g. AFS plugin can be added to the framework and all programs will thereby be able to use it without modification. On many systems, the authentication framework is PAM (Pluggable Authentication Modules). Acquiring AFS tokens via PAM can be done by several different PAM modules, including Russ Allbery's [pam-afs-session](http://www.eyrie.org/~eagle/software/pam-afs-session/) and Red Hat's `pam_krb5afs`.
 
-See previous question.
+### <a name="afsatcell"></a><a name="3.03  What is /afs/@cell?"></a> 3.02 What is `/afs/@cell`?
 
-### <a name="3.03  What is /afs/@cell?"></a> 3.03 What is /afs/@cell?
+It is a commonly created symbolic link pointing at `/afs/$your_cell_name`. `@cell` is not something that is provided by AFS. You may decide it is useful in your cell and wish to create it yourself.
 
-It is a symbolic link pointing at /afs/$your\_cell\_name.
+`/afs/@cell` is useful because:
 
-NB, @cell is not something that is provided by AFS. You may decide it is useful in your cell and wish to create it yourself.
+- If you look after more than one AFS cell, you could create the link in each cell then set your `$PATH` as:
 
-/afs/@cell is useful because:
+        PATH=$PATH:/afs/@cell/@sys/local/bin
 
-- If you look after more than one AFS cell, you could create the link in each cell then set your PATH as:
-  - PATH=$PATH:/afs/@cell/@sys/local/bin
+- For most cells, it shortens the path names to be typed in, thus reducing typos and saving time.
 
-- For most cells, it shortens the path names to be typed in thus reducing typos and saving time.
+A disadvantage of using this convention is that when you `cd` into `/afs/@cell` then type `pwd` you see `/afs/@cell` instead of the full name of your cell. This may appear confusing if a user wants to tell a user in another cell the pathname to a file.
 
-A disadvantage of using this convention is that when you cd into /afs/@cell then type "pwd" you see "/afs/@cell" instead of the full name of your cell. This may appear confusing if a user wants to tell a user in another cell the pathname to a file.
-
-You could create your own /afs/@cell with the following:
+You could create your own `/afs/@cell` with the following script (usable in `ksh` or any POSIX shell):
 
     #/bin/ksh -
     # author: mpb
@@ -116,43 +96,39 @@ You could create your own /afs/@cell with the following:
 
 <http://www-archive.stanford.edu/lists/info-afs/hyper95/0298.html>
 
-### <a name="3.04  Given that AFS data is loc"></a> 3.04 Given that AFS data is location independent, how does an AFS client determine which server houses the data its user is attempting to access?
+### <a name="vldb"></a><a name="3.04  Given that AFS data is loc"></a> 3.03 Given that AFS data is location independent, how does an AFS client determine which server houses the data its user is attempting to access?
 
 The Volume Location Database (VLDB) is stored on AFS Database Servers and is ideally replicated across 3 or more Database Server machines. Replication of the Database ensures high availability and load balances the requests for the data. The VLDB maintains information regarding the current physical location of all volume data (files and directories) in the cell, including the IP address of the [[FileServer]], and the name of the disk partition the data is stored on.
 
-A list of a cell's Database Servers is stored on the local disk of each AFS Client machine as: /usr/vice/etc/CellServDB
+A list of a cell's Database Servers is stored on the local disk of each AFS Client machine as `/usr/vice/etc/CellServDB`
 
-The Database Servers also house the Kerberos Authentication Database (encrypted user and server passwords), the Protection Database (user UID and protection group information) and the Backup Database (used by System Administrators to backup AFS file data to tape).
+The Database Servers also house the Protection Database (user UID and protection group information) and the Backup Database (used by System Administrators to backup AFS file data to tape), and in older sites the Kerberos Authentication Database (encrypted user and server passwords).
 
-### <a name="3.05  How does AFS maintain cons"></a> 3.05 How does AFS maintain consistency on read-write files?
+### <a name="callbacks"></a><a name="3.05  How does AFS maintain cons"></a> 3.04 How does AFS maintain consistency on read-write files?
 
-AFS uses a mechanism called "callback".
+AFS uses a mechanism called "callbacks".
 
-Callback is a promise from the fileserver that the cache version of a file/directory is up-to-date. It is established by the fileserver with the caching of a file.
+A callback is a promise from the fileserver that the cache version of a file/directory is up-to-date. It is established by the fileserver with the caching of a file.
 
-When a file is modified the fileserver breaks the callback. When the user accesses the file again the Cache Manager fetches a new copy if the callback has been broken.
+When a file is modified, the fileserver breaks the callback. When the user accesses the file again the Cache Manager fetches a new copy if the callback has been broken or it has expired (after 2 hours by default).
 
-The following paragraphs describe AFS callback mechanism in more detail:
+The following paragraphs describe the AFS callback mechanism in more detail:
 
-If I open() fileA and start reading, and you then open() fileA, write() a change **\*\*and close() or fsync()\*\*** the file to get your changes back to the server - at the time the server accepts and writes your changes to the appropriate location on the server disk, the server also breaks callbacks to all clients to which it issued a copy of fileA.
+If I `open()` `fileA` and start reading, and you then `open()` `fileA`, `write()` a change **\*\*and `close()` or `fsync()`\*\*** the file to get your changes back to the server - at the time the server accepts and writes your changes to the appropriate location on the server disk, the server also breaks callbacks to all clients to which it issued a copy of `fileA`.
 
-So my client receives a message to break the callback on fileA, which it dutifully does. But my application (editor, spreadsheet, whatever I'm using to read fileA) is still running, and doesn't really care that the callback has been broken.
+So my client receives a message to break the callback on `fileA`, which it dutifully does. But my application (editor, spreadsheet, whatever I'm using to read fileA) is still running, and doesn't really care that the callback has been broken.
 
-When something causes the application to read() more of the file the read() system call executes AFS cache manager code via the VFS switch, which does check the callback and therefore gets new copies of the data.
+When something causes the application to `read()` more of the file, the `read()` system call executes AFS cache manager code via the VFS switch, which does check the callback and therefore gets new copies of the data.
 
 Of course, the application may not re-read data that it has already read, but that would also be the case if you were both using the same host. So, for both AFS and local files, I may not see your changes.
 
-Now if I exit the application and start it again, or if the application does another open() on the file, then I will see the changes you've made.
+Now if I exit the application and start it again, or if the application does another `open()` on the file, then I will see the changes you've made.
 
 This information tends to cause tremendous heartache and discontent - but unnecessarily so. People imagine rampant synchronization problems. In practice this rarely happens and in those rare instances, the data in question is typically not critical enough to cause real problems or crashing and burning of applications. Since 1985, we've found that the synchronization algorithm has been more than adequate in practice - but people still like to worry!
 
-The source of worry is that, if I make changes to a file from my workstation, your workstation is not guaranteed to be notified until I close or fsync the file, at which point AFS guarantees that your workstation will be notified. This is a significant departure from NFS, in which no guarantees are provided.
+The source of worry is that, if I make changes to a file from my workstation, your workstation is not guaranteed to be notified until I `close` or `fsync` the file, at which point AFS guarantees that your workstation will be notified. This is a significant departure from NFS, in which no guarantees are provided.
 
-Partially because of the worry factor and largely because of Posix, this will change in DFS. DFS synchronization semantics are identical to local file system synchronization.
-
-[ DFS is the Distributed File System which is part of the Distributed ] [ Computing Environment (DCE). ]
-
-### <a name="3.06  Which protocols does AFS u"></a> 3.06 Which protocols does AFS use?
+### <a name="protocols"></a><a name="3.06  Which protocols does AFS u"></a> 3.05 Which protocols does AFS use?
 
 AFS may be thought of as a collection of protocols and software processes, nested one on top of the other. The constant interaction between and within these levels makes AFS a very sophisticated software system.
 
@@ -160,103 +136,74 @@ At the lowest level is the UDP protocol. UDP is the connection to the actual net
 
 Above the RPC is a series of server processes and interfaces that all use Rx for communication between machines. Fileserver, volserver, upserver, upclient, and bosserver are server processes that export RPC interfaces to allow their user interface commands to request actions and get information. For example, a bos status  command will examine the bos server process on the indicated file server machine.
 
-Database servers use ubik, a replicated database mechanism which is implemented using RPC. Ubik guarantees that the copies of AFS databases of multiple server machines remain consistent. It provides an application programming interface (API) for database reads and writes, and uses RPCs to keep the database synchronized. The database server processes, vlserver, kaserver, and ptserver, reside above ubik. These processes export an RPC interface which allows user commands to control their operation. For instance, the pts command is used to communicate with the ptserver, while the command klog uses the kaserver's RPC interface.
+Database servers use ubik, a replicated database mechanism which is implemented using RPC. Ubik guarantees that the copies of AFS databases of multiple server machines remain consistent. It provides an application programming interface (API) for database reads and writes, and uses RPCs to keep the database synchronized. The database server processes, `vlserver` and `ptserver`, reside above ubik. These processes export an RPC interface which allows user commands to control their operation. For instance, the `pts` command is used to communicate with the `ptserver`, while the command `vos` uses the `vlserver`'s RPC interface.
 
-Some application programs are quite complex, and draw on RPC interfaces for communication with an assortment of processes. Scout utilizes the RPC interface to file server processes to display and monitor the status of file servers. The uss command interfaces with kaserver, ptserver, volserver and vlserver to create new user accounts.
+Some application programs are quite complex, and draw on RPC interfaces for communication with an assortment of processes. Scout utilizes the RPC interface to file server processes to display and monitor the status of file servers. The `uss` command interfaces with `ptserver`, `volserver`, and `vlserver` to create new user accounts.
 
-The Cache Manager also exports an RPC interface. This interface is used principally by file server machines to break callbacks. It can also be used to obtain Cache Manager status information. The program cmdebug shows the status of a Cache Manager using this interface.
+The Cache Manager also exports an RPC interface. This interface is used principally by file server machines to break callbacks. It can also be used to obtain Cache Manager status information. The program `cmdebug` shows the status of a Cache Manager using this interface.
 
 For additional information, Section 1.5 of the AFS System Administrator's Guide and the April 1990 Cache Update contain more information on ubik. Udebug information and short descriptions of all debugging tools were included in the January 1991 Cache Update. Future issues will discuss other debugging tools in more detail.
 
-[ source: <ftp://ftp.transarc.com/pub/afsug/newsletter/apr91> ] [ Copyright 1991 Transarc Corporation ]
+[source: <ftp://ftp.transarc.com/pub/afsug/newsletter/apr91>] [Copyright 1991 Transarc Corporation]
 
-### <a name="3.07  Which TCP/IP ports and pro"></a> 3.07 Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?
+### <a name="ports"></a><a name="3.07  Which TCP/IP ports and pro"></a> 3.06 Which TCP/IP ports and protocols do I need to enable in order to operate AFS through my Internet firewall?
 
-Assuming you have already taken care of nameserving, you may wish to use an Internet timeserver for Network Time Protocol [[[NTP|FurtherReading#NTP]]] and the question about timed:
+Outbound destination ports for a client:
 
-ntp 123/udp
+    kerberos 88/udp 88/tcp
+    ntp 123/udp
+    afs3-fileserver 7000/udp
+    afs3-ptserver 7002/udp
+    afs3-vlserver 7003/udp
+    afs3-volserver 7005/udp
 
-A list of NTP servers is available via anonymous FTP from:
+If you also plan to control AFS servers from a client, you will also need
 
-- <http://www.eecis.udel.edu/~mills/ntp/servers.html>
+    afs3-bosserver 7007/udp
 
-For further details on NTP see: <http://www.eecis.udel.edu/~ntp/>
+You will also need to allow an inbound port
 
-For a "minimal" AFS service which does not allow inbound or outbound klog:
+    afs3-callback 7001/udp
 
-       cachemanager    4711/udp (only if you use the arla-client instead of OpenAFS)
-       fileserver      7000/udp
-       cachemanager    7001/udp
-       ptserver        7002/udp
-       vlserver        7003/udp
-       kaserver        7004/udp
-       volserver       7005/udp
-       reserved        7006/udp
-       bosserver       7007/udp
+or if you are using Arla
 
-(Ports in the 7020-7029 range are used by the AFS backup system, and won't be needed by external clients performing simple file accesses.)
+    cachemanager 4711/udp
 
-Additionally, for "klog" to work through the firewall you need to allow inbound and outbound UDP on ports &gt;1024 (probably 1024&lt;port&lt;2048 would suffice depending on the number of simultaneous klogs).
+(Note: if you are using NAT, you should try to to arrange for the UDP NAT timeout on port 7001 to be at least two hours. Recent [[OpenAFS]] server and client versions will try to send keepalives to keep the callback NAT entry open, but some consumer router/WiFi/NAT devices may have a timeout that is too short even for this keepalive. If the NAT entry expires, your cache manager will not be [[notified of file changes on the server|AdminFAQ#callbacks]] and you will only find out about file changes approximately after two hours, when the callback expires.)
 
-See also: <http://www-archive.stanford.edu/lists/info-afs/hyper95/0874.html>
+You will also need to allow various ephemeral UDP source ports for outbound connections, but you will need to do this for DNS and [[NTP|AdminFAQ#ntp]] anyway.
 
-### <a name="3.08  Are setuid programs execut"></a> 3.08 Are setuid programs executable across AFS cell boundaries?
+### <a name="setuid"></a><a name="3.08  Are setuid programs execut"></a> 3.07 Are setuid programs executable across AFS cell boundaries?
 
-By default, the setuid bit is ignored but the program may be run (without setuid privilege).
+By default, the setuid bit is ignored but the program may be run (without setuid privilege). It would be bad to allow arbitrary setuid programs in remote cells to run; consider that someone could put a setuid copy of `bash` in a personal cell, arrange for that to be visible via DNS `SRV` records, and then `fs mkmount` a reference to it in their AFS space on e.g. a school machine.
 
-It is possible to configure an AFS client to honour the setuid bit. This is achieved by root running:
+It is possible to configure an AFS client to honor the setuid bit. This is achieved by `root` (only) running:
 
        root@toontown # fs setcell -cell $cellname -suid
 
-(where $cellname is the name of the foreign cell. Use with care!).
+where `$cellname` is the name of the foreign cell. Use with care!
 
-NB: making a program setuid (or setgid) in AFS does **not** mean that the program will get AFS permissions of a user or group. To become AFS authenticated, you have to klog. If you are not authenticated, AFS treats you as "system:anyuser".
+Note that making a program setuid (or setgid) in AFS does **not** mean that the program will get AFS permissions of a user or group. To become AFS authenticated, you have to `aklog`. If you are not authenticated to AFS, AFS treats you as `system:anyuser`. setuid only affects local Unix permissions (and is meaningless on Windows clients).
 
-### <a name="3.09  How can I run daemons with"></a> 3.09 How can I run daemons with tokens that do not expire?
+### <a name="kstart"></a><a name="3.09  How can I run daemons with"></a> 3.08 How can I run daemons with tokens that do not expire?
 
-It is not a good idea to run with tokens that do not expire because this would weaken one of the security features of Kerberos.
+It is not a good idea to run with tokens that do not expire because this would weaken one of the security features of Kerberos. A (slightly) better approach is to re-authenticate just before the token expires. (Even more preferable would be to get a token for a particular operation, preferably from the user performing some operation, but this is not always possible, especially with services that are not aware of Kerberos.)
 
-A better approach is to re-authenticate just before the token expires.
+The most common way to achieve this these days is to generate a keytab containing the credentials you want the daemon to have, and use a program like [k5start](http://www.eyrie.org/~eagle/software/kstart/) to run the daemon with those credentials.
 
-The most common way to achieve this these days is to generate a keytab
-containing the credentials you want the daemon to have, and use a program like
-[k5start](http://www.eyrie.org/~eagle/software/kstart/) to run the daemon with
-those credentials. The kstart tools can be compared to the old "reauth"
-program.
+### <a name="crack"></a><a name="3.10  Can I check my user&#39;s pass"></a> 3.09 Can I check my users' passwords for security purposes?
 
-### <a name="3.10  Can I check my user&#39;s pass"></a> 3.10 Can I check my user's passwords for security purposes?
+The major Kerberos implementations (MIT Kerberos and Heimdal) all include ways to do password strength checking when a user chooses a password. There are not currently any (public!) utilities to check keys in a KDC (which are generated from passwords) against dictionaries; and you cannot (generally) generate an unencrypted KDC dump to check them (the KDC keys are double-encrypted: not only are they stored as encrypted keys instead of the original plaintext passwords, but the entire record is encrypted with the KDC's own master key).
 
-Yes. Alec Muffett's Crack tool (at version 4.1f) has been converted to work on the Transarc kaserver database. This modified Crack (AFS Crack) is available via anonymous ftp from:
+### <a name="balance"></a><a name="3.11  Is there a way to automati"></a> 3.10 Is there a way to automatically balance disk usage across fileservers?
 
-- <ftp://export.acs.cmu.edu/pub/crack.tar.Z>
-- <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/crack.tar.Z>
-
-and is known to work on: pmax\_\* sun4\*\_\* hp700\_\* rs\_aix\* next\_\*
-
-It uses the file /usr/afs/db/kaserver.DB0, which is the database on the kaserver machine that contains the encrypted passwords. As a bonus, AFS Crack is usually two to three orders of magnitude faster than the standard Crack since there is no concept of salting in a Kerberos database.
-
-On a normal UNIX /etc/passwd file, each password can have been encrypted around 4096 (2^12) different saltings of the crypt(3) algorithm, so for a large number of users it is easy to see that a potentially large (up to 4095) number of seperate encryptions of each word checked has been avoided.
-
-Author: Dan Lovinger Contact: Derrick J. Brashear &lt;shadow+@andrew.cmu.edu&gt;
-
-<table border="1" cellpadding="0" cellspacing="0">
-  <tr>
-    <td> Note: </td>
-    <td> AFS Crack does not work for MIT Kerberos Databases. The author is willing to give general guidance to someone interested in doing the (probably minimal) amount of work to port it to do MIT Kerberos. The author does not have access to a MIT Kerberos server to do this. </td>
-  </tr>
-</table>
-
-### <a name="3.11  Is there a way to automati"></a> 3.11 Is there a way to automatically balance disk usage across fileservers?
-
-Yes. There is a tool, balance, which does exactly this. It can be retrieved via anonymous ftp from:
-
-- <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/balance-1.1b.tar.gz>
+Yes. There is a tool, balance, which does exactly this. It can be retrieved via anonymous ftp from <ftp://ftp.andrew.cmu.edu/pub/AFS-Tools/balance-1.2-beta.tar.gz>. (It does not appear to have been updated since late 2003).
 
 Actually, it is possible to write arbitrary balancing algorithms for this tool. The default set of "agents" provided for the current version of balance balance by usage, # of volumes, and activity per week, the latter currently requiring a source patch to the AFS volserver. Balance is highly configurable.
 
 Author: Dan Lovinger Contact: Derrick Brashear &lt;shadow+@andrew.cmu.edu&gt;
 
-### <a name="3.12  Can I shutdown an AFS file"></a> 3.12 Can I shutdown an AFS fileserver without affecting users?
+### <a name="shutdown"></a><a name="3.12  Can I shutdown an AFS file"></a> 3.11 Can I shutdown an AFS fileserver without affecting users?
 
 Yes, this is an example of the flexibility you have in managing AFS.
 
@@ -265,199 +212,79 @@ Before attempting to shutdown an AFS fileserver you have to make some arrangemen
 1. Move all AFS volumes to another fileserver. (Check you have the space!) This can be done "live" while users are actively using files in those volumes with no detrimental effects.
 
 1. Make sure that critical services have been replicated on one (or more) other fileserver(s). Such services include:
-  - kaserver - Kerberos Authentication server
-  - vlserver - Volume Location server
-  - ptserver - Protection server
-  - buserver - Backup server
+  - `vlserver` - Volume Location server
+  - `ptserver` - Protection server
+  - `buserver` - Backup server
+  - `kaserver` - Old Kerberos Authentication server
+  - `fileserver`
+  - Kerberos KDCs, or `kaserver` on older installations
 
 It is simple to test this before the real shutdown by issuing:
 
-       bos shutdown $server $service
+    bos shutdown $server $service
 
-       where: $server is the name of the server to be shutdown
-         and  $service is one (or all) of: kaserver vlserver ptserver buserver
+where `$server` is the name of the server to be shutdown and `$service` is `-all` or the specific service to be shut down. Note that a service instance may *not* be the same as the service name; use `bos status $server` to check. (One common configuration uses short names like `pts` or even `pt` for the `ptserver` service, for example.)
+
+Kerberos services are usually not managed via `bos`; check the OS's services manager for `krb5kdc`, `kadmind`, `kpasswdd`, and similar. (Different Kerberos implementations will have different service daemons.)
 
 Other points to bear in mind:
 
-- "vos remove" any RO volumes on the server to be shutdown. Create corresponding RO volumes on the 2nd fileserver after moving the RW. There are two reasons for this:
-  1. An RO on the same partition ("cheap replica") requires less space than a full-copy RO.
-  2. Because AFS always accesses RO volumes in preference to RW, traffic will be directed to the RO and therefore quiesce the load on the fileserver to be shutdown.
+- `vos remove` any RO volumes on the server to be shutdown. Create corresponding RO volumes on the 2nd fileserver after moving the RW. There are two reasons for this:
+    1. An RO on the same partition ("cheap replica") requires less space than a full-copy RO.
+    2. Because AFS always accesses RO volumes in preference to RW, traffic will be directed to the RO and therefore quiesce the load on the fileserver to be shutdown.
+- If you are still using `kaserver` and the system to be shutdown has the lowest IP address, there may be a brief delay in authenticating because of timeout experienced before contacting a second `kaserver`.
 
-- If the system to be shutdown has the lowest IP address there may be a brief delay in authenticating because of timeout experienced before contacting a second kaserver.
+### <a name="mail"></a><a name="3.13  How can I set up mail deli"></a><a name="3.52  Is it a good idea to store"></a> 3.12 How can I set up mail delivery to users with `$HOME`s in AFS?
 
-### <a name="3.13  How can I set up mail deli"></a> 3.13 How can I set up mail delivery to users with $HOMEs in AFS?
+Preferably, don't. This has been found to scale poorly because of high load on read-write servers; mail clients check for new mail every few minutes (or even seconds) and this will cause problems for any file server. Additionally, as the mail server cannot authenticate to AFS as the receiving user, you need to carefully manage permissions on the receiving directory tree to avoid mail being lost or the directory being used as a general dropbox with potential security implications.
 
-There are many ways to do this. Here, only two methods are considered:
+See [this message](http://www.openafs.org/pipermail/openafs-info/2007-June/026621.html) for more information about the scalability of mail delivery onto a shared fileserver. (Something to think about: very similar considerations are why the recommendation for Exchange mail servers is to only have a small number of users on each mailbox server.)
 
-Method 1: deliver into local filestore
+If you absolutely must do this for some reason, here's one way to do it.
 
-This is the simplest to implement. Set up your mail delivery to append mail to /var/spool/mail/$USER on one mailserver host. The mailserver is an AFS client so users draw their mail out of local filestore into their AFS $HOME (eg: inc).
+First, you must have your mail delivery daemon AFS authenticated (probably as "`postman`" or similar). [`kstart`](http://www.eyrie.org/~eagle/software/kstart/) can be used to do this. (Note that the mail delivery agent cannot authenticate as the actual user! To do so, it would need access to keytabs for each possible recipient; and it is almost certainly a bad idea to give it access to such keytabs.)
 
-Note that if you expect your (AFS unauthenticated) mail delivery program to be able to process .forward files in AFS $HOMEs then you need to add "system:anyuser rl" to each $HOMEs ACL.
+Second, you need to set up the ACLs so that "`postman`" has lookup rights down to the user's `$HOME` and "`lik`" on the destination directory (for this example, we'll use `$HOME/Mail`).
 
-The advantages are:
-
-- Simple to implement and maintain.
-- No need to authenticate into AFS.
-
-The drawbacks are:
-
-- It doesn't scale very well.
-- Users have to login to the mailserver to access their new mail.
-- Probably less secure than having your mailbox in AFS.
-- System administrator has to manage space in /var/spool/mail.
-
-Method 2: deliver into AFS
-
-This takes a little more setting up than the first method.
-
-First, you must have your mail delivery daemon AFS authenticated (probably as "postman"). The reauth example in afs-contrib shows how a daemon can renew its token. You will also need to setup the daemon startup soon after boot time to klog (see the -pipe option).
-
-Second, you need to set up the ACLs so that "postman" has lookup rights down to the user's $HOME and "lik" on $HOME/Mail.
-
-Advantages:
-
-- Scales better than first method.
-- Delivers to user's $HOME in AFS giving location independence.
-- Probably more secure than first method.
-- User responsible for space used by mail.
-
-Disadvantages:
-
-- More complicated to set up.
-- Need to correctly set ACLs down to $HOME/Mail for every user.
-- Probably need to store postman's password in a file so that the mail delivery daemon can klog after boot time. This may be OK if the daemon runs on a relatively secure host.
-
-An example of how to do this for IBM RISC System/6000 is auth-sendmail. A beta test version of auth-sendmail can be found in:
-
-<file:///afs/transarc.com/public/afs-contrib/doc/faq/auth-sendmail.tar.Z> <ftp://ftp.transarc.com/pub/afs-contrib/doc/faq/auth-sendmail.tar.Z>
-
-### <a name="3.14  Should I replicate a _Read"></a> 3.14 Should I replicate a [[ReadOnly]] volume on the same partition and server as the [[ReadWrite]] volume?
+### <a name="shadowro"></a><a name="3.14  Should I replicate a _Read"></a> 3.13 Should I replicate a [[ReadOnly]] volume on the same partition and server as the [[ReadWrite]] volume?
 
 Yes, Absolutely! It improves the robustness of your served volumes.
 
-If [[ReadOnly]] volumes exist (note use of term **exist** rather than **are available**), Cache Managers will **never** utilize the [[ReadWrite]] version of the volume. The only way to access the RW volume is via the "dot" path (or by special mounting).
+If [[ReadOnly]] volumes _exist_ (_not_ just "are available"), Cache Managers will not utilize the [[ReadWrite]] version of the volume except via an explicit [[ReadWrite]] mountpoint. This means if **all** RO copies are on dead servers, are offline, are behind a network partition, etc, then clients will not be able to get the data, even if the RW version of the volume is healthy, on a healthy server and in a healthy network.
 
-This means if **all** RO copies are on dead servers, are offline, are behind a network partition, etc, then clients will not be able to get the data, even if the RW version of the volume is healthy, on a healthy server and in a healthy network.
+However, you are **very** strongly encouraged to keep one RO copy of a volume on the _same server and partition_ as the RW. There are two reasons for this:
 
-However, you are **very** strongly encouraged to keep one RO copy of a volume on the **same server and partition** as the RW. There are two reasons for this:
-
-1. The RO that is on the same server and partition as the RW is a clone (just a copy of the header - not a full copy of each file). It therefore is very small, but provides access to the same set of files that all other (full copy) [[ReadOnly]] volume do. Transarc trainers refer to this as the "cheap replica".
+1. The RO that is on the same server and partition as the RW is a clone (just a copy of the header, not a full copy of each file). It therefore is very small, but provides access to the same set of files that all other (full copy) [[ReadOnly]] volumes do. Transarc trainers referred to this as the "cheap replica", although the term "shadow" is finding some currency.
 2. To prevent the frustration that occurs when all your ROs are unavailable but a perfectly healthy RW was accessible but not used.
 
-If you keep a "cheap replica", then by definition, if the RW is available, one of the RO's is also available, and clients will utilize that site.
+If you keep a "cheap replica", then by definition, if the RW is available, one of the ROs is also available, and clients will utilize that site.
 
-### <a name="3.15  Should I start AFS before"></a><a name="3.15  Should I start AFS before "></a> 3.15 Should I start AFS before NFS in /etc/inittab?
-
-Yes, it is possible to run both AFS and NFS on the same system but you should start AFS first.
-
-In IBM's AIX 3.2, your /etc/inittab would contain:
-
-    rcafs:2:wait:/etc/rc.afs > /dev/console 2>&1 # Start AFS daemons
-    rcnfs:2:wait:/etc/rc.nfs > /dev/console 2>&1 # Start NFS daemons
-
-With AIX, you need to load NFS kernel extensions before the AFS KEs in /etc/rc.afs like this:
-
-    #!/bin/sh -
-    # example /etc/rc.afs for an AFS fileserver running AIX 3.2
-    #
-    echo "Installing NFS kernel extensions (for AFS+NFS)"
-    /etc/gfsinstall -a /usr/lib/drivers/nfs.ext
-    echo "Installing AFS kernel extensions..."
-    D=/usr/afs/bin/dkload
-    ${D}/cfgexport -a ${D}/export.ext
-    ${D}/cfgafs    -a ${D}/afs.ext
-    /usr/afs/bin/bosserver &
-
-### <a name="3.16  Will AFS run on a multi-ho"></a> 3.16 Will AFS run on a multi-homed fileserver?
+### <a name="multihomed"></a><a name="3.16  Will AFS run on a multi-ho"></a> 3.14 Will AFS run on a multi-homed fileserver?
 
 (multi-homed = host has more than one network interface.)
 
-Yes, it will. However, AFS was designed for hosts with a single IP address. There can be problems if you have one host name being resolved to several IP addresses.
+Yes, it will. Older AFS assumed that there is one address per host, but modern [[OpenAFS]] identifies servers ad clients by UUIDs (universally unique identifiers) so that a fileserver will be recognized by any of its registered addresses.
 
-Transarc suggest designating unique hostnames for each network interface. For example, a host called "spot" has two tokenring and one ethernet interfaces: spot-tr0, spot-tr1, spot-en0. Then, select which interface will be used for AFS and use that hostname in the [[CellServDB]] file (eg: spot-tr0).
+See the documentation for the [`NetInfo`](http://docs.openafs.org/Reference/5/NetInfo.html), [`NetRestrict`](http://docs.openafs.org/Reference/5/NetRestrict.html) files. The UUID for a fileserver is generated when the [`sysid`](http://docs.openafs.org/Reference/5/sysid.html) file is created.
 
-You also have to remember to use the AFS interface name with any AFS commands that require a server name (eg: vos listvol spot-tr0).
-
-There is a more detailed discussion of this in the August 1993 issue of "Cache Update" (see: <ftp://ftp.transarc.com/pub/afsug/newsletter/aug93>).
-
-The simplest way of dealing with this is to make your AFS fileservers single-homed (eg only use one network interface).
-
-At release 3.4 of AFS, it is possible to have multi-homed fileservers (but _not_ multi-homed database servers).
-
-### <a name="3.17  Can I replicate my user&#39;s"></a><a name="3.17  Can I replicate my user&#39;s "></a> 3.17 Can I replicate my user's home directory AFS volumes?
+### <a name="replicatehome"></a><a name="3.17  Can I replicate my user&#39;s"></a><a name="3.17  Can I replicate my user&#39;s "></a> 3.15 Can I replicate my user's home directory AFS volumes?
 
 No.
 
-Users with $HOMEs in /afs normally have an AFS [[ReadWrite]] volume mounted in their home directory.
+Users with `$HOME`s in `/afs` normally have an AFS [[ReadWrite]] volume mounted in their home directory. You can replicate a RW volume, but only as a [[ReadOnly]] volume; there can only be one instance of a [[ReadWrite]] volume.
 
-You can replicate a RW volume but only as a [[ReadOnly]] volume and there can only be one instance of a [[ReadWrite]] volume.
+In theory you could have RO copies of a user's RW volume on a second server, but in practice this won't work for the following reasons:
 
-In theory, you could have RO copies of a user's RW volume on a second server but in practice this won't work for the following reasons:
+a) AFS has a bias to always access the RO copy of a RW volume if one exists. So the user would have a [[ReadOnly]] `$HOME`, which is not very useful. (You could use an RW mountpoint to avoid this.)
+b) [[ReadOnly]] volumes are not automatically updated; you would need to manually update each user volume (e.g. `vos release user.fred; fs checkv`).
 
-    a) AFS has built-in bias to always access the RO copy of a RW volume.
-       So the user would have a ReadOnly $HOME which is not too useful!
+The bottom line is: you cannot usefully replicate `$HOME`s across servers.
 
-    b) Even if a) was not true you would have to arrange frequent
-       synchronisation of the RO copy with the RW volume (for example:
-       "vos release user.fred; fs checkv") and this would have to be
-       done for all such user volumes.
+(That said, there is one potentially useful case: if there is an extended fileserver outage, you can use `vos convertROtoRW` to promote a [[ReadOnly]] volume to [[ReadWrite]]. You should only do this if the alternative is restoring the entire contents of the downed fileserver from a backup; should the fileserver return to service, the attempt to re-register additional [[ReadWrite]] volume instances will fail. As such, *if* you make sure to use a [[ReadWrite]] mountpoint for user volumes, replicating a user's `$HOME` may prove useful as an online backup.)
 
-    c) Presumably, the idea of replicating is to recover the $HOME
-       in the event of a server crash. Even if a) and b) were not
-       problems consider what you might have to do to recover a $HOME:
+### <a name="listclients"></a><a name="3.21  How can I list which clien"></a> 3.16 How can I list which clients have cached files from a server?
 
-       1) Create a new RW volume for the user on the second server
-          (perhaps named "user.fred.2").
-
-       2) Now, where do you mount it?
-
-          The existing mountpoint cannot be used because it already has
-          the ReadOnly copy of the original volume mounted there.
-
-          Let's choose: /afs/MyCell/user/fred.2
-
-       3) Copy data from the RO of the original into the new RW volume
-          user.fred.2
-
-       4) Change the user's entry in the password file for the new $HOME:
-          /afs/MyCell/user/fred.2
-
-       You would have to attempt steps 1 to 4 for every user who had
-       their RW volume on the crashed server. By the time you had done
-       all of this, the crashed server would probably have rebooted.
-
-       The bottom line is: you cannot replicate $HOMEs across servers.
-
-### <a name="3.18  What is the Andrew Benchma"></a> 3.18 What is the Andrew Benchmark?
-
-"It is a script that operates on a collection of files constituting an application program. The operations are intended to represent typical actions of an average user. The input to the benchmark is a source tree of about 70 files. The files total about 200 KB in size. The benchmark consists of five distinct phases:
-
-      I MakeDir - Construct a target subtree that is identical to the
-                  source subtree.
-     II Copy    - Copy every file from the source subtree to the target subtree.
-    III ScanDir - Traverse the target subtree and examine the status
-                  of every file in it.
-     IV ReadAll - Scan every byte of every file in the target subtree.
-      V Make    - Complete and link all files in the target subtree."
-
-Source: <file:///afs/transarc.com/public/afs-contrib/doc/benchmark/Andrew.Benchmark.ps> <ftp://ftp.transarc.com/pub/afs-contrib/doc/benchmark/Andrew.Benchmark.ps>
-
-### <a name="3.19  Where can I find the Andre"></a> 3.19 Where can I find the Andrew Benchmark?
-
-From Daniel Joseph Barnhart Clark's [message](http://lists.openafs.org/pipermail/openafs-info/2004-April/012942.html):
-
-It's linked to from <http://www.citi.umich.edu/projects/linux-scalability/tools.html>; CITI also has some useful mods at <http://www.citi.umich.edu/projects/nfs-perf/results/cmarion/>.
-
-### <a name="3.20  Is there a version of HP V"></a> 3.20 Is there a version of HP VUE login with AFS authentication?
-
-Yes, the availability of this is described in: <file:///afs/transarc.com/public/afs-contrib/pointers/HP-VUElogin.txt> <ftp://ftp.transarc.com/pub/afs-contrib/pointers/HP-VUElogin.txt>
-
-If you don't have access to the above, please contact Rajeev Pandey of Hewlett Packard whose email address is &lt;rpandey@cv.hp.com&gt;.
-
-### <a name="3.21  How can I list which clien"></a> 3.21 How can I list which clients have cached files from a server?
-
-By using the following script:
+By using the following script, which should work in a POSIX-compliant shell, `ksh` or `bash` (but check the path to `rxdebug`, and you need `nslookup` to be installed):
 
     #!/bin/ksh -
     #
@@ -467,159 +294,181 @@ By using the following script:
     # PURPOSE       Display AFS clients which have grabbed files from a server
 
     if [ $# = 0 ]; then
-            echo "Usage: $0 <afs_server 1> ... <afsserver n>"
-            exit 1
+        echo "Usage: $0 <afs_server 1> ... <afsserver n>"
+        exit 1
     fi
     for n; do
-            /usr/afsws/etc/rxdebug -servers $n -allconn
-    done | grep '^Connection' | \
-    while  read x y z ipaddr rest; do echo $ipaddr; done | sort -u |
+        /usr/afsws/etc/rxdebug -servers $n -allconn
+    done |
+	grep '^Connection' |
+    while read x y z ipaddr rest; do
+	    echo $ipaddr
+	done |
+	sort -u |
     while read ipaddr; do
-            ipaddr=${ipaddr%%,}
-            n="`nslookup $ipaddr`"
-            n="${n##*Name: }"
-            n="${n%%Address:*}"
-            n="${n##*([ ])}"
-            n="${n%?}"
-            echo "$n ($ipaddr)"
+        ipaddr=${ipaddr%%,}
+        n="`nslookup $ipaddr`"
+        n="${n##*Name: }"
+        n="${n%%Address:*}"
+        n="${n##*([ ])}"
+        n="${n%?}"
+        echo "$n ($ipaddr)"
     done
 
-### <a name="3.22  Do Backup volumes require"></a><a name="3.22  Do Backup volumes require "></a> 3.22 Do Backup volumes require as much space as [[ReadWrite]] volumes?
+An alternative in Perl (still requires `rxdebug` but not `nslookup`):
 
-No.
+    #! /usr/bin/perl -w
+	use strict;
+	use warnings;
+	use Socket;
+	
+	my %client;
+	for my $fs (@ARGV) {
+		open my $rx, '-|', "rxdebug -server \Q$fs\E -allconn" or die "rxdebug: $!";
+		while (<$rx>) {
+			/^Connection from host (\S+),/ and $client{$1} = 1;
+		}
+	}
+	for my $ip (keys %client) {
+		my ($ia, $host);
+		$ia = inet_aton($ip);
+		if (defined ($host = gethostbyaddr($ia, AF_INET))) {
+			$client{$ip} = "$host ($ip)";
+		} else {
+			$client{$ip} = $ip;
+		}
+	}
+	for my $host (sort values %client) {
+		print $host, "\n";
+	}
 
-The technique used is to create a new volume, where every file in the RW copy is pointed to by the new backup volume. The files don't exist in the BK, only in the RW volume. The backup volume therefore takes up very little space.
+### <a name="backupvol"></a><a name="3.22  Do Backup volumes require"></a><a name="3.22  Do Backup volumes require "></a> 3.17 Do Backup volumes require as much space as [[ReadWrite]] volumes?
 
-If the user now starts modifying data, the old copy must not be destroyed.
+Occasionally, but usually not. A backup volume consists of copy-on-write clones of the files in the original volume; if the file in the original is then modified, it will be copied first, leaving the backup volume pointing at the original version. The BK volume is re-synchronised with the RW next time a `vos backup` or `vos backupsys` is run.
 
-There is a Copy-On-Write bit in the vnode; if the fileserver writes to a vnode with the bit on, it allocates a new vnode for the data and turns off the COW bit. The BK volume hangs onto the old data, and the RW volume slowly splits itself away over time.
+The space needed for the BK volume is directly related to the size of all files changed in the RW between runs of `vos backupsys`.
 
-The BK volume is re-synchronised with the RW next time a "vos backupsys" is run.
+### <a name="ntp"></a><a name="NTP"></a><a name="3.23  Should I run timed on my A"></a> 3.18 Should I run `ntpd` on my AFS client?
 
-The space needed for the BK volume is directly related to the size of all files changed in the RW between runs of "vos backupsys".
+Yes. You should not rely on older time services such as `timed` or programs such as `ntpdate`, and should not use the legacy `settime` functionality of the AFS client. You should also avoid using automatic time synchronization provided by virtual machine hypervisors (indeed, VMware specifically recommends disabling its time synchronization on Linux and using `ntpd`).
 
-### <a name="3.23  Should I run timed on my A"></a> 3.23 Should I run timed on my AFS client?
+The AFS Servers make use of NTP [[[NTP|FurtherReading#NTP]]] to synchronise time each other and typically with one or more external NTP servers. By default, clients synchronize their time with one of the servers in the local cell. Thus all the machines participating in the AFS cell have an accurate view of the time.
 
-No.
+For further details on NTP see <http://www.ntp.org/>. The latest version is 4.2.6, dated December 2011, which is **much** more recent that the version packaged with Transarc AFS. OpenAFS no longer ships with `timed`, since it is assumed that all sites use NTP.
 
-<a name="NTP"></a> The AFS Servers make use of NTP [[[NTP|FurtherReading#NTP]]] to synchronise time each other and typically with one or more external NTP servers. By default, clients synchronize their time with one of the servers in the local cell. Thus all the machines participating in the AFS cell have an accurate view of the time.
+A list of NTP servers is available from <http://support.ntp.org/servers/>. Note that you should prefer to have one or more master local servers sync to one of the "pool" servers for your continent, and other local clients sync to the master local server(s).
 
-For further details on NTP see: <http://www.eecis.udel.edu/~ntp/>. The latest version is 4.1, dated August 2001, which is **much** more recent that the version packaged with Transarc AFS.
+The default time setting behavior of the AFS client can be disabled by specifying the `-nosettime` argument to [afsd](http://www.transarc.ibm.com/Library/documentation/afs/3.5/unix/cmd/cmd53.htm). It is **strongly** recommended that you run NTP and use `-nosettime` on all machines (clients *and* servers).
 
-A list of NTP servers is available via anonymous FTP from:
+### <a name="cellservdb"></a><a name="3.24  Why should I keep /usr/vic"></a><a name="3.25  How can I keep /usr/vice/e"></a> 3.19 Why and how should I keep `/usr/vice/etc/CellServDB` current?
 
-- <http://www.eecis.udel.edu/~mills/ntp/servers.html>
+On AFS clients, `/usr/vice/etc/CellServDB` defines the cells (and their db servers) that can be accessed via `/afs`. Over time, site details change: servers are added/removed or moved onto new network addresses; new cells appear. While some of this can be handled by means of DNS `AFSDB` or `SRV` records, you must know about a cell to even be able to ask about it; the [[CellServDB]] acts as a central directory of cell. (Of course, it is sometimes a good idea to not advertise some internal cells; but that also means not putting them in public-facing DNS, so you will likely want a local [[CellServDB]].)
 
-The default time setting behavior of the AFS client can be disabled by specifying the `-nosettime` argument to [afsd](http://www.transarc.ibm.com/Library/documentation/afs/3.5/unix/cmd/cmd53.htm). This is recommended for AFS servers which are also configured as clients (because servers normally run NTP daemons) and for clients that run NTP.
+In order to keep up-to-date with such changes, the [[CellServDB]] file on each AFS client should be kept consistent with some master copy (at your site).
 
-### <a name="3.24  Why should I keep /usr/vic"></a> 3.24 Why should I keep /usr/vice/etc/CellServDB current?
+As well as updating [[CellServDB]], your AFS administrator should ensure that new cells are mounted in your cell's `root.afs` volume. If a cell is added to [[CellServDB]], either the **client** must be restarted or you must use [`fs newcell`](http://docs.openafs.org/Reference/1/fs_newcell.html) to register the new cell information with the running client.
 
-On AFS clients, /usr/vice/etc/CellservDB, defines the cells and (their servers) that can be accessed via /afs.
+The official public master [[CellServDB]] is maintained at `grand.central.org`, from <http://grand.central.org/dl/cellservdb/CellServDB> or <file:///afs/grand.central.org/service/CellServDB>. You can send updates for this to <cellservdb@central.org>.
 
-Over time, site details change: servers are added/removed or moved onto new network addresses. New sites appear.
+The client [[CellServDB]] file must not reside under `/afs` (since it needs to exist before the client starts!) and is best located in local filespace.
 
-In order to keep up-to-date with such changes, the [[CellservDB]] file on each AFS client should be kept consistent with some master copy (at your site).
+After obtaining an updated [[CellServDB]] and distributing to clients, you will want to run a script similar to this Perl script. (It could be written in shell, but not comprehensibly. Feel free to reimplement in your preferred language.)
 
-As well as updating [[CellservDB]], your AFS administrator should ensure that new cells are mounted in your cell's root.afs volume.
+	#! /usr/bin/perl
+	use strict;
+	use warnings;
 
-If a cell is added to [[CellServDB]] then the **client** must either be restared or you must the AFS command "fs newcell -cell .. -servers ... ...".
+	#
+	# Given a CellServDB file (may be local, may be master), issue "fs newcell" for each listed
+	# cell.  We don't bother checking for changes, as that's much more expensive than making an
+	# unnecessary change.
+	#
+	# Expected usage via puppet:  rather than making it the restart/reconfigure action for the
+	# client (or server) we depend on an exec stanza which does so.  No point in running it if
+	# what changed is something else that requires a full restart.
+	#
 
-### <a name="3.25  How can I keep /usr/vice/e"></a> 3.25 How can I keep /usr/vice/etc/CellServDB current?
+	my $cell;
+	my @srv = ();
 
-Do a daily copy from a master source and update the AFS kernel sitelist.
+	while (<>) {
+	  chomp;
+	  if (/^>(\S+)(?:\s|\Z)/) {
+		if (defined $cell and @srv) {
+		  system 'fs', 'newcell', $cell, @srv and die "fs newcell failed";
+		}
+		$cell = $1;
+		@srv = ();
+	  }
+	  # same rules as afsd: if the name doesn't resolve, use the IP
+	  elsif (defined $cell and /(^\d+\.\d+\.\d+\.\d+)\s*#(\S+)\s*$/) {
+		if (defined gethostbyname($2)) {
+		  push @srv, $2;
+		} else {
+		  push @srv, $1;
+		}
+	  }
+	  else {
+		warn "line $ {.}: can't parse \"$_\"\n";
+	  }
+	}
+	# last entry
+	if (defined $cell and @srv) {
+	  system 'fs', 'newcell', $cell, @srv and die "fs newcell failed";
+	} else {
+	  warn "line $ {.}: no valid cells found\n";
+	}
 
-One good master source is the grand.central.org [[CellServDB]], available from <http://grand.central.org/dl/cellservdb/CellServDB> or <file:/afs/openafs.org/service/CellServDB> (N.B. update to /afs/grand.central.org path when available). You can send updates for this to <cellservdb@central.org>.
+### <a name="fileservers"></a><a name="3.26  How can I compute a list o"></a> 3.20 How can I compile a list of AFS fileservers?
 
-The client [[CellServDB]] file must not reside under /afs and is best located in local filespace.
+Here is a Bourne shell command to do it (it will work in GNU bash and the Korn shell, too, and even `csh`):
 
-Simply updating a client [[CellServDB]] file is not enough. You also need to update the AFS kernel sitelist by either: 1) rebooting the client or 2) running "fs newcell $cell\_name $server\_list" for each site in the [[CellServDB]] file.
+    stimpy@nick $ vos listvldb -cell `cat /usr/vice/etc/ThisCell` | awk '/server/ {print $2}' | sort -u
 
-A script to update the AFS kernel sitelist on a running system is newCellServDB.
+### <a name="anonftp"></a><a name="3.27  How can I set up anonymous"></a> 3.21 How can I set up anonymous FTP login to access `/afs`?
 
-<file:///afs/ece.cmu.edu/usr/awk/Public/newCellServDB> <ftp://ftp.ece.cmu.edu/pub/afs-tools/newCellServDB>
+The easiest way on a primarily "normal" machine (where you don't want to have everything in AFS) is to actually mount `root.cell` under `~ftp`, and then symlink `/afs` to `~ftp/afs` or whatever. It's as simple as changing the mountpoint in `/usr/vice/etc/cacheinfo` and restarting `afsd`.
 
-One way to distribute [[CellServDB]] is to have a root cron job on each AFS client copy the file then run newCellServDB.
+Note that when you do this, anon ftp users can go anywhere `system:anyuser` can (or worse, if you're using IP-based ACLs and the ftp host is listed in any PTS groups). The only "polite" solution I've arrived at is to have the ftp host machine run a minimal [[CellServDB]] and police my ACLs tightly.
 
-Example:
+Alternatively, you can make `~ftp` an AFS volume and just mount whatever you need under that - this works well if you can keep everything in AFS, and you don't have the same problems with anonymous "escapes" into `/afs`. (Note that you can often use host `tmpfs` mounts onto AFS directories to hide things or provide host-specific paths.)
 
-    #!/bin/ksh -
-    #
-    # NAME       syncCellServDB
-    # PURPOSE    Update local CellServDB file and update AFS kernel sitelist
-    # USAGE      run by daily root cron job eg:
-    #                    0 3 * * * /usr/local/sbin/syncCellServDB
-    #
-    # NOTE       "@cell" is a symbolic link to /afs/$this_cell_name
+Note that similar considerations apply to web access; it used to be not uncommon for accidental misconfigurations of MIT's web hosts to result in people's home directories showing up in Google searches. This **will** annoy people who do not think of their [[OpenAFS]] home directory as being world-visible! (even though they should realize it and set their ACL appropriately)
 
-    src=/afs/@cell/service/etc/CellServDB
-    dst=/usr/vice/etc/CellServDB
-    xec=/usr/local/sbin/newCellServDB
-    log=/var/log/syncCellServDB
+### <a name="encrypt"></a><a name="3.28 Is the data sent over the n"></a> 3.22 Is the data sent over the network encrypted in AFS?
 
-    if [ -s ${src} ]; then
-            if [ ${src} -nt ${dst} ]; then
-                    cp $dst ${dst}- && cp $src $dst && $xec 2>&1 >$log
-            else
-                    echo "master copy no newer: no processing to be done" >$log
-            fi
-    else
-            echo "zero length file: ${src}" >&2
-    fi
+[[OpenAFS]] has an `fs` subcommand to turn on encryption of regular file data sent and received by a client. This is a per client setting that persists until reboot. No server actions are needed to support this change. The syntax is:
 
-### <a name="3.26  How can I compute a list o"></a> 3.26 How can I compute a list of AFS fileservers?
+    fs setcrypt on
+    fs setcrypt off
+    fs getcrypt
 
-Here is a Bourne shell command to do it (it will work in GNU bash and the Korn shell, too):
+Note that this only encrypts network traffic between the client and server. The data on the server's disk is not encrypted, nor is the data in the client's disk cache. The encryption algorithm used is [fcrypt](http://surfvi.com/~ota/fcrypt-paper.txt), which is a DES variant. Additionally, data read/written without a token is not encrypted over the wire. This (and the use of DES variants, both here and in general) is a shortcoming of AFS's security protocols and is being addressed by the development of a new `rxgk` protocol.
 
-       stimpy@nick $ vos listvldb -cell `cat /usr/vice/etc/ThisCell` \\
-                     | awk '(/server/) {print $2}' | sort -u
+Enabling encryption by default:
 
-### <a name="3.27  How can I set up anonymous"></a> 3.27 How can I set up anonymous FTP login to access /afs?
-
-The easiest way on a primarily "normal" machine (where you don't want to have everything in AFS) is to actually mount root.cell under ~ftp, and then symlink /afs to ~ftp/afs or whatever. It's as simple as changing the mountpoint in /usr/vice/etc/cacheinfo and restarting afsd.
-
-Note that when you do this, anon ftp users can go anywhere system:anyuser can (or worse, if you're using IP-based ACLs and the ftp host is PTS groups). The only "polite" solution I've arrived at is to have the ftp host machine run a minimal [[CellServDB]] and police my ACLs tightly.
-
-Alternatively, you can make ~ftp an AFS volume and just mount whatever you need under that - this works well if you can keep everything in AFS, and you don't have the same problems with anonymous "escapes" into /afs.
-
-Unless you need to do authenticating ftp, you are _strongly_ recommended using wu-ftpdv2.4 (or better).
-
-### <a name="3.28 Is the data sent over the n"></a> 3.28 Is the data sent over the network encrypted in AFS ?
-
-There is still no easy way to do this in Transarc AFS, but [[OpenAFS]] now has a "fs" subcommand to turn on encryption of regular file data sent and received by a client. This is a per client setting that persist until reboot. No server actions are needed to support this change. The syntax is:
-
-- `fs setcrypt on`
-- `fs setcrypt off`
-- `fs getcrypt`
-
-Note that this only encrypts network traffic between the client and server. The data on the server's disk is not encrypted nor is the data in the client's disk cache. The encryption algorithm used is [fcrypt](http://surfvi.com/~ota/fcrypt-paper.txt), which is a DES variant.
-
-Getting encryption enabled by default:
-
-- [[RedHat]] Linux: ([src](https://lists.openafs.org/pipermail/openafs-info/2002-July/005085.html)) change the last line of /etc/sysconfig/afs to `AFS_POST_INIT="/usr/bin/fs setcrypt on"`
+- [[RedHat]] Linux: ([src](https://lists.openafs.org/pipermail/openafs-info/2002-July/005085.html)) change the last line of `/etc/sysconfig/afs` to `AFS_POST_INIT="/usr/bin/fs setcrypt on"`
 - Windows ([src](https://lists.openafs.org/pipermail/openafs-info/2003-June/009416.html)) set the following registry value named `SecurityLevel` under `HKLM\SYSTEM\CurrentControlSet\Services\TransarcAFSDaemon\Parameters` to 2.
 
-I have not tested either of these procedures. -- Ted Anderson - 05 Jun 2003
-
-### <a name="3.29 What underlying filesystems"></a> 3.29 What underlying filesystems can I use for AFS ?
+### <a name="filesystems"></a><a name="3.29 What underlying filesystems"></a> 3.23 What underlying filesystems can I use for AFS?
 
 See also [[SupportedConfigurations]].
 
-You need to distinguish between the filesystem used by the file server to store the actual AFS data (by convention in /vicep?) and the filesystem used by the client cache manager to cache files.
+What filesystems can be used for fileserver partitions depends on what `configure` switches were used during compilation from sources. To be always on the safe side, use the `--enable-namei-fileserver` configure flag; that will give you a `fileserver` binary which can act on any `/vicep*` partition regardless of its filesystem type. With the namei file server, you can basically use any filesystem you want. The namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though).
 
-Fileserver is started by bosserver. It depends, what ./configure switches were used during compilation from sources. To be always on the safe side, use --enable-namei-fileserver configure flag. That will give you fileserver binary which can act on any /vicep? partition regardless it's filesystem type. With the new namei file server you can basically use any filesystem you want. The namei file server does not do any fancy stuff behind the scenes but only accesses normal files (their names are a bit strange though).
+Older versions of AFS also provided an inode fileserver. On older Solaris it once gave a 10% speedup over the namei fileserver; but with modern operating systems and disks, the performance difference is negligible. The inode fileserver cannot run on every filesystem, as it abuses the filesystem internals to store AFS metadata and opens files directly by inode number instead of going through the normal filesystem access methanisms. The `fsck` distributed with the operating system will consider these inode-accessed files to be "dangling" and either link them into `lost+found` or delete them entirely; it will also often corrupt the AFS metadata, which it doesn't know about. As of [[OpenAFS]] 1.6, inode fileservers are no longer supported; you can still build from source with inode support, but it has bugs and should only be used in a read-only configuration to copy volumes to a namei fileserver host.
 
-The opposite to namei fileserver is inode based nameserver. According to openafs-devel email list, it gave on some Solaris box 10% speedup over the namei based server. The namei based fileserver cannot run on every filesystem, as it stores some internal afs-specific data into the filesystem. Typically, /sbin/fsck distributed withthe operating system zaps these data. Inode based fileserver directly operates on the inodes of the underlying file system which therefore has to fully support the inode abstraction scheme. The the Administrators Guide for more details (they differ from system to system).
-
-On the client side where you run /usr/afs/etc/afsd as a kernel process, you always have to use a file system supporting the inode abstraction for the cache (usually /usr/vice/cache) since the cache manager references files by their inode. Fortunately, it does not do such tricky stuff as the inode based fileserver.
+On the client side, the cache partition requires a filesystem supporting the inode abstraction for the cache (usually `/var/vice/cache`) since the cache manager references files by their inode. Fortunately, it does not store metadata in "unused" parts of the filesystem, and cache creation always provides proper names for the cache files so they won't be damaged by `fsck`.
 
 The following file systems have been reported _not_ to work for the AFS client cache:
 
-- reiserfs
+- [[ReiserFS]]
 - vxfs (HP-UX)
-- advfs (Tru64), it works but gives cache corruption
-- efs (SGI) - IBM AFS does support efs, but openafs doesn't have a license for that.
+- advfs (Tru64), it initially works but eventually corrupts the cache
+- efs (SGI) - Transarc AFS supported efs, but [[OpenAFS]] doesn't have a license to use the efs code
+- zfs (Solaris, FreeBSD, other ports) - you can however use a zvolume with a ufs or other supported filesystem
 
-- Patch committed to cvs around 6/2003 will now enforce this in some cases and generate a warning to the user if the filesystem type is wrong.
+The OpenAFS cache manager will detect an unsupported filesystem and refuse to start.
 
 The following file systems have been reported to work for the AFS client cache:
 
@@ -629,9 +478,11 @@ The following file systems have been reported to work for the AFS client cache:
 - xfs (at least on IRIX 6.5)
 - ufs (Solaris, [[Tru64Unix]])
 
-### <a name="3.30 Compiling _OpenAFS"></a> 3.30 Compiling [[OpenAFS]]
+### <a name="3.30 Compiling _OpenAFS"></a> 3.24 Compiling [[OpenAFS]] from source
 
-The kernel parts on Solaris have to be compiled with Sun cc, same for other platforms, i.e. you need same compiler used to compile kernel to compile your afs modules. [[Tru64Unix]] doesn't support modules, so you have to edit kernel config files and link statically into kernel. Kernel module insertion works fine on Linux, Solaris, Irix ...
+(Modern [[OpenAFS]] supports proper packaging for various systems; these notes are still somewhat applicable but mostly relevant for 1.2.x.)
+
+The kernel component of [[OpenAFS]] must be compiled by the same kernel used to compile the kernel, e.g. Solaris must use the cc from SUNWspro and not gcc. [[Tru64Unix]] doesn't support modules, so you have to edit kernel config files and link statically into kernel. Dynamically loaded Kernel modules work on Linux, Solaris, Irix ...
 
     ./configure --enable-transarc-paths=/usr/etc --with-afs-sysname=i386_linux24
     make dest
@@ -639,9 +490,13 @@ The kernel parts on Solaris have to be compiled with Sun cc, same for other plat
 
 ... and continue the install process described in IBM AFS documentation. If you do "make install", you will end up with some stuff installed into /usr/local but something not, regardless the --enable-transarc-paths option ... "make install" it's messy.
 
-### <a name="3.31 Upgrading _OpenAFS"></a> 3.31 Upgrading [[OpenAFS]]
+### <a name="3.31 Upgrading _OpenAFS"></a> 3.25 Upgrading [[OpenAFS]]
 
-Upgrade of AFS on Linux
+(Modern [[OpenAFS]] supports proper packaging for various systems; these notes are still somewhat applicable but mostly relevant for 1.2.x.)
+
+These instructions assume a "dest" tree (the output of `make dest`, and the contents of the official binary distribution tarballs). It is generally preferable to use native packages when they exist; the packaging will handle most of the details of upgrading for you.
+
+#### Upgrade of AFS on Linux
 
     /etc/rc.d/init.d/afs stop
     cd root.client/usr/vice/etc
@@ -662,7 +517,7 @@ Upgrade of AFS on Linux
     cp /usr/vice/etc/afs.conf /etc/sysconfig/afs
     /etc/rc.d/init.d/afs start
 
-Upgrade of AFS on Solaris 2.6
+#### Upgrade of AFS on Solaris 2.6
 
     cd /etc/rc3.d/
     mv S20afs aS20afs
@@ -681,7 +536,7 @@ Upgrade of AFS on Solaris 2.6
     mv aS20afs S20afs
     init 6
 
-Upgrade of AFS on Irix 6.5
+#### Upgrade of AFS on Irix 6.5
 
     /etc/chkconfig -f afsserver off
     /etc/chkconfig -f afsclient off
@@ -712,7 +567,7 @@ Upgrade of AFS on Irix 6.5
     /etc/chkconfig -f afsxnfs off
     /etc/reboot
 
-Upgrade of AFS on [[Tru64Unix]]
+#### Upgrade of AFS on [[Tru64Unix]]
 
     cd root.server/usr/afs/
     tar cvf - ./bin | (cd /usr/afs; tar xfp -)
@@ -724,38 +579,39 @@ Upgrade of AFS on [[Tru64Unix]]
     cp etc/afsd /usr/vice/etc/afsd
     cp etc/C/afszcm.cat /usr/vice/etc/C/afszcm.cat
 
-### <a name="3.32 Debugging _OpenAFS"></a> 3.32 Debugging [[OpenAFS]]
+### <a name="3.32 Debugging _OpenAFS"></a> 3.26 Notes on debugging [[OpenAFS]]
 
-In case of troubles when you need only fileserver process to run (to be able to debug), run the lwp fileserver instead of the pthreads fileserver (src/viced/fileserver instead of src/tviced/fileserver if you have a buildtree handy):
+In case of troubles when you need only `fileserver` process to run (to be able to debug), run the `lwp` fileserver instead of the `pthreads` fileserver (`src/viced/fileserver` instead of `src/tviced/fileserver` if you have a buildtree handy):
 
-cp src/viced/fileserver /usr/afs/bin (or wherever)
+    cp src/viced/fileserver /usr/afs/bin (or wherever)
+    bos restart localhost fs -local
 
-    bos restart calomys fs -local
+then attach with `gdb`. (This may be less necessary with recent `gdb`; its `pthreads` support used to be quite abysmal. [*ed.*])
 
-... then attach with gdb
-
-To debug if client running afsd kernel process talks to the servers from [[CellServDB]], do:
+To debug if client running `afsd` kernel process talks to the servers from [[CellServDB]], do:
 
     tcpdump -vv -s 1500 port 7001
 
 Other ports are:
 
-    fileserver      7000/udp                        # fileport (FILESERVICE)
-    afscb           7001/udp                        # kernel extensions
-    afsprot         7002/udp                        # ptserver (PROTSERVICE)
-    afsvldb         7003/udp                        # vlserver (VLDBSERVICE)
-    afskauth        7004/udp                        # kaserver (KAUTHSERVICE)
-    afsvol          7005/udp                        # volserver (VOLUMESERVICE)
-    afserror        7006/udp                        # ERRORSERVICE
-    afsnanny        7007/udp                        # bosserver (NANNYSERVICE)
-    afsupdate       7008/udp                        # upserver (UPDATESERVICE)
-    afsrmtsys       7009/udp                        # RMTSYSSERVICE
+	afs3-fileserver 7000/udp    # file server itself
+	afs3-callback   7001/udp    # callbacks to cache managers
+	afs3-prserver   7002/udp    # users & groups database
+	afs3-vlserver   7003/udp    # volume location database
+	afs3-kaserver   7004/udp    # AFS/Kerberos authentication service
+	afs3-volser     7005/udp    # volume managment server
+	afs3-errors     7006/udp    # error interpretation service
+	afs3-bos        7007/udp    # basic overseer process
+	afs3-update     7008/udp    # server-to-server updater
+	afs3-rmtsys     7009/udp    # remote cache manager service
 
-When tcpdump doesn't help, try:
+When `tcpdump` doesn't help, try:
 
-    fstrace setset cm -active; make your error happen; fstrace dump cm
+    fstrace setset cm -active
+	# make your error happen
+	fstrace dump cm
 
-### <a name="3.33 Tuning client cache for hug"></a> 3.33 Tuning client cache for huge data
+### <a name="3.33 Tuning client cache for hug"></a> 3.27 Tuning client cache for huge data
 
 Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache sizes afsd crashes on startup (Linux, [[Tru64Unix]] at least). It is possibly when dcache is too small. Go for:
 
@@ -776,7 +632,7 @@ Use on afsd command line -chunk 17 or greater. Be carefull, with certain cache s
 
     -- kolya
 
-### <a name="3.34 Settting up PAM with AFS"></a> 3.34 Settting up PAM with AFS
+### <a name="3.34 Settting up PAM with AFS"></a> 3.28 Settting up PAM with AFS
 
 Solaris
 
@@ -798,259 +654,26 @@ Solaris
     # reafslog is to unlock dtlogin's screensaver
     other  auth sufficient /usr/athena/lib/pam_krb4.so reafslog
 
-### <a name="3.35 Setting up AFS key in KDC a"></a> 3.35 Setting up AFS key in KDC and [[KeyFile]]
+### <a name="afskrbconf"></a><a name="3.37 afs_krb_get_lrealm() using"></a><a name="3.37 afs_krb_get_lrealm() using "></a> 3.29 How can I have a Kerberos realm different from the AFS cell name? How can I use an AFS cell across multiple Kerberos realms?
 
-The easiest method is not much recommended, as the password is possibly very weak:
+OpenAFS defaults to using a Kerberos realm generated from the cell name by uppercasing. You can instead tell it the Kerberos realm to use with a truncated `krb.conf` file:
 
-    dattan# bos addkey server -kvno <n+1>
-    <pw>
-    <pw-again>
+    /usr/afs/etc/krb.conf        # Transarc paths
+	/etc/openafs/server/krb.conf # FHS paths
 
-    dattan# kstring2key -c <cellname>
-    <pw>
+You do not list any KDCs in this file, just space-separated realms on a single line. See also [[below|AdminFAQ#multirealm]]. You can list a maximum of 2 realms in this file in older AFS, but [[OpenAFS]] 1.6 and later allow any number of realms.
 
-    dattan# kadmin ckey afs
-    <cut-n-paste the ascii output from above>
+### <a name="bosinstances"></a><a name="3.40 What are those bos(1) -type"></a> 3.30 What are the `bos` instance types? How do I use them?
 
-Beware, there is currently a byte order bug in the kadmin tool as of May 2001 in KTH-KRB. If you run kadmin on a little indian machine (PC, Alpha, ...) you must swap the bytes manually. Here is a small example:
+There are, as of this writing, 4 types of [`bos`](http://docs.openafs.org/Reference/8/bos_create.html) server:
 
-    bg$ kstring2key -c sics.se
-    password:
-    ascii = \361\334\211\221\221\206\325\334
-    hex   = f1dc89919186d5dc
-    bg$ kadmin
-    kadmin: ckey afs
-    bg.admin@SICS.SE's Password:
-    New DES key for afs: \221\211\334\361\334\325\206\221
+* `simple` - a single program which will be kept running as needed.
+* `cron` - a single program, plus a time at which it will be automatically run; typically used for cell backups.
+    The time looks like `04:00` to run every day at a given time, or `sun 04:00` to run once a week. Times may be specified in 24-hour or 12-hour (with am/pm suffix); weekdays may be full or abbreviated to 3 characters. Case is ignored. (A legacy usage allows the string `now` to be used; use [`bos exec`](http://docs.openafs.org/Reference/8/bos_exec.html) instead.)
+* `fs` - a standard fileserver which has three programs that must be run together in a particular way. The `fs` server type will take care of starting, stopping, and restarting these programs in order to keep them working together.
+* `dafs` - demand attach fileservers are similar to standard fileservers, but have an additional component program to be synchronized. The `dafs` server type will ensure these are started, stopped, and restarted correctly while maintaining synchronization.
 
-Please note how the bytes are swapped in groups of four.
-
-This bug is fixed in an upcoming release.
-
-Better approach is to create random key in KDC using "ksrvutil get" (rather then "ksrvutil add" which asks you for the new password), export it into /etc/srvtab ("ksrvutil ext") and from there copy it into /usr/afs/etc/KeyFile using asetkey utility from /afs/transarc.com/public/afs-contrib. After some years, you may wish to regenerate the random afs key using "ksrvutil change" in KDC and exporting it again.
-
-There are two nice pages abou this:
-
-<http://www.cs.cmu.edu/afs/andrew.cmu.edu/usr/shadow/www/afs/afs-with-kerberos.html> <http://www.contrib.andrew.cmu.edu/~shadow/afs/afs-with-kerberos.html>
-
-As someone noted, you might need some ext\_srvtab utility to extract the key from /etc/srvtab, but I don't remeber that I needed it. Then he also suggets to use asetkey utility.
-
-Create afs.natur\\.cuni\\.cz@NATUR.CUNI.CZ principal entry in kerberos:
-
-      principal name: afs
-      principal instance: natur.cuni.cz
-      principal realm: NATUR.CUNI.CZ
-
-Import this key from Kerberos (/etc/srvtab) into AFS /usr/afs/etc/KeyFile using asetkey utility, which is I think from /afs/transarc.com/public/afs-contrib
-
-./asetkey add 0 /etc/srvtab <afs.natur.cuni.cz@NATUR.CUNI.CZ>
-
-This [[KeyFile]] with the AFS-key you can just always re-copy to new AFS **server** machines. Be sure that the key version number KVNO is always same in this [[KeyFile]] and in Kerberos database. On all these machines you of course need afs.hostname.REALM key loaded into their /etc/srvtab (create them with 'ksrvutil get'). It seems klog(1) needs afs@REALM, so copy the principal afs.cell.name@REALM to it.
-
-You can test if you have same keys in kerberos and AFS like this:
-
-    kauth username
-    tokens
-
-If you have some tokens now, then it works and you can now shutdown kaserver. Users, which you have created in AFS under kaserver are in /usr/afs/db/kaserver.\*, but you can just forget them. Create these users again in Kerberos IV.
-
-AFS users are then looked up in:
-
-kerberos database (/var/kerberos/principal.db)
-
-/usr/afs/etc/UserList (permission to manipulate 'bos')
-
-system:administrators (permissions for vos, pts, fs, i.e. 'pts adduser' etc)
-
-    ---------------------------------------------------------------------------------
-    Another approach, untested:
-
-    http://www.natur.cuni.cz/~majordomo/krb4/krb4.9703/msg00002.html
-
-    Date: Tue, 9 May 2000 10:57:23 +0200 (MET DST)
-    From: Johan Hedin <johanh  at  fusion.kth.se>
-    To: Erland Fristedt <Erland.Fristedt@wcs.eraj.ericsson.se>
-    Cc: krb4@sics.se
-    Subject: Re: AFS+KTH-KRB problem
-
-    This is a printout how we got it to work. Hope this helps.
-
-    /Johan Hedin
-
-    callisto#/usr/athena/sbin/ksrvutil -p johanh.admin -f srvtab get
-    Name [rcmd]: afs
-    Instance [callisto]: fusion.kth.se
-    Realm [FUSION.KTH.SE]:
-    Is this correct? (y,n) [y]
-    Add more keys? (y,n) [n]
-    Password for johanh.admin@FUSION.KTH.SE:
-    Warning: Are you sure `fusion.kth.se' should not be `fusion'?
-    Added afs.fusion.kth.se@FUSION.KTH.SE
-    Old keyfile in srvtab.old.
-    callisto#/usr/athena/sbin/ksrvutil -p johanh.admin -f srvtab list
-    Version    Principal
-       4     afs.fusion.kth.se@FUSION.KTH.SE
-    callisto#/tmp/asetkey add 4 srvtab afs.fusion.kth.se@FUSION.KTH.SE
-    callisto#cd ..
-    callisto#bin/bos status callisto
-    Instance buserver, currently running normally.
-    Instance ptserver, currently running normally.
-    Instance vlserver, currently running normally.
-    Instance fs, currently running normally.
-        Auxiliary status is: file server running.
-    callisto#bin/fs la /afs
-    Access list for /afs is
-    Normal rights:
-
-      system:administrators rlidwka
-
-    --------------------------------------------------------------------------------
-    > Tokens held by the Cache Manager:
-    >
-    > User's (AFS ID 6020) tokens for afs@sunrise.ericsson.se [Expires May  5
-    > 04:05]
-    >    --End of list--
-
-    You got your tickets alright, but then
-
-    > > touch /afs/.sunrise.ericsson.se/tabort
-    > afs: Tokens for user of AFS id 6020 for cell sunrise.ericsson.se are
-    > discarded (rxkad error=19270407)
-
-    grep 19270407 /usr/afsws/include/rx/*
-    /usr/afsws/include/rx/rxkad.h:#define RXKADBADTICKET (19270407L)
-
-    so I would guess that the key version number and/or the key on your
-    AFS servers does not match the key of the afs principal.
-
-    Use klist -v to figure out about key version numbers and then use
-
-    $ kstring2key -c sunrise.ericsson.se
-    password:
-    ascii = \242\345\345\260\323p\263\233
-    hex   = a2e5e5b0d370b39b
-
-    or some other means to ensure that you use the same keys.
-
-### <a name="3.36 Obtaining and getting asetk"></a> 3.36 Obtaining and getting asetkey compiled
-
-Better approach is to create random key in KDC, export it into /etc/srvtab and from there move in /usr/afs/etc/KeyFile using asetkey utility from /afs/transarc.com/public/afs-contrib
-
-    |  I can not get asetkey to compile.
-    |
-    |  asetkey.c: In function `main':
-    |  asetkey.c:25: `AFSCONF_SERVERNAME' undeclared (first use in this function)
-    |  asetkey.c:25: (Each undeclared identifier is reported only once
-    |  asetkey.c:25: for each function it appears in.)
-    +--->8
-
-AFS 3.5 got rid of a few commonly-used AFS defines; I suspect they are now API calls of some kind, akin to the POSIX move from hardcoded constants to use of \{,f\}pathconf() and sysconf(). I have no idea what those calls are, though.
-
-In the meantime, the following two defines are useful in building stuff on AFS 3.5:
-
-    #define AFSCONF_CLIENTNAME      "/usr/vice/etc"
-    #define AFSCONF_SERVERNAME      "/usr/afs/etc"
-
-### <a name="3.37 afs_krb_get_lrealm() using"></a><a name="3.37 afs_krb_get_lrealm() using "></a> 3.37 afs\_krb\_get\_lrealm() using /usr/afs/etc/krb.conf
-
-In this file you can set also another REALM to be used by you afs server processes, if the REALM should differ from the system-wide REALM (
-
-    /etc/krb.conf
-
-).
-
-Don't forget it's related to these entries in Kerberos KDC:
-
-    afs.cell.name@REALM
-    krbtgt CELL.NAME@REALM
-
-If you use heimdal (or MIT krb5), do:
-
-echo "REALM" &gt; /usr/afs/etc/krb.conf
-
-### <a name="3.38 Moving from kaserver to Hei"></a> 3.38 Moving from kaserver to Heimdal KDC
-
-    > While converting all our administration tools, we have discovered that
-    > the time a principal changed his/her/its password is _not_ carried over
-    > from the kaserver DB.
-
-First of all, some Heimdal's configure flags:
-
-    --enable-kaserver
-
-requires krb4 libs, so for that you'll need a working krb4 are you still using a kaserver/kaserver emulation ?
-
-    --enable-kaserver-db
-
-is just for dumping a kaserver krb4 database. If you are no longer running a kaserver, you don't need it.
-
-Migration itself:
-
-<https://lists.openafs.org/pipermail/openafs-info/2002-May/004326.html>
-
-This works while migrating from kaserver:
-
-    /usr/heimdal/libexec/hprop --source=kaserver --cell=xxx
-    --kaspecials --stdout | /usr/heimdal/libexec/hpropd --no-inetd --stdin
-
-This somewhat doesn't:
-
-    /usr/heimdal/libexec/hprop --source=kaserver --cell=xxx
-    --encrypt --master-key=<path to key> --kaspecials --stdout |
-    /usr/heimdal/libexec/hpropd --stdin
-
-### <a name="3.39 Moving from KTH-KRB4 to Hei"></a> 3.39 Moving from KTH-KRB4 to Heimdal KDC
-
-    /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /var/kerberos/dump.txt --master-key=/.k -D | /usr/heimdal/libexec/hpropd -n
-
-    or
-
-    1. dump of the krb4 database with kdb_util
-    2. dump of the "default" heimdal database with kadmin -l
-    3. /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d /usr/heimdal/libexec/hprop -n -k /etc/krb5.keytab --source=krb4-dump -d
-       where /etc/krb5.keytab contains hprop/`hostname` keys
-    4. merge of the converted database with file from (2) via kadmin
-
-    The special thing for me is the use of "-D" in the (3) which seems to
-    cause conversion des-cbc-sha1 keys of old krb4 database entries to
-    des-cbc-md5.
-
-### <a name="3.40 What are those bos(1) -type"></a> 3.40 What are those bos(1) -type values simple and cron?
-
-Typically, admins do this once they configure new afs server:
-
-    bos create foo ptserver simple /usr/afs/bin/ptserver -cell bar.baz
-    bos create foo vlserver simple /usr/afs/bin/vlserver -cell bar.baz
-    bos create foo fs fs /usr/afs/bin/fileserver /usr/afs/bin/volserver /usr/afs/bin/salvager -cell bar.baz
-
-Type "simple" has one process. type "cron" gets forked at the appropriate time.
-
-### <a name="3.41 KDC listens on port 88 inst"></a> 3.41 KDC listens on port 88 instead of 750
-
-    "Kramer, Matthew" <mattkr@bu.edu> writes:
-
-    > Hello,
-    >       Our Kerberos 4 environment listens on only port 750 and doesn't
-    > listen on port 88.  For Win2K/XP machines this causes a problem in
-    > C:\openafs-1.2.8\src\kauth\user_nt.c line 144 when the Kerberos port is
-    > queried from the %systemroot%\system32\drivers\etc\services file.  Win2K
-    > and XP both return 88 which is correct for Kerberos 5 but in our case
-    > not for Kerberos 4.  Why doesn't it instead query for kerberos-iv which
-    > would return the correct value of 750?
-    >
-    > Y:\src\kauth>diff user_nt.c.orig user_nt.c
-    > 144c144
-    > <       sp = getservbyname("kerberos", "udp");
-    > ---
-    > >       sp = getservbyname("kerberos-iv", "udp");
-    >
-    A quick work around could be to use Loves requestforwarder found at
-
-    ftp://ftp.stacken.kth.se/pub/projects/krb-forward/krb-forward-0.1.tar.gz
-
-    /JockeF
-
-### <a name="3.42 afsd gives me &quot;Error -1 in"></a><a name="3.42 afsd gives me &quot;Error -1 in "></a> 3.42 afsd gives me "Error -1 in basic initialization." on startup
+### <a name="syscall"></a><a name="3.42 afsd gives me  Error -1 in"></a> 3.31 afsd gives me "`Error -1 in basic initialization.`" on startup
 
 When starting afsd, I get the following:
 
@@ -1067,34 +690,29 @@ When starting afsd, I get the following:
     afsd: Forking rxevent daemon.
     SScall(137, 28, 48)=-1 SScall(137, 28, 0)=-1 SScall(137, 28, 36)=-1 afsd: Error -1 in basic initialization.
 
-Solution: make sure you have kernel module loaded.
+Make sure the kernel module has been loaded. Modern [[OpenAFS]] startup scripts should ensure this and report an error if it cannot be loaded, but startup scripts from older versions or on systems which can't use loadable kernel modules (requiring the kernel to be relinked) will not catch this and you will get these errors from `SScall`.
 
-### <a name="3.43 Although I get krb tickets,"></a> 3.43 Although I get krb tickets, afslog doesn't give me tokens, I see UDP packets to port 4444
+### <a name="translate_et"></a><a name="3.44 I get error message trhough"></a> 3.32 Error "`afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)`"
 
-Using tcpdump I see the following traffic. What runs on the port 4444?
+    elmer@toontown ~$ translate_et 19270407
+    19270407 (rxk).7 = security object was passed a bad ticket
 
-    15:16:54.815194 IP foo.bar.baz.32772 > foo.bar.baz.4444: UDP, length: 269
-    15:16:54.815199 IP foo.bar.baz > foo.bar.baz: icmp 305: foo.bar.baz udp port 4444 unreachable
+or alternately
 
-This is the 5-&gt;4 ticket conversion service on UDP port 4444. Assuming your afs servers know how to deal with krb5 tickets (since openafs-1.2.10? and 1.3.6x?) include the following in /etc/krb5.conf:
-
-    [appdefaults]
-            afs-use-524 = local
-
-### <a name="3.44 I get error message trhough"></a> 3.44 I get error message trhough syslogd: "afs: Tokens for user of AFS id 0 for cell foo.bar.baz are discarded (rxkad error=19270407)"
-
-Answer:
-
-    grep 19270407 /usr/afsws/include/rx/*
+    elmer@toontown ~$ grep 19270407 /usr/afsws/include/rx/*
     /usr/afsws/include/rx/rxkad.h:#define RXKADBADTICKET (19270407L)
 
-Note that a common cause of this problem is the use of periods (".") in kerberos principals.  If you have a kerberos principal such as my.name@REALM.COM and create the corresponding pts userid "my.name" you will get the cryptic error above. If you want to use such principal names and have OpenAFS 1.4.7 or later, you can pass the option -allow-dotted-principals to all server daemons to allow their use. See the -allow-dotted-principals option in the fileserver (or any server daemon) documentation for more information.
+A common cause of this problem (error 19270407) is the use of periods ("`.`") in Kerberos V principals.  If you have a Kerberos principal such as `my.name@REALM.COM` and create the corresponding `pts` userid `my.name`, you will get the cryptic error above. If you want to use such principal names and have OpenAFS 1.4.7 or later, you can pass the option `-allow-dotted-principals` to all server daemons to allow their use. See the `-allow-dotted-principals` option in the fileserver (or any server daemon) documentation for more information. (The problem here is that for compatibility reasons, [[OpenAFS]] uses Kerberos 4 name rules internally; while "`.`" was the name component separator in Kerberos 4, in [[Kerberos5]] it is "`/`" so [[OpenAFS]] translates `.` to `/` when passing names to Kerberos for verification. This means that a Kerberos 5 name with an embedded period cannot be used directly without disabling the translation; but with the translation disabled, you cannot easily use Kerberos 5 names with components. There is ongoing work in this area because `rxgk` requires proper support for these names.)
 
-### <a name="3.45 I get tickets and tokens, b"></a> 3.45 I get tickets and tokens, but still get Permission denied.
+In general, the `translate_et` utility can be used to find out what an AFS error number means. This only works for AFS errors; some utilities may also report Kerberos errors in this way, and `translate_et` will not work for these. Some sites have alternative utilities that understand Kerberos as well as AFS errors (see for example (here)[file:///afs/sinenomine.net/user/ballbery/public/translate_err]).
 
-Answer: /usr/afs/etc/UserList accepts only krb4 syntax. Use `joe.admin` instead of `joe/admin`. See `https://lists.openafs.org/pipermail/openafs-devel/2002-December/008673.html` and the rest of the thread.
+### <a name="UserList"></a><a name="3.45 I get tickets and tokens, b"></a> 3.33 I have tickets and tokens, but still get `Permission denied` for some operations.
 
-### <a name="3.46 Recovering broken afs cache"></a> 3.46 Recovering broken afs cache on clients
+This can be caused by the above, or by not being in a server `UserList` (`/usr/afs/etc/UserList` or `/etc/openafs/server/UserList`).
+
+Also beware that, as described [[above|AdminFAQ#translate_et]], `UserList` accepts only Kerberos 4 name syntax: use `joe.admin` instead of `joe/admin`. See `https://lists.openafs.org/pipermail/openafs-devel/2002-December/008673.html` and the rest of the thread.
+
+### <a name="flushvol"></a><a name="3.46 Recovering broken afs cache"></a> 3.34 Recovering broken AFS cache on clients
 
     >> Does anyone have a trick to force AFS to refresh its cache (for a
     >> particular directory or even for all files?) The only way I know
@@ -1119,103 +737,105 @@ Answer: /usr/afs/etc/UserList accepts only krb4 syntax. Use `joe.admin` instead 
 
     Flushing a particular file had no effect (the same error as shown above appears). Flushvolume took a long time, but when it eventually completed, the ls -la behaved exactly as one would expect.
 
-### <a name="3.47 What does it mean for a vol"></a> 3.47 What does it mean for a volume to not be in the VLDB?
+Recent [[OpenAFS]] (1.6.4 and newer) has an [`fs flushall`](http://docs.openafs.org/Reference/1/fs_flushall.html) command in addition to the `flush` and `flushvol` commands.
+
+Older AFS versions sometimes corrupted their cache filesystems in ways that `fs flushvol` cannot fix. Sometimes this can be corrected with
+
+    root@toontown ~# fs setca 1; fs setca 0
+
+(set the cache to minimum size, and then back to normal; beware that in most versions of Transarc AFS, you will have to specify the actual cache size instead of `0`!). If this does not work, you can force a cache rebuild by shutting down [[OpenAFS]] and removing `/var/vice/cache/CacheItems` (it is not necessary to remove all cache files), although you may want to remake the filesystem (`mkfs` or `newfs`) instead in case there is actual filesystem corruption.
+
+If this happens regularly, please file an OpenAFS bug.
+
+### <a name="notinvldb"></a><a name="3.47 What does it mean for a vol"></a> 3.35 What does it mean for a volume to not be in the VLDB?
 
 If a volume is not in the VLDB, you will be unable to perform operations on it using its name; all "vos" operations will need to be done using its numerical id, server, and partition. Furthermore, if a volume is not in the VLDB, it cannot be reached via mountpoints.
 
-### <a name="3.48 What is a Volume Group?"></a> 3.48 What is a Volume Group?
+### <a name="volumegroup"></a><a name="3.48 What is a Volume Group?"></a> 3.36 What is a Volume Group?
 
-You can think of a Volume Group as an RW volume, and all of the clones of that RW (its RO clone, BK clone, and any other clones). All of the volumes in a Volume Group can share storage for data that is the same between all of them. This is why, for example, an RO clone usually takes up very little disk space; since an RW and its RO clone are in the same Volume Group, they can share storage for unchanged data.
+You can think of a Volume Group as an RW volume, and all of the clones of that RW (its RO clone, BK clone, and any other clones). All of the volumes in a Volume Group on the same fileserver can share storage for data that is the same between all of them. This is why, for example, an RO clone usually takes up very little disk space; since an RW and its RO clone are in the same Volume Group, they can share storage for unchanged data.
 
-All of the volumes in a group usually have very similar volume ID numbers. For example, if an RW volume has ID 536870915, its RO clone will typically be 536870916. However, this is not required, as volume ID numbers can be almost anything. You can even manually specify what volume ID number you want for a volume when you create the volume with "vos create".
+All of the volumes in a group usually have very similar volume ID numbers. For example, if an RW volume has ID 536870915, its RO clone will typically be 536870916. However, this is not required, as volume ID numbers can be almost anything. You can even manually specify what volume ID number you want for a volume when you create the volume with "`vos create`".
 
 Currently, you can only have about 8 volumes in a Volume Group. However, this limitation is due to technical details of the fileserver "namei" disk backend. If that backend is improved in the future, or if different backends are developed, the number of volumes in a volume group could be much greater.
 
 Some low-level documentation may refer to a "volume group ID". This is always the same as the RW volume ID.
 
-### <a name="3.49 What is a Clone?"></a> 3.49 What is a Clone?
+### <a name="clone"></a><a name="3.49 What is a Clone?"></a> 3.37 What is a Clone?
 
 A clone of a volume is a read-only copy of that volume which shares on-disk storage with the original volume. Backup volumes are a particular kind of clone volume. Read-only replicas which reside on the same partition as their read-write volume are another particular kind of clone volume. In some other storage systems this kind of volume is called a "snapshot".
 
-Clone volumes must belong to the same volume group (see previous question) as the volume which they are a clone of.
+Clone volumes must belong to the same volume group (see [[previous question|AdminFAQ#volumegroup]]) as the volume which they are a clone of.
 
-In addition to backup and readonly clones, you may create up to three additional clones of a volume. To do this, use "vos clone".
+In addition to backup and readonly clones, you may create up to three additional clones of a volume. To do this, use "`vos clone`".
 
-When you "vos remove" a volume, its "backup" clone will also be removed automatically. However, clones created with "vos clone" are **not** removed automatically. Unfortunately, these "dangling clones" will no longer be in the VLDB (see question 3.47). They belong to a volume group whose leader (rw volume) no longer exists, which is a somewhat undefined state for AFS. Such volumes should be manually deleted as soon as possible.
+When you "`vos remove`" a volume, its "backup" clone will also be removed automatically. However, clones created with "`vos clone`" are **not** removed automatically. Unfortunately, these "dangling clones" will no longer be in the VLDB (see [[above|AdminFAQ#notinvldb]]). They belong to a volume group whose leader (RW volume) no longer exists, which is a somewhat undefined state for AFS. Such volumes should be manually deleted as soon as possible.
 
-### <a name="3.50 What is a Shadow?"></a> 3.50 What is a Shadow?
+### <a name="shadow"></a><a name="3.50 What is a Shadow?"></a> 3.38 What is a Shadow?
 
 A shadow of a volume is a duplicate of that volume which resides on a different partition. Shadow volumes do not share storage with their original volumes (unlike clones). A readonly volume on a **different** partition than its readwrite volume could be considered one particular example of a shadow volume; however, in practice the term "shadow volume" is used to refer to volumes created with "vos shadow" and not to refer to readonly volumes.
 
-A shadow of any readwrite volume may be created using the "vos shadow" command. This will create a new volume which is a shadow of the original volume, and will copy the contents of the old volume to the new volume. This will also set a bit in the header of the new shadow volume that identifies it as a shadow volume. Shadow volumes do not appear in the VLDB (see question 3.47) -- "vos shadow" does not create a VLDB entry and "vos syncvldb" ignores shadow volumes.
+A shadow of any readwrite volume may be created using the "vos shadow" command. This will create a new volume which is a shadow of the original volume, and will copy the contents of the old volume to the new volume. This will also set a bit in the header of the new volume that identifies it as a shadow volume. Shadow volumes do not appear in the VLDB (see [[above|AdminFAQ#notinvldb]]) -- "`vos shadow`" does not create a VLDB entry and "`vos syncvldb`" ignores shadow volumes.
 
-You can "refresh" a shadow volume from its original with "vos shadow -incremental". This operation will first check to make sure that the target of the operation is a shadow volume, to prevent the administrator from accidentally corrupting a non-shadow volume. However, if you shadow from a readwrite volume to some shadow of **another** volume, the shadow will be corrupted and will have to be deleted. Vos shadow will only copy data which has changed, so it is very efficient.
+You can "refresh" a shadow volume from its original with "`vos shadow -incremental`". This operation will first check to make sure that the target of the operation is a shadow volume, to prevent the administrator from accidentally corrupting a non-shadow volume. However, if you shadow from a readwrite volume to some shadow of **another** volume, the shadow will be corrupted and will have to be deleted. `vos shadow` will only copy data which has changed, so it is very efficient.
 
-You can remove the shadow bit from a volume's header with "vos syncvldb -force". This will remove the shadow bit and create a VLDB entry for the volume, deleting any previous entry for the rw volume. However, the rw volume itself will not be deleted; it will simply exist without a VLDB entry.
+You can remove the shadow bit from a volume's header with "`vos syncvldb -force`". This will remove the shadow bit and create a VLDB entry for the volume, deleting any previous entry for the RW volume. However, the RW volume itself will not be deleted; it will simply exist without a VLDB entry.
 
-Attempting to create shadows of two different rw volumes on the same partition with the same name is prohibited by the volserver. Technically it is possible to create two shadow volumes with the same name on different partitions; however, this is not advisable.
+Attempting to create shadows of two different RW volumes on the same partition with the same name is prohibited by the `volserver`. Technically it is possible to create two shadow volumes with the same name on different partitions; however, this is not advisable and may lead to undefined behavior.
 
-### <a name="3.51 Can I authenticate to my af"></a> 3.51 Can I authenticate to my afs cell using multiple kerberos Realms?
+(Some AFS administrators may refer to an RO clone of an RW volume on the same server/partition as a "shadow"; this terminology predates the existence of shadow volumes.)
 
-Yes. This can be useful if your organization has multiple kerberos Realms with identical user entries: For example you might have an MIT Kerberos realm for Unix-like systems, and an Active Directory domain for windows with synchronized accounts.
+### <a name="multirealm"></a><a name="3.51 Can I authenticate to my af"></a> 3.39 Can I authenticate to my AFS cell using multiple Kerberos realms?
 
-As long as you only need to support 2 realms, and one of them has the same name as the afs cell(or the uppercase of the name of the afs cell) you can do this without upgrading to a new version of AFS. If you need more Realms, or if neither Realm name matches your cell name, there is work to support this in the development tree.
+Yes. This can be useful if your organization has multiple Kerberos realms with identical user entries: For example you might have an MIT Kerberos realm for Unix-like systems, and an Active Directory domain for Windows with synchronized accounts.
 
 In order to make this work, you need to do 4 things.
 
-1) add a key for the afs service to the additional realm and store it in a keytab:
+1. Add a key for the `afs` service to the additional realm and store it in a keytab:
 
-    $ kadmin -q ank -e des-cbc-crc:v4 -kvno <new kvno> afs/your.cell.name@YOUR.SECOND.REALM.NAME
-    $ kadmin -q ktadd -e des-cbc-crc:v4 -k /path/to/afs.keytab afs/your.cell.name@YOUR.SECOND.REALM.NAME
+        $ kadmin -q ank -e des-cbc-crc:v4 -kvno <new kvno> afs/your.cell.name@YOUR.SECOND.REALM.NAME
+        $ kadmin -q ktadd -e des-cbc-crc:v4 -k /path/to/afs.keytab afs/your.cell.name@YOUR.SECOND.REALM.NAME
 
-Note that a kvno must be specified for the key that is different than the kvno for your existing key(s) in the original realm. you can check on the kvno of the existing keys by running "asetkey list" on one of your servers. since keys must be in ascending order in the AFS [[KeyFile]] it will be easiest if you make the new kvno higher than any existing key's kvno.
+    Note that a kvno must be specified for the key that is different than the kvno for your existing key(s) in the original realm. You can check on the kvno of the existing keys by running "`asetkey list`" on one of your servers. Since keys must be in ascending order in the AFS [[KeyFile]], it will be easiest if you make the new kvno higher than any existing key's kvno.
 
-It's also worth noting that the process of adding the key to a keytab(at least with MIT krb5) actually creates a new key first, so your kvno will end up being higher than what you specified when you added the principal. you can check on the current kvno by using the "kadmin -q getprinc afs/your.cell.name@YOUR.SECOND.REALM.NAME" command.
+    It's also worth noting that the process of adding the key to a keytab (at least with MIT krb5) actually creates a new key first, so your kvno will end up being higher than what you specified when you added the principal. You can check on the current kvno by using the command "`kadmin -q getprinc afs/your.cell.name@YOUR.SECOND.REALM.NAME`".
 
-2) add the new key to the afs [[KeyFile]] on your afs servers:
+2. Add the new key to the [[KeyFile]] on your AFS servers:
 
-    $ asetkey add <kvno> /path/to/afs.keytab afs/your.cell.name@YOUR.SECOND.REALM.NAME
+        $ asetkey add <kvno> /path/to/afs.keytab afs/your.cell.name@YOUR.SECOND.REALM.NAME
 
-note that the kvno here needs to be the same one as is reported by the kadmin getprinc command.
+    Note that the kvno here needs to be the same one as is reported by the `kadmin getprinc` command.
 
-3) create an afs krb.conf with your additional Realm's name in it, and place it on all of your AFS servers:
+3. Create an AFS `krb.conf` with your additional realm's name in it, and place it on all of your AFS servers; see [[above|AdminFAQ#afskrbconf]].
 
-    echo "YOUR.SECOND.REALM.NAME" > /usr/afs/etc/krb.conf
+4. Restart your AFS servers.
 
-4) restart you afs servers.
-
-at this point you should be able to run:
+At this point you should be able to run:
 
     kinit you@YOUR.SECOND.REALM.NAME
     aklog
 
-and recieve the same privileges as if you had run:
+and receive the same privileges as if you had run:
 
     kinit you@YOUR.CELL.NAME
     aklog
 
-### <a name="3.52  Is it a good idea to store"></a> 3.52 Is it a good idea to store mail in AFS?
+### <a name="nss"></a><a name="3.53  How can I ensure that the"></a><a name="3.53  How can I ensure that the "></a> 3.40 How can I ensure that the userids on client machines match the users' `pts` ids?
 
-Some people have expressed the opinion that this is not a good idea. Assuming that a modern (one-file-per-message) format is being used, the concrete reasons to avoid storing mail in AFS include:
+You can use [libnss-afs](http://www.megacz.com/software/libnss-afs.html) for this.
 
-1. AFS is not designed to provide good performance under the sort of concurrent accesses that occur when many mail server machines share a common space in AFS; see [this message](http://www.openafs.org/pipermail/openafs-info/2007-June/026621.html) for more information.
-  - This does not apply to situations where there is a single mail server for a particular user.
-  - This also may not apply if [Callback Extended Information](http://michigan-openafs-lists.central.org/archives/afs3-standardization/2008-May/000123.html) is implemented.
+### <a name="fastrestart"></a><a name="3.54  What is Fast Restart?"></a> 3.41 What is Fast Restart?
 
-### <a name="3.53  How can I ensure that the"></a><a name="3.53  How can I ensure that the "></a> 3.53 How can I ensure that the userids on client machines match the users' pts ids?
-
-You can use [libnss-afs](http://www.hcoop.net/~megacz/software/libnss-afs.html) for this.
-
-### <a name="3.54  What is Fast Restart?"></a> 3.54 What is Fast Restart?
-
-When compiled with --enable-fast-restart, the file server will start up immediately, without first salvaging any volumes which cannot be attached.
+When compiled with `--enable-fast-restart`, the file server will start up immediately, without first salvaging any volumes which cannot be attached.
 
 Disadvantages to Fast Restart, [as noted here](http://lists.openafs.org/pipermail/openafs-info/2008-May/029386.html) include:
 
 1. Volumes in need of salvage remain offline until an administrator intervenes manually
 2. On an inode-based fileserver, salvaging a single volume crawls every inode; therefore, salvaging volumes individually (rather than partition-at-a-time) duplicates work.
 
-### <a name="#3.55  Reboot ?"></a> 3.55 Why does AFS reboot itself spontaneously at 4:00am every Sunday?
+In [[OpenAFS]] 1.6 there is a [[demand attach fileserver|DemandAttach]] which provides even faster restart while reducing the drawbacks; you should use it instead.
+
+### <a name="restart"></a><a name="#3.55  Reboot ?"></a> 3.42 Why does AFS reboot itself spontaneously at 4:00am every Sunday?
 
 This was made to be the default behavior back in the days when OpenAFS servers had problems with leaking memory and other resources. These days, it is generally seen as not necessary.
 
@@ -1224,13 +844,21 @@ You can disable this behavior with:
     bos setrestart $SERVER_NAME never
     bos setrestart $SERVER_NAME -newbinary never
 
-### <a name="#3.56 weak crypto"></a>3.56 Why do I get an error -1765328370 when authenticating?
+Newer versions of [[OpenAFS]] do not enable this by default.
 
-  -1765328370 KDC has no support for encryption type
- 
-  In other words, your KDC has support for DES-CBC-CRC turned off.
-  Re-enable support for DES encryption types and you will get further.
+### <a name="weakcrypto"></a><a name="#3.56 weak crypto"></a> 3.43 Why do I get an error -1765328370 when authenticating?
 
-  Check /etc/krb5.conf and make sure it has "allow_weak_crypto = true" in the [libdefaults]
-  section.  Also check kdc.conf (possibly located in /var/kerberos/krb5kdc) and make sure
-  that des-cbc-crc:normal is in the supported_enctypes list.
+    tweety@toontown ~$ translate_err -1765328370
+    krb5 error -1765328370 = KRB5KDC_ERR_ETYPE_NOSUPP
+
+(See [[here|AdminFAQ#translate_et]] for `translate_err`.) Usually this means that your KDC has support for `des-cbc-crc` and other weaker encryption types turned off. Re-enable support for DES encryption types and you will get further.
+
+Check `/etc/krb5.conf` and make sure it has something like the following in it:
+
+	[libdefaults]
+    allow_weak_crypto = true
+
+Also check `kdc.conf` (possibly located in `/var/kerberos/krb5kdc`; check the documentation for your Kerberos packages) and make sure that `des-cbc-crc:normal` is in the `supported_enctypes` list.
+
+There is ongoing work to remove the need for DES enctypes.
+
