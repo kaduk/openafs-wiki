@@ -265,7 +265,9 @@ If you keep a "cheap replica", then by definition, if the RW is available, one o
 
 Yes, it will. Older AFS assumed that there is one address per host, but modern [[OpenAFS]] identifies servers ad clients by UUIDs (universally unique identifiers) so that a fileserver will be recognized by any of its registered addresses.
 
-See the documentation for the [`NetInfo`](http://docs.openafs.org/Reference/5/NetInfo.html), [`NetRestrict`](http://docs.openafs.org/Reference/5/NetRestrict.html) files. The UUID for a fileserver is generated when the [`sysid`](http://docs.openafs.org/Reference/5/sysid.html) file is created.
+See the documentation for the [`NetInfo`](http://docs.openafs.org/Reference/5/NetInfo.html) and [`NetRestrict`](http://docs.openafs.org/Reference/5/NetRestrict.html) files. The UUID for a fileserver is generated when the [`sysid`](http://docs.openafs.org/Reference/5/sysid.html) file is created.
+
+If you have multiple addresses and must use only one of them (say, multiple addresses on the same subnet), you may need to use the `-rxbind` option to the network server processes `bosserver`, `kaserver`, `ptserver`, `vlserver`, `volserver`, `fileserver` as appropriate. (Note that some of these do not currently document `-rxbind`, notably `kaserver` because it is not being maintained. Again, the preferred solution here is to migrate off of `kaserver`, but the `rxbind` option _will_ work if needed.)
 
 ### <a name="replicatehome"></a><a name="3.17  Can I replicate my user&#39;s"></a><a name="3.17  Can I replicate my user&#39;s "></a> 3.15 Can I replicate my user's home directory AFS volumes?
 
