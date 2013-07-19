@@ -246,7 +246,7 @@ First, you must have your mail delivery daemon AFS authenticated (probably as "`
 
 Second, you need to set up the ACLs so that "`postman`" has lookup rights down to the user's `$HOME` and "`lik`" on the destination directory (for this example, we'll use `$HOME/Mail`).
 
-### <a name="shadowro"></a><a name="3.14  Should I replicate a _Read"></a> 3.13 Should I replicate a [[ReadOnly]] volume on the same partition and server as the [[ReadWrite]] volume?
+### <a name="cheapclone"></a><a name="3.14  Should I replicate a _Read"></a> 3.13 Should I replicate a [[ReadOnly]] volume on the same partition and server as the [[ReadWrite]] volume?
 
 Yes, Absolutely! It improves the robustness of your served volumes.
 
@@ -254,7 +254,7 @@ If [[ReadOnly]] volumes _exist_ (_not_ just "are available"), Cache Managers wil
 
 However, you are **very** strongly encouraged to keep one RO copy of a volume on the _same server and partition_ as the RW. There are two reasons for this:
 
-1. The RO that is on the same server and partition as the RW is a clone (just a copy of the header, not a full copy of each file). It therefore is very small, but provides access to the same set of files that all other (full copy) [[ReadOnly]] volumes do. Transarc trainers referred to this as the "cheap replica", although the term "shadow" is finding some currency.
+1. The RO that is on the same server and partition as the RW is a clone (just a copy of the header, not a full copy of each file). It therefore is very small, but provides access to the same set of files that all other (full copy) [[ReadOnly]] volumes do. Transarc trainers referred to this as the "cheap replica"; some admins call it a "shadow", but this is not the same as a [[shadow volume|AdminFAQ#shadow volume]].
 2. To prevent the frustration that occurs when all your ROs are unavailable but a perfectly healthy RW was accessible but not used.
 
 If you keep a "cheap replica", then by definition, if the RW is available, one of the ROs is also available, and clients will utilize that site.
@@ -785,7 +785,7 @@ You can remove the shadow bit from a volume's header with "`vos syncvldb -force`
 
 Attempting to create shadows of two different RW volumes on the same partition with the same name is prohibited by the `volserver`. Technically it is possible to create two shadow volumes with the same name on different partitions; however, this is not advisable and may lead to undefined behavior.
 
-(Some AFS administrators may refer to an RO clone of an RW volume on the same server/partition as a "shadow"; this terminology predates the existence of shadow volumes.)
+(Some AFS administrators may refer to an RO clone of an RW volume on the same server/partition as a "shadow"; this terminology predates the existence of shadow volumes and should be avoided.)
 
 ### <a name="multirealm"></a><a name="3.51 Can I authenticate to my af"></a> 3.39 Can I authenticate to my AFS cell using multiple Kerberos realms?
 
