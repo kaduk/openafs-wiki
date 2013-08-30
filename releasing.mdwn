@@ -1,0 +1,48 @@
+## Notes about release process ##
+
+The different binary packages are built by a group of volunteers called the release-team.<br/>
+The packages themselves are stored under /afs/grand.central.org/software/openafs/*release-number*.<br/>
+
+The distibution-page on www.openafs.org is created automatically by the script *make_www_release*<br/> 
+found in the *tools* (git://git.openafs.org/tools.git) repository.
+
+Thus, the packagers are asked to provide the packagers in a certain directory structure so that <br/>
+this html-page is constructed correctly:
+
+**OS**/**arch**/*package-files*
+
+where **OS** has to match to the regex  :
+   $prefix=~s/^(.*?)[-\d]+.*/$1/;
+
+and $prefix should be then one of :
+
+    %TopTitles = (
+    'aix'     => 'IBM AIX',
+    'darwin'  => 'Darwin',
+    'dux'     => 'Digital UNIX',
+    'fedora'  => 'Fedora',
+    'freebsd' => 'Free BSD',
+    'fbsd' => 'Free BSD',
+    'hpux'    => 'HP/UX',
+    'irix'    => 'SGI Irix',
+    'macos'   => 'MacOS X',
+    'openbsd' => 'Open BSD',
+    'opensuse'=> 'OpenSUSE',
+    'redhat'  => 'RedHat Linux',
+    'rhel'    => 'RedHat Enterprise Linux',
+    'solaris' => 'Oracle Solaris',
+    'sle'     => 'SUSE Linux Enterprise',
+    'winnt'   => 'Windows 2000/XP/2003',
+    'win9x'   => 'Windows 95/98/Millenium Edition',
+    );
+
+and **arch** is free-form and typically one of i386,i586,i686,x86_64
+
+some example directory would then be:
+
+* freebsd-91/i386
+* freebsd-91/x86_64
+* rhel5/i386
+* rhel5/x86_64
+
+if there is a source package available (like a source-rpm), it should be put directly under the **OS** directory.
