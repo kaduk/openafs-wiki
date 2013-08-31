@@ -7,3 +7,11 @@ Any changes submitted to gerrit will automatically be built by buildbot, and the
 [[BuildbotMasterNotes]]
 
 [[BuildbotSlaveHowto]]
+
+
+# Todo items
+
+  * Getting an acceptable gerrit status plugin in upstream buildbot project.
+  * Upgrading the buildbot software on the buildbot master (depends on the gerrit status plugin).
+  * Incorporating more testing into the build.
+  * Using the buildslaves to generate release packages/tarballs. This requires a way of triggering the release builds and uploading to the web site.
