@@ -1,0 +1,55 @@
+## Initial list of significant ports:
+
+### Server ports (destinations):
+
+##### 88/udp Kerberos 5 authentication
+##### 750/udp Kerberos 4 authentication
+##### 7004/udp kaserver / fakeka / ka-forwarder
+Note: kaserver also listens on the previous 2 ports, and all Windows clients use them; older kinit and aklog uses 750, newer kinit aklog uses 88, klog uses 7004. Source ports are ephemeral.  Additional ports are used for Kerberos (but not kaserver) administration, primarily 465/tcp (kpasswd) and 749/tcp (kadmin), again with ephemeral source ports.
+
+##### 123/udp time synchronization
+Note that ntpd can be configured to use 123/udp as the source port, but modern versions will use the normal client port allocation mechanisms.
+
+##### 53/udp DNS
+It is possible to restrict clients to using only port 53/udp as the source port, by configuring a caching nameserver on the client and configuring it to only use 53/udp for outgoing queries.
+
+##### 514/udp syslog
+Only if clients are configured for remote logging. The source port will depend on the syslog implementation but is usually ephemeral.
+
+##### 7002/udp ptserver (AFS authorization)
+Clients use this at login (aklog or klog) time. Be aware that credential "forwarding" does not actually copy an existing credential, but requests a new one using the old one as an authenticator; as such, it requires both ptserver and kaserver or kdc to be reachable from the destination host. Source ports are ephemeral.
+
+##### 7000/udp fileserver
+##### 7003/udp vlserver
+##### 7005/udp volserver
+Clients use these to locate volumes and read/write data; servers communicate between each other. Both use ephemeral ports.
+
+##### 7001/udp cache manager
+This is a service on *clients*; clients notify servers that they are using data via callbacks, and servers contact the clients to "break the callback" and notify them of changes to the data. The source port is 7000/udp (fileserver). Servers also regularly "ping" clients in an attempt to maintain NAT mappings.
+
+##### 7007/udp bosserver
+Service maintenance service; servers themselves do not use this directly (but often also run clients which may be used to talk to it). The source port is ephemeral.
+
+### Optional services:
+
+##### 7008/udp upserver
+If you are using the update service (non-default) then this port is used to communicate with it. Source ports are ephemeral.
+
+##### 7009/udp knfs
+AFS/NFS translator remote services. Only used with the AFS/NFS translator, which has not been functional for many years because it depends on kernel internals for NFS integration.
+
+##### 7020-7032/udp buserver / butc
+AFS backup service. 7020 is the controller coordinator; 7021 is command and control; other ports are for tape controllers. Source ports are ephemeral. Note that tape controllers may run on AFS clients, and will communicate with fileserver, volserver, and vlserver as well as the coordinator and buserver.
+
+##### 7101/udp xstat
+##### 2106/udp fsmonitor
+Debugging and statistics collection.
+
+##### 4711/udp arlad
+Arla was an AFS implementation for platforms not supported by Transarc AFS. It used port 4711 instead of 7001 for callbacks.
+
+### Notes
+
+Ephemeral ports are typically allocated starting from 1024; the upper range depends on the platform and the system configuration, but often extends over 32000 and may potentially be up to 65534. In general there is no control over the port usage beyond constraining the kernel's willingness to assign ephemeral ports to any process. Be aware that severe constraints on ephemeral UDP ports will have a significant impact on other UDP services, notably DNS and potentially syslog.
+
+In most cases, clients do not need access to the entire 7000-7011 port range allocated for AFS; 7000-7005 is sufficient, if necessary add 7007 for bos (controlling servers from clients) and 7008 for backup control.
