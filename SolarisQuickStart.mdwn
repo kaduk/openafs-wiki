@@ -169,18 +169,6 @@ the realm `COM` for it! This is why typically you will see two entries in
     # the second entry is not actually necessary if the domain and realm match
     # the first is necessary
 
-**IMPORTANT** One additional change is needed to `krb5.conf` for [[OpenAFS]]
-to work. While work is ongoing on a modern encryption / security protocol
-(`rxgk`), current [[OpenAFS]] versions are limited to an older, weaker
-encryption scheme which modern [[Kerberos|KerberosV]] implementations disable by
-default. You will need to add a line to the `libdefaults` section to re-enable
-this scheme:
-
-    [libdefaults]
-    allow_weak_crypto = true
-
-(We don't like this either, but there isn't anything to be done about it until
-`rxgk` is ready.)
 
 ### Adding `/usr/afsws/bin` and `/usr/afs/bin` to the system path
 
@@ -286,15 +274,7 @@ provide both prdb and vldb services. Most installations also provide KDCs on
 the db hosts, because older versions of AFS included an additional Kerberos
 Authentication (`ka`) database based on an older, now known to be insecure,
 version of the Kerberos protocol. [[OpenAFS]] *does not* require that the
-KDCs be on the db servers, unless for some reason you must use `kaserver`
-instead of [[Kerberos 5|KerberosV]] KDCs.
-
-It is **very strongly** advised that you not use `kaserver` except in existing
-`kaserver`-based installations, and that such installations be upgraded to use
-[[Kerberos 5|KerberosV]] as soon as possible; the older Kerberos 4 protocol
-has severe security issues, which are inherited by `kaserver`. Note that, as
-these are protocol flaws, it is not possible to patch `kaserver` to fix them;
-an (incompatible) new protocol is required.
+KDCs be on the db servers.
 
     cd /usr
     mv afsws/root.server/usr/afs afs
@@ -304,36 +284,30 @@ an (incompatible) new protocol is required.
     chmod 700 local db
 
 At this point, if you are adding a server to an *existing* cell, you should
-copy the `KeyFile` from an existing db server or file server. (This file is
-highly sensitive, as servers use it to authenticate to each other and
-administrators may use it to authenticate to servers; use a secure copying
-protocol such as `scp`.) If this is a *new* cell, you will need to create a
-cell principal: use `kadmin` as a principal with [[Kerberos|KerberosV]]
-administrative rights.
+copy the `KeyFile` and `rxkad.keytab` from an existing db server or file
+server. (This file is highly sensitive, as servers use it to authenticate
+to each other and administrators may use it to authenticate to servers;
+use a secure copying protocol such as `scp`.) If this is a *new* cell,
+you will need to create a cell principal: use `kadmin` as a principal with
+[[Kerberos|KerberosV]] administrative rights.
 
-    kadmin: addprinc -randkey -e des-cbc-crc:normal afs/cell
-    kadmin: ktadd -k /usr/afs/etc/afs.keytab -e des-cbc-crc:normal afs/cell
+    kadmin: addprinc -randkey afs/cell
+    kadmin: ktadd -k /usr/afs/etc/rxkad.keytab afs/cell
 
 The string `cell` above should be replaced with the name of the cell (note:
 *not* the [[Kerberos|KerberosV]] realm or domain name as with most
 [[Kerberos|KerberosV]] service principals!). It is also possible to use simply
 `afs` as the cell principal, but this is not recommended for new
-installations. Note the key version number reported by `ktadd`; you will
-need this for `asetkey`. You will then need to use this
-principal to create a `KeyFile`:
+installations.
 
-    /usr/afs/bin/bosserver -noauth
-    /usr/afs/bin/asetkey add vno /usr/afs/etc/afs.keytab afs/cell
-    pkill bosserver
+Current versions of OpenAFS require you to create an empty `KeyFile`.
+(This was used for legacy DES authentication and should not be used in
+modern installations. Later versions of OpenAFS may create it automatically
+if `rxkad.keytab` is found.)
 
-As above, replace `cell` with the cell name; also replace `vno` with the key
-version number. (Again, if this appears to be `1` then you have probably
-confused the `Key` with the `MKey`; use `ktutil`, or `getprinc` inside
-`kadmin`, to get the correct key `vno`.) `bosserver` will create an initial
-`ThisCell` and `CellServDB` (which `asetkey` requires even though it doesn't
-use them).
+    touch /usr/afs/etc/KeyFile
 
-Once you have a `KeyFile` in place, you are ready to configure a server.
+Once you have `rxkad.keytab` in place, you are ready to configure a server.
 
 If this is an existing cell, you should copy the *server* `ThisCell`,
 `CellServDB`, and `UserList` to `/usr/afs/etc`. (These will usually be in
@@ -346,7 +320,7 @@ is configured.) Otherwise:
 
 As before, replace `cell` with the actual cell name. If this complains about
 authentication, you will need to verify your [[Kerberos|KerberosV]]
-configuration and that your `KeyFile` matches the KDC.
+configuration and that your `rxkad.keytab` matches the KDC.
 
 If this machine is only to be a file server and not a db server, skip ahead to
 [[Setting up a file server|SolarisQuickStart#fileserver]].
@@ -377,7 +351,7 @@ that up as well:
 If this is a *new* cell then you need to initialize the Protection Database
 and create the `UserList`. Note that at this point you need a working client;
 it is somewhat easier if this client is running on the new server, since a
-remote client probably does not have an appropriate `KeyFile` and it cannot
+remote client probably does not have an appropriate `rxkad.keytab` and it cannot
 authenticate as the cell admin until *after* this command is run. If this is a
 new db server in an existing cell, you are done except for doing the `bos
 addhost` above on the existing db servers and waiting for the new server to
@@ -510,8 +484,8 @@ using an actual token.
 
 Solaris `kinit` will likely pause here and spit out some complaints about
 "`getpwnam failed for name=admin`"; it's trying to do NFSv4 initialization,
-which we do not care about so the necessary NFSv4 configuration has not been
-done.
+which we do not care about so the NFSv4 configuration it is looking for
+has not been done.
 
     aklog
     pts examine admin
