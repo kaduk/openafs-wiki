@@ -269,6 +269,8 @@ See the documentation for the [`NetInfo`](http://docs.openafs.org/Reference/5/Ne
 
 If you have multiple addresses and must use only one of them (say, multiple addresses on the same subnet), you may need to use the `-rxbind` option to the network server processes `bosserver`, `kaserver`, `ptserver`, `vlserver`, `volserver`, `fileserver` as appropriate. (Note that some of these do not currently document `-rxbind`, notably `kaserver` because it is not being maintained. Again, the preferred solution here is to migrate off of `kaserver`, but the `rxbind` option _will_ work if needed.)
 
+Database servers can *not* safely operate multihomed; the Ubik replication protocol assumes a 1-to-1 mapping between addresses and servers. Use the [`NetInfo`](http://docs.openafs.org/Reference/5/NetInfo.html) and [`NetRestrict`](http://docs.openafs.org/Reference/5/NetRestrict.html) files to associate database servers with a single address.
+
 ### <a name="replicatehome"></a><a name="3.17  Can I replicate my user&#39;s"></a><a name="3.17  Can I replicate my user&#39;s "></a> 3.15 Can I replicate my user's home directory AFS volumes?
 
 No.
