@@ -163,8 +163,11 @@ The following additional packages are needed to [[build RPM packages|HowToBuildO
 
 [Oracle Solaris Studio][1] can be used to build OpenAFS binaries on the
 solaris platform. Solaris Studio is freely available for the solaris and linux
-platforms with a no-cost Oracle Technology Network (OTN) account. Follow the
-package installer instructions for your platform type and version.
+platforms with a no-cost Oracle Technology Network (OTN) account.  For recent
+versions of Solaris, use the `pkg' command to install Solaris Studio.  Follow the
+package installer instructions on the Solaris Studio download page for
+your platform type and version. This requires you to create and download a key
+and certificate using your OTN account.
 
 [1]: http://www.oracle.com/technetwork/server-storage/solarisstudio
 
@@ -193,22 +196,28 @@ Note: Is a perl devel lib needed on solaris?
 
 #### Solaris 11 ####
 
-Install [SolarisStudio][1] via tarball, or follow the instructions to install
-the package for your platform.
+Install [SolarisStudio][1] using the `pkg' command. You will need an SSL
+certificate and key, which can be created using your OTN account. See the instructions
+on the Solaris Studio download page.
 
-Use the `pkg` tool to install the other necessary tools and libs to build OpenAFS
-on Solaris 11.
+(Alternately, install Solaris Studio from the tar file installer, and then find
+and install any missing dependencies.)
+
+Use the `pkg` tool to install the other necessary packages:
 
       $ sudo pkg install git
-      $ sudo pkg install make system/header flex bison gnu-m4 gnu-coreutils gnu-binutils gnu-sed 
-      $ sudo pkg install automake            /* this selects automake-111; if dependency errors are indicated, try automake-110 */
-      $ sudo pkg install autoconf libtool
-      $ sudo pkg install developer/gcc-3
+      $ sudo pkg install text/locale
+      $ sudo pkg install gnu-coreutils gnu-binutils gnu-sed
+      $ sudo pkg install make flex bison
+      $ sudo pkg install automake autoconf libtool
 
-The OpenAFS build process also requires the `gencat` program. Verify
-`/usr/bin/gencat` is available, otherwise install the `SUNWloc` package.
+If you have dependency issues with automake, try automake-110
 
-     $ sudo pkg install SUNWloc
+If you have installed Solaris Studio via the tar file, you may need to install
+the `system/header' package manually:
+
+      $ sudo pkg install system/header
+
 
 ## Getting the Source Code ##
 
