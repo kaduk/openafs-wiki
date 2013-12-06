@@ -1,0 +1,18 @@
+# TODO list for rxgk support
+
+This page provides a list of open tasks that will help get rxgk imported and used throughout the tree.
+If you wish to work on any of these items, please note your interest by adding your name in parentheses and sending mail to the -devel list.
+
+* Implement a prototype of the proposed new prdb format that includes support for extended names (https://github.com/kaduk/openafs/blob/prdb/doc/txt/prdb.txt)
+* Document the vldb format, akin to the prdb.txt above
+* Using the vldb document as a guide, design a vldb extension to store per-fileserver token-encrypting keys
+* Make the afsconf changes needed to allow rxgk server security objects (there must be a way to select which getkey function is used, since not all rxgk-capable servers will use the cell-wide key for token encryption)
+* Make the afsconf changes needed for producing rxgk client security objects (the target service is needed in order to perform GSS negotiation against the correct GSS acceptor name, or to choose which long-term key to use if printing a token) (Do we also want to expose a hook for the client identity?)
+* Use rxgk for ubik synchronization connections -- these will use printed tokens and do not need any GSS bits
+* Write a getkey routine to pull the cell-wide shared key from KeyFileExt
+* Design a scheme for storing the per-fileserver token-encrypting keys, presumably on disk as these really should accept tokens across restarts
+* Decide what we want combined tokens to mean.  Do we allow combinations with more than two identities?  Are combined tokens to be used as the intersection of identities, or the union?  Can we do both somehow?
+* Review the existing rxgk code that kaduk will be posting to gerrit
+* Review the existing pthread-bos code on gerrit -- bos is a nice simple standalone protocol to play with rxgk-ifying, but it is only possible for the pthreaded version.
+* Decide whether the bosserver should use an ephemeral token-encrypting key.  There are no long-lived connections to the bosserver and this would save on the hassle of putting another key on disk, but it makes localauth more complicated.  Absent a scheme to print initiator credentials from given acceptor credentials (could be done for krb5 with a sort of kimpersonate), we probably have to do a real GSS negotiation, which depends on the network and everything being configured properly.
+
