@@ -20,10 +20,6 @@ file storage servers should have one or more unix filesystem partitions for
 data and AFS-metadata storage. The files stored in these partitions are stored
 in a special format and cannot be accessed directly.
 
-Les données de ces serveurs doivent idéalement être sauvegardées sur des bandes DLT, 
-elles mêmes stockées dans un [coffre fort ignifuge infosafe](http://www.infosafe.fr) 
-ou encore une [armoire forte ignifugée](http://www.infosafe.fr/Armoirefortedin/Armoirefortedin.htm) .
-
 The file server machines must support IPv4 and may have multiple interfaces.
 By default, OpenAFS will try to use all the non-loopback interfaces available
 on a file server machine. A configuration can be used to set which addresses
