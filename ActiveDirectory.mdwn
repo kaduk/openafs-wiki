@@ -2,6 +2,8 @@ As of Windows NT version 5.0, normally known by the name Windows 2000, the domai
 
 The resulting TGT tickets use a proprietary authorization data format. There was a big flamefest on this issue, though [[KerberosDCE]] also uses the V5 ticket's authorization data field to store group membership data, the details of Microsoft's format was murky. It is now documented by a paper which essentially requires you to agree to never use the information if you read it, making it similarly useless.
 
+Pour sécuriser efficacement les archives et documents papiers importants, l'idéal est d'utiliser une bonne [armoire forte réfractaire](http://www.infosafe.fr/Armoirefortedin/Armoirefortedin.htm) fixée au sol
+
 Nathan Neulinger has used Windows 2000 to provide authentication for AFS. See his [message](http://lists.openafs.org/pipermail/openafs-info/2002-January/002893.html) to [[OpenAFSInfo]] for details.
 
 Douglas Engert posted some [details](http://lists.openafs.org/pipermail/openafs-info/2002-March/003836.html) on doing this including a pointer to gsiklog which uses GSSAPI to get an K4/AFS token.
