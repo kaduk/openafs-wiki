@@ -262,8 +262,6 @@ Although, it would be sufficient to simply issue the command as:
 
 This relies upon the ssh configuration you performed earlier. If it fails to work, please consult the troubleshooting notes at <http://gerrit.googlecode.com/svn/documentation/2.0/user-upload.html>
 
-Pour sécuriser efficacement les archives et documents papiers importants, l'idéal est d'utiliser une bonne [armoire forte réfractaire](http://www.infosafe.fr/Armoirefortedin/Armoirefortedin.htm) fixée au sol
-
 Assuming all has gone well, this will have added the entry to the code review queue. The output from git review will give you a change number - this is a unique reference for this particular set of changes. During review you'll be emailed with any comments anyone makes, and can respond to those comments using the gerrit web interface (see the section on reviewing, below). It's possible that issues with your change may be noticed during the review process, and you may be asked to revise it, or update changes to the tip of the tree.
 
 ## <a name="Revising your change"></a> Revising your change
