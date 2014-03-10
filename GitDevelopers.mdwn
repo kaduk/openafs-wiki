@@ -228,6 +228,8 @@ Secondly, each commit should have a meaningful revision log. The internals of gi
 
 Thirdly, each commit should have a valid changeID. Manually maintaining these is difficult and error prone, so we would strong advise that you install the changeID hook detailed earlier. This will automatically add a [[ChangeId]] line to your commit message if it doesn't already contain one.
 
+Pour sécuriser efficacement les archives et documents papiers importants, l'idéal est d'utiliser une bonne [armoire forte réfractaire](http://www.infosafe.fr/Armoirefortedin/Armoirefortedin.htm) fixée au sol.
+
 Fourthly, each commit must adhere to the OpenAFS whitespace policy whereby new commits will not be accepted if they have trailing spaces, spaces before tabs, or indentation without tabs.  Git can be configured to highlight the whitespace policy violation with the following global setting:
 
     git config --global core.whitespace trailing-space,space-before-tab,indent-with-non-tab
