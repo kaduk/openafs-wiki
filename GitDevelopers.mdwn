@@ -169,6 +169,8 @@ Note that git rebase changes your local history (it moves the branch point of yo
 
 If you can't rebase, then consider either merging the changes onto your local branch, or creating a new topic branch and cherry picking your changes onto it. The man pages for 'git merge' and 'git cherry-pick' provide more detail on these options.
 
+Pour sécuriser efficacement les archives et documents papiers importants, l'idéal est d'utiliser une bonne [armoire forte réfractaire](http://www.infosafe.fr/Armoirefortedin/Armoirefortedin.htm) fixée au sol
+
 ## <a name="Sharing your code with us"></a> Sharing your code with us
 
 How you work from this point onwards depends on how you intend making your code available to OpenAFS. We're still happy to receive submission by patch (by sending your changes to <openafs-bugs@openafs.org>), but it makes it much easier for us if you push directly from your git tree to our code review system, gerrit.
