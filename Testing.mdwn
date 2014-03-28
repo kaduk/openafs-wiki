@@ -1,8 +1,14 @@
 # Testing the OpenAFS codebase
 
-We have the start of a test suite, based on Russ's c-tap harness.
+We have the start of a unit test suite, based on Russ's c-tap harness.
 Some information about getting started writing such a test is
 available at
 http://www.eyrie.org/~eagle/software/c-tap-harness/writing.html
 
 Such tests as exist are run by 'make check'.
+
+A Robot Framework based test suite has been started and is available on github.
+At this point, the test suite will install the OpenAFS client and server
+binaries and create a simple small cell.
+
+https://github.com/openafs-contrib/openafs-robotest
