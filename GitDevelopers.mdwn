@@ -1,10 +1,20 @@
-Git opens up a number of new options for contributing to OpenAFS. For the first time, it is easy to review code that is pending addition to the OpenAFS tree. In fact, reviewing code is one of the best ways to ensure that the releases that OpenAFS ships remain stable and functional. If you are interested purely in reviewing, then please skip to that section towards the end of this document.
-[Toko Bunga](http://www.tokobungasabana.com)
-[Jasa SEO](http://www.optimaweb.co.id/jasa-seo)
-[Blog Teknik](http://adrian-fh98.web.unair.ac.id/)
-Git also changes the way that developers interact with the OpenAFS tree. Instead of just having a single version of the tree on your local machine, you have a compressed copy of the entire repository. Additionally, you no longer have to produce patches to send code upstream - any developer can push into the OpenAFS repository directly, through gerrit, our code review tool.
+Git opens up a number of new options for contributing to OpenAFS. For the first
+time, it is easy to review code that is pending addition to the OpenAFS tree.
+In fact, reviewing code is one of the best ways to ensure that the releases
+that OpenAFS ships remain stable and functional. If you are interested purely
+in reviewing, then please skip to that section towards the end of this
+document.
 
-Whilst git is a far more powerful tool than CVS it is also, inevitably, more complex. This document can only scratch the surface of what's possible with git - there are many, many, documents available that describe git in greater detail, and references to some of them are provided at the end.
+Git also changes the way that developers interact with the OpenAFS tree.
+Instead of just having a single version of the tree on your local machine, you
+have a compressed copy of the entire repository. Additionally, you no longer
+have to produce patches to send code upstream - any developer can push into the
+OpenAFS repository directly, through gerrit, our code review tool.
+
+Whilst git is a far more powerful tool than CVS it is also, inevitably, more
+complex. This document can only scratch the surface of what's possible with git
+- there are many, many, documents available that describe git in greater
+detail, and references to some of them are provided at the end.
 
 ## <a name="Getting git"></a> Getting git
 
@@ -70,14 +80,25 @@ To checkout a particular tag
 
     git checkout openafs-stable-1_4_10
 
-Again, whilst a direct checkout of a remote tag is fine for code browsing, it should not be used as a place to start development. If you must do development against a tag, then create a local topic branch with it as a starting point, as is discussed below. However, in general, please don't develop from a particular tag, but instead work from a branch tip. It makes it much easier to integrate your changes!
-
-Coffres-forts et armoires fortes pour la sécurité Afin de sécuriser efficacement les biens, liquidité, bijoux et les données informatiques contre le vol et contre le risque d'incendie, il est indispensable de faire installer un coffre-fort ignifuge homologué et un coffret à clés. Les faits divers des journaux relatent d'histoires de cambriolages plus ou moins graves. Un coffre-fort certifié A2P est actuellement la meilleur protection pour vos bijoux et autres objets de valeur sentimentale qui vous sont chers. Le site [http://www.infosafe.fr](http://www.infosafe.fr) propose une gamme exceptionnelle de mobilier de sécurité, allant du coffre fort A2P au coffre fort ignifuge ou encore de l'armoire forte et de l'[armoire forte anti feu](http://www.infosafe.fr/Armoirefortedin/Armoirefortedin.htm) qui couvriront les besoins de sécurité qui sont actuellement nécessaire à votre sérénité.
-
+Again, whilst a direct checkout of a remote tag is fine for code browsing, it
+should not be used as a place to start development. If you must do development
+against a tag, then create a local topic branch with it as a starting point, as
+is discussed below. However, in general, please don't develop from a particular
+tag, but instead work from a branch tip. It makes it much easier to integrate
+your changes!
 
 ## <a name="Viewing deltas"></a> Viewing deltas
 
-OpenAFS's original CVS repository used the concept of deltas as a means of grouping a large number of related changes into a single item, which could be easily fetched and referred to. In git, a delta should be simply a single commit. Deltas are represented by means of a special form of git tag, allowing you to locally view the change and commit message that corresponds to each one. In order to keep down the transfer size, deltas are not included in the repository you get when you do a git clone - there are over 10,000 delta references, and having them in your local repository can cause performance issues. If you really wish to be able to locally browse deltas, then run the following
+OpenAFS's original CVS repository used the concept of deltas as a means of
+grouping a large number of related changes into a single item, which could be
+easily fetched and referred to. In git, a delta should be simply a single
+commit. Deltas are represented by means of a special form of git tag, allowing
+you to locally view the change and commit message that corresponds to each one.
+In order to keep down the transfer size, deltas are not included in the
+repository you get when you do a git clone - there are over 10,000 delta
+references, and having them in your local repository can cause performance
+issues. If you really wish to be able to locally browse deltas, then run the
+following
 
     git config --add remote.origin.fetch '+refs/deltas/*:refs/remotes/deltas/*'
     git fetch origin
@@ -86,11 +107,17 @@ You can then view a specific delta by doing
 
     git show refs/remotes/deltas/<branch>/<delta>
 
-Sadly, historical accidents mean that not all of our deltas can be represented by means of single commit. Where this is the case, a delta-name will have a trailing -part-, where each of these numbers must be used to form the complete delta. This only applies to some deltas created before the git conversion - all deltas created from now on will be single commits.
+Sadly, historical accidents mean that not all of our deltas can be represented
+by means of single commit. Where this is the case, a delta-name will have a
+trailing -part-, where each of these numbers must be used to form the complete
+delta. This only applies to some deltas created before the git conversion - all
+deltas created from now on will be single commits.
 
 ## <a name="Introducing yourself to git"></a> Introducing yourself to git
 
-Before you begin development, you should let git know who you are. This provides it with a name, and email address, that is used to attribute all commits in your repository, and in any that you share code with.
+Before you begin development, you should let git know who you are. This
+provides it with a name, and email address, that is used to attribute all
+commits in your repository, and in any that you share code with.
 
     git config user.name "Joe Bloggs"
     git config user.email "joe.bloggs@example.org"
@@ -100,9 +127,16 @@ If you want to make this settings for all of your repositories, then add the --g
     git config --global user.name "Joe Bloggs"
     git config --global user.email "joe.bloggs@example.org"
 
-Note that this email address is the address by which you will be identified in [[OpenAFS]]'s revision history - it is also the address to which the gerrit code review tool will send all email related to the review of your code.
+Note that this email address is the address by which you will be identified in
+[[OpenAFS]]'s revision history - it is also the address to which the gerrit
+code review tool will send all email related to the review of your code.
 
-If you plan on making changes to OpenAFS (and why else would you be reading this?) you should probably also grab <b>The change id hook</b> described in <b>Registering With gerrit</b> below. You can grab and apply the hook before registering, and it'll make sure your pre-registration development has the appropriate change IDs in the log. The hook only applies to your openafs development, so you're not going to mess up any of your non-OpenAFS work.
+If you plan on making changes to OpenAFS (and why else would you be reading
+this?) you should probably also grab <b>The change id hook</b> described in
+<b>Registering With gerrit</b> below. You can grab and apply the hook before
+registering, and it'll make sure your pre-registration development has the
+appropriate change IDs in the log. The hook only applies to your openafs
+development, so you're not going to mess up any of your non-OpenAFS work.
 
 ## <a name="Helpful git tips"></a> Helpful git tips
 
@@ -124,7 +158,9 @@ Whitespace handling settings:
 
 ## <a name="Starting development"></a> Starting development
 
-We strongly recommend that you do all of your development upon 'topic branches' This allows you to isolate multiple unrelated changes, and makes it easier to keep your tree in sync with the upstream [[OpenAFS]] one.
+We strongly recommend that you do all of your development upon 'topic branches'
+This allows you to isolate multiple unrelated changes, and makes it easier to
+keep your tree in sync with the upstream [[OpenAFS]] one.
 
 Before creating a new topic branch, running
 

@@ -1,29 +1,53 @@
-## <a name="Social Media Services On Cheaplikes.co.uk"></a> Social Media Services On Cheaplikes.co.uk
-Every company is different, so it makes sense that every company’s social media strategy will be different too.  Social Media Delivered offers tailored social media training, consulting and services for all types of companies across all industries, with a focus on developing custom social media strategy that works for your company and your social media services review : >>>>>>> [1nich.blogspot.com]( http://1nich.blogspot.com/) 
- [buy facebook likes]( http://1nich.blogspot.com/2014/04/complete-review-cheaplikes.html) - [buy youtube likes]( http://1nich.blogspot.com/2014/04/buy-youtube-likes-reviews-on-cheaplikes.html) - [buy instagram likes]( http://1nich.blogspot.com/2014/04/buy-instagram-likes-reviews-on.html) - [buy instagram likes]( http://1nich.blogspot.com/2014/04/buy-pinterest-likes-review-on.html)
+# IP Address-Based AFS Access Control for Fun and Profit
+
+You may have heard that the Andrew File System --
+[AFS](http://www.openafs.org/) -- allows IP address-based entries for directory
+ACLs. The idea is that processes running on a machine with a given IP address
+can access protected directories without needing further authentication. You
+may have even tried it. If you're like me, you were frustrated. Now I've
+discovered the secrets, and I'm going to share them with you. You don't even
+have to bribe me.
+
+Why would you want IP-based access? One scenario is that you have files whose
+access should be limited to certain machines. Maybe you have software that
+should only be run on certain machines because of legal or hardware
+limitations. Maybe authentication for certain processes is a drag to work out.
+Whatever your reason, this is pretty easy to do after you know the tricks, and
+seems to provide a moderate level of security.
 
 
- [http://cheaplikes.co.uk](http://cheaplikes.co.uk)
->>>>>>>
-Every company is different, so it makes sense that every company’s social media strategy will be different too.  Social Media services offers tailored social media training, consulting and services for all types of companies across all industries, with a focus on developing custom social media strategy that works for your company and your social media needs.
-- See more at [buy facebook likes]( http://cheaplikes.co.uk/buy-facebook-likes/) - [buy youtube likes]( http://cheaplikes.co.uk/buy-youtube-likes/) - [buy instagram likes]( http://cheaplikes.co.uk/buy-instagram-likes/) - [buy instagram likes]( http://cheaplikes.co.uk/buy-pinterest-likes/)
+Some introductory information and relevant links:
 
-All links in this web page should pop up in a single side window, so you won't have to flip back and forth between pages. I've tried to link every command to a relevant page, but other references may only be linked at their first instance.
+These examples were created under AFS 3.4a and [Sun](http://www.sun.com)'s
+[Solaris](http://www.sun.com/software/solaris/) 2.6. <br /> Documentation links
+were to Transarc's documentation, until IBM [changed the links and made the
+version
+3.6](http://www-3.ibm.com/software/stormgmt/afs/manuals/Library/unix/en_US/HTML/AdminRef/auarf002.htm).
+Now my documentation links point to the open source version's site,
+[OpenAFS](http://www.openafs.org). <br /> Transarc, the original commercial
+developer of AFS, is now [IBM](http://www.ibm.com)'s Pittsburgh Lab.<br /> AFS
+was first developed at [Carnegie Mellon University](http://www.cmu.edu/) as
+part of the [ Andrew Project](http://www.cs.cmu.edu/~AUIS/). <br /> For more
+information about AFS, try reading the
+[FAQ](http://www.faqs.org/faqs/by-newsgroup/alt/alt.filesystems.afs.html) for
+the USENET newsgroup [alt.filesystems.afs](news:alt.filesystems.afs). <br />
+
+All links in this web page should pop up in a single side window, so you won't
+have to flip back and forth between pages. I've tried to link every command to
+a relevant page, but other references may only be linked at their first
+instance.
+
 ----
 
-You may have heard that the Andrew File System -- [AFS](http://www.openafs.org/) -- allows IP address-based entries for directory ACLs. The idea is that processes running on a machine with a given IP address can access protected directories without needing further authentication. You may have even tried it. If you're like me, you were frustrated. Now I've discovered the secrets, and I'm going to share them with you. You don't even have to bribe me.
+Ok, you'll be dealing with just an IP number for the machine that needs access.
+No DNS names: AFS wants just an IP address and none of your carefully
+thought-out, clever naming scheme. Yeah, I know -- no fun. You'll have to get
+over it. Sorry.
 
-Why would you want IP-based access? One scenario is that you have files whose access should be limited to certain machines. Maybe you have software that should only be run on certain machines because of legal or hardware limitations. Maybe authentication for certain processes is a drag to work out. Whatever your reason, this is pretty easy to do after you know the tricks, and seems to provide a moderate level of security 
-
-These examples were created under AFS 3.4a and [Sun](http://www.sun.com)'s [Solaris](http://www.sun.com/software/solaris/) 2.6. <br /> Documentation links were to Transarc's documentation, until IBM [changed the links and made the version 3.6](http://www-3.ibm.com/software/stormgmt/afs/manuals/Library/unix/en_US/HTML/AdminRef/auarf002.htm). Now my documentation links point to the open source version's site, [OpenAFS](http://www.openafs.org). <br /> Transarc, the original commercial developer of AFS, is now [IBM](http://www.ibm.com)'s Pittsburgh Lab.<br /> AFS was first developed at [Carnegie Mellon University](http://www.cmu.edu/) as part of the [ Andrew Project](http://www.cs.cmu.edu/~AUIS/). <br /> For more information about AFS, try reading the [FAQ](http://www.faqs.org/faqs/by-newsgroup/alt/alt.filesystems.afs.html) for the USENET newsgroup [alt.filesystems.afs](news:alt.filesystems.afs).<br />
-
-All links in this web page should pop up in a single side window, so you won't have to flip back and forth between pages. I've tried to link every command to a relevant page, but other references may only be linked at their first instance.
-----
-
-Ok, you'll be dealing with just an IP number for the machine that needs access. No DNS names: AFS wants just an IP address and none of your carefully thought-out, clever naming scheme. Yeah, I know -- no fun. You'll have to get over it. Sorry.
-[Sewa Mobil Jakarta](http://www.awanirentcar.com/pricelist) - [Aksesoris mobil](http://kiosauto.com) - [Cotton bud](http://www.mitracatur.com/product/cotton-bud) - [Glutera](http://www.grosir-kosmetik.com/62-glutera.html) - [Been pink](http://www.grosir-kosmetik.com/63-been-pink-beauty-series.html) - [Toko bunga jakarta](http://www.tokobungasabana.com)
-
-The IP number must be in your AFS [PTS](http://www.openafs.org/pages/doc/AdminReference/auarf210.htm#HDRPTS_INTRO) database, just like a user. I'll use your-machine.your-domain.com (1.2.3.4) as an example.
+The IP number must be in your AFS
+[PTS](http://www.openafs.org/pages/doc/AdminReference/auarf210.htm#HDRPTS_INTRO)
+database, just like a user. I'll use your-machine.your-domain.com (1.2.3.4) as
+an example.
 
 [Using klog, get an admin token](http://www.openafs.org/pages/doc/AdminReference/auarf200.htm#HDRKLOG) for your AFS cell.
 
@@ -41,17 +65,34 @@ It's not there. So create it:
      User 1.2.3.4 has id 2147418256
 </pre>
 
-The AFS protection database server (PTS) assigns an AFS UID (the number after "User 1.2.3.4 has id ") to the machine. [ Accumulated wisdom recommends](http://www.openafs.org/pages/doc/AdminReference/auarf215.htm#HDRPTS_CREATEUSER) allowing that instead of trying to pick one, so don't use the -id flag unless you're sure know what you're doing and have consulted a [[SysAdmin]] quorum at your site.
+The AFS protection database server (PTS) assigns an AFS UID (the number after
+"User 1.2.3.4 has id ") to the machine. [ Accumulated wisdom
+recommends](http://www.openafs.org/pages/doc/AdminReference/auarf215.htm#HDRPTS_CREATEUSER)
+allowing that instead of trying to pick one, so don't use the -id flag unless
+you're sure know what you're doing and have consulted a [[SysAdmin]] quorum at
+your site.
 
-You can wildcard/subnet these IP-based PTS entries. So you can get PTS ids for IP ranges denoted by, e.g.:
+You can wildcard/subnet these IP-based PTS entries. So you can get PTS ids for
+IP ranges denoted by, e.g.:
 
          1.2.3.0
          1.2.0.0
          1.0.0.0
 
-This is supposed to do what you'd think it would: grant privileges to machines within the IP range denoted by the leading non-zero elements. Now you can easily give thousands of people and machines access when you didn't mean to. If you get the idea of wildcarding everything, as in 0.0.0.0, use system:anyuser instead. God knows why you'd want that, and if you're reading this you really ought to know about system:anyuser anyway, but that's how to do it. I don't know what happens if you need to give access to a machine that has a zero as the last tuple of the IP address. Maybe you should get another IP address for that machine. :)
+This is supposed to do what you'd think it would: grant privileges to machines
+within the IP range denoted by the leading non-zero elements. Now you can
+easily give thousands of people and machines access when you didn't mean to. If
+you get the idea of wildcarding everything, as in 0.0.0.0, use system:anyuser
+instead. God knows why you'd want that, and if you're reading this you really
+ought to know about system:anyuser anyway, but that's how to do it. I don't
+know what happens if you need to give access to a machine that has a zero as
+the last tuple of the IP address. Maybe you should get another IP address for
+that machine. :)
 
-OK, now your-machine has an AFS PTS id. But don't put the IP number directly on the ACL. Instead, create an appropriate PTS group and add the machine to it. Don't mix IP and principal entries in the same group; create another group (more on this later).
+OK, now your-machine has an AFS PTS id. But don't put the IP number directly on
+the ACL. Instead, create an appropriate PTS group and add the machine to it.
+Don't mix IP and principal entries in the same group; create another group
+(more on this later).
 
 I'll create a PTS group:
 
@@ -70,13 +111,37 @@ What does the group your-stuff look like?
         membership: 0, flags: S-M--, group quota: 0.
 </pre>
 
-I'll ignore everything right now except the flags, which are an access control list for the PTS entry. What's above is my local default for groups. The "S" means anyone can run [pts examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE) on the group. The "M" means anyone can run [pts membership](http://www.openafs.org/pages/doc/AdminReference/auarf222.htm#HDRPTS_MEMBERSHIP) on the group. The flags are
+I'll ignore everything right now except the flags, which are an access control
+list for the PTS entry. What's above is my local default for groups. The "S"
+means anyone can run [pts
+examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE)
+on the group. The "M" means anyone can run [pts
+membership](http://www.openafs.org/pages/doc/AdminReference/auarf222.htm#HDRPTS_MEMBERSHIP)
+on the group. The flags are
 
          SOMAR
 
-and affect the operation of the [pts](http://www.openafs.org/pages/doc/AdminReference/auarf210.htm#HDRPTS_INTRO) commands [examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE), [listowned](http://www.openafs.org/pages/doc/AdminReference/auarf221.htm#HDRPTS_LISTOWNED), [membership](http://www.openafs.org/pages/doc/AdminReference/auarf222.htm#HDRPTS_MEMBERSHIP), [adduser](http://www.openafs.org/pages/doc/AdminReference/auarf211.htm#HDRPTS_ADDUSER), and [removeuser](http://www.openafs.org/pages/doc/AdminReference/auarf223.htm#HDRPTS_REMOVEUSER), respectively. The flags can generally have values of uppercase, lowercase, or hyphen. I won't go into the flags much here, but read the man page, and think carefully about what you want to be seen by whom. For instance, if the group is going to be for machines where users will be allowed to run certain software, you might want to make it easy for folks to discover what those machines are. If you're trying to keep users out, you might want to hide the membership from prying eyes. Pay as much attention to this as you would to any other ACL or permission.
+and affect the operation of the
+[pts](http://www.openafs.org/pages/doc/AdminReference/auarf210.htm#HDRPTS_INTRO)
+commands
+[examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE),
+[listowned](http://www.openafs.org/pages/doc/AdminReference/auarf221.htm#HDRPTS_LISTOWNED),
+[membership](http://www.openafs.org/pages/doc/AdminReference/auarf222.htm#HDRPTS_MEMBERSHIP),
+[adduser](http://www.openafs.org/pages/doc/AdminReference/auarf211.htm#HDRPTS_ADDUSER),
+and
+[removeuser](http://www.openafs.org/pages/doc/AdminReference/auarf223.htm#HDRPTS_REMOVEUSER),
+respectively. The flags can generally have values of uppercase, lowercase, or
+hyphen. I won't go into the flags much here, but read the man page, and think
+carefully about what you want to be seen by whom. For instance, if the group is
+going to be for machines where users will be allowed to run certain software,
+you might want to make it easy for folks to discover what those machines are.
+If you're trying to keep users out, you might want to hide the membership from
+prying eyes. Pay as much attention to this as you would to any other ACL or
+permission.
 
-By the way, [ pts examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE) works for any entity in the PTS database: groups, principals, and machines. E.g.:
+By the way, [pts examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE)
+works for any entity in the PTS database: groups, principals, and machines.
+E.g.:
 
          bash-2.02$ pts examine 1.2.3.4
          Name: 1.2.3.4, id: 2147418256, owner: system:administrators, creator: admin,
@@ -84,9 +149,16 @@ By the way, [ pts examine](http://www.openafs.org/pages/doc/AdminReference/auarf
 
 The above flags are my current local default for machine entries.
 
-Since [ pts examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE) works for three different types of entries -- machines, principals, and groups -- the man pages get confusing. The flags mean different things depending on what you're examining.
+Since [ pts
+examine](http://www.openafs.org/pages/doc/AdminReference/auarf217.htm#HDRPTS_EXAMINE)
+works for three different types of entries -- machines, principals, and groups
+-- the man pages get confusing. The flags mean different things depending on
+what you're examining.
 
-<center><strong> * When using pts examine, keep clearly in mind what type entry you're examining, and pay attention just to the parts of the manual page that speak to your type entry. If you do this and keep your mind clear of distraction, all will be well. :) * </strong></center>
+<center><strong> * When using pts examine, keep clearly in mind what type entry
+you're examining, and pay attention just to the parts of the manual page that
+speak to your type entry. If you do this and keep your mind clear of
+distraction, all will be well. :) * </strong></center>
 
 I assume you'll want to add 1.2.3.4 to your-stuff:
 
@@ -102,9 +174,16 @@ You'll get back just a prompt. So group your-stuff should now contain
         1.2.3.4
 </pre>
 
-By the way, it's really easy to confuse [pts adduser](http://www.openafs.org/pages/doc/AdminReference/auarf211.htm#HDRPTS_ADDUSER) and [pts createuser](http://www.openafs.org/pages/doc/AdminReference/auarf215.htm#HDRPTS_CREATEUSER). Just like the rest of the AFS command suite, there are too many commands that sound too much alike or don't do exactly what you'd think from the name. Read the man page. Query a local [[SysAdmin]] quorum. <strike>Join [Alcoholics Anonymous](http://www.aa.org/)</strike>. :)
+By the way, it's really easy to confuse [pts
+adduser](http://www.openafs.org/pages/doc/AdminReference/auarf211.htm#HDRPTS_ADDUSER)
+and [pts
+createuser](http://www.openafs.org/pages/doc/AdminReference/auarf215.htm#HDRPTS_CREATEUSER).
+Just like the rest of the AFS command suite, there are too many commands that
+sound too much alike or don't do exactly what you'd think from the name. Read
+the man page. Query a local [[SysAdmin]] quorum.
 
-You did have an AFS directory you wanted to protect, right? Let's say that directory's permissions currently look like
+You did have an AFS directory you wanted to protect, right? Let's say that
+directory's permissions currently look like
 
 <pre>
       bash-2.02$ <a href="http://www.openafs.org/pages/doc/AdminReference/auarf148.htm#HDRFS_LISTACL" target="SIDEWINDOW">fs listacl</a> /afs/your-domain/your-dir
@@ -120,7 +199,9 @@ Set directory permissions with [fs setacl](http://www.openafs.org/pages/doc/Admi
       bash-2.02$ <a href="http://www.openafs.org/pages/doc/AdminReference/auarf157.htm#HDRFS_SETACL" target="SIDEWINDOW">fs setacl</a> /afs/your-domain/your-dir your-stuff write
 </pre>
 
-"write" is short for all perms except administer. Now [fs listacl](http://www.openafs.org/pages/doc/AdminReference/auarf148.htm#HDRFS_LISTACL) should return something like
+"write" is short for all perms except administer. Now [fs
+listacl](http://www.openafs.org/pages/doc/AdminReference/auarf148.htm#HDRFS_LISTACL)
+should return something like
 
 <pre>
       bash-2.02$ <a href="http://www.openafs.org/pages/doc/AdminReference/auarf148.htm#HDRFS_LISTACL" target="SIDEWINDOW">fs listacl</a> /afs/your-domain/your-dir
@@ -141,8 +222,10 @@ Then you get on your-machine.your-domain.com and try. You still can't look at th
 
 This has always been where I scratched my head and said "I don't get it." But I figured it out. I will now attempt to dispel confusion.
 
-<center><strong>An AFS file server treats ACL IP entries differently from principal entries: <p>Changes to ACLs for principals are reflected almost right away.</p>
-    <p>Changes to ACLs for IP entries are <strong>NOT</strong>. </p></strong></center>
+<center><strong>An AFS file server treats ACL IP entries differently from
+principal entries: <p>Changes to ACLs for principals are reflected almost right
+away.</p> <p>Changes to ACLs for IP entries are <strong>NOT</strong>.
+</p></strong></center>
 
 There's a flag to the [fileserver](http://www.openafs.org/pages/doc/AdminReference/auarf129.htm#HDRFILESERVER) instance called -hr:
 
@@ -150,11 +233,16 @@ There's a flag to the [fileserver](http://www.openafs.org/pages/doc/AdminReferen
 >
 > > `Specifies how often the File Server refreshes its knowledge of the machines that belong to protection groups (its "host CPS"). The File Server must update this information to enable users from machines recently added to protection groups to access data for which those Machines now have the necessary ACL permissions. `
 
-Farther down in both the IBM and [[OpenAFS]] documentation mentioned above for the fileserver instance, the default setting for this "-hr" parameter is given as two hours:
+Farther down in both the IBM and [[OpenAFS]] documentation mentioned above for
+the fileserver instance, the default setting for this "-hr" parameter is given
+as two hours:
 
 > > ` The File Server maintains a host current protection subgroup (host CPS) for each client machine from which it has received a data access request. Like the CPS for a user, a host CPS lists all of the Protection Database groups to which the machine belongs, and the File Server compares the host CPS to a directory's ACL to determine in what manner users on the machine are authorized to access the directory's contents. When the pts adduser or pts removeuser command is used to change the groups to which a machine belongs, the File Server must recompute the machine's host CPS in order to notice the change. By default, the File Server contacts the Protection Server every two hours to recompute host CPSs, implying that it can take that long for changed group memberships to become effective. To change this frequency, use the -hr argument. `
 
-Maybe there's some overhead involved in these checks, so they're not done very often. Who knows? Maybe you'll want to diddle this flag for your site's fileserver instances, but probably not, or you'll never get to it, or you don't want to declare a downtime.
+Maybe there's some overhead involved in these checks, so they're not done very
+often. Who knows? Maybe you'll want to diddle this flag for your site's
+fileserver instances, but probably not, or you'll never get to it, or you don't
+want to declare a downtime.
 
 When I ran into this problem, one suggestion was
 
@@ -209,8 +297,10 @@ A few caveats:
 - There's a newly exposed problem on some platforms with occasional loss of IP-based access. The problem is discussed on the [[OpenAFS]]-Devel mailing list in [this thread](https://lists.openafs.org/pipermail/openafs-devel/2006-June/013946.html). Please take a look if you're having problems. Derrick Brashear is currently (30 June 2006) testing a patch, which you can find at
          /afs/andrew.cmu.edu/usr/shadow/ubik-all.diff-2
 
-Was this page useful, or even interesting? Please link to it: it's difficult to find.
+Was this page useful, or even interesting? Please link to it: it's difficult to
+find.
 
-Send comments, questions, bad links, &amp;c. to [me](mailto:jhvilas@gmail.com) if you like, or fix them -- this is a Wiki, after all. And to the many people who've sent comments: Thank you! Your feedback has helped!
+Send comments, questions, bad links, &amp;c. to [me](mailto:jhvilas@gmail.com)
+if you like, or fix them -- this is a Wiki, after all. And to the many people
+who've sent comments: Thank you! Your feedback has helped!
 
--- Joseph H Vilas - 03 Aug 2006
