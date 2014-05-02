@@ -1,4 +1,3 @@
--- Steven Jenkins - 08 Jun 2007
 
 This is an entry point into the code architecture. As always, the source for your release is the authoritative reference, but this wiki is designed to help navigate the source and point out relevant documentation.
 
@@ -59,7 +58,7 @@ In addition to the package name, also note that only rxstat uses an M prefix; al
 
   $ **grep -r regex .**
 
-and find every time <pattern> appears in a file
+and find every time *pattern* appears in a file
 
 - If you're looking for one specific word, the <tt>-w</tt> switch is your friend as well.
 
