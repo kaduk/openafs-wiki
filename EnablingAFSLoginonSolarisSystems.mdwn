@@ -1,3 +1,5 @@
+[[!toc levels=3]]
+
 At this point you incorporate AFS into the operating system's Pluggable Authentication Module (PAM) scheme. PAM integrates all authentication mechanisms on the machine, including login, to provide the security infrastructure for authenticated access to and from the machine.
 
 Explaining PAM is beyond the scope of this document. It is assumed that you understand the syntax and meanings of settings in the PAM configuration file (for example, how the other entry works, the effect of marking an entry as required, optional, or sufficient, and so on).
@@ -42,15 +44,15 @@ If you use a Kerberos implementation of AFS authentication:
 
 If the pam library is owned by the wrong group, it will fail to be called when you login.
 
-## <a name="Solaris 9"></a> Solaris 9
+## Solaris 9
 
        # chown root:bin pam_afs.krb.so.1
 
-## <a name="Solaris 8"></a> Solaris 8
+## Solaris 8
 
        # chown root:sys pam_afs.krb.so.1
 
-# <a name="Edit pam.conf"></a> Edit pam.conf
+# Edit pam.conf
 
 Edit the Authentication management section of the Solaris PAM configuration file, /etc/pam.conf by convention. The entries in this section have the value auth in their second field.
 
@@ -60,7 +62,7 @@ If there are services for which you want to use AFS authentication, but for whic
 
 Then create an AFS-related entry for each service, placing it immediately below the standard entry. The following example shows what the Authentication Management section looks like after you have you edited or created entries for the services mentioned previously. Note that the example AFS entries appear on two lines only for legibility.
 
-## <a name="pam.conf configuration for Solar"></a> pam.conf configuration for Solaris 9
+## pam.conf configuration for Solaris 9
 
 Note: leave the full path to the library intact for afs. This will allow it to work for both 32 bit and 64 bit Solaris.
 
@@ -90,7 +92,7 @@ Solaris 9 will not allow the line continuation char "\\" in pam.conf
     #   telnet  auth  optional  /usr/lib/security/pam_unix.so.1
     #   telnet  auth  optional  /usr/lib/security/pam_afs.so  try_first_pass  ignore_root  setenv_password_expires
 
-## <a name="pam.conf configuration for Solar"></a> pam.conf configuration for Solaris 6
+##  pam.conf configuration for Solaris 6
 
        login   auth  optional  /usr/lib/security/pam_unix.so.1
        login   auth  optional  /usr/lib/security/pam_afs.so       \

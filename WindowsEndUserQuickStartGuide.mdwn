@@ -1,16 +1,19 @@
-# <a name="End User Quick Start Guide"></a> End User Quick Start Guide
 
-## <a name="Introduction"></a> Introduction
+[[!toc levels=3]]
+
+#  End User Quick Start Guide
+
+##  Introduction
 
 This guide is a (hopefully) straightforward manual for setting up [[OpenAFS]] for Windows <del>1.3.70</del> <b>1.7.4</b>. It was written with the not-so-experienced user in mind and is a step-by-step description of a sample configuration. Changing the settings to your specific needs should pose no problems.
 
 <i><b>(The changes for 1.7.4 are incomplete; none of the pictures are up to date.  When complete, the markup should be removed --jtb) </b></i>
 
-### <a name="Before the Installation"></a> Before the Installation
+###  Before the Installation
 
 Before we start, let us take a moment and just skim through the installation. For the impatient, this section may not be what you are looking for. This is an introduction to the concepts of AFS'ing in Windows -- "basic" knowledge you should have before attempting to connect to the world.
 
-#### <a name="System Requirements"></a> System Requirements
+####  System Requirements
 
 First of all, check that your system and network is capable of using [[OpenAFS]] for Windows. You will need <del>Windows 2000 or later. Support for Windows NT and the Windows 9x (including ME) series has been discontinued. If you succeed with the installation, it is sheer luck!</del> <b>Windows XP SP3, Windows Server 2003 SP2, Windows Vista SP1, Windows Server 2008, Windows 7, Windows Server 2008 R2</b>.
 
@@ -18,7 +21,7 @@ The disc usage of [[OpenAFS]] is pretty limited: around <del>50</del><b>100</b> 
 
 To be able to access files, you will need the network up and running. AFS is not very demanding on bandwidth, but realize that every byte of a file is transmitted over the wire (or air) uncompressed. The use of the client cache helps reduce bandwidth requirements.
 
-#### <a name="Kerberos: An Analogy"></a> Kerberos: An Analogy
+####  Kerberos: An Analogy
 
 AFS uses an access-restriction system called Kerberos, originally developed at MIT. Kerberos is a three-part authenticator. You could say the Kerberos server (a.k.a. KDC, Kerberos Domain Controller) is somewhat like an ID-card archive. When Adam wants to loan a car from Eve, Eve may trust Adam. Adam is trusted to leave the car back as agreed. In this case, Adam needs simply state "I am Adam". Eve lends him the car, and everything is fine.
 
@@ -36,7 +39,7 @@ However, if Eve has never met this Adam fellow, she might not want to just give 
 
 Both Adam and Eve go about sending in their secret password (known only to the respective person and the computer at ID Authority). They flash their fresh ID cards, and accept each others identity. Instead of the two trusting each other, they only have to trust one common party.
 
-#### <a name="Kerberos in practice"></a> Kerberos in practice
+####  Kerberos in practice
 
 In AFS, you (the Windows Client, actually) are Adam, and the AFS server is Eve. They both communicate with a KDC.
 
@@ -46,19 +49,19 @@ Nowadays, [[OpenAFS]] for Windows does support [[KerberosV]] tickets ("ID cards"
 
 In order to use [[KerberosV]] (recommended), you will have to use Kerberos for Windows <del>an MIT product</del>. Of course, this requires that you use [[KerberosV]] servers, which still is not always the case. Small sites may still use [[OpenAFS]]'s own Kerberos IV server implementation, called the **_kaserver_** <b>but since this option is no longer supported, this introduction will no longer discuss it</b>.
 
-### <a name="A Word of Advice"></a> A Word of Advice
+###  A Word of Advice
 
 While installing and configuring AFS, you should keep in mind that the authentication part is the part which most often causes problems. This is partly due to the fact that different generations of Kerberos are kept in the software for backward compatiblity. It may also be that some information is not available to the [[OpenAFS]] developers. Please be patient about getting Kerberos to work.
 
 If the AFS servers you are about to connect to are already set up and in use, you may be able to browse public areas without being authenticated. This way, you can check if AFS or Kerberos is causing your headache.
 
-### <a name="The Software Installation"></a> The Software Installation
+###  The Software Installation
 
 Now that you know about the existence and uses of Kerberos, we can continue with the installation. This guide will first discuss the installation screens, then continuing with a simple sample configuration and end with some references. Happy installing!
 
-## <a name="Step by Step"></a> Step by Step
+##  Step by Step
 
-### <a name="Optionally: Download Kerberos fo"></a> <del>Optionally:</del> Download and Install Kerberos for Windows
+###  <del>Optionally:</del> Download and Install Kerberos for Windows
 
 <del>If you know, or believe, that the AFS cell you will be connecting to uses [[KerberosV]], you should download [MIT Kerberos for Windows](http://web.mit.edu/kerberos/www/). The latest release is available on [this page](http://web.mit.edu/kerberos/www/dist/). The download of interest is the **Installer** for Windows.</del>  
 
@@ -79,13 +82,13 @@ need to make this configuration file change.
 
 Note that installing <del>MIT</del> Kerberos for Windows will not prevent you from using the old Kerberos 4 protocol. It will, however, set up your computer for [[KerberosV]] as a first choice.
 
-### <a name="Install Network Identity Manager (v2)"></a>Download and Install Network Identity Manager (v2)
+### Download and Install Network Identity Manager (v2)
 
 Download and install Network Identity Manager (v2) also from <a href="https://www.secure-endpoints.com/netidmgr/v2/index.html">Secure Endpoints</a>.
 The "Typical Install" is all one needs here. <i>(NB: shoudl give picture here></i></b>
 
 
-### <a name="Obtaining _OpenAFS for Windows"></a> Obtaining [[OpenAFS]] for Windows
+###  Obtaining [[OpenAFS]] for Windows
 
 The main site for [[OpenAFS]] is [openafs.org](http://openafs.org). From here you can download the latest releases of all versions of the [[OpenAFS]] package. On [this page](http://openafs.org/windows.html) you will always find the latest releases.
 
@@ -104,7 +107,7 @@ For 32 bit machines, there is one MSI installer that you need.  It contains
 <b><i>In the remainder of this document we assume you have a 64-bit system.
 (Stopped here with 1.7.4 changes.)</i></b>
 
-### <a name="Start the Installation"></a> Start the Installation
+###  Start the Installation
 
 To begin installing, run the file you downloaded. The screens are pretty standard. Let us go through them one by one.
 
@@ -116,7 +119,7 @@ In the Typical Installation, only enough to get your Windows Client working is i
 
 This choice is skipped in the [[NullSoft]] installer.
 
-#### <a name="Custom Installation"></a> Custom Installation
+####  Custom Installation
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/4 custom.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/2 components.png" width="503" height="386" /> Choosing Custom Installation gives you more control over what is installed onto your computer. This is shown to the right. There are three different icons used when presenting the components: a grey, a white and a red cross. Installation using the Nullsoft Installer is similar, except a standard checkbox list is being used.
 
@@ -164,13 +167,13 @@ Default is enabled for all options except the last. The install program only app
 
 This is all it takes for Custom Installation. From now on, the differences between the three installation types are not visible.
 
-### <a name="Finishing the Installation"></a> Finishing the Installation
+###  Finishing the Installation
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/8 ready.png" width="499" height="385" /> <img src="http://www.e.kth.se/~tommie/openafs/screens/install/nis/7 installing.png" width="503" height="386" /> Now that you have setup your [[OpenAFS]] package, [[OpenAFS]] can be copied into the right directories. This will be reasonably fast, so don't go for a coffee yet!
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/install/msi/11 restart.png" width="366" height="165" /> The last thing you have to do is reboot your computer. Theoretically, you could start [[OpenAFS]] without rebooting. This is not recommended, though. With all of today's anti virus programs and synchronization drivers, you can have that well-deserved coffee break now. Soon, the final adventure will begin.
 
-## <a name="Configure the Rest"></a> Configure the Rest
+##  Configure the Rest
 
 When you logged in, you may have encountered an error message from "AFS Integrated Logon". This is because you enabled Integrated Logon, but did not have the same username and password for both Windows and the AFS servers. In a later section, we will see how we can make [[OpenAFS]] ignore these situations without bothering you about it.
 
@@ -184,11 +187,11 @@ Please note that this is only a starting point. If you are looking for a complet
 
 According to the Client Status, the service is started, as it should. If you used the Typical Installation mode, you will now have to change the cell name into something more appropriate. (No one can authenticate to openafs.org, really.) Change it to whatever your network administrator told you. It is usually simply the domain name of the organization.
 
-### <a name="Silencing the Intergrated Login"></a> Silencing the Intergrated Login
+###  Silencing the Intergrated Login
 
 <img src="http://www.e.kth.se/~tommie/openafs/screens/afsconfig/adv_login.png" width="285" height="175" /> Information is good, but not in excess. To remove the message, go to the "Advanced" tab. Click the "Logon..." button, and set "Fail Logins Silently" to "Yes". This is shown to the right.
 
-### <a name="Check If You Have Kerberos 5"></a> Check If You Have Kerberos 5
+###  Check If You Have Kerberos 5
 
 If everything is well, you should now be able to obtain AFS tokens for your default cell. Try this by opening the Credentials Manager from the Start Menu. Depending on your installation settings, you may be presented with a password prompt, an information window, or nothing.
 
@@ -204,17 +207,17 @@ If you get an error at this time, you (probably) need to have [[KerberosV]] inst
 
 Optional: Kerberos for Windows To be able to use [[KerberosV]] authentication servers, install MIT Kerberos for Windows. A description of how to install this is outside the scope of this guide.
 
-## <a name="Trying It Out"></a> Trying It Out
+##  Trying It Out
 
 Start the Credentials Manager and try to obtain new tokens. This should work. You should be able to browse the lands of **_\\\\AFS\\all_** like you were on a Unix computer. Do you have write permissions in the right directories?
 
-## <a name="Mapping Network Drives"></a> Mapping Network Drives
+##  Mapping Network Drives
 
 Many Windows users are more comfortable using drive letters instead of UNC path notation such as \\\\AFS\\openafs.org\\software\\openafs\\1.5.73\\. Windows permits any UNC path to be mapped to a drive. On Windows 7 this can be done from the Start Menu. Right Click on "Computer" and select "Map Network Drive". Select a drive letter to map, enter the \\\\AFS UNC path to map, and select "Reconnect at logon". To map the AFS root volume, use the UNC path \\\\AFS\\all.
 
 Drive mapping can also be performed using the "NET USE" command line tool.
 
-## <a name="From here to eternity"></a> From here to eternity
+##  From here to eternity
 
 The next time you install [[OpenAFS]] for Windows, you are sufficiently competent to go directly onto the [[WindowsAdministratorsInstallationGuide]]. It is more hard-core, and with less fancy screen shots. The [[WindowsConfigurationReferenceGuide]] contains a complete description of the configuration options of [[OpenAFS]] for Windows.
 

@@ -1,37 +1,10 @@
-## <a name="Demand-Attach File-Server (DAFS)"></a> Demand-Attach File-Server (DAFS)
+[[!toc levels=3]]
+
+#  Demand-Attach File-Server (DAFS)
+
 OpenAFS 1.5 contains Demand-Attach File-Server (DAFS). DAFS is a significant departure from the more _traditional_ AFS file-server and this document details those changes.
 
-<div>
-  <ul>
-    <li><a href="#Demand-Attach File-Server (DAFS)"> Demand-Attach File-Server (DAFS)</a></li>
-    <li><a href="#Why Demand-Attach File-Server (D"> Why Demand-Attach File-Server (DAFS) ?</a></li>
-    <li><a href="#An Overview of Demand-Attach Fil"> An Overview of Demand-Attach File-Server</a></li>
-    <li><a href="#The Gory Details of the Demand-A"> The Gory Details of the Demand-Attach File-Server</a><ul>
-        <li><a href="#Bos Configuration"> Bos Configuration</a></li>
-        <li><a href="#File-server Start-up / Shutdown"> File-server Start-up / Shutdown Sequence</a></li>
-        <li><a href="#Volume Finite-State Automata"> Volume Finite-State Automata</a></li>
-        <li><a href="#Volume Least Recently Used (VLRU"> Volume Least Recently Used (VLRU) Queues</a></li>
-        <li><a href="#Vnode Finite-State Automata"> Vnode Finite-State Automata</a></li>
-        <li><a href="#Demand Salvaging"> Demand Salvaging</a></li>
-        <li><a href="#File-Server Host / Callback Stat"> File-Server Host / Callback State</a></li>
-      </ul>
-    </li>
-    <li><a href="#File-Server Arguments (relating"> File-Server Arguments (relating to Demand-Attach)</a></li>
-    <li><a href="#Tools for Debugging Demand-Attac"> Tools for Debugging Demand-Attach File-Server</a><ul>
-        <li><a href="#==fssync-debug=="> fssync-debug</a></li>
-        <li><a href="#==salvsync-debug=="> salvsync-debug</a></li>
-        <li><a href="#==state_analyzer=="> state_analyzer</a><ul>
-            <li><a href="#Header Information"> Header Information</a></li>
-            <li><a href="#Host Information"> Host Information</a></li>
-            <li><a href="#Callback Information"> Callback Information</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
-## <a name="Why Demand-Attach File-Server (D"></a> Why Demand-Attach File-Server (DAFS) ?
+##  Why Demand-Attach File-Server (DAFS) ?
 
 On a traditional file-server, volumes are attached at start-up and detached only at shutdown. Any attached volume can be modified and changes are periodically flushed to disk or on shutdown. When a file-server isn't shutdown cleanly, the integrity of every attached volume has to be verified by the salvager, whether the volume had been modified or not. As file-servers grow larger (and the number of volumes increase), the length of time required to salvage and attach volumes increases, e.g. it takes around two hours for a file-server housing 512GB data to salvage and attach volumes !
 
@@ -41,7 +14,7 @@ The primary objective of the demand-attach file-server was to dramatically reduc
 
 Large portions of this document were taken / influenced by the presentation entitled [Demand Attach / Fast-Restart Fileserver](http://workshop.openafs.org/afsbpw06/talks/tkeiser-dafs.pdf) given by Tom Keiser at the [AFS and Kerberos Best Practices Workshop](http://workshop.openafs.org/) in [2006](http://workshop.openafs.org/afsbpw06/).
 
-## <a name="An Overview of Demand-Attach Fil"></a> An Overview of Demand-Attach File-Server
+##  An Overview of Demand-Attach File-Server
 
 Demand-attach necessitated a significant re-design of certain aspects of the AFS code, including:
 
@@ -66,9 +39,9 @@ The changes implemented for demand-attach include:
 - callbacks are no longer broken on shutdown
 - instead, host / callback state is preserved across restarts
 
-## <a name="The Gory Details of the Demand-A"></a> The Gory Details of the Demand-Attach File-Server
+##  The Gory Details of the Demand-Attach File-Server
 
-### <a name="Bos Configuration"></a> Bos Configuration 
+###  Bos Configuration 
 A traditional file-server uses the `bnode` type `fs` and has a definition similar to
 
     bnode fs fs 1
@@ -90,7 +63,7 @@ The instance for a demand-attach file-server is therefore `dafs`
 instead of `fs`.  For a complete list of configuration options see the
 [dafileserver man page](http://docs.openafs.org/Reference/8/dafileserver.html).
 
-### <a name="File-server Start-up / Shutdown"></a><a name="File-server Start-up / Shutdown "></a> File-server Start-up / Shutdown Sequence
+### <a name="File-server Start-up / Shutdown "></a> File-server Start-up / Shutdown Sequence
 
 The table below compares the start-up sequence for a traditional file-server and a demand-attach file-server.
 
@@ -150,13 +123,13 @@ The shutdown sequence for both file-server types is:
 
 On a traditional file-server, volumes are off-lined (detached) serially. In demand-attach, as many threads as possible are used to detach volumes, which is possible due to the notion of a volume has an associated state.
 
-### <a name="Volume Finite-State Automata"></a> Volume Finite-State Automata
+###  Volume Finite-State Automata
 
 The volume finite-state automata is available in the source tree under `doc/arch/dafs-fsa.dot`. See [[=fssync-debug=|DemandAttach#fssync_debug]] for information on debugging the volume package.
 
-<a name="VolumeLeastRecentlyUsed"></a>
 
-### <a name="Volume Least Recently Used (VLRU"></a> Volume Least Recently Used (VLRU) Queues
+
+###  Volume Least Recently Used (VLRU) Queues
 
 The Volume Least Recently Used (VLRU) is a garbage collection facility which automatically off-lines volumes in the background. The purpose of this facility is to pro-actively off-line infrequently used volumes to improve shutdown and salvage times. The process of off-lining a volume from the "attached" state to the "pre-attached" state is called soft detachment.
 
@@ -191,7 +164,7 @@ VLRU works in a manner similar to a generational garbage collector. There are fi
 
 The state of the various VLRU queues is dumped with the file-server state and at shutdown.
 
-<a name="VLRUStateTransitions"></a> The VLRU queues new, mid (intermediate) and old are generational queues for active volumes. State transitions are controlled by inactivity timers and are
+ The VLRU queues new, mid (intermediate) and old are generational queues for active volumes. State transitions are controlled by inactivity timers and are
 
 <table border="1" cellpadding="0" cellspacing="0">
   <tr>
@@ -240,15 +213,15 @@ The state of the various VLRU queues is dumped with the file-server state and at
 
 `vlruthresh` has been optimized for RO file-servers, where volumes are frequently accessed once a day and soft-detaching has little effect (RO volumes are not salvaged; one of the main reasons for soft detaching).
 
-### <a name="Vnode Finite-State Automata"></a> Vnode Finite-State Automata
+###  Vnode Finite-State Automata
 
 The vnode finite-state automata is available in the source tree under `doc/arch/dafs-vnode-fsa.dot`
 
 `/usr/afs/bin/fssync-debug` provides low-level inspection and control of the file-server volume package. **Indiscriminate use of <code>fsync-debug</code>** can lead to extremely bad things occurring. Use with care. 
 
-<a name="SalvageServer"></a>
 
-### <a name="Demand Salvaging"></a> Demand Salvaging
+
+###  Demand Salvaging
 
 Demand salvaging is implemented by the `salvageserver`. The actual code for salvaging a volume remains largely unchanged. However, the method for invoking salvaging with demand-attach has changed:
 
@@ -263,15 +236,15 @@ Demand salvaging is implemented by the `salvageserver`. The actual code for salv
 - `/usr/afs/bin/salvsync-debug` provides low-level inspection and control over the `salvageserver`. **Indiscriminate use of `salvsync-debug` can lead to extremely bad things occurring. Use with care.**
 - See [[=salvsync-debug=|DemandAttach#salvsync_debug]] for information on debugging problems with the salvageserver.
 
-<a name="FSStateDat"></a>
 
-### <a name="File-Server Host / Callback Stat"></a> File-Server Host / Callback State
+
+###  File-Server Host / Callback State
 
 Host / callback information is persistent across restarts with demand-attach. On shutdown, the file-server writes the data to `/usr/afs/local/fsstate.dat`. The contents of this file are read and verified at start-up and hence it is unnecessary to break callbacks on shutdown with demand-attach.
 
 The contents of `fsstate.dat` can be inspected using `/usr/afs/bin/state_analyzer`.
 
-## <a name="File-Server Arguments (relating"></a><a name="File-Server Arguments (relating "></a> File-Server Arguments (relating to Demand-Attach)
+## <a name="File-Server Arguments (relating "></a> File-Server Arguments (relating to Demand-Attach)
 
 These are available in the man-pages (section 8) for the fileserver; some details are provided here for convenience:
 
@@ -301,7 +274,7 @@ Arguments controlling the host / callback state:
   </tr>
   <tr>
     <td><code>fs-state-verify</code></td>
-    <td><none %vbar%="%VBAR%" %vbar^%="%VBAR^%" both="both" restore="restore" save="save"> </none></td>
+    <td> n/a </td>
     <td> both </td>
     <td> - </td>
     <td> Controls the behavior of the state verification mechanism. Before saving or restoring the <code>fileserver</code> state information, the internal host and callback data structures are verified. A value of 'none' turns off all verification. A value of 'save' only performs the verification steps prior to saving state to disk. A value of 'restore' only performs the verification steps after restoring state from disk. A value of 'both' performs all verification steps both prior to saving and after restoring state. </td>
@@ -362,11 +335,11 @@ Arguments controlling the VLRU
   </tr>
 </table>
 
-## <a name="Tools for Debugging Demand-Attac"></a> Tools for Debugging Demand-Attach File-Server
+##  Tools for Debugging Demand-Attach File-Server
 
 Several tools aid debugging problems with demand-attach file-servers. They operate at an extremely low-level and hence require a detailed knowledge of the architecture / code.
 
-### <a name="==fssync-debug=="></a> <code>**fssync-debug**</code>
+###  <code>**fssync-debug**</code>
 
 **Indiscriminate use of `fssync-debug` can have extremely dire consequences. Use with care.** 
 
@@ -485,7 +458,7 @@ Note that the `volumeid` argument must be the numeric ID and the `partition` arg
 
 An understanding of the [volume finite-state machine](http://www.dementia.org/twiki//view/dafs-fsa.png) is required before the state of a volume should be manipulated.
 
-### <a name="==salvsync-debug=="></a> <code>**salvsync-debug**</code>
+###  <code>**salvsync-debug**</code>
 
 **Indiscriminate use of `salvsync-debug` can have extremely dire consequences. Use with care**
 
@@ -537,11 +510,11 @@ Under normal circumstances, the priority ( `prio`) of a salvage request is the n
 
 (where `priority` is a 32-bit integer).
 
-### <a name="==state_analyzer=="></a> <code>**state\_analyzer**</code>
+###  <code>**state\_analyzer**</code>
 
 `state_analyzer` allows the contents of the host / callback state file ( `/usr/afs/local/fsstate.dat`) to be inspected.
 
-#### <a name="Header Information"></a> Header Information
+####  Header Information
 
 Header information is gleaned through the `hdr` command
 
@@ -570,7 +543,7 @@ Header information is gleaned through the `hdr` command
           }
     fs state analyzer>
 
-#### <a name="Host Information"></a> Host Information
+####  Host Information
 
 Host information can be gleaned through the `h` command, e.g.
 
@@ -655,7 +628,7 @@ Host information can be gleaned through the `h` command, e.g.
           }
     fs state analyzer: h(1)>
 
-#### <a name="Callback Information"></a> Callback Information
+####  Callback Information
 
 Callback information is available through the `cb` command, e.g.
 

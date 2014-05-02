@@ -1,153 +1,118 @@
-<div>
-  <ul>
-    <li><a href="#UNIX"> UNIX</a><ul>
-        <li><a href="#AFS Backend"> AFS Backend</a></li>
-        <li><a href="#BackupAFS">BackupAFS</a></li>
-        <li><a href="#Balancing"> Balancing</a></li>
-        <li><a href="#Frak"> Frak</a></li>
-        <li><a href="#FSR"> FSR</a></li>
-        <li><a href="#LibNSS-AFS"> LibNSS-AFS</a></li>
-        <li><a href="#LSMounts"> LSMounts</a></li>
-        <li><a href="#Nagios Monitoring"> Nagios Monitoring</a></li>
-        <li><a href="#Mount Points"> Mount Points</a></li>
-        <li><a href="#MVTO"> MVTO</a></li>
-        <li><a href="#Pam-AFS-Session"> Pam-AFS-Session</a></li>
-        <li><a href="#Pam-KRB5"> Pam-KRB5</a></li>
-        <li><a href="#Partinfo"> Partinfo</a></li>
-        <li><a href="#PHPafsfree">PHPafsfree</a></li>
-        <li><a href="#Reporting DB"> Reporting DB</a></li>
-        <li><a href="#VolCreate"> VolCreate</a></li>
-        <li><a href="#VolNuke"> VolNuke</a></li>
-      </ul>
-    </li>
-    <li><a href="#Linux"> Linux</a><ul>
-        <li><a href="#AFS Tokens GUI"> AFS Tokens GUI</a></li>
-        <li><a href="#Kvibille Nautilus Plugin"> Kvibille Nautilus Plugin</a></li>
-        <li><a href="#Nautilus for RHEL4"> Nautilus for RHEL4</a></li>
-      </ul>
-    </li>
-    <li><a href="#Macintosh"> Macintosh</a><ul>
-        <li><a href="#AFS Tokens GUI"> AFS Tokens GUI</a></li>
-        <li><a href="#AFS Commander"> AFS Commander</a></li>
-        <li><a href="#Contextual Menu Plug-in for Find"> Contextual Menu Plug-in for Finder</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
+[[!toc levels=3]]
 
-# <a name="UNIX"></a> UNIX
+# UNIX
 
-## <a name="AFS Backend"></a> AFS Backend 
+## AFS Backend
 
 Delegated administration of certain volumes.
 
 Available at <http://www.eyrie.org/~eagle/software/afs-backend/>
 
-## <a name="BackupAFS"></a> [[BackupAFS]]
+## [[BackupAFS]]
 
 Backup [[OpenAFS]] volumes to a backup server's local disk or attached RAID. Supports full and multi-level incremental dumps, exponential expiry, and configuration via conf files or a web interface.
 
 Available at <http://www.physics.unc.edu/~stephen/BackupAFS/>
 
-## <a name="Balancing"></a> Balancing
+## Balancing
 
 Balance volumes, usage, and accesses among servers.
 
 Available at <http://www.eyrie.org/~eagle/software/afs-balance/>
 
-## <a name="Frak"></a> Frak
+## Frak
 
 Show differences between AFS file trees or volumes
 
 Available at <http://www.eyrie.org/~eagle/software/frak/>
 
-## <a name="FSR"></a> FSR
+## FSR
 
 Recursive wrapper around fs directory commands
 
 Available at: <http://www.eyrie.org/~eagle/software/fsr/>
 
-## <a name="LibNSS-AFS"></a> [[LibNSS]]-AFS
+## [[LibNSS]]-AFS
 
 Uses the ptdb (ptserver) to resolve username-to-userid and userid-to-username (NSS) queries on platforms that use GNU Libc.
 
 Available at: <http://www.hcoop.net/~megacz/software/libnss-afs.html>
 
-## <a name="LSMounts"></a> LSMounts
+## LSMounts
 
 Search through a directory for mount points
 
 Available at: <http://www.eyrie.org/~eagle/software/lsmounts/>
 
-## <a name="Nagios Monitoring"></a> Nagios Monitoring
+## Nagios Monitoring
 
 Nagios-compatible probes to monitor AFS
 
 Available at: <http://www.eyrie.org/~eagle/software/afs-monitor/>
 
-## <a name="Mount Points"></a> Mount Points
+## Mount Points
 
 Maintain a database of volume mount points
 
 Available at: <http://www.eyrie.org/~eagle/software/afs-mount/>
 
-## <a name="MVTO"></a> MVTO
+## MVTO
 
 Smart vos move with usage balancing
 
 Available at: <http://www.eyrie.org/~eagle/software/mvto/>
 
-## <a name="Pam-AFS-Session"></a> Pam-AFS-Session
+## Pam-AFS-Session
 
 AFS PAG and token PAM session module
 
 Available at: <http://www.eyrie.org/~eagle/software/pam-afs-session/>
 
-## <a name="Pam-KRB5"></a> Pam-KRB5
+## Pam-KRB5
 
 Kerberos v5 PAM module
 
 Available at: <http://www.eyrie.org/~eagle/software/pam-krb5/>
 
-## <a name="Partinfo"></a> Partinfo
+## Partinfo
 
 Nicely formatted partition usage report
 
 Available at: <http://www.eyrie.org/~eagle/software/partinfo/>
 
-## <a name="PHPafsfree"></a> PHPafsfree
+## PHPafsfree
 
 A PHP/GD AFS fileserver disk utilization grapher inspired by the original tcl/tk afsfree script.
 
 Available at: <http://www.physics.unc.edu/~stephen/phpafsfree/>
 
-## <a name="Reporting DB"></a> Reporting DB
+## Reporting DB
 
 Load AFS metadata into a SQL database for reporting
 
 Available at: <http://www.eyrie.org/~eagle/software/afsdb/>
 
-## <a name="VolCreate"></a> [[VolCreate]]
+## [[VolCreate]]
 
 Smart vos create with automatic volume placement
 
 Available at: <http://www.eyrie.org/~eagle/software/volcreate/>
 
-## <a name="VolNuke"></a> [[VolNuke]]
+## [[VolNuke]]
 
 Smart vos remove that finds volume location
 
 Available at: <http://www.eyrie.org/~eagle/software/volnuke/>
 
-# <a name="Linux"></a> Linux
+# Linux
 
-## <a name="AFS Tokens GUI"></a> AFS Tokens GUI
+## AFS Tokens GUI
 
 Obtain and delete your AFS tokens via Kerberos 5 login. Manage your group membership and owned groups.
 
 Source and binaries available at [https://forge.cornell.edu/sf/frs/do/viewSummary/projects.afs\_tokens/frs](https://forge.cornell.edu/sf/frs/do/viewSummary/projects.afs_tokens/frs)
 
-## <a name="Kvibille Nautilus Plugin"></a> Kvibille Nautilus Plugin
+## Kvibille Nautilus Plugin
 
 Graphical editor for AFS access control lists (ACL). Works as a Nautilus plugin and as a standalone application.
 
@@ -157,7 +122,7 @@ RHEL5 rpms available at <http://ayo.sys.kth.se/kth/linux/5/i386/misc/> and [http
 
 Main source tree available at <ftp://ftp.nada.kth.se/pub/hacks/kvibille/>
 
-## <a name="Nautilus for RHEL4"></a> Nautilus for RHEL4
+## Nautilus for RHEL4
 
 The stock Nautilus with RHEL4, like the Mac OS X finder, attempts to "help" you by pre-determining access to AFS files and folders based on the unix permissions. This version has a small hack which will always return access allowed such that the access decision is made by AFS itself.
 
@@ -165,24 +130,23 @@ Prior to 2.8.1-5.EL4, an additional hack was necessary for nautilus to respect t
 
 RPMS available at /afs/cnf.cornell.edu/shares/public/outside\_users/openafs/nautilus
 
-# <a name="Macintosh"></a> Macintosh
+# Macintosh
 
-## <a name="AFS Tokens GUI"></a> AFS Tokens GUI
+## AFS Tokens GUI
 
 Obtain and delete your AFS tokens via Kerberos 5 login. Manage your group membership and owned groups.
 
 Source and binaries available at [https://forge.cornell.edu/sf/frs/do/viewSummary/projects.afs\_tokens/frs](https://forge.cornell.edu/sf/frs/do/viewSummary/projects.afs_tokens/frs)
 
-## <a name="AFS Commander"></a> AFS Commander
+## AFS Commander
 
 Afs Commander is the development version Apple OSX AFS Preference Pane, made for simplify the afs client administration and usability.
 
 Available at [http://www.lnf.infn.it/~bisegni/Main/Afs\_Commander.html](http://www.lnf.infn.it/~bisegni/Main/Afs_Commander.html)
 
-## <a name="Contextual Menu Plug-in for Find"></a> Contextual Menu Plug-in for Finder
+## Contextual Menu Plug-in for Finder
 
 Provides access list and volume quota information. AFS access control lists can be added, modified, and deleted. Volume information on user quota and disk space usage are available.
 
 Available at [http://www.ncsu.edu/mac/pn/index.php?name=UpDownload&amp;req=viewdownloaddetails&amp;lid=10](http://www.ncsu.edu/mac/pn/index.php?name=UpDownload&req=viewdownloaddetails&lid=10)
 
--- [[RedFyre]] - 01 Aug 2008

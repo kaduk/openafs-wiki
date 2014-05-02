@@ -1,8 +1,11 @@
-# <a name="Git Plan:"></a> Git Plan:
+[[!toc levels=3]]
+
+#  Git Plan:
 
 This is the procedure used to convert the [[OpenAFS]] CVS version control into a git repository. This work was done by Maximilian Cohan and Michael Meffie at the [[OpenAFS]] hackathon 2008 at Google, based off the work already done by Derrick Brashear.
 
-## <a name="Background"></a> Background
+
+##  Background
 
 The [[OpenAFS]] cvs repository poses several unique and interesting challenges in the git conversion. A custom tool called wdelta, combined with a custom set of commit scripts, has been used since the projects inception. The deltas are effectively patch sets made up of rcs revisions. We need to preserve these deltas and all the history associated with the deltas. Unfortuntunately, the not all deltas were created automically. This leads to some issues,
 
@@ -11,19 +14,19 @@ The [[OpenAFS]] cvs repository poses several unique and interesting challenges i
 - In the cases where there are revision gaps, there could be conflicts when trying to collapse the changes into a single patch for the file.
 - Also in the cases where there are gaps, it is possible that cvs tags could interleave the revisions of a delta, although it is unknown at this time if such a case exists.
 
-## <a name="Overview of the process"></a> Overview of the process
+##  Overview of the process
 
-## <a name="Where the tools are"></a> Where the tools are
+##  Where the tools are
 
 /afs/sinenomine.net/public/openafs/projects/git\_work/
 
-## <a name="Set up base Repo"></a> Set up base Repo
+##  Set up base Repo
 
-### <a name="Prep:"></a> Prep:
+###  Prep:
 
-### <a name="Process:"></a> Process:
+###  Process:
 
-#### <a name="(commit 1) Start from IBM 1.0 +"></a><a name="(commit 1) Start from IBM 1.0 + "></a> (commit 1) Start from IBM 1.0 + 3.6 docs
+#### (commit 1) Start from IBM 1.0 + 3.6 docs
 
 - (in a tmp directory) cvs -d:pserver:anonymous@cvs.openafs.org:/cvs -z5 export -ropenafs-stable-1\_1\_0 openafs/doc
 - Make and change to git\_base directory
@@ -34,18 +37,18 @@ The [[OpenAFS]] cvs repository poses several unique and interesting challenges i
 - git add .
 - git commit -m "Initial IBM source code import\\rDelta initial-20001103" --author="Transarc &lt;afs@transarc.com&gt;"
 
-#### <a name="(commit 2) Apply license changes"></a> (commit 2) Apply license changes
+#### (commit 2) Apply license changes
 
 - Apply 2.patch
 - Cleanup: rm .rej &amp; .orig
 - untar 2-postapply.tar
 - git commit -m "" --author="Transarc &lt;afs@transarc.com&gt;"
 
-### <a name="Patch Fixup"></a> Patch Fixup
+###  Patch Fixup
 
 - Original codebase had bit errors; tarball used for git base does not have them, remove (most of) these fixes from patchsets
 
-### <a name="Repo Fixup"></a> Repo Fixup
+###  Repo Fixup
 
 - Resolve issues into commit 3
   - Part of the doc tree was not in the initial import
@@ -59,15 +62,15 @@ The [[OpenAFS]] cvs repository poses several unique and interesting challenges i
 - Amend commit 1
 - Reapply commit 2
 
-### <a name="Issues:"></a> Issues:
+###  Issues:
 
 license changes won´t apply cleanly as initial was from RCS and CVS munged rev vars on checkout
 
-## <a name="Automate patch - branches"></a> Automate patch -&gt; branches
+##  Automate patch -&gt; branches
 
-### <a name="Prep:"></a> Prep:
+###  Prep:
 
-### <a name="Process:"></a> Process:
+###  Process:
 
 - Clone base repo (git clone git\_base git\_working)
 - Starting with 3.patch
@@ -76,15 +79,15 @@ license changes won´t apply cleanly as initial was from RCS and CVS munged rev 
   - Apply patch (git apply --index)
   - Commit (-m ´Apply patch X´)
 
-### <a name="Issues:"></a> Issues:
+###  Issues:
 
-## <a name="Handle binaries"></a> Handle binaries
+##  Handle binaries
 
-### <a name="Prep:"></a> Prep:
+###  Prep:
 
 - Find a list of binaries in cvs, search for '^expand\\w+@b|o@'
 
-### <a name="Process:"></a> Process:
+###  Process:
 
 - Loop:
   - For patch X
@@ -93,13 +96,13 @@ license changes won´t apply cleanly as initial was from RCS and CVS munged rev 
   - For each binary file, CVS check out listed revision over existing file
   - Commit (-m ´Adding binaries´)
 
-## <a name="Merge branches into master branc"></a> Merge branches into master branch
+##  Merge branches into master branch
 
-### <a name="Prep:"></a> Prep:
+###  Prep:
 
 - Parse patches to make X.msg &amp; X.author
 
-### <a name="Process:"></a> Process:
+###  Process:
 
 - Loop:
   - Merge branch X into master (git merge --squash)
@@ -107,12 +110,11 @@ license changes won´t apply cleanly as initial was from RCS and CVS munged rev 
   - ! On failure... stop, and allow for reset
 - Push master to origin/master
 
-## <a name="Validate and release"></a> Validate and release
+##  Validate and release
 
 - Check that checkout of master matches cvs HEAD
 
-## <a name="Handle tags"></a> Handle tags
+##  Handle tags
 
 - Determine tag-&gt;delta relationship
 
--- Michael Meffie - 28 Oct 2008

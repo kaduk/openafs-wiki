@@ -1,85 +1,7 @@
-<div>
-  <ul>
-    <li><a href="#Installing the First AFS Machine"> Installing the First AFS Machine</a></li>
-    <li><a href="#Overview: Installing Server Func"> Overview: Installing Server Functionality</a></li>
-    <li><a href="#Choosing the First AFS Machine"> Choosing the First AFS Machine</a></li>
-    <li><a href="#Performing Platform-Specific Pro"> Performing Platform-Specific Procedures</a></li>
-    <li><a href="#Getting Started on AIX Systems"> Getting Started on AIX Systems</a><ul>
-        <li><a href="#Loading AFS into the AIX Kernel"> Loading AFS into the AIX Kernel</a></li>
-        <li><a href="#Replacing the fsck Program Helpe"> Replacing the fsck Program Helper on AIX Systems</a></li>
-        <li><a href="#Configuring Server Volumes on AI"> Configuring Server Volumes on AIX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on Digital UNIX"> Getting Started on Digital UNIX Systems</a><ul>
-        <li><a href="#Loading AFS into the Digital UNI">Loading AFS into the Digital UNIX Kernel</a></li>
-        <li><a href="#Replacing the fsck Program on Di"> Replacing the fsck Program on Digital UNIX Systems</a></li>
-        <li><a href="#Configuring Server Volumes on Di"> Configuring Server Volumes on Digital UNIX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on HP-UX Systems"> Getting Started on HP-UX Systems</a><ul>
-        <li><a href="#Building AFS into the HP-UX Kern"> Building AFS into the HP-UX Kernel</a></li>
-        <li><a href="#Configuring the AFS-modified fsc"> Configuring the AFS-modified fsck Program on HP-UX Systems</a></li>
-        <li><a href="#Configuring Server Volumes on HP"> Configuring Server Volumes on HP-UX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on IRIX Systems"> Getting Started on IRIX Systems</a><ul>
-        <li><a href="#Loading AFS into the IRIX Kernel"> Loading AFS into the IRIX Kernel</a></li>
-        <li><a href="#Configuring Server Volumes on IR"> Configuring Server Volumes on IRIX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on Linux Systems"> Getting Started on Linux Systems</a><ul>
-        <li><a href="#Loading AFS into the Linux Kerne"> Loading AFS into the Linux Kernel</a></li>
-        <li><a href="#Configuring Server Volumes on Li"> Configuring Server Volumes on Linux Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on Solaris Syste"> Getting Started on Solaris Systems</a><ul>
-        <li><a href="#Loading AFS into the Solaris Ker"> Loading AFS into the Solaris Kernel</a></li>
-        <li><a href="#Configuring the AFS-modified fsc"> Configuring the AFS-modified fsck Program on Solaris Systems</a></li>
-        <li><a href="#Configuring Server Partitions on"> Configuring Server Partitions on Solaris Systems</a></li>
-        <li><a href="#Enabling AFS Login on Solaris Sy"> Enabling AFS Login on Solaris Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Starting the BOS Server"> Starting the BOS Server</a></li>
-    <li><a href="#Defining Cell Name and Membershi"> Defining Cell Name and Membership for Server Processes</a></li>
-    <li><a href="#Starting the Database Server Pro"> Starting the Database Server Processes</a></li>
-    <li><a href="#Initializing Cell Security"> Initializing Cell Security</a></li>
-    <li><a href="#Starting the File Server, Volume"> Starting the File Server, Volume Server, and Salvager</a></li>
-    <li><a href="#Starting the Server Portion of t"> Starting the Server Portion of the Update Server</a></li>
-    <li><a href="#Starting the Controller for NTPD"> Starting the Controller for NTPD</a></li>
-    <li><a href="#Overview: Installing Client Func"> Overview: Installing Client Functionality</a><ul>
-        <li><a href="#Copying Client Files to the Loca"> Copying Client Files to the Local Disk</a></li>
-        <li><a href="#Defining Cell Membership for Cli"> Defining Cell Membership for Client Processes</a></li>
-        <li><a href="#Creating the Client _CellServDB"> Creating the Client CellServDB File</a></li>
-        <li><a href="#Configuring the Cache"> Configuring the Cache</a></li>
-        <li><a href="#Configuring the Cache Manager"> Configuring the Cache Manager</a></li>
-      </ul>
-    </li>
-    <li><a href="#Overview: Completing the Install"> Overview: Completing the Installation of the First AFS Machine</a><ul>
-        <li><a href="#Verifying the AFS Initialization"> Verifying the AFS Initialization Script</a></li>
-        <li><a href="#On AIX systems:"> On AIX systems:</a></li>
-        <li><a href="#On Digital UNIX systems:"> On Digital UNIX systems:</a></li>
-        <li><a href="#On HP-UX systems:"> On HP-UX systems:</a></li>
-        <li><a href="#On IRIX systems:"> On IRIX systems:</a></li>
-        <li><a href="#On Linux systems:"> On Linux systems:</a></li>
-        <li><a href="#On Solaris systems:"> On Solaris systems:</a></li>
-      </ul>
-    </li>
-    <li><a href="#Configuring the Top Levels of th"> Configuring the Top Levels of the AFS Filespace</a></li>
-    <li><a href="#Storing AFS Binaries in AFS"> Storing AFS Binaries in AFS</a></li>
-    <li><a href="#The AFS distribution includes th"> The AFS distribution includes the following documents:</a></li>
-    <li><a href="#Storing System Binaries in AFS"> Storing System Binaries in AFS</a></li>
-    <li><a href="#Enabling Access to Foreign Cells"> Enabling Access to Foreign Cells</a></li>
-    <li><a href="#Improving Cell Security"> Improving Cell Security</a></li>
-    <li><a href="#Controlling root Access"> Controlling root Access</a><ul>
-        <li><a href="#Controlling System Administrator"> Controlling System Administrator Access</a></li>
-        <li><a href="#Protecting Sensitive AFS Directo"> Protecting Sensitive AFS Directories</a></li>
-      </ul>
-    </li>
-    <li><a href="#Removing Client Functionality"> Removing Client Functionality</a></li>
-  </ul>
-</div>
 
-# <a name="Installing the First AFS Machine"></a> Installing the First AFS Machine
+[[!toc level=3]]
+
+#  Installing the First AFS Machine
 
 This chapter describes how to install the first AFS machine in your cell, configuring it as both a file server machine and a client machine. After completing all procedures in this chapter, you can remove the client functionality if you wish, as described in Removing Client Functionality.
 
@@ -117,7 +39,7 @@ This chapter is divided into three large sections corresponding to the three par
 
 - Configuring your cell's filespace, establishing further security mechanisms, and enabling access to foreign cells (begins in Overview: Completing the Installation of the First AFS Machine)
 
-# <a name="Overview: Installing Server Func"></a> Overview: Installing Server Functionality
+#  Overview: Installing Server Functionality
 
 In the first phase of installing your cell's first AFS machine, you install file server and database server functionality by performing the following procedures:
 
@@ -147,7 +69,7 @@ In the first phase of installing your cell's first AFS machine, you install file
 
 13. Start the controller process (called runntp) for the Network Time Protocol Daemon, which synchronizes machine clocks
 
-# <a name="Choosing the First AFS Machine"></a> Choosing the First AFS Machine
+#  Choosing the First AFS Machine
 
 The first AFS machine you install must have sufficient disk space to store AFS volumes. To take best advantage of AFS's capabilities, store client-side binaries as well as user files in volumes. When you later install additional file server machines in your cell, you can distribute these volumes among the different machines as you see fit.
 
@@ -163,7 +85,7 @@ Create the /usr/afs and /usr/vice/etc directories on the local disk, to house se
 
        # mkdir /cdrom
 
-# <a name="Performing Platform-Specific Pro"></a> Performing Platform-Specific Procedures
+#  Performing Platform-Specific Procedures
 
 Several of the initial procedures for installing a file server machine differ for each system type. For convenience, the following sections group them together for each system type:
 
@@ -192,21 +114,21 @@ You can also add or remove server partitions on an existing file server machine.
 
 - If the machine is to remain an AFS client machine, modify the machine's authentication system so that users obtain an AFS token as they log into the local file system. Using AFS is simpler and more convenient for your users if you make the modifications on all client machines. Otherwise, users must perform a two-step login procedure (login to the local file system and then issue the klog command). For further discussion of AFS authentication, see the chapter in the IBM AFS Administration Guide about cell configuration and administration issues.
 
-# <a name="Getting Started on AIX Systems"></a> Getting Started on AIX Systems
+#  Getting Started on AIX Systems
 
 Begin by running the AFS initialization script to call the AIX kernel extension facility, which dynamically loads AFS modifications into the kernel. Then use the SMIT program to configure partitions for storing AFS volumes, and replace the AIX fsck program helper with a version that correctly handles AFS volumes. If the machine is to remain an AFS client machine, incorporate AFS into the AIX secondary authentication system.
 
-## <a name="Loading AFS into the AIX Kernel"></a> Loading AFS into the AIX Kernel
+##  Loading AFS into the AIX Kernel
 
 [[Loading AFS into the AIX Kernel|LoadingAFSIntoTheAIXKernel]]
 
-## <a name="Replacing the fsck Program Helpe"></a> Replacing the fsck Program Helper on AIX Systems
+##  Replacing the fsck Program Helper on AIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Replacing the fsck Program Helper on AIX Systems|ReplacingTheFsckProgramHelperOnAIXSystems]]
 
-## <a name="Configuring Server Volumes on AI"></a> Configuring Server Volumes on AIX Systems
+##  Configuring Server Volumes on AIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -214,21 +136,21 @@ If this system is going to be used as a file server to share some of its disk sp
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on AIX Systems|EnablingAFSLoginOnAIXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
-# <a name="Getting Started on Digital UNIX"></a><a name="Getting Started on Digital UNIX "></a> Getting Started on Digital UNIX Systems
+# <a name="Getting Started on Digital UNIX "></a> Getting Started on Digital UNIX Systems
 
 Begin by either building AFS modifications into a new static kernel or by setting up to dynamically load the AFS kernel module. Then create partitions for storing AFS volumes, and replace the Digital UNIX fsck program with a version that correctly handles AFS volumes. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Security Integration Architecture (SIA) matrix.
 
-## <a name="Loading AFS into the Digital UNI"></a> Loading AFS into the Digital UNIX Kernel
+##  Loading AFS into the Digital UNIX Kernel
 
 [[Building AFS into the Digital UNIX Kernel|BuildingAFSIntoTheDigitalUNIXKernel]]
 
-## <a name="Replacing the fsck Program on Di"></a> Replacing the fsck Program on Digital UNIX Systems
+##  Replacing the fsck Program on Digital UNIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Replacing the fsck Program on Digital UNIX Systems|ReplacingTheFsckProgramOnDigitalUNIXSystems]]
 
-## <a name="Configuring Server Volumes on Di"></a> Configuring Server Volumes on Digital UNIX Systems
+##  Configuring Server Volumes on Digital UNIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -236,21 +158,21 @@ If this system is going to be used as a file server to share some of its disk sp
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Digital UNIX Systems|EnablingAFSLoginOnDigitalUNIXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
-# <a name="Getting Started on HP-UX Systems"></a> Getting Started on HP-UX Systems
+#  Getting Started on HP-UX Systems
 
 Begin by building AFS modifications into a new kernel; HP-UX does not support dynamic loading. Then create partitions for storing AFS volumes, and install and configure the AFS-modified fsck program to run on AFS server partitions. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Pluggable Authentication Module (PAM) scheme.
 
-## <a name="Building AFS into the HP-UX Kern"></a> Building AFS into the HP-UX Kernel
+##  Building AFS into the HP-UX Kernel
 
 [[Building AFS into the HP-UX Kernel|BuildingAFSIntoTheHP-UXKernel]]
 
-## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on HP-UX Systems
+##  Configuring the AFS-modified fsck Program on HP-UX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Configuring the AFS-modified fsck Program on HP-UX Systems|ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
 
-## <a name="Configuring Server Volumes on HP"></a> Configuring Server Volumes on HP-UX Systems
+##  Configuring Server Volumes on HP-UX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -258,19 +180,19 @@ If this system is going to be used as a file server to share some of its disk sp
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on HP-UX Systems|EnablingAFSLoginOnHP-UXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
-# <a name="Getting Started on IRIX Systems"></a> Getting Started on IRIX Systems
+#  Getting Started on IRIX Systems
 
 Begin by incorporating AFS modifications into the kernel. Either use the ml dynamic loader program, or build a static kernel. Then configure partitions to house AFS volumes. AFS supports use of both EFS and XFS partitions for housing AFS volumes. SGI encourages use of XFS partitions.
 
 You do not need to replace IRIX fsck program, because the version that SGI distributes handles AFS volumes properly.
 
-## <a name="Loading AFS into the IRIX Kernel"></a> Loading AFS into the IRIX Kernel
+##  Loading AFS into the IRIX Kernel
 
 [[Loading AFS into the IRIX Kernel|LoadingAFSIntoTheIRIXKernel]]
 
 Proceed to Configuring Server Partitions on IRIX Systems.
 
-## <a name="Configuring Server Volumes on IR"></a> Configuring Server Volumes on IRIX Systems
+##  Configuring Server Volumes on IRIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -278,15 +200,15 @@ If this system is going to be used as a file server to share some of its disk sp
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on IRIX Systems|EnablingAFSLoginOnIRIXSystems]]. Otherwise, proceed to Starting the BOS Server.
 
-# <a name="Getting Started on Linux Systems"></a> Getting Started on Linux Systems
+#  Getting Started on Linux Systems
 
 Begin by running the AFS initialization script to call the insmod program, which dynamically loads AFS modifications into the kernel. Then create partitions for storing AFS volumes. You do not need to replace the Linux fsck program. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Pluggable Authentication Module (PAM) scheme.
 
-## <a name="Loading AFS into the Linux Kerne"></a> Loading AFS into the Linux Kernel
+##  Loading AFS into the Linux Kernel
 
 [[Loading AFS into the Linux Kernel|LoadingAFSIntoTheLinuxKernel]]
 
-## <a name="Configuring Server Volumes on Li"></a> Configuring Server Volumes on Linux Systems
+##  Configuring Server Volumes on Linux Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -294,21 +216,21 @@ If this system is going to be used as a file server to share some of its disk sp
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to [[Enabling AFS Login on Linux Systems|EnablingAFSLoginOnLinuxSystems]]. Otherwise, proceed to Starting the BOS Server.
 
-# <a name="Getting Started on Solaris Syste"></a> Getting Started on Solaris Systems
+#  Getting Started on Solaris Systems
 
 Begin by running the AFS initialization script to call the modload program distributed by Sun Microsystems, which dynamically loads AFS modifications into the kernel. Then create partitions for storing AFS volumes, and install and configure the AFS-modified fsck program to run on AFS server partitions. If the machine is to remain an AFS client machine, incorporate AFS into the machine's Pluggable Authentication Module (PAM) scheme.
 
-## <a name="Loading AFS into the Solaris Ker"></a> Loading AFS into the Solaris Kernel
+##  Loading AFS into the Solaris Kernel
 
 [[Loading AFS into the Solaris Kernel|LoadingAFSIntoTheSolarisKernel]]
 
-## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on Solaris Systems
+##  Configuring the AFS-modified fsck Program on Solaris Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Configuring the AFS-modified fsck Program on Solaris Systems|ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
 
-## <a name="Configuring Server Partitions on"></a> Configuring Server Partitions on Solaris Systems
+##  Configuring Server Partitions on Solaris Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -316,7 +238,7 @@ If this system is going to be used as a file server to share some of its disk sp
 
 If you plan to retain client functionality on this machine after completing the installation, proceed to Enabling AFS Login on Solaris Systems. Otherwise, proceed to Starting the BOS Server.
 
-## <a name="Enabling AFS Login on Solaris Sy"></a> Enabling AFS Login on Solaris Systems
+##  Enabling AFS Login on Solaris Systems
 
 Note: If you plan to remove client functionality from this machine after completing the installation, skip this section and proceed to Starting the BOS Server.
 
@@ -324,7 +246,7 @@ Note: If you plan to remove client functionality from this machine after complet
 
 Proceed to Starting the BOS Server (or if referring to these instructions while installing an additional file server machine, return to Starting Server Programs).
 
-# <a name="Starting the BOS Server"></a> Starting the BOS Server
+#  Starting the BOS Server
 
 You are now ready to start the AFS server processes on this machine. Begin by copying the AFS server binaries from the CD-ROM to the conventional local disk location, the /usr/afs/bin directory. The following instructions also create files in other subdirectories of the /usr/afs directory.
 
@@ -370,7 +292,7 @@ If either or both of /usr/vice/etc/ThisCell and /usr/vice/etc/CellServDB do not 
 
        # ln -s /usr/afs/etc/CellServDB
 
-# <a name="Defining Cell Name and Membershi"></a> Defining Cell Name and Membership for Server Processes
+#  Defining Cell Name and Membership for Server Processes
 
 Now assign your cell's name. The chapter in the IBM AFS Administration Guide about cell configuration and administration issues discusses the important considerations, explains why changing the name is difficult, and outlines the restrictions on name format. Two of the most important restrictions are that the name cannot include uppercase letters or more than 64 characters.
 
@@ -396,7 +318,7 @@ Because you are not authenticated and authorization checking is disabled, the bo
        Cell name is cell_name
            Host 1 is machine_name
 
-# <a name="Starting the Database Server Pro"></a> Starting the Database Server Processes
+#  Starting the Database Server Processes
 
 Next use the bos create command to create entries for the four database server processes in the /usr/afs/local/BosConfig file and start them running. The four processes run on database server machines only:
 
@@ -434,7 +356,7 @@ You can safely ignore the messages that tell you to add Kerberos to the /etc/ser
        # ./bos create <machine name> vlserver simple /usr/afs/bin/vlserver  \
                       -cell <cell name>  -noauth
 
-# <a name="Initializing Cell Security"></a> Initializing Cell Security
+#  Initializing Cell Security
 
 Now initialize the cell's security mechanisms. Begin by creating the following two initial entries in the Authentication Database:
 
@@ -533,19 +455,26 @@ By default, the Protection Server assigns AFS UID 1 (one) to the admin user, bec
        # ./pts createuser -name admin -cell <cell name> [-id <AFS UID>]  -noauth
        User admin has id AFS UID
 
-10. Issue the pts adduser command to make the admin user a member of the system:administrators group, and the pts membership command to verify the new membership. Membership in the group enables the admin user to issue privileged pts commands and some privileged fs commands.
+10. Issue the pts adduser command to make the admin user a member of the
+system:administrators group, and the pts membership command to verify the new
+membership. Membership in the group enables the admin user to issue privileged
+pts commands and some privileged fs commands.
+
 
        # ./pts adduser admin system:administrators -cell <cell name> -noauth
-
        # ./pts membership admin -cell  <cell name> -noauth
        Groups admin (id: 1) is a member of:
          system:administrators
 
-11. Issue the bos restart command with the -all flag to restart the database server processes, so that they start using the new server encryption key.
+
+11. Issue the bos restart command with the -all flag to restart the database
+server processes, so that they start using the new server encryption key.
+
 
        # ./bos restart <machine name> -all -cell <cell name> -noauth
 
-# <a name="Starting the File Server, Volume"></a> Starting the File Server, Volume Server, and Salvager
+
+#  Starting the File Server, Volume Server, and Salvager
 
 Start the fs process, which consists of the File Server, Volume Server, and Salvager (fileserver, volserver and salvager processes).
 
@@ -584,7 +513,7 @@ The Volume Server produces a message confirming that it created the volume on th
 
 You can ignore error messages indicating that tokens are missing, or that authentication failed.
 
-# <a name="Starting the Server Portion of t"></a> Starting the Server Portion of the Update Server
+#  Starting the Server Portion of the Update Server
 
 Start the server portion of the Update Server (the upserver process), to distribute the contents of directories on this machine to other server machines in the cell. It becomes active when you configure the client portion of the Update Server on additional server machines.
 
@@ -606,7 +535,7 @@ For more information on the upclient and upserver processes, see their reference
                  "/usr/afs/bin/upserver  -crypt /usr/afs/etc    \
                  -clear /usr/afs/bin" -cell <cell name>  -noauth
 
-# <a name="Starting the Controller for NTPD"></a> Starting the Controller for NTPD
+#  Starting the Controller for NTPD
 
 Keeping the clocks on all server and client machines in your cell synchronized is crucial to several functions, and in particular to the correct operation of AFS's distributed database technology, Ubik. The chapter in the IBM AFS Administration Guide about administering server machines explains how time skew can disturb Ubik's performance and cause service outages in your cell.
 
@@ -640,7 +569,7 @@ As the runntp process initializes NTPD, trace messages sometimes appear on the s
              "/usr/afs/bin/runntp -localclock <host>+"  \
              -cell <cell name>  -noauth
 
-# <a name="Overview: Installing Client Func"></a> Overview: Installing Client Functionality
+#  Overview: Installing Client Functionality
 
 The machine you are installing is now an AFS file server machine, database server machine, system control machine, and binary distribution machine. Now make it a client machine by completing the following tasks:
 
@@ -652,7 +581,7 @@ The machine you are installing is now an AFS file server machine, database serve
 
 1. Create the /afs directory and start the Cache Manager
 
-## <a name="Copying Client Files to the Loca"></a> Copying Client Files to the Local Disk
+##  Copying Client Files to the Local Disk
 
 Before installing and configuring the AFS client, copy the necessary files from the AFS CD-ROM to the local /usr/vice/etc directory.
 
@@ -670,7 +599,7 @@ On some system types that use a dynamic kernel loader program, you previously co
 
        # cp -rp  C  /usr/vice/etc
 
-## <a name="Defining Cell Membership for Cli"></a> Defining Cell Membership for Client Processes
+##  Defining Cell Membership for Client Processes
 
 Every AFS client machine has a copy of the /usr/vice/etc/ThisCell file on its local disk to define the machine's cell membership for the AFS client programs that run on it. The [[ThisCell]] file you created in the /usr/afs/etc directory (in Defining Cell Name and Membership for Server Processes) is used only by server processes.
 
@@ -692,19 +621,19 @@ Among other functions, the [[ThisCell]] file on a client machine determines the 
 
        # cp  /usr/afs/etc/ThisCell  ThisCell
 
-## <a name="Creating the Client _CellServDB"></a><a name="Creating the Client _CellServDB "></a> Creating the Client [[CellServDB]] File
+## <a name="Creating the Client _CellServDB "></a> Creating the Client [[CellServDB]] File
 
 [[Creating the Client CellServDB File|CreatingTheClientCellServDBFile]]
 
-## <a name="Configuring the Cache"></a> Configuring the Cache
+##  Configuring the Cache
 
 [[Configuring the Cache|ConfiguringTheCache]]
 
-## <a name="Configuring the Cache Manager"></a> Configuring the Cache Manager
+##  Configuring the Cache Manager
 
 [[Configuring the Cache Manager|ConfiguringTheCacheManager]]
 
-# <a name="Overview: Completing the Install"></a> Overview: Completing the Installation of the First AFS Machine
+#  Overview: Completing the Installation of the First AFS Machine
 
 The machine is now configured as an AFS file server and client machine. In this final phase of the installation, you initialize the Cache Manager and then create the upper levels of your AFS filespace, among other procedures. The procedures are:
 
@@ -720,7 +649,7 @@ The machine is now configured as an AFS file server and client machine. In this 
 
 1. Remove client functionality if desired
 
-## <a name="Verifying the AFS Initialization"></a> Verifying the AFS Initialization Script
+##  Verifying the AFS Initialization Script
 
 At this point you run the AFS initialization script to verify that it correctly invokes all of the necessary programs and AFS processes, and that they start correctly. The following are the relevant commands:
 
@@ -746,37 +675,37 @@ If there are problems during the initialization, attempt to resolve them. The AF
 
 1. Issue the appropriate commands to run the AFS initialization script for this system type.
 
-## <a name="On AIX systems:"></a> On AIX systems:
+##  On AIX systems:
 
 [[Initialization Script on AIX|InitializationScriptOnAIX]]
 
 Proceed to Step 4.
 
-## <a name="On Digital UNIX systems:"></a> On Digital UNIX systems:
+##  On Digital UNIX systems:
 
 [[Initialization Script on Digital UNIX|InitializationScriptOnDigitalUNIX]]
 
 Proceed to Step 4.
 
-## <a name="On HP-UX systems:"></a> On HP-UX systems:
+##  On HP-UX systems:
 
 [[Initialization Script on HP-UX|InitializationScriptOnHP-UX]]
 
 Proceed to Step 4.
 
-## <a name="On IRIX systems:"></a> On IRIX systems:
+##  On IRIX systems:
 
 [[Initialization Script on IRIX|InitializationScriptOnIRIX]]
 
 Proceed to Step 4.
 
-## <a name="On Linux systems:"></a> On Linux systems:
+##  On Linux systems:
 
 [[Initialization Script on Linux|InitializationScriptOnLinux]]
 
 Proceed to Step 4.
 
-## <a name="On Solaris systems:"></a> On Solaris systems:
+##  On Solaris systems:
 
 [[Initialization Script on Solaris|InitializationScriptOnSolaris]]
 
@@ -784,7 +713,7 @@ Step 4. Verify that /usr/afs and its subdirectories on the new file server machi
 
 Proceed to Configuring the Top Levels of the AFS Filespace.
 
-# <a name="Configuring the Top Levels of th"></a> Configuring the Top Levels of the AFS Filespace
+#  Configuring the Top Levels of the AFS Filespace
 
 If you have not previously run AFS in your cell, you now configure the top levels of your cell's AFS filespace. If you have run a previous version of AFS, the filespace is already configured. Proceed to Storing AFS Binaries in AFS.
 
@@ -854,7 +783,7 @@ Change directory to /usr/afs/bin to make it easier to access the command binarie
 
        # ./fs examine /afs/cellname
 
-# <a name="Storing AFS Binaries in AFS"></a> Storing AFS Binaries in AFS
+#  Storing AFS Binaries in AFS
 
 In the conventional configuration, you make AFS client binaries and configuration files available in the subdirectories of the /usr/afsws directory on client machines (afsws is an acronym for AFS workstation). You can conserve local disk space by creating /usr/afsws as a link to an AFS volume that houses the AFS client binaries and configuration files for this system type.
 
@@ -925,7 +854,7 @@ If you wish, you can set the volume's quota to a finite value after you complete
 
 Storing AFS Documents in AFS
 
-# <a name="The AFS distribution includes th"></a> The AFS distribution includes the following documents:
+#  The AFS distribution includes the following documents:
 
 - IBM AFS Release Notes
 
@@ -981,7 +910,7 @@ If you choose to store the HTML version of the documents in AFS, note that in ad
 
 An alternative is to create a link in each user's home directory to the /afs/cellname/afsdoc/format\_name directory.
 
-# <a name="Storing System Binaries in AFS"></a> Storing System Binaries in AFS
+#  Storing System Binaries in AFS
 
 You can also choose to store other system binaries in AFS volumes, such as the standard UNIX programs conventionally located in local disk directories such as /etc, /bin, and /lib. Storing such binaries in an AFS volume not only frees local disk space, but makes it easier to update binaries on all client machines.
 
@@ -1023,7 +952,7 @@ You can name volumes in any way you wish, and mount them at other locations than
     sysname.usr.man    /afs/cellname/sysname/usr/man
     sysname.usr.sys    /afs/cellname/sysname/usr/sys
 
-# <a name="Enabling Access to Foreign Cells"></a> Enabling Access to Foreign Cells
+#  Enabling Access to Foreign Cells
 
 In this section you create a mount point in your AFS filespace for the root.cell volume of each foreign cell that you want to enable your users to access. For users working on a client machine to access the cell, there must in addition be an entry for it in the client machine's local /usr/vice/etc/CellServDB file. (The instructions in Creating the Client [[CellServDB]] File suggest that you use the [[CellServDB]].sample file included in the AFS distribution as the basis for your cell's client [[CellServDB]] file. The sample file lists all of the cells that had agreed to participate in the AFS global namespace at the time your AFS CD-ROM was created. As mentioned in that section, the AFS Product Support group also maintains a copy of the file, updating it as necessary.)
 
@@ -1052,18 +981,28 @@ Issue the following commands only once.
 
        # /usr/afs/bin/fs checkvolumes
 
-1. If this machine is going to remain an AFS client after you complete the installation, verify that the local /usr/vice/etc/CellServDB file includes an entry for each foreign cell.
+If this machine is going to remain an AFS client after you complete the
+installation, verify that the local /usr/vice/etc/CellServDB file includes an
+entry for each foreign cell.
 
 For each cell that does not already have an entry, complete the following instructions:
 
-1. 1. 1. Create an entry in the [[CellServDB]] file. Be sure to comply with the formatting instructions in Creating the Client [[CellServDB]] File.
+Create an entry in the [[CellServDB]] file. Be sure to comply with the
+formatting instructions in Creating the Client [[CellServDB]] File.
 
-1. 1. 1. Issue the fs newcell command to add an entry for the cell directly to the list that the Cache Manager maintains in kernel memory. Provide each database server machine's fully qualified hostname.
+Issue the fs newcell command to add an entry for the cell directly to
+the list that the Cache Manager maintains in kernel memory. Provide each
+database server machine's fully qualified hostname.
 
-       # /usr/afs/bin/fs newcell <foreign_cell> <dbserver1>    \
-                [<dbserver2>] [<dbserver3>]
 
-1. 1. 1. If you plan to maintain a central version of the [[CellServDB]] file (the conventional location is /afs/cellname/common/etc/CellServDB), create it now as a copy of the local /usr/vice/etc/CellServDB file. Verify that it includes an entry for each foreign cell you want your users to be able to access.
+       # /usr/afs/bin/fs newcell <foreign_cell> <dbserver1> [<dbserver2>] [<dbserver3>]
+
+
+If you plan to maintain a central version of the [[CellServDB]] file
+(the conventional location is /afs/cellname/common/etc/CellServDB), create it
+now as a copy of the local /usr/vice/etc/CellServDB file. Verify that it
+includes an entry for each foreign cell you want your users to be able to
+access.
 
        # mkdir common
 
@@ -1073,17 +1012,17 @@ For each cell that does not already have an entry, complete the following instru
 
        # /usr/afs/bin/vos release root.cell
 
-1. Issue the ls command to verify that the new cell's mount point is visible in your filespace. The output lists the directories at the top level of the new cell's AFS filespace.
+Issue the ls command to verify that the new cell's mount point is visible in your filespace. The output lists the directories at the top level of the new cell's AFS filespace.
 
        # ls /afs/foreign_cell
 
-1. Please register your cell with the AFS Product Support group at this time. If you do not want to participate in the global AFS namespace, they list your cell in a private [[CellServDB]] file that is not available to other AFS cells.
+Please register your cell with the AFS Product Support group at this time. If you do not want to participate in the global AFS namespace, they list your cell in a private [[CellServDB]] file that is not available to other AFS cells.
 
-# <a name="Improving Cell Security"></a> Improving Cell Security
+#  Improving Cell Security
 
 This section discusses ways to improve the security of AFS data in your cell. Also see the chapter in the IBM AFS Administration Guide about configuration and administration issues.
 
-# <a name="Controlling root Access"></a> Controlling root Access
+#  Controlling root Access
 
 As on any machine, it is important to prevent unauthorized users from logging onto an AFS server or client machine as the local superuser root. Take care to keep the root password secret.
 
@@ -1093,7 +1032,7 @@ The local root superuser does not have special access to AFS data through the Ca
 
 - On server machines, the ability to disable authorization checking, or to install rogue process binaries
 
-## <a name="Controlling System Administrator"></a> Controlling System Administrator Access
+##  Controlling System Administrator Access
 
 Following are suggestions for managing AFS administrative privilege:
 
@@ -1107,7 +1046,7 @@ Following are suggestions for managing AFS administrative privilege:
 
 - Limit the use by administrators of standard UNIX commands that make connections to remote machines (such as the telnet utility). Many of these programs send passwords across the network without encrypting them.
 
-## <a name="Protecting Sensitive AFS Directo"></a> Protecting Sensitive AFS Directories
+##  Protecting Sensitive AFS Directories
 
 Some subdirectories of the /usr/afs directory contain files crucial to cell security. Unauthorized users must not read or write to these files because of the potential for misuse of the information they contain.
 
@@ -1131,7 +1070,7 @@ The following charts lists the expected mode bit settings. A question mark indic
     /usr/afs/local    drwx???---
     /usr/afs/logs    drwxr?xr-x
 
-# <a name="Removing Client Functionality"></a> Removing Client Functionality
+#  Removing Client Functionality
 
 Follow the instructions in this section only if you do not wish this machine to remain an AFS client. Removing client functionality means that you cannot use this machine to access AFS files.
 
