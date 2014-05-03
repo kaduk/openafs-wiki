@@ -1,47 +1,17 @@
-## <a name="2  Using AFS"></a> 2 Using AFS
+[[!toc levels=3]]
+
+## 2 Using AFS
 
 The Usage Section of the [[AFSFrequentlyAskedQuestions]].
 
 - [[PreambleFAQ]]
 - [[GeneralFAQ]]
-
-<div>
-  <ul>
-    <li><a href="#2  Using AFS"> 2 Using AFS</a><ul>
-        <li><a href="#2.01  What are the differences b"> 2.01 What are the differences between AFS and a Unix filesystem?</a></li>
-        <li><a href="#2.02  What is an AFS protection"> 2.02 What is an AFS protection group?</a></li>
-        <li><a href="#2.03  What are the AFS defined p"> 2.03 What are the AFS-defined protection groups?</a></li>
-        <li><a href="#2.04  What is an AFS access cont"> 2.04 What is an AFS access control list (ACL)?</a></li>
-        <li><a href="#2.05  What are the AFS access ri"> 2.05 What are the AFS access rights?</a></li>
-        <li><a href="#2.06  What is pagsh?"> 2.06 What is <code>pagsh</code>?</a></li>
-        <li><a href="#2.07  Why use a PAG?"> 2.07 Why use a PAG?</a></li>
-        <li><a href="#2.08  How can I tell if I have a"> 2.08 How can I tell if I have a PAG?</a></li>
-        <li><a href="#2.09  Can I still run cron jobs"> 2.09 Can I still run <code>cron</code> jobs with AFS?</a></li>
-        <li><a href="#2.10  How much disk space does a"> 2.10 How much disk space does a 1-byte file occupy in AFS?</a></li>
-        <li><a href="#2.11  Is it possible to specify"> 2.11 Is it possible to specify a user who is external to the current AFS cell on an ACL?</a></li>
-        <li><a href="#2.12  Are there any problems pri"> 2.12 Are there any problems printing files in <code>/afs</code>?</a></li>
-        <li><a href="#2.13  Can I create a fifo (aka n"> 2.13 Can I create a FIFO (a/k/a named pipe) in <code>/afs</code>?</a></li>
-        <li><a href="#2.14  If an AFS server crashes,"> 2.14 If an AFS server crashes, do I have to reboot my AFS client?</a></li>
-        <li><a href="#2.15  Can I use AFS on my diskle"> 2.15 Can I use AFS on my diskless workstation?</a></li>
-        <li><a href="#2.16  Can I test for AFS tokens"> 2.16 Can I test for AFS tokens from within my program?</a></li>
-        <li><a href="#2.17  What's the difference betw"> 2.17 What's the difference between <code>/afs/cellname</code> and <code>/afs/.cellname</code>?</a></li>
-        <li><a href="#2.18  Can I klog as two users on"> 2.18 Can I <code>aklog</code> as two users on a machine in the same cell?</a></li>
-        <li><a href="#2.19  What are the ~/._afsXXXX f"> 2.19 What are the <code>~/.__afsXXXX</code> files?</a></li>
-        <li><a href="#2.20  How do you set up IP-based"> 2.20 How do you set up IP-based ACLs?</a></li>
-        <li><a href="#2.21 What meaning do the owner,"> 2.21 What meaning do the owner, group, and mode bits have in AFS?</a></li>
-        <li><a href="#2.22 What are "dropboxes"?"> 2.22 What are "dropboxes"?</a></li>
-        <li><a href="#2.23 Can I access a RW-Volume">2.23 Can I access a RW volume using the RO path?</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
 - [[AdminFAQ]]
 - [[ResourcesFAQ]]
 - [[AboutTheFAQ]]
 - [[FurtherReading]]
 
-### <a name="2.01  What are the differences b"></a> 2.01 What are the differences between AFS and a Unix filesystem?
+### 2.01 What are the differences between AFS and a Unix filesystem?
 
 Essentially, from a user's point of view, there is little difference between AFS and local Unix filestore. Nearly all the commands normally used to access local files can be used to access files in `/afs`.
 
@@ -130,7 +100,7 @@ AFS supports advisory locking of an entire file with `flock()`. Processes on the
 
 AFS does not support character and block special files. The `mknod` command does not create either character or block special files under `/afs`.
 
-### <a name="2.02  What is an AFS protection"></a><a name="2.02  What is an AFS protection "></a> 2.02 What is an AFS protection group?
+### 2.02 What is an AFS protection group?
 
 A named list of users.
 
@@ -144,7 +114,7 @@ An AFS group typically has the format `owner-id:group-name`. By default, only th
 
 It is possible to have both users and IP addresses as members of an AFS group. By using an IP address like this you can specify all the users from the host with that IP address. Note that IP address membership is insecure, due to the possibility of packet spoofing and the inability of current AFS protocols to protect server communications that do not involve a user-based security token; the `rxgk` security protocol currently under development will enable token-protected access at the client machine level as well as the user level.
 
-### <a name="2.03  What are the AFS defined p"></a> 2.03 What are the AFS-defined protection groups?
+### 2.03 What are the AFS-defined protection groups?
 
 - `system:anyuser`
   - Everyone who has access to an AFS client in any cell that is on the same network as your cell.
@@ -155,7 +125,7 @@ It is possible to have both users and IP addresses as members of an AFS group. B
 - `system:administrators`
   - Users who have privileges to execute some but not all system administrator commands.
 
-### <a name="2.04  What is an AFS access cont"></a> 2.04 What is an AFS access control list (ACL)?
+### 2.04 What is an AFS access control list (ACL)?
 
 There is an ACL for every directory in AFS. The ACL specifies protection at the directory level (not file level) by listing permissions of users and/or groups to a directory. There is a maximum of 20 entries on an ACL.
 
@@ -179,7 +149,7 @@ The members of `fac:coords` can be determined by accessing the protection group 
       roadrunner
       yosemite.sam
 
-### <a name="2.05  What are the AFS access ri"></a> 2.05 What are the AFS access rights?
+### 2.05 What are the AFS access rights?
 
 In AFS, there are seven access rights that may be set or not set:
 
@@ -246,7 +216,7 @@ There are shorthand forms for some common permission combinations:
   </tr>
 </table>
 
-### <a name="2.06  What is pagsh?"></a> 2.06 What is `pagsh`?
+### 2.06 What is `pagsh`?
 
 A command to get a new shell with a process authentication group (PAG).
 
@@ -254,7 +224,7 @@ This is normally used if your system does not get AFS tokens on login. It is use
 
 The PAG uniquely identifies the user to the Cache Manager. Without a PAG, the Cache Manager uses the Unix UID to identify a user and tokens will be shared across all processes owned by that UID.
 
-### <a name="2.07  Why use a PAG?"></a> 2.07 Why use a PAG?
+### 2.07 Why use a PAG?
 
 There are two reasons:
 
@@ -262,7 +232,7 @@ There are two reasons:
 
 1. For security: if you don't have a PAG, then the Cache Manager identifies you by Unix UID. Another user with `root` access to the client could `su` to you and thereby use your token.
 
-### <a name="2.08  How can I tell if I have a"></a> 2.08 How can I tell if I have a PAG?
+### 2.08 How can I tell if I have a PAG?
 
 Usually you can tell if you have a PAG by typing `id`. (Platforms which are derived directly from AT&T System V Release 4, such as Solaris, will not show the additional group vector by default; if there is no `groups=` section in the output of `id`, try `id -a`.) A PAG is indicated by the appearance of one or two large integers in the list of groups.
 
@@ -280,7 +250,7 @@ On Linux clients, your PAG may not show up as such a group in the group list. An
 
 If you see an `afs_pag` key in the output, then you are in a PAG.
 
-### <a name="2.09  Can I still run cron jobs"></a><a name="2.09  Can I still run cron jobs "></a> 2.09 Can I still run `cron` jobs with AFS?
+### 2.09 Can I still run `cron` jobs with AFS?
 
 Yes, but remember that in order to fully access files in AFS you have to be AFS authenticated. If your `cron` job doesn't `aklog` then it only gets `system:anyuser` access.
 
@@ -290,15 +260,15 @@ Note that you can still run a `cron` job without getting a token, if the task do
 
     0 7 * * * $sys_anyuser_readable_dir/7AMdaily 2>/dev/null
 
-### <a name="2.10  How much disk space does a"></a> 2.10 How much disk space does a 1-byte file occupy in AFS?
+### 2.10 How much disk space does a 1-byte file occupy in AFS?
 
 This varies depending on the filesystem used by the fileserver containing that file. Some filesystems may only use up 1024 bytes for such a file, and others may use 4096; still others may use more or fewer bytes.
 
-### <a name="2.11  Is it possible to specify"></a><a name="2.11  Is it possible to specify "></a> 2.11 Is it possible to specify a user who is external to the current AFS cell on an ACL?
+### 2.11 Is it possible to specify a user who is external to the current AFS cell on an ACL?
 
 Yes. This requires setting up a cross-realm relationship with the Kerberos realm on the remote site, but this is possible. Typically you refer to "remote" users like `user@remote.cell`, and you can use them in ACLs, or add them to `pts` groups.
 
-### <a name="2.12  Are there any problems pri"></a> 2.12 Are there any problems printing files in `/afs`?
+### 2.12 Are there any problems printing files in `/afs`?
 
 There are two common issues that come up with printing from AFS:
 
@@ -314,11 +284,11 @@ Both of these may be mitigated by using shell redirection to send the file to th
 
 Very few print services have the ability to manage token access in a way that allows an ACL-protected file to be printed by pathname without enabling access control to be subverted by users by means of the print service. It is **not** recommended to grant the print service general access to AFS by means of [[kstart|http://www.eyrie.org/software/kstart/]] or similar mechanisms.
 
-### <a name="2.13  Can I create a fifo (aka n"></a> 2.13 Can I create a FIFO (a/k/a named pipe) in `/afs`?
+### 2.13 Can I create a FIFO (a/k/a named pipe) in `/afs`?
 
 No. AFS does not support `mknod fifofile p`. AFS only supports normal files, directories, and symlinks; not Unix- or Windows-specific filesystem node types.
 
-### <a name="2.14  If an AFS server crashes,"></a><a name="2.14  If an AFS server crashes, "></a> 2.14 If an AFS server crashes, do I have to reboot my AFS client?
+### 2.14 If an AFS server crashes, do I have to reboot my AFS client?
 
 No.
 
@@ -340,23 +310,23 @@ If you are accessing [[ReadWrite]] volumes on a crashed server then you will not
 
 You don't need to reboot, and the Cache Manager activity is "invisible" to the user. You may want to speed up recovery by issuing the command `fs checkservers`, but even this is unnecessary and will usually only improve recovery by a few seconds.
 
-### <a name="2.15  Can I use AFS on my diskle"></a> 2.15 Can I use AFS on my diskless workstation?
+### 2.15 Can I use AFS on my diskless workstation?
 
 Yes. The AFS Cache Manager can be configured to work with either a disk based cache or a memory (RAM) based cache.
 
 Note that using a memory cache may not be as fast as you might think. Modern operating systems should cache disk data in memory when accessed, so using a disk cache should mean you are hitting RAM most of the time anyway. Disk caches are also much more common, and thus much more heavily tested, and so are better optimized. If you have a local disk and it's reasonably fast, usually going with a disk cache is preferable to memory cache. Additionally, most operating systems do a better job of optimizing a native RAM disk, so you might consider putting your AFS cache in a RAM disk instead of using [[OpenAFS]]'s own memory cache.
 
-### <a name="2.16  Can I test for AFS tokens"></a><a name="2.16  Can I test for AFS tokens "></a> 2.16 Can I test for AFS tokens from within my program?
+### 2.16 Can I test for AFS tokens from within my program?
 
 Yes. However, the mechanism for doing so varies depending on the platform. To see examples of how to do this, you can look at the source of any program that deals with AFS tokens. One such example is [pam-afs-session](http://www.eyrie.org/~eagle/software/pam-afs-session/)
 
-### <a name="2.17  What&#39;s the difference betw"></a> 2.17 What's the difference between `/afs/cellname` and `/afs/.cellname`?
+### 2.17 What's the difference between `/afs/cellname` and `/afs/.cellname`?
 
 AFS has [[ReadOnly]] (RO) and [[ReadWrite]] (RW) volumes.
 
 The convention in AFS is to mount the RW volume `root.cell` as `/afs/.cellname` and the RO volume `root.cell.readonly` as `/afs/cellname`. This is so that when you travel down the `/afs/.cellname` link, AFS will always use the RW site of any volumes that have RO clones. This allows your administrator to update the RW copy of a volume and `vos release $volname` so that it will appear in `/afs/cellname`.
 
-### <a name="2.18  Can I klog as two users on"></a> 2.18 Can I `aklog` as two users on a machine in the same cell?
+### 2.18 Can I `aklog` as two users on a machine in the same cell?
 
 Yes, *if* you use two different PAGs. The token store only supports one token per cell per authentication group; with UID-based PAGs, this means one token per cell per user, but with PAGs you can have multiple shell windows/sessions, each with its own PAG and associated AFS tokens.
 
@@ -364,7 +334,7 @@ Note that most Kerberos implementations (the one on Mac OS X 10.7 and 10.8 being
 
 An alternative to using multiple users in this way is to use ACLs to grant access on a shared directory to both users.
 
-### <a name="2.19  What are the ~/._afsXXXX f"></a> 2.19 What are the `~/.__afsXXXX` files?
+### 2.19 What are the `~/.__afsXXXX` files?
 
 They are temporary reference files used by the AFS Cache Manager.
 
@@ -374,11 +344,11 @@ Some applications rely on that feature, e.g. they create a temporary file and re
 
 Newer versions of AFS rename such files to `.__afsXXXX`, thus making sure that the data stays around as expected by the application. As soon as the file gets closed, the associated `.__afsXXXX` should disappear.
 
-### <a name="2.20  How do you set up IP-based"></a> 2.20 How do you set up IP-based ACLs?
+### 2.20 How do you set up IP-based ACLs?
 
 See [[IPAccessControl]].
 
-### <a name="2.21 What meaning do the owner,"></a><a name="2.21 What meaning do the owner, "></a> 2.21 What meaning do the owner, group, and mode bits have in AFS?
+### 2.21 What meaning do the owner, group, and mode bits have in AFS?
 
 In order to appear more like a local filesystem, AFS will faithfully store the numeric UID (owner), GID (group), for both files and directories, as well as the permission bits (read, write, and execute for user, group, and other, plus `setuid`, `setgid`, and "sticky" bits) for files. Note that permission bits for directories are not stored.
 
@@ -408,7 +378,7 @@ The "sticky" bit, group of a file, `g+rwx` (octal `0070`), and `o+rwx` (octal `0
 
 Newly created files and directories are given an owner numerically equal to the `pts` identity of the user who created the file or directory. Initial mode bits are assigned by the AFS cilent, typically based on the creating user's `umask`.
 
-### <a name="2.22 What are &quot;dropboxes&quot;?"></a> 2.22 What are "dropboxes"?
+### 2.22 What are "dropboxes"?
 
 When the ACL on a directory is set to `irl` (_read_, _list_, _insert_), this creates what is called a "dropbox". In theory, users should be able to deposit files in the directory, but not modify them once deposited.
 
@@ -416,7 +386,7 @@ In practice, the "not modify them once deposited" part is not enforced by the fi
 
 Also, note that a `system:anyuser irl` ACL has an additional problems: because dropbox semantics are based on `pts` identities (see question 2.21), the fileserver cannot distinguish between two unauthenticated users. So, not only can a user come back days later and modify the "dropped" file, but **any** user can modify a file dropped by an unauthenticated user, at any time. 
 
-### <a name="2.23 Can I access a RW-Volume"></a>2.23 Can I access a RW volume using the RO path?
+### 2.23 Can I access a RW volume using the RO path?
 
 Depends. Once you have RO-Volumes released, a mountpoint pointing to the RO will bring you to the RO volume. To change that behavior, you have to change the corresponding mountpoint with `fs rmmount` and `fs mkmount -rw`. However, for some situations, like software installations, it might be useful to reach the RW volume through the RO path.
 

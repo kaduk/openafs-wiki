@@ -1,61 +1,6 @@
-<div>
-  <ul>
-    <li><a href="#Installing Additional Server Mac">Installing Additional Server Machines</a></li>
-    <li><a href="#Installing an Additional File Se">Installing an Additional File Server Machine</a></li>
-    <li><a href="#Creating AFS Directories and Per"> Creating AFS Directories and Performing Platform-Specific Procedures</a></li>
-    <li><a href="#Getting Started on AIX Systems"> Getting Started on AIX Systems</a><ul>
-        <li><a href="#Replacing the fsck Program Helpe"> Replacing the fsck Program Helper on AIX Systems</a></li>
-        <li><a href="#Configuring Server Volumes on AI"> Configuring Server Volumes on AIX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on Digital UNIX"> Getting Started on Digital UNIX Systems</a><ul>
-        <li><a href="#Replacing the fsck Program on Di"> Replacing the fsck Program on Digital UNIX Systems</a></li>
-        <li><a href="#Configuring Server Volumes on Di"> Configuring Server Volumes on Digital UNIX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on HP-UX Systems"> Getting Started on HP-UX Systems</a><ul>
-        <li><a href="#Configuring the AFS-modified fsc"> Configuring the AFS-modified fsck Program on HP-UX Systems</a></li>
-        <li><a href="#Configuring Server Volumes on HP"> Configuring Server Volumes on HP-UX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on IRIX Systems"> Getting Started on IRIX Systems</a><ul>
-        <li><a href="#Configuring Server Volumes on IR"> Configuring Server Volumes on IRIX Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on Linux Systems"> Getting Started on Linux Systems</a><ul>
-        <li><a href="#Configuring Server Volumes on Li"> Configuring Server Volumes on Linux Systems</a></li>
-      </ul>
-    </li>
-    <li><a href="#Getting Started on Solaris Syste"> Getting Started on Solaris Systems</a><ul>
-        <li><a href="#Configuring the AFS-modified fsc"> Configuring the AFS-modified fsck Program on Solaris Systems</a></li>
-        <li><a href="#Configuring Server Volumes On So"> Configuring Server Volumes On Solaris</a></li>
-      </ul>
-    </li>
-    <li><a href="#Starting Server Programs">Starting Server Programs</a></li>
-    <li><a href="#Installing Client Functionality"> Installing Client Functionality</a></li>
-    <li><a href="#Completing the Installation"> Completing the Installation</a><ul>
-        <li><a href="#On AIX systems:"> On AIX systems:</a></li>
-        <li><a href="#On Digital UNIX systems:"> On Digital UNIX systems:</a></li>
-        <li><a href="#On HP-UX systems:"> On HP-UX systems:</a></li>
-        <li><a href="#On IRIX systems:"> On IRIX systems:</a></li>
-        <li><a href="#On Linux systems:"> On Linux systems:</a></li>
-        <li><a href="#On Solaris systems:"> On Solaris systems:</a></li>
-      </ul>
-    </li>
-    <li><a href="#Installing Database Server Funct">Installing Database Server Functionality</a><ul>
-        <li><a href="#Summary of Procedures">Summary of Procedures</a></li>
-        <li><a href="#Instructions">Instructions</a></li>
-      </ul>
-    </li>
-    <li><a href="#Removing Database Server Functio">Removing Database Server Functionality</a><ul>
-        <li><a href="#Summary of Procedures">Summary of Procedures</a></li>
-        <li><a href="#Instructions">Instructions</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
+[[!toc levels=3]]
 
-# <a name="Installing Additional Server Mac"></a> Installing Additional Server Machines
+# Installing Additional Server Machines
 
 Instructions for the following procedures appear in the indicated section of this chapter.
 
@@ -79,7 +24,7 @@ The instructions make the following assumptions.
 
 - All files on the CD-ROM are owned by root. i.e. The files that you install should be owned by root, or the standard application user for the system.
 
-# <a name="Installing an Additional File Se"></a> Installing an Additional File Server Machine
+# Installing an Additional File Server Machine
 
 The procedure for installing a new file server machine is similar to installing the first file server machine in your cell. There are a few parts of the installation that differ depending on whether the machine is the same AFS system type as an existing file server machine or is the first file server machine of its system type in your cell. The differences mostly concern the source for the needed binaries and files, and what portions of the Update Server you install:
 
@@ -109,7 +54,7 @@ To install a new file server machine, perform the following procedures:
 
 After completing the instructions in this section, you can install database server functionality on the machine according to the instructions in Installing Database Server Functionality.
 
-# <a name="Creating AFS Directories and Per"></a> Creating AFS Directories and Performing Platform-Specific Procedures
+# Creating AFS Directories and Performing Platform-Specific Procedures
 
 Create the /usr/afs and /usr/vice/etc directories on the local disk. Subsequent instructions copy files from the AFS distribution CD-ROM into them, at the appropriate point for each system type.
 
@@ -147,17 +92,17 @@ To continue, proceed to the section for this system type:
 
 - Getting Started on Solaris Systems
 
-# <a name="Getting Started on AIX Systems"></a> Getting Started on AIX Systems
+# Getting Started on AIX Systems
 
 [[Loading AFS into the AIX Kernel|LoadingAFSIntoTheAIXKernel]]
 
-## <a name="Replacing the fsck Program Helpe"></a> Replacing the fsck Program Helper on AIX Systems
+## Replacing the fsck Program Helper on AIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Replacing the fsck Program Helper on AIX Systems|ReplacingTheFsckProgramHelperOnAIXSystems]]
 
-## <a name="Configuring Server Volumes on AI"></a> Configuring Server Volumes on AIX Systems
+## Configuring Server Volumes on AIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -167,7 +112,7 @@ If the machine is to remain an AFS client, incorporate AFS into its authenticati
 
 Proceed to Starting Server Programs.
 
-# <a name="Getting Started on Digital UNIX"></a><a name="Getting Started on Digital UNIX "></a> Getting Started on Digital UNIX Systems
+# Getting Started on Digital UNIX Systems
 
 Begin by building AFS modifications into the kernel, then configure server partitions and replace the Digital UNIX fsck program with a version that correctly handles AFS volumes.
 
@@ -175,13 +120,13 @@ If the machine's hardware and software configuration exactly matches another Dig
 
 [[Building AFS into the Digital UNIX Kernel|BuildingAFSIntoTheDigitalUNIXKernel]]
 
-## <a name="Replacing the fsck Program on Di"></a> Replacing the fsck Program on Digital UNIX Systems
+## Replacing the fsck Program on Digital UNIX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Replacing the fsck Program on Digital UNIX Systems|ReplacingTheFsckProgramOnDigitalUNIXSystems]]
 
-## <a name="Configuring Server Volumes on Di"></a> Configuring Server Volumes on Digital UNIX Systems
+## Configuring Server Volumes on Digital UNIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -191,19 +136,19 @@ If the machine is to remain an AFS client, incorporate AFS into its authenticati
 
 Proceed to Starting Server Programs.
 
-# <a name="Getting Started on HP-UX Systems"></a> Getting Started on HP-UX Systems
+# Getting Started on HP-UX Systems
 
 Begin by building AFS modifications into the kernel, then configure server partitions and replace the HP-UX fsck program with a version that correctly handles AFS volumes.
 
 [[Building AFS into the HP-UX Kernel|BuildingAFSIntoTheHP-UXKernel]]
 
-## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on HP-UX Systems
+## Configuring the AFS-modified fsck Program on HP-UX Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Configuring the AFS-modified fsck Program on HP-UX Systems|ConfiguringTheAFS-modifiedFsckProgramOnHP-UXSystems]]
 
-## <a name="Configuring Server Volumes on HP"></a> Configuring Server Volumes on HP-UX Systems
+## Configuring Server Volumes on HP-UX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -213,7 +158,7 @@ If the machine is to remain an AFS client, incorporate AFS into its authenticati
 
 Proceed to Starting Server Programs.
 
-# <a name="Getting Started on IRIX Systems"></a> Getting Started on IRIX Systems
+# Getting Started on IRIX Systems
 
 Begin by incorporating AFS modifications into the kernel. Either use the ml dynamic loader program, or build a static kernel. Then configure partitions to house AFS volumes. AFS supports use of both EFS and XFS partitions for housing AFS volumes. SGI encourages use of XFS partitions.
 
@@ -221,7 +166,7 @@ You do not need to replace IRIX fsck program, because the version that SGI distr
 
 [[Loading AFS into the IRIX Kernel|LoadingAFSIntoTheIRIXKernel]]
 
-## <a name="Configuring Server Volumes on IR"></a> Configuring Server Volumes on IRIX Systems
+## Configuring Server Volumes on IRIX Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -231,11 +176,11 @@ If this system is going to be used as a file server to share some of its disk sp
 
 1. Proceed to Starting Server Programs.
 
-# <a name="Getting Started on Linux Systems"></a> Getting Started on Linux Systems
+# Getting Started on Linux Systems
 
 [[Loading AFS into the Linux Kernel|LoadingAFSIntoTheLinuxKernel]]
 
-## <a name="Configuring Server Volumes on Li"></a> Configuring Server Volumes on Linux Systems
+## Configuring Server Volumes on Linux Systems
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -245,17 +190,17 @@ If the machine is to remain an AFS client, incorporate AFS into its authenticati
 
 Proceed to Starting Server Programs.
 
-# <a name="Getting Started on Solaris Syste"></a> Getting Started on Solaris Systems
+# Getting Started on Solaris Systems
 
 [[Loading AFS into the Solaris Kernel|LoadingAFSIntoTheSolarisKernel]]
 
-## <a name="Configuring the AFS-modified fsc"></a> Configuring the AFS-modified fsck Program on Solaris Systems
+## Configuring the AFS-modified fsck Program on Solaris Systems
 
 Never run the standard fsck program on AFS server partitions. It discards AFS volumes.
 
 [[Configuring the AFS-modified fsck Program on Solaris Systems|ConfiguringTheAFS-modifiedFsckProgramOnSolarisSystems]]
 
-## <a name="Configuring Server Volumes On So"></a> Configuring Server Volumes On Solaris
+## Configuring Server Volumes On Solaris
 
 If this system is going to be used as a file server to share some of its disk space, create a directory called /vicepxx for each AFS server partition you are configuring (there must be at least one). If it is not going to be a file server you can skip this step.
 
@@ -265,7 +210,7 @@ If the machine is to remain an AFS client, incorporate AFS into its authenticati
 
 Proceed to Starting Server Programs.
 
-# <a name="Starting Server Programs"></a> Starting Server Programs
+# Starting Server Programs
 
 In this section you initialize the BOS Server, the Update Server, the controller process for NTPD, and the fs process. You begin by copying the necessary server files to the local disk.
 
@@ -279,9 +224,8 @@ In this section you initialize the BOS Server, the Update Server, the controller
 
 - - Copy files from the CD-ROM to the local /usr/afs directory.
 
-       # cd /cdrom/<sys_version>/dest/root.server/usr/afs
-
-       # cp -rp  *  /usr/afs
+    `# cd /cdrom/<sys_version>/dest/root.server/usr/afs`
+    `# cp -rp  *  /usr/afs`
 
 1. Copy the contents of the /usr/afs/etc directory from an existing file server machine, using a remote file transfer protocol such as ftp or NFS. If you use a system control machine, it is best to copy the contents of its /usr/afs/etc directory. If you choose not to run a system control machine, copy the directory's contents from any existing file server machine.
 
@@ -295,6 +239,7 @@ In this section you initialize the BOS Server, the Update Server, the controller
 
 By default, the Update Server performs updates every 300 seconds (five minutes). Use the -t argument to specify a different number of seconds. For the machine name argument, substitute the name of the machine you are installing. The command appears on multiple lines here only for legibility reasons.
 
+
        # ./bos create  <machine name> upclientetc simple  \
              "/usr/afs/bin/upclient  <system control machine>  \
              [-t  <time>]  /usr/afs/etc" -cell  <cell name>  -noauth
@@ -302,6 +247,7 @@ By default, the Update Server performs updates every 300 seconds (five minutes).
 1. Create an instance of the Update Server to handle distribution of the file server binaries stored in the /usr/afs/bin directory.
 
 \* If this is the first file server machine of its AFS system type, create the upserver process as an instance of the server portion of the Update Server. It distributes its copy of the file server process binaries to the other file server machines of this system type that you install in future. Creating this process makes this machine the binary distribution machine for its type.
+
 
        # ./bos create  <machine name> upserver  simple  \
              "/usr/afs/bin/upserver -clear /usr/afs/bin"   \
@@ -321,6 +267,7 @@ By default, the Update Server performs updates every 300 seconds (five minutes).
 
        # ./bos create  <machine name> runntp simple  \
              /usr/afs/bin/runntp -cell <cell name>  -noauth
+
 <dl>
   <dd>
     <dl>
@@ -338,7 +285,7 @@ Attempting to run multiple instances of the NTPD causes an error. Running NTPD t
              /usr/afs/bin/fileserver /usr/afs/bin/volserver  \
              /usr/afs/bin/salvager -cell <cell name>  -noauth
 
-# <a name="Installing Client Functionality"></a> Installing Client Functionality
+# Installing Client Functionality
 
 If you want this machine to be a client as well as a server, follow the instructions in this section. Otherwise, skip to Completing the Installation.
 
@@ -394,7 +341,7 @@ On some system types that use a dynamic kernel loader program, you previously co
 
 1. If appropriate, follow the instructions in Storing AFS Binaries in AFS to copy the AFS binaries for this system type into an AFS volume. See the introduction to this section for further discussion.
 
-# <a name="Completing the Installation"></a> Completing the Installation
+# Completing the Installation
 
 At this point you run the machine's AFS initialization script to verify that it correctly loads AFS modifications into the kernel and starts the BOS Server, which starts the other server processes. If you have installed client files, the script also starts the Cache Manager. If the script works correctly, perform the steps that incorporate it into the machine's startup and shutdown sequence. If there are problems during the initialization, attempt to resolve them. The AFS Product Support group can provide assistance if necessary.
 
@@ -412,37 +359,37 @@ If the machine is configured as a client using a disk cache, it can take a while
 
 1. Run the AFS initialization script by issuing the appropriate commands for this system type.
 
-## <a name="On AIX systems:"></a> On AIX systems:
+## On AIX systems:
 
 [[Initialization Script on AIX|InitializationScriptOnAIX]]
 
 Proceed to Step 4.
 
-## <a name="On Digital UNIX systems:"></a> On Digital UNIX systems:
+## On Digital UNIX systems:
 
 [[Initialization Script on Digital UNIX|InitializationScriptOnDigitalUNIX]]
 
 Proceed to Step 4.
 
-## <a name="On HP-UX systems:"></a> On HP-UX systems:
+## On HP-UX systems:
 
 [[Initialization Script on HP-UX|InitializationScriptOnHP-UX]]
 
 Proceed to Step 4.
 
-## <a name="On IRIX systems:"></a> On IRIX systems:
+## On IRIX systems:
 
 [[Initialization Script on IRIX|InitializationScriptOnIRIX]]
 
 Proceed to Step 4.
 
-## <a name="On Linux systems:"></a> On Linux systems:
+## On Linux systems:
 
 [[Initialization Script on Linux|InitializationScriptOnLinux]]
 
 Proceed to Step 4.
 
-## <a name="On Solaris systems:"></a> On Solaris systems:
+## On Solaris systems:
 
 [[Initialization Script on Solaris|InitializationScriptOnSolaris]]
 
@@ -450,7 +397,7 @@ Step 4. Verify that /usr/afs and its subdirectories on the new file server machi
 
 1. To configure this machine as a database server machine, proceed to Installing Database Server Functionality.
 
-# <a name="Installing Database Server Funct"></a> Installing Database Server Functionality
+# Installing Database Server Functionality
 
 This section explains how to install database server functionality. Database server machines have two defining characteristics. First, they run the Authentication Server, Protection Server, and Volume Location (VL) Server processes. They also run the Backup Server if the cell uses the AFS Backup System, as is assumed in these instructions. Second, they appear in the [[CellServDB]] file of every machine in the cell (and of client machines in foreign cells, if they are to access files in this cell).
 
@@ -472,7 +419,7 @@ o If the new database server machine has a lower IP address than any existing da
 
 o If the new database server machine does not have the lowest IP address of any database server machine, then it is better to update clients after restarting the database server processes. Client machines do not start using the new database server machine until you update their kernel memory list, but that does not usually cause timeouts or update problems (because the new machine is not likely to become the coordinator).
 
-## <a name="Summary of Procedures"></a> Summary of Procedures
+## Summary of Procedures
 
 To install a database server machine, perform the following procedures.
 
@@ -490,7 +437,7 @@ To install a database server machine, perform the following procedures.
 
 1. Notify the AFS Product Support group that you have installed a new database server machine
 
-## <a name="Instructions"></a> Instructions
+## Instructions
 
 Note: It is assumed that your PATH environment variable includes the directory that houses the AFS command binaries. If not, you possibly need to precede the command names with the appropriate pathname.
 
@@ -546,7 +493,7 @@ There are several ways to update the [[CellServDB]] file on client machines, as 
 
 10. Start the Volume Location (VL) Server (the vlserver process).
 
-       % bos create <machine name> vlserver simple /usr/afs/bin/vlserver
+       `% bos create <machine name> vlserver simple /usr/afs/bin/vlserver`
 
 11. Issue the bos restart command on every database server machine in the cell, including the new machine. The command restarts the Authentication, Backup, Protection, and VL Servers, which forces an election of a new Ubik coordinator for each process. The new machine votes in the election and is considered as a potential new coordinator.
 
@@ -568,11 +515,11 @@ If an error occurs, restart all server processes on the database server machines
 
 If you wish to participate in the AFS global name space, your cell's entry appear in a [[CellServDB]] file that the AFS Product Support group makes available to all AFS sites. Otherwise, they list your cell in a private file that they do not share with other AFS sites.
 
-# <a name="Removing Database Server Functio"></a> Removing Database Server Functionality
+# Removing Database Server Functionality
 
 Removing database server machine functionality is nearly the reverse of installing it.
 
-## <a name="Summary of Procedures"></a> Summary of Procedures
+## Summary of Procedures
 
 To decommission a database server machine, perform the following procedures.
 
@@ -590,7 +537,7 @@ To decommission a database server machine, perform the following procedures.
 
 1. Restart the database server processes on the remaining database server machines
 
-## <a name="Instructions"></a> Instructions
+## Instructions
 
 Note: It is assumed that your PATH environment variable includes the directory that houses the AFS command binaries. If not, you possibly need to precede the command names with the appropriate pathname.
 
