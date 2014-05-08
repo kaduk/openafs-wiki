@@ -18,4 +18,4 @@ If you wish to work on any of these items, please note your interest by adding y
 * ~~Move rx epoch and cid generation into the core rx code (out of rxkad).  This will require some thought to seed the rfc3961 crypto random generator in the kernel on platforms which do not already implement in-kernel randomness (maybe just HPUX or something like that?).  An attempt at this is at https://github.com/kaduk/openafs/commits/epoch but that branch has been overtaken by events in terms of rfc3961 support, I (kaduk) believe.  Update: kaduk will try picking this up again.~~ This is in gerrit, changes 10840-10843.
 * Teach asetkey to produce a random key in the KeyFileExt to be used as the cell-wide token-encrypting key.
 * gklog (or additions to aklog?) to get a user token and shove it into the kernel.  This will probably require more pioctls and changes to how tokens are stored in the kernel.
-* There is still much to do in getting a smooth transition plan that does not involve a lot of steps.
+* There is still much to do in getting a smooth transition plan that does not involve many steps.
